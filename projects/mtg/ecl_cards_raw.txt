@@ -1,0 +1,6034 @@
+Total cards in MTGJSON: 427
+
+---
+name=Changeling Wayfinder
+mana={3}
+type=Creature — Shapeshifter
+rarity=C
+power=1
+toughness=2
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=1
+text=Changeling (This card is every creature type.)
+When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+---
+name=Rooftop Percher
+mana={5}
+type=Creature — Shapeshifter
+rarity=C
+power=3
+toughness=3
+keywords=['Changeling', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=2
+text=Changeling (This card is every creature type.)
+Flying
+When this creature enters, exile up to two target cards from graveyards. You gain 3 life.
+---
+name=Adept Watershaper
+mana={2}{W}
+type=Creature — Merfolk Cleric
+rarity=R
+power=3
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Cleric']
+number=3
+text=Other tapped creatures you control have indestructible.
+---
+name=Ajani, Outland Chaperone
+mana={1}{W}{W}
+type=Legendary Planeswalker — Ajani
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Ajani']
+number=4
+text=[+1]: Create a 1/1 green and white Kithkin creature token.
+[−2]: Ajani deals 4 damage to target tapped creature.
+[−8]: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.
+---
+name=Appeal to Eirdu
+mana={3}{W}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=5
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+One or two target creatures each get +2/+1 until end of turn.
+---
+name=Bark of Doran
+mana={1}{W}
+type=Artifact — Equipment
+rarity=U
+power=
+toughness=
+keywords=['Equip']
+supertypes=[]
+types=['Artifact']
+subtypes=['Equipment']
+number=6
+text=Equipped creature gets +0/+1.
+As long as equipped creature's toughness is greater than its power, it assigns combat damage equal to its toughness rather than its power.
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+---
+name=Brigid, Clachan's Heart // Brigid, Doun's Mind
+mana={2}{W}
+type=Legendary Creature — Kithkin Warrior
+rarity=R
+power=3
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Kithkin', 'Warrior']
+number=7
+text=Whenever this creature enters or transforms into Brigid, Clachan's Heart, create a 1/1 green and white Kithkin creature token.
+At the beginning of your first main phase, you may pay {G}. If you do, transform Brigid.
+---
+name=Brigid, Clachan's Heart // Brigid, Doun's Mind
+mana=
+type=Legendary Creature — Kithkin Soldier
+rarity=R
+power=3
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=7
+text={T}: Add X {G} or X {W}, where X is the number of other creatures you control.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Brigid.
+---
+name=Burdened Stoneback
+mana={1}{W}
+type=Creature — Giant Warrior
+rarity=U
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=8
+text=This creature enters with two -1/-1 counters on it.
+{1}{W}, Remove a counter from this creature: Target creature gains indestructible until end of turn. Activate only as a sorcery. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+---
+name=Champion of the Clachan
+mana={3}{W}
+type=Creature — Kithkin Knight
+rarity=R
+power=4
+toughness=5
+keywords=['Behold', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Knight']
+number=9
+text=Flash
+As an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.)
+Other Kithkin you control get +1/+1.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Clachan Festival
+mana={2}{W}
+type=Kindred Enchantment — Kithkin
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Kindred', 'Enchantment']
+subtypes=['Kithkin']
+number=10
+text=When this enchantment enters, create two 1/1 green and white Kithkin creature tokens.
+{4}{W}: Create a 1/1 green and white Kithkin creature token.
+---
+name=Crib Swap
+mana={2}{W}
+type=Kindred Instant — Shapeshifter
+rarity=U
+power=
+toughness=
+keywords=['Changeling']
+supertypes=[]
+types=['Kindred', 'Instant']
+subtypes=['Shapeshifter']
+number=11
+text=Changeling (This card is every creature type.)
+Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
+---
+name=Curious Colossus
+mana={5}{W}{W}
+type=Creature — Giant Warrior
+rarity=M
+power=7
+toughness=7
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=12
+text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
+---
+name=Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight
+mana={3}{W}{W}
+type=Legendary Creature — Elemental God
+rarity=M
+power=5
+toughness=5
+keywords=['Flying', 'Lifelink', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'God']
+number=13
+text=Flying, lifelink
+Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
+At the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
+---
+name=Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight
+mana=
+type=Legendary Creature — Elemental God
+rarity=M
+power=5
+toughness=5
+keywords=['Flying', 'Lifelink', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'God']
+number=13
+text=Flying, lifelink
+Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+At the beginning of your first main phase, you may pay {W}. If you do, transform Isilu.
+---
+name=Encumbered Reejerey
+mana={1}{W}
+type=Creature — Merfolk Soldier
+rarity=U
+power=5
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=14
+text=This creature enters with three -1/-1 counters on it.
+Whenever this creature becomes tapped while it has a -1/-1 counter on it, remove a -1/-1 counter from it.
+---
+name=Evershrike's Gift
+mana={W}
+type=Enchantment — Aura
+rarity=U
+power=
+toughness=
+keywords=['Blight', 'Enchant']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=15
+text=Enchant creature
+Enchanted creature gets +1/+0 and has flying.
+{1}{W}, Blight 2: Return this card from your graveyard to your hand. Activate only as a sorcery. (To blight 2, put two -1/-1 counters on a creature you control.)
+---
+name=Flock Impostor
+mana={2}{W}
+type=Creature — Shapeshifter
+rarity=U
+power=2
+toughness=2
+keywords=['Changeling', 'Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=16
+text=Changeling (This card is every creature type.)
+Flash
+Flying
+When this creature enters, return up to one other target creature you control to its owner's hand.
+---
+name=Gallant Fowlknight
+mana={3}{W}
+type=Creature — Kithkin Knight
+rarity=C
+power=3
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Knight']
+number=17
+text=When this creature enters, creatures you control get +1/+0 until end of turn. Kithkin creatures you control also gain first strike until end of turn.
+---
+name=Goldmeadow Nomad
+mana={W}
+type=Creature — Kithkin Scout
+rarity=C
+power=1
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Scout']
+number=18
+text={W}, Exile this card from your graveyard: Create a 1/1 green and white Kithkin creature token. Activate only as a sorcery.
+---
+name=Keep Out
+mana={1}{W}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=19
+text=Choose one —
+• Keep Out deals 4 damage to target tapped creature.
+• Destroy target enchantment.
+---
+name=Kinbinding
+mana={3}{W}{W}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=20
+text=Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn.
+At the beginning of combat on your turn, create a 1/1 green and white Kithkin creature token.
+---
+name=Kinsbaile Aspirant
+mana={W}
+type=Creature — Kithkin Citizen
+rarity=U
+power=2
+toughness=1
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Citizen']
+number=21
+text=As an additional cost to cast this spell, behold a Kithkin or pay {2}. (To behold a Kithkin, choose a Kithkin you control or reveal a Kithkin card from your hand.)
+Whenever another creature you control enters, this creature gets +1/+1 until end of turn.
+---
+name=Kinscaer Sentry
+mana={1}{W}
+type=Creature — Kithkin Soldier
+rarity=R
+power=2
+toughness=2
+keywords=['First strike', 'Lifelink']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=22
+text=First strike, lifelink
+Whenever this creature attacks, you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is the number of attacking creatures you control.
+---
+name=Kithkeeper
+mana={6}{W}
+type=Creature — Elemental
+rarity=U
+power=3
+toughness=3
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=23
+text=Vivid — When this creature enters, create X 1/1 green and white Kithkin creature tokens, where X is the number of colors among permanents you control.
+Tap three untapped creatures you control: This creature gets +3/+0 and gains flying until end of turn.
+---
+name=Liminal Hold
+mana={3}{W}
+type=Enchantment
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=24
+text=When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life.
+---
+name=Meanders Guide
+mana={2}{W}
+type=Creature — Merfolk Scout
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Scout']
+number=25
+text=Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+---
+name=Moonlit Lamenter
+mana={2}{W}
+type=Creature — Treefolk Cleric
+rarity=U
+power=2
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Cleric']
+number=26
+text=This creature enters with a -1/-1 counter on it.
+{1}{W}, Remove a counter from this creature: Draw a card. Activate only as a sorcery.
+---
+name=Morningtide's Light
+mana={3}{W}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=27
+text=Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped under their owners' control.
+Until your next turn, prevent all damage that would be dealt to you.
+Exile Morningtide's Light.
+---
+name=Personify
+mana={1}{W}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=28
+text=Exile target creature you control, then return that card to the battlefield under its owner's control. Create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
+---
+name=Protective Response
+mana={2}{W}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=29
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Destroy target attacking or blocking creature.
+---
+name=Pyrrhic Strike
+mana={2}{W}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=30
+text=As an additional cost to cast this spell, you may blight 2. (You may put two -1/-1 counters on a creature you control.)
+Choose one. If this spell's additional cost was paid, choose both instead.
+• Destroy target artifact or enchantment.
+• Destroy target creature with mana value 3 or greater.
+---
+name=Reluctant Dounguard
+mana={2}{W}
+type=Creature — Kithkin Soldier
+rarity=C
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=31
+text=This creature enters with two -1/-1 counters on it.
+Whenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Rhys, the Evermore
+mana={1}{W}
+type=Legendary Creature — Elf Warrior
+rarity=R
+power=2
+toughness=2
+keywords=['Flash']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=32
+text=Flash
+When Rhys enters, another target creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+{W}, {T}: Remove any number of counters from target creature you control. Activate only as a sorcery.
+---
+name=Riverguard's Reflexes
+mana={1}{W}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=33
+text=Target creature gets +2/+2 and gains first strike until end of turn. Untap it.
+---
+name=Shore Lurker
+mana={3}{W}
+type=Creature — Merfolk Scout
+rarity=C
+power=3
+toughness=3
+keywords=['Flying', 'Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Scout']
+number=34
+text=Flying
+When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+---
+name=Slumbering Walker
+mana={3}{W}{W}
+type=Creature — Giant Warrior
+rarity=R
+power=4
+toughness=7
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=35
+text=This creature enters with two -1/-1 counters on it.
+At the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
+---
+name=Spiral into Solitude
+mana={1}{W}
+type=Enchantment — Aura
+rarity=C
+power=
+toughness=
+keywords=['Blight', 'Enchant']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=36
+text=Enchant creature
+Enchanted creature can't attack or block.
+{1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature. (To blight 1, put a -1/-1 counter on a creature you control.)
+---
+name=Sun-Dappled Celebrant
+mana={4}{W}{W}
+type=Creature — Treefolk Cleric
+rarity=C
+power=5
+toughness=6
+keywords=['Convoke', 'Vigilance']
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Cleric']
+number=37
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Vigilance
+---
+name=Thoughtweft Imbuer
+mana={3}{W}
+type=Creature — Kithkin Advisor
+rarity=U
+power=0
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Advisor']
+number=38
+text=Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of Kithkin you control.
+---
+name=Timid Shieldbearer
+mana={1}{W}
+type=Creature — Kithkin Soldier
+rarity=C
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=39
+text={4}{W}: Creatures you control get +1/+1 until end of turn.
+---
+name=Tributary Vaulter
+mana={2}{W}
+type=Creature — Merfolk Warrior
+rarity=C
+power=1
+toughness=3
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Warrior']
+number=40
+text=Flying
+Whenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn.
+---
+name=Wanderbrine Preacher
+mana={1}{W}
+type=Creature — Merfolk Cleric
+rarity=C
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Cleric']
+number=41
+text=Whenever this creature becomes tapped, you gain 2 life.
+---
+name=Wanderbrine Trapper
+mana={W}
+type=Creature — Merfolk Scout
+rarity=U
+power=2
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Scout']
+number=42
+text={1}, {T}, Tap another untapped creature you control: Tap target creature an opponent controls.
+---
+name=Winnowing
+mana={4}{W}{W}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=43
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
+---
+name=Aquitect's Defenses
+mana={1}{U}
+type=Enchantment — Aura
+rarity=C
+power=
+toughness=
+keywords=['Enchant', 'Flash']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=44
+text=Flash
+Enchant creature you control
+When this Aura enters, enchanted creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+Enchanted creature gets +1/+2.
+---
+name=Blossombind
+mana={1}{U}
+type=Enchantment — Aura
+rarity=C
+power=
+toughness=
+keywords=['Enchant']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=45
+text=Enchant creature
+When this Aura enters, tap enchanted creature.
+Enchanted creature can't become untapped and can't have counters put on it.
+---
+name=Champions of the Shoal
+mana={3}{U}
+type=Creature — Merfolk Soldier
+rarity=R
+power=4
+toughness=6
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=46
+text=As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.)
+Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Disruptor of Currents
+mana={3}{U}{U}
+type=Creature — Merfolk Wizard
+rarity=R
+power=3
+toughness=3
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=47
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, return up to one other target nonland permanent to its owner's hand.
+---
+name=Flitterwing Nuisance
+mana={U}
+type=Creature — Faerie Rogue
+rarity=R
+power=2
+toughness=2
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=48
+text=Flying
+This creature enters with a -1/-1 counter on it.
+{2}{U}, Remove a counter from this creature: Whenever a creature you control deals combat damage to a player or planeswalker this turn, draw a card.
+---
+name=Glamer Gifter
+mana={1}{U}
+type=Creature — Faerie Wizard
+rarity=U
+power=1
+toughness=2
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=49
+text=Flash
+Flying
+When this creature enters, choose up to one other target creature. Until end of turn, that creature has base power and toughness 4/4 and gains all creature types.
+---
+name=Glamermite
+mana={2}{U}
+type=Creature — Faerie Rogue
+rarity=C
+power=2
+toughness=2
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=50
+text=Flash
+Flying
+When this creature enters, choose one —
+• Tap target creature.
+• Untap target creature.
+---
+name=Glen Elendra Guardian
+mana={2}{U}
+type=Creature — Faerie Wizard
+rarity=R
+power=3
+toughness=4
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=51
+text=Flash
+Flying
+This creature enters with a -1/-1 counter on it.
+{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
+---
+name=Glen Elendra's Answer
+mana={2}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=52
+text=This spell can't be countered.
+Counter all spells your opponents control and all abilities your opponents control. Create a 1/1 blue and black Faerie creature token with flying for each spell and ability countered this way.
+---
+name=Gravelgill Scoundrel
+mana={1}{U}
+type=Creature — Merfolk Rogue
+rarity=C
+power=1
+toughness=3
+keywords=['Vigilance']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Rogue']
+number=53
+text=Vigilance
+Whenever this creature attacks, you may tap another untapped creature you control. If you do, this creature can't be blocked this turn.
+---
+name=Harmonized Crescendo
+mana={4}{U}{U}
+type=Instant
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=54
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Draw a card for each permanent you control of that type.
+---
+name=Illusion Spinners
+mana={4}{U}
+type=Creature — Faerie Wizard
+rarity=U
+power=4
+toughness=3
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=55
+text=You may cast this spell as though it had flash if you control a Faerie.
+Flying
+This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)
+---
+name=Kulrath Mystic
+mana={2}{U}
+type=Creature — Elemental Wizard
+rarity=C
+power=2
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Wizard']
+number=56
+text=Whenever you cast a spell with mana value 4 or greater, this creature gets +2/+0 and gains vigilance until end of turn.
+---
+name=Loch Mare
+mana={1}{U}
+type=Creature — Horse Serpent
+rarity=M
+power=4
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Horse', 'Serpent']
+number=57
+text=This creature enters with three -1/-1 counters on it.
+{1}{U}, Remove a counter from this creature: Draw a card.
+{2}{U}, Remove two counters from this creature: Tap target creature. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+---
+name=Lofty Dreams
+mana={3}{U}{U}
+type=Enchantment — Aura
+rarity=U
+power=
+toughness=
+keywords=['Convoke', 'Enchant']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=58
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Enchant creature
+When this Aura enters, draw a card.
+Enchanted creature gets +2/+2 and has flying.
+---
+name=Mirrorform
+mana={4}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=59
+text=Each nonland permanent you control becomes a copy of target non-Aura permanent.
+---
+name=Noggle the Mind
+mana={1}{U}
+type=Enchantment — Aura
+rarity=U
+power=
+toughness=
+keywords=['Enchant', 'Flash']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=60
+text=Flash
+Enchant creature
+Enchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1. (It loses all colors and all other creature types.)
+---
+name=Oko, Lorwyn Liege // Oko, Shadowmoor Scion
+mana={2}{U}
+type=Legendary Planeswalker — Oko
+rarity=M
+power=
+toughness=
+keywords=['Mill', 'Transform']
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Oko']
+number=61
+text=At the beginning of your first main phase, you may pay {G}. If you do, transform Oko.
+[+2]: Up to one target creature gains all creature types. (This effect doesn't end.)
+[+1]: Target creature gets -2/-0 until your next turn.
+---
+name=Oko, Lorwyn Liege // Oko, Shadowmoor Scion
+mana=
+type=Legendary Planeswalker — Oko
+rarity=M
+power=
+toughness=
+keywords=['Mill', 'Transform']
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Oko']
+number=61
+text=At the beginning of your first main phase, you may pay {U}. If you do, transform Oko.
+[−1]: Mill three cards. You may put a permanent card from among them into your hand.
+[−3]: Create two 3/3 green Elk creature tokens.
+[−6]: Choose a creature type. You get an emblem with "Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof."
+---
+name=Omni-Changeling
+mana={3}{U}{U}
+type=Creature — Shapeshifter
+rarity=U
+power=0
+toughness=0
+keywords=['Changeling', 'Convoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=62
+text=Changeling (This card is every creature type.)
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+You may have this creature enter as a copy of any creature on the battlefield, except it has changeling.
+---
+name=Pestered Wellguard
+mana={3}{U}
+type=Creature — Merfolk Soldier
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=63
+text=Whenever this creature becomes tapped, create a 1/1 blue and black Faerie creature token with flying.
+---
+name=Rime Chill
+mana={6}{U}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=['Vivid']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=64
+text=Vivid — This spell costs {1} less to cast for each color among permanents you control.
+Tap up to two target creatures. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Draw a card.
+---
+name=Rimefire Torque
+mana={1}{U}
+type=Artifact
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=65
+text=As this artifact enters, choose a creature type.
+Whenever a permanent you control of the chosen type enters, put a charge counter on this artifact.
+{T}, Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
+---
+name=Rimekin Recluse
+mana={2}{U}
+type=Creature — Elemental Wizard
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Wizard']
+number=66
+text=When this creature enters, return up to one other target creature to its owner's hand.
+---
+name=Run Away Together
+mana={1}{U}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=67
+text=Choose two target creatures controlled by different players. Return those creatures to their owners' hands.
+---
+name=Shinestriker
+mana={4}{U}{U}
+type=Creature — Elemental
+rarity=U
+power=3
+toughness=3
+keywords=['Flying', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=68
+text=Flying
+Vivid — When this creature enters, draw cards equal to the number of colors among permanents you control.
+---
+name=Silvergill Mentor
+mana={1}{U}
+type=Creature — Merfolk Wizard
+rarity=U
+power=2
+toughness=1
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=69
+text=As an additional cost to cast this spell, behold a Merfolk or pay {2}. (To behold a Merfolk, choose a Merfolk you control or reveal a Merfolk card from your hand.)
+When this creature enters, create a 1/1 white and blue Merfolk creature token.
+---
+name=Silvergill Peddler
+mana={2}{U}
+type=Creature — Merfolk Citizen
+rarity=C
+power=2
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Citizen']
+number=70
+text=Whenever this creature becomes tapped, draw a card, then discard a card.
+---
+name=Spell Snare
+mana={U}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=71
+text=Counter target spell with mana value 2.
+---
+name=Stratosoarer
+mana={4}{U}
+type=Creature — Elemental
+rarity=C
+power=3
+toughness=5
+keywords=['Basic landcycling', 'Cycling', 'Flying', 'Landcycling', 'Typecycling']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=72
+text=Flying
+When this creature enters, target creature gains flying until end of turn.
+Basic landcycling {1}{U} ({1}{U}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+---
+name=Summit Sentinel
+mana={1}{U}
+type=Creature — Elemental Soldier
+rarity=C
+power=1
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Soldier']
+number=73
+text=When this creature dies, draw a card.
+---
+name=Sunderflock
+mana={7}{U}{U}
+type=Creature — Elemental
+rarity=R
+power=5
+toughness=5
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=74
+text=This spell costs {X} less to cast, where X is the greatest mana value among Elementals you control.
+Flying
+When this creature enters, if you cast it, return all non-Elemental creatures to their owners' hands.
+---
+name=Swat Away
+mana={2}{U}{U}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=75
+text=This spell costs {2} less to cast if a creature is attacking you.
+The owner of target spell or creature puts it on their choice of the top or bottom of their library.
+---
+name=Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield
+mana={1}{U}
+type=Legendary Creature — Merfolk Wizard
+rarity=R
+power=2
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=76
+text=Sygg can't be blocked.
+Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
+---
+name=Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield
+mana=
+type=Legendary Creature — Merfolk Rogue
+rarity=R
+power=2
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Merfolk', 'Rogue']
+number=76
+text=Sygg can't be blocked.
+Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+---
+name=Tanufel Rimespeaker
+mana={3}{U}
+type=Creature — Elemental Wizard
+rarity=U
+power=2
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Wizard']
+number=77
+text=Whenever you cast a spell with mana value 4 or greater, draw a card.
+---
+name=Temporal Cleansing
+mana={3}{U}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=78
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+The owner of target nonland permanent puts it into their library second from the top or on the bottom.
+---
+name=Thirst for Identity
+mana={2}{U}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=79
+text=Draw three cards. Then discard two cards unless you discard a creature card.
+---
+name=Unexpected Assistance
+mana={3}{U}{U}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=80
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Draw three cards, then discard a card.
+---
+name=Unwelcome Sprite
+mana={1}{U}
+type=Creature — Faerie Rogue
+rarity=U
+power=2
+toughness=1
+keywords=['Flying', 'Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=81
+text=Flying
+Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
+---
+name=Wanderwine Distracter
+mana={3}{U}
+type=Creature — Merfolk Wizard
+rarity=C
+power=4
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=82
+text=Whenever this creature becomes tapped, target creature an opponent controls gets -3/-0 until end of turn.
+---
+name=Wanderwine Farewell
+mana={5}{U}{U}
+type=Kindred Sorcery — Merfolk
+rarity=U
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Merfolk']
+number=83
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Return one or two target nonland permanents to their owners' hands. Then if you control a Merfolk, create a 1/1 white and blue Merfolk creature token for each permanent returned to its owner's hand this way.
+---
+name=Wild Unraveling
+mana={U}{U}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=84
+text=As an additional cost to cast this spell, blight 2 or pay {1}. (To blight 2, put two -1/-1 counters on a creature you control.)
+Counter target spell.
+---
+name=Auntie's Sentence
+mana={1}{B}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=85
+text=Choose one —
+• Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+• Target creature gets -2/-2 until end of turn.
+---
+name=Barbed Bloodletter
+mana={1}{B}
+type=Artifact — Equipment
+rarity=C
+power=
+toughness=
+keywords=['Equip', 'Flash']
+supertypes=[]
+types=['Artifact']
+subtypes=['Equipment']
+number=86
+text=Flash
+When this Equipment enters, attach it to target creature you control. That creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Equipped creature gets +1/+2.
+Equip {2}
+---
+name=Bile-Vial Boggart
+mana={B}
+type=Creature — Goblin Assassin
+rarity=C
+power=1
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Assassin']
+number=87
+text=When this creature dies, put a -1/-1 counter on up to one target creature.
+---
+name=Bitterbloom Bearer
+mana={B}{B}
+type=Creature — Faerie Rogue
+rarity=M
+power=1
+toughness=1
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=88
+text=Flash
+Flying
+At the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying.
+---
+name=Blight Rot
+mana={2}{B}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=89
+text=Put four -1/-1 counters on target creature.
+---
+name=Blighted Blackthorn
+mana={4}{B}
+type=Creature — Treefolk Warlock
+rarity=C
+power=3
+toughness=7
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Warlock']
+number=90
+text=Whenever this creature enters or attacks, you may blight 2. If you do, you draw a card and lose 1 life. (To blight 2, put two -1/-1 counters on a creature you control.)
+---
+name=Bloodline Bidding
+mana={6}{B}{B}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=91
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
+---
+name=Boggart Mischief
+mana={2}{B}
+type=Kindred Enchantment — Goblin
+rarity=U
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Kindred', 'Enchantment']
+subtypes=['Goblin']
+number=92
+text=When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.)
+Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
+---
+name=Boggart Prankster
+mana={1}{B}
+type=Creature — Goblin Warrior
+rarity=C
+power=1
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=93
+text=Whenever you attack, target attacking Goblin you control gets +1/+0 until end of turn.
+---
+name=Bogslither's Embrace
+mana={1}{B}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=94
+text=As an additional cost to cast this spell, blight 1 or pay {3}. (To blight 1, put a -1/-1 counter on a creature you control.)
+Exile target creature.
+---
+name=Champion of the Weird
+mana={3}{B}
+type=Creature — Goblin Berserker
+rarity=R
+power=5
+toughness=5
+keywords=['Behold', 'Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Berserker']
+number=95
+text=As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.)
+Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Creakwood Safewright
+mana={1}{B}
+type=Creature — Elf Warrior
+rarity=U
+power=5
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=96
+text=This creature enters with three -1/-1 counters on it.
+At the beginning of your end step, if there is an Elf card in your graveyard and this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Darkness Descends
+mana={2}{B}{B}
+type=Sorcery
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=97
+text=Put two -1/-1 counters on each creature.
+---
+name=Dawnhand Dissident
+mana={B}
+type=Creature — Elf Warlock
+rarity=R
+power=1
+toughness=2
+keywords=['Blight', 'Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=98
+text={T}, Blight 1: Surveil 1.
+{T}, Blight 2: Exile target card from a graveyard.
+During your turn, you may cast creature spells from among cards you own exiled with this creature by removing three counters from among creatures you control in addition to paying their other costs.
+---
+name=Dawnhand Eulogist
+mana={3}{B}
+type=Creature — Elf Warlock
+rarity=C
+power=3
+toughness=3
+keywords=['Menace', 'Mill']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=99
+text=Menace (This creature can't be blocked except by two or more creatures.)
+When this creature enters, mill three cards. Then if there is an Elf card in your graveyard, each opponent loses 2 life and you gain 2 life. (To mill three cards, put the top three cards of your library into your graveyard.)
+---
+name=Dose of Dawnglow
+mana={4}{B}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=100
+text=Return target creature card from your graveyard to the battlefield. Then if it isn't your main phase, blight 2. (Put two -1/-1 counters on a creature you control.)
+---
+name=Dream Seizer
+mana={3}{B}
+type=Creature — Faerie Rogue
+rarity=C
+power=3
+toughness=2
+keywords=['Blight', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=101
+text=Flying
+When this creature enters, you may blight 1. If you do, each opponent discards a card. (To blight 1, put a -1/-1 counter on a creature you control.)
+---
+name=Gloom Ripper
+mana={3}{B}{B}
+type=Creature — Elf Assassin
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Assassin']
+number=102
+text=When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.
+---
+name=Gnarlbark Elm
+mana={2}{B}
+type=Creature — Treefolk Warlock
+rarity=U
+power=3
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Warlock']
+number=103
+text=This creature enters with two -1/-1 counters on it.
+{2}{B}, Remove two counters from this creature: Target creature gets -2/-2 until end of turn. Activate only as a sorcery.
+---
+name=Graveshifter
+mana={3}{B}
+type=Creature — Shapeshifter
+rarity=U
+power=2
+toughness=2
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=104
+text=Changeling (This card is every creature type.)
+When this creature enters, you may return target creature card from your graveyard to your hand.
+---
+name=Grub, Storied Matriarch // Grub, Notorious Auntie
+mana={2}{B}
+type=Legendary Creature — Goblin Warlock
+rarity=R
+power=2
+toughness=1
+keywords=['Blight', 'Menace', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=105
+text=Menace
+Whenever this creature enters or transforms into Grub, Storied Matriarch, return up to one target Goblin card from your graveyard to your hand.
+At the beginning of your first main phase, you may pay {R}. If you do, transform Grub.
+---
+name=Grub, Storied Matriarch // Grub, Notorious Auntie
+mana=
+type=Legendary Creature — Goblin Warrior
+rarity=R
+power=2
+toughness=1
+keywords=['Blight', 'Menace', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=105
+text=Menace
+Whenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token."
+At the beginning of your first main phase, you may pay {B}. If you do, transform Grub.
+---
+name=Gutsplitter Gang
+mana={3}{B}
+type=Creature — Goblin Berserker
+rarity=U
+power=6
+toughness=6
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Berserker']
+number=106
+text=At the beginning of your first main phase, you may blight 2. If you don't, you lose 3 life. (To blight 2, put two -1/-1 counters on a creature you control.)
+---
+name=Heirloom Auntie
+mana={2}{B}
+type=Creature — Goblin Warlock
+rarity=C
+power=4
+toughness=4
+keywords=['Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=107
+text=This creature enters with two -1/-1 counters on it.
+Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)
+---
+name=Iron-Shield Elf
+mana={1}{B}
+type=Creature — Elf Warrior
+rarity=U
+power=3
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=108
+text=Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+---
+name=Moonglove Extractor
+mana={2}{B}
+type=Creature — Elf Warlock
+rarity=C
+power=2
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=109
+text=Whenever this creature attacks, you draw a card and lose 1 life.
+---
+name=Moonshadow
+mana={B}
+type=Creature — Elemental
+rarity=M
+power=7
+toughness=7
+keywords=['Menace']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=110
+text=Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Mornsong Aria
+mana={1}{B}{B}
+type=Legendary Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Enchantment']
+subtypes=[]
+number=111
+text=Players can't draw cards or gain life.
+At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
+---
+name=Mudbutton Cursetosser
+mana={B}
+type=Creature — Goblin Warlock
+rarity=U
+power=2
+toughness=1
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=112
+text=As an additional cost to cast this spell, behold a Goblin or pay {2}. (To behold a Goblin, choose a Goblin you control or reveal a Goblin card from your hand.)
+This creature can't block.
+When this creature dies, destroy target creature an opponent controls with power 2 or less.
+---
+name=Nameless Inversion
+mana={1}{B}
+type=Kindred Instant — Shapeshifter
+rarity=U
+power=
+toughness=
+keywords=['Changeling']
+supertypes=[]
+types=['Kindred', 'Instant']
+subtypes=['Shapeshifter']
+number=113
+text=Changeling (This card is every creature type.)
+Target creature gets +3/-3 and loses all creature types until end of turn.
+---
+name=Nightmare Sower
+mana={3}{B}
+type=Creature — Faerie Assassin
+rarity=U
+power=2
+toughness=3
+keywords=['Flying', 'Lifelink']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Assassin']
+number=114
+text=Flying, lifelink
+Whenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.
+---
+name=Perfect Intimidation
+mana={3}{B}
+type=Sorcery
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=115
+text=Choose one or both —
+• Target opponent exiles two cards from their hand.
+• Remove all counters from target creature.
+---
+name=Requiting Hex
+mana={B}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=116
+text=As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+Destroy target creature with mana value 2 or less. If this spell's additional cost was paid, you gain 2 life.
+---
+name=Retched Wretch
+mana={2}{B}
+type=Creature — Goblin
+rarity=U
+power=4
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin']
+number=117
+text=When this creature dies, if it had a -1/-1 counter on it, return it to the battlefield under its owner's control and it loses all abilities.
+---
+name=Scarblade Scout
+mana={1}{B}
+type=Creature — Elf Scout
+rarity=C
+power=2
+toughness=2
+keywords=['Lifelink', 'Mill']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Scout']
+number=118
+text=Lifelink
+When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)
+---
+name=Scarblade's Malice
+mana={B}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=119
+text=Target creature you control gains deathtouch and lifelink until end of turn. When that creature dies this turn, create a 2/2 black and green Elf creature token.
+---
+name=Shimmercreep
+mana={4}{B}
+type=Creature — Elemental
+rarity=U
+power=3
+toughness=5
+keywords=['Menace', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=120
+text=Menace (This creature can't be blocked except by two or more creatures.)
+Vivid — When this creature enters, each opponent loses X life and you gain X life, where X is the number of colors among permanents you control.
+---
+name=Taster of Wares
+mana={2}{B}
+type=Creature — Goblin Warlock
+rarity=R
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=121
+text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
+---
+name=Twilight Diviner
+mana={2}{B}
+type=Creature — Elf Cleric
+rarity=R
+power=3
+toughness=3
+keywords=['Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Cleric']
+number=122
+text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
+---
+name=Unbury
+mana={1}{B}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=123
+text=Choose one —
+• Return target creature card from your graveyard to your hand.
+• Return two target creature cards that share a creature type from your graveyard to your hand.
+---
+name=Ashling, Rekindled // Ashling, Rimebound
+mana={1}{R}
+type=Legendary Creature — Elemental Sorcerer
+rarity=R
+power=1
+toughness=3
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=124
+text=Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
+---
+name=Ashling, Rekindled // Ashling, Rimebound
+mana=
+type=Legendary Creature — Elemental Wizard
+rarity=R
+power=1
+toughness=3
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'Wizard']
+number=124
+text=Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+At the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.
+---
+name=Boldwyr Aggressor
+mana={3}{R}{R}
+type=Creature — Giant Warrior
+rarity=U
+power=2
+toughness=5
+keywords=['Double strike']
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=125
+text=Double strike
+Other Giants you control have double strike.
+---
+name=Boneclub Berserker
+mana={3}{R}
+type=Creature — Goblin Berserker
+rarity=C
+power=2
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Berserker']
+number=126
+text=This creature gets +2/+0 for each other Goblin you control.
+---
+name=Boulder Dash
+mana={1}{R}
+type=Sorcery
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=127
+text=Boulder Dash deals 2 damage to any target and 1 damage to any other target.
+---
+name=Brambleback Brute
+mana={2}{R}
+type=Creature — Giant Warrior
+rarity=C
+power=4
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=128
+text=This creature enters with two -1/-1 counters on it.
+{1}{R}, Remove a counter from this creature: Target creature can't block this turn. Activate only as a sorcery.
+---
+name=Burning Curiosity
+mana={2}{R}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=129
+text=As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+Exile the top two cards of your library. If this spell's additional cost was paid, exile the top three cards instead. Until the end of your next turn, you may play those cards.
+---
+name=Champion of the Path
+mana={3}{R}
+type=Creature — Elemental Sorcerer
+rarity=R
+power=7
+toughness=3
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=130
+text=As an additional cost to cast this spell, behold an Elemental and exile it. (Exile an Elemental you control or an Elemental card from your hand.)
+Whenever another Elemental you control enters, it deals damage equal to its power to each opponent.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Cinder Strike
+mana={R}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=['Blight']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=131
+text=As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+Cinder Strike deals 2 damage to target creature. It deals 4 damage to that creature instead if this spell's additional cost was paid.
+---
+name=Collective Inferno
+mana={3}{R}{R}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=132
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+As this enchantment enters, choose a creature type.
+Double all damage that sources you control of the chosen type would deal.
+---
+name=Elder Auntie
+mana={2}{R}
+type=Creature — Goblin Warlock
+rarity=C
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=133
+text=When this creature enters, create a 1/1 black and red Goblin creature token.
+---
+name=End-Blaze Epiphany
+mana={X}{R}
+type=Instant
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=134
+text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
+---
+name=Enraged Flamecaster
+mana={2}{R}
+type=Creature — Elemental Sorcerer
+rarity=C
+power=3
+toughness=2
+keywords=['Reach']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=135
+text=Reach
+Whenever you cast a spell with mana value 4 or greater, this creature deals 2 damage to each opponent.
+---
+name=Explosive Prodigy
+mana={1}{R}
+type=Creature — Elemental Sorcerer
+rarity=U
+power=1
+toughness=1
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=136
+text=Vivid — When this creature enters, it deals X damage to target creature an opponent controls, where X is the number of colors among permanents you control.
+---
+name=Feed the Flames
+mana={3}{R}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=137
+text=Feed the Flames deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+---
+name=Flame-Chain Mauler
+mana={1}{R}
+type=Creature — Elemental Warrior
+rarity=C
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Warrior']
+number=138
+text={1}{R}: This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+---
+name=Flamebraider
+mana={1}{R}
+type=Creature — Elemental Bard
+rarity=U
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Bard']
+number=139
+text={T}: Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elemental sources.
+---
+name=Flamekin Gildweaver
+mana={3}{R}
+type=Creature — Elemental Sorcerer
+rarity=C
+power=4
+toughness=3
+keywords=['Trample', 'Treasure']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=140
+text=Trample
+When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+---
+name=Giantfall
+mana={1}{R}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=141
+text=Choose one —
+• Target creature you control deals damage equal to its power to target creature an opponent controls.
+• Destroy target artifact.
+---
+name=Goatnap
+mana={2}{R}
+type=Sorcery
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=142
+text=Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If that creature is a Goat, it also gets +3/+0 until end of turn.
+---
+name=Goliath Daydreamer
+mana={2}{R}{R}
+type=Creature — Giant Wizard
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Wizard']
+number=143
+text=Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves.
+Whenever this creature attacks, you may cast a spell from among cards you own in exile with dream counters on them without paying its mana cost.
+---
+name=Gristle Glutton
+mana={1}{R}
+type=Creature — Goblin Scout
+rarity=C
+power=1
+toughness=3
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Scout']
+number=144
+text={T}, Blight 1: Discard a card. If you do, draw a card. (To blight 1, put a -1/-1 counter on a creature you control.)
+---
+name=Hexing Squelcher
+mana={1}{R}
+type=Creature — Goblin Sorcerer
+rarity=R
+power=2
+toughness=2
+keywords=['Ward']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Sorcerer']
+number=145
+text=This spell can't be countered.
+Ward—Pay 2 life.
+Spells you control can't be countered.
+Other creatures you control have "Ward—Pay 2 life."
+---
+name=Impolite Entrance
+mana={R}
+type=Sorcery
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=146
+text=Target creature gains trample and haste until end of turn.
+Draw a card.
+---
+name=Kindle the Inner Flame
+mana={3}{R}
+type=Kindred Sorcery — Elemental
+rarity=U
+power=
+toughness=
+keywords=['Behold', 'Flashback']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Elemental']
+number=147
+text=Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
+Flashback—{1}{R}, Behold three Elementals. (You may cast this card from your graveyard for its flashback cost. Then exile it. To behold an Elemental, choose an Elemental you control or reveal an Elemental card from your hand.)
+---
+name=Kulrath Zealot
+mana={5}{R}
+type=Creature — Elemental Warrior
+rarity=C
+power=6
+toughness=5
+keywords=['Basic landcycling', 'Cycling', 'Landcycling', 'Typecycling']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Warrior']
+number=148
+text=When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+Basic landcycling {1}{R} ({1}{R}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+---
+name=Lasting Tarfire
+mana={1}{R}
+type=Enchantment
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=149
+text=At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 damage to each opponent.
+---
+name=Lavaleaper
+mana={3}{R}
+type=Creature — Elemental
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=150
+text=All creatures have haste.
+Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
+---
+name=Meek Attack
+mana={2}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=151
+text={1}{R}: You may put a creature card with total power and toughness 5 or less from your hand onto the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice that creature.
+---
+name=Reckless Ransacking
+mana={1}{R}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=['Treasure']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=152
+text=Target creature gets +3/+2 until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+---
+name=Scuzzback Scrounger
+mana={1}{R}
+type=Creature — Goblin Warrior
+rarity=R
+power=3
+toughness=2
+keywords=['Blight', 'Treasure']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=153
+text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+---
+name=Sear
+mana={1}{R}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=154
+text=Sear deals 4 damage to target creature or planeswalker.
+---
+name=Sizzling Changeling
+mana={2}{R}
+type=Creature — Shapeshifter
+rarity=U
+power=3
+toughness=2
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=155
+text=Changeling (This card is every creature type.)
+When this creature dies, exile the top card of your library. Until the end of your next turn, you may play that card.
+---
+name=Soul Immolation
+mana={3}{R}{R}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=156
+text=As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control. (Put X -1/-1 counters on a creature you control.)
+Soul Immolation deals X damage to each opponent and each creature they control.
+---
+name=Soulbright Seeker
+mana={R}
+type=Creature — Elemental Sorcerer
+rarity=U
+power=2
+toughness=1
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=157
+text=As an additional cost to cast this spell, behold an Elemental or pay {2}. (To behold an Elemental, choose an Elemental you control or reveal an Elemental card from your hand.)
+{R}: Target creature you control gains trample until end of turn. If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}.
+---
+name=Sourbread Auntie
+mana={2}{R}{R}
+type=Creature — Goblin Warrior
+rarity=U
+power=4
+toughness=3
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=158
+text=When this creature enters, you may blight 2. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 2, put two -1/-1 counters on a creature you control.)
+---
+name=Spinerock Tyrant
+mana={3}{R}{R}
+type=Creature — Dragon
+rarity=M
+power=6
+toughness=6
+keywords=['Flying', 'Wither']
+supertypes=[]
+types=['Creature']
+subtypes=['Dragon']
+number=159
+text=Flying
+Wither (This deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
+---
+name=Squawkroaster
+mana={3}{R}
+type=Creature — Elemental
+rarity=U
+power=*
+toughness=4
+keywords=['Double strike', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=160
+text=Double strike
+Vivid — Squawkroaster's power is equal to the number of colors among permanents you control.
+---
+name=Sting-Slinger
+mana={2}{R}
+type=Creature — Goblin Warrior
+rarity=U
+power=3
+toughness=3
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=161
+text={1}{R}, {T}, Blight 1: This creature deals 2 damage to each opponent. (To blight 1, put a -1/-1 counter on a creature you control.)
+---
+name=Tweeze
+mana={2}{R}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=162
+text=Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card.
+---
+name=Warren Torchmaster
+mana={1}{R}
+type=Creature — Goblin Warrior
+rarity=U
+power=2
+toughness=2
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=163
+text=At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)
+---
+name=Assert Perfection
+mana={1}{G}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=164
+text=Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls.
+---
+name=Aurora Awakener
+mana={6}{G}
+type=Creature — Giant Druid
+rarity=M
+power=7
+toughness=7
+keywords=['Trample', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Druid']
+number=165
+text=Trample
+Vivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanent cards onto the battlefield, then put the rest of the revealed cards on the bottom of your library in a random order.
+---
+name=Bloom Tender
+mana={1}{G}
+type=Creature — Elf Druid
+rarity=M
+power=1
+toughness=1
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=166
+text=Vivid — {T}: For each color among permanents you control, add one mana of that color.
+---
+name=Blossoming Defense
+mana={G}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=167
+text=Target creature you control gets +2/+2 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+---
+name=Bristlebane Battler
+mana={1}{G}
+type=Creature — Kithkin Soldier
+rarity=R
+power=6
+toughness=6
+keywords=['Trample', 'Ward']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=168
+text=Trample, ward {2}
+This creature enters with five -1/-1 counters on it.
+Whenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Bristlebane Outrider
+mana={3}{G}
+type=Creature — Kithkin Knight
+rarity=U
+power=3
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Knight']
+number=169
+text=This creature can't be blocked by creatures with power 2 or less.
+As long as another creature entered the battlefield under your control this turn, this creature gets +2/+0.
+---
+name=Celestial Reunion
+mana={X}{G}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Behold']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=170
+text=As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type.
+Search your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.
+---
+name=Champions of the Perfect
+mana={3}{G}
+type=Creature — Elf Warrior
+rarity=R
+power=6
+toughness=6
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=171
+text=As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.)
+Whenever you cast a creature spell, draw a card.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Chomping Changeling
+mana={2}{G}
+type=Creature — Shapeshifter
+rarity=U
+power=1
+toughness=2
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=172
+text=Changeling (This card is every creature type.)
+When this creature enters, destroy up to one target artifact or enchantment.
+---
+name=Crossroads Watcher
+mana={2}{G}
+type=Creature — Kithkin Ranger
+rarity=C
+power=3
+toughness=3
+keywords=['Trample']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Ranger']
+number=173
+text=Trample
+Whenever another creature you control enters, this creature gets +1/+0 until end of turn.
+---
+name=Dawn's Light Archer
+mana={2}{G}
+type=Creature — Elf Archer
+rarity=C
+power=4
+toughness=2
+keywords=['Flash', 'Reach']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Archer']
+number=174
+text=Flash
+Reach
+---
+name=Dundoolin Weaver
+mana={1}{G}
+type=Creature — Kithkin Druid
+rarity=U
+power=2
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Druid']
+number=175
+text=When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand.
+---
+name=Formidable Speaker
+mana={2}{G}
+type=Creature — Elf Druid
+rarity=R
+power=2
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=176
+text=When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
+{1}, {T}: Untap another target permanent.
+---
+name=Gilt-Leaf's Embrace
+mana={2}{G}
+type=Enchantment — Aura
+rarity=C
+power=
+toughness=
+keywords=['Enchant', 'Flash']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=177
+text=Flash
+Enchant creature
+When this Aura enters, enchanted creature gains trample and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+Enchanted creature gets +2/+0.
+---
+name=Great Forest Druid
+mana={1}{G}
+type=Creature — Treefolk Druid
+rarity=C
+power=0
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Druid']
+number=178
+text={T}: Add one mana of any color.
+---
+name=Luminollusk
+mana={3}{G}
+type=Creature — Elemental
+rarity=U
+power=2
+toughness=4
+keywords=['Deathtouch', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=179
+text=Deathtouch
+Vivid — When this creature enters, you gain life equal to the number of colors among permanents you control.
+---
+name=Lys Alana Dignitary
+mana={1}{G}
+type=Creature — Elf Advisor
+rarity=U
+power=2
+toughness=3
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Advisor']
+number=180
+text=As an additional cost to cast this spell, behold an Elf or pay {2}. (To behold an Elf, choose an Elf you control or reveal an Elf card from your hand.)
+{T}: Add {G}{G}. Activate only if there is an Elf card in your graveyard.
+---
+name=Lys Alana Informant
+mana={1}{G}
+type=Creature — Elf Scout
+rarity=C
+power=3
+toughness=1
+keywords=['Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Scout']
+number=181
+text=When this creature enters or dies, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+---
+name=Midnight Tilling
+mana={1}{G}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=['Mill']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=182
+text=Mill four cards, then you may return a permanent card from among them to your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
+---
+name=Mistmeadow Council
+mana={4}{G}
+type=Creature — Kithkin Advisor
+rarity=C
+power=4
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Advisor']
+number=183
+text=This spell costs {1} less to cast if you control a Kithkin.
+When this creature enters, draw a card.
+---
+name=Moon-Vigil Adherents
+mana={2}{G}{G}
+type=Creature — Elf Druid
+rarity=U
+power=0
+toughness=0
+keywords=['Trample']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=184
+text=Trample
+This creature gets +1/+1 for each creature you control and each creature card in your graveyard.
+---
+name=Morcant's Eyes
+mana={1}{G}
+type=Kindred Enchantment — Elf
+rarity=U
+power=
+toughness=
+keywords=['Surveil']
+supertypes=[]
+types=['Kindred', 'Enchantment']
+subtypes=['Elf']
+number=185
+text=At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+{4}{G}{G}, Sacrifice this enchantment: Create X 2/2 black and green Elf creature tokens, where X is the number of Elf cards in your graveyard. Activate only as a sorcery.
+---
+name=Mutable Explorer
+mana={2}{G}
+type=Creature — Shapeshifter
+rarity=R
+power=1
+toughness=1
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=186
+text=Changeling (This card is every creature type.)
+When this creature enters, create a tapped Mutavault token. (It's a land with "{T}: Add {C}" and "{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.")
+---
+name=Pitiless Fists
+mana={3}{G}
+type=Enchantment — Aura
+rarity=U
+power=
+toughness=
+keywords=['Enchant', 'Fight']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=187
+text=Enchant creature you control
+When this Aura enters, enchanted creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+Enchanted creature gets +2/+2.
+---
+name=Prismabasher
+mana={4}{G}{G}
+type=Creature — Elemental
+rarity=U
+power=6
+toughness=6
+keywords=['Trample', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=188
+text=Trample
+Vivid — When this creature enters, up to X target creatures you control get +X/+X until end of turn, where X is the number of colors among permanents you control.
+---
+name=Prismatic Undercurrents
+mana={3}{G}
+type=Enchantment
+rarity=U
+power=
+toughness=
+keywords=['Vivid']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=189
+text=Vivid — When this enchantment enters, search your library for up to X basic land cards, where X is the number of colors among permanents you control. Reveal those cards, put them into your hand, then shuffle.
+You may play an additional land on each of your turns.
+---
+name=Pummeler for Hire
+mana={4}{G}
+type=Creature — Giant Mercenary
+rarity=U
+power=4
+toughness=4
+keywords=['Reach', 'Vigilance', 'Ward']
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Mercenary']
+number=190
+text=Vigilance, reach
+Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+When this creature enters, you gain X life, where X is the greatest power among Giants you control.
+---
+name=Safewright Cavalry
+mana={3}{G}
+type=Creature — Elf Warrior
+rarity=C
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=191
+text=This creature can't be blocked by more than one creature.
+{5}: Target Elf you control gets +2/+2 until end of turn.
+---
+name=Sapling Nursery
+mana={6}{G}{G}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=['Affinity', 'Landfall']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=192
+text=Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)
+Landfall — Whenever a land you control enters, create a 3/4 green Treefolk creature token with reach.
+{1}{G}, Exile this enchantment: Treefolk and Forests you control gain indestructible until end of turn.
+---
+name=Selfless Safewright
+mana={3}{G}{G}
+type=Creature — Elf Warrior
+rarity=R
+power=4
+toughness=2
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=193
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
+---
+name=Shimmerwilds Growth
+mana={1}{G}
+type=Enchantment — Aura
+rarity=U
+power=
+toughness=
+keywords=['Enchant']
+supertypes=[]
+types=['Enchantment']
+subtypes=['Aura']
+number=194
+text=Enchant land
+As this Aura enters, choose a color.
+Enchanted land is the chosen color.
+Whenever enchanted land is tapped for mana, its controller adds an additional one mana of the chosen color.
+---
+name=Spry and Mighty
+mana={4}{G}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=195
+text=Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
+---
+name=Surly Farrier
+mana={1}{G}
+type=Creature — Kithkin Citizen
+rarity=C
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Citizen']
+number=196
+text={T}: Target creature you control gets +1/+1 and gains vigilance until end of turn. Activate only as a sorcery.
+---
+name=Tend the Sprigs
+mana={2}{G}
+type=Sorcery
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=197
+text=Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control seven or more lands and/or Treefolk, create a 3/4 green Treefolk creature token with reach. (It can block creatures with flying.)
+---
+name=Thoughtweft Charge
+mana={1}{G}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=198
+text=Target creature gets +3/+3 until end of turn. If a creature entered the battlefield under your control this turn, draw a card.
+---
+name=Trystan, Callous Cultivator // Trystan, Penitent Culler
+mana={2}{G}
+type=Legendary Creature — Elf Druid
+rarity=R
+power=3
+toughness=4
+keywords=['Deathtouch', 'Mill', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=199
+text=Deathtouch
+Whenever this creature enters or transforms into Trystan, Callous Cultivator, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life.
+At the beginning of your first main phase, you may pay {B}. If you do, transform Trystan.
+---
+name=Trystan, Callous Cultivator // Trystan, Penitent Culler
+mana=
+type=Legendary Creature — Elf Warlock
+rarity=R
+power=3
+toughness=4
+keywords=['Deathtouch', 'Mill', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=199
+text=Deathtouch
+Whenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life.
+At the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.
+---
+name=Unforgiving Aim
+mana={2}{G}
+type=Instant
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=200
+text=Choose one —
+• Destroy target creature with flying.
+• Destroy target enchantment.
+• Create a 2/2 black and green Elf creature token.
+---
+name=Vinebred Brawler
+mana={2}{G}
+type=Creature — Elf Berserker
+rarity=U
+power=4
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Berserker']
+number=201
+text=This creature must be blocked if able.
+Whenever this creature attacks, another target Elf you control gets +2/+1 until end of turn.
+---
+name=Virulent Emissary
+mana={G}
+type=Creature — Elf Assassin
+rarity=U
+power=1
+toughness=1
+keywords=['Deathtouch']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Assassin']
+number=202
+text=Deathtouch
+Whenever another creature you control enters, you gain 1 life.
+---
+name=Wildvine Pummeler
+mana={6}{G}
+type=Creature — Giant Berserker
+rarity=C
+power=6
+toughness=5
+keywords=['Reach', 'Trample', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Berserker']
+number=203
+text=Vivid — This spell costs {1} less to cast for each color among permanents you control.
+Reach, trample
+---
+name=Abigale, Eloquent First-Year
+mana={W/B}{W/B}
+type=Legendary Creature — Bird Bard
+rarity=R
+power=1
+toughness=1
+keywords=['First strike', 'Flying', 'Lifelink']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Bird', 'Bard']
+number=204
+text=Flying, first strike, lifelink
+When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
+---
+name=Ashling's Command
+mana={3}{U}{R}
+type=Kindred Instant — Elemental
+rarity=R
+power=
+toughness=
+keywords=['Treasure']
+supertypes=[]
+types=['Kindred', 'Instant']
+subtypes=['Elemental']
+number=205
+text=Choose two —
+• Create a token that's a copy of target Elemental you control.
+• Target player draws two cards.
+• Ashling's Command deals 2 damage to each creature target player controls.
+• Target player creates two Treasure tokens.
+---
+name=Boggart Cursecrafter
+mana={B}{R}
+type=Creature — Goblin Warlock
+rarity=U
+power=2
+toughness=3
+keywords=['Deathtouch']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=206
+text=Deathtouch
+Whenever another Goblin you control dies, this creature deals 1 damage to each opponent.
+---
+name=Bre of Clan Stoutarm
+mana={2}{R}{W}
+type=Legendary Creature — Giant Warrior
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=207
+text={1}{W}, {T}: Another target creature you control gains flying and lifelink until end of turn.
+At the beginning of your end step, if you gained life this turn, exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than or equal to the amount of life you gained this turn. Otherwise, put it into your hand.
+---
+name=Brigid's Command
+mana={1}{G}{W}
+type=Kindred Sorcery — Kithkin
+rarity=R
+power=
+toughness=
+keywords=['Fight']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Kithkin']
+number=208
+text=Choose two —
+• Create a token that's a copy of target Kithkin you control.
+• Target player creates a 1/1 green and white Kithkin creature token.
+• Target creature you control gets +3/+3 until end of turn.
+• Target creature you control fights target creature an opponent controls.
+---
+name=Catharsis
+mana={4}{R/W}{R/W}
+type=Creature — Elemental Incarnation
+rarity=M
+power=3
+toughness=4
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=209
+text=When this creature enters, if {W}{W} was spent to cast it, create two 1/1 green and white Kithkin creature tokens.
+When this creature enters, if {R}{R} was spent to cast it, creatures you control get +1/+1 and gain haste until end of turn.
+Evoke {R/W}{R/W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
+---
+name=Chaos Spewer
+mana={2}{B/R}
+type=Creature — Goblin Warlock
+rarity=C
+power=5
+toughness=4
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=210
+text=When this creature enters, you may pay {2}. If you don't, blight 2. (To blight 2, put two -1/-1 counters on a creature you control.)
+---
+name=Chitinous Graspling
+mana={3}{G/U}
+type=Creature — Shapeshifter
+rarity=C
+power=3
+toughness=4
+keywords=['Changeling', 'Reach']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=211
+text=Changeling (This card is every creature type.)
+Reach
+---
+name=Deceit
+mana={4}{U/B}{U/B}
+type=Creature — Elemental Incarnation
+rarity=M
+power=5
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=212
+text=When this creature enters, if {U}{U} was spent to cast it, return up to one other target nonland permanent to its owner's hand.
+When this creature enters, if {B}{B} was spent to cast it, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+Evoke {U/B}{U/B}
+---
+name=Deepchannel Duelist
+mana={W}{U}
+type=Creature — Merfolk Soldier
+rarity=U
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=213
+text=At the beginning of your end step, untap target Merfolk you control.
+Other Merfolk you control get +1/+1.
+---
+name=Deepway Navigator
+mana={W}{U}
+type=Creature — Merfolk Wizard
+rarity=R
+power=2
+toughness=2
+keywords=['Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=214
+text=Flash
+When this creature enters, untap each other Merfolk you control.
+As long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.
+---
+name=Doran, Besieged by Time
+mana={1}{W}{B}{G}
+type=Legendary Creature — Treefolk Druid
+rarity=R
+power=0
+toughness=5
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Treefolk', 'Druid']
+number=215
+text=Each creature spell you cast with toughness greater than its power costs {1} less to cast.
+Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
+---
+name=Dream Harvest
+mana={5}{U/B}{U/B}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=216
+text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
+---
+name=Eclipsed Boggart
+mana={B/R}{B/R}{B/R}
+type=Creature — Goblin Scout
+rarity=U
+power=2
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Scout']
+number=217
+text=When this creature enters, look at the top four cards of your library. You may reveal a Goblin, Swamp, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Elf
+mana={B/G}{B/G}{B/G}
+type=Creature — Elf Scout
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Scout']
+number=218
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elf, Swamp, or Forest card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Flamekin
+mana={1}{U/R}{U/R}
+type=Creature — Elemental Scout
+rarity=U
+power=1
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Scout']
+number=219
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elemental, Island, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Kithkin
+mana={G/W}{G/W}
+type=Creature — Kithkin Scout
+rarity=U
+power=2
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Scout']
+number=220
+text=When this creature enters, look at the top four cards of your library. You may reveal a Kithkin, Forest, or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Merrow
+mana={W/U}{W/U}{W/U}
+type=Creature — Merfolk Scout
+rarity=U
+power=2
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Scout']
+number=221
+text=When this creature enters, look at the top four cards of your library. You may reveal a Merfolk, Plains, or Island card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Emptiness
+mana={4}{W/B}{W/B}
+type=Creature — Elemental Incarnation
+rarity=M
+power=3
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=222
+text=When this creature enters, if {W}{W} was spent to cast it, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+When this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature.
+Evoke {W/B}{W/B}
+---
+name=Feisty Spikeling
+mana={1}{R/W}
+type=Creature — Shapeshifter
+rarity=C
+power=2
+toughness=1
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=223
+text=Changeling (This card is every creature type.)
+During your turn, this creature has first strike.
+---
+name=Figure of Fable
+mana={G/W}
+type=Creature — Kithkin
+rarity=R
+power=1
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin']
+number=224
+text={G/W}: This creature becomes a Kithkin Scout with base power and toughness 2/3.
+{1}{G/W}{G/W}: If this creature is a Scout, it becomes a Kithkin Soldier with base power and toughness 4/5.
+{3}{G/W}{G/W}{G/W}: If this creature is a Soldier, it becomes a Kithkin Avatar with base power and toughness 7/8 and protection from each of your opponents.
+---
+name=Flaring Cinder
+mana={1}{U/R}{U/R}
+type=Creature — Elemental Sorcerer
+rarity=C
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=225
+text=When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card.
+---
+name=Gangly Stompling
+mana={2}{R/G}
+type=Creature — Shapeshifter
+rarity=C
+power=4
+toughness=2
+keywords=['Changeling', 'Trample']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=226
+text=Changeling (This card is every creature type.)
+Trample
+---
+name=Glister Bairn
+mana={2}{G/U}{G/U}{G/U}
+type=Creature — Ouphe
+rarity=U
+power=1
+toughness=4
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Ouphe']
+number=227
+text=Vivid — At the beginning of combat on your turn, another target creature you control gets +X/+X until end of turn, where X is the number of colors among permanents you control.
+---
+name=Grub's Command
+mana={3}{B}{R}
+type=Kindred Sorcery — Goblin
+rarity=R
+power=
+toughness=
+keywords=['Mill']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Goblin']
+number=228
+text=Choose two —
+• Create a token that's a copy of target Goblin you control.
+• Creatures target player controls get +1/+1 and gain haste until end of turn.
+• Destroy target artifact or creature.
+• Target player mills five cards, then puts each Goblin card milled this way into their hand.
+---
+name=High Perfect Morcant
+mana={2}{B}{G}
+type=Legendary Creature — Elf Noble
+rarity=R
+power=4
+toughness=4
+keywords=['Blight', 'Proliferate']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Noble']
+number=229
+text=Whenever High Perfect Morcant or another Elf you control enters, each opponent blights 1. (They each put a -1/-1 counter on a creature they control.)
+Tap three untapped Elves you control: Proliferate. Activate only as a sorcery. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+---
+name=Hovel Hurler
+mana={3}{R/W}{R/W}
+type=Creature — Giant Warrior
+rarity=U
+power=6
+toughness=7
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=230
+text=This creature enters with two -1/-1 counters on it.
+{R/W}{R/W}, Remove a counter from this creature: Another target creature you control gets +1/+0 and gains flying until end of turn. Activate only as a sorcery.
+---
+name=Kirol, Attentive First-Year
+mana={1}{R/W}{R/W}
+type=Legendary Creature — Vampire Cleric
+rarity=R
+power=3
+toughness=3
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Vampire', 'Cleric']
+number=231
+text=Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
+---
+name=Lluwen, Imperfect Naturalist
+mana={B/G}{B/G}
+type=Legendary Creature — Elf Druid
+rarity=R
+power=1
+toughness=3
+keywords=['Mill']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=232
+text=When Lluwen enters, mill four cards, then you may put a creature or land card from among the milled cards on top of your library.
+{2}{B/G}{B/G}{B/G}, {T}, Discard a land card: Create a 1/1 black and green Worm creature token for each land card in your graveyard.
+---
+name=Maralen, Fae Ascendant
+mana={2}{B}{G}{U}
+type=Legendary Creature — Elf Faerie Noble
+rarity=R
+power=4
+toughness=5
+keywords=['Flying']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Faerie', 'Noble']
+number=233
+text=Flying
+Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.
+Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
+---
+name=Merrow Skyswimmer
+mana={3}{W/U}{W/U}
+type=Creature — Merfolk Soldier
+rarity=C
+power=2
+toughness=2
+keywords=['Convoke', 'Flying', 'Vigilance']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=234
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Flying, vigilance
+When this creature enters, create a 1/1 white and blue Merfolk creature token.
+---
+name=Mischievous Sneakling
+mana={1}{U/B}
+type=Creature — Shapeshifter
+rarity=C
+power=2
+toughness=2
+keywords=['Changeling', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=235
+text=Changeling (This card is every creature type.)
+Flash
+---
+name=Morcant's Loyalist
+mana={1}{B}{G}
+type=Creature — Elf Warrior
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=236
+text=Other Elves you control get +1/+1.
+When this creature dies, return another target Elf card from your graveyard to your hand.
+---
+name=Noggle Robber
+mana={1}{R/G}{R/G}
+type=Creature — Noggle Rogue
+rarity=U
+power=3
+toughness=3
+keywords=['Treasure']
+supertypes=[]
+types=['Creature']
+subtypes=['Noggle', 'Rogue']
+number=237
+text=When this creature enters or dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+---
+name=Prideful Feastling
+mana={2}{W/B}
+type=Creature — Shapeshifter
+rarity=C
+power=2
+toughness=3
+keywords=['Changeling', 'Lifelink']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=238
+text=Changeling (This card is every creature type.)
+Lifelink
+---
+name=Raiding Schemes
+mana={3}{R}{G}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=239
+text=Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
+---
+name=Reaping Willow
+mana={1}{W/B}{W/B}{W/B}
+type=Creature — Treefolk Cleric
+rarity=U
+power=3
+toughness=6
+keywords=['Lifelink']
+supertypes=[]
+types=['Creature']
+subtypes=['Treefolk', 'Cleric']
+number=240
+text=Lifelink
+This creature enters with two -1/-1 counters on it.
+{1}{W/B}, Remove two counters from this creature: Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery.
+---
+name=Sanar, Innovative First-Year
+mana={2}{U/R}{U/R}
+type=Legendary Creature — Goblin Sorcerer
+rarity=R
+power=2
+toughness=4
+keywords=['Vivid']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Sorcerer']
+number=241
+text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
+---
+name=Shadow Urchin
+mana={2}{B/R}
+type=Creature — Ouphe
+rarity=R
+power=3
+toughness=4
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Ouphe']
+number=242
+text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)
+Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
+---
+name=Stoic Grove-Guide
+mana={4}{B/G}
+type=Creature — Elf Druid
+rarity=C
+power=5
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=243
+text={1}{B/G}, Exile this card from your graveyard: Create a 2/2 black and green Elf creature token. Activate only as a sorcery.
+---
+name=Sygg's Command
+mana={1}{W}{U}
+type=Kindred Sorcery — Merfolk
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Merfolk']
+number=244
+text=Choose two —
+• Create a token that's a copy of target Merfolk you control.
+• Creatures target player controls gain lifelink until end of turn.
+• Target player draws a card.
+• Tap target creature. Put a stun counter on it.
+---
+name=Tam, Mindful First-Year
+mana={1}{G/U}
+type=Legendary Creature — Gorgon Wizard
+rarity=R
+power=2
+toughness=2
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Gorgon', 'Wizard']
+number=245
+text=Each other creature you control has hexproof from each of its colors.
+{T}: Target creature you control becomes all colors until end of turn.
+---
+name=Thoughtweft Lieutenant
+mana={G}{W}
+type=Creature — Kithkin Soldier
+rarity=U
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=246
+text=Whenever this creature or another Kithkin you control enters, target creature you control gets +1/+1 and gains trample until end of turn.
+---
+name=Trystan's Command
+mana={4}{B}{G}
+type=Kindred Sorcery — Elf
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Elf']
+number=247
+text=Choose two —
+• Create a token that's a copy of target Elf you control.
+• Return one or two target permanent cards from your graveyard to your hand.
+• Destroy target creature or enchantment.
+• Creatures target player controls get +3/+3 until end of turn. Untap them.
+---
+name=Twinflame Travelers
+mana={2}{U}{R}
+type=Creature — Elemental Sorcerer
+rarity=U
+power=3
+toughness=3
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=248
+text=Flying
+If a triggered ability of another Elemental you control triggers, it triggers an additional time.
+---
+name=Vibrance
+mana={3}{R/G}{R/G}
+type=Creature — Elemental Incarnation
+rarity=M
+power=4
+toughness=4
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=249
+text=When this creature enters, if {R}{R} was spent to cast it, this creature deals 3 damage to any target.
+When this creature enters, if {G}{G} was spent to cast it, search your library for a land card, reveal it, put it into your hand, then shuffle. You gain 2 life.
+Evoke {R/G}{R/G}
+---
+name=Voracious Tome-Skimmer
+mana={U/B}{U/B}{U/B}
+type=Creature — Faerie Rogue
+rarity=U
+power=2
+toughness=3
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=250
+text=Flying
+Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
+---
+name=Wary Farmer
+mana={1}{G/W}{G/W}
+type=Creature — Kithkin Citizen
+rarity=C
+power=3
+toughness=3
+keywords=['Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Citizen']
+number=251
+text=At the beginning of your end step, if another creature entered the battlefield under your control this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+---
+name=Wistfulness
+mana={3}{G/U}{G/U}
+type=Creature — Elemental Incarnation
+rarity=M
+power=6
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=252
+text=When this creature enters, if {G}{G} was spent to cast it, exile target artifact or enchantment an opponent controls.
+When this creature enters, if {U}{U} was spent to cast it, draw two cards, then discard a card.
+Evoke {G/U}{G/U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
+---
+name=Chronicle of Victory
+mana={6}
+type=Legendary Artifact
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Artifact']
+subtypes=[]
+number=253
+text=As Chronicle of Victory enters, choose a creature type.
+Creatures you control of the chosen type get +2/+2 and have first strike and trample.
+Whenever you cast a spell of the chosen type, draw a card.
+---
+name=Dawn-Blessed Pennant
+mana={1}
+type=Artifact
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=254
+text=As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.
+Whenever a permanent you control of the chosen type enters, you gain 1 life.
+{2}, {T}, Sacrifice this artifact: Return target card of the chosen type from your graveyard to your hand.
+---
+name=Firdoch Core
+mana={3}
+type=Kindred Artifact — Shapeshifter
+rarity=C
+power=
+toughness=
+keywords=['Changeling']
+supertypes=[]
+types=['Kindred', 'Artifact']
+subtypes=['Shapeshifter']
+number=255
+text=Changeling (This card is every creature type.)
+{T}: Add one mana of any color.
+{4}: This artifact becomes a 4/4 artifact creature until end of turn.
+---
+name=Foraging Wickermaw
+mana={2}
+type=Artifact Creature — Scarecrow
+rarity=C
+power=1
+toughness=3
+keywords=['Surveil']
+supertypes=[]
+types=['Artifact', 'Creature']
+subtypes=['Scarecrow']
+number=256
+text=When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+{1}: Add one mana of any color. This creature becomes that color until end of turn. Activate only once each turn.
+---
+name=Gathering Stone
+mana={4}
+type=Artifact
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=257
+text=As this artifact enters, choose a creature type.
+Spells you cast of the chosen type cost {1} less to cast.
+When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
+---
+name=Mirrormind Crown
+mana={4}
+type=Artifact — Equipment
+rarity=R
+power=
+toughness=
+keywords=['Equip']
+supertypes=[]
+types=['Artifact']
+subtypes=['Equipment']
+number=258
+text=As long as this Equipment is attached to a creature, the first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of equipped creature.
+Equip {2}
+---
+name=Puca's Eye
+mana={2}
+type=Artifact
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=259
+text=When this artifact enters, draw a card, then choose a color. This artifact becomes the chosen color.
+{3}, {T}: Draw a card. Activate only if there are five colors among permanents you control.
+---
+name=Springleaf Drum
+mana={1}
+type=Artifact
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=260
+text={T}, Tap an untapped creature you control: Add one mana of any color.
+---
+name=Stalactite Dagger
+mana={2}
+type=Artifact — Equipment
+rarity=C
+power=
+toughness=
+keywords=['Equip']
+supertypes=[]
+types=['Artifact']
+subtypes=['Equipment']
+number=261
+text=When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
+Equipped creature gets +1/+1 and is all creature types.
+Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+---
+name=Blood Crypt
+mana=
+type=Land — Swamp Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Mountain']
+number=262
+text=({T}: Add {B} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Eclipsed Realms
+mana=
+type=Land
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=[]
+number=263
+text=As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.
+{T}: Add {C}.
+{T}: Add one mana of any color. Spend this mana only to cast a spell of the chosen type or activate an ability of a source of the chosen type.
+---
+name=Evolving Wilds
+mana=
+type=Land
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=[]
+number=264
+text={T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+---
+name=Hallowed Fountain
+mana=
+type=Land — Plains Island
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Plains', 'Island']
+number=265
+text=({T}: Add {W} or {U}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Overgrown Tomb
+mana=
+type=Land — Swamp Forest
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Forest']
+number=266
+text=({T}: Add {B} or {G}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Steam Vents
+mana=
+type=Land — Island Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Island', 'Mountain']
+number=267
+text=({T}: Add {U} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Temple Garden
+mana=
+type=Land — Forest Plains
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Forest', 'Plains']
+number=268
+text=({T}: Add {G} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Plains
+mana=
+type=Basic Land — Plains
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Plains']
+number=269
+text=({T}: Add {W}.)
+---
+name=Island
+mana=
+type=Basic Land — Island
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Island']
+number=270
+text=({T}: Add {U}.)
+---
+name=Swamp
+mana=
+type=Basic Land — Swamp
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Swamp']
+number=271
+text=({T}: Add {B}.)
+---
+name=Mountain
+mana=
+type=Basic Land — Mountain
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Mountain']
+number=272
+text=({T}: Add {R}.)
+---
+name=Forest
+mana=
+type=Basic Land — Forest
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Forest']
+number=273
+text=({T}: Add {G}.)
+---
+name=Plains
+mana=
+type=Basic Land — Plains
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Plains']
+number=274
+text=({T}: Add {W}.)
+---
+name=Island
+mana=
+type=Basic Land — Island
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Island']
+number=275
+text=({T}: Add {U}.)
+---
+name=Swamp
+mana=
+type=Basic Land — Swamp
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Swamp']
+number=276
+text=({T}: Add {B}.)
+---
+name=Mountain
+mana=
+type=Basic Land — Mountain
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Mountain']
+number=277
+text=({T}: Add {R}.)
+---
+name=Forest
+mana=
+type=Basic Land — Forest
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Forest']
+number=278
+text=({T}: Add {G}.)
+---
+name=Plains
+mana=
+type=Basic Land — Plains
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Plains']
+number=279
+text=({T}: Add {W}.)
+---
+name=Island
+mana=
+type=Basic Land — Island
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Island']
+number=280
+text=({T}: Add {U}.)
+---
+name=Swamp
+mana=
+type=Basic Land — Swamp
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Swamp']
+number=281
+text=({T}: Add {B}.)
+---
+name=Mountain
+mana=
+type=Basic Land — Mountain
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Mountain']
+number=282
+text=({T}: Add {R}.)
+---
+name=Forest
+mana=
+type=Basic Land — Forest
+rarity=C
+power=
+toughness=
+keywords=[]
+supertypes=['Basic']
+types=['Land']
+subtypes=['Forest']
+number=283
+text=({T}: Add {G}.)
+---
+name=Ajani, Outland Chaperone
+mana={1}{W}{W}
+type=Legendary Planeswalker — Ajani
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Ajani']
+number=284
+text=[+1]: Create a 1/1 green and white Kithkin creature token.
+[−2]: Ajani deals 4 damage to target tapped creature.
+[−8]: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.
+---
+name=Brigid, Clachan's Heart // Brigid, Doun's Mind
+mana={2}{W}
+type=Legendary Creature — Kithkin Warrior
+rarity=R
+power=3
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Kithkin', 'Warrior']
+number=285
+text=Whenever this creature enters or transforms into Brigid, Clachan's Heart, create a 1/1 green and white Kithkin creature token.
+At the beginning of your first main phase, you may pay {G}. If you do, transform Brigid.
+---
+name=Brigid, Clachan's Heart // Brigid, Doun's Mind
+mana=
+type=Legendary Creature — Kithkin Soldier
+rarity=R
+power=3
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=285
+text={T}: Add X {G} or X {W}, where X is the number of other creatures you control.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Brigid.
+---
+name=Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight
+mana={3}{W}{W}
+type=Legendary Creature — Elemental God
+rarity=M
+power=5
+toughness=5
+keywords=['Flying', 'Lifelink', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'God']
+number=286
+text=Flying, lifelink
+Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
+At the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
+---
+name=Eirdu, Carrier of Dawn // Isilu, Carrier of Twilight
+mana=
+type=Legendary Creature — Elemental God
+rarity=M
+power=5
+toughness=5
+keywords=['Flying', 'Lifelink', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'God']
+number=286
+text=Flying, lifelink
+Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+At the beginning of your first main phase, you may pay {W}. If you do, transform Isilu.
+---
+name=Oko, Lorwyn Liege // Oko, Shadowmoor Scion
+mana={2}{U}
+type=Legendary Planeswalker — Oko
+rarity=M
+power=
+toughness=
+keywords=['Mill', 'Transform']
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Oko']
+number=287
+text=At the beginning of your first main phase, you may pay {G}. If you do, transform Oko.
+[+2]: Up to one target creature gains all creature types. (This effect doesn't end.)
+[+1]: Target creature gets -2/-0 until your next turn.
+---
+name=Oko, Lorwyn Liege // Oko, Shadowmoor Scion
+mana=
+type=Legendary Planeswalker — Oko
+rarity=M
+power=
+toughness=
+keywords=['Mill', 'Transform']
+supertypes=['Legendary']
+types=['Planeswalker']
+subtypes=['Oko']
+number=287
+text=At the beginning of your first main phase, you may pay {U}. If you do, transform Oko.
+[−1]: Mill three cards. You may put a permanent card from among them into your hand.
+[−3]: Create two 3/3 green Elk creature tokens.
+[−6]: Choose a creature type. You get an emblem with "Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof."
+---
+name=Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield
+mana={1}{U}
+type=Legendary Creature — Merfolk Wizard
+rarity=R
+power=2
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=288
+text=Sygg can't be blocked.
+Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
+---
+name=Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield
+mana=
+type=Legendary Creature — Merfolk Rogue
+rarity=R
+power=2
+toughness=2
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Merfolk', 'Rogue']
+number=288
+text=Sygg can't be blocked.
+Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+---
+name=Grub, Storied Matriarch // Grub, Notorious Auntie
+mana={2}{B}
+type=Legendary Creature — Goblin Warlock
+rarity=R
+power=2
+toughness=1
+keywords=['Blight', 'Menace', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=289
+text=Menace
+Whenever this creature enters or transforms into Grub, Storied Matriarch, return up to one target Goblin card from your graveyard to your hand.
+At the beginning of your first main phase, you may pay {R}. If you do, transform Grub.
+---
+name=Grub, Storied Matriarch // Grub, Notorious Auntie
+mana=
+type=Legendary Creature — Goblin Warrior
+rarity=R
+power=2
+toughness=1
+keywords=['Blight', 'Menace', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=289
+text=Menace
+Whenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token."
+At the beginning of your first main phase, you may pay {B}. If you do, transform Grub.
+---
+name=Ashling, Rekindled // Ashling, Rimebound
+mana={1}{R}
+type=Legendary Creature — Elemental Sorcerer
+rarity=R
+power=1
+toughness=3
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=290
+text=Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
+---
+name=Ashling, Rekindled // Ashling, Rimebound
+mana=
+type=Legendary Creature — Elemental Wizard
+rarity=R
+power=1
+toughness=3
+keywords=['Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elemental', 'Wizard']
+number=290
+text=Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+At the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.
+---
+name=Trystan, Callous Cultivator // Trystan, Penitent Culler
+mana={2}{G}
+type=Legendary Creature — Elf Druid
+rarity=R
+power=3
+toughness=4
+keywords=['Deathtouch', 'Mill', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=291
+text=Deathtouch
+Whenever this creature enters or transforms into Trystan, Callous Cultivator, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life.
+At the beginning of your first main phase, you may pay {B}. If you do, transform Trystan.
+---
+name=Trystan, Callous Cultivator // Trystan, Penitent Culler
+mana=
+type=Legendary Creature — Elf Warlock
+rarity=R
+power=3
+toughness=4
+keywords=['Deathtouch', 'Mill', 'Transform']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=291
+text=Deathtouch
+Whenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life.
+At the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.
+---
+name=Catharsis
+mana={4}{R/W}{R/W}
+type=Creature — Elemental Incarnation
+rarity=M
+power=3
+toughness=4
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=292
+text=When this creature enters, if {W}{W} was spent to cast it, create two 1/1 green and white Kithkin creature tokens.
+When this creature enters, if {R}{R} was spent to cast it, creatures you control get +1/+1 and gain haste until end of turn.
+Evoke {R/W}{R/W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
+---
+name=Deceit
+mana={4}{U/B}{U/B}
+type=Creature — Elemental Incarnation
+rarity=M
+power=5
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=293
+text=When this creature enters, if {U}{U} was spent to cast it, return up to one other target nonland permanent to its owner's hand.
+When this creature enters, if {B}{B} was spent to cast it, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+Evoke {U/B}{U/B}
+---
+name=Emptiness
+mana={4}{W/B}{W/B}
+type=Creature — Elemental Incarnation
+rarity=M
+power=3
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=294
+text=When this creature enters, if {W}{W} was spent to cast it, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+When this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature.
+Evoke {W/B}{W/B}
+---
+name=Vibrance
+mana={3}{R/G}{R/G}
+type=Creature — Elemental Incarnation
+rarity=M
+power=4
+toughness=4
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=295
+text=When this creature enters, if {R}{R} was spent to cast it, this creature deals 3 damage to any target.
+When this creature enters, if {G}{G} was spent to cast it, search your library for a land card, reveal it, put it into your hand, then shuffle. You gain 2 life.
+Evoke {R/G}{R/G}
+---
+name=Wistfulness
+mana={3}{G/U}{G/U}
+type=Creature — Elemental Incarnation
+rarity=M
+power=6
+toughness=5
+keywords=['Evoke']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Incarnation']
+number=296
+text=When this creature enters, if {G}{G} was spent to cast it, exile target artifact or enchantment an opponent controls.
+When this creature enters, if {U}{U} was spent to cast it, draw two cards, then discard a card.
+Evoke {G/U}{G/U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
+---
+name=Adept Watershaper
+mana={2}{W}
+type=Creature — Merfolk Cleric
+rarity=R
+power=3
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Cleric']
+number=297
+text=Other tapped creatures you control have indestructible.
+---
+name=Curious Colossus
+mana={5}{W}{W}
+type=Creature — Giant Warrior
+rarity=M
+power=7
+toughness=7
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=298
+text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
+---
+name=Kinbinding
+mana={3}{W}{W}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=299
+text=Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn.
+At the beginning of combat on your turn, create a 1/1 green and white Kithkin creature token.
+---
+name=Kinscaer Sentry
+mana={1}{W}
+type=Creature — Kithkin Soldier
+rarity=R
+power=2
+toughness=2
+keywords=['First strike', 'Lifelink']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=300
+text=First strike, lifelink
+Whenever this creature attacks, you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is the number of attacking creatures you control.
+---
+name=Morningtide's Light
+mana={3}{W}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=301
+text=Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped under their owners' control.
+Until your next turn, prevent all damage that would be dealt to you.
+Exile Morningtide's Light.
+---
+name=Slumbering Walker
+mana={3}{W}{W}
+type=Creature — Giant Warrior
+rarity=R
+power=4
+toughness=7
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=302
+text=This creature enters with two -1/-1 counters on it.
+At the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
+---
+name=Disruptor of Currents
+mana={3}{U}{U}
+type=Creature — Merfolk Wizard
+rarity=R
+power=3
+toughness=3
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=303
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, return up to one other target nonland permanent to its owner's hand.
+---
+name=Flitterwing Nuisance
+mana={U}
+type=Creature — Faerie Rogue
+rarity=R
+power=2
+toughness=2
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=304
+text=Flying
+This creature enters with a -1/-1 counter on it.
+{2}{U}, Remove a counter from this creature: Whenever a creature you control deals combat damage to a player or planeswalker this turn, draw a card.
+---
+name=Glen Elendra Guardian
+mana={2}{U}
+type=Creature — Faerie Wizard
+rarity=R
+power=3
+toughness=4
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=305
+text=Flash
+Flying
+This creature enters with a -1/-1 counter on it.
+{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
+---
+name=Glen Elendra's Answer
+mana={2}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=306
+text=This spell can't be countered.
+Counter all spells your opponents control and all abilities your opponents control. Create a 1/1 blue and black Faerie creature token with flying for each spell and ability countered this way.
+---
+name=Loch Mare
+mana={1}{U}
+type=Creature — Horse Serpent
+rarity=M
+power=4
+toughness=5
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Horse', 'Serpent']
+number=307
+text=This creature enters with three -1/-1 counters on it.
+{1}{U}, Remove a counter from this creature: Draw a card.
+{2}{U}, Remove two counters from this creature: Tap target creature. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+---
+name=Mirrorform
+mana={4}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=308
+text=Each nonland permanent you control becomes a copy of target non-Aura permanent.
+---
+name=Sunderflock
+mana={7}{U}{U}
+type=Creature — Elemental
+rarity=R
+power=5
+toughness=5
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=309
+text=This spell costs {X} less to cast, where X is the greatest mana value among Elementals you control.
+Flying
+When this creature enters, if you cast it, return all non-Elemental creatures to their owners' hands.
+---
+name=Bitterbloom Bearer
+mana={B}{B}
+type=Creature — Faerie Rogue
+rarity=M
+power=1
+toughness=1
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=310
+text=Flash
+Flying
+At the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying.
+---
+name=Dawnhand Dissident
+mana={B}
+type=Creature — Elf Warlock
+rarity=R
+power=1
+toughness=2
+keywords=['Blight', 'Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warlock']
+number=311
+text={T}, Blight 1: Surveil 1.
+{T}, Blight 2: Exile target card from a graveyard.
+During your turn, you may cast creature spells from among cards you own exiled with this creature by removing three counters from among creatures you control in addition to paying their other costs.
+---
+name=Gloom Ripper
+mana={3}{B}{B}
+type=Creature — Elf Assassin
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Assassin']
+number=312
+text=When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.
+---
+name=Moonshadow
+mana={B}
+type=Creature — Elemental
+rarity=M
+power=7
+toughness=7
+keywords=['Menace']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=313
+text=Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Taster of Wares
+mana={2}{B}
+type=Creature — Goblin Warlock
+rarity=R
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=314
+text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
+---
+name=Twilight Diviner
+mana={2}{B}
+type=Creature — Elf Cleric
+rarity=R
+power=3
+toughness=3
+keywords=['Surveil']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Cleric']
+number=315
+text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
+---
+name=Goliath Daydreamer
+mana={2}{R}{R}
+type=Creature — Giant Wizard
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Wizard']
+number=316
+text=Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves.
+Whenever this creature attacks, you may cast a spell from among cards you own in exile with dream counters on them without paying its mana cost.
+---
+name=Hexing Squelcher
+mana={1}{R}
+type=Creature — Goblin Sorcerer
+rarity=R
+power=2
+toughness=2
+keywords=['Ward']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Sorcerer']
+number=317
+text=This spell can't be countered.
+Ward—Pay 2 life.
+Spells you control can't be countered.
+Other creatures you control have "Ward—Pay 2 life."
+---
+name=Lavaleaper
+mana={3}{R}
+type=Creature — Elemental
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=318
+text=All creatures have haste.
+Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
+---
+name=Meek Attack
+mana={2}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=319
+text={1}{R}: You may put a creature card with total power and toughness 5 or less from your hand onto the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice that creature.
+---
+name=Scuzzback Scrounger
+mana={1}{R}
+type=Creature — Goblin Warrior
+rarity=R
+power=3
+toughness=2
+keywords=['Blight', 'Treasure']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warrior']
+number=320
+text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+---
+name=Soul Immolation
+mana={3}{R}{R}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=321
+text=As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control. (Put X -1/-1 counters on a creature you control.)
+Soul Immolation deals X damage to each opponent and each creature they control.
+---
+name=Spinerock Tyrant
+mana={3}{R}{R}
+type=Creature — Dragon
+rarity=M
+power=6
+toughness=6
+keywords=['Flying', 'Wither']
+supertypes=[]
+types=['Creature']
+subtypes=['Dragon']
+number=322
+text=Flying
+Wither (This deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
+---
+name=Aurora Awakener
+mana={6}{G}
+type=Creature — Giant Druid
+rarity=M
+power=7
+toughness=7
+keywords=['Trample', 'Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Giant', 'Druid']
+number=323
+text=Trample
+Vivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanent cards onto the battlefield, then put the rest of the revealed cards on the bottom of your library in a random order.
+---
+name=Bloom Tender
+mana={1}{G}
+type=Creature — Elf Druid
+rarity=M
+power=1
+toughness=1
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=324
+text=Vivid — {T}: For each color among permanents you control, add one mana of that color.
+---
+name=Bristlebane Battler
+mana={1}{G}
+type=Creature — Kithkin Soldier
+rarity=R
+power=6
+toughness=6
+keywords=['Trample', 'Ward']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=325
+text=Trample, ward {2}
+This creature enters with five -1/-1 counters on it.
+Whenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Celestial Reunion
+mana={X}{G}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Behold']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=326
+text=As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type.
+Search your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.
+---
+name=Mutable Explorer
+mana={2}{G}
+type=Creature — Shapeshifter
+rarity=R
+power=1
+toughness=1
+keywords=['Changeling']
+supertypes=[]
+types=['Creature']
+subtypes=['Shapeshifter']
+number=327
+text=Changeling (This card is every creature type.)
+When this creature enters, create a tapped Mutavault token. (It's a land with "{T}: Add {C}" and "{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.")
+---
+name=Sapling Nursery
+mana={6}{G}{G}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=['Affinity', 'Landfall']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=328
+text=Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)
+Landfall — Whenever a land you control enters, create a 3/4 green Treefolk creature token with reach.
+{1}{G}, Exile this enchantment: Treefolk and Forests you control gain indestructible until end of turn.
+---
+name=Spry and Mighty
+mana={4}{G}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=329
+text=Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
+---
+name=Ashling's Command
+mana={3}{U}{R}
+type=Kindred Instant — Elemental
+rarity=R
+power=
+toughness=
+keywords=['Treasure']
+supertypes=[]
+types=['Kindred', 'Instant']
+subtypes=['Elemental']
+number=330
+text=Choose two —
+• Create a token that's a copy of target Elemental you control.
+• Target player draws two cards.
+• Ashling's Command deals 2 damage to each creature target player controls.
+• Target player creates two Treasure tokens.
+---
+name=Boggart Cursecrafter
+mana={B}{R}
+type=Creature — Goblin Warlock
+rarity=U
+power=2
+toughness=3
+keywords=['Deathtouch']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Warlock']
+number=331
+text=Deathtouch
+Whenever another Goblin you control dies, this creature deals 1 damage to each opponent.
+---
+name=Brigid's Command
+mana={1}{G}{W}
+type=Kindred Sorcery — Kithkin
+rarity=R
+power=
+toughness=
+keywords=['Fight']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Kithkin']
+number=332
+text=Choose two —
+• Create a token that's a copy of target Kithkin you control.
+• Target player creates a 1/1 green and white Kithkin creature token.
+• Target creature you control gets +3/+3 until end of turn.
+• Target creature you control fights target creature an opponent controls.
+---
+name=Deepchannel Duelist
+mana={W}{U}
+type=Creature — Merfolk Soldier
+rarity=U
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=333
+text=At the beginning of your end step, untap target Merfolk you control.
+Other Merfolk you control get +1/+1.
+---
+name=Doran, Besieged by Time
+mana={1}{W}{B}{G}
+type=Legendary Creature — Treefolk Druid
+rarity=R
+power=0
+toughness=5
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Treefolk', 'Druid']
+number=334
+text=Each creature spell you cast with toughness greater than its power costs {1} less to cast.
+Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
+---
+name=Eclipsed Boggart
+mana={B/R}{B/R}{B/R}
+type=Creature — Goblin Scout
+rarity=U
+power=2
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Scout']
+number=335
+text=When this creature enters, look at the top four cards of your library. You may reveal a Goblin, Swamp, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Elf
+mana={B/G}{B/G}{B/G}
+type=Creature — Elf Scout
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Scout']
+number=336
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elf, Swamp, or Forest card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Flamekin
+mana={1}{U/R}{U/R}
+type=Creature — Elemental Scout
+rarity=U
+power=1
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Scout']
+number=337
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elemental, Island, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Kithkin
+mana={G/W}{G/W}
+type=Creature — Kithkin Scout
+rarity=U
+power=2
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Scout']
+number=338
+text=When this creature enters, look at the top four cards of your library. You may reveal a Kithkin, Forest, or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Eclipsed Merrow
+mana={W/U}{W/U}{W/U}
+type=Creature — Merfolk Scout
+rarity=U
+power=2
+toughness=3
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Scout']
+number=339
+text=When this creature enters, look at the top four cards of your library. You may reveal a Merfolk, Plains, or Island card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+---
+name=Grub's Command
+mana={3}{B}{R}
+type=Kindred Sorcery — Goblin
+rarity=R
+power=
+toughness=
+keywords=['Mill']
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Goblin']
+number=340
+text=Choose two —
+• Create a token that's a copy of target Goblin you control.
+• Creatures target player controls get +1/+1 and gain haste until end of turn.
+• Destroy target artifact or creature.
+• Target player mills five cards, then puts each Goblin card milled this way into their hand.
+---
+name=Morcant's Loyalist
+mana={1}{B}{G}
+type=Creature — Elf Warrior
+rarity=U
+power=3
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=341
+text=Other Elves you control get +1/+1.
+When this creature dies, return another target Elf card from your graveyard to your hand.
+---
+name=Sygg's Command
+mana={1}{W}{U}
+type=Kindred Sorcery — Merfolk
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Merfolk']
+number=342
+text=Choose two —
+• Create a token that's a copy of target Merfolk you control.
+• Creatures target player controls gain lifelink until end of turn.
+• Target player draws a card.
+• Tap target creature. Put a stun counter on it.
+---
+name=Thoughtweft Lieutenant
+mana={G}{W}
+type=Creature — Kithkin Soldier
+rarity=U
+power=2
+toughness=2
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Soldier']
+number=343
+text=Whenever this creature or another Kithkin you control enters, target creature you control gets +1/+1 and gains trample until end of turn.
+---
+name=Trystan's Command
+mana={4}{B}{G}
+type=Kindred Sorcery — Elf
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Kindred', 'Sorcery']
+subtypes=['Elf']
+number=344
+text=Choose two —
+• Create a token that's a copy of target Elf you control.
+• Return one or two target permanent cards from your graveyard to your hand.
+• Destroy target creature or enchantment.
+• Creatures target player controls get +3/+3 until end of turn. Untap them.
+---
+name=Twinflame Travelers
+mana={2}{U}{R}
+type=Creature — Elemental Sorcerer
+rarity=U
+power=3
+toughness=3
+keywords=['Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=345
+text=Flying
+If a triggered ability of another Elemental you control triggers, it triggers an additional time.
+---
+name=Chronicle of Victory
+mana={6}
+type=Legendary Artifact
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Artifact']
+subtypes=[]
+number=346
+text=As Chronicle of Victory enters, choose a creature type.
+Creatures you control of the chosen type get +2/+2 and have first strike and trample.
+Whenever you cast a spell of the chosen type, draw a card.
+---
+name=Hallowed Fountain // Hallowed Fountain
+mana=
+type=Land — Plains Island
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Plains', 'Island']
+number=347
+text=({T}: Add {W} or {U}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Hallowed Fountain // Hallowed Fountain
+mana=
+type=Land — Plains Island
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Plains', 'Island']
+number=347
+text=({T}: Add {W} or {U}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Steam Vents // Steam Vents
+mana=
+type=Land — Island Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Island', 'Mountain']
+number=348
+text=({T}: Add {U} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Steam Vents // Steam Vents
+mana=
+type=Land — Island Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Island', 'Mountain']
+number=348
+text=({T}: Add {U} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Blood Crypt // Blood Crypt
+mana=
+type=Land — Swamp Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Mountain']
+number=349
+text=({T}: Add {B} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Blood Crypt // Blood Crypt
+mana=
+type=Land — Swamp Mountain
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Mountain']
+number=349
+text=({T}: Add {B} or {R}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Overgrown Tomb // Overgrown Tomb
+mana=
+type=Land — Swamp Forest
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Forest']
+number=350
+text=({T}: Add {B} or {G}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Overgrown Tomb // Overgrown Tomb
+mana=
+type=Land — Swamp Forest
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Swamp', 'Forest']
+number=350
+text=({T}: Add {B} or {G}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Temple Garden // Temple Garden
+mana=
+type=Land — Forest Plains
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Forest', 'Plains']
+number=351
+text=({T}: Add {G} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Temple Garden // Temple Garden
+mana=
+type=Land — Forest Plains
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Land']
+subtypes=['Forest', 'Plains']
+number=351
+text=({T}: Add {G} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped.
+---
+name=Bitterbloom Bearer
+mana={B}{B}
+type=Creature — Faerie Rogue
+rarity=M
+power=1
+toughness=1
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Rogue']
+number=352
+text=Flash
+Flying
+At the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying.
+---
+name=Champion of the Clachan
+mana={3}{W}
+type=Creature — Kithkin Knight
+rarity=R
+power=4
+toughness=5
+keywords=['Behold', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin', 'Knight']
+number=353
+text=Flash
+As an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.)
+Other Kithkin you control get +1/+1.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Rhys, the Evermore
+mana={1}{W}
+type=Legendary Creature — Elf Warrior
+rarity=R
+power=2
+toughness=2
+keywords=['Flash']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=354
+text=Flash
+When Rhys enters, another target creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+{W}, {T}: Remove any number of counters from target creature you control. Activate only as a sorcery.
+---
+name=Winnowing
+mana={4}{W}{W}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=355
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
+---
+name=Champions of the Shoal
+mana={3}{U}
+type=Creature — Merfolk Soldier
+rarity=R
+power=4
+toughness=6
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Soldier']
+number=356
+text=As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.)
+Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Harmonized Crescendo
+mana={4}{U}{U}
+type=Instant
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=357
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Draw a card for each permanent you control of that type.
+---
+name=Rimefire Torque
+mana={1}{U}
+type=Artifact
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Artifact']
+subtypes=[]
+number=358
+text=As this artifact enters, choose a creature type.
+Whenever a permanent you control of the chosen type enters, put a charge counter on this artifact.
+{T}, Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
+---
+name=Bloodline Bidding
+mana={6}{B}{B}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=359
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
+---
+name=Champion of the Weird
+mana={3}{B}
+type=Creature — Goblin Berserker
+rarity=R
+power=5
+toughness=5
+keywords=['Behold', 'Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Goblin', 'Berserker']
+number=360
+text=As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.)
+Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Mornsong Aria
+mana={1}{B}{B}
+type=Legendary Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=['Legendary']
+types=['Enchantment']
+subtypes=[]
+number=361
+text=Players can't draw cards or gain life.
+At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
+---
+name=Champion of the Path
+mana={3}{R}
+type=Creature — Elemental Sorcerer
+rarity=R
+power=7
+toughness=3
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental', 'Sorcerer']
+number=362
+text=As an additional cost to cast this spell, behold an Elemental and exile it. (Exile an Elemental you control or an Elemental card from your hand.)
+Whenever another Elemental you control enters, it deals damage equal to its power to each opponent.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Collective Inferno
+mana={3}{R}{R}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=363
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+As this enchantment enters, choose a creature type.
+Double all damage that sources you control of the chosen type would deal.
+---
+name=End-Blaze Epiphany
+mana={X}{R}
+type=Instant
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=364
+text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
+---
+name=Champions of the Perfect
+mana={3}{G}
+type=Creature — Elf Warrior
+rarity=R
+power=6
+toughness=6
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=365
+text=As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.)
+Whenever you cast a creature spell, draw a card.
+When this creature leaves the battlefield, return the exiled card to its owner's hand.
+---
+name=Formidable Speaker
+mana={2}{G}
+type=Creature — Elf Druid
+rarity=R
+power=2
+toughness=4
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=366
+text=When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
+{1}, {T}: Untap another target permanent.
+---
+name=Selfless Safewright
+mana={3}{G}{G}
+type=Creature — Elf Warrior
+rarity=R
+power=4
+toughness=2
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=367
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
+---
+name=Abigale, Eloquent First-Year
+mana={W/B}{W/B}
+type=Legendary Creature — Bird Bard
+rarity=R
+power=1
+toughness=1
+keywords=['First strike', 'Flying', 'Lifelink']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Bird', 'Bard']
+number=368
+text=Flying, first strike, lifelink
+When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
+---
+name=Bre of Clan Stoutarm
+mana={2}{R}{W}
+type=Legendary Creature — Giant Warrior
+rarity=R
+power=4
+toughness=4
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Giant', 'Warrior']
+number=369
+text={1}{W}, {T}: Another target creature you control gains flying and lifelink until end of turn.
+At the beginning of your end step, if you gained life this turn, exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than or equal to the amount of life you gained this turn. Otherwise, put it into your hand.
+---
+name=Deepway Navigator
+mana={W}{U}
+type=Creature — Merfolk Wizard
+rarity=R
+power=2
+toughness=2
+keywords=['Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=370
+text=Flash
+When this creature enters, untap each other Merfolk you control.
+As long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.
+---
+name=Dream Harvest
+mana={5}{U/B}{U/B}
+type=Sorcery
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=371
+text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
+---
+name=Figure of Fable
+mana={G/W}
+type=Creature — Kithkin
+rarity=R
+power=1
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Kithkin']
+number=372
+text={G/W}: This creature becomes a Kithkin Scout with base power and toughness 2/3.
+{1}{G/W}{G/W}: If this creature is a Scout, it becomes a Kithkin Soldier with base power and toughness 4/5.
+{3}{G/W}{G/W}{G/W}: If this creature is a Soldier, it becomes a Kithkin Avatar with base power and toughness 7/8 and protection from each of your opponents.
+---
+name=High Perfect Morcant
+mana={2}{B}{G}
+type=Legendary Creature — Elf Noble
+rarity=R
+power=4
+toughness=4
+keywords=['Blight', 'Proliferate']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Noble']
+number=373
+text=Whenever High Perfect Morcant or another Elf you control enters, each opponent blights 1. (They each put a -1/-1 counter on a creature they control.)
+Tap three untapped Elves you control: Proliferate. Activate only as a sorcery. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+---
+name=Kirol, Attentive First-Year
+mana={1}{R/W}{R/W}
+type=Legendary Creature — Vampire Cleric
+rarity=R
+power=3
+toughness=3
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Vampire', 'Cleric']
+number=374
+text=Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
+---
+name=Lluwen, Imperfect Naturalist
+mana={B/G}{B/G}
+type=Legendary Creature — Elf Druid
+rarity=R
+power=1
+toughness=3
+keywords=['Mill']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=375
+text=When Lluwen enters, mill four cards, then you may put a creature or land card from among the milled cards on top of your library.
+{2}{B/G}{B/G}{B/G}, {T}, Discard a land card: Create a 1/1 black and green Worm creature token for each land card in your graveyard.
+---
+name=Maralen, Fae Ascendant
+mana={2}{B}{G}{U}
+type=Legendary Creature — Elf Faerie Noble
+rarity=R
+power=4
+toughness=5
+keywords=['Flying']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Elf', 'Faerie', 'Noble']
+number=376
+text=Flying
+Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.
+Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
+---
+name=Raiding Schemes
+mana={3}{R}{G}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=377
+text=Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
+---
+name=Sanar, Innovative First-Year
+mana={2}{U/R}{U/R}
+type=Legendary Creature — Goblin Sorcerer
+rarity=R
+power=2
+toughness=4
+keywords=['Vivid']
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Goblin', 'Sorcerer']
+number=378
+text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
+---
+name=Shadow Urchin
+mana={2}{B/R}
+type=Creature — Ouphe
+rarity=R
+power=3
+toughness=4
+keywords=['Blight']
+supertypes=[]
+types=['Creature']
+subtypes=['Ouphe']
+number=379
+text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)
+Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
+---
+name=Tam, Mindful First-Year
+mana={1}{G/U}
+type=Legendary Creature — Gorgon Wizard
+rarity=R
+power=2
+toughness=2
+keywords=[]
+supertypes=['Legendary']
+types=['Creature']
+subtypes=['Gorgon', 'Wizard']
+number=380
+text=Each other creature you control has hexproof from each of its colors.
+{T}: Target creature you control becomes all colors until end of turn.
+---
+name=Mirrormind Crown
+mana={4}
+type=Artifact — Equipment
+rarity=R
+power=
+toughness=
+keywords=['Equip']
+supertypes=[]
+types=['Artifact']
+subtypes=['Equipment']
+number=381
+text=As long as this Equipment is attached to a creature, the first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of equipped creature.
+Equip {2}
+---
+name=Winnowing
+mana={4}{W}{W}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=382
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
+---
+name=Glen Elendra Guardian
+mana={2}{U}
+type=Creature — Faerie Wizard
+rarity=M
+power=3
+toughness=4
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=383
+text=Flash
+Flying
+This creature enters with a -1/-1 counter on it.
+{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
+---
+name=Harmonized Crescendo
+mana={4}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=384
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Draw a card for each permanent you control of that type.
+---
+name=Bloodline Bidding
+mana={6}{B}{B}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=385
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
+---
+name=Moonshadow
+mana={B}
+type=Creature — Elemental
+rarity=M
+power=7
+toughness=7
+keywords=['Menace']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=386
+text=Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Collective Inferno
+mana={3}{R}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=387
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+As this enchantment enters, choose a creature type.
+Double all damage that sources you control of the chosen type would deal.
+---
+name=Meek Attack
+mana={2}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=388
+text={1}{R}: You may put a creature card with total power and toughness 5 or less from your hand onto the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice that creature.
+---
+name=Spinerock Tyrant
+mana={3}{R}{R}
+type=Creature — Dragon
+rarity=M
+power=6
+toughness=6
+keywords=['Flying', 'Wither']
+supertypes=[]
+types=['Creature']
+subtypes=['Dragon']
+number=389
+text=Flying
+Wither (This deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
+---
+name=Bloom Tender
+mana={1}{G}
+type=Creature — Elf Druid
+rarity=M
+power=1
+toughness=1
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=390
+text=Vivid — {T}: For each color among permanents you control, add one mana of that color.
+---
+name=Selfless Safewright
+mana={3}{G}{G}
+type=Creature — Elf Warrior
+rarity=M
+power=4
+toughness=2
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=391
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
+---
+name=Winnowing
+mana={4}{W}{W}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=392
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
+---
+name=Glen Elendra Guardian
+mana={2}{U}
+type=Creature — Faerie Wizard
+rarity=M
+power=3
+toughness=4
+keywords=['Flash', 'Flying']
+supertypes=[]
+types=['Creature']
+subtypes=['Faerie', 'Wizard']
+number=393
+text=Flash
+Flying
+This creature enters with a -1/-1 counter on it.
+{1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
+---
+name=Harmonized Crescendo
+mana={4}{U}{U}
+type=Instant
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=394
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Draw a card for each permanent you control of that type.
+---
+name=Bloodline Bidding
+mana={6}{B}{B}
+type=Sorcery
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Sorcery']
+subtypes=[]
+number=395
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
+---
+name=Moonshadow
+mana={B}
+type=Creature — Elemental
+rarity=M
+power=7
+toughness=7
+keywords=['Menace']
+supertypes=[]
+types=['Creature']
+subtypes=['Elemental']
+number=396
+text=Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+---
+name=Collective Inferno
+mana={3}{R}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=397
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+As this enchantment enters, choose a creature type.
+Double all damage that sources you control of the chosen type would deal.
+---
+name=Meek Attack
+mana={2}{R}
+type=Enchantment
+rarity=M
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=398
+text={1}{R}: You may put a creature card with total power and toughness 5 or less from your hand onto the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice that creature.
+---
+name=Spinerock Tyrant
+mana={3}{R}{R}
+type=Creature — Dragon
+rarity=M
+power=6
+toughness=6
+keywords=['Flying', 'Wither']
+supertypes=[]
+types=['Creature']
+subtypes=['Dragon']
+number=399
+text=Flying
+Wither (This deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
+---
+name=Bloom Tender
+mana={1}{G}
+type=Creature — Elf Druid
+rarity=M
+power=1
+toughness=1
+keywords=['Vivid']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Druid']
+number=400
+text=Vivid — {T}: For each color among permanents you control, add one mana of that color.
+---
+name=Selfless Safewright
+mana={3}{G}{G}
+type=Creature — Elf Warrior
+rarity=M
+power=4
+toughness=2
+keywords=['Convoke', 'Flash']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=401
+text=Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
+---
+name=Personify
+mana={1}{W}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=402
+text=Exile target creature you control, then return that card to the battlefield under its owner's control. Create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
+---
+name=Silvergill Mentor
+mana={1}{U}
+type=Creature — Merfolk Wizard
+rarity=U
+power=2
+toughness=1
+keywords=['Behold']
+supertypes=[]
+types=['Creature']
+subtypes=['Merfolk', 'Wizard']
+number=403
+text=As an additional cost to cast this spell, behold a Merfolk or pay {2}. (To behold a Merfolk, choose a Merfolk you control or reveal a Merfolk card from your hand.)
+When this creature enters, create a 1/1 white and blue Merfolk creature token.
+---
+name=Iron-Shield Elf
+mana={1}{B}
+type=Creature — Elf Warrior
+rarity=U
+power=3
+toughness=1
+keywords=[]
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Warrior']
+number=404
+text=Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)
+---
+name=Sear
+mana={1}{R}
+type=Instant
+rarity=U
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=405
+text=Sear deals 4 damage to target creature or planeswalker.
+---
+name=Virulent Emissary
+mana={G}
+type=Creature — Elf Assassin
+rarity=U
+power=1
+toughness=1
+keywords=['Deathtouch']
+supertypes=[]
+types=['Creature']
+subtypes=['Elf', 'Assassin']
+number=406
+text=Deathtouch
+Whenever another creature you control enters, you gain 1 life.
+---
+name=Kinbinding
+mana={3}{W}{W}
+type=Enchantment
+rarity=R
+power=
+toughness=
+keywords=[]
+supertypes=[]
+types=['Enchantment']
+subtypes=[]
+number=407
+text=Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn.
+At the beginning of combat on your turn, create a 1/1 green and white Kithkin creature token.
+---
+name=Harmonized Crescendo
+mana={4}{U}{U}
+type=Instant
+rarity=R
+power=
+toughness=
+keywords=['Convoke']
+supertypes=[]
+types=['Instant']
+subtypes=[]
+number=408
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Choose a creature type. Draw a card for each permanent you control of that type.
