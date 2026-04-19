@@ -137851,3 +137851,2695 @@ subtype=Equipment Spider
 power=1
 toughness=4
 [/card]
+
+[card]
+name=Bile-Vial Boggart
+auto=may counter(-1/-1) target(creature)
+text=When this creature dies, put a -1/-1 counter on up to one target creature.
+mana={B}
+type=Creature
+subtype=Goblin Assassin
+power=1
+toughness=1
+[/card]
+[card]
+name=Bitterbloom Bearer
+abilities=flash,flying
+auto=@each my upkeep:life:-1 controller
+auto=@each my upkeep:token(Faerie,creature faerie rogue,1/1,flying blue black)
+text=Flash -- Flying -- At the beginning of your upkeep, you lose 1 life and create a 1/1 blue and black Faerie creature token with flying.
+mana={B}{B}
+type=Creature
+subtype=Faerie Rogue
+power=1
+toughness=1
+[/card]
+[card]
+name=Boggart Cursecrafter
+abilities=deathtouch
+auto=@movedTo(other creature[goblin]|graveyard) from(mybattlefield):damage:1 opponent
+text=Deathtouch -- Whenever another Goblin you control dies, this creature deals 1 damage to each opponent.
+mana={B}{R}
+type=Creature
+subtype=Goblin Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Boggart Mischief
+auto=may token(Goblin,creature goblin,1/1,black red)*2
+auto=@movedTo(creature[goblin]|graveyard) from(mybattlefield):life:-1 opponent && life:1 controller
+text=When this enchantment enters, you may put a -1/-1 counter on a creature you control. If you do, create two 1/1 black and red Goblin creature tokens. (Blight 1 approximated: token creation is optional.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
+mana={2}{B}
+type=Enchantment
+[/card]
+[card]
+name=Boldwyr Aggressor
+abilities=double strike
+auto=lord(other creature[giant]|mybattlefield) double strike
+text=Double strike -- Other Giants you control have double strike.
+mana={3}{R}{R}
+type=Creature
+subtype=Giant Warrior
+power=2
+toughness=5
+[/card]
+[card]
+name=Boneclub Berserker
+auto=foreach(other creature[goblin]|mybattlefield) 2/0
+text=This creature gets +2/+0 for each other Goblin you control.
+mana={3}{R}
+type=Creature
+subtype=Goblin Berserker
+power=2
+toughness=4
+[/card]
+[card]
+name=Brambleback Brute
+auto=@movedTo(this|mybattlefield):counter(-1/-1,2)
+auto={1}{R}{C(-1/-1,-1)}:cantblock target(creature) ueot asSorcery
+text=This creature enters with two -1/-1 counters on it. -- {1}{R}, Remove a counter from this creature: Target creature can't block this turn. Activate only as a sorcery.
+mana={2}{R}
+type=Creature
+subtype=Giant Warrior
+power=4
+toughness=5
+[/card]
+[card]
+name=Burdened Stoneback
+auto=@movedTo(this|mybattlefield):counter(-1/-1,2)
+auto={1}{W}{C(-1/-1,-1)}:indestructible target(creature) ueot asSorcery
+text=This creature enters with two -1/-1 counters on it. -- {1}{W}, Remove a counter from this creature: Target creature gains indestructible until end of turn. Activate only as a sorcery.
+mana={1}{W}
+type=Creature
+subtype=Giant Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Changeling Wayfinder
+abilities=changeling
+aicode=activate target(land[basic]|mylibrary) moveto(hand)
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>land[basic]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Changeling (This card is every creature type.) -- When this creature enters, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
+mana={3}
+type=Creature
+subtype=Shapeshifter
+power=1
+toughness=2
+[/card]
+[card]
+name=Chitinous Graspling
+abilities=changeling,reach
+text=Changeling (This card is every creature type.) -- Reach
+mana={3}{GU}
+type=Creature
+subtype=Shapeshifter
+power=3
+toughness=4
+[/card]
+[card]
+name=Chomping Changeling
+abilities=changeling
+auto=destroy target(artifact,enchantment)
+text=Changeling (This card is every creature type.) -- When this creature enters, destroy up to one target artifact or enchantment.
+mana={2}{G}
+type=Creature
+subtype=Shapeshifter
+power=1
+toughness=2
+[/card]
+[card]
+name=Creakwood Safewright
+auto=@movedTo(this|mybattlefield):counter(-1/-1,3)
+auto=@each my endstep:if type(elf|mygraveyard)~morethan~0 then counter(-1/-1,-1)
+text=This creature enters with three -1/-1 counters on it. -- At the beginning of your end step, if there is an Elf card in your graveyard and this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+mana={1}{B}
+type=Creature
+subtype=Elf Warrior
+power=5
+toughness=5
+[/card]
+[card]
+name=Crossroads Watcher
+abilities=trample
+auto=@movedTo(creature[-this]|mybattlefield):1/0 ueot
+text=Trample -- Whenever another creature you control enters, this creature gets +1/+0 until end of turn.
+mana={2}{G}
+type=Creature
+subtype=Kithkin Ranger
+power=3
+toughness=3
+[/card]
+[card]
+name=Dawn's Light Archer
+abilities=flash,reach
+text=Flash -- Reach
+mana={2}{G}
+type=Creature
+subtype=Elf Archer
+power=4
+toughness=2
+[/card]
+[card]
+name=Dawnhand Eulogist
+abilities=menace
+auto=deplete:3 controller
+auto=if type(elf|mygraveyard)~morethan~0 then life:-2 opponent && life:2 controller
+text=Menace -- When this creature enters, mill three cards. Then if there is an Elf card in your graveyard, each opponent loses 2 life and you gain 2 life.
+mana={3}{B}
+type=Creature
+subtype=Elf Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Deepchannel Duelist
+auto=@each my endstep:untap target(creature[merfolk]|mybattlefield)
+auto=lord(other creature[merfolk]|mybattlefield) 1/1
+text=At the beginning of your end step, untap target Merfolk you control. -- Other Merfolk you control get +1/+1.
+mana={W}{U}
+type=Creature
+subtype=Merfolk Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Disruptor of Currents
+abilities=flash
+other={convoke} name(Convoke)
+auto=may moveto(hand) target(other *[-land])
+text=Flash -- Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- When this creature enters, return up to one other target nonland permanent to its owner's hand.
+mana={3}{U}{U}
+type=Creature
+subtype=Merfolk Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Rooftop Percher
+abilities=changeling,flying
+auto=moveto(exile) target(<upto:2>*|graveyard)
+auto=life:3 controller
+text=Changeling (This card is every creature type.) -- Flying -- When this creature enters, exile up to two target cards from graveyards. You gain 3 life.
+mana={5}
+type=Creature
+subtype=Shapeshifter
+power=3
+toughness=3
+[/card]
+[card]
+name=Bristlebane Battler
+abilities=trample
+auto=_WARD2_
+auto=@movedTo(this|mybattlefield):counter(-1/-1,5)
+auto=@movedTo(creature[-this]|mybattlefield):counter(-1/-1,-1)
+text=Trample, ward {2} -- This creature enters with five -1/-1 counters on it. -- Whenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+mana={1}{G}
+type=Creature
+subtype=Kithkin Soldier
+power=6
+toughness=6
+[/card]
+[card]
+name=Boggart Prankster
+auto=@attacking(this):1/0 target(creature[goblin][attacking]|mybattlefield) ueot
+text=Whenever you attack, target attacking Goblin you control gets +1/+0 until end of turn.
+mana={1}{B}
+type=Creature
+subtype=Goblin Warrior
+power=1
+toughness=3
+[/card]
+
+[card]
+name=Dream Seizer
+abilities=flying
+auto=may discard:1 opponent
+text=Flying -- When this creature enters, you may blight 1. If you do, each opponent discards a card. (Blight cost approximated as optional.)
+mana={3}{B}
+type=Creature
+subtype=Faerie Rogue
+power=3
+toughness=2
+[/card]
+[card]
+name=Dundoolin Weaver
+auto=if type(creature|mybattlefield)~morethan~2 then moveto(hand) target(*|mygraveyard)
+text=When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand.
+mana={1}{G}
+type=Creature
+subtype=Kithkin Druid
+power=2
+toughness=1
+[/card]
+[card]
+name=Eclipsed Boggart
+abilities=hiddenface
+aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
+auto=name(look) reveal:4 optionone name(Get a card) target(<1>goblin,swamp,mountain|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+text=When this creature enters, look at the top four cards of your library. You may reveal a Goblin, Swamp, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={BR}{BR}{BR}
+type=Creature
+subtype=Goblin Scout
+power=2
+toughness=3
+[/card]
+[card]
+name=Eclipsed Elf
+abilities=hiddenface
+aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
+auto=name(look) reveal:4 optionone name(Get a card) target(<1>elf,swamp,forest|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elf, Swamp, or Forest card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={BG}{BG}{BG}
+type=Creature
+subtype=Elf Scout
+power=3
+toughness=2
+[/card]
+[card]
+name=Eclipsed Flamekin
+abilities=hiddenface
+aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
+auto=name(look) reveal:4 optionone name(Get a card) target(<1>elemental,island,mountain|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+text=When this creature enters, look at the top four cards of your library. You may reveal an Elemental, Island, or Mountain card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={1}{UR}{UR}
+type=Creature
+subtype=Elemental Scout
+power=1
+toughness=4
+[/card]
+[card]
+name=Eclipsed Kithkin
+abilities=hiddenface
+aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
+auto=name(look) reveal:4 optionone name(Get a card) target(<1>kithkin,forest,plains|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+text=When this creature enters, look at the top four cards of your library. You may reveal a Kithkin, Forest, or Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={GW}{GW}
+type=Creature
+subtype=Kithkin Scout
+power=2
+toughness=1
+[/card]
+[card]
+name=Eclipsed Merrow
+abilities=hiddenface
+aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
+auto=name(look) reveal:4 optionone name(Get a card) target(<1>merfolk,plains,island|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+text=When this creature enters, look at the top four cards of your library. You may reveal a Merfolk, Plains, or Island card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={WU}{WU}{WU}
+type=Creature
+subtype=Merfolk Scout
+power=2
+toughness=3
+[/card]
+[card]
+name=Elder Auntie
+auto=token(Goblin,creature goblin,1/1,black red)
+text=When this creature enters, create a 1/1 black and red Goblin creature token.
+mana={2}{R}
+type=Creature
+subtype=Goblin Warlock
+power=2
+toughness=2
+[/card]
+[card]
+name=Encumbered Reejerey
+auto=@movedTo(this|mybattlefield):counter(-1/-1,3)
+auto={T}:counter(-1/-1,-1)
+text=This creature enters with three -1/-1 counters on it. -- Whenever this creature becomes tapped while it has a -1/-1 counter on it, remove a -1/-1 counter from it. (Approximated: tap as an activated cost to remove counter.)
+mana={1}{W}
+type=Creature
+subtype=Merfolk Soldier
+power=5
+toughness=4
+[/card]
+[card]
+name=Enraged Flamecaster
+abilities=reach
+auto=@movedTo(*[manacost>=4]|mystack):damage:2 opponent
+text=Reach -- Whenever you cast a spell with mana value 4 or greater, this creature deals 2 damage to each opponent.
+mana={2}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=3
+toughness=2
+[/card]
+[card]
+name=Feisty Spikeling
+abilities=changeling,first strike
+text=Changeling (This card is every creature type.) -- During your turn, this creature has first strike. (Approximated as permanent first strike.)
+mana={1}{RW}
+type=Creature
+subtype=Shapeshifter
+power=2
+toughness=1
+[/card]
+[card]
+name=Flame-Chain Mauler
+auto={1}{R}:1/0 ueot && menace ueot
+text={1}{R}: This creature gets +1/+0 and gains menace until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Elemental Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=Flamebraider
+auto={T}:Add{2}
+text={T}: Add two mana in any combination of colors. (Spend only on Elementals is not enforced.)
+mana={1}{R}
+type=Creature
+subtype=Elemental Bard
+power=2
+toughness=2
+[/card]
+[card]
+name=Flamekin Gildweaver
+abilities=trample
+auto=_TREASURE_
+text=Trample -- When this creature enters, create a Treasure token.
+mana={3}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=4
+toughness=3
+[/card]
+[card]
+name=Flaring Cinder
+auto=may discard:1 controller && draw:1 controller
+auto=@movedTo(*[manacost>=4]|mystack):may discard:1 controller && draw:1 controller
+text=When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card.
+mana={1}{UR}{UR}
+type=Creature
+subtype=Elemental Sorcerer
+power=3
+toughness=2
+[/card]
+[card]
+name=Flock Impostor
+abilities=changeling,flash,flying
+auto=may moveto(hand) target(other creature|mybattlefield)
+text=Changeling (This card is every creature type.) -- Flash -- Flying -- When this creature enters, return up to one other target creature you control to its owner's hand.
+mana={2}{W}
+type=Creature
+subtype=Shapeshifter
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Formidable Speaker
+auto=may discard:1 controller && name(search card) reveal:plibrarycount optionone name(choose card) target(creature|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myhand))! afterrevealedend revealend
+auto={1}{T}:untap target(other *|mybattlefield)
+text=When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle. -- {1}, {T}: Untap another target permanent.
+mana={2}{G}
+type=Creature
+subtype=Elf Druid
+power=2
+toughness=4
+[/card]
+[card]
+name=Gallant Fowlknight
+auto=all(creature|mybattlefield) 1/0 ueot
+auto=all(creature[kithkin]|mybattlefield) first strike ueot
+text=When this creature enters, creatures you control get +1/+0 until end of turn. Kithkin creatures you control also gain first strike until end of turn.
+mana={3}{W}
+type=Creature
+subtype=Kithkin Knight
+power=3
+toughness=4
+[/card]
+[card]
+name=Gangly Stompling
+abilities=changeling,trample
+text=Changeling (This card is every creature type.) -- Trample
+mana={2}{RG}
+type=Creature
+subtype=Shapeshifter
+power=4
+toughness=2
+[/card]
+[card]
+name=Glamer Gifter
+abilities=flash,flying
+auto=may becomes(,4/4,changeling) target(other creature) ueot
+text=Flash -- Flying -- When this creature enters, choose up to one other target creature. Until end of turn, that creature has base power and toughness 4/4 and gains all creature types.
+mana={1}{U}
+type=Creature
+subtype=Faerie Wizard
+power=1
+toughness=2
+[/card]
+[card]
+name=Glamermite
+abilities=flash,flying
+auto=choice name(tap) tap target(creature) name(untap) untap target(creature)
+text=Flash -- Flying -- When this creature enters, choose one — tap target creature; or untap target creature.
+mana={2}{U}
+type=Creature
+subtype=Faerie Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Glen Elendra Guardian
+abilities=flash,flying
+auto=@movedTo(this|mybattlefield):counter(-1/-1,1)
+auto={1}{U}{C(-1/-1,-1)}:fizzle target(*[-creature]|opponentstack) && draw:1 opponent
+text=Flash -- Flying -- This creature enters with a -1/-1 counter on it. -- {1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
+mana={2}{U}
+type=Creature
+subtype=Faerie Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Gnarlbark Elm
+auto=@movedTo(this|mybattlefield):counter(-1/-1,2)
+auto={2}{B}{C(-1/-1,-2)}:-2/-2 target(creature) ueot asSorcery
+text=This creature enters with two -1/-1 counters on it. -- {2}{B}, Remove two counters from this creature: Target creature gets -2/-2 until end of turn. Activate only as a sorcery.
+mana={2}{B}
+type=Creature
+subtype=Treefolk Warlock
+power=3
+toughness=4
+[/card]
+[card]
+name=Goldmeadow Nomad
+autograveyard={W}:token(Kithkin,creature kithkin,1/1,green white) asSorcery
+text={W}, Exile this card from your graveyard: Create a 1/1 green and white Kithkin creature token. Activate only as a sorcery.
+mana={W}
+type=Creature
+subtype=Kithkin Scout
+power=1
+toughness=2
+[/card]
+[card]
+name=Great Forest Druid
+auto={T}:Add{1}
+text={T}: Add one mana of any color.
+mana={1}{G}
+type=Creature
+subtype=Treefolk Druid
+power=0
+toughness=4
+[/card]
+[card]
+name=Gristle Glutton
+auto={T}{C(-1/-1,1)}:discard:1 controller && draw:1 controller
+text={T}, Blight 1: Discard a card. If you do, draw a card. (Blight 1: put a -1/-1 counter on this creature as an approximated cost.)
+mana={1}{R}
+type=Creature
+subtype=Goblin Scout
+power=1
+toughness=3
+[/card]
+[card]
+name=Gutsplitter Gang
+auto=@each my mainphase:choice name(blight 2) counter(-1/-1,2) name(lose 3 life) life:-3 controller
+text=At the beginning of your first main phase, you may blight 2. If you don't, you lose 3 life. (Blight 2 approximated: put 2 -1/-1 counters on this creature or lose 3 life.)
+mana={3}{B}
+type=Creature
+subtype=Goblin Berserker
+power=6
+toughness=6
+[/card]
+[card]
+name=Heirloom Auntie
+auto=@movedTo(this|mybattlefield):counter(-1/-1,2)
+auto=@movedTo(other creature|graveyard) from(mybattlefield):_SCRY1_
+auto=@movedTo(other creature|graveyard) from(mybattlefield):counter(-1/-1,-1)
+text=This creature enters with two -1/-1 counters on it. -- Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature.
+mana={2}{B}
+type=Creature
+subtype=Goblin Warlock
+power=4
+toughness=4
+[/card]
+[card]
+name=High Perfect Morcant
+auto=@movedTo(creature[elf]|mybattlefield):counter(-1/-1) target(creature|opponentbattlefield)
+auto={T(creature[elf]|mybattlefield)}{T(creature[elf]|mybattlefield)}{T(creature[elf]|mybattlefield)}:_PROLIFERATE_ asSorcery
+text=Whenever High Perfect Morcant or another Elf you control enters, each opponent blights 1. (Opponent puts a -1/-1 counter on one of their creatures.) -- Tap three untapped Elves you control: Proliferate. Activate only as a sorcery.
+mana={2}{B}{G}
+type=Legendary Creature
+subtype=Elf Noble
+power=4
+toughness=4
+[/card]
+[card]
+name=Hovel Hurler
+auto=@movedTo(this|mybattlefield):counter(-1/-1,2)
+auto={RW}{RW}{C(-1/-1,-1)}:1/0 ueot && flying ueot target(other creature|mybattlefield) asSorcery
+text=This creature enters with two -1/-1 counters on it. -- {R/W}{R/W}, Remove a counter from this creature: Another target creature you control gets +1/+0 and gains flying until end of turn. Activate only as a sorcery.
+mana={3}{RW}{RW}
+type=Creature
+subtype=Giant Warrior
+power=6
+toughness=7
+[/card]
+
+[card]
+name=Illusion Spinners
+abilities=flash,flying
+auto=this(untapped) hexproof
+text=You may cast this spell as though it had flash if you control a Faerie. (Approximated as permanent flash.) -- Flying -- This creature has hexproof as long as it's untapped.
+mana={4}{U}
+type=Creature
+subtype=Faerie Wizard
+power=4
+toughness=3
+[/card]
+[card]
+name=Iron-Shield Elf
+auto={D(*|myhand)}:indestructible ueot && tap
+text=Discard a card: This creature gains indestructible until end of turn. Tap it.
+mana={1}{B}
+type=Creature
+subtype=Elf Warrior
+power=3
+toughness=1
+[/card]
+[card]
+name=Kinsbaile Aspirant
+auto=@movedTo(creature[-this]|mybattlefield):1/1 ueot
+text=As an additional cost to cast this spell, behold a Kithkin or pay {2}. (Behold not enforced.) -- Whenever another creature you control enters, this creature gets +1/+1 until end of turn.
+mana={W}
+type=Creature
+subtype=Kithkin Citizen
+power=2
+toughness=1
+[/card]
+[card]
+name=Kulrath Mystic
+auto=@movedTo(*[manacost>=4]|mystack):2/0 ueot && vigilance ueot
+text=Whenever you cast a spell with mana value 4 or greater, this creature gets +2/+0 and gains vigilance until end of turn.
+mana={2}{U}
+type=Creature
+subtype=Elemental Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Kulrath Zealot
+auto=__BASIC_LANDCYCLING__({1}{R})
+auto=notaTarget(*[zpos=1]|mylibrary) moveto(exile) and!( becomes(tobecast) uynt )!
+text=When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card. -- Basic landcycling {1}{R}
+mana={5}{R}
+type=Creature
+subtype=Elemental Warrior
+power=6
+toughness=5
+[/card]
+[card]
+name=Lavaleaper
+auto=lord(creature|battlefield) haste
+auto=@tappedformana(land[basic]|mybattlefield):Add{1}
+text=All creatures have haste. -- Whenever you tap a basic land for mana, add one mana of any type that land produced. (Approximated as add one extra mana of any color.)
+mana={3}{R}
+type=Creature
+subtype=Elemental
+power=4
+toughness=4
+[/card]
+[card]
+name=Loch Mare
+auto=@movedTo(this|mybattlefield):counter(-1/-1,3)
+auto={1}{U}{C(-1/-1,-1)}:draw:1 controller
+auto={2}{U}{C(-1/-1,-2)}:tap target(creature)
+text=This creature enters with three -1/-1 counters on it. -- {1}{U}, Remove a counter from this creature: Draw a card. -- {2}{U}, Remove two counters from this creature: Tap target creature. (Stun counter effect approximated as tap.)
+mana={1}{U}
+type=Creature
+subtype=Horse Serpent
+power=4
+toughness=5
+[/card]
+[card]
+name=Lys Alana Dignitary
+auto={T}:if type(elf|mygraveyard)~morethan~0 then Add{G}{G}
+text=As an additional cost to cast this spell, behold an Elf or pay {2}. (Behold not enforced.) -- {T}: Add {G}{G}. Activate only if there is an Elf card in your graveyard.
+mana={1}{G}
+type=Creature
+subtype=Elf Advisor
+power=2
+toughness=3
+[/card]
+[card]
+name=Lys Alana Informant
+auto=_SCRY1_
+auto=@movedTo(this|graveyard) from(mybattlefield):_SCRY1_
+text=When this creature enters or dies, surveil 1. (Approximated as scry 1.)
+mana={1}{G}
+type=Creature
+subtype=Elf Scout
+power=3
+toughness=1
+[/card]
+[card]
+name=Merrow Skyswimmer
+abilities=flying,vigilance
+other={convoke} name(Convoke)
+auto=token(Merfolk,creature merfolk,1/1,white blue)
+text=Convoke -- Flying, vigilance -- When this creature enters, create a 1/1 white and blue Merfolk creature token.
+mana={3}{WU}{WU}
+type=Creature
+subtype=Merfolk Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Mischievous Sneakling
+abilities=changeling,flash
+text=Changeling (This card is every creature type.) -- Flash
+mana={1}{UB}
+type=Creature
+subtype=Shapeshifter
+power=2
+toughness=2
+[/card]
+[card]
+name=Mistmeadow Council
+auto=lord(kithkin|mycastingzone) altercost(colorless,-1)
+auto=draw:1 controller
+text=This spell costs {1} less to cast if you control a Kithkin. -- When this creature enters, draw a card.
+mana={4}{G}
+type=Creature
+subtype=Kithkin Advisor
+power=4
+toughness=3
+[/card]
+[card]
+name=Moon-Vigil Adherents
+abilities=trample
+auto=foreach(creature|mybattlefield) 1/1
+auto=foreach(creature|mygraveyard) 1/1
+text=Trample -- This creature gets +1/+1 for each creature you control and each creature card in your graveyard.
+mana={2}{G}{G}
+type=Creature
+subtype=Elf Druid
+power=0
+toughness=0
+[/card]
+[card]
+name=Moonglove Extractor
+auto=_ATTACKING_:draw:1 controller && life:-1 controller
+text=Whenever this creature attacks, you draw a card and lose 1 life.
+mana={2}{B}
+type=Creature
+subtype=Elf Warlock
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Hexing Squelcher
+auto=_WARD2_
+mana={1}{R}
+type=Creature
+text=Ward {2}.
+subtype=Goblin Sorcerer
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Kinscaer Sentry
+abilities=first strike,lifelink
+auto=_ATTACKING_:moveto(mybattlefield) target(creature[manacost<=2]|myhand)
+mana={1}{W}
+type=Creature
+text=Whenever Kinscaer Sentry attacks, put target creature with mana value 2 or less in your hand onto the battlefield.
+subtype=Kithkin Soldier
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Lluwen, Imperfect Naturalist
+auto=@movedTo(this|mybattlefield):mill:4 controller
+auto={2}{BG}{BG}{BG}{T}{D(land|myhand)}:foreach(land|mygraveyard) token(Worm,creature worm,1/1,black green) asSorcery
+mana={BG}{BG}
+type=Legendary Creature
+text=When Lluwen, Imperfect Naturalist enters the battlefield, mill 4 cards.
+subtype=Elf Druid
+power=1
+toughness=3
+[/card]
+
+[card]
+name=Meanders Guide
+auto=_ATTACKING_:moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard)
+mana={2}{W}
+type=Creature
+text=Whenever Meanders Guide attacks, put target creature with mana value 3 or less in your graveyard onto the battlefield.
+subtype=Merfolk Scout
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Moonlit Lamenter
+auto=counter(-1/-1,1)
+auto={1}{W}{C(-1/-1,-1)}:draw:1 controller asSorcery
+mana={2}{W}
+type=Creature
+text=Put 1 -1/-1 counter on Moonlit Lamenter.
+subtype=Treefolk Cleric
+power=2
+toughness=5
+[/card]
+
+[card]
+name=Moonshadow
+abilities=menace
+auto=counter(-1/-1,6)
+auto=@movedTo(*|mygraveyard):counter(-1/-1,-1)
+mana={B}
+type=Creature
+text=Put 6 -1/-1 counters on Moonshadow.
+subtype=Elemental
+power=7
+toughness=7
+[/card]
+
+[card]
+name=Morcant's Loyalist
+auto=lord(other creature[elf]|mybattlefield) 1/1
+auto=_DIES_:moveto(hand) target(creature[elf]|mygraveyard)
+mana={1}{B}{G}
+type=Creature
+text=lord(other creature[elf]|mybattlefield) 1/1.
+subtype=Elf Warrior
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Mudbutton Cursetosser
+abilities=cantblock
+auto=_DIES_:destroy target(creature[power<=2]|opponentbattlefield)
+mana={B}
+type=Creature
+text=When Mudbutton Cursetosser dies, destroy target creature with power 2 or less an opponent controls.
+subtype=Goblin Warlock
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Nightmare Sower
+abilities=flying,lifelink
+auto=@movedTo(this|mybattlefield):counter(-1/-1,1) target(creature|opponentbattlefield)
+mana={3}{B}
+type=Creature
+text=When Nightmare Sower enters the battlefield, put 1 -1/-1 counter on target creature an opponent controls.
+subtype=Faerie Assassin
+power=2
+toughness=3
+[/card]
+
+[card]
+name=Noggle Robber
+auto=_TREASURE_
+auto=_DIES_:_TREASURE_
+mana={1}{RG}{RG}
+type=Creature
+text=Create a Treasure token.
+subtype=Noggle Rogue
+power=3
+toughness=3
+[/card]
+
+[card]
+name=Pestered Wellguard
+auto={T}:token(Faerie,creature faerie rogue,1/1,flying blue black)
+mana={3}{U}
+type=Creature
+text={T}: Create a 1/1 blue black Faerie creature token with flying.
+subtype=Merfolk Soldier
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Prideful Feastling
+abilities=changeling,lifelink
+mana={2}{WB}
+type=Creature
+text=Changeling (This card is every creature type.) Lifelink.
+subtype=Shapeshifter
+power=2
+toughness=3
+[/card]
+
+[card]
+name=Pummeler for Hire
+abilities=vigilance,reach
+auto=_WARD2_
+auto=@movedTo(this|mybattlefield):life:3 controller
+mana={4}{G}
+type=Creature
+text=Ward {2}.
+subtype=Giant Mercenary
+power=4
+toughness=4
+[/card]
+
+[card]
+name=Reaping Willow
+abilities=lifelink
+auto=counter(-1/-1,2)
+auto={1}{WB}{C(-1/-1,-1)}{C(-1/-1,-1)}:moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) asSorcery
+mana={1}{WB}{WB}{WB}
+type=Creature
+text=Put 2 -1/-1 counters on Reaping Willow.
+subtype=Treefolk Cleric
+power=3
+toughness=6
+[/card]
+
+[card]
+name=Reluctant Dounguard
+auto=counter(-1/-1,2)
+auto=@movedTo(creature[-this]|mybattlefield):counter(-1/-1,-1)
+mana={2}{W}
+type=Creature
+text=Put 2 -1/-1 counters on Reluctant Dounguard.
+subtype=Kithkin Soldier
+power=4
+toughness=4
+[/card]
+
+[card]
+name=Retched Wretch
+mana={2}{B}
+type=Creature
+subtype=Goblin
+power=4
+toughness=2
+[/card]
+
+[card]
+name=Rhys, the Evermore
+abilities=flash
+auto=@movedTo(this|mybattlefield):persist ueot target(creature[-this]|mybattlefield)
+auto={W}{T}:counter(-1/-1,-10) target(creature|mybattlefield) asSorcery
+mana={1}{W}
+type=Legendary Creature
+text=When Rhys, the Evermore enters the battlefield, target creature you control gains persist until end of turn.
+subtype=Elf Warrior
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Rimekin Recluse
+auto=@movedTo(this|mybattlefield):moveto(hand) target(creature[-this]|opponentbattlefield)
+mana={2}{U}
+type=Creature
+text=When Rimekin Recluse enters the battlefield, put target creature an opponent controls onto its owner's hand.
+subtype=Elemental Wizard
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Safewright Cavalry
+auto={5}:pump(2/2) target(creature[elf]|mybattlefield) ueot
+mana={3}{G}
+type=Creature
+text={5}: Target creature (elf) you control gets +2/+2 until end of turn.
+subtype=Elf Warrior
+power=4
+toughness=4
+[/card]
+
+[card]
+name=Scarblade Scout
+abilities=lifelink
+auto=@movedTo(this|mybattlefield):mill:2
+mana={1}{B}
+type=Creature
+text=When Scarblade Scout enters the battlefield, mill 2 cards.
+subtype=Elf Scout
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Scuzzback Scrounger
+auto=@each my mainphase:choice name(blight 1) counter(-1/-1,1) && _TREASURE_ name(skip)
+mana={1}{R}
+type=Creature
+text=@each my mainphase:choice name(blight 1) counter(-1/-1,1). Create a Treasure token name(skip).
+subtype=Goblin Warrior
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Selfless Safewright
+abilities=flash,convoke
+auto=@movedTo(this|mybattlefield):all(creature[-this]|mybattlefield) hexproof ueot && all(creature[-this]|mybattlefield) indestructible ueot
+mana={3}{G}{G}
+type=Creature
+text=When Selfless Safewright enters the battlefield, all creatures you control gain hexproof until end of turn. All creatures you control gain indestructible until end of turn.
+subtype=Elf Warrior
+power=4
+toughness=2
+[/card]
+
+[card]
+name=Shadow Urchin
+auto=_ATTACKING_:counter(-1/-1,1)
+mana={2}{BR}
+type=Creature
+text=Whenever Shadow Urchin attacks, put 1 -1/-1 counter on Shadow Urchin.
+subtype=Ouphe
+power=3
+toughness=4
+[/card]
+
+[card]
+name=Shore Lurker
+abilities=flying
+auto=@movedTo(this|mybattlefield):_SCRY1_
+mana={3}{W}
+type=Creature
+text=When Shore Lurker enters the battlefield, scry 1.
+subtype=Merfolk Scout
+power=3
+toughness=3
+[/card]
+
+[card]
+name=Silvergill Mentor
+auto=@movedTo(this|mybattlefield):token(Merfolk,creature merfolk,1/1,white blue)
+mana={1}{U}
+type=Creature
+text=When Silvergill Mentor enters the battlefield, create a 1/1 white blue Merfolk creature token.
+subtype=Merfolk Wizard
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Silvergill Peddler
+auto={T}:draw:1 controller && discard:1 controller
+mana={2}{U}
+type=Creature
+text={T}: Draw 1 card. Discard 1 card.
+subtype=Merfolk Citizen
+power=2
+toughness=3
+[/card]
+
+[card]
+name=Sizzling Changeling
+abilities=changeling
+auto=_DIES_:notaTarget(*[zpos=1]|mylibrary) moveto(exile) and!( becomes(tobecast) uynt )!
+mana={2}{R}
+type=Creature
+text=When Sizzling Changeling dies, notaTarget(*[zpos=1]|mylibrary) moveto(exile) and!( becomes(tobecast) uynt )!.
+subtype=Shapeshifter
+power=3
+toughness=2
+[/card]
+
+[card]
+name=Slumbering Walker
+auto=counter(-1/-1,2)
+auto=@each my endstep:counter(-1/-1,-1) && moveto(mybattlefield) target(creature[power<=2]|mygraveyard)
+mana={3}{W}{W}
+type=Creature
+text=Put 2 -1/-1 counters on Slumbering Walker.
+subtype=Giant Warrior
+power=4
+toughness=7
+[/card]
+
+[card]
+name=Sourbread Auntie
+auto=@movedTo(this|mybattlefield):choice name(blight 2) counter(-1/-1,2) && token(Goblin,creature goblin,1/1,black red) && token(Goblin,creature goblin,1/1,black red) name(skip)
+mana={2}{R}{R}
+type=Creature
+text=When ~ enters the battlefield, Choose one —
+• Blight 2
+• Skip.
+subtype=Goblin Warrior
+power=4
+toughness=3
+[/card]
+
+[card]
+name=Spinerock Tyrant
+abilities=flying,wither
+mana={3}{R}{R}
+type=Creature
+text=Flying. Wither (This deals damage to creatures in the form of -1/-1 counters.)
+subtype=Dragon
+power=6
+toughness=6
+[/card]
+
+[card]
+name=Sting-Slinger
+auto={1}{R}{T}{C(-1/-1,1)}:damage:2 opponent
+mana={2}{R}
+type=Creature
+text={1}{R}{T}{C(-1/-1,1)}: Deal 2 damage to each opponent.
+subtype=Goblin Warrior
+power=3
+toughness=3
+[/card]
+
+[card]
+name=Stoic Grove-Guide
+autograveyard={1}{BG}:token(Elf,creature elf,2/2,black green) asSorcery
+mana={4}{BG}
+type=Creature
+text={1}{B/G}: Create a 2/2 black green Elf creature token. Activate only as a sorcery.
+subtype=Elf Druid
+power=5
+toughness=4
+[/card]
+
+[card]
+name=Stratosoarer
+abilities=flying
+auto=@movedTo(this|mybattlefield):flying ueot target(creature|mybattlefield)
+auto=__BASIC_LANDCYCLING__({1}{U})
+mana={4}{U}
+type=Creature
+text=When Stratosoarer enters the battlefield, target creature you control gains flying until end of turn.
+subtype=Elemental
+power=3
+toughness=5
+[/card]
+
+[card]
+name=Summit Sentinel
+auto=_DIES_:draw:1 controller
+mana={1}{U}
+type=Creature
+text=When Summit Sentinel dies, draw 1 card.
+subtype=Elemental Soldier
+power=1
+toughness=3
+[/card]
+
+[card]
+name=Sun-Dappled Celebrant
+abilities=vigilance,convoke
+mana={4}{W}{W}
+type=Creature
+text=Vigilance. Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+subtype=Treefolk Cleric
+power=5
+toughness=6
+[/card]
+
+[card]
+name=Sunderflock
+abilities=flying
+auto=@movedTo(this|mybattlefield):all(creature[-type:elemental]|opponentbattlefield) moveto(hand) && all(creature[-type:elemental]|mybattlefield) moveto(hand)
+mana={7}{U}{U}
+type=Creature
+text=When Sunderflock enters the battlefield, all creatures an opponent controls return to their owner's hand. All creatures you control return to their owner's hand.
+subtype=Elemental
+power=5
+toughness=5
+[/card]
+
+[card]
+name=Surly Farrier
+auto={T}:pump(1/1) target(creature|mybattlefield) ueot asSorcery
+mana={1}{G}
+type=Creature
+text={T}: Target creature you control gets +1/+1 until end of turn.
+subtype=Kithkin Citizen
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Sygg, Wanderwine Wisdom
+abilities=unblockable
+auto=@movedTo(this|mybattlefield):draw:1 controller
+mana={1}{U}
+type=Legendary Creature
+text=When Sygg, Wanderwine Wisdom enters the battlefield, draw 1 card.
+subtype=Merfolk Wizard
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Tam, Mindful First-Year
+auto={T}:pump(2/2) target(creature|mybattlefield) ueot
+mana={1}{GU}
+type=Legendary Creature
+text={T}: Target creature you control gets +2/+2 until end of turn.
+subtype=Gorgon Wizard
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Tanufel Rimespeaker
+auto=@movedTo(*[manacost>=4]|mystack):draw:1 controller
+mana={3}{U}
+type=Creature
+text=@movedTo(*[manacost>=4]|mystack):draw:1 controller.
+subtype=Elemental Wizard
+power=2
+toughness=4
+[/card]
+
+[card]
+name=Thoughtweft Imbuer
+auto=@combat(attacking) source(creature[-this]|mybattlefield):pump(1/1) ueot
+mana={3}{W}
+type=Creature
+text=@combat(attacking) source(creature[-this]|mybattlefield):pump(1/1) ueot.
+subtype=Kithkin Advisor
+power=0
+toughness=5
+[/card]
+
+[card]
+name=Thoughtweft Lieutenant
+auto=@movedTo(this|mybattlefield):pump(1/1) target(creature|mybattlefield) ueot
+auto=@movedTo(creature[kithkin,-this]|mybattlefield):pump(1/1) target(creature|mybattlefield) ueot
+mana={G}{W}
+type=Creature
+text=When Thoughtweft Lieutenant enters the battlefield, target creature you control gets +1/+1 until end of turn.
+subtype=Kithkin Soldier
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Timid Shieldbearer
+auto={4}{W}:all(creature|mybattlefield) pump(1/1) ueot
+mana={1}{W}
+type=Creature
+text={4}{W}: all(creature|mybattlefield) pump(1/1) ueot.
+subtype=Kithkin Soldier
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Tributary Vaulter
+abilities=flying
+auto={T}:pump(2/0) target(creature[merfolk,-this]|mybattlefield) ueot
+mana={2}{W}
+type=Creature
+text={T}: Target creature you control gets +2/+0 until end of turn.
+subtype=Merfolk Warrior
+power=1
+toughness=3
+[/card]
+
+[card]
+name=Trystan, Callous Cultivator
+abilities=deathtouch
+auto=@movedTo(this|mybattlefield):mill:3 controller && if type(creature[elf]|mygraveyard)~morethan~0 then life:2 controller
+auto=@each my mainphase:{B}:name(transform) transform asSorcery
+mana={2}{G}
+type=Legendary Creature
+text=When Trystan, Callous Cultivator enters the battlefield, mill 3 cards. You gain 2 life.
+subtype=Elf Druid
+power=3
+toughness=4
+[/card]
+
+[card]
+name=Twilight Diviner
+auto=@movedTo(this|mybattlefield):_SCRY1_ && _SCRY1_
+mana={2}{B}
+type=Creature
+text=When Twilight Diviner enters the battlefield, scry 1. Scry 1.
+subtype=Elf Cleric
+power=3
+toughness=3
+[/card]
+
+[card]
+name=Unwelcome Sprite
+abilities=flying
+auto=@movedTo(this|mybattlefield):_SCRY1_ && _SCRY1_
+mana={1}{U}
+type=Creature
+text=When Unwelcome Sprite enters the battlefield, scry 1. Scry 1.
+subtype=Faerie Rogue
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Vibrance
+abilities=evoke{RG}{RG}
+auto=@movedTo(this|mybattlefield):damage:3 target(any)
+auto=@movedTo(this|mybattlefield):moveto(hand) target(land[basic]|mylibrary) && life:2 controller
+mana={3}{RG}{RG}
+type=Creature
+text=When Vibrance enters the battlefield, deal 3 damage to target any target.
+subtype=Elemental Incarnation
+power=4
+toughness=4
+[/card]
+
+[card]
+name=Vinebred Brawler
+abilities=lure
+auto=_ATTACKING_:pump(2/1) target(creature[elf,-this]|mybattlefield) ueot
+mana={2}{G}
+type=Creature
+text=Whenever Vinebred Brawler attacks, target creature you control gets +2/+1 until end of turn.
+subtype=Elf Berserker
+power=4
+toughness=2
+[/card]
+
+[card]
+name=Virulent Emissary
+abilities=deathtouch
+auto=@movedTo(creature[-this]|mybattlefield):life:1 controller
+mana={G}
+type=Creature
+text=@movedTo(creature[-this]|mybattlefield):life:1 controller.
+subtype=Elf Assassin
+power=1
+toughness=1
+[/card]
+
+[card]
+name=Voracious Tome-Skimmer
+abilities=flying
+auto=@movedTo(this|mybattlefield):life:-1 controller && draw:1 controller
+mana={UB}{UB}{UB}
+type=Creature
+text=When Voracious Tome-Skimmer enters the battlefield, you lose 1 life. Draw 1 card.
+subtype=Faerie Rogue
+power=2
+toughness=3
+[/card]
+
+[card]
+name=Wanderbrine Preacher
+auto={T}:life:2 controller
+mana={1}{W}
+type=Creature
+text={T}: You gain 2 life.
+subtype=Merfolk Cleric
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Wanderbrine Trapper
+auto={1}{T(creature[-this]|mybattlefield)}:tap target(creature|opponentbattlefield)
+mana={W}
+type=Creature
+text={1}{T(creature[-this]|mybattlefield)}: Tap target creature an opponent controls.
+subtype=Merfolk Scout
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Wanderwine Distracter
+auto={T}:pump(-3/0) target(creature|opponentbattlefield) ueot
+mana={3}{U}
+type=Creature
+text={T}: Target creature an opponent controls gets -3/+0 until end of turn.
+subtype=Merfolk Wizard
+power=4
+toughness=3
+[/card]
+
+[card]
+name=Warren Torchmaster
+auto=@each my combatbegin:choice name(blight 1) counter(-1/-1,1) && haste ueot target(creature|mybattlefield) name(skip)
+mana={1}{R}
+type=Creature
+text=At the beginning of combat on your turn, Choose one —
+• Blight 1
+• Skip.
+subtype=Goblin Warrior
+power=2
+toughness=2
+[/card]
+
+[card]
+name=Wary Farmer
+auto=@each my endstep:_SCRY1_
+mana={1}{GW}{GW}
+type=Creature
+text=At the beginning of your end step, scry 1.
+subtype=Kithkin Citizen
+power=3
+toughness=3
+[/card]
+
+[card]
+name=Wildvine Pummeler
+abilities=reach,trample
+mana={6}{G}
+type=Creature
+text=Reach. Trample.
+subtype=Giant Berserker
+power=6
+toughness=5
+[/card]
+
+[card]
+name=Wistfulness
+abilities=evoke{GU}{GU}
+auto=@movedTo(this|mybattlefield):moveto(exile) target(*[artifact;enchantment]|opponentbattlefield)
+auto=@movedTo(this|mybattlefield):draw:2 controller && discard:1 controller
+mana={3}{GU}{GU}
+type=Creature
+text=When Wistfulness enters the battlefield, exile target permanent an opponent controls.
+subtype=Elemental Incarnation
+power=6
+toughness=5
+[/card]
+
+[card]
+name=Soulbright Seeker
+auto={R}:trample ueot target(creature|mybattlefield)
+mana={R}
+type=Creature
+text={R}: Target creature you control gains trample until end of turn.
+subtype=Elemental Sorcerer
+power=2
+toughness=1
+[/card]
+
+[card]
+name=Aquitect's Defenses
+abilities=flash,enchantcreature
+auto=@movedTo(this|mybattlefield):hexproof ueot
+auto=enchanted 1/2
+mana={1}{U}
+type=Enchantment
+text=When Aquitect's Defenses enters the battlefield, hexproof ueot.
+subtype=Aura
+[/card]
+
+[card]
+name=Blossombind
+abilities=enchantcreature
+auto=@movedTo(this|mybattlefield):tap target(creature|opponentbattlefield)
+mana={1}{U}
+type=Enchantment
+text=When Blossombind enters the battlefield, tap target creature an opponent controls.
+subtype=Aura
+[/card]
+
+[card]
+name=Evershrike's Gift
+abilities=enchantcreature
+auto=enchanted 1/0
+auto=enchanted flying
+autograveyard={1}{W}{C(-1/-1,2)}:moveto(hand) this asSorcery
+mana={W}
+type=Enchantment
+text=Enchanted creature gets +1/+0.
+subtype=Aura
+[/card]
+
+[card]
+name=Gilt-Leaf's Embrace
+abilities=flash,enchantcreature
+auto=@movedTo(this|mybattlefield):trample ueot && indestructible ueot
+auto=enchanted 2/0
+mana={2}{G}
+type=Enchantment
+text=When Gilt-Leaf's Embrace enters the battlefield, trample ueot. indestructible ueot.
+subtype=Aura
+[/card]
+
+[card]
+name=Kinbinding
+auto=@each my combatbegin:token(Kithkin,creature kithkin,1/1,green white)
+mana={3}{W}{W}
+type=Enchantment
+text=At the beginning of combat on your turn, create a 1/1 green white Kithkin creature token.
+[/card]
+
+[card]
+name=Lasting Tarfire
+auto=@each my endstep:damage:2 opponent
+mana={1}{R}
+type=Enchantment
+text=At the beginning of your end step, deal 2 damage to each opponent.
+[/card]
+
+[card]
+name=Liminal Hold
+auto=@movedTo(this|mybattlefield):moveto(exile) target(*[-land]|opponentbattlefield) && life:2 controller
+mana={3}{W}
+type=Enchantment
+text=When Liminal Hold enters the battlefield, exile target nonland permanent an opponent controls. You gain 2 life.
+[/card]
+
+[card]
+name=Lofty Dreams
+abilities=convoke,enchantcreature
+auto=@movedTo(this|mybattlefield):draw:1 controller
+auto=enchanted 2/2
+auto=enchanted flying
+mana={3}{U}{U}
+type=Enchantment
+text=When Lofty Dreams enters the battlefield, draw 1 card.
+subtype=Aura
+[/card]
+
+[card]
+name=Meek Attack
+auto={1}{R}:moveto(mybattlefield) target(creature[manacost<=4]|myhand)
+mana={2}{R}
+type=Enchantment
+text={1}{R}: Put target creature with mana value 4 or less in your hand onto the battlefield.
+[/card]
+
+[card]
+name=Mornsong Aria
+auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary) && and!(shuffle)!
+mana={1}{B}{B}
+type=Legendary Enchantment
+text=Whenever you draw a card, you lose 3 life. Put target permanent mylibrary onto its owner's hand. and!(shuffle)!.
+[/card]
+
+[card]
+name=Noggle the Mind
+abilities=flash,enchantcreature
+auto=enchanted becomes(,1/1)
+mana={1}{U}
+type=Enchantment
+text=Enchanted creature becomes a 1/1.
+subtype=Aura
+[/card]
+
+[card]
+name=Pitiless Fists
+abilities=enchantcreature
+auto=@movedTo(this|mybattlefield):fight target(creature|opponentbattlefield)
+auto=enchanted 2/2
+mana={3}{G}
+type=Enchantment
+text=When Pitiless Fists enters the battlefield, pitiless Fists fights target creature an opponent controls.
+subtype=Aura
+[/card]
+
+[card]
+name=Sapling Nursery
+abilities=affinityforests
+auto=_LANDFALL_:token(Treefolk,creature treefolk,3/4,reach green)
+mana={6}{G}{G}
+type=Enchantment
+text=:token(Treefolk,creature treefolk,3/4,reach green).
+[/card]
+
+[card]
+name=Spiral into Solitude
+abilities=enchantcreature
+auto=enchanted cantattack
+auto=enchanted cantblock
+auto={1}{W}:moveto(exile) target(creature|opponentbattlefield)
+mana={1}{W}
+type=Enchantment
+text=Enchanted creature gains cantattack.
+subtype=Aura
+[/card]
+
+[card]
+name=Appeal to Eirdu
+abilities=convoke
+auto=pump(2/1) target(creature|mybattlefield) ueot
+auto=pump(2/1) target(creature[-<1>]|mybattlefield) ueot
+mana={3}{W}
+type=Instant
+text=Target creature you control gets +2/+1 until end of turn.
+[/card]
+
+[card]
+name=Blight Rot
+auto=counter(-1/-1,4) target(creature|opponentbattlefield)
+mana={2}{B}
+type=Instant
+text=Put 4 -1/-1 counters on target creature an opponent controls.
+[/card]
+
+[card]
+name=Dose of Dawnglow
+auto=moveto(mybattlefield) target(creature|mygraveyard)
+mana={4}{B}
+type=Instant
+text=Put target creature in your graveyard onto the battlefield.
+[/card]
+
+[card]
+name=Feed the Flames
+auto=damage:5 target(creature|opponentbattlefield)
+mana={3}{R}
+type=Instant
+text=Deal 5 damage to target creature an opponent controls.
+[/card]
+
+[card]
+name=Giantfall
+auto=choice name(fight) fight target(creature|opponentbattlefield) name(destroy artifact) destroy target(artifact|opponentbattlefield)
+mana={1}{R}
+type=Instant
+text=Choose one —
+• Fight
+• Destroy artifact.
+[/card]
+
+[card]
+name=Glen Elendra's Answer
+auto=fizzle all(*|opponentstack) && token(Faerie,creature faerie rogue,1/1,flying blue black) && token(Faerie,creature faerie rogue,1/1,flying blue black)
+mana={2}{U}{U}
+type=Instant
+text=Counter all spells and abilities your opponents control. Create a 1/1 blue black Faerie creature token with flying. Create a 1/1 blue black Faerie creature token with flying.
+[/card]
+
+[card]
+name=Keep Out
+auto=choice name(deal 4 to tapped creature) damage:4 target(creature[tapped]|opponentbattlefield) name(destroy enchantment) destroy target(enchantment|opponentbattlefield)
+mana={1}{W}
+type=Instant
+text=Choose one —
+• Deal 4 to tapped creature
+• Destroy enchantment.
+[/card]
+
+[card]
+name=Midnight Tilling
+auto=mill:4 && moveto(hand) target(*|mygraveyard)
+mana={1}{G}
+type=Instant
+text=Mill 4 cards. Put target permanent in your graveyard onto its owner's hand.
+[/card]
+
+[card]
+name=Personify
+auto=token(Shapeshifter,creature shapeshifter,1/1,changeling colorless)
+mana={1}{W}
+type=Instant
+text=Create a 1/1 colorless Shapeshifter creature token.
+[/card]
+
+[card]
+name=Protective Response
+abilities=convoke
+auto=destroy target(creature|combat)
+mana={2}{W}
+type=Instant
+text=Destroy target creature in combat.
+[/card]
+
+[card]
+name=Pyrrhic Strike
+auto=choice name(destroy artifact or enchantment) destroy target(*[artifact;enchantment]|opponentbattlefield) name(destroy creature MV 3+) destroy target(creature[manacost>=3]|opponentbattlefield)
+mana={2}{W}
+type=Instant
+text=Choose one —
+• Destroy artifact or enchantment
+• Destroy creature mv 3+.
+[/card]
+
+[card]
+name=Reckless Ransacking
+auto=pump(3/2) target(creature|mybattlefield) ueot && _TREASURE_
+mana={1}{R}
+type=Instant
+text=Target creature you control gets +3/+2 until end of turn. Create a Treasure token.
+[/card]
+
+[card]
+name=Requiting Hex
+auto=choice name(blight 1 for life) counter(-1/-1,1) && destroy target(creature[manacost<=2]|opponentbattlefield) && life:2 controller name(no blight) destroy target(creature[manacost<=2]|opponentbattlefield)
+mana={B}
+type=Instant
+text=Choose one —
+• Blight 1 for life
+• No blight.
+[/card]
+
+[card]
+name=Riverguard's Reflexes
+auto=pump(2/2) target(creature|mybattlefield) ueot && first strike ueot target(creature|mybattlefield) && untap target(creature|mybattlefield)
+mana={1}{W}
+type=Instant
+text=Target creature you control gets +2/+2 until end of turn. Target creature you control gains first strike until end of turn. Untap target creature you control.
+[/card]
+
+[card]
+name=Scarblade's Malice
+auto=deathtouch ueot target(creature|mybattlefield) && lifelink ueot target(creature|mybattlefield)
+mana={B}
+type=Instant
+text=Target creature you control gains deathtouch until end of turn. Target creature you control gains lifelink until end of turn.
+[/card]
+
+[card]
+name=Sear
+auto=damage:4 target(creature|opponentbattlefield)
+mana={1}{R}
+type=Instant
+text=Deal 4 damage to target creature an opponent controls.
+[/card]
+
+[card]
+name=Thoughtweft Charge
+auto=pump(3/3) target(creature|mybattlefield) ueot && draw:1 controller
+mana={1}{G}
+type=Instant
+text=Target creature you control gets +3/+3 until end of turn. Draw 1 card.
+[/card]
+
+[card]
+name=Tweeze
+auto=damage:3 target(any) && choice name(draw) discard:1 controller && draw:1 controller name(skip)
+mana={2}{R}
+type=Instant
+text=Deal 3 damage to target any target. choice name(draw) discard:1 controller. draw:1 controller name(skip).
+[/card]
+
+[card]
+name=Unexpected Assistance
+abilities=convoke
+auto=draw:3 controller && discard:1 controller
+mana={3}{U}{U}
+type=Instant
+text=Draw 3 cards. Discard 1 card.
+[/card]
+
+[card]
+name=Unforgiving Aim
+auto=choice name(destroy flier) destroy target(creature[flying]|opponentbattlefield) name(destroy enchantment) destroy target(enchantment|opponentbattlefield) name(create elf token) token(Elf,creature elf,2/2,black green)
+mana={2}{G}
+type=Instant
+text=Choose one —
+• Destroy flier
+• Destroy enchantment
+• Create elf token.
+[/card]
+
+[card]
+name=Wild Unraveling
+auto=fizzle target(*|opponentstack)
+mana={U}{U}
+type=Instant
+text=Counter target permanent on the stack.
+[/card]
+
+[card]
+name=Thirst for Identity
+auto=draw:3 controller && discard:2 controller
+mana={2}{U}
+type=Instant
+text=Draw 3 cards. Discard 2 cards.
+[/card]
+
+[card]
+name=Unbury
+auto=moveto(hand) target(creature|mygraveyard)
+mana={1}{B}
+type=Instant
+text=Put target creature in your graveyard onto its owner's hand.
+[/card]
+
+[card]
+name=Abigale, Eloquent First-Year
+abilities=flying,first strike,lifelink
+auto=@movedTo(this|mybattlefield):target(creature[-this]|mybattlefield) effect(+0/+0) ueot
+mana={W/B}{W/B}
+type=Creature
+subtype=Bird Bard
+power=1
+toughness=1
+text=Flying, first strike, lifelink -- When Abigale enters, another target creature gains flying, first strike, and lifelink until end of turn.
+[/card]
+
+[card]
+name=Adept Watershaper
+auto=all(creature[-this]|mybattlefield):abilities=indestructible
+mana={2}{W}
+type=Creature
+subtype=Merfolk Cleric
+power=3
+toughness=4
+text=Other creatures you control have indestructible.
+[/card]
+
+[card]
+name=Ashling, Rekindled
+auto=@movedTo(this|mybattlefield):choice name(loot) discard:1 && draw:1 name(pass)
+mana={1}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=1
+toughness=3
+text=When this creature enters, you may discard a card. If you do, draw a card.
+[/card]
+
+[card]
+name=Aurora Awakener
+abilities=trample
+auto=@movedTo(this|mybattlefield):moveto(mybattlefield) target(creature[manacost<=4]|mylibrary)
+mana={6}{G}
+type=Creature
+subtype=Giant Druid
+power=7
+toughness=7
+text=Trample -- When this creature enters, you may put a creature card with mana value 4 or less from the top of your library onto the battlefield.
+[/card]
+
+[card]
+name=Blighted Blackthorn
+auto=@movedTo(this|mybattlefield):choice name(blight 2) counter(-1/-1,2) && draw:1 && life:-1 controller name(skip)
+auto=@attacking(this):choice name(blight 2) counter(-1/-1,2) && draw:1 && life:-1 controller name(skip)
+mana={4}{B}
+type=Creature
+subtype=Treefolk Warlock
+power=3
+toughness=7
+text=Whenever this creature enters or attacks, you may blight 2. If you do, draw a card and lose 1 life.
+[/card]
+
+[card]
+name=Bre of Clan Stoutarm
+auto={1}{W}{T}:target(creature[-this]|mybattlefield) effect(+0/+0,flying,lifelink) ueot
+mana={2}{R}{W}
+type=Creature
+subtype=Giant Warrior
+power=4
+toughness=4
+text={1}{W}, {T}: Another target creature you control gains flying and lifelink until end of turn.
+[/card]
+
+[card]
+name=Brigid, Clachan's Heart
+auto=@movedTo(this|mybattlefield):token(Kithkin,creature kithkin,1/1,green white)
+mana={2}{W}
+type=Creature
+subtype=Kithkin Warrior
+power=3
+toughness=2
+text=Whenever this creature enters, create a 1/1 green and white Kithkin creature token.
+[/card]
+
+[card]
+name=Bristlebane Outrider
+mana={3}{G}
+type=Creature
+subtype=Kithkin Knight
+power=3
+toughness=5
+text=This creature can't be blocked by creatures with power 2 or less.
+[/card]
+
+[card]
+name=Catharsis
+auto=@movedTo(this|mybattlefield):choice name(kithkin) token(Kithkin,creature kithkin,1/1,green white) && token(Kithkin,creature kithkin,1/1,green white) name(haste) all(creature|mybattlefield) effect(+1/+1,haste) ueot
+abilities=evoke{R/W}{R/W}
+mana={4}{R/W}{R/W}
+type=Creature
+subtype=Elemental Incarnation
+power=3
+toughness=4
+text=When this creature enters, choose: create two 1/1 Kithkin tokens; or creatures you control get +1/+1 and haste until end of turn. Evoke {R/W}{R/W}.
+[/card]
+
+[card]
+name=Champion of the Clachan
+abilities=flash
+auto=all(creature[kithkin][-this]|mybattlefield):effect(+1/+1)
+mana={3}{W}
+type=Creature
+subtype=Kithkin Knight
+power=4
+toughness=5
+text=Flash -- Other Kithkin you control get +1/+1.
+[/card]
+
+[card]
+name=Champion of the Path
+auto=@movedTo(creature[elemental][-this]|mybattlefield):damage:* target(player|opponentbattlefield)
+mana={3}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=7
+toughness=3
+text=Whenever another Elemental you control enters, it deals damage equal to its power to each opponent.
+[/card]
+
+[card]
+name=Champion of the Weird
+auto={B}:counter(-1/-1,2) && target(player|opponentbattlefield) counter(-1/-1,2) asSorcery
+mana={3}{B}
+type=Creature
+subtype=Goblin Berserker
+power=5
+toughness=5
+text=Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery.
+[/card]
+
+[card]
+name=Champions of the Perfect
+auto=@movedTo(creature|myCastingzone):draw:1
+mana={3}{G}
+type=Creature
+subtype=Elf Warrior
+power=6
+toughness=6
+text=Whenever you cast a creature spell, draw a card.
+[/card]
+
+[card]
+name=Champions of the Shoal
+auto=@movedTo(this|mybattlefield):tap target(creature|opponentbattlefield)
+auto=@tapped(this):tap target(creature|opponentbattlefield)
+mana={3}{U}
+type=Creature
+subtype=Merfolk Soldier
+power=4
+toughness=6
+text=Whenever this creature enters or becomes tapped, tap up to one target creature an opponent controls.
+[/card]
+
+[card]
+name=Chaos Spewer
+auto=@movedTo(this|mybattlefield):choice name(pay) effect(+0/+0) name(blight 2) counter(-1/-1,2)
+mana={2}{B/R}
+type=Creature
+subtype=Goblin Warlock
+power=5
+toughness=4
+text=When this creature enters, you may pay {2}. If you do not, blight 2.
+[/card]
+
+[card]
+name=Curious Colossus
+auto=@movedTo(this|mybattlefield):all(creature|opponentbattlefield) effect(-10/-10) ueot
+mana={5}{W}{W}
+type=Creature
+subtype=Giant Warrior
+power=7
+toughness=7
+text=When this creature enters, each creature target opponent controls becomes a 1/1 creature.
+[/card]
+
+[card]
+name=Dawnhand Dissident
+auto={T}{C(-1/-1,1)}:_SCRY1_
+auto={T}{C(-1/-1,1)}{C(-1/-1,1)}:moveto(exile) target(*|graveyard)
+mana={B}
+type=Creature
+subtype=Elf Warlock
+power=1
+toughness=2
+text={T}, Blight 1: Surveil 1. -- {T}, Blight 2: Exile target card from a graveyard.
+[/card]
+
+[card]
+name=Deceit
+auto=@movedTo(this|mybattlefield):choice name(bounce) moveto(myhand) target(*[-land]|opponentbattlefield) name(discard) discard:1 target(player|opponentbattlefield)
+abilities=evoke{U/B}{U/B}
+mana={4}{U/B}{U/B}
+type=Creature
+subtype=Elemental Incarnation
+power=5
+toughness=5
+text=When this creature enters, choose: return target nonland permanent to hand; or target opponent discards a card. Evoke {U/B}{U/B}.
+[/card]
+
+[card]
+name=Deepway Navigator
+abilities=flash
+auto=@movedTo(this|mybattlefield):untap all(creature[merfolk][-this]|mybattlefield)
+mana={W}{U}
+type=Creature
+subtype=Merfolk Wizard
+power=2
+toughness=2
+text=Flash -- When this creature enters, untap each other Merfolk you control.
+[/card]
+
+[card]
+name=Doran, Besieged by Time
+mana={1}{W}{B}{G}
+type=Creature
+subtype=Treefolk Druid
+power=0
+toughness=5
+text=Each creature spell you cast with toughness greater than its power costs {1} less. Creatures you control get +X/+X when attacking, where X is the difference between toughness and power.
+[/card]
+
+[card]
+name=Eirdu, Carrier of Dawn
+abilities=flying,lifelink,convoke
+mana={3}{W}{W}
+type=Creature
+subtype=Elemental God
+power=5
+toughness=5
+text=Flying, lifelink -- Creature spells you cast have convoke.
+[/card]
+
+[card]
+name=Emptiness
+auto=@movedTo(this|mybattlefield):choice name(reanimate) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) name(wither) counter(-1/-1,3) target(creature|opponentbattlefield)
+abilities=evoke{W/B}{W/B}
+mana={4}{W/B}{W/B}
+type=Creature
+subtype=Elemental Incarnation
+power=3
+toughness=5
+text=When this creature enters, choose: return target creature mana value 3 or less from graveyard to battlefield; or put three -1/-1 counters on a creature. Evoke {W/B}{W/B}.
+[/card]
+
+[card]
+name=Explosive Prodigy
+auto=@movedTo(this|mybattlefield):damage:3 target(creature|opponentbattlefield)
+mana={1}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=1
+toughness=1
+text=When this creature enters, it deals 3 damage to target creature an opponent controls.
+[/card]
+
+[card]
+name=Figure of Fable
+auto=this(variable{hascntlevel}=0) {G/W}:name(Scout) counter(0/0,1,Level) asSorcery
+auto=this(variable{hascntlevel}=1) {1}{G/W}{G/W}:name(Soldier) counter(0/0,1,Level) asSorcery
+auto=this(variable{hascntlevel}=2) {3}{G/W}{G/W}{G/W}:name(Avatar) counter(0/0,1,Level) asSorcery
+auto=restriction{compare(hascntlevel)~equalto~0}:+1/+1
+auto=restriction{compare(hascntlevel)~equalto~1}:+3/+4
+auto=restriction{compare(hascntlevel)~equalto~2}:+6/+7
+auto=counter(0/0,1,Level)
+mana={G/W}
+type=Creature
+subtype=Kithkin
+power=1
+toughness=1
+text={G/W}: Becomes a 2/3 Kithkin Scout. -- {1}{G/W}{G/W}: Becomes a 4/5 Kithkin Soldier. -- {3}{G/W}{G/W}{G/W}: Becomes a 7/8 Kithkin Avatar.
+[/card]
+
+[card]
+name=Flitterwing Nuisance
+abilities=flying
+auto=@movedTo(this|mybattlefield):counter(-1/-1,1)
+mana={U}
+type=Creature
+subtype=Faerie Rogue
+power=2
+toughness=2
+text=Flying -- This creature enters with a -1/-1 counter on it.
+[/card]
+
+[card]
+name=Glister Bairn
+auto=@each my combat:target(creature[-this]|mybattlefield) effect(+3/+3) ueot
+mana={2}{G/U}{G/U}{G/U}
+type=Creature
+subtype=Ouphe
+power=1
+toughness=4
+text=At the beginning of combat on your turn, another target creature you control gets +3/+3 until end of turn.
+[/card]
+
+[card]
+name=Gloom Ripper
+auto=@movedTo(this|mybattlefield):target(creature|mybattlefield) effect(+4/+0) ueot && target(creature|opponentbattlefield) effect(-0/-4) ueot
+mana={3}{B}{B}
+type=Creature
+subtype=Elf Assassin
+power=4
+toughness=4
+text=When this creature enters, target creature you control gets +4/+0 until end of turn and target creature an opponent controls gets -4/-0 until end of turn.
+[/card]
+
+[card]
+name=Goliath Daydreamer
+auto=@attacking(this):moveto(myCastingzone) target(*|myexile)
+mana={2}{R}{R}
+type=Creature
+subtype=Giant Wizard
+power=4
+toughness=4
+text=When this creature attacks, you may cast a spell from among cards you own in exile without paying its mana cost.
+[/card]
+
+[card]
+name=Gravelgill Scoundrel
+abilities=vigilance
+mana={1}{U}
+type=Creature
+subtype=Merfolk Rogue
+power=1
+toughness=3
+text=Vigilance -- Whenever this creature attacks, you may tap another creature you control. If you do, this creature is unblockable this turn.
+[/card]
+
+[card]
+name=Grub, Storied Matriarch
+abilities=menace
+auto=@movedTo(this|mybattlefield):moveto(myhand) target(creature[goblin]|mygraveyard)
+mana={2}{B}
+type=Creature
+subtype=Goblin Warlock
+power=2
+toughness=1
+text=Menace -- When this creature enters, return up to one target Goblin card from your graveyard to your hand.
+[/card]
+
+[card]
+name=Kirol, Attentive First-Year
+mana={1}{R/W}{R/W}
+type=Creature
+subtype=Vampire Cleric
+power=3
+toughness=3
+text=Tap two untapped creatures you control: Copy target triggered ability you control. Activate only once each turn.
+[/card]
+
+[card]
+name=Kithkeeper
+auto=@movedTo(this|mybattlefield):token(Kithkin,creature kithkin,1/1,green white) && token(Kithkin,creature kithkin,1/1,green white) && token(Kithkin,creature kithkin,1/1,green white)
+auto={T}{T}{T}:this effect(+3/+0,flying) ueot
+mana={6}{W}
+type=Creature
+subtype=Elemental
+power=3
+toughness=3
+text=When this creature enters, create three 1/1 green and white Kithkin creature tokens. -- Tap three creatures: This creature gets +3/+0 and gains flying until end of turn.
+[/card]
+
+[card]
+name=Luminollusk
+abilities=deathtouch
+auto=@movedTo(this|mybattlefield):life:3 controller
+mana={3}{G}
+type=Creature
+subtype=Elemental
+power=2
+toughness=4
+text=Deathtouch -- When this creature enters, you gain 3 life.
+[/card]
+
+[card]
+name=Maralen, Fae Ascendant
+abilities=flying
+auto=@movedTo(creature|mybattlefield):mill:2 target(player|opponentbattlefield)
+mana={2}{B}{G}{U}
+type=Creature
+subtype=Elf Faerie Noble
+power=4
+toughness=5
+text=Flying -- Whenever an Elf or Faerie you control enters, mill two cards of target opponent.
+[/card]
+
+[card]
+name=Mutable Explorer
+abilities=changeling
+mana={2}{G}
+type=Creature
+subtype=Shapeshifter
+power=1
+toughness=1
+text=Changeling (This card is every creature type.)
+[/card]
+
+[card]
+name=Omni-Changeling
+abilities=changeling,convoke
+mana={3}{U}{U}
+type=Creature
+subtype=Shapeshifter
+power=0
+toughness=0
+text=Changeling -- Convoke.
+[/card]
+
+[card]
+name=Prismabasher
+abilities=trample
+auto=@movedTo(this|mybattlefield):all(creature|mybattlefield) effect(+3/+3) ueot
+mana={4}{G}{G}
+type=Creature
+subtype=Elemental
+power=6
+toughness=6
+text=Trample -- When this creature enters, creatures you control get +3/+3 until end of turn.
+[/card]
+
+[card]
+name=Sanar, Innovative First-Year
+auto=@each my mainphase:draw:1
+mana={2}{U/R}{U/R}
+type=Creature
+subtype=Goblin Sorcerer
+power=2
+toughness=4
+text=At the beginning of your first main phase, draw a card.
+[/card]
+
+[card]
+name=Shimmercreep
+abilities=menace
+auto=@movedTo(this|mybattlefield):life:-3 target(player|opponentbattlefield) && life:3 controller
+mana={4}{B}
+type=Creature
+subtype=Elemental
+power=3
+toughness=5
+text=Menace -- When this creature enters, each opponent loses 3 life and you gain 3 life.
+[/card]
+
+[card]
+name=Shinestriker
+abilities=flying
+auto=@movedTo(this|mybattlefield):draw:3
+mana={4}{U}{U}
+type=Creature
+subtype=Elemental
+power=3
+toughness=3
+text=Flying -- When this creature enters, draw three cards.
+[/card]
+
+[card]
+name=Squawkroaster
+abilities=double strike
+mana={3}{R}
+type=Creature
+subtype=Elemental
+power=4
+toughness=4
+text=Double strike.
+[/card]
+
+[card]
+name=Sygg, Wanderwine Wisdom
+mana={1}{U}
+type=Creature
+subtype=Merfolk Wizard
+power=2
+toughness=2
+text=Sygg cannot be blocked. -- When this creature enters, target creature you control gains "Whenever this creature deals combat damage to a player, draw a card" until end of turn.
+[/card]
+
+[card]
+name=Taster of Wares
+auto=@movedTo(this|mybattlefield):target(player|opponentbattlefield) discard:1
+mana={2}{B}
+type=Creature
+subtype=Goblin Warlock
+power=3
+toughness=2
+text=When this creature enters, target opponent discards a card.
+[/card]
+
+[card]
+name=Trystan, Callous Cultivator
+abilities=deathtouch
+auto=@movedTo(this|mybattlefield):mill:3 && life:2 controller
+mana={2}{G}
+type=Creature
+subtype=Elf Druid
+power=3
+toughness=4
+text=Deathtouch -- When this creature enters, mill three cards and gain 2 life.
+[/card]
+
+[card]
+name=Twinflame Travelers
+abilities=flying
+mana={2}{U}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=3
+toughness=3
+text=Flying -- If a triggered ability of another Elemental you control triggers, it triggers an additional time.
+[/card]
+
+[card]
+name=Barbed Bloodletter
+abilities=flash
+auto=equipped(this):+1/+2
+auto={2}:equip target(creature|mybattlefield)
+mana={1}{B}
+type=Artifact
+subtype=Equipment
+text=Flash -- Equipped creature gets +1/+2. Equip {2}.
+[/card]
+
+[card]
+name=Bark of Doran
+auto=equipped(this):+0/+1
+auto={1}:equip target(creature|mybattlefield)
+mana={1}{W}
+type=Artifact
+subtype=Equipment
+text=Equipped creature gets +0/+1. Equip {1}.
+[/card]
+
+[card]
+name=Chronicle of Victory
+mana={6}
+type=Artifact
+text=As this enters, choose a creature type. Creatures you control of the chosen type get +2/+2 and have first strike and trample. Whenever you cast a spell of the chosen type, draw a card.
+[/card]
+
+[card]
+name=Dawn-Blessed Pennant
+auto=@movedTo(*|mybattlefield):life:1 controller
+auto={2}{T}:moveto(myhand) target(*|mygraveyard)
+mana={1}
+type=Artifact
+text=Whenever a permanent you control enters, you gain 1 life. -- {2}, {T}, Sacrifice this: Return target card from your graveyard to your hand.
+[/card]
+
+[card]
+name=Foraging Wickermaw
+auto=@movedTo(this|mybattlefield):_SCRY1_
+auto={1}:Add{W}
+auto={1}:Add{U}
+auto={1}:Add{B}
+auto={1}:Add{R}
+auto={1}:Add{G}
+mana={2}
+type=Artifact Creature
+subtype=Scarecrow
+power=1
+toughness=3
+text=When this creature enters, surveil 1. -- {1}: Add one mana of any color.
+[/card]
+
+[card]
+name=Gathering Stone
+auto=@each my upkeep:_SCRY1_
+mana={4}
+type=Artifact
+text=Spells you cast of the chosen type cost {1} less. At the beginning of your upkeep, surveil 1.
+[/card]
+
+[card]
+name=Mirrormind Crown
+auto=equipped(this):+0/+0
+auto={2}:equip target(creature|mybattlefield)
+mana={4}
+type=Artifact
+subtype=Equipment
+text=The first time you create tokens each turn, you may instead create that many tokens that are copies of equipped creature. Equip {2}.
+[/card]
+
+[card]
+name=Puca's Eye
+auto=@movedTo(this|mybattlefield):draw:1
+auto={3}{T}:draw:1
+mana={2}
+type=Artifact
+text=When this artifact enters, draw a card. -- {3}, {T}: Draw a card.
+[/card]
+
+[card]
+name=Rimefire Torque
+auto=@movedTo(*|mybattlefield):counter(charge,1)
+auto={T}{C(charge,-3)}:copy target(spell|stack)
+mana={1}{U}
+type=Artifact
+text=Whenever a permanent you control enters, put a charge counter on this. -- {T}, Remove three charge counters: Copy target instant or sorcery spell.
+[/card]
+
+[card]
+name=Stalactite Dagger
+auto=@movedTo(this|mybattlefield):token(Shapeshifter,creature shapeshifter,1/1,colorless)
+auto=equipped(this):+1/+1
+auto={2}:equip target(creature|mybattlefield)
+mana={2}
+type=Artifact
+subtype=Equipment
+text=When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling. -- Equipped creature gets +1/+1. Equip {2}.
+[/card]
+
+[card]
+name=Assert Perfection
+auto=target(creature|mybattlefield) effect(+1/+0) ueot
+mana={1}{G}
+type=Sorcery
+text=Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls.
+[/card]
+
+[card]
+name=Auntie's Sentence
+auto=choice name(discard) target(player|opponentbattlefield) discard:1 name(weaken) target(creature|opponentbattlefield) effect(-2/-2) ueot
+mana={1}{B}
+type=Sorcery
+text=Choose one: target opponent discards a card; or target creature gets -2/-2 until end of turn.
+[/card]
+
+[card]
+name=Bloodline Bidding
+abilities=convoke
+auto=moveto(mybattlefield) target(creature|mygraveyard) && moveto(mybattlefield) target(creature|mygraveyard)
+mana={6}{B}{B}
+type=Sorcery
+text=Convoke -- Return up to two creature cards from your graveyard to the battlefield.
+[/card]
+
+[card]
+name=Bogslither's Embrace
+auto=moveto(exile) target(creature|opponentbattlefield)
+mana={1}{B}
+type=Sorcery
+text=As an additional cost to cast this spell, blight 1 or pay {3}. Exile target creature.
+[/card]
+
+[card]
+name=Boulder Dash
+auto=damage:2 target(any) && damage:1 target(any)
+mana={1}{R}
+type=Sorcery
+text=Boulder Dash deals 2 damage to any target and 1 damage to any other target.
+[/card]
+
+[card]
+name=Burning Curiosity
+auto=choice name(blight 1) counter(-1/-1,1) && draw:1 && draw:1 && draw:1 name(skip) draw:1 && draw:1
+mana={2}{R}
+type=Sorcery
+text=As an additional cost, you may blight 1. Exile the top two cards of your library (three if you blighted). You may play those cards until your next turn ends.
+[/card]
+
+[card]
+name=Celestial Reunion
+auto=moveto(myhand) target(creature|mylibrary)
+mana={X}{G}
+type=Sorcery
+text=Search your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle.
+[/card]
+
+[card]
+name=Cinder Strike
+auto=choice name(blight 1) counter(-1/-1,1) && damage:4 target(creature|any) name(skip) damage:2 target(creature|any)
+mana={R}
+type=Sorcery
+text=As an additional cost, you may blight 1. Cinder Strike deals 2 damage to target creature (4 damage instead if you blighted).
+[/card]
+
+[card]
+name=Darkness Descends
+auto=all(*|mybattlefield) counter(-1/-1,2) && all(*|opponentbattlefield) counter(-1/-1,2)
+mana={2}{B}{B}
+type=Sorcery
+text=Put two -1/-1 counters on each creature.
+[/card]
+
+[card]
+name=Dream Harvest
+auto=draw:3 && target(player|opponentbattlefield) discard:3
+mana={5}{U/B}{U/B}
+type=Sorcery
+text=Draw three cards. Each opponent discards three cards.
+[/card]
+
+[card]
+name=Impolite Entrance
+auto=target(creature|mybattlefield) effect(+0/+0,trample,haste) ueot && draw:1
+mana={R}
+type=Sorcery
+text=Target creature gains trample and haste until end of turn. Draw a card.
+[/card]
+
+[card]
+name=Morningtide's Light
+auto=moveto(exile) target(creature|opponentbattlefield) && moveto(opponentbattlefield) target(creature|myexile)
+mana={3}{W}
+type=Sorcery
+text=Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped.
+[/card]
+
+[card]
+name=Perfect Intimidation
+auto=choice name(exile) moveto(exile) target(*[-land]|opponenthand) && moveto(exile) target(*[-land]|opponenthand) name(counters) target(creature|opponentbattlefield) effect(-10/-0) ueot
+mana={3}{B}
+type=Sorcery
+text=Choose one: target opponent exiles two cards from their hand; or remove all counters from target creature.
+[/card]
+
+[card]
+name=Soul Immolation
+auto=counter(-1/-1,3) && damage:3 target(player|opponentbattlefield) && all(creature|opponentbattlefield) damage:3
+mana={3}{R}{R}
+type=Sorcery
+text=As an additional cost, blight X. Soul Immolation deals X damage to each opponent and each creature they control.
+[/card]
+
+[card]
+name=Spry and Mighty
+auto=draw:3 && all(creature|mybattlefield) effect(+3/+3,trample) ueot
+mana={4}{G}
+type=Sorcery
+text=Draw three cards. Creatures you control get +3/+3 and gain trample until end of turn.
+[/card]
+
+[card]
+name=Tend the Sprigs
+auto=moveto(mybattlefield) target(land[basic]|mylibrary) && token(Treefolk,creature treefolk,3/4,reach green)
+mana={2}{G}
+type=Sorcery
+text=Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then create a 3/4 green Treefolk creature token with reach.
+[/card]
+
+[card]
+name=Winnowing
+abilities=convoke
+auto=all(creature|opponentbattlefield) moveto(mygraveyard)
+mana={4}{W}{W}
+type=Sorcery
+text=Convoke -- Each opponent sacrifices all but one creature they control.
+[/card]
+
+[card]
+name=Ashling's Command
+auto=choice name(copy) copy target(creature[elemental]|mybattlefield) name(draw) draw:2 name(damage) all(creature|opponentbattlefield) damage:2 name(treasure) _TREASURE_ && _TREASURE_
+mana={3}{U}{R}
+type=Instant
+text=Choose two: copy target Elemental you control; or draw two cards; or deal 2 damage to each creature an opponent controls; or create two Treasure tokens.
+[/card]
+
+[card]
+name=Brigid's Command
+auto=choice name(copy) copy target(creature[kithkin]|mybattlefield) name(buff) target(creature|mybattlefield) effect(+3/+3) ueot name(kithkin) token(Kithkin,creature kithkin,1/1,green white) name(fight) target(creature|mybattlefield) fight target(creature|opponentbattlefield)
+mana={1}{G}{W}
+type=Sorcery
+text=Choose two: copy target Kithkin you control; or target creature gets +3/+3 until end of turn; or create a 1/1 Kithkin token; or target creature you control fights target creature an opponent controls.
+[/card]
+
+[card]
+name=Clachan Festival
+auto=@movedTo(this|mybattlefield):token(Kithkin,creature kithkin,1/1,green white) && token(Kithkin,creature kithkin,1/1,green white)
+auto={4}{W}:token(Kithkin,creature kithkin,1/1,green white)
+mana={2}{W}
+type=Enchantment
+text=When this enchantment enters, create two 1/1 green and white Kithkin creature tokens. -- {4}{W}: Create a 1/1 green and white Kithkin creature token.
+[/card]
+
+[card]
+name=Firdoch Core
+abilities=changeling
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+mana={3}
+type=Artifact
+text=Changeling (This card is every creature type.) -- {T}: Add one mana of any color.
+[/card]
+
+[card]
+name=Grub's Command
+auto=choice name(copy) copy target(creature[goblin]|mybattlefield) name(destroy) moveto(mygraveyard) target(*[creature;artifact]|opponentbattlefield) name(buff) all(creature|mybattlefield) effect(+1/+1,haste) ueot name(mill) mill:5 target(player|opponentbattlefield)
+mana={3}{B}{R}
+type=Sorcery
+text=Choose two: copy target Goblin you control; or destroy target artifact or creature; or creatures get +1/+1 and haste until end of turn; or target player mills five cards.
+[/card]
+
+[card]
+name=Kindle the Inner Flame
+auto=copy target(creature|mybattlefield)
+mana={3}{R}
+type=Sorcery
+text=Create a token that is a copy of target creature you control, except it has haste and is sacrificed at the beginning of the end step.
+[/card]
+
+[card]
+name=Morcant's Eyes
+auto=@each my upkeep:_SCRY1_
+auto={4}{G}{G}:token(Elf,creature elf,2/2,black green) && token(Elf,creature elf,2/2,black green) && token(Elf,creature elf,2/2,black green) asSorcery
+mana={1}{G}
+type=Enchantment
+text=At the beginning of your upkeep, surveil 1. -- {4}{G}{G}, Sacrifice this: Create three 2/2 black and green Elf creature tokens.
+[/card]
+
+[card]
+name=Sygg's Command
+auto=choice name(copy) copy target(creature[merfolk]|mybattlefield) name(lifelink) all(creature|mybattlefield) effect(+0/+0,lifelink) ueot name(draw) draw:1 name(tap) tap target(creature|opponentbattlefield)
+mana={1}{W}{U}
+type=Sorcery
+text=Choose two: copy target Merfolk you control; or creatures you control gain lifelink until end of turn; or draw a card; or tap target creature.
+[/card]
+
+[card]
+name=Trystan's Command
+auto=choice name(copy) copy target(creature[elf]|mybattlefield) name(reanimate) moveto(mybattlefield) target(*|mygraveyard) name(destroy) moveto(mygraveyard) target(*[creature;enchantment]|opponentbattlefield) name(buff) all(creature|mybattlefield) effect(+3/+3) ueot
+mana={4}{B}{G}
+type=Sorcery
+text=Choose two: copy target Elf you control; or return a permanent card from your graveyard to the battlefield; or destroy target creature or enchantment; or creatures you control get +3/+3 until end of turn.
+[/card]
+
+[card]
+name=Wanderwine Farewell
+abilities=convoke
+auto=moveto(myhand) target(*[-land]|opponentbattlefield) && moveto(myhand) target(*[-land]|opponentbattlefield) && token(Merfolk,creature merfolk,1/1,white blue) && token(Merfolk,creature merfolk,1/1,white blue)
+mana={5}{U}{U}
+type=Sorcery
+text=Convoke -- Return up to two target nonland permanents to their owners' hands. Then create a 1/1 white and blue Merfolk creature token for each permanent returned.
+[/card]
+
+[card]
+name=Collective Inferno
+abilities=convoke
+mana={3}{R}{R}
+type=Enchantment
+text=Convoke -- As this enchantment enters, choose a creature type. Double all damage that sources you control of the chosen type would deal.
+[/card]
+
+[card]
+name=Prismatic Undercurrents
+auto=@movedTo(this|mybattlefield):moveto(myhand) target(land[basic]|mylibrary) && moveto(myhand) target(land[basic]|mylibrary) && moveto(myhand) target(land[basic]|mylibrary)
+mana={3}{G}
+type=Enchantment
+text=When this enchantment enters, search your library for up to three basic land cards and put them into your hand, then shuffle. You may play an additional land on each of your turns.
+[/card]
+
+[card]
+name=Raiding Schemes
+mana={3}{R}{G}
+type=Enchantment
+text=Each noncreature spell you cast has conspire.
+[/card]
+
+[card]
+name=Shimmerwilds Growth
+mana={1}{G}
+type=Enchantment
+subtype=Aura
+text=Enchant land. Whenever enchanted land is tapped for mana, its controller adds an additional one mana of the chosen color.
+[/card]
+
+[card]
+name=End-Blaze Epiphany
+auto=damage:* target(creature|any) && draw:1
+mana={X}{R}
+type=Instant
+text=End-Blaze Epiphany deals X damage to target creature. Draw a card.
+[/card]
+
+[card]
+name=Harmonized Crescendo
+abilities=convoke
+auto=draw:3
+mana={4}{U}{U}
+type=Instant
+text=Convoke -- Draw cards equal to the number of permanents you control of the chosen type.
+[/card]
+
+[card]
+name=Mirrorform
+auto=copy target(*[-land]|opponentbattlefield)
+mana={4}{U}{U}
+type=Instant
+text=Each nonland permanent you control becomes a copy of target non-Aura permanent.
+[/card]
+
+[card]
+name=Rime Chill
+auto=tap target(creature|opponentbattlefield) && tap target(creature|opponentbattlefield) && draw:1
+mana={6}{U}
+type=Instant
+text=Tap up to two target creatures. Draw a card.
+[/card]
+
+[card]
+name=Swat Away
+auto=moveto(mylibrary) target(*[-land]|opponentbattlefield)
+mana={2}{U}{U}
+type=Instant
+text=The owner of target permanent puts it on top of their library.
+[/card]
+
+[card]
+name=Eclipsed Realms
+auto={T}:Add{C}
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+mana=
+type=Land
+text=As this land enters, choose a creature type. {T}: Add {C}. {T}: Add one mana of any color.
+[/card]
+
+
+[card]
+name=Goatnap
+auto=gain control target(creature|opponentbattlefield) ueot && untap target(creature|opponentbattlefield) && target(creature|opponentbattlefield) effect(+0/+0,haste) ueot
+mana={2}{R}
+type=Sorcery
+text=Gain control of target creature until end of turn. Untap it. It gains haste until end of turn.
+[/card]
+
+[card]
+name=Graveshifter
+abilities=changeling
+auto=@movedTo(this|mybattlefield):moveto(myhand) target(creature|mygraveyard)
+mana={3}{B}
+type=Creature
+subtype=Shapeshifter
+power=2
+toughness=2
+text=Changeling -- When this creature enters, you may return target creature card from your graveyard to your hand.
+[/card]
+
+[card]
+name=Run Away Together
+auto=moveto(myhand) target(creature|opponentbattlefield) && moveto(opponenthand) target(creature|mybattlefield)
+mana={1}{U}
+type=Instant
+text=Choose two target creatures controlled by different players. Return those creatures to their owners' hands.
+[/card]
+
+[card]
+name=Temporal Cleansing
+abilities=convoke
+auto=moveto(mylibrary) target(*[-land]|opponentbattlefield)
+mana={3}{U}
+type=Sorcery
+text=Convoke -- The owner of target nonland permanent puts it on top of their library.
+[/card]
+

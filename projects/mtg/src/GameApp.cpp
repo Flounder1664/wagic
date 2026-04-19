@@ -75,6 +75,7 @@ GameApp::GameApp() :
     players[0] = PLAYER_TYPE_CPU;
     players[1] = PLAYER_TYPE_CPU;
     gameType = GAME_TYPE_CLASSIC;
+    quickGame = false;
 
     mCurrentState = NULL;
     mNextState = NULL;

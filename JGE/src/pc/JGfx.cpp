@@ -34,12 +34,22 @@ extern "C" {
 #include "../../include/JResourceManager.h"
 #include "../../include/JFileSystem.h"
 #include "../../include/JAssert.h"
+#include <set>
+#include <mutex>
 
 #if (defined WIN32) && (!defined QT_CONFIG)
 #ifndef __attribute__
 #define __attribute__((a))
 #endif
 #endif
+
+// Live-texture registry: tracks every JTexture that is currently alive.
+// BindTexture checks this before dereferencing tex to avoid MTE-tagged
+// dangling pointers left behind after texture eviction.
+namespace {
+    std::mutex sTextureMutex;
+    std::set<void*> sLiveTextures;
+}
 
 #ifdef _DEBUG
 #define checkGlError()            \
@@ -346,10 +356,19 @@ void JQuad::SetHotSpot(float x, float y)
 JTexture::JTexture() : mWidth(0), mHeight(0), mBuffer(NULL)
 {
     mTexId = -1;
+    std::lock_guard<std::mutex> lock(sTextureMutex);
+    sLiveTextures.insert(this);
 }
 
 JTexture::~JTexture()
 {
+    // Unregister FIRST, before freeing GL resource, so any concurrent render
+    // thread check in BindTexture sees this texture as dead.
+    {
+        std::lock_guard<std::mutex> lock(sTextureMutex);
+        sLiveTextures.erase(this);
+    }
+
     checkGlError();
     if (mTexId != (GLuint)-1)
         glDeleteTextures(1, &mTexId);
@@ -843,7 +862,15 @@ void JRenderer::EndScene()
 void JRenderer::BindTexture(JTexture *tex)
 {
     checkGlError();
-    if (tex && mCurrentTex != tex->mTexId)
+    if (!tex) return;
+    // Guard against MTE-tagged dangling pointers: verify the texture is still
+    // alive in the registry before touching any of its fields.
+    {
+        std::lock_guard<std::mutex> lock(sTextureMutex);
+        if (sLiveTextures.find(tex) == sLiveTextures.end())
+            return;  // texture was freed; skip this draw call safely
+    }
+    if (mCurrentTex != tex->mTexId)
     {
         mCurrentTex = tex->mTexId;
 
@@ -888,6 +915,9 @@ void Swap(float *a, float *b)
 void JRenderer::RenderQuad(JQuad* quad, float xo, float yo, float angle, float xScale, float yScale)
 {
     checkGlError();
+
+    if (quad == NULL || quad->mTex == NULL)
+        return;
 
     //yo = SCREEN_HEIGHT-yo-1;//-(quad->mHeight);
     float width = quad->mWidth;
@@ -1071,6 +1101,9 @@ void JRenderer::RenderQuad(JQuad* quad, float xo, float yo, float angle, float x
 void JRenderer::RenderQuad(JQuad* quad, VertexColor* pt)
 {
     checkGlError();
+
+    if (quad == NULL || quad->mTex == NULL)
+        return;
 
     for (int i=0;i<4;i++)
     {

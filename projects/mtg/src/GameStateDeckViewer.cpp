@@ -2071,17 +2071,15 @@ void GameStateDeckViewer::OnScroll(int inXVelocity, int inYVelocity)
     {
         if(abs(inXVelocity) > 300)
         {
-            //FIXME: this 500 is a bit arbitrary
-            int numCards = (magnitude / 500) % 8;
+            int numCards = magnitude / 300;
             mView->changePositionAnimated(flickRight ? numCards : - numCards);
         }
     }
     else
     {
-        if(abs(inYVelocity) > 300)
+        if(abs(inYVelocity) > 800)
         {
-            //FIXME: this 500 is a bit arbitrary
-            int numFilters = (magnitude / 500);
+            int numFilters = 1;
             mView->changeFilterAnimated(flickUp ? numFilters : - numFilters);
         }
     }

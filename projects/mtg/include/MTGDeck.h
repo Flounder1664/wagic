@@ -55,6 +55,7 @@ public:
     MTGPack * mPack; //Does it use a specialized booster pack?
     bool bZipped; //Is this set's images present as a zip file?
     bool bThemeZipped; //[...] in the theme?
+    bool autounlock; //If true, unlock this set automatically on first load (for custom/fan sets).
     int counts[MTGSetInfo::MAX_COUNT];
 };
 

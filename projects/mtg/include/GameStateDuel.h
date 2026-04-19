@@ -136,7 +136,7 @@ public:
     void leaveOutAIvsAIMatches();
     void updateScoreforTournament();
     int getHardRandomDeck();
-    int getRandomDeck(bool noEasyDecks, GameType type);
+    int getRandomDeck(bool noEasyDecks, GameType type, bool leastPlayed = false);
     int remainingDecksToNextStage();
 private:
     bool mCompetition;
@@ -285,6 +285,7 @@ public:
         MENUITEM_TASKBOARD = -33,
         MENUITEM_TOGGLE_SELECT_ALL = -34,
         MENUITEM_CONFIRM_SELECT_ALL = -35,
+        MENUITEM_RANDOM_AI_LEAST_PLAYED = -36,
         MENUITEM_MORE_INFO = kInfoMenuID
     };
 

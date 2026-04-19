@@ -222,7 +222,16 @@ void GameStateDuel::Start()
         // only reset "Played Games" and "Victories" info if we didn't come here from within a match
         tournament->Start();
 
-        if (tournament->getOpLevel()< OPLEVEL_NEXT_GAME)
+        if (mParent->quickGame && tournament->getOpLevel() < OPLEVEL_NEXT_GAME)
+        {
+            // Quick Game: restore last match type or default to single game
+            int nbGames = options["quickgame_nbgames"].number;
+            int matchMode = options["quickgame_matchmode"].number;
+            if (nbGames <= 0) { nbGames = 1; matchMode = MATCHMODE_FIXED; }
+            tournament->setMatchType(nbGames, matchMode);
+            setGamePhase(DUEL_STATE_CHOOSE_DECK1);
+        }
+        else if (tournament->getOpLevel()< OPLEVEL_NEXT_GAME)
             setGamePhase(DUEL_STATE_PREPARE_CNOGMENU);
         else
         {
@@ -410,7 +419,10 @@ void GameStateDuel::ConstructOpponentMenu()
                     opponentMenu->Add(MENUITEM_GAUNTLET,"Gauntlet",_("Prove your mettle against each and every opponent, one at a time.").c_str());
                 opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
                 if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+                {
                    opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+                   opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+                }
             }
             else
             {
@@ -423,7 +435,10 @@ void GameStateDuel::ConstructOpponentMenu()
                 else
                 {
                      if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+                     {
                         opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+                        opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+                     }
                      opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
                 }
 
@@ -431,7 +446,10 @@ void GameStateDuel::ConstructOpponentMenu()
         } else if (mParent->gameType == GAME_TYPE_STONEHEWER && mParent->players[1] == PLAYER_TYPE_CPU){
             opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
             if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+            {
                opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+               opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+            }
         }
         if (options[Options::EVILTWIN_MODE_UNLOCKED].number && !tournamentSelection)
             opponentMenu->Add(MENUITEM_EVIL_TWIN, "Evil Twin", _("Can you defeat yourself?").c_str());
@@ -1382,6 +1400,9 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
                 return;
           }
         }
+        // Remember last match type for Quick Game
+        options["quickgame_nbgames"].number = tournament->getGamesToPlay();
+        options["quickgame_matchmode"].number = tournament->getMatchMode();
         cnogmenu->Close();
         setGamePhase(DUEL_STATE_CNOGMENU_IS_CLOSING);
         break;
@@ -1443,6 +1464,23 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
         case MENUITEM_RANDOM_AI_HARD:
             {
                 int deck = tournament->getRandomDeck(true, mParent->gameType);
+                if (deck>0)
+                {
+                    game->loadPlayer(1, mParent->players[1], deck, premadeDeck);
+                    tournament->addDeck(1,game->players.at(1)->deckId,mParent->players[1]);
+                }
+            }
+            setAISpeed();
+            if (opponentMenu) opponentMenu->Close();
+            if (tournamentSelection)
+                setGamePhase(DUEL_STATE_CHOOSE_DECK2_TO_2);
+            else
+                setGamePhase(DUEL_STATE_CHOOSE_DECK2_TO_PLAY);
+
+            break;
+        case MENUITEM_RANDOM_AI_LEAST_PLAYED:
+            {
+                int deck = tournament->getRandomDeck(false, mParent->gameType, true);
                 if (deck>0)
                 {
                     game->loadPlayer(1, mParent->players[1], deck, premadeDeck);
@@ -1700,6 +1738,24 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
             }
             else
 #endif //NETWORK_SUPPORT
+            if (mParent->quickGame)
+            {
+                // Quick Game: auto-select least-played opponent
+                int deck = tournament->getRandomDeck(false, mParent->gameType, true);
+                if (deck > 0)
+                {
+                    game->loadPlayer(1, mParent->players[1], deck);
+                    tournament->addDeck(1, game->players.at(1)->deckId, mParent->players[1]);
+                    setAISpeed();
+                    setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_PLAY);
+                }
+                else
+                {
+                    // No AI decks available: fall back to manual opponent selection
+                    setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_2);
+                }
+            }
+            else
             {
                 setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_2);
             }
@@ -1987,7 +2043,7 @@ void Tournament::initTournamentResults()
 
 
 
-int Tournament::getRandomDeck(bool noEasyDecks, GameType type)
+int Tournament::getRandomDeck(bool noEasyDecks, GameType type, bool leastPlayed)
 {
     DeckManager *deckManager = DeckManager::GetInstance();
     vector<DeckMetaData *> *deckList =  deckManager->getAIDeckOrderList();
@@ -2011,6 +2067,20 @@ int Tournament::getRandomDeck(bool noEasyDecks, GameType type)
                 decks.push_back(i);
             }
         }
+    }
+
+    // Least-played filter: keep only decks with the fewest games played
+    if (leastPlayed && decks.size() > 0)
+    {
+        int minPlayed = deckList->at(decks[0])->getGamesPlayed();
+        for (unsigned int i = 1; i < decks.size(); i++)
+            if (deckList->at(decks[i])->getGamesPlayed() < minPlayed)
+                minPlayed = deckList->at(decks[i])->getGamesPlayed();
+        vector<unsigned int> filtered;
+        for (unsigned int i = 0; i < decks.size(); i++)
+            if (deckList->at(decks[i])->getGamesPlayed() == minPlayed)
+                filtered.push_back(decks[i]);
+        decks = filtered;
     }
     while(isDouble && decks.size()>0)
     {

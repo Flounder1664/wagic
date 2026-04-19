@@ -241,3 +241,31 @@ build/
 
 # Backup files
 *~.nib
+
+#############
+## This fork
+#############
+
+# Android build artifacts
+*.apk
+*.ap_
+*.ap_.d
+projects/mtg/Android/bin/apk_work/
+projects/mtg/Android/obj/
+projects/mtg/Android/gen/
+
+# User / collection data (machine-specific)
+collection*.dat
+maxglee_*.dat
+
+# Large set binaries not tracked in git
+ECL.zip
+10E_sample.zip
+
+# Debug session artefacts
+crash_logcat.txt
+crash_site.txt
+alt_render_disasm.txt
+
+# Claude Code session files
+.claude/

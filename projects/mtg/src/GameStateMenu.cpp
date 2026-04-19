@@ -604,6 +604,28 @@ void GameStateMenu::Update(float dt)
 
             //Reload list of unlocked sets, now that we know about the sets.
             options.reloadProfile();
+
+            //Auto-unlock any set marked autounlock=true in its [meta] block (e.g. custom/fan sets).
+            {
+                bool anyNewUnlock = false;
+                for (int i = 0; i < setlist.size(); i++)
+                {
+                    MTGSetInfo* si = setlist.getInfo(i);
+                    if (si && si->autounlock && options[Options::optionSet(i)].number == 0)
+                    {
+                        GameOptionAward* goa = dynamic_cast<GameOptionAward*>(&options[Options::optionSet(i)]);
+                        if (goa)
+                        {
+                            goa->giveAward();
+                            anyNewUnlock = true;
+                            DebugTrace("Auto-unlocked set: " << setlist[i]);
+                        }
+                    }
+                }
+                if (anyNewUnlock)
+                    options.save();
+            }
+
             genNbCardsStr();
             //All major things have been loaded, resize the cache to use it as efficiently as possible
             WResourceManager::Instance()->ResetCacheLimits();
@@ -695,7 +717,7 @@ void GameStateMenu::Update(float dt)
                         bool unlocked = rules->unlockOption == INVALID_OPTION 
                             ? (rules->mUnlockOptionString.size() == 0 ||  options[rules->mUnlockOptionString].number !=0)
                             :  options[rules->unlockOption].number != 0;
-                        if (!rules->hidden && (unlocked))
+                        if (!rules->hidden && (unlocked) && rules->gamemode != GAME_TYPE_STORY)
                         {
                             subMenuController->Add(SUBMENUITEM_END_OFFSET + i, rules->displayName.c_str());
                         }
@@ -910,6 +932,22 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
     default:
         switch (controlId)
         {
+        case MENUITEM_CLASSIC:
+            mParent->players[0] = PLAYER_TYPE_HUMAN;
+            mParent->players[1] = PLAYER_TYPE_CPU;
+            this->hasChosenGameType = true;
+            mParent->quickGame = true;
+            mParent->rules = Rules::getRulesByFilename("classic.txt");
+            if (!mParent->rules) break; // classic.txt missing; game resources are broken
+            mParent->gameType = GAME_TYPE_CLASSIC;
+            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_NONE;
+            break;
+        case MENUITEM_OTHER_MODES:
+            mParent->players[0] = PLAYER_TYPE_HUMAN;
+            mParent->players[1] = PLAYER_TYPE_CPU;
+            mParent->quickGame = false;
+            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_NONE;
+            break;
         case MENUITEM_PLAY:
             subMenuController = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), MENU_FIRST_DUEL_SUBMENU, this, Fonts::MENU_FONT, 150, 60);
             if (subMenuController)
@@ -924,7 +962,6 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
 #ifdef NETWORK_SUPPORT
                 subMenuController->Add(SUBMENUITEM_2PLAYERS, "2 Players");
 #endif //NETWORK_SUPPORT
-                subMenuController->Add(SUBMENUITEM_DEMO, _("Demo").c_str());
                 subMenuController->Add(SUBMENUITEM_CANCEL, _("Cancel").c_str());
 #ifdef TESTSUITE
                 if (Rules::getRulesByFilename("testsuite.txt"))
@@ -982,13 +1019,6 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
             break;
         }
 #endif //NETWORK_SUPPORT
-        case SUBMENUITEM_DEMO:
-            mParent->players[0] = PLAYER_TYPE_CPU;
-            mParent->players[1] = PLAYER_TYPE_CPU;
-            mParent->gameType = GAME_TYPE_DEMO;
-            subMenuController->Close();
-            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_SUBMENU_CLOSING;
-            break;
         case SUBMENUITEM_CANCEL:
         case kInfoMenuID: // Triangle button
             if (subMenuController != NULL)

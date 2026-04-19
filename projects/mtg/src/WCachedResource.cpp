@@ -81,6 +81,14 @@ WCachedTexture::WCachedTexture()
 
 WCachedTexture::~WCachedTexture()
 {
+    // Null out mTex on all tracked JQuads before freeing the texture.
+    // This converts any dangling pointer into a safe null that RenderQuad can check.
+    for (map<string, JQuadPtr>::iterator it = mTrackedQuads.begin(); it != mTrackedQuads.end(); ++it)
+    {
+        if (it->second.get())
+            it->second->mTex = NULL;
+    }
+
     if (texture)
         SAFE_DELETE(texture);
 }
@@ -171,11 +179,23 @@ void WCachedTexture::Refresh()
         SAFE_DELETE(texture);
 
     if (!texture)
+    {
         texture = old;
+    }
     else
+    {
+        // Null out tracked JQuads BEFORE freeing the old texture.
+        // This prevents any window where mTex points to freed memory.
+        for (map<string, JQuadPtr>::iterator it = mTrackedQuads.begin(); it != mTrackedQuads.end(); ++it)
+        {
+            if (it->second.get())
+                it->second->mTex = NULL;
+        }
         SAFE_DELETE(old);
+    }
 
-    JRenderer::GetInstance()->TransferTextureToGLContext(*texture);
+    if (texture)
+        JRenderer::GetInstance()->TransferTextureToGLContext(*texture);
 
     for (map<string, JQuadPtr>::iterator it = mTrackedQuads.begin(); it != mTrackedQuads.end(); ++it)
     {

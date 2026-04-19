@@ -3993,3 +3993,26 @@ mana={2}{R}{R}
 type=Legendary Planeswalker
 subtype=Zariel
 [/card]
+[card]
+name=Ajani, Outland Chaperone
+auto=loyalty:1 name(plus1) token(Kithkin,creature kithkin,1/1,green white)
+auto=loyalty:-2 name(minus2) damage:4 target(creature|opponentbattlefield)
+auto=loyalty:-8 name(minus8) moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary)
+mana={1}{W}{W}
+type=Planeswalker
+subtype=Ajani
+loyalty=3
+text=[+1]: Create a 1/1 green and white Kithkin creature token. -- [-2]: Ajani deals 4 damage to target tapped creature. -- [-8]: Put up to three creature cards with mana value 3 or less from your library onto the battlefield.
+[/card]
+
+[card]
+name=Oko, Lorwyn Liege
+auto=loyalty:2 name(plus2) target(creature|mybattlefield) effect(+0/+0) ueot
+auto=loyalty:1 name(plus1) target(creature|opponentbattlefield) effect(-2/-0) ueot
+mana={2}{U}
+type=Planeswalker
+subtype=Oko
+loyalty=3
+text=[+2]: Up to one target creature gains all creature types until your next turn. -- [+1]: Target creature gets -2/-0 until your next turn.
+[/card]
+

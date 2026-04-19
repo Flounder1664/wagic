@@ -48,6 +48,7 @@ public:
 
     GameType gameType;
     Rules * rules;
+    bool quickGame;
 #ifdef NETWORK_SUPPORT
     string mServerAddress;
     JNetwork* mpNetwork;
