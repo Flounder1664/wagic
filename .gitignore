@@ -267,5 +267,8 @@ crash_logcat.txt
 crash_site.txt
 alt_render_disasm.txt
 
+# Machine-specific build config (copy from wagic_build_config.example.py and edit)
+wagic_build_config.py
+
 # Claude Code session files
 .claude/

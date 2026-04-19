@@ -4,14 +4,17 @@ with the locally-modified versions.
 """
 import zipfile, os, shutil
 
-CORE_ZIP = 'M:/Claude_projects/wagic/projects/mtg/bin/Res/core.zip'
-CORE_TMP = 'M:/Claude_projects/wagic/projects/mtg/bin/Res/core_tmp.zip'
+_REPO = os.path.dirname(os.path.abspath(__file__))
+_RES  = os.path.join(_REPO, "projects", "mtg", "bin", "Res")
+
+CORE_ZIP = os.path.join(_RES, "core.zip")
+CORE_TMP = os.path.join(_RES, "core_tmp.zip")
 
 REPLACEMENTS = {
     'sets/primitives/mtg.txt':
-        'M:/Claude_projects/wagic/projects/mtg/bin/Res/sets/primitives/mtg.txt',
+        os.path.join(_RES, "sets", "primitives", "mtg.txt"),
     'sets/primitives/planeswalkers.txt':
-        'M:/Claude_projects/wagic/projects/mtg/bin/Res/sets/primitives/planeswalkers.txt',
+        os.path.join(_RES, "sets", "primitives", "planeswalkers.txt"),
 }
 
 print(f'Rebuilding {CORE_ZIP} with updated primitives...')

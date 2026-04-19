@@ -7,16 +7,18 @@ import shutil
 import subprocess
 import zipfile
 import io
+from wagic_build_config import BUILD_TOOLS, DEBUG_KEY, DEBUG_KEY_PASS
 
-APK_IN   = r"M:\Claude_projects\wagic\projects\mtg\Android\bin\Wagic-debug.apk"
-APK_WORK = r"M:\Claude_projects\wagic\projects\mtg\Android\bin\Wagic-debug-patched.apk"
-APK_ALIGNED = r"M:\Claude_projects\wagic\projects\mtg\Android\bin\Wagic-debug-aligned.apk"
-LIBMAIN  = r"M:\Claude_projects\wagic\projects\mtg\Android\libs\arm64-v8a\libmain.so"
+_REPO    = os.path.dirname(os.path.abspath(__file__))
+_ANDROID = os.path.join(_REPO, "projects", "mtg", "Android")
 
-BUILD_TOOLS = r"C:\Android-SDK\build-tools\26.0.3"
-ZIPALIGN    = os.path.join(BUILD_TOOLS, "zipalign.exe")
-APKSIGNER   = os.path.join(BUILD_TOOLS, "apksigner.bat")
-DEBUG_KEY   = r"C:\Users\john\.android\debug.keystore"
+APK_IN      = os.path.join(_ANDROID, "bin", "Wagic-debug.apk")
+APK_WORK    = os.path.join(_ANDROID, "bin", "Wagic-debug-patched.apk")
+APK_ALIGNED = os.path.join(_ANDROID, "bin", "Wagic-debug-aligned.apk")
+LIBMAIN     = os.path.join(_ANDROID, "libs", "arm64-v8a", "libmain.so")
+
+ZIPALIGN  = os.path.join(BUILD_TOOLS, "zipalign.exe")
+APKSIGNER = os.path.join(BUILD_TOOLS, "apksigner.bat")
 
 REPLACE_ENTRY = "lib/arm64-v8a/libmain.so"
 
@@ -56,8 +58,8 @@ print("Signing with debug key...")
 r = subprocess.run([
     APKSIGNER, "sign",
     "--ks", DEBUG_KEY,
-    "--ks-pass", "pass:android",
-    "--key-pass", "pass:android",
+    "--ks-pass", f"pass:{DEBUG_KEY_PASS}",
+    "--key-pass", f"pass:{DEBUG_KEY_PASS}",
     "--out", APK_IN,
     APK_ALIGNED
 ], capture_output=True, text=True)
