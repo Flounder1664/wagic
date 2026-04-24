@@ -73,7 +73,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>src/zipFS;Dependencies/SDL/include;Dependencies/include;$(JGEEXTRAS);../Boost;../projects/mtg/include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;NDEBUG;_LIB;PTRDIFF_MAX=0x7fffffff;INTMAX_MAX=0x7fffffffffffffffLL;BOOST_NO_RVALUE_REFERENCES;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -86,7 +86,9 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
+      <AdditionalOptions>/FS /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -101,7 +103,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>src/zipFS;Dependencies/SDL/include;Dependencies/include;$(JGEEXTRAS);../Boost;../projects/mtg/include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;_DEBUG;_LIB;PTRDIFF_MAX=0x7fffffff;INTMAX_MAX=0x7fffffffffffffffLL;BOOST_NO_RVALUE_REFERENCES;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -114,7 +116,9 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -129,7 +133,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>src/zipFS;Dependencies/SDL/include;Dependencies/include;$(JGEEXTRAS);../Boost;../projects/mtg/include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;NDEBUG;_LIB;_SECURE_SCL=0;_HAS_ITERATOR_DEBBUGING=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TIXML_USE_STL; SDL_CONFIG;WIN32;NDEBUG;_LIB;_SECURE_SCL=0;_HAS_ITERATOR_DEBBUGING=0;PTRDIFF_MAX=0x7fffffff;INTMAX_MAX=0x7fffffffffffffffLL;BOOST_NO_RVALUE_REFERENCES;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -143,7 +147,9 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -155,6 +161,50 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\libjpeg\jcapimin.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcapistd.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jccoefct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jccolor.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcdctmgr.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jchuff.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcinit.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcmainct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcmarker.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcmaster.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcomapi.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcparam.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcphuff.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcprepct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jcsample.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdapimin.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdapistd.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdatadst.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdatasrc.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdcoefct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdcolor.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jddctmgr.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdhuff.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdinput.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdmainct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdmarker.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdmaster.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdmerge.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdphuff.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdpostct.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jdsample.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jerror.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jfdctflt.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jfdctfst.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jfdctint.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jidctflt.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jidctfst.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jidctint.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jidctred.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jmemmgr.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jmemnobs.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jquant1.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jquant2.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
+    <ClCompile Include="Dependencies\libjpeg\jutils.c"><AdditionalIncludeDirectories>Dependencies\libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile>
     <ClCompile Include="Dependencies\SDL\src\main\windows\SDL_windows_main.c" />
     <ClCompile Include="src\Encoding.cpp" />
     <ClCompile Include="src\JAnimator.cpp" />
