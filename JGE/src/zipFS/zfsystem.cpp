@@ -502,8 +502,10 @@ bool filesystem::PreloadZip(const char * Filename, map<string, limited_file_info
                     continue;
 
 			    target[Name] = limited_file_info(
-				    realBeginOfFile + FileHdr.m_RelOffset,					// "Local File" header offset position
-				    FileHdr.m_UncompSize					// File Size
+				    realBeginOfFile + FileHdr.m_RelOffset,	// "Local File" header offset position
+				    FileHdr.m_UncompSize,				// Uncompressed size (== CompSize for STORED)
+				    FileHdr.m_CompSize,
+				    FileHdr.m_CompMethod
 			    );
 		    }
 	    }
@@ -528,13 +530,11 @@ bool filesystem::PreloadZip(const char * Filename, map<string, limited_file_info
 		    const char * Name = &(* FileHdr.m_Filename.begin());
 		    if (FileHdr.m_FilenameSize != 0) {
 
-                // The zip in zip method only supports stored Zips because of JFileSystem limitations
-                if ((FileHdr.m_UncompSize != FileHdr.m_CompSize) || FileHdr.m_CompMethod != STORED)
-                    continue;
-
 			    target[Name] = limited_file_info(
 				    FileHdr.m_RelOffset,					// "Local File" header offset position
-				    FileHdr.m_UncompSize					// File Size
+				    FileHdr.m_UncompSize,				// Uncompressed size
+				    FileHdr.m_CompSize,					// Compressed size
+				    FileHdr.m_CompMethod				// Compression method
 			    );
 		    }
 	    }

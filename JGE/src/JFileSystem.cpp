@@ -413,6 +413,19 @@ bool JFileSystem::OpenFile(const string &filename)
 
     mCurrentFileInZip = &(it2->second);
     mFileSize = it2->second.m_Size;
+
+    if (it2->second.m_CompMethod != 0 /* STORED */)
+    {
+        std::streamoff dataOff = filesystem::SkipLFHdr(mZipFile,
+                                     std::streamoff(it2->second.m_Offset));
+        if (dataOff == std::streamoff(-1))
+            return false;
+        ((zip_file_system::izstream &)mFile).open(mZipFile.FullFilePath().c_str(), dataOff,
+                                                  std::streamoff(it2->second.m_CompSize),
+                                                  it2->second.m_CompMethod);
+        if (!mFile)
+            return false;
+    }
     return true;
 
 }
@@ -434,14 +447,20 @@ int JFileSystem::ReadFile(void *buffer, int size)
 {
     if (mCurrentFileInZip)
     {
+        if (mCurrentFileInZip->m_CompMethod != 0 /* STORED */)
+        {
+            // DEFLATE entry: mFile was opened as a decompression stream in OpenFile
+            assert(mFile);
+            mFile.read((char *)buffer, size);
+            return mFile.eof() ? 0 : size;
+        }
         assert(mZipFile);
-        if((size_t)size > mCurrentFileInZip->m_Size) //only support "store" method for zip inside zips
+        if((size_t)size > mCurrentFileInZip->m_Size)
             return 0;
         std::streamoff offset = filesystem::SkipLFHdr(mZipFile, mCurrentFileInZip->m_Offset);
         if (!mZipFile.seekg(offset))
             return 0;
         mZipFile.read((char *) buffer, size);
-        //TODO what if can't read
         return size;
     }
 

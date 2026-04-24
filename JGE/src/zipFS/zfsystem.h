@@ -23,7 +23,7 @@
 //     misrepresented as being the original software.
 //  3. This notice may not be removed or altered from any source distribution.
 //
-//  Tanguy FautrÅE
+//  Tanguy FautrÔøΩE
 //  softdev@telenet.be
 //
 //////////////////////////////////////////////////////////////////////
@@ -125,12 +125,14 @@ public:
 	class limited_file_info
 	{
 	public:
-		limited_file_info() :  m_Offset(0), m_Size(0) { }
-		limited_file_info(size_t Offset, size_t Size) :
-			m_Offset(Offset), m_Size(Size) { }
+		limited_file_info() : m_Offset(0), m_Size(0), m_CompSize(0), m_CompMethod(0) { }
+		limited_file_info(size_t Offset, size_t Size, size_t CompSize, short CompMethod) :
+			m_Offset(Offset), m_Size(Size), m_CompSize(CompSize), m_CompMethod(CompMethod) { }
 
 		size_t	m_Offset;
 		size_t	m_Size;
+		size_t	m_CompSize;
+		short	m_CompMethod;
 	};
 
     class pooledBuffer
