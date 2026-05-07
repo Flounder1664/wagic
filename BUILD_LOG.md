@@ -22,4 +22,5 @@ Device serials:
 2026-05-07 41c82285c               device=RP5     result=pass — process alive, gamepad + features all good
 2026-05-07 e1db9f205             device=S9      result=pass — taps work after scoping joystick init `#ifndef ANDROID`
 2026-05-07 e1db9f205             device=RP5     result=pass — gamepad still works (SDL joystick path was unused on RP5; gamepad goes via Java keysyms)
+2026-05-07 e1db9f205             device=Windows result=pass — VS2022 v145 Release/Win32 builds Wagic.exe; #ifndef ANDROID is no-op on Windows
 ```
