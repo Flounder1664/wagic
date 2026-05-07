@@ -20,4 +20,13 @@ Tracks changes made on `Flounder1664/wagic` that are not in upstream `WagicProje
 | 2026-05-07 | wip/uncategorized-may      | 2dc9b3c16  | CLAUDE.md, JGE/test_jlogger_usage.cpp, TODO_new_sets.md, root_cause_analysis.md, ndk_build_log2.txt | N/A | notes/scratch |
 | 2026-05-07 | wagic-v145-windows         | 246f729aa  | .gitignore additions for build outputs and Scryfall dumps          | N/A                  | hygiene |
 | 2026-05-07 | john/android-s9-fix        | 9de163a7a  | LOCAL_CHANGES.md, BUILD_LOG.md, CLAUDE.md branch-map, PORTABILITY_NOTES.md S9 serial | N/A | housekeeping; bug-hunt branch |
-| 2026-05-07 | john/android-s9-fix        | (next commit) | SDLActivity.java flipEGL try/catch + GameStateMenu.cpp bgTexture lock fix (cherry-picked safe parts of wip/s9-fix-attempts) | needs build & test on RP5 + S9 + Windows | defensive; not yet known to fix S9 regression — bisect of 24 Apr suspects still required |
+| 2026-05-07 | john/android-s9-fix        | 41c82285c  | SDLActivity.java flipEGL try/catch + GameStateMenu.cpp bgTexture lock fix (cherry-picked safe parts of wip/s9-fix-attempts) | RP5, S9 (after data fix) | defensive; harmless |
+| 2026-05-07 | john/android-s9-fix        | (next commit) | SDLmain.cpp: scope `SDL_JoystickOpen` + `SDL_JoystickEventState(SDL_ENABLE)` `#ifndef ANDROID` | **RP5 gamepad OK + S9 taps OK** | **S9 input regression fixed** |
+
+## Diagnostic notes (2026-05-07)
+
+Two separate S9 issues converged into the user's "broken" report:
+
+1. **Internal app data corruption** (manifested as SIGSEGV in libgui's BufferQueue ~14s into launch). Same crash reproduced on `verified-android-2026-04-19` libmain.so, `wagic-v145-windows` tip, and the Phase 1 cherry-pick build. Fixed by `pm clear net.wagic.app`. Saves on the S9 SD card (UUID `0449-B4A1`) survived the clear.
+2. **Outdated core.zip on S9 SD card** (54.8 MB vs PC's 55.5 MB). Caused features like quickplay to be missing. Fixed by pushing the PC's `core.zip` to `/storage/0449-B4A1/Android/data/net.wagic.app/files/Wagic/Res/Wagic-core-0255.zip`.
+3. **Real code regression** in `7a32a6f30` (Apr 24): `SDL_JoystickEventState(SDL_ENABLE)` on Android causes SDL to pump non-touch input into the joystick event queue, starving real touch dispatch. RP5 was unaffected because its gamepad goes through Android's keysym path, not SDL's joystick API. Fix: scope the joystick-open block `#ifndef ANDROID` so PC keeps the Apr-24 gamepad code and Android falls back to pre-Apr-24 behavior.

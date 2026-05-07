@@ -811,12 +811,18 @@ bool SdlApp::OnInit()
 
 	JGECreateDefaultBindings();
 
+#ifndef ANDROID
+	// Android routes gamepad buttons through Java keysym events; opening an
+	// SDL joystick and enabling its event stream causes SDL on Android to
+	// pump sensor/touch data into the joystick queue, starving real touch
+	// dispatch (S9 taps drop). Keep this PC/Linux-only.
 	if (SDL_NumJoysticks() > 0)
 	{
 		g_joystick = SDL_JoystickOpen(0);
 		if (g_joystick)
 			SDL_JoystickEventState(SDL_ENABLE);
 	}
+#endif
 
 	if (!InitGame())
 	{
