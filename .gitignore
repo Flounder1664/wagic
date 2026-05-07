@@ -272,3 +272,15 @@ wagic_build_config.py
 
 # Claude Code session files
 .claude/
+
+# Linux/AppImage build outputs (parked on wip/steam-deck-linux)
+/build-linux/
+/tools/appimage/
+*.AppImage
+
+# Local CMake debug builds
+/build-debug/
+
+# Scryfall data dumps (re-fetch with fetch_card_images.py)
+/all-cards-*.json
+/oracle-cards-*.json
