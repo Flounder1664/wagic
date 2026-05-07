@@ -22,6 +22,7 @@
 #include "utils.h"
 #include "AIPlayer.h"
 #include "GameApp.h"
+#include "JFileSystem.h"
 
 #include "CarouselDeckView.h"
 #include "GridDeckView.h"
@@ -210,6 +211,7 @@ void GameStateDeckViewer::buildEditorMenu()
     deckMenu->Add(MENU_ITEM_FILTER_BY, _("Filter By..."), _("Narrow down the list of cards. "));
     deckMenu->Add(MENU_ITEM_SWITCH_DECKS_NO_SAVE, _("Switch Decks"), _("No changes. View another deck."));
     deckMenu->Add(MENU_ITEM_SAVE_RENAME, _("Rename Deck"), _("Change the name of the deck"));
+    deckMenu->Add(MENU_ITEM_DELETE_DECK, _("Delete Deck"), _("Permanently delete this deck."));
     deckMenu->Add(MENU_ITEM_SAVE_RETURN_MAIN_MENU, _("Save & Quit Editor"), _("Save changes. Return to the main menu"));
     deckMenu->Add(MENU_ITEM_SAVE_AS_AI_DECK, _("Save As AI Deck"), _("All changes are final."));
     deckMenu->Add(MENU_ITEM_MAIN_MENU, _("Quit Editor"), _("No changes. Return to the main menu."));
@@ -1922,7 +1924,18 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
         deckListSize = deckList->size();
 
         if (controlId == MENU_ITEM_NEW_DECK) // new deck option selected
-            deckIdNumber = deckList->size() + 1;
+        {
+            // Pick the smallest positive id not already in use, so deletions
+            // leave reusable gaps and a fresh deck never overwrites an existing file.
+            vector<int> usedIds;
+            usedIds.reserve(deckList->size());
+            for (size_t i = 0; i < deckList->size(); ++i)
+                usedIds.push_back(deckList->at(i)->getDeckId());
+            std::sort(usedIds.begin(), usedIds.end());
+            deckIdNumber = 1;
+            for (size_t i = 0; i < usedIds.size() && usedIds[i] == deckIdNumber; ++i)
+                ++deckIdNumber;
+        }
         else if (deckListSize > 0 && controlId <= deckListSize)
             deckIdNumber = deckList->at(controlId - 1)-> getDeckId();
         else
@@ -1946,6 +1959,22 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
             {
                 options.keypadStart(myDeck->parent->meta_name, &newDeckname);
                 options.keypadTitle("Rename deck");
+            }
+            break;
+
+        case MENU_ITEM_DELETE_DECK:
+            if (myDeck && myDeck->parent)
+            {
+                SAFE_DELETE(subMenu);
+                char buf[256];
+                snprintf(buf, sizeof(buf), _("Delete '%s'?").c_str(), myDeck->parent->meta_name.c_str());
+                const float menuXOffset = SCREEN_WIDTH_F - 300;
+                const float menuYOffset = SCREEN_HEIGHT_F / 2;
+                subMenu = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(),
+                                         MENU_DECK_DELETE_CONFIRM, this, Fonts::MAIN_FONT,
+                                         menuXOffset, menuYOffset, buf);
+                subMenu->Add(MENU_ITEM_NO,  _("No"), "", true); // default = No
+                subMenu->Add(MENU_ITEM_YES, _("Yes"));
             }
             break;
 
@@ -1982,6 +2011,60 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
             mStage = STAGE_WAITING;
             last_user_activity = 0;
             toggleView();
+            break;
+        }
+        break;
+
+    case MENU_DECK_DELETE_CONFIRM:
+        switch (controlId)
+        {
+        case MENU_ITEM_YES:
+        {
+            if (myDeck && myDeck->parent)
+            {
+                int id = myDeck->parent->meta_id;
+
+                // Build profile-relative paths (JFileSystem prepends mUserFSPath).
+                std::ostringstream deckRel, statsRel;
+                deckRel  << "deck"             << id << ".txt";
+                statsRel << "stats/player_deck" << id << ".txt";
+                string deckPath  = options.profileFile(deckRel.str(),  "", false);
+                string statsPath = options.profileFile(statsRel.str(), "", false);
+
+                // Drop in-memory caches before deleting the file on disk.
+                // DeleteMetaData also frees the StatsWrapper that mStatsWrapper aliases,
+                // so just null mStatsWrapper here — don't SAFE_DELETE it (double-free).
+                DeckManager::GetInstance()->DeleteMetaData(deckPath, false);
+                mStatsWrapper = NULL;
+
+                JFileSystem * fs = JFileSystem::GetInstance();
+                fs->Remove(deckPath);
+                fs->Remove(statsPath); // ignore failure — stats file may not exist
+
+                // Point the view at the still-valid collection before freeing the
+                // deck wrappers — otherwise mView keeps a stale pointer that the
+                // next Render() (line 1622: mView->Render()) would dereference.
+                if (mView) mView->SetDeck(myCollection);
+
+                SAFE_DELETE(myDeck->parent);
+                SAFE_DELETE(myDeck);
+                if (mySideboard)   { SAFE_DELETE(mySideboard->parent);   SAFE_DELETE(mySideboard); }
+                if (myCommandZone) { SAFE_DELETE(myCommandZone->parent); SAFE_DELETE(myCommandZone); }
+                if (myDungeonZone) { SAFE_DELETE(myDungeonZone->parent); SAFE_DELETE(myDungeonZone); }
+                SAFE_DELETE(source);
+                SAFE_DELETE(filterMenu);
+            }
+            subMenu->Close();
+            updateDecks();
+            mStage = STAGE_WELCOME;
+            // Leave mSwitching=false: there is no editor state to return to,
+            // so Cancel from the welcome menu must exit to the main menu rather
+            // than fall back into STAGE_WAITING with no current deck.
+            mSwitching = false;
+            break;
+        }
+        case MENU_ITEM_NO:
+            subMenu->Close();
             break;
         }
         break;
