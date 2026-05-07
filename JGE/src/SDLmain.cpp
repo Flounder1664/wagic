@@ -17,12 +17,18 @@
 #include "DebugRoutines.h"
 #include <stdexcept>
 #include <iostream>
+#include <string>
 #include <math.h>
 #ifndef WIN32
 #include <unistd.h>
 #endif
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef LINUX
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+#endif
 
 
 #if (defined FORCE_GLES)
@@ -496,7 +502,8 @@ bool InitGame(void)
 
 void DestroyGame(void)
 {
-	g_engine->SetApp(NULL);
+	if (g_engine)
+		g_engine->SetApp(NULL);
 	if (g_app)
 	{
 		g_app->Destroy();
@@ -536,7 +543,11 @@ void SdlApp::OnUpdate()
 	if(g_engine)
 		g_engine->Render();
 
+#if defined(LINUX) && !defined(ANDROID)
+	SDL_GL_SwapWindow(window);
+#else
 	SDL_GL_SwapBuffers();
+#endif
 }
 
 void SdlApp::OnKeyPressed(const SDL_KeyboardEvent& event)
@@ -711,7 +722,7 @@ void SdlApp::OnTouchEvent(const SDL_TouchFingerEvent& event)
                     }
                 }
             }
-      		else      
+      		else
 #endif
 			g_engine->LeftClicked(
                 ((event.x - viewPort.x) * SCREEN_WIDTH) / actualWidth,
@@ -731,6 +742,15 @@ bool SdlApp::OnInit()
 		return false;
 	}
 
+#if defined(LINUX) && !defined(ANDROID)
+	{
+		SDL_DisplayMode dm;
+		if (SDL_GetCurrentDisplayMode(0, &dm) == 0)
+			DebugTrace("Video Display : h " << dm.h << ", w " << dm.w);
+	}
+	window_w = ACTUAL_SCREEN_WIDTH;
+	window_h = ACTUAL_SCREEN_HEIGHT;
+#else
 	const SDL_VideoInfo *pVideoInfo = SDL_GetVideoInfo();
 	DebugTrace("Video Display : h " << pVideoInfo->current_h << ", w " << pVideoInfo->current_w);
 
@@ -741,6 +761,7 @@ bool SdlApp::OnInit()
 	window_w = ACTUAL_SCREEN_WIDTH;
 	window_h = ACTUAL_SCREEN_HEIGHT;
 #endif
+#endif
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE,    	    8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,  	    8);
@@ -750,17 +771,61 @@ bool SdlApp::OnInit()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,  	    16);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,		    32);
 
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,	    8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,	8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,	    8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,	8);
+	// Accumulation buffers are not supported by modern Mesa / RadeonSI and
+	// cause SDL_CreateWindow to fail with "no matching GLX visual" on Linux.
+	// Wagic does not use them; set to 0 unconditionally.
+	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,   0);
+	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 0);
+	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,  0);
+	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 0);
 
+	// Request MSAA; the SDL2 Linux path below retries without it if unavailable.
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
+#if defined(LINUX) && !defined(ANDROID)
+	{
+		// SDL2 path for native Linux desktop / Steam Deck.
+		// First try with MSAA; if that fails (XWayland / some Mesa configs reject it)
+		// fall back to no MSAA.  Accumulation buffers are also dropped on retry
+		// since they are deprecated in modern OpenGL.
+		Uint32 winFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+		window = SDL_CreateWindow(g_launcher->GetName(),
+								  SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+								  window_w, window_h, winFlags);
+		if (!window)
+		{
+			// Retry without MSAA (some XWayland / Mesa configs reject MSAA visuals)
+			SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 0);
+			SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 0);
+			window = SDL_CreateWindow(g_launcher->GetName(),
+									  SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+									  window_w, window_h, winFlags);
+		}
+		if (!window)
+		{
+			cerr << "SDL_CreateWindow failed: " << SDL_GetError() << "\n";
+			return false;
+		}
+		SDL_GLContext glctx = SDL_GL_CreateContext(window);
+		if (!glctx)
+		{
+			// Retry context without MSAA
+			SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 0);
+			SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 0);
+			glctx = SDL_GL_CreateContext(window);
+		}
+		if (!glctx)
+		{
+			cerr << "SDL_GL_CreateContext failed: " << SDL_GetError() << "\n";
+			return false;
+		}
+		Surf_Display = NULL; // unused on SDL2 path; kept to satisfy other code paths
+	}
+#else
 	if((Surf_Display = SDL_SetVideoMode(window_w, window_h, 32,
 #ifdef ANDROID
 		SDL_OPENGL | SDL_FULLSCREEN | SDL_WINDOW_BORDERLESS)) == NULL)
@@ -772,6 +837,7 @@ bool SdlApp::OnInit()
 		return false;
 	}
 	SDL_WM_SetCaption(g_launcher->GetName(), "");
+#endif
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);		// Black Background (yes that's the way fuckers)
 #if (defined GL_ES_VERSION_2_0) || (defined GL_VERSION_2_0)
@@ -842,9 +908,41 @@ int main(int argc, char* argv[])
 		mJNIEnv = (JNIEnv * )argv[1];
         mJNIClass = (jclass * )argv[2];
     }
-#endif		
+#endif
 
 	DebugTrace("I R in da native");
+
+#ifdef LINUX
+	// On Linux (including Steam Deck / AppImage runs), put the writable User/
+	// directory under $HOME so the application directory can stay read-only.
+	// Mirrors the Qt build at JFileSystem.cpp:139-147 (homePath/USERDIR pattern).
+	{
+		const char* home = getenv("HOME");
+		if (home && *home)
+		{
+			std::string base       = std::string(home) + "/.local/share/Wagic";
+			std::string userPath   = base + "/User/";
+			std::string systemPath = "Res/"; // resolved relative to CWD (set by AppRun)
+
+			// Recursively create base + User dir; ignore EEXIST.
+			std::string accum;
+			for (size_t i = 1; i <= base.size(); ++i)
+			{
+				if (i == base.size() || base[i] == '/')
+				{
+					accum = base.substr(0, i);
+					if (mkdir(accum.c_str(), 0755) != 0 && errno != EEXIST)
+						DebugTrace("mkdir failed for " << accum << ": " << errno);
+				}
+			}
+			if (mkdir(userPath.c_str(), 0755) != 0 && errno != EEXIST)
+				DebugTrace("mkdir failed for " << userPath << ": " << errno);
+
+			DebugTrace("Linux JFileSystem userPath=" << userPath << " systemPath=" << systemPath);
+			JFileSystem::init(userPath, systemPath);
+		}
+	}
+#endif
 
 	g_launcher = new JGameLauncher();
 

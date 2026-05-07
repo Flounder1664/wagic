@@ -125,32 +125,46 @@ void JNetwork::registerCommand(string command, void* object, processCmd processC
 void JNetwork::Update()
 {
 	boost::mutex::scoped_lock r(receiveMutex);
-    // Checking for some command to execute
-	size_t begin_start_tag = received.str().find("<");
-	size_t end_start_tag = received.str().find(">");
-	string command = received.str().substr(begin_start_tag+1, end_start_tag-(begin_start_tag+1));
-	size_t begin_end_tag = received.str().find(command + "/>");
-	size_t end_end_tag = received.str().find("/>");
-    if(begin_start_tag != string::npos && begin_end_tag != string::npos )
+    // Drain all complete commands from the receive buffer in one Update() call.
+    // Previously only one command was processed per frame, causing multi-action turns
+    // to lag by one frame per queued command and appearing to stall.
+    for (;;)
     {
-		map<string, CommandStruc>::iterator ite = sCommandMap.find(command);
-		if(ite != sCommandMap.end())
-		{
-			DebugTrace("begin of command received : " + received.str() );
-			DebugTrace("begin of command toSend : " + toSend.str() );
+        size_t begin_start_tag = received.str().find("<");
+        if (begin_start_tag == string::npos) break;
+        size_t end_start_tag = received.str().find(">");
+        if (end_start_tag == string::npos) break;
 
-			processCmd theMethod = (ite)->second.processCommand;
-			stringstream input(received.str().substr(end_start_tag+1, (begin_end_tag-1)-(end_start_tag+1)));
-			stringstream output;
-			theMethod((ite)->second.object, input, output);
-			string aString = received.str().substr(end_end_tag+2, string::npos);
-			received.str(aString);
-			if(output.str().size())
-				sendCommand((ite)->second.command, output.str(), "Response");
+        string command = received.str().substr(begin_start_tag+1, end_start_tag-(begin_start_tag+1));
+        size_t begin_end_tag = received.str().find(command + "/>");
+        size_t end_end_tag   = received.str().find("/>");
+        if (begin_end_tag == string::npos) break;  // incomplete message — wait for more data
 
-			DebugTrace("end of command received : "<< received.str() );
-			DebugTrace("end of command toSend : "<< toSend.str() );
-		}
+        map<string, CommandStruc>::iterator ite = sCommandMap.find(command);
+        if (ite != sCommandMap.end())
+        {
+            DebugTrace("begin of command received : " + received.str() );
+            DebugTrace("begin of command toSend : " + toSend.str() );
+
+            processCmd theMethod = (ite)->second.processCommand;
+            stringstream input(received.str().substr(end_start_tag+1, (begin_end_tag-1)-(end_start_tag+1)));
+            stringstream output;
+            theMethod((ite)->second.object, input, output);
+            string aString = received.str().substr(end_end_tag+2, string::npos);
+            received.str(aString);
+            if (output.str().size())
+                sendCommand((ite)->second.command, output.str(), "Response");
+
+            DebugTrace("end of command received : "<< received.str() );
+            DebugTrace("end of command toSend : "<< toSend.str() );
+        }
+        else
+        {
+            // Unknown command — skip past it to avoid infinite loop
+            string aString = received.str().substr(end_end_tag+2, string::npos);
+            received.str(aString);
+            DebugTrace("Unknown command skipped: " + command);
+        }
     }
 }
 
