@@ -158,6 +158,10 @@ void GameStateMenu::Start()
     hasChosenGameType = false;
     mParent->gameType = GAME_TYPE_CLASSIC;
 
+    // Keep bgTexture locked across ClearUnlocked() so the menu background isn't
+    // evicted and reloaded from disk (reload fails after a game session).
+    JTexture* oldBg = bgTexture;
+
     //Manual clean up of some cache Data. Ideally those should clean themselves up, so this is kind of a hack for now
     WResourceManager::Instance()->ClearUnlocked();
 
@@ -174,6 +178,9 @@ void GameStateMenu::Start()
 
     if (MENU_STATE_MAJOR_MAINMENU == currentState)
         currentState = currentState | MENU_STATE_MINOR_FADEIN;
+
+    if (oldBg)
+        WResourceManager::Instance()->Release(oldBg);
 
     wallpaper = "";
     scrollerSet = 0; // This will force-update the scroller text
@@ -327,8 +334,6 @@ int GameStateMenu::nextSetFolder(const string & root, const string & file)
 void GameStateMenu::End()
 {
     JRenderer::GetInstance()->EnableVSync(false);
-
-    WResourceManager::Instance()->Release(bgTexture);
     SAFE_DELETE(mGuiController);
 }
 

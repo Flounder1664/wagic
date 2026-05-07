@@ -1829,7 +1829,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // EGL buffer flip
     public void flipEGL() {
         if (!mSurfaceValid) {
-            createSurface(this.getHolder());
+            try {
+                createSurface(this.getHolder());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "flipEGL: surface not ready, skipping frame: " + e.getMessage());
+                return;
+            }
         }
 
         try {
