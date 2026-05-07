@@ -20,6 +20,6 @@ Device serials:
 2026-05-07 41c82285c               device=S9      result=partial — boots cleanly after data clear, but taps problematic (separate code regression, no quickplay due to outdated core.zip)
 2026-05-07 41c82285c               device=S9      result=partial — quickplay restored after pushing PC core.zip; taps still problematic (real code regression in 7a32a6f30 confirmed)
 2026-05-07 41c82285c               device=RP5     result=pass — process alive, gamepad + features all good
-2026-05-07 <fix-commit>             device=S9      result=pass — taps work after scoping joystick init `#ifndef ANDROID`
-2026-05-07 <fix-commit>             device=RP5     result=pass — gamepad still works (SDL joystick path was unused on RP5; gamepad goes via Java keysyms)
+2026-05-07 e1db9f205             device=S9      result=pass — taps work after scoping joystick init `#ifndef ANDROID`
+2026-05-07 e1db9f205             device=RP5     result=pass — gamepad still works (SDL joystick path was unused on RP5; gamepad goes via Java keysyms)
 ```
