@@ -26,4 +26,7 @@ Device serials:
 2026-05-07 6a26c874d                device=Windows result=pass — Quick Game now shows land icon (mIcons[12] + i<6 + modrules.xml iconId=6)
 2026-05-07 6a26c874d                device=S9      result=pass — same after pushing modrules.xml to /storage/0449-B4A1/.../Wagic/Res/rules/
 2026-05-07 6a26c874d                device=RP5     result=pass — same after pushing modrules.xml to /storage/3963-3235/.../Wagic/Res/rules/
+2026-05-07 f65a30263                device=Windows result=pass — delete-deck + version-display 0.25.7 (resource 0.25.6) verified
+2026-05-07 f65a30263                device=S9      result=pass — same; pushed Wagic-core-0256.zip to SD UUID 0449-B4A1
+2026-05-07 f65a30263                device=RP5     result=pass — same; refreshed Wagic-core-0256.zip (May-4 58 MB build)
 ```

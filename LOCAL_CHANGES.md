@@ -11,8 +11,8 @@ Tracks changes made on `Flounder1664/wagic` that are not in upstream `WagicProje
 | 2026-04-24 | wagic-v145-windows         | 7a32a6f30  | SDLmain.cpp, mtg.props, vcxproj                                    | Windows              | **NOT tested on Android — suspect for S9 input regression** |
 | 2026-04-24 | wagic-v145-windows         | b81231d43  | JFileSystem.cpp, zfsystem.{cpp,h}                                  | Windows              | **NOT tested on Android — suspect for S9 input regression** |
 | 2026-04-24 | wagic-v145-windows         | (cherry-picks) | deck files, CardImageLinks.csv                                  | —                    | data-only |
-| 2026-05-07 | feature/deck-editor-delete | 1a6f14a59  | GameStateDeckViewer.{cpp,h}, MenuItem.cpp, DeckMenuItem.cpp, GameStateMenu.h | needs build & test | Feature complete in code |
-| 2026-05-07 | feature/version-display    | 21a63aad0  | build.number.properties, Wagic_Version.h                           | needs build & test   | In-game version display |
+| 2026-05-07 | feature/deck-editor-delete | 1a6f14a59  | GameStateDeckViewer.{cpp,h}, MenuItem.cpp, DeckMenuItem.cpp, GameStateMenu.h | RP5, S9, Windows | merged into wagic-v145-windows at `ec1d30589` |
+| 2026-05-07 | feature/version-display    | 21a63aad0  | build.number.properties, Wagic_Version.h                           | RP5, S9, Windows     | merged into wagic-v145-windows at `f65a30263`; display version 0.25.7, resource version 0.25.6 (loads `Wagic-core-0256.zip`) |
 | 2026-05-07 | wip/steam-deck-linux       | 472a3b4a9  | SDLmain.cpp Linux blocks, JNetwork.cpp, mtg.props NETWORK_SUPPORT, CMakeLists.txt, STEAM_DECK.md, tools/linux/ | not yet successful | parked |
 | 2026-05-07 | wip/s9-fix-attempts        | 49b99371e  | SDLActivity.java flipEGL try/catch + brightness; GameStateMenu.cpp bgTexture lock | inconclusive | review in Phase 1 of S9-fix work |
 | 2026-05-07 | wip/card-data-may          | 58a8423a3  | DFT/INR _cards.dat, primitives, wallpapers, modrules, Rules/GameObserver/GameState.cpp | partial — per-card validation pending | needs validation |
