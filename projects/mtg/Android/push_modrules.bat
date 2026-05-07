@@ -8,32 +8,28 @@ echo Checking device connection...
 %ADB% devices
 
 echo.
-echo Trying /sdcard/Wagic/Res/rules/
-%ADB% shell "ls /sdcard/Wagic/Res/rules/" 2>nul
-if %ERRORLEVEL% == 0 (
-    echo Found! Pushing to /sdcard/Wagic/Res/rules/modrules.xml
-    %ADB% push "%SRC%" /sdcard/Wagic/Res/rules/modrules.xml
-    goto done
+echo Searching for Wagic rules folder on device...
+
+for /f "delims=" %%P in ('%ADB% shell "find /storage -name modrules.xml 2>/dev/null | head -1"') do set FOUND=%%P
+
+if not defined FOUND (
+    echo Not found via find, trying known paths...
+    for /f "delims=" %%P in ('%ADB% shell "find /sdcard /storage/emulated/0 -maxdepth 5 -name modrules.xml 2>/dev/null | head -1"') do set FOUND=%%P
 )
 
-echo Trying /sdcard/Android/data/net.wagic.app/files/Wagic/Res/rules/
-%ADB% shell "ls /sdcard/Android/data/net.wagic.app/files/Wagic/Res/rules/" 2>nul
-if %ERRORLEVEL% == 0 (
-    echo Found! Pushing to /sdcard/Android/data/net.wagic.app/files/Wagic/Res/rules/modrules.xml
-    %ADB% push "%SRC%" /sdcard/Android/data/net.wagic.app/files/Wagic/Res/rules/modrules.xml
-    goto done
+if not defined FOUND (
+    echo ERROR: Could not find modrules.xml on device.
+    echo Make sure Wagic has been launched at least once to create its data folders.
+    goto end
 )
 
-echo.
-echo Could not find Wagic rules folder automatically.
-echo Please check adb shell ls /sdcard/ for the correct path,
-echo or manually copy modrules.xml using Windows Explorer.
-echo Source file: %SRC%
-goto end
-
-:done
-echo.
-echo Done. Restart Wagic on the device to pick up the change.
+echo Found at: %FOUND%
+%ADB% push "%SRC%" "%FOUND%"
+if %ERRORLEVEL% == 0 (
+    echo Done. Restart Wagic on the device to pick up the change.
+) else (
+    echo Push failed.
+)
 
 :end
 pause
