@@ -499,7 +499,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Assquatch
-text=Each other Donkey gets +1½/+1½. -- Whenever another Donkey comes into play, untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
+text=Each other Donkey gets +1ï¿½/+1ï¿½. -- Whenever another Donkey comes into play, untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
 mana={4}{R}
 type=Creature
 subtype=Donkey Lord
@@ -551,7 +551,7 @@ type=Instant
 [/card]
 [card]
 name=Avatar of Me
-text=Avatar of Me costs {1} more to play for each ten years you've been alive. -- Avatar of Me's power is equal to your height in feet and its toughness is equal to your American shoe size. Round to the nearest ½. -- Avatar of Me's color is the color of your eyes.
+text=Avatar of Me costs {1} more to play for each ten years you've been alive. -- Avatar of Me's power is equal to your height in feet and its toughness is equal to your American shoe size. Round to the nearest ï¿½. -- Avatar of Me's color is the color of your eyes.
 mana={2}{U}{U}
 type=Creature
 subtype=Avatar
@@ -981,6 +981,7 @@ type=Enchantment
 [/card]
 [card]
 name=Blurry Beeble
+auto=@combatdamaged(player) from(this):may _LOOT_
 text=Blurry (This creature can be blocked only if defending player was wearing glasses as it was cast.) -- Whenever Blurry Beeble deals combat damage to a player, you may draw a card. If you do, discard a card.
 mana={U}
 type=Artifact Creature
@@ -1098,7 +1099,7 @@ toughness=5
 [/card]
 [card]
 name=Bosom Buddy
-text=Whenever you play a spell, you may gain ½ life for each word in that spell's name.
+text=Whenever you play a spell, you may gain ï¿½ life for each word in that spell's name.
 mana={3}{W}
 type=Creature
 subtype=Elephant Townsfolk
@@ -1123,7 +1124,10 @@ type=Instant
 [card]
 name=Bright-Palm, Soul Awakener
 auto=cantbeblockedby(creature[power<=2])
-auto=@this creature attacksdouble the number of counter(1/1)starget(creature that creature unblockable by creature with power 2,less this turn
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[cantbeblockedby(creature[power<=2])])) ueot
+auto=_ATTACKING_counter(1/1) target(creature|mybattlefield)
+auto=_ATTACKING_target(creature|mybattlefield) transforms((,newability[cantbeblockedby(creature[power<=2])])) ueot
 text=Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Whenever this creature attacks, double the number of +1/+1 counters on target creature. That creature can't be blocked by creatures with power 2 or less this turn.
 mana={1}{R}{G}{W}
 type=Legendary Creature
@@ -1208,7 +1212,7 @@ type=Enchantment
 [/card]
 [card]
 name=Bureaucracy
-text=Pursuant to subsection 3.1(4) of Richard's Rules of Order, during the upkeep of each participant in this game of the Magic: The Gathering® trading card game (hereafter known as "PLAYER"), that PLAYER performs all actions in the sequence of previously added actions (hereafter known as "ACTION QUEUE"), in the order those actions were added, then adds another action to the end of the ACTION QUEUE. All actions must be simple physical or verbal actions that a player can perform while sitting in a chair, without jeopardizing the health and security of said PLAYER. -- If any PLAYER does not perform all the prescribed actions in the correct order, sacrifice Bureaucracy and said PLAYER discards his or her complement of cards in hand (hereafter known as "HAND").
+text=Pursuant to subsection 3.1(4) of Richard's Rules of Order, during the upkeep of each participant in this game of the Magic: The Gatheringï¿½ trading card game (hereafter known as "PLAYER"), that PLAYER performs all actions in the sequence of previously added actions (hereafter known as "ACTION QUEUE"), in the order those actions were added, then adds another action to the end of the ACTION QUEUE. All actions must be simple physical or verbal actions that a player can perform while sitting in a chair, without jeopardizing the health and security of said PLAYER. -- If any PLAYER does not perform all the prescribed actions in the correct order, sacrifice Bureaucracy and said PLAYER discards his or her complement of cards in hand (hereafter known as "HAND").
 mana={3}{U}{U}
 type=Enchantment
 [/card]
@@ -1895,8 +1899,9 @@ type=Enchantment
 [card]
 name=Conclave Sledge-Captain
 abilities=trample
-auto=@combatdamaged(player) from(this):
-auto=@this creature deals combat damage to a playerput that many counter(1/1)sit
+auto=choice name(Backup: self) counter(1/1,3)
+auto=choice name(Backup: other creature) counter(1/1,3) target(other creature|mybattlefield) transforms((,trample,newability[@combatdamaged(player) from(this):counter(1/1)])) ueot
+auto=@combatdamaged(player) from(this):counter(1/1)
 text=Backup 1, backup 1, backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn. Each backup ability triggers separately.) -- Trample -- Whenever this creature deals combat damage to a player, put that many +1/+1 counters on it.
 mana={5}{G}
 type=Creature
@@ -2921,7 +2926,9 @@ toughness=1
 [/card]
 [card]
 name=Emergent Woodwurm
-auto=@this creature attackslook at the top x cards of your library, where x is its power may permanent card with mana value x,less from among them onmoveTo(mybattlefield) put the restthe bottom of your library in a random order
+auto=choice name(Backup: self) counter(1/1,3)
+auto=choice name(Backup: other creature) counter(1/1,3) target(other creature|mybattlefield) transforms((,newability[_ATTACKING_reveal:p revealzone(mylibrary) optionone name(put on battlefield) target(*[-instant;-sorcery;manacost<=power]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend])) ueot
+auto=_ATTACKING_reveal:p revealzone(mylibrary) optionone name(put on battlefield) target(*[-instant;-sorcery;manacost<=power]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Backup 3 (When this creature enters the battlefield, put three +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.) -- Whenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 mana={6}{G}
 type=Creature
@@ -3365,6 +3372,8 @@ type=Instant
 [/card]
 [card]
 name=Fervent Champion
+abilities=first strike,haste
+auto=_ATTACKING_target(other creature[knight;attacking]|mybattlefield) 1/0 ueot
 text=First strike, haste -- Whenever Fervent Champion attacks, another target attacking Knight you control gets +1/+0 until end of turn. -- Equip abilities you activate that target Fervent Champion cost 3 less to activate.
 mana={R}
 type=Creature
@@ -3575,7 +3584,7 @@ type=Instant
 [/card]
 [card]
 name=Fraction Jackson
-text={G}, {T}: Return target card with a ½ on it from your graveyard to your hand.
+text={G}, {T}: Return target card with a ï¿½ on it from your graveyard to your hand.
 mana={2}{G}
 type=Creature
 subtype=Human Hero
@@ -3687,6 +3696,7 @@ subtype=New Phyrexia
 [/card]
 [card]
 name=GO TO JAIL
+auto=(blink)forsrc target(creature|opponentbattlefield)
 text=When GO TO JAIL enters the battlefield, exile target creature an opponent controls until GO TO JAIL leaves the battlefield. -- At the beginning of the upkeep of the exiled card's owner, that player rolls two six-sided dice. If they roll doubles, sacrifice GO TO JAIL.
 mana={W}
 type=Enchantment
@@ -5983,7 +5993,7 @@ subtype=Arkhos
 [/card]
 [card]
 name=Letter Bomb
-text=When Letter Bomb comes into play, sign it and shuffle it into target player's library. That player reveals each card he or she draws until Letter Bomb is drawn. When that player draws Letter Bomb, it deals 19½ damage to him or her.
+text=When Letter Bomb comes into play, sign it and shuffle it into target player's library. That player reveals each card he or she draws until Letter Bomb is drawn. When that player draws Letter Bomb, it deals 19ï¿½ damage to him or her.
 mana={6}
 type=Artifact
 [/card]
@@ -7185,7 +7195,7 @@ toughness=3
 [/card]
 [card]
 name=Necro-Impotence
-text=Skip your untap step. -- At the beginning of your upkeep, you may pay X life. If you do, untap X permanents. -- Pay ½ life: Remove the top card of your library from the game face down. Put that card into your hand at end of turn.
+text=Skip your untap step. -- At the beginning of your upkeep, you may pay X life. If you do, untap X permanents. -- Pay ï¿½ life: Remove the top card of your library from the game face down. Put that card into your hand at end of turn.
 mana={B}{B}{B}
 type=Enchantment
 [/card]
@@ -7226,7 +7236,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Nerf War
-text=Fire a Nerf blaster until empty at target library from at least two meters away. For each card knocked off that library, put it into its owner?s graveyard and Nerf War deals ½ damage to that player. (Foam darts only.)
+text=Fire a Nerf blaster until empty at target library from at least two meters away. For each card knocked off that library, put it into its owner?s graveyard and Nerf War deals ï¿½ damage to that player. (Foam darts only.)
 mana={3}{U}{R}
 type=Sorcery
 [/card]
@@ -8123,6 +8133,8 @@ type=Enchantment
 [/card]
 [card]
 name=Precursor Golem
+auto=token(Golem,Artifact Creature Golem,3/3)
+auto=token(Golem,Artifact Creature Golem,3/3)
 text=When Precursor Golem enters the battlefield, put two 3/3 colorless Golem artifact creature tokens onto the battlefield. -- Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.
 mana={5}
 type=Artifact Creature
@@ -8550,6 +8562,7 @@ type=Artifact
 [/card]
 [card]
 name=Reflector Mage
+auto=moveTo(hand) target(creature|opponentbattlefield)
 text=When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. That creature's owner can't cast spells with the same name as that creature until your next turn.
 mana={1}{W}{U}
 type=Creature
@@ -8973,7 +8986,7 @@ type=Artifact
 name=Sandsteppe War Riders
 abilities=trample
 auto=lord(creature|myBattlefield)
-auto=@each my combatbegins:bolster x, where x is the number of differently named artifact tokens|myBattlefield)
+auto=@each my combatbegins:ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) counter(1/1,2)!$ controller
 text=Trample -- At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control. (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)
 mana={3}{G}
 type=Creature
@@ -8989,13 +9002,13 @@ subtype=Contraption
 [/card]
 [card]
 name=Saute
-text=Saute deals 3½ damage to target creature or player.
+text=Saute deals 3ï¿½ damage to target creature or player.
 mana={1}{R}{R}
 type=Instant
 [/card]
 [card]
 name=Save Life
-text=Choose one Target player gains 2½ life; or prevent the next 2½ damage that would be dealt to target creature this turn. -- Gotcha Whenever an opponent says "Save" or "Life," you may say "Gotcha" If you do, return Save Life from your graveyard to your hand.
+text=Choose one Target player gains 2ï¿½ life; or prevent the next 2ï¿½ damage that would be dealt to target creature this turn. -- Gotcha Whenever an opponent says "Save" or "Life," you may say "Gotcha" If you do, return Save Life from your graveyard to your hand.
 mana={W}
 type=Instant
 [/card]
@@ -10442,7 +10455,7 @@ type=Artifact
 [/card]
 [card]
 name=Supersize
-text=Target creature gets +3½/+3½ until end of turn.
+text=Target creature gets +3ï¿½/+3ï¿½ until end of turn.
 mana={1}{G}
 type=Instant
 [/card]
@@ -10915,8 +10928,8 @@ type=Plane
 subtype=The Abyss
 [/card]
 [card]
-name=The Ultimate Nightmare of Wizards of the Coast® Customer Service
-text=The Ultimate Nightmare of Wizards of the Coast® Customer Service deals X damage to each of Y target creatures and Z target players.
+name=The Ultimate Nightmare of Wizards of the Coastï¿½ Customer Service
+text=The Ultimate Nightmare of Wizards of the Coastï¿½ Customer Service deals X damage to each of Y target creatures and Z target players.
 mana={X}{R}{R}
 type=Sorcery
 [/card]
@@ -11378,6 +11391,7 @@ toughness=1
 [/card]
 [card]
 name=Tsabo's Web
+auto=draw:1
 text=When Tsabo's Web enters the battlefield, draw a card. -- Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
 mana={2}
 type=Artifact
@@ -12040,7 +12054,7 @@ type=Sorcery
 [/card]
 [card]
 name=Wet Willie of the Damned
-text=Wet Willie of the Damned deals 2½ damage to target creature or player and you gain 2½ life.
+text=Wet Willie of the Damned deals 2ï¿½ damage to target creature or player and you gain 2ï¿½ life.
 mana={2}{B}{B}
 type=Sorcery
 [/card]
@@ -12278,6 +12292,7 @@ type=Sorcery
 [/card]
 [card]
 name=Wort, the Raidmother
+auto=_GOBLINTOKEN_*2
 text=When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield. -- Each red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
 mana={4}{RG}{RG}
 type=Legendary Creature

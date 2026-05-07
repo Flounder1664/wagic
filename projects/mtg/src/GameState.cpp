@@ -7,6 +7,7 @@
 #include "DeckStats.h"
 #include "DeckMetaData.h"
 #include "DeckManager.h"
+#include "JFileSystem.h"
 #include "Player.h"
 
 // The purpose of this method is to create a listing of decks to be used for the input menu
@@ -28,71 +29,82 @@ vector<DeckMetaData *> GameState::BuildDeckList(const string& path, const string
 {
     vector<DeckMetaData*> retList;
 
-    int found = 1;
-    int nbDecks = 1;
     DeckManager *deckManager = DeckManager::GetInstance();
     bool isAI = path.find("baka") != string::npos;
-    while (found && (!maxDecks || nbDecks <= maxDecks))
+
+    // Scan the folder for deck<N>.txt files instead of probing sequentially.
+    // Decks no longer need contiguous IDs — gaps from deleted decks are fine.
+    vector<string> entries = JFileSystem::GetInstance()->scanfolder(path);
+    vector<int> deckIds;
+    for (size_t i = 0; i < entries.size(); ++i)
     {
-        found = 0;
+        int n = 0;
+        char tail = 0;
+        // sscanf returns 1 on a clean "deck<N>.txt" match; tail catches names like "deck3.txt.bak"
+        if (sscanf(entries[i].c_str(), "deck%d.txt%c", &n, &tail) == 1 && n > 0)
+            deckIds.push_back(n);
+    }
+    std::sort(deckIds.begin(), deckIds.end());
+
+    for (size_t idx = 0; idx < deckIds.size(); ++idx)
+    {
+        if (maxDecks && (int)retList.size() >= maxDecks)
+            break;
+
+        int nbDecks = deckIds[idx];
         std::ostringstream filename;
         filename << path << "/deck" << nbDecks << ".txt";
         DeckMetaData * meta = deckManager->getDeckMetaDataByFilename(filename.str(), isAI);
 
-        if (meta)
-        {
-            found = 1;
-            if(!showall && ((meta->isCommanderDeck() && type != GAME_TYPE_COMMANDER) || (!meta->isCommanderDeck() && type == GAME_TYPE_COMMANDER))){
-                meta = NULL; // It will show commander decks only in commander mode and it will hide them in other modes.
-                nbDecks++;
-                continue;
-            }
-            //Check if the deck is unlocked based on sets etc...
-            bool unlocked = true;
-            vector<int> unlockRequirements = meta->getUnlockRequirements();
-            for (size_t i = 0; i < unlockRequirements.size(); ++i)
-            {
-                    if (! options[unlockRequirements[i]].number)
-                    {
-                        unlocked = false;
-                        break;
-                    }
-            }
+        if (!meta)
+            continue;
 
-            if (unlocked)
+        if(!showall && ((meta->isCommanderDeck() && type != GAME_TYPE_COMMANDER) || (!meta->isCommanderDeck() && type == GAME_TYPE_COMMANDER))){
+            // It will show commander decks only in commander mode and it will hide them in other modes.
+            continue;
+        }
+        //Check if the deck is unlocked based on sets etc...
+        bool unlocked = true;
+        vector<int> unlockRequirements = meta->getUnlockRequirements();
+        for (size_t i = 0; i < unlockRequirements.size(); ++i)
+        {
+            if (! options[unlockRequirements[i]].number)
             {
-                if (statsPlayer)
+                unlocked = false;
+                break;
+            }
+        }
+
+        if (unlocked)
+        {
+            if (statsPlayer)
+            {
+                std::ostringstream aiStatsDeckName;
+                aiStatsDeckName << smallDeckPrefix << "_deck" << nbDecks;
+                meta->mStatsFilename = aiStatsDeckName.str();
+                meta->mIsAI = true;
+                if (meta->mPlayerDeck != statsPlayer->GetCurrentDeckStatsFile())
                 {
-                    std::ostringstream aiStatsDeckName;
-                    aiStatsDeckName << smallDeckPrefix << "_deck" << nbDecks;
-                    meta->mStatsFilename = aiStatsDeckName.str();
-                    meta->mIsAI = true;
-                    if (meta->mPlayerDeck != statsPlayer->GetCurrentDeckStatsFile())
-                    {
-                        meta->mPlayerDeck = statsPlayer->GetCurrentDeckStatsFile();
-                        meta->Invalidate();
-                    }
+                    meta->mPlayerDeck = statsPlayer->GetCurrentDeckStatsFile();
+                    meta->Invalidate();
                 }
-                else
-                {
-                    std::ostringstream playerStatsDeckName;
-                    playerStatsDeckName << "stats/player_deck" << nbDecks << ".txt";
-                    meta->mStatsFilename = options.profileFile(playerStatsDeckName.str());
-                    meta->mIsAI = false;
-                }
-                retList.push_back(meta);
             }
             else
             {
-                //updateMetaDataList in DeckManager.cpp performs some weird magic, swapping data between its cache and the "retList" from this function
-                //Bottom line, we need to guarantee retList contains exactly the same items as (or updated versions of) the items in DeckManager Cache
-                //In other words, any meta data that didn't make it to retList in this function must be erased from the DeckManager cache
-                deckManager->DeleteMetaData(filename.str(), isAI);
+                std::ostringstream playerStatsDeckName;
+                playerStatsDeckName << "stats/player_deck" << nbDecks << ".txt";
+                meta->mStatsFilename = options.profileFile(playerStatsDeckName.str());
+                meta->mIsAI = false;
             }
-
-            nbDecks++;
+            retList.push_back(meta);
         }
-        meta = NULL;
+        else
+        {
+            //updateMetaDataList in DeckManager.cpp performs some weird magic, swapping data between its cache and the "retList" from this function
+            //Bottom line, we need to guarantee retList contains exactly the same items as (or updated versions of) the items in DeckManager Cache
+            //In other words, any meta data that didn't make it to retList in this function must be erased from the DeckManager cache
+            deckManager->DeleteMetaData(filename.str(), isAI);
+        }
     }
     // Now decks can be sorted by name or by creation date.
     if(!options[Options::SORTINGDECKS].number)
