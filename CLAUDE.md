@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Fork branch map
+
+- `master`                = upstream `WagicProject/wagic`
+- `john/android-rp5`      = Android port (gamepad mapping, swipe fix, ECL crash fix) — tag `verified-android-2026-04-19`
+- `wagic-v145-windows`    = unified release branch (Android port + VS2022 v145 + zipFS + cherry-picks)
+- `feature/*`             = work ready to land (deck-editor delete, version display)
+- `wip/*`                 = work parked / preserved (Steam Deck, S9-fix attempts, card-data testing, build tooling, uncategorized notes)
+- `john/android-s9-fix`   = active branch for the S9 Tablet input regression hunt
+
+See `LOCAL_CHANGES.md` for one-row-per-change history and `BUILD_LOG.md` for the device-install log.
+
 ## Project Overview
 
 **Wagic, the Homebrew** is a C++ card game engine (Magic: The Gathering-like) targeting PSP, Android, iOS, Windows, macOS, and Linux. The codebase has two main layers:

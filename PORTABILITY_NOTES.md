@@ -76,7 +76,8 @@ Everything in this table currently appears as a hardcoded literal somewhere in t
 | Android SDK | `C:\Android-SDK\` | patch_apk.py, ADB commands |
 | Android SDK build-tools version | `26.0.3` | patch_apk.py |
 | Android NDK | `C:\android-ndk-r22\` | build commands |
-| Device ADB serial | `d15e0854` | every ADB command in docs |
+| Device ADB serial (RP5) | `d15e0854` | every ADB command in docs |
+| Device ADB serial (S9 Tablet) | `R52X10ACZCW` | captured 2026-05-07; not yet referenced in §6 — substitute when running S9-only commands |
 | Device SD card UUID | `3963-3235` | device push targets |
 | Android app package | `net.wagic.app` | device paths, adb install |
 | Active player profile | `Maxglee` | collection.dat and deck file location |
