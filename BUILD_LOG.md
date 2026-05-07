@@ -23,7 +23,7 @@ Device serials:
 2026-05-07 e1db9f205             device=S9      result=pass — taps work after scoping joystick init `#ifndef ANDROID`
 2026-05-07 e1db9f205             device=RP5     result=pass — gamepad still works (SDL joystick path was unused on RP5; gamepad goes via Java keysyms)
 2026-05-07 e1db9f205             device=Windows result=pass — VS2022 v145 Release/Win32 builds Wagic.exe; #ifndef ANDROID is no-op on Windows
-2026-05-07 <next>                device=Windows result=pass — Quick Game now shows land icon (mIcons[12] + i<6 + modrules.xml iconId=6)
-2026-05-07 <next>                device=S9      result=pass — same after pushing modrules.xml to /storage/0449-B4A1/.../Wagic/Res/rules/
-2026-05-07 <next>                device=RP5     result=pass — same after pushing modrules.xml to /storage/3963-3235/.../Wagic/Res/rules/
+2026-05-07 6a26c874d                device=Windows result=pass — Quick Game now shows land icon (mIcons[12] + i<6 + modrules.xml iconId=6)
+2026-05-07 6a26c874d                device=S9      result=pass — same after pushing modrules.xml to /storage/0449-B4A1/.../Wagic/Res/rules/
+2026-05-07 6a26c874d                device=RP5     result=pass — same after pushing modrules.xml to /storage/3963-3235/.../Wagic/Res/rules/
 ```
