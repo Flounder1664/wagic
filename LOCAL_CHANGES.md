@@ -21,7 +21,8 @@ Tracks changes made on `Flounder1664/wagic` that are not in upstream `WagicProje
 | 2026-05-07 | wagic-v145-windows         | 246f729aa  | .gitignore additions for build outputs and Scryfall dumps          | N/A                  | hygiene |
 | 2026-05-07 | john/android-s9-fix        | 9de163a7a  | LOCAL_CHANGES.md, BUILD_LOG.md, CLAUDE.md branch-map, PORTABILITY_NOTES.md S9 serial | N/A | housekeeping; bug-hunt branch |
 | 2026-05-07 | john/android-s9-fix        | 41c82285c  | SDLActivity.java flipEGL try/catch + GameStateMenu.cpp bgTexture lock fix (cherry-picked safe parts of wip/s9-fix-attempts) | RP5, S9 (after data fix) | defensive; harmless |
-| 2026-05-07 | john/android-s9-fix        | (next commit) | SDLmain.cpp: scope `SDL_JoystickOpen` + `SDL_JoystickEventState(SDL_ENABLE)` `#ifndef ANDROID` | **RP5 gamepad OK + S9 taps OK** | **S9 input regression fixed** |
+| 2026-05-07 | john/android-s9-fix        | e1db9f205  | SDLmain.cpp: scope `SDL_JoystickOpen` + `SDL_JoystickEventState(SDL_ENABLE)` `#ifndef ANDROID` | **RP5 gamepad OK + S9 taps OK + Windows v145 builds clean** | **S9 input regression fixed**; merged into wagic-v145-windows at `488cba426`; tag `verified-android-2026-05-07` |
+| 2026-05-07 | wagic-v145-windows         | (next commit) | GameStateMenu.{cpp,h} expand mIcons[10]→[12] and `for i<5`→`for i<6`; modrules.xml updated to iconId=6 for Quick Game (cherry-picked from wip/card-data-may) | RP5 + S9 + Windows | Quick Game now uses the 6th menu-icon column (land sprite at slot 5/6 of miconslarge.png 504×144) |
 
 ## Diagnostic notes (2026-05-07)
 

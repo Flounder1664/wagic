@@ -17,7 +17,7 @@ private:
     SimpleMenu* subMenuController;
     SimpleMenu* gameTypeMenu;
     bool hasChosenGameType;
-    JQuadPtr mIcons[10];
+    JQuadPtr mIcons[12];
     JTexture * bgTexture;
     JQuadPtr mBg;
     JTexture * splashTex;
