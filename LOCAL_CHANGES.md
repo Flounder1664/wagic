@@ -19,4 +19,5 @@ Tracks changes made on `Flounder1664/wagic` that are not in upstream `WagicProje
 | 2026-05-07 | wip/build-tooling          | 3163558d9  | patch_*.py, fetch_*.py, build_full_sets.py, push_*.bat, new_set_cards.json | dev-only            | utility scripts |
 | 2026-05-07 | wip/uncategorized-may      | 2dc9b3c16  | CLAUDE.md, JGE/test_jlogger_usage.cpp, TODO_new_sets.md, root_cause_analysis.md, ndk_build_log2.txt | N/A | notes/scratch |
 | 2026-05-07 | wagic-v145-windows         | 246f729aa  | .gitignore additions for build outputs and Scryfall dumps          | N/A                  | hygiene |
-| 2026-05-07 | john/android-s9-fix        | (this commit) | LOCAL_CHANGES.md, BUILD_LOG.md, CLAUDE.md branch-map, PORTABILITY_NOTES.md S9 serial | N/A | housekeeping; bug-hunt branch |
+| 2026-05-07 | john/android-s9-fix        | 9de163a7a  | LOCAL_CHANGES.md, BUILD_LOG.md, CLAUDE.md branch-map, PORTABILITY_NOTES.md S9 serial | N/A | housekeeping; bug-hunt branch |
+| 2026-05-07 | john/android-s9-fix        | (next commit) | SDLActivity.java flipEGL try/catch + GameStateMenu.cpp bgTexture lock fix (cherry-picked safe parts of wip/s9-fix-attempts) | needs build & test on RP5 + S9 + Windows | defensive; not yet known to fix S9 regression — bisect of 24 Apr suspects still required |
