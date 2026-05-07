@@ -2,6 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+# External Tool & Model Routing
+
+`qwen-logic-high`, `deepseek-r1:14b`, and Gemini are external models invoked via
+shell, not Claude Code subagents. Claude is the only agent in the loop.
+
+## Delegation triggers
+
+| Trigger | Delegate to | How |
+|---|---|---|
+| Bulk mechanical refactor or boilerplate test scaffolding | `qwen-logic-high:latest` (Ollama) | `ollama run qwen-logic-high:latest` via Bash, prompt on stdin |
+| Stuck or recursive bug — want a second reasoning pass | `deepseek-r1:14b` (Ollama) | same pattern |
+| Image analysis, UI screenshot, sprite description | Gemini 2.5 Flash | `curl` to `generativelanguage.googleapis.com/v1beta/...`, key from `$GEMINI_API_KEY` |
+| Sprite resize / palettize | LibreSprite CLI | `C:\Portable_Apps\libresprite\libresprite.exe -b in.png --scale N --save-as out.png` |
+
+Default: Claude edits directly. Delegate only when a trigger above fits.
+
+## 32x32 sprite conversion
+
+```bat
+C:\Portable_Apps\libresprite\libresprite.exe -b input.png --scale 0.0625 --save-as output.png
+```
+
 ## Project Overview
 
 **Wagic, the Homebrew** is a C++ card game engine (Magic: The Gathering-like) targeting PSP, Android, iOS, Windows, macOS, and Linux. The codebase has two main layers:
@@ -40,7 +62,15 @@ ant debug -f projects/mtg/Android/build.xml
 
 ### Windows
 
-Open `projects/mtg/Windows/mtg_vs2010.sln` in Visual Studio.
+Requires Visual Studio Build Tools 2019+ (toolset v145). Build `template.vcxproj` directly — do **not** use the `.sln` (the SDL sub-project fails on modern Windows SDKs):
+
+```bat
+"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\MSBuild.exe" ^
+  "projects\mtg\template.vcxproj" ^
+  /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v145 /m /nologo
+```
+
+Output: `projects/mtg/bin/Wagic.exe`. Deploy that folder (including `SDL.dll` from `JGE/Dependencies/lib/` and the `Res/` and `User/` directories).
 
 ### Version update (required before building releases)
 
