@@ -203,59 +203,8 @@ The user's preference is for something portable between *their* Windows PC and a
 
 These are live bugs/gaps the next dev session should pick up after portability is done. They are documented here so they don't get lost; they do NOT block the tidy-up.
 
-### ECL card images not showing in deck editor
-Symptom: ECL cards render as text-only in the deck editor; full-size art and thumbnails never appear. Crash is fixed (see §9 above), this is now purely "images missing". Confirmed separately by user Apr 19 2026.
-
-What's known:
-- `User/sets/ECL/ECL.zip` exists on device at
-  `/storage/3963-3235/Android/data/net.wagic.app/files/Wagic/User/sets/ECL/ECL.zip`
-  — 25 MB, timestamp 2026-04-17.
-- A `thumbnails/` directory sits next to ECL.zip on device but is empty.
-  Images are therefore expected to be INSIDE the zip (ECL-style shipping).
-- The in-built image downloader was tried; it crashed the game. Since the
-  user's fork has no ECL entries in `CardImageLinks.csv` and the app
-  downloads the CSV from upstream WagicProject releases (which also lack
-  ECL), the downloader path is a dead end for ECL anyway. Acceptable.
-- Expected lookup path (traced Apr 19):
-  `MTGCard::getImageName()` → `"696600.jpg"`
-  → `RetrieveCard` builds `"ECL/696600.jpg"`
-  → `WCachedTexture::Attempt` (WCachedResource.cpp:207) for thumbs inserts
-    `thumbnails/` after the first `/` → `"ECL/thumbnails/696600.jpg"`
-  → `ResourceManagerImpl::cardFile` (WResourceManager.cpp:703) splits on
-    first `/`, set="ECL", rest="thumbnails/696600.jpg" (or "696600.jpg"
-    for full-size)
-  → tries `fs->AttachZipFile("sets/ECL/ECL.zip")`
-  → if attached, returns the rest; full-size is expected at
-    `<id>.jpg` at zip root, thumb at `thumbnails/<id>.jpg`.
-
-Not yet verified (pick up here):
-1. **Actual internal layout of `ECL.zip`.** Open the file
-   (`unzip -l M:\Claude_projects\wagic\ECL.zip`) or pull the device copy
-   and confirm it has `696600.jpg` / `thumbnails/696600.jpg` at the
-   expected positions. If images are instead under `ECL/696600.jpg` or
-   similar nested path, that's the bug — rebuild the zip.
-2. **Where `AttachZipFile("sets/ECL/ECL.zip")` actually looks on Android.**
-   JFileSystem has a resource root; is it `Res/` (so it looks in
-   `Res/sets/ECL/ECL.zip` inside the main core.zip, not in User/)? Or is
-   User/ also in its search path? Grep `JFileSystem::Init` / the
-   resource-root setup in JGE/src/android/. If User/sets/ is NOT on the
-   search path, either:
-   - move ECL.zip into core.zip under `sets/ECL/ECL.zip` (bloats core.zip
-     by 25 MB), OR
-   - add a search-path entry so User/sets/ is scanned, OR
-   - ship a small `_cards.dat` + zip under User/ using whatever mechanism
-     Wagic already supports for user-added sets (check existing code for
-     how user-added sets are loaded — there's precedent).
-3. **Whether thumbnail fallback is firing.** If the zip is found but the
-   thumb path isn't, the code falls back to `kGenericThumbCard` silently
-   — you'd see blank/placeholder rather than a useful error. Add a
-   `DebugTrace` or pull a fresh logcat while opening the ECL deck and
-   grep for `"Can't locate"` / `"thumbnail"`.
-
-Suggested first move: run `unzip -l` on `M:\Claude_projects\wagic\ECL.zip`
-to confirm internal layout. If that's wrong, the fix is a rebuild of the
-zip. If that's right, the bug is on the resource-root side and needs a
-logcat during deck-editor open.
+### ECL card images not showing in deck editor — RESOLVED (Apr 30 2026)
+ECL cards now render correctly in the deck editor. See `project_completed_changes.md` for details. The earlier diagnostic trace through `MTGCard::getImageName` / `WCachedTexture::Attempt` / `ResourceManagerImpl::cardFile` / `JFileSystem::AttachZipFile` is no longer relevant.
 
 ### Image downloader crashes the game
 Low priority. User confirmed acceptable — the CSV-based downloader isn't
