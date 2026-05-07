@@ -1151,6 +1151,9 @@ public class SDLActivity extends Activity implements OnKeyListener {
 		enterImmersiveMode();
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+		getWindow().setAttributes(lp);
 
 		// So we can call stuff from static callbacks
 		mSingleton = this;
@@ -1829,7 +1832,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // EGL buffer flip
     public void flipEGL() {
         if (!mSurfaceValid) {
-            createSurface(this.getHolder());
+            try {
+                createSurface(this.getHolder());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "flipEGL: surface not ready, skipping frame: " + e.getMessage());
+                return;
+            }
         }
 
         try {
