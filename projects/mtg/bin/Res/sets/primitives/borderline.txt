@@ -132074,3 +132074,15 @@ subtype=Devil
 power=2
 toughness=3
 [/card]
+[card]
+name=Bottomless Pool // Locker Room
+other={4}{U} name(Locker Room)
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+auto={4}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Locker Room) name(Unlock Locker Room) unlockdoor:2 asSorcery
+auto={U} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Bottomless Pool) name(Unlock Bottomless Pool) unlockdoor:1 asSorcery
+text=Bottomless Pool ({U}, Door 1) or Locker Room ({4}{U}, Door 2). The unlocked door places a Door counter on this card. Pay the other half's mana cost at sorcery speed to unlock the other door.
+mana={U}
+type=Enchantment
+subtype=Room
+[/card]

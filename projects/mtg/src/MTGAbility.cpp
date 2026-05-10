@@ -1634,8 +1634,20 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             playerName = card->controller()->opponent()->getDisplayName();
         } else if(from.size() && from[1] == "controller"){
             playerName = card->controller()->getDisplayName();
-        } 
+        }
         return NEW TrCardDungeonCompleted(observer, id, card, tc, once, limitOnceATurn, totaldng, playerName);
+    }
+
+    //A Room has been fully unlocked (Duskmourn Rooms)
+    if (TargetChooser * tc = parseSimpleTC(s, "roomfullyunlocked", card)){
+        string playerName = "";
+        vector<string>from = parseBetween(s, "from(",")");
+        if(from.size() && from[1] == "opponent"){
+            playerName = card->controller()->opponent()->getDisplayName();
+        } else if(from.size() && from[1] == "controller"){
+            playerName = card->controller()->getDisplayName();
+        }
+        return NEW TrCardRoomFullyUnlocked(observer, id, card, tc, once, limitOnceATurn, playerName);
     }
 
     //Roll die has been performed from a card
@@ -4369,6 +4381,17 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         }
         Targetable * t = spell ? spell->getNextTarget() : NULL;
         MTGAbility * a = NEW AAAlterDungeonCompleted(observer, id, card, t, dungeoncompleted, NULL, who);
+        a->oneShot = 1;
+        return a;
+    }
+
+    //unlock a Room door (Duskmourn Rooms)
+    vector<string> splitUnlockDoor = parseBetween(s, "unlockdoor:", " ", false);
+    if (splitUnlockDoor.size())
+    {
+        int doorNum = atoi(splitUnlockDoor[1].c_str());
+        if (doorNum != 1 && doorNum != 2) doorNum = 1;
+        MTGAbility * a = NEW AAAlterDoorUnlocked(observer, id, card, card, doorNum, NULL);
         a->oneShot = 1;
         return a;
     }

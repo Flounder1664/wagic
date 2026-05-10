@@ -29,4 +29,5 @@ Device serials:
 2026-05-07 f65a30263                device=Windows result=pass — delete-deck + version-display 0.25.7 (resource 0.25.6) verified
 2026-05-07 f65a30263                device=S9      result=pass — same; pushed Wagic-core-0256.zip to SD UUID 0449-B4A1
 2026-05-07 f65a30263                device=RP5     result=pass — same; refreshed Wagic-core-0256.zip (May-4 58 MB build)
+2026-05-10 feature/duskmourn-rooms  device=Windows result=build-pass — VS2022 v145 Release/Win32 builds clean (7 warnings, 0 errors); Wagic.exe + Wagic-core-0256.zip + DSK 673448 image deployed to G:\Wagic-windows\; gameplay verification pending
 ```

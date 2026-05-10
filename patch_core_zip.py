@@ -15,6 +15,10 @@ REPLACEMENTS = {
         os.path.join(_RES, "sets", "primitives", "mtg.txt"),
     'sets/primitives/planeswalkers.txt':
         os.path.join(_RES, "sets", "primitives", "planeswalkers.txt"),
+    'sets/primitives/borderline.txt':
+        os.path.join(_RES, "sets", "primitives", "borderline.txt"),
+    'sets/primitives/_macros.txt':
+        os.path.join(_RES, "sets", "primitives", "_macros.txt"),
 }
 
 print(f'Rebuilding {CORE_ZIP} with updated primitives...')

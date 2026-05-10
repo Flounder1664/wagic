@@ -1374,6 +1374,49 @@ AAAlterDungeonCompleted::~AAAlterDungeonCompleted()
 {
 }
 
+//AA Door Unlocked (Duskmourn Rooms)
+AAAlterDoorUnlocked::AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, int doorNumber, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0), doorNumber(doorNumber)
+{
+    target = _target;
+    aType = MTGAbility::COUNTERS;
+}
+
+int AAAlterDoorUnlocked::resolve()
+{
+    MTGCardInstance * room = source;
+    if (!room || !room->counters) return 0;
+
+    const char * counterName = (doorNumber == 2) ? "Door2" : "Door1";
+    const char * otherName   = (doorNumber == 2) ? "Door1" : "Door2";
+
+    if (room->counters->hasCounter(counterName, 0, 0))
+        return 0;
+
+    room->counters->addCounter(counterName, 0, 0, false, false, source);
+
+    if (room->counters->hasCounter(otherName, 0, 0))
+    {
+        WEvent * e = NEW WEventRoomFullyUnlocked(room, room->controller()->getDisplayName());
+        game->receiveEvent(e);
+    }
+    return 1;
+}
+
+const string AAAlterDoorUnlocked::getMenuText()
+{
+    return doorNumber == 2 ? _("Unlock Door 2").c_str() : _("Unlock Door 1").c_str();
+}
+
+AAAlterDoorUnlocked * AAAlterDoorUnlocked::clone() const
+{
+    return NEW AAAlterDoorUnlocked(*this);
+}
+
+AAAlterDoorUnlocked::~AAAlterDoorUnlocked()
+{
+}
+
 //AA Yidaro Count
 AAAlterYidaroCount::AAAlterYidaroCount(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int yidarocount, ManaCost * _cost,
         int who) :
