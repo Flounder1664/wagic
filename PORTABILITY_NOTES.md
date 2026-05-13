@@ -156,6 +156,42 @@ C:\Android-SDK\platform-tools\adb.exe -s d15e0854 push `
   /storage/3963-3235/Android/data/net.wagic.app/files/Wagic/Res/Wagic-core-0255.zip
 ```
 
+### Windows C++ change → deploy
+
+The Windows binary is built from `projects/mtg/template.vcxproj` (NOT the stale `mtg_vs2010.sln`) using the VS2022 BuildTools install + the v145 toolset (Win32 / Release):
+
+```powershell
+# 1. Build Wagic.exe
+& 'C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\MSBuild.exe' `
+  'M:\Claude_projects\wagic\projects\mtg\template.vcxproj' `
+  /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v145 /m /nologo
+
+# Output → M:\Claude_projects\wagic\projects\mtg\bin\Wagic.exe
+
+# 2. Back up the previous Wagic.exe (rolling-old convention on G:\)
+copy 'G:\Wagic-windows\Wagic.exe' "G:\Wagic-windows\Wagic.exe.old.$(Get-Date -Format yyyyMMdd)"
+
+# 3. Deploy
+copy 'M:\Claude_projects\wagic\projects\mtg\bin\Wagic.exe' 'G:\Wagic-windows\Wagic.exe'
+```
+
+Engine source (e.g. `JGE/src/SDLmain.cpp`, `projects/mtg/src/*`) lives on `wagic-v145-windows`. Any feature branch that needs a Windows binary should be cut off that branch so the v145 toolset config in `projects/mtg/mtg.props` is in scope. Verbose output: append `/verbosity:detailed`.
+
+### Windows card-data change → deploy
+
+```powershell
+# 1. Patch the in-tree core.zip with the latest primitives/cards
+python M:\Claude_projects\wagic\patch_core_zip.py
+
+# 2. Deploy with the VERSIONED name expected by Wagic_Version.h
+copy 'M:\Claude_projects\wagic\projects\mtg\bin\Res\core.zip' `
+     'G:\Wagic-windows\Res\Wagic-core-0256.zip'
+```
+
+The current resource version is `0256` (see `WAGIC_RESOURCE_*` in [projects/mtg/include/Wagic_Version.h](projects/mtg/include/Wagic_Version.h:21)). On Windows, `JGE/src/zipFS/zfsystem.cpp:50` globs every `*.zip` in `Res\` alphabetically and the alphabetically-last entry wins for duplicate filenames — so rename any stale `core.zip` / `Wagic-core-0255.zip` in `G:\Wagic-windows\Res\` to `*.zip.old.<date>` before deploying, otherwise the new zip is silently shadowed. (Burned 90 minutes on this on 2026-05-10.)
+
+Zips also need explicit directory marker entries (zero-byte `sets/`, `sets/DSK/`, etc.) — without them `scanfolder` returns empty and Wagic loads zero sets from the zip. `patch_core_zip.py` was updated 2026-05-11 to emit these markers regardless of the source zip's quirks.
+
 ### Verifying a push landed
 
 MTP / Windows Explorer often caches file timestamps. Verify via adb:
