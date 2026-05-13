@@ -132077,11 +132077,13 @@ toughness=3
 [card]
 name=Bottomless Pool // Locker Room
 other={4}{U} name(Locker Room)
-auto=ifnot paid(alternative) then unlockdoor:1
-auto=alternative unlockdoor:2
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Bottomless Pool ETB) target(creature|battlefield) moveto(hand)
+auto=@damaged(player) from(creature|myBattlefield) restriction{compare(hascntdoor2)~equalto~1}:name(Locker Room draw) draw:1 controller
 auto={4}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Locker Room) name(Unlock Locker Room) unlockdoor:2 asSorcery
 auto={U} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Bottomless Pool) name(Unlock Bottomless Pool) unlockdoor:1 asSorcery
-text=Bottomless Pool ({U}, Door 1) or Locker Room ({4}{U}, Door 2). The unlocked door places a Door counter on this card. Pay the other half's mana cost at sorcery speed to unlock the other door.
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Bottomless Pool (Door 1, {U}): When you unlock this door, return target creature to its owner's hand. -- Locker Room (Door 2, {4}{U}): Whenever a creature you control deals combat damage to a player, draw a card.
 mana={U}
 type=Enchantment
 subtype=Room

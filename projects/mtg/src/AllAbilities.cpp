@@ -1384,11 +1384,20 @@ AAAlterDoorUnlocked::AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCar
 
 int AAAlterDoorUnlocked::resolve()
 {
+    // Always operate on the ability's source — the Room card itself. `target`
+    // here is whatever the wrapping activated ability bound (e.g. a creature
+    // selected for a chained bounce effect), which is the wrong card to
+    // mutate.
     MTGCardInstance * room = source;
     if (!room || !room->counters) return 0;
 
-    const char * counterName = (doorNumber == 2) ? "Door2" : "Door1";
-    const char * otherName   = (doorNumber == 2) ? "Door1" : "Door2";
+    // Walk to the live instance (counter mutations follow the same pattern as AACounter).
+    while (room->next) room = room->next;
+
+    // Counter names match the engine's `hascntdoorN` lookup, which extracts
+    // the suffix lowercase (addMagicText lowercases the entire auto= line).
+    const char * counterName = (doorNumber == 2) ? "door2" : "door1";
+    const char * otherName   = (doorNumber == 2) ? "door1" : "door2";
 
     if (room->counters->hasCounter(counterName, 0, 0))
         return 0;
