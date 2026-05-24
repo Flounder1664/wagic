@@ -387,6 +387,11 @@ WEventCardDungeonCompleted::WEventCardDungeonCompleted(MTGCardInstance * card, i
 {
 }
 
+WEventRoomFullyUnlocked::WEventRoomFullyUnlocked(MTGCardInstance * card, string playerName) :
+    WEventCardUpdate(card), playerName(playerName)
+{
+}
+
 WEventCardRollDie::WEventCardRollDie(MTGCardInstance * card, string playerName) :
     WEventCardUpdate(card), playerName(playerName)
 {
@@ -685,6 +690,12 @@ Targetable * WEventCardBearerChosen::getTarget(int target)
 }
 
 Targetable * WEventCardDungeonCompleted::getTarget(int target)
+{
+    if (target) return card;
+    return NULL;
+}
+
+Targetable * WEventRoomFullyUnlocked::getTarget(int target)
 {
     if (target) return card;
     return NULL;

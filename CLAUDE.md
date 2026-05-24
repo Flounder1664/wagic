@@ -51,7 +51,15 @@ ant debug -f projects/mtg/Android/build.xml
 
 ### Windows
 
-Open `projects/mtg/Windows/mtg_vs2010.sln` in Visual Studio.
+This fork builds with VS2022 BuildTools + the v145 toolset, NOT the stale `mtg_vs2010.sln`:
+
+```powershell
+& 'C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\MSBuild.exe' `
+  'projects\mtg\template.vcxproj' `
+  /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v145 /m /nologo
+```
+
+Output: `projects\mtg\bin\Wagic.exe`. Cut feature branches off `wagic-v145-windows` so `projects/mtg/mtg.props` (with the v145 toolset config) is in scope. Full build + deploy runbook (including the `G:\Wagic-windows\Res\*.zip` shadowing gotcha) is in [PORTABILITY_NOTES.md](PORTABILITY_NOTES.md) §6.
 
 ### Version update (required before building releases)
 

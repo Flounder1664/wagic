@@ -132074,3 +132074,182 @@ subtype=Devil
 power=2
 toughness=3
 [/card]
+[card]
+name=Bottomless Pool // Locker Room
+other={4}{U} name(Locker Room)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Bottomless Pool ETB) target(creature|battlefield) moveto(hand)
+auto=@damaged(player) from(creature|myBattlefield) restriction{compare(hascntdoor2)~equalto~1}:name(Locker Room draw) draw:1 controller
+auto={4}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Locker Room) name(Unlock Locker Room) unlockdoor:2 asSorcery
+auto={U} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Bottomless Pool) name(Unlock Bottomless Pool) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Bottomless Pool (Door 1, {U}): When you unlock this door, return target creature to its owner's hand. -- Locker Room (Door 2, {4}{U}): Whenever a creature you control deals combat damage to a player, draw a card.
+mana={U}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Grand Entryway // Elegant Rotunda
+other={2}{W} name(Elegant Rotunda)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Grand Entryway ETB) token(Glimmer,Enchantment Creature Glimmer,1/1,white)
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Elegant Rotunda ETB) target(creature|battlefield) counter(1/1)
+auto={2}{W} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Elegant Rotunda) name(Unlock Elegant Rotunda) unlockdoor:2 asSorcery
+auto={1}{W} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Grand Entryway) name(Unlock Grand Entryway) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Grand Entryway (Door 1, {1}{W}): When you unlock this door, create a 1/1 white Glimmer enchantment creature token. -- Elegant Rotunda (Door 2, {2}{W}): When you unlock this door, put a +1/+1 counter on target creature. (Wagic approximation of "up to two".)
+mana={1}{W}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Surgical Suite // Hospital Room
+other={3}{W} name(Hospital Room)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Surgical Suite ETB) target(creature[manacost<=3]|mygraveyard) moveto(mybattlefield)
+auto=@combat(attacking) source(creature|myBattlefield) restriction{compare(hascntdoor2)~equalto~1}:name(Hospital Room counter) target(creature[attacking]|mybattlefield) counter(1/1)
+auto={3}{W} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Hospital Room) name(Unlock Hospital Room) unlockdoor:2 asSorcery
+auto={1}{W} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Surgical Suite) name(Unlock Surgical Suite) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Surgical Suite (Door 1, {1}{W}): When you unlock this door, return target creature card with mana value 3 or less from your graveyard to the battlefield. -- Hospital Room (Door 2, {3}{W}): Whenever you attack, put a +1/+1 counter on target attacking creature.
+mana={1}{W}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Meat Locker // Drowned Diner
+other={3}{U}{U} name(Drowned Diner)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Meat Locker ETB) target(creature|battlefield) tap(noevent) and!( counter(0/0.2.stun) )!
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Drowned Diner ETB) draw:3 controller && discard:1 controller
+auto={3}{U}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Drowned Diner) name(Unlock Drowned Diner) unlockdoor:2 asSorcery
+auto={2}{U} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Meat Locker) name(Unlock Meat Locker) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Meat Locker (Door 1, {2}{U}): When you unlock this door, tap target creature and put two stun counters on it. -- Drowned Diner (Door 2, {3}{U}{U}): When you unlock this door, draw three cards, then discard a card.
+mana={2}{U}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Funeral Room // Awakening Hall
+other={6}{B}{B} name(Awakening Hall)
+auto=@movedto(creature|mygraveyard) from(mybattlefield) restriction{compare(hascntdoor1)~equalto~1}:name(Funeral Room drain) life:-1 opponent && life:1 controller
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Awakening Hall ETB) all(creature|mygraveyard) moveto(mybattlefield)
+auto={6}{B}{B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Awakening Hall) name(Unlock Awakening Hall) unlockdoor:2 asSorcery
+auto={2}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Funeral Room) name(Unlock Funeral Room) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Funeral Room (Door 1, {2}{B}): Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life. -- Awakening Hall (Door 2, {6}{B}{B}): When you unlock this door, return all creature cards from your graveyard to the battlefield.
+mana={2}{B}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Unholy Annex // Ritual Chamber
+other={3}{B}{B} name(Ritual Chamber)
+auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex draw) draw:1 controller
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Ritual Chamber ETB) token(Demon,Creature Demon,6/6,black,flying)
+auto={3}{B}{B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Ritual Chamber) name(Unlock Ritual Chamber) unlockdoor:2 asSorcery
+auto={2}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Unholy Annex) name(Unlock Unholy Annex) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Unholy Annex (Door 1, {2}{B}): At the beginning of your end step, draw a card. (Simplified: original card also has Demon-conditional drain.) -- Ritual Chamber (Door 2, {3}{B}{B}): When you unlock this door, create a 6/6 black Demon creature token with flying.
+mana={2}{B}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Glassworks // Shattered Yard
+other={4}{R} name(Shattered Yard)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Glassworks ETB) target(creature|opponentbattlefield) damage:4
+auto=@each my end restriction{compare(hascntdoor2)~equalto~1}:name(Shattered Yard ping) damage:1 all(opponent)
+auto={4}{R} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Shattered Yard) name(Unlock Shattered Yard) unlockdoor:2 asSorcery
+auto={2}{R} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Glassworks) name(Unlock Glassworks) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Glassworks (Door 1, {2}{R}): When you unlock this door, this Room deals 4 damage to target creature an opponent controls. -- Shattered Yard (Door 2, {4}{R}): At the beginning of your end step, this Room deals 1 damage to each opponent.
+mana={2}{R}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Painter's Studio // Defaced Gallery
+other={1}{R} name(Defaced Gallery)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Painter's Studio ETB) all(*[zpos<=1]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )!
+auto=@combat(attacking) source(creature|myBattlefield) restriction{compare(hascntdoor2)~equalto~1}:name(Defaced Gallery pump) all(creature[attacking]|mybattlefield) transforms((,newability[counter(1/0)])) ueot
+auto={1}{R} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Defaced Gallery) name(Unlock Defaced Gallery) unlockdoor:2 asSorcery
+auto={2}{R} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Painter's Studio) name(Unlock Painter's Studio) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Painter's Studio (Door 1, {2}{R}): When you unlock this door, exile the top two cards of your library. You may play them this turn. (Wagic simplification: "until end of next turn" treated as "this turn".) -- Defaced Gallery (Door 2, {1}{R}): Whenever you attack, attacking creatures you control get +1/+0 until end of turn.
+mana={2}{R}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Restricted Office // Lecture Hall
+other={5}{U}{U} name(Lecture Hall)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Restricted Office ETB) all(creature[power>=3]|battlefield) destroy
+auto=this(compare(hascntdoor2)~equalto~1) lord(other *|mybattlefield) hexproof
+auto={5}{U}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Lecture Hall) name(Unlock Lecture Hall) unlockdoor:2 asSorcery
+auto={2}{W}{W} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Restricted Office) name(Unlock Restricted Office) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Restricted Office (Door 1, {2}{W}{W}): When you unlock this door, destroy all creatures with power 3 or greater. -- Lecture Hall (Door 2, {5}{U}{U}): Other permanents you control have hexproof.
+mana={2}{W}{W}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Roaring Furnace // Steaming Sauna
+other={3}{U}{U} name(Steaming Sauna)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Roaring Furnace ETB) target(creature|opponentbattlefield) damage:phandcount
+auto=@each my end restriction{compare(hascntdoor2)~equalto~1}:name(Steaming Sauna draw) draw:1 controller
+auto={3}{U}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Steaming Sauna) name(Unlock Steaming Sauna) unlockdoor:2 asSorcery
+auto={1}{R} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Roaring Furnace) name(Unlock Roaring Furnace) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Roaring Furnace (Door 1, {1}{R}): When you unlock this door, this Room deals damage equal to the number of cards in your hand to target creature an opponent controls. -- Steaming Sauna (Door 2, {3}{U}{U}): At the beginning of your end step, draw a card. (Wagic simplification: "no maximum hand size" omitted.)
+mana={1}{R}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Cramped Vents // Access Maze
+other={5}{B}{B} name(Access Maze)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Cramped Vents ETB) target(creature|opponentbattlefield) damage:6
+auto={5}{B}{B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Access Maze) name(Unlock Access Maze) unlockdoor:2 asSorcery
+auto={3}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Cramped Vents) name(Unlock Cramped Vents) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Cramped Vents (Door 1, {3}{B}): When you unlock this door, this Room deals 6 damage to target creature an opponent controls. (Wagic simplification: excess-as-life omitted.) -- Access Maze (Door 2, {5}{B}{B}): UNSUPPORTED in Wagic (life-as-alt-cost). Unlock available but the static effect doesn't apply.
+mana={3}{B}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Polluted Cistern // Dim Oubliette
+other={4}{B} name(Dim Oubliette)
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Dim Oubliette ETB) all(*[zpos<=2]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[target(creature|mygraveyard) moveto(mybattlefield)])) ueot )!
+auto={4}{B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Dim Oubliette) name(Unlock Dim Oubliette) unlockdoor:2 asSorcery
+auto={1}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Polluted Cistern) name(Unlock Polluted Cistern) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Polluted Cistern (Door 1, {1}{B}): UNSUPPORTED in Wagic (card-type count). Unlock available but the static effect doesn't apply. -- Dim Oubliette (Door 2, {4}{B}): When you unlock this door, mill three cards, then return a creature card from your graveyard to the battlefield.
+mana={1}{B}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Spiked Corridor // Torture Pit
+other={3}{R} name(Torture Pit)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Spiked Corridor ETB) token(Devil,Creature Devil,1/1,red) and!( transforms((,newability[@movedto(this|mygraveyard):damage:1 target(anytarget)])) forever )!*3
+auto={3}{R} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Torture Pit) name(Unlock Torture Pit) unlockdoor:2 asSorcery
+auto={3}{R} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Spiked Corridor) name(Unlock Spiked Corridor) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Spiked Corridor (Door 1, {3}{R}): When you unlock this door, create three 1/1 red Devil creature tokens with "When this token dies, it deals 1 damage to any target." -- Torture Pit (Door 2, {3}{R}): UNSUPPORTED in Wagic (damage-replacement). Unlock available but the static effect doesn't apply.
+mana={3}{R}
+type=Enchantment
+subtype=Room
+[/card]
