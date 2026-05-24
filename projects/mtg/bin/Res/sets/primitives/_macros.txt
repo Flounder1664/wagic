@@ -388,3 +388,17 @@
 
 # Vehicle Token
 #AUTO_DEFINE _VEHICLE_ token(Vehicle^Artifact Vehicle^3/2) and!( transforms((,newability[{crew(other creature[power>=1]|myBattlefield)}:name(crew 1 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}])) forever )!
+
+# Earthbend N (TLA) - target land becomes 0/0 Elemental creature with haste and N +1/+1 counters; still a land; returns tapped when it dies or is exiled
+#AUTO_DEFINE _EARTHBEND1_ name(Earthbend 1) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
+#AUTO_DEFINE _EARTHBEND2_ name(Earthbend 2) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.2)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
+#AUTO_DEFINE _EARTHBEND3_ name(Earthbend 3) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.3)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
+#AUTO_DEFINE _EARTHBEND4_ name(Earthbend 4) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.4)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
+#AUTO_DEFINE _EARTHBEND5_ name(Earthbend 5) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.5)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
+
+# Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
+#AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R}
+#AUTO_DEFINE _FIREBEND2_ @combat(attacking) source(this):Add{R}{R}
+#AUTO_DEFINE _FIREBEND3_ @combat(attacking) source(this):Add{R}{R}{R}
+#AUTO_DEFINE _FIREBEND4_ @combat(attacking) source(this):Add{R}{R}{R}{R}
+#AUTO_DEFINE _FIREBEND5_ @combat(attacking) source(this):Add{R}{R}{R}{R}{R}

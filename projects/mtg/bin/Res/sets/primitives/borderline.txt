@@ -1359,8 +1359,8 @@ type=Sorcery
 [/card]
 [card]
 name=Agitator Ant
-auto=@each my end:may name(Put 1/1 counters and goad) target(creature|mybattlefield) transforms((,newability[counter(1/1.2)],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
-auto=@each my end:ability$!may name(Put 1/1 counters and goad) target(creature|mybattlefield) transforms((,newability[counter(1/1.2)],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever!$ opponent
+auto=@each my end:may name(Put 1/1 counters and goad) target(creature|mybattlefield) transforms((,newability[counter(1/1.2)],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
+auto=@each my end:ability$!may name(Put 1/1 counters and goad) target(creature|mybattlefield) transforms((,newability[counter(1/1.2)],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever!$ opponent
 text=At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
 mana={2}{R}
 type=Creature
@@ -4793,8 +4793,8 @@ toughness=2
 [card]
 name=Archpriest of Shadows
 abilities=deathtouch
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],deathtouch,newability[@combatdamaged(player) from(this):target(creature|mygraveyard) moveTo(mybattlefield)])) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,deathtouch,newability[@combatdamaged(player) from(this):target(creature|mygraveyard) moveTo(mybattlefield)])) ueot
 auto=@combatdamaged(player) from(this):target(creature|mygraveyard) moveTo(mybattlefield)
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.) -- Deathtouch -- Whenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.
 mana={3}{B}{B}
@@ -7323,7 +7323,7 @@ type=Sorcery
 [card]
 name=Baeloth Barrityl, Entertainer
 abilities=backgroundpartner
-auto=lord(creature[power<=pminus1minusend]|opponentBattlefield) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
+auto=lord(creature[power<=pminus1minusend]|opponentBattlefield) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
 auto=@movedto(creature[-blocking;attacking;counter{0/0.1.Goaded}]|graveyard) from(battlefield):name(Create treasure) _TREASURE_
 auto=@movedto(creature[-attacking;blocking;counter{0/0.1.Goaded}]|graveyard) from(battlefield):name(Create treasure) _TREASURE_
 text=Creatures your opponents control with power less than Baeloth Barrityl's power are goaded. (They attack each combat if able and attack a player other than you if able.) -- Whenever a goaded attacking or blocking creature dies, you create a Treasure token. -- Choose a Background (You can have a Background as a second commander.)
@@ -9612,7 +9612,7 @@ toughness=1
 [card]
 name=Besmirch
 target=creature
-auto=moveto(mybattlefield) and!( transforms((,newability[@next end:moveTo(ownerBattlefield)],newability[untap],newability[haste ueot],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever )!
+auto=moveto(mybattlefield) and!( transforms((,newability[@next end:moveTo(ownerBattlefield)],newability[untap],newability[haste ueot],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever )!
 text=Until end of turn, gain control of target creature and it gains haste. Untap and goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
 mana={1}{R}{R}
 type=Sorcery
@@ -9772,7 +9772,7 @@ toughness=2
 [card]
 name=Bhaal, Lord of Murder
 auto=this(variable{phalfinitlife}) indestructible
-auto=@movedTo(other creature[-token]|graveyard) from(myBattlefield):name(Put 1/1 counter and goad) target(creature|battlefield) transforms((,newability[counter(1/1)],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=@movedTo(other creature[-token]|graveyard) from(myBattlefield):name(Put 1/1 counter and goad) target(creature|battlefield) transforms((,newability[counter(1/1)],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=As long as your life total is less than or equal to half your starting life total, Bhaal, Lord of Murder has indestructible. -- Whenever another nontoken creature you control dies, put a +1/+1 counter on target creature and goad it.
 mana={2}{B}{R}{G}
 type=Legendary Creature
@@ -12326,8 +12326,8 @@ toughness=4
 [/card]
 [card]
 name=Bola Slinger
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[_ATTACKING_tap target(*[artifact;creature]|opponentBattlefield)] )) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[_ATTACKING_tap target(*[artifact;creature]|opponentBattlefield)])) ueot
 auto=_ATTACKING_tap target(artifact,creature|opponentBattlefield)
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Whenever this creature attacks, tap target artifact or creature an opponent controls.
 mana={3}{W}
@@ -12932,8 +12932,8 @@ type=Sorcery
 [card]
 name=Boon-Bringer Valkyrie
 abilities=first strike,flying,lifelink
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],first strike,flying,lifelink)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,first strike,flying,lifelink)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.) -- Flying, first strike, lifelink
 mana={3}{W}{W}
 type=Creature
@@ -17012,6 +17012,7 @@ name=Catlike Curiosity
 abilities=exiledeath
 backside=Mischievous Catgeist
 target=creature
+auto=@combatdamaged(player) from(mytgt):draw:1 controller
 text=Enchant creature -- Whenever enchanted creature deals combat damage to a player, draw a card. -- If Catlike Curiosity would be put into a graveyard from anywhere, exile it instead. // Mischievous Catgeist
 color=blue
 type=Enchantment
@@ -18988,8 +18989,8 @@ type=Instant
 [/card]
 [card]
 name=Chomping Kavu
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[cantbeblockedby(creature[power<=2])])) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[cantbeblockedby(creature[power<=2])])) ueot
 auto=cantbeblockedby(creature[power<=2])
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- This creature can't be blocked by creatures with power 2 or less.
 mana={3}{G}
@@ -21835,8 +21836,8 @@ type=Instant
 [card]
 name=Consuming Aetherborn
 abilities=lifelink
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],lifelink)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,lifelink)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Lifelink
 mana={3}{B}
 type=Creature
@@ -22237,7 +22238,7 @@ toughness=4
 [card]
 name=Coronation of Chaos
 target=<upto:3>creature
-auto=transforms((,newability[cantblock ueot],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=transforms((,newability[cantblock ueot],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=Up to three target creatures can't block this turn. Goad them. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
 mana={2}{R}
 type=Sorcery
@@ -23003,8 +23004,8 @@ name=Cragsmasher Yeti
 abilities=trample
 aicode=activate moveto(hand) target(mountain|myLibrary)
 autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>mountain|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
-auto=name(This creature) target(this) counter(1/1,2)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1.2)],trample)) ueot
+auto=choice name(Backup: self) counter(1/1,2)
+auto=choice name(Backup: other creature) counter(1/1,2) target(other creature|mybattlefield) transforms((,trample)) ueot
 text=Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.) -- Backup 2 (When this creature enters, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.) -- Trample
 mana={4}{R}{R}
 type=Creature
@@ -26107,8 +26108,8 @@ name=Death-Greeter's Champion
 abilities=double strike
 other={3}{R} name(Dash)
 auto=alternative transforms((,haste,newability[@next end:moveto(hand) all(this)])) forever
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],double strike)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,double strike)) ueot
 text=Dash {3}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.) -- Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.) -- Double strike
 mana={2}{R}
 type=Creature
@@ -29483,8 +29484,8 @@ abilities=trample
 aicode=activate transforms((,newability[if type(creature[zpos<=thatmuch]|myLibrary)~morethan~0 then target(creature[zpos<=thatmuch]|myLibrary) moveto(hand) and!( all(other *[zpos<=thatmuch]|mylibrary) moveto(myreveal) and!( bottomoflibrary )! )! else all(*[zpos<=thatmuch]|mylibrary) moveto(myreveal) and!( bottomoflibrary )! ])) oneshot
 auto=@combatdamaged(player) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto=@combatdamaged(battle|opponentbattlefield) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
-auto=choice name(Target this creature) all(this) counter(1/1)
-auto=choice name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[@combatdamaged(battle|opponentbattlefield) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend],newability[@combatdamaged(player) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend])) forever
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,trample,newability[@combatdamaged(battle|opponentbattlefield) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend],newability[@combatdamaged(player) from(this):name(Reveal cards) reveal:thatmuch optionone name(put in hand) target(<upto:1>*[land;creature]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend])) ueot
 text=Backup 1 -- Trample -- Whenever this creature deals combat damage to a player or battle, look at that many cards from the top of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={2}{G}{G}
 type=Creature
@@ -34366,8 +34367,9 @@ toughness=3
 [/card]
 [card]
 name=Enduring Bondwarden
-auto=name(Put counter on creature) target(creature|battlefield) transforms((,newability[counter(1/1)],newability[_DIES_choice thisforeach(counter{1/1}) counter(1/1) target(creature|mybattlefield)])) forever
-auto=_DIES_choice thisforeach(counter{1/1}) counter(1/1) target(creature|mybattlefield)
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[_DIES_thisforeach(counter{1/1}) counter(1/1) target(creature|mybattlefield)])) ueot
+auto=_DIES_thisforeach(counter{1/1}) counter(1/1) target(creature|mybattlefield)
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- When this creature dies, put its counters on target creature you control.
 mana={W}
 type=Creature
@@ -38649,8 +38651,8 @@ toughness=1
 [card]
 name=Fearless Skald
 abilities=double strike
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],double strike)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,double strike)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Double strike
 mana={4}{R}
 type=Creature
@@ -46293,8 +46295,8 @@ name=Gloomfang Mauler
 abilities=menace
 aicode=activate moveto(hand) target(swamp|myLibrary)
 autohand={2}{cycle}:name(search card) reveal:plibrarycount optionone name(choose card) target(<1>swamp|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveto(hand))! afterrevealedend revealend
-auto=name(This creature) target(this) counter(1/1,2)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1.2)],menace)) ueot
+auto=choice name(Backup: self) counter(1/1,2)
+auto=choice name(Backup: other creature) counter(1/1,2) target(other creature|mybattlefield) transforms((,menace)) ueot
 text=Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.) -- Backup 2 (When this creature enters, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.) -- Menace
 mana={5}{B}{B}
 type=Creature
@@ -47539,8 +47541,8 @@ type=Sorcery
 [card]
 name=Golden-Scale Aeronaut
 abilities=flying
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],flying)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,flying)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Flying
 mana={4}{W}
 type=Creature
@@ -49687,9 +49689,9 @@ type=Enchantment
 [card]
 name=Guardian Scalelord
 abilities=flying
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[_ATTACKING_target(*[-land;-instant;-sorcery;manacost<=power]|mygraveyard) moveTo(battlefield)])) ueot
-auto=_ATTACKING_target(*[-land;-instant;-sorcery;manacost<=power]|mygraveyard) moveTo(battlefield)
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,flying,newability[_ATTACKING_target(*[-land;-instant;-sorcery;manacost<=power]|mygraveyard) moveTo(mybattlefield)])) ueot
+auto=_ATTACKING_target(*[-land;-instant;-sorcery;manacost<=power]|mygraveyard) moveTo(mybattlefield)
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.) -- Flying -- Whenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power.
 mana={4}{W}
 type=Creature
@@ -50923,8 +50925,8 @@ type=Enchantment
 [/card]
 [card]
 name=Hangar Scrounger
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[@tapped(this):may _DISCARD&DRAW_])) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[@tapped(this):may _DISCARD&DRAW_])) ueot
 auto=@tapped(this):may _DISCARD&DRAW_
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.
 mana={2}{R}
@@ -57782,7 +57784,7 @@ subtype=Aura
 [/card]
 [card]
 name=Insufferable Balladeer
-auto=name(Vicious Mockery) target(creature|opponentBattlefield) transforms((,newability[cantblock ueot],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=name(Vicious Mockery) target(creature|opponentBattlefield) transforms((,newability[cantblock ueot],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=Vicious Mockery - When Insufferable Balladeer enters, target creature an opponent controls can't block this turn. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
 mana={1}{R}
 type=Creature
@@ -61357,7 +61359,7 @@ type=Instant
 [/card]
 [card]
 name=Karazikar, the Eye Tyrant
-auto=@each my blockers:name(Tap opponent creature) target(creature|opponentbattlefield) transforms((,newability[tap(noevent)],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=@each my blockers:name(Tap opponent creature) target(creature|opponentbattlefield) transforms((,newability[tap(noevent)],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=Whenever you attack a player, tap target creature that player controls and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever an opponent attacks another one of your opponents, you and the attacking player each draw a card and lose 1 life.
 mana={3}{B}{R}
 type=Legendary Creature
@@ -68711,7 +68713,7 @@ type=Land
 [card]
 name=Maeve, Insidious Singer
 auto={2}{U}:name(Goad opponent creature) target(creature|opponentBattlefield) _GOAD_
-auto={2}{U}:name(Goad your creature) target(creature|myBattlefield) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)],newability[@combat(attacking) source(this):draw:1])) ueot
+auto={2}{U}:name(Goad your creature) target(creature|myBattlefield) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg],newability[@combat(attacking) source(this):draw:1])) ueot
 text={2}{U}: Goad target creature. Whenever that creature attacks one of your opponents this turn, you draw a card. (A goaded creature attacks each combat if able and attacks a player other than you if able, until your next turn.)
 mana={2}{U}{U}
 type=Legendary Creature
@@ -70253,7 +70255,7 @@ toughness=5
 name=Martial Impetus
 target=creature
 auto=teach(creature) 1/1
-auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
+auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[@each my upkeep:counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
 auto=teach(creature) if cantargetcard(*|myBattlefield) then transforms((,newability[_ATTACKING_all(other creature[attacking]|myBattlefield) 1/1]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn.
 mana={2}{W}
@@ -72763,8 +72765,8 @@ type=Artifact
 [/card]
 [card]
 name=Mirror-Style Master
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[@combat(attacking) source(this):name(Copy modified attacking creatures) all(creature[attacking&modified]|mybattlefield) clone with(battleready,unearth)])) forever
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[@combat(attacking) source(this):name(Copy modified attacking creatures) all(creature[attacking&modified]|mybattlefield) clone with(battleready,unearth)])) ueot
 auto=@combat(attacking) source(this):name(Copy modified attacking creatures) all(creature[attacking&modified]|mybattlefield) clone with(battleready,unearth)
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Whenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)
 mana={4}{R}{R}
@@ -73552,7 +73554,7 @@ toughness=4
 [card]
 name=Mocking Doppelganger
 abilities=flash
-auto=may target(creature|opponentBattlefield) copy and!( transforms((,newability[lord(other creature[share!name!]|battlefield) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack]))])) forever )!
+auto=may target(creature|opponentBattlefield) copy and!( transforms((,newability[lord(other creature[share!name!]|battlefield) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack]))])) forever )!
 text=Flash -- You may have Mocking Doppelganger enter the battlefield as a copy of a creature an opponent controls, except it has "Other creatures with the same name as this creature are goaded." (They attack each combat if able and attack a player other than you if able.)
 mana={3}{U}
 type=Creature
@@ -78847,7 +78849,7 @@ type=Instant
 [card]
 name=Oceanus Dragon
 abilities=flying
-auto=target(creature|opponentBattlefield) transforms((,newability[tap],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=target(creature|opponentBattlefield) transforms((,newability[tap],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=Flying -- When Oceanus Dragon enters, tap target creature an opponent controls. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
 mana={4}{U}{U}
 type=Creature
@@ -82179,7 +82181,7 @@ type=Instant
 [card]
 name=Parasitic Impetus
 target=creature
-auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[_ATTACKING_life:-2 controller],newability[_ATTACKING_life:2 opponent]))
+auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[@each my upkeep:counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[_ATTACKING_life:-2 controller],newability[_ATTACKING_life:2 opponent]))
 auto=2/2
 text=Enchant creature -- Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, its controller loses 2 life and you gain 2 life.
 mana={2}{B}
@@ -85665,7 +85667,7 @@ type=Sorcery
 name=Predatory Impetus
 target=creature
 auto=3/3
-auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],_MUST_BE_BLOCKD_))
+auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[@each my upkeep:counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],_MUST_BE_BLOCKD_))
 text=Enchant creature -- Enchanted creature gets +3/+3, must be blocked if able, and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
 mana={4}{G}
 type=Enchantment
@@ -86989,7 +86991,7 @@ toughness=2
 name=Psychic Impetus
 target=creature
 aicode=activate transforms((,newability[all(*[zpos<=2]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
-auto=teach(creature) transforms((,newability[2/2],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
+auto=teach(creature) transforms((,newability[2/2],newability[counter(0/0.1.Goaded) notrg],newability[@each my upkeep:counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
 auto=@combat(attacking) source(mytgt):name(Scry 2) _SCRY2_
 text=Enchant creature -- Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, you scry 2.
 mana={2}{U}
@@ -90605,8 +90607,8 @@ type=Sorcery
 [card]
 name=Redcap Heelslasher
 abilities=first strike
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],first strike)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,first strike)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- First strike
 mana={3}{R}
 type=Creature
@@ -96104,8 +96106,8 @@ toughness=4
 [card]
 name=Saiba Cryptomancer
 abilities=flash,hexproof
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],hexproof)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,hexproof)) ueot
 text=Flash -- Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Hexproof
 mana={1}{U}
 type=Creature
@@ -98258,8 +98260,8 @@ toughness=3
 [card]
 name=Scorn-Blade Berserker
 auto={1}{S}:name(Draw a card) draw:1 controller
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[{1}{S}:name(Draw a card) draw:1 controller])) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[{1}{S}:name(Draw a card) draw:1 controller])) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- {1}, Sacrifice this creature: Draw a card.
 mana={B}
 type=Creature
@@ -100032,8 +100034,8 @@ type=Artifact
 [card]
 name=Serpent-Blade Assailant
 abilities=deathtouch
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],deathtouch)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,deathtouch)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Deathtouch
 mana={2}{G}
 type=Creature
@@ -101563,7 +101565,7 @@ subtype=Equipment
 [card]
 name=Shiny Impetus
 target=creature
-auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
+auto=teach(creature) transforms((,newability[counter(0/0.1.Goaded) notrg],newability[@each my upkeep:counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack]))
 auto=@combat(attacking) source(mytgt):_TREASURE_
 auto=2/2
 text=Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, you create a Treasure token. (It's an artifact with "Tap, Sacrifice this artifact: Add one mana of any color.")
@@ -102564,8 +102566,8 @@ toughness=3
 [card]
 name=Sigiled Sentinel
 abilities=vigilance
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],vigilance)) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,vigilance)) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- Vigilance
 mana={2}{W}
 type=Creature
@@ -105025,7 +105027,7 @@ toughness=0
 [/card]
 [card]
 name=Sly Instigator
-auto={U}{T}:target(creature|opponentbattlefield) transforms((,newability[this(counter{0/0.1.Goaded}>0) unblockable],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto={U}{T}:target(creature|opponentbattlefield) transforms((,newability[this(counter{0/0.1.Goaded}>0) unblockable],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text={U}, {T}: Until your next turn, target creature an opponent controls can't be blocked. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
 mana={3}{U}
 type=Creature
@@ -106991,8 +106993,8 @@ name=Spectacular Showdown
 abilities=overload
 target=creature
 other={4}{R}{R}{R} name(Overload)
-auto=transforms((,newability[counter(0/0.1.DoubleStrike)],newability[this(counter{0/0.1.DoubleStrike}>=1) double strike],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
-auto=overload all(creature|battlefield) transforms((,newability[counter(0/0.1.DoubleStrike)],newability[this(counter{0/0.1.DoubleStrike}>=1) double strike],newability[counter(0/0.1.Goaded)],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[end next once sourceinplay] removeallcounters(0/0.-1.Goaded)])) forever
+auto=transforms((,newability[counter(0/0.1.DoubleStrike)],newability[this(counter{0/0.1.DoubleStrike}>=1) double strike],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
+auto=overload all(creature|battlefield) transforms((,newability[counter(0/0.1.DoubleStrike)],newability[this(counter{0/0.1.DoubleStrike}>=1) double strike],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
 text=Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.) -- Overload {4}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")
 mana={1}{R}
 type=Sorcery
@@ -110594,6 +110596,8 @@ type=Land
 name=Strangling Grasp
 target=*[creature;planeswalker]|opponentbattlefield
 backside=Vengeful Strangler
+auto=@each my upkeep:ability$!sacrifice notaTarget(*[-land]|mybattlefield)!$ opponent
+auto=@each my upkeep:life:-1 opponent
 text=Enchant creature or planeswalker an opponent controls -- At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life. // Vengeful Strangler
 type=Enchantment
 subtype=Aura
@@ -110657,8 +110661,8 @@ subtype=Background
 [card]
 name=Streetwise Negotiator
 abilities=combattoughness
-auto=name(This creature) target(this) counter(1/1)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1)],newability[combattoughness])) ueot
+auto=choice name(Backup: self) counter(1/1)
+auto=choice name(Backup: other creature) counter(1/1) target(other creature|mybattlefield) transforms((,newability[combattoughness])) ueot
 text=Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.) -- This creature assigns combat damage equal to its toughness rather than its power.
 mana={1}{G}
 type=Creature
@@ -126386,8 +126390,8 @@ toughness=1
 [card]
 name=Voldaren Thrillseeker
 auto={1}{S}:name(Deal damage) target(anytarget) damage:p
-auto=name(This creature) target(this) counter(1/1,2)
-auto=name(Target other creature) target(other creature) transforms((,newability[counter(1/1.2)],newability[{1}{S}:name(Deal damage) target(anytarget) damage:p])) ueot
+auto=choice name(Backup: self) counter(1/1,2)
+auto=choice name(Backup: other creature) counter(1/1,2) target(other creature|mybattlefield) transforms((,newability[{1}{S}:name(Deal damage) target(anytarget) damage:p])) ueot
 text=Backup 2 (When this creature enters, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.) -- {1}, Sacrifice this creature: It deals damage equal to its power to any target.
 mana={2}{R}
 type=Creature
