@@ -31,8 +31,16 @@ public class StorageOptions
     public static void determineStorageOptions(android.content.Context mContext)
     {
         // Update permission flag so every call site sees the current state.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            hasManageStoragePermission = Environment.isExternalStorageManager();
+        // API 30 (R) introduced MANAGE_EXTERNAL_STORAGE; below that, legacy storage is unrestricted.
+        // We use reflection so this file compiles against the API 23 build target.
+        if (Build.VERSION.SDK_INT >= 30) {
+            try {
+                java.lang.reflect.Method m = Environment.class.getMethod("isExternalStorageManager");
+                hasManageStoragePermission = (Boolean) m.invoke(null);
+            } catch (Exception e) {
+                hasManageStoragePermission = false;
+                Log.w(TAG, "isExternalStorageManager unavailable: " + e.getMessage());
+            }
         } else {
             hasManageStoragePermission = true; // legacy storage: unrestricted below API 30
         }
@@ -234,7 +242,12 @@ public class StorageOptions
             t++;
             String mount = mMounts.get(i);
             File root = new File(mount);
-            if (!root.exists() || !root.isDirectory() || !root.canWrite())
+            // File.canWrite() is unreliable under FUSE with MANAGE_EXTERNAL_STORAGE:
+            // the FUSE daemon grants access via AppOps, but access() returns EACCES.
+            // Keep the path if we hold the permission, even if canWrite() is false.
+            boolean accessible = root.exists() && root.isDirectory() &&
+                (root.canWrite() || hasManageStoragePermission);
+            if (!accessible)
                 mMounts.remove(i--);
         }
 

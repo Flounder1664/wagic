@@ -34,7 +34,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 
-import android.provider.Settings;
+// android.provider.Settings constants for MANAGE_ALL_FILES_ACCESS_PERMISSION are API 30+;
+// we use the action string literal directly so this compiles against the API 23 build target.
 
 import android.util.Log;
 
@@ -446,12 +447,19 @@ public class SDLActivity extends Activity implements OnKeyListener {
                     !internalPath.equalsIgnoreCase(selectedRemovableCardPath)) {
                 wagicMediaPath = new File(selectedRemovableCardPath);
 
-                if (!wagicMediaPath.exists() || !wagicMediaPath.canWrite()) {
+                // File.canWrite() uses the Unix access() syscall which checks group
+                // membership; MANAGE_EXTERNAL_STORAGE is enforced by the FUSE daemon
+                // instead, so canWrite() returns false even when actual writes succeed.
+                // Accept the path if we hold MANAGE_EXTERNAL_STORAGE as a fallback.
+                boolean pathOk = wagicMediaPath.exists() &&
+                    (wagicMediaPath.canWrite() || StorageOptions.hasManageStoragePermission);
+                if (!pathOk) {
                     Log.e(TAG,
                         "Error in initializing system folder: " +
                         selectedRemovableCardPath);
                 } else { // found a removable media location
                     sdcardPath = selectedRemovableCardPath + "/Wagic";
+                    new File(sdcardPath).mkdirs(); // ensure the Wagic directory exists
                 }
             }
 
@@ -1166,24 +1174,38 @@ public class SDLActivity extends Activity implements OnKeyListener {
 		// Without it the storage picker falls back to the app-scoped path which
 		// other apps cannot read.  We show a one-time dialog; the user can also
 		// grant it later via Settings → Storage Data Options.
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
-		    !Environment.isExternalStorageManager()) {
-		    AlertDialog.Builder permDialog = new AlertDialog.Builder(this);
-		    permDialog.setTitle("All Files Access");
-		    permDialog.setMessage(
-		        "Wagic needs \"All files access\" permission to store game data " +
-		        "where companion apps (like the deck editor) can reach it.\n\n" +
-		        "Tap \"Grant\" to open Settings, then enable the permission for Wagic. " +
-		        "You can also grant it later via the in-game Settings menu.");
-		    permDialog.setPositiveButton("Grant",
-		        new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-		                startActivity(intent);
-		            }
-		        });
-		    permDialog.setNegativeButton("Not now", null);
-		    permDialog.show();
+		// Note: API 30 constants (VERSION_CODES.R, isExternalStorageManager,
+		// ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION) are accessed via reflection /
+		// string literals so this code compiles against the API 23 build target.
+		if (Build.VERSION.SDK_INT >= 30) {
+		    try {
+		        java.lang.reflect.Method isManager =
+		            Environment.class.getMethod("isExternalStorageManager");
+		        boolean hasPermission = (Boolean) isManager.invoke(null);
+		        if (!hasPermission) {
+		            AlertDialog.Builder permDialog = new AlertDialog.Builder(this);
+		            permDialog.setTitle("All Files Access");
+		            permDialog.setMessage(
+		                "Wagic needs \"All files access\" permission to store game data " +
+		                "where companion apps (like the deck editor) can reach it.\n\n" +
+		                "Tap \"Grant\" to open Settings, then enable the permission for Wagic. " +
+		                "You can also grant it later via the in-game Settings menu.");
+		            permDialog.setPositiveButton("Grant",
+		                new DialogInterface.OnClickListener() {
+		                    public void onClick(DialogInterface dialog, int which) {
+		                        // "android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION" is the
+		                        // string value of Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+		                        Intent intent = new Intent(
+		                            "android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION");
+		                        startActivity(intent);
+		                    }
+		                });
+		            permDialog.setNegativeButton("Not now", null);
+		            permDialog.show();
+		        }
+		    } catch (Exception e) {
+		        Log.e(TAG, "Error checking MANAGE_EXTERNAL_STORAGE permission: " + e.getMessage());
+		    }
 		}
 
 		StorageOptions.determineStorageOptions(mContext);
