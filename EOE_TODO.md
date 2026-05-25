@@ -6,7 +6,31 @@ Release: August 1, 2025. **Total: 266 unique English cards**.
 ## Status
 - ✅ `sets/EOE/_cards.dat` created — all 266 cards allocated IDs **1530001–1530398** (= 1530000 + collector_number)
 - ✅ 15 cards already playable (have existing primitives): basic lands, shock lands, Annul, Bombard, Banishing Light, Blooming Stinger
-- ⏳ 251 cards need new primitives written in `sets/primitives/mtg.txt`
+- ✅ **Batch 1 (70 cards)** written — commit `5a94d4363` — EASY creatures, instants, sorceries, equipment, artifact creatures
+- ✅ New token macros: `_LANDERTOKEN_`, `_ROBOTTOKEN_` added to `_macros.txt`
+- ✅ `core.zip` rebuilt to include batch 1 + macros
+- ⏳ ~105 more EASY cards remain (see `EOE_CARDS_FULL.txt` for full classification)
+- ⏳ ~75 MEDIUM cards need primitives
+- ⏳ 1 HARD card: Tezzeret, Cruel Captain (planeswalker — blocked until engine support)
+
+### Batch 1 cards written (70, 2026-05-25)
+All-Fates Scroll, Atmospheric Greenhouse, Beamsaw Prospector, Biosynthic Burst,
+Biomechan Engineer, Biotech Specialist, Chrome Companion, Comet Crawler,
+Cut Propulsion, Dark Endurance, Dauntless Scrapbot, Decode Transmissions,
+Depressurize, Diplomatic Relations, Dual-Sun Adepts, Edge Rover,
+Embrace Oblivion, Eumidian Terrabotanist, Exosuit Savior, Frenzied Baloth,
+Full Bore, Galactic Wayfarer, Gene Pollinator, Gigastorm Titan,
+Glacier Godmaw, Gravkill, Gravpack Monoist, Honor, Hullcarver,
+Hymn of the Faller, Icecave Crasher, Icetill Explorer, Illvoi Galeblade,
+Illvoi Operative, Insatiable Skittermaw, Intrepid Tenderfoot, Kavaron Skywarden,
+Kavaron Turbodrone, Lashwhip Predator, Mechan Navigator, Melded Moxite,
+Meltstrider Eulogist, Meltstrider's Gear, Mental Modulation, Molecular Modifier,
+Monoist Sentry, Nanoform Sentinel, Nebula Dragon, Nutrient Block,
+Oreplate Pangolin, Plasma Bolt, Radiant Strike, Remnant Elemental,
+Rig for War, Sami's Curiosity, Seedship Agrarian, Selfcraft Mechan,
+Skystinger, Slagdrill Scrapper, Squire's Lightblade, Starfighter Pilot,
+Sunstar Expansionist, Sunstar Lightsmith, Swarm Culler, Thawbringer,
+Tragic Trajectory, Unravel, Voidforged Titan, Zealous Display, Zookeeper Mechan
 
 Difficulty: Easy = direct Wagic primitives; Medium = approximation needed; Hard = requires engine work.
 
