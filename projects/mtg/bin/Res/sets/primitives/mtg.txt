@@ -11977,6 +11977,15 @@ mana={3}{R}{R}
 type=Enchantment
 [/card]
 [card]
+name=Blooming Stinger
+mana={1}{G}
+type=Creature
+subtype=Plant Scorpion
+power=2
+toughness=2
+text=Blooming Stinger
+[/card]
+[card]
 name=Blood Artist
 auto=@movedTo(creature|graveyard) from(battlefield):ability$!choice life:-1 target(player) && life:1 controller!$ controller
 text=Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
