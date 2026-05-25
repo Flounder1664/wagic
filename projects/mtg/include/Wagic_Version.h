@@ -20,7 +20,7 @@ Mod by: Vitty85
    NOT on every display-version bump. Update manually when pushing new core.zip. */
 #define WAGIC_RESOURCE_MAJOR    0
 #define WAGIC_RESOURCE_MEDIUM   25
-#define WAGIC_RESOURCE_MINOR    6
+#define WAGIC_RESOURCE_MINOR    7
 
 #define VERSION_DOT(a, b, c) a ##.## b ##.## c
 #define VERSION_WITHOUT_DOT(a, b, c) a ## b ## c
