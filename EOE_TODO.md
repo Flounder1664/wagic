@@ -12,8 +12,29 @@ Release: August 1, 2025. **Total: 266 unique English cards**.
 - ✅ **Batch 3 (18 cards)** written — commit `ed160f100` — remaining straightforward EASY cards
 - ✅ `core.zip` rebuilt to include batch 1 + batch 2 + batch 3 + macros
 - ✅ **154 cards** now implemented (15 pre-existing + 70 + 51 + 18)
-- ⏳ ~112 cards remain: ~37 complex EASY (dynamic X, copy, warp, cost-reduction mechanics) + ~75 MEDIUM
+- ✅ **Batch 4 (36 cards)** written — commit `40fc996bf` — MEDIUM cards (warp stripped, effects simplified)
+- ✅ **Batch 5 (13 cards)** written — MEDIUM cards: blink-exile, static haste grant, sacrifice-cost reanimate, combat-damage draw
+- ✅ **203 cards** now implemented (15 pre-existing + 70 + 51 + 18 + 36 + 13)
+- ✅ `core.zip` rebuilt + deployed to `G:\Wagic-windows\Res\` for PC testing
+- ⏳ ~63 cards remain (mostly complex/warp-dependent mechanics)
 - ⏳ 1 HARD card: Tezzeret, Cruel Captain (planeswalker — blocked until engine support)
+
+### Batch 5 cards written (13, 2026-05-25)
+All-Fates Stalker, Haliya Guided by Light, Mechanozoa, Perigee Beckoner,
+Quantum Riddler, Reroute Systems, Scrounge for Eternity, Starfield Shepherd,
+Starwinder, Tannuk Steadfast Second, Timeline Culler, Vaultguard Trooper,
+Weftstalker Ardent
+
+### Batch 4 cards written (36, 2026-05-25)
+Bioengineered Future, Blade of the Swarm, Brightspear Zealot, Bygone Colossus,
+Cloudsculpt Technician, Codecracker Hound, Cosmogrand Zenith, Dawnstrike Vanguard,
+Drill Too Deep, Drix Fatemaker, Eusocial Engineering, Fell Gravship,
+Flight-Deck Coordinator, Frontline War-Rager, Germinating Wurm, Gravblade Heavy,
+Interceptor Mechan, Invasive Maneuvers, Knight Luminary, Nova Hellkite,
+Rayblade Trooper, Red Tiger Mechan, Rescue Skiff, Ruinous Rampage,
+Sami Ship's Engineer, Scour for Scrap, Seedship Broodtender, Sinister Cryologist,
+Starport Security, Starbreach Whale, Susurian Voidborn, Syr Vondam Sunstar Exemplar,
+Uthros Titanic Godcore, Vote Out, Weftblade Enhancer, Xu-Ifit Osteoharmonist
 
 ### Batch 3 cards written (18, 2026-05-25)
 Alpharael Stonechosen, Atomic Microsizer, Auxiliary Boosters, Cryogen Relic,
