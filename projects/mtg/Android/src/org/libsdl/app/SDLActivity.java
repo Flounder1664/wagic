@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -26,11 +27,14 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
+
+import android.provider.Settings;
 
 import android.util.Log;
 
@@ -1156,6 +1160,32 @@ public class SDLActivity extends Activity implements OnKeyListener {
 		mSingleton = this;
 		mContext = this.getApplicationContext();
 		RES_FILENAME = getResourceName();
+
+		// On Android 11+ (API 30+) request MANAGE_EXTERNAL_STORAGE so Wagic's
+		// data directory is accessible to companion apps (e.g. deck editor).
+		// Without it the storage picker falls back to the app-scoped path which
+		// other apps cannot read.  We show a one-time dialog; the user can also
+		// grant it later via Settings → Storage Data Options.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
+		    !Environment.isExternalStorageManager()) {
+		    AlertDialog.Builder permDialog = new AlertDialog.Builder(this);
+		    permDialog.setTitle("All Files Access");
+		    permDialog.setMessage(
+		        "Wagic needs \"All files access\" permission to store game data " +
+		        "where companion apps (like the deck editor) can reach it.\n\n" +
+		        "Tap \"Grant\" to open Settings, then enable the permission for Wagic. " +
+		        "You can also grant it later via the in-game Settings menu.");
+		    permDialog.setPositiveButton("Grant",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int which) {
+		                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+		                startActivity(intent);
+		            }
+		        });
+		    permDialog.setNegativeButton("Not now", null);
+		    permDialog.show();
+		}
+
 		StorageOptions.determineStorageOptions(mContext);
 		checkStorageLocationPreference();
 		prepareOptionMenu(null);
