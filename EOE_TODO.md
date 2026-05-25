@@ -9,10 +9,18 @@ Release: August 1, 2025. **Total: 266 unique English cards**.
 - ✅ **Batch 1 (70 cards)** written — commit `5a94d4363` — EASY creatures, instants, sorceries, equipment, artifact creatures
 - ✅ New token macros: `_LANDERTOKEN_`, `_ROBOTTOKEN_`, `_DRONETOKEN_` added to `_macros.txt`
 - ✅ **Batch 2 (51 cards)** written — creatures, Spacecraft, lands, multi-color, removal (see list below)
-- ✅ `core.zip` rebuilt to include batch 1 + batch 2 + macros
-- ⏳ ~55 more EASY cards remain (see `EOE_CARDS_FULL.txt` for full classification)
-- ⏳ ~75 MEDIUM cards need primitives
+- ✅ **Batch 3 (18 cards)** written — commit `ed160f100` — remaining straightforward EASY cards
+- ✅ `core.zip` rebuilt to include batch 1 + batch 2 + batch 3 + macros
+- ✅ **154 cards** now implemented (15 pre-existing + 70 + 51 + 18)
+- ⏳ ~112 cards remain: ~37 complex EASY (dynamic X, copy, warp, cost-reduction mechanics) + ~75 MEDIUM
 - ⏳ 1 HARD card: Tezzeret, Cruel Captain (planeswalker — blocked until engine support)
+
+### Batch 3 cards written (18, 2026-05-25)
+Alpharael Stonechosen, Atomic Microsizer, Auxiliary Boosters, Cryogen Relic,
+Cryoshatter, Faller's Faithful, Hardlight Containment, Hylderblade,
+Illvoi Infiltrator, Kavaron Harrier, Lumen-Class Frigate, Monoist Circuit-Feeder,
+Secluded Starforge, Specimen Freighter, Systems Override, Terrapact Intimidator,
+Virulent Silencer, Wedgelight Rammer
 
 ### Batch 2 cards written (51, 2026-05-25)
 Adagia Windswept Bastion, Alpharael Dreaming Acolyte, Beyond the Quiet,
