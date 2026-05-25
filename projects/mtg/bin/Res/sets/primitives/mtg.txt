@@ -3037,6 +3037,15 @@ power=2
 toughness=3
 [/card]
 [card]
+name=Alpharael, Stonechosen
+mana={3}{B}{B}
+type=Legendary Creature
+subtype=Human Cleric
+power=3
+toughness=3
+text=Ward—Discard a card at random. Void — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
+[/card]
+[card]
 name=Alpine Grizzly
 mana={2}{G}
 type=Creature
@@ -7093,6 +7102,15 @@ power=5
 toughness=5
 [/card]
 [card]
+name=Atomic Microsizer
+auto={2}:equip
+auto=teach(creature) +1/+0
+text=Equipped creature gets +1/+0. Equip {2}
+mana={U}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
 name=Atraxa, Praetors' Voice
 abilities=flying,vigilance,deathtouch,lifelink
 auto=@each my end:_PROLIFERATE_
@@ -7631,6 +7649,16 @@ auto=@each my end restriction{delirium}:flip(Ancient of the Equinox)
 text={B}: Put the top card of your library into your graveyard. -- Delirium At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
 mana={2}{G}
 type=Enchantment
+[/card]
+[card]
+name=Auxiliary Boosters
+auto=@movedTo(this|myBattlefield):_ROBOTTOKEN_
+auto={3}:equip
+auto=teach(creature) +1/+2,flying
+text=When this Equipment enters, create a 2/2 colorless Robot artifact creature token. Equipped creature gets +1/+2 and has flying. Equip {3}
+mana={4}{W}
+type=Artifact
+subtype=Equipment
 [/card]
 [card]
 name=Avacyn's Collar
@@ -25620,6 +25648,23 @@ mana={2}{R}
 type=Sorcery
 [/card]
 [card]
+name=Cryogen Relic
+auto=@movedTo(this|myBattlefield):draw:1
+auto=@movedTo(this|graveyard) from(battlefield):draw:1
+text=When this artifact enters or leaves the battlefield, draw a card.
+mana={1}{U}
+type=Artifact
+[/card]
+[card]
+name=Cryoshatter
+target=creature|opponentbattlefield
+auto=teach(creature) -5/-0
+text=Enchant creature. Enchanted creature gets -5/-0. When enchanted creature becomes tapped or is dealt damage, destroy it. (Destroy trigger not supported)
+mana={U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
 name=Crypsis
 target=creature|mybattlefield
 auto=teach(creature) protection from(creature|opponentbattlefield) ueot
@@ -40752,6 +40797,16 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
+name=Faller's Faithful
+auto=@movedTo(this|myBattlefield):bury target(creature|opponentbattlefield)
+text=When this creature enters, destroy up to one other target creature.
+mana={2}{B}
+type=Creature
+subtype=Human Wizard
+power=3
+toughness=1
+[/card]
+[card]
 name=Fallow Earth
 target=land
 auto=moveTo(ownerLibrary)
@@ -55202,6 +55257,13 @@ power=5
 toughness=5
 [/card]
 [card]
+name=Hardlight Containment
+auto=(blink)forsrc target(creature|opponentbattlefield)
+text=When this Aura enters, exile target creature an opponent controls until this Aura leaves the battlefield.
+mana={W}
+type=Enchantment
+[/card]
+[card]
 name=Harmattan Efreet
 abilities=flying
 auto={1}{U}{U}:flying target(creature)
@@ -59547,6 +59609,15 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
+name=Hylderblade
+auto={4}:equip
+auto=teach(creature) +3/+1
+text=Equipped creature gets +3/+1. Equip {4}
+mana={B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
 name=Hymn of Rebirth
 target=creature|graveyard
 auto=moveTo(myBattlefield)
@@ -60288,6 +60359,16 @@ type=Creature
 subtype=Jellyfish Warrior
 power=1
 toughness=1
+[/card]
+[card]
+name=Illvoi Infiltrator
+auto=@combatdamaged(player) from(this):draw:1 controller
+text=Whenever this creature deals combat damage to a player, draw a card.
+mana={2}{U}
+type=Creature
+subtype=Jellyfish Rogue
+power=1
+toughness=3
 [/card]
 [card]
 name=Illvoi Light Jammer
@@ -65178,6 +65259,16 @@ type=Creature
 subtype=Kavu Soldier
 power=4
 toughness=3
+[/card]
+[card]
+name=Kavaron Harrier
+auto=@attacking(this):_ROBOTTOKEN_
+text=Whenever this creature attacks, create a 2/2 colorless Robot artifact creature token.
+mana={R}
+type=Artifact Creature
+subtype=Robot Soldier
+power=2
+toughness=1
 [/card]
 [card]
 name=Kavaron Skywarden
@@ -72617,6 +72708,15 @@ power=1
 toughness=1
 [/card]
 [card]
+name=Lumen-Class Frigate
+text=2+ | Other creatures you control get +1/+1. 12+ | Flying, lifelink. (Station not supported)
+mana={1}{W}
+type=Artifact Creature
+subtype=Spacecraft
+power=3
+toughness=5
+[/card]
+[card]
 name=Lumengrid Augur
 auto={1}{t}:target(player) draw:1 && ability$! reject notaTarget(*|myhand) and!( if cantargetcard(artifact|*) then untap all(mysource) )! !$ targetedplayer
 text={1}, {T}: Target player draws a card, then discards a card. If that player discards an artifact card this way, untap Lumengrid Augur.
@@ -80030,6 +80130,16 @@ auto=@movedTo(creature[manacost=16]|battlefield) once:sacrifice all(this) && los
 text=When a creature enters, sacrifice Monkey Cage and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's mana value.
 mana={5}
 type=Artifact
+[/card]
+[card]
+name=Monoist Circuit-Feeder
+abilities=flying
+text=Flying.
+mana={4}{B}{B}
+type=Artifact Creature
+subtype=Nautilus
+power=4
+toughness=4
 [/card]
 [card]
 name=Monoist Sentry
@@ -106529,6 +106639,13 @@ text=As Secluded Glen enters, you may reveal a Faerie card from your hand. If yo
 type=Land
 [/card]
 [card]
+name=Secluded Starforge
+auto={T}:Add{C}
+auto={5}{T}:_ROBOTTOKEN_
+text={T}: Add {C}. {5}, {T}: Create a 2/2 colorless Robot artifact creature token.
+type=Land
+[/card]
+[card]
 name=Secluded Steppe
 abilities=cycling
 auto=tap(noevent)
@@ -115840,6 +115957,16 @@ power=6
 toughness=6
 [/card]
 [card]
+name=Specimen Freighter
+auto=@movedTo(this|myBattlefield):bounce target(creature|opponentbattlefield)
+text=When this Spacecraft enters, return up to one target creature to its owner's hand.
+mana={5}{U}
+type=Artifact Creature
+subtype=Spacecraft
+power=4
+toughness=7
+[/card]
+[card]
 name=Spectacular Spider-Man
 abilities=flash
 auto={1}:ability(flying) all(this) ueot
@@ -123204,6 +123331,13 @@ power=4
 toughness=4
 [/card]
 [card]
+name=Systems Override
+auto=name(gain control) target(*|opponentbattlefield) transforms((,newability[moveTo(opponentbattlefield)],newability[@next end:moveTo(ownerbattlefield)],newability[untap],haste)) ueot
+text=Gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn.
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
 name=Szadek, Lord of Secrets
 alias=89092
 abilities=flying
@@ -125344,6 +125478,17 @@ name=Terramorphic Expanse
 auto={T}{S}:moveTo(myBattlefield) and!(tap(noevent))! target(land[basic]|myLibrary)
 text={T}, Sacrifice Terramorphic Expanse: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle.
 type=Land
+[/card]
+[card]
+name=Terrapact Intimidator
+auto=@movedTo(this|myBattlefield):_LANDERTOKEN_
+auto=@movedTo(this|myBattlefield):_LANDERTOKEN_
+text=When this creature enters, create two Lander tokens.
+mana={1}{R}
+type=Creature
+subtype=Kavu Scout
+power=2
+toughness=1
 [/card]
 [card]
 name=Terrarion
@@ -135977,6 +136122,16 @@ mana={2}{B}
 type=Enchantment
 [/card]
 [card]
+name=Virulent Silencer
+auto=@combatdamaged(player) from(this):alterpoison:2 opponent
+text=Whenever this creature deals combat damage to a player, that player gets two poison counters.
+mana={3}
+type=Artifact Creature
+subtype=Robot Assassin
+power=2
+toughness=3
+[/card]
+[card]
 name=Virulent Sliver
 auto=lord(sliver) poisontoxic
 text=All Sliver creatures have poisonous 1. (Whenever a Sliver deals combat damage to a player, that player gets a poison counter. A player with ten or more poison counters loses the game.)
@@ -139511,6 +139666,16 @@ mana={2}{G}
 type=Artifact Creature
 subtype=Equipment Spider
 power=1
+toughness=4
+[/card]
+[card]
+name=Wedgelight Rammer
+auto=@movedTo(this|myBattlefield):_ROBOTTOKEN_
+text=When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.
+mana={3}{W}
+type=Artifact Creature
+subtype=Spacecraft
+power=3
 toughness=4
 [/card]
 [card]
