@@ -7,11 +7,29 @@ Release: August 1, 2025. **Total: 266 unique English cards**.
 - ✅ `sets/EOE/_cards.dat` created — all 266 cards allocated IDs **1530001–1530398** (= 1530000 + collector_number)
 - ✅ 15 cards already playable (have existing primitives): basic lands, shock lands, Annul, Bombard, Banishing Light, Blooming Stinger
 - ✅ **Batch 1 (70 cards)** written — commit `5a94d4363` — EASY creatures, instants, sorceries, equipment, artifact creatures
-- ✅ New token macros: `_LANDERTOKEN_`, `_ROBOTTOKEN_` added to `_macros.txt`
-- ✅ `core.zip` rebuilt to include batch 1 + macros
-- ⏳ ~105 more EASY cards remain (see `EOE_CARDS_FULL.txt` for full classification)
+- ✅ New token macros: `_LANDERTOKEN_`, `_ROBOTTOKEN_`, `_DRONETOKEN_` added to `_macros.txt`
+- ✅ **Batch 2 (51 cards)** written — creatures, Spacecraft, lands, multi-color, removal (see list below)
+- ✅ `core.zip` rebuilt to include batch 1 + batch 2 + macros
+- ⏳ ~55 more EASY cards remain (see `EOE_CARDS_FULL.txt` for full classification)
 - ⏳ ~75 MEDIUM cards need primitives
 - ⏳ 1 HARD card: Tezzeret, Cruel Captain (planeswalker — blocked until engine support)
+
+### Batch 2 cards written (51, 2026-05-25)
+Adagia Windswept Bastion, Alpharael Dreaming Acolyte, Beyond the Quiet,
+Cerebral Download, Command Bridge, Dawnsire Sunstar Dreadnought,
+Debris Field Crusher, Desculpting Blast, Divert Disaster, Dockworker Drone,
+Dual-Sun Technique, Dubious Delicacy, Elegy Acolyte, Emergency Eject,
+Fungal Colossus, Galvanizing Sawship, Haliya Ascendant Cadet,
+Honored Knight-Captain, Illvoi Light Jammer, Kav Landseeker,
+Kavaron Memorial World, Larval Scoutlander, Lightless Evangel,
+Lithobraking, Lost in Space, Mechan Assembler, Mechan Shieldmate,
+Meltstrider's Resolve, Mm'menon Uthros Exile, Mouth of the Storm,
+Orbital Plunge, Pinnacle Kill-Ship, Seam Rip, Seedship Impact,
+Shattered Wings, Singularity Rupture, Station Monitor, Steelswarm Operator,
+Susurian Dirgecraft, Sunset Saboteur, Survey Mechan, Susur Secundi Void Altar,
+Syr Vondam the Lucent, Tannuk Memorial Ensign, Temporal Intervention,
+The Eternity Elevator, The Seriema, Thaumaton Torpedo, Umbral Collar Zealot,
+Uthros Scanship, Wurmwall Sweeper
 
 ### Batch 1 cards written (70, 2026-05-25)
 All-Fates Scroll, Atmospheric Greenhouse, Beamsaw Prospector, Biosynthic Burst,
