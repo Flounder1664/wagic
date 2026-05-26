@@ -27,6 +27,7 @@ PRIMITIVES_DIR = r"M:\Claude_projects\wagic\projects\mtg\bin\Res\sets\primitives
 MTG_TXT       = os.path.join(PRIMITIVES_DIR, "mtg.txt")
 BORDER_TXT    = os.path.join(PRIMITIVES_DIR, "borderline.txt")
 UNSUP_TXT     = os.path.join(PRIMITIVES_DIR, "unsupported.txt")
+PW_TXT        = os.path.join(PRIMITIVES_DIR, "planeswalkers.txt")
 OUTPUT_CSV    = r"M:\Claude_projects\wagic\wagic_gap_SOS_2026.csv"
 
 CUTOFF_DATE   = "2026-04-24"   # SOS (Secrets of Strixhaven) release date
@@ -182,14 +183,18 @@ def main():
     supported   = parse_primitive_names(MTG_TXT)
     borderline  = parse_primitive_names(BORDER_TXT)
     unsupported = parse_primitive_names(UNSUP_TXT)
+    pw_existing = parse_primitive_names(PW_TXT)
+    # treat planeswalkers.txt entries as "supported" for gap purposes
+    supported = supported | pw_existing
 
     supported_lower   = {n.lower(): n for n in supported}
     borderline_lower  = {n.lower(): n for n in borderline}
     unsupported_lower = {n.lower(): n for n in unsupported}
 
-    print(f"  mtg.txt:        {len(supported):,} cards")
-    print(f"  borderline.txt: {len(borderline):,} cards")
-    print(f"  unsupported.txt:{len(unsupported):,} cards")
+    print(f"  mtg.txt:           {len(supported) - len(pw_existing):,} cards")
+    print(f"  planeswalkers.txt: {len(pw_existing):,} cards")
+    print(f"  borderline.txt:    {len(borderline):,} cards")
+    print(f"  unsupported.txt:   {len(unsupported):,} cards")
 
     # 2. Load and deduplicate Scryfall JSON
     print(f"\nLoading Scryfall JSON ({SCRYFALL_JSON})...", flush=True)
