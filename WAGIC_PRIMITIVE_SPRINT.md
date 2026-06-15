@@ -209,12 +209,14 @@ and DFC ("X // Y" cards):
 
 ---
 
-## 4. Battles — 1 non-DFC card
+## 4. Battles — 0 actionable
 
-Only one non-DFC battle missing: **Occupation of Llanowar** (UNK).
-
-Add following the pattern of the 36 existing battle approximations in
-`borderline.txt`. Probably 5 minutes of work.
+The lone "non-DFC battle missing" — **Occupation of Llanowar** (set `unk`,
+2023) — turned out to be an unsupported **playtest** card: subtype
+*Battle — Control Point*, not a Siege. Its defeat trigger changes
+*controller* (no back face to flip), which our Siege-only `backside=`/`flip`
+machinery can't approximate. Very low value. **Skip.** See
+[Flounder1664/wagic#4](https://github.com/Flounder1664/wagic/issues/4) comment.
 
 ---
 
