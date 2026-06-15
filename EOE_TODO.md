@@ -3,6 +3,8 @@
 Cards from Edge of Eternities — all new MTG mechanics, standard set (no IP licensing).
 Release: August 1, 2025. **Total: 266 unique English cards**.
 
+**Tracked in GitHub:** [Flounder1664/wagic#7](https://github.com/Flounder1664/wagic/issues/7)
+
 ## Status
 - ✅ `sets/EOE/_cards.dat` created — all 266 cards allocated IDs **1530001–1530398** (= 1530000 + collector_number)
 - ✅ 15 cards already playable (have existing primitives): basic lands, shock lands, Annul, Bombard, Banishing Light, Blooming Stinger

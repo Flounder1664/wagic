@@ -4,6 +4,11 @@ Status: planning — work not started.
 Source data: `wagic_gap_SOS_2026.csv` (run `gap_analysis.py` to regenerate).
 Last reviewed: 2026-05-26.
 
+**Tracked in GitHub:**
+- Vehicles → [Flounder1664/wagic#4](https://github.com/Flounder1664/wagic/issues/4)
+- Ward → [Flounder1664/wagic#5](https://github.com/Flounder1664/wagic/issues/5)
+- Planeswalkers → [Flounder1664/wagic#6](https://github.com/Flounder1664/wagic/issues/6) (21 DFC PWs blocked on [wagic#2](https://github.com/Flounder1664/wagic/issues/2))
+
 ## Why this document exists
 
 The gap analysis found four categories of "missing" cards that don't actually

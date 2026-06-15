@@ -4,6 +4,11 @@ Status: planning — work not started.
 Source data: `wagic_gap_SOS_2026.csv` (run `gap_analysis.py` to regenerate).
 Last reviewed: 2026-05-26.
 
+**Tracked in GitHub:**
+- Sagas → [Flounder1664/wagic#1](https://github.com/Flounder1664/wagic/issues/1)
+- DFC → [Flounder1664/wagic#2](https://github.com/Flounder1664/wagic/issues/2)
+- Classes → [Flounder1664/wagic#3](https://github.com/Flounder1664/wagic/issues/3) (blocked by #1)
+
 ## Why this document exists
 
 A gap analysis against the Scryfall dataset (cards released up to SOS, 2026-04-24)
