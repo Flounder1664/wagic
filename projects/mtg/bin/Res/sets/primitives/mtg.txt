@@ -836,7 +836,7 @@ type=Instant
 [/card]
 [card]
 name=Adagia, Windswept Bastion
-auto=@movedTo(this|myBattlefield):tap(noevent)
+auto=tap(noevent)
 auto={T}:Add{W}
 text=This land enters tapped. {T}: Add {W}.
 type=Land
@@ -7662,7 +7662,7 @@ type=Enchantment
 [/card]
 [card]
 name=Auxiliary Boosters
-auto=@movedTo(this|myBattlefield):_ROBOTTOKEN_
+auto=_ROBOTTOKEN_
 auto={3}:equip
 auto=teach(creature) +1/+2,flying
 text=When this Equipment enters, create a 2/2 colorless Robot artifact creature token. Equipped creature gets +1/+2 and has flying. Equip {3}
@@ -11349,7 +11349,7 @@ subtype=Aura
 [/card]
 [card]
 name=Bioengineered Future
-auto=@movedTo(this|myBattlefield):_LANDERTOKEN_
+auto=_LANDERTOKEN_
 text=When this enchantment enters, create a Lander token.
 mana={1}{G}{G}
 type=Enchantment
@@ -11757,7 +11757,7 @@ toughness=1
 [/card]
 [card]
 name=Blade of the Swarm
-auto=@movedTo(this|myBattlefield):counter(1/1,2) all(this)
+auto=counter(1/1,2) all(this)
 text=When this creature enters, put two +1/+1 counters on it.
 mana={3}{B}
 type=Creature
@@ -22413,7 +22413,7 @@ toughness=4
 [/card]
 [card]
 name=Codecracker Hound
-auto=@movedTo(this|myBattlefield):draw:1 && mill:1
+auto=draw:1 && mill:1
 text=When this creature enters, draw a card and mill a card.
 mana={2}{U}
 type=Creature
@@ -22762,7 +22762,7 @@ toughness=3
 [/card]
 [card]
 name=Command Bridge
-auto=@movedTo(this|myBattlefield):tap(noevent)
+auto=tap(noevent)
 auto={T}:_MANAOFANYCOLOR_
 text=This land enters tapped. {T}: Add one mana of any color.
 type=Land
@@ -25726,9 +25726,10 @@ type=Sorcery
 [/card]
 [card]
 name=Cryogen Relic
-auto=@movedTo(this|myBattlefield):draw:1
-auto=@movedTo(this|graveyard) from(battlefield):draw:1
-text=When this artifact enters or leaves the battlefield, draw a card.
+auto=draw:1
+auto=_DIES_draw:1 controller
+auto={1}{U}{S}:counter(0/0,1,stun) target(creature)
+text=When this artifact enters or leaves the battlefield, draw a card. -- {1}{U}, Sacrifice this artifact: Put a stun counter on up to one target tapped creature.
 mana={1}{U}
 type=Artifact
 [/card]
@@ -33937,7 +33938,7 @@ toughness=2
 [/card]
 [card]
 name=Drix Fatemaker
-auto=@movedTo(this|myBattlefield):counter(1/1) target(creature|mybattlefield)
+auto=counter(1/1) target(creature|mybattlefield)
 text=When this creature enters, put a +1/+1 counter on target creature you control. Each creature you control with a +1/+1 counter on it has trample. (Trample static not supported)
 mana={3}{G}
 type=Creature
@@ -40910,7 +40911,7 @@ subtype=Aura
 [/card]
 [card]
 name=Faller's Faithful
-auto=@movedTo(this|myBattlefield):bury target(creature|opponentbattlefield)
+auto=bury target(creature|opponentbattlefield)
 text=When this creature enters, destroy up to one other target creature.
 mana={2}{B}
 type=Creature
@@ -41849,8 +41850,8 @@ subtype=Aura
 [/card]
 [card]
 name=Fell Gravship
-auto=@movedTo(this|myBattlefield):mill:3
-auto=@movedTo(this|myBattlefield):moveto(hand) target(creature|mygraveyard)
+auto=mill:3
+auto=moveto(hand) target(creature|mygraveyard)
 text=When this Spacecraft enters, mill three cards, then return a creature card from your graveyard to your hand.
 mana={2}{B}
 type=Artifact Creature
@@ -48008,7 +48009,7 @@ toughness=5
 [/card]
 [card]
 name=Germinating Wurm
-auto=@movedTo(this|myBattlefield):life:2
+auto=life:2
 text=When this creature enters, you gain 2 life.
 mana={4}{G}
 type=Creature
@@ -60546,7 +60547,7 @@ toughness=3
 name=Illvoi Light Jammer
 abilities=flash
 auto={3}:equip
-auto=@movedTo(this|myBattlefield):hexproof ueot target(creature|mybattlefield)
+auto=hexproof ueot target(creature|mybattlefield)
 auto=teach(creature) +1/+2
 text=Flash. When this Equipment enters, attach it to target creature you control. That creature gains hexproof until end of turn. Equipped creature gets +1/+2. Equip {3}.
 mana={1}{U}
@@ -62083,7 +62084,7 @@ type=Enchantment
 [card]
 name=Interceptor Mechan
 abilities=flying
-auto=@movedTo(this|myBattlefield):moveto(hand) target(*[creature;artifact]|mygraveyard)
+auto=moveto(hand) target(*[creature;artifact]|mygraveyard)
 auto=@endOfTurn(_):counter(1/1) all(this)
 text=Flying. When this creature enters, return target artifact or creature card from your graveyard to your hand. Void — At the beginning of your end step, put a +1/+1 counter on this creature.
 mana={2}{B}{R}
@@ -65483,7 +65484,7 @@ toughness=3
 [/card]
 [card]
 name=Kavaron, Memorial World
-auto=@movedTo(this|myBattlefield):tap(noevent)
+auto=tap(noevent)
 auto={T}:Add{R}
 text=This land enters tapped. {T}: Add {R}.
 type=Land
@@ -67180,7 +67181,7 @@ toughness=2
 [/card]
 [card]
 name=Knight Luminary
-auto=@movedTo(this|myBattlefield):_HUMANSOLDIERTOKEN_
+auto=_HUMANSOLDIERTOKEN_
 text=When this creature enters, create a 1/1 white Human Soldier creature token.
 mana={3}{W}
 type=Creature
@@ -76476,7 +76477,7 @@ subtype=Aura
 [/card]
 [card]
 name=Mechanozoa
-auto=@movedTo(this|myBattlefield):tap target(*[artifact;creature]|opponentbattlefield)
+auto=tap target(*[artifact;creature]|opponentbattlefield)
 text=When this creature enters, tap target artifact or creature an opponent controls.
 mana={4}{U}{U}
 type=Artifact Creature
@@ -85391,7 +85392,7 @@ toughness=2
 [card]
 name=Nova Hellkite
 abilities=flying,haste
-auto=@movedTo(this|myBattlefield):damage:1 target(creature|opponentbattlefield)
+auto=damage:1 target(creature|opponentbattlefield)
 text=Flying, haste. When this creature enters, it deals 1 damage to target creature an opponent controls.
 mana={3}{R}{R}
 type=Creature
@@ -90066,7 +90067,7 @@ toughness=4
 [/card]
 [card]
 name=Perigee Beckoner
-auto=@movedTo(this|myBattlefield):pump(2/0) target(creature|mybattlefield) ueot
+auto=pump(2/0) target(creature|mybattlefield) ueot
 text=When this creature enters, until end of turn, another target creature you control gets +2/+0.
 mana={4}{B}
 type=Creature
@@ -95269,7 +95270,7 @@ toughness=5
 [card]
 name=Quantum Riddler
 abilities=flying
-auto=@movedTo(this|myBattlefield):draw:1
+auto=draw:1
 text=Flying. When this creature enters, draw a card.
 mana={3}{U}{U}
 type=Creature
@@ -97445,7 +97446,7 @@ type=Instant
 [/card]
 [card]
 name=Rayblade Trooper
-auto=@movedTo(this|myBattlefield):counter(1/1) target(creature|mybattlefield)
+auto=counter(1/1) target(creature|mybattlefield)
 text=When this creature enters, put a +1/+1 counter on target creature you control.
 mana={2}{W}
 type=Creature
@@ -99283,7 +99284,7 @@ type=Instant
 [/card]
 [card]
 name=Rescue Skiff
-auto=@movedTo(this|myBattlefield):moveto(mybattlefield) target(creature|mygraveyard)
+auto=moveto(mybattlefield) target(creature|mygraveyard)
 text=When this Spacecraft enters, return target creature card from your graveyard to the battlefield.
 mana={5}{W}
 type=Artifact Creature
@@ -106263,7 +106264,9 @@ type=Sorcery
 [/card]
 [card]
 name=Scrounge for Eternity
-auto=moveto(mybattlefield) target(creature[manacost<=5]|mygraveyard) && _LANDERTOKEN_
+target=creature[manacost<=5]|mygraveyard
+auto=moveTo(myBattlefield)
+auto=_LANDERTOKEN_
 text=As an additional cost to cast this spell, sacrifice an artifact or creature. Return target creature card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token.
 mana={2}{B}{S(artifact,creature|mybattlefield)}
 type=Sorcery
@@ -107255,7 +107258,7 @@ toughness=3
 [/card]
 [card]
 name=Seedship Broodtender
-auto=@movedTo(this|myBattlefield):mill:3
+auto=mill:3
 auto={3}{B}{G}{S}:moveto(mybattlefield) target(creature|mygraveyard)
 text=When this creature enters, mill three cards. {3}{B}{G}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield.
 mana={B}{G}
@@ -111862,7 +111865,7 @@ type=Enchantment
 [/card]
 [card]
 name=Sinister Cryologist
-auto=@movedTo(this|myBattlefield):pump(-3/0) target(creature|opponentbattlefield) ueot
+auto=pump(-3/0) target(creature|opponentbattlefield) ueot
 text=When this creature enters, target creature an opponent controls gets -3/-0 until end of turn.
 mana={2}{U}
 type=Creature
@@ -116290,7 +116293,7 @@ toughness=6
 [/card]
 [card]
 name=Specimen Freighter
-auto=@movedTo(this|myBattlefield):bounce target(creature|opponentbattlefield)
+auto=bounce target(creature|opponentbattlefield)
 text=When this Spacecraft enters, return up to one target creature to its owner's hand.
 mana={5}{U}
 type=Artifact Creature
@@ -118938,7 +118941,7 @@ type=Artifact
 [card]
 name=Starbreach Whale
 abilities=flying
-auto=@movedTo(this|myBattlefield):_SURVEIL2_
+auto=_SURVEIL2_
 text=Flying. When this creature enters, surveil 2.
 mana={4}{U}
 type=Creature
@@ -122723,7 +122726,7 @@ type=Enchantment
 [/card]
 [card]
 name=Susur Secundi, Void Altar
-auto=@movedTo(this|myBattlefield):tap(noevent)
+auto=tap(noevent)
 auto={T}:Add{B}
 text=This land enters tapped. {T}: Add {B}.
 type=Land
@@ -125885,8 +125888,8 @@ type=Land
 [/card]
 [card]
 name=Terrapact Intimidator
-auto=@movedTo(this|myBattlefield):_LANDERTOKEN_
-auto=@movedTo(this|myBattlefield):_LANDERTOKEN_
+auto=_LANDERTOKEN_
+auto=_LANDERTOKEN_
 text=When this creature enters, create two Lander tokens.
 mana={1}{R}
 type=Creature
@@ -133831,7 +133834,7 @@ toughness=4
 [/card]
 [card]
 name=Uthros, Titanic Godcore
-auto=@movedTo(this|myBattlefield):tap(noevent)
+auto=tap(noevent)
 auto={T}:Add{U}
 text=This land enters tapped. {T}: Add {U}.
 type=Land
@@ -140110,7 +140113,7 @@ toughness=4
 [/card]
 [card]
 name=Wedgelight Rammer
-auto=@movedTo(this|myBattlefield):_ROBOTTOKEN_
+auto=_ROBOTTOKEN_
 text=When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.
 mana={3}{W}
 type=Artifact Creature
@@ -140141,7 +140144,7 @@ toughness=3
 [/card]
 [card]
 name=Weftblade Enhancer
-auto=@movedTo(this|myBattlefield):counter(1/1) target(creature|mybattlefield)
+auto=counter(1/1) target(creature|mybattlefield)
 text=When this creature enters, put a +1/+1 counter on target creature you control.
 mana={5}{W}
 type=Creature
