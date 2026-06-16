@@ -95271,7 +95271,7 @@ toughness=5
 name=Quantum Riddler
 abilities=flying
 auto=draw:1
-text=Flying. When this creature enters, draw a card.
+text=Flying. When this creature enters, draw a card. (As long as you have one or fewer cards in hand, your draws are increased by 1 -- not supported by the engine.)
 mana={3}{U}{U}
 type=Creature
 subtype=Sphinx
@@ -106268,7 +106268,7 @@ target=creature[manacost<=5]|mygraveyard
 auto=moveTo(myBattlefield)
 auto=_LANDERTOKEN_
 text=As an additional cost to cast this spell, sacrifice an artifact or creature. Return target creature card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token.
-mana={2}{B}{S(artifact,creature|mybattlefield)}
+mana={2}{B}{S(*[artifact;creature]|mybattlefield)}
 type=Sorcery
 [/card]
 [card]
