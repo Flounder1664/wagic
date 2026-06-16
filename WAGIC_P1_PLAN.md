@@ -36,7 +36,9 @@ safely verified.** This must be solved FIRST. Three options:
 | **(B) Add a TESTSUITE config to the Windows vcxproj** | Med | Net-new build config (define `TESTSUITE`, wire `WAGIC_TESTSUITE` headless exit from #1155). Keeps everything on one toolchain but adds a config we must maintain. |
 | **(C) Manual in-game verification only** | High per-fix | No harness. Eyeball each fix in a Baka game on Windows. Infeasible for timing fixes (#1158) and AI ranking (#1166). Last resort. |
 
-**Decision needed from user before P1 execution.** This plan assumes (A).
+**DECIDED 2026-06-16: Option (A).** Stand up a WSL + qt5 console/debug build
+(`CONFIG+=console CONFIG+=debug DEFINES+=CAPTURE_STDERR`) used solely as a
+test harness — never shipped. First execution step of P1.
 
 ---
 
@@ -97,8 +99,9 @@ existing behaviour (regression risk — needs suite green before+after).
    - For each 🟡: grep-verify the named symbols in our tree FIRST (Phase 0 lesson).
 4. **Behaviour-changing fixes** (🔴, suite must be green before+after each):
    #1161, then #1173 → #1175 (ordered), then #1158.
-5. **AI fixes** (🔴 AI-only): #1167, #1166 — run the AI test subset; accept if no
-   regressions and they don't make Baka obviously worse.
+5. **AI fixes** (🔴 AI-only, **LOW PRIORITY — do last**): #1167, #1166 — run the
+   AI test subset; accept only if no regressions. Not urgent; fine to defer past
+   the rest of the batch entirely.
 6. **Revisit #1172** (the no-op): only if we choose to write the missing
    mana-parser change (`MTGAbility.cpp:~5432` extract `restriction{...}` →
    `castRestriction`). Separate task; not part of this batch.
@@ -126,11 +129,22 @@ For every fix:
 
 ---
 
-## Open decisions for the user
+## Decisions — resolved 2026-06-16
 
-1. **Test harness: option A (WSL qt5), B (Windows TESTSUITE config), or C
-   (manual)?** Gates everything. (A) recommended.
-2. **AI heuristic changes (#1166, #1167)** — adopt, or hold? They change Baka's
-   play and have no regression test that proves "better", only "different".
-3. **#1172 mana-parser completion** — write the missing piece, or leave Adarkar
-   Unicorn-class cards as known-broken and move on?
+1. **Test harness → Option (A)**, WSL qt5 console build. ✅ Decided.
+2. **AI heuristic changes (#1166, #1167) → adopt, LOW PRIORITY.** They look like
+   improvements but aren't urgent and have no test proving "better." Do them
+   LAST in the sequence (after all rules fixes), and only if the harness shows
+   no AI-test regressions.
+3. **#1172 mana-parser completion → LOW VALUE, likely skip.** Blast radius is
+   tiny: only **5 cards** in our primitives currently carry a `restriction{...}`
+   on a mana ability that the engine silently ignores —
+   `mtg.txt:21077` (Add{3} if total power > 7), `mtg.txt:88265` (discard-cost
+   {B}{B}{B}), `borderline.txt:22219` ({U}{B}{R} if instant/sorcery in hand),
+   `borderline.txt:71446` ({G} if you control an artifact), `borderline.txt:123280`
+   ({U} if you control a Human) — plus Adarkar Unicorn (6th, would regain its
+   upkeep-only restriction). 0 cards are parked in `unsupported.txt` for this.
+   So completing #1172 (engine guard + the missing mana-parser
+   `restriction{...}`→`castRestriction` wiring at `MTGAbility.cpp:~5432`) fixes
+   at most ~6 cards. Defer unless one of those 6 matters; not worth blocking the
+   batch.
