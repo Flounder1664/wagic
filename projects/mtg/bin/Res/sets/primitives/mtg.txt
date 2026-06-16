@@ -47827,7 +47827,7 @@ type=Land
 [/card]
 [card]
 name=Gene Pollinator
-auto={T}{T(other creature|myBattlefield)}:_MANAOFANYCOLOR_
+auto={T}{T(other *[creature;artifact;enchantment;land;planeswalker]|myBattlefield)}:_MANAOFANYCOLOR_
 text={T}, Tap an untapped creature you control: Add one mana of any color.
 mana={G}
 type=Artifact Creature
@@ -69235,6 +69235,13 @@ auto=life:twicetype:plains:mybattlefield controller
 text=You gain 2 life for each Plains you control.
 mana={3}{W}{W}
 type=Sorcery
+[/card]
+[card]
+name=Lander
+auto={2}{T}{S}:name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
+text={2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+type=Artifact
+subtype=Lander
 [/card]
 [card]
 name=Landslide
