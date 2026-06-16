@@ -47826,8 +47826,8 @@ type=Land
 [/card]
 [card]
 name=Gene Pollinator
-auto={T}:_MANAOFANYCOLOR_
-text={T}: Add one mana of any color.
+auto={T}{T(other creature|myBattlefield)}:_MANAOFANYCOLOR_
+text={T}, Tap an untapped creature you control: Add one mana of any color.
 mana={G}
 type=Artifact Creature
 subtype=Robot Insect
@@ -106263,7 +106263,7 @@ type=Sorcery
 [/card]
 [card]
 name=Scrounge for Eternity
-auto=moveto(mybattlefield) target(creature|mygraveyard) where(converted<=5) && _LANDERTOKEN_
+auto=moveto(mybattlefield) target(creature[manacost<=5]|mygraveyard) && _LANDERTOKEN_
 text=As an additional cost to cast this spell, sacrifice an artifact or creature. Return target creature card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token.
 mana={2}{B}{S(artifact,creature|mybattlefield)}
 type=Sorcery
@@ -124446,7 +124446,7 @@ toughness=4
 [/card]
 [card]
 name=Tannuk, Steadfast Second
-auto=all(other creature|mybattlefield) haste
+auto=lord(other creature|myBattlefield) haste
 text=Other creatures you control have haste.
 mana={2}{R}{R}
 type=Legendary Creature
