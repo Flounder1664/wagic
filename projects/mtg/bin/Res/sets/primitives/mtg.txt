@@ -107279,6 +107279,7 @@ toughness=3
 name=Seedship Impact
 target=artifact,enchantment
 auto=bury
+auto=_LANDERTOKEN_
 text=Destroy target artifact or enchantment. If its mana value was 2 or less, create a Lander token.
 mana={1}{G}
 type=Instant
@@ -124448,7 +124449,7 @@ toughness=7
 [card]
 name=Tannuk, Memorial Ensign
 auto=_LANDFALL_damage:1 opponent
-auto=@movedTo(land|myBattlefield) restriction{thisturn(land[fresh]|myBattlefield)~equalto~1}:draw:1 controller
+auto=@movedTo(land|myBattlefield) restriction{thisturn(land[fresh]|myBattlefield)~equalto~1} turnlimited:draw:1 controller
 text=Landfall -- Whenever a land you control enters, Tannuk deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, draw a card.
 mana={1}{R}{G}
 type=Legendary Creature
