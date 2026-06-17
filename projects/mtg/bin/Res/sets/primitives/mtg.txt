@@ -107277,10 +107277,11 @@ toughness=3
 [/card]
 [card]
 name=Seedship Impact
-target=artifact,enchantment
-auto=bury
-auto=_LANDERTOKEN_
-text=Destroy target artifact or enchantment. If its mana value was 2 or less, create a Lander token.
+auto=choice name(Destroy artifact MV2 or less, create a Lander) destroy target(artifact[manacost<=2]|battlefield) && _LANDERTOKEN_
+auto=choice name(Destroy enchantment MV2 or less, create a Lander) destroy target(enchantment[manacost<=2]|battlefield) && _LANDERTOKEN_
+auto=choice name(Destroy artifact MV3 or more) destroy target(artifact[manacost>=3]|battlefield)
+auto=choice name(Destroy enchantment MV3 or more) destroy target(enchantment[manacost>=3]|battlefield)
+text=Destroy target artifact or enchantment. If its mana value was 2 or less, create a Lander token. (Choice: destroy MV<=2 + Lander, or destroy MV>=3.)
 mana={1}{G}
 type=Instant
 [/card]

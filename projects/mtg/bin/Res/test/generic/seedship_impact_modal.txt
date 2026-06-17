@@ -1,0 +1,21 @@
+#Seedship Impact (EOE): mode 0 destroys a MV<=2 artifact and creates a Lander.
+#Verifies the modal choice + the combined artifact-or-enchantment[manacost<=2] target filter.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Seedship Impact
+manapool:{1}{G}
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Seedship Impact
+choice 0
+Ornithopter
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Lander
+graveyard:Seedship Impact
+[PLAYER2]
+graveyard:Ornithopter
+[END]
