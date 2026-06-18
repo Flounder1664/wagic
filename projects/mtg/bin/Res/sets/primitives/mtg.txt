@@ -60126,6 +60126,8 @@ type=Sorcery
 [/card]
 [card]
 name=Icetill Explorer
+auto=maxPlay(land)+1
+auto=lord(land|mygraveyard) canPlayFromGraveyard
 auto=_LANDFALL_mill:1 controller
 text=Landfall -- Whenever a land you control enters, mill a card.
 mana={2}{G}{G}
