@@ -321,8 +321,13 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
     //open. "Nothing has happened yet" is detected through empty zones, but
     //cards exiled by Serum Powder redraws (player->exiledBySerum) are part
     //of that window and must not close it (issue #979).
-    if ((game->turn < 1) && (player->game->hand->nb_cards != 0) && (card->basicAbilities[(int)Constants::LEYLINE])
-        && game->getCurrentGamePhase() == MTG_PHASE_FIRSTMAIN
+    //Player on the play uses their first main phase; player on the draw uses
+    //their first turn before drawing (mirrors the Mulligan menu's window) so
+    //BOTH players can start Leylines on the battlefield. Was "turn < 1" only,
+    //which excluded the player on the draw entirely (their first turn is 1).
+    if ((((game->turn == 0) && game->getCurrentGamePhase() == MTG_PHASE_FIRSTMAIN)
+          || ((game->turn == 1) && game->getCurrentGamePhase() < MTG_PHASE_DRAW))
+        && (player->game->hand->nb_cards != 0) && (card->basicAbilities[(int)Constants::LEYLINE])
         && player->game->graveyard->nb_cards == 0
         && player->game->exile->nb_cards == player->exiledBySerum
         )
