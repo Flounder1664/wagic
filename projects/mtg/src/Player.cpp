@@ -44,6 +44,9 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     initiative = 0;
     surveilOffset = 0;
     exiledBySerum = 0;
+    handMulligans = 0;
+    cardsToBottom = 0;
+    keptOpeningHand = false;
     devotionOffset = 0;
     lastShuffleTurn = -1;
     epic = 0;
@@ -252,10 +255,15 @@ void Player::takeMulligan()
         currentPlayerZones->library);
 
     currentPlayerZones->library->shuffle(); //Shuffle
-    
-    for (int i = 0; i < (cardsinhand - 1); i++)
+
+    //London mulligan: redraw a FULL opening hand (the old Paris rule drew
+    //one fewer each time). Under London the hand is always full at mulligan
+    //time, so cardsinhand here is the opening size. The mulligan cost is
+    //paid on KEEP: the player then puts handMulligans cards on the bottom
+    //of the library (see GameObserver::cardClick / cardsToBottom).
+    handMulligans++;
+    for (int i = 0; i < cardsinhand; i++)
         game->drawFromLibrary();
-         //Draw hand with 1 less card penalty //almhum
 }
 
 void Player::serumMulligan()
@@ -273,6 +281,25 @@ void Player::serumMulligan()
     for (int i = 0; i < (cardsinhand); i++)
         game->drawFromLibrary();
          //Draw hand no penalty
+}
+
+void Player::bottomCardFromHand(MTGCardInstance * card)
+{
+    //Move the chosen hand card to the BOTTOM of the library. Drawing takes
+    //from the end of the vector (MTGPlayerCards::drawFromLibrary reads
+    //cards[nb_cards-1]), so the bottom is the front. Mirrors AALibraryBottom.
+    if (!card || !game->hand->hasCard(card))
+        return;
+    MTGCardInstance * moved = game->putInLibrary(card);
+    if (!moved)
+        return;
+    MTGLibrary * library = game->library;
+    vector<MTGCardInstance *> newOrder;
+    newOrder.push_back(moved);
+    for (unsigned int k = 0; k < library->cards.size(); ++k)
+        if (library->cards[k] != moved)
+            newOrder.push_back(library->cards[k]);
+    library->cards = newOrder;
 }
 
 bool Player::hasPossibleAttackers()
@@ -399,6 +426,21 @@ bool Player::parseLine(const string& s)
             exiledBySerum = atoi(s.substr(limiter + 1).c_str());
             return true;
         }
+        else if (areaS.compare("handmulligans") == 0)
+        {
+            handMulligans = atoi(s.substr(limiter + 1).c_str());
+            return true;
+        }
+        else if (areaS.compare("cardstobottom") == 0)
+        {
+            cardsToBottom = atoi(s.substr(limiter + 1).c_str());
+            return true;
+        }
+        else if (areaS.compare("keptopeninghand") == 0)
+        {
+            keptOpeningHand = (atoi(s.substr(limiter + 1).c_str()) == 1);
+            return true;
+        }
         else if (areaS.compare("deckfile") == 0)
         {
             deckFile = s.substr(limiter + 1);
@@ -480,6 +522,12 @@ ostream& operator<<(ostream& out, const Player& p)
     out << "premade=" << p.premade << endl;
     if(p.exiledBySerum)
         out << "serumexiled=" << p.exiledBySerum << endl;
+    if(p.handMulligans)
+        out << "handmulligans=" << p.handMulligans << endl;
+    if(p.cardsToBottom)
+        out << "cardstobottom=" << p.cardsToBottom << endl;
+    if(p.keptOpeningHand)
+        out << "keptopeninghand=1" << endl;
     if(p.deckFile != "")
         out << "deckfile=" << p.deckFile << endl;
     if(p.deckFileSmall != "")

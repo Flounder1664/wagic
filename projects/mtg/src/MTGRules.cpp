@@ -303,6 +303,11 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
 {
     defaultPlayName = card->isLand()?"Play Land":"Cast Card Normally";
     Player * player = game->currentlyActing();
+    //London mulligan: a player who has mulliganed must Keep Hand and finish
+    //putting cards on the bottom before they can play anything. While owing
+    //that, hand clicks are routed to bottoming in GameObserver::cardClick.
+    if ((player->handMulligans > 0 && !player->keptOpeningHand) || player->cardsToBottom > 0)
+        return 0;
     if (!player->game->hand->hasCard(card) && !player->game->graveyard->hasCard(card) && !player->game->exile->hasCard(card) && !player->game->library->hasCard(card) && !player->game->commandzone->hasCard(card))
          return 0;
     if ((player->game->library->hasCard(card) && !card->canPlayFromLibrary()) || (player->game->graveyard->hasCard(card) && !card->has(Constants::CANPLAYFROMGRAVEYARD)) || (player->game->exile->hasCard(card) && !card->has(Constants::CANPLAYFROMEXILE)))
@@ -458,10 +463,10 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
     //////X is set, below we set sunburst for X if needed and cast or reset the card.//////
     //////107.3a If a spell or activated ability has a mana cost, alternative cost,  //////
     //////additional cost, and / or activation cost with an{ X }, [-X], or X in it,  //////
-    //////and the value of X isn’t defined by the text of that spell or ability, the //////
+    //////and the value of X isnï¿½t defined by the text of that spell or ability, the //////
     //////controller of that spell or ability chooses and announces the value of X as//////
     //////part of casting the spell or activating the ability.                       //////
-    //////(See rule 601, “Casting Spells.”) While a spell is on the stack, any X in  //////
+    //////(See rule 601, ï¿½Casting Spells.ï¿½) While a spell is on the stack, any X in  //////
     //////its mana cost or in any alternative cost or additional cost it has equals  //////
     //////the announced value.While an activated ability is on the stack, any X in   //////
     //////its activation cost equals the announced value.                            //////
@@ -971,10 +976,10 @@ int MTGAlternativeCostRule::reactToClick(MTGCardInstance * card, ManaCost *alter
     //////X is set, below we set sunburst for X if needed and cast or reset the card.//////
     //////107.3a If a spell or activated ability has a mana cost, alternative cost,  //////
     //////additional cost, and / or activation cost with an{ X }, [-X], or X in it,  //////
-    //////and the value of X isn’t defined by the text of that spell or ability, the //////
+    //////and the value of X isnï¿½t defined by the text of that spell or ability, the //////
     //////controller of that spell or ability chooses and announces the value of X as//////
     //////part of casting the spell or activating the ability.                       //////
-    //////(See rule 601, “Casting Spells.”) While a spell is on the stack, any X in  //////
+    //////(See rule 601, ï¿½Casting Spells.ï¿½) While a spell is on the stack, any X in  //////
     //////its mana cost or in any alternative cost or additional cost it has equals  //////
     //////the announced value.While an activated ability is on the stack, any X in   //////
     //////its activation cost equals the announced value.                            //////
@@ -1861,9 +1866,9 @@ int MTGAttackCostRule::reactToClick(MTGCardInstance * card)
     return 1;
     /*
     508.1g: If any of the chosen creatures require paying costs to attack, the active player determines the total cost to attack.
-            Costs may include paying mana, tapping permanents, sacrificing permanents, discarding cards, and so on. Once the total cost is determined, it becomes “locked in.” 
+            Costs may include paying mana, tapping permanents, sacrificing permanents, discarding cards, and so on. Once the total cost is determined, it becomes ï¿½locked in.ï¿½ 
             If effects would change the total cost after this time, ignore this change.
-    508.1h: If any of the costs require mana, the active player then has a chance to activate mana abilities (see rule 605, “Mana Abilities”).
+    508.1h: If any of the costs require mana, the active player then has a chance to activate mana abilities (see rule 605, ï¿½Mana Abilitiesï¿½).
     508.1i: Once the player has enough mana in his or her mana pool, he or she pays all costs in any order. Partial payments are not allowed.
     */
 }
@@ -1941,8 +1946,8 @@ int MTGBlockCostRule::reactToClick(MTGCardInstance * card)
     /*
     509.1d: If any of the chosen creatures require paying costs to block, the defending player determines the total cost to block. 
     Costs may include paying mana, tapping permanents, sacrificing permanents, discarding cards, and so on. 
-    Once the total cost is determined, it becomes “locked in.” If effects would change the total cost after this time, ignore this change.
-    509.1e: If any of the costs require mana, the defending player then has a chance to activate mana abilities (see rule 605, “Mana Abilities”).
+    Once the total cost is determined, it becomes ï¿½locked in.ï¿½ If effects would change the total cost after this time, ignore this change.
+    509.1e: If any of the costs require mana, the defending player then has a chance to activate mana abilities (see rule 605, ï¿½Mana Abilitiesï¿½).
     509.1f: Once the player has enough mana in his or her mana pool, he or she pays all costs in any order. Partial payments are not allowed.
     */
 }

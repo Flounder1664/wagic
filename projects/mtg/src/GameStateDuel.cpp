@@ -997,7 +997,12 @@ void GameStateDuel::Update(float dt)
                         && game->currentPlayer->game->hand->nb_cards > 0 && game->currentPlayer->game->inPlay->nb_cards == 0 && game->currentPlayer->game->graveyard->nb_cards == 0
                         && game->currentPlayer->game->exile->nb_cards == game->currentPlayer->exiledBySerum && game->currentlyActing() == (Player*)game->currentPlayer) //Now you can mulligan even if you didn't start as first. Serum Powder exiles don't end the window (issue #979).
                     {
-                        menu->Add(MENUITEM_MULLIGAN, "Mulligan");
+                        if (!game->currentPlayer->keptOpeningHand)
+                            menu->Add(MENUITEM_MULLIGAN, "Mulligan");
+                        //London mulligan: once you have mulliganed you must Keep
+                        //Hand to commit, which makes you put N cards on the bottom.
+                        if (game->currentPlayer->handMulligans > 0 && !game->currentPlayer->keptOpeningHand)
+                            menu->Add(MENUITEM_KEEP_HAND, "Keep Hand");
                     }
                     //END almosthumane - mulligan
                     if(game->getCurrentGamePhase() == MTG_PHASE_COMBATATTACKERS && game->currentlyActing() == (Player*)game->currentPlayer){ // During attack phase it shows a button to toggle all creatures to attack mode
@@ -1889,6 +1894,16 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
             //almosthumane - mulligan
             game->Mulligan();
 
+            menu->Close();
+            setGamePhase(DUEL_STATE_CANCEL);
+            break;
+        case MENUITEM_KEEP_HAND:
+            //London mulligan: commit to the current hand. Owe one bottomed
+            //card per mulligan taken; the player now clicks that many hand
+            //cards to send them to the bottom of the library.
+            game->currentPlayer->keptOpeningHand = true;
+            game->currentPlayer->cardsToBottom = game->currentPlayer->handMulligans;
+            game->logAction(game->currentPlayer, "keephand");
             menu->Close();
             setGamePhase(DUEL_STATE_CANCEL);
             break;

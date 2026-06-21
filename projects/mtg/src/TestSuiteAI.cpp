@@ -246,6 +246,18 @@ int TestSuiteAI::Act(float)
         int choice = atoi(action.substr(action.find("choice ") + 7).c_str());
         observer->mLayers->actionLayer()->doReactTo(choice);
     }
+    else if (action.compare("mulligan") == 0)
+    {
+        observer->Mulligan(observer->currentlyActing());
+    }
+    else if (action.compare("keephand") == 0)
+    {
+        //London mulligan: commit to the hand; owe one bottomed card per
+        //mulligan. The subsequent card-name clicks bottom them.
+        Player * p = observer->currentlyActing();
+        p->keptOpeningHand = true;
+        p->cardsToBottom = p->handMulligans;
+    }
     else if (action.find(" -momir- ") != string::npos)
     {
         int start = action.find(" -momir- ");

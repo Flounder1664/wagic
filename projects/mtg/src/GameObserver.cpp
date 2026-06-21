@@ -1558,6 +1558,19 @@ int GameObserver::cardClick(MTGCardInstance * card, Targetable * object, bool lo
         }
     }
 
+    //London mulligan: while the acting player owes "put N cards on the
+    //bottom" after keeping a mulliganed hand, a click on one of their own
+    //hand cards bottoms it, bypassing all normal click handling.
+    {
+        Player * acter = currentlyActing();
+        if (card && acter && acter->cardsToBottom > 0 && acter->game->hand->hasCard(card))
+        {
+            acter->bottomCardFromHand(card);
+            acter->cardsToBottom--;
+            return cardClickLog(log, acter, zone, backup, index, 1);
+        }
+    }
+
     do {
         if (targetChooser)
         {
@@ -2102,6 +2115,10 @@ bool GameObserver::processAction(const string& s)
             mLayers->actionLayer()->doReactTo(choice);
     } else if (s == "p1" || s == "p2") {
         cardClick(NULL, p);
+    } else if(s.find("keephand") != string::npos) {
+        //London mulligan: replay the "keep" decision so the bottom-card
+        //clicks logged after it find cardsToBottom set (see cardClick).
+        if (p) { p->keptOpeningHand = true; p->cardsToBottom = p->handMulligans; }
     } else if(s.find("mulligan") != string::npos) {
         Mulligan(p);
     } else if(s.find("shufflelib") != string::npos) {
