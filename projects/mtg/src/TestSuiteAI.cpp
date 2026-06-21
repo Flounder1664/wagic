@@ -694,6 +694,14 @@ void TestSuite::ThreadProc(void* inParam)
         float counter = 1.0f;
         while(instance->mProcessing && (filename = instance->getNextFile()) != "")
         {
+            if (filename == "+pregametests")
+            {   //Directive, not a file: mirror loadNext()'s handling (line ~627)
+                //so the worker loop doesn't report our fork's pregame directive
+                //as an unloadable test. Upstream #1168's loader had no such
+                //directive, so its ThreadProc reported it as "Could not load".
+                instance->pregameTests();
+                continue;
+            }
             TestSuiteGame * theGame = NULL;
             {
                 //File reads and the lazily-populated card collection are not
