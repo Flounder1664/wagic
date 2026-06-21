@@ -303,10 +303,15 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
 {
     defaultPlayName = card->isLand()?"Play Land":"Cast Card Normally";
     Player * player = game->currentlyActing();
-    //London mulligan: a player who has mulliganed must Keep Hand and finish
-    //putting cards on the bottom before they can play anything. While owing
-    //that, hand clicks are routed to bottoming in GameObserver::cardClick.
-    if ((player->handMulligans > 0 && !player->keptOpeningHand) || player->cardsToBottom > 0)
+    //London mulligan: a player who has mulliganed must keep (advance the
+    //phase or use the Keep Hand menu) and then put cards on the bottom
+    //before they can play anything.
+    if (player->cardsToBottom > 0)
+        //In the bottom-selection step the hand cards ARE the things to click;
+        //report them clickable so they highlight. The click is intercepted in
+        //GameObserver::cardClick and bottoms the card rather than playing it.
+        return player->game->hand->hasCard(card) ? 1 : 0;
+    if (player->handMulligans > 0 && !player->keptOpeningHand)
         return 0;
     if (!player->game->hand->hasCard(card) && !player->game->graveyard->hasCard(card) && !player->game->exile->hasCard(card) && !player->game->library->hasCard(card) && !player->game->commandzone->hasCard(card))
          return 0;

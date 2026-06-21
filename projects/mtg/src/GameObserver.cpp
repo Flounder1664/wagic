@@ -315,6 +315,18 @@ void GameObserver::nextCombatStep()
 
 void GameObserver::userRequestNextGamePhase(bool allowInterrupt, bool log)
 {
+    //London mulligan: the first attempt to move on after mulliganing means
+    //"keep this hand". The player must then put one card per mulligan on the
+    //bottom of their library (click them in hand) before the phase advances.
+    if (currentPlayer && currentPlayer->handMulligans > 0 && !currentPlayer->keptOpeningHand)
+    {
+        currentPlayer->keptOpeningHand = true;
+        currentPlayer->cardsToBottom = currentPlayer->handMulligans;
+        logAction(currentPlayer, "keephand");
+    }
+    if (currentPlayer && currentPlayer->cardsToBottom > 0)
+        return; //still owe bottomed cards; hold the opening window open
+
     if(log) {
         stringstream stream;
         stream << "next " << allowInterrupt << " " <<mCurrentGamePhase;
