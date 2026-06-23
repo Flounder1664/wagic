@@ -2,9 +2,9 @@
 #given). Simple path: return one mana-value-2 creature from the
 #graveyard to the battlefield.
 # https://github.com/WagicProject/wagic/issues/1085
-#Its persistent (forever) global effect is now surfaced as a card in the
-#command zone (issue #23). The card is a Token with the negated source id
-#(-479598), so it's asserted by id rather than name.
+#Note: its persistent global effect uses the `emblem` keyword but is NOT a
+#real emblem, so (issue #23) it carries no emblem("...") marker and shows no
+#command-zone card - the command zone stays empty here.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -26,6 +26,5 @@ SECONDMAIN
 [PLAYER1]
 inplay:grizzly bears
 graveyard:call of the death-dweller
-command:-479598
 [PLAYER2]
 [END]

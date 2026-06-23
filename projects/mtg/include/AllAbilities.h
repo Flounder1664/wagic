@@ -3132,16 +3132,16 @@ public:
 class GenericAbilityMod: public InstantAbility, public NestedAbility
 {
 public:
-    //Emblem / global-effect visibility (issue #23): when isEmblem is set,
-    //resolve() also drops a named card into the controller's command zone (the
-    //"C" box) so the ongoing effect is visible. Its lifetime is tied to the
-    //granted ability via GameObserver::emblemTokens, so temporary (ueot)
-    //effects' cards vanish when the effect ends. emblemDone guards single creation.
+    //Explicit emblems (issue #23): set when the line was  emblem("rules text")
+    //<effect> . resolve() then drops a "<source> Emblem" card carrying that text
+    //into the controller's command zone (the "C" box) so the emblem is visible.
+    //Permanent by nature, so the card just persists (no lifetime hook). Multiple
+    //activations make multiple cards (emblems aren't unique).
     bool isEmblem;
-    bool emblemDone;
     MTGCardInstance * emblemSource;
+    string emblemText;
     GenericAbilityMod(GameObserver* observer, int _id, MTGCardInstance * _source, Damageable * _target, MTGAbility * ability) :
-      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemDone(false), emblemSource(NULL)
+      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemSource(NULL)
       {
           ability->target = _target;
       }
@@ -3163,19 +3163,20 @@ public:
               return 1;
           }
           toAdd->addToGame();
-          //Emblem (issue #23): drop a named card into the controller's command
-          //zone so the (permanent) effect is visible in the "C" box. Only
-          //forever/dontremove effects reach here (gated in the parser), so the
-          //card simply persists - no removal hook needed. Type Emblem => never
-          //castable (MTGPutInPlayRule guard).
-          if (isEmblem && emblemSource && !emblemDone)
+          //Emblem (issue #23): drop a "<source> Emblem" card carrying the
+          //rules text into the controller's command zone (the "C" box). Only
+          //explicitly-marked emblems reach here. Permanent => the card simply
+          //persists (no removal hook). Type Emblem => never castable
+          //(MTGPutInPlayRule guard).
+          if (isEmblem && emblemSource)
           {
-              emblemDone = true;
               Player * ctrl = emblemSource->controller();
               if (ctrl)
               {
-                  Token * tok = NEW Token(emblemSource->name, emblemSource, 0, 0);
+                  Token * tok = NEW Token(emblemSource->name + " Emblem", emblemSource, 0, 0);
                   tok->addType(Subtypes::TYPE_EMBLEM);
+                  if (!emblemText.empty())
+                      tok->setText(emblemText);
                   tok->owner = ctrl;
                   tok->isToken = 1;
                   ctrl->game->commandzone->addCard(tok);

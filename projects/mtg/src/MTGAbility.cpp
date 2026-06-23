@@ -2852,22 +2852,39 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     }
     
         // neverending effect
-    if (s.find("emblem ") == 0)
+    if (s.find("emblem") == 0 && s.size() > 6 && (s[6] == ' ' || s[6] == '('))
     {
-        string s1 = s.substr(7);
-        MTGAbility * a1 = parseMagicLine(s1, id, spell, card);
+        string rest = s.substr(6);
+        //Explicit-emblem marker (issue #23): a REAL, displayable emblem is
+        //written  emblem("rules text") <effect> . The quoted text both marks it
+        //as a true emblem (so a card is shown in the command zone) and becomes
+        //the card's body. Plain  emblem <effect>  (no quoted text) stays an
+        //invisible internal/global effect - this cleanly excludes the overloaded
+        //non-emblem uses (perpetuals, ueot globals like High Tide) with no guess.
+        string emblemText = "";
+        size_t firstNonSpace = rest.find_first_not_of(" ");
+        if (firstNonSpace != string::npos && rest[firstNonSpace] == '(')
+        {
+            size_t q1 = rest.find('"', firstNonSpace);
+            size_t q2 = (q1 != string::npos) ? rest.find('"', q1 + 1) : string::npos;
+            size_t closeParen = (q2 != string::npos) ? rest.find(')', q2) : string::npos;
+            if (q1 != string::npos && q2 != string::npos && closeParen != string::npos)
+            {
+                emblemText = rest.substr(q1 + 1, q2 - q1 - 1);
+                rest = rest.substr(closeParen + 1);
+            }
+        }
+        MTGAbility * a1 = parseMagicLine(rest, id, spell, card);
         if (!a1)
             return NULL;
 
         GenericAbilityMod * gmod = NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
-        gmod->emblemSource = card;
-        //First cut (issue #23): surface only PERMANENT effects (forever /
-        //dontremove) - real emblems and persistent global effects - as a card
-        //in the command zone. Temporary (ueot/uynt) effects need lifetime
-        //tracking to vanish on expiry (their granted ability can linger in the
-        //action layer rather than being removed), so they're deferred.
-        if (s.find("forever") != string::npos || s.find("dontremove") != string::npos)
+        if (!emblemText.empty())
+        {
             gmod->isEmblem = true;
+            gmod->emblemSource = card;
+            gmod->emblemText = emblemText;
+        }
         return gmod;
     }
 
