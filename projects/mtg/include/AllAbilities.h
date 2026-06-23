@@ -3163,11 +3163,11 @@ public:
               return 1;
           }
           toAdd->addToGame();
-          //Emblem / ongoing-effect: drop a named card into the controller's
-          //command zone so the effect is visible (issue #23). Tie it to toAdd
-          //via game->emblemTokens so it is removed when the effect ends
-          //(ActionLayer::removeFromGame) - ueot effects vanish at end of turn,
-          //forever ones persist. Type Emblem => never castable (MTGPutInPlayRule).
+          //Emblem (issue #23): drop a named card into the controller's command
+          //zone so the (permanent) effect is visible in the "C" box. Only
+          //forever/dontremove effects reach here (gated in the parser), so the
+          //card simply persists - no removal hook needed. Type Emblem => never
+          //castable (MTGPutInPlayRule guard).
           if (isEmblem && emblemSource && !emblemDone)
           {
               emblemDone = true;
@@ -3179,7 +3179,6 @@ public:
                   tok->owner = ctrl;
                   tok->isToken = 1;
                   ctrl->game->commandzone->addCard(tok);
-                  game->emblemTokens[toAdd] = tok;
               }
           }
           return 1;

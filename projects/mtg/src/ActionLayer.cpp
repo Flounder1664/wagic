@@ -40,17 +40,6 @@ int ActionLayer::removeFromGame(ActionElement * e)
     MTGAbility * a = dynamic_cast<MTGAbility*>(e);
     if (a != NULL)
     {
-        //Emblem / ongoing-effect (issue #23): when the granted ability is
-        //removed (ueot expiry, etc.), remove its visible command-zone card too,
-        //so temporary effects' cards vanish exactly when the effect ends.
-        std::map<MTGAbility*, MTGCardInstance*>::iterator eit = observer->emblemTokens.find(a);
-        if (eit != observer->emblemTokens.end())
-        {
-            MTGCardInstance * etok = eit->second;
-            if (etok && etok->currentZone)
-                etok->currentZone->removeCard(etok, 0);
-            observer->emblemTokens.erase(eit);
-        }
         MTGAbility * toCheck = af.getCoreAbility(a);
         AManaProducer * manaObject = dynamic_cast<AManaProducer*>(toCheck);
         if(manaObject)
