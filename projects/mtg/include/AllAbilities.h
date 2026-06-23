@@ -3132,8 +3132,16 @@ public:
 class GenericAbilityMod: public InstantAbility, public NestedAbility
 {
 public:
+    //Emblem / global-effect visibility (issue #23): when isEmblem is set,
+    //resolve() also drops a named card into the controller's command zone (the
+    //"C" box) so the ongoing effect is visible. Its lifetime is tied to the
+    //granted ability via GameObserver::emblemTokens, so temporary (ueot)
+    //effects' cards vanish when the effect ends. emblemDone guards single creation.
+    bool isEmblem;
+    bool emblemDone;
+    MTGCardInstance * emblemSource;
     GenericAbilityMod(GameObserver* observer, int _id, MTGCardInstance * _source, Damageable * _target, MTGAbility * ability) :
-      InstantAbility(observer, _id, _source,_target), NestedAbility(ability)
+      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemDone(false), emblemSource(NULL)
       {
           ability->target = _target;
       }
@@ -3155,6 +3163,25 @@ public:
               return 1;
           }
           toAdd->addToGame();
+          //Emblem / ongoing-effect: drop a named card into the controller's
+          //command zone so the effect is visible (issue #23). Tie it to toAdd
+          //via game->emblemTokens so it is removed when the effect ends
+          //(ActionLayer::removeFromGame) - ueot effects vanish at end of turn,
+          //forever ones persist. Type Emblem => never castable (MTGPutInPlayRule).
+          if (isEmblem && emblemSource && !emblemDone)
+          {
+              emblemDone = true;
+              Player * ctrl = emblemSource->controller();
+              if (ctrl)
+              {
+                  Token * tok = NEW Token(emblemSource->name, emblemSource, 0, 0);
+                  tok->addType(Subtypes::TYPE_EMBLEM);
+                  tok->owner = ctrl;
+                  tok->isToken = 1;
+                  ctrl->game->commandzone->addCard(tok);
+                  game->emblemTokens[toAdd] = tok;
+              }
+          }
           return 1;
       }
 

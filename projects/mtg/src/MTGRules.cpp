@@ -301,6 +301,10 @@ PermanentAbility(observer, _id)
 
 int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
 {
+    //Emblem / ongoing-effect cards sit in the command zone only to be visible
+    //(issue #23); they are never cast, so neither player nor AI may "play" one.
+    if (card->hasType(Subtypes::TYPE_EMBLEM))
+        return 0;
     defaultPlayName = card->isLand()?"Play Land":"Cast Card Normally";
     Player * player = game->currentlyActing();
     //London mulligan: a player who has mulliganed must keep (advance the

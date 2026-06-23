@@ -11,6 +11,7 @@
 #include "ReplacementEffects.h"
 #include "GuiStatic.h"
 #include <queue>
+#include <map>
 #include <time.h>
 #ifdef NETWORK_SUPPORT
 #include "JNetwork.h"
@@ -88,6 +89,11 @@ class GameObserver{
   time_t startedAt;
   Rules * mRules;
   MTGCardInstance* ExtraRules;
+  //Maps an active emblem / global-effect ability to its visible command-zone
+  //card (issue #23). The card is removed when its ability is (see
+  //ActionLayer::removeFromGame), so temporary (ueot) effects' cards vanish on
+  //expiry while permanent (forever) ones persist.
+  std::map<MTGAbility*, MTGCardInstance*> emblemTokens;
   Trash* mTrash;
 
   GameType gameType() const { return mGameType; };

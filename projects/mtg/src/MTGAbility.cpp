@@ -2859,7 +2859,16 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         if (!a1)
             return NULL;
 
-        return NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
+        GenericAbilityMod * gmod = NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
+        gmod->emblemSource = card;
+        //First cut (issue #23): surface only PERMANENT effects (forever /
+        //dontremove) - real emblems and persistent global effects - as a card
+        //in the command zone. Temporary (ueot/uynt) effects need lifetime
+        //tracking to vanish on expiry (their granted ability can linger in the
+        //action layer rather than being removed), so they're deferred.
+        if (s.find("forever") != string::npos || s.find("dontremove") != string::npos)
+            gmod->isEmblem = true;
+        return gmod;
     }
 
     //choose a color
