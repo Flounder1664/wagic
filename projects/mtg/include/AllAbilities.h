@@ -3177,6 +3177,10 @@ public:
                   tok->addType(Subtypes::TYPE_EMBLEM);
                   if (!emblemText.empty())
                       tok->setText(emblemText);
+                  //Force the generic card frame: the Token ctor copies the
+                  //source's (negated) id, which resolves to wrong art (e.g. the
+                  //token the emblem creates). id 0 => clean frame for all (#23).
+                  tok->setMTGId(0);
                   tok->owner = ctrl;
                   tok->isToken = 1;
                   ctrl->game->commandzone->addCard(tok);
