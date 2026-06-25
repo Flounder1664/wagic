@@ -2298,7 +2298,7 @@ name=Mu Yanling, Sky Dancer
 auto=counter(0/0,2,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: Target creature gets -2/-0 and lose Flying) ability$! may target(creature) transforms((,newability[-2/0],newability[-flying])) uynt !$ controller
 auto={C(0/0,-3,Loyalty)}:name(-3: Create an Creature Elemental Bird 4/4 blue with flying) create(Elemental Bird:Creature Elemental Bird:4/4:blue:flying)
-auto={C(0/0,-8,Loyalty)}:name(-8: Emblem: All islands have: Draw a card) all(island|mybattlefield) transforms((,newability[{T}:draw:1 controller])) forever dontremove
+auto={C(0/0,-8,Loyalty)}:name(-8: Emblem: All islands have: Draw a card) emblem("Islands you control have '{T}: Draw a card.'") transforms((,newability[lord(island|mybattlefield) {T}:draw:1 controller])) forever dontremove
 text=+2: Until your next turn, up to one target creature gets -2/-0 and loses flying. -- -3: Create a 4/4 blue Elemental Bird creature token with flying. -- -8: You get an emblem with "Islands you control have '{T}: Draw a card.'"
 mana={1}{U}{U}
 type=Legendary Planeswalker
@@ -2988,7 +2988,7 @@ name=Serra the Benevolent
 auto=counter(0/0,4,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: Creatures you control with flying gets +1/+1) all(creature[flying]|myBattlefield) 1/1 ueot
 auto={C(0/0,-3,Loyalty)}:name(-3: Create a White Creature Angel 4/4) token(Angel,Creature Angel,4/4,white,flying,vigilance)
-auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: "Worship") this(variable{worshipped} >= 1) transforms((,newability[reduceto:1])) forever dontremove
+auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: "Worship") emblem("If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.") this(variable{worshipped} >= 1) transforms((,newability[reduceto:1])) forever dontremove
 text=+2: Creatures you control with flying get +1/+1 until end of turn. -- -3: Create a 4/4 white Angel creature token with flying and vigilance. -- -6: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
 mana={2}{W}{W}
 type=Legendary Planeswalker
