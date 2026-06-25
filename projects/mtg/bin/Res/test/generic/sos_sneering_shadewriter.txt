@@ -1,0 +1,20 @@
+#SOS: Sneering Shadewriter ETB drain 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:sneering shadewriter
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+sneering shadewriter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:sneering shadewriter
+manapool:{0}
+life:22
+[PLAYER2]
+life:18
+[END]

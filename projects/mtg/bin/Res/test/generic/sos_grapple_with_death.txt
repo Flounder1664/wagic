@@ -1,0 +1,23 @@
+#SOS: Grapple with Death destroys a creature and gains 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:grapple with death
+manapool:{1}{B}{G}
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+grapple with death
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:grapple with death
+manapool:{0}
+life:21
+[PLAYER2]
+graveyard:grizzly bears
+life:20
+[END]

@@ -1,0 +1,20 @@
+#SOS: Quick Study draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:quick study
+library:plains,island
+manapool:{2}{U}
+[PLAYER2]
+life:20
+[DO]
+quick study
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:plains,island
+graveyard:quick study
+manapool:{0}
+[PLAYER2]
+life:20
+[END]

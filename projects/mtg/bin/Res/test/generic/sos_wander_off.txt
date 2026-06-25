@@ -1,0 +1,21 @@
+#SOS: Wander Off exiles target creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:wander off
+manapool:{3}{B}
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+wander off
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:wander off
+manapool:{0}
+[PLAYER2]
+exile:grizzly bears
+life:20
+[END]
