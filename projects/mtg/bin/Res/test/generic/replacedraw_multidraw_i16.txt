@@ -1,0 +1,26 @@
+#Issue #16: replacedraw on a multi-card draw crashes.
+#Thought Reflection ("If you would draw a card, draw two cards instead.")
+#in play, then Ancestral Recall (draw:3) targeting its controller.
+#Each of the 3 draws is replaced by 2 -> expected 6 cards drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:ancestral recall
+inplay:thought reflection
+library:plains,island,swamp,forest,mountain,counterspell
+manapool:{U}
+[PLAYER2]
+life:20
+[DO]
+ancestral recall
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:thought reflection
+graveyard:ancestral recall
+hand:plains,island,swamp,forest,mountain,counterspell
+manapool:{0}
+[PLAYER2]
+life:20
+[END]
