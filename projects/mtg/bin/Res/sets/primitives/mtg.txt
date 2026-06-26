@@ -145313,5 +145313,59 @@ text=Target creature you control gets +1/+0 and gains indestructible until end o
 mana={B}
 type=Instant
 [/card]
+#=== Secrets of Strixhaven (SOS) — EASY batch 3 ===
+[card]
+name=Muse's Encouragement
+auto=token(Elemental,Creature Elemental,3/3,blue,red,flying)
+auto=_SURVEIL2_
+text=Create a 3/3 blue and red Elemental creature token with flying. Surveil 2.
+mana={4}{U}
+type=Instant
+[/card]
+[card]
+name=Stadium Tidalmage
+auto=may draw:1 && discard:1 controller
+auto=@attacking(this):may draw:1 && discard:1 controller
+text=Whenever Stadium Tidalmage enters or attacks, you may draw a card. If you do, discard a card.
+mana={2}{U}{R}
+type=Creature
+subtype=Djinn Sorcerer
+power=4
+toughness=4
+[/card]
+[card]
+name=Traumatic Critique
+target=anytarget
+auto=damage:x
+auto=draw:2 controller
+auto=discard:1 controller
+text=Traumatic Critique deals X damage to any target. Draw two cards, then discard a card.
+mana={X}{U}{R}
+type=Instant
+[/card]
+[card]
+name=Rapturous Moment
+auto=draw:3 controller && discard:2 controller
+auto=add{U}{U}{R}{R}{R} controller
+text=Draw three cards, then discard two cards. Add {U}{U}{R}{R}{R}.
+mana={4}{U}{R}
+type=Sorcery
+[/card]
+[card]
+name=Embrace the Paradox
+auto=draw:3 controller
+auto=may moveto(mybattlefield) target(land|myhand) and!(tap(noevent))!
+text=Draw three cards. You may put a land card from your hand onto the battlefield tapped.
+mana={3}{G}{U}
+type=Instant
+[/card]
+[card]
+name=Seize the Spoils
+auto=draw:2 controller
+auto=_TREASURE_
+text=As an additional cost to cast this spell, discard a card. -- Draw two cards and create a Treasure token.
+mana={2}{R}{D(*|myhand)}
+type=Sorcery
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]
