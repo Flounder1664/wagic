@@ -145225,5 +145225,93 @@ subtype=Giant Sorcerer
 power=4
 toughness=4
 [/card]
+#=== Secrets of Strixhaven (SOS) — EASY batch 2 ===
+[card]
+name=Pest Mascot
+abilities=trample
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1)
+text=Trample -- Whenever you gain life, put a +1/+1 counter on Pest Mascot.
+mana={1}{B}{G}
+type=Creature
+subtype=Pest Ape
+power=2
+toughness=3
+[/card]
+[card]
+name=Eager Glyphmage
+auto=token(Inkling,Creature Inkling,1/1,white,black,flying)
+text=When Eager Glyphmage enters, create a 1/1 white and black Inkling creature token with flying.
+mana={3}{W}
+type=Creature
+subtype=Cat Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Bogwater Lumaret
+auto=life:1 controller
+auto=@movedTo(creature|myBattlefield):life:1 controller
+text=Whenever Bogwater Lumaret or another creature you control enters, you gain 1 life.
+mana={B}{G}
+type=Creature
+subtype=Spirit Frog
+power=2
+toughness=2
+[/card]
+[card]
+name=Stand Up for Yourself
+target=creature[power>=3]
+auto=destroy
+text=Destroy target creature with power 3 or greater.
+mana={2}{W}
+type=Instant
+[/card]
+[card]
+name=Unsubtle Mockery
+target=creature
+auto=damage:4
+auto=_SURVEIL1_
+text=Unsubtle Mockery deals 4 damage to target creature. Surveil 1.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Vibrant Outburst
+target=anytarget
+auto=damage:3 && tap target(<upto:1>creature)
+text=Vibrant Outburst deals 3 damage to any target. Tap up to one target creature.
+mana={U}{R}
+type=Instant
+[/card]
+[card]
+name=Banishing Betrayal
+target=*[-land]
+auto=moveTo(hand)
+auto=_SURVEIL1_
+text=Return target nonland permanent to its owner's hand. Surveil 1.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Interjection
+auto=target(creature) transforms((,newability[2/2 ueot],newability[first strike ueot])) ueot
+text=Target creature gets +2/+2 and gains first strike until end of turn.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Chase Inspiration
+auto=target(creature|mybattlefield) transforms((,newability[0/3 ueot],newability[hexproof ueot])) ueot
+text=Target creature you control gets +0/+3 and gains hexproof until end of turn.
+mana={U}
+type=Instant
+[/card]
+[card]
+name=Masterful Flourish
+auto=target(creature|mybattlefield) transforms((,newability[1/0 ueot],newability[indestructible ueot])) ueot
+text=Target creature you control gets +1/+0 and gains indestructible until end of turn.
+mana={B}
+type=Instant
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]

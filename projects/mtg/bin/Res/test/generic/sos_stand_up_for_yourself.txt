@@ -1,0 +1,21 @@
+#SOS: Stand Up for Yourself destroys a creature with power 3+.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:stand up for yourself
+manapool:{2}{W}
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+stand up for yourself
+hill giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:stand up for yourself
+manapool:{0}
+[PLAYER2]
+graveyard:hill giant
+life:20
+[END]

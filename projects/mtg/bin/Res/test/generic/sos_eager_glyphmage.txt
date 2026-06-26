@@ -1,0 +1,18 @@
+#SOS: Eager Glyphmage ETB creates a 1/1 Inkling token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:eager glyphmage
+manapool:{3}{W}
+[PLAYER2]
+life:20
+[DO]
+eager glyphmage
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:eager glyphmage,*
+manapool:{0}
+[PLAYER2]
+life:20
+[END]
