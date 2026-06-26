@@ -15,7 +15,7 @@ Wagic includes 336 sets. Most recent: **Tarkir: Dragonstorm (TDM/TDC)** — Apri
 | TLA  | Avatar: The Last Airbender | 2025-11-21 | 414 | Universes Beyond |
 | ECL  | Lorwyn Eclipsed | 2026-01-23 | ~408 | Standard Expansion |
 | TMT  | Teenage Mutant Ninja Turtles | 2026-03-06 | 320 | Universes Beyond |
-| SOS  | Secrets of Strixhaven | 2026-04-24 | 271 unique (368 prints) | Standard Expansion — **assessed: see [SOS_BACKLOG.md](SOS_BACKLOG.md)** (67 easy / 148 medium / 56 hard) |
+| SOS  | Secrets of Strixhaven | 2026-04-24 | 271 unique (368 prints) | Standard Expansion — **EASY bucket done**, see [SOS_BACKLOG.md](SOS_BACKLOG.md) (32 easy ✅ / 183 medium / 56 hard) |
 
 **Total new unique cards (rough): ~2,430**
 
