@@ -145169,7 +145169,7 @@ toughness=3
 [card]
 name=Shopkeeper's Bane
 abilities=trample
-auto=@attacking(this):life:2 controller
+auto=_ATTACKING_life:2 controller
 text=Trample -- Whenever Shopkeeper's Bane attacks, you gain 2 life.
 mana={2}{G}
 type=Creature
@@ -145278,7 +145278,8 @@ type=Instant
 [card]
 name=Vibrant Outburst
 target=anytarget
-auto=damage:3 && tap target(<upto:1>creature)
+auto=damage:3
+auto=tap target(<upto:1>creature)
 text=Vibrant Outburst deals 3 damage to any target. Tap up to one target creature.
 mana={U}{R}
 type=Instant
@@ -145324,8 +145325,8 @@ type=Instant
 [/card]
 [card]
 name=Stadium Tidalmage
-auto=may draw:1 && discard:1 controller
-auto=@attacking(this):may draw:1 && discard:1 controller
+auto=may draw:1 && discard:1
+auto=_ATTACKING_may draw:1 && discard:1
 text=Whenever Stadium Tidalmage enters or attacks, you may draw a card. If you do, discard a card.
 mana={2}{U}{R}
 type=Creature
@@ -145338,14 +145339,14 @@ name=Traumatic Critique
 target=anytarget
 auto=damage:x
 auto=draw:2 controller
-auto=discard:1 controller
+auto=discard:1
 text=Traumatic Critique deals X damage to any target. Draw two cards, then discard a card.
 mana={X}{U}{R}
 type=Instant
 [/card]
 [card]
 name=Rapturous Moment
-auto=draw:3 controller && discard:2 controller
+auto=draw:3 controller && discard:2
 auto=add{U}{U}{R}{R}{R} controller
 text=Draw three cards, then discard two cards. Add {U}{U}{R}{R}{R}.
 mana={4}{U}{R}

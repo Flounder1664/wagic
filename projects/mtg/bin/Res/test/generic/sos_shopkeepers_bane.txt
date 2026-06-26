@@ -1,0 +1,28 @@
+#SOS: Shopkeeper's Bane gains 2 life when it ATTACKS (not on enter).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:shopkeeper's bane
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+#begin combat
+next
+#attackers
+shopkeeper's bane
+next
+#blockers
+next
+#damage
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:shopkeeper's bane
+life:22
+[PLAYER2]
+life:16
+[END]
