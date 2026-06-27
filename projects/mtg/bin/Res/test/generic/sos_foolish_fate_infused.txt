@@ -1,0 +1,24 @@
+#SOS M1: gain life (Chaplain's Blessing) then Foolish Fate -> Infusion fires, controller loses 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:chaplain's blessing,foolish fate
+manapool:{2}{W}{B}
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+chaplain's blessing
+foolish fate
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:chaplain's blessing,foolish fate
+manapool:{0}
+life:25
+[PLAYER2]
+graveyard:grizzly bears
+life:17
+[END]

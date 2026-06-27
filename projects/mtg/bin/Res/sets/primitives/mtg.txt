@@ -145421,5 +145421,87 @@ text=Create two 2/2 red and white Spirit creature tokens. (Approximation: the fl
 mana={1}{W}{W}
 type=Sorcery
 [/card]
+#=== Secrets of Strixhaven (SOS) — MEDIUM batch M1 (Infusion) ===
+#Infusion condition "if you gained life this turn" = compare(lifegain)~morethan~0
+[card]
+name=Foolish Fate
+target=creature
+auto=destroy
+auto=if compare(oplifegain)~morethan~0 then life:-3 targetController
+text=Destroy target creature. -- Infusion: If you gained life this turn, that creature's controller loses 3 life.
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Efflorescence
+target=creature
+auto=counter(1/1,2)
+auto=if compare(lifegain)~morethan~0 then transforms((,newability[trample ueot],newability[indestructible ueot]))
+text=Put two +1/+1 counters on target creature. -- Infusion: If you gained life this turn, that creature also gains trample and indestructible until end of turn.
+mana={2}{G}
+type=Instant
+[/card]
+[card]
+name=Withering Curse
+auto=if compare(lifegain)~morethan~0 then destroy all(creature) else all(creature) -2/-2 ueot
+text=All creatures get -2/-2 until end of turn. -- Infusion: If you gained life this turn, destroy all creatures instead.
+mana={1}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Poisoner's Apprentice
+auto=if compare(lifegain)~morethan~0 then target(creature|opponentbattlefield) -4/-4 ueot
+text=Infusion: When Poisoner's Apprentice enters, target creature an opponent controls gets -4/-4 until end of turn if you gained life this turn.
+mana={2}{B}
+type=Creature
+subtype=Orc Warlock
+power=2
+toughness=2
+[/card]
+[card]
+name=Old-Growth Educator
+abilities=vigilance,reach
+auto=if compare(lifegain)~morethan~0 then counter(1/1,2)
+text=Vigilance, reach -- Infusion: When Old-Growth Educator enters, put two +1/+1 counters on it if you gained life this turn.
+mana={2}{B}{G}
+type=Creature
+subtype=Treefolk Druid
+power=4
+toughness=4
+[/card]
+[card]
+name=Ulna Alley Shopkeep
+abilities=menace
+auto=this(compare(lifegain)~morethan~0) 2/0
+text=Menace -- Infusion: Ulna Alley Shopkeep gets +2/+0 as long as you gained life this turn.
+mana={2}{B}
+type=Creature
+subtype=Goblin Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Tenured Concocter
+abilities=vigilance
+auto=this(compare(lifegain)~morethan~0) 2/0
+auto=@targeted(this) from(*|opponentzones):may draw:1 controller
+text=Vigilance -- Whenever Tenured Concocter becomes the target of a spell or ability an opponent controls, you may draw a card. -- Infusion: Tenured Concocter gets +2/+0 as long as you gained life this turn.
+mana={4}{G}
+type=Creature
+subtype=Troll Druid
+power=4
+toughness=5
+[/card]
+[card]
+name=Tragedy Feaster
+abilities=trample
+auto=@each my end restriction{compare(lifegain)~equalto~0}:sacrifice
+text=Trample -- Ward (omitted: discard a card) -- Infusion: At the beginning of your end step, sacrifice a permanent unless you gained life this turn.
+mana={2}{B}{B}
+type=Creature
+subtype=Demon
+power=7
+toughness=6
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]
