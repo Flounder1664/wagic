@@ -1,0 +1,19 @@
+#SOS M5: Group Project creates a 2/2 Spirit token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:group project
+manapool:{1}{W}
+[PLAYER2]
+life:20
+[DO]
+group project
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:group project
+manapool:{0}
+[PLAYER2]
+life:20
+[END]

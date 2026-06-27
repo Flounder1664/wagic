@@ -145368,5 +145368,58 @@ text=As an additional cost to cast this spell, discard a card. -- Draw two cards
 mana={2}{R}{D(*|myhand)}
 type=Sorcery
 [/card]
+#=== Secrets of Strixhaven (SOS) — MEDIUM batch M5 (Flashback) ===
+[card]
+name=Tome Blast
+target=anytarget
+auto=damage:2
+flashback={4}{R}
+text=Tome Blast deals 2 damage to any target. -- Flashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Pursue the Past
+auto=life:2 controller
+auto=may discard:1 && draw:2 controller
+flashback={2}{R}{W}
+text=You gain 2 life. You may discard a card. If you do, draw two cards. -- Flashback {2}{R}{W}
+mana={R}{W}
+type=Sorcery
+[/card]
+[card]
+name=Dig Site Inventory
+target=creature|mybattlefield
+auto=counter(1/1) && transforms((,newability[vigilance ueot]))
+flashback={W}
+text=Put a +1/+1 counter on target creature you control. It gains vigilance until end of turn. -- Flashback {W}
+mana={W}
+type=Sorcery
+[/card]
+[card]
+name=Duel Tactics
+target=creature
+auto=damage:1 && transforms((,newability[cantblock ueot]))
+flashback={1}{R}
+text=Duel Tactics deals 1 damage to target creature. It can't block this turn. -- Flashback {1}{R}
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Group Project
+auto=token(Spirit,Creature Spirit,2/2,red,white)
+flashback={T(creature|mybattlefield)}{T(creature|mybattlefield)}{T(creature|mybattlefield)}
+text=Create a 2/2 red and white Spirit creature token. -- Flashback—Tap three untapped creatures you control.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Antiquities on the Loose
+auto=token(Spirit,Creature Spirit,2/2,red,white)*2
+flashback={4}{W}{W}
+text=Create two 2/2 red and white Spirit creature tokens. (Approximation: the flashback +1/+1-counter bonus is not implemented.) -- Flashback {4}{W}{W}
+mana={1}{W}{W}
+type=Sorcery
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]

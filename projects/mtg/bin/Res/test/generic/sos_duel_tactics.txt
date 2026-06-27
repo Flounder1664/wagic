@@ -1,0 +1,21 @@
+#SOS M5: Duel Tactics deals 1 damage to a creature (kills a 1-toughness).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:duel tactics
+manapool:{R}
+[PLAYER2]
+inplay:goblin piker
+life:20
+[DO]
+duel tactics
+goblin piker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:duel tactics
+manapool:{0}
+[PLAYER2]
+graveyard:goblin piker
+life:20
+[END]

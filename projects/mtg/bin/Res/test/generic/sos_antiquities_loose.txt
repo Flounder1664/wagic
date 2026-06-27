@@ -1,0 +1,19 @@
+#SOS M5: Antiquities on the Loose creates two 2/2 Spirit tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:antiquities on the loose
+manapool:{1}{W}{W}
+[PLAYER2]
+life:20
+[DO]
+antiquities on the loose
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:antiquities on the loose
+manapool:{0}
+[PLAYER2]
+life:20
+[END]
