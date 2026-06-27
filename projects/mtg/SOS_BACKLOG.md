@@ -16,13 +16,13 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 
 183 MEDIUM cards grouped into 16 mechanic-coherent batches. Order is a suggestion: Tier A builds the 4 new SOS keyword patterns; Tier B is standard DSL; Tier C is engine/variable-scaling-gated; Tier D is per-card cleanup. Each batch builds one reusable pattern, then applies it across the batch.
 
-| Batch | Mechanic | Cards | Pattern to build | Risk |
-|---|---|---|---|---|
+| Batch | Mechanic | Cards | Pattern to build | Risk | Status |
+|---|---|---|---|---|---|
 | M1 | Infusion | 12 | build the gained-life-this-turn condition once | Low-Med |
 | M2 | Repartee | 12 | cast-trigger + "targets a creature" filter | Med |
 | M3 | Opus | 9 | cast-trigger + mana-spent threshold | HIGH - mana-spent tracking uncertain |
 | M4 | Increment | 9 | per-cast mana-vs-P/T compare | HIGH - may need engine work |
-| M5 | Flashback | 9 | native flashback= field | Low |
+| M5 | Flashback | 9 | native flashback= field | Low | **6 DONE** (697028-33); deferred: Daydream, Practiced Offense (harder); Flashback-the-card → reclassify HARD (grants flashback dynamically) |
 | M6 | Modal / College Charms | 11 | choice name(...) ... name(...) form | Low-Med |
 | M7 | Nonbasic lands | 13 | land DSL (ETB tapped, tap-for-mana, fetch) | Low-Med |
 | M8 | Activated creatures & artifacts | 17 | activated-ability forms | Low-Med |
