@@ -18,6 +18,7 @@ import os
 BASE    = os.path.dirname(os.path.abspath(__file__))
 BIN     = os.path.join(BASE, "bin")
 LIBS    = os.path.join(BASE, "libs", "arm64-v8a")
+DEXLIBS = os.path.join(BIN,  "dexedLibs")
 WORK    = os.path.join(BIN,  "apk_work")
 OUT     = os.path.join(WORK, "Wagic-unsigned.apk")
 
@@ -46,9 +47,34 @@ with zipfile.ZipFile(OUT, "w", compression=zipfile.ZIP_DEFLATED) as apk:
             apk.writestr(entry, res.read(entry.filename))
     print(f"  + resources from Wagic.ap_ ({len(zipfile.ZipFile(RES_APK).namelist())} entries)")
 
-    # Dex
+    # Dex (app classes)
     apk.write(DEX, "classes.dex")
     print(f"  + classes.dex")
+
+    # Third-party library dex files (jsoup, json-simple, zip4j, ...).
+    # ant pre-dexes each jar into bin/dexedLibs/<name>.jar with an internal
+    # classes.dex.  ant's own apkbuilder step (which we replace here) is what
+    # normally folds these in, so we must add them ourselves or their classes
+    # (e.g. org.jsoup.*) are missing at runtime -> NoClassDefFoundError ->
+    # the image downloader's slow scrape path crashes the whole app.
+    # ART (API 21+) auto-loads secondary classes2.dex, classes3.dex, ...
+    dex_index = 2
+    if os.path.isdir(DEXLIBS):
+        for jar in sorted(os.listdir(DEXLIBS)):
+            if not jar.endswith(".jar"):
+                continue
+            jar_path = os.path.join(DEXLIBS, jar)
+            with zipfile.ZipFile(jar_path, "r") as lib:
+                if "classes.dex" not in lib.namelist():
+                    print(f"  ! {jar} has no classes.dex, skipping")
+                    continue
+                entry = f"classes{dex_index}.dex"
+                apk.writestr(entry, lib.read("classes.dex"))
+                print(f"  + {entry}  (from {jar})")
+                dex_index += 1
+    if dex_index == 2:
+        print("  ! WARNING: no dexedLibs added - jsoup/etc will be missing, "
+              "the slow image-download path will fail at runtime")
 
     # Native libs
     apk.write(LIBSDL,  "lib/arm64-v8a/libSDL.so")

@@ -107,7 +107,12 @@ public class SDLActivity extends Activity implements OnKeyListener {
 
     //public final static String RES_FOLDER = Environment.getExternalStorageDirectory().getPath() + "/Wagic/Res/";
     public static String RES_FILENAME = "";
-    public static String databaseurl = "https://github.com/Flounder1664/wagic/releases/latest/download/CardImageLinks.csv";
+    // Point at upstream WagicProject for now: it hosts a real (non-prerelease)
+    // CardImageLinks.csv, whereas the fork's only release is a prerelease and the
+    // /releases/latest/ endpoint 404s on it. Limitation: the upstream CSV does not
+    // index fork-added sets, so cards in those sets fall back to the slow scrape
+    // path. See LOCAL_CHANGES.md "Image downloader" note for the follow-up.
+    public static String databaseurl = "https://github.com/WagicProject/wagic/releases/latest/download/CardImageLinks.csv";
 
     // Preferences
     public static final String kWagicSharedPreferencesKey = "net.wagic.app.preferences.wagic";
@@ -809,8 +814,16 @@ public class SDLActivity extends Activity implements OnKeyListener {
                                         res = "SET " + set + ":\n" + details;
                                     }
                                 }
-                            } catch (Exception e) {
-                                res = res + "\n" + e.getMessage();
+                            } catch (Throwable e) {
+                                // Catch Throwable (not just Exception): the slow
+                                // scrape path can hit NoClassDefFoundError (e.g.
+                                // a missing third-party lib like jsoup) or
+                                // OutOfMemoryError, both of which are Errors and
+                                // would otherwise propagate out of this thread and
+                                // crash the whole app. Degrade to a failed-set
+                                // message instead.
+                                res = res + "\nSET " + set + " failed: " +
+                                    e.toString();
                                 error = true;
                             }
                         }
