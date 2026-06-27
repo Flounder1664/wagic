@@ -23,7 +23,7 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 | M3 | Opus | 9 | cast-trigger + mana-spent threshold | HIGH - mana-spent tracking uncertain |
 | M4 | Increment | 9 | per-cast mana-vs-P/T compare | HIGH - may need engine work |
 | M5 | Flashback | 9 | native flashback= field | Low | **6 DONE** (697028-33); deferred: Daydream, Practiced Offense (harder); Flashback-the-card → reclassify HARD (grants flashback dynamically) |
-| M6 | Modal / College Charms | 11 | choice name(...) ... name(...) form | Low-Med |
+| M6 | Modal / College Charms | 11 | choice name(...) ... name(...) form | Low-Med | **8 DONE** (697042-49). Deferred: Choreographed Sparks (copy #19), Biblioplex Tomekeeper (Prepared), Moment of Reckoning (repeatable modal) |
 | M7 | Nonbasic lands | 13 | land DSL (ETB tapped, tap-for-mana, fetch) | Low-Med |
 | M8 | Activated creatures & artifacts | 17 | activated-ability forms | Low-Med |
 | M9 | Leave-graveyard trigger | 8 | GATED: build the trigger first (no Wagic impl) | HIGH - new shared mechanic, unlocks all 8 |
