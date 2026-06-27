@@ -1,0 +1,22 @@
+#SOS M6: Prismari Charm mode 2 (bounce a nonland permanent). Mode 0 surveil+draw verified crash-free separately.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:prismari charm
+manapool:{U}{R}
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+prismari charm
+choice 2
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:prismari charm
+manapool:{0}
+[PLAYER2]
+hand:grizzly bears
+life:20
+[END]

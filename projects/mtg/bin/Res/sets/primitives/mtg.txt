@@ -145503,5 +145503,77 @@ subtype=Demon
 power=7
 toughness=6
 [/card]
+#=== Secrets of Strixhaven (SOS) — MEDIUM batch M6 (Modal / College Charms) ===
+[card]
+name=Glorious Decay
+auto=choice name(Destroy target artifact) destroy target(artifact)
+auto=choice name(4 damage to target creature with flying) damage:4 target(creature[flying])
+auto=choice name(Exile a card from a graveyard, draw a card) moveto(exile) target(*|graveyard) && draw:1 controller
+text=Choose one — Destroy target artifact; or deal 4 damage to target creature with flying; or exile target card from a graveyard and draw a card.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Silverquill Charm
+auto=choice name(Two +1/+1 counters) counter(1/1,2) target(creature)
+auto=choice name(Exile target creature with power 2 or less) moveto(exile) target(creature[power<=2])
+auto=choice name(Each opponent loses 3 life, you gain 3) life:-3 opponent && life:3 controller
+text=Choose one — Put two +1/+1 counters on target creature; or exile target creature with power 2 or less; or each opponent loses 3 life and you gain 3 life.
+mana={W}{B}
+type=Instant
+[/card]
+[card]
+name=Quandrix Charm
+auto=choice name(Counter unless its controller pays 2) countertarget unless(pay:2)
+auto=choice name(Destroy target enchantment) destroy target(enchantment)
+auto=choice name(Base power and toughness 5/5) target(creature) transforms((,setpower=5,settoughness=5)) ueot
+text=Choose one — Counter target spell unless its controller pays {2}; or destroy target enchantment; or target creature has base power and toughness 5/5 until end of turn.
+mana={G}{U}
+type=Instant
+[/card]
+[card]
+name=Lorehold Charm
+auto=choice name(Each opponent sacrifices an artifact) target(opponent) ability$!name(sacrifice an artifact) notaTarget(artifact[-token]|mybattlefield) sacrifice!$ targetedplayer
+auto=choice name(Reanimate mana value 2 or less) moveTo(mybattlefield) target(creature,artifact[manacost<=2]|mygraveyard)
+auto=choice name(Creatures get +1/+1 and trample) all(creature|mybattlefield) transforms((,newability[1/1],trample)) ueot
+text=Choose one — Each opponent sacrifices a nontoken artifact; or return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield; or creatures you control get +1/+1 and gain trample until end of turn.
+mana={R}{W}
+type=Instant
+[/card]
+[card]
+name=Witherbloom Charm
+auto=choice name(Sacrifice a permanent, draw two) may sacrifice notaTarget(*|mybattlefield) && draw:2 controller
+auto=choice name(You gain 5 life) life:5 controller
+auto=choice name(Destroy nonland permanent mana value 2 or less) destroy target(*[-land][manacost<=2]|battlefield)
+text=Choose one — You may sacrifice a permanent; if you do, draw two cards; or you gain 5 life; or destroy target nonland permanent with mana value 2 or less.
+mana={B}{G}
+type=Instant
+[/card]
+[card]
+name=Prismari Charm
+auto=choice name(Surveil 2, then draw a card) _SURVEIL2_ draw:1 controller
+auto=choice name(1 damage to one or two targets) damage:1 target(<upto:2>anytarget)
+auto=choice name(Return target nonland permanent to hand) moveto(hand) target(*[-land]|battlefield)
+text=Choose one — Surveil 2, then draw a card; or deal 1 damage to each of one or two targets; or return target nonland permanent to its owner's hand.
+mana={U}{R}
+type=Instant
+[/card]
+[card]
+name=Artistic Process
+auto=choice name(6 damage to target creature) damage:6 target(creature)
+auto=choice name(2 damage to each creature you don't control) damage:2 all(creature|opponentbattlefield)
+auto=choice name(3/3 Elemental with flying and haste) token(Elemental,Creature Elemental,3/3,blue,red,flying,haste)
+text=Choose one — Artistic Process deals 6 damage to target creature; or deals 2 damage to each creature you don't control; or create a 3/3 blue and red Elemental creature token with flying and haste.
+mana={3}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Splatter Technique
+auto=choice name(Draw four cards) draw:4 controller
+auto=choice name(4 damage to each creature and planeswalker) damage:4 all(creature,planeswalker)
+text=Choose one — Draw four cards; or Splatter Technique deals 4 damage to each creature and planeswalker.
+mana={1}{U}{U}{R}{R}
+type=Sorcery
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]
