@@ -18,7 +18,7 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 
 | Batch | Mechanic | Cards | Pattern to build | Risk | Status |
 |---|---|---|---|---|---|
-| M1 | Infusion | 12 | build the gained-life-this-turn condition once | Low-Med |
+| M1 | Infusion | 12 | build the gained-life-this-turn condition once | Low-Med | **8 DONE** (697034-41); condition = compare(lifegain)/(oplifegain). Deferred: Thornfist (cond. lord), Moseo (var-X reanimate), Lumaret's Favor (copy), Follow the Lumarets (modal dig) |
 | M2 | Repartee | 12 | cast-trigger + "targets a creature" filter | Med |
 | M3 | Opus | 9 | cast-trigger + mana-spent threshold | HIGH - mana-spent tracking uncertain |
 | M4 | Increment | 9 | per-cast mana-vs-P/T compare | HIGH - may need engine work |
