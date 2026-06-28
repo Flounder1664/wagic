@@ -1,0 +1,22 @@
+#SOS M6 charm-mode regression.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:quandrix charm
+manapool:{G}{U}
+[PLAYER2]
+inplay:propaganda
+life:20
+[DO]
+quandrix charm
+choice 0
+propaganda
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:quandrix charm
+manapool:{0}
+[PLAYER2]
+graveyard:propaganda
+life:20
+[END]

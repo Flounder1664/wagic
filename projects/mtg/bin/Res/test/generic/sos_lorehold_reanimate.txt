@@ -1,0 +1,22 @@
+#SOS M6 charm-mode regression.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:lorehold charm
+graveyard:grizzly bears
+manapool:{R}{W}
+[PLAYER2]
+life:20
+[DO]
+lorehold charm
+choice 1
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:grizzly bears
+graveyard:lorehold charm
+manapool:{0}
+[PLAYER2]
+life:20
+[END]
