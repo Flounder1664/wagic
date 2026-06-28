@@ -1,3 +1,6 @@
+# Card IDs: id = 697000 + Scryfall collector_number (set:sos). Range 697001-697368.
+# Stable per-card, collision-free vs ECL (696600-696872). ALL future SOS batches must follow this rule.
+# Regenerate: Scryfall set:sos&unique=cards, lowest numeric collector_number per card name.
 [meta]
 author=Wagic Team
 name=Secrets of Strixhaven
@@ -7,246 +10,246 @@ autounlock=true
 [/meta]
 [card]
 primitive=Rearing Embermare
-id=697001
+id=697127
 rarity=C
 [/card]
 [card]
 primitive=Sneering Shadewriter
-id=697002
+id=697101
 rarity=C
 [/card]
 [card]
 primitive=Imperious Inkmage
-id=697003
+id=697195
 rarity=C
 [/card]
 [card]
 primitive=Shopkeeper's Bane
-id=697004
+id=697159
 rarity=C
 [/card]
 [card]
 primitive=Quick Study
-id=697005
+id=697065
 rarity=C
 [/card]
 [card]
 primitive=Grapple with Death
-id=697006
+id=697192
 rarity=C
 [/card]
 [card]
 primitive=Pull from the Grave
-id=697007
+id=697095
 rarity=C
 [/card]
 [card]
 primitive=Oracle's Restoration
-id=697008
+id=697156
 rarity=C
 [/card]
 [card]
 primitive=Wander Off
-id=697009
+id=697104
 rarity=C
 [/card]
 [card]
 primitive=Zealous Lorecaster
-id=697010
+id=697137
 rarity=C
 [/card]
 [card]
 primitive=Last Gasp
-id=697011
+id=697086
 rarity=C
 [/card]
 [card]
 primitive=Pest Mascot
-id=697012
+id=697209
 rarity=C
 [/card]
 [card]
 primitive=Eager Glyphmage
-id=697013
+id=697011
 rarity=C
 [/card]
 [card]
 primitive=Bogwater Lumaret
-id=697014
+id=697177
 rarity=C
 [/card]
 [card]
 primitive=Stand Up for Yourself
-id=697015
-rarity=U
-[/card]
-[card]
-primitive=Unsubtle Mockery
-id=697016
-rarity=C
-[/card]
-[card]
-primitive=Vibrant Outburst
-id=697017
-rarity=U
-[/card]
-[card]
-primitive=Banishing Betrayal
-id=697018
-rarity=C
-[/card]
-[card]
-primitive=Interjection
-id=697019
-rarity=C
-[/card]
-[card]
-primitive=Chase Inspiration
-id=697020
-rarity=C
-[/card]
-[card]
-primitive=Masterful Flourish
-id=697021
-rarity=C
-[/card]
-[card]
-primitive=Muse's Encouragement
-id=697022
-rarity=C
-[/card]
-[card]
-primitive=Stadium Tidalmage
-id=697023
-rarity=C
-[/card]
-[card]
-primitive=Traumatic Critique
-id=697024
-rarity=R
-[/card]
-[card]
-primitive=Rapturous Moment
-id=697025
-rarity=U
-[/card]
-[card]
-primitive=Embrace the Paradox
-id=697026
-rarity=C
-[/card]
-[card]
-primitive=Seize the Spoils
-id=697027
-rarity=C
-[/card]
-[card]
-primitive=Tome Blast
-id=697028
-rarity=C
-[/card]
-[card]
-primitive=Pursue the Past
-id=697029
-rarity=C
-[/card]
-[card]
-primitive=Dig Site Inventory
-id=697030
-rarity=C
-[/card]
-[card]
-primitive=Duel Tactics
-id=697031
-rarity=U
-[/card]
-[card]
-primitive=Group Project
-id=697032
-rarity=U
-[/card]
-[card]
-primitive=Antiquities on the Loose
-id=697033
-rarity=R
-[/card]
-[card]
-primitive=Foolish Fate
 id=697034
 rarity=U
 [/card]
 [card]
+primitive=Unsubtle Mockery
+id=697136
+rarity=C
+[/card]
+[card]
+primitive=Vibrant Outburst
+id=697240
+rarity=U
+[/card]
+[card]
+primitive=Banishing Betrayal
+id=697038
+rarity=C
+[/card]
+[card]
+primitive=Interjection
+id=697022
+rarity=C
+[/card]
+[card]
+primitive=Chase Inspiration
+id=697041
+rarity=C
+[/card]
+[card]
+primitive=Masterful Flourish
+id=697089
+rarity=C
+[/card]
+[card]
+primitive=Muse's Encouragement
+id=697061
+rarity=C
+[/card]
+[card]
+primitive=Stadium Tidalmage
+id=697232
+rarity=C
+[/card]
+[card]
+primitive=Traumatic Critique
+id=697239
+rarity=R
+[/card]
+[card]
+primitive=Rapturous Moment
+id=697219
+rarity=U
+[/card]
+[card]
+primitive=Embrace the Paradox
+id=697186
+rarity=C
+[/card]
+[card]
+primitive=Seize the Spoils
+id=697129
+rarity=C
+[/card]
+[card]
+primitive=Tome Blast
+id=697135
+rarity=C
+[/card]
+[card]
+primitive=Pursue the Past
+id=697216
+rarity=C
+[/card]
+[card]
+primitive=Dig Site Inventory
+id=697010
+rarity=C
+[/card]
+[card]
+primitive=Duel Tactics
+id=697112
+rarity=U
+[/card]
+[card]
+primitive=Group Project
+id=697017
+rarity=U
+[/card]
+[card]
+primitive=Antiquities on the Loose
+id=697007
+rarity=R
+[/card]
+[card]
+primitive=Foolish Fate
+id=697083
+rarity=U
+[/card]
+[card]
 primitive=Efflorescence
-id=697035
+id=697144
 rarity=C
 [/card]
 [card]
 primitive=Withering Curse
-id=697036
+id=697105
 rarity=M
 [/card]
 [card]
 primitive=Poisoner's Apprentice
-id=697037
+id=697092
 rarity=U
 [/card]
 [card]
 primitive=Old-Growth Educator
-id=697038
+id=697207
 rarity=U
 [/card]
 [card]
 primitive=Ulna Alley Shopkeep
-id=697039
+id=697103
 rarity=C
 [/card]
 [card]
 primitive=Tenured Concocter
-id=697040
+id=697163
 rarity=C
 [/card]
 [card]
 primitive=Tragedy Feaster
-id=697041
+id=697102
 rarity=R
 [/card]
 [card]
 primitive=Glorious Decay
-id=697042
+id=697150
 rarity=C
 [/card]
 [card]
 primitive=Silverquill Charm
-id=697043
+id=697225
 rarity=U
 [/card]
 [card]
 primitive=Quandrix Charm
-id=697044
+id=697217
 rarity=U
 [/card]
 [card]
 primitive=Lorehold Charm
-id=697045
+id=697200
 rarity=U
 [/card]
 [card]
 primitive=Witherbloom Charm
-id=697046
+id=697244
 rarity=U
 [/card]
 [card]
 primitive=Prismari Charm
-id=697047
+id=697211
 rarity=U
 [/card]
 [card]
 primitive=Artistic Process
-id=697048
+id=697108
 rarity=U
 [/card]
 [card]
 primitive=Splatter Technique
-id=697049
+id=697231
 rarity=R
 [/card]
