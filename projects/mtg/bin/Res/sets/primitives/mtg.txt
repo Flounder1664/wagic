@@ -145533,10 +145533,10 @@ type=Instant
 [/card]
 [card]
 name=Lorehold Charm
-auto=choice name(Each opponent sacrifices an artifact) target(opponent) ability$!name(sacrifice an artifact) notaTarget(artifact[-token]|mybattlefield) sacrifice!$ targetedplayer
-auto=choice name(Reanimate mana value 2 or less) moveTo(mybattlefield) target(creature,artifact[manacost<=2]|mygraveyard)
+auto=choice name(Destroy target artifact an opponent controls) destroy target(artifact|opponentbattlefield)
+auto=choice name(Reanimate a creature mana value 2 or less) moveTo(mybattlefield) target(creature[manacost<=2]|mygraveyard)
 auto=choice name(Creatures get +1/+1 and trample) all(creature|mybattlefield) transforms((,newability[1/1],trample)) ueot
-text=Choose one — Each opponent sacrifices a nontoken artifact; or return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield; or creatures you control get +1/+1 and gain trample until end of turn.
+text=Choose one — Each opponent sacrifices a nontoken artifact (approx: destroy target artifact an opponent controls — the edict no-ops vs the AI); or return target creature card with mana value 2 or less from your graveyard to the battlefield (approx: artifact reanimation dropped); or creatures you control get +1/+1 and gain trample until end of turn.
 mana={R}{W}
 type=Instant
 [/card]
