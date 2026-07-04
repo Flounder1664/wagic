@@ -207,6 +207,13 @@ private:
     void ConstructOpponentMenu(); //loads the opponentMenu if it doesn't exist
     void initScroller();
     void setGamePhase(int newGamePhase);
+    // If GameApp::pendingDraftTournament is set (by GameStateDraft before
+    // transitioning here), configures the Tournament/loads both players from
+    // it and jumps straight to DUEL_STATE_PLAY, skipping the normal deck-
+    // selection menus entirely. Called once from the end of Start(); no-op
+    // otherwise. See GameStateDraft.cpp for why this couldn't just be a
+    // method GameStateDraft calls directly on a GameStateDuel instance.
+    void setupPendingDraftTournament();
 
 
 public:

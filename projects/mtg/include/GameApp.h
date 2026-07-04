@@ -84,6 +84,15 @@ public:
     static void resumeMusic();
     static PlayerType players[2];
 
+    // Set by GameStateDraft before transitioning to GAME_STATE_DUEL, consumed
+    // once by GameStateDuel::Start(). GameStateDraft can't reach the live
+    // GameStateDuel instance directly (GameApp::mGameStates is private, no
+    // accessor) to configure its Tournament object across the transition, so
+    // this mirrors the existing `players[2]` pattern of passing config via a
+    // static rather than adding a new access path.
+    static bool pendingDraftTournament;
+    static int pendingDraftHumanDeckId;
+    static vector<int> pendingDraftBotDeckIds;
 };
 
 extern vector<JQuadPtr> manaIcons;

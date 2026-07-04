@@ -13,9 +13,26 @@
 #include "WResourceManager.h"
 #include "SimpleMenu.h"
 #include "GameOptions.h"
+#include "Rules.h"
 #include <JFileSystem.h>
 #include <JRenderer.h>
 #include <algorithm>
+
+namespace
+{
+// Fixed, deliberately high-numbered AI deck slots reserved for draft-mode
+// bot decks. AIPlayerFactory::createAIPlayer() hardcodes "ai/baka/deck%i.txt"
+// (AIPlayer.cpp:231) -- it doesn't go through DeckManager at all, so these
+// files can't live anywhere else and still be loadable. Numbers this high
+// are extremely unlikely to collide with any shipped or player-added AI
+// deck (which start at 1 and count up), but they DO become visible to
+// normal Quest/casual opponent selection (DeckManager has no unlock/
+// visibility filter) for as long as the files exist -- cleaned up at the
+// start of each new draft to bound that window, not perfectly, but without
+// needing a hook into GameStateDuel's own end-of-tournament flow.
+const int kDraftBotDeckIdBase = 9001;
+const char* kDraftProfileName = "WagicDraftTemp";
+}
 
 namespace
 {
@@ -397,15 +414,33 @@ void GameStateDraft::logDraftSummary()
 
 void GameStateDraft::materializeDecks()
 {
-    // Scratch folder, deliberately not ai/baka/ or the player's real deck
-    // folder: getRandomDeck() and the normal opponent-picker scan ai/baka/
-    // with no unlock/visibility filter (see the GH issue's discussion), so
-    // anything written there leaks into ordinary Quest/casual opponent
-    // selection; the player's own deck folder is live save data that
-    // shouldn't be touched by a throwaway draft result. deckN.txt naming
-    // matters: MTGDeck's file constructor derives meta_id by stripping
-    // exactly "deck" from the filename stem (MTGDeck.cpp:929).
-    JFileSystem::GetInstance()->MakeDir("ai/draft/");
+    // Both AIPlayerFactory::createAIPlayer() (AIPlayer.cpp:231) and
+    // GameObserver::loadPlayer() (GameObserver.cpp:2335) hardcode their deck
+    // paths ("ai/baka/deck%i.txt" and "<profile>/deck%i.txt" respectively) --
+    // neither goes through DeckManager, so there's no scratch folder that
+    // works for actually loading these into a match. A dedicated ai/draft/
+    // folder (the previous version of this function) produces files nothing
+    // in the engine will ever read.
+    //
+    // The human's deck is made safe by switching to a dedicated profile
+    // first (below) -- deckN.txt then lands under profiles/WagicDraftTemp/,
+    // never the player's real profile. Bot decks have no such isolation
+    // available (ai/baka/ isn't profile-scoped -- confirmed by checking
+    // every ai/baka reference in src/), so they use fixed high-numbered
+    // slots instead, cleaned up at the start of the next draft.
+    JFileSystem* fs = JFileSystem::GetInstance();
+    for (int i = 0; i < 7; i++)
+    {
+        char stale[64];
+        sprintf(stale, "ai/baka/deck%i.txt", kDraftBotDeckIdBase + i);
+        fs->Remove(stale);
+    }
+
+    options[Options::ACTIVE_PROFILE] = string(kDraftProfileName);
+    options.reloadProfile();
+
+    GameApp::pendingDraftBotDeckIds.clear();
+    int botSlot = kDraftBotDeckIdBase;
 
     for (int i = 0; i < mSession->getNumSeats(); i++)
     {
@@ -413,13 +448,38 @@ void GameStateDraft::materializeDecks()
         if (!seat)
             continue;
         MTGDeck* deck = DraftDeckBuilder::buildDeck(seat, MTGCollection());
-        char path[64];
-        sprintf(path, "ai/draft/deck%i.txt", i);
-        string title = (i == mHumanSeatId) ? "My Draft Deck" : "Bot Draft Deck";
-        deck->save(path, false, title, "");
-        DebugTrace("[Draft] seat " << i << " deck saved to " << path << " (" << deck->totalCards() << " cards)");
+
+        if (i == mHumanSeatId)
+        {
+            string path = options.profileFile() + "/deck1.txt";
+            deck->save(path, false, "My Draft Deck", "");
+            GameApp::pendingDraftHumanDeckId = 1;
+            DebugTrace("[Draft] human deck saved to " << path << " (" << deck->totalCards() << " cards)");
+        }
+        else
+        {
+            char path[64];
+            sprintf(path, "ai/baka/deck%i.txt", botSlot);
+            deck->save(path, false, "Bot Draft Deck", "");
+            GameApp::pendingDraftBotDeckIds.push_back(botSlot);
+            DebugTrace("[Draft] bot seat " << i << " deck saved to " << path << " (" << deck->totalCards() << " cards)");
+            botSlot++;
+        }
         SAFE_DELETE(deck);
     }
+}
+
+void GameStateDraft::startTournamentMatch()
+{
+    materializeDecks();
+
+    GameApp::players[0] = PLAYER_TYPE_HUMAN;
+    GameApp::players[1] = PLAYER_TYPE_CPU;
+    mParent->gameType = GAME_TYPE_CLASSIC;
+    mParent->rules = Rules::getRulesByFilename("classic.txt");
+    GameApp::pendingDraftTournament = true;
+
+    mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DUEL);
 }
 
 void GameStateDraft::handleHumanPick(int cardId)
@@ -446,7 +506,6 @@ void GameStateDraft::handleHumanPick(int cardId)
         {
             mDraftComplete = true;
             logDraftSummary();
-            materializeDecks();
             return;
         }
         mSession->beginRound(mSession->getCurrentRound() + 1);
@@ -470,7 +529,9 @@ void GameStateDraft::Update(float dt)
 
     if (mDraftComplete)
     {
-        if (btn == JGE_BTN_OK || btn == JGE_BTN_SEC || btn == JGE_BTN_MENU)
+        if (btn == JGE_BTN_OK)
+            startTournamentMatch();
+        else if (btn == JGE_BTN_SEC || btn == JGE_BTN_MENU)
             mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
         return;
     }
@@ -574,8 +635,10 @@ void GameStateDraft::Render()
     {
         WFont* font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
         if (font)
-            font->DrawString("Draft complete! Decks saved to ai/draft/ (press any button to return to the menu)", 10.0f,
-                    10.0f);
+        {
+            font->DrawString("Draft complete!", 10.0f, 10.0f);
+            font->DrawString("OK: play your KO bracket now   SEC/MENU: return to the main menu", 10.0f, 30.0f);
+        }
     }
 
     if (mQuitMenu)

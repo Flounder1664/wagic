@@ -326,6 +326,46 @@ void GameStateDuel::Start()
     }
 
     mEngine->ResetInput();
+
+    setupPendingDraftTournament();
+}
+
+// See GameApp.h for why this is a static flag rather than GameStateDraft
+// calling a public method directly: GameApp::mGameStates is private, so
+// GameStateDraft has no way to reach this (long-lived, singleton) instance
+// after transitioning to GAME_STATE_DUEL to configure it there instead.
+//
+// Mirrors the exact sequence MENUITEM_KO_TOURNAMENT's handler uses
+// (addDeck(0,...) before enableTournamantMode -- Tournament::addDeck()
+// behaves differently once mTournamentMode is no longer 0, see
+// Tournament::addDeck's two branches -- then enableTournamantMode(KO,1),
+// then addDeck(1,...) per opponent, then initTournament(), then loadPlayer()
+// for both seats using tournament->getDeckNumber() rather than assuming the
+// ids come back in the order they were added), except it jumps straight to
+// DUEL_STATE_PLAY instead of DUEL_STATE_CHOOSE_DECK2_TO_PLAY: that state
+// only advances once an actual deckmenu/opponentMenu reports isClosed(), and
+// this path never creates one, so it would otherwise hang forever every
+// frame doing nothing.
+void GameStateDuel::setupPendingDraftTournament()
+{
+    if (!GameApp::pendingDraftTournament)
+        return;
+    GameApp::pendingDraftTournament = false;
+
+    SAFE_DELETE(deckmenu);
+    SAFE_DELETE(opponentMenu);
+
+    tournament->addDeck(0, GameApp::pendingDraftHumanDeckId, mParent->players[0]);
+    tournament->enableTournamantMode(TOURNAMENTMODES_KO, 1);
+    for (size_t i = 0; i < GameApp::pendingDraftBotDeckIds.size(); i++)
+        tournament->addDeck(1, GameApp::pendingDraftBotDeckIds[i], mParent->players[1]);
+    tournament->initTournament();
+
+    game->loadPlayer(0, mParent->players[0], tournament->getDeckNumber(0), false);
+    game->loadPlayer(1, mParent->players[1], tournament->getDeckNumber(1), false);
+    setAISpeed();
+
+    setGamePhase(DUEL_STATE_PLAY);
 }
 
 void GameStateDuel::initRand(unsigned int seed)
