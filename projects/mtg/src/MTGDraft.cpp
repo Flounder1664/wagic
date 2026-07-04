@@ -11,6 +11,7 @@
 #include "MTGPack.h"
 #include "MTGDefinitions.h"
 #include "DebugRoutines.h"
+#include "JFileSystem.h"
 
 DraftSeat::DraftSeat(int seatId, bool isBot, MTGAllCards* database) :
     mSeatId(seatId), mIsBot(isBot), mTotalPicks(0)
@@ -546,6 +547,39 @@ bool runDraftEngineSmokeTest()
             DebugTrace("[DraftSmokeTest] seat " << i << " built deck: " << deckSize << " cards");
         }
         SAFE_DELETE(deck);
+    }
+
+    // Materializing a built deck to disk (GameStateDraft::materializeDecks())
+    // is UI-flow code that can't run headlessly, but the save()/reload it
+    // relies on can be verified directly: does a deck DraftDeckBuilder built
+    // survive a real save-to-file and reload with the same card counts?
+    {
+        JFileSystem::GetInstance()->MakeDir("ai/draft/");
+        DraftSeat* seat0 = session.getSeat(0);
+        MTGDeck* built = seat0 ? DraftDeckBuilder::buildDeck(seat0, MTGCollection()) : NULL;
+        if (!built)
+        {
+            DebugTrace("[DraftSmokeTest] FAILED: could not build seat 0's deck for the save/reload check");
+            ok = false;
+        }
+        else
+        {
+            const string path = "ai/draft/deck0.txt";
+            built->save(path, false, "Draft Smoke Test Deck", "");
+            MTGDeck reloaded(path, MTGCollection());
+            if (reloaded.totalCards() != built->totalCards())
+            {
+                DebugTrace(
+                        "[DraftSmokeTest] FAILED: reloaded deck has " << reloaded.totalCards() << " cards, expected "
+                                << built->totalCards());
+                ok = false;
+            }
+            else
+            {
+                DebugTrace("[DraftSmokeTest] save/reload round-trip OK: " << reloaded.totalCards() << " cards");
+            }
+            SAFE_DELETE(built);
+        }
     }
 
     if (ok)

@@ -15,10 +15,12 @@ class SimpleMenu;
 
 // First interactive slice of draft mode (see GH issue #27): the human opens a
 // pack, picks one card, bots resolve automatically, repeat until all 3
-// rounds are done. Deliberately minimal -- no deck-build step yet, no
-// materializing decks to disk, no tournament wiring. Entry point is an
-// always-visible "Draft (test)" item in the Play submenu (GameStateMenu.cpp)
-// while this is still feature-branch work in progress.
+// rounds are done, then every seat's deck is built (DraftDeckBuilder) and
+// saved to ai/draft/deckN.txt. Deliberately minimal still -- no human
+// deck-build/editing step (the human gets an auto-built deck like the bots
+// do, for now), no DeckManager registration, no tournament wiring. Entry
+// point is an always-visible "Draft (test)" item in the Play submenu
+// (GameStateMenu.cpp) while this is still feature-branch work in progress.
 //
 // Card focus/selection reuses CardDisplay entirely unmodified: CardDisplay's
 // GameObserver/JGuiListener callback paths are for duel- and shop-specific
@@ -48,6 +50,7 @@ private:
     void clearPoolDisplayInstances();
     void handleHumanPick(int cardId);
     void logDraftSummary();
+    void materializeDecks();
     void openQuitMenu();
     void closeQuitMenu();
 

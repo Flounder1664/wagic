@@ -13,6 +13,7 @@
 #include "WResourceManager.h"
 #include "SimpleMenu.h"
 #include "GameOptions.h"
+#include <JFileSystem.h>
 #include <JRenderer.h>
 #include <algorithm>
 
@@ -394,6 +395,33 @@ void GameStateDraft::logDraftSummary()
     }
 }
 
+void GameStateDraft::materializeDecks()
+{
+    // Scratch folder, deliberately not ai/baka/ or the player's real deck
+    // folder: getRandomDeck() and the normal opponent-picker scan ai/baka/
+    // with no unlock/visibility filter (see the GH issue's discussion), so
+    // anything written there leaks into ordinary Quest/casual opponent
+    // selection; the player's own deck folder is live save data that
+    // shouldn't be touched by a throwaway draft result. deckN.txt naming
+    // matters: MTGDeck's file constructor derives meta_id by stripping
+    // exactly "deck" from the filename stem (MTGDeck.cpp:929).
+    JFileSystem::GetInstance()->MakeDir("ai/draft/");
+
+    for (int i = 0; i < mSession->getNumSeats(); i++)
+    {
+        DraftSeat* seat = mSession->getSeat(i);
+        if (!seat)
+            continue;
+        MTGDeck* deck = DraftDeckBuilder::buildDeck(seat, MTGCollection());
+        char path[64];
+        sprintf(path, "ai/draft/deck%i.txt", i);
+        string title = (i == mHumanSeatId) ? "My Draft Deck" : "Bot Draft Deck";
+        deck->save(path, false, title, "");
+        DebugTrace("[Draft] seat " << i << " deck saved to " << path << " (" << deck->totalCards() << " cards)");
+        SAFE_DELETE(deck);
+    }
+}
+
 void GameStateDraft::handleHumanPick(int cardId)
 {
     MTGDeck* pack = mSession->getPackForSeat(mHumanSeatId);
@@ -418,6 +446,7 @@ void GameStateDraft::handleHumanPick(int cardId)
         {
             mDraftComplete = true;
             logDraftSummary();
+            materializeDecks();
             return;
         }
         mSession->beginRound(mSession->getCurrentRound() + 1);
@@ -545,7 +574,8 @@ void GameStateDraft::Render()
     {
         WFont* font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
         if (font)
-            font->DrawString("Draft complete! (press any button to return to the menu)", 10.0f, 10.0f);
+            font->DrawString("Draft complete! Decks saved to ai/draft/ (press any button to return to the menu)", 10.0f,
+                    10.0f);
     }
 
     if (mQuitMenu)
