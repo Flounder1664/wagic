@@ -132,24 +132,25 @@ public:
             mObjects[i]->Render();
             if (font && i < mCounts.size() && mCounts[i] > 1)
             {
-                // Kept inside the card's own ~38-unit-tall footprint. Sized
-                // and centered from the font's own measured width/height
-                // (GetStringWidth/GetHeight) rather than guessed padding
-                // numbers, which is what made the previous version sit
-                // off-center in the box.
+                // Horizontal centering used manual (bw-textW)/2 math before;
+                // switched to the font's own JGETEXT_CENTER alignment mode
+                // (WFont.h:31-33) instead of re-deriving the same offset by
+                // hand, since that's the tested, already-used-elsewhere path
+                // rather than one more manual computation to get subtly
+                // wrong. Vertical still centered from GetHeight() -- there's
+                // no vertical alignment mode, only horizontal.
                 CardGui* cardg = (CardGui*) mObjects[i];
                 char buffer[8];
                 sprintf(buffer, "x%i", mCounts[i]);
                 font->SetScale(0.6f);
-                float textW = font->GetStringWidth(buffer);
                 float textH = font->GetHeight();
-                float bw = textW + 4.0f;
+                float bw = font->GetStringWidth(buffer) + 4.0f;
                 float bh = textH + 2.0f;
                 float bx = cardg->x - bw / 2.0f;
                 float by = cardg->y + 6.0f;
                 r->FillRect(bx, by, bw, bh, ARGB(200,0,0,0));
                 r->DrawRect(bx, by, bw, bh, ARGB(220,240,240,240));
-                font->DrawString(buffer, bx + (bw - textW) / 2.0f, by + (bh - textH) / 2.0f);
+                font->DrawString(buffer, bx + bw / 2.0f, by + (bh - textH) / 2.0f, JGETEXT_CENTER);
                 font->SetScale(1.0f);
             }
         }
