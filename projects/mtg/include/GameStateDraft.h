@@ -11,6 +11,7 @@ class DraftSession;
 class MTGPack;
 class MTGCard;
 class MTGCardInstance;
+class SimpleMenu;
 
 // First interactive slice of draft mode (see GH issue #27): the human opens a
 // pack, picks one card, bots resolve automatically, repeat until all 3
@@ -26,7 +27,7 @@ class MTGCardInstance;
 // mCurr/mObjects state directly instead, and checks JGE_BTN_OK -- the single
 // abstract "confirm" button JGE already normalizes Android touch/gamepad/PC
 // input into (GuiLayers.cpp: mActionButton = JGE_BTN_OK).
-class GameStateDraft: public GameState
+class GameStateDraft: public GameState, public JGuiListener
 {
 public:
     GameStateDraft(GameApp* parent);
@@ -38,6 +39,7 @@ public:
     virtual void End();
     virtual void Update(float dt);
     virtual void Render();
+    virtual void ButtonPressed(int controllerId, int controlId);
 
 private:
     void refreshPackDisplay();
@@ -46,17 +48,20 @@ private:
     void clearPoolDisplayInstances();
     void handleHumanPick(int cardId);
     void logDraftSummary();
+    void openQuitMenu();
+    void closeQuitMenu();
 
     DraftSession* mSession;
     MTGPack* mPack;
     CardDisplay* mPackDisplay; // the current pack, interactive
     CardDisplay* mPoolDisplay; // cards picked so far this draft -- browsable in review mode
+    SimpleMenu* mQuitMenu; // confirm before actually leaving to the main menu
     std::vector<MTGCardInstance*> mDisplayInstances;
     std::vector<MTGCardInstance*> mPoolDisplayInstances;
     std::vector<MTGCard*> mHumanPickOrder; // not owned -- cards live in MTGCollection()
     int mHumanSeatId;
     bool mDraftComplete;
-    bool mReviewingPool; // JGE_BTN_CTRL toggles between picking and browsing the pool
+    bool mReviewingPool; // toggles between picking and browsing the pool
     std::string mLoadError; // non-empty if the pack failed to load or produced no cards
 };
 

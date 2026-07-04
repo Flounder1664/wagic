@@ -11,6 +11,8 @@
 #include "DebugRoutines.h"
 #include "WFont.h"
 #include "WResourceManager.h"
+#include "SimpleMenu.h"
+#include "GameOptions.h"
 #include <JRenderer.h>
 #include <algorithm>
 
@@ -18,6 +20,9 @@ namespace
 {
 const int kPoolCols = 7;
 const int kPoolMaxRows = 4;
+const int kDraftQuitMenuId = 500;
+const int kDraftQuitMenuResume = 1;
+const int kDraftQuitMenuConfirm = 2;
 const float kPoolColStep = 30.0f;
 const float kPoolRowStep = 45.0f;
 
@@ -78,7 +83,31 @@ public:
         else if (key == JGE_BTN_DOWN)
             n = (std::min)((int) mObjects.size() - 1, mCurr + kPoolCols);
         else
-            return false;
+        {
+            // Mouse/touch click -- mirrors CardDisplay::CheckUserInput's
+            // default case (nearest object to the click point), minus the
+            // rotateLeft()/rotateRight() calls, which don't apply here.
+            int x1, y1;
+            JGE* jge = observer ? observer->getInput() : JGE::GetInstance();
+            if (!jge || !jge->GetLeftClickCoordinates(x1, y1))
+                return false;
+
+            unsigned int minDistance2 = (unsigned int) -1;
+            for (size_t i = 0; i < mObjects.size(); i++)
+            {
+                float top, left;
+                if (mObjects[i]->getTopLeft(top, left))
+                {
+                    unsigned int distance2 = static_cast<unsigned int> ((top - y1) * (top - y1) + (left - x1) * (left - x1));
+                    if (distance2 < minDistance2)
+                    {
+                        minDistance2 = distance2;
+                        n = (int) i;
+                    }
+                }
+            }
+            jge->LeftClickedProcessed();
+        }
 
         if (n != mCurr && mObjects[mCurr] != NULL && mObjects[mCurr]->Leaving(key))
         {
@@ -114,9 +143,10 @@ public:
                 float bx = cardg->x - 10.0f;
                 float by = cardg->y + 6.0f;
                 float bw = font->GetStringWidth(buffer) + 4.0f;
-                r->FillRect(bx, by, bw, 11.0f, ARGB(200,0,0,0));
-                r->DrawRect(bx, by, bw, 11.0f, ARGB(220,240,240,240));
-                font->DrawString(buffer, bx + 2.0f, by - 1.0f);
+                float bh = 7.0f;
+                r->FillRect(bx, by, bw, bh, ARGB(200,0,0,0));
+                r->DrawRect(bx, by, bw, bh, ARGB(220,240,240,240));
+                font->DrawString(buffer, bx + 2.0f, by - 2.0f);
                 font->SetScale(1.0f);
             }
         }
@@ -148,6 +178,7 @@ GameStateDraft::GameStateDraft(GameApp* parent) :
     mPack = NULL;
     mPackDisplay = NULL;
     mPoolDisplay = NULL;
+    mQuitMenu = NULL;
     mHumanSeatId = 0;
     mDraftComplete = false;
     mReviewingPool = false;
@@ -167,8 +198,40 @@ void GameStateDraft::Destroy()
     clearPoolDisplayInstances();
     SAFE_DELETE(mPackDisplay);
     SAFE_DELETE(mPoolDisplay);
+    SAFE_DELETE(mQuitMenu);
     SAFE_DELETE(mSession);
     SAFE_DELETE(mPack);
+}
+
+void GameStateDraft::openQuitMenu()
+{
+    if (mQuitMenu)
+        return;
+    mQuitMenu = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), kDraftQuitMenuId, this, Fonts::MENU_FONT,
+            SCREEN_WIDTH / 2 - 100, 25);
+    mQuitMenu->Add(kDraftQuitMenuResume, "Resume Draft");
+    mQuitMenu->Add(kDraftQuitMenuConfirm, "Quit to Main Menu");
+}
+
+void GameStateDraft::closeQuitMenu()
+{
+    SAFE_DELETE(mQuitMenu);
+}
+
+void GameStateDraft::ButtonPressed(int controllerId, int controlId)
+{
+    if (controllerId != kDraftQuitMenuId)
+        return;
+
+    if (controlId == kDraftQuitMenuConfirm)
+    {
+        closeQuitMenu();
+        mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+    }
+    else
+    {
+        closeQuitMenu();
+    }
 }
 
 void GameStateDraft::clearDisplayInstances()
@@ -269,6 +332,7 @@ void GameStateDraft::Start()
     mDraftComplete = false;
     mHumanSeatId = 0;
     mReviewingPool = false;
+    closeQuitMenu();
     mHumanPickOrder.clear();
 
     mLoadError = "";
@@ -379,13 +443,27 @@ void GameStateDraft::Update(float dt)
     if (!mPackDisplay)
         return;
 
-    if (btn == JGE_BTN_MENU)
+    if (mQuitMenu)
     {
-        mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+        mQuitMenu->CheckUserInput(btn);
+        mQuitMenu->Update(dt);
         return;
     }
 
-    if (btn == JGE_BTN_CTRL)
+    if (btn == JGE_BTN_MENU)
+    {
+        openQuitMenu();
+        return;
+    }
+
+    // Same button GuiHand uses to toggle the hand open/closed
+    // (GuiHand.cpp: "options[Options::REVERSETRIGGERS] ? JGE_BTN_PREV :
+    // JGE_BTN_NEXT") -- JGE_BTN_CTRL has no on-screen Android control, this
+    // one already does since it's used for exactly this kind of toggle
+    // elsewhere.
+    JButton reviewToggle = (options[Options::REVERSETRIGGERS].number ? JGE_BTN_PREV : JGE_BTN_NEXT);
+
+    if (btn == reviewToggle)
     {
         mReviewingPool = !mReviewingPool;
     }
@@ -432,7 +510,7 @@ void GameStateDraft::Render()
 
         WFont* font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
         if (font)
-            font->DrawString("Reviewing picks (CTRL to go back)", 10.0f, 10.0f);
+            font->DrawString("Reviewing picks (press the same button again to go back)", 10.0f, 10.0f);
     }
     else if (mPackDisplay)
     {
@@ -455,4 +533,7 @@ void GameStateDraft::Render()
         if (font)
             font->DrawString("Draft complete! (press any button to return to the menu)", 10.0f, 10.0f);
     }
+
+    if (mQuitMenu)
+        mQuitMenu->Render();
 }
