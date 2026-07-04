@@ -161,17 +161,21 @@ MTGCard* BotDraftPicker::pick(DraftSeat& seat, MTGDeck& pack)
 }
 
 DraftSession::DraftSession(int numSeats, MTGAllCards* database, int numRounds, int cardsPerPack) :
-    mNumRounds(numRounds), mCardsPerPack(cardsPerPack)
+    mNumRounds(numRounds), mCardsPerPack(cardsPerPack), mCurrentRound(-1), mPickInRound(0), mDirection(1)
 {
     mRoundPacks.resize(numRounds, (MTGPack*) NULL);
     mSeats.resize(numSeats, NULL);
     mPickers.resize(numSeats, (DraftPicker*) NULL);
+    mCurrentPacks.resize(numSeats, (MTGDeck*) NULL);
+    mPickedThisStep.resize(numSeats, false);
     for (int i = 0; i < numSeats; i++)
         mSeats[i] = NEW DraftSeat(i, true, database);
 }
 
 DraftSession::~DraftSession()
 {
+    for (size_t i = 0; i < mCurrentPacks.size(); i++)
+        SAFE_DELETE(mCurrentPacks[i]);
     for (size_t i = 0; i < mSeats.size(); i++)
         SAFE_DELETE(mSeats[i]);
 }
@@ -201,53 +205,145 @@ DraftSeat* DraftSession::getSeat(int seatId) const
     return NULL;
 }
 
+bool DraftSession::beginRound(int round)
+{
+    if (mSeats.empty() || round < 0 || round >= mNumRounds)
+        return false;
+    MTGPack* roundPack = mRoundPacks[round];
+    if (!roundPack)
+        return false;
+
+    for (size_t i = 0; i < mCurrentPacks.size(); i++)
+        SAFE_DELETE(mCurrentPacks[i]);
+
+    int n = (int) mSeats.size();
+    for (int i = 0; i < n; i++)
+    {
+        mCurrentPacks[i] = NEW MTGDeck(mSeats[i]->getPool()->database);
+        roundPack->assemblePack(mCurrentPacks[i]);
+    }
+
+    mCurrentRound = round;
+    mPickInRound = 0;
+    mDirection = (round % 2 == 0) ? 1 : -1;
+    std::fill(mPickedThisStep.begin(), mPickedThisStep.end(), false);
+    return true;
+}
+
+MTGDeck* DraftSession::getPackForSeat(int seatId) const
+{
+    if (seatId < 0 || seatId >= (int) mCurrentPacks.size())
+        return NULL;
+    return mCurrentPacks[seatId];
+}
+
+bool DraftSession::submitPick(int seatId, MTGCard* card)
+{
+    if (seatId < 0 || seatId >= (int) mSeats.size() || !card)
+        return false;
+    if (mPickedThisStep[seatId])
+        return false;
+    MTGDeck* pack = mCurrentPacks[seatId];
+    if (!pack || pack->totalCards() <= 0)
+        return false;
+
+    pack->remove(card);
+    mSeats[seatId]->recordPick(card);
+    mPickedThisStep[seatId] = true;
+    return true;
+}
+
+bool DraftSession::hasPickedThisStep(int seatId) const
+{
+    if (seatId < 0 || seatId >= (int) mPickedThisStep.size())
+        return false;
+    return mPickedThisStep[seatId];
+}
+
+void DraftSession::resolveBotPicksForStep()
+{
+    for (size_t i = 0; i < mSeats.size(); i++)
+    {
+        if (mPickedThisStep[i] || !mSeats[i]->isBot())
+            continue;
+        MTGDeck* pack = mCurrentPacks[i];
+        if (!pack || pack->totalCards() <= 0)
+        {
+            mPickedThisStep[i] = true; // nothing to pick; don't block the step on an empty pack
+            continue;
+        }
+        DraftPicker* picker = mPickers[i] ? mPickers[i] : (DraftPicker*) &mDefaultBotPicker;
+        MTGCard* chosen = picker->pick(*mSeats[i], *pack);
+        if (chosen)
+        {
+            pack->remove(chosen);
+            mSeats[i]->recordPick(chosen);
+        }
+        mPickedThisStep[i] = true;
+    }
+}
+
+bool DraftSession::allSeatsPickedThisStep() const
+{
+    for (size_t i = 0; i < mPickedThisStep.size(); i++)
+        if (!mPickedThisStep[i])
+            return false;
+    return true;
+}
+
+void DraftSession::endRound()
+{
+    for (size_t i = 0; i < mCurrentPacks.size(); i++)
+        SAFE_DELETE(mCurrentPacks[i]);
+}
+
+bool DraftSession::advanceStep()
+{
+    if (mCurrentRound < 0 || !allSeatsPickedThisStep())
+        return false;
+
+    int n = (int) mSeats.size();
+    if (mDirection > 0)
+        std::rotate(mCurrentPacks.begin(), mCurrentPacks.begin() + (n - 1), mCurrentPacks.end());
+    else
+        std::rotate(mCurrentPacks.begin(), mCurrentPacks.begin() + 1, mCurrentPacks.end());
+
+    mPickInRound++;
+    std::fill(mPickedThisStep.begin(), mPickedThisStep.end(), false);
+
+    if (mPickInRound >= mCardsPerPack)
+        endRound();
+
+    return true;
+}
+
+bool DraftSession::isRoundComplete() const
+{
+    return mCurrentRound >= 0 && mPickInRound >= mCardsPerPack;
+}
+
+bool DraftSession::isDraftComplete() const
+{
+    return isRoundComplete() && mCurrentRound == mNumRounds - 1;
+}
+
 bool DraftSession::runFullDraft()
 {
     if (mSeats.empty())
         return false;
 
-    int n = (int) mSeats.size();
-
     for (int round = 0; round < mNumRounds; round++)
     {
-        MTGPack* roundPack = mRoundPacks[round];
-        if (!roundPack)
+        if (!beginRound(round))
             return false;
 
-        vector<MTGDeck*> packs(n);
-        for (int i = 0; i < n; i++)
+        do
         {
-            packs[i] = NEW MTGDeck(mSeats[i]->getPool()->database);
-            roundPack->assemblePack(packs[i]);
-        }
-
-        int direction = (round % 2 == 0) ? 1 : -1;
-
-        for (int pickNum = 0; pickNum < mCardsPerPack; pickNum++)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                MTGDeck* currentPack = packs[i];
-                if (currentPack->totalCards() <= 0)
-                    continue;
-
-                DraftPicker* picker = mPickers[i] ? mPickers[i] : (DraftPicker*) &mDefaultBotPicker;
-                MTGCard* chosen = picker->pick(*mSeats[i], *currentPack);
-                if (!chosen)
-                    continue;
-
-                currentPack->remove(chosen);
-                mSeats[i]->recordPick(chosen);
-            }
-
-            if (direction > 0)
-                std::rotate(packs.begin(), packs.begin() + (n - 1), packs.end());
-            else
-                std::rotate(packs.begin(), packs.begin() + 1, packs.end());
-        }
-
-        for (int i = 0; i < n; i++)
-            SAFE_DELETE(packs[i]);
+            resolveBotPicksForStep();
+            if (!allSeatsPickedThisStep())
+                return false; // a non-bot seat never got a pick submitted
+            advanceStep();
+        } while (!isRoundComplete());
     }
 
     return true;

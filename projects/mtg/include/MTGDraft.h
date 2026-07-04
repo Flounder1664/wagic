@@ -40,6 +40,14 @@ public:
     // The (up to) two colors this seat has picked the most of so far.
     void getTopColors(int& first, int& second) const;
 
+    // The human seat(s) default to bot-controlled at construction; the UI
+    // flips this once it takes over a seat so resolveBotPicksForStep() knows
+    // to leave that seat's pick to an explicit submitPick() call instead.
+    void setIsBot(bool isBot)
+    {
+        mIsBot = isBot;
+    }
+
 private:
     int mSeatId;
     bool mIsBot;
@@ -73,13 +81,21 @@ private:
 
 // Runs the pack-passing rotation for a full booster draft: numRounds packs
 // of cardsPerPack cards, direction alternating each round, one pick per seat
-// per step. Headless by design -- runFullDraft() is for simulation/testing;
-// the interactive UI will drive picks one at a time instead once it exists.
+// per step.
+//
+// Driving model: a GameState's Update()/Render() loop can't block waiting for
+// a click, so the rotation is exposed as incremental steps (beginRound() /
+// getPackForSeat() / submitPick() / resolveBotPicksForStep() / advanceStep())
+// rather than a single call that runs the whole draft. runFullDraft() is a
+// thin convenience wrapper around those same primitives for headless
+// simulation/testing, where every seat is bot-controlled.
 class DraftSession
 {
 public:
-    // Seats default to bot-controlled (BotDraftPicker); call setPicker() on a
-    // seat to hand it an interactive (human) picker instead.
+    // Seats default to bot-controlled (BotDraftPicker); call
+    // getSeat(id)->setIsBot(false) to hand a seat to interactive (human)
+    // input instead -- resolveBotPicksForStep() then leaves it for an
+    // explicit submitPick() call rather than auto-resolving it.
     // Default cardsPerPack is 14, not 15: real packs have a free basic land
     // slot that isn't part of the draft pick pool (see the deck-build addendum
     // in the GH issue -- basics are seeded separately, not drafted).
@@ -98,6 +114,26 @@ public:
     // Not owned by the session; pass NULL to revert the seat to the shared bot picker.
     void setPicker(int seatId, DraftPicker* picker);
 
+    // -- Incremental driving (what the interactive UI calls) --
+    bool beginRound(int round); // assembles that round's N packs; call once per round
+    MTGDeck* getPackForSeat(int seatId) const; // pack currently in front of a seat, or NULL
+    bool submitPick(int seatId, MTGCard* card); // records one seat's pick for the current step
+    bool hasPickedThisStep(int seatId) const;
+    void resolveBotPicksForStep(); // auto-resolves every bot seat that hasn't picked yet this step
+    bool allSeatsPickedThisStep() const;
+    bool advanceStep(); // rotates packs to the next pick; false if nothing left to advance
+    bool isRoundComplete() const;
+    bool isDraftComplete() const;
+    int getCurrentRound() const
+    {
+        return mCurrentRound;
+    }
+    int getPickInRound() const
+    {
+        return mPickInRound;
+    }
+
+    // -- Headless convenience: drives the above for every seat via pickers --
     bool runFullDraft();
 
     DraftSeat* getSeat(int seatId) const;
@@ -115,12 +151,20 @@ public:
     }
 
 private:
+    void endRound();
+
     int mNumRounds;
     int mCardsPerPack;
     std::vector<MTGPack*> mRoundPacks; // one slot per round, sized to mNumRounds
     std::vector<DraftSeat*> mSeats;
     std::vector<DraftPicker*> mPickers;
     BotDraftPicker mDefaultBotPicker;
+
+    int mCurrentRound; // -1 until beginRound() is first called
+    int mPickInRound;
+    int mDirection;
+    std::vector<MTGDeck*> mCurrentPacks; // valid between beginRound() and the round ending
+    std::vector<bool> mPickedThisStep;
 };
 
 #ifdef TESTSUITE
