@@ -86,11 +86,15 @@ public:
     DraftSession(int numSeats, MTGAllCards* database, int numRounds = 3, int cardsPerPack = 14);
     ~DraftSession();
 
-    // Not owned -- caller loads/keeps the MTGPack definition alive.
-    void setPackTemplate(MTGPack* pack)
-    {
-        mPackTemplate = pack;
-    }
+    // Every seat opens the same set each round (like real draft -- one booster
+    // pool per round, not a per-seat choice), but the set can change between
+    // rounds 1/2/3 (e.g. round 1 from set A, rounds 2-3 from set B). Which set
+    // to use for which round is a selection-process decision for later; this
+    // just makes the plumbing not assume "one set for the whole draft.
+    // Not owned -- caller loads/keeps the MTGPack definitions alive.
+    void setPackTemplate(MTGPack* pack); // convenience: same pack for every round
+    void setPackTemplateForRound(int round, MTGPack* pack);
+
     // Not owned by the session; pass NULL to revert the seat to the shared bot picker.
     void setPicker(int seatId, DraftPicker* picker);
 
@@ -113,7 +117,7 @@ public:
 private:
     int mNumRounds;
     int mCardsPerPack;
-    MTGPack* mPackTemplate;
+    std::vector<MTGPack*> mRoundPacks; // one slot per round, sized to mNumRounds
     std::vector<DraftSeat*> mSeats;
     std::vector<DraftPicker*> mPickers;
     BotDraftPicker mDefaultBotPicker;

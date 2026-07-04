@@ -161,8 +161,9 @@ MTGCard* BotDraftPicker::pick(DraftSeat& seat, MTGDeck& pack)
 }
 
 DraftSession::DraftSession(int numSeats, MTGAllCards* database, int numRounds, int cardsPerPack) :
-    mNumRounds(numRounds), mCardsPerPack(cardsPerPack), mPackTemplate(NULL)
+    mNumRounds(numRounds), mCardsPerPack(cardsPerPack)
 {
+    mRoundPacks.resize(numRounds, (MTGPack*) NULL);
     mSeats.resize(numSeats, NULL);
     mPickers.resize(numSeats, (DraftPicker*) NULL);
     for (int i = 0; i < numSeats; i++)
@@ -173,6 +174,18 @@ DraftSession::~DraftSession()
 {
     for (size_t i = 0; i < mSeats.size(); i++)
         SAFE_DELETE(mSeats[i]);
+}
+
+void DraftSession::setPackTemplate(MTGPack* pack)
+{
+    for (size_t i = 0; i < mRoundPacks.size(); i++)
+        mRoundPacks[i] = pack;
+}
+
+void DraftSession::setPackTemplateForRound(int round, MTGPack* pack)
+{
+    if (round >= 0 && round < (int) mRoundPacks.size())
+        mRoundPacks[round] = pack;
 }
 
 void DraftSession::setPicker(int seatId, DraftPicker* picker)
@@ -190,18 +203,22 @@ DraftSeat* DraftSession::getSeat(int seatId) const
 
 bool DraftSession::runFullDraft()
 {
-    if (!mPackTemplate || mSeats.empty())
+    if (mSeats.empty())
         return false;
 
     int n = (int) mSeats.size();
 
     for (int round = 0; round < mNumRounds; round++)
     {
+        MTGPack* roundPack = mRoundPacks[round];
+        if (!roundPack)
+            return false;
+
         vector<MTGDeck*> packs(n);
         for (int i = 0; i < n; i++)
         {
             packs[i] = NEW MTGDeck(mSeats[i]->getPool()->database);
-            mPackTemplate->assemblePack(packs[i]);
+            roundPack->assemblePack(packs[i]);
         }
 
         int direction = (round % 2 == 0) ? 1 : -1;
