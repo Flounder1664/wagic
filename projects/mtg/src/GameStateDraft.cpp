@@ -54,6 +54,40 @@ public:
         mCounts.push_back(count);
     }
 
+    // CardDisplay::CheckUserInput's LEFT/RIGHT case calls rotateLeft()/
+    // rotateRight() once the cursor crosses start_item+nb_displayed_items --
+    // those shift every object's x by +-30 assuming a single scrolling row
+    // (CardDisplay.cpp:56-76). This grid shows everything at once (no
+    // scrolling window), so reusing that navigation would silently drift
+    // every card's x left/right by 30 each time the cursor crosses a row
+    // boundary. Plain bounded index movement instead, with the same
+    // Entering()/Leaving() focus-transition calls the base class makes (for
+    // the focused-card zoom animation).
+    bool CheckUserInput(JButton key)
+    {
+        if (mObjects.empty())
+            return false;
+
+        int n = mCurr;
+        if (key == JGE_BTN_LEFT)
+            n = (std::max)(0, mCurr - 1);
+        else if (key == JGE_BTN_RIGHT)
+            n = (std::min)((int) mObjects.size() - 1, mCurr + 1);
+        else if (key == JGE_BTN_UP)
+            n = (std::max)(0, mCurr - kPoolCols);
+        else if (key == JGE_BTN_DOWN)
+            n = (std::min)((int) mObjects.size() - 1, mCurr + kPoolCols);
+        else
+            return false;
+
+        if (n != mCurr && mObjects[mCurr] != NULL && mObjects[mCurr]->Leaving(key))
+        {
+            mCurr = n;
+            mObjects[mCurr]->Entering();
+        }
+        return true;
+    }
+
     void Render(bool /*norect*/ = false)
     {
         JRenderer* r = JRenderer::GetInstance();
@@ -69,14 +103,37 @@ public:
             mObjects[i]->Render();
             if (font && i < mCounts.size() && mCounts[i] > 1)
             {
+                // Kept inside the card's own ~38-unit-tall footprint (badge
+                // spans y+6..y+17) -- it previously sat at y+20..y+35, which
+                // overran into the row below's cards, drawn after it in
+                // index order and so painted over it.
                 CardGui* cardg = (CardGui*) mObjects[i];
                 char buffer[8];
                 sprintf(buffer, "x%i", mCounts[i]);
-                font->SetScale(0.8f);
-                font->DrawString(buffer, cardg->x + 10, cardg->y + 20);
+                font->SetScale(0.6f);
+                float bx = cardg->x - 10.0f;
+                float by = cardg->y + 6.0f;
+                float bw = font->GetStringWidth(buffer) + 4.0f;
+                r->FillRect(bx, by, bw, 11.0f, ARGB(200,0,0,0));
+                r->DrawRect(bx, by, bw, 11.0f, ARGB(220,240,240,240));
+                font->DrawString(buffer, bx + 2.0f, by - 1.0f);
                 font->SetScale(1.0f);
             }
         }
+    }
+
+    // Only called while GameStateDraft is in "review" mode -- the focused
+    // pack's own big preview (CardDisplay::Render()) isn't drawn then, so
+    // this doesn't need to fight it for the same screen space.
+    void RenderFocusedBig()
+    {
+        if (mObjects.empty() || mCurr < 0 || mCurr >= (int) mObjects.size())
+            return;
+        CardGui* cardg = (CardGui*) mObjects[mCurr];
+        if (!cardg || !cardg->card)
+            return;
+        Pos pos((CardGui::BigWidth / 2), CardGui::BigHeight / 2 - 10, 0.80f, 0.0, 220);
+        CardGui::DrawCard(cardg->card, pos, DrawMode::kNormal);
     }
 
 private:
@@ -93,6 +150,7 @@ GameStateDraft::GameStateDraft(GameApp* parent) :
     mPoolDisplay = NULL;
     mHumanSeatId = 0;
     mDraftComplete = false;
+    mReviewingPool = false;
 }
 
 GameStateDraft::~GameStateDraft()
@@ -210,6 +268,7 @@ void GameStateDraft::Start()
 {
     mDraftComplete = false;
     mHumanSeatId = 0;
+    mReviewingPool = false;
     mHumanPickOrder.clear();
 
     mLoadError = "";
@@ -326,7 +385,19 @@ void GameStateDraft::Update(float dt)
         return;
     }
 
-    if (btn == JGE_BTN_OK)
+    if (btn == JGE_BTN_CTRL)
+    {
+        mReviewingPool = !mReviewingPool;
+    }
+    else if (mReviewingPool)
+    {
+        // CheckUserInput isn't virtual, and DraftPoolDisplay overrides it
+        // (like Render()) -- must call through the derived type or this
+        // silently resolves to CardDisplay::CheckUserInput instead.
+        if (mPoolDisplay)
+            ((DraftPoolDisplay*) mPoolDisplay)->CheckUserInput(btn);
+    }
+    else if (btn == JGE_BTN_OK)
     {
         if (mPackDisplay->mCurr >= 0 && mPackDisplay->mCurr < (int) mPackDisplay->mObjects.size())
         {
@@ -341,6 +412,8 @@ void GameStateDraft::Update(float dt)
     }
 
     mPackDisplay->Update(dt);
+    if (mPoolDisplay)
+        mPoolDisplay->Update(dt);
 }
 
 void GameStateDraft::Render()
@@ -348,8 +421,23 @@ void GameStateDraft::Render()
     if (mPoolDisplay)
         ((DraftPoolDisplay*) mPoolDisplay)->Render();
 
-    if (mPackDisplay)
+    // CardDisplay::Render() always draws its own big-card preview of the
+    // focused card at the same fixed screen position -- while reviewing the
+    // pool, show the pool's preview there instead of the pack's, rather than
+    // have both fight for the same space.
+    if (mReviewingPool)
+    {
+        if (mPoolDisplay)
+            ((DraftPoolDisplay*) mPoolDisplay)->RenderFocusedBig();
+
+        WFont* font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        if (font)
+            font->DrawString("Reviewing picks (CTRL to go back)", 10.0f, 10.0f);
+    }
+    else if (mPackDisplay)
+    {
         mPackDisplay->Render();
+    }
 
     if (!mLoadError.empty())
     {

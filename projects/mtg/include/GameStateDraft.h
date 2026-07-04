@@ -50,12 +50,13 @@ private:
     DraftSession* mSession;
     MTGPack* mPack;
     CardDisplay* mPackDisplay; // the current pack, interactive
-    CardDisplay* mPoolDisplay; // cards picked so far this draft, read-only
+    CardDisplay* mPoolDisplay; // cards picked so far this draft -- browsable in review mode
     std::vector<MTGCardInstance*> mDisplayInstances;
     std::vector<MTGCardInstance*> mPoolDisplayInstances;
     std::vector<MTGCard*> mHumanPickOrder; // not owned -- cards live in MTGCollection()
     int mHumanSeatId;
     bool mDraftComplete;
+    bool mReviewingPool; // JGE_BTN_CTRL toggles between picking and browsing the pool
     std::string mLoadError; // non-empty if the pack failed to load or produced no cards
 };
 
