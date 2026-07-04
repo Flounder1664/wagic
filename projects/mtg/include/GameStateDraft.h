@@ -2,6 +2,7 @@
 #define _GAME_STATE_DRAFT_H_
 
 #include <vector>
+#include <string>
 #include <JGE.h>
 #include "GameState.h"
 #include "CardDisplay.h"
@@ -39,16 +40,21 @@ public:
 
 private:
     void refreshPackDisplay();
+    void refreshPoolDisplay();
     void clearDisplayInstances();
+    void clearPoolDisplayInstances();
     void handleHumanPick(int cardId);
     void logDraftSummary();
 
     DraftSession* mSession;
     MTGPack* mPack;
-    CardDisplay* mPackDisplay;
+    CardDisplay* mPackDisplay; // the current pack, interactive
+    CardDisplay* mPoolDisplay; // cards picked so far this draft, read-only
     std::vector<MTGCardInstance*> mDisplayInstances;
+    std::vector<MTGCardInstance*> mPoolDisplayInstances;
     int mHumanSeatId;
     bool mDraftComplete;
+    std::string mLoadError; // non-empty if the pack failed to load or produced no cards
 };
 
 #endif
