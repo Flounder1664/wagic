@@ -167,6 +167,26 @@ private:
     std::vector<bool> mPickedThisStep;
 };
 
+// Turns a seat's raw drafted pool into a playable ~40-card deck. A pool
+// always contains some off-color/forced picks (best-available-card taken
+// when nothing on-color was open, hate-picks, etc.) that shouldn't be played
+// -- this commits to the seat's top 1-2 colors (DraftSeat::getTopColors),
+// keeps only on-color/colorless cards from the pool (best-scored first, via
+// BotDraftPicker::scoreCard, capped to leave room for lands), and fills the
+// remaining slots with basics weighted by colored-mana-symbol count across
+// the kept spells -- not an even split. Basics aren't drafted (no pack has a
+// land slot); they're pulled fresh from MTGAllCards by name, since Wagic has
+// no unlimited/free-basic-land mechanic to reuse (see the GH issue's
+// addendum).
+class DraftDeckBuilder
+{
+public:
+    static MTGDeck* buildDeck(DraftSeat* seat, MTGAllCards* database, int deckSize = 40, int numLands = 17);
+
+private:
+    static MTGCard* getBasicLand(MTGAllCards* database, int mtgColor);
+};
+
 #ifdef TESTSUITE
 bool runDraftEngineSmokeTest();
 #endif

@@ -349,6 +349,132 @@ bool DraftSession::runFullDraft()
     return true;
 }
 
+MTGCard* DraftDeckBuilder::getBasicLand(MTGAllCards* database, int mtgColor)
+{
+    switch (mtgColor)
+    {
+        case Constants::MTG_COLOR_GREEN:
+            return database->getCardByName("Forest");
+        case Constants::MTG_COLOR_BLUE:
+            return database->getCardByName("Island");
+        case Constants::MTG_COLOR_RED:
+            return database->getCardByName("Mountain");
+        case Constants::MTG_COLOR_BLACK:
+            return database->getCardByName("Swamp");
+        case Constants::MTG_COLOR_WHITE:
+            return database->getCardByName("Plains");
+        default:
+            return NULL;
+    }
+}
+
+namespace
+{
+struct DraftDeckCandidate
+{
+    MTGCard* card;
+    float score;
+};
+
+struct DraftDeckCandidateScoreDesc
+{
+    bool operator()(const DraftDeckCandidate& a, const DraftDeckCandidate& b) const
+    {
+        return a.score > b.score;
+    }
+};
+}
+
+MTGDeck* DraftDeckBuilder::buildDeck(DraftSeat* seat, MTGAllCards* database, int deckSize, int numLands)
+{
+    MTGDeck* result = NEW MTGDeck(database);
+    if (!seat || !seat->getPool())
+        return result;
+
+    int first, second;
+    seat->getTopColors(first, second);
+
+    vector<DraftDeckCandidate> candidates;
+    MTGDeck* pool = seat->getPool();
+    for (map<int, int>::iterator it = pool->cards.begin(); it != pool->cards.end(); ++it)
+    {
+        MTGCard* card = pool->getCardById(it->first);
+        if (!card || !card->data || card->data->isLand())
+            continue;
+
+        bool colorless = true;
+        for (int c = Constants::MTG_COLOR_GREEN; c <= Constants::MTG_COLOR_WHITE; c++)
+        {
+            if (card->data->hasColor(c))
+            {
+                colorless = false;
+                break;
+            }
+        }
+        bool onColor = colorless || (first >= 0 && card->data->hasColor(first)) || (second >= 0 && card->data->hasColor(second));
+        if (!onColor)
+            continue;
+
+        for (int copy = 0; copy < it->second; copy++)
+        {
+            DraftDeckCandidate c;
+            c.card = card;
+            c.score = BotDraftPicker::scoreCard(card, *seat);
+            candidates.push_back(c);
+        }
+    }
+
+    std::sort(candidates.begin(), candidates.end(), DraftDeckCandidateScoreDesc());
+
+    int numSpells = deckSize - numLands;
+    int keep = (std::min)((int) candidates.size(), numSpells);
+
+    int weight[Constants::MTG_NB_COLORS];
+    for (int c = 0; c < Constants::MTG_NB_COLORS; c++)
+        weight[c] = 0;
+
+    for (int i = 0; i < keep; i++)
+    {
+        MTGCard* card = candidates[i].card;
+        result->add(card);
+        ManaCost* mc = card->data->getManaCost();
+        if (mc)
+        {
+            for (int c = Constants::MTG_COLOR_GREEN; c <= Constants::MTG_COLOR_WHITE; c++)
+                weight[c] += mc->getCost(c);
+        }
+    }
+
+    int firstWeight = (first >= 0) ? weight[first] : 0;
+    int secondWeight = (second >= 0) ? weight[second] : 0;
+    int totalWeight = firstWeight + secondWeight;
+
+    int firstLands, secondLands;
+    if (second < 0 || totalWeight <= 0)
+    {
+        firstLands = numLands;
+        secondLands = 0;
+    }
+    else
+    {
+        firstLands = (int) ((float) firstWeight / (float) totalWeight * numLands + 0.5f);
+        firstLands = (std::max)(0, (std::min)(numLands, firstLands));
+        secondLands = numLands - firstLands;
+    }
+
+    MTGCard* firstBasic = (first >= 0) ? getBasicLand(database, first) : NULL;
+    MTGCard* secondBasic = (second >= 0) ? getBasicLand(database, second) : NULL;
+
+    if (firstBasic)
+        for (int i = 0; i < firstLands; i++)
+            result->add(firstBasic);
+    if (secondBasic)
+        for (int i = 0; i < secondLands; i++)
+            result->add(secondBasic);
+
+    return result;
+}
+
 #ifdef TESTSUITE
 bool runDraftEngineSmokeTest()
 {
@@ -407,6 +533,19 @@ bool runDraftEngineSmokeTest()
                 "[DraftSmokeTest] seat " << i << ": " << seat->getTotalPicks() << " picks, top colors " << first
                         << "(" << seat->getColorPickCount(first) << ") / " << second << "("
                         << seat->getColorPickCount(second) << ")");
+
+        MTGDeck* deck = DraftDeckBuilder::buildDeck(seat, MTGCollection());
+        int deckSize = deck ? deck->totalCards() : -1;
+        if (!deck || deckSize < 30 || deckSize > 40)
+        {
+            DebugTrace("[DraftSmokeTest] FAILED: seat " << i << " built deck has " << deckSize << " cards, expected 30-40");
+            ok = false;
+        }
+        else
+        {
+            DebugTrace("[DraftSmokeTest] seat " << i << " built deck: " << deckSize << " cards");
+        }
+        SAFE_DELETE(deck);
     }
 
     if (ok)
