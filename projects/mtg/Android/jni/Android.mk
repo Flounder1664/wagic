@@ -92,6 +92,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/MTGCardInstance.cpp \
         $(MTG_PATH)/src/MTGDeck.cpp \
         $(MTG_PATH)/src/MTGDefinitions.cpp \
+        $(MTG_PATH)/src/MTGDraft.cpp \
         $(MTG_PATH)/src/MTGGamePhase.cpp \
         $(MTG_PATH)/src/MTGGameZones.cpp \
         $(MTG_PATH)/src/MTGPack.cpp \

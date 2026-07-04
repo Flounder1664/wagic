@@ -407,6 +407,7 @@
     <ClCompile Include="src\MTGCardInstance.cpp" />
     <ClCompile Include="src\MTGDeck.cpp" />
     <ClCompile Include="src\MTGDefinitions.cpp" />
+    <ClCompile Include="src\MTGDraft.cpp" />
     <ClCompile Include="src\MTGGamePhase.cpp" />
     <ClCompile Include="src\MTGGameZones.cpp" />
     <ClCompile Include="src\MTGPack.cpp" />
@@ -535,6 +536,7 @@
     <ClInclude Include="include\MTGCardInstance.h" />
     <ClInclude Include="include\MTGDeck.h" />
     <ClInclude Include="include\MTGDefinitions.h" />
+    <ClInclude Include="include\MTGDraft.h" />
     <ClInclude Include="include\MTGGamePhase.h" />
     <ClInclude Include="include\MTGGameZones.h" />
     <ClInclude Include="include\MTGPack.h" />

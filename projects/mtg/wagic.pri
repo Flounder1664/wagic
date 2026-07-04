@@ -118,6 +118,7 @@ SOURCES += \
         src/MTGCardInstance.cpp\
         src/MTGDeck.cpp\
         src/MTGDefinitions.cpp\
+        src/MTGDraft.cpp\
         src/MTGGamePhase.cpp\
         src/MTGGameZones.cpp\
         src/MTGPack.cpp\
@@ -206,6 +207,7 @@ HEADERS  += \
         include/AIPlayer.h\
         include/GameStateDuel.h\
         include/MTGDeck.h\
+        include/MTGDraft.h\
         include/TargetChooser.h\
         include/AIStats.h\
         include/GameState.h\

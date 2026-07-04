@@ -8,6 +8,7 @@
 #include "TestSuiteAI.h"
 #include "GameOptions.h"
 #include "MTGDeck.h"
+#include "MTGDraft.h"
 #include "DebugRoutines.h"
 #include <QCoreApplication>
 #include <QElapsedTimer>
@@ -94,6 +95,10 @@ int main(int argc, char* argv[])
     options.reloadProfile();
     TestSuite testSuite("test/_tests.txt");
     result = testSuite.run();
+#ifdef TESTSUITE
+    if (!runDraftEngineSmokeTest())
+        result++;
+#endif
     delete wagicCore;
     DebugTrace("TestSuite done: failed test: " << result << " out of " << testSuite.nbTests + testSuite.nbAITests << " total");
 #ifdef CAPTURE_STDERR
