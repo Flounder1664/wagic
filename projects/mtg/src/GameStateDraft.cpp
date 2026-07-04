@@ -132,21 +132,24 @@ public:
             mObjects[i]->Render();
             if (font && i < mCounts.size() && mCounts[i] > 1)
             {
-                // Kept inside the card's own ~38-unit-tall footprint (badge
-                // spans y+6..y+17) -- it previously sat at y+20..y+35, which
-                // overran into the row below's cards, drawn after it in
-                // index order and so painted over it.
+                // Kept inside the card's own ~38-unit-tall footprint. Sized
+                // and centered from the font's own measured width/height
+                // (GetStringWidth/GetHeight) rather than guessed padding
+                // numbers, which is what made the previous version sit
+                // off-center in the box.
                 CardGui* cardg = (CardGui*) mObjects[i];
                 char buffer[8];
                 sprintf(buffer, "x%i", mCounts[i]);
                 font->SetScale(0.6f);
-                float bx = cardg->x - 10.0f;
+                float textW = font->GetStringWidth(buffer);
+                float textH = font->GetHeight();
+                float bw = textW + 4.0f;
+                float bh = textH + 2.0f;
+                float bx = cardg->x - bw / 2.0f;
                 float by = cardg->y + 6.0f;
-                float bw = font->GetStringWidth(buffer) + 4.0f;
-                float bh = 7.0f;
                 r->FillRect(bx, by, bw, bh, ARGB(200,0,0,0));
                 r->DrawRect(bx, by, bw, bh, ARGB(220,240,240,240));
-                font->DrawString(buffer, bx + 2.0f, by - 2.0f);
+                font->DrawString(buffer, bx + (bw - textW) / 2.0f, by + (bh - textH) / 2.0f);
                 font->SetScale(1.0f);
             }
         }
@@ -182,6 +185,7 @@ GameStateDraft::GameStateDraft(GameApp* parent) :
     mHumanSeatId = 0;
     mDraftComplete = false;
     mReviewingPool = false;
+    mQuitConfirmed = false;
 }
 
 GameStateDraft::~GameStateDraft()
@@ -220,18 +224,18 @@ void GameStateDraft::closeQuitMenu()
 
 void GameStateDraft::ButtonPressed(int controllerId, int controlId)
 {
-    if (controllerId != kDraftQuitMenuId)
+    if (controllerId != kDraftQuitMenuId || !mQuitMenu)
         return;
 
-    if (controlId == kDraftQuitMenuConfirm)
-    {
-        closeQuitMenu();
-        mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
-    }
-    else
-    {
-        closeQuitMenu();
-    }
+    // ButtonPressed() runs from inside mQuitMenu->CheckUserInput() -- deleting
+    // mQuitMenu here (as a previous version of this did) deletes the object
+    // out from under its own still-running call, a use-after-free that
+    // crashed on "Quit to Main Menu". SimpleMenu::Close() (SimpleMenu.cpp:
+    // 368-372) only sets a flag/starts a brief close animation; the actual
+    // delete happens later in Update(), once isClosed() is true and we're no
+    // longer anywhere on mQuitMenu's own call stack.
+    mQuitConfirmed = (controlId == kDraftQuitMenuConfirm);
+    mQuitMenu->Close();
 }
 
 void GameStateDraft::clearDisplayInstances()
@@ -332,6 +336,7 @@ void GameStateDraft::Start()
     mDraftComplete = false;
     mHumanSeatId = 0;
     mReviewingPool = false;
+    mQuitConfirmed = false;
     closeQuitMenu();
     mHumanPickOrder.clear();
 
@@ -447,6 +452,14 @@ void GameStateDraft::Update(float dt)
     {
         mQuitMenu->CheckUserInput(btn);
         mQuitMenu->Update(dt);
+        if (mQuitMenu->isClosed())
+        {
+            bool confirmed = mQuitConfirmed;
+            closeQuitMenu();
+            mQuitConfirmed = false;
+            if (confirmed)
+                mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+        }
         return;
     }
 

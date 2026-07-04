@@ -62,6 +62,7 @@ private:
     int mHumanSeatId;
     bool mDraftComplete;
     bool mReviewingPool; // toggles between picking and browsing the pool
+    bool mQuitConfirmed; // set by ButtonPressed(), acted on later once mQuitMenu->isClosed()
     std::string mLoadError; // non-empty if the pack failed to load or produced no cards
 };
 
