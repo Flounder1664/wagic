@@ -89,6 +89,7 @@ SOURCES += \
         src/GameStateAwards.cpp\
         src/GameState.cpp\
         src/GameStateDeckViewer.cpp\
+        src/GameStateDraft.cpp\
         src/GameStateDuel.cpp\
         src/GameStateMenu.cpp\
         src/GameStateOptions.cpp\
@@ -202,6 +203,7 @@ HEADERS  += \
         include/MTGCard.h\
         include/AIMomirPlayer.h\
         include/GameStateDeckViewer.h\
+        include/GameStateDraft.h\
         include/MTGCardInstance.h\
         include/Targetable.h\
         include/AIPlayer.h\

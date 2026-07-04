@@ -64,6 +64,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/GameStateAwards.cpp \
         $(MTG_PATH)/src/GameState.cpp \
         $(MTG_PATH)/src/GameStateDeckViewer.cpp \
+        $(MTG_PATH)/src/GameStateDraft.cpp \
         $(MTG_PATH)/src/GameStateDuel.cpp \
         $(MTG_PATH)/src/GameStateMenu.cpp \
         $(MTG_PATH)/src/GameStateOptions.cpp \

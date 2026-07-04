@@ -21,6 +21,7 @@
 #include "GameStateShop.h"
 #include "GameStateAwards.h"
 #include "GameStateStory.h"
+#include "GameStateDraft.h"
 #include "DeckStats.h"
 #include "DeckMetaData.h"
 #include "DeckManager.h"
@@ -285,6 +286,9 @@ void GameApp::Create()
 
     mGameStates[GAME_STATE_STORY] = NEW GameStateStory(this);
     mGameStates[GAME_STATE_STORY]->Create();
+
+    mGameStates[GAME_STATE_DRAFT] = NEW GameStateDraft(this);
+    mGameStates[GAME_STATE_DRAFT]->Create();
 
     mGameStates[GAME_STATE_TRANSITION] = NULL;
 

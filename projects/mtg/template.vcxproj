@@ -373,6 +373,7 @@
     <ClCompile Include="src\GameState.cpp" />
     <ClCompile Include="src\GameStateAwards.cpp" />
     <ClCompile Include="src\GameStateDeckViewer.cpp" />
+    <ClCompile Include="src\GameStateDraft.cpp" />
     <ClCompile Include="src\GameStateDuel.cpp" />
     <ClCompile Include="src\GameStateMenu.cpp" />
     <ClCompile Include="src\GameStateOptions.cpp" />
@@ -507,6 +508,7 @@
     <ClInclude Include="include\GameState.h" />
     <ClInclude Include="include\GameStateAwards.h" />
     <ClInclude Include="include\GameStateDeckViewer.h" />
+    <ClInclude Include="include\GameStateDraft.h" />
     <ClInclude Include="include\GameStateDuel.h" />
     <ClInclude Include="include\GameStateMenu.h" />
     <ClInclude Include="include\GameStateOptions.h" />

@@ -128,7 +128,7 @@ float BotDraftPicker::scoreCard(MTGCard* card, const DraftSeat& seat)
             weight += seat.getColorPickCount(first);
         if (second >= 0 && data->hasColor(second))
             weight += seat.getColorPickCount(second);
-        score += std::min(weight, 20) * 0.5f;
+        score += (std::min)(weight, 20) * 0.5f;
     }
     else
     {
