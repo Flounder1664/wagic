@@ -9,6 +9,7 @@
 
 class DraftSession;
 class MTGPack;
+class MTGCard;
 class MTGCardInstance;
 
 // First interactive slice of draft mode (see GH issue #27): the human opens a
@@ -52,6 +53,7 @@ private:
     CardDisplay* mPoolDisplay; // cards picked so far this draft, read-only
     std::vector<MTGCardInstance*> mDisplayInstances;
     std::vector<MTGCardInstance*> mPoolDisplayInstances;
+    std::vector<MTGCard*> mHumanPickOrder; // not owned -- cards live in MTGCollection()
     int mHumanSeatId;
     bool mDraftComplete;
     std::string mLoadError; // non-empty if the pack failed to load or produced no cards

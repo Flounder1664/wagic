@@ -12,6 +12,7 @@
 #include "WFont.h"
 #include "WResourceManager.h"
 #include <JRenderer.h>
+#include <algorithm>
 
 namespace
 {
@@ -125,33 +126,27 @@ void GameStateDraft::refreshPoolDisplay()
     DraftPoolDisplay* pool = NEW DraftPoolDisplay(2, SCREEN_WIDTH - 255, 10, 7);
     mPoolDisplay = pool;
 
-    MTGDeck* picked = mSession->getSeat(mHumanSeatId)->getPool();
-    if (!picked)
-        return;
-
-    for (map<int, int>::iterator it = picked->cards.begin(); it != picked->cards.end(); ++it)
+    // AddCard()'s x position is baked in from mObjects.size() at the moment
+    // each card is added, not recomputed from start_item at render time -- so
+    // only ever add the cards that should actually be visible (at most
+    // nb_displayed_items), rather than adding everything and trying to
+    // "scroll" afterward. mHumanPickOrder (not the pool MTGDeck's cards map,
+    // which is unordered by card id) is what gives us "most recent" here.
+    int total = (int) mHumanPickOrder.size();
+    int shown = (std::min)(total, 7);
+    for (int i = total - shown; i < total; i++)
     {
-        MTGCard* card = picked->getCardById(it->first);
-        if (!card)
-            continue;
-        for (int copy = 0; copy < it->second; copy++)
-        {
-            MTGCardInstance* ci = NEW MTGCardInstance(card, NULL);
-            mPoolDisplayInstances.push_back(ci);
-            pool->AddCard(ci);
-        }
+        MTGCardInstance* ci = NEW MTGCardInstance(mHumanPickOrder[i], NULL);
+        mPoolDisplayInstances.push_back(ci);
+        pool->AddCard(ci);
     }
-
-    // Show the most recently picked cards, not always the first 7 -- this
-    // display never receives input to scroll on its own.
-    int total = (int) mPoolDisplayInstances.size();
-    pool->start_item = total > 7 ? total - 7 : 0;
 }
 
 void GameStateDraft::Start()
 {
     mDraftComplete = false;
     mHumanSeatId = 0;
+    mHumanPickOrder.clear();
 
     mLoadError = "";
 
@@ -216,6 +211,7 @@ void GameStateDraft::handleHumanPick(int cardId)
         return;
     if (!mSession->submitPick(mHumanSeatId, originalCard))
         return;
+    mHumanPickOrder.push_back(originalCard);
 
     mSession->resolveBotPicksForStep();
     if (!mSession->allSeatsPickedThisStep())
