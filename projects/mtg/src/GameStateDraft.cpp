@@ -16,32 +16,65 @@
 
 namespace
 {
+const int kPoolCols = 7;
+const int kPoolMaxRows = 4;
+const float kPoolColStep = 30.0f;
+const float kPoolRowStep = 45.0f;
+
 // CardDisplay::Render() unconditionally draws an enlarged preview of the
 // focused card at a fixed screen position (CardGui::BigWidth/2, roughly the
 // left third of the screen) -- fine for the interactive pack, but a read-only
 // "picked so far" strip shouldn't fight it for the same space. This overrides
 // just the thumbnail-row part of CardDisplay::Render (Render(bool) isn't
 // virtual, so this only needs to be called through a DraftPoolDisplay*, which
-// GameStateDraft does).
+// GameStateDraft does), and lays cards out in a grid (kPoolCols per row)
+// instead of AddCard()'s single-row formula, with an "xN" count badge per
+// unique card instead of one thumbnail per duplicate copy.
 class DraftPoolDisplay: public CardDisplay
 {
 public:
-    DraftPoolDisplay(int id, int px, int py, int nb_displayed_items = 7) :
-        CardDisplay(id, NULL, px, py, NULL, NULL, nb_displayed_items)
+    DraftPoolDisplay(int id, int px, int py) :
+        CardDisplay(id, NULL, px, py, NULL, NULL, kPoolCols * kPoolMaxRows)
     {
+    }
+
+    void AddCardAt(MTGCardInstance* card, int slot, int count)
+    {
+        int col = slot % kPoolCols;
+        int row = slot / kPoolCols;
+        CardGui* view = NEW CardView(CardView::nullZone, card, static_cast<float> (x + 20 + col * kPoolColStep),
+                static_cast<float> (y + 25 + row * kPoolRowStep));
+        Add(view);
+        mCounts.push_back(count);
     }
 
     void Render(bool /*norect*/ = false)
     {
         JRenderer* r = JRenderer::GetInstance();
-        r->DrawRect(static_cast<float> (x), static_cast<float> (y), static_cast<float> (nb_displayed_items * 30 + 20),
-                50, ARGB(255,255,255,255));
-        for (int i = start_item; i < start_item + nb_displayed_items && i < (int) mObjects.size(); i++)
+        int rows = mObjects.empty() ? 1 : (std::min)(kPoolMaxRows, ((int) mObjects.size() + kPoolCols - 1) / kPoolCols);
+        r->DrawRect(static_cast<float> (x), static_cast<float> (y), static_cast<float> (kPoolCols * kPoolColStep + 20),
+                kPoolRowStep * rows + 5, ARGB(255,255,255,255));
+
+        WFont* font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        for (size_t i = 0; i < mObjects.size(); i++)
         {
-            if (mObjects[i])
-                mObjects[i]->Render();
+            if (!mObjects[i])
+                continue;
+            mObjects[i]->Render();
+            if (font && i < mCounts.size() && mCounts[i] > 1)
+            {
+                CardGui* cardg = (CardGui*) mObjects[i];
+                char buffer[8];
+                sprintf(buffer, "x%i", mCounts[i]);
+                font->SetScale(0.8f);
+                font->DrawString(buffer, cardg->x + 10, cardg->y + 20);
+                font->SetScale(1.0f);
+            }
         }
     }
+
+private:
+    std::vector<int> mCounts; // parallel to mObjects, by add order
 };
 }
 
@@ -123,22 +156,44 @@ void GameStateDraft::refreshPoolDisplay()
 
     // Top-right -- same column as the pack row below, clear of the big-card
     // preview on the left.
-    DraftPoolDisplay* pool = NEW DraftPoolDisplay(2, SCREEN_WIDTH - 255, 10, 7);
+    DraftPoolDisplay* pool = NEW DraftPoolDisplay(2, SCREEN_WIDTH - 255, 10);
     mPoolDisplay = pool;
 
-    // AddCard()'s x position is baked in from mObjects.size() at the moment
-    // each card is added, not recomputed from start_item at render time -- so
-    // only ever add the cards that should actually be visible (at most
-    // nb_displayed_items), rather than adding everything and trying to
-    // "scroll" afterward. mHumanPickOrder (not the pool MTGDeck's cards map,
-    // which is unordered by card id) is what gives us "most recent" here.
-    int total = (int) mHumanPickOrder.size();
-    int shown = (std::min)(total, 7);
-    for (int i = total - shown; i < total; i++)
+    // Collapse duplicates into one thumbnail + an "xN" badge instead of one
+    // thumbnail per copy, ordered by when each card was first picked
+    // (mHumanPickOrder -- the pool MTGDeck's cards map is keyed/ordered by
+    // card id, not pick order).
+    vector<MTGCard*> uniqueCards;
+    map<int, int> countByCardId;
+    map<int, int> slotByCardId;
+    for (size_t i = 0; i < mHumanPickOrder.size(); i++)
     {
-        MTGCardInstance* ci = NEW MTGCardInstance(mHumanPickOrder[i], NULL);
+        MTGCard* card = mHumanPickOrder[i];
+        int id = card->getMTGId();
+        map<int, int>::iterator it = slotByCardId.find(id);
+        if (it == slotByCardId.end())
+        {
+            slotByCardId[id] = (int) uniqueCards.size();
+            uniqueCards.push_back(card);
+            countByCardId[id] = 1;
+        }
+        else
+        {
+            countByCardId[id]++;
+        }
+    }
+
+    int maxShown = kPoolCols * kPoolMaxRows;
+    int total = (int) uniqueCards.size();
+    int shown = (std::min)(total, maxShown);
+    int startIdx = total - shown;
+
+    for (int i = startIdx; i < total; i++)
+    {
+        MTGCard* card = uniqueCards[i];
+        MTGCardInstance* ci = NEW MTGCardInstance(card, NULL);
         mPoolDisplayInstances.push_back(ci);
-        pool->AddCard(ci);
+        pool->AddCardAt(ci, i - startIdx, countByCardId[card->getMTGId()]);
     }
 }
 
