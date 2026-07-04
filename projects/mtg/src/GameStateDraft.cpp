@@ -34,7 +34,13 @@ class DraftPoolDisplay: public CardDisplay
 {
 public:
     DraftPoolDisplay(int id, int px, int py) :
-        CardDisplay(id, NULL, px, py, NULL, NULL, kPoolCols * kPoolMaxRows)
+        // nb_displayed_items must be the per-row count (kPoolCols), not the
+        // grid's total capacity (kPoolCols*kPoolMaxRows) -- CardDisplay's
+        // constructor clamps x assuming nb_displayed_items cards side by side
+        // in one row (CardDisplay.cpp: "if (x + nb_displayed_items*30+25 >
+        // SCREEN_WIDTH) x = ..."). Passing 28 there clamped x to -385,
+        // silently rendering the whole grid off-screen to the left.
+        CardDisplay(id, NULL, px, py, NULL, NULL, kPoolCols)
     {
     }
 
@@ -162,24 +168,27 @@ void GameStateDraft::refreshPoolDisplay()
     // Collapse duplicates into one thumbnail + an "xN" badge instead of one
     // thumbnail per copy, ordered by when each card was first picked
     // (mHumanPickOrder -- the pool MTGDeck's cards map is keyed/ordered by
-    // card id, not pick order).
+    // card id, not pick order). Dedup by name, not getMTGId(): a set can have
+    // multiple distinct printings/ids sharing the same card name (same
+    // pattern as basic lands having many ids in _cards.dat), so two picks of
+    // the same-named card can land on different ids and dodge an id-keyed dedup.
     vector<MTGCard*> uniqueCards;
-    map<int, int> countByCardId;
-    map<int, int> slotByCardId;
+    map<string, int> countByName;
+    map<string, int> slotByName;
     for (size_t i = 0; i < mHumanPickOrder.size(); i++)
     {
         MTGCard* card = mHumanPickOrder[i];
-        int id = card->getMTGId();
-        map<int, int>::iterator it = slotByCardId.find(id);
-        if (it == slotByCardId.end())
+        const string& name = card->data->name;
+        map<string, int>::iterator it = slotByName.find(name);
+        if (it == slotByName.end())
         {
-            slotByCardId[id] = (int) uniqueCards.size();
+            slotByName[name] = (int) uniqueCards.size();
             uniqueCards.push_back(card);
-            countByCardId[id] = 1;
+            countByName[name] = 1;
         }
         else
         {
-            countByCardId[id]++;
+            countByName[name]++;
         }
     }
 
@@ -193,7 +202,7 @@ void GameStateDraft::refreshPoolDisplay()
         MTGCard* card = uniqueCards[i];
         MTGCardInstance* ci = NEW MTGCardInstance(card, NULL);
         mPoolDisplayInstances.push_back(ci);
-        pool->AddCardAt(ci, i - startIdx, countByCardId[card->getMTGId()]);
+        pool->AddCardAt(ci, i - startIdx, countByName[card->data->name]);
     }
 }
 
