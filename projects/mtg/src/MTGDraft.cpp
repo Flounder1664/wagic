@@ -12,6 +12,9 @@
 #include "MTGDefinitions.h"
 #include "DebugRoutines.h"
 #include "JFileSystem.h"
+#ifdef TESTSUITE
+#include "GameOptions.h"
+#endif
 
 DraftSeat::DraftSeat(int seatId, bool isBot, MTGAllCards* database) :
     mSeatId(seatId), mIsBot(isBot), mTotalPicks(0)
@@ -580,6 +583,41 @@ bool runDraftEngineSmokeTest()
             }
             SAFE_DELETE(built);
         }
+    }
+
+    // Verify the in-memory option-set mechanism GameStateDraft::
+    // materializeDecks() relies on to force simple mana / visible closed hand
+    // in the draft profile. read() the same label strings and confirm the
+    // resulting enum value round-trips -- if this fails the deployed draft
+    // profile would silently keep GameOptions defaults (fancy mana, invisible
+    // hand), which is exactly the bug this guards against.
+    {
+        int savedMana = options[Options::MANADISPLAY].number;
+        int savedHand = options[Options::CLOSEDHAND].number;
+
+        options[Options::MANADISPLAY].read("Simple");
+        options[Options::CLOSEDHAND].read("visible");
+
+        if (options[Options::MANADISPLAY].number != OptionManaDisplay::STATIC)
+        {
+            DebugTrace("[DraftSmokeTest] FAILED: MANADISPLAY read(\"Simple\") gave "
+                    << options[Options::MANADISPLAY].number << ", expected " << OptionManaDisplay::STATIC);
+            ok = false;
+        }
+        if (options[Options::CLOSEDHAND].number != OptionClosedHand::VISIBLE)
+        {
+            DebugTrace("[DraftSmokeTest] FAILED: CLOSEDHAND read(\"visible\") gave "
+                    << options[Options::CLOSEDHAND].number << ", expected " << OptionClosedHand::VISIBLE);
+            ok = false;
+        }
+
+        // restore so the test doesn't mutate the harness profile's live options
+        options[Options::MANADISPLAY].number = savedMana;
+        options[Options::CLOSEDHAND].number = savedHand;
+
+        if (ok)
+            DebugTrace("[DraftSmokeTest] option read() mechanism OK (Simple->" << OptionManaDisplay::STATIC
+                    << ", visible->" << OptionClosedHand::VISIBLE << ")");
     }
 
     if (ok)

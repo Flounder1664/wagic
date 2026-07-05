@@ -436,41 +436,43 @@ void GameStateDraft::materializeDecks()
         fs->Remove(stale);
     }
 
-    // Carry the player's real settings (mana symbol style, hand open/close,
-    // key bindings, interrupt settings, tutorial-seen flags, etc.) into the
-    // fresh temp profile instead of leaving it on GameOptions defaults --
-    // otherwise the draft matches show every tutorial popup, fancy mana, no
-    // closed hand, etc.
+    // Give the temp draft profile sensible settings instead of raw
+    // GameOptions defaults (which show fancy mana, an invisible closed hand,
+    // and every tutorial popup during the draft's matches).
     //
-    // Earlier attempts copied the source options.txt to the temp profile's
-    // options.txt and reloaded, but that fought reloadProfile()'s own
-    // save-during-load (checkProfile() -> createProfileFolders() ->
-    // profileOptions->save()) which rewrites the file from the in-memory
-    // options, so the exact on-disk bytes never survived intact. This
-    // instead applies the values directly to the live options object in
-    // memory, which is what actually drives the game, and lets the normal
-    // save() persist them:
-    //   1. snapshot the source options.txt while the real profile is active
-    //   2. switch to the temp profile + reloadProfile (temp now live)
-    //   3. parse the snapshot and apply each recognized option to the live
-    //      object via options[id].read(val) -- immune to newline/encoding
-    //      issues since it never round-trips through a text-mode file write;
-    //      the unknown keys (tuto_*, unlocked_*, prx_*, aw_*) also land in
-    //      the live object's own unknownMap the same way GameOptions::load
-    //      does, so tutorial-seen flags carry too
-    //   4. save() once to persist the temp profile
+    // Two parts, in order:
+    //   A. best-effort carry of the *real* profile's settings (key bindings,
+    //      interrupt settings, tutorial-seen flags, etc.) applied directly to
+    //      the live in-memory options -- immune to the newline/reload-resave
+    //      issues that sank every file-copy attempt, since nothing depends on
+    //      on-disk bytes being read back.
+    //   B. force the two display options the player specifically wanted
+    //      (simple mana, visible closed hand) AFTER the carry, so they're
+    //      correct even if the carry read nothing.
+    //
+    // The real profile is whatever's active now -- but never let it be the
+    // temp profile itself. If a previous draft left the player stuck on
+    // WagicDraftTemp (the old restore bug), reading settings from it and, worse,
+    // setting the restore target back to it, would cascade: empty carry, and
+    // never returning to a real profile. Treat that case as "no known real
+    // profile" and restore to the default profile ("") instead.
+    string realProfile = options[Options::ACTIVE_PROFILE].str;
+    if (realProfile == string(kDraftProfileName))
+        realProfile = "";
+
     string originalSettings;
     JFileSystem::GetInstance()->readIntoString(options.profileFile(PLAYER_SETTINGS), originalSettings);
-    DebugTrace("[Draft] read " << originalSettings.size() << " bytes of source profile settings");
+    DebugTrace("[Draft] carrying settings from profile '" << realProfile << "' (" << originalSettings.size() << " bytes)");
 
     // See GameApp.h -- GameStateMenu::Start() switches back to this once the
     // tournament ends or the player quits back to the main menu.
-    GameApp::pendingProfileRestoreValue = options[Options::ACTIVE_PROFILE].str;
+    GameApp::pendingProfileRestoreValue = realProfile;
     GameApp::pendingProfileRestore = true;
 
     options[Options::ACTIVE_PROFILE] = string(kDraftProfileName);
     options.reloadProfile();
 
+    // A. best-effort carry
     if (originalSettings.size())
     {
         std::stringstream stream(originalSettings);
@@ -498,8 +500,13 @@ void GameStateDraft::materializeDecks()
             else if (id == INVALID_OPTION)
                 options[name].read(val); // unknown keys (tuto_*, unlocked_*, ...)
         }
-        options.save();
     }
+
+    // B. guaranteed display defaults (must match the label strings in
+    // OptionManaDisplay/OptionClosedHand, GameOptions.cpp)
+    options[Options::MANADISPLAY].read("Simple");
+    options[Options::CLOSEDHAND].read("visible");
+    options.save();
 
     GameApp::pendingDraftBotDeckIds.clear();
     int botSlot = kDraftBotDeckIdBase;
