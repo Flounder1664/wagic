@@ -364,16 +364,16 @@ void GameStateDraft::Start()
     if (!mPack)
     {
         mPack = NEW MTGPack();
-        mPack->load("packs/ecl_draft_booster.txt");
+        mPack->load("packs/draft_booster.txt");
         if (!mPack->isValid())
-            mPack->load("Res/packs/ecl_draft_booster.txt"); // see MTGDraft.cpp's smoke test: some
+            mPack->load("Res/packs/draft_booster.txt"); // see MTGDraft.cpp's smoke test: some
                                                               // run configurations resolve resource
                                                               // paths relative to a folder above Res/
     }
 
     if (!mPack->isValid())
     {
-        mLoadError = "Draft pack failed to load: packs/ecl_draft_booster.txt";
+        mLoadError = "Draft pack failed to load: packs/draft_booster.txt";
         DebugTrace("[Draft] " << mLoadError);
         return;
     }
@@ -436,8 +436,32 @@ void GameStateDraft::materializeDecks()
         fs->Remove(stale);
     }
 
+    // Carry the player's real settings (mana symbol style, key bindings,
+    // interrupt settings, tutorial-seen flags, etc.) into the fresh temp
+    // profile instead of leaving it on GameOptions defaults, which is why
+    // first-draft testing showed every tutorial popup again. Read before
+    // switching profiles (profileFile() resolves against whichever profile
+    // is currently active), then copy into the temp profile's own
+    // options.txt once it's active, and reload again so the copied settings
+    // actually take effect -- reloadProfile() only reads whatever file
+    // exists at the time it's called.
+    string originalSettingsPath = options.profileFile(PLAYER_SETTINGS);
+    string originalSettings;
+    JFileSystem::GetInstance()->readIntoString(originalSettingsPath, originalSettings);
+
     options[Options::ACTIVE_PROFILE] = string(kDraftProfileName);
     options.reloadProfile();
+
+    if (originalSettings.size())
+    {
+        std::ofstream settingsFile;
+        if (JFileSystem::GetInstance()->openForWrite(settingsFile, options.profileFile(PLAYER_SETTINGS)))
+        {
+            settingsFile << originalSettings;
+            settingsFile.close();
+            options.reloadProfile();
+        }
+    }
 
     GameApp::pendingDraftBotDeckIds.clear();
     int botSlot = kDraftBotDeckIdBase;

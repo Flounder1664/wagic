@@ -480,7 +480,7 @@ MTGDeck* DraftDeckBuilder::buildDeck(DraftSeat* seat, MTGAllCards* database, int
 bool runDraftEngineSmokeTest()
 {
     MTGPack pack;
-    pack.load("packs/ecl_draft_booster.txt");
+    pack.load("packs/draft_booster.txt");
     if (!pack.isValid())
     {
         // The WSL console test harness runs with cwd=projects/mtg/bin, one level
@@ -488,11 +488,11 @@ bool runDraftEngineSmokeTest()
         // path that the shipped game (and MTGPacks::loadAll()) resolves correctly.
         // Real gameplay never hits this fallback; it's here only so the smoke
         // test runs the same way under the harness as it will in the shipped game.
-        pack.load("Res/packs/ecl_draft_booster.txt");
+        pack.load("Res/packs/draft_booster.txt");
     }
     if (!pack.isValid())
     {
-        DebugTrace("[DraftSmokeTest] FAILED: ecl_draft_booster.txt did not load from either path");
+        DebugTrace("[DraftSmokeTest] FAILED: draft_booster.txt did not load from either path");
         return false;
     }
 
