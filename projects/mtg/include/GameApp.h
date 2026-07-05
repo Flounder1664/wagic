@@ -93,6 +93,17 @@ public:
     static bool pendingDraftTournament;
     static int pendingDraftHumanDeckId;
     static vector<int> pendingDraftBotDeckIds;
+
+    // Set by GameStateDraft to the player's real ACTIVE_PROFILE value right
+    // before switching to the temp draft profile; consumed by
+    // GameStateMenu::Start() (reached both when the tournament finishes
+    // normally and when the player quits mid-tournament back to the main
+    // menu -- one hook catches both exits rather than needing a second one
+    // inside GameStateDuel). Empty string means "nothing pending" -- also
+    // the correct value when no profile was active to begin with, since
+    // ACTIVE_PROFILE's own default is "".
+    static bool pendingProfileRestore;
+    static string pendingProfileRestoreValue;
 };
 
 extern vector<JQuadPtr> manaIcons;

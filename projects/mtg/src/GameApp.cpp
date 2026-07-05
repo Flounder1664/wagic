@@ -39,6 +39,8 @@ PlayerType GameApp::players[] = { PLAYER_TYPE_CPU, PLAYER_TYPE_CPU };
 bool GameApp::pendingDraftTournament = false;
 int GameApp::pendingDraftHumanDeckId = 0;
 vector<int> GameApp::pendingDraftBotDeckIds;
+bool GameApp::pendingProfileRestore = false;
+string GameApp::pendingProfileRestoreValue = "";
 bool GameApp::HasMusic = true;
 JMusic * GameApp::music = NULL;
 string GameApp::currentMusicFile = "";

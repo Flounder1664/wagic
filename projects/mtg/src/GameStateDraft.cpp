@@ -449,6 +449,11 @@ void GameStateDraft::materializeDecks()
     string originalSettings;
     JFileSystem::GetInstance()->readIntoString(originalSettingsPath, originalSettings);
 
+    // See GameApp.h -- GameStateMenu::Start() switches back to this once the
+    // tournament ends or the player quits back to the main menu.
+    GameApp::pendingProfileRestoreValue = options[Options::ACTIVE_PROFILE].str;
+    GameApp::pendingProfileRestore = true;
+
     options[Options::ACTIVE_PROFILE] = string(kDraftProfileName);
     options.reloadProfile();
 

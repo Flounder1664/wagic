@@ -137,6 +137,21 @@ void GameStateMenu::Destroy()
 void GameStateMenu::Start()
 {
     LOG("GameStateMenu::Start");
+
+    // See GameApp.h -- restores whatever profile was active before
+    // GameStateDraft switched to the temp draft profile, whether we got here
+    // by finishing the whole tournament or quitting mid-tournament back to
+    // the main menu. Both paths end up at GAME_STATE_MENU, so this one hook
+    // catches both instead of needing a second one inside GameStateDuel.
+    if (GameApp::pendingProfileRestore)
+    {
+        options[Options::ACTIVE_PROFILE] = GameApp::pendingProfileRestoreValue;
+        options.reloadProfile();
+        GameApp::pendingProfileRestore = false;
+        GameApp::pendingProfileRestoreValue = "";
+        genNbCardsStr();
+    }
+
     JRenderer::GetInstance()->EnableVSync(true);
     subMenuController = NULL;
     SAFE_DELETE(mGuiController);
