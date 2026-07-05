@@ -436,18 +436,32 @@ void GameStateDraft::materializeDecks()
         fs->Remove(stale);
     }
 
-    // Carry the player's real settings (mana symbol style, key bindings,
-    // interrupt settings, tutorial-seen flags, etc.) into the fresh temp
-    // profile instead of leaving it on GameOptions defaults, which is why
-    // first-draft testing showed every tutorial popup again. Read before
-    // switching profiles (profileFile() resolves against whichever profile
-    // is currently active), then copy into the temp profile's own
-    // options.txt once it's active, and reload again so the copied settings
-    // actually take effect -- reloadProfile() only reads whatever file
-    // exists at the time it's called.
-    string originalSettingsPath = options.profileFile(PLAYER_SETTINGS);
+    // Carry the player's real settings (mana symbol style, hand open/close,
+    // key bindings, interrupt settings, tutorial-seen flags, etc.) into the
+    // fresh temp profile instead of leaving it on GameOptions defaults --
+    // otherwise the draft matches show every tutorial popup, fancy mana, no
+    // closed hand, etc.
+    //
+    // Earlier attempts copied the source options.txt to the temp profile's
+    // options.txt and reloaded, but that fought reloadProfile()'s own
+    // save-during-load (checkProfile() -> createProfileFolders() ->
+    // profileOptions->save()) which rewrites the file from the in-memory
+    // options, so the exact on-disk bytes never survived intact. This
+    // instead applies the values directly to the live options object in
+    // memory, which is what actually drives the game, and lets the normal
+    // save() persist them:
+    //   1. snapshot the source options.txt while the real profile is active
+    //   2. switch to the temp profile + reloadProfile (temp now live)
+    //   3. parse the snapshot and apply each recognized option to the live
+    //      object via options[id].read(val) -- immune to newline/encoding
+    //      issues since it never round-trips through a text-mode file write;
+    //      the unknown keys (tuto_*, unlocked_*, prx_*, aw_*) also land in
+    //      the live object's own unknownMap the same way GameOptions::load
+    //      does, so tutorial-seen flags carry too
+    //   4. save() once to persist the temp profile
     string originalSettings;
-    JFileSystem::GetInstance()->readIntoString(originalSettingsPath, originalSettings);
+    JFileSystem::GetInstance()->readIntoString(options.profileFile(PLAYER_SETTINGS), originalSettings);
+    DebugTrace("[Draft] read " << originalSettings.size() << " bytes of source profile settings");
 
     // See GameApp.h -- GameStateMenu::Start() switches back to this once the
     // tournament ends or the player quits back to the main menu.
@@ -459,23 +473,32 @@ void GameStateDraft::materializeDecks()
 
     if (originalSettings.size())
     {
-        // Binary mode, not the default ios_base::out (text mode): options.txt
-        // already contains \r\n line endings, and a text-mode ofstream on
-        // Windows translates every \n it's given into \r\n -- doubling
-        // \r\n into \r\r\n throughout. That corrupted every string-valued
-        // option (mana_display, closed_hand, FirstPlayer, KickerPay all
-        // vanished from a real comparison of the two files -- their values
-        // failed an exact-match lookup against a trailing stray \r baked
-        // into the value); numeric options (cheatmode=1 etc.) happened to
-        // survive since numeric parsing ignores trailing garbage.
-        std::ofstream settingsFile;
-        if (JFileSystem::GetInstance()->openForWrite(settingsFile, options.profileFile(PLAYER_SETTINGS),
-                std::ios_base::out | std::ios_base::binary))
+        std::stringstream stream(originalSettings);
+        string line;
+        while (std::getline(stream, line))
         {
-            settingsFile << originalSettings;
-            settingsFile.close();
-            options.reloadProfile();
+            if (!line.size())
+                continue;
+            if (line[line.size() - 1] == '\r')
+                line.erase(line.size() - 1); // handle DOS line endings, like GameOptions::load
+            if (!line.size())
+                continue;
+            size_t eq = line.find('=');
+            if (eq == string::npos)
+                continue;
+            string name = line.substr(0, eq);
+            string val = line.substr(eq + 1);
+            int id = Options::getID(name);
+            // Skip the global options (ACTIVE_PROFILE, LANG): applying
+            // ACTIVE_PROFILE from the source would immediately switch us back
+            // off the temp profile. Everything above LAST_GLOBAL is
+            // profile-scoped and safe to carry.
+            if (id != INVALID_OPTION && id > Options::LAST_GLOBAL)
+                options[id].read(val);
+            else if (id == INVALID_OPTION)
+                options[name].read(val); // unknown keys (tuto_*, unlocked_*, ...)
         }
+        options.save();
     }
 
     GameApp::pendingDraftBotDeckIds.clear();
