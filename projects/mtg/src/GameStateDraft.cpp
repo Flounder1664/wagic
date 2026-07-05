@@ -459,8 +459,18 @@ void GameStateDraft::materializeDecks()
 
     if (originalSettings.size())
     {
+        // Binary mode, not the default ios_base::out (text mode): options.txt
+        // already contains \r\n line endings, and a text-mode ofstream on
+        // Windows translates every \n it's given into \r\n -- doubling
+        // \r\n into \r\r\n throughout. That corrupted every string-valued
+        // option (mana_display, closed_hand, FirstPlayer, KickerPay all
+        // vanished from a real comparison of the two files -- their values
+        // failed an exact-match lookup against a trailing stray \r baked
+        // into the value); numeric options (cheatmode=1 etc.) happened to
+        // survive since numeric parsing ignores trailing garbage.
         std::ofstream settingsFile;
-        if (JFileSystem::GetInstance()->openForWrite(settingsFile, options.profileFile(PLAYER_SETTINGS)))
+        if (JFileSystem::GetInstance()->openForWrite(settingsFile, options.profileFile(PLAYER_SETTINGS),
+                std::ios_base::out | std::ios_base::binary))
         {
             settingsFile << originalSettings;
             settingsFile.close();

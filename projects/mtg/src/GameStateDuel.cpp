@@ -355,6 +355,15 @@ void GameStateDuel::setupPendingDraftTournament()
     SAFE_DELETE(deckmenu);
     SAFE_DELETE(opponentMenu);
 
+    // Best of 3 per round, like a real draft pod -- never set explicitly
+    // before, so each match played out as a single game using whatever
+    // mNbGames/mMatchMode the long-lived Tournament object happened to
+    // already have (leftover from the last normal game session). An 8-seat
+    // KO bracket is 3 rounds either way (quarterfinal/semifinal/final --
+    // correct for 8 entrants), so a single-game match made every round of
+    // the whole event resolve in exactly one game each.
+    tournament->setMatchType(3, MATCHMODE_BESTOF);
+
     tournament->addDeck(0, GameApp::pendingDraftHumanDeckId, mParent->players[0]);
     tournament->enableTournamantMode(TOURNAMENTMODES_KO, 1);
     for (size_t i = 0; i < GameApp::pendingDraftBotDeckIds.size(); i++)
