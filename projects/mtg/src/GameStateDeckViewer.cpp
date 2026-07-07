@@ -272,6 +272,23 @@ void GameStateDeckViewer::Start()
     JRenderer::GetInstance()->EnableVSync(true);
 }
 
+void GameStateDeckViewer::exitEditor()
+{
+    if (GameApp::pendingDraftDeckEdit)
+    {
+        // Draft routed through here to let the player tweak their auto-built
+        // deck. Hand off to the KO bracket instead of the main menu.
+        // GameStateDraft already saved deck1 (the starting point / what the
+        // player just edited over) and configured players/gameType/rules; the
+        // tournament reads it via GameStateDuel::setupPendingDraftTournament().
+        GameApp::pendingDraftDeckEdit = false;
+        GameApp::pendingDraftTournament = true;
+        mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DUEL);
+        return;
+    }
+    mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+}
+
 void GameStateDeckViewer::End()
 {
     JRenderer::GetInstance()->EnableVSync(false);
@@ -1889,7 +1906,7 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
         if (controlId == MENU_ITEM_CANCEL)
         {
             if (!mSwitching)
-                mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+                exitEditor();
             else
                 mStage = STAGE_WAITING;
 
@@ -1951,7 +1968,7 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
 
         case MENU_ITEM_SAVE_RETURN_MAIN_MENU:
             saveDeck();
-            mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+            exitEditor();
             break;
 
         case MENU_ITEM_SAVE_RENAME:
@@ -1997,7 +2014,7 @@ void GameStateDeckViewer::ButtonPressed(int controllerId, int controlId)
             mSwitching = true;
             break;
         case MENU_ITEM_MAIN_MENU:
-            mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+            exitEditor();
             break;
         case MENU_ITEM_EDITOR_CANCEL:
             mStage = STAGE_WAITING;

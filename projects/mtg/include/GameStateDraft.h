@@ -60,7 +60,8 @@ private:
     void handleHumanPick(int cardId);
     void logDraftSummary();
     void materializeDecks();
-    void startTournamentMatch();
+    void seedEditorCollection();
+    void enterDeckEditor();
     void openQuitMenu();
     void closeQuitMenu();
 

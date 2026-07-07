@@ -121,6 +121,11 @@ private:
     void insertSideBoard();
     void insertCommandZone();
     void insertDungeonZone();
+    // Normally transitions to the main menu, but if a draft is routing through
+    // the editor (GameApp::pendingDraftDeckEdit) it hands off to the draft
+    // tournament instead. Replaces the bare GAME_STATE_MENU transitions at the
+    // editor's exit points so both flows funnel through one place.
+    void exitEditor();
 public:
     GameStateDeckViewer(GameApp* parent);
     virtual ~GameStateDeckViewer();

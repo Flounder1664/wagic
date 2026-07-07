@@ -538,17 +538,54 @@ void GameStateDraft::materializeDecks()
     }
 }
 
-void GameStateDraft::startTournamentMatch()
+// Populate the temp draft profile's collection.dat with exactly the human's
+// drafted pool plus a stock of basic lands, so the reused deck editor
+// (GameStateDeckViewer reads playerdata->collection from the active profile)
+// shows only what was drafted -- the player can't add cards they didn't
+// draft, but has enough basics to build any mana base. Must run after
+// materializeDecks() has switched to the temp profile.
+void GameStateDraft::seedEditorCollection()
 {
-    materializeDecks();
+    DraftSeat* human = mSession->getSeat(mHumanSeatId);
+    if (!human || !human->getPool())
+        return;
 
+    MTGDeck* collection = NEW MTGDeck(MTGCollection());
+    collection->add(human->getPool()); // every drafted card, with its counts
+
+    const int kBasicsPerColor = 30; // plenty for any 40-card mana base
+    for (int c = Constants::MTG_COLOR_GREEN; c <= Constants::MTG_COLOR_WHITE; c++)
+    {
+        MTGCard* land = DraftDeckBuilder::getBasicLand(MTGCollection(), c);
+        if (!land)
+            continue;
+        for (int i = 0; i < kBasicsPerColor; i++)
+            collection->add(land);
+    }
+
+    collection->save(options.profileFile(PLAYER_COLLECTION), false, "collection", "");
+    DebugTrace("[Draft] seeded editor collection with " << collection->totalCards() << " cards");
+    SAFE_DELETE(collection);
+}
+
+void GameStateDraft::enterDeckEditor()
+{
+    // Saves the auto-built human deck1 + bot decks and switches to the temp
+    // profile; seedEditorCollection() then fills that profile's collection so
+    // the editor is scoped to the drafted pool.
+    materializeDecks();
+    seedEditorCollection();
+
+    // Pre-configure everything the tournament needs now, while we have the
+    // context -- none of it changes while the player edits, and it means the
+    // editor's exit only has to flip pendingDraftTournament and transition.
     GameApp::players[0] = PLAYER_TYPE_HUMAN;
     GameApp::players[1] = PLAYER_TYPE_CPU;
     mParent->gameType = GAME_TYPE_CLASSIC;
     mParent->rules = Rules::getRulesByFilename("classic.txt");
-    GameApp::pendingDraftTournament = true;
 
-    mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DUEL);
+    GameApp::pendingDraftDeckEdit = true;
+    mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DECK_VIEWER);
 }
 
 void GameStateDraft::handleHumanPick(int cardId)
@@ -599,7 +636,7 @@ void GameStateDraft::Update(float dt)
     if (mDraftComplete)
     {
         if (btn == JGE_BTN_OK)
-            startTournamentMatch();
+            enterDeckEditor();
         else if (btn == JGE_BTN_SEC || btn == JGE_BTN_MENU)
             mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
         return;
@@ -706,7 +743,8 @@ void GameStateDraft::Render()
         if (font)
         {
             font->DrawString("Draft complete!", 10.0f, 10.0f);
-            font->DrawString("OK: play your KO bracket now   SEC/MENU: return to the main menu", 10.0f, 30.0f);
+            font->DrawString("OK: edit your deck, then play the KO bracket   SEC/MENU: return to the main menu", 10.0f,
+                    30.0f);
         }
     }
 

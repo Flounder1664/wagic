@@ -183,7 +183,8 @@ class DraftDeckBuilder
 public:
     static MTGDeck* buildDeck(DraftSeat* seat, MTGAllCards* database, int deckSize = 40, int numLands = 17);
 
-private:
+    // Public so GameStateDraft can seed the deck-editor collection with basic
+    // lands (the drafted pool has none). mtgColor is Constants::MTG_COLOR_*.
     static MTGCard* getBasicLand(MTGAllCards* database, int mtgColor);
 };
 

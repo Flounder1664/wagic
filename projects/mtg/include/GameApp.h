@@ -94,6 +94,13 @@ public:
     static int pendingDraftHumanDeckId;
     static vector<int> pendingDraftBotDeckIds;
 
+    // Set by GameStateDraft before transitioning to GAME_STATE_DECK_VIEWER so
+    // the human can tweak their auto-built draft deck before the bracket.
+    // Consumed by GameStateDeckViewer: while set, the editor's exit routes
+    // into the draft tournament (sets pendingDraftTournament + transitions to
+    // GAME_STATE_DUEL) instead of back to the main menu.
+    static bool pendingDraftDeckEdit;
+
     // Set by GameStateDraft to the player's real ACTIVE_PROFILE value right
     // before switching to the temp draft profile; consumed by
     // GameStateMenu::Start() (reached both when the tournament finishes
