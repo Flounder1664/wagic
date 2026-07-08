@@ -330,6 +330,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Counters.cpp" />
+    <ClCompile Include="src\CrashLog.cpp" />
     <ClCompile Include="src\Credits.cpp" />
     <ClCompile Include="src\Damage.cpp" />
     <ClCompile Include="src\DamagerDamaged.cpp" />
@@ -488,6 +489,7 @@
     <ClInclude Include="include\CarouselDeckView.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\Counters.h" />
+    <ClInclude Include="include\CrashLog.h" />
     <ClInclude Include="include\Credits.h" />
     <ClInclude Include="include\Damage.h" />
     <ClInclude Include="include\DamagerDamaged.h" />

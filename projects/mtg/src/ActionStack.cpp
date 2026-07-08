@@ -16,7 +16,10 @@ The Action Stack contains all information for Game Events that can be interrupte
 #include "ModRules.h"
 #include "AllAbilities.h"
 #include "CardSelector.h"
+#include "CrashLog.h"
+#include "MTGCardInstance.h"
 #include <typeinfo>
+#include <sstream>
 
 namespace
 {
@@ -917,6 +920,22 @@ int ActionStack::resolve()
         return 0;
 
     DebugTrace("Resolving Action on stack: " << action->getDisplayName());
+
+    // Crash breadcrumb (see CrashLog.h): action->resolve() runs card-defined
+    // effect code and is the most crash-prone spot in the engine. Record what
+    // is about to resolve, and the source card, so an unhandled exception can
+    // name the card to fix rather than closing silently.
+    {
+        std::ostringstream crumb;
+        crumb << "turn " << (observer ? observer->turn : -1);
+        if (observer)
+            crumb << " " << observer->getCurrentGamePhaseName();
+        crumb << ": resolving '" << action->getDisplayName() << "'";
+        if (action->source)
+            crumb << " [source card: " << action->source->name << "]";
+        CrashLog::setBreadcrumb(crumb.str());
+    }
+
     if (action->resolve())
     {
         action->state = RESOLVED_OK;

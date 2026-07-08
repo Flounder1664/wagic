@@ -12,6 +12,7 @@
 #include "WResourceManager.h"
 #include "ExtraCost.h"
 #include "GameApp.h"
+#include "CrashLog.h"
 #include "Subtypes.h"
 #include "GameStateTransitions.h"
 #include "GameStateDeckViewer.h"
@@ -107,6 +108,7 @@ void GameApp::Create()
 #endif
 #endif //QT_CONFIG
     //_CrtSetBreakAlloc(368);
+    CrashLog::install(); // capture card-ability crashes to crash_log.txt (see CrashLog.h)
     LOG("starting Game");
 
     string systemFolder = "Res/";

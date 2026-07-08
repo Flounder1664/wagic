@@ -45,6 +45,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/CardSelector.cpp \
         $(MTG_PATH)/src/CardSelectorSingleton.cpp \
         $(MTG_PATH)/src/Counters.cpp \
+        $(MTG_PATH)/src/CrashLog.cpp \
         $(MTG_PATH)/src/Credits.cpp \
         $(MTG_PATH)/src/Damage.cpp \
         $(MTG_PATH)/src/DamagerDamaged.cpp \

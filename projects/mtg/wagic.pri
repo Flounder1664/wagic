@@ -69,6 +69,7 @@ SOURCES += \
         src/CarouselDeckView.cpp\
         src/Closest.cpp\
         src/Counters.cpp\
+        src/CrashLog.cpp\
         src/Credits.cpp\
         src/Damage.cpp\
         src/DamagerDamaged.cpp\
@@ -250,6 +251,7 @@ HEADERS  += \
         include/GuiCombat.h\
         include/Player.h\
         include/utils.h\
+        include/CrashLog.h\
         include/Credits.h\
         include/GuiFrame.h\
         include/PlayGuiObjectController.h\
