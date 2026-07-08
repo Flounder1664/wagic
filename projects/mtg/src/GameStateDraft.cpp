@@ -41,6 +41,15 @@ const int kPoolMaxRows = 4;
 const int kDraftQuitMenuId = 500;
 const int kDraftQuitMenuResume = 1;
 const int kDraftQuitMenuConfirm = 2;
+const int kDraftSetMenuId = 501;
+const int kDraftSetMenuCancel = -1; // matches kCancelMenuID; set ids are >= 0 so no collision
+// A set needs at least this many cards per rarity to draft the 1 rare /
+// 3 uncommon / 10 common pack with reasonable variety. Marginal sets don't
+// crash (MTGPackSlot::add just yields a smaller pack), but a healthy margin
+// keeps picks interesting.
+const int kMinCommons = 15;
+const int kMinUncommons = 6;
+const int kMinRares = 3;
 const float kPoolColStep = 30.0f;
 const float kPoolRowStep = 45.0f;
 
@@ -201,7 +210,11 @@ GameStateDraft::GameStateDraft(GameApp* parent) :
     mPackDisplay = NULL;
     mPoolDisplay = NULL;
     mQuitMenu = NULL;
+    mSetMenu = NULL;
     mHumanSeatId = 0;
+    mSelectingSet = false;
+    mChosenSetId = 0;
+    mSetChosen = false;
     mDraftComplete = false;
     mReviewingPool = false;
     mQuitConfirmed = false;
@@ -222,6 +235,7 @@ void GameStateDraft::Destroy()
     SAFE_DELETE(mPackDisplay);
     SAFE_DELETE(mPoolDisplay);
     SAFE_DELETE(mQuitMenu);
+    SAFE_DELETE(mSetMenu);
     SAFE_DELETE(mSession);
     SAFE_DELETE(mPack);
 }
@@ -243,18 +257,23 @@ void GameStateDraft::closeQuitMenu()
 
 void GameStateDraft::ButtonPressed(int controllerId, int controlId)
 {
-    if (controllerId != kDraftQuitMenuId || !mQuitMenu)
-        return;
-
-    // ButtonPressed() runs from inside mQuitMenu->CheckUserInput() -- deleting
-    // mQuitMenu here (as a previous version of this did) deletes the object
-    // out from under its own still-running call, a use-after-free that
-    // crashed on "Quit to Main Menu". SimpleMenu::Close() (SimpleMenu.cpp:
-    // 368-372) only sets a flag/starts a brief close animation; the actual
-    // delete happens later in Update(), once isClosed() is true and we're no
-    // longer anywhere on mQuitMenu's own call stack.
-    mQuitConfirmed = (controlId == kDraftQuitMenuConfirm);
-    mQuitMenu->Close();
+    // ButtonPressed() runs from inside the menu's own CheckUserInput() --
+    // deleting the menu here (as a previous version did) frees the object out
+    // from under its still-running call, a use-after-free. So just record the
+    // choice; Update() acts on it once we're off the menu's call stack.
+    if (controllerId == kDraftQuitMenuId && mQuitMenu)
+    {
+        // SimpleMenu::Close() (SimpleMenu.cpp:368-372) only starts a brief
+        // close animation; the actual delete happens later in Update() once
+        // isClosed() is true.
+        mQuitConfirmed = (controlId == kDraftQuitMenuConfirm);
+        mQuitMenu->Close();
+    }
+    else if (controllerId == kDraftSetMenuId && mSetMenu)
+    {
+        mChosenSetId = controlId;
+        mSetChosen = true;
+    }
 }
 
 void GameStateDraft::clearDisplayInstances()
@@ -356,11 +375,15 @@ void GameStateDraft::Start()
     mHumanSeatId = 0;
     mReviewingPool = false;
     mQuitConfirmed = false;
+    mSetChosen = false;
     closeQuitMenu();
     mHumanPickOrder.clear();
 
     mLoadError = "";
 
+    // The rarity-slot template (1 rare / 3 uncommon / 10 common). Its own pool
+    // set is irrelevant -- beginDraftWithSet() overrides it per chosen set via
+    // MTGPack::setPool().
     if (!mPack)
     {
         mPack = NEW MTGPack();
@@ -378,6 +401,42 @@ void GameStateDraft::Start()
         return;
     }
 
+    buildSetMenu();
+    mSelectingSet = true;
+}
+
+void GameStateDraft::buildSetMenu()
+{
+    SAFE_DELETE(mSetMenu);
+    mSetMenu = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), kDraftSetMenuId, this, Fonts::MENU_FONT,
+            SCREEN_WIDTH / 2 - 100, 20, "Choose a set to draft");
+
+    for (int i = 0; i < setlist.size(); i++)
+    {
+        MTGSetInfo* info = setlist.getInfo(i);
+        if (!info)
+            continue;
+        if (info->counts[MTGSetInfo::COMMON] >= kMinCommons && info->counts[MTGSetInfo::UNCOMMON] >= kMinUncommons
+                && info->counts[MTGSetInfo::RARE] >= kMinRares)
+        {
+            // Item id is the set id itself (>= 0); ButtonPressed reads it back
+            // directly. Label with the long name plus the short code.
+            string label = info->getName();
+            if (label != info->id)
+                label += " (" + info->id + ")";
+            mSetMenu->Add(i, label.c_str());
+        }
+    }
+
+    mSetMenu->Add(kDraftSetMenuCancel, "Cancel");
+}
+
+void GameStateDraft::beginDraftWithSet(int setId)
+{
+    string code = setlist[setId];
+    mPack->setPool("all set:" + code + ";");
+    DebugTrace("[Draft] drafting set " << code);
+
     SAFE_DELETE(mSession);
     mSession = NEW DraftSession(8, MTGCollection(), 3, 14);
     mSession->setPackTemplate(mPack);
@@ -390,7 +449,7 @@ void GameStateDraft::Start()
 
     if (mDisplayInstances.empty())
     {
-        mLoadError = "Draft pack loaded but produced 0 cards (check pool filter / set id)";
+        mLoadError = "Draft pack loaded but produced 0 cards for set " + code;
         DebugTrace("[Draft] " << mLoadError);
     }
 }
@@ -626,6 +685,29 @@ void GameStateDraft::Update(float dt)
 {
     JButton btn = mEngine->ReadButton();
 
+    if (mSelectingSet)
+    {
+        if (mSetMenu)
+        {
+            mSetMenu->CheckUserInput(btn);
+            mSetMenu->Update(dt);
+        }
+        // mSetChosen is set by ButtonPressed (from inside CheckUserInput);
+        // act on it here, off the menu's call stack, so deleting mSetMenu is safe.
+        if (mSetChosen)
+        {
+            mSetChosen = false;
+            mSelectingSet = false;
+            int chosen = mChosenSetId;
+            SAFE_DELETE(mSetMenu);
+            if (chosen == kDraftSetMenuCancel)
+                mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+            else
+                beginDraftWithSet(chosen);
+        }
+        return;
+    }
+
     if (!mSession)
     {
         if (btn == JGE_BTN_OK || btn == JGE_BTN_SEC || btn == JGE_BTN_MENU)
@@ -706,6 +788,13 @@ void GameStateDraft::Update(float dt)
 
 void GameStateDraft::Render()
 {
+    if (mSelectingSet)
+    {
+        if (mSetMenu)
+            mSetMenu->Render();
+        return;
+    }
+
     if (mPoolDisplay)
         ((DraftPoolDisplay*) mPoolDisplay)->Render();
 

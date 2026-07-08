@@ -64,16 +64,22 @@ private:
     void enterDeckEditor();
     void openQuitMenu();
     void closeQuitMenu();
+    void buildSetMenu();
+    void beginDraftWithSet(int setId);
 
     DraftSession* mSession;
     MTGPack* mPack;
     CardDisplay* mPackDisplay; // the current pack, interactive
     CardDisplay* mPoolDisplay; // cards picked so far this draft -- browsable in review mode
     SimpleMenu* mQuitMenu; // confirm before actually leaving to the main menu
+    SimpleMenu* mSetMenu; // choose which set to draft, shown before the first pack
     std::vector<MTGCardInstance*> mDisplayInstances;
     std::vector<MTGCardInstance*> mPoolDisplayInstances;
     std::vector<MTGCard*> mHumanPickOrder; // not owned -- cards live in MTGCollection()
     int mHumanSeatId;
+    bool mSelectingSet; // true while the set-selection menu is up, before drafting
+    int mChosenSetId; // set by ButtonPressed(), acted on next Update() (avoid delete-in-callback)
+    bool mSetChosen;
     bool mDraftComplete;
     bool mReviewingPool; // toggles between picking and browsing the pool
     bool mQuitConfirmed; // set by ButtonPressed(), acted on later once mQuitMenu->isClosed()
