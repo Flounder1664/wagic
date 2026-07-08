@@ -10,8 +10,12 @@
 #include "GuiHand.h"
 #include "GuiPlay.h"
 #include "GuiMana.h"
+#include "GuiStatic.h"
 #include "Trash.h"
 #include "DuelLayers.h"
+#include "MTGDeck.h"
+#include "WResourceManager.h"
+#include "GameApp.h"
 
 void DuelLayers::CheckUserInput(int isAI)
 {
@@ -24,6 +28,11 @@ void DuelLayers::CheckUserInput(int isAI)
     {
         if ((!isAI) && ((0 != key) ||  jge->GetLeftClickCoordinates(x, y)))
         {
+            if (key == JGE_BTN_TAGBUG) {
+                TagBuggyCard();
+                jge->LeftClickedProcessed();
+                break;
+            }
             if (stack->CheckUserInput(key)) {
                 jge->LeftClickedProcessed();
                 break;
@@ -53,10 +62,86 @@ void DuelLayers::CheckUserInput(int isAI)
     }
 }
 
+// Append a note about the currently-selected card to bugreports.txt, capturing
+// enough game state to reproduce a misbehaving card later. Triggered by the
+// JGE_BTN_TAGBUG hotkey (T on the PC build). Flags the card under the selection
+// cursor (hand or battlefield); if the cursor is on a zone pile it logs the pile
+// so the keypress is never a silent no-op.
+void DuelLayers::TagBuggyCard()
+{
+    MTGCardInstance* card = NULL;
+    string pileDesc;
+
+    PlayGuiObject* sel = mCardSelector ? mCardSelector->getActiveObject() : NULL;
+    if (CardGui* cg = dynamic_cast<CardGui*>(sel))
+        card = cg->card;
+    else if (GuiGameZone* gz = dynamic_cast<GuiGameZone*>(sel))
+    {
+        if (gz->zone)
+        {
+            char buf[128];
+            sprintf(buf, "%s (%d cards)", gz->zone->getName(), gz->zone->nb_cards);
+            pileDesc = buf;
+        }
+    }
+
+    if (!card && pileDesc.empty())
+    {
+        mTagMessage = "Nothing selected to flag";
+        mTagMessageTimer = 2.0f;
+        return;
+    }
+
+    // Debounce: don't re-log the same card while its confirmation is still up.
+    if (card && card == mLastTagged && mTagMessageTimer > 0.0f)
+        return;
+
+    std::ofstream file;
+    if (JFileSystem::GetInstance()->openForWrite(file, "bugreports.txt", ios_base::app))
+    {
+        file << "==== BUG FLAG ====" << std::endl;
+        file << "turn " << observer->turn
+             << ", phase " << observer->getCurrentGamePhaseName() << std::endl;
+        if (card)
+        {
+            int ctrl = -1;
+            for (int i = 0; i < observer->getPlayersNumber(); ++i)
+                if (observer->getPlayer(i) == card->controller()) ctrl = i;
+
+            file << "card: " << card->getName()
+                 << " [id " << card->getId()
+                 << ", set " << setlist[card->setId] << "]" << std::endl;
+            file << "zone: " << (card->getCurrentZone() ? card->getCurrentZone()->getName() : "?")
+                 << ", controller: player " << ctrl << std::endl;
+            file << "power/toughness: " << card->getCurrentPower() << "/" << card->getCurrentToughness()
+                 << " (printed " << card->getPower() << "/" << card->getToughness() << ")" << std::endl;
+            file << "tapped: " << (card->isTapped() ? "yes" : "no") << std::endl;
+        }
+        else
+        {
+            file << "zone pile: " << pileDesc << std::endl;
+        }
+        file << std::endl;
+        file.close();
+
+        mTagMessage = card ? (string("Flagged: ") + card->getName())
+                           : (string("Flagged pile: ") + pileDesc);
+        mLastTagged = card;
+    }
+    else
+    {
+        mTagMessage = "Could not write bugreports.txt";
+    }
+    mTagMessageTimer = 2.5f;
+}
+
 void DuelLayers::Update(float dt, Player * currentPlayer)
 {
     for (int i = 0; i < nbitems; ++i)
         objects[i]->Update(dt);
+
+    if (mTagMessageTimer > 0.0f)
+        mTagMessageTimer -= dt;
 
     int isAI = currentPlayer->isAI() || currentPlayer != getObserver()->players[mPlayerViewIndex]; // Fix for 2 players hand.
     if (isAI && !currentPlayer->getObserver()->isLoading())
@@ -86,7 +171,7 @@ GuiAvatars * DuelLayers::GetAvatars()
 }
 
 DuelLayers::DuelLayers(GameObserver* go, int playerViewIndex) :
-    nbitems(0), mPlayerViewIndex(playerViewIndex)
+    nbitems(0), mPlayerViewIndex(playerViewIndex), mTagMessageTimer(0.0f), mLastTagged(NULL)
 {
     observer = go;
     observer->mLayers = this;
@@ -155,6 +240,23 @@ void DuelLayers::Render()
     }
     for (int i = nbitems - 1; i >= 0; --i)
         objects[i]->Render();
+
+    // Transient confirmation for the bug-flag hotkey, drawn on top of everything.
+    if (mTagMessageTimer > 0.0f && !mTagMessage.empty())
+    {
+        WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        if (font)
+        {
+            float x = SCREEN_WIDTH / 2;
+            float y = 8;
+            font->SetScale(1.0f);
+            font->SetColor(ARGB(255, 0, 0, 0));
+            font->DrawString(mTagMessage.c_str(), x + 1, y + 1, JGETEXT_CENTER);
+            font->SetColor(ARGB(255, 255, 220, 60));
+            font->DrawString(mTagMessage.c_str(), x, y, JGETEXT_CENTER);
+            font->SetColor(ARGB(255, 255, 255, 255));
+        }
+    }
 }
 
 int DuelLayers::receiveEvent(WEvent * e)

@@ -188,6 +188,7 @@ gDefaultBindings[] =
     { 'K',		JGE_BTN_SEC },
     { 'J',		JGE_BTN_PRI },
     { 'F',      JGE_BTN_FULLSCREEN },
+    { 'T',      JGE_BTN_TAGBUG },
 };
 
 void JGECreateDefaultBindings()
