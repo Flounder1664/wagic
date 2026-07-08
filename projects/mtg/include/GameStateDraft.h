@@ -11,6 +11,7 @@ class DraftSession;
 class MTGPack;
 class MTGCard;
 class MTGCardInstance;
+class MTGSetInfo;
 class SimpleMenu;
 
 // First interactive slice of draft mode (see GH issue #27): the human opens a
@@ -64,21 +65,42 @@ private:
     void enterDeckEditor();
     void openQuitMenu();
     void closeQuitMenu();
-    void buildSetMenu();
-    void beginDraftWithSet(int setId);
+    // Set-selection flow, shown before the first pack. A two-level menu: a
+    // "mode" menu (random / era / one set / three sets) then, for the last
+    // two, the set list itself.
+    void buildModeMenu();
+    void buildSetListMenu();
+    bool isDraftableSet(MTGSetInfo* info) const;
+    int randomDraftableSet(int minYear, int maxYear) const; // -1 bounds = unbounded; -1 return = none
+    MTGPack* makePackForSet(const std::string& setCode); // NULL on template-load failure
+    void beginDraftSingle(int setId); // all 3 rounds from one set
+    void beginDraftMulti(const std::vector<int>& setIds); // one pack each from N sets
+    void startDraftSession(); // shared tail: seat 0 -> human, begin round 0, refresh
+    void clearDraftPacks();
+
+    // Which menu is showing during set selection.
+    enum SetSelectStage
+    {
+        SEL_MODE,   // the top mode menu
+        SEL_ONE,    // pick a single set for all 3 rounds
+        SEL_THREE   // pick 3 sets, one pack each
+    };
 
     DraftSession* mSession;
-    MTGPack* mPack;
+    std::vector<MTGPack*> mDraftPacks; // owned; must outlive mSession (it holds raw ptrs)
     CardDisplay* mPackDisplay; // the current pack, interactive
     CardDisplay* mPoolDisplay; // cards picked so far this draft -- browsable in review mode
     SimpleMenu* mQuitMenu; // confirm before actually leaving to the main menu
-    SimpleMenu* mSetMenu; // choose which set to draft, shown before the first pack
+    SimpleMenu* mSetMenu; // reused for both the mode menu and the set list
     std::vector<MTGCardInstance*> mDisplayInstances;
     std::vector<MTGCardInstance*> mPoolDisplayInstances;
     std::vector<MTGCard*> mHumanPickOrder; // not owned -- cards live in MTGCollection()
+    std::vector<int> mMultiSets; // accumulates the 3 chosen sets in SEL_THREE
     int mHumanSeatId;
-    bool mSelectingSet; // true while the set-selection menu is up, before drafting
-    int mChosenSetId; // set by ButtonPressed(), acted on next Update() (avoid delete-in-callback)
+    bool mSelectingSet; // true while a set-selection menu is up, before drafting
+    int mSetSelectStage;
+    int mChosenControlId; // set by ButtonPressed(), acted on next Update() (avoid delete-in-callback)
+    int mChosenMenuId; // which menu fired the choice (kDraftModeMenuId / kDraftSetMenuId)
     bool mSetChosen;
     bool mDraftComplete;
     bool mReviewingPool; // toggles between picking and browsing the pool

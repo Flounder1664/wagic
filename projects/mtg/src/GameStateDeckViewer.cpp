@@ -191,10 +191,16 @@ void GameStateDeckViewer::updateDecks()
     vector<DeckMetaData *> playerDeckList = fillDeckMenu(welcome_menu, options.profileFile(), "", NULL, 0, GAME_TYPE_CLASSIC, true); // Show all decks in deck editor menu...
 
     newDeckname = "";
-    welcome_menu->Add(MENU_ITEM_NEW_DECK, "--NEW--");
-    if (options[Options::CHEATMODE].number && (!myCollection || myCollection->getCount(WSrcDeck::UNFILTERED_MIN_COPIES) < 4))
+    // In a draft, the only deck to edit is the auto-built one; a blank "--NEW--"
+    // deck or the cheat unlock make no sense (you draft your pool, you don't
+    // build from scratch or unlock cards).
+    if (!GameApp::pendingDraftDeckEdit)
     {
-        welcome_menu->Add(MENU_ITEM_CHEAT_MODE, "--UNLOCK CARDS--");
+        welcome_menu->Add(MENU_ITEM_NEW_DECK, "--NEW--");
+        if (options[Options::CHEATMODE].number && (!myCollection || myCollection->getCount(WSrcDeck::UNFILTERED_MIN_COPIES) < 4))
+        {
+            welcome_menu->Add(MENU_ITEM_CHEAT_MODE, "--UNLOCK CARDS--");
+        }
     }
     welcome_menu->Add(MENU_ITEM_CANCEL, "Cancel");
 
@@ -209,12 +215,25 @@ void GameStateDeckViewer::buildEditorMenu()
     deckMenu = NEW DeckEditorMenu(MENU_DECK_BUILDER, this, Fonts::OPTION_FONT, "Deck Editor", myDeck, mStatsWrapper);
 
     deckMenu->Add(MENU_ITEM_FILTER_BY, _("Filter By..."), _("Narrow down the list of cards. "));
-    deckMenu->Add(MENU_ITEM_SWITCH_DECKS_NO_SAVE, _("Switch Decks"), _("No changes. View another deck."));
-    deckMenu->Add(MENU_ITEM_SAVE_RENAME, _("Rename Deck"), _("Change the name of the deck"));
-    deckMenu->Add(MENU_ITEM_DELETE_DECK, _("Delete Deck"), _("Permanently delete this deck."));
-    deckMenu->Add(MENU_ITEM_SAVE_RETURN_MAIN_MENU, _("Save & Quit Editor"), _("Save changes. Return to the main menu"));
-    deckMenu->Add(MENU_ITEM_SAVE_AS_AI_DECK, _("Save As AI Deck"), _("All changes are final."));
-    deckMenu->Add(MENU_ITEM_MAIN_MENU, _("Quit Editor"), _("No changes. Return to the main menu."));
+
+    if (GameApp::pendingDraftDeckEdit)
+    {
+        // Draft context: only one deck to edit, headed straight into the
+        // bracket -- switching/renaming/deleting/saving-as-AI are all
+        // irrelevant, and the exit items go to the bracket, not the main menu.
+        deckMenu->Add(MENU_ITEM_SAVE_RETURN_MAIN_MENU, _("Save & Play"), _("Save your deck and start the bracket."));
+        deckMenu->Add(MENU_ITEM_MAIN_MENU, _("Play Without Saving"), _("Keep the auto-built deck; start the bracket."));
+    }
+    else
+    {
+        deckMenu->Add(MENU_ITEM_SWITCH_DECKS_NO_SAVE, _("Switch Decks"), _("No changes. View another deck."));
+        deckMenu->Add(MENU_ITEM_SAVE_RENAME, _("Rename Deck"), _("Change the name of the deck"));
+        deckMenu->Add(MENU_ITEM_DELETE_DECK, _("Delete Deck"), _("Permanently delete this deck."));
+        deckMenu->Add(MENU_ITEM_SAVE_RETURN_MAIN_MENU, _("Save & Quit Editor"), _("Save changes. Return to the main menu"));
+        deckMenu->Add(MENU_ITEM_SAVE_AS_AI_DECK, _("Save As AI Deck"), _("All changes are final."));
+        deckMenu->Add(MENU_ITEM_MAIN_MENU, _("Quit Editor"), _("No changes. Return to the main menu."));
+    }
+
     deckMenu->Add(MENU_ITEM_TOGGLE_VIEW, _("Toggle View"), _("Toggle view grid/carousel."));
     deckMenu->Add(MENU_ITEM_EDITOR_CANCEL, _("Cancel"), _("Close menu."));
 }

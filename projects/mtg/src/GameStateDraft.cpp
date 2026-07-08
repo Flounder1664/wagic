@@ -42,7 +42,19 @@ const int kDraftQuitMenuId = 500;
 const int kDraftQuitMenuResume = 1;
 const int kDraftQuitMenuConfirm = 2;
 const int kDraftSetMenuId = 501;
+const int kDraftModeMenuId = 502;
 const int kDraftSetMenuCancel = -1; // matches kCancelMenuID; set ids are >= 0 so no collision
+// Mode-menu item ids. Negative so they never collide with a set id (>= 0),
+// which the set-list menu uses directly as item ids.
+const int kModeCancel = -1;
+const int kModeRandom = -2;
+const int kModeOld = -3;
+const int kModeNew = -4;
+const int kModePickOne = -5;
+const int kModePickThree = -6;
+// Era boundaries for the "old cards" / "new cards" quick options (inclusive).
+const int kOldEraMaxYear = 2003; // through the 8th Edition era
+const int kNewEraMinYear = 2018;
 // A set needs at least this many cards per rarity to draft the 1 rare /
 // 3 uncommon / 10 common pack with reasonable variety. Marginal sets don't
 // crash (MTGPackSlot::add just yields a smaller pack), but a healthy margin
@@ -206,18 +218,26 @@ GameStateDraft::GameStateDraft(GameApp* parent) :
     GameState(parent, "draft")
 {
     mSession = NULL;
-    mPack = NULL;
     mPackDisplay = NULL;
     mPoolDisplay = NULL;
     mQuitMenu = NULL;
     mSetMenu = NULL;
     mHumanSeatId = 0;
     mSelectingSet = false;
-    mChosenSetId = 0;
+    mSetSelectStage = SEL_MODE;
+    mChosenControlId = 0;
+    mChosenMenuId = 0;
     mSetChosen = false;
     mDraftComplete = false;
     mReviewingPool = false;
     mQuitConfirmed = false;
+}
+
+void GameStateDraft::clearDraftPacks()
+{
+    for (size_t i = 0; i < mDraftPacks.size(); i++)
+        SAFE_DELETE(mDraftPacks[i]);
+    mDraftPacks.clear();
 }
 
 GameStateDraft::~GameStateDraft()
@@ -236,8 +256,8 @@ void GameStateDraft::Destroy()
     SAFE_DELETE(mPoolDisplay);
     SAFE_DELETE(mQuitMenu);
     SAFE_DELETE(mSetMenu);
-    SAFE_DELETE(mSession);
-    SAFE_DELETE(mPack);
+    SAFE_DELETE(mSession); // holds raw ptrs into mDraftPacks -- delete it first
+    clearDraftPacks();
 }
 
 void GameStateDraft::openQuitMenu()
@@ -269,9 +289,10 @@ void GameStateDraft::ButtonPressed(int controllerId, int controlId)
         mQuitConfirmed = (controlId == kDraftQuitMenuConfirm);
         mQuitMenu->Close();
     }
-    else if (controllerId == kDraftSetMenuId && mSetMenu)
+    else if ((controllerId == kDraftSetMenuId || controllerId == kDraftModeMenuId) && mSetMenu)
     {
-        mChosenSetId = controlId;
+        mChosenMenuId = controllerId;
+        mChosenControlId = controlId;
         mSetChosen = true;
     }
 }
@@ -376,72 +397,157 @@ void GameStateDraft::Start()
     mReviewingPool = false;
     mQuitConfirmed = false;
     mSetChosen = false;
+    mMultiSets.clear();
     closeQuitMenu();
     mHumanPickOrder.clear();
 
     mLoadError = "";
 
-    // The rarity-slot template (1 rare / 3 uncommon / 10 common). Its own pool
-    // set is irrelevant -- beginDraftWithSet() overrides it per chosen set via
-    // MTGPack::setPool().
-    if (!mPack)
-    {
-        mPack = NEW MTGPack();
-        mPack->load("packs/draft_booster.txt");
-        if (!mPack->isValid())
-            mPack->load("Res/packs/draft_booster.txt"); // see MTGDraft.cpp's smoke test: some
-                                                              // run configurations resolve resource
-                                                              // paths relative to a folder above Res/
-    }
-
-    if (!mPack->isValid())
-    {
-        mLoadError = "Draft pack failed to load: packs/draft_booster.txt";
-        DebugTrace("[Draft] " << mLoadError);
-        return;
-    }
-
-    buildSetMenu();
+    mSetSelectStage = SEL_MODE;
+    buildModeMenu();
     mSelectingSet = true;
 }
 
-void GameStateDraft::buildSetMenu()
+bool GameStateDraft::isDraftableSet(MTGSetInfo* info) const
+{
+    return info && info->counts[MTGSetInfo::COMMON] >= kMinCommons
+            && info->counts[MTGSetInfo::UNCOMMON] >= kMinUncommons && info->counts[MTGSetInfo::RARE] >= kMinRares;
+}
+
+int GameStateDraft::randomDraftableSet(int minYear, int maxYear) const
+{
+    vector<int> candidates;
+    for (int i = 0; i < setlist.size(); i++)
+    {
+        MTGSetInfo* info = setlist.getInfo(i);
+        if (!isDraftableSet(info))
+            continue;
+        if (minYear >= 0 && info->year < minYear)
+            continue;
+        if (maxYear >= 0 && info->year > maxYear)
+            continue;
+        candidates.push_back(i);
+    }
+    if (candidates.empty())
+        return -1;
+    return candidates[rand() % candidates.size()];
+}
+
+void GameStateDraft::buildModeMenu()
 {
     SAFE_DELETE(mSetMenu);
+    mSetMenu = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), kDraftModeMenuId, this, Fonts::MENU_FONT,
+            SCREEN_WIDTH / 2 - 110, 20, "Draft format");
+    mSetMenu->Add(kModeRandom, "Random set");
+    mSetMenu->Add(kModeOld, "Old cards (random early set)");
+    mSetMenu->Add(kModeNew, "New cards (random recent set)");
+    mSetMenu->Add(kModePickOne, "Choose one set (3 packs)...");
+    mSetMenu->Add(kModePickThree, "Choose 3 sets (1 pack each)...");
+    mSetMenu->Add(kModeCancel, "Cancel");
+}
+
+void GameStateDraft::buildSetListMenu()
+{
+    SAFE_DELETE(mSetMenu);
+    string title = "Choose a set to draft";
+    if (mSetSelectStage == SEL_THREE)
+    {
+        char buf[48];
+        sprintf(buf, "Choose set %d of 3", (int) mMultiSets.size() + 1);
+        title = buf;
+    }
     mSetMenu = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), kDraftSetMenuId, this, Fonts::MENU_FONT,
-            SCREEN_WIDTH / 2 - 100, 20, "Choose a set to draft");
+            SCREEN_WIDTH / 2 - 100, 20, title.c_str());
 
     for (int i = 0; i < setlist.size(); i++)
     {
         MTGSetInfo* info = setlist.getInfo(i);
-        if (!info)
+        if (!isDraftableSet(info))
             continue;
-        if (info->counts[MTGSetInfo::COMMON] >= kMinCommons && info->counts[MTGSetInfo::UNCOMMON] >= kMinUncommons
-                && info->counts[MTGSetInfo::RARE] >= kMinRares)
-        {
-            // Item id is the set id itself (>= 0); ButtonPressed reads it back
-            // directly. Label with the long name plus the short code.
-            string label = info->getName();
-            if (label != info->id)
-                label += " (" + info->id + ")";
-            mSetMenu->Add(i, label.c_str());
-        }
+        // Item id is the set id itself (>= 0); ButtonPressed reads it back
+        // directly. Label with the long name plus the short code.
+        string label = info->getName();
+        if (label != info->id)
+            label += " (" + info->id + ")";
+        mSetMenu->Add(i, label.c_str());
     }
 
-    mSetMenu->Add(kDraftSetMenuCancel, "Cancel");
+    mSetMenu->Add(kDraftSetMenuCancel, "Back");
 }
 
-void GameStateDraft::beginDraftWithSet(int setId)
+// Loads a fresh copy of the rarity-slot template (1 rare / 3 uncommon /
+// 10 common) and points it at one set. A fresh copy per set is needed because
+// the three-sets mode drafts a different pool each round, and DraftSession
+// holds a distinct pack pointer per round. NULL if the template file is
+// missing.
+MTGPack* GameStateDraft::makePackForSet(const string& setCode)
 {
+    MTGPack* p = NEW MTGPack();
+    p->load("packs/draft_booster.txt");
+    if (!p->isValid())
+        p->load("Res/packs/draft_booster.txt"); // some run configs resolve resources one level up
+    if (!p->isValid())
+    {
+        SAFE_DELETE(p);
+        return NULL;
+    }
+    p->setPool("all set:" + setCode + ";");
+    return p;
+}
+
+void GameStateDraft::beginDraftSingle(int setId)
+{
+    if (setId < 0)
+    {
+        mLoadError = "No draftable set found for that option";
+        DebugTrace("[Draft] " << mLoadError);
+        return;
+    }
     string code = setlist[setId];
-    mPack->setPool("all set:" + code + ";");
-    DebugTrace("[Draft] drafting set " << code);
+    MTGPack* p = makePackForSet(code);
+    if (!p)
+    {
+        mLoadError = "Draft pack template failed to load: packs/draft_booster.txt";
+        DebugTrace("[Draft] " << mLoadError);
+        return;
+    }
+
+    clearDraftPacks();
+    mDraftPacks.push_back(p);
 
     SAFE_DELETE(mSession);
     mSession = NEW DraftSession(8, MTGCollection(), 3, 14);
-    mSession->setPackTemplate(mPack);
-    mSession->getSeat(mHumanSeatId)->setIsBot(false);
+    mSession->setPackTemplate(p);
+    DebugTrace("[Draft] drafting set " << code << " (all rounds)");
+    startDraftSession();
+}
 
+void GameStateDraft::beginDraftMulti(const vector<int>& setIds)
+{
+    SAFE_DELETE(mSession);
+    mSession = NEW DraftSession(8, MTGCollection(), (int) setIds.size(), 14);
+
+    clearDraftPacks();
+    for (size_t r = 0; r < setIds.size(); r++)
+    {
+        string code = setlist[setIds[r]];
+        MTGPack* p = makePackForSet(code);
+        if (!p)
+        {
+            mLoadError = "Draft pack template failed to load: packs/draft_booster.txt";
+            DebugTrace("[Draft] " << mLoadError);
+            return;
+        }
+        mDraftPacks.push_back(p);
+        mSession->setPackTemplateForRound((int) r, p);
+        DebugTrace("[Draft] round " << r << " set " << code);
+    }
+    startDraftSession();
+}
+
+void GameStateDraft::startDraftSession()
+{
+    mSession->getSeat(mHumanSeatId)->setIsBot(false);
     mSession->beginRound(0);
     mSession->resolveBotPicksForStep();
     refreshPackDisplay();
@@ -449,7 +555,7 @@ void GameStateDraft::beginDraftWithSet(int setId)
 
     if (mDisplayInstances.empty())
     {
-        mLoadError = "Draft pack loaded but produced 0 cards for set " + code;
+        mLoadError = "Draft pack produced 0 cards (check set has enough cards)";
         DebugTrace("[Draft] " << mLoadError);
     }
 }
@@ -697,13 +803,72 @@ void GameStateDraft::Update(float dt)
         if (mSetChosen)
         {
             mSetChosen = false;
-            mSelectingSet = false;
-            int chosen = mChosenSetId;
-            SAFE_DELETE(mSetMenu);
-            if (chosen == kDraftSetMenuCancel)
-                mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
-            else
-                beginDraftWithSet(chosen);
+            int id = mChosenControlId;
+
+            if (mChosenMenuId == kDraftModeMenuId)
+            {
+                SAFE_DELETE(mSetMenu);
+                switch (id)
+                {
+                    case kModeCancel:
+                        mSelectingSet = false;
+                        mParent->DoTransition(TRANSITION_FADE, GAME_STATE_MENU);
+                        break;
+                    case kModeRandom:
+                        mSelectingSet = false;
+                        beginDraftSingle(randomDraftableSet(-1, -1));
+                        break;
+                    case kModeOld:
+                        mSelectingSet = false;
+                        beginDraftSingle(randomDraftableSet(-1, kOldEraMaxYear));
+                        break;
+                    case kModeNew:
+                        mSelectingSet = false;
+                        beginDraftSingle(randomDraftableSet(kNewEraMinYear, -1));
+                        break;
+                    case kModePickOne:
+                        mSetSelectStage = SEL_ONE;
+                        buildSetListMenu();
+                        break;
+                    case kModePickThree:
+                        mSetSelectStage = SEL_THREE;
+                        mMultiSets.clear();
+                        buildSetListMenu();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else // kDraftSetMenuId (the set list)
+            {
+                if (id == kDraftSetMenuCancel)
+                {
+                    // "Back" -- return to the mode menu.
+                    SAFE_DELETE(mSetMenu);
+                    mSetSelectStage = SEL_MODE;
+                    buildModeMenu();
+                }
+                else if (mSetSelectStage == SEL_ONE)
+                {
+                    SAFE_DELETE(mSetMenu);
+                    mSelectingSet = false;
+                    beginDraftSingle(id);
+                }
+                else // SEL_THREE
+                {
+                    mMultiSets.push_back(id);
+                    SAFE_DELETE(mSetMenu);
+                    if (mMultiSets.size() >= 3)
+                    {
+                        mSelectingSet = false;
+                        beginDraftMulti(mMultiSets);
+                    }
+                    else
+                    {
+                        buildSetListMenu(); // pick the next set
+                    }
+                }
+            }
         }
         return;
     }
