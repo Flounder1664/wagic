@@ -72,16 +72,32 @@ void DuelLayers::TagBuggyCard()
     MTGCardInstance* card = NULL;
     string pileDesc;
 
-    PlayGuiObject* sel = mCardSelector ? mCardSelector->getActiveObject() : NULL;
-    if (CardGui* cg = dynamic_cast<CardGui*>(sel))
-        card = cg->card;
-    else if (GuiGameZone* gz = dynamic_cast<GuiGameZone*>(sel))
+    // If a zone pile (graveyard/exile/library/command zone/sideboard) is open for
+    // browsing, flag the specific card highlighted in it. OpenedDisplay is set by
+    // GuiGameZone::toggleDisplay while a pile browser is up; its highlighted item
+    // is mObjects[mCurr] (a CardView).
+    if (CardDisplay* disp = observer->OpenedDisplay)
     {
-        if (gz->zone)
+        if (disp->mCurr >= 0 && disp->mCurr < (int) disp->mObjects.size())
+            if (CardGui* cg = dynamic_cast<CardGui*>(disp->mObjects[disp->mCurr]))
+                card = cg->card;
+    }
+
+    // Otherwise use the card under the selection cursor (hand/battlefield), or the
+    // pile itself when the cursor is on a closed zone pile.
+    if (!card)
+    {
+        PlayGuiObject* sel = mCardSelector ? mCardSelector->getActiveObject() : NULL;
+        if (CardGui* cg = dynamic_cast<CardGui*>(sel))
+            card = cg->card;
+        else if (GuiGameZone* gz = dynamic_cast<GuiGameZone*>(sel))
         {
-            char buf[128];
-            sprintf(buf, "%s (%d cards)", gz->zone->getName(), gz->zone->nb_cards);
-            pileDesc = buf;
+            if (gz->zone)
+            {
+                char buf[128];
+                sprintf(buf, "%s (%d cards)", gz->zone->getName(), gz->zone->nb_cards);
+                pileDesc = buf;
+            }
         }
     }
 
