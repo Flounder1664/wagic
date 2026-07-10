@@ -175,6 +175,20 @@ DuelLayers::DuelLayers(GameObserver* go, int playerViewIndex) :
 {
     observer = go;
     observer->mLayers = this;
+
+    // Bind 'T' to the bug-flag button at every duel start. Required because the
+    // game loads saved keybindings at startup (GameOptionKeyBindings::read calls
+    // ClearBindings() then re-applies only the saved pairs), which wipes any JGE
+    // default binding the user hasn't saved — so binding 'T' only in SDLmain's
+    // defaults is not enough. Re-binding here, after options are loaded and once
+    // per duel, guarantees it works. Unbind first so we never stack duplicates.
+    // SDLK_t == 't' == 116 on the SDL/Windows build.
+    if (JGE* je = observer->getInput())
+    {
+        je->UnbindKey((LocalKeySym) 't');
+        JGE::BindKey((LocalKeySym) 't', JGE_BTN_TAGBUG);
+    }
+
     mCardSelector = NEW CardSelector(go, this);
     //1 Action Layer
     action = NEW ActionLayer(go);
