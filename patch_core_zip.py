@@ -27,6 +27,8 @@ REPLACEMENTS = {
 ADD_FILES = {
     'sets/SOS/_cards.dat':
         os.path.join(_RES, "sets", "SOS", "_cards.dat"),
+    'packs/draft_booster.txt':
+        os.path.join(_RES, "packs", "draft_booster.txt"),
 }
 
 print(f'Rebuilding {CORE_ZIP} with updated primitives...')
