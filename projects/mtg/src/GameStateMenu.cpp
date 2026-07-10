@@ -1005,10 +1005,7 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
                 if (Rules::getRulesByFilename("testsuite.txt"))
                     subMenuController->Add(SUBMENUITEM_TESTSUITE, "Test Suite");
 #endif
-                // Draft mode is feature-branch work in progress (GH issue #27) -- always
-                // visible for now so it's reachable for manual testing; gate or remove
-                // before this lands on master.
-                subMenuController->Add(SUBMENUITEM_DRAFT_TEST, "Draft (test)");
+                subMenuController->Add(SUBMENUITEM_DRAFT, _("Draft").c_str());
 
 #ifdef AI_CHANGE_TESTING
                 subMenuController->Add(SUBMENUITEM_TESTAI, "AI A/B Testing");
@@ -1093,7 +1090,7 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
             currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_SUBMENU_CLOSING;
             break;
 #endif
-        case SUBMENUITEM_DRAFT_TEST:
+        case SUBMENUITEM_DRAFT:
             subMenuController->Close();
             mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DRAFT);
             break;
