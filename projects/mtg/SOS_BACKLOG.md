@@ -2,15 +2,64 @@
 
 Set code `sos` - Standard expansion, 2026-04-24. Source: Scryfall `set:sos&unique=cards` (271 unique cards).
 
-Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The original heuristic over-counted EASY; cards needing leave-graveyard triggers (no Wagic impl), X-scaling, cost-reduction, token-with-ability, fight, or cast-from-exile were moved to MEDIUM.
+Assessment generated 2026-06-25, re-bucketed 2026-06-26, **reconciled against `grade_index` + `sets/SOS/_cards.dat` on 2026-07-11**. The batch-plan tables below were updated as work landed, but the top status counts and the flat MEDIUM/HARD lists were never reconciled — they still claimed 32 EASY-only. This pass fixes that against ground truth.
 
-## Status
+## Status (reconciled 2026-07-11)
 
-| Bucket | Count | Notes |
+True SOS cards (Scryfall, deduped): **271**.
+
+| Status | Count | Notes |
 |---|---|---|
-| EASY | 32 | **ALL IMPLEMENTED** (26 new primitives ids 697001-697027 + 5 basic lands + Last Gasp reprint). WSL TestSuiteAI 817/0. |
-| MEDIUM | 183 | Supported mechanics needing careful DSL, incl. 35 re-bucketed from EASY. |
-| HARD | 56 | Engine-blocked / no analog: Prepared split (36), Converge (9), Paradigm (5), copy (4), planeswalkers (2). |
+| **Really implemented (registered)** | **49** | `primitive=` in `sets/SOS/_cards.dat` resolving `supported`/`borderline` in `grade_index`. All 49 resolve — **0 dangling/UNWRITTEN registered entries, 0 resolve-unsupported**. |
+| Basic lands (engine-provided) | 5 | Forest/Island/Mountain/Plains/Swamp — auto-added to every set, not in `_cards.dat`. Playable. |
+| **Written but NOT wired into the set** | **8** | Primitive exists in `grade_index` but the card is absent from `sets/SOS/_cards.dat`. Cheap wins — just add `id=`/`primitive=` rows. See section below. |
+| Still excluded (truly absent) | **209** | No primitive anywhere. Backlog. |
+
+Effectively playable today = 49 registered + 5 basics = **54**. The 8 written-but-unwired cards become 62 with a trivial `_cards.dat` edit.
+
+### Excluded-reason breakdown (209 truly-absent)
+
+| Reason bucket | Count |
+|---|---|
+| BACKLOG-MEDIUM (supported mechanics, careful DSL) | 149 |
+| ENGINE-BLOCKED / HARD (copy-split 36, converge 9, paradigm 5, planeswalker 2) | 52 |
+| BACKLOG-EASY (nonbasic lands — dual/utility) | 8 |
+
+### Drift from the 2026-06-26 doc
+
+The old top table asserted **32 EASY implemented / 0 MEDIUM done**. Ground truth: **49 registered**, i.e. **22 cards drifted** — they were listed under MEDIUM buckets (Infusion, Flashback, Modal/College Charms) yet are in fact implemented *and* registered. These match the "DONE" annotations already present in the M1/M5/M6 batch tables; only the summary counts and flat lists lagged. All 22 are moved to the DONE section below.
+
+## DONE — implemented and registered (49)
+
+All 49 resolve `supported` in `grade_index` (`mtg.txt`) and carry a `primitive=` row in `sets/SOS/_cards.dat`.
+
+**Original EASY bucket (26 new primitives + Last Gasp reprint = 27):**
+Banishing Betrayal · Bogwater Lumaret · Chase Inspiration · Eager Glyphmage · Embrace the Paradox · Grapple with Death · Imperious Inkmage · Interjection · Last Gasp (R) · Masterful Flourish · Muse's Encouragement · Oracle's Restoration · Pest Mascot · Pull from the Grave · Quick Study · Rapturous Moment · Rearing Embermare · Seize the Spoils · Shopkeeper's Bane · Sneering Shadewriter · Stadium Tidalmage · Stand Up for Yourself · Traumatic Critique · Unsubtle Mockery · Vibrant Outburst · Wander Off · Zealous Lorecaster
+
+**Landed after 2026-06-26 (the 22 drifted cards — were listed MEDIUM, actually done):**
+
+- Infusion (M1): Efflorescence · Foolish Fate · Old-Growth Educator · Poisoner's Apprentice · Tenured Concocter · Tragedy Feaster · Ulna Alley Shopkeep · Withering Curse
+- Flashback (M5): Antiquities on the Loose · Dig Site Inventory · Duel Tactics · Group Project · Pursue the Past · Tome Blast
+- Modal / College Charms (M6): Artistic Process · Glorious Decay · Lorehold Charm · Prismari Charm · Quandrix Charm · Silverquill Charm · Splatter Technique · Witherbloom Charm
+
+Test fixtures backing this landed work live in `projects/mtg/bin/Res/test/generic/sos_*.txt` (charms, flashback, infusion base/infused pairs, etc.).
+
+## WRITTEN BUT NOT WIRED INTO SOS (8) — cheap wins
+
+These have a working primitive in `grade_index` but no entry in `sets/SOS/_cards.dat`, so they never appear in SOS draft pools / imports. Wiring them in is a one-line `_cards.dat` edit each (add `id=` in the 697xxx range + `primitive=`), no primitive authoring needed.
+
+| Card | Type | Grade / file |
+|---|---|---|
+| Essence Scatter | Instant | supported / mtg.txt |
+| Terramorphic Expanse | Land | supported / mtg.txt |
+| Ancestral Anger | Sorcery | borderline / borderline.txt |
+| Deathcap Glade | Land | borderline / borderline.txt |
+| Dreamroot Cascade | Land | borderline / borderline.txt |
+| Shattered Sanctum | Land | borderline / borderline.txt |
+| Stormcarved Coast | Land | borderline / borderline.txt |
+| Sundown Pass | Land | borderline / borderline.txt |
+
+(The 5 basic lands are also "written but unregistered" in the strict sense, but the engine auto-adds basics to every set, so they are already playable and are not listed here.)
 
 ## MEDIUM - Implementation Batch Plan
 
@@ -268,7 +317,9 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 
 
 
-## HARD (56)
+## HARD (52 outstanding)
+
+_Reconciled 2026-07-11: 52 truly-absent HARD cards — copy-split 36, converge 9, paradigm 5, planeswalker 2. (The old "56" folded in 4 that were either mis-bucketed or since reclassified.) The lists below are the original hand-curated groupings; treat the 2026-07-11 status table as authoritative for counts._
 
 
 **Converge: variable mana-color scaling (#20)**
@@ -339,7 +390,9 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 - Professor Dellian Fel _(Legendary Planeswalker — Dellian)_
 - Ral Zarek, Guest Lecturer _(Legendary Planeswalker — Ral)_
 
-## MEDIUM (183)
+## MEDIUM (149 outstanding)
+
+_Reconciled 2026-07-11: 149 truly-absent BACKLOG-MEDIUM cards remain (down from the flat "183" — 22 have shipped and are in the DONE section, 8 nonbasic lands split to BACKLOG-EASY, remainder rebalanced). The hand-curated lists below still enumerate the shipped-but-not-yet-removed cards; the DONE section above is authoritative for what's implemented._
 
 
 **"for each" scaling**
@@ -597,9 +650,9 @@ Assessment generated 2026-06-25, **re-bucketed 2026-06-26** after authoring. The
 - Molten Note _(Sorcery)_
 - Slumbering Trudge _(Creature — Plant Beast)_
 
-## EASY (32)
+## EASY (32) — historical
 
-_All implemented. (D) = new primitive this cycle; (R) = existing reprint/basic._
+_All implemented. (D) = new primitive this cycle; (R) = existing reprint/basic. This is the original EASY cycle only; 22 further cards (Infusion/Flashback/Charms) shipped afterward and are in the DONE section above, bringing the registered total to 49._
 
 - [x] Forest _(Basic Land — Forest)_ (R)
 - [x] Island _(Basic Land — Island)_ (R)

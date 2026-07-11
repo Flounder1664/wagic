@@ -9,13 +9,13 @@ Wagic includes 336 sets. Most recent: **Tarkir: Dragonstorm (TDM/TDC)** — Apri
 
 | Code | Name | Release Date | Base Card Count | Type |
 |------|------|--------------|-----------------|------|
-| FIN  | Magic: The Gathering — Final Fantasy | 2025-06-13 | ~309 (681 with variants) | Universes Beyond |
-| EOE  | Edge of Eternities | 2025-08-01 | ~374 | Standard Expansion |
-| SPM  | Marvel's Spider-Man | 2025-09-26 | 300 | Universes Beyond |
-| TLA  | Avatar: The Last Airbender | 2025-11-21 | 414 | Universes Beyond |
-| ECL  | Lorwyn Eclipsed | 2026-01-23 | ~408 | Standard Expansion |
-| TMT  | Teenage Mutant Ninja Turtles | 2026-03-06 | 320 | Universes Beyond |
-| SOS  | Secrets of Strixhaven | 2026-04-24 | 271 unique (368 prints) | Standard Expansion — **EASY bucket done**, see [SOS_BACKLOG.md](SOS_BACKLOG.md) (32 easy ✅ / 183 medium / 56 hard) |
+| FIN  | Magic: The Gathering — Final Fantasy | 2025-06-13 | 313 unique | Universes Beyond — **audited**, see [FIN_BACKLOG.md](FIN_BACKLOG.md) (137 really implemented / 176 dangling refs: 11 engine-blocked, 143 medium, 21 easy, 1 out-of-scope) |
+| EOE  | Edge of Eternities | 2025-08-01 | 266 unique | Standard Expansion — **203/266 registered-playable but many APPROXIMATE**, see [EOE_TODO.md](../../EOE_TODO.md) (warp 4/50, station 5/28, void 4/14 faithful — bodies strip the new mechanic; 63 excluded: 11 easy / 50 medium / 2 engine-blocked) |
+| SPM  | Marvel's Spider-Man | 2025-09-26 | 193 unique | Universes Beyond — **audited**, see [SPM_BACKLOG.md](SPM_BACKLOG.md) (110 really implemented / 83 excluded: 1 engine-blocked, 24 easy, 58 medium — all 83 also dangling `_cards.dat` refs) |
+| TLA  | Avatar: The Last Airbender | 2025-11-21 | 286 unique | Universes Beyond — **audited**, see [TLA_BACKLOG.md](TLA_BACKLOG.md) (49 really implemented / 237 UNWRITTEN: 59 engine-blocked [Waterbend 22, Earthbend 19, Airbend 8, Exhaust 2, Saga//creature-transform DFC 8], 118 medium, 60 easy — all 237 also dangling `_cards.dat` refs; 0 unregistered) |
+| ECL  | Lorwyn Eclipsed | 2026-01-23 | 278 unique | Standard Expansion — **registered & playable (278/278) but NOT faithfully complete**, see [ECL_BACKLOG.md](ECL_BACKLOG.md) (0 missing/unregistered, BUT ~26 new-mechanic cards ship with the keyword stripped: **vivid 0/14 faithful**, behold 2/12, blight 19/24; 1 stray entry "Mistbind Clique") |
+| TMT  | Teenage Mutant Ninja Turtles | 2026-03-06 | 195 unique | Universes Beyond — **audited**, see [TMT_BACKLOG.md](TMT_BACKLOG.md) (16 really implemented / 179 excluded: 26 engine-blocked [Sneak], 101 easy, 52 medium, 0 out-of-scope — all 179 also dangling `_cards.dat` refs; 0 unregistered; only Sneak of the 3 predicted walls survives) |
+| SOS  | Secrets of Strixhaven | 2026-04-24 | 271 unique (368 prints) | Standard Expansion — **audited & reconciled 2026-07-11**, see [SOS_BACKLOG.md](SOS_BACKLOG.md) (49 really implemented [registered, 0 dangling] + 5 engine basics / 8 written-but-not-wired [cheap wins] / 209 excluded: 149 medium, 52 hard [copy-split 36, converge 9, paradigm 5, pw 2], 8 easy lands; 0 unsupported) |
 
 **Total new unique cards (rough): ~2,430**
 
@@ -26,82 +26,29 @@ Wagic includes 336 sets. Most recent: **Tarkir: Dragonstorm (TDM/TDC)** — Apri
 
 ---
 
-## Sample Set Analysis: Teenage Mutant Ninja Turtles (TMT)
+## Teenage Mutant Ninja Turtles (TMT) — audited
 
-**195 unique cards** (base set, excluding alternate-art variants)
+The rough "Sample Set Analysis" that previously sat here (estimating 8 simple / ~105 hard /
+~75 really-hard, with **Sneak / Disappear / Alliance** as three separate engine walls) has been
+superseded by a full audit against `grade_index.json`. See **[TMT_BACKLOG.md](TMT_BACKLOG.md)** for
+the per-card classification. Corrected numbers:
 
-### Primitive Coverage
-
-| Category | Count | Notes |
-|----------|-------|-------|
-| Already in Wagic primitives | 8 | Swamp, Forest, Mountain, Island, Plains, Negate, Escape Tunnel, Make Your Move |
-| Need new primitive entry | 187 | All TMNT-named cards are new |
-
-### Effort Classification of the 187 New Cards
-
-#### SIMPLE — Primitive exists, just needs `_cards.dat` entry: **8 cards**
-The 5 basic lands, Negate, Escape Tunnel, and Make Your Move are all in mtg.txt already.
-Only requires adding to a TMT `_cards.dat`. Zero effort per card.
-
----
-
-#### HARD — Mechanic exists in Wagic, needs a new primitive written: **~105 cards (est.)**
-
-Covers cards using only already-implemented mechanics:
-
-| Mechanic | Wagic Status | Example cards |
-|----------|-------------|---------------|
-| +1/+1 counters | ✅ Fully implemented | Most creature cards in the set |
-| Affinity for Artifacts | ✅ `affinityartifacts` keyword | Metalhead, Buzz Bots, Henchbots |
-| Flying, Trample, Haste, Menace, etc. | ✅ All standard keywords | Throughout the set |
-| ETB / death triggers | ✅ Standard trigger framework | Most creature abilities |
-| Draw, damage, life gain/loss | ✅ Standard effects | Instants and sorceries |
-| Food tokens (Pizza-themed) | ✅ Food primitive in ELD | Omni-Cheese Pizza, Everything Pizza cycle |
-| Mutagen tokens (tap+sac for +1/+1) | ✅ Within existing token+activated ability framework | Michelangelo, Improviser; The Ooze |
-| Class enchantments (Technique cycle) | ✅ Level-counter system in borderline.txt | 11 Technique cards (Leonardo's, Raphael's etc.) |
-
-Effort per card: 30 min – 2 hours to write and test the primitive.
-
----
-
-#### REALLY HARD — New C++ ability class required: **~75 cards (est.)**
-
-Three new mechanics that have no equivalent in Wagic:
-
-**1. Sneak** (~15–20 cards)
-> Cast during the declare blockers step as an alternative cost. Return an unblocked attacker to hand; creature enters tapped and attacking the same target.
-
-- Similar to Ninjutsu (which IS in Wagic) but fundamentally different: it's a *cast* (goes through the stack) rather than an activated ability, and triggers a replacement effect on entry. New C++ class needed in AllAbilities.h + parseMagicLine registration.
-- Affects all cards that explicitly use the `sneak` keyword — primarily the ninja-type creatures.
-
-**2. Disappear** (~15–20 cards)
-> Ability word: triggers when a permanent leaves the battlefield under your control.
-
-- "Leaves the battlefield" triggers exist in Wagic (`@movedTo`, `@movedFrom`), but Disappear is a *cumulative* within-turn tracker ("how many permanents left this turn"). Cards like Krang & Shredder scale with the count. This requires a new counter/state tracker in the game observer.
-- Simpler Disappear cards that just fire once per departure may be achievable with existing triggers.
-
-**3. Alliance** (~10–15 cards)
-> "Whenever another creature enters the battlefield under your control."
-
-- ETB triggers exist in Wagic but Alliance specifically requires "another creature" (not self) ETB. Search of SNC primitives and AllAbilities.h found zero Alliance implementation. Needs a new trigger class or extension of the existing ETB trigger filter.
-- Once implemented for one card it covers all Alliance cards — shared C++ cost.
-
-**Remaining Really Hard** (~25 cards): Unique per-card effects with no analog in the ability language — complex replacement effects, multi-zone interactions, unusual win conditions.
-
----
-
-### TMT Implementation Roadmap (rough effort)
-
-| Phase | Scope | Estimated Effort |
-|-------|-------|-----------------|
-| 1. Set skeleton | Create TMT `_cards.dat`, add 8 existing primitives | 2 hours |
-| 2. Hard cards | Write ~105 new primitives, test each | 4–8 weeks (1 person) |
-| 3. Alliance C++ | Implement Alliance trigger, ~15 primitive entries | 3–5 days |
-| 4. Disappear C++ | Implement Disappear trigger/counter, ~20 primitive entries | 1–2 weeks |
-| 5. Sneak C++ | Implement Sneak mechanic, ~20 primitive entries | 2–3 weeks |
-| 6. Remaining | Complex per-card abilities | Varies (2–4 weeks) |
-
-**Total rough estimate for TMT: 8–14 weeks (1 developer)**
+- **195 true unique cards** (not 320 — the earlier figure counted alternate-art/showcase prints).
+- **16 really implemented** (13 supported + 3 borderline): the 5 basic lands plus 11 names
+  reusing primitives authored for other products.
+- **179 excluded**, and every one is also an **UNWRITTEN dangling `_cards.dat` reference** —
+  the set skeleton is 100% built out (all 195 true cards registered, **0 unregistered**), but the
+  primitive text behind 179 of them was never authored.
+- Buckets: **26 ENGINE-BLOCKED (Sneak)** · **101 BACKLOG-EASY** · **52 BACKLOG-MEDIUM** ·
+  **0 OUT-OF-SCOPE**.
+- **Only Sneak of the three predicted walls survives.** Sneak is an alt-cost variant of Ninjutsu
+  (whose bespoke `ANinja` C++ class it would extend). **Alliance** is a plain "another creature
+  you control enters" ETB trigger already shipped in quantity (Impact Tremors, Cathars' Crusade)
+  — not blocked. **Disappear** ("a permanent left the battlefield under your control this turn")
+  is built from supported morbid-style parts — MEDIUM, not blocked.
+- Bookkeeping: `_cards.dat` has 200 `primitive=` lines = 195 true cards + **5 foreign strays**
+  (April O'Neil, Live on the Scene; Leonardo, Tactical Leader; Pizza Party; Sewer Pipe Omenpath;
+  Splinter's Wisdom — sibling-product entries with `910xxx` ids) to clean up.
 
 ---
 

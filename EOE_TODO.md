@@ -1,25 +1,83 @@
 # Wagic — EOE (Edge of Eternities) TODO
 
 Cards from Edge of Eternities — all new MTG mechanics, standard set (no IP licensing).
-Release: August 1, 2025. **Total: 266 unique English cards**.
+Release: August 1, 2025. **Total: 266 unique English cards.**
 
 **Tracked in GitHub:** [Flounder1664/wagic#7](https://github.com/Flounder1664/wagic/issues/7)
 
-## Status
-- ✅ `sets/EOE/_cards.dat` created — all 266 cards allocated IDs **1530001–1530398** (= 1530000 + collector_number)
-- ✅ 15 cards already playable (have existing primitives): basic lands, shock lands, Annul, Bombard, Banishing Light, Blooming Stinger
-- ✅ **Batch 1 (70 cards)** written — commit `5a94d4363` — EASY creatures, instants, sorceries, equipment, artifact creatures
-- ✅ New token macros: `_LANDERTOKEN_`, `_ROBOTTOKEN_`, `_DRONETOKEN_` added to `_macros.txt`
-- ✅ **Batch 2 (51 cards)** written — creatures, Spacecraft, lands, multi-color, removal (see list below)
-- ✅ **Batch 3 (18 cards)** written — commit `ed160f100` — remaining straightforward EASY cards
-- ✅ `core.zip` rebuilt to include batch 1 + batch 2 + batch 3 + macros
-- ✅ **154 cards** now implemented (15 pre-existing + 70 + 51 + 18)
-- ✅ **Batch 4 (36 cards)** written — commit `40fc996bf` — MEDIUM cards (warp stripped, effects simplified)
-- ✅ **Batch 5 (13 cards)** written — MEDIUM cards: blink-exile, static haste grant, sacrifice-cost reanimate, combat-damage draw
-- ✅ **203 cards** now implemented (15 pre-existing + 70 + 51 + 18 + 36 + 13)
-- ✅ `core.zip` rebuilt + deployed to `G:\Wagic-windows\Res\` for PC testing
-- ⏳ ~63 cards remain (mostly complex/warp-dependent mechanics)
-- ⏳ 1 HARD card: Tezzeret, Cruel Captain (planeswalker — blocked until engine support)
+> **⚠️ FAITHFULNESS CAVEAT (added 2026-07-11).** The "203 implemented" figure counts cards that
+> *load and play*, not cards that faithfully implement their printed rules. Body inspection shows
+> many EOE cards ship as **approximations with the new mechanic stripped**: of cards that have a
+> primitive, only **warp 4/50, station 5/28, void 4/14** are faithful (e.g. Rescue Skiff ships as a
+> vanilla 5/6 with Station gone; the batch notes below already say "warp stripped, effects
+> simplified"). So the real "faithfully complete" count is well under 203. Same pattern as ECL — see
+> [audits/README.md](projects/mtg/audits/README.md) faithfulness caveat.
+
+## Status (re-audited 2026-07-06)
+
+- ✅ `sets/EOE/_cards.dat` has a `primitive=` entry for **all 266/266 cards** — IDs 1530001–1530398 (= 1530000 + collector_number)
+- ✅ **203/266 cards (76%) are really implemented** — verified by cross-checking every `_cards.dat` primitive name against Wagic's full implemented-primitive corpus (mtg.txt + borderline.txt + planeswalkers.txt, ~26,874 names), not just presence in `_cards.dat`
+- ⏳ **63/266 cards (24%) are excluded** — a `_cards.dat` row exists (registering the name+ID) but the primitive text itself was never written
+- ✅ **0 dangling references** — every `_cards.dat` entry maps to a real EOE card; every excluded card has a `_cards.dat` row waiting for its primitive. No stale/orphaned entries found.
+- ✅ **0 out-of-scope cards** — all 266 are real, distinct, Scryfall-listed playable cards (no test/marketing/joke cards in this set)
+
+This audit corrects the prior "203 implemented, ~63 remain" note (from 2026-05-25) from an estimate into a verified, per-card number — it turns out the estimate was already exactly right, but the bucket breakdown below is new.
+
+### Bucket breakdown of the 63 excluded cards
+
+| Bucket | Count | Meaning |
+|---|---|---|
+| **BACKLOG-EASY** | 11 | Uses only mechanics Wagic already fully supports elsewhere; straightforward to primitive |
+| **BACKLOG-MEDIUM** | 50 | Supported mechanics, but needs careful multi-clause/conditional DSL work (incl. several needing a new but precedented pattern: Station/Vehicle-style, Void-tracker, replacement-effect doubling) |
+| **DANGLING-REFERENCE** | 0 | None found |
+| **ENGINE-BLOCKED** | 2 | Tezzeret, Cruel Captain (planeswalker card not authored); The Dominion Bracelet (Mindslaver-style full-turn control-take-over — confirmed absent from the engine, and explicitly catalogued as unsupported) |
+| **OUT-OF-SCOPE** | 0 | None found |
+
+**Correcting the old planeswalker assumption:** the previous note flagged Tezzeret, Cruel Captain as blocked "until engine support" for planeswalkers. That's no longer accurate as a blanket statement — Wagic's planeswalker corpus (`planeswalkers.txt`) has **296 working planeswalkers**, including 8 other Tezzeret versions (Tezzeret the Schemer, Tezzeret the Seeker, Tezzeret, Agent of Bolas, Tezzeret, Artifice Master, Tezzeret, Betrayer of Flesh, Tezzeret, Cruel Machinist, Tezzeret, Master of Metal, Tezzeret, Master of the Bridge). The loyalty-ability engine mechanism itself works fine. "Tezzeret, Cruel Captain" specifically has just never been authored as a card — same situation as any other unwritten card, not a fundamental engine gap. It's kept in ENGINE-BLOCKED here only because authoring a new loyalty-ability card is a materially bigger lift than a normal primitive (needs a planeswalker template, not a same-day batch card).
+
+### New mechanic notes surfaced by this audit
+
+- **Station / Spacecraft charge counters** — genuinely unimplemented as a generic keyword (zero hits anywhere in engine source). 8 of the 63 excluded cards are Station Spacecraft/Planets (Synthesizer Labship, Entropic Battlecruiser, Sledge-Class Seedship, Warmaker Gunship, Infinite Guideline Station, Extinguisher Battleship, Evendo Waking Haven, and Tapestry Warden's stationing clause). Wagic's Vehicle/Crew mechanic (Smuggler's Copter, Heart of Kiran, Skysovereign) is a close structural analog — tap-a-creature to power up a noncreature into a creature — so these are BACKLOG-MEDIUM (adapt the Crew pattern) rather than engine-blocked, but it's real per-card design work, not a batch pattern yet.
+- **Void (ability word)** — the "if a nonland permanent left the battlefield this turn or a spell was warped this turn" turn-tracker has no engine equivalent (confirmed: no such state tracking exists). Affects Chorale of the Void and Roving Actuator among the excluded cards, and is also referenced as flavor text on some already-implemented Void cards (those got the non-Void baseline effect only). BACKLOG-MEDIUM once/if a shared tracker is built — same shape as the SOS set's "leave-graveyard trigger" gated mechanic.
+- **Devour, Kicker, token-copy effects, Mind Control-style control-change, Affinity** — all confirmed genuinely supported already via existing implemented cards (Skinthinner/Deranged Hermit for Devour, Sea Gate Restoration for Kicker, Rite of Replication/Progenitor Mimic for token-copy, Mind Control/Control Magic for control-change, existing Affinity cards). Cards using these mechanics were classified BACKLOG-EASY/MEDIUM, not engine-blocked.
+- **"Second spell each turn" trigger** — already used by several implemented EOE cards (Cosmogrand Zenith, Illvoi Operative, Sunstar Lightsmith). Uthros Psionicist's cost-reduction variant of the same trigger is BACKLOG-MEDIUM, not a new mechanic.
+
+### Full list of the 63 excluded cards by bucket
+
+**BACKLOG-EASY (11)**
+- Focus Fire — X damage to attacking/blocking creature, X = 2 + creatures/Spacecraft you control
+- Harmonious Grovestrider — P/T = lands you control, plus Ward
+- Hemosymbic Mite — whenever tapped, another target creature gets +X/+X (X = this creature's power)
+- Luxknight Breacher — ETB with counters equal to other creatures/artifacts you control
+- Memorial Team Leader — static anthem during your turn + warp
+- Mightform Harmonizer — Landfall doubles target creature's power until EOT + warp
+- Pinnacle Emissary — cast-artifact-spell trigger makes a flying-restricted Drone token + warp
+- Pull Through the Weft — two-mode graveyard recursion (permanents to hand / lands to battlefield)
+- Sami, Wildcat Captain — double strike, vigilance, affinity for artifacts on your spells
+- Space-Time Anomaly — mill equal to caster's life total
+- Terrasymbiosis — whenever counters placed on a creature you control, draw that many (once/turn)
+
+**BACKLOG-MEDIUM (50)**
+- Anticausal Vestige, Archenemy's Charm, Astelli Reclaimer, Broodguard Elite, Chorale of the Void,
+  Close Encounter, Consult the Star Charts, Cosmogoyf, Devastating Onslaught, Dyadrine Synthesis Amalgam,
+  Emissary Escort, Entropic Battlecruiser, Evendo Waking Haven, Exalted Sunborn, Extinguisher Battleship,
+  Famished Worldsire, Genemorph Imago, Infinite Guideline Station, Lightstall Inquisitor, Loading Zone,
+  Memorial Vault, Mm'menon the Right Hand, Moonlit Meditation, Mutinous Massacre, Ouroboroid,
+  Pain for All, Pinnacle Starcage, Possibility Technician, Pulsar Squadron Ace, Ragost Deft Gastronaut,
+  Requiem Monolith, Roving Actuator, Rust Harvester, Scout for Survivors, Sledge-Class Seedship,
+  Sothera the Supervoid, Starfield Vocalist, Sunstar Chaplain, Synthesizer Labship, Tapestry Warden,
+  Terminal Velocity, Territorial Bruntar, The Endstone, Thrumming Hivepool, Tractor Beam,
+  Uthros Psionicist, Warmaker Gunship, Weapons Manufacturing, Weftwalking, Zero Point Ballad
+
+**ENGINE-BLOCKED (2)**
+- Tezzeret, Cruel Captain — planeswalker card not authored (engine supports planeswalkers generally)
+- The Dominion Bracelet — Mindslaver-style "control target opponent during their next turn"; confirmed unimplemented and explicitly catalogued unsupported
+
+**DANGLING-REFERENCE (0)** · **OUT-OF-SCOPE (0)**
+
+---
+
+## Batches written so far (203 cards, chronological)
 
 ### Batch 5 cards written (13, 2026-05-25)
 All-Fates Stalker, Haliya Guided by Light, Mechanozoa, Perigee Beckoner,
@@ -85,190 +143,16 @@ Difficulty: Easy = direct Wagic primitives; Medium = approximation needed; Hard 
 
 ---
 
-## Card Breakdown by Type
-
-| Type | Count | Est. Easy | Est. Medium | Est. Hard | Notes |
-|------|-------|-----------|------------|----------|-------|
-| **Creatures** | 139 | ~95 | ~35 | ~9 | Most are straightforward; some have complex ETB/triggers or equipment interactions |
-| **Artifacts** | 74 | ~60 | ~14 | ~0 | Includes equipment + artifact creatures (Robots, etc.) |
-| **Instants** | 30 | ~20 | ~8 | ~2 | Mostly removal, draw, burn; some choice/conditional effects |
-| **Sorceries** | 23 | ~15 | ~6 | ~2 | Tutors, board wipes, ramp |
-| **Enchantments** | 16 | ~12 | ~3 | ~1 | Auras, static effects, likely some with choice mechanics |
-| **Lands** | 17 | ~15 | ~2 | ~0 | Planet lands + basic lands (vanilla or +1/+1) |
-| **Planeswalkers** | 1 | 0 | 0 | 1 | Tezzeret, Cruel Captain — **Hard** (planeswalker engine limitation) |
-| **TOTAL** | **266** | ~217 (81%) | ~68 (26%) | ~15 (6%) | *Rough estimates; actual counts depend on detailed card scan* |
-
-**Confidence:** 80–85% of EOE is **Easy** (can be primitived directly from existing patterns).
-
----
-
-## Classification Framework
-
-### Easy — Straightforward, no approximation needed
-
-✅ Basic stats + keywords (flying, haste, menace, trample, deathtouch, vigilance, lifelink, etc.)
-✅ Simple ETB triggers ("when ~ enters, draw a card", "when ~ enters, deal 2 damage")
-✅ Death triggers ("when ~ dies, return a creature from your graveyard")
-✅ Tap/untap mechanics
-✅ Token generation (Goblin, Insect, Robot, Food, etc.)
-✅ Draw, discard, mill, damage, life gain/loss
-✅ Mana ramp (ramp creatures, signets, land fetch)
-✅ Single-target removal (burn, destroy, bounce, exile)
-✅ Basic equipment (Equip cost → +X/+X or keyword)
-
-**Estimated count: ~217 cards**
-
----
-
-### Medium — Existing mechanics but needs careful primitivization
-
-⚠️ Choice mechanics ("choose one —")
-⚠️ Multi-branch ETB triggers ("if X, do Y; if Z, do W")
-⚠️ Conditions ("only if", "when", "whenever" with restrictions)
-⚠️ Land/graveyard plays ("play lands from graveyard" — uses `canplayfromexile` pattern)
-⚠️ Equipment interactions (equipped creatures get +X/+X or new ability)
-⚠️ Aura enchantments (attach to creature/permanent + grant ability)
-⚠️ Sacrifice mechanics with restrictions
-⚠️ Combat-phase conditional effects ("at combat begins, if...")
-
-**Estimated count: ~68 cards**
-
----
-
-### Hard — Requires C++ engine support
-
-❌ **Planeswalkers** (loyalty abilities, planeswalker uniqueness rule, +/–/0 loyalty costs) — **1 card: Tezzeret, Cruel Captain**
-❌ DFC / flip mechanics (transform) — **0 cards in EOE sample** (but watch for variants)
-❌ Copy spells / copy abilities — unlikely in standard set
-❌ Exchange life totals — unlikely
-❌ Counter triggered abilities — unlikely in standard set
-❌ Completely unique mechanics (need research per card)
-
-**Estimated count: ~15 cards** (mostly edge cases within Medium categories)
-
----
-
-## Sample Cards by Category
-
-### Easy Creatures (majority pattern)
-```
-Ragost, Deft Gastronaut — Legendary Creature — Lobster Citizen
-(Expected: simple keyword/ETB, likely culinary theme)
-
-Honored Knight-Captain — Creature — Human Advisor Knight
-(Expected: keyword + maybe ETB draw or token generation)
-
-Broodguard Elite — Creature — Insect Knight
-(Expected: flying/menace + maybe +1/+1 counter trigger)
-
-Thawbringer — Creature — Insect Scout
-(Expected: creature with simple ETB or damage effect)
-
-Quantum Riddler — Creature — Sphinx
-(Expected: flying + draw/loot on ETB)
-
-Starfield Shepherd — Creature — Angel
-(Expected: flying + life gain or token generation)
-```
-
-### Easy Artifacts (Equipment + Token Generators)
-```
-Lumen-Class Frigate — Artifact — Spacecraft
-(Expected: artifact token or simple tap ability)
-
-Thaumaton Torpedo — Artifact
-(Expected: {T}, sac: deal damage to creature or player)
-
-The Eternity Elevator — Legendary Artifact — Spacecraft
-(Expected: mana ramp or creature recursion)
-
-Dubious Delicacy — Artifact — Food
-(Expected: {T}, sac: gain 3 life or draw a card)
-```
-
-### Easy Instants/Sorceries
-```
-Annul — Instant
-(Expected: counter target spell or destroy target artifact)
-
-Bombard — Instant
-(Expected: deal damage, possibly multimodal)
-
-Biosynthic Burst — Instant
-(Expected: creature enters tapped or gets +X/+X temporarily)
-
-Radiant Strike — Instant
-(Expected: damage to creature/player, possibly with life gain)
-
-Consult the Star Charts — Sorcery
-(Expected: draw or tutor effect)
-```
-
----
-
-## Estimated Implementation Effort
-
-### Phase 1: Easy Cards (~217 cards, ~4–6 weeks @ 1 dev)
-- Batch primitives by mechanic type (keywords, ETB, death, token gen, removal)
-- Test in groups of 10–20 per batch
-- Low complexity, high coverage
-
-### Phase 2: Medium Cards (~68 cards, ~3–4 weeks @ 1 dev)
-- Audit each card for engine support (choice syntax, conditional triggers, etc.)
-- Prioritize high-value cards (Rares, Legendaries, popular mechanics)
-- Some may be downgradeable to Easy upon inspection
-
-### Phase 3: Hard Cards (~15 cards, varies)
-- Planeswalker (Tezzeret) — **Postponed** (needs planeswalker engine support)
-- Others — **Research** to determine if approximation is viable
-
-**Total rough estimate: 7–10 weeks (1 developer, full-time)**
-
----
-
-## Quick Wins (Immediate)
-
-Cards to implement first (easy, high-value):
-
-1. **Icetill Explorer** (EOE 192) — Creature, {2}{G}{G}, 2/4
-   - "You may play an additional land on each of your turns"
-   - "You may play lands from your graveyard" (use `canplayfromexile` pattern)
-   - "Landfall — Whenever a land you control enters, mill a card" (standard trigger)
-   - **Classification: Medium** (all mechanics exist; needs testing)
-   - **Value: High** (constructed-playable land ramp)
-
-2. **Robot creatures** (Dauntless Scrapbot, Roving Actuator, etc.)
-   - Expected: stats + simple keywords + tap abilities
-   - **Classification: Easy**
-   - **Value: Medium** (tribal support for Robot deck)
-
-3. **Removal spells** (Depressurize, Gravkill, Unravel, Radiant Strike, etc.)
-   - **Classification: Easy** (direct damage, creature removal, bounce)
-   - **Value: High** (utility for all decks)
-
-4. **Token generators** (Food tokens, Insect tokens, etc.)
-   - **Classification: Easy** (standard `_*TOKEN_` macro)
-   - **Value: Medium** (support for sacrifice synergies)
-
----
-
-## Data Source
-
-**File:** `M:\Claude_projects\wagic\all-cards-20260430092244.json` (Scryfall dump, April 30, 2026)
-**Total cards in dump:** 38,733
-**EOE English subset:** 266 unique cards
-**Deduped by name:** Yes (only latest printing per card)
-
----
-
 ## Next Actions
 
-- [ ] **Full card scan:** Iterate all 266 cards and extract oracle text details
-- [ ] **Keyword audit:** List all unique abilities in EOE; cross-ref vs. Wagic primitives
-- [ ] **Create detailed card list:** One row per card with Easy/Medium/Hard + blockers
-- [ ] **Identify engine blockers:** Any new mechanics without Wagic equivalent?
-- [ ] **Batch primitives:** Group cards by mechanic; write primitives in batches
-- [ ] **Test in-game:** Validate each batch (20+ card chunks) on Android/Windows
+- [ ] **Batch 6 (BACKLOG-EASY, 11 cards):** write the 11 straightforward remaining cards listed above
+- [ ] **Batch 7+ (BACKLOG-MEDIUM, 50 cards):** group by shared mechanic pattern before writing:
+  - Station/Spacecraft group (8 cards): adapt from Vehicle/Crew pattern — build once, apply across all 8
+  - Void-tracker group (2 cards): needs the shared turn-state tracker built first (same shape as SOS's leave-graveyard-trigger gate)
+  - Remaining ~40: per-card multi-clause DSL, similar effort profile to SOS's M11–M16 batches
+- [ ] **Planeswalker (1 card):** author Tezzeret, Cruel Captain once a planeswalker card is next up in the schedule (engine support already exists — see other 296 PWs)
+- [ ] **The Dominion Bracelet:** deprioritize — no Mindslaver-style control-take-over analog anywhere in Wagic; would need new engine work disproportionate to a single card
+- [ ] `core.zip` rebuild + Windows/Android deploy once Batch 6 lands
 
 **Owner:** *(TBD — pick up when FIN/TLA/SPM/TMT backlog is clear)*
 **Priority:** Medium (after current feature branches merge; before Rooms/Aetherdrift work)
