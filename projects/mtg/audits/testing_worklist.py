@@ -133,10 +133,17 @@ def parse_cards_dat(path):
                     cur[k] = v.strip()
 
 
+# Human verification is recorded in-game as a Wagic grade (card_grades.tsv,
+# name<TAB>grade<TAB>date, one deduped row per card). Map grade -> status.
+GRADE_TO_STATUS = {
+    "supported": "VERIFIED", "borderline": "PARTIAL", "unofficial": "PARTIAL",
+    "crappy": "BROKEN", "unsupported": "BROKEN", "dangerous": "BROKEN",
+}
+
+
 def load_status(path):
-    """primitive name -> status (latest row wins). Behaviour is per primitive,
-    so verification status is keyed by name, not by printing. Tolerates absent
-    file/columns."""
+    """primitive name -> status, from the in-game card_grades.tsv. Behaviour is
+    per primitive, so it's keyed by name. Tolerates absent file/columns."""
     status = {}
     if not path or not os.path.isfile(path):
         return status
@@ -144,9 +151,9 @@ def load_status(path):
         rd = csv.DictReader(fh, delimiter="\t")
         for row in rd:
             name = (row.get("name", "") or "").strip()
-            st = (row.get("status", "") or "").strip().upper()
-            if name and st:
-                status[name] = st         # later rows overwrite → latest wins
+            grade = (row.get("grade", "") or "").strip().lower()
+            if name and grade in GRADE_TO_STATUS:
+                status[name] = GRADE_TO_STATUS[grade]
     return status
 
 
@@ -177,8 +184,8 @@ def main():
         os.path.join(here, "..", "bin", "Res")), help="path to Res/")
     ap.add_argument("--status", default=os.path.normpath(
         os.path.join(here, "..", "bin", "Res", "..", "..", "..",
-                     "User", "card_status.tsv")),
-        help="card_status.tsv (optional)")
+                     "User", "card_grades.tsv")),
+        help="in-game card_grades.tsv (optional)")
     ap.add_argument("--tests", default=os.path.normpath(
         os.path.join(here, "..", "bin", "Res", "test", "_tests.txt")),
         help="TestSuite index (_tests.txt) for the has_testcase column")
