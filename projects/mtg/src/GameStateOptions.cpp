@@ -90,6 +90,7 @@ void GameStateOptions::Start()
     optionsList->Add(NEW OptionInteger(Options::DISABLECARDS, "Disable card images"));
     optionsList->Add(NEW OptionInteger(Options::TRANSITIONS, "Disable screen transitions"));
     optionsList->Add(NEW OptionInteger(Options::OSD, "Display InGame extra information"));
+    optionsList->Add(NEW WDecoEnum(NEW OptionInteger(Options::CARDSTATUS_BADGES, "Card status badges", 2, 1, 0)));
     optionsTabs->Add(optionsList);
 
     optionsList = NEW WGuiList("User");

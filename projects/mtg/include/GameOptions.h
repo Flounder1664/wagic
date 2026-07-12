@@ -86,6 +86,7 @@ public:
         INTERRUPT_ENDTURN,
         INTERRUPT_CLEANUP,
         INTERRUPT_AFTEREND,
+        CARDSTATUS_BADGES, // in-duel verification badge display: 0 off / 1 untested only / 2 all
         BEGIN_AWARDS, //Options after this use the GameOptionAward struct, which includes a timestamp.
         DIFFICULTY_MODE_UNLOCKED = BEGIN_AWARDS,
         EVILTWIN_MODE_UNLOCKED,
@@ -249,6 +250,20 @@ public:
 private:
     OptionManaDisplay();
     static OptionManaDisplay mDef;
+};
+
+class OptionCardBadges : public EnumDefinition
+{
+public:
+    enum { OFF = 0, UNTESTED_ONLY = 1, ALL = 2 };
+    static EnumDefinition * getInstance()
+    {
+        return &mDef;
+    }
+
+private:
+    OptionCardBadges();
+    static OptionCardBadges mDef;
 };
 
 class OptionMaxGrade : public EnumDefinition

@@ -153,6 +153,11 @@ void DuelLayers::RecordCardStatus(const char* status)
                << date << '\t' << ctx << '\t' << pt << '\n';
             sf.close();
         }
+        // keep the in-duel badge store live so the badge updates immediately
+        CardStatusStore::set(card->getName(),
+            broken ? CardStatusStore::ST_BROKEN
+            : (strcmp(status, "VERIFIED") == 0 ? CardStatusStore::ST_VERIFIED
+                                               : CardStatusStore::ST_PARTIAL));
     }
 
     // --- bugreports.txt: rich block, BROKEN only (preserves the bug-report flow)
@@ -250,6 +255,7 @@ DuelLayers::DuelLayers(GameObserver* go, int playerViewIndex) :
         je->UnbindKey((LocalKeySym) 'v'); JGE::BindKey((LocalKeySym) 'v', JGE_BTN_VERIFY);
         je->UnbindKey((LocalKeySym) 'p'); JGE::BindKey((LocalKeySym) 'p', JGE_BTN_PARTIAL);
     }
+    CardStatusStore::reload();   // load card_status.tsv for the in-duel badges
 
     mCardSelector = NEW CardSelector(go, this);
     //1 Action Layer

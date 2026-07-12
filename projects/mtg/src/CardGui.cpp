@@ -18,6 +18,60 @@
 #include "ModRules.h"
 #include "CardDescriptor.h"
 #include "GameApp.h"
+#include "GameOptions.h"
+#include <map>
+#include <sstream>
+
+namespace CardStatusStore
+{
+    static std::map<string, int> sStatus;
+
+    static int statusFromString(const string& s)
+    {
+        if (s == "VERIFIED") return ST_VERIFIED;
+        if (s == "PARTIAL")  return ST_PARTIAL;
+        if (s == "BROKEN")   return ST_BROKEN;
+        return ST_UNTESTED;
+    }
+
+    void reload()
+    {
+        sStatus.clear();
+        string contents;
+        if (!JFileSystem::GetInstance()->readIntoString("card_status.tsv", contents))
+            return;
+        std::stringstream stream(contents);
+        string line;
+        std::getline(stream, line);                 // header
+        while (std::getline(stream, line))
+        {
+            // set \t id \t name \t status \t ...  (latest row wins)
+            size_t p1 = line.find('\t');
+            if (p1 == string::npos) continue;
+            size_t p2 = line.find('\t', p1 + 1);
+            if (p2 == string::npos) continue;
+            size_t p3 = line.find('\t', p2 + 1);
+            if (p3 == string::npos) continue;
+            size_t p4 = line.find('\t', p3 + 1);
+            string name = line.substr(p2 + 1, p3 - p2 - 1);
+            string st = line.substr(p3 + 1,
+                p4 == string::npos ? string::npos : p4 - p3 - 1);
+            if (!name.empty())
+                sStatus[name] = statusFromString(st);
+        }
+    }
+
+    int get(const string& name)
+    {
+        std::map<string, int>::iterator it = sStatus.find(name);
+        return it == sStatus.end() ? ST_UNTESTED : it->second;
+    }
+
+    void set(const string& name, int status)
+    {
+        sStatus[name] = status;
+    }
+}
 
 const float CardGui::Width = 28.0;
 const float CardGui::Height = 40.0;
@@ -118,6 +172,34 @@ CardView::~CardView()
             card = card->next;
         }
     }
+}
+
+// Draw the base card, then a small verification-status badge in the top-left
+// corner when the "Card status badges" option is on (1=untested only, 2=all).
+void CardView::Render()
+{
+    CardGui::Render();
+
+    int mode = options[Options::CARDSTATUS_BADGES].number;
+    if (!mode || !card)
+        return;
+
+    int st = CardStatusStore::get(card->getName());
+    if (mode == OptionCardBadges::UNTESTED_ONLY && st != CardStatusStore::ST_UNTESTED)
+        return;
+
+    PIXEL_TYPE col;
+    switch (st)
+    {
+    case CardStatusStore::ST_VERIFIED: col = ARGB(255, 90, 220, 90);  break; // green
+    case CardStatusStore::ST_PARTIAL:  col = ARGB(255, 255, 170, 40); break; // amber
+    case CardStatusStore::ST_BROKEN:   col = ARGB(255, 255, 80, 80);  break; // red
+    default:                           col = ARGB(200, 160, 160, 160); break; // untested grey
+    }
+    float s = 6.0f * actZ;
+    JRenderer * r = JRenderer::GetInstance();
+    r->FillRect(actX + 1.0f, actY + 1.0f, s, s, ARGB(255, 0, 0, 0)); // outline
+    r->FillRect(actX + 1.5f, actY + 1.5f, s - 1.0f, s - 1.0f, col);
 }
 
 void CardGui::Update(float dt)

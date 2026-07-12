@@ -13,6 +13,17 @@ class MTGCard;
 class MTGCardInstance;
 class PlayGuiObject;
 
+// In-memory mirror of User/card_status.tsv (human verification statuses), keyed
+// by card name. Populated by reload() (at duel start) and kept live by set()
+// when the V/P/T hotkeys record a status; read by CardView to draw the badge.
+namespace CardStatusStore
+{
+    enum { ST_UNTESTED = 0, ST_VERIFIED, ST_PARTIAL, ST_BROKEN };
+    void reload();
+    int  get(const string& name);
+    void set(const string& name, int status);
+}
+
 namespace DrawMode
 {
     enum
@@ -78,11 +89,8 @@ public:
     CardView(const SelectorZone, MTGCardInstance* card, const Pos& ref);
     virtual ~CardView();
 
-    void Render()
-    {
-        CardGui::Render();
-    }
-    
+    void Render();   // CardGui::Render() + verification status badge (defined in CardGui.cpp)
+
     void Render(JQuad* q)
     {
         Pos::Render(q);
