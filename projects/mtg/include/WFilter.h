@@ -447,20 +447,6 @@ protected:
     char rarity;
 };
 
-/**
-  Matches a card by its implementation grade (Constants::GRADE_*). Use e.g.
-  "grade:borderline" in the deck editor to find cards that need verification work.
-*/
-class WCFilterGrade: public WCardFilter
-{
-public:
-    WCFilterGrade(string arg);
-    bool isMatch(MTGCard * c);
-    string getCode();
-protected:
-    int grade;   // Constants::GRADE_* to match, or -1 for any
-};
-
 
 /**
   Matches a card of a given basic ability.

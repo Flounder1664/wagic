@@ -153,8 +153,6 @@ WCardFilter * WCFilterFactory::Terminal(string src, string arg)
 
     if (type == "r" || type == "rarity")
         return NEW WCFilterRarity(arg);
-    else if (type == "grade" || type == "g")
-        return NEW WCFilterGrade(arg);
     else if (type == "c" || type == "color")
         return NEW WCFilterColor(arg);
     else if (type == "nc" || type == "ncolor")
@@ -441,42 +439,6 @@ bool WCFilterRarity::isMatch(MTGCard * c)
     if (!c || !c->data) return false;
     if (rarity == 'A') return true; //A for "Any" or "All"
     return (c->getRarity() == rarity);
-}
-
-//WCFilterGrade
-WCFilterGrade::WCFilterGrade(string arg)
-{
-    grade = -1;   // any
-    // key off the value's 3rd letter, same scheme the primitive grade= line uses:
-    // suPported / boRderline / unOfficial / crAppy / unSupported / daNgerous
-    if (arg.size() > 2)
-    {
-        switch (tolower(arg[2]))
-        {
-        case 'p': grade = Constants::GRADE_SUPPORTED;   break;
-        case 'r': grade = Constants::GRADE_BORDERLINE;  break;
-        case 'o': grade = Constants::GRADE_UNOFFICIAL;  break;
-        case 'a': grade = Constants::GRADE_CRAPPY;      break;
-        case 's': grade = Constants::GRADE_UNSUPPORTED; break;
-        case 'n': grade = Constants::GRADE_DANGEROUS;   break;
-        }
-    }
-}
-
-bool WCFilterGrade::isMatch(MTGCard * c)
-{
-    if (!c || !c->data) return false;
-    if (grade < 0) return true;
-    return c->data->grade == grade;
-}
-
-string WCFilterGrade::getCode()
-{
-    const char* names[6] = { "supported", "borderline", "unofficial",
-                             "crappy", "unsupported", "dangerous" };
-    char buf[48];
-    sprintf(buf, "grade:%s;", (grade >= 0 && grade < 6) ? names[grade] : "any");
-    return buf;
 }
 
 string WCFilterRarity::getCode()
