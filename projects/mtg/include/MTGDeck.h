@@ -100,7 +100,8 @@ class MTGAllCards
 private:
     MTGCard * tempCard; //used by parser
     CardPrimitive * tempPrimitive; //used by parser
-    int currentGrade; //used by Parser (we don't want an additional attribute for the primitives for that as it is only used at load time)
+    int currentGrade; //used by Parser
+    int mFileGrade;   //default grade for the primitive file currently loading (supported/borderline/unsupported)
     static MTGAllCards* instance;
 
 protected:

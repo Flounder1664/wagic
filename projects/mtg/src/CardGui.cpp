@@ -212,6 +212,23 @@ CardView::~CardView()
 
 // Draw the base card, then a small verification-status badge in the top-left
 // corner when the "Card status badges" option is on (1=untested only, 2=all).
+static PIXEL_TYPE gradeColor(int g)
+{
+    if (g <= Constants::GRADE_SUPPORTED)  return ARGB(255, 90, 220, 90);   // green
+    if (g <= Constants::GRADE_UNOFFICIAL) return ARGB(255, 255, 170, 40);  // amber
+    return ARGB(255, 255, 80, 80);                                         // red (crappy+)
+}
+
+static void drawBadge(JRenderer* r, float x, float y, float s, PIXEL_TYPE col)
+{
+    r->FillRect(x, y, s, s, ARGB(255, 0, 0, 0));                 // outline
+    r->FillRect(x + 0.5f, y + 0.5f, s - 1.0f, s - 1.0f, col);
+}
+
+// Draw the card, then verification badges when the "Card status badges" option
+// is on. The card's persisted grade (from the primitive) is the top-left badge;
+// a pending flag from card_grades.tsv (a proposed change, not yet reviewed) is a
+// second top-right badge. Mode 1 = flagged cards only; mode 2 = all cards.
 void CardView::Render()
 {
     CardGui::Render();
@@ -220,19 +237,27 @@ void CardView::Render()
     if (!mode || !card)
         return;
 
-    int g = CardStatusStore::get(card->getName());
-    if (mode == OptionCardBadges::UNTESTED_ONLY && g != CardStatusStore::UNTESTED)
-        return;
-
-    PIXEL_TYPE col;
-    if (g == CardStatusStore::UNTESTED)            col = ARGB(200, 160, 160, 160); // grey
-    else if (g <= Constants::GRADE_SUPPORTED)      col = ARGB(255, 90, 220, 90);   // green
-    else if (g <= Constants::GRADE_UNOFFICIAL)     col = ARGB(255, 255, 170, 40);  // amber
-    else                                           col = ARGB(255, 255, 80, 80);   // red (crappy+)
-    float s = 6.0f * actZ;
+    int flag = CardStatusStore::get(card->getName());   // proposed grade, or UNTESTED
     JRenderer * r = JRenderer::GetInstance();
-    r->FillRect(actX + 1.0f, actY + 1.0f, s, s, ARGB(255, 0, 0, 0)); // outline
-    r->FillRect(actX + 1.5f, actY + 1.5f, s - 1.0f, s - 1.0f, col);
+    float s = 6.0f * actZ;
+
+    if (mode == OptionCardBadges::FLAGGED_ONLY)
+    {
+        if (flag != CardStatusStore::UNTESTED)
+            drawBadge(r, actX + 1.0f, actY + 1.0f, s, gradeColor(flag));
+        return;
+    }
+
+    // mode == ALL: persisted grade on every card, proposed change overlaid
+    int baseGrade = (card->model && card->model->data) ? card->model->data->grade
+                                                       : Constants::GRADE_SUPPORTED;
+    drawBadge(r, actX + 1.0f, actY + 1.0f, s, gradeColor(baseGrade));
+
+    if (flag != CardStatusStore::UNTESTED && flag != baseGrade)
+    {
+        float cw = CardGui::Width * actZ;
+        drawBadge(r, actX + cw - s - 1.0f, actY + 1.0f, s, gradeColor(flag));
+    }
 }
 
 void CardGui::Update(float dt)

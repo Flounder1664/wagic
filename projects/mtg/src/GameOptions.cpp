@@ -1036,7 +1036,7 @@ OptionCardBadges OptionCardBadges::mDef;
 OptionCardBadges::OptionCardBadges()
 {
     mDef.values.push_back(EnumDefinition::assoc(OFF, "Off"));
-    mDef.values.push_back(EnumDefinition::assoc(UNTESTED_ONLY, "Untested only"));
+    mDef.values.push_back(EnumDefinition::assoc(FLAGGED_ONLY, "Flagged only"));
     mDef.values.push_back(EnumDefinition::assoc(ALL, "All"));
 }
 

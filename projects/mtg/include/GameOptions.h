@@ -255,7 +255,7 @@ private:
 class OptionCardBadges : public EnumDefinition
 {
 public:
-    enum { OFF = 0, UNTESTED_ONLY = 1, ALL = 2 };
+    enum { OFF = 0, FLAGGED_ONLY = 1, ALL = 2 };
     static EnumDefinition * getInstance()
     {
         return &mDef;
