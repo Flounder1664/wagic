@@ -18,8 +18,43 @@ Usage:
 Outputs (next to this script): <prefix>.tsv (all testable cards) and
 <prefix>.md (per-set summary + top untested-by-risk checklist).
 """
-import argparse, os, sys, glob, csv
+import argparse, os, sys, glob, csv, re
 from collections import defaultdict
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def load_testcases(tests_index, prim_names):
+    """Set of primitive names that already have a Wagic TestSuite script.
+
+    TestSuite scripts are named after the card under test (e.g.
+    `agony_warp_i1085.txt`, `Angel_of_Vitality_2.txt`). Match each registered
+    test filename to a card by longest-prefix against the primitive-name
+    universe, both reduced to lowercase-alphanumeric so apostrophes/underscores/
+    suffixes don't matter. Heuristic (filename-based) — good enough to flag
+    already-covered cards. Returns (tested_names, num_registered_tests)."""
+    by_norm = {}
+    for n in prim_names:
+        by_norm.setdefault(_norm(n), n)           # any winner on collision
+    tested = set()
+    if not tests_index or not os.path.isfile(tests_index):
+        return tested, 0
+    n_tests = 0
+    with open(tests_index, encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            e = line.strip()
+            if not e or e.startswith("#") or e.startswith("+"):
+                continue                          # comment / section directive
+            n_tests += 1
+            s = _norm(os.path.splitext(os.path.basename(e))[0])
+            for L in range(len(s), 2, -1):        # longest match wins
+                hit = by_norm.get(s[:L])
+                if hit:
+                    tested.add(hit)
+                    break
+    return tested, n_tests
 
 # The fork's hand-authored, new-mechanic sets — the audit's identified risk
 # (grade "supported" can still strip a mechanic). Edit as new fork sets land.
@@ -144,6 +179,9 @@ def main():
         os.path.join(here, "..", "bin", "Res", "..", "..", "..",
                      "User", "card_status.tsv")),
         help="card_status.tsv (optional)")
+    ap.add_argument("--tests", default=os.path.normpath(
+        os.path.join(here, "..", "bin", "Res", "test", "_tests.txt")),
+        help="TestSuite index (_tests.txt) for the has_testcase column")
     ap.add_argument("--by", choices=["set", "risk"], default="risk")
     ap.add_argument("--out-prefix", default="testing_worklist")
     args = ap.parse_args()
@@ -157,6 +195,10 @@ def main():
     print(f"status rows: {len(status)} "
           f"({'found' if status else 'no card_status.tsv → all UNTESTED'})",
           file=sys.stderr)
+
+    tested_names, n_tests = load_testcases(args.tests, prims.keys())
+    print(f"testsuite: {n_tests} registered scripts → matched "
+          f"{len(tested_names)} distinct cards", file=sys.stderr)
 
     # Aggregate registrations by DISTINCT primitive name (behaviour is per name).
     cards = {}                       # name -> aggregate dict
@@ -195,51 +237,62 @@ def main():
         rows.append({
             "name": a["name"], "grade": a["grade"], "status": st,
             "risk": score, "risk_reasons": reasons, "missing": a["missing"],
+            "has_testcase": a["name"] in tested_names,
             "printings": a["printings"], "sets": len(a["sets"]),
             "example_set": a["ex_set"], "example_id": a["ex_id"],
         })
 
+    # Within a risk tier, surface cards WITHOUT an automated test first
+    # (has_testcase False sorts before True) — already-guarded cards deprioritised.
     if args.by == "set":
-        rows.sort(key=lambda r: (r["example_set"], -r["risk"], r["name"]))
+        rows.sort(key=lambda r: (r["example_set"], -r["risk"],
+                                 r["has_testcase"], r["name"]))
     else:
-        rows.sort(key=lambda r: (-r["risk"], r["name"]))
+        rows.sort(key=lambda r: (-r["risk"], r["has_testcase"], r["name"]))
 
     # ---- TSV: one row per distinct testable card (primitive name) ----
     tsv_path = os.path.join(here, args.out_prefix + ".tsv")
-    cols = ["name", "grade", "status", "risk", "risk_reasons", "missing",
-            "printings", "sets", "example_set", "example_id"]
+    cols = ["name", "grade", "status", "has_testcase", "risk", "risk_reasons",
+            "missing", "printings", "sets", "example_set", "example_id"]
     with open(tsv_path, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
         w.writeheader()
         w.writerows(rows)
 
-    # per-set verified-name counts (a set is "done" when its testable names pass)
+    # per-set verified / scripted name counts
     for s, d in per_set.items():
         names = d.get("_names", set())
         d["names"] = len(names)
         d["ver_names"] = sum(1 for n in names if status.get(n) == "VERIFIED")
+        d["scripted"] = sum(1 for n in names if n in tested_names)
 
     untested = [r for r in rows if r["status"] == "UNTESTED"]
+    n_scripted = sum(1 for r in rows if r["has_testcase"])
     md_path = os.path.join(here, args.out_prefix + ".md")
     with open(md_path, "w", encoding="utf-8") as fh:
         fh.write("# Card verification worklist\n\n")
         fh.write(f"- distinct testable cards (written, non-trivial): "
                  f"**{len(rows)}**\n")
         fh.write(f"- still `UNTESTED`: **{len(untested)}**\n")
+        fh.write(f"- already have a Wagic TestSuite script: **{n_scripted}** "
+                 f"(~{100*n_scripted/len(rows):.0f}%) — automated regression; "
+                 "still worth a human faithfulness pass.\n")
         fh.write("- trivial (basic land / French-vanilla) and unwritten "
                  "(dangling) cards are excluded from testing.\n")
         fh.write("- risk: fork-new (card exists only in the fork's hand-authored "
-                 "sets) + grade + `#MISSING` note + targets.\n\n")
+                 "sets) + grade + `#MISSING` note + targets. Within a tier, cards "
+                 "with no TestSuite script come first.\n\n")
         fh.write("## Top 100 untested by risk\n\n")
-        fh.write("| name | grade | risk | why | printings | note |\n"
+        fh.write("| name | grade | risk | why | script? | note |\n"
                  "|---|---|---|---|---|---|\n")
         for r in untested[:100]:
             fh.write(f"| {r['name']} | {r['grade']} | {r['risk']} | "
-                     f"{r['risk_reasons']} | {r['printings']} | {r['missing']} |\n")
+                     f"{r['risk_reasons']} | {'✓' if r['has_testcase'] else '—'} "
+                     f"| {r['missing']} |\n")
         fh.write("\n## Per-set coverage (registrations)\n\n")
         fh.write("| set | reg | trivial | unwritten | testable | "
-                 "distinct-names | verified-names | %verified |\n")
-        fh.write("|---" * 8 + "|\n")
+                 "distinct-names | scripted | verified-names | %verified |\n")
+        fh.write("|---" * 9 + "|\n")
         for s in sorted(per_set):
             d = per_set[s]
             nm = d.get("names", 0)
@@ -247,11 +300,11 @@ def main():
             pct = f"{100*vn/nm:.0f}%" if nm else "-"
             fh.write(f"| {s} | {d.get('reg',0)} | {d.get('trivial',0)} | "
                      f"{d.get('unwritten',0)} | {d.get('testable_reg',0)} | "
-                     f"{nm} | {vn} | {pct} |\n")
+                     f"{nm} | {d.get('scripted',0)} | {vn} | {pct} |\n")
 
     print(f"\nwrote {tsv_path}\nwrote {md_path}")
     print(f"distinct-testable={len(rows)}  untested={len(untested)}  "
-          f"sets={len(per_set)}")
+          f"scripted={n_scripted}  sets={len(per_set)}")
 
 
 if __name__ == "__main__":
