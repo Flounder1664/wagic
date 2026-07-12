@@ -248,15 +248,26 @@ void CardView::Render()
         return;
     }
 
-    // mode == ALL: persisted grade on every card, proposed change overlaid
+    // mode == ALL: show the grade badge only when worse than supported (keep
+    // green cards clean); a pending flag overlaps the badge's bottom-right, or
+    // stands alone when the (green) base badge is hidden.
     int baseGrade = (card->model && card->model->data) ? card->model->data->grade
                                                        : Constants::GRADE_SUPPORTED;
-    drawBadge(r, actX + 1.0f, actY + 1.0f, s, gradeColor(baseGrade));
+    float bx = actX + 1.0f, by = actY + 1.0f;
+    bool showBase = baseGrade > Constants::GRADE_SUPPORTED;
+    bool showFlag = flag != CardStatusStore::UNTESTED && flag != baseGrade;
 
-    if (flag != CardStatusStore::UNTESTED && flag != baseGrade)
+    if (showBase)
+        drawBadge(r, bx, by, s, gradeColor(baseGrade));
+    if (showFlag)
     {
-        float cw = CardGui::Width * actZ;
-        drawBadge(r, actX + cw - s - 1.0f, actY + 1.0f, s, gradeColor(flag));
+        if (showBase)
+        {
+            float fs = s * 0.6f;   // small overlay on the badge's bottom-right quarter
+            drawBadge(r, bx + s - fs, by + s - fs, fs, gradeColor(flag));
+        }
+        else
+            drawBadge(r, bx, by, s, gradeColor(flag)); // green base hidden: flag is the badge
     }
 }
 
