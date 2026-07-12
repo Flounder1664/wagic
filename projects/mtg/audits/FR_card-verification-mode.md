@@ -1,7 +1,7 @@
 # Feature Request: In-game Card Verification Mode ("does this card actually work?")
 
 **Status:** proposal
-**Related:** the `T` bug-flag hotkey (in `DuelLayers`), the set-coverage audit in `projects/mtg/audits/` (`SUMMARY.md`, `master_grade_table.tsv`, `README.md`).
+**Related:** the `T` bug-flag hotkey (in `DuelLayers`), the set-coverage audit in `projects/mtg/audits/` (`SUMMARY.md`, `master_grade_table.tsv`, `README.md`), and the **Wagic TestSuite** ([wiki](https://github.com/WagicProject/wagic/wiki/TestSuite), scripts in `projects/mtg/bin/Res/test/`).
 
 ## Summary
 
@@ -108,9 +108,32 @@ A verification-mode command that instantiates the next `UNTESTED` card (in workl
 - **Faithfulness bar:** does `VERIFIED` mean "matches Oracle text exactly" or "played without a visible problem"? (Suggest: matches Oracle intent; anything short = `PARTIAL` + note.)
 - **Gating:** verification-mode toggle vs always-on.
 
+## Relationship to the Wagic TestSuite
+
+Wagic already has an **automated** test framework — the [TestSuite](https://github.com/WagicProject/wagic/wiki/TestSuite): scripts in `Res/test/` (`_tests.txt` registers them), each an `[INIT]` game state → `[DO]` actions → `[ASSERT]` expected zones → `[END]`, runnable in-game (Play → Test Suite) or headless via the WSL console harness. This proposal **complements** it, it does not replace it — and the two form a pipeline, not a choice.
+
+**Why human verification is needed even with the TestSuite:**
+
+- **Coverage.** The fork has **~850 scripted tests** vs **~28,000 distinct testable cards** — roughly **3%**. Authoring a script per card is far more effort than a human eyeballing it once; the TestSuite can't realistically reach the whole pool.
+- **Structural blind spots.** The TestSuite states *"some variables, like the toughness of the creature, cannot be accessed directly"* — you must contrive a scenario where the property causes an observable zone change. That is **exactly the Hunter's Mark bug that started this** ("+1/+1 until end of turn not granted"): a human sees the wrong `2/2` instantly, but asserting it in a script means engineering a lethal-combat scenario. It also can't judge rendering, layout, timing, or UI faithfulness at all.
+- **Faithfulness discovery.** The TestSuite guards *known* expectations; the human sweep *discovers* where a "supported" primitive silently strips a mechanic (the audit's core finding).
+
+**The pipeline:**
+
+```
+worklist (#1, risk-ranked) → human spot-check (V / P / T keys)
+   → for risky or fixed cards, author a TestSuite [INIT]/[DO]/[ASSERT] case
+   → automated regression thereafter (in-game + headless)
+```
+
+- The **worklist (#1) prioritises TestSuite-authoring effort too** — fork-new / borderline / `#MISSING` cards are both the human-sweep priority and where a permanent script pays off most. It can later cross-reference `Res/test/_tests.txt` to flag cards that already have a script (so they can be pre-marked / deprioritised).
+- A **`PARTIAL`/`BROKEN` note becomes the seed for an `[ASSERT]`** — one-time human verification converts into a lasting regression guard.
+- **#6 spawn-next can reuse the TestSuite's `[INIT]` instantiation path** — the engine already builds arbitrary game states from card names/multiverse IDs for tests; the spawn-next queue drives the same machinery.
+- Optional **`has_testcase` signal** in `card_status` (from `_tests.txt`): a card is fully mature when it is **human-`VERIFIED` *and* guarded by an automated test**, not just one or the other.
+
 ## Non-goals
 
-- Not a replacement for the automated `TestSuiteAI` (scripted assertions). This is **human spot-verification** of real behaviour — it catches rendering, timing, UI, and interaction faithfulness that scripts don't, and it produces the faithfulness signal the presence-based grade can't.
+- Not a replacement for the TestSuite. This is **human spot-verification** of real behaviour — it catches the rendering, timing, UI, and faithfulness gaps scripts structurally can't, feeds the TestSuite where a permanent guard is worth it, and produces the faithfulness signal the presence-based grade can't.
 
 ## Why now / fit
 
