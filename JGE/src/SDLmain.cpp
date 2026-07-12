@@ -398,6 +398,8 @@ static const struct { LocalKeySym keysym; JButton keycode; } gDefaultBindings[] 
 	{ SDLK_b,             JGE_BTN_SOUND },
 	{ SDLK_f,             JGE_BTN_FULLSCREEN },
 	{ SDLK_t,             JGE_BTN_TAGBUG },
+	{ SDLK_v,             JGE_BTN_VERIFY },
+	{ SDLK_p,             JGE_BTN_PARTIAL },
 
 	/* old Qt ones, basically modified to comply with the N900 keyboard
 	{ SDLK_a,             JGE_BTN_NEXT },
