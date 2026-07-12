@@ -21,55 +21,91 @@
 #include "GameOptions.h"
 #include <map>
 #include <sstream>
+#include <ctime>
 
 namespace CardStatusStore
 {
-    static std::map<string, int> sStatus;
+    struct Entry { int grade; string date; };
+    static std::map<string, Entry> sGrades;   // one entry per card name (deduped)
+    static bool sLoaded = false;
 
-    static int statusFromString(const string& s)
+    const char* gradeName(int g)
     {
-        if (s == "VERIFIED") return ST_VERIFIED;
-        if (s == "PARTIAL")  return ST_PARTIAL;
-        if (s == "BROKEN")   return ST_BROKEN;
-        return ST_UNTESTED;
+        switch (g)
+        {
+        case Constants::GRADE_SUPPORTED:   return "Supported";
+        case Constants::GRADE_BORDERLINE:  return "Borderline";
+        case Constants::GRADE_UNOFFICIAL:  return "Unofficial";
+        case Constants::GRADE_CRAPPY:      return "Crappy";
+        case Constants::GRADE_UNSUPPORTED: return "Unsupported";
+        case Constants::GRADE_DANGEROUS:   return "Dangerous";
+        }
+        return "Supported";
+    }
+    static int gradeFromName(const string& s)
+    {
+        if (s == "Borderline")  return Constants::GRADE_BORDERLINE;
+        if (s == "Unofficial")  return Constants::GRADE_UNOFFICIAL;
+        if (s == "Crappy")      return Constants::GRADE_CRAPPY;
+        if (s == "Unsupported") return Constants::GRADE_UNSUPPORTED;
+        if (s == "Dangerous")   return Constants::GRADE_DANGEROUS;
+        return Constants::GRADE_SUPPORTED;
+    }
+
+    // Rewrite the whole (deduped) file so it stays one row per card and never
+    // grows unbounded — writes happen only on a keypress, so cost is trivial.
+    static void rewrite()
+    {
+        std::ofstream f;
+        if (!JFileSystem::GetInstance()->openForWrite(f, "card_grades.tsv", ios_base::out))
+            return;
+        f << "name\tgrade\tdate\n";
+        for (std::map<string, Entry>::iterator it = sGrades.begin(); it != sGrades.end(); ++it)
+            f << it->first << '\t' << gradeName(it->second.grade) << '\t' << it->second.date << '\n';
+        f.close();
     }
 
     void reload()
     {
-        sStatus.clear();
+        sGrades.clear();
+        sLoaded = true;
         string contents;
-        if (!JFileSystem::GetInstance()->readIntoString("card_status.tsv", contents))
+        if (!JFileSystem::GetInstance()->readIntoString("card_grades.tsv", contents))
             return;
         std::stringstream stream(contents);
         string line;
         std::getline(stream, line);                 // header
         while (std::getline(stream, line))
         {
-            // set \t id \t name \t status \t ...  (latest row wins)
-            size_t p1 = line.find('\t');
-            if (p1 == string::npos) continue;
-            size_t p2 = line.find('\t', p1 + 1);
-            if (p2 == string::npos) continue;
-            size_t p3 = line.find('\t', p2 + 1);
-            if (p3 == string::npos) continue;
-            size_t p4 = line.find('\t', p3 + 1);
-            string name = line.substr(p2 + 1, p3 - p2 - 1);
-            string st = line.substr(p3 + 1,
-                p4 == string::npos ? string::npos : p4 - p3 - 1);
-            if (!name.empty())
-                sStatus[name] = statusFromString(st);
+            size_t t1 = line.find('\t');            // name \t grade \t date
+            if (t1 == string::npos) continue;
+            size_t t2 = line.find('\t', t1 + 1);
+            string name = line.substr(0, t1);
+            string grade = line.substr(t1 + 1, t2 == string::npos ? string::npos : t2 - t1 - 1);
+            if (name.empty()) continue;
+            Entry e;
+            e.grade = gradeFromName(grade);
+            e.date = (t2 == string::npos) ? "" : line.substr(t2 + 1);
+            sGrades[name] = e;
         }
     }
 
     int get(const string& name)
     {
-        std::map<string, int>::iterator it = sStatus.find(name);
-        return it == sStatus.end() ? ST_UNTESTED : it->second;
+        if (!sLoaded) reload();
+        std::map<string, Entry>::iterator it = sGrades.find(name);
+        return it == sGrades.end() ? UNTESTED : it->second.grade;
     }
 
-    void set(const string& name, int status)
+    void set(const string& name, int grade)
     {
-        sStatus[name] = status;
+        if (!sLoaded) reload();
+        char date[16];
+        time_t now = time(NULL);
+        strftime(date, sizeof date, "%Y-%m-%d", localtime(&now));
+        Entry e; e.grade = grade; e.date = date;
+        sGrades[name] = e;                          // dedup: update in place
+        rewrite();
     }
 }
 
@@ -184,18 +220,15 @@ void CardView::Render()
     if (!mode || !card)
         return;
 
-    int st = CardStatusStore::get(card->getName());
-    if (mode == OptionCardBadges::UNTESTED_ONLY && st != CardStatusStore::ST_UNTESTED)
+    int g = CardStatusStore::get(card->getName());
+    if (mode == OptionCardBadges::UNTESTED_ONLY && g != CardStatusStore::UNTESTED)
         return;
 
     PIXEL_TYPE col;
-    switch (st)
-    {
-    case CardStatusStore::ST_VERIFIED: col = ARGB(255, 90, 220, 90);  break; // green
-    case CardStatusStore::ST_PARTIAL:  col = ARGB(255, 255, 170, 40); break; // amber
-    case CardStatusStore::ST_BROKEN:   col = ARGB(255, 255, 80, 80);  break; // red
-    default:                           col = ARGB(200, 160, 160, 160); break; // untested grey
-    }
+    if (g == CardStatusStore::UNTESTED)            col = ARGB(200, 160, 160, 160); // grey
+    else if (g <= Constants::GRADE_SUPPORTED)      col = ARGB(255, 90, 220, 90);   // green
+    else if (g <= Constants::GRADE_UNOFFICIAL)     col = ARGB(255, 255, 170, 40);  // amber
+    else                                           col = ARGB(255, 255, 80, 80);   // red (crappy+)
     float s = 6.0f * actZ;
     JRenderer * r = JRenderer::GetInstance();
     r->FillRect(actX + 1.0f, actY + 1.0f, s, s, ARGB(255, 0, 0, 0)); // outline

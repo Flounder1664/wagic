@@ -134,30 +134,15 @@ void DuelLayers::RecordCardStatus(const char* status)
         sprintf(pt, "%d/%d (printed %d/%d)", card->getCurrentPower(),
                 card->getCurrentToughness(), card->getPower(), card->getToughness());
 
-    // --- card_status.tsv: one row per press, keyed by card (read by the worklist)
+    // --- record the result mapped to Wagic's grade vocabulary in the deduped
+    //     card_grades.tsv (one row per card). Also updates the live badge store.
+    //     V=Supported, P=Borderline, T(broken)=Crappy.
     if (card)
     {
-        JFileSystem* fs = JFileSystem::GetInstance();
-        const bool existed = fs->FileExists("card_status.tsv");
-        std::ofstream sf;
-        if (fs->openForWrite(sf, "card_status.tsv", ios_base::app))
-        {
-            if (!existed)
-                sf << "set\tid\tname\tstatus\tnote\ttested_by\tdate\tcontext\tpt\n";
-            char date[16];
-            time_t now = time(NULL);
-            strftime(date, sizeof date, "%Y-%m-%d", localtime(&now));
-            sf << setlist[card->setId] << '\t' << card->getId() << '\t'
-               << card->getName() << '\t' << status << '\t' << '\t'  // note (blank)
-               << options[Options::ACTIVE_PROFILE].str << '\t'
-               << date << '\t' << ctx << '\t' << pt << '\n';
-            sf.close();
-        }
-        // keep the in-duel badge store live so the badge updates immediately
-        CardStatusStore::set(card->getName(),
-            broken ? CardStatusStore::ST_BROKEN
-            : (strcmp(status, "VERIFIED") == 0 ? CardStatusStore::ST_VERIFIED
-                                               : CardStatusStore::ST_PARTIAL));
+        int grade = broken ? Constants::GRADE_CRAPPY
+                  : (strcmp(status, "VERIFIED") == 0 ? Constants::GRADE_SUPPORTED
+                                                     : Constants::GRADE_BORDERLINE);
+        CardStatusStore::set(card->getName(), grade);
     }
 
     // --- bugreports.txt: rich block, BROKEN only (preserves the bug-report flow)
@@ -188,14 +173,13 @@ void DuelLayers::RecordCardStatus(const char* status)
     }
 
     // --- on-screen confirmation
-    const char* label = broken ? "Flagged BROKEN"
-                        : (strcmp(status, "VERIFIED") == 0 ? "Verified 100%" : "Partial");
+    const char* label = broken ? "Broken -> Crappy"
+                        : (strcmp(status, "VERIFIED") == 0 ? "Verified -> Supported"
+                                                           : "Partial -> Borderline");
     if (card)
         mTagMessage = string(label) + ": " + card->getName();
     else
         mTagMessage = string(label) + " pile: " + pileDesc;
-    if (strcmp(status, "PARTIAL") == 0)
-        mTagMessage += "  (add note in card_status.tsv)";
     mLastTagged = card;
     mLastStatus = status;
     mTagMessageTimer = 2.5f;

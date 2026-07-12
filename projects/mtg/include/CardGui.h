@@ -13,15 +13,18 @@ class MTGCard;
 class MTGCardInstance;
 class PlayGuiObject;
 
-// In-memory mirror of User/card_status.tsv (human verification statuses), keyed
-// by card name. Populated by reload() (at duel start) and kept live by set()
-// when the V/P/T hotkeys record a status; read by CardView to draw the badge.
+// In-memory mirror of User/card_grades.tsv — human verification mapped onto
+// Wagic's grade vocabulary (Supported/Borderline/Crappy = Constants::GRADE_*).
+// Keyed by card name, one entry per card (deduped, rewritten on update so the
+// file can't grow unbounded). reload() at duel start; set() by the V/P/T
+// hotkeys; read by CardView to colour the badge.
 namespace CardStatusStore
 {
-    enum { ST_UNTESTED = 0, ST_VERIFIED, ST_PARTIAL, ST_BROKEN };
+    static const int UNTESTED = -1;              // no entry for this card
+    const char* gradeName(int grade);
     void reload();
-    int  get(const string& name);
-    void set(const string& name, int status);
+    int  get(const string& name);                // a Constants::GRADE_* value, or UNTESTED
+    void set(const string& name, int grade);     // GRADE_* ; persists (dedup rewrite)
 }
 
 namespace DrawMode
