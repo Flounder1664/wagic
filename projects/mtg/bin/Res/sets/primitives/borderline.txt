@@ -45933,6 +45933,8 @@ type=Sorcery
 [/card]
 [card]
 name=Gleemox
+grade=supported
+# REVIEW 2026-07-12 [P:med] Works as expected
 auto={T}:Add{W}
 auto={T}:Add{U}
 auto={T}:Add{B}

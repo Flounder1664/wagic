@@ -10817,6 +10817,7 @@ type=Sorcery
 [card]
 name=Behold the Sinister Six!
 grade=borderline
+# REVIEW 2026-07-12 [P:med] allows selecting duplicates
 auto=moveto(mybattlefield) target(<upto:6>creature[-token]|mygraveyard)
 mana={6}{B}
 type=Sorcery
@@ -39669,6 +39670,7 @@ subtype=Aura
 [card]
 name=Evil Reawakened
 grade=borderline
+# REVIEW 2026-07-12 [P:med] doesn't add the +1/+1 counters
 auto=counter(1/1,2) moveto(mybattlefield) target(creature|mygraveyard)
 text=Return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it. (Approximation: counters added while in graveyard, carry over on entry.)
 mana={4}{B}
@@ -79648,6 +79650,7 @@ type=Sorcery
 [card]
 name=Mob Lookout
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 auto=draw:1 && discard:1 controller
 mana={1}{U/B}
 type=Creature
@@ -88014,6 +88017,7 @@ toughness=2
 [card]
 name=Oroku Saki, Shredder Rising
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 id=1520068
 auto=@combat(attackdamage) source(this):draw:1 controller && life:-1 controller
 mana={2}{B}
@@ -116932,6 +116936,7 @@ text=Menace -- Whenever Spider-Man Noir attacks alone, put a +1/+1 counter on it
 [card]
 name=Spider-Man, Web-Slinger
 grade=borderline
+# REVIEW 2026-07-12 [P:med] websling alternate casting cost doesn't work
 auto=@combat(attacking) source(this):token(Spider,Creature Spider,2/1,reach,green) controller
 mana={2}{W}
 type=Legendary Creature
@@ -124866,6 +124871,7 @@ type=Instant
 [card]
 name=Technodrome
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 id=1520179
 abilities=reach,trample
 auto=@each my combatbegins:if compare(power)~lessthan~6 then cantattack ueot
