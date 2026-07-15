@@ -39491,6 +39491,8 @@ type=Sorcery
 [/card]
 [card]
 name=Eusocial Engineering
+grade=borderline
+# REVIEW 2026-07-14 [P:med] didn't get the option to play for warp cost
 auto=_LANDFALL_:_ROBOTTOKEN_
 text=Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token.
 mana={3}{G}{G}
@@ -60128,6 +60130,8 @@ type=Sorcery
 [/card]
 [card]
 name=Icetill Explorer
+grade=borderline
+# REVIEW 2026-07-14 [P:high] doesn't mill a card on landfall
 auto=maxPlay(land)+1
 auto=lord(land|mygraveyard) canPlayFromGraveyard
 auto=_LANDFALL_mill:1 controller

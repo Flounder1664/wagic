@@ -39406,6 +39406,8 @@ type=Land
 [/card]
 [card]
 name=Field of the Dead
+grade=supported
+# REVIEW 2026-07-14 [P:med] 
 auto=tap(noevent)
 auto={T}:add{C}
 auto=if type(land|myBattlefield)~morethan~6 then name(Create zombie) _ZOMBIETOKEN_
