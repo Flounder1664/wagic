@@ -2,6 +2,14 @@
 
 Cross-set audit of missing / unsupported cards. Started 2026-07-06.
 
+> **⚠ Data moved (2026-07-15):** the machine-readable tables
+> (`master_grade_table.tsv`, `gap_per_set.tsv`, `testing_worklist.*`) now live
+> in the **wagic-tools** repo under `audits/`, regenerated reproducibly by
+> `audits/build_audit.py` from this repo's `_cards.dat` + primitives +
+> `missing_cards_by_sets/` ground truth. This directory keeps the narrative
+> analysis docs only. The `*_BACKLOG.md` files in `projects/mtg/` are frozen
+> history — the card-work registry in wagic-tools supersedes them.
+
 ## What "excluded" means — two distinct gap types
 
 A card can be absent from real play for two structurally different reasons. Keep them separate:
