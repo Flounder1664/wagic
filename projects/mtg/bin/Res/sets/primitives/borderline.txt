@@ -132261,3 +132261,59 @@ mana={3}{R}
 type=Enchantment
 subtype=Room
 [/card]
+[card]
+name=Driftgloom Coyote
+auto=(blink)forsrc target(creature|opponentbattlefield)
+#MISSING If that creature had power 2 or less, put a +1/+1 counter on this creature
+text=When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield. If that creature had power 2 or less, put a +1/+1 counter on this creature.
+mana={3}{W}{W}
+type=Creature
+subtype=Elemental Coyote
+power=3
+toughness=4
+[/card]
+[card]
+name=Pawpatch Recruit
+kicker={2} name(Offspring)
+abilities=trample
+auto=@targeted(creature|mybattlefield) from(*|opponentstack):counter(1/1) target(other creature|mybattlefield)
+auto=if paid(kicker) then clone and!( becomes(,1/1) forever )!
+text=Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.) -- Trample -- Whenever a creature you control becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on target creature you control other than that creature.
+mana={G}
+type=Creature
+subtype=Rabbit Warrior
+power=2
+toughness=1
+[/card]
+[card]
+name=Camellia, the Seedmiser
+abilities=menace
+auto=lord(other squirrel|mybattlefield) menace
+auto=@sacrificed(food|mybattlefield):token(Squirrel,Creature Squirrel,1/1,green)
+#MISSING {2}, Forage: Put a +1/+1 counter on each other Squirrel you control (forage cost unsupported)
+text=Menace -- Other Squirrels you control have menace. -- Whenever you sacrifice one or more Foods, create a 1/1 green Squirrel creature token. -- {2}, Forage: Put a +1/+1 counter on each other Squirrel you control. (To forage, exile three cards from your graveyard or sacrifice a Food.)
+mana={1}{B}{G}
+type=Legendary Creature
+subtype=Squirrel Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Helga, Skittish Seer
+auto=@movedTo(*[creature;manacost>=4]|mystack):draw:1 controller && life:1 controller && counter(1/1) all(this)
+#MISSING {T}: Add X mana of any one color, where X is Helga's power (restricted X mana ability unsupported)
+text=Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life, and put a +1/+1 counter on Helga. -- {T}: Add X mana of any one color, where X is Helga's power. Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs.
+mana={G}{W}{U}
+type=Legendary Creature
+subtype=Frog Druid
+power=1
+toughness=3
+[/card]
+[card]
+name=Oakhollow Village
+auto={T}:add{C}
+auto={T}:add{G}
+auto={G}{T}:counter(1/1) all(frog[fresh]|mybattlefield) && counter(1/1) all(rabbit[fresh]|mybattlefield) && counter(1/1) all(raccoon[fresh]|mybattlefield) && counter(1/1) all(squirrel[fresh]|mybattlefield)
+text={T}: Add {C}. -- {T}: Add {G}. Spend this mana only to cast a creature spell. -- {G}, {T}: Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn.
+type=Land
+[/card]
