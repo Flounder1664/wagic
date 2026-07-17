@@ -1,0 +1,25 @@
+#WOE Gingerbread regression (user-reported): casting the Puny Snack adventure half must NOT
+#create the creature side's Food token (ifnot paid(alternative) guard). Card goes to exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:gingerbread hunter // puny snack
+manapool:{4}{G}{2}{B}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+gingerbread hunter // puny snack
+choice 1
+hill giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:*
+manapool:{4}{G}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[END]

@@ -84075,7 +84075,7 @@ type=Land
 [card]
 name=Pilot
 grade=borderline
-# REVIEW 2026-07-17 [P:med] created by back on track. the saddle ability doesn't seem to work.
+# REVIEW 2026-07-17 [P:med] created by back on track. the saddle ability doesn t seem to work.
 auto={0} restriction{type(vehicle|myBattlefield)~morethan~0}:name(Can crew as 2 greater) transforms((,newability[2/0] ,cantattack,cantblock,cantpwattack)) ueot limit:1
 type=Artifact Creature
 subtype=Pilot
@@ -93974,7 +93974,7 @@ name=Rocketeer Boostbuggy
 grade=borderline
 # REVIEW 2026-07-17 [P:med] after the exhaust cost the vehicle should be a creature but it stays in the artifact area and still has to be crewed.
 auto=_ATTACKING__TREASURE_
-auto={3} restriction{compare(hascntexhaust)~equalto~0}:becomes(Artifact Creature) forever && counter(0/0,1,exhaust) && counter(1/1)
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:transforms((Artifact Creature)) forever && counter(0/0,1,exhaust) && counter(1/1)
 auto=_CREW1_
 text=Whenever this Vehicle attacks, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") -- Exhaust - {3}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.) -- Crew 1
 mana={R}{G}
@@ -107841,7 +107841,7 @@ toughness=1
 [card]
 name=Spire Mechcycle
 abilities=haste
-auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:becomes(creature) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
+auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:transforms((Creature)) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
 auto=_CREW2_
 auto=_CREW2COMPLEMENT_
 text=Haste -- Exhaust - Tap another untapped Mount or Vehicle you control: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it for each Mount and/or Vehicle you control other than this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
@@ -108929,6 +108929,7 @@ toughness=4
 [/card]
 [card]
 name=Stampeding Scurryfoot
+grade=supported
 auto={3}{G} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1) && create(elephant:creature elephant:3/3:green)
 text=Exhaust - {3}{G}: Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token. (Activate each exhaust ability only once.)
 mana={G}
@@ -132291,6 +132292,8 @@ toughness=1
 [/card]
 [card]
 name=Camellia, the Seedmiser
+grade=borderline
+# REVIEW 2026-07-17 [P:med] forage doesn t seem to work
 abilities=menace
 auto=lord(other squirrel|mybattlefield) menace
 auto=@sacrificed(food|mybattlefield):token(Squirrel,Creature Squirrel,1/1,green)
@@ -132315,6 +132318,7 @@ toughness=3
 [/card]
 [card]
 name=Oakhollow Village
+grade=supported
 auto={T}:add{C}
 auto={T}:add{G}
 auto={G}{T}:counter(1/1) all(frog[fresh]|mybattlefield) && counter(1/1) all(rabbit[fresh]|mybattlefield) && counter(1/1) all(raccoon[fresh]|mybattlefield) && counter(1/1) all(squirrel[fresh]|mybattlefield)
@@ -132387,6 +132391,8 @@ toughness=3
 [/card]
 [card]
 name=Fuss // Bother
+grade=borderline
+# REVIEW 2026-07-17 [P:med] bother: surveil 2 didn t trigger on cast
 other={4}{W/U}{W/U} name(Bother)
 auto=ifnot paid(alternative) then counter(1/1) all(creature[attacking]|mybattlefield)
 auto=alternative token(Thopter,artifact creature thopter,1/1,colorless flying)*3
@@ -132438,7 +132444,7 @@ type=Sorcery
 [card]
 name=Cursed Courtier
 grade=borderline
-# REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no @cursed role token that could be removed or moved.
+# REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no cursed role token that could be removed or moved.
 abilities=lifelink
 auto=becomes(,1/1) forever
 #MISSING actual Cursed Role token aura (approximated: enters as base 1/1; there is no aura to remove)
@@ -132451,9 +132457,11 @@ toughness=3
 [/card]
 [card]
 name=Gingerbread Hunter // Puny Snack
+grade=borderline
+# REVIEW 2026-07-17 [P:med] I got a food token for the adventure mode which I should not have.
 abilities=adventure
 other={2}{B} name(Puny Snack)
-auto=_FOOD_
+auto=ifnot paid(alternative) then _FOOD_
 auto=alternative target(creature) -2/-2 ueot
 auto=alternative _ADVENTURE_
 text=When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") // Target creature gets -2/-2 until end of turn.
@@ -132534,6 +132542,7 @@ toughness=3
 [/card]
 [card]
 name=Questing Druid // Seek the Beast
+grade=borderline
 abilities=adventure
 other={1}{R} name(Seek the Beast)
 auto=@movedTo(*[white;blue;black;red]|mystack):counter(1/1)
@@ -132897,9 +132906,10 @@ toughness=2
 [card]
 name=Mai, Jaded Edge
 grade=borderline
-# REVIEW 2026-07-17 [P:med] exhaust didn't add double strike counter
+# REVIEW 2026-07-17 [P:med] exhaust didn t add double strike counter
 abilities=prowess
-auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && transforms((,doublestrike)) forever
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && counter(0/0,1,doublestrike)
+auto=this(counter{0/0.1.doublestrike}>=1) double strike
 #MISSING the double strike is granted directly rather than via a keyword counter
 text=Prowess -- Exhaust - {3}: Put a double strike counter on Mai. (Activate each exhaust ability only once.)
 mana={1}{R}
@@ -132911,7 +132921,7 @@ toughness=3
 [card]
 name=Marshals' Pathcruiser
 auto=may target(land[basic]|mylibrary) moveto(hand)
-auto={W}{U}{B}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,2)
+auto={W}{U}{B}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && transforms((Artifact Creature)) forever && counter(1/1,2)
 auto={crew(other creature[power>=5]|myBattlefield)}:name(crew 5 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
 text=When this Vehicle enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- Exhaust - {W}{U}{B}{R}{G}: This Vehicle becomes an artifact creature. Put two +1/+1 counters on it. (Activate each exhaust ability only once.) -- Crew 5
 mana={3}
@@ -132936,7 +132946,7 @@ toughness=3
 [card]
 name=Rangers' Refueler
 auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):draw:1 controller
-auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1)
+auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && transforms((Artifact Creature)) forever && counter(1/1)
 auto=_CREW2_
 auto=_CREW2COMPLEMENT_
 text=Whenever you activate an exhaust ability, draw a card. -- Exhaust - {4}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.) -- Crew 2
@@ -132995,7 +133005,6 @@ toughness=3
 [card]
 name=Rangers' Aetherhive
 grade=supported
-# REVIEW 2026-07-17 [P:med] 
 abilities=vigilance
 auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):token(Thopter,artifact creature thopter,1/1,colorless flying)
 auto=_CREW1_
