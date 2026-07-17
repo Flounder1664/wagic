@@ -1,0 +1,23 @@
+#EOE Icetill Explorer regression (user-reported, high): playing a land mills a card
+#(landfall effect was written as the nonexistent mill:1; now deplete:1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:icetill explorer
+hand:forest
+library:15780,ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:icetill explorer,forest
+graveyard:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]
