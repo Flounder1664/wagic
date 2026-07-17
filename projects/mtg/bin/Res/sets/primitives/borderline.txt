@@ -72234,6 +72234,8 @@ type=Artifact
 [/card]
 [card]
 name=Mindspring Merfolk
+grade=borderline
+# REVIEW 2026-07-17 [P:med] I spent 5 mana, got 4 exhaust options all looked the same. chose the bottom one,  it gave one +1/+1 drew no cards
 auto={10}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=10) counter(0/0,1,exhaust) && draw:10 && counter(1/1) all(merfolk[creature]|myBattlefield)
 auto={9}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=9) counter(0/0,1,exhaust) && draw:9 && counter(1/1) all(merfolk[creature]|myBattlefield)
 auto={8}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=8) counter(0/0,1,exhaust) && draw:8 && counter(1/1) all(merfolk[creature]|myBattlefield)
@@ -132586,6 +132588,8 @@ toughness=4
 [/card]
 [card]
 name=Virtue of Loyalty // Ardenvale Fealty
+grade=supported
+# REVIEW 2026-07-17 [P:med] 
 abilities=adventure
 other={1}{W} name(Ardenvale Fealty)
 auto=@each my end:untap all(creature|myBattlefield)
@@ -132770,6 +132774,8 @@ type=Instant
 [/card]
 [card]
 name=Roadside Assistance
+grade=borderline
+# REVIEW 2026-07-17 [P:med] created the pilot but did not attach as an aura nor make the vehicle a creature
 target=creature,vehicle|battlefield
 auto=token(Pilot,creature pilot,1/1,colorless)
 auto=1/1
@@ -132933,7 +132939,8 @@ toughness=5
 [card]
 name=Peema Trailblazer
 abilities=trample
-auto=@combatdamaged(player) from(this):alterenergy:thatmuch controller
+auto=@combatdamaged(player) from(this):alterenergy:3 controller
+#MISSING energy gain is a flat 3 (printed power): alterenergy freezes its amount at parse time, so thatmuch is always 0 there (engine limitation; small C++ fix possible)
 auto={e:6} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,2)
 #MISSING then draw cards equal to the greatest power among creatures you control (dynamic greatest-power draw unsupported)
 text=Trample -- Whenever this creature deals combat damage to a player, you get that many {E} (energy counters). -- Exhaust - Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)
