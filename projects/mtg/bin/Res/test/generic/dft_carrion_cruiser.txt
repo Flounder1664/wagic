@@ -1,0 +1,22 @@
+#DFT Carrion Cruiser: ETB mill 2 (gy-return prompt not harness-driveable; mill asserted).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:carrion cruiser
+library:15780,ornithopter
+manapool:{2}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+carrion cruiser
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:carrion cruiser
+graveyard:*,*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -132606,3 +132606,205 @@ text=You may discard a card. If you do, draw two cards. Create a Wicked Role tok
 mana={1}{R}
 type=Sorcery
 [/card]
+[card]
+name=Apocalypse Runner
+auto={T}:target(creature[power<=2]|mybattlefield) transforms((,lifelink,unblockable)) ueot
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+text={T}: Target creature you control with power 2 or less gains lifelink until end of turn and can't be blocked this turn. -- Crew 3
+mana={2}{B}{R}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=5
+[/card]
+[card]
+name=Carrion Cruiser
+auto=deplete:2 controller
+auto=may target(creature,vehicle|mygraveyard) moveto(hand)
+auto=_CREW1_
+text=When this Vehicle enters, mill two cards. Then return a creature or Vehicle card from your graveyard to your hand. -- Crew 1
+mana={2}{B}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=2
+[/card]
+[card]
+name=Clamorous Ironclad
+abilities=menace
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+autohand={R}{cycle}:draw:1 controller
+text=Menace -- Crew 3 -- Cycling {R}
+mana={3}{R}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=3
+[/card]
+[card]
+name=Detention Chariot
+auto=(blink)forsrc target(artifact,creature|opponentbattlefield)
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+autohand={W}{cycle}:draw:1 controller
+text=When this Vehicle enters, exile target artifact or creature an opponent controls until this Vehicle leaves the battlefield. -- Crew 3 -- Cycling {W}
+mana={4}{W}{W}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Earthrumbler
+abilities=vigilance,trample
+auto={E(artifact,creature|mygraveyard)}:name(animate) becomes(Artifact Creature) ueot
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+text=Vigilance, trample -- Exile an artifact or creature card from your graveyard: This Vehicle becomes an artifact creature until end of turn. -- Crew 3
+mana={4}{G}
+type=Artifact
+subtype=Vehicle
+power=7
+toughness=6
+[/card]
+[card]
+name=Hulldrifter
+abilities=flying
+auto=draw:2
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+text=Flying -- When this Vehicle enters, draw two cards. -- Crew 3
+mana={3}{U}{U}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=2
+[/card]
+[card]
+name=Salvation Engine
+auto=lord(other creature[artifact]|mybattlefield) 2/2
+auto=@combat(attacking) source(this):may target(artifact|mygraveyard) moveto(mybattlefield)
+auto={crew(other creature[power>=6]|myBattlefield)}:name(crew 6 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~5}
+text=Other artifact creatures you control get +2/+2. -- Whenever this Vehicle attacks, return up to one target artifact card from your graveyard to the battlefield. -- Crew 6
+mana={4}{W}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=10
+[/card]
+[card]
+name=Thundering Broodwagon
+abilities=menace,reach
+auto=destroy target(*[-land;manacost<=4]|opponentbattlefield)
+auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+autohand={2}{cycle}:draw:1 controller
+text=Menace, reach -- When this Vehicle enters, destroy target nonland permanent an opponent controls with mana value 4 or less. -- Crew 3 -- Cycling {2}
+mana={2}{B}{B}{G}{G}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=5
+[/card]
+[card]
+name=Nesting Bot
+auto=_DIES_token(Servo,artifact creature servo,1/1,colorless)
+#MISSING Start your engines! and Max speed - this creature gets +1/+0 (speed mechanic unsupported)
+text=Start your engines! -- When this creature dies, create a 1/1 colorless Servo artifact creature token. -- Max speed - This creature gets +1/+0.
+mana={W}
+type=Artifact Creature
+subtype=Robot
+power=1
+toughness=1
+[/card]
+[card]
+name=Perilous Snare
+auto=(blink)forsrc target(*[-land]|opponentbattlefield)
+#MISSING Start your engines! and Max speed - {T}: put a +1/+1 counter on target creature or Vehicle (speed mechanic unsupported)
+text=Start your engines! -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- Max speed - {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
+mana={2}{W}
+type=Artifact
+[/card]
+[card]
+name=Cloudspire Coordinator
+auto=_SCRY2_
+#MISSING {T}: create X Pilot tokens for Mounts/Vehicles that entered this turn (X-count + crew-boost rider unsupported)
+text=When this creature enters, scry 2. -- {T}: Create X 1/1 colorless Pilot creature tokens, where X is the number of Mounts and/or Vehicles that entered the battlefield under your control this turn.
+mana={R}{W}
+type=Creature
+subtype=Human Pilot
+power=3
+toughness=1
+[/card]
+[card]
+name=Back on Track
+target=creature,vehicle|mygraveyard
+auto=moveTo(myBattlefield)
+auto=token(Pilot,creature pilot,1/1,colorless)
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
+text=Return target creature or Vehicle card from your graveyard to the battlefield. Create a 1/1 colorless Pilot creature token.
+mana={4}{B}
+type=Sorcery
+[/card]
+[card]
+name=Defend the Rider
+auto=choice name(hexproof and indestructible) target(*[-land]|mybattlefield) transforms((,hexproof,indestructible)) ueot
+auto=choice name(create a Pilot) token(Pilot,creature pilot,1/1,colorless)
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
+text=Choose one - -- - Target permanent you control gains hexproof and indestructible until end of turn. -- - Create a 1/1 colorless Pilot creature token.
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Roadside Assistance
+target=creature,vehicle|battlefield
+auto=token(Pilot,creature pilot,1/1,colorless)
+auto=1/1
+auto=lifelink
+#MISSING the Pilot token's crew rider; aura grant on a noncreature Vehicle may not apply until it animates
+text=Enchant creature or Vehicle -- When this Aura enters, create a 1/1 colorless Pilot creature token. -- Enchanted permanent gets +1/+1 and has lifelink.
+mana={2}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Country Roads
+auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto={T}:add{W}
+auto={1}{W}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
+#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {W}. -- {1}{W}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Foul Roads
+auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto={T}:add{B}
+auto={1}{B}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
+#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {B}. -- {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Reef Roads
+auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto={T}:add{U}
+auto={1}{U}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
+#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {U}. -- {1}{U}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Rocky Roads
+auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto={T}:add{R}
+auto={1}{R}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
+#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {R}. -- {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Wild Roads
+auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto={T}:add{G}
+auto={1}{G}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
+#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {G}. -- {1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
+type=Land
+[/card]

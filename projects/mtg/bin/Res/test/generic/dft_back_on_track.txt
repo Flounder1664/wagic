@@ -1,0 +1,23 @@
+#DFT Back on Track: reanimate a creature from graveyard + Pilot token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:back on track
+graveyard:grizzly bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+back on track
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:grizzly bears,*
+graveyard:back on track
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

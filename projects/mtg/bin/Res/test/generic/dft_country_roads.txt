@@ -1,0 +1,20 @@
+#DFT Country Roads: enters tapped with no Vehicle; sac ability makes a Pilot.
+#tappedinplay asserts the land came in tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:country roads
+life:20
+[PLAYER2]
+life:20
+[DO]
+country roads
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:country roads
+tappedinplay:1
+life:20
+[PLAYER2]
+life:20
+[END]
