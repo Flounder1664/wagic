@@ -1,0 +1,25 @@
+#WOE Faerie Slumber Party: all creatures bounced, then two Faerie tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:faerie slumber party
+inplay:grizzly bears
+manapool:{4}{U}{U}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+faerie slumber party
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:grizzly bears
+inplay:*,*
+graveyard:faerie slumber party
+manapool:{0}
+life:20
+[PLAYER2]
+hand:hill giant
+life:20
+[END]

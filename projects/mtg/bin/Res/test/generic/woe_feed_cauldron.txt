@@ -1,0 +1,24 @@
+#WOE Feed the Cauldron: destroy a mv<=3 creature, create a Food.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:feed the cauldron
+manapool:{2}{B}
+life:20
+[PLAYER2]
+inplay:goblin piker
+life:20
+[DO]
+feed the cauldron
+goblin piker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:feed the cauldron
+manapool:{0}
+life:20
+[PLAYER2]
+graveyard:goblin piker
+life:20
+[END]

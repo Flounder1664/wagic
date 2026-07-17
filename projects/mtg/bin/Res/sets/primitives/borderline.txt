@@ -132400,3 +132400,209 @@ text=When Proft's Eidetic Memory enters, draw a card. -- You have no maximum han
 mana={1}{U}
 type=Legendary Enchantment
 [/card]
+[card]
+name=Decadent Dragon // Expensive Taste
+abilities=flying,trample
+auto=@combat(attacking) source(this):_TREASURE_
+#MISSING Expensive Taste adventure (exile top two of opponent's library face down and play them - cast-from-opponent-exile unsupported)
+text=Flying, trample -- Whenever this creature attacks, create a Treasure token. // Expensive Taste {2}{B}: UNSUPPORTED in Wagic.
+mana={2}{R}{R}
+type=Creature
+subtype=Dragon
+power=4
+toughness=4
+[/card]
+[card]
+name=Feed the Cauldron
+target=creature[manacost<=3]
+auto=destroy
+auto=_FOOD_
+#MISSING Food should only be created if it is your turn
+text=Destroy target creature with mana value 3 or less. If it's your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Faerie Slumber Party
+auto=all(creature|battlefield) moveto(hand)
+auto=token(Faerie,creature faerie,1/1,blue flying)*2
+#MISSING tokens should be created only if an opponent controlled a returned creature (always created here), and the Faerie tokens lack the "can block only creatures with flying" restriction
+text=Return all creatures to their owners' hands. For each opponent who controlled a creature returned this way, you create two 1/1 blue Faerie creature tokens with flying and "This token can block only creatures with flying."
+mana={4}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Cursed Courtier
+abilities=lifelink
+auto=becomes(,1/1) forever
+#MISSING actual Cursed Role token aura (approximated: enters as base 1/1; there is no aura to remove)
+text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
+mana={2}{W}
+type=Creature
+subtype=Human Noble
+power=3
+toughness=3
+[/card]
+[card]
+name=Gingerbread Hunter // Puny Snack
+abilities=adventure
+other={2}{B} name(Puny Snack)
+auto=_FOOD_
+auto=alternative target(creature) -2/-2 ueot
+auto=alternative _ADVENTURE_
+text=When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") // Target creature gets -2/-2 until end of turn.
+mana={4}{G}
+type=Creature
+subtype=Giant
+power=5
+toughness=5
+[/card]
+[card]
+name=Grabby Giant // That's Mine
+abilities=reach,adventure
+other={1}{R} name(That's Mine)
+auto={2}{R}{S(artifact,land|mybattlefield)}:draw:1
+auto=alternative _TREASURE_
+auto=alternative _ADVENTURE_
+text=Reach -- {2}{R}, Sacrifice an artifact or land: Draw a card. // Create a Treasure token.
+mana={3}{R}
+type=Creature
+subtype=Giant
+power=4
+toughness=3
+[/card]
+[card]
+name=Hollow Scavenger // Bakery Raid
+abilities=adventure
+other={G} name(Bakery Raid)
+auto={1}{S(food|mybattlefield)}:2/2 ueot
+#MISSING the +2/+2 ability should be activatable only once each turn
+auto=alternative _FOOD_
+auto=alternative _ADVENTURE_
+text={1}, Sacrifice a Food: This creature gets +2/+2 until end of turn. Activate only once each turn. // Create a Food token.
+mana={2}{G}
+type=Creature
+subtype=Wolf
+power=3
+toughness=2
+[/card]
+[card]
+name=Imodane's Recruiter // Train Troops
+abilities=adventure
+other={4}{W} name(Train Troops)
+auto=ifnot paid(alternative) then all(creature|mybattlefield) 1/0 ueot
+auto=ifnot paid(alternative) then all(creature|mybattlefield) transforms((,haste)) ueot
+auto=alternative token(Knight,creature knight,2/2,white vigilance)*2
+auto=alternative _ADVENTURE_
+text=When this creature enters, creatures you control get +1/+0 and gain haste until end of turn. // Create two 2/2 white Knight creature tokens with vigilance.
+mana={2}{R}
+type=Creature
+subtype=Human Knight
+power=2
+toughness=2
+[/card]
+[card]
+name=Intrepid Trufflesnout // Go Hog Wild
+abilities=adventure
+other={1}{G} name(Go Hog Wild)
+auto=@combat(attackedalone) source(this):_FOOD_
+auto=alternative target(creature) 2/2 ueot
+auto=alternative _ADVENTURE_
+text=Whenever this creature attacks alone, create a Food token. // Target creature gets +2/+2 until end of turn.
+mana={1}{G}
+type=Creature
+subtype=Boar
+power=3
+toughness=1
+[/card]
+[card]
+name=Provisions Merchant
+auto=_FOOD_
+#MISSING attack trigger: you may sacrifice a Food; if you do, attacking creatures get +1/+1 and gain trample until end of turn
+text=When this creature enters, create a Food token. -- Whenever this creature attacks, you may sacrifice a Food. If you do, attacking creatures get +1/+1 and gain trample until end of turn.
+mana={2}{G}{G}
+type=Creature
+subtype=Beast Peasant
+power=3
+toughness=3
+[/card]
+[card]
+name=Questing Druid // Seek the Beast
+abilities=adventure
+other={1}{R} name(Seek the Beast)
+auto=@movedTo(*[white;blue;black;red]|mystack):counter(1/1)
+auto=alternative moveto(exile) and!( transforms((,canplayfromexile)) uynt )! all(*[zpos<=2]|mylibrary)
+auto=alternative _ADVENTURE_
+#MISSING exiled cards are playable until your next turn (card says until your next end step)
+text=Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on this creature. // Exile the top two cards of your library. Until your next end step, you may play those cards.
+mana={1}{G}
+type=Creature
+subtype=Human Druid
+power=1
+toughness=1
+[/card]
+[card]
+name=Ratcatcher Trainee // Pest Problem
+abilities=firststrike,adventure
+other={2}{R} name(Pest Problem)
+#MISSING first strike should apply during your turn only (granted always)
+auto=alternative token(Rat,creature rat,1/1,black cantblock)*2
+auto=alternative _ADVENTURE_
+text=During your turn, this creature has first strike. // Create two 1/1 black Rat creature tokens with "This token can't block."
+mana={1}{R}
+type=Creature
+subtype=Human Peasant
+power=2
+toughness=1
+[/card]
+[card]
+name=Tempest Hart // Scan the Clouds
+abilities=trample,adventure
+other={1}{U} name(Scan the Clouds)
+auto=@movedTo(*[manacost>=5]|mystack):counter(1/1)
+auto=alternative draw:2 && discard:2
+auto=alternative _ADVENTURE_
+text=Trample -- Whenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on this creature. // Draw two cards, then discard two cards.
+mana={3}{G}
+type=Creature
+subtype=Elemental Elk
+power=3
+toughness=4
+[/card]
+[card]
+name=Virtue of Loyalty // Ardenvale Fealty
+abilities=adventure
+other={1}{W} name(Ardenvale Fealty)
+auto=@each my end:untap all(creature|myBattlefield)
+auto=@each my end:counter(1/1) all(creature|myBattlefield)
+auto=alternative token(Knight,creature knight,2/2,white vigilance)
+auto=alternative _ADVENTURE_
+text=At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures. // Create a 2/2 white Knight creature token with vigilance.
+mana={3}{W}{W}
+type=Enchantment
+[/card]
+[card]
+name=Shatter the Oath
+target=creature,enchantment|battlefield
+auto=destroy
+#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Eriette's Whisper
+auto=discard:2 opponent
+#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Witch's Mark
+auto=may discard:1 && draw:2
+#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
+mana={1}{R}
+type=Sorcery
+[/card]
