@@ -1,0 +1,22 @@
+#TMT The Last Ronin's Technique: normal cast -> three Spirit tokens.
+#The sneak alternate cost (other=/otherrestriction=) isn't harness-driveable mid-combat - in-game V.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:the last ronin's technique
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+the last ronin's technique
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+graveyard:the last ronin's technique
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

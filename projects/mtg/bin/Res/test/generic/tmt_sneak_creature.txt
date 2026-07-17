@@ -1,0 +1,22 @@
+#TMT Foot Ninjas: normal cast + ETB gain 3. The sneak (ninjutsu) activation from hand
+#can't be driven from the suite (hand-ability menu blind spot) - in-game V loop; the
+#machinery itself is ANinja, proven by the long-supported ninjutsu cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:foot ninjas
+manapool:{4}{W}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+foot ninjas
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:foot ninjas
+manapool:{0}
+life:23
+[PLAYER2]
+life:20
+[END]

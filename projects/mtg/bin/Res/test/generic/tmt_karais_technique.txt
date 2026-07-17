@@ -1,0 +1,24 @@
+#TMT Karai's Technique modal: mode 1 (-3/-3) kills a Goblin Piker (modal cast-crash coverage).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:karai's technique
+manapool:{1}{W}{B}
+life:20
+[PLAYER2]
+inplay:goblin piker
+life:20
+[DO]
+karai's technique
+choice 1
+goblin piker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:karai's technique
+manapool:{0}
+life:20
+[PLAYER2]
+graveyard:goblin piker
+life:20
+[END]

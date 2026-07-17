@@ -84074,6 +84074,8 @@ type=Land
 [/card]
 [card]
 name=Pilot
+grade=borderline
+# REVIEW 2026-07-17 [P:med] created by back on track. the saddle ability doesn't seem to work.
 auto={0} restriction{type(vehicle|myBattlefield)~morethan~0}:name(Can crew as 2 greater) transforms((,newability[2/0] ,cantattack,cantblock,cantpwattack)) ueot limit:1
 type=Artifact Creature
 subtype=Pilot
@@ -93969,6 +93971,8 @@ type=Instant
 [/card]
 [card]
 name=Rocketeer Boostbuggy
+grade=borderline
+# REVIEW 2026-07-17 [P:med] after the exhaust cost the vehicle should be a creature but it stays in the artifact area and still has to be crewed.
 auto=_ATTACKING__TREASURE_
 auto={3} restriction{compare(hascntexhaust)~equalto~0}:becomes(Artifact Creature) forever && counter(0/0,1,exhaust) && counter(1/1)
 auto=_CREW1_
@@ -132433,6 +132437,8 @@ type=Sorcery
 [/card]
 [card]
 name=Cursed Courtier
+grade=borderline
+# REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no @cursed role token that could be removed or moved.
 abilities=lifelink
 auto=becomes(,1/1) forever
 #MISSING actual Cursed Role token aura (approximated: enters as base 1/1; there is no aura to remove)
@@ -132667,6 +132673,8 @@ toughness=6
 [/card]
 [card]
 name=Hulldrifter
+grade=borderline
+# REVIEW 2026-07-17 [P:med] Crew required a creature of power 3, it would not accept a 2 and a 1.
 abilities=flying
 auto=draw:2
 auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
@@ -132888,6 +132896,8 @@ toughness=2
 [/card]
 [card]
 name=Mai, Jaded Edge
+grade=borderline
+# REVIEW 2026-07-17 [P:med] exhaust didn't add double strike counter
 abilities=prowess
 auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && transforms((,doublestrike)) forever
 #MISSING the double strike is granted directly rather than via a keyword counter
@@ -132984,6 +132994,8 @@ toughness=3
 [/card]
 [card]
 name=Rangers' Aetherhive
+grade=supported
+# REVIEW 2026-07-17 [P:med] 
 abilities=vigilance
 auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):token(Thopter,artifact creature thopter,1/1,colorless flying)
 auto=_CREW1_
@@ -132993,4 +133005,262 @@ type=Artifact
 subtype=Vehicle
 power=3
 toughness=5
+[/card]
+[card]
+name=Dark Leo & Shredder
+autohand={W}{B}{N}:ninjutsu
+auto=lord(ninja[attacking]|mybattlefield) deathtouch
+auto=@combatdamaged(player) from(this):token(Ninja,creature ninja,1/1,black)
+#MISSING then if you control five or more Ninjas, that player loses half their life, rounded up
+text=Sneak {W}{B} -- Attacking Ninjas you control have deathtouch. -- Whenever Dark Leo & Shredder deal combat damage to a player, create a 1/1 black Ninja creature token. Then if you control five or more Ninjas, that player loses half their life, rounded up.
+mana={W}{B}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle Human
+power=1
+toughness=3
+[/card]
+[card]
+name=Donatello, Gadget Master
+autohand={1}{U}{N}:ninjutsu
+#MISSING Whenever Donatello deals combat damage to a player, create a token copy of target artifact you control (copy effects unsupported, wagic#19)
+text=Sneak {1}{U} -- Whenever Donatello deals combat damage to a player, create a token that's a copy of target artifact you control.
+mana={2}{U}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=3
+toughness=2
+[/card]
+[card]
+name=Foot Ninjas
+autohand={3}{W/B}{N}:ninjutsu
+auto=life:3
+text=Sneak {3}{W/B} -- When this creature enters, you gain 3 life.
+mana={4}{W/B}{W/B}
+type=Creature
+subtype=Human Ninja
+power=5
+toughness=5
+[/card]
+[card]
+name=Karai, Future of the Foot
+autohand={2}{W}{B}{N}:ninjutsu
+auto=@combatdamaged(player) from(this):may target(creature|mygraveyard) moveto(hand)
+#MISSING if her sneak cost was paid this turn, return the card to the battlefield instead (sneak-paid detection unsupported)
+text=Sneak {2}{W}{B} -- Whenever Karai deals combat damage to a player, return target creature card from your graveyard to your hand. If her sneak cost was paid this turn, instead return that card to the battlefield.
+mana={1}{W}{B}
+type=Legendary Creature
+subtype=Human Ninja
+power=3
+toughness=3
+[/card]
+[card]
+name=Leonardo, Big Brother
+autohand={W}{N}:ninjutsu
+auto=foreach(other creature|myBattlefield) 1/0
+text=Sneak {W} -- Leonardo gets +1/+0 for each other creature you control.
+mana={2}{W}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=1
+toughness=3
+[/card]
+[card]
+name=Leonardo, Cutting Edge
+abilities=lifelink
+autohand={W}{N}:ninjutsu
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1)
+text=Sneak {W} -- Lifelink -- Whenever you gain life, put a +1/+1 counter on Leonardo.
+mana={1}{W}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=1
+toughness=1
+[/card]
+[card]
+name=Leonardo, Leader in Blue
+autohand={3}{W}{W}{N}:ninjutsu
+auto={1}{W}:first strike ueot
+#MISSING When Leonardo enters, if his sneak cost was paid, creatures you control get +2/+0 until end of turn (sneak-paid detection unsupported)
+text=Sneak {3}{W}{W} -- When Leonardo enters, if his sneak cost was paid, creatures you control get +2/+0 until end of turn. -- {1}{W}: Leonardo gains first strike until end of turn.
+mana={W}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=2
+toughness=1
+[/card]
+[card]
+name=Leonardo, Sewer Samurai
+abilities=double strike
+autohand={2}{W}{W}{N}:ninjutsu
+#MISSING During your turn, you may cast power/toughness<=1 creature spells from your graveyard (they get a finality counter)
+text=Sneak {2}{W}{W} -- Double strike -- During your turn, you may cast creature spells with power or toughness 1 or less from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it.
+mana={3}{W}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle Samurai
+power=3
+toughness=3
+[/card]
+[card]
+name=Michelangelo, Improviser
+autohand={2}{G}{G}{N}:ninjutsu
+auto=@combatdamaged(player) from(this):may target(creature|myhand) moveto(mybattlefield) && may target(land|myhand) moveto(mybattlefield)
+text=Sneak {2}{G}{G} -- Whenever Michelangelo deals combat damage to a player, you may put a creature card and/or a land card from your hand onto the battlefield.
+mana={3}{G}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=4
+toughness=4
+[/card]
+[card]
+name=Raphael, the Nightwatcher
+autohand={1}{R}{R}{N}:ninjutsu
+auto=lord(creature[attacking]|mybattlefield) double strike
+text=Sneak {1}{R}{R} -- Attacking creatures you control have double strike.
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=2
+toughness=3
+[/card]
+[card]
+name=Shark Shredder, Killer Clone
+abilities=first strike
+autohand={3}{B}{B}{N}:ninjutsu
+#MISSING combat-damage trigger: put up to one creature from that player's graveyard onto the battlefield under your control tapped and attacking
+text=Sneak {3}{B}{B} -- First strike -- Whenever Shark Shredder deals combat damage to a player, put up to one target creature card from that player's graveyard onto the battlefield under your control. It enters tapped and attacking that player.
+mana={2}{B}{B}
+type=Legendary Creature
+subtype=Shark Octopus Ninja
+power=4
+toughness=4
+[/card]
+[card]
+name=Shredder, Unrelenting
+abilities=deathtouch
+autohand={3}{B}{N}:ninjutsu
+auto=target(other creature|mybattlefield) deathtouch ueot
+auto=@combat(attacking) source(this):target(other creature|mybattlefield) deathtouch ueot
+text=Sneak {3}{B} -- Deathtouch -- Whenever Shredder enters or attacks, another target creature you control gains deathtouch until end of turn.
+mana={4}{B}
+type=Legendary Creature
+subtype=Human Ninja
+power=6
+toughness=4
+[/card]
+[card]
+name=Splinter, Hamato Yoshi
+abilities=menace
+autohand={B}{N}:ninjutsu
+auto=lord(other ninja|mybattlefield) 1/1
+text=Sneak {B} -- Menace -- Other Ninjas you control get +1/+1.
+mana={1}{B}
+type=Legendary Creature
+subtype=Mutant Ninja Rat
+power=1
+toughness=3
+[/card]
+[card]
+name=Turncoat Kunoichi
+autohand={2}{W}{B}{N}:ninjutsu
+auto=(blink)forsrc target(creature|opponentbattlefield)
+#MISSING if this creature's sneak cost was paid, exile the chosen creature permanently instead (sneak-paid detection unsupported)
+text=Sneak {2}{W}{B} -- When this creature enters, choose target creature an opponent controls. Exile that creature until this creature leaves the battlefield. If this creature's sneak cost was paid, instead exile the chosen creature.
+mana={2}{W}
+type=Creature
+subtype=Mutant Ninja Fox
+power=3
+toughness=2
+[/card]
+[card]
+name=Donatello's Technique
+other={U} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=draw:2
+#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
+text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
+mana={2}{U}
+type=Sorcery
+[/card]
+[card]
+name=Jennika's Technique
+other={R} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=damage:2 all(creature|battlefield)
+#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
+text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Karai's Technique
+other={W}{B} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=choice name(+3/+3) target(creature) 3/3 ueot
+auto=choice name(-3/-3) target(creature) -3/-3 ueot
+#MISSING may choose BOTH modes (choose-one only here); Sneak's bounce payment
+text=Sneak {W}{B} -- Choose one or both - -- - Target creature gets +3/+3 until end of turn. -- - Target creature gets -3/-3 until end of turn.
+mana={1}{W}{B}
+type=Sorcery
+[/card]
+[card]
+name=Leonardo's Technique
+other={1}{W} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+target=<upto:2>creature[manacost<=3]|mygraveyard
+auto=moveTo(myBattlefield)
+#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
+text=Sneak {1}{W} -- Return one or two target creature cards each with mana value 3 or less from your graveyard to the battlefield.
+mana={3}{W}
+type=Sorcery
+[/card]
+[card]
+name=New Generation's Technique
+other={2}{G} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
+#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
+text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+mana={3}{G}
+type=Sorcery
+[/card]
+[card]
+name=Raphael's Technique
+other={2}{R} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
+#MISSING each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
+text=Sneak {2}{R} -- Each player may discard their hand and draw seven cards.
+mana={4}{R}{R}
+type=Instant
+[/card]
+[card]
+name=Shredder's Technique
+other={B} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+target=creature,enchantment|battlefield
+auto=destroy
+#MISSING you lose 2 life if an enchantment was destroyed; Sneak's bounce payment
+text=Sneak {B} -- Destroy target creature or enchantment. If an enchantment was destroyed this way, you lose 2 life.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Splinter's Technique
+other={1}{B} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=target(*|mylibrary) moveto(hand)
+#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
+text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=The Last Ronin's Technique
+other={1}{W} name(Sneak)
+otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
+#MISSING if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
+text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
+mana={3}{W}
+type=Instant
 [/card]
