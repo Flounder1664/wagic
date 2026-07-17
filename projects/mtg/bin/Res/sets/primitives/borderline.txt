@@ -15783,7 +15783,7 @@ type=Sorcery
 [/card]
 [card]
 name=Camera Launcher
-auto=this(cantargetcard(*[-effect]) {3}:becomes(effect) forever && counter(1/1) && _THOPTERTOKEN_
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1) && _THOPTERTOKEN_
 text=Exhaust - {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)
 mana={3}
 type=Artifact Creature
@@ -29721,8 +29721,8 @@ type=Enchantment
 [/card]
 [card]
 name=Draconautics Engineer
-auto=this(cantargetcard(*[-effect]) {R}:name(creatures gain haste) name(creatures gain haste) becomes(effect) forever && all(other creature|myBattlefield) haste && counter(1/1)
-auto=this(cantargetcard(*[-effectd]) {3}{R}:name(Create Dinosaur Dragon) name(Create Dinosaur Dragon) becomes(effectd) forever && create(dinosaur dragon:creature dinosaur dragon:4/4:red:flying)
+auto={R} restriction{compare(hascntexhaust)~equalto~0}:name(creatures gain haste) name(creatures gain haste) counter(0/0,1,exhaust) && all(other creature|myBattlefield) haste && counter(1/1)
+auto={3}{R} restriction{compare(hascntexhaustd)~equalto~0}:name(Create Dinosaur Dragon) name(Create Dinosaur Dragon) counter(0/0,1,exhaustd) && counter(0/0,1,exhaust) && create(dinosaur dragon:creature dinosaur dragon:4/4:red:flying)
 text=Exhaust - {R}: Other creatures you control gain haste until end of turn. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.) -- Exhaust - {3}{R}: Create a 4/4 red Dinosaur Dragon creature token with flying.
 mana={1}{R}
 type=Creature
@@ -48843,7 +48843,7 @@ type=Sorcery
 [card]
 name=Greenbelt Guardian
 auto={G}:target(creature) trample ueot
-auto=this(cantargetcard(*[-effect]) {3}{G}:becomes(effect) forever && counter(1/1,3)
+auto={3}{G} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1,3)
 text={G}: Target creature gains trample until end of turn. -- Exhaust - {3}{G}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)
 mana={1}{G}
 type=Creature
@@ -51730,7 +51730,7 @@ toughness=1
 [card]
 name=Hazard of the Dunes
 abilities=reach,trample
-auto=this(cantargetcard(*[-effect]) {6}{G}:becomes(effect) forever && counter(1/1,3)
+auto={6}{G} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1,3)
 text=Trample, reach -- Exhaust - {6}{G}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)
 mana={3}{G}
 type=Creature
@@ -61802,7 +61802,7 @@ toughness=1
 [card]
 name=Keen Buccaneer
 abilities=vigilance
-auto=this(cantargetcard(*[-effect]) {1}{U}:becomes(effect) forever && _LOOT_ && counter(1/1)
+auto={1}{U} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && _LOOT_ && counter(1/1)
 text=Vigilance -- Exhaust - {1}{U}: Draw a card, then discard a card. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
 mana={2}{U}
 type=Creature
@@ -67389,9 +67389,9 @@ toughness=4
 [card]
 name=Loot, the Pathfinder
 abilities=double strike,haste,vigilance
-auto=this(cantargetcard(*[-effectg]) {G}{T}:name(Add three mana) name(Add three mana) becomes(effectg) forever && ability$!choice add{W}{W}{W} _ choice add{B}{B}{B} _ choice add{G}{G}{G} _ choice add{R}{R}{R} _ choice add{U}{U}{U}!$ controller
-auto=this(cantargetcard(*[-effectu]) {U}{T}:name(Draw three cards) name(Draw three cards) becomes(effectu) forever && draw:3
-auto=this(cantargetcard(*[-effectr]) {R}{T}:name(Deal three damage) name(Deal three damage) becomes(effectr) forever && ability$! damage:3 target(anytarget) !$ controller
+auto={G}{T} restriction{compare(hascntexhaustg)~equalto~0}:name(Add three mana) name(Add three mana) counter(0/0,1,exhaustg) && counter(0/0,1,exhaust) && ability$!choice add{W}{W}{W} _ choice add{B}{B}{B} _ choice add{G}{G}{G} _ choice add{R}{R}{R} _ choice add{U}{U}{U}!$ controller
+auto={U}{T} restriction{compare(hascntexhaustu)~equalto~0}:name(Draw three cards) name(Draw three cards) counter(0/0,1,exhaustu) && counter(0/0,1,exhaust) && draw:3
+auto={R}{T} restriction{compare(hascntexhaustr)~equalto~0}:name(Deal three damage) name(Deal three damage) counter(0/0,1,exhaustr) && counter(0/0,1,exhaust) && ability$! damage:3 target(anytarget) !$ controller
 text=Double strike, vigilance, haste -- Exhaust - {G}, {T}: Add three mana of any one color. (Activate each exhaust ability only once.) -- Exhaust - {U}, {T}: Draw three cards. -- Exhaust - {R}, {T}: Loot deals 3 damage to any target.
 mana={2}{G}{U}{R}
 type=Legendary Creature
@@ -72234,17 +72234,17 @@ type=Artifact
 [/card]
 [card]
 name=Mindspring Merfolk
-auto=this(cantargetcard(*[-effect]) {10}{U}{U}{T}:name() name(x=10) becomes(effect) forever && draw:10 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {9}{U}{U}{T}:name() name(x=9) becomes(effect) forever && draw:9 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {8}{U}{U}{T}:name() name(x=8) becomes(effect) forever && draw:8 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {7}{U}{U}{T}:name() name(x=7) becomes(effect) forever && draw:7 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {6}{U}{U}{T}:name() name(x=6) becomes(effect) forever && draw:6 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {5}{U}{U}{T}:name() name(x=5) becomes(effect) forever && draw:5 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {4}{U}{U}{T}:name() name(x=4) becomes(effect) forever && draw:4 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {3}{U}{U}{T}:name() name(x=3) becomes(effect) forever && draw:3 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {2}{U}{U}{T}:name() name(x=2) becomes(effect) forever && draw:2 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {1}{U}{U}{T}:name() name(x=1) becomes(effect) forever && draw:1 && counter(1/1) all(merfolk[creature]|myBattlefield)
-auto=this(cantargetcard(*[-effect]) {U}{U}{T}:name() name(x=0) becomes(effect) forever && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={10}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=10) counter(0/0,1,exhaust) && draw:10 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={9}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=9) counter(0/0,1,exhaust) && draw:9 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={8}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=8) counter(0/0,1,exhaust) && draw:8 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={7}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=7) counter(0/0,1,exhaust) && draw:7 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={6}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=6) counter(0/0,1,exhaust) && draw:6 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={5}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=5) counter(0/0,1,exhaust) && draw:5 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={4}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=4) counter(0/0,1,exhaust) && draw:4 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={3}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=3) counter(0/0,1,exhaust) && draw:3 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={2}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=2) counter(0/0,1,exhaust) && draw:2 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={1}{U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=1) counter(0/0,1,exhaust) && draw:1 && counter(1/1) all(merfolk[creature]|myBattlefield)
+auto={U}{U}{T} restriction{compare(hascntexhaust)~equalto~0}:name() name(x=0) counter(0/0,1,exhaust) && counter(1/1) all(merfolk[creature]|myBattlefield)
 text=Exhaust - {X}{U}{U}, {T}: Draw X cards. Put a +1/+1 counter on each Merfolk creature you control. (Activate each exhaust ability only once.)
 mana={U}
 type=Creature
@@ -81671,7 +81671,7 @@ type=Legendary Artifact
 [/card]
 [card]
 name=Pacesetter Paragon
-auto=this(cantargetcard(*[-effect]) {2}{R}:becomes(effect) forever && counter(1/1) && double strike ueot
+auto={2}{R} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1) && double strike ueot
 text=Exhaust - {2}{R}: Put a +1/+1 counter on this creature. It gains double strike until end of turn. (Activate each exhaust ability only once.)
 mana={2}{R}
 type=Creature
@@ -86830,7 +86830,7 @@ type=Instant
 [card]
 name=Prowcatcher Specialist
 abilities=haste
-auto=this(cantargetcard(*[-effect]) {3}{R}:becomes(effect) forever && counter(1/1,2)
+auto={3}{R} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1,2)
 text=Haste -- Exhaust - {3}{R}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
 mana={1}{R}
 type=Creature
@@ -93970,7 +93970,7 @@ type=Instant
 [card]
 name=Rocketeer Boostbuggy
 auto=_ATTACKING__TREASURE_
-auto=this(cantargetcard(*[-effect]) {3}:becomes(Artifact Creature effect) forever && counter(1/1)
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:becomes(Artifact Creature) forever && counter(0/0,1,exhaust) && counter(1/1)
 auto=_CREW1_
 text=Whenever this Vehicle attacks, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") -- Exhaust - {3}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.) -- Crew 1
 mana={R}{G}
@@ -95755,7 +95755,7 @@ toughness=3
 name=Sabotage Strategist
 abilities=flying,vigilance
 auto=lord(creature[attacking]|opponentbattlefield) -1/0
-auto=this(cantargetcard(*[-effect]) {5}{U}{U}:becomes(effect) forever && counter(1/1,3)
+auto={5}{U}{U} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1,3)
 text=Flying, vigilance -- Whenever one or more creatures attack you, those creatures get -1/-0 until end of turn. -- Exhaust - {5}{U}{U}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)
 mana={2}{U}{U}
 type=Creature
@@ -104424,7 +104424,7 @@ toughness=3
 [card]
 name=Skystreak Engineer
 abilities=flying
-auto=this(cantargetcard(*[-effect]) {4}{U}:becomes(effect) forever && counter(1/1,2)
+auto={4}{U} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1,2)
 text=Flying -- Exhaust - {4}{U}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
 mana={1}{U}
 type=Creature
@@ -107837,7 +107837,7 @@ toughness=1
 [card]
 name=Spire Mechcycle
 abilities=haste
-auto=this(cantargetcard(*[-effect]) {T(other *[mount;vehicle]|myBattlefield)}:becomes(effect creature) forever && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
+auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:becomes(creature) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
 auto=_CREW2_
 auto=_CREW2COMPLEMENT_
 text=Haste -- Exhaust - Tap another untapped Mount or Vehicle you control: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it for each Mount and/or Vehicle you control other than this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
@@ -108925,7 +108925,7 @@ toughness=4
 [/card]
 [card]
 name=Stampeding Scurryfoot
-auto=this(cantargetcard(*[-effect]) {3}{G}:becomes(effect) forever && counter(1/1) && create(elephant:creature elephant:3/3:green)
+auto={3}{G} restriction{compare(hascntexhaust)~equalto~0}:counter(0/0,1,exhaust) && counter(1/1) && create(elephant:creature elephant:3/3:green)
 text=Exhaust - {3}{G}: Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token. (Activate each exhaust ability only once.)
 mana={G}
 type=Creature
@@ -132807,4 +132807,190 @@ auto={1}{G}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
 #MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {G}. -- {1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
+[/card]
+[card]
+name=Afterburner Expert
+auto={2}{G}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,2)
+#MISSING Whenever you activate an exhaust ability, return this card from your graveyard to the battlefield (no graveyard-side exhaust trigger)
+text=Exhaust - {2}{G}{G}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.) -- Whenever you activate an exhaust ability, return this card from your graveyard to the battlefield.
+mana={2}{G}
+type=Creature
+subtype=Goblin Artificer
+power=4
+toughness=2
+[/card]
+[card]
+name=Boom Scholar
+auto={4}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: team trample) counter(0/0,1,exhaust) && all(creature|mybattlefield) transforms((,trample)) ueot && counter(1/1,2)
+#MISSING Exhaust abilities of other permanents you control cost {2} less to activate (cost reduction unsupported)
+text=Exhaust abilities of other permanents you control cost {2} less to activate. -- Exhaust - {4}{R}{G}: Creatures and Vehicles you control gain trample until end of turn. Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+mana={1}{R}{G}
+type=Creature
+subtype=Goblin Advisor
+power=3
+toughness=3
+[/card]
+[card]
+name=Boommobile
+auto=ability$!choice add{W}{W}{W}{W} _ choice add{U}{U}{U}{U} _ choice add{B}{B}{B}{B} _ choice add{R}{R}{R}{R} _ choice add{G}{G}{G}{G}!$ controller
+auto={10}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=10) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:10 target(anytarget) !$ controller
+auto={9}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=9) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:9 target(anytarget) !$ controller
+auto={8}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=8) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:8 target(anytarget) !$ controller
+auto={7}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=7) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:7 target(anytarget) !$ controller
+auto={6}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=6) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:6 target(anytarget) !$ controller
+auto={5}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=5) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:5 target(anytarget) !$ controller
+auto={4}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=4) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:4 target(anytarget) !$ controller
+auto={3}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=3) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:3 target(anytarget) !$ controller
+auto={2}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=2) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:2 target(anytarget) !$ controller
+auto={1}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=1) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:1 target(anytarget) !$ controller
+auto=_CREW2_
+auto=_CREW2COMPLEMENT_
+#MISSING the ETB mana should be spendable only to activate abilities (unrestricted here); X capped at 10
+text=When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities. -- Exhaust - {X}{2}{R}: This Vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
+mana={2}{R}{R}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Elvish Refueler
+auto={1}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: +1/+1 counter) counter(0/0,1,exhaust) && counter(1/1)
+#MISSING During your turn, as long as you haven't activated an exhaust ability this turn, you may activate exhaust abilities as though they haven't been activated (reset static unsupported)
+text=During your turn, as long as you haven't activated an exhaust ability this turn, you may activate exhaust abilities as though they haven't been activated. -- Exhaust - {1}{G}: Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+mana={2}{G}
+type=Creature
+subtype=Elf Druid
+power=2
+toughness=3
+[/card]
+[card]
+name=Greasewrench Goblin
+auto={2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: loot two) counter(0/0,1,exhaust) && counter(1/1) && may discard:2 && draw:2
+#MISSING "up to two" flexibility (all-or-nothing two-card loot here; draw happens even on empty discard)
+text=Exhaust - {2}{R}: Discard up to two cards, then draw that many cards. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+mana={R}
+type=Creature
+subtype=Goblin Artificer
+power=2
+toughness=1
+[/card]
+[card]
+name=Hog-Monkey
+auto=@each my combatbegins:target(creature[counter{1/1.1}]|mybattlefield) transforms((,menace)) ueot
+auto={5} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,2)
+text=At the beginning of combat on your turn, target creature you control with a +1/+1 counter on it gains menace until end of turn. -- Exhaust - {5}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+mana={2}{B}
+type=Creature
+subtype=Boar Monkey
+power=3
+toughness=2
+[/card]
+[card]
+name=Mai, Jaded Edge
+abilities=prowess
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && transforms((,doublestrike)) forever
+#MISSING the double strike is granted directly rather than via a keyword counter
+text=Prowess -- Exhaust - {3}: Put a double strike counter on Mai. (Activate each exhaust ability only once.)
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Noble
+power=1
+toughness=3
+[/card]
+[card]
+name=Marshals' Pathcruiser
+auto=may target(land[basic]|mylibrary) moveto(hand)
+auto={W}{U}{B}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,2)
+auto={crew(other creature[power>=5]|myBattlefield)}:name(crew 5 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
+text=When this Vehicle enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- Exhaust - {W}{U}{B}{R}{G}: This Vehicle becomes an artifact creature. Put two +1/+1 counters on it. (Activate each exhaust ability only once.) -- Crew 5
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=5
+[/card]
+[card]
+name=Peema Trailblazer
+abilities=trample
+auto=@combatdamaged(player) from(this):alterenergy:thatmuch controller
+auto={e:6} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,2)
+#MISSING then draw cards equal to the greatest power among creatures you control (dynamic greatest-power draw unsupported)
+text=Trample -- Whenever this creature deals combat damage to a player, you get that many {E} (energy counters). -- Exhaust - Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)
+mana={2}{G}
+type=Creature
+subtype=Elephant Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Rangers' Refueler
+auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):draw:1 controller
+auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1)
+auto=_CREW2_
+auto=_CREW2COMPLEMENT_
+text=Whenever you activate an exhaust ability, draw a card. -- Exhaust - {4}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.) -- Crew 2
+mana={1}{U}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=Redshift, Rocketeer Chief
+abilities=vigilance
+auto={10}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: deploy hand) counter(0/0,1,exhaust) && all(*[-instant&-sorcery]|myhand) moveto(mybattlefield)
+#MISSING {T}: Add X mana of any one color where X is Redshift's power, only to activate abilities (restricted dynamic mana unsupported); "any number" deploys the whole hand
+text=Vigilance -- {T}: Add X mana of any one color, where X is Redshift's power. Spend this mana only to activate abilities. -- Exhaust - {10}{R}{G}: Put any number of permanent cards from your hand onto the battlefield. (Activate each exhaust ability only once.)
+mana={R}{G}
+type=Legendary Creature
+subtype=Goblin Pilot
+power=2
+toughness=3
+[/card]
+[card]
+name=Sita Varma, Masked Racer
+auto={X}{G}{G}{U} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: X +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,X)
+#MISSING then you may have each other creature's base power and toughness become Sita Varma's power until end of turn
+text=Exhaust - {X}{G}{G}{U}: Put X +1/+1 counters on Sita Varma. Then you may have the base power and toughness of each other creature you control become equal to Sita Varma's power until end of turn. (Activate each exhaust ability only once.)
+mana={G}{U}
+type=Legendary Creature
+subtype=Human Rogue
+power=2
+toughness=3
+[/card]
+[card]
+name=Skyserpent Seeker
+abilities=flying,deathtouch
+auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two lands tapped) counter(0/0,1,exhaust) && counter(1/1) && may target(<2>land|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
+#MISSING reveal-until-two-lands (implemented as: search any two lands onto the battlefield tapped)
+text=Flying, deathtouch -- Exhaust - {4}: Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+mana={G}{U}
+type=Creature
+subtype=Snake
+power=1
+toughness=1
+[/card]
+[card]
+name=Adrenaline Jockey
+auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):counter(1/1)
+#MISSING Whenever a player casts a spell, if it's not their turn, this creature deals 4 damage to them (off-turn cast trigger unsupported)
+text=Whenever a player casts a spell, if it's not their turn, this creature deals 4 damage to them. -- Whenever you activate an exhaust ability, put a +1/+1 counter on this creature.
+mana={2}{R}
+type=Creature
+subtype=Minotaur Pilot
+power=3
+toughness=3
+[/card]
+[card]
+name=Rangers' Aetherhive
+abilities=vigilance
+auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):token(Thopter,artifact creature thopter,1/1,colorless flying)
+auto=_CREW1_
+text=Vigilance -- Whenever you activate an exhaust ability, create a 1/1 colorless Thopter artifact creature token with flying. -- Crew 1
+mana={1}{G}{U}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=5
 [/card]

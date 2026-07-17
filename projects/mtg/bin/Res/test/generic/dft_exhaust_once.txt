@@ -1,0 +1,22 @@
+#DFT Exhaust gate: Stampeding Scurryfoot's {3}{G} exhaust with mana for two activations
+#must produce exactly ONE Elephant token (second click blocked by the hascntexhaust restriction).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:stampeding scurryfoot
+manapool:{3}{G}{3}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+stampeding scurryfoot
+stampeding scurryfoot
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:stampeding scurryfoot,*
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[END]
