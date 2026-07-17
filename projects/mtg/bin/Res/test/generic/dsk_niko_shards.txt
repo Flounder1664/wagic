@@ -1,0 +1,21 @@
+#DSK Niko: ETB creates two Shard tokens (asserted); the tokens' granted sac ability
+#can't be driven from the suite - verified in-game.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:673629
+manapool:{2}{W}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+niko, light of hope
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:673629,*,*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

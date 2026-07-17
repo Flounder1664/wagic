@@ -132317,3 +132317,48 @@ auto={G}{T}:counter(1/1) all(frog[fresh]|mybattlefield) && counter(1/1) all(rabb
 text={T}: Add {C}. -- {T}: Add {G}. Spend this mana only to cast a creature spell. -- {G}, {T}: Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn.
 type=Land
 [/card]
+[card]
+name=Beastie Beatdown
+target=creature|mybattlefield
+auto=if delirium then counter(1/1,2) all(mytgt)
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+text=Choose target creature you control and target creature an opponent controls. -- Delirium - If there are four or more card types among cards in your graveyard, put two +1/+1 counters on the creature you control. -- The creature you control deals damage equal to its power to the creature an opponent controls.
+mana={R}{G}
+type=Sorcery
+[/card]
+[card]
+name=Sawblade Skinripper
+abilities=menace
+auto={2}{S(other creature,enchantment|mybattlefield)}:counter(1/1)
+#MISSING At the beginning of your end step, if you sacrificed one or more permanents this turn, this creature deals that much damage to any target (per-turn sacrifice tracking unsupported)
+text=Menace -- {2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on this creature. -- At the beginning of your end step, if you sacrificed one or more permanents this turn, this creature deals that much damage to any target.
+mana={1}{B}{R}
+type=Creature
+subtype=Human Assassin
+power=3
+toughness=2
+[/card]
+[card]
+name=Unidentified Hovership
+abilities=flying
+auto=_CREW1_
+auto=may moveTo(exile) target(creature[toughness<=5])
+#MISSING When this Vehicle leaves the battlefield, the exiled card's owner manifests dread (manifest dread unsupported; the exile is permanent here)
+text=Flying -- When this Vehicle enters, exile up to one target creature with toughness 5 or less. -- When this Vehicle leaves the battlefield, the exiled card's owner manifests dread. -- Crew 1
+mana={1}{W}{W}
+type=Artifact
+subtype=Vehicle
+power=2
+toughness=2
+[/card]
+[card]
+name=Niko, Light of Hope
+auto=token(Shard^Shard Enchantment^0/0) and!( transforms((,newability[{2}{S}:_SCRY1_ draw:1 controller])) forever )!*2
+#MISSING {2}{T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step... (copy effects unsupported, wagic#19)
+text=When Niko enters, create two Shard tokens. (They're enchantments with "{2}, Sacrifice this token: Scry 1, then draw a card.") -- {2}, {T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.
+mana={2}{W}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=3
+toughness=4
+[/card]
