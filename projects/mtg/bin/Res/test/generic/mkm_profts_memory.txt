@@ -1,0 +1,23 @@
+#MKM Proft's Eidetic Memory: ETB draw 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:proft's eidetic memory
+library:15780,ornithopter
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+proft's eidetic memory
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:proft's eidetic memory
+hand:*
+library:*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

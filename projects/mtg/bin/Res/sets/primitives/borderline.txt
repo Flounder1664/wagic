@@ -132362,3 +132362,41 @@ subtype=Human Wizard
 power=3
 toughness=4
 [/card]
+[card]
+name=Eliminate the Impossible
+auto=_CLUE_
+auto=all(creature|opponentbattlefield) -2/0 ueot
+text=Investigate. Creatures your opponents control get -2/-0 until end of turn. If any of them are suspected, they're no longer suspected. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Forensic Gadgeteer
+auto=@movedTo(*[artifact]|mystack):_CLUE_
+#MISSING Activated abilities of artifacts you control cost {1} less to activate
+text=Whenever you cast an artifact spell, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- Activated abilities of artifacts you control cost {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.
+mana={2}{U}
+type=Creature
+subtype=Vedalken Artificer Detective
+power=2
+toughness=3
+[/card]
+[card]
+name=Fuss // Bother
+other={4}{W/U}{W/U} name(Bother)
+auto=ifnot paid(alternative) then counter(1/1) all(creature[attacking]|mybattlefield)
+auto=alternative token(Thopter,artifact creature thopter,1/1,colorless flying)*3
+#MISSING Bother's Surveil 2 (auto=alternative _SURVEIL2_ segfaults the loader - surveil macro can't follow the alternative prefix)
+text=Put a +1/+1 counter on each attacking creature you control. // Create three 1/1 colorless Thopter artifact creature tokens with flying. Surveil 2.
+mana={2}{R/W}
+type=Instant
+[/card]
+[card]
+name=Proft's Eidetic Memory
+abilities=nomaxhand
+auto=draw:1
+#MISSING At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control (cards-drawn-this-turn tracking unsupported)
+text=When Proft's Eidetic Memory enters, draw a card. -- You have no maximum hand size. -- At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control, where X is the number of cards you've drawn this turn minus one.
+mana={1}{U}
+type=Legendary Enchantment
+[/card]
