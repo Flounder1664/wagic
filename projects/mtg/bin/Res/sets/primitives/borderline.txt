@@ -133725,3 +133725,137 @@ subtype=Vehicle
 power=4
 toughness=4
 [/card]
+[card]
+name=Monk's Fist
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/0
+auto={2}:equip
+#MISSING equipped creature is a Monk in addition to its other types
+text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +1/+0 and is a Monk in addition to its other types. -- Equip {2}
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=White Mage's Staff
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/1
+auto=@combat(attacking) source(mytgt):life:1 controller
+auto={3}:equip
+#MISSING equipped creature is a Cleric in addition to its other types
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric. -- Equip {3}
+mana={1}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Thief's Knife
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/1
+auto=@combatdamaged(player) source(mytgt):draw:1 controller
+auto={4}:equip
+#MISSING equipped creature is a Rogue in addition to its other types
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+1, has "Whenever this creature deals combat damage to a player, draw a card," and is a Rogue. -- Equip {4}
+mana={2}{U}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Sage's Nouliths
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/0
+auto=@combat(attacking) source(mytgt):may untap target(creature[attacking]|mybattlefield)
+auto={3}:equip
+#MISSING equipped creature is a Cleric in addition to its other types
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+0, has "Whenever this creature attacks, untap target attacking creature," and is a Cleric. -- Equip {3}
+mana={1}{U}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Warrior's Sword
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 3/2
+auto={5}:equip
+#MISSING equipped creature is a Warrior in addition to its other types
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +3/+2 and is a Warrior. -- Equip {5}
+mana={3}{R}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Dark Knight's Greatsword
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 3/0
+auto={3}:equip
+#MISSING equip cost is "pay 3 life, once each turn" (approximated as {3}); equipped creature is a Knight
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +3/+0 and is a Knight. -- Chaosbringer - Equip - Pay 3 life. Activate only once each turn.
+mana={2}{B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Ninja's Blades
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/1
+auto=@combatdamaged(player) source(mytgt):draw:1 controller && discard:1
+auto={2}:equip
+#MISSING equipped creature is a Ninja; that player loses life equal to the discarded card's mana value
+text=Job select. -- Equipped creature gets +1/+1, is a Ninja, and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card. That player loses life equal to the discarded card's mana value." -- Equip {2}
+mana={2}{B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Black Mage's Rod
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 1/0
+auto={3}:equip
+#MISSING equipped creature has "cast a noncreature spell -> deal 1 to each opponent" and is a Wizard (controller-cast grant on equipped creature)
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+0, has "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent," and is a Wizard. -- Equip {3}
+mana={1}{B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Red Mage's Rapier
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto={3}:equip
+#MISSING equipped creature has "cast a noncreature spell -> +2/+0 ueot" and is a Wizard (controller-cast grant on equipped creature)
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature has "Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn" and is a Wizard. -- Equip {3}
+mana={1}{R}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Astrologian's Planisphere
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto={2}:equip
+#MISSING equipped creature is a Wizard and has "cast a noncreature spell / draw your third card -> +1/+1 counter" (controller-cast grant on equipped creature)
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature is a Wizard and has "Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature." -- Diana - Equip {2}
+mana={1}{U}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Machinist's Arsenal
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 2/2
+auto={4}:equip
+#MISSING dynamic +2/+2 per artifact (approximated +1/+1 per artifact); equipped creature is an Artificer
+text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +2/+2 for each artifact you control and is an Artificer. -- Machina - Equip {4}
+mana={4}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Summoner's Grimoire
+auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=@combat(attacking) source(mytgt):may target(creature|myhand) moveto(mybattlefield)
+auto={3}:equip
+#MISSING equipped creature is a Shaman; an enchantment put this way enters tapped and attacking
+text=Job select. -- Equipped creature is a Shaman and has "Whenever this creature attacks, you may put a creature card from your hand onto the battlefield. If that card is an enchantment card, it enters tapped and attacking." -- Abraxas - Equip {3}
+mana={3}{G}
+type=Artifact
+subtype=Book Equipment
+[/card]
