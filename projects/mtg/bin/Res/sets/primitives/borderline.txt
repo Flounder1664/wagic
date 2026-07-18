@@ -133611,3 +133611,76 @@ text=Kicker - Sacrifice an artifact or creature. -- Target creature gets -2/-2 u
 mana={1}{B}
 type=Instant
 [/card]
+[card]
+name=Adventurer's Airship
+abilities=flying
+auto=_ATTACKING__LOOT_
+auto=_CREW2_
+text=Flying -- Whenever this Vehicle attacks, draw a card, then discard a card. -- Crew 2
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=2
+[/card]
+[card]
+name=Cargo Ship
+abilities=flying,vigilance
+auto={T}:add{C}
+auto=_CREW1_
+#MISSING the {C} may be spent only to cast/activate artifacts
+text=Flying, vigilance -- {T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source. -- Crew 1
+mana={1}{U}
+type=Artifact
+subtype=Vehicle
+power=2
+toughness=3
+[/card]
+[card]
+name=Magitek Armor
+auto=token(Hero,creature hero,1/1,colorless)
+auto=_CREW1_
+text=When this Vehicle enters, create a 1/1 colorless Hero creature token. -- Crew 1
+mana={3}{W}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=The Lunar Whale
+abilities=flying,showfromtoplibrary,canplayfromlibrarytop
+auto=_CREW1_
+#MISSING play-top-of-library should be gated on having attacked this turn (granted unconditionally here)
+text=Flying -- You may look at the top card of your library any time. -- As long as The Lunar Whale attacked this turn, you may play the top card of your library. -- Crew 1
+mana={3}{U}
+type=Legendary Artifact
+subtype=Vehicle
+power=3
+toughness=5
+[/card]
+[card]
+name=The Prima Vista
+abilities=flying
+auto=_CREW2_
+#MISSING becomes a creature when you cast a noncreature spell with 4+ mana spent (mana-spent tracking unsupported)
+text=Flying -- Whenever you cast a noncreature spell, if at least four mana was spent to cast it, The Prima Vista becomes an artifact creature until end of turn. -- Crew 2
+mana={4}{U}
+type=Legendary Artifact
+subtype=Vehicle
+power=5
+toughness=3
+[/card]
+[card]
+name=The Regalia
+abilities=haste
+auto=_ATTACKING_may target(<1>land|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=_CREW1_
+#MISSING should reveal until a land (implemented as: search a land onto the battlefield tapped)
+text=Haste -- Whenever The Regalia attacks, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order. -- Crew 1
+mana={4}
+type=Legendary Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
