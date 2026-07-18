@@ -133859,3 +133859,110 @@ mana={3}{G}
 type=Artifact
 subtype=Book Equipment
 [/card]
+[card]
+name=Baron, Airship Kingdom
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{R}
+text=This land enters tapped. -- {T}: Add {U} or {R}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Gohn, Town of Ruin
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{G}
+text=This land enters tapped. -- {T}: Add {B} or {G}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Gongaga, Reactor Town
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{G}
+text=This land enters tapped. -- {T}: Add {R} or {G}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Guadosalam, Farplane Gateway
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{U}
+text=This land enters tapped. -- {T}: Add {G} or {U}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Insomnia, Crown City
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{B}
+text=This land enters tapped. -- {T}: Add {W} or {B}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Rabanastre, Royal City
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{W}
+text=This land enters tapped. -- {T}: Add {R} or {W}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Sharlayan, Nation of Scholars
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{U}
+text=This land enters tapped. -- {T}: Add {W} or {U}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Treno, Dark City
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{B}
+text=This land enters tapped. -- {T}: Add {U} or {B}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Vector, Imperial Capital
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{R}
+text=This land enters tapped. -- {T}: Add {B} or {R}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Windurst, Federation Center
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{W}
+text=This land enters tapped. -- {T}: Add {G} or {W}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Adventurer's Inn
+auto=life:2
+auto={T}:Add{C}
+text=When this land enters, you gain 2 life. -- {T}: Add {C}.
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Capital City
+auto={T}:Add{C}
+auto={1}{T}:ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
+autohand={2}{cycle}:draw:1 controller
+text={T}: Add {C}. -- {1}, {T}: Add one mana of any color. -- Cycling {2}
+type=Land
+subtype=Town
+[/card]
