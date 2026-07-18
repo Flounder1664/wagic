@@ -1,6 +1,12 @@
 """
-Patch Wagic-debug.apk by replacing lib/arm64-v8a/libmain.so,
+Patch Wagic-debug.apk by replacing EVERY freshly-built native lib under
+lib/arm64-v8a/ (libmain.so, libSDL.so, ...) with the on-disk build output,
 then zipalign and re-sign with debug key.
+
+Replacing only libmain.so (the old behaviour) left a stale libSDL.so in the
+APK — which is how the Android 15+ 16KB-alignment warning survived a rebuild
+of libmain even after the linker flag was added. Any lib not rebuilt on disk
+is passed through unchanged.
 """
 import os
 import shutil
@@ -15,32 +21,38 @@ _ANDROID = os.path.join(_REPO, "projects", "mtg", "Android")
 APK_IN      = os.path.join(_ANDROID, "bin", "Wagic-debug.apk")
 APK_WORK    = os.path.join(_ANDROID, "bin", "Wagic-debug-patched.apk")
 APK_ALIGNED = os.path.join(_ANDROID, "bin", "Wagic-debug-aligned.apk")
-LIBMAIN     = os.path.join(_ANDROID, "libs", "arm64-v8a", "libmain.so")
+LIBDIR      = os.path.join(_ANDROID, "libs", "arm64-v8a")
 
 ZIPALIGN  = os.path.join(BUILD_TOOLS, "zipalign.exe")
 APKSIGNER = os.path.join(BUILD_TOOLS, "apksigner.bat")
 
-REPLACE_ENTRY = "lib/arm64-v8a/libmain.so"
+# Map every built lib/arm64-v8a/*.so that also exists in the APK.
+print("Reading freshly-built native libs...")
+new_libs = {}
+for fn in sorted(os.listdir(LIBDIR)):
+    if fn.endswith(".so"):
+        with open(os.path.join(LIBDIR, fn), "rb") as f:
+            new_libs["lib/arm64-v8a/" + fn] = f.read()
+        print(f"  {fn}: {len(new_libs['lib/arm64-v8a/' + fn]):,} bytes")
 
-# Step 1: Read new libmain.so bytes
-print("Reading new libmain.so...")
-with open(LIBMAIN, "rb") as f:
-    new_so_bytes = f.read()
-print(f"  {len(new_so_bytes):,} bytes")
-
-# Step 2: Rebuild APK zip, replacing libmain.so
-print(f"Rebuilding APK, replacing {REPLACE_ENTRY}...")
+# Step 2: Rebuild APK zip, replacing each matching lib
+print("Rebuilding APK...")
+replaced = set()
 with zipfile.ZipFile(APK_IN, 'r') as zin, \
      zipfile.ZipFile(APK_WORK, 'w', zipfile.ZIP_DEFLATED) as zout:
     for item in zin.infolist():
-        if item.filename == REPLACE_ENTRY:
+        if item.filename in new_libs:
             print(f"  Replacing: {item.filename}")
-            zout.writestr(item, new_so_bytes)
+            zout.writestr(item, new_libs[item.filename])
+            replaced.add(item.filename)
         else:
             # Preserve original compression
             data = zin.read(item.filename)
             zout.writestr(item, data)
-print("  Done rebuilding.")
+missing = set(new_libs) - replaced
+if missing:
+    print("  NOTE: built but not present in APK (skipped):", ", ".join(sorted(missing)))
+print(f"  Done rebuilding. Replaced {len(replaced)} lib(s).")
 
 # Step 3: zipalign
 if os.path.exists(APK_ALIGNED):
