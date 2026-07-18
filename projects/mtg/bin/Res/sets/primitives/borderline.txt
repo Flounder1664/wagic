@@ -133684,3 +133684,44 @@ subtype=Vehicle
 power=4
 toughness=4
 [/card]
+[card]
+name=Mysidian Elder
+auto=token(Wizard,creature wizard,0/1,black) and!( transforms((,newability[@movedTo(*[-creature]|mystack):damage:1 all(opponent)])) forever )!
+text=When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+mana={2}{R}
+type=Creature
+subtype=Human Wizard
+power=1
+toughness=3
+[/card]
+[card]
+name=Queen Brahne
+abilities=prowess
+auto=_ATTACKING_token(Wizard,creature wizard,0/1,black) and!( transforms((,newability[@movedTo(*[-creature]|mystack):damage:1 all(opponent)])) forever )!
+text=Prowess -- Whenever Queen Brahne attacks, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Noble
+power=2
+toughness=1
+[/card]
+[card]
+name=Prishe's Wanderings
+auto=may target(land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
+auto=counter(1/1) target(creature|mybattlefield)
+#MISSING can also fetch a Town card (only basic lands here)
+text=Search your library for a basic land card or Town card, put it onto the battlefield tapped, then shuffle. When you search your library this way, put a +1/+1 counter on target creature you control.
+mana={2}{G}
+type=Instant
+[/card]
+[card]
+name=Phantom Train
+abilities=trample
+auto={S(other artifact,creature|mybattlefield)}:counter(1/1) && transforms((Spirit Artifact Creature)) ueot
+text=Trample -- Sacrifice another artifact or creature: Put a +1/+1 counter on this Vehicle. It becomes a Spirit artifact creature in addition to its other types until end of turn.
+mana={3}{B}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
