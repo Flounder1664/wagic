@@ -133280,3 +133280,211 @@ text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens.
 mana={3}{W}
 type=Instant
 [/card]
+[card]
+name=The Legend of Kuruk
+backside=Avatar Kuruk
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=_SCRY2_ draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _SCRY2_ draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Scry 2, then draw a card. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
+mana={2}{U}{U}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Avatar Kuruk
+auto=@movedTo(*|mystack):token(Spirit,creature spirit,1/1,colorless)
+#MISSING Spirit token's "can't block or be blocked by non-Spirit creatures" rider; Exhaust - Waterbend {20}: take an extra turn (waterbend cost engine-blocked)
+text=Whenever you cast a spell, create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures." -- Exhaust - Waterbend {20}: Take an extra turn after this one.
+type=Legendary Creature
+subtype=Avatar
+power=4
+toughness=3
+[/card]
+[card]
+name=The Legend of Roku
+backside=Avatar Roku
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=all(*[zpos<=3]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uynt])) uynt )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Exile the top three cards of your library. Until the end of your next turn, you may play those cards. -- II - Add one mana of any color. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
+mana={2}{R}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Avatar Roku
+auto=_FIREBEND4_
+auto={8}:token(Dragon,creature dragon,4/4,red flying)
+#MISSING the Dragon token's own firebending 4
+text=Firebending 4 (Whenever this creature attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.) -- {8}: Create a 4/4 red Dragon creature token with flying and firebending 4.
+type=Legendary Creature
+subtype=Avatar
+power=4
+toughness=4
+[/card]
+[card]
+name=The Legend of Yangchen
+backside=Avatar Yangchen
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=name(Exile a permanent) target(*[-land;manacost>=3]|opponentbattlefield) moveto(exile)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may draw:3 opponent && draw:3 controller
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+#MISSING chapter I is each-player-chooses-up-to-one (political); approximated as exile one opponent permanent with mv>=3
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents. -- II - You may have target opponent draw three cards. If you do, draw three cards. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
+mana={3}{W}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Avatar Yangchen
+abilities=flying
+#MISSING Whenever you cast your second spell each turn, airbend up to one other target nonland permanent (airbend engine-blocked)
+text=Flying -- Whenever you cast your second spell each turn, airbend up to one other target nonland permanent.
+type=Legendary Creature
+subtype=Avatar
+power=4
+toughness=5
+[/card]
+[card]
+name=The Rise of Sozin
+backside=Fire Lord Sozin
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=destroy all(creature|battlefield)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+#MISSING chapter II (name a card, exile up to four copies from an opponent's zones) has no DSL form; skipped
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Destroy all creatures. -- II - Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
+mana={4}{B}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Fire Lord Sozin
+abilities=menace
+auto=_FIREBEND3_
+#MISSING combat-damage trigger: pay {X}, reanimate creatures with total mv<=X from that player's graveyard under your control
+text=Menace, firebending 3 -- Whenever Fire Lord Sozin deals combat damage to a player, you may pay {X}. When you do, put any number of target creature cards with total mana value X or less from that player's graveyard onto the battlefield under your control.
+type=Legendary Creature
+subtype=Human Noble
+power=5
+toughness=5
+[/card]
+[card]
+name=The Legend of Kyoshi
+backside=Avatar Kyoshi
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=draw:3 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _EARTHBEND2_
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+#MISSING ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Draw cards equal to the greatest power among creatures you control. -- II - Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
+mana={4}{G}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Avatar Kyoshi
+auto=lord(land|mybattlefield) trample
+auto=lord(land|mybattlefield) hexproof
+#MISSING {T}: Add X mana of any one color where X = greatest power among your creatures (dynamic restricted mana unsupported)
+text=Lands you control have trample and hexproof. -- {T}: Add X mana of any one color, where X is the greatest power among creatures you control.
+type=Legendary Creature
+subtype=Avatar
+power=5
+toughness=4
+[/card]
+[card]
+name=Avatar Aang
+abilities=flying
+auto=_FIREBEND2_
+#MISSING draw when you waterbend/earthbend/firebend/airbend, and transform after doing all four this turn (waterbend/airbend engine-blocked)
+text=Flying, firebending 2 -- Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform Avatar Aang.
+mana={R}{G}{W}{U}
+type=Legendary Creature
+subtype=Human Avatar Ally
+power=4
+toughness=4
+backside=Aang, Master of Elements
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+[/card]
+[card]
+name=Aang, Master of Elements
+abilities=flying
+auto=@each upkeep:may flip(backside)
+#MISSING spells cost {W}{U}{B}{R}{G} less (five-color cost reduction unsupported); the upkeep transform's payoff (gain 4 life, draw 4, +4 counters, 4 damage each opponent) fires via the back's own ETB below is approximated as a may-flip only
+text=Flying -- Spells you cast cost {W}{U}{B}{R}{G} less to cast. -- At the beginning of each upkeep, you may transform Aang, Master of Elements. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
+type=Legendary Creature
+subtype=Avatar Ally
+power=6
+toughness=6
+[/card]
+[card]
+name=Aang, at the Crossroads
+abilities=flying
+auto=reveal:5 optionone name(Put a creature into play) target(creature[manacost<=4]|reveal) moveto(mybattlefield) optiononeend
+auto=@movedTo(other creature|nonbattlezone) from(myBattlefield):flip(backside) forcetype(Legendary Creature)
+#MISSING ETB should bottom the unchosen revealed cards; the transform should wait until the next upkeep (here it flips immediately when a creature leaves)
+text=Flying -- When Aang enters, look at the top five cards of your library. You may put a creature card with mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order. -- When another creature you control leaves the battlefield, transform Aang at the beginning of the next upkeep.
+mana={2}{G}{W}{U}
+type=Legendary Creature
+subtype=Human Avatar Ally
+power=3
+toughness=3
+backside=Aang, Destined Savior
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+[/card]
+[card]
+name=Aang, Destined Savior
+abilities=flying
+auto=lord(creature[land]|mybattlefield) vigilance
+auto=@combat(begin) source(this):_EARTHBEND2_
+#MISSING earthbend 2 fires at the beginning of combat on your turn
+text=Flying -- Land creatures you control have vigilance. -- At the beginning of combat on your turn, earthbend 2.
+type=Legendary Creature
+subtype=Avatar Ally
+power=4
+toughness=4
+[/card]
+[card]
+name=Aang, Swift Savior
+abilities=flash,flying
+#MISSING ETB airbend up to one target (airbend engine-blocked); Waterbend {8}: Transform Aang (waterbend engine-blocked, no flip path)
+text=Flash -- Flying -- When Aang enters, airbend up to one other target creature or spell. -- Waterbend {8}: Transform Aang.
+mana={1}{W}{U}
+type=Legendary Creature
+subtype=Human Avatar Ally
+power=2
+toughness=3
+backside=Aang and La, Ocean's Fury
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+[/card]
+[card]
+name=Aang and La, Ocean's Fury
+abilities=reach,trample
+auto=@combat(attacking) source(this):counter(1/1) all(creature[tapped]|mybattlefield)
+text=Reach, trample -- Whenever Aang and La attack, put a +1/+1 counter on each tapped creature you control.
+type=Legendary Creature
+subtype=Avatar Spirit Ally
+power=5
+toughness=5
+[/card]
