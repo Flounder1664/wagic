@@ -1,0 +1,23 @@
+#FIN Vayne's Treachery: unkicked -> -2/-2 (Goblin Piker 2/1 dies).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:vayne's treachery
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:goblin piker
+life:20
+[DO]
+vayne's treachery
+goblin piker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:vayne's treachery
+manapool:{0}
+life:20
+[PLAYER2]
+graveyard:goblin piker
+life:20
+[END]

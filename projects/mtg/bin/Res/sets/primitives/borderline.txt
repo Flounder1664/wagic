@@ -133488,3 +133488,126 @@ subtype=Avatar Spirit Ally
 power=5
 toughness=5
 [/card]
+[card]
+name=Call the Mountain Chocobo
+flashback={5}{R}
+auto=name(Search a Mountain) target(mountain|mylibrary) moveto(hand)
+auto=token(Bird,creature bird,2/2,green) and!( transforms((,newability[_LANDFALL_1/0 ueot])) forever )!
+text=Search your library for a Mountain card, reveal it, put it into your hand, then shuffle. Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn." -- Flashback {5}{R}
+mana={3}{R}
+type=Sorcery
+[/card]
+[card]
+name=Chocobo Racetrack
+auto=_LANDFALL_token(Bird,creature bird,2/2,green) and!( transforms((,newability[_LANDFALL_1/0 ueot])) forever )!
+text=Landfall - Whenever a land you control enters, create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+mana={3}{G}{G}
+type=Artifact
+[/card]
+[card]
+name=Choco, Seeker of Paradise
+auto=_LANDFALL_1/0 ueot
+#MISSING attack trigger: look at N cards (N = attacking Birds), take one, put lands from among them tapped, rest to graveyard
+text=Whenever one or more Birds you control attack, look at that many cards from the top of your library. You may put one of them into your hand. Then put any number of land cards from among them onto the battlefield tapped and the rest into your graveyard. -- Landfall - Whenever a land you control enters, Choco gets +1/+0 until end of turn.
+mana={1}{G}{W}{U}
+type=Legendary Creature
+subtype=Bird
+power=3
+toughness=5
+[/card]
+[card]
+name=Chocobo Kick
+kicker={U(land|mybattlefield)} name(return a land)
+target=creature|mybattlefield
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+#MISSING if kicked, the creature deals twice its power instead
+text=Kicker - Return a land you control to its owner's hand. -- Target creature you control deals damage equal to its power to target creature an opponent controls. If this spell was kicked, the creature you control deals twice that much damage instead.
+mana={1}{G}
+type=Sorcery
+[/card]
+[card]
+name=From Father to Son
+flashback={4}{W}{W}{W}
+auto=name(Search a Vehicle) target(vehicle|mylibrary) moveto(hand)
+#MISSING if cast from a graveyard, put the Vehicle onto the battlefield instead (no cast-from-graveyard predicate)
+text=Search your library for a Vehicle card, reveal it, and put it into your hand. If this spell was cast from a graveyard, put that card onto the battlefield instead. Then shuffle. -- Flashback {4}{W}{W}{W}
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Ice Flan
+auto=name(Tap and stun) target(artifact,creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
+abilities=islandcycling
+text=When this creature enters, tap target artifact or creature an opponent controls. Put a stun counter on it. -- Islandcycling {2}
+mana={4}{U}{U}
+type=Creature
+subtype=Elemental Ooze
+power=5
+toughness=4
+[/card]
+[card]
+name=Nibelheim Aflame
+flashback={5}{R}{R}
+target=creature|mybattlefield
+auto=transforms((,newability[all(other creature) dynamicability<!powerstrike!>])) forever
+#MISSING if cast from a graveyard, discard your hand and draw four cards (no cast-from-graveyard predicate)
+text=Choose target creature you control. It deals damage equal to its power to each other creature. If this spell was cast from a graveyard, discard your hand and draw four cards. -- Flashback {5}{R}{R}
+mana={2}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Retrieve the Esper
+flashback={5}{U}
+auto=token(Robot Warrior,artifact creature robot warrior,3/3,blue)
+#MISSING if cast from a graveyard, put two +1/+1 counters on the token (no cast-from-graveyard predicate)
+text=Create a 3/3 blue Robot Warrior artifact creature token. Then if this spell was cast from a graveyard, put two +1/+1 counters on that token. -- Flashback {5}{U}
+mana={3}{U}
+type=Sorcery
+[/card]
+[card]
+name=Ride the Shoopuf
+auto=_LANDFALL_counter(1/1) target(creature|mybattlefield)
+auto={5}{G}{G}:transforms((Beast Creature,setpower=7,settoughness=7)) forever
+text=Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature you control. -- {5}{G}{G}: This enchantment becomes a 7/7 Beast creature in addition to its other types.
+mana={1}{G}
+type=Enchantment
+[/card]
+[card]
+name=Rydia, Summoner of Mist
+auto=_LANDFALL_may discard:1 && draw:1
+#MISSING Summon - {X}{T}: return target Saga with mana value X from your graveyard with a finality counter and haste (dynamic-mv return unsupported)
+text=Landfall - Whenever a land you control enters, you may discard a card. If you do, draw a card. -- Summon - {X}, {T}: Return target Saga card with mana value X from your graveyard to the battlefield with a finality counter on it. It gains haste until end of turn.
+mana={R}{G}
+type=Legendary Creature
+subtype=Human Shaman
+power=1
+toughness=2
+[/card]
+[card]
+name=Sorceress's Schemes
+flashback={4}{R}
+auto=name(Return an instant or sorcery) target(*[instant;sorcery]|mygraveyard) moveto(hand)
+auto=add{R}
+text=Return target instant or sorcery card from your graveyard or exiled card with flashback you own to your hand. Add {R}. -- Flashback {4}{R}
+mana={3}{R}
+type=Sorcery
+[/card]
+[card]
+name=The Final Days
+flashback={4}{B}{B}
+auto=token(Horror,creature horror,2/2,black)*2 tapped
+#MISSING if cast from a graveyard, instead create X tapped tokens where X = creature cards in your graveyard (no cast-from-graveyard predicate)
+text=Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard. -- Flashback {4}{B}{B}
+mana={2}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Vayne's Treachery
+kicker={S(artifact,creature|mybattlefield)} name(sacrifice)
+target=creature|battlefield
+auto=ifnot paid(kicker) then -2/-2 ueot
+auto=if paid(kicker) then -6/-6 ueot
+text=Kicker - Sacrifice an artifact or creature. -- Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.
+mana={1}{B}
+type=Instant
+[/card]
