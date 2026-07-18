@@ -133966,3 +133966,226 @@ text={T}: Add {C}. -- {1}, {T}: Add one mana of any color. -- Cycling {2}
 type=Land
 subtype=Town
 [/card]
+[card]
+name=Summon: Anima
+abilities=menace
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) draw:1 controller && life:-1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) draw:1 controller && life:-1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) draw:1 controller && life:-1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) destroy target(creature|opponentbattlefield) && life:-3 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) sacrifice(this)
+#MISSING ch IV is each-opponent-sacrifices (approximated as destroy one opponent creature + lose 3)
+text=I, II, III - Pain - You draw a card and lose 1 life. -- IV - Oblivion - Each opponent sacrifices a creature and loses 3 life. -- Menace
+mana={4}{B}{B}
+type=Enchantment Creature
+subtype=Saga Horror
+power=4
+toughness=4
+[/card]
+[card]
+name=Summon: Choco/Mog
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) all(other creature|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(other creature|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) all(other creature|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) all(other creature|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) sacrifice(this)
+text=I, II, III, IV - Stampede! - Other creatures you control get +1/+0 until end of turn.
+mana={2}{W}
+type=Enchantment Creature
+subtype=Saga Bird Moogle
+power=3
+toughness=3
+[/card]
+[card]
+name=Summon: Esper Ramuh
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) damage:2 target(creature|opponentbattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(wizard|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(wizard|mybattlefield) 1/0 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch I damage = number of noncreature-nonland cards in your graveyard (approximated as 2)
+text=I - Judgment Bolt - This creature deals damage equal to the noncreature, nonland cards in your graveyard to target creature an opponent controls. -- II, III - Wizards you control get +1/+0.
+mana={2}{R}{R}
+type=Enchantment Creature
+subtype=Saga Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Summon: Fat Chocobo
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) token(Bird,creature bird,2/2,green) and!( transforms((,newability[_LANDFALL_1/0 ueot])) forever )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(creature|mybattlefield) transforms((,trample)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) all(creature|mybattlefield) transforms((,trample)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) all(creature|mybattlefield) transforms((,trample)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) sacrifice(this)
+text=I - Wark - Create a 2/2 green Bird token. -- II, III, IV - Kerplunk - Creatures you control gain trample until end of turn.
+mana={4}{G}
+type=Enchantment Creature
+subtype=Saga Bird
+power=4
+toughness=4
+[/card]
+[card]
+name=Summon: Fenrir
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) may target(land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch II (next creature enters with +1/+1) delayed-cast trigger; ch III draw gated on controlling the greatest-power creature (approximated as may draw)
+text=I - Crescent Fang - Search for a basic land, put it onto the battlefield tapped. -- II - next creature enters with a +1/+1 counter. -- III - Draw a card if you control the greatest-power creature.
+mana={2}{G}
+type=Enchantment Creature
+subtype=Saga Wolf
+power=3
+toughness=2
+[/card]
+[card]
+name=Summon: G.F. Ifrit
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) may discard:1 && draw:1
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may discard:1 && draw:1
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) add{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) add{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) sacrifice(this)
+text=I, II - You may discard a card. If you do, draw a card. -- III, IV - Add {R}.
+mana={2}{R}
+type=Enchantment Creature
+subtype=Saga Demon
+power=3
+toughness=2
+[/card]
+[card]
+name=Summon: Knights of Round
+abilities=indestructible
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) token(Knight,creature knight,2/2,white)*3
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) token(Knight,creature knight,2/2,white)*3
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) token(Knight,creature knight,2/2,white)*3
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=4) token(Knight,creature knight,2/2,white)*3
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) all(other creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) sacrifice(this)
+#MISSING ch V should also put an indestructible counter on each other creature
+text=I-IV - Create three 2/2 white Knight tokens. -- V - Ultimate End - Other creatures you control get +2/+2 and gain an indestructible counter. -- Indestructible
+mana={6}{W}{W}
+type=Enchantment Creature
+subtype=Saga Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Summon: Primal Garuda
+abilities=flying
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) damage:4 target(creature[tapped]|opponentbattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(other creature|mybattlefield) transforms((,newability[1/0],flying)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(other creature|mybattlefield) transforms((,newability[1/0],flying)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=I - Aerial Blast - Deals 4 damage to target tapped creature an opponent controls. -- II, III - Slipstream - Another target creature you control gets +1/+0 and gains flying. -- Flying
+mana={3}{W}
+type=Enchantment Creature
+subtype=Saga Harpy
+power=3
+toughness=3
+[/card]
+[card]
+name=Summon: Primal Odin
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) destroy target(creature|opponentbattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 controller && life:-2 controller && life:-2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch II grants "combat damage to a player -> that player loses the game" (loses-the-game unsupported)
+text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken. -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
+mana={4}{B}{B}
+type=Enchantment Creature
+subtype=Saga Knight
+power=5
+toughness=3
+[/card]
+[card]
+name=Summon: Shiva
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III draws one card per tapped creature opponents control (approximated as draw 1)
+text=I, II - Heavenly Strike - Tap target creature an opponent controls and put a stun counter on it. -- III - Diamond Dust - Draw a card for each tapped creature your opponents control.
+mana={3}{U}{U}
+type=Enchantment Creature
+subtype=Saga Elemental
+power=4
+toughness=5
+[/card]
+[card]
+name=Summon: Titan
+abilities=reach,trample
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) deplete:5 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(land|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(other creature|mybattlefield) transforms((,trample,newability[3/3])) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III buff is +X/+X where X = lands you control (approximated as +3/+3)
+text=I - Mill five cards. -- II - Return all land cards from your graveyard to the battlefield tapped. -- III - Another target creature gains trample and gets +X/+X where X is the number of lands you control.
+mana={3}{G}{G}
+type=Enchantment Creature
+subtype=Saga Giant
+power=7
+toughness=7
+[/card]
+[card]
+name=Summon: G.F. Cerberus
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) _SURVEIL1_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch II/III copy the next instant or sorcery you cast (copy-spell unsupported, wagic#19)
+text=I - Surveil 1. -- II - Double - copy the next instant/sorcery you cast this turn. -- III - Triple - copy it twice.
+mana={2}{R}{R}
+type=Enchantment Creature
+subtype=Saga Dog
+power=3
+toughness=3
+[/card]
+[card]
+name=Summon: Leviathan
+abilities=ward
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) all(creature[-kraken&-leviathan&-merfolk&-octopus&-serpent]|battlefield) moveto(hand)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ward is Ward {2} (generic ward here); ch II/III delayed "when a sea creature attacks, draw" unsupported
+text=I - Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand. -- II, III - whenever a sea creature attacks, draw a card. -- Ward {2}
+mana={4}{U}{U}
+type=Enchantment Creature
+subtype=Saga Leviathan
+power=6
+toughness=6
+[/card]
+[card]
+name=Summon: Brynhildr
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uynt])) uynt )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch I "play it during any turn you add a lore counter" timing (approx: playable until your next turn); ch II/III delayed next-creature-gains-haste unsupported
+text=I - Chain - Exile the top card of your library, playable while lore counters are added. -- II, III - Gestalt Mode - your next creature spell gains haste.
+mana={1}{R}
+type=Enchantment Creature
+subtype=Saga Knight
+power=2
+toughness=1
+[/card]
