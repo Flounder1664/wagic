@@ -134279,3 +134279,49 @@ subtype=Zombie Horror
 power=3
 toughness=2
 [/card]
+[card]
+name=Austere Command
+auto=choice name(Destroy artifacts and enchantments) destroy all(artifact) && destroy all(enchantment)
+auto=choice name(Destroy artifacts and small creatures) destroy all(artifact) && destroy all(creature[manacost<=3])
+auto=choice name(Destroy artifacts and big creatures) destroy all(artifact) && destroy all(creature[manacost>=4])
+auto=choice name(Destroy enchantments and small creatures) destroy all(enchantment) && destroy all(creature[manacost<=3])
+auto=choice name(Destroy enchantments and big creatures) destroy all(enchantment) && destroy all(creature[manacost>=4])
+auto=choice name(Destroy all creatures) destroy all(creature[manacost<=3]) && destroy all(creature[manacost>=4])
+text=Choose two - -- - Destroy all artifacts. -- - Destroy all enchantments. -- - Destroy all creatures with mana value 3 or less. -- - Destroy all creatures with mana value 4 or greater.
+mana={4}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Pact of Negation
+auto=fizzle
+auto=if casted(this) then transforms((,newability[upcost[{3}{U}{U};next upkeep] wingame opponent])) forever
+text=Counter target spell. -- At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
+mana={0}
+type=Instant
+[/card]
+[card]
+name=Slaughter Pact
+target=creature[-black]|battlefield
+auto=destroy
+auto=if casted(this) then transforms((,newability[upcost[{2}{B};next upkeep] wingame opponent])) forever
+text=Destroy target nonblack creature. -- At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
+mana={0}
+type=Instant
+[/card]
+[card]
+name=Tribal Flames
+auto=damage:pbasiclandtypes target(anytarget)
+text=Domain - Tribal Flames deals X damage to any target, where X is the number of basic land types among lands you control.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Quiet Disrepair
+target=artifact,enchantment|battlefield
+auto=@each my upkeep:choice name(Destroy enchanted permanent) destroy all(mytgt)
+auto=@each my upkeep:choice name(Gain 2 life) life:2 controller
+text=Enchant artifact or enchantment -- At the beginning of your upkeep, choose one - -- - Destroy enchanted permanent. -- - You gain 2 life.
+mana={1}{G}
+type=Enchantment
+subtype=Aura
+[/card]
