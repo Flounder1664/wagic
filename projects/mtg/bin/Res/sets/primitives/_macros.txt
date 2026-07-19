@@ -247,11 +247,11 @@
 
 #AUTO_DEFINE _EERIE_ @roomfullyunlocked(*[Room]|mybattlefield):
 
-#AUTO_DEFINE _CREW1_ {crew(other creature[power>=1]|myBattlefield)}:name(crew 1 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+#AUTO_DEFINE _CREW1_ {crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 
-#AUTO_DEFINE _CREW2_ {crew(other creature[power>=2]|myBattlefield)}:name(crew 2 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+#AUTO_DEFINE _CREW2_ {crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
 
-#AUTO_DEFINE _CREW2COMPLEMENT_ {crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 2 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~1}
+#AUTO_DEFINE _CREW2COMPLEMENT_ {crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
 
 # Endure
 #AUTO_DEFINE _ENDURE1_  transforms((,newability[choice counter(1/1)],newability[choice create(Spirit:Creature:1/1:white)])) ueot
@@ -387,7 +387,7 @@
 #AUTO_DEFINE _TREASURE_ token(Treasure^Treasure Artifact^0/0) and!( transforms((,newability[{T}{S}:Add{W}],newability[{T}{S}:Add{U}],newability[{T}{S}:Add{B}],newability[{T}{S}:Add{R}],newability[{T}{S}:Add{G}])) forever )!
 
 # Vehicle Token
-#AUTO_DEFINE _VEHICLE_ token(Vehicle^Artifact Vehicle^3/2) and!( transforms((,newability[{crew(other creature[power>=1]|myBattlefield)}:name(crew 1 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}])) forever )!
+#AUTO_DEFINE _VEHICLE_ token(Vehicle^Artifact Vehicle^3/2) and!( transforms((,newability[{crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}])) forever )!
 
 # Earthbend N (TLA) - target land becomes 0/0 Elemental creature with haste and N +1/+1 counters; still a land; returns tapped when it dies or is exiled
 #AUTO_DEFINE _EARTHBEND1_ name(Earthbend 1) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever

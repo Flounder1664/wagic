@@ -900,7 +900,6 @@ name=Aerial Surveyor
 abilities=flying
 auto=@combat(attacking) source(this) restriction{type(land|opponentBattlefield)~morethan~type(land|myBattlefield)}:name(Search basic plains) target(plains[basic]|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle controller])) oneshot )!
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Flying -- Whenever Aerial Surveyor attacks, if defending player controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle. -- Crew 2
 mana={2}{W}
 type=Artifact
@@ -9633,11 +9632,7 @@ auto={T}:alterenergy:2 controller
 auto={T}{E:2}:tap target(creature)
 auto={T}{E:3}:draw:1
 auto={E:4}:becomes(Artifact Creature) ueot
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text={T}: You get {E}{E} (two energy counters). -- {T}, Pay {E}{E}: Tap target creature. -- {T}, Pay {E}{E}{E}: Draw a card. -- Pay {E}{E}{E}{E}: Bespoke Battlewagon becomes an artifact creature until end of turn. -- Crew 4
 mana={3}{U}
 type=Artifact
@@ -20790,17 +20785,7 @@ type=Enchantment
 [card]
 name=Colossal Plow
 auto=_ATTACKING_life:3 controller && add{W}{W}{W} doesntempty
-auto={crew(other creature[power>=6]|myBattlefield)}:name(crew 6[1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=5]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~2,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 6 [6 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~5,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~5,compare(crewtotalpower)~morethan~5}
+auto={crew6(other creature|myBattlefield)}:name(Crew 6) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~5}
 text=Whenever Colossal Plow attacks, add {W}{W}{W} and you gain 3 life. Until end of turn, you don't lose this mana as steps and phases end. -- Crew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={2}
 type=Artifact
@@ -21636,11 +21621,7 @@ type=Land
 [card]
 name=Conqueror's Galleon
 auto=_ATTACKING_phaseaction[combatends once] flip(Conqueror's Foothold)
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text=When Conqueror's Galleon attacks, exile it at end of combat, then return it to the battlefield transformed under your control. -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}
 type=Artifact
@@ -23759,7 +23740,6 @@ name=Cryptcaller Chariot
 abilities=menace
 auto=@discarded(*|myHand):_ZOMBIETOKEN_ and!( tap(noevent) )!
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Menace -- Whenever you discard one or more cards, create that many tapped 2/2 black Zombie creature tokens. -- Crew 2
 mana={3}{B}
 type=Artifact
@@ -26288,7 +26268,6 @@ name=Debris Beetle
 abilities=trample
 auto=all(opponent) life:-3 && life:3
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Trample -- When this Vehicle enters, each opponent loses 3 life and you gain 3 life. -- Crew 2
 mana={2}{B}{G}
 type=Artifact
@@ -26902,7 +26881,6 @@ type=Enchantment
 name=Deluxe Dragster
 auto=cantbeblockedby(creature[-Vehicle])
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 auto=@combatdamaged(player) from(this):may target(*[instant;sorcery]|opponentgraveyard) activate castcard(normal) and!(transforms((,newability[gainedexiledeath])) forever)!
 text=Deluxe Dragster can't be blocked except by Vehicles. -- Whenever Deluxe Dragster deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead. -- Crew 2
 mana={4}{U}
@@ -27125,7 +27103,6 @@ abilities=affinityartifacts
 auto=ability$! may name() name(destroy for opponent) destroy target(creature|opponentBattlefield) !$ controller
 auto=if type(creature|myBattlefield)~morethan~0 then ability$! may name() name(destroy for controller) destroy target(creature|myBattlefield) && counter(1/1,2) all(Demonic Junker[fresh]|myBattlefield) !$ controller
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.) -- When this Vehicle enters, for each player, destroy up to one target creature that player controls. If a creature you controlled was destroyed this way, put two +1/+1 counters on this Vehicle. -- Crew 2
 mana={6}{B}
 type=Artifact
@@ -31508,7 +31485,6 @@ toughness=3
 name=Dune Drifter
 auto=target(*[artifact;creature;manacost<=x]|mygraveyard) moveTo(battlefield)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={X}{W}{B}
 type=Artifact
@@ -31685,7 +31661,6 @@ toughness=3
 name=Dusk Legion Dreadnought
 abilities=vigilance
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Vigilance -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={5}
 type=Artifact
@@ -34237,7 +34212,6 @@ toughness=1
 name=Enchanted Carriage
 auto=create(Mouse:creature Mouse:1/1:white)*2
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=When Enchanted Carriage enters, create two 1/1 white Mouse creature tokens. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={5}
 type=Artifact
@@ -35333,11 +35307,7 @@ toughness=2
 [/card]
 [card]
 name=Esika's Chariot
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 auto=token(Cat,Creature Cat,2/2,green)*2
 auto=_ATTACKING_clone target(*[token]|mybattlefield)
 text=When Esika's Chariot enters, create two 2/2 green Cat creature tokens. -- Whenever Esika's Chariot attacks, create a token that's a copy of target token you control. -- Crew 4
@@ -38921,9 +38891,7 @@ type=Sorcery
 name=Fell Flagship
 auto=lord(pirate|mybattlefield) 1/0
 auto=@combatdamagefoeof(player) from(this):ability$!name(discard) target(*|myhand) reject!$ opponent
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Pirates you control get +1/+0. -- Whenever Fell Flagship deals combat damage to a player, that player discards a card. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -43105,9 +43073,7 @@ toughness=4
 [/card]
 [card]
 name=Futurist Sentinel
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}{U}
 type=Artifact
@@ -43859,7 +43825,6 @@ name=Gastal Thrillroller
 abilities=haste,trample
 auto=becomes(creature) ueot
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 autograveyard={2}{R}{D(*|myhand)}:moveTo(battlefield) _FINALITY_COUNTER_ asSorcery
 text=Trample, haste -- When this Vehicle enters, it becomes an artifact creature until end of turn. -- Crew 2 -- {2}{R}, Discard a card: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery.
 mana={2}{R}
@@ -45203,7 +45168,6 @@ toughness=2
 name=Gilded Assault Cart
 abilities=trample
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 autograveyard={S(*[treasure]|mybattlefield)}{S(*[treasure]|mybattlefield)}:moveto(hand)
 text=Trample -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.) -- Sacrifice two Treasures: Return Gilded Assault Cart from your graveyard to your hand.
 mana={1}{R}{R}
@@ -49366,9 +49330,7 @@ toughness=3
 name=Grond, the Gatebreaker
 abilities=trample
 auto=aslongas(army|mybattlefield) becomes(Artifact Creature)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Trample -- As long as it's your turn and you control an Army, Grond, the Gatebreaker is an artifact creature. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}{B}
 type=Legendary Artifact
@@ -49825,7 +49787,6 @@ name=Guidelight Pathmaker
 abilities=vigilance
 auto=may name(search your library) target(artifact|mylibrary) moveTo(library) and!( if cantargetcard(artifact[manacost<=2]|*) then transforms((,newability[moveto(myBattlefield)])) oneshot else moveTo(hand) )!
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Vigilance -- When this Vehicle enters, you may search your library for an artifact card and reveal it. Put it onto the battlefield if its mana value is 2 or less. Otherwise, put it into your hand. If you search your library this way, shuffle. -- Crew 2
 mana={4}{W}{U}
 type=Artifact
@@ -56204,7 +56165,6 @@ toughness=5
 name=Imperial Recovery Unit
 auto=_ATTACKING_name(Return creature or vehicle) transforms((,newability[if type(creature[manacost<=2]|mygraveyard)~morethan~0 then choice name(Return creature) name(Return creature) target(creature[manacost<=2]|mygraveyard) moveto(hand)],newability[if type(vehicle[manacost<=2]|mygraveyard)~morethan~0 then choice name(Return vehicle) name(Return vehicle) target(vehicle[manacost<=2]|mygraveyard) moveto(hand)])) oneshot
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever Imperial Recovery Unit attacks, return target creature or Vehicle card with mana value 2 or less from your graveyard to your hand. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={2}{W}
 type=Artifact
@@ -56318,7 +56278,6 @@ type=Instant
 [/card]
 [card]
 name=Imposter Mech
-auto=may name(Copy a creature) target(creature|opponentbattlefield) copy and!( transforms((removetypes,newability[becomes(Artifact Vehicle)],newability[{crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}],newability[{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}],newability[{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}])) forever )!
 text=You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types. -- Crew 3
 mana={1}{U}
 type=Artifact
@@ -69786,7 +69745,6 @@ name=Marauding Dreadship
 abilities=haste
 auto=name(Incubate 2) name(Incubate 2) token(Incubator) and!( counter(1/1.2) )!
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Haste -- When Marauding Dreadship enters, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.) -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={2}{R}
 type=Artifact
@@ -70882,7 +70840,6 @@ toughness=10
 [card]
 name=Mechtitan Core
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 auto=this(variable{type:*[creature;vehicle]:mybattlefield}>4) {5}{E}:name(Create mechtitan) name(Create mechtitan) token(Mechtitan) and!( transforms((,newability[name(Exile 4 creatures or vehicles) target(<4>other *[creature;vehicle]|mybattlefield) moveto(myexile) and!( becomes(tobemech) forever )!],newability[_DIES_name(Return exiled cards) all(tobemech|myexile) moveto(ownerbattlefield) and!( tap(noevent) )!])) forever )!
 text={5}, Exile Mechtitan Core and four other artifact creatures and/or Vehicles you control: Create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, vigilance, trample, lifelink, and haste that's all colors. When that token leaves the battlefield, return all cards exiled with Mechtitan Core except Mechtitan Core to the battlefield tapped under their owners' control. -- Crew 2
 mana={2}
@@ -70973,9 +70930,7 @@ name=Meldweb Strider
 abilities=vigilance
 auto=counter(0/0,1,Oil)
 auto={C(0/0,-1,Oil)}:name(Becomes an artifact creature) transforms((Artifact Creature)) ueot
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Vigilance -- Meldweb Strider enters with an oil counter on it. -- Remove an oil counter from Meldweb Strider: It becomes an artifact creature until end of turn. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}{U}
 type=Artifact
@@ -71802,7 +71757,6 @@ type=Artifact
 name=Midnight Mangler
 auto=this(variable{opponentturn}) becomes(creature)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=During turns other than yours, this Vehicle is an artifact creature. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={1}{U}
 type=Artifact
@@ -72215,7 +72169,7 @@ type=Enchantment
 name=Mindlink Mech
 abilities=flying
 auto={0}:name(Copy and crew 1 [1 creature]) target(creature[-legendary&-tapped]|mybattlefield) tap && copy and!( all(this) transforms((Artifact Vechicle Creature,setpower=4,settoughness=3,flying,newability[@next end:flip(myorigname) undocpy])) ueot )! restriction{compare(crewtotalpower)~morethan~0} limit:1
-auto={crew(other creature[power>=1]|myBattlefield)}:name(crew 1 [1 creature]) transforms((Artifact Vechicle Creature,setpower=4,settoughness=3,flying)) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) transforms((Artifact Vechicle Creature,setpower=4,settoughness=3,flying)) ueot restriction{compare(crewtotalpower)~morethan~0}
 text=Flying -- Whenever Mindlink Mech becomes crewed for the first time each turn, until end of turn, Mindlink Mech becomes a copy of target nonlegendary creature that crewed it this turn, except it's 4/3, it's a Vehicle artifact in addition to its other types, and it has flying. -- Crew 1
 mana={2}{U}
 type=Artifact
@@ -73547,9 +73501,7 @@ type=Land
 [card]
 name=Mobilizer Mech
 abilities=flying
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) transforms((,newability[becomes(Artifact Creature) ueot],newability[may name(Transform another vehicle) target(vehicle[-creature]|mybattlefield) becomes(Artifact Creature) ueot])) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) transforms((,newability[becomes(Artifact Creature) ueot],newability[may name(Transform another vehicle) target(vehicle[-creature]|mybattlefield) becomes(Artifact Creature) ueot])) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) transforms((,newability[becomes(Artifact Creature) ueot],newability[may name(Transform another vehicle) target(vehicle[-creature]|mybattlefield) becomes(Artifact Creature) ueot])) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) transforms((,newability[becomes(Artifact Creature) ueot],newability[may name(Transform another vehicle) target(vehicle[-creature]|mybattlefield) becomes(Artifact Creature) ueot])) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Flying -- Whenever Mobilizer Mech becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={1}{U}
 type=Artifact
@@ -74819,7 +74771,6 @@ toughness=2
 name=Mukotai Soulripper
 auto=_ATTACKING_may name(Sacrifice) transforms((,newability[sacrifice notaTarget(other *[artifact;creature]|myBattlefield)],newability[counter(1/1)],menace)) ueot
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever Mukotai Soulripper attacks, you may sacrifice another artifact or creature. If you do, put a +1/+1 counter on Mukotai Soulripper and it gains menace until end of turn. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={1}{B}
 type=Artifact
@@ -76040,9 +75991,7 @@ type=Sorcery
 [card]
 name=Nautiloid Ship
 abilities=flying
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 auto=name(Exile graveyard) transforms((,newability[choice name(Exile opponent graveyard) all(*|opponentgraveyard) moveto(exile) and!( counter(0/0.1.NautiloidExiled) )!],newability[choice name(Exile your graveyard) all(*|mygraveyard) moveto(exile) and!( counter(0/0.1.NautiloidExiled) )!])) oneshot
 auto=@combatdamaged(player) from(this):may name(Put creature in play) target(creature[counter{0/0.1.NautiloidExiled}]|exile) moveto(mybattlefield)
 text=Flying -- When Nautiloid Ship enters, exile target player's graveyard. -- Whenever Nautiloid Ship deals combat damage to a player, you may put a creature card exiled with Nautiloid Ship onto the battlefield under your control. -- Crew 3
@@ -82240,11 +82189,7 @@ toughness=5
 name=Parhelion II
 abilities=flying,first strike,vigilance
 auto=_ATTACKING_create(angel:creature angel:4/4:white:flying:vigilance:battleready)*2
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text=Flying, first strike, vigilance -- Whenever Parhelion II attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking. -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={6}{W}{W}
 type=Legendary Artifact
@@ -86371,7 +86316,6 @@ subtype=Aura
 name=Prodigy's Prototype
 auto=@combat(attacking) source(vehicle|mybattlefield):name(Create pilot) token(Pilot)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater." -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={1}{W}{U}
 type=Artifact
@@ -88529,9 +88473,7 @@ toughness=2
 name=Raiders' Karve
 aicode=activate all(land[zpos=1]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
 auto=_ATTACKING_reveal:1 optionone target(<upto:1>land|reveal) moveto(ownerbattlefield) and!( tap(noevent) )! optiononeend optiontwo target(*|reveal) moveto(mylibrary) optiontwoend revealend
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Whenever Raiders' Karve attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -90437,9 +90379,7 @@ toughness=3
 name=Reckoner Bankbuster
 auto=counter(0/0,3,Charge)
 auto={2}{T}{C(0/0,-1,Charge)}:name(Draw a card) draw:1 controller && if compare(hascntcharge)~equalto~0 then _TREASURE_ && if compare(hascntcharge)~equalto~0 then token(Pilot)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Reckoner Bankbuster enters with three charge counters on it. -- {2}, {T}, Remove a charge counter from Reckoner Bankbuster: Draw a card. Then if there are no charge counters on Reckoner Bankbuster, create a Treasure token and a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater." -- Crew 3
 mana={2}
 type=Artifact
@@ -92579,9 +92519,7 @@ toughness=3
 name=Ribskiff
 abilities=poisontwotoxic
 auto=draw:1
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Toxic 2 (Players dealt combat damage by this permanent also get two poison counters.) -- When Ribskiff enters, draw a card. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}
 type=Artifact
@@ -93035,7 +92973,6 @@ toughness=3
 name=Ripclaw Wrangler
 auto=ability$!reject notatarget(*|myhand)!$ opponent
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=When this Vehicle enters, each opponent discards a card. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}{B}
 type=Artifact
@@ -94222,9 +94159,7 @@ type=Sorcery
 name=Rolling Hamsphere
 auto=foreach(Hamster|myBattlefield) 1/1
 auto=_ATTACKING_create(hamster:creature hamster:1/1:red)*3
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Rolling Hamsphere gets +1/+1 for each Hamster you control. -- Whenever Rolling Hamsphere attacks, create three 1/1 red Hamster creature tokens, then it deals X damage to any target, where X is the number of Hamsters you control. -- Crew 3
 mana={7}
 type=Artifact
@@ -94711,7 +94646,6 @@ abilities=double strike
 auto=teach(creature) double strike
 auto={4}:equip
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Double strike -- Equipped creature has double strike. -- Equip {4} -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn. Creatures can't be attached to other permanents.)
 mana={3}
 type=Artifact
@@ -100515,7 +100449,6 @@ type=Sorcery
 name=Shadowed Caravel
 auto=@explored(creature|mybattlefield):all(this) counter(1/1)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever a creature you control explores, put a +1/+1 counter on Shadowed Caravel. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={2}
 type=Artifact
@@ -101858,27 +101791,7 @@ toughness=1
 name=Shorikai, Genesis Engine
 abilities=canbecommander
 auto={1}{T}:name(Draw, discard and create Pilot) draw:2 controller && transforms((,newability[name(Discard a card) target(*|myhand) reject],newability[token(Pilot)])) forever
-auto={crew(other creature[power>=8]|myBattlefield)}:name(crew 8[1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=8]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=7]|myBattlefield)}:name(crew 8[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=7]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=6]|myBattlefield)}:name(crew 8[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=5]|myBattlefield)}:name(crew 8[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=4]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 8[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=6]|myBattlefield)}:name(crew 8[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=5]|myBattlefield)}:name(crew 8[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 8[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 8[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 8[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=5]|myBattlefield)}:name(crew 8[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 8[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 8[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 8[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~3,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 8[5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 8[5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 8[5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~2,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 8[6 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~4,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~5,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 8[6 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~5,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 8[7 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~5,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~6,compare(crewtotalpower)~morethan~7}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 8[8 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~7,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~7,compare(crewtotalpower)~morethan~7}
+auto={crew8(other creature|myBattlefield)}:name(Crew 8) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~7}
 text={1}, {T}: Draw two cards, then discard a card. Create a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater." -- Crew 8 (Tap any number of creatures you control with total power 8 or more: This Vehicle becomes an artifact creature until end of turn.) -- Shorikai, Genesis Engine can be your commander.
 mana={2}{W}{U}
 type=Legendary Artifact
@@ -102692,7 +102605,6 @@ type=Artifact
 name=Silent Submersible
 auto=@combatdamaged(player,planeswalker) from(this):draw:1
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever Silent Submersible deals combat damage to a player or planeswalker, draw a card. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={U}{U}
 type=Artifact
@@ -104061,7 +103973,6 @@ toughness=3
 name=Skybox Ferry
 abilities=cycling,flying
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 autohand=__CYCLING__({2})
 text=Flying -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.) -- Cycling {2} ({2}, Discard this card: Draw a card.)
 mana={5}
@@ -107848,7 +107759,6 @@ grade=supported
 abilities=haste
 auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:transforms((Creature)) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Haste -- Exhaust - Tap another untapped Mount or Vehicle you control: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it for each Mount and/or Vehicle you control other than this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
 mana={4}{R}
 type=Artifact
@@ -111997,11 +111907,7 @@ type=Sorcery
 name=Surgehacker Mech
 abilities=menace
 auto=damage:twicetype:vehicle:mybattlefield target(creature,planeswalker|opponentBattlefield)
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text=Menace -- When Surgehacker Mech enters, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls. -- Crew 4
 mana={4}
 type=Artifact
@@ -116166,7 +116072,6 @@ name=The Last Ride
 auto=thisforeach(controllerlife) -1/-1
 auto={2}{B}{L:2}:draw:1
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=The Last Ride gets -X/-X, where X is your life total. -- {2}{B}, Pay 2 life: Draw a card. -- Crew 2
 mana={B}
 type=Legendary Artifact
@@ -116976,7 +116881,6 @@ name=Thopter Fabricator
 abilities=flying
 auto=_SECOND_DRAW__THOPTERTOKEN_
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Flying -- Whenever you draw your second card each turn, create a 1/1 colorless Thopter artifact creature token with flying. -- Crew 2
 mana={2}{U}
 type=Artifact
@@ -117956,7 +117860,6 @@ type=Artifact
 name=Thundersteel Colossus
 abilities=haste,trample
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Trample, haste -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={7}
 type=Artifact
@@ -124340,7 +124243,6 @@ auto={T}:Add{B}
 auto={T}:Add{R}
 auto={T}:Add{G}
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=When this Vehicle enters, you gain 2 life. -- {T}: Add one mana of any color. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={2}{G}
 type=Artifact
@@ -128218,9 +128120,7 @@ name=Weatherlight
 abilities=flying
 aicode=activate target(*[artifact;legendary;saga;zpos<=5]|mylibrary) moveto(hand)
 auto=@combatdamaged(player) from(this):reveal:5 optionone name(Get historic) target(*[artifact;legendary;saga]|reveal) moveto(hand) optiononeend optiontwo all(*|reveal) bottomoflibrary optiontwoend revealend
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Flying -- Whenever Weatherlight deals combat damage to a player, look at the top five cards of your library. You may reveal a historic card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. (Artifacts, legendaries, and Sagas are historic.) -- Crew 3
 mana={4}
 type=Legendary Artifact
@@ -131706,9 +131606,7 @@ toughness=1
 [card]
 name=Zeppelin
 abilities=flying
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Flying -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 type=Artifact
 subtype=Vehicle
@@ -132638,7 +132536,7 @@ type=Sorcery
 [card]
 name=Apocalypse Runner
 auto={T}:target(creature[power<=2]|mybattlefield) transforms((,lifelink,unblockable)) ueot
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text={T}: Target creature you control with power 2 or less gains lifelink until end of turn and can't be blocked this turn. -- Crew 3
 mana={2}{B}{R}
 type=Artifact
@@ -132661,7 +132559,7 @@ toughness=2
 [card]
 name=Clamorous Ironclad
 abilities=menace
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 autohand={R}{cycle}:draw:1 controller
 text=Menace -- Crew 3 -- Cycling {R}
 mana={3}{R}
@@ -132673,7 +132571,7 @@ toughness=3
 [card]
 name=Detention Chariot
 auto=(blink)forsrc target(artifact,creature|opponentbattlefield)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 autohand={W}{cycle}:draw:1 controller
 text=When this Vehicle enters, exile target artifact or creature an opponent controls until this Vehicle leaves the battlefield. -- Crew 3 -- Cycling {W}
 mana={4}{W}{W}
@@ -132686,7 +132584,7 @@ toughness=6
 name=Earthrumbler
 abilities=vigilance,trample
 auto={E(artifact,creature|mygraveyard)}:name(animate) becomes(Artifact Creature) ueot
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Vigilance, trample -- Exile an artifact or creature card from your graveyard: This Vehicle becomes an artifact creature until end of turn. -- Crew 3
 mana={4}{G}
 type=Artifact
@@ -132700,7 +132598,7 @@ grade=borderline
 # REVIEW 2026-07-17 [P:med] Crew required a creature of power 3, it would not accept a 2 and a 1.
 abilities=flying
 auto=draw:2
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Flying -- When this Vehicle enters, draw two cards. -- Crew 3
 mana={3}{U}{U}
 type=Artifact
@@ -132712,7 +132610,7 @@ toughness=2
 name=Salvation Engine
 auto=lord(other creature[artifact]|mybattlefield) 2/2
 auto=@combat(attacking) source(this):may target(artifact|mygraveyard) moveto(mybattlefield)
-auto={crew(other creature[power>=6]|myBattlefield)}:name(crew 6 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~5}
+auto={crew6(other creature|myBattlefield)}:name(Crew 6) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~5}
 text=Other artifact creatures you control get +2/+2. -- Whenever this Vehicle attacks, return up to one target artifact card from your graveyard to the battlefield. -- Crew 6
 mana={4}{W}
 type=Artifact
@@ -132725,7 +132623,7 @@ name=Thundering Broodwagon
 grade=supported
 abilities=menace,reach
 auto=destroy target(*[-land;manacost<=4]|opponentbattlefield)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 autohand={2}{cycle}:draw:1 controller
 text=Menace, reach -- When this Vehicle enters, destroy target nonland permanent an opponent controls with mana value 4 or less. -- Crew 3 -- Cycling {2}
 mana={2}{B}{B}{G}{G}
@@ -132879,7 +132777,6 @@ auto={3}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=3) counter(0
 auto={2}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=2) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:2 target(anytarget) !$ controller
 auto={1}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=1) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:1 target(anytarget) !$ controller
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 #MISSING the ETB mana should be spendable only to activate abilities (unrestricted here); X capped at 10
 text=When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities. -- Exhaust - {X}{2}{R}: This Vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
 mana={2}{R}{R}
@@ -132941,7 +132838,7 @@ toughness=3
 name=Marshals' Pathcruiser
 auto=may target(land[basic]|mylibrary) moveto(hand)
 auto={W}{U}{B}{R}{G} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && transforms((Artifact Creature)) forever && counter(1/1,2)
-auto={crew(other creature[power>=5]|myBattlefield)}:name(crew 5 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
+auto={crew5(other creature|myBattlefield)}:name(Crew 5) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~4}
 text=When this Vehicle enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- Exhaust - {W}{U}{B}{R}{G}: This Vehicle becomes an artifact creature. Put two +1/+1 counters on it. (Activate each exhaust ability only once.) -- Crew 5
 mana={3}
 type=Artifact
@@ -132968,7 +132865,6 @@ name=Rangers' Refueler
 auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):draw:1 controller
 auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && transforms((Artifact Creature)) forever && counter(1/1)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever you activate an exhaust ability, draw a card. -- Exhaust - {4}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.) -- Crew 2
 mana={1}{U}
 type=Artifact
@@ -134588,7 +134484,7 @@ name=Venomsac Lagac
 grade=supported
 # REVIEW 2026-07-19 [P:med] 
 abilities=deathtouch
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:0/3 ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 2 Mount (see printed card).
@@ -134601,7 +134497,7 @@ toughness=1
 [card]
 name=Bridled Bighorn
 abilities=vigilance
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Sheep,creature sheep,1/1,white)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 2 Mount (see printed card).
@@ -134614,7 +134510,7 @@ toughness=4
 [card]
 name=Alacrian Jaguar
 abilities=vigilance
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:2/2 ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 1 Mount (see printed card).
@@ -134626,7 +134522,7 @@ toughness=4
 [/card]
 [card]
 name=Quilled Charger
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot && transforms((,menace)) ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 2 Mount (see printed card).
@@ -134639,7 +134535,7 @@ toughness=3
 [card]
 name=Brightfield Glider
 abilities=vigilance
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot && transforms((,flying)) ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 3 Mount (see printed card).
@@ -134652,7 +134548,7 @@ toughness=1
 [card]
 name=Autarch Mammoth
 auto=token(Elephant,creature elephant,3/3,green)
-auto={crew(other creature[power>=5]|myBattlefield)}:name(Saddle 5) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
+auto={crew5(other creature|myBattlefield)}:name(Saddle 5) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~4}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Elephant,creature elephant,3/3,green)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 5 Mount (see printed card).
@@ -134664,7 +134560,7 @@ toughness=5
 [/card]
 [card]
 name=Gilded Ghoda
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:_TREASURE_
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 1 Mount (see printed card).
@@ -134676,7 +134572,7 @@ toughness=2
 [/card]
 [card]
 name=Drover Grizzly
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:all(creature|mybattlefield) transforms((,trample)) ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 1 Mount (see printed card).
@@ -134688,7 +134584,7 @@ toughness=2
 [/card]
 [card]
 name=Bulwark Ox
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(creature|battlefield)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING Sacrifice: creatures with counters gain hexproof and indestructible ueot
@@ -134703,7 +134599,7 @@ toughness=2
 name=Brightfield Mustang
 grade=supported
 # REVIEW 2026-07-19 [P:med] 
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:untap all(this) && counter(1/1)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 1 Mount (see printed card).
@@ -134716,7 +134612,7 @@ toughness=3
 [card]
 name=Lagorin, Soul of Alacria
 abilities=flying
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(<upto:2>mount,vehicle|mybattlefield)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 1 Mount (see printed card).
@@ -134729,7 +134625,7 @@ toughness=1
 [card]
 name=District Mascot
 auto=counter(1/1)
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING {1}{G}, remove two +1/+1 counters: destroy target artifact (counter-removal cost)
@@ -134743,7 +134639,7 @@ toughness=0
 [card]
 name=Dracosaur Auxiliary
 abilities=flying,haste
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:damage:2 target(anytarget)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 3 Mount (see printed card).
@@ -134756,7 +134652,7 @@ toughness=4
 [card]
 name=Gloryheath Lynx
 abilities=lifelink
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:may target(plains[basic]|mylibrary) moveto(hand)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle 2 Mount (see printed card).
@@ -134768,7 +134664,7 @@ toughness=3
 [/card]
 [card]
 name=Archmage's Newt
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING combat-damage flashback-grant to a graveyard instant/sorcery ({0} if saddled) has no DSL form; saddle scaffold only
 text=Saddle Mount (see printed card).
@@ -134780,7 +134676,7 @@ toughness=2
 [/card]
 [card]
 name=Bounding Felidar
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:all(other creature|myBattlefield) transforms((,newability[life:1 controller],newability[counter(1/1)])) oneshot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
@@ -134793,7 +134689,7 @@ toughness=7
 [card]
 name=Calamity, Galloping Inferno
 abilities=haste
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING attack-while-saddled: create tapped attacking copies of a saddler, twice (saddler untrackable; chosen-creature token-copy loop not expressible)
 text=Saddle Mount (see printed card).
@@ -134805,7 +134701,7 @@ toughness=6
 [/card]
 [card]
 name=Caustic Bronco
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this):all(*[zpos=1]|mylibrary) moveto(hand)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING the mana-value life-swing (lose life = MV if unsaddled, else each opponent loses that much); reveal-to-hand approximated
@@ -134819,7 +134715,7 @@ toughness=2
 [card]
 name=Congregation Gryff
 abilities=flying,lifelink
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING attack-while-saddled +X/+X where X = Mounts you control (dynamic count pump not expressible); flying/lifelink static kept
 text=Saddle Mount (see printed card).
@@ -134832,7 +134728,7 @@ toughness=4
 [card]
 name=Fortune, Loyal Steed
 auto=_SCRY2_
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING attack-while-saddled end-of-combat blink of self + a saddler (self-blink unreliable in engine; saddler untrackable); ETB scry 2 kept
 text=Saddle Mount (see printed card).
@@ -134845,7 +134741,7 @@ toughness=4
 [card]
 name=Giant Beaver
 abilities=vigilance
-auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(creature|mybattlefield)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING 'that saddled it this turn' restriction on the target (saddler untrackable) -- approximated as any creature you control
@@ -134858,7 +134754,7 @@ toughness=4
 [/card]
 [card]
 name=Gila Courser
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:name(Exile top card) _IMPULSEUENT_
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
@@ -134871,7 +134767,7 @@ toughness=2
 [card]
 name=Guardian Sunmare
 abilities=ward
-auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~3}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:may target(*[-land;-instant;-sorcery;manacost<=3]|mylibrary) moveto(myBattlefield) and!( shuffle )!
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING Ward {2} (cost amount not honored) -- ward keyword kept
@@ -134885,7 +134781,7 @@ toughness=5
 [card]
 name=Ornery Tumblewagg
 auto=@each my combat:counter(1/1) target(creature|mybattlefield)
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING attack-while-saddled: double the +1/+1 counters on target (dynamic counter-double not expressible); begin-combat +1/+1 kept
 text=Saddle Mount (see printed card).
@@ -134897,7 +134793,7 @@ toughness=2
 [/card]
 [card]
 name=Rambling Possum
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING 'return any number of saddlers to hand' (saddler untrackable); +1/+2 kept
@@ -134911,7 +134807,7 @@ toughness=3
 [card]
 name=Seraphic Steed
 abilities=firststrike,lifelink
-auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~3}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Angel,creature angel,3/3,white,flying)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
@@ -134923,7 +134819,7 @@ toughness=2
 [/card]
 [card]
 name=Stubborn Burrowfiend
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@counteradded(0/0.1.saddled) from(this):mill:2 controller
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING the +X/+X where X = creature cards in graveyard (dynamic pump); 'first time each turn' not gated; mill 2 kept
@@ -134937,7 +134833,7 @@ toughness=2
 [card]
 name=The Gitrog, Ravenous Ride
 abilities=trample,haste
-auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 #MISSING combat-damage: sacrifice a saddler to draw X and ramp X lands, X = its power (saddler untrackable, dynamic X)
 text=Saddle Mount (see printed card).
@@ -134949,7 +134845,7 @@ toughness=5
 [/card]
 [card]
 name=Trained Arynx
-auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,firststrike)) ueot && _SCRY1_
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
@@ -134961,7 +134857,7 @@ toughness=1
 [/card]
 [card]
 name=Unswerving Sloth
-auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~3}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,indestructible)) ueot && untap all(creature|mybattlefield)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
