@@ -134189,3 +134189,93 @@ subtype=Saga Knight
 power=2
 toughness=1
 [/card]
+[card]
+name=White Auracite
+auto=(blink)forsrc target(*[-land]|opponentbattlefield)
+auto={T}:Add{W}
+text=When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- {T}: Add {W}.
+mana={2}{W}{W}
+type=Artifact
+[/card]
+[card]
+name=Ultimecia, Temporal Threat
+auto=all(creature|opponentbattlefield) tap(noevent)
+auto=@combatdamaged(player) from(creature|mybattlefield):draw:1 controller
+text=When Ultimecia enters, tap all creatures your opponents control. -- Whenever a creature you control deals combat damage to a player, draw a card.
+mana={4}{U}{U}
+type=Legendary Creature
+subtype=Human Warlock
+power=4
+toughness=4
+[/card]
+[card]
+name=Seymour Flux
+auto=@each my upkeep:may life:-1 controller && draw:1 controller && counter(1/1)
+text=At the beginning of your upkeep, you may pay 1 life. If you do, draw a card and put a +1/+1 counter on Seymour Flux.
+mana={4}{B}
+type=Legendary Creature
+subtype=Spirit Avatar
+power=5
+toughness=5
+[/card]
+[card]
+name=PuPu UFO
+abilities=flying
+auto={T}:may target(land|myhand) moveto(mybattlefield)
+#MISSING {3}: base power becomes the number of Towns you control (dynamic power unsupported)
+text=Flying -- {T}: You may put a land card from your hand onto the battlefield. -- {3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control.
+mana={2}
+type=Artifact Creature
+subtype=Construct Alien
+power=0
+toughness=4
+[/card]
+[card]
+name=Cloud of Darkness
+abilities=flying
+auto=target(creature|opponentbattlefield) -2/-2 ueot
+#MISSING Particle Beam is -X/-X where X = permanent cards in your graveyard (approximated as -2/-2)
+text=Flying -- Particle Beam - When Cloud of Darkness enters, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.
+mana={2}{B}{G}{G}
+type=Legendary Creature
+subtype=Avatar
+power=3
+toughness=3
+[/card]
+[card]
+name=Tonberry
+abilities=firststrike,deathtouch
+auto=tap(noevent)
+auto=counter(0/0,1,stun) all(this)
+#MISSING first strike and deathtouch should apply only during your turn (granted unconditionally here)
+text=This creature enters tapped with a stun counter on it. -- Chef's Knife - During your turn, this creature has first strike and deathtouch.
+mana={B}
+type=Creature
+subtype=Salamander Horror
+power=2
+toughness=1
+[/card]
+[card]
+name=Cactuar
+abilities=trample
+auto=@each my end:may moveto(hand)
+#MISSING should return to hand mandatorily unless it entered this turn (made optional here)
+text=Trample -- At the beginning of your end step, if this creature didn't enter the battlefield this turn, return it to its owner's hand.
+mana={G}
+type=Creature
+subtype=Plant
+power=3
+toughness=3
+[/card]
+[card]
+name=Qutrub Forayer
+auto=choice name(Destroy a damaged creature) destroy target(creature|battlefield)
+auto=choice name(Exile from a graveyard) moveto(exile) target(<upto:2>*|graveyard)
+#MISSING mode 1 should be limited to a creature dealt damage this turn
+text=When this creature enters, choose one - -- - Destroy target creature that was dealt damage this turn. -- - Exile up to two target cards from a single graveyard.
+mana={2}{B}
+type=Creature
+subtype=Zombie Horror
+power=3
+toughness=2
+[/card]
