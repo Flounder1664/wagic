@@ -254,9 +254,12 @@ class TapTargetCost : public ExtraCost
 {
 public:
     bool crew;
-    TapTargetCost(TargetChooser *_tc = NULL, bool crew = false);
+    int crewPowerNeeded; //crew/saddle N: pay by tapping any creatures with total power >= N (0 = legacy single target)
+    TapTargetCost(TargetChooser *_tc = NULL, bool crew = false, int crewPowerNeeded = 0);
+    int crewPowerPaid();
     virtual int isPaymentSet();
     virtual int doPay();
+    virtual void Render();
     virtual TapTargetCost * clone() const;
 };
 //untap a target as cost

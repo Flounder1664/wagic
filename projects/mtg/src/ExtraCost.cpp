@@ -816,13 +816,42 @@ TapTargetCost * TapTargetCost::clone() const
     return ec;
 }
 
-TapTargetCost::TapTargetCost(TargetChooser *_tc, bool crew)
-    : ExtraCost("Tap Target", _tc), crew(crew)
+TapTargetCost::TapTargetCost(TargetChooser *_tc, bool crew, int crewPowerNeeded)
+    : ExtraCost("Tap Target", _tc), crew(crew), crewPowerNeeded(crewPowerNeeded)
 {
+}
+
+//crew/saddle N: sum the power of currently selected valid creatures,
+//pruning any that became invalid (tapped, phased out, can't crew, left play).
+int TapTargetCost::crewPowerPaid()
+{
+    int paid = 0;
+    if (!tc)
+        return 0;
+    vector<Targetable*> targetlist = tc->getTargetsFrom();
+    for (vector<Targetable*>::iterator it = targetlist.begin(); it != targetlist.end(); it++)
+    {
+        MTGCardInstance * t = dynamic_cast<MTGCardInstance*>(*it);
+        if (!t)
+            continue;
+        if (t->isTapped() || t->isPhased || t->has(Constants::CANTCREW)
+            || !t->controller()->game->battlefield->hasCard(t))
+        {
+            tc->removeTarget(t);
+            t->isExtraCostTarget = false;
+            if (target == t)
+                target = NULL;
+            continue;
+        }
+        paid += t->power;
+    }
+    return paid;
 }
 
 int TapTargetCost::isPaymentSet()
 {
+    if (crew && crewPowerNeeded > 0)
+        return (crewPowerPaid() >= crewPowerNeeded) ? 1 : 0;
     if (target && target->isTapped())
     {
         tc->removeTarget(target);
@@ -840,6 +869,21 @@ int TapTargetCost::isPaymentSet()
     if (target)
         return 1;
     return 0;
+}
+
+void TapTargetCost::Render()
+{
+    if (crew && crewPowerNeeded > 0)
+    {
+        char buf[64];
+        sprintf(buf, "Tap creatures: %d/%d power", crewPowerPaid(), crewPowerNeeded);
+        WFont * mFont = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        mFont->SetScale(DEFAULT_MAIN_FONT_SCALE);
+        mFont->SetColor(ARGB(255,255,255,255));
+        mFont->DrawString(buf, 40, 20, JGETEXT_LEFT);
+        return;
+    }
+    ExtraCost::Render();
 }
 
 int TapTargetCost::doPay()

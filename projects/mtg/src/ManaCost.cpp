@@ -338,8 +338,18 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                                 manaCost->addExtraCost(NEW CycleCost(tc));
                             }
                             else if(value.substr(0,4) == "crew")
-                            {//tap crew
-                                manaCost->addExtraCost(NEW TapTargetCost(tc,true));
+                            {//tap crew - "crewN(...)" pays by tapping any creatures with total power >= N,
+                             //bare "crew(...)" keeps the legacy single-target behavior.
+                                int crewPowerNeeded = 0;
+                                size_t paren = value.find("(");
+                                if (paren != string::npos && paren > 4)
+                                    crewPowerNeeded = atoi(value.substr(4, paren - 4).c_str());
+                                if (crewPowerNeeded > 0 && tc)
+                                {
+                                    tc->maxtargets = 20;
+                                    tc->targetMin = false;
+                                }
+                                manaCost->addExtraCost(NEW TapTargetCost(tc,true,crewPowerNeeded));
                             }
                             else if(value.find("(") != string::npos)
                             {
