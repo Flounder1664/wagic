@@ -134561,3 +134561,182 @@ subtype=Human Warrior Rogue
 power=2
 toughness=2
 [/card]
+[card]
+name=Venomsac Lagac
+abilities=deathtouch
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:0/3 ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 2 Mount (see printed card).
+mana={1}{G}
+type=Creature
+subtype=Lizard Mount
+power=2
+toughness=1
+[/card]
+[card]
+name=Bridled Bighorn
+abilities=vigilance
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Sheep,creature sheep,1/1,white)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 2 Mount (see printed card).
+mana={3}{W}
+type=Creature
+subtype=Sheep Mount
+power=3
+toughness=4
+[/card]
+[card]
+name=Alacrian Jaguar
+abilities=vigilance
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:2/2 ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 1 Mount (see printed card).
+mana={4}{G}
+type=Creature
+subtype=Cat Mount
+power=4
+toughness=4
+[/card]
+[card]
+name=Quilled Charger
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot && transforms((,menace)) ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 2 Mount (see printed card).
+mana={3}{R}
+type=Creature
+subtype=Boar Mount
+power=4
+toughness=3
+[/card]
+[card]
+name=Brightfield Glider
+abilities=vigilance
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot && transforms((,flying)) ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 3 Mount (see printed card).
+mana={W}
+type=Creature
+subtype=Bird Mount
+power=1
+toughness=1
+[/card]
+[card]
+name=Autarch Mammoth
+auto=token(Elephant,creature elephant,3/3,green)
+auto={crew(other creature[power>=5]|myBattlefield)}:name(Saddle 5) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Elephant,creature elephant,3/3,green)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 5 Mount (see printed card).
+mana={4}{G}{G}
+type=Creature
+subtype=Elephant Mount
+power=5
+toughness=5
+[/card]
+[card]
+name=Gilded Ghoda
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:_TREASURE_
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 1 Mount (see printed card).
+mana={1}{R}
+type=Creature
+subtype=Horse Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Drover Grizzly
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:all(creature|mybattlefield) transforms((,trample)) ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 1 Mount (see printed card).
+mana={2}{G}
+type=Creature
+subtype=Bear Mount
+power=4
+toughness=2
+[/card]
+[card]
+name=Bulwark Ox
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(creature|battlefield)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING Sacrifice: creatures with counters gain hexproof and indestructible ueot
+text=Saddle 1 Mount (see printed card).
+mana={1}{W}
+type=Creature
+subtype=Ox Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Brightfield Mustang
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:untap all(this) && counter(1/1)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 1 Mount (see printed card).
+mana={3}{W}
+type=Creature
+subtype=Horse Mount
+power=3
+toughness=3
+[/card]
+[card]
+name=Lagorin, Soul of Alacria
+abilities=flying
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(<upto:2>mount,vehicle|mybattlefield)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 1 Mount (see printed card).
+mana={G}{W}
+type=Creature
+subtype=Beast Mount
+power=1
+toughness=1
+[/card]
+[card]
+name=District Mascot
+auto=counter(1/1)
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING {1}{G}, remove two +1/+1 counters: destroy target artifact (counter-removal cost)
+text=Saddle 1 Mount (see printed card).
+mana={G}
+type=Creature
+subtype=Dog Mount
+power=0
+toughness=0
+[/card]
+[card]
+name=Dracosaur Auxiliary
+abilities=flying,haste
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:damage:2 target(anytarget)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 3 Mount (see printed card).
+mana={4}{R}{R}
+type=Creature
+subtype=Dinosaur Mount
+power=4
+toughness=4
+[/card]
+[card]
+name=Gloryheath Lynx
+abilities=lifelink
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:may target(plains[basic]|mylibrary) moveto(hand)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle 2 Mount (see printed card).
+mana={1}{W}
+type=Creature
+subtype=Cat Mount
+power=2
+toughness=3
+[/card]
