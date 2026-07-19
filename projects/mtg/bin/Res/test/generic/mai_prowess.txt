@@ -1,0 +1,25 @@
+#Mai prowess: cast a noncreature spell -> Mai (1/3) gets +1/+1 -> attacks for 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510147
+hand:shock
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+shock
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510147
+graveyard:shock
+manapool:{0}
+life:20
+[PLAYER2]
+graveyard:grizzly bears
+life:20
+[END]

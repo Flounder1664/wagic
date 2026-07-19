@@ -100830,6 +100830,7 @@ type=Enchantment
 [/card]
 [card]
 name=Shard
+grade=borderline
 aicode=activate transforms((,newability[draw:1 controller])) oneshot
 auto={2}{S}:scry:1 scrycore delayed draw:1 controller scrycoreend scryend
 text={2}, Sacrifice this enchantment: Scry 1, then draw a card.
@@ -132363,6 +132364,7 @@ toughness=2
 [/card]
 [card]
 name=Niko, Light of Hope
+grade=borderline
 auto=token(Shard^Shard Enchantment^0/0) and!( transforms((,newability[{2}{S}:_SCRY1_ draw:1 controller])) forever )!*2
 #MISSING {2}{T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step... (copy effects unsupported, wagic#19)
 text=When Niko enters, create two Shard tokens. (They're enchantments with "{2}, Sacrifice this token: Scry 1, then draw a card.") -- {2}, {T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.
@@ -132504,6 +132506,7 @@ toughness=2
 [/card]
 [card]
 name=Imodane's Recruiter // Train Troops
+grade=supported
 abilities=adventure
 other={4}{W} name(Train Troops)
 auto=ifnot paid(alternative) then all(creature|mybattlefield) 1/0 ueot
@@ -132574,6 +132577,7 @@ toughness=1
 [/card]
 [card]
 name=Tempest Hart // Scan the Clouds
+grade=borderline
 abilities=trample,adventure
 other={1}{U} name(Scan the Clouds)
 auto=@movedTo(*[manacost>=5]|mystack):counter(1/1)
@@ -132712,6 +132716,7 @@ toughness=10
 [/card]
 [card]
 name=Thundering Broodwagon
+grade=supported
 abilities=menace,reach
 auto=destroy target(*[-land;manacost<=4]|opponentbattlefield)
 auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
@@ -132788,6 +132793,7 @@ subtype=Aura
 [/card]
 [card]
 name=Country Roads
+grade=supported
 auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{W}
 auto={1}{W}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
@@ -132912,8 +132918,9 @@ toughness=2
 [card]
 name=Mai, Jaded Edge
 grade=borderline
-# REVIEW 2026-07-17 [P:med] exhaust didn t add double strike counter
+# REVIEW 2026-07-19 [P:med] FIXED: prowess pump line added; exhaust double strike counter
 abilities=prowess
+auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && counter(0/0,1,doublestrike)
 auto=this(counter{0/0.1.doublestrike}>=1) double strike
 #MISSING the double strike is granted directly rather than via a keyword counter
@@ -133165,6 +133172,8 @@ toughness=4
 [/card]
 [card]
 name=Splinter, Hamato Yoshi
+grade=borderline
+# REVIEW 2026-07-19 [P:-] sneak worked
 abilities=menace
 autohand={B}{N}:ninjutsu
 auto=lord(other ninja|mybattlefield) 1/1
@@ -133189,6 +133198,7 @@ toughness=2
 [/card]
 [card]
 name=Donatello's Technique
+grade=borderline
 other={U} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
@@ -133209,6 +133219,7 @@ type=Instant
 [/card]
 [card]
 name=Karai's Technique
+grade=borderline
 other={W}{B} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
@@ -133272,6 +133283,7 @@ type=Sorcery
 [/card]
 [card]
 name=The Last Ronin's Technique
+grade=borderline
 other={1}{W} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
@@ -133289,7 +133301,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=_SCRY2_ draw:1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _SCRY2_ draw:1 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Scry 2, then draw a card. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{U}{U}
 type=Enchantment
@@ -133314,7 +133327,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=all(*[zpos<=3]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uynt])) uynt )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Exile the top three cards of your library. Until the end of your next turn, you may play those cards. -- II - Add one mana of any color. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{R}{R}
 type=Enchantment
@@ -133340,7 +133354,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=name(Exile a permanent) target(*[-land;manacost>=3]|opponentbattlefield) moveto(exile)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may draw:3 opponent && draw:3 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
 #MISSING chapter I is each-player-chooses-up-to-one (political); approximated as exile one opponent permanent with mv>=3
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents. -- II - You may have target opponent draw three cards. If you do, draw three cards. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={3}{W}{W}
@@ -133365,7 +133380,8 @@ anyzone={0}:doubleside(backside)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy all(creature|battlefield)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
 #MISSING chapter II (name a card, exile up to four copies from an opponent's zones) has no DSL form; skipped
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Destroy all creatures. -- II - Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{B}{B}
@@ -133392,7 +133408,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=draw:3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _EARTHBEND2_
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
 #MISSING ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Draw cards equal to the greatest power among creatures you control. -- II - Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{G}{G}
@@ -133412,6 +133429,8 @@ toughness=4
 [/card]
 [card]
 name=Avatar Aang
+grade=borderline
+# REVIEW 2026-07-19 [P:med] may be firebending triggered but I had no opportunity to use the mana
 abilities=flying
 auto=_FIREBEND2_
 #MISSING draw when you waterbend/earthbend/firebend/airbend, and transform after doing all four this turn (waterbend/airbend engine-blocked)
@@ -133440,7 +133459,7 @@ toughness=6
 name=Aang, at the Crossroads
 abilities=flying
 auto=reveal:5 optionone name(Put a creature into play) target(creature[manacost<=4]|reveal) moveto(mybattlefield) optiononeend
-auto=@movedTo(other creature|nonbattlezone) from(myBattlefield):flip(backside) forcetype(Legendary Creature)
+#MISSING transform on a creature leaving (flip to imageless back crashed in-game; disabled pending render fix)
 #MISSING ETB should bottom the unchosen revealed cards; the transform should wait until the next upkeep (here it flips immediately when a creature leaves)
 text=Flying -- When Aang enters, look at the top five cards of your library. You may put a creature card with mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order. -- When another creature you control leaves the battlefield, transform Aang at the beginning of the next upkeep.
 mana={2}{G}{W}{U}
@@ -133594,8 +133613,10 @@ type=Sorcery
 [/card]
 [card]
 name=The Final Days
+grade=borderline
+# REVIEW 2026-07-19 [P:med] FIXED: tokens now enter tapped; missing image is a later pass
 flashback={4}{B}{B}
-auto=token(Horror,creature horror,2/2,black)*2 tapped
+auto=token(Horror,creature horror,2/2,black) and!( tap(noevent) )!*2
 #MISSING if cast from a graveyard, instead create X tapped tokens where X = creature cards in your graveyard (no cast-from-graveyard predicate)
 text=Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard. -- Flashback {4}{B}{B}
 mana={2}{B}{B}
@@ -134100,6 +134121,7 @@ toughness=3
 [/card]
 [card]
 name=Summon: Primal Odin
+grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) destroy target(creature|opponentbattlefield)
@@ -134199,6 +134221,7 @@ type=Artifact
 [/card]
 [card]
 name=Ultimecia, Temporal Threat
+grade=supported
 auto=all(creature|opponentbattlefield) tap(noevent)
 auto=@combatdamaged(player) from(creature|mybattlefield):draw:1 controller
 text=When Ultimecia enters, tap all creatures your opponents control. -- Whenever a creature you control deals combat damage to a player, draw a card.
@@ -134244,6 +134267,8 @@ toughness=3
 [/card]
 [card]
 name=Tonberry
+grade=borderline
+# REVIEW 2026-07-19 [P:med] stun works; first strike your-turn-only unsupported (granted note)
 abilities=firststrike,deathtouch
 auto=tap(noevent)
 auto=counter(0/0,1,stun) all(this)
@@ -134293,6 +134318,7 @@ type=Sorcery
 [/card]
 [card]
 name=Pact of Negation
+target=*|stack
 auto=fizzle
 auto=if casted(this) then transforms((,newability[upcost[{3}{U}{U};next upkeep] wingame opponent])) forever
 text=Counter target spell. -- At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
@@ -134379,6 +134405,7 @@ type=Sorcery
 [/card]
 [card]
 name=Bugenhagen, Wise Elder
+grade=borderline
 abilities=reach
 auto=@each my upkeep restriction{type(creature[power>=7]|mybattlefield)~morethan~0}:draw:1 controller
 auto={T}:ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller

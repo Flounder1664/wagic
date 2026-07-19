@@ -39492,7 +39492,7 @@ type=Sorcery
 [card]
 name=Eusocial Engineering
 grade=borderline
-# REVIEW 2026-07-17 [P:med] didn t get the option to play for warp cost
+# REVIEW 2026-07-19 [P:med] no warp cast option (warp mechanic pending)
 auto=_LANDFALL__ROBOTTOKEN_
 text=Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token.
 mana={3}{G}{G}
@@ -116996,6 +116996,7 @@ text=Equipped creature gets +2/+2. Equip {2}.
 [card]
 name=Spider-UK
 grade=borderline
+# REVIEW 2026-07-19 [P:high] web-sling needs the bounce (alt-cost approximation, no bounce)
 other={2}{W} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 #MISSING Web-slinging's return-a-tapped-creature payment (the discount is granted without the bounce)
