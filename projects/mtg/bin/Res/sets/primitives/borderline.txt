@@ -107843,6 +107843,8 @@ toughness=1
 [/card]
 [card]
 name=Spire Mechcycle
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 abilities=haste
 auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:transforms((Creature)) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
 auto=_CREW2_
@@ -132384,6 +132386,8 @@ type=Instant
 [/card]
 [card]
 name=Forensic Gadgeteer
+grade=borderline
+# REVIEW 2026-07-19 [P:med] 
 auto=@movedTo(*[artifact]|mystack):_CLUE_
 #MISSING Activated abilities of artifacts you control cost {1} less to activate
 text=Whenever you cast an artifact spell, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- Activated abilities of artifacts you control cost {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.
@@ -132477,6 +132481,8 @@ toughness=5
 [/card]
 [card]
 name=Grabby Giant // That's Mine
+grade=borderline
+# REVIEW 2026-07-19 [P:med] couldn't cast that's mine as an instant.
 abilities=reach,adventure
 other={1}{R} name(That's Mine)
 auto={2}{R}{S(artifact,land|mybattlefield)}:draw:1
@@ -133294,6 +133300,8 @@ type=Instant
 [/card]
 [card]
 name=The Legend of Kuruk
+grade=borderline
+# REVIEW 2026-07-19 [P:med] 
 backside=Avatar Kuruk
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
@@ -133374,6 +133382,8 @@ toughness=5
 [/card]
 [card]
 name=The Rise of Sozin
+grade=borderline
+# REVIEW 2026-07-19 [P:med] 
 backside=Fire Lord Sozin
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
@@ -133759,6 +133769,8 @@ subtype=Equipment
 [/card]
 [card]
 name=White Mage's Staff
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combat(attacking) source(mytgt):life:1 controller
@@ -133771,6 +133783,8 @@ subtype=Equipment
 [/card]
 [card]
 name=Thief's Knife
+grade=borderline
+# REVIEW 2026-07-19 [P:med] drew 2 cards not 1
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combatdamaged(player) source(mytgt):draw:1 controller
@@ -133972,6 +133986,8 @@ subtype=Town
 [/card]
 [card]
 name=Adventurer's Inn
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 auto=life:2
 auto={T}:Add{C}
 text=When this land enters, you gain 2 life. -- {T}: Add {C}.
@@ -134086,6 +134102,8 @@ toughness=2
 [/card]
 [card]
 name=Summon: Knights of Round
+grade=borderline
+# REVIEW 2026-07-19 [P:med] i got 6 interrupt messages, expected 3
 abilities=indestructible
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
@@ -134362,7 +134380,7 @@ type=Land
 [card]
 name=Radiant Summit
 grade=borderline
-# REVIEW 2026-07-19 [P:med] shows tap for red and tap for white twice
+# REVIEW 2026-07-19 [P:med] 
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{W}
@@ -134372,6 +134390,8 @@ subtype=Mountain Plains
 [/card]
 [card]
 name=Vernal Fen
+grade=borderline
+# REVIEW 2026-07-19 [P:med] two of each tap for G/B
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{G}
@@ -134540,6 +134560,8 @@ type=Artifact
 [/card]
 [card]
 name=Hermes, Overseer of Elpis
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 auto=@movedTo(*[-creature]|mystack):token(Bird,creature bird,1/1,blue flying vigilance)
 #MISSING attack trigger: whenever you attack with one or more Birds, draw/scry payoff
 text=Whenever you cast a noncreature spell, create a 1/1 blue Bird creature token with flying and vigilance.
@@ -134563,6 +134585,8 @@ toughness=2
 [/card]
 [card]
 name=Venomsac Lagac
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 abilities=deathtouch
 auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:0/3 ueot
@@ -134677,6 +134701,8 @@ toughness=2
 [/card]
 [card]
 name=Brightfield Mustang
+grade=supported
+# REVIEW 2026-07-19 [P:med] 
 auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:untap all(this) && counter(1/1)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -134739,4 +134765,209 @@ type=Creature
 subtype=Cat Mount
 power=2
 toughness=3
+[/card]
+[card]
+name=Archmage's Newt
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING combat-damage flashback-grant to a graveyard instant/sorcery ({0} if saddled) has no DSL form; saddle scaffold only
+text=Saddle Mount (see printed card).
+mana={1}{U}
+type=Creature
+subtype=Salamander Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Bounding Felidar
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:all(other creature|myBattlefield) transforms((,newability[life:1 controller],newability[counter(1/1)])) oneshot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle Mount (see printed card).
+mana={5}{W}
+type=Creature
+subtype=Cat Beast Mount
+power=4
+toughness=7
+[/card]
+[card]
+name=Calamity, Galloping Inferno
+abilities=haste
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING attack-while-saddled: create tapped attacking copies of a saddler, twice (saddler untrackable; chosen-creature token-copy loop not expressible)
+text=Saddle Mount (see printed card).
+mana={4}{R}{R}
+type=Legendary Creature
+subtype=Horse Mount
+power=4
+toughness=6
+[/card]
+[card]
+name=Caustic Bronco
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@combat(attacking) source(this):all(*[zpos=1]|mylibrary) moveto(hand)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING the mana-value life-swing (lose life = MV if unsaddled, else each opponent loses that much); reveal-to-hand approximated
+text=Saddle Mount (see printed card).
+mana={1}{B}
+type=Creature
+subtype=Snake Horse Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Congregation Gryff
+abilities=flying,lifelink
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING attack-while-saddled +X/+X where X = Mounts you control (dynamic count pump not expressible); flying/lifelink static kept
+text=Saddle Mount (see printed card).
+mana={1}{G}{W}
+type=Creature
+subtype=Hippogriff Mount
+power=1
+toughness=4
+[/card]
+[card]
+name=Fortune, Loyal Steed
+auto=_SCRY2_
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING attack-while-saddled end-of-combat blink of self + a saddler (self-blink unreliable in engine; saddler untrackable); ETB scry 2 kept
+text=Saddle Mount (see printed card).
+mana={2}{W}
+type=Legendary Creature
+subtype=Beast Mount
+power=2
+toughness=4
+[/card]
+[card]
+name=Giant Beaver
+abilities=vigilance
+auto={crew(other creature[power>=3]|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(creature|mybattlefield)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING 'that saddled it this turn' restriction on the target (saddler untrackable) -- approximated as any creature you control
+text=Saddle Mount (see printed card).
+mana={3}{G}
+type=Creature
+subtype=Beaver Mount
+power=4
+toughness=4
+[/card]
+[card]
+name=Gila Courser
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:name(Exile top card) _IMPULSEUENT_
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle Mount (see printed card).
+mana={2}{R}
+type=Creature
+subtype=Lizard Mount
+power=4
+toughness=2
+[/card]
+[card]
+name=Guardian Sunmare
+abilities=ward
+auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:may target(*[-land;-instant;-sorcery;manacost<=3]|mylibrary) moveto(myBattlefield) and!( shuffle )!
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING Ward {2} (cost amount not honored) -- ward keyword kept
+text=Saddle Mount (see printed card).
+mana={3}{W}{W}
+type=Creature
+subtype=Horse Mount
+power=5
+toughness=5
+[/card]
+[card]
+name=Ornery Tumblewagg
+auto=@each my combat:counter(1/1) target(creature|mybattlefield)
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING attack-while-saddled: double the +1/+1 counters on target (dynamic counter-double not expressible); begin-combat +1/+1 kept
+text=Saddle Mount (see printed card).
+mana={2}{G}
+type=Creature
+subtype=Brushwagg Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Rambling Possum
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING 'return any number of saddlers to hand' (saddler untrackable); +1/+2 kept
+text=Saddle Mount (see printed card).
+mana={2}{G}
+type=Creature
+subtype=Possum Mount
+power=3
+toughness=3
+[/card]
+[card]
+name=Seraphic Steed
+abilities=firststrike,lifelink
+auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Angel,creature angel,3/3,white,flying)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle Mount (see printed card).
+mana={G}{W}
+type=Creature
+subtype=Unicorn Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=Stubborn Burrowfiend
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@counteradded(0/0.1.saddled) from(this):mill:2 controller
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING the +X/+X where X = creature cards in graveyard (dynamic pump); 'first time each turn' not gated; mill 2 kept
+text=Saddle Mount (see printed card).
+mana={1}{G}
+type=Creature
+subtype=Badger Beast Mount
+power=2
+toughness=2
+[/card]
+[card]
+name=The Gitrog, Ravenous Ride
+abilities=trample,haste
+auto={crew(other creature[power>=1]|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~0}
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+#MISSING combat-damage: sacrifice a saddler to draw X and ramp X lands, X = its power (saddler untrackable, dynamic X)
+text=Saddle Mount (see printed card).
+mana={3}{B}{G}
+type=Legendary Creature
+subtype=Frog Horror Mount
+power=6
+toughness=5
+[/card]
+[card]
+name=Trained Arynx
+auto={crew(other creature[power>=2]|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,firststrike)) ueot && _SCRY1_
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle Mount (see printed card).
+mana={1}{W}
+type=Creature
+subtype=Cat Beast Mount
+power=3
+toughness=1
+[/card]
+[card]
+name=Unswerving Sloth
+auto={crew(other creature[power>=4]|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,indestructible)) ueot && untap all(creature|mybattlefield)
+auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
+text=Saddle Mount (see printed card).
+mana={3}{W}{W}
+type=Creature
+subtype=Sloth Mount
+power=5
+toughness=5
 [/card]
