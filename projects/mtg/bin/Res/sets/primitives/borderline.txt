@@ -134325,3 +134325,101 @@ mana={1}{G}
 type=Enchantment
 subtype=Aura
 [/card]
+[card]
+name=Desolate Mire
+auto={1}{T}:Add{W}{B}
+text={1}, {T}: Add {W}{B}.
+type=Land
+[/card]
+[card]
+name=Radiant Summit
+auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{W}
+text={T}: Add {R} or {W}. -- This land enters tapped unless you control two or more basic lands.
+type=Land
+subtype=Mountain Plains
+[/card]
+[card]
+name=Vernal Fen
+auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{G}
+text={T}: Add {B} or {G}. -- This land enters tapped unless you control two or more basic lands.
+type=Land
+subtype=Swamp Forest
+[/card]
+[card]
+name=Glittering Massif
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{W}
+autohand={2}{cycle}:draw:1 controller
+text={T}: Add {R} or {W}. -- This land enters tapped. -- Cycling {2}
+type=Land
+subtype=Mountain Plains
+[/card]
+[card]
+name=Festering Thicket
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{G}
+autohand={2}{cycle}:draw:1 controller
+text={T}: Add {B} or {G}. -- This land enters tapped. -- Cycling {2}
+type=Land
+subtype=Swamp Forest
+[/card]
+[card]
+name=Worldsoul's Rage
+auto=damage:x target(anytarget)
+#MISSING then put up to X land cards from your hand and/or graveyard onto the battlefield tapped
+text=Worldsoul's Rage deals X damage to any target. Put up to X land cards from your hand and/or graveyard onto the battlefield tapped.
+mana={X}{R}{G}
+type=Sorcery
+[/card]
+[card]
+name=Bugenhagen, Wise Elder
+abilities=reach
+auto=@each my upkeep restriction{type(creature[power>=7]|mybattlefield)~morethan~0}:draw:1 controller
+auto={T}:ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
+text=Reach -- At the beginning of your upkeep, if you control a creature with power 7 or greater, draw a card. -- {T}: Add one mana of any color.
+mana={1}{G}
+type=Legendary Creature
+subtype=Human Advisor
+power=2
+toughness=4
+[/card]
+[card]
+name=Helitrooper
+abilities=flying
+auto=_ATTACKING_target(other creature[attacking]|mybattlefield) flying ueot
+#MISSING Equip abilities you activate that target this creature cost less
+text=Flying -- Whenever this creature attacks, another target attacking creature gains flying until end of turn.
+mana={1}{W}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Chocobo Knights
+auto=_ATTACKING_all(creature[counter{1/1.1}]|mybattlefield) double strike ueot
+#MISSING should apply to creatures with ANY counter (only +1/+1 counters here)
+text=Whenever you attack, creatures you control with counters on them gain double strike until end of turn.
+mana={3}{W}
+type=Creature
+subtype=Human Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Amarant Coral
+abilities=trample,mustattack
+#MISSING No Mercy - combat-damage-to-opponent also deals that much to each creature that player controls
+text=Trample -- Amarant Coral attacks each combat if able. -- No Mercy - Whenever Amarant Coral deals combat damage to an opponent, it deals that much damage to each creature that player controls.
+mana={2}{R}{G}
+type=Legendary Creature
+subtype=Human Warrior
+power=4
+toughness=3
+[/card]
