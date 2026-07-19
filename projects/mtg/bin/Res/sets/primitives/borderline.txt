@@ -134153,6 +134153,8 @@ toughness=5
 [/card]
 [card]
 name=Summon: Titan
+grade=borderline
+# REVIEW 2026-07-19 [P:med] lore 1 mill didn't trigger
 abilities=reach,trample
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
@@ -134359,6 +134361,8 @@ type=Land
 [/card]
 [card]
 name=Radiant Summit
+grade=borderline
+# REVIEW 2026-07-19 [P:med] shows tap for red and tap for white twice
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{W}
@@ -134448,5 +134452,49 @@ mana={2}{R}{G}
 type=Legendary Creature
 subtype=Human Warrior
 power=4
+toughness=3
+[/card]
+[card]
+name=Metropolis Reformer
+abilities=flying,vigilance
+auto=@damaged(this):life:thatmuch controller
+#MISSING "You have hexproof" (player hexproof has no DSL form)
+text=Flying, vigilance -- You have hexproof. -- Whenever this creature is dealt damage, you gain that much life.
+mana={2}{W}
+type=Creature
+subtype=Angel Cleric
+power=2
+toughness=3
+[/card]
+[card]
+name=Fearless Swashbuckler
+abilities=haste
+auto=lord(vehicle|mybattlefield) haste
+#MISSING attack trigger: if a Pirate and a Vehicle attacked this combat, draw three then discard two
+text=Haste -- Vehicles you control have haste. -- Whenever you attack, if a Pirate and a Vehicle attacked this combat, draw three cards, then discard two cards.
+mana={1}{U}{R}
+type=Creature
+subtype=Fish Pirate
+power=2
+toughness=2
+[/card]
+[card]
+name=Boseiju, Who Shelters All
+auto=tap(noevent)
+auto={T}:life:-2 controller && add{C}
+#MISSING the {C} can't-be-countered rider when spent on an instant/sorcery; the 2 life is an effect here, not a cost
+text=Boseiju enters tapped. -- {T}, Pay 2 life: Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered.
+type=Legendary Land
+[/card]
+[card]
+name=Ashroot Animist
+abilities=trample
+auto=_ATTACKING_target(other creature|mybattlefield) transforms((,trample,newability[2/2])) ueot
+#MISSING the buff is +X/+X where X = this creature's power (approximated +2/+2)
+text=Trample -- Whenever this creature attacks, another target creature you control gains trample and gets +X/+X until end of turn, where X is this creature's power.
+mana={2}{R}{G}
+type=Creature
+subtype=Lizard Druid
+power=3
 toughness=3
 [/card]
