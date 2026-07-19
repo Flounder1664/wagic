@@ -134498,3 +134498,66 @@ subtype=Lizard Druid
 power=3
 toughness=3
 [/card]
+[card]
+name=Kilo, Apogee Mind
+abilities=haste
+auto=@tapped(this):_PROLIFERATE_
+text=Haste -- Whenever Kilo becomes tapped, proliferate.
+mana={U}{R}{W}
+type=Legendary Artifact Creature
+subtype=Robot Artificer
+power=3
+toughness=3
+[/card]
+[card]
+name=Surge Conductor
+auto=@movedTo(other artifact[-token]|myBattlefield):_PROLIFERATE_
+text=Whenever another nontoken artifact you control enters, proliferate.
+mana={3}
+type=Artifact Creature
+subtype=Robot
+power=3
+toughness=2
+[/card]
+[card]
+name=Patrolling Peacemaker
+auto=counter(1/1,2)
+#MISSING proliferate whenever an opponent commits a crime (crime detection unsupported)
+text=This creature enters with two +1/+1 counters on it. -- Whenever an opponent commits a crime, proliferate.
+mana={2}{W}
+type=Artifact Creature
+subtype=Robot Soldier
+power=0
+toughness=0
+[/card]
+[card]
+name=Insight Engine
+auto={2}{T}:counter(0/0,1,charge) && draw:1 controller
+#MISSING should draw a card for EACH charge counter (dynamic draw unsupported; draws 1)
+text={2}, {T}: Put a charge counter on this artifact, then draw a card for each charge counter on it.
+mana={2}{U}
+type=Artifact
+[/card]
+[card]
+name=Hermes, Overseer of Elpis
+auto=@movedTo(*[-creature]|mystack):token(Bird,creature bird,1/1,blue flying vigilance)
+#MISSING attack trigger: whenever you attack with one or more Birds, draw/scry payoff
+text=Whenever you cast a noncreature spell, create a 1/1 blue Bird creature token with flying and vigilance.
+mana={3}{U}
+type=Legendary Creature
+subtype=Elder Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Siegfried, Famed Swordsman
+abilities=menace
+auto=deplete:3 controller
+#MISSING then put X +1/+1 counters on Siegfried where X = twice the creature cards in your graveyard (dynamic)
+text=Menace -- When Siegfried enters, mill three cards. Then put X +1/+1 counters on Siegfried, where X is twice the number of creature cards in your graveyard.
+mana={3}{B}
+type=Legendary Creature
+subtype=Human Warrior Rogue
+power=2
+toughness=2
+[/card]
