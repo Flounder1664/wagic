@@ -132380,8 +132380,7 @@ toughness=5
 [card]
 name=Grabby Giant // That's Mine
 grade=borderline
-# REVIEW 2026-07-19 [P:med] couldn't cast that's mine as an instant.
-abilities=reach,adventure
+abilities=reach,adventure,asflash
 other={1}{R} name(That's Mine)
 auto={2}{R}{S(artifact,land|mybattlefield)}:draw:1
 auto=alternative _TREASURE_
@@ -133680,10 +133679,10 @@ subtype=Equipment
 [card]
 name=Thief's Knife
 grade=borderline
-# REVIEW 2026-07-19 [P:med] drew 2 cards not 1
+# REVIEW 2026-07-20 [P:med] FIXED: source(mytgt) -> from(mytgt) on the @combatdamaged draw (matches Sword of Fire and Ice).
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
-auto=@combatdamaged(player) source(mytgt):draw:1 controller
+auto=@combatdamaged(player) from(mytgt):draw:1 controller
 auto={4}:equip
 #MISSING equipped creature is a Rogue in addition to its other types
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+1, has "Whenever this creature deals combat damage to a player, draw a card," and is a Rogue. -- Equip {4}
@@ -133729,7 +133728,7 @@ subtype=Equipment
 name=Ninja's Blades
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
-auto=@combatdamaged(player) source(mytgt):draw:1 controller && discard:1
+auto=@combatdamaged(player) from(mytgt):draw:1 controller && discard:1
 auto={2}:equip
 #MISSING equipped creature is a Ninja; that player loses life equal to the discarded card's mana value
 text=Job select. -- Equipped creature gets +1/+1, is a Ninja, and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card. That player loses life equal to the discarded card's mana value." -- Equip {2}
@@ -133999,7 +133998,7 @@ toughness=2
 [card]
 name=Summon: Knights of Round
 grade=borderline
-# REVIEW 2026-07-19 [P:med] i got 6 interrupt messages, expected 3
+# REVIEW 2026-07-20 [P:low] "6 interrupts expected 3" investigated: saga idiom is sound (identical to Summon: Bahamut; phase trigger is edge-triggered so no turn-1 double-advance; token()*3 is valid). Likely chapters I+II across two turns (3 each). Recheck in-game whether two chapters fire on the SAME turn.
 abilities=indestructible
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
@@ -134278,8 +134277,6 @@ name=Radiant Summit
 grade=borderline
 # REVIEW 2026-07-19 [P:med] 
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
-auto={T}:Add{R}
-auto={T}:Add{W}
 text={T}: Add {R} or {W}. -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Mountain Plains
@@ -134287,10 +134284,8 @@ subtype=Mountain Plains
 [card]
 name=Vernal Fen
 grade=borderline
-# REVIEW 2026-07-19 [P:med] two of each tap for G/B
+# REVIEW 2026-07-20 [P:med] FIXED: removed redundant explicit {T}:Add{B}/{T}:Add{G}; subtype Swamp Forest already grants intrinsic mana (was doubling).
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
-auto={T}:Add{B}
-auto={T}:Add{G}
 text={T}: Add {B} or {G}. -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Swamp Forest
@@ -134298,8 +134293,6 @@ subtype=Swamp Forest
 [card]
 name=Glittering Massif
 auto=tap(noevent)
-auto={T}:Add{R}
-auto={T}:Add{W}
 autohand={2}{cycle}:draw:1 controller
 text={T}: Add {R} or {W}. -- This land enters tapped. -- Cycling {2}
 type=Land
@@ -134308,8 +134301,6 @@ subtype=Mountain Plains
 [card]
 name=Festering Thicket
 auto=tap(noevent)
-auto={T}:Add{B}
-auto={T}:Add{G}
 autohand={2}{cycle}:draw:1 controller
 text={T}: Add {B} or {G}. -- This land enters tapped. -- Cycling {2}
 type=Land
