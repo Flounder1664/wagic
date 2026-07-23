@@ -134858,3 +134858,145 @@ subtype=Sloth Mount
 power=5
 toughness=5
 [/card]
+[card]
+name=Ravenhill Flock
+grade=borderline
+abilities=flying
+auto=@drawof(player):counter(1/1)
+text=Flying -- Whenever you draw a card, put a +1/+1 counter on this creature.
+mana={3}{U}
+type=Creature
+subtype=Bird
+power=1
+toughness=2
+[/card]
+[card]
+name=Eagle of the Great Shelf
+grade=borderline
+abilities=flying
+auto=_ATTACKING_foreach(other creature|mybattlefield) 1/1 ueot
+text=Flying -- Whenever this creature attacks, it gets +1/+1 until end of turn for each other creature you control.
+mana={4}{W}
+type=Creature
+subtype=Bird Soldier
+power=2
+toughness=5
+[/card]
+[card]
+name=Nighthowl Pursuer
+grade=borderline
+abilities=menace
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:2/2 ueot
+text=Menace -- Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, this creature gets +2/+2 until end of turn.
+mana={B}
+type=Creature
+subtype=Wolf
+power=1
+toughness=1
+[/card]
+[card]
+name=The Chief Warg
+grade=borderline
+abilities=menace
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:draw:1 controller && life:-1 controller
+#MISSING triggers on this creature attacking; card triggers whenever you attack with any creature
+text=Menace -- Ferocious -- Whenever you attack while you control a creature with power 4 or greater, you draw a card and lose 1 life.
+mana={2}{B}{G}
+type=Legendary Creature
+subtype=Wolf
+power=3
+toughness=3
+[/card]
+[card]
+name=Chief Warg's Company
+grade=borderline
+abilities=trample
+auto=@each my upkeep:token(Wolf,creature wolf,2/2,green)
+#MISSING can't attack unless you control two or more other Wolves
+text=Trample -- This creature can't attack unless you control two or more other Wolves. -- At the beginning of your upkeep, create a 2/2 green Wolf creature token.
+mana={1}{B}{G}
+type=Creature
+subtype=Wolf
+power=5
+toughness=3
+[/card]
+[card]
+name=Smaug the Magnificent
+grade=borderline
+abilities=flying,haste
+auto=@each my upkeep:_TREASURE_
+#MISSING attack trigger dealing damage equal to the number of Treasures you control
+text=Flying, haste -- Whenever Smaug attacks, he deals damage equal to the number of Treasures you control to any target. -- At the beginning of your upkeep, create a Treasure token.
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=Dragon
+power=4
+toughness=3
+[/card]
+[card]
+name=Dragon's Desire
+grade=borderline
+auto=foreach(artifact|opponentbattlefield) Add{R}
+text=Add {R} for each artifact your opponents control.
+mana={2}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Fíli and Kíli, Joyous
+grade=borderline
+abilities=haste
+auto={T}:Add{R}{R}
+#MISSING mana can only be spent on Dwarf, Equipment and Saga spells
+text=Haste -- {T}: Add {R}{R}. Spend this mana only to cast Dwarf, Equipment, and Saga spells.
+mana={2}{R}
+type=Legendary Creature
+subtype=Dwarf Bard
+power=3
+toughness=3
+[/card]
+[card]
+name=Bag End Banquet
+grade=borderline
+auto=_FOOD_*3
+auto={T}:foreach(artifact[food]|mybattlefield) Add{C}
+text=When this artifact enters, create three Food tokens. -- {T}: Add {C} for each Food you control.
+mana={6}
+type=Artifact
+[/card]
+[card]
+name=Ori, Plate Stacker
+grade=borderline
+auto=foreach(artifact,enchantment|opponentbattlefield) life:1 controller
+auto=destroy all(artifact,enchantment|opponentbattlefield)
+text=When Ori enters, destroy all artifacts and enchantments your opponents control. You gain 1 life for each permanent destroyed this way.
+mana={5}{W}{W}
+type=Legendary Creature
+subtype=Dwarf Bard
+power=3
+toughness=3
+[/card]
+[card]
+name=Long-Lost Lances
+grade=borderline
+auto=teach(creature) 2/0
+auto=teach(creature) first strike
+auto=teach(creature) vigilance
+auto={2}:equip
+#MISSING first strike/vigilance apply only during your turn, and to all equipped creatures you control
+text=Equipped creature gets +2/+0. -- During your turn, creatures you control that are equipped have first strike and vigilance. -- Equip {2}
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Smaug the Impenetrable
+grade=borderline
+abilities=flying,indestructible,haste
+#MISSING whenever Smaug is dealt noncombat damage, create that many Treasure tokens
+text=Flying, indestructible, haste -- Whenever Smaug is dealt noncombat damage, create that many Treasure tokens.
+mana={5}{B}{R}
+type=Legendary Creature
+subtype=Dragon
+power=8
+toughness=7
+[/card]
