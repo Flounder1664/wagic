@@ -39375,7 +39375,6 @@ type=Land
 [card]
 name=Field of the Dead
 grade=supported
-# REVIEW 2026-07-14 [P:med] 
 auto=tap(noevent)
 auto={T}:add{C}
 auto=if type(land|myBattlefield)~morethan~6 then name(Create zombie) _ZOMBIETOKEN_
@@ -45900,7 +45899,6 @@ type=Sorcery
 [card]
 name=Gleemox
 grade=supported
-# REVIEW 2026-07-12 [P:med] Works as expected
 auto={T}:Add{W}
 auto={T}:Add{U}
 auto={T}:Add{B}
@@ -107755,7 +107753,6 @@ toughness=1
 [card]
 name=Spire Mechcycle
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 abilities=haste
 auto={T(other *[mount;vehicle]|myBattlefield)} restriction{compare(hascntexhaust)~equalto~0}:transforms((Creature)) forever && counter(0/0,1,exhaust) && counter(1/1) foreach(other *[mount;vehicle]|myBattlefield)
 auto=_CREW2_
@@ -132239,6 +132236,8 @@ type=Sorcery
 [/card]
 [card]
 name=Sawblade Skinripper
+grade=borderline
+# REVIEW 2026-07-24 [P:med] 
 abilities=menace
 auto={2}{S(other creature,enchantment|mybattlefield)}:counter(1/1)
 #MISSING At the beginning of your end step, if you sacrificed one or more permanents this turn, this creature deals that much damage to any target (per-turn sacrifice tracking unsupported)
@@ -132496,7 +132495,6 @@ toughness=4
 [card]
 name=Virtue of Loyalty // Ardenvale Fealty
 grade=supported
-# REVIEW 2026-07-17 [P:med] 
 abilities=adventure
 other={1}{W} name(Ardenvale Fealty)
 auto=@each my end:untap all(creature|myBattlefield)
@@ -132861,6 +132859,7 @@ toughness=3
 [/card]
 [card]
 name=Rangers' Refueler
+grade=supported
 auto=@counteradded(0/0.1.exhaust) from(*|myBattlefield):draw:1 controller
 auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: animate) counter(0/0,1,exhaust) && transforms((Artifact Creature)) forever && counter(1/1)
 auto=_CREW2_
@@ -133665,7 +133664,6 @@ subtype=Equipment
 [card]
 name=White Mage's Staff
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combat(attacking) source(mytgt):life:1 controller
@@ -133882,7 +133880,6 @@ subtype=Town
 [card]
 name=Adventurer's Inn
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 auto=life:2
 auto={T}:Add{C}
 text=When this land enters, you gain 2 life. -- {T}: Add {C}.
@@ -134258,9 +134255,10 @@ type=Sorcery
 [/card]
 [card]
 name=Quiet Disrepair
+grade=borderline
+# REVIEW 2026-07-24 [P:med] FIXED: was two independent upkeep triggers; now one ability$!choice A _ choice B!$ modal.
 target=artifact,enchantment|battlefield
-auto=@each my upkeep:choice name(Destroy enchanted permanent) destroy all(mytgt)
-auto=@each my upkeep:choice name(Gain 2 life) life:2 controller
+auto=@each my upkeep:ability$!choice name(Destroy enchanted permanent) destroy all(mytgt) _ choice name(Gain 2 life) life:2 controller!$ controller
 text=Enchant artifact or enchantment -- At the beginning of your upkeep, choose one - -- - Destroy enchanted permanent. -- - You gain 2 life.
 mana={1}{G}
 type=Enchantment
@@ -134283,8 +134281,7 @@ subtype=Mountain Plains
 [/card]
 [card]
 name=Vernal Fen
-grade=borderline
-# REVIEW 2026-07-20 [P:med] FIXED: removed redundant explicit {T}:Add{B}/{T}:Add{G}; subtype Swamp Forest already grants intrinsic mana (was doubling).
+grade=supported
 auto=if type(land[basic]|mybattlefield)~lessthan~2 then tap(noevent)
 text={T}: Add {B} or {G}. -- This land enters tapped unless you control two or more basic lands.
 type=Land
@@ -134448,7 +134445,6 @@ type=Artifact
 [card]
 name=Hermes, Overseer of Elpis
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 auto=@movedTo(*[-creature]|mystack):token(Bird,creature bird,1/1,blue flying vigilance)
 #MISSING attack trigger: whenever you attack with one or more Birds, draw/scry payoff
 text=Whenever you cast a noncreature spell, create a 1/1 blue Bird creature token with flying and vigilance.
@@ -134473,7 +134469,6 @@ toughness=2
 [card]
 name=Venomsac Lagac
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 abilities=deathtouch
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:0/3 ueot
@@ -134525,6 +134520,8 @@ toughness=3
 [/card]
 [card]
 name=Brightfield Glider
+grade=borderline
+# REVIEW 2026-07-24 [P:med] 2nd turn that it was saddled didn't add the +1/+2
 abilities=vigilance
 auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:1/2 ueot && transforms((,flying)) ueot
@@ -134589,7 +134586,6 @@ toughness=2
 [card]
 name=Brightfield Mustang
 grade=supported
-# REVIEW 2026-07-19 [P:med] 
 auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:untap all(this) && counter(1/1)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -134679,6 +134675,8 @@ toughness=7
 [/card]
 [card]
 name=Calamity, Galloping Inferno
+grade=borderline
+# REVIEW 2026-07-24 [P:med] 
 abilities=haste
 auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -134705,6 +134703,8 @@ toughness=2
 [/card]
 [card]
 name=Congregation Gryff
+grade=borderline
+# REVIEW 2026-07-24 [P:med] 
 abilities=flying,lifelink
 auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -134731,6 +134731,8 @@ toughness=4
 [/card]
 [card]
 name=Giant Beaver
+grade=borderline
+# REVIEW 2026-07-24 [P:med] 
 abilities=vigilance
 auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:counter(1/1) target(creature|mybattlefield)
@@ -134771,6 +134773,8 @@ toughness=5
 [/card]
 [card]
 name=Ornery Tumblewagg
+grade=borderline
+# REVIEW 2026-07-24 [P:med] Primordial Hydra doubles it's own tokens.
 auto=@each my combat:counter(1/1) target(creature|mybattlefield)
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -134956,7 +134960,7 @@ toughness=3
 [/card]
 [card]
 name=Bag End Banquet
-grade=borderline
+grade=supported
 auto=_FOOD_*3
 auto={T}:foreach(artifact[food]|mybattlefield) Add{C}
 text=When this artifact enters, create three Food tokens. -- {T}: Add {C} for each Food you control.
@@ -134965,7 +134969,7 @@ type=Artifact
 [/card]
 [card]
 name=Ori, Plate Stacker
-grade=borderline
+grade=supported
 auto=foreach(artifact,enchantment|opponentbattlefield) life:1 controller
 auto=destroy all(artifact,enchantment|opponentbattlefield)
 text=When Ori enters, destroy all artifacts and enchantments your opponents control. You gain 1 life for each permanent destroyed this way.
