@@ -11281,6 +11281,20 @@ type=Artifact
 subtype=Blood
 [/card]
 [card]
+name=Food
+auto={2}{T}{S}:name(Gain 3 life) life:3 controller
+text={2}, {T}, Sacrifice this artifact: You gain 3 life.
+type=Artifact
+subtype=Food
+[/card]
+[card]
+name=Clue
+auto={2}{S}:name(Draw a card) draw:1 controller
+text={2}, Sacrifice this artifact: Draw a card.
+type=Artifact
+subtype=Clue
+[/card]
+[card]
 name=Blood Age General
 auto={T}:all(spirit[attacking]|battlefield) transforms((,newability[1/0])) ueot
 text={T}: Attacking Spirits get +1/+0 until end of turn.
@@ -134239,6 +134253,8 @@ type=Instant
 [/card]
 [card]
 name=Slaughter Pact
+grade=borderline
+# REVIEW 2026-07-24 [P:med] doesn't seem to accept or require the payment at next upkeep
 target=creature[-black]|battlefield
 auto=destroy
 auto=if casted(this) then transforms((,newability[upcost[{2}{B};next upkeep] wingame opponent])) forever

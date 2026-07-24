@@ -375,16 +375,16 @@
 #AUTO_DEFINE _ZOMBIETOKEN_ create(zombie:creature zombie:2/2:black)
 
 # Blood Token
-#AUTO_DEFINE _BLOOD_ token(Blood^Blood Artifact^0/0) and!( transforms((,newability[{1}{T}{D(*|myhand)}{S}:draw:1])) forever )!
+#AUTO_DEFINE _BLOOD_ token(Blood)
 
 # Clue Token
-#AUTO_DEFINE _CLUE_ token(Clue^Clue Artifact^0/0) and!( transforms((,newability[{2}{S}:draw:1])) forever )!
+#AUTO_DEFINE _CLUE_ token(Clue)
 
 # Food Token
-#AUTO_DEFINE _FOOD_ token(Food^Food Artifact^0/0) and!( transforms((,newability[{2}{T}{S}:life:3])) forever )!
+#AUTO_DEFINE _FOOD_ token(Food)
 
 # Treasure Token
-#AUTO_DEFINE _TREASURE_ token(Treasure^Treasure Artifact^0/0) and!( transforms((,newability[{T}{S}:Add{W}],newability[{T}{S}:Add{U}],newability[{T}{S}:Add{B}],newability[{T}{S}:Add{R}],newability[{T}{S}:Add{G}])) forever )!
+#AUTO_DEFINE _TREASURE_ token(Treasure)
 
 # Vehicle Token
 #AUTO_DEFINE _VEHICLE_ token(Vehicle^Artifact Vehicle^3/2) and!( transforms((,newability[{crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}])) forever )!
