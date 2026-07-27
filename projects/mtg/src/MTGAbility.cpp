@@ -5769,6 +5769,20 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //Trigger doubling: doubletrigger(<scope>) - abilities of permanents matching
+    //<scope> that you control trigger one additional time (Harmonic Prodigy,
+    //Sanctum of All, Panharmonicon...). Use an "other ..." scope for cards that
+    //say "another". Unrelated to Doubling Season, which doubles tokens/counters.
+    vector<string> splitDoubleTrigger = parseBetween(s, "doubletrigger(", ")");
+    if (splitDoubleTrigger.size())
+    {
+        TargetChooserFactory tcf(observer);
+        TargetChooser * doubleScope = tcf.createTargetChooser(splitDoubleTrigger[1], card);
+        if (!doubleScope)
+            return NULL;
+        return NEW ATriggerDoubler(observer, id, card, doubleScope);
+    }
+
     //identify what a leveler creature will max out at.
     vector<string> splitMaxlevel = parseBetween(s, "maxlevel:", " ", false);
     if (splitMaxlevel.size())
@@ -6580,6 +6594,18 @@ int AbilityFactory::magicText(int id, Spell * spell, MTGCardInstance * card, int
             if (a->oneShot)
             {
                 a->resolve();
+                //Trigger doubling for ENTER-THE-BATTLEFIELD abilities. A permanent's
+                //bare auto= lines are its ETB triggers, but they are oneShots resolved
+                //here rather than through TriggeredAbility, so the doubler has to be
+                //applied at this point too (this is the Panharmonicon path).
+                //Gated on the source actually being in play, so a resolving instant or
+                //sorcery - whose effects are oneShots on this same path - is untouched.
+                MTGCardInstance * etbSource = (spell && spell->source) ? spell->source : card;
+                if (etbSource && etbSource->isInPlay(observer))
+                {
+                    for (int extra = countTriggerDoublers(observer, etbSource); extra > 0; extra--)
+                        a->resolve();
+                }
                 delete (a);
             }
             else
@@ -7922,19 +7948,50 @@ int TriggeredAbility::receiveEvent(WEvent * e)
     {
         resolve();
         return 1;
-        //triggers that resolve from stack events must resolve instantly or by the time they do the cards that triggered them 
+        //triggers that resolve from stack events must resolve instantly or by the time they do the cards that triggered them
         //have already been put in play or graveyard.
     }
         fireAbility();
+        for (int extra = extraTriggerCount(); extra > 0; extra--)
+            fireAbility();
         return 1;
     }
     return 0;
 }
 
+//Trigger doubling (Harmonic Prodigy, Sanctum of All, Panharmonicon...): count the
+//permanents in play whose doubleScope matches triggerSource. Each one makes the
+//trigger fire one ADDITIONAL time. Firing twice is safe: ActionStack::addAbility
+//wraps the ability in a fresh StackAbility per call, and StackAbility neither owns
+//nor deletes the ability (its resolve() is just ability->resolve()).
+int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource)
+{
+    if (!triggerSource || !observer || !observer->mLayers || !observer->mLayers->actionLayer())
+        return 0;
+    int extra = 0;
+    ActionLayer * al = observer->mLayers->actionLayer();
+    for (size_t i = 1; i < al->mObjects.size(); i++)
+    {
+        ATriggerDoubler * doubler = dynamic_cast<ATriggerDoubler *>((MTGAbility *) al->mObjects[i]);
+        if (doubler && doubler->doubles(triggerSource))
+            extra++;
+    }
+    return extra;
+}
+
+int TriggeredAbility::extraTriggerCount()
+{
+    return countTriggerDoublers(game, source);
+}
+
 void TriggeredAbility::Update(float)
 {
     if (trigger())
+    {
         fireAbility();
+        for (int extra = extraTriggerCount(); extra > 0; extra--)
+            fireAbility();
+    }
 }
 
 ostream& TriggeredAbility::toString(ostream& out) const
