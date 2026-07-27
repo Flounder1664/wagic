@@ -134426,7 +134426,7 @@ toughness=3
 [card]
 name=Amarant Coral
 abilities=trample,mustattack
-#MISSING No Mercy - combat-damage-to-opponent also deals that much to each creature that player controls
+auto=@combatdamaged(player) from(this):damage:thatmuch all(creature|opponentbattlefield)
 text=Trample -- Amarant Coral attacks each combat if able. -- No Mercy - Whenever Amarant Coral deals combat damage to an opponent, it deals that much damage to each creature that player controls.
 mana={2}{R}{G}
 type=Legendary Creature
@@ -134783,8 +134783,8 @@ grade=borderline
 # REVIEW 2026-07-24 [P:med] 
 abilities=flying,lifelink
 auto={crew3(other creature|myBattlefield)}:name(Saddle 3) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~2}
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:foreach(*[mount]|mybattlefield) 1/1 ueot
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
-#MISSING attack-while-saddled +X/+X where X = Mounts you control (dynamic count pump not expressible); flying/lifelink static kept
 text=Saddle Mount (see printed card).
 mana={1}{G}{W}
 type=Creature
@@ -135005,7 +135005,7 @@ name=Smaug the Magnificent
 grade=borderline
 abilities=flying,haste
 auto=@each my upkeep:_TREASURE_
-#MISSING attack trigger dealing damage equal to the number of Treasures you control
+auto=_ATTACKING_damage:type:artifact[treasure]:mybattlefield target(anytarget)
 text=Flying, haste -- Whenever Smaug attacks, he deals damage equal to the number of Treasures you control to any target. -- At the beginning of your upkeep, create a Treasure token.
 mana={2}{R}{R}
 type=Legendary Creature
@@ -135072,7 +135072,8 @@ subtype=Equipment
 name=Smaug the Impenetrable
 grade=borderline
 abilities=flying,indestructible,haste
-#MISSING whenever Smaug is dealt noncombat damage, create that many Treasure tokens
+auto=@damaged(this):token(Treasure)*thatmuch
+#MISSING fires on ALL damage; the card is noncombat damage only (combat damage cannot be excluded here)
 text=Flying, indestructible, haste -- Whenever Smaug is dealt noncombat damage, create that many Treasure tokens.
 mana={5}{B}{R}
 type=Legendary Creature
