@@ -6397,6 +6397,45 @@ ACastRestriction::~ACastRestriction()
     SAFE_DELETE(restrictionsScope);
 }
 
+//--- Trigger doubling -------------------------------------------------------
+//Passive marker: TriggeredAbility::extraTriggerCount() walks the action layer
+//looking for these and fires the trigger one extra time per match.
+ATriggerDoubler::ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope) :
+    MTGAbility(observer, _id, card), doubleScope(_doubleScope)
+{
+}
+
+bool ATriggerDoubler::doubles(MTGCardInstance * triggerSource)
+{
+    if (!triggerSource || !doubleScope || !source)
+        return false;
+    //"a permanent YOU control" - a doubler never doubles an opponent's triggers
+    if (triggerSource->controller() != source->controller())
+        return false;
+    //Self-inclusion is decided by the scope, not hardcoded: Harmonic Prodigy IS a
+    //Shaman and doubles its own prowess, while Sanctum of All says "another Shrine"
+    //and so is written with an "other" target chooser.
+    return doubleScope->canTarget(triggerSource);
+}
+
+const string ATriggerDoubler::getMenuText()
+{
+    return "Trigger Doubler";
+}
+
+ATriggerDoubler * ATriggerDoubler::clone() const
+{
+    ATriggerDoubler * a = NEW ATriggerDoubler(*this);
+    if (doubleScope)
+        a->doubleScope = doubleScope->clone();
+    return a;
+}
+
+ATriggerDoubler::~ATriggerDoubler()
+{
+    SAFE_DELETE(doubleScope);
+}
+
 
 AInstantCastRestrictionUEOT::AInstantCastRestrictionUEOT(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target, TargetChooser * _restrictionsScope, WParsedInt * _value, bool _modifyExisting, int _zoneId, int who) :
     InstantAbilityTP(observer, _id, card, _target, who)

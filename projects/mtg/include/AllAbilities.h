@@ -2405,6 +2405,27 @@ public:
 };
 
 
+/* Trigger doubling: "If an ability of <scope> you control would trigger, that
+   ability triggers an additional time" (Harmonic Prodigy, Sanctum of All,
+   Panharmonicon...). A passive ability that simply advertises itself in the
+   action layer; TriggeredAbility::extraTriggerCount() finds it and fires the
+   trigger once more per matching doubler.
+   NOTE: this is unrelated to Doubling Season, which doubles a *result* (tokens
+   or counters) and is already handled in pure DSL. */
+class ATriggerDoubler: public MTGAbility
+{
+public:
+    TargetChooser * doubleScope; //whose triggered abilities get doubled
+
+    ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope);
+    //true when a trigger belonging to triggerSource should fire an extra time
+    bool doubles(MTGCardInstance * triggerSource);
+    const string getMenuText();
+    ATriggerDoubler * clone() const;
+    ~ATriggerDoubler();
+};
+
+
 class  AInstantCastRestrictionUEOT: public InstantAbilityTP
 {
 public:
