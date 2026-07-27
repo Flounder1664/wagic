@@ -132409,8 +132409,7 @@ toughness=3
 name=Hollow Scavenger // Bakery Raid
 abilities=adventure
 other={G} name(Bakery Raid)
-auto={1}{S(food|mybattlefield)}:2/2 ueot
-#MISSING the +2/+2 ability should be activatable only once each turn
+auto={1}{S(food|mybattlefield)}:2/2 ueot limit:1
 auto=alternative _FOOD_
 auto=alternative _ADVENTURE_
 text={1}, Sacrifice a Food: This creature gets +2/+2 until end of turn. Activate only once each turn. // Create a Food token.
@@ -132479,9 +132478,9 @@ toughness=1
 [/card]
 [card]
 name=Ratcatcher Trainee // Pest Problem
-abilities=firststrike,adventure
+abilities=adventure
 other={2}{R} name(Pest Problem)
-#MISSING first strike should apply during your turn only (granted always)
+auto=@each my beginofturn:firststrike ueot
 auto=alternative token(Rat,creature rat,1/1,black cantblock)*2
 auto=alternative _ADVENTURE_
 text=During your turn, this creature has first strike. // Create two 1/1 black Rat creature tokens with "This token can't block."
@@ -132709,46 +132708,46 @@ subtype=Aura
 [card]
 name=Country Roads
 grade=supported
-auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{W}
 auto={1}{W}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {W}. -- {1}{W}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
 [card]
 name=Foul Roads
-auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{B}
 auto={1}{B}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {B}. -- {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
 [card]
 name=Reef Roads
-auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{U}
 auto={1}{U}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {U}. -- {1}{U}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
 [card]
 name=Rocky Roads
-auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{R}
 auto={1}{R}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {R}. -- {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
 [card]
 name=Wild Roads
-auto=aslongas(vehicle|myBattlefield) tap(noevent) <1 oneshot
+auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{G}
 auto={1}{G}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-#MISSING Mounts don't exist in Wagic (only Vehicles satisfy the untapped condition); Pilot crew rider missing
+#MISSING the Pilot token's "saddles and crews as though its power were 2 greater" rider
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {G}. -- {1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133729,8 +133728,8 @@ subtype=Equipment
 name=Dark Knight's Greatsword
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 3/0
-auto={3}:equip
-#MISSING equip cost is "pay 3 life, once each turn" (approximated as {3}); equipped creature is a Knight
+auto={3}:equip limit:1
+#MISSING equip cost is "pay 3 life" (approximated as {3}); equipped creature is a Knight
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +3/+0 and is a Knight. -- Chaosbringer - Equip - Pay 3 life. Activate only once each turn.
 mana={2}{B}
 type=Artifact
@@ -134195,10 +134194,10 @@ toughness=3
 name=Tonberry
 grade=borderline
 # REVIEW 2026-07-19 [P:med] stun works; first strike your-turn-only unsupported (granted note)
-abilities=firststrike,deathtouch
 auto=tap(noevent)
 auto=counter(0/0,1,stun) all(this)
-#MISSING first strike and deathtouch should apply only during your turn (granted unconditionally here)
+auto=@each my beginofturn:firststrike ueot
+auto=@each my beginofturn:deathtouch ueot
 text=This creature enters tapped with a stun counter on it. -- Chef's Knife - During your turn, this creature has first strike and deathtouch.
 mana={B}
 type=Creature
