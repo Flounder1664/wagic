@@ -11295,6 +11295,64 @@ type=Artifact
 subtype=Clue
 [/card]
 [card]
+name=Monster
+grade=borderline
+target=creature
+auto=teach(creature) 1/1
+auto=teach(creature) trample
+text=Enchant creature -- Enchanted creature gets +1/+1 and has trample.
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
+name=Sorcerer
+grade=borderline
+target=creature
+auto=teach(creature) 1/1
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Scry 1) _SCRY1_]))
+text=Enchant creature -- Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
+name=Royal
+grade=borderline
+target=creature
+auto=teach(creature) 1/1
+auto=teach(creature) transforms((,newability[_WARD1_]))
+text=Enchant creature -- Enchanted creature gets +1/+1 and has ward {1}.
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
+name=Young Hero
+grade=borderline
+target=creature
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this) restriction{compare(toughness)~lessthan~4}:counter(1/1)]))
+text=Enchant creature -- Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
+name=Wicked
+grade=borderline
+target=creature
+auto=teach(creature) 1/1
+autograveyard=_DIES_life:-1 opponent
+text=Enchant creature -- Enchanted creature gets +1/+1. -- When this Aura is put into a graveyard from the battlefield, each opponent loses 1 life.
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
+name=Cursed
+grade=borderline
+target=creature
+auto=teach(creature) becomes(,1/1)
+text=Enchant creature -- Enchanted creature has base power and toughness 1/1.
+type=Enchantment
+subtype=Aura Role
+[/card]
+[card]
 name=Blood Age General
 auto={T}:all(spirit[attacking]|battlefield) transforms((,newability[1/0])) ueot
 text={T}: Attacking Spirits get +1/+0 until end of turn.
@@ -132365,8 +132423,8 @@ name=Cursed Courtier
 grade=borderline
 # REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no cursed role token that could be removed or moved.
 abilities=lifelink
-auto=becomes(,1/1) forever
-#MISSING actual Cursed Role token aura (approximated: enters as base 1/1; there is no aura to remove)
+auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+#MISSING Role replacement rule (a second Role on the same creature should put the older one into the graveyard)
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
 type=Creature
@@ -132522,7 +132580,8 @@ type=Enchantment
 name=Shatter the Oath
 target=creature,enchantment|battlefield
 auto=destroy
-#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+#MISSING Role replacement rule (a second Role on the same creature should put the older one into the graveyard)
 text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}{B}
 type=Sorcery
@@ -132530,7 +132589,8 @@ type=Sorcery
 [card]
 name=Eriette's Whisper
 auto=discard:2 opponent
-#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+#MISSING Role replacement rule (a second Role on the same creature should put the older one into the graveyard)
 text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}
 type=Sorcery
@@ -132538,7 +132598,8 @@ type=Sorcery
 [card]
 name=Witch's Mark
 auto=may discard:1 && draw:2
-#MISSING Wicked Role token attached to up to one target creature you control (Role tokens unsupported)
+auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+#MISSING Role replacement rule (a second Role on the same creature should put the older one into the graveyard)
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={1}{R}
 type=Sorcery
