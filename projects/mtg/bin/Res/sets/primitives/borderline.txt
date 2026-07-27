@@ -51217,9 +51217,9 @@ toughness=2
 [/card]
 [card]
 name=Harmonic Prodigy
-#MISSING: not possible to trigger twice any ability ATM
 abilities=prowess
 auto=@movedTo(*[-creature]|mystack):name(Gains 1/1 ueot) 1/1 ueot
+auto=doubletrigger(other *[shaman;wizard]|mybattlefield)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- If an ability of a Shaman or another Wizard you control triggers, that ability triggers an additional time.
 mana={1}{R}
 type=Creature
@@ -96557,7 +96557,7 @@ toughness=2
 [/card]
 [card]
 name=Sanctum of All
-#MISSING: not possible to trigger twice any ability ATM
+auto=aslongas(*[shrine]|mybattlefield) doubletrigger(other *[shrine]|mybattlefield) >5
 auto=@each my upkeep:ability$!name(Choose one) choice name(Don't search) donothing _ choice name(Search Library) moveTo(myBattlefield) target(*[shrine]|myLibrary) && shuffle oneshot _ choice name(Search Graveyard) moveTo(myBattlefield) target(*[shrine]|myGraveyard)!$ controller
 text=At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it. -- If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
 mana={W}{U}{B}{R}{G}
