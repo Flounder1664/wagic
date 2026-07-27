@@ -105193,9 +105193,8 @@ toughness=2
 [card]
 name=Scarlet Spider, Ben Reilly
 grade=borderline
-other={R}{G} name(Web-slinging)
+other={R}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-#MISSING Web-slinging's return-a-tapped-creature payment (the discount is granted without the bounce)
 auto=@movedTo(other creature|mybattlefield):counter(1/1) target(creature|mybattlefield)
 mana={1}{R}{G}
 type=Legendary Creature
@@ -111205,9 +111204,8 @@ type=Instant
 [card]
 name=Silk, Web Weaver
 grade=borderline
-other={1}{G}{W} name(Web-slinging)
+other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-#MISSING Web-slinging's return-a-tapped-creature payment (the discount is granted without the bounce)
 auto=@movedTo(other creature[reach]|mybattlefield):token(Spider,Creature Spider,2/1,reach,green) controller
 mana={2}{G}{W}
 type=Legendary Creature
@@ -116908,9 +116906,8 @@ text=Menace -- Whenever Spider-Man Noir attacks alone, put a +1/+1 counter on it
 [/card]
 [card]
 name=Spider-Man, Web-Slinger
-other={W} name(Web-slinging)
+other={W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-#MISSING Web-slinging's return-a-tapped-creature payment (the discount is granted without the bounce)
 grade=borderline
 # REVIEW 2026-07-12 [P:med] websling alternate casting cost doesn't work
 auto=@combat(attacking) source(this):token(Spider,Creature Spider,2/1,reach,green) controller
@@ -116957,9 +116954,8 @@ text=Equipped creature gets +2/+2. Equip {2}.
 name=Spider-UK
 grade=borderline
 # REVIEW 2026-07-19 [P:high] web-sling needs the bounce (alt-cost approximation, no bounce)
-other={2}{W} name(Web-slinging)
+other={2}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-#MISSING Web-slinging's return-a-tapped-creature payment (the discount is granted without the bounce)
 auto=@each my endstep:if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 && life:2 controller
 text=At the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, draw a card and gain 2 life.
 mana={3}{W}

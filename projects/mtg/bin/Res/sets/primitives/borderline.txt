@@ -133173,20 +133173,18 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
-other={U} name(Sneak)
+other={U}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
-#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
 mana={2}{U}
 type=Sorcery
 [/card]
 [card]
 name=Jennika's Technique
-other={R} name(Sneak)
+other={R}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=damage:2 all(creature|battlefield)
-#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
 text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
 mana={2}{R}
 type=Instant
@@ -133194,7 +133192,7 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
-other={W}{B} name(Sneak)
+other={W}{B}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
 auto=choice name(-3/-3) target(creature) -3/-3 ueot
@@ -133205,28 +133203,26 @@ type=Sorcery
 [/card]
 [card]
 name=Leonardo's Technique
-other={1}{W} name(Sneak)
+other={1}{W}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
-#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
 text=Sneak {1}{W} -- Return one or two target creature cards each with mana value 3 or less from your graveyard to the battlefield.
 mana={3}{W}
 type=Sorcery
 [/card]
 [card]
 name=New Generation's Technique
-other={2}{G} name(Sneak)
+other={2}{G}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
-#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 mana={3}{G}
 type=Sorcery
 [/card]
 [card]
 name=Raphael's Technique
-other={2}{R} name(Sneak)
+other={2}{R}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
 #MISSING each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
@@ -133236,7 +133232,7 @@ type=Instant
 [/card]
 [card]
 name=Shredder's Technique
-other={B} name(Sneak)
+other={B}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -133247,10 +133243,9 @@ type=Sorcery
 [/card]
 [card]
 name=Splinter's Technique
-other={1}{B} name(Sneak)
+other={1}{B}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
-#MISSING Sneak's return-an-unblocked-attacker payment (the discount is granted without the bounce)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
 mana={3}{B}
 type=Sorcery
@@ -133258,7 +133253,7 @@ type=Sorcery
 [card]
 name=The Last Ronin's Technique
 grade=borderline
-other={1}{W} name(Sneak)
+other={1}{W}{n} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
 #MISSING if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
