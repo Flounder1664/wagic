@@ -13541,6 +13541,8 @@ type=Creature
 subtype=Plant Scorpion
 power=2
 toughness=2
+abilities=deathtouch
+auto=target(other creature|mybattlefield) deathtouch forever
 text=Blooming Stinger
 [/card]
 [card]
@@ -20851,6 +20853,10 @@ subtype=Aura
 name=Chronicle of Victory
 mana={6}
 type=Artifact
+auto=chooseatype lord(creature[chosentype]|mybattlefield) 2/2 chooseend
+auto=chooseatype lord(creature[chosentype]|mybattlefield) first strike chooseend
+auto=chooseatype lord(creature[chosentype]|mybattlefield) trample chooseend
+#MISSING 'whenever you cast a spell of the chosen type, draw a card' (cast trigger filtered by the chosen type is not expressible)
 text=As this enters, choose a creature type. Creatures you control of the chosen type get +2/+2 and have first strike and trample. Whenever you cast a spell of the chosen type, draw a card.
 [/card]
 [card]
@@ -52331,6 +52337,8 @@ type=Land
 [/card]
 [card]
 name=Gravblade Heavy
+auto=aslongas(artifact|mybattlefield) 1/0
+auto=aslongas(artifact|mybattlefield) deathtouch
 text=As long as you control an artifact, this creature gets +1/+0 and has deathtouch. (Conditional bonus not supported)
 mana={3}{B}
 type=Creature
@@ -59728,6 +59736,8 @@ toughness=7
 [/card]
 [card]
 name=Hydra Omnivore
+auto=@combatdamaged(player) from(this):damage:thatmuch opponent
+#MISSING multiplayer only - hits 'each other opponent'; in a 1v1 game this is a no-op
 text=Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.
 mana={4}{G}{G}
 type=Creature
@@ -99652,11 +99662,14 @@ toughness=2
 [/card]
 [card]
 name=Retched Wretch
+auto=_DIES_restriction{compare(hascnt-1-1)~morethan~0}:moveTo(ownerBattlefield)
+#MISSING the -1/-1 counter gate is approximated by a counter check at death time
 mana={2}{B}
 type=Creature
 subtype=Goblin
 power=4
 toughness=2
+text=When this creature dies, if it had a -1/-1 counter on it, return it to the battlefield under its owner's control and it loses all abilities.
 [/card]
 [card]
 name=Rethink

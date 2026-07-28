@@ -23876,6 +23876,7 @@ toughness=0
 [/card]
 [card]
 name=Crystacean
+abilities=flash
 text=Flash
 mana={3}{U}
 type=Creature
@@ -36630,6 +36631,7 @@ type=Enchantment
 [card]
 name=Excruciator
 #MISSING: damage can't be prevented
+#MISSING damage-cannot-be-prevented has no DSL form (engine wall)
 text=Damage that would be dealt by Excruciator can't be prevented.
 mana={6}{R}{R}
 type=Creature
