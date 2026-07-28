@@ -90102,7 +90102,7 @@ toughness=7
 name=Realm-Scorcher Hellkite
 abilities=flying,haste,hasotherkicker
 other={4}{R}{R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
-otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~1
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
 auto=alternative thisforeach(variable{4}) ability$!name(Choose one) choice name(Add white) add{W} _ choice name(Add blue) add{U} _ choice name(Add black) add{B} _ choice name(Add red) add{R} _ choice name(Add green) add{G}!$ controller
 auto={1}{R}:damage:1 target(anytarget)
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Flying, haste -- When Realm-Scorcher Hellkite enters, if it was bargained, add four mana in any combination of colors. -- {1}{R}: Realm-Scorcher Hellkite deals 1 damage to any target.
@@ -132275,11 +132275,15 @@ toughness=1
 [card]
 name=Camellia, the Seedmiser
 grade=borderline
-# REVIEW 2026-07-17 [P:med] forage doesn t seem to work
+# REVIEW 2026-07-17 [P:med] forage doesn t seem to work - FIXED 2026-07-28, the
+# forage ability was simply absent; covered by test generic/forage_camellia.txt
 abilities=menace
 auto=lord(other squirrel|mybattlefield) menace
 auto=@sacrificed(food|mybattlefield):token(Squirrel,Creature Squirrel,1/1,green)
-#MISSING {2}, Forage: Put a +1/+1 counter on each other Squirrel you control (forage cost unsupported)
+#Forage is "exile three cards from your graveyard OR sacrifice a Food", which is a
+#choice of costs, not one cost. Two activated abilities give the player that choice.
+auto={2}{S(food|myBattlefield)}:name(Forage - sacrifice a Food) counter(1/1) all(other squirrel|myBattlefield)
+auto={2}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}:name(Forage - exile 3 cards) counter(1/1) all(other squirrel|myBattlefield)
 text=Menace -- Other Squirrels you control have menace. -- Whenever you sacrifice one or more Foods, create a 1/1 green Squirrel creature token. -- {2}, Forage: Put a +1/+1 counter on each other Squirrel you control. (To forage, exile three cards from your graveyard or sacrifice a Food.)
 mana={1}{B}{G}
 type=Legendary Creature
