@@ -135186,3 +135186,124 @@ text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast t
 mana={R}
 type=Instant
 [/card]
+[card]
+name=Agatha's Champion
+grade=borderline
+abilities=trample,hasotherkicker
+other={4}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative fight target(creature|opponentbattlefield)
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Trample -- When this creature enters, if it was bargained, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
+mana={4}{G}
+type=Creature
+subtype=Human Knight
+power=4
+toughness=4
+[/card]
+[card]
+name=Troublemaker Ouphe
+grade=borderline
+abilities=hasotherkicker
+other={1}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative moveTo(exile) target(artifact,enchantment|opponentbattlefield)
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, exile target artifact or enchantment an opponent controls.
+mana={1}{G}
+type=Creature
+subtype=Ouphe
+power=2
+toughness=2
+[/card]
+[card]
+name=Tenacious Tomeseeker
+grade=borderline
+abilities=hasotherkicker
+other={2}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative moveTo(myhand) target(*[instant;sorcery]|mygraveyard)
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, return target instant or sorcery card from your graveyard to your hand.
+mana={2}{U}
+type=Creature
+subtype=Human Knight
+power=3
+toughness=2
+[/card]
+[card]
+name=High Fae Negotiator
+grade=borderline
+abilities=flying,hasotherkicker
+other={3}{B}{B}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative life:-3 opponent
+auto=alternative life:3 controller
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Flying -- When this creature enters, if it was bargained, each opponent loses 3 life and you gain 3 life.
+mana={3}{B}{B}
+type=Creature
+subtype=Faerie Warlock
+power=3
+toughness=5
+[/card]
+[card]
+name=Hamlet Glutton
+grade=borderline
+abilities=trample,hasotherkicker
+other={3}{G}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=life:3 controller
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- This spell costs {2} less to cast if it's bargained. -- Trample -- When this creature enters, you gain 3 life.
+mana={5}{G}{G}
+type=Creature
+subtype=Giant
+power=6
+toughness=6
+[/card]
+[card]
+name=Diminisher Witch
+grade=borderline
+abilities=hasotherkicker
+other={2}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|opponentbattlefield)])) oneshot )!
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+#MISSING Role replacement rule (a second Role on the same creature should put the older one into the graveyard). Also inherits the open Cursed Courtier issue: the enchanted creature does become 1/1, but the Role token itself is not present as a removable/movable permanent.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
+mana={2}{U}
+type=Creature
+subtype=Human Warlock
+power=3
+toughness=2
+[/card]
+[card]
+name=Dunbarrow Revivalist
+grade=borderline
+abilities=hasotherkicker
+other={1}{B}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative moveTo(myhand) target(creature|mygraveyard)
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+#MISSING The one-time boon ("When one or more creatures enter under your control, create a Wicked Role token attached to one of them") is absent: a one-shot delayed trigger armed on the PLAYER rather than on a permanent has no counterpart in the DSL. Only the bargained graveyard return is implemented.
+text=Bargain -- When Dunbarrow Revivalist enters, you get a one-time boon with "When one or more creatures enter under your control, create a Wicked Role token attached to one of them." Then if Dunbarrow Revivalist was bargained, return a creature card from your graveyard to your hand.
+mana={1}{B}
+type=Creature
+subtype=Human Warlock
+power=3
+toughness=1
+[/card]
+[card]
+name=Talion's Throneguard
+grade=borderline
+abilities=flying,flash
+auto=moveTo(ownerhand) target(*[-land]|battlefield)
+#MISSING Bargain is not offered at all. Bargaining this card buys ONLY the rider "that card perpetually gains 'This spell costs {2} more to cast'", and perpetual cost modifiers are not expressible; a Bargain option that took a sacrifice and changed nothing would be worse than none. Also approximated: "up to one target" is implemented as a required target, and returning a SPELL from the stack is not offered.
+text=Flash -- Bargain -- Flying -- When Talion's Throneguard enters, return up to one target spell or nonland permanent to its owner's hand. If Talion's Throneguard was bargained, that card perpetually gains "This spell costs {2} more to cast."
+mana={2}{U}{U}
+type=Creature
+subtype=Faerie Wizard
+power=4
+toughness=2
+[/card]
