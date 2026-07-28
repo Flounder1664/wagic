@@ -1,0 +1,34 @@
+#COLLECT EVIDENCE as an activated-ability cost. Forensic Researcher's second
+#ability is "{T}, Collect evidence 3: Tap target creature you don't control",
+#approximated as exiling two graveyard cards.
+#Both halves of the cost are asserted: the two graveyard cards must end up in
+#exile (proving the evidence was really paid, the failure mode that made bargain
+#look implemented when it was not) and the opponent's Hill Giant must be tapped.
+#"choice 1" picks the evidence ability; the menu also lists the untap ability.
+#No manapool: this ability costs only {T} plus the exiles, so any mana left over
+#would itself fail the assert.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+graveyard:Mountain,Forest
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Forensic Researcher
+choice 1
+Mountain
+Forest
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+exile:Mountain,Forest
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]
