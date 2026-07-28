@@ -134,13 +134,15 @@ toughness=6
 [card]
 name=Abigale, Eloquent First-Year
 abilities=flying,first strike,lifelink
-auto=target(creature[-this]|mybattlefield) effect(+0/+0) ueot
+auto=target(other creature) transforms((,newability[loseabilities],flying,first strike,lifelink)) forever
+#MISSING the three keywords should arrive as flying/first strike/lifelink COUNTERS (keyword counters on another creature are not expressible)
 mana={W/B}{W/B}
 type=Creature
 subtype=Bird Bard
 power=1
 toughness=1
-text=Flying, first strike, lifelink -- When Abigale enters, another target creature gains flying, first strike, and lifelink until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, first strike, lifelink -- When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
 [/card]
 [card]
 name=Abjure
@@ -4833,7 +4835,8 @@ toughness=1
 name=April O'Neil, Live on the Scene
 abilities=flash
 auto=draw:1 controller
-text=Flash -- When April O'Neil enters, draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- Partner—Character select
 mana={2}{U}
 type=Legendary Creature
 subtype=Human
@@ -6557,7 +6560,8 @@ toughness=2
 [card]
 name=Ashe, Princess of Dalmasca
 auto=@combat(attacking) source(this):name(search) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose artifact) target(<1>artifact|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
-text=Whenever Ashe attacks, search your library for an artifact card and put it into your hand, then shuffle.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever Ashe attacks, look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={2}{W}
 type=Legendary Creature
 subtype=Human Rebel Noble
@@ -6702,7 +6706,8 @@ auto=choice name(damage creatures) all(creature|opponentbattlefield) damage:2
 auto=choice name(two treasures) _TREASURE_ && _TREASURE_
 mana={3}{U}{R}
 type=Instant
-text=Choose two: copy target Elemental you control; or draw two cards; or deal 2 damage to each creature an opponent controls; or create two Treasure tokens.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Choose two — -- • Create a token that's a copy of target Elemental you control. -- • Target player draws two cards. -- • Ashling's Command deals 2 damage to each creature target player controls. -- • Target player creates two Treasure tokens.
 [/card]
 [card]
 name=Ashling, Rekindled
@@ -11383,7 +11388,8 @@ auto=teach(creature) ward2
 mana={2}{W}{U}
 type=Artifact
 subtype=Equipment
-text=When Biorganic Carapace enters, attach it to target creature you control. Equipped creature gets +0/+3 and has ward {2}. Equip {2}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this Equipment enters, attach it to target creature you control. -- Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control." (Equipment, Auras you control, and counters are modifications.) -- Equip {2}
 [/card]
 [card]
 name=Biorhythm
@@ -14036,9 +14042,10 @@ toughness=1
 [/card]
 [card]
 name=Boggart Mischief
-auto=may token(Goblin,creature goblin,1/1,black red)*2
+auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(Goblin,creature goblin,1/1,black red)*2
 auto=@movedTo(creature[goblin]|graveyard) from(mybattlefield):life:-1 opponent && life:1 controller
-text=When this enchantment enters, you may put a -1/-1 counter on a creature you control. If you do, create two 1/1 black and red Goblin creature tokens. (Blight 1 approximated: token creation is optional.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
 mana={2}{B}
 type=Enchantment
 [/card]
@@ -22407,7 +22414,8 @@ toughness=4
 [card]
 name=Codecracker Hound
 auto=draw:1 && mill:1
-text=When this creature enters, draw a card and mill a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, look at the top two cards of your library. Put one into your hand and the other into your graveyard. -- Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
 type=Creature
 subtype=Dog
@@ -26867,7 +26875,8 @@ type=Creature
 subtype=Human Citizen
 power=3
 toughness=3
-text=When Damage Control Crew enters, choose one — Return a land from your graveyard to your hand; or put a +1/+1 counter on target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, choose one — -- • Repair — Return target card with mana value 4 or greater from your graveyard to your hand. -- • Impound — Exile target artifact or enchantment.
 [/card]
 [card]
 name=Damia, Sage of Stone
@@ -28036,7 +28045,8 @@ toughness=1
 [/card]
 [card]
 name=Dawnsire, Sunstar Dreadnought
-text=Station -- Tap another creature you control: Put charge counters equal to its power on this Spacecraft. It's an artifact creature at 10+ and gains abilities at 10+ and 20+.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.) -- 10+ | Whenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker. -- 20+ | Flying
 mana={5}
 type=Legendary Artifact Creature
 subtype=Spacecraft
@@ -32104,7 +32114,8 @@ toughness=4
 name=Doc Ock's Henchmen
 abilities=flash
 auto=@combat(attacking) source(this):draw:1 && discard:1
-text=Flash -- Whenever this creature attacks, draw a card then discard a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flash -- Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 mana={2}{U}
 type=Creature
 subtype=Human Villain
@@ -32119,7 +32130,8 @@ auto=teach(creature) transforms((,newability[{T}:tap target(creature|opponentbat
 mana={1}
 type=Artifact
 subtype=Equipment
-text=Equipped creature gets +2/+0 and has "{T}: Tap target creature an opponent controls." -- Equip {2}
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it. -- Equipped creature gets +4/+4. -- Equip {5}
 [/card]
 [card]
 name=Doc Ock, Sinister Scientist
@@ -32408,7 +32420,8 @@ type=Creature
 subtype=Treefolk Druid
 power=0
 toughness=5
-text=Each creature spell you cast with toughness greater than its power costs {1} less. Creatures you control get +X/+X when attacking, where X is the difference between toughness and power.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Each creature spell you cast with toughness greater than its power costs {1} less to cast. -- Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
 [/card]
 [card]
 name=Doran, the Siege Tower
@@ -33118,7 +33131,8 @@ auto=token(Hero,Creature Hero,1/1,,) controller
 auto={4}:equip
 auto=teach(creature) 1/0
 auto=teach(creature) flying
-text=Job select -- When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it. -- Equipped creature gets +1/+0 and has flying. -- Equip {4}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +1/+0 and is a Knight in addition to its other types. -- During your turn, equipped creature has flying. -- Gae Bolg — Equip {4}
 mana={1}{W}
 type=Artifact
 subtype=Equipment
@@ -33542,7 +33556,8 @@ name=Dream Harvest
 auto=draw:3 && target(player|opponentbattlefield) discard:3
 mana={5}{U/B}{U/B}
 type=Sorcery
-text=Draw three cards. Each opponent discards three cards.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
 [/card]
 [card]
 name=Dream Leash
@@ -35442,7 +35457,8 @@ auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):1/
 auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):trample ueot
 mana={2}{G}
 type=Enchantment
-text=When Earthbender Ascension enters, earthbend 2 and search your library for a basic land card and put that card onto the battlefield tapped, then shuffle. -- Landfall — Whenever a land enters the battlefield under your control, put a quest counter on Earthbender Ascension. Then if it has four or more quest counters on it, creatures you control get +1/+1 and gain trample until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Landfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.
 [/card]
 [card]
 name=Earthbending Lesson
@@ -35911,7 +35927,8 @@ subtype=Aura
 name=Edge Rover
 abilities=reach
 auto=_DIES__LANDERTOKEN_
-text=Reach -- When this creature dies, create a Lander token.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- When this creature dies, each player creates a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
 mana={G}
 type=Artifact Creature
 subtype=Robot Scout
@@ -37884,7 +37901,8 @@ name=End-Blaze Epiphany
 auto=damage:* target(creature|any) && draw:1
 mana={X}{R}
 type=Instant
-text=End-Blaze Epiphany deals X damage to target creature. Draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
 [/card]
 [card]
 name=Endangered Armodon
@@ -47063,7 +47081,8 @@ type=Artifact
 [card]
 name=Galvanizing Sawship
 abilities=flying,haste
-text=Station -- Tap another creature you control: Put charge counters on this Spacecraft. At 3+ counters: Flying, haste.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 3+.) -- 3+ | Flying, haste
 mana={5}{R}
 type=Artifact Creature
 subtype=Spacecraft
@@ -47383,7 +47402,8 @@ name=Gathering Stone
 auto=@each my upkeep:_SCRY1_
 mana={4}
 type=Artifact
-text=Spells you cast of the chosen type cost {1} less. At the beginning of your upkeep, surveil 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 [/card]
 [card]
 name=Gatstaf Arsonists
@@ -49082,7 +49102,8 @@ toughness=1
 [card]
 name=Gigantoplasm
 auto=may copy notaTarget(creature) and!( {X}:name(Base X) transforms((,setpower=X,settoughness=X)) ueot )!
-text=You may have Gigantoplasm enter the battlefield as a copy of any creature on the battlefield except it gains "{X}: This creature has base power and toughness X/X."
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=You may have this creature enter as a copy of any creature on the battlefield, except it has "{X}: This creature has base power and toughness X/X."
 mana={3}{U}
 type=Creature
 subtype=Shapeshifter
@@ -63523,7 +63544,8 @@ toughness=3
 [card]
 name=Jenova, Ancient Calamity
 auto=@each my combatbegins:counter(1/1) target(other creature|mybattlefield)
-text=At the beginning of combat on your turn, put a +1/+1 counter on up to one other target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of combat on your turn, put a number of +1/+1 counters equal to Jenova's power on up to one other target creature. That creature becomes a Mutant in addition to its other types. -- Whenever a Mutant you control dies during your turn, you draw cards equal to its power.
 mana={2}{B}{G}
 type=Legendary Creature
 subtype=Alien
@@ -69737,7 +69759,8 @@ type=Sorcery
 name=Lavaleaper
 auto=lord(creature|battlefield) haste
 auto=@tappedformana(land[basic]|mybattlefield):Add{1}
-text=All creatures have haste. -- Whenever you tap a basic land for mana, add one mana of any type that land produced. (Approximated as add one extra mana of any color.)
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=All creatures have haste. -- Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
 mana={3}{R}
 type=Creature
 subtype=Elemental
@@ -74903,7 +74926,8 @@ type=Creature
 subtype=Elf Faerie Noble
 power=4
 toughness=5
-text=Flying -- Whenever an Elf or Faerie you control enters, mill two cards of target opponent.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library. -- Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
 [/card]
 [card]
 name=Marang River Prowler
@@ -80912,7 +80936,8 @@ name=Mornsong Aria
 auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary) && and!(shuffle)!
 mana={1}{B}{B}
 type=Legendary Enchantment
-text=Whenever you draw a card, you lose 3 life. Put target permanent mylibrary onto its owner's hand. and!(shuffle)!.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 [/card]
 [card]
 name=Moroii
@@ -84374,10 +84399,11 @@ subtype=Equipment
 [card]
 name=Nightmare Sower
 abilities=flying,lifelink
-auto=counter(-1/-1,1) target(creature|opponentbattlefield)
+auto=@movedTo(*|mystack) restriction{opponentturnonly}:may counter(-1/-1,1) target(creature)
 mana={3}{B}
 type=Creature
-text=When Nightmare Sower enters the battlefield, put 1 -1/-1 counter on target creature an opponent controls.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, lifelink -- Whenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.
 subtype=Faerie Assassin
 power=2
 toughness=3
@@ -85056,7 +85082,8 @@ toughness=2
 name=Noctis, Prince of Lucis
 abilities=lifelink
 autograveyard={3}:moveto(mybattlefield) target(artifact|mygraveyard) asSorcery
-text=Lifelink -- {3}: Return target artifact from your graveyard to the battlefield.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Lifelink -- You may cast artifact spells from your graveyard by paying 3 life in addition to paying their other costs. If you cast a spell this way, that artifact enters with a finality counter on it.
 mana={1}{W}{U}{B}
 type=Legendary Creature
 subtype=Human Noble
@@ -88667,7 +88694,8 @@ type=Sorcery
 [card]
 name=Painful Quandary
 auto=@movedTo(*|opponentstack):ability$!choice name(Lose 5 life) life:-5 _ if type(*|myhand)~morethan~0 then choice name(discard) target(*|myhand) reject!$ opponent
-text=Whenever an opponent casts a spell, that player loses 5 life unless they discards a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.
 mana={3}{B}{B}
 type=Enchantment
 [/card]
@@ -88745,7 +88773,8 @@ name=Paladin's Arms
 auto=token(Hero,Creature Hero,1/1,,) controller
 auto={4}:equip
 auto=teach(creature) 2/1
-text=Job select -- When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it. -- Equipped creature gets +2/+1. -- Equip {4}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +2/+1, has ward {1}, and is a Knight in addition to its other types. -- Lightbringer and Hero's Shield — Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
 mana={2}{W}
 type=Artifact
 subtype=Equipment
@@ -90800,7 +90829,8 @@ toughness=3
 [card]
 name=Phoenix Down
 auto={1}{W}{T}{S(this|mybattlefield)}:moveto(mybattlefield) target(creature[manacost<=4]|mygraveyard) tapped
-text={1}{W}, {T}, Sacrifice Phoenix Down: Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={1}{W}, {T}, Exile this artifact: Choose one — -- • Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped. -- • Exile target Skeleton, Spirit, or Zombie.
 mana={W}
 type=Artifact
 [/card]
@@ -96078,7 +96108,8 @@ type=Creature
 subtype=Goblin Berserker Villain
 power=5
 toughness=4
-text=Haste, trample
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Haste -- Mayhem {2}{R} (You may cast this card from your graveyard for {2}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Raging Gorilla
@@ -96788,7 +96819,8 @@ type=Creature
 subtype=Dragon
 power=4
 toughness=4
-text=Flying. -- Firebending 2. (Whenever Ran and Shaw attack, add {R}{R}.) -- When Ran and Shaw enters, if you have three or more Dragon or Lesson cards in your graveyard, create a non-legendary token that's a copy of it. (Not yet implemented.) -- {3}{R}: Dragons you control get +2/+0 until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, firebending 2 -- When Ran and Shaw enter, if you cast them and there are three or more Dragon and/or Lesson cards in your graveyard, create a token that's a copy of Ran and Shaw, except it's not legendary. -- {3}{R}: Dragons you control get +2/+0 until end of turn.
 [/card]
 [card]
 name=Rancid Earth
@@ -103977,7 +104009,8 @@ type=Creature
 subtype=Goblin Sorcerer
 power=2
 toughness=4
-text=At the beginning of your first main phase, draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
 [/card]
 [card]
 name=Sanctified Charge
@@ -105214,7 +105247,8 @@ type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=1
-text=Menace -- When Scarlet Spider, Kaine enters, it deals 1 damage to target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace (This creature can't be blocked except by two or more creatures.) -- When Scarlet Spider enters, you may discard a card. If you do, put a +1/+1 counter on him. -- Mayhem {B/R} (You may cast this card from your graveyard for {B/R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Scarmaker
@@ -106416,10 +106450,11 @@ toughness=1
 [/card]
 [card]
 name=Scuzzback Scrounger
-auto=@each my mainphase:choice name(blight 1) counter(-1/-1,1) && _TREASURE_ name(skip)
+auto=@each my firstmain:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && _TREASURE_
 mana={1}{R}
 type=Creature
-text=@each my mainphase:choice name(blight 1) counter(-1/-1,1). Create a Treasure token name(skip).
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 subtype=Goblin Warrior
 power=3
 toughness=2
@@ -108812,7 +108847,8 @@ name=Shadow Urchin
 auto=_ATTACKING_:counter(-1/-1,1)
 mana={2}{BR}
 type=Creature
-text=Whenever Shadow Urchin attacks, put 1 -1/-1 counter on Shadow Urchin.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.) -- Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
 subtype=Ouphe
 power=3
 toughness=4
@@ -116822,7 +116858,8 @@ type=Creature
 subtype=Spider Avatar
 power=2
 toughness=2
-text=Reach -- {T}: Add {R} or {G}. -- When Spider Manifestation enters, put a +1/+1 counter on it.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- {T}: Add {R} or {G}. -- Whenever you cast a spell with mana value 4 or greater, untap this creature.
 [/card]
 [card]
 name=Spider Spawning
@@ -116873,7 +116910,8 @@ type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=3
-text=Reach -- Tap, Discard a card: Draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- Whenever Spider-Gwen becomes tapped, you may discard a card. If you do, draw a card.
 [/card]
 [card]
 name=Spider-Ham, Peter Porker
@@ -116895,7 +116933,8 @@ type=Creature
 subtype=Spider Horror Citizen
 power=4
 toughness=3
-text=Haste -- Mayhem {1}{R} (approx: cast from graveyard for {1}{R} plus discard a card).
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Spider-Man Noir
@@ -116906,7 +116945,8 @@ type=Legendary Creature
 subtype=Spider Hero
 power=3
 toughness=3
-text=Menace -- Whenever Spider-Man Noir attacks alone, put a +1/+1 counter on it and mill a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace -- Whenever a creature you control attacks alone, put a +1/+1 counter on it. Then surveil X, where X is the number of counters on it. (Look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 [/card]
 [card]
 name=Spider-Man, Web-Slinger
@@ -116931,7 +116971,8 @@ type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=1
-text=Riot (enters with +1/+1 counter or haste; you choose). Other Spiders you control have haste.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -- Other Spiders you control have riot. -- Spells and abilities can't be countered. -- Damage can't be prevented.
 [/card]
 [card]
 name=Spider-Rex, Daring Dino
@@ -117384,7 +117425,8 @@ auto=enchanted cantblock
 auto={1}{W}:moveto(exile) target(creature|opponentbattlefield)
 mana={1}{W}
 type=Enchantment
-text=Enchanted creature gains cantattack.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Enchant creature -- Enchanted creature can't attack or block. -- {1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature. (To blight 1, put a -1/-1 counter on a creature you control.)
 subtype=Aura
 [/card]
 [card]
@@ -119507,7 +119549,8 @@ type=Legendary Creature
 subtype=Dinosaur Villain
 power=5
 toughness=4
-text=Menace -- When Stegron enters, target noncreature artifact you control becomes a 7/7 creature until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Dinosaur Formula — {1}{R}, Discard this card: Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.
 [/card]
 [card]
 name=Stench of Decay
@@ -123303,7 +123346,8 @@ auto=choice name(draw) draw:1
 auto=choice name(tap creature) tap target(creature|opponentbattlefield)
 mana={1}{W}{U}
 type=Sorcery
-text=Choose two: copy target Merfolk you control; or creatures you control gain lifelink until end of turn; or draw a card; or tap target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Choose two — -- • Create a token that's a copy of target Merfolk you control. -- • Creatures target player controls gain lifelink until end of turn. -- • Target player draws a card. -- • Tap target creature. Put a stun counter on it.
 [/card]
 [card]
 name=Sygg, River Cutthroat
@@ -124667,7 +124711,8 @@ type=Creature
 subtype=Goblin Warlock
 power=3
 toughness=2
-text=When this creature enters, target opponent discards a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
 [/card]
 [card]
 name=Tatsumasa, the Dragon's Fang
@@ -125922,7 +125967,8 @@ auto=2/2 ueot
 auto=lifelink ueot
 mana={3}{G}
 type=Instant
-text=Two target creatures each get +2/+2 and gain lifelink until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=This spell costs {2} less to cast if you control a permanent with mana value 4 or greater. -- One or two target creatures you control each get +1/+0 until end of turn. They each deal damage equal to their power to target creature an opponent controls.
 [/card]
 [card]
 name=Terrifying Presence
@@ -126488,14 +126534,16 @@ type=Sorcery
 name=The Earth Crystal
 auto=lord(*[green]|mycastingzone) altercost(colorless,-1)
 auto={4}{G}{G}{T}:counter(1/1) target(<upto:2>creature|mybattlefield)
-text=Green spells you cast cost {1} less to cast. -- {4}{G}{G}, {T}: Put a +1/+1 counter on each of up to two target creatures you control.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Green spells you cast cost {1} less to cast. -- If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead. -- {4}{G}{G}, {T}: Distribute two +1/+1 counters among one or two target creatures you control.
 mana={2}{G}{G}
 type=Legendary Artifact
 [/card]
 [card]
 name=The Eternity Elevator
 auto={T}:Add{C}{C}{C}
-text={T}: Add {C}{C}{C}. Station -- Tap another creature you control: Put charge counters on this Spacecraft.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={T}: Add {C}{C}{C}. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.) -- 20+ | {T}: Add X mana of any one color, where X is the number of charge counters on The Eternity Elevator.
 mana={5}
 type=Legendary Artifact
 subtype=Spacecraft
@@ -126736,7 +126784,8 @@ toughness=3
 name=Thespian's Stage
 auto={T}:Add{1}
 auto={2}{T}:copy target(other land|battlefield) and!( {2}{T}:copy target(other land|battlefield) )!
-text={T}: Add {1}. -- {2}, {T}: Thespian's Stage becomes a copy of target land and gains this ability.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={T}: Add {C}. -- {2}, {T}: This land becomes a copy of target land, except it has this ability.
 type=Land
 [/card]
 [card]
@@ -131841,7 +131890,8 @@ name=Twilight Diviner
 auto=_SCRY1_ && _SCRY1_
 mana={2}{B}
 type=Creature
-text=When Twilight Diviner enters the battlefield, scry 1. Scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
 subtype=Elf Cleric
 power=3
 toughness=3
@@ -133360,7 +133410,8 @@ abilities=flying
 auto=_SCRY1_ && _SCRY1_
 mana={1}{U}
 type=Creature
-text=When Unwelcome Sprite enters the battlefield, scry 1. Scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
 subtype=Faerie Rogue
 power=2
 toughness=1
@@ -137571,7 +137622,8 @@ abilities=flying
 auto=life:-1 controller && draw:1 controller
 mana={UB}{UB}{UB}
 type=Creature
-text=When Voracious Tome-Skimmer enters the battlefield, you lose 1 life. Draw 1 card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
 subtype=Faerie Rogue
 power=2
 toughness=3
@@ -139470,10 +139522,11 @@ toughness=2
 [/card]
 [card]
 name=Wary Farmer
-auto=@each my endstep:_SCRY1_
+auto=@each my endstep restriction{type(other creature[fresh]|mybattlefield)~morethan~0}:_SURVEIL1_
 mana={1}{GW}{GW}
 type=Creature
-text=At the beginning of your end step, scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of your end step, if another creature entered the battlefield under your control this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 subtype=Kithkin Citizen
 power=3
 toughness=3
@@ -140073,7 +140126,8 @@ name=Web Up
 auto=(blink)forsrc target(*[-land]|opponentbattlefield)
 mana={2}{W}
 type=Enchantment
-text=When Web Up enters, exile target nonland permanent an opponent controls. Return it when Web Up leaves the battlefield.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.
 [/card]
 [card]
 name=Web-Shooters

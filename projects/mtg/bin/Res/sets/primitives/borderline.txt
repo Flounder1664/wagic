@@ -22066,7 +22066,8 @@ name=Contract Killing
 target=creature
 auto=destroy
 auto=_TREASURE_*2
-text=Destroy target creature. Create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Destroy target creature. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={3}{B}{B}
 type=Sorcery
 [/card]
@@ -24445,7 +24446,8 @@ name=Curse of Opulence
 target=player
 auto=if compare(oppotgt)~morethan~0 then name(Target opponent) name(Target opponent) transforms((,newability[@combat(attacking) source(creature|myBattlefield) turnlimited:name(Create Gold) name(Create Gold) token(Gold)])) forever
 auto=if compare(ctrltgt)~morethan~0 then name(Target yourself) name(Target yourself) transforms((,newability[@combat(attacking) source(creature|opponentBattlefield) turnlimited:name(Create Gold) name(Create Gold) token(Gold)])) forever
-text=Enchant player -- Whenever enchanted player is attacked, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color.". Each opponent attacking that player does the same.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Enchant player -- Whenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this token: Add one mana of any color.")
 mana={R}
 type=Enchantment
 subtype=Aura Curse
@@ -28364,7 +28366,8 @@ toughness=1
 [card]
 name=Dire Fleet Hoarder
 auto=_DIES__TREASURE_
-text=When Dire Fleet Hoarder dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={1}{B}
 type=Creature
 subtype=Human Pirate
@@ -44214,7 +44217,8 @@ auto=this(counter{0/0.1.luck}>0) {T}:add{U}
 auto=this(counter{0/0.1.luck}>0) {T}:add{G}
 auto=this(counter{0/0.1.luck}>0) {T}:add{B}
 auto=this(counter{0/0.1.luck}>0) {T}:add{R}
-text=If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand. -- {T}: Add {1}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand. -- {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
 type=Legendary Land
 [/card]
 [card]
@@ -52068,7 +52072,8 @@ name=Heartless Pillage
 target=opponent
 auto=ability$!name(discard 2 cards) target(<2>*|myhand) reject!$ targetedplayer
 auto=if raid then _TREASURE_
-text=Target opponent discards two cards. -- Raid - If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Target opponent discards two cards. -- Raid — If you attacked this turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={2}{B}
 type=Sorcery
 [/card]
@@ -57501,7 +57506,8 @@ auto=if paid(kicker) then ability$!name(Put two +1/+1 counters) may name(Put two
 auto=ifnot paid(kicker) then choice name(Put two +1/+1 counters) name(Put two +1/+1 counters) counter(1/1,2) target(creature)
 auto=ifnot paid(kicker) then choice name(Gain life equal to power) name(Gain life equal to power) target(player) life:power:highest:*:targetedpersonsbattlefield
 auto=ifnot paid(kicker) then choice name(Target creature fights) name(Target creature fights) target(creature|myBattlefield) _FIGHT_
-text=Kicker {2}{G} -- Choose one. If Inscription of Abundance is kicked, choose any number instead. -- Put two +1/+1 counters on target creature. -- Target player gain X life, where X is the greatest power among creatures they control. -- Target creature you control fights target creature you don't control.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Kicker {2}{G} -- Choose one. If this spell was kicked, choose any number instead. -- • Put two +1/+1 counters on target creature. -- • Target player gains X life, where X is the greatest power among creatures they control. -- • Target creature you control fights target creature you don't control.
 mana={1}{G}
 type=Instant
 [/card]
@@ -100742,7 +100748,8 @@ toughness=3
 [card]
 name=Shambling Ghast
 auto=_DIES_name(Choose one) transforms((,newability[if type(creature|opponentbattlefield)~morethan~0 then choice name(Creature gets -1/-1) name(Creature gets -1/-1) target(creature|opponentbattlefield) -1/-1 ueot],newability[choice name(Create treasure) _TREASURE_])) oneshot
-text=When Shambling Ghast dies, Choose one -- Brave the Stench - Target creature an opponent controls gets -1/-1 until end of turn. -- Search the Body - Create a Treasure token. (it's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature dies, choose one — -- • Target creature an opponent controls gets -1/-1 until end of turn. -- • Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={B}
 type=Creature
 subtype=Zombie
@@ -119318,7 +119325,8 @@ auto=@each targetedplayer upkeep restriction{type(*[-land]|targetedplayerbattlef
 auto=@each targetedplayer upkeep restriction{type(*[-land]|targetedplayerbattlefield)~morethan~0,type(*|targetedplayerhand)~equalto~0}:name(Pay or sacrifice) name(Pay or sacrifice) ability$!name(Pay or sacrifice) choice name(Sacrifice nonland permanent) sacrifice notaTarget(*[-land]|mybattlefield) _ choice name(Pay 3 life) life:-3 controller!$ targetedplayer
 auto=@each targetedplayer upkeep restriction{type(*[-land]|targetedplayerbattlefield)~equalto~0,type(*|targetedplayerhand)~morethan~0}:name(Pay or discard) name(Pay or discard) ability$!name(Pay or discard) choice name(Discard a card) reject notaTarget(*|myhand) _ choice name(Pay 3 life) life:-3 controller!$ targetedplayer
 auto=@each targetedplayer upkeep restriction{type(*[-land]|targetedplayerbattlefield)~equalto~0,type(*|targetedplayerhand)~equalto~0}:name(Pay 3 life) name(Pay 3 life) name(Pay 3 life) life:-3 targetedplayer
-text=Enchant player -- At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Enchant player -- At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent of their choice or discard a card.
 mana={3}{B}
 type=Enchantment
 subtype=Aura Curse
@@ -134084,7 +134092,8 @@ auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=4) token(Knig
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) all(other creature|mybattlefield) 2/2 ueot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) sacrifice(this)
 #MISSING ch V should also put an indestructible counter on each other creature
-text=I-IV - Create three 2/2 white Knight tokens. -- V - Ultimate End - Other creatures you control get +2/+2 and gain an indestructible counter. -- Indestructible
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after V.) -- I, II, III, IV — Create three 2/2 white Knight creature tokens. -- V — Ultimate End — Other creatures you control get +2/+2 until end of turn. Put an indestructible counter on each of them. -- Indestructible
 mana={6}{W}{W}
 type=Enchantment Creature
 subtype=Saga Knight
@@ -134194,7 +134203,8 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uynt])) uynt )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 #MISSING ch I "play it during any turn you add a lore counter" timing (approx: playable until your next turn); ch II/III delayed next-creature-gains-haste unsupported
-text=I - Chain - Exile the top card of your library, playable while lore counters are added. -- II, III - Gestalt Mode - your next creature spell gains haste.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Chain — Exile the top card of your library. During any turn you put a lore counter on this Saga, you may play that card. -- II, III — Gestalt Mode — When you next cast a creature spell this turn, it gains haste until end of turn.
 mana={1}{R}
 type=Enchantment Creature
 subtype=Saga Knight
