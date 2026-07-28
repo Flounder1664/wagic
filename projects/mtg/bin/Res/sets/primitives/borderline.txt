@@ -133173,7 +133173,8 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
-other={U}{n} name(Sneak)
+other={U} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
@@ -133182,7 +133183,8 @@ type=Sorcery
 [/card]
 [card]
 name=Jennika's Technique
-other={R}{n} name(Sneak)
+other={R} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=damage:2 all(creature|battlefield)
 text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
@@ -133192,7 +133194,8 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
-other={W}{B}{n} name(Sneak)
+other={W}{B} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
 auto=choice name(-3/-3) target(creature) -3/-3 ueot
@@ -133203,7 +133206,8 @@ type=Sorcery
 [/card]
 [card]
 name=Leonardo's Technique
-other={1}{W}{n} name(Sneak)
+other={1}{W} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
@@ -133213,7 +133217,8 @@ type=Sorcery
 [/card]
 [card]
 name=New Generation's Technique
-other={2}{G}{n} name(Sneak)
+other={2}{G} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
@@ -133222,7 +133227,8 @@ type=Sorcery
 [/card]
 [card]
 name=Raphael's Technique
-other={2}{R}{n} name(Sneak)
+other={2}{R} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
 #MISSING each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
@@ -133232,7 +133238,8 @@ type=Instant
 [/card]
 [card]
 name=Shredder's Technique
-other={B}{n} name(Sneak)
+other={B} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -133243,7 +133250,8 @@ type=Sorcery
 [/card]
 [card]
 name=Splinter's Technique
-other={1}{B}{n} name(Sneak)
+other={1}{B} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
@@ -133253,7 +133261,8 @@ type=Sorcery
 [card]
 name=The Last Ronin's Technique
 grade=borderline
-other={1}{W}{n} name(Sneak)
+other={1}{W} name(Sneak)
+#MISSING Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
 #MISSING if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
