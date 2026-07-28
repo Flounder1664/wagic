@@ -105195,7 +105195,9 @@ name=Scarlet Spider, Ben Reilly
 grade=borderline
 other={R}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=@movedTo(other creature|mybattlefield):counter(1/1) target(creature|mybattlefield)
+abilities=trample
+auto=if paid(alternative) then counter(1/1) all(this)
+#MISSING Sensational Save scales with the RETURNED creature's mana value (X counters); approximated as one +1/+1 counter
 mana={1}{R}{G}
 type=Legendary Creature
 subtype=Spider Human Hero
@@ -111206,7 +111208,9 @@ name=Silk, Web Weaver
 grade=borderline
 other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=@movedTo(other creature[reach]|mybattlefield):token(Spider,Creature Spider,2/1,reach,green) controller
+auto=@movedTo(creature|mystack):token(Human Citizen,Creature Human Citizen,1/1,green white) controller
+auto={3}{G}{W}:all(creature|mybattlefield) 2/2 ueot
+auto={3}{G}{W}:all(creature|mybattlefield) vigilance ueot
 mana={2}{G}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
@@ -116909,14 +116913,12 @@ name=Spider-Man, Web-Slinger
 other={W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 grade=borderline
-# REVIEW 2026-07-12 [P:med] websling alternate casting cost doesn't work
-auto=@combat(attacking) source(this):token(Spider,Creature Spider,2/1,reach,green) controller
 mana={2}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=3
 toughness=3
-text=Web-slinging (approx). Whenever Spider-Man attacks, create a 2/1 green Spider creature token with reach.
+text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)
 [/card]
 [card]
 name=Spider-Punk
