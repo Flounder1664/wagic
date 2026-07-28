@@ -135100,9 +135100,13 @@ toughness=7
 [card]
 name=Candy Grapple
 grade=borderline
+abilities=hasotherkicker
 target=creature
-auto=-3/-3 ueot
-#MISSING Bargain (optional sacrifice of an artifact/enchantment/token as an additional cost) is NOT expressible: a non-mana extra cost on kicker= reports paid(kicker)=true even when unpaid, and on other= it makes the card uncastable. Only the unbargained -3/-3 is implemented; the bargained -5/-5 is unreachable.
+other={1}{B}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=alternative -5/-5 ueot
+auto=ifnot paid(alternative) then -3/-3 ueot
+#MISSING Bargain may also be paid by sacrificing a creature token; the sacrifice chooser only offers artifacts and enchantments (which covers Treasure/Food/Clue and every enchantment). A third comma clause in an extra-cost S() silently breaks the chooser, so creature tokens cannot be added.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Target creature gets -3/-3 until end of turn. If this spell was bargained, that creature gets -5/-5 until end of turn instead.
 mana={1}{B}
 type=Instant

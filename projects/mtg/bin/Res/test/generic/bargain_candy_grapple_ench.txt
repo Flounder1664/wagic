@@ -1,0 +1,29 @@
+#BARGAIN, enchantment branch of the sacrifice target chooser. Same as
+#bargain_candy_grapple_paid.txt but pays the bargain with an enchantment rather
+#than an artifact, so the multi-type chooser is exercised on more than its first
+#clause. Circle of Protection: Black is an enchantment with no ETB effect, so the
+#only thing it can contribute to the assert is having been sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Circle of Protection: Black
+hand:Candy Grapple
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Air Elemental
+life:20
+[DO]
+Candy Grapple
+choice 1
+Circle of Protection: Black
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Candy Grapple,Circle of Protection: Black
+life:20
+[PLAYER2]
+graveyard:Air Elemental
+life:20
+[END]
