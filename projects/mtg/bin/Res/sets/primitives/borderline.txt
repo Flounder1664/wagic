@@ -135115,3 +135115,74 @@ text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast t
 mana={1}{B}
 type=Instant
 [/card]
+[card]
+name=Archon's Glory
+grade=borderline
+abilities=hasotherkicker
+target=creature
+other={W}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=2/2 ueot
+auto=alternative flying ueot
+auto=alternative lifelink ueot
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Target creature gets +2/+2 until end of turn. If this spell was bargained, that creature also gains flying and lifelink until end of turn.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Ice Out
+grade=borderline
+abilities=hasotherkicker
+target=*|stack
+other={U}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=fizzle
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- This spell costs {1} less to cast if it's bargained. -- Counter target spell.
+mana={1}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Johann's Stopgap
+grade=borderline
+abilities=hasotherkicker
+target=*[-land]|battlefield
+other={1}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=moveTo(ownerhand)
+auto=draw:1 controller
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- This spell costs {2} less to cast if it's bargained. -- Return target nonland permanent to its owner's hand. Draw a card.
+mana={3}{U}
+type=Sorcery
+[/card]
+[card]
+name=Kellan's Lightblades
+grade=borderline
+abilities=hasotherkicker
+target=creature[attacking;blocking]
+other={1}{W}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=ifnot paid(alternative) then damage:3
+auto=alternative destroy
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Kellan's Lightblades deals 3 damage to target attacking or blocking creature. If this spell was bargained, destroy that creature instead.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Torch the Tower
+grade=borderline
+abilities=hasotherkicker
+target=creature,planeswalker
+other={R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=ifnot paid(alternative) then damage:2
+auto=alternative damage:3
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
+#MISSING Two riders are absent: the scry 1 on the bargained mode, and the replacement effect exiling a permanent this damaged instead of letting it die. The scry is omitted rather than guessed because a scry/surveil macro after an "alternative" prefix is known to break the loader.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1. -- If a permanent dealt damage by Torch the Tower would die this turn, exile it instead.
+mana={R}
+type=Instant
+[/card]

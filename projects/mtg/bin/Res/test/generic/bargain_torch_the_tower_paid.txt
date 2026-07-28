@@ -1,0 +1,28 @@
+#BARGAIN on a new card, BARGAINED path. Same Hill Giant, but the bargain is paid by
+#sacrificing an Ornithopter, so the damage becomes 3 and the Giant dies. Both halves
+#of the cost are asserted: the Ornithopter must reach the graveyard (proving the
+#sacrifice was really taken) and the Giant must die (proving the upgraded branch ran).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Torch the Tower
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Torch the Tower
+choice 1
+Ornithopter
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Torch the Tower,Ornithopter
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]
