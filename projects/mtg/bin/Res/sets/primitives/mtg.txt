@@ -4833,8 +4833,8 @@ toughness=1
 [/card]
 [card]
 name=April O'Neil, Live on the Scene
-abilities=flash
-auto=draw:1 controller
+auto=@movedTo(*[mutant;ninja;turtle]|mybattlefield):_CLUE_
+#MISSING Partner-Character select
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- Partner—Character select
 mana={2}{U}
@@ -11383,8 +11383,8 @@ toughness=2
 name=Biorganic Carapace
 auto=equip target(creature|mybattlefield)
 auto={2}:equip
-auto=teach(creature) 0/3
-auto=teach(creature) ward2
+auto=teach(creature) 2/2
+#MISSING equipped creature's 'draw a card for each modified creature' combat-damage trigger
 mana={2}{W}{U}
 type=Artifact
 subtype=Equipment
@@ -26875,7 +26875,8 @@ toughness=4
 [/card]
 [card]
 name=Damage Control Crew
-auto=choice name(repair) moveto(hand) target(land|mygraveyard) name(reinforce) counter(1/1) target(creature|mybattlefield)
+auto=choice name(Repair) moveTo(hand) target(*[manacost>=4]|mygraveyard)
+auto=choice name(Impound) moveTo(exile) target(*[artifact;enchantment])
 mana={3}{G}
 type=Creature
 subtype=Human Citizen
@@ -32130,9 +32131,9 @@ toughness=1
 [/card]
 [card]
 name=Doc Ock's Tentacles
-auto={2}:equip
-auto=teach(creature) 2/0
-auto=teach(creature) transforms((,newability[{T}:tap target(creature|opponentbattlefield)]))
+auto={5}:equip
+auto=teach(creature) 4/4
+#MISSING auto-attach when a creature with mana value 5 or greater enters
 mana={1}
 type=Artifact
 subtype=Equipment
@@ -96112,7 +96113,8 @@ toughness=1
 [/card]
 [card]
 name=Raging Goblinoids
-abilities=haste,trample
+abilities=haste
+#MISSING Mayhem {2}{R} (cast from graveyard if discarded this turn) - not expressible
 mana={4}{R}
 type=Creature
 subtype=Goblin Berserker Villain
@@ -116939,8 +116941,8 @@ text=When Spider-Ham enters, create a Food token.
 [card]
 name=Spider-Islanders
 grade=borderline
-abilities=haste
 autograveyard={1}{R}{D} restriction{compare(oplifelost)~morethan~0}:moveto(mybattlefield) this asSorcery
+#MISSING the real card has NO haste; Mayhem's 'only if you discarded it this turn' gate is approximated by a life-lost restriction
 mana={3}{R}
 type=Creature
 subtype=Spider Horror Citizen
@@ -116975,7 +116977,6 @@ text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapp
 [/card]
 [card]
 name=Spider-Punk
-abilities=haste
 auto=choice name(Counter) counter(1/1)
 auto=choice name(Haste) haste ueot
 auto=lord(spider|mybattlefield) haste
