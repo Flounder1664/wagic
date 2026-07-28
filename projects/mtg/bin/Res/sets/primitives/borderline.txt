@@ -83209,8 +83209,8 @@ type=Artifact
 [/card]
 [card]
 name=Pestilent Haze
-name=choice name(Creatures gets -2/-2) all(creature|battlefield) -2/-2 ueot
-name=choice name(Remove Loyalty counter) counter(0/0,-2,Loyalty) all(planeswalker|battlefield)
+auto=choice name(Creatures gets -2/-2) all(creature|battlefield) -2/-2 ueot
+auto=choice name(Remove Loyalty counter) counter(0/0,-2,Loyalty) target(planeswalker)
 text=Choose one -- All creatures get -2/-2 until end of turn. -- Remove two loyalty counters from each planeswalker.
 mana={1}{B}{B}
 type=Sorcery
