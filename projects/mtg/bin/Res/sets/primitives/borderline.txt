@@ -135396,3 +135396,69 @@ subtype=Robot Giant
 power=9
 toughness=9
 [/card]
+[card]
+name=Memorial Team Leader
+grade=borderline
+other={1}{R} name(Warp)
+auto=this(variable{controllerturn}>0) lord(other creature|mybattlefield) 1/0
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=During your turn, other creatures you control get +1/+0. -- Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={3}{R}
+type=Creature
+subtype=Kavu Soldier
+power=4
+toughness=3
+[/card]
+[card]
+name=Exalted Sunborn
+grade=borderline
+other={1}{W} name(Warp)
+abilities=flying,lifelink
+#Token doubling is the Doubling Season listener, not the trigger-doubling engine ability.
+auto=@tokencreated(*|myBattlefield):name(Double the token) all(trigger) clone options(notrigger)
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=Flying, lifelink -- If one or more tokens would be created under your control, twice that many of those tokens are created instead. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={3}{W}{W}
+type=Creature
+subtype=Angel Wizard
+power=4
+toughness=5
+[/card]
+[card]
+name=Loading Zone
+grade=borderline
+other={G} name(Warp)
+auto=@totalcounteradded(any) from(creature|myBattlefield) duplicate(all) nocost:ability$!name(Double the counter) donothing!$ controller
+#MISSING Doubling is applied to counters on CREATURES only. The card also covers Spacecraft and Planet, which are not modelled as types here.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=If one or more counters would be put on a creature, Spacecraft, or Planet you control, twice that many of each of those kinds of counters are put on it instead. -- Warp {G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={3}{G}
+type=Enchantment
+[/card]
+[card]
+name=Broodguard Elite
+grade=borderline
+other={X}{G} name(Warp)
+auto=counter(1/1,X)
+#MISSING The leaves-the-battlefield trigger ("put its counters on target creature you control") is absent: there is no way to read back how many +1/+1 counters this had at the moment it left. That matters more on this card than most, because warp exiles it at the next end step, which is exactly when the trigger should fire.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={X}{G}{G}
+type=Creature
+subtype=Insect Knight
+power=0
+toughness=0
+[/card]
+[card]
+name=Starfield Vocalist
+grade=borderline
+other={1}{U} name(Warp)
+#MISSING Its whole ability - "if a permanent ENTERING causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time" - is Panharmonicon, i.e. the CAUSE axis of trigger doubling. The engine gained doubletrigger(<scope>) on 2026-07-27, but only the SOURCE axis; doubletrigger(*|mybattlefield) here would double every trigger regardless of cause, which plays quite differently. Left out rather than approximated. Ships as a vanilla 3/4 with warp.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. -- Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={3}{U}
+type=Creature
+subtype=Human Bard
+power=3
+toughness=4
+[/card]
