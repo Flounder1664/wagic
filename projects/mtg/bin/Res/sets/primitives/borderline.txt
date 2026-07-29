@@ -135380,3 +135380,19 @@ text=When this artifact enters, look at the top four cards of your library. Put 
 mana={4}{B}
 type=Artifact
 [/card]
+[card]
+name=Bygone Colossus
+grade=borderline
+#WARP. Structurally this is Adventure with the halves swapped: an alternative cast
+#cost, then the card is exiled in a state where it may be cast again later. The
+#exile+recast chunk below is lifted verbatim from the _ADVENTURE_ macro; the only
+#new part is delaying it to the next end step with phaseaction[end once].
+other={3} name(Warp)
+auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+text=Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
+mana={9}
+type=Artifact Creature
+subtype=Robot Giant
+power=9
+toughness=9
+[/card]
