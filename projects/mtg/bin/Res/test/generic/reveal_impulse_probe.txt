@@ -1,0 +1,32 @@
+#PROBE: can the harness cast a reveal/look-at-top-N card AT ALL?
+#Impulse is an old, supported, untouched card - "look at the top four, put one in
+#your hand and the rest on the bottom". No test in the suite has ever cast a reveal
+#card, so before blaming a newly written one for a segfault, find out whether this
+#whole class of card can be driven from the harness.
+#RESULT: it passes. The reveal machinery itself is fine in the harness, so this is
+#kept as the first regression test the suite has ever had for a look-at-top-N card.
+#See task notes: a BYTE-IDENTICAL clone of this card under a different name still
+#segfaults when its own test casts it, which is unexplained.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Impulse
+library:Mountain,Forest,Island,Swamp
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Impulse
+choice 0
+Mountain
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mountain
+library:Forest,Island,Swamp
+graveyard:Impulse
+life:20
+[PLAYER2]
+life:20
+[END]
