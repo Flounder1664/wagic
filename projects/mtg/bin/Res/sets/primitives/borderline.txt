@@ -135462,3 +135462,56 @@ subtype=Human Bard
 power=3
 toughness=4
 [/card]
+[card]
+name=Stonesplitter Bolt
+grade=borderline
+abilities=hasotherkicker
+target=creature,planeswalker
+other={X}{R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=ifnot paid(alternative) then damage:X
+#"twice X" is two separate damage:X lines on the bargained branch.
+#REVIEW-V The BARGAINED branch is unverified. The harness test only covers the plain
+#cast: driving the bargain menu and the X-value menu in a single cast was not worked
+#out, so "twice X" has never actually been observed. Confirm in game that bargaining
+#this doubles the damage before trusting it.
+auto=alternative damage:X
+auto=alternative damage:X
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
+mana={X}{R}
+type=Instant
+[/card]
+[card]
+name=Brave the Wilds
+grade=borderline
+abilities=hasotherkicker
+other={G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>land[basic]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=alternative target(land|mybattlefield) transforms((Elemental Creature,setpower=3,settoughness=3,haste)) forever
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- If this spell was bargained, target land you control becomes a 3/3 Elemental creature with haste that's still a land. -- Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+mana={G}
+type=Sorcery
+[/card]
+[card]
+name=Back for Seconds
+grade=borderline
+target=<2>creature|mygraveyard
+auto=moveTo(myhand)
+#MISSING Bargain is not offered. Bargaining lets ONE of the returned cards with mana value 4 or less go to the battlefield instead of your hand; the two returns come from a single <2> target line and cannot be split so that one lands in a different zone. Only the unbargained "both to hand" is implemented.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Return up to two target creature cards from your graveyard to your hand. If this spell was bargained, you may put one of those cards with mana value 4 or less onto the battlefield instead of putting it into your hand.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Rowan's Grim Search
+grade=borderline
+auto=draw:2
+auto=life:-2 controller
+#MISSING Bargain is not offered. Bargaining adds a top-four look-and-filter before the draw, which needs the reveal machinery and is the only thing bargaining buys here; without it a Bargain option would cost a permanent and change nothing.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- If this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard. -- You draw two cards and you lose 2 life.
+mana={2}{B}
+type=Instant
+[/card]
