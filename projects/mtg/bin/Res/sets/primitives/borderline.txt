@@ -135324,7 +135324,13 @@ toughness=3
 name=Axebane Ferox
 grade=borderline
 abilities=deathtouch,haste
-#MISSING Ward-Collect evidence 4. Ward only supports a MANA cost in the engine (abilities=ward:N); a ward whose cost is exiling cards is not expressible, so the card is a vanilla deathtouch/haste beater. This is the whole of its protective half, so it is a real gap rather than a rounding error.
+#Ward is not C++: _WARDn_ is a DSL macro over pay[[<cost>]] ... donothing?fizzle, and
+#GenericPaidAbility feeds that cost through ManaCost::parseManaCost, which builds
+#ExtraCosts. So a ward paid by exiling cards is expressible after all - this is the
+#mana-only _WARD4_ macro with the mana swapped for two graveyard exiles.
+auto=@targeted(this) from(*|opponentzones):choice name(Collect evidence 4) name(Collect evidence 4) target(*|opponentzones) transforms((,newability[pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}]] name(Exile 2 cards from your graveyard) donothing?fizzle])) oneshot
+#MISSING Collect evidence 4 is approximated as exiling 2 cards from the graveyard: the real cost is any cards whose TOTAL mana value is 4 or more, and Wagic cannot total mana value across a chosen set.
+#REVIEW-V Ward cannot be driven from the harness (it needs the OPPONENT to target this creature, which is AI-driven), so this is verified only as "parses and breaks nothing". Confirm in game that targeting Axebane Ferox offers the exile-or-fizzle choice.
 text=Deathtouch, haste -- Ward-Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)
 mana={2}{G}{G}
 type=Creature
