@@ -2323,10 +2323,11 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     static const int kNumKeywords = (int)(sizeof(kKeywords) / sizeof(kKeywords[0]));
 
     JRenderer * renderer = JRenderer::GetInstance();
-    // Draw with the single-byte (ASCII) companion font directly. MAIN_FONT delegates Latin
-    // text to it, so only this font's own GetHeight()/GetStringWidth() match what actually
-    // gets rendered -- which we need to size the box and centre the two-letter badge.
-    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT + Fonts::kSingleByteFontOffset);
+    // Use MAIN_FONT. In a Latin build this *is* the single-byte "simon" font (the companion
+    // at MAIN_FONT+kSingleByteFontOffset only exists for CJK, so fetching that id directly
+    // returns null and crashes). GetStringWidth() delegates to the ASCII glyphs with scale
+    // applied either way, so box sizing from these metrics is correct.
+    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
     // Shared singleton; save/restore its scale so our badge text doesn't affect other text.
     const float oldFontScale = font->GetScale();
 
