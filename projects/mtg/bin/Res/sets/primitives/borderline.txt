@@ -37415,7 +37415,11 @@ toughness=2
 [/card]
 [card]
 name=Fact or Fiction
-auto=reveal:5 optionone target(<upto:3>*|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+#MISSING The real card has an OPPONENT split the five revealed cards into two piles
+#and you take one pile; there is no way to make the AI split meaningfully. Approximated
+#as "take some of the five". Taking 3 of 5 was too generous (John, 2026-07-30) - a fair
+#split averages about 2 - so it is capped at 2.
+auto=reveal:5 optionone target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 mana={3}{U}
 type=Instant
