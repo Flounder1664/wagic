@@ -135507,3 +135507,81 @@ text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast t
 mana={2}{B}
 type=Instant
 [/card]
+[card]
+name=Farsight Ritual
+grade=borderline
+abilities=hasotherkicker
+other={2}{U}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+#<upto:2>, never a bare <2>: an exact multi-count take never presents the cards.
+auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<8>*|reveal) bottomoflibrary optiontwoend revealend
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
+#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
+mana={2}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Thunderous Debut
+grade=borderline
+abilities=hasotherkicker
+other={6}{G}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<20>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
+auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<20>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
+#MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
+#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
+mana={6}{G}{G}
+type=Sorcery
+[/card]
+[card]
+name=Beseech the Mirror
+grade=borderline
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+#MISSING Bargain is not offered, and the exile step is collapsed. Bargained, the real card lets you CAST the tutored card for free when its mana value is 4 or less; casting from a face-down exile for free is not expressible, and the UNBARGAINED outcome is exactly "tutor to hand", which is what this is. A Bargain option would cost a permanent and change nothing.
+#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Search your library for a card, exile it face down, then shuffle. If this spell was bargained, you may cast the exiled card without paying its mana cost if that spell's mana value is 4 or less. Put the exiled card into your hand if it wasn't cast this way.
+mana={1}{B}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Cryptex
+grade=borderline
+auto={T}{evidence3(*|mygraveyard)}:name(Collect evidence 3 - Add mana) counter(0/0,1,unlock) && ability$!name(Choose one) choice name(Add white) add{W} _ choice name(Add blue) add{U} _ choice name(Add black) add{B} _ choice name(Add red) add{R} _ choice name(Add green) add{G}!$ controller
+auto={S} restriction{compare(hascntunlock)~morethan~4}:name(Sacrifice - Surveil 3, draw 3) _SURVEIL3_ draw:3 controller
+text={T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on this artifact. -- Sacrifice this artifact: Surveil 3, then draw three cards. Activate only if this artifact has five or more unlock counters on it.
+mana={2}
+type=Artifact
+[/card]
+[card]
+name=Hedge Whisperer
+grade=borderline
+auto={3}{G}{T}{evidence4(*|mygraveyard)} restriction{assorcery}:name(Collect evidence 4 - Animate a land) target(land|mybattlefield) transforms((Plant Boar Creature,setpower=5,settoughness=5,green,haste)) ueot
+#MISSING Two approximations. The animation should last "for as long as this creature remains tapped"; there is no duration for that, so it lasts until end of turn - close in practice, because the optional "you may choose not to untap" is also absent (Wagic doesnotuntap is mandatory, which would strand the Whisperer tapped forever), so it untaps normally and the land would revert anyway.
+text=You may choose not to untap this creature during your untap step. -- {3}{G}, {T}, Collect evidence 4: Target land you control becomes a 5/5 green Plant Boar creature with haste for as long as this creature remains tapped. It's still a land. Activate only as a sorcery.
+mana={G}
+type=Creature
+subtype=Elf Druid Detective
+power=0
+toughness=3
+[/card]
+[card]
+name=Detective's Phoenix
+grade=borderline
+abilities=flying,haste
+auto=bestow bstw
+auto=bestow teach(creature) 2/2
+auto=bestow teach(creature) flying
+auto=bestow teach(creature) haste
+bestow={R}{evidence6(*|mygraveyard)}
+#MISSING "You may cast this card from your graveyard using its bestow ability" is absent - a bestow cast from the graveyard has no counterpart here.
+#REVIEW-V First card to put a non-mana extra cost on a bestow= line; the bestow slot has never carried one. If the evidence is not demanded when bestowing, drop it to plain {R} and note the gap.
+text=Bestow-{R}, Collect evidence 6. -- Flying, haste -- Enchanted creature gets +2/+2 and has flying and haste. -- You may cast this card from your graveyard using its bestow ability.
+mana={2}{R}
+type=Enchantment Creature
+subtype=Phoenix
+power=2
+toughness=2
+[/card]
