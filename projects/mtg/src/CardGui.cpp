@@ -2324,13 +2324,16 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
 
     JRenderer * renderer = JRenderer::GetInstance();
     WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+    // MAIN_FONT is a shared singleton; save its scale and restore it before returning so
+    // our badge text doesn't shrink whatever is drawn next (e.g. the mana/counter labels).
+    const float oldFontScale = font->GetScale();
 
     // Geometry uses the BigWidth/BigHeight (200x285) reference frame scaled by actZ, the
     // same convention as RenderCountersBig. A vertical column down the left edge, starting
     // below the title bar so it sits over the art rather than the name/mana line.
-    const float badgeW = 15.f;
-    const float badgeH = 13.f;
-    const float stepY  = 16.f;
+    const float badgeW = 13.f;
+    const float badgeH = 11.f;
+    const float stepY  = 14.f;
     const int   maxIcons = 12;
     float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
     float y0 = pos.actY + (-BigHeight / 2 + 46) * pos.actZ;
@@ -2374,12 +2377,14 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
             renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
             renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
             font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
-            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.5f * pos.actZ);
-            font->DrawString(kKeywords[k].badge, x + 2.5f * pos.actZ, y + 2.5f * pos.actZ);
+            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.58f * pos.actZ);
+            font->DrawString(kKeywords[k].badge, x + 2.f * pos.actZ, y + 1.5f * pos.actZ);
         }
 
         ++shown;
     }
+
+    font->SetScale(oldFontScale);
 }
 
 MTGCardInstance* CardView::getCard()
