@@ -307,16 +307,22 @@ void CardGui::Render()
         tc = game->getCurrentTargetChooser();
 
     bool alternate = true;
-    JQuadPtr quad = game? game->getResourceManager()->RetrieveCard(card, CACHE_THUMB):WResourceManager::Instance()->RetrieveCard(card, CACHE_THUMB);
+    // #32: the thumbnail texture is only ~120x172, so it looks blurry once a card is
+    // drawn magnified (focus zoom 1.4x, combat/damage zoom 2.2x). Above ~1.2x draw
+    // scale, pull the full-resolution card image instead. Only the one or two focused
+    // cards ever hit this, and their full image is usually already resident because the
+    // preview panel is showing it, so the extra cache pressure is negligible.
+    int cardStyle = (actZ > 1.2f) ? RETRIEVE_NORMAL : CACHE_THUMB;
+    JQuadPtr quad = game? game->getResourceManager()->RetrieveCard(card, cardStyle):WResourceManager::Instance()->RetrieveCard(card, cardStyle);
     if(card && !card->isToken && card->name != card->model->data->name)
     {
         MTGCard * fcard = MTGCollection()->getCardByName(card->name);
-        quad = game->getResourceManager()->RetrieveCard(fcard, CACHE_THUMB);
+        quad = game->getResourceManager()->RetrieveCard(fcard, cardStyle);
     }
     if (game && card->hasCopiedToken && !quad.get())
     {
         MTGCard * tcard = MTGCollection()->getCardById(abs(card->copiedID));
-        quad = game->getResourceManager()->RetrieveCardToken(tcard, CACHE_THUMB, 1, abs(card->copiedID));
+        quad = game->getResourceManager()->RetrieveCardToken(tcard, cardStyle, 1, abs(card->copiedID));
     }
     if (quad.get())
         alternate = false;
