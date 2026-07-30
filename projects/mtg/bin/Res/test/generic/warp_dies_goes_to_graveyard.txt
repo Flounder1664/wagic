@@ -1,0 +1,30 @@
+#John: a warp creature that was NOT warp-cast "died due to 0 toughness and went to
+#exile" - Exalted Sunborn (4/5) killed by a bargained Candy Grapple (-5/-5).
+#A dead creature belongs in the GRAVEYARD. This casts Exalted Sunborn normally
+#(choice 0), then bargains Candy Grapple by sacrificing an Ornithopter and points it
+#at the Sunborn. All three cards must end up in the graveyard, and exile must be
+#empty - the assert fails if anything lands in exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Exalted Sunborn,Candy Grapple
+manapool:{4}{W}{W}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Exalted Sunborn
+choice 0
+Candy Grapple
+choice 1
+Ornithopter
+Exalted Sunborn
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Exalted Sunborn,Candy Grapple,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[END]
