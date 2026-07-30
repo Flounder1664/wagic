@@ -286,3 +286,7 @@ wagic_build_config.py
 /oracle-cards-*.json
 eoe_scryfall.json
 teoe_scryfall.json
+
+# Locally generated ability keyword icons (see tools/build_ability_icons.sh; #31)
+# Derived from third-party artwork -- must NOT be committed. Keep icons out of the repo.
+projects/mtg/bin/Res/graphics/keywords/
