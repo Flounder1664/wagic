@@ -135458,17 +135458,20 @@ toughness=4
 name=Stonesplitter Bolt
 grade=borderline
 abilities=hasotherkicker
-target=creature,planeswalker
 other={X}{R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-auto=ifnot paid(alternative) then damage:X
-#"twice X" is two separate damage:X lines on the bargained branch.
+#Target is INLINE with no top-level target= line - the Blaze form. With a separate
+#target= line the X cost made it behave as a multi-target chooser: the first creature
+#clicked went red and nothing happened, then a second click damaged THAT one instead
+#(John, 2026-07-30).
+auto=ifnot paid(alternative) then damage:X target(creature,planeswalker)
+#"twice X" is damage:X applied twice to the SAME chosen target via &&; two separate
+#auto lines would each ask for a target and hit two different permanents.
 #REVIEW-V The BARGAINED branch is unverified. The harness test only covers the plain
 #cast: driving the bargain menu and the X-value menu in a single cast was not worked
 #out, so "twice X" has never actually been observed. Confirm in game that bargaining
 #this doubles the damage before trusting it.
-auto=alternative damage:X
-auto=alternative damage:X
+auto=alternative damage:X target(creature,planeswalker) && damage:X
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
 mana={X}{R}
