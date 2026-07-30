@@ -31000,8 +31000,12 @@ type=Artifact
 [/card]
 [card]
 name=Dig Through Time
+#REVIEW-V <2> presented no cards to choose in game (John 2026-07-30); switched to
+#<upto:2>, the form Collected Company uses and which does prompt. The real card puts
+#exactly two in hand, so <upto:2> also permits taking fewer - accepted over a card
+#that does nothing. 78 other cards still use the exact-count form; not touched.
 aicode=activate target(<2>*[zpos<=7]|mylibrary) moveto(hand)
-auto=name(look) reveal:7 optionone name(Get Card) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:7 optionone name(Get Card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
 text=Delve (Each card you exile from your graveyard while casting this spell pays for {1}.) -- Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
 mana={6}{U}{U}
 other={delve} name(Delve)

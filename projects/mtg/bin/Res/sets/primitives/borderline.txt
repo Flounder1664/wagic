@@ -135339,7 +135339,9 @@ toughness=4
 [card]
 name=Polygraph Orb
 grade=borderline
-auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<4>*|reveal) moveto(ownergraveyard) optiontwoend revealend
+auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<4>*|reveal) moveto(ownergraveyard) optiontwoend revealend
+#Uses <upto:2>, NOT <2>: John found Dig Through Time (<2>) never presented its cards
+#while Collected Company (<upto:2>) did. Trade-off: the player may take fewer than 2.
 #REVIEW-V Cannot be harness-tested: casting a multi-card reveal segfaults the HEADLESS
 #harness only (fake renderer). Verified in game via Collected Company, same construct.
 auto=life:-2 controller
