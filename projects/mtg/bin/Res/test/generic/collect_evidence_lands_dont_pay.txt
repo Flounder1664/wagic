@@ -1,0 +1,30 @@
+#NEGATIVE case for collect evidence. Lands have mana value 0, so a graveyard holding
+#nothing but lands can never reach evidence 3 and the ability must stay unusable.
+#Under the old card-count approximation these two lands DID pay for it, so this test
+#is the one that pins the behaviour change.
+#The Researcher is clicked and the evidence branch chosen, then both lands are named;
+#nothing may be exiled and the opponent's creature must be untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+graveyard:Mountain,Forest
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+Forensic Researcher
+choice 1
+Mountain
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+graveyard:Mountain,Forest
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[END]

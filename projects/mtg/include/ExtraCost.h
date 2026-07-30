@@ -276,8 +276,12 @@ public:
 class ExileTargetCost : public ExtraCost
 {
 public:
-  ExileTargetCost(TargetChooser *_tc = NULL);
+  int evidenceNeeded; //collect evidence N: exile cards with total mana value >= N (0 = legacy single target)
+  ExileTargetCost(TargetChooser *_tc = NULL, int evidenceNeeded = 0);
+  int evidencePaid();
+  virtual int isPaymentSet();
   virtual int doPay();
+  virtual void Render();
   virtual ExileTargetCost * clone() const;
 };
 

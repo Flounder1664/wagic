@@ -135282,8 +135282,7 @@ toughness=2
 name=Forensic Researcher
 grade=borderline
 auto={T}:name(Untap another permanent) untap target(other *|mybattlefield)
-auto={T}{E(*|mygraveyard)}{E(*|mygraveyard)}:name(Collect evidence 3 - Tap a creature) tap target(creature|opponentbattlefield)
-#MISSING Collect evidence 3 is approximated as exiling 2 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 3 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
+auto={T}{evidence3(*|mygraveyard)}:name(Collect evidence 3 - Tap a creature) tap target(creature|opponentbattlefield)
 text={T}: Untap another target permanent you control. -- {T}, Collect evidence 3: Tap target creature you don't control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
 mana={2}{U}
 type=Creature
@@ -135299,8 +135298,7 @@ abilities=deathtouch,haste
 #GenericPaidAbility feeds that cost through ManaCost::parseManaCost, which builds
 #ExtraCosts. So a ward paid by exiling cards is expressible after all - this is the
 #mana-only _WARD4_ macro with the mana swapped for two graveyard exiles.
-auto=@targeted(this) from(*|opponentzones):choice name(Collect evidence 4) name(Collect evidence 4) target(*|opponentzones) transforms((,newability[pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}]] name(Exile 2 cards from your graveyard) donothing?fizzle])) oneshot
-#MISSING Collect evidence 4 is approximated as exiling 2 cards from the graveyard: the real cost is any cards whose TOTAL mana value is 4 or more, and Wagic cannot total mana value across a chosen set.
+auto=@targeted(this) from(*|opponentzones):choice name(Collect evidence 4) name(Collect evidence 4) target(*|opponentzones) transforms((,newability[pay[[{evidence4(*|mygraveyard)}]] name(Exile 2 cards from your graveyard) donothing?fizzle])) oneshot
 #REVIEW-V Ward cannot be driven from the harness (it needs the OPPONENT to target this creature, which is AI-driven), so this is verified only as "parses and breaks nothing". Confirm in game that targeting Axebane Ferox offers the exile-or-fizzle choice.
 text=Deathtouch, haste -- Ward-Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)
 mana={2}{G}{G}
@@ -135312,10 +135310,8 @@ toughness=4
 [card]
 name=Tenth District Hero
 grade=borderline
-auto={1}{W}{E(*|mygraveyard)}:name(Collect evidence 2 - become a Detective) counter(0/0,1,detective) && transforms((Human Detective,setpower=4,settoughness=4,vigilance)) forever
-auto={2}{W}{E(*|mygraveyard)}{E(*|mygraveyard)} restriction{compare(hascntdetective)~morethan~0}:name(Collect evidence 4 - become Mileva) counter(0/0,1,mileva) && transforms((Legendary Creature,setpower=5,settoughness=5,newability[lord(other creature|mybattlefield) indestructible])) forever
-#MISSING Collect evidence 2 is approximated as exiling 1 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 2 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
-#MISSING Collect evidence 4 is approximated as exiling 2 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 4 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
+auto={1}{W}{evidence2(*|mygraveyard)}:name(Collect evidence 2 - become a Detective) counter(0/0,1,detective) && transforms((Human Detective,setpower=4,settoughness=4,vigilance)) forever
+auto={2}{W}{evidence4(*|mygraveyard)} restriction{compare(hascntdetective)~morethan~0}:name(Collect evidence 4 - become Mileva) counter(0/0,1,mileva) && transforms((Legendary Creature,setpower=5,settoughness=5,newability[lord(other creature|mybattlefield) indestructible])) forever
 #MISSING The second ability does not rename the creature to Mileva, the Stalwart (cosmetic only). "If this creature is a Detective" is enforced with a named counter stamped by the first ability rather than by reading the type line.
 text={1}{W}, Collect evidence 2: This creature becomes a Human Detective with base power and toughness 4/4 and gains vigilance. -- {2}{W}, Collect evidence 4: If this creature is a Detective, it becomes a legendary creature named Mileva, the Stalwart, it has base power and toughness 5/5, and it gains "Other creatures you control have indestructible."
 mana={1}{W}
@@ -135327,9 +135323,8 @@ toughness=3
 [card]
 name=Kylox's Voltstrider
 grade=borderline
-auto={E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}:name(Collect evidence 6 - animate) becomes(Artifact Creature) ueot
+auto={evidence6(*|mygraveyard)}:name(Collect evidence 6 - animate) becomes(Artifact Creature) ueot
 auto=_CREW2_
-#MISSING Collect evidence 6 is approximated as exiling 3 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 6 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
 #MISSING The attack trigger ("you may cast an instant or sorcery from among cards exiled with it, and it goes to the bottom of the library instead of the graveyard") is absent: nothing tracks which cards were exiled BY this permanent, so there is no set to cast from. Note this also means the collect-evidence exiles are not recoverable the way the real card intends.
 text=Collect evidence 6: This Vehicle becomes an artifact creature until end of turn. -- Whenever this Vehicle attacks, you may cast an instant or sorcery spell from among cards exiled with it. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead. -- Crew 2
 mana={1}{U}{R}
@@ -135345,8 +135340,7 @@ auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<2>*|reveal) movet
 #REVIEW-V Cannot be harness-tested: casting a multi-card reveal segfaults the HEADLESS
 #harness only (fake renderer). Verified in game via Collected Company, same construct.
 auto=life:-2 controller
-auto={2}{T}{E(*|mygraveyard)}{E(*|mygraveyard)}:name(Collect evidence 3 - Drain) life:-3 opponent
-#MISSING Collect evidence 3 is approximated as exiling 2 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 3 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
+auto={2}{T}{evidence3(*|mygraveyard)}:name(Collect evidence 3 - Drain) life:-3 opponent
 #MISSING The activated ability should let each opponent discard a card or sacrifice a creature INSTEAD of losing 3 life; the opponent-choice construct is known to no-op against the harness AI, so the life loss is applied unconditionally, making it strictly better than the real card.
 text=When this artifact enters, look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life. -- {2}, {T}, Collect evidence 3: Each opponent loses 3 life unless they discard a card or sacrifice a creature. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
 mana={4}{B}
