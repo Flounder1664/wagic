@@ -135428,7 +135428,15 @@ grade=borderline
 other={X}{G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1,X)
-#MISSING The leaves-the-battlefield trigger ("put its counters on target creature you control") is absent: there is no way to read back how many +1/+1 counters this had at the moment it left. That matters more on this card than most, because warp exiles it at the next end step, which is exactly when the trigger should fire.
+#Counter transfer uses the MODULAR mechanism - thisforeach(counter{1/1.1}) repeats the
+#effect once per +1/+1 counter still on this card (cf. Arcbound Worker). The trigger is
+#the leave-the-battlefield form rather than _DIES_, because this must also fire when warp
+#exiles it at the next end step.
+auto=@movedTo(this|nonbattlezone) from(battlefield):thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
+#MISSING The real card moves ALL its counters; this moves only +1/+1 counters. In practice
+#Broodguard Elite only ever carries +1/+1 counters, from its own X.
+#REVIEW-V Counter COUNT cannot be asserted by the harness. Verify in game: cast it for X=2,
+#let it die or be warp-exiled, and check the target creature gains 2 counters.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
