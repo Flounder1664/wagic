@@ -117,6 +117,7 @@ const float CardGui::BigHeight = 285.0;
 const float kWidthScaleFactor = 0.8f;
 
 map<string, string> CardGui::counterGraphics;
+map<string, string> CardGui::keywordGraphics;
 
 namespace
 {
@@ -1523,6 +1524,7 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
         renderer->RenderQuad(quad.get(), x, pos.actY, pos.actT, (scale-0.005f)+modxscale+gdvadd, (scale-0.005f)+modyscale+gdvadd);
 
         RenderCountersBig(card, pos);
+        RenderAbilityIconsBig(card, pos);
         return;
     }
 
@@ -2277,7 +2279,107 @@ void CardGui::RenderCountersBig(MTGCard * mtgcard, const Pos& pos, int drawMode)
             font->DrawString(buf, x + 5, y + 5);
         }
     }
-    
+
+}
+
+void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
+{
+    // Only in-play card instances carry a live ability set (basicAbilities is rebuilt
+    // as auras/equipment/lords/counters change), so this reflects *current* abilities,
+    // including granted ones -- which is the whole point of the feature.
+    MTGCardInstance * card = dynamic_cast<MTGCardInstance*>(mtgcard);
+    if (!card)
+        return;
+
+    // Curated evergreen keywords, in display order. `id` is the Constants basic-ability
+    // index; `icon` is looked up as Res/graphics/keywords/<icon>.png (absent by default,
+    // which is deliberate -- see #31 on the WotC-artwork licensing question); `badge` is
+    // the copyright-free two-letter fallback drawn with the main font. Two letters because
+    // single initials collide (Flying/First strike/Flash, Deathtouch/Defender/Double strike).
+    struct KeywordIcon { int id; const char* icon; const char* badge; };
+    static const KeywordIcon kKeywords[] = {
+        { Constants::FLYING,         "flying",         "FL" },
+        { Constants::FIRSTSTRIKE,    "firststrike",    "FS" },
+        { Constants::DOUBLESTRIKE,   "doublestrike",   "DS" },
+        { Constants::DEATHTOUCH,     "deathtouch",     "DT" },
+        { Constants::TRAMPLE,        "trample",        "TR" },
+        { Constants::LIFELINK,       "lifelink",       "LL" },
+        { Constants::VIGILANCE,      "vigilance",      "VG" },
+        { Constants::MENACE,         "menace",         "MN" },
+        { Constants::INTIMIDATE,     "intimidate",     "IT" },
+        { Constants::REACH,          "reach",          "RC" },
+        { Constants::HASTE,          "haste",          "HS" },
+        { Constants::FLASH,          "flash",          "FH" },
+        { Constants::DEFENDER,       "defender",       "DF" },
+        { Constants::HEXPROOF,       "hexproof",       "HX" },
+        { Constants::SHROUD,         "shroud",         "SH" },
+        { Constants::INDESTRUCTIBLE, "indestructible", "ID" },
+        { Constants::FEAR,           "fear",           "FE" },
+        { Constants::UNBLOCKABLE,    "unblockable",    "UB" },
+        { Constants::CHANGELING,     "changeling",     "CH" },
+        { Constants::INFECT,         "infect",         "IF" },
+        { Constants::WITHER,         "wither",         "WI" },
+    };
+    static const int kNumKeywords = (int)(sizeof(kKeywords) / sizeof(kKeywords[0]));
+
+    JRenderer * renderer = JRenderer::GetInstance();
+    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+
+    // Geometry uses the BigWidth/BigHeight (200x285) reference frame scaled by actZ, the
+    // same convention as RenderCountersBig. A vertical column down the left edge, starting
+    // below the title bar so it sits over the art rather than the name/mana line.
+    const float badgeW = 15.f;
+    const float badgeH = 13.f;
+    const float stepY  = 16.f;
+    const int   maxIcons = 12;
+    float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
+    float y0 = pos.actY + (-BigHeight / 2 + 46) * pos.actZ;
+
+    int shown = 0;
+    for (int k = 0; k < kNumKeywords && shown < maxIcons; ++k)
+    {
+        if (!card->has(kKeywords[k].id))
+            continue;
+
+        float y = y0 + shown * stepY * pos.actZ;
+
+        // Optional user-supplied icon; cached path ("" == not present -> letter badge).
+        const string keyName = kKeywords[k].icon;
+        if (keywordGraphics.find(keyName) == keywordGraphics.end())
+        {
+            string rel = "keywords/";
+            rel.append(keyName);
+            rel.append(".png");
+            string _gfx = WResourceManager::Instance()->graphicsFile(rel);
+            if (!fileExists(_gfx.c_str()))
+                _gfx = "";
+            keywordGraphics[keyName] = _gfx;
+        }
+        const string& gfx = keywordGraphics[keyName];
+
+        if (gfx.size())
+        {
+            JQuadPtr q = WResourceManager::Instance()->RetrieveTempQuad(gfx);
+            if (q.get() && q->mTex)
+            {
+                float scale = (badgeH * pos.actZ) / q->mHeight;
+                q->SetColor(ARGB((int)pos.actA, 255, 255, 255));
+                renderer->RenderQuad(q.get(), x, y, 0, scale, scale);
+            }
+        }
+        else
+        {
+            float bw = badgeW * pos.actZ;
+            float bh = badgeH * pos.actZ;
+            renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
+            renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
+            font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
+            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.5f * pos.actZ);
+            font->DrawString(kKeywords[k].badge, x + 2.5f * pos.actZ, y + 2.5f * pos.actZ);
+        }
+
+        ++shown;
+    }
 }
 
 MTGCardInstance* CardView::getCard()

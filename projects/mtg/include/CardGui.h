@@ -43,6 +43,7 @@ struct CardGui: public PlayGuiObject
 protected:
 
     static map<string, string>counterGraphics;
+    static map<string, string>keywordGraphics;
 
     /*
     ** Tries to render the Big version of a card picture, backups to text version in case of failure
@@ -50,6 +51,9 @@ protected:
     static void RenderBig(MTGCard * card, const Pos& pos, bool thumb = false, bool noborder = false, bool gdv = false);
 
     static void RenderCountersBig(MTGCard * card, const Pos& pos, int drawMode = DrawMode::kNormal);
+    // #31: overlay small icons/badges for the keyword abilities a card currently has
+    // (including granted ones). Shown on the big preview only, to avoid board clutter.
+    static void RenderAbilityIconsBig(MTGCard * card, const Pos& pos);
     static void AlternateRender(MTGCard * card, const Pos& pos);
     static void TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad);
     static string FormattedData (string data, string replace, string value);
