@@ -2332,8 +2332,8 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     // same convention as RenderCountersBig. A vertical column down the left edge, starting
     // below the title bar so it sits over the art rather than the name/mana line.
     const float badgeW = 13.f;
-    const float badgeH = 11.f;
-    const float stepY  = 14.f;
+    const float badgeH = 12.f;
+    const float stepY  = 15.f;
     const int   maxIcons = 12;
     float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
     float y0 = pos.actY + (-BigHeight / 2 + 46) * pos.actZ;
@@ -2377,8 +2377,11 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
             renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
             renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
             font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
-            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.58f * pos.actZ);
-            font->DrawString(kKeywords[k].badge, x + 2.f * pos.actZ, y + 1.5f * pos.actZ);
+            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.72f * pos.actZ);
+            // Centre the two-letter badge in the box: horizontally via JGETEXT_CENTER
+            // around the box mid-x, vertically using the scaled glyph height.
+            float ty = y + (bh - font->GetHeight()) / 2.f;
+            font->DrawString(kKeywords[k].badge, x + bw / 2.f, ty, JGETEXT_CENTER);
         }
 
         ++shown;
