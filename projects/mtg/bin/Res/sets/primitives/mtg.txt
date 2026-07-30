@@ -2861,10 +2861,12 @@ type=Artifact
 [/card]
 [card]
 name=All-Fates Stalker
+abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
 auto=(blink)forsrc target(creature|opponentbattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, exile up to one target non-Assassin creature until this creature leaves the battlefield. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}
 type=Creature
@@ -22413,11 +22415,13 @@ toughness=4
 [/card]
 [card]
 name=Codecracker Hound
+abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
 auto=draw:1 && mill:1
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, look at the top two cards of your library. Put one into your hand and the other into your graveyard. -- Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
 type=Creature
@@ -33931,10 +33935,12 @@ toughness=2
 [/card]
 [card]
 name=Drix Fatemaker
+abilities=canplayfromexile
 grade=borderline
 other={1}{G} name(Warp)
 auto=counter(1/1) target(creature|mybattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, put a +1/+1 counter on target creature. -- Each creature you control with a +1/+1 counter on it has trample. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{G}
 type=Creature
@@ -39489,11 +39495,13 @@ type=Sorcery
 [/card]
 [card]
 name=Eusocial Engineering
+abilities=canplayfromexile
 other={1}{G} name(Warp)
 grade=borderline
 # REVIEW 2026-07-19 [P:med] no warp cast option (warp mechanic pending)
 auto=_LANDFALL__ROBOTTOKEN_
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Landfall - Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{G}{G}
 type=Enchantment
@@ -48015,10 +48023,12 @@ toughness=5
 [/card]
 [card]
 name=Germinating Wurm
+abilities=canplayfromexile
 grade=borderline
 other={1}{G} name(Warp)
 auto=life:2
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, you gain 2 life. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{G}
 type=Creature
@@ -54960,10 +54970,12 @@ toughness=3
 [/card]
 [card]
 name=Haliya, Guided by Light
+abilities=canplayfromexile
 grade=borderline
 other={W} name(Warp)
 auto=@movedTo(creature,artifact|mybattlefield):life:1
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Whenever Haliya or another creature or artifact you control enters, you gain 1 life. -- At the beginning of your end step, draw a card if you've gained 3 or more life this turn. -- Warp {W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{W}
 type=Legendary Creature
@@ -67199,10 +67211,12 @@ toughness=2
 [/card]
 [card]
 name=Knight Luminary
+abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
 auto=_HUMANSOLDIERTOKEN_
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, create a 1/1 white Human Soldier creature token. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}
 type=Creature
@@ -76507,10 +76521,12 @@ subtype=Aura
 [/card]
 [card]
 name=Mechanozoa
+abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
 auto=tap target(*[artifact;creature]|opponentbattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{U}{U}
 type=Artifact Creature
@@ -85429,9 +85445,10 @@ toughness=2
 name=Nova Hellkite
 grade=borderline
 other={2}{R} name(Warp)
-abilities=flying,haste
+abilities=flying,haste,canplayfromexile
 auto=damage:1 target(creature|opponentbattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Flying, haste -- When this creature enters, it deals 1 damage to target creature an opponent controls. -- Warp {2}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{R}{R}
 type=Creature
@@ -90105,10 +90122,12 @@ toughness=4
 [/card]
 [card]
 name=Perigee Beckoner
+abilities=canplayfromexile
 grade=borderline
 other={1}{B} name(Warp)
 auto=pump(2/0) target(creature|mybattlefield) ueot
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." -- Warp {1}{B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{B}
 type=Creature
@@ -95313,10 +95332,11 @@ toughness=5
 name=Quantum Riddler
 grade=borderline
 other={1}{U} name(Warp)
-abilities=flying
+abilities=flying,canplayfromexile
 auto=draw:1
 auto=replacedraw if compare(phandcount)~lessthan~2 then draw:2 noreplace else draw:1 noreplace
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Flying -- When this creature enters, draw a card. -- As long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead. -- Warp {1}{U}
 mana={3}{U}{U}
 type=Creature
@@ -97495,10 +97515,12 @@ type=Instant
 [/card]
 [card]
 name=Rayblade Trooper
+abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
 auto=counter(1/1) target(creature|mybattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, put a +1/+1 counter on target creature you control. -- Whenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{W}
 type=Creature
@@ -98402,8 +98424,9 @@ type=Sorcery
 name=Red Tiger Mechan
 grade=borderline
 other={1}{R} name(Warp)
-abilities=haste
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+abilities=haste,canplayfromexile
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Haste -- Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{R}
 type=Artifact Creature
@@ -111938,10 +111961,12 @@ type=Enchantment
 [/card]
 [card]
 name=Sinister Cryologist
+abilities=canplayfromexile
 grade=borderline
 other={U} name(Warp)
 auto=pump(-3/0) target(creature|opponentbattlefield) ueot
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, target creature an opponent controls gets -3/-0 until end of turn. -- Warp {U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
 type=Creature
@@ -119026,9 +119051,10 @@ type=Artifact
 name=Starbreach Whale
 grade=borderline
 other={1}{U} name(Warp)
-abilities=flying
+abilities=flying,canplayfromexile
 auto=_SURVEIL2_
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Flying -- When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{U}
 type=Creature
@@ -119057,8 +119083,9 @@ type=Enchantment
 name=Starfield Shepherd
 grade=borderline
 other={1}{W} name(Warp)
-abilities=flying
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+abilities=flying,canplayfromexile
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Flying -- When this creature enters, search your library for a basic Plains card or a creature card with mana value 1 or less, reveal it, put it into your hand, then shuffle. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}{W}
 type=Creature
@@ -119194,10 +119221,12 @@ toughness=1
 [/card]
 [card]
 name=Starwinder
+abilities=canplayfromexile
 grade=borderline
 other={2}{U}{U} name(Warp)
 auto=@combatdamaged(player) from(creature|mybattlefield):may draw:1 controller
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Whenever a creature you control deals combat damage to a player, you may draw that many cards. -- Warp {2}{U}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={5}{U}{U}
 type=Creature
@@ -122838,10 +122867,12 @@ toughness=3
 [/card]
 [card]
 name=Susurian Voidborn
+abilities=canplayfromexile
 grade=borderline
 other={B} name(Warp)
 auto=@movedTo(creature,artifact|mygraveyard) from(battlefield):life:-1 opponent && life:1 controller
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Whenever this creature or another creature or artifact you control dies, target opponent loses 1 life and you gain 1 life. -- Warp {B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{B}
 type=Creature
@@ -140254,10 +140285,12 @@ toughness=3
 [/card]
 [card]
 name=Weftblade Enhancer
+abilities=canplayfromexile
 grade=borderline
 other={2}{W} name(Warp)
 auto=counter(1/1) target(creature|mybattlefield)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=When this creature enters, put a +1/+1 counter on each of up to two target creatures. -- Warp {2}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={5}{W}
 type=Creature
@@ -140267,10 +140300,12 @@ toughness=4
 [/card]
 [card]
 name=Weftstalker Ardent
+abilities=canplayfromexile
 grade=borderline
 other={R} name(Warp)
 auto=@movedTo(other creature|mybattlefield):damage:1 all(opponent)
-auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent. -- Warp {R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{R}
 type=Creature

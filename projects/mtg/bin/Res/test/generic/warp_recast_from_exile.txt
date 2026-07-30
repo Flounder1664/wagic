@@ -1,0 +1,44 @@
+#WARP, the RECAST half - the part no test covered and that John found broken in game
+#("could not play cards exiled with warp"). Fixed by making canplayfromexile
+#intrinsic: granting it on the warp exile does not stick, because the grant lands on
+#the pre-move instance and is lost when the card changes zone.
+#
+#Red Tiger Mechan costs {3}{R} with Warp {1}{R}. The warp cast uses a preset mana
+#pool (the known-good pattern); the RECAST taps four real lands on a later turn,
+#because a mana pool does not survive the turn.
+#HARNESS GOTCHA: the four lands must be DIFFERENT cards. Clicking a name in [DO]
+#always resolves to the same single instance, so nine copies of "Mountain" tap once
+#and the other eight clicks are silently no-ops.
+#The trailing "choice 0" answers the menu that appears because the card also has an
+#other= warp cost, so casting it from exile offers normal-vs-warp.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mountain,Island,Swamp,Forest
+hand:Red Tiger Mechan
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Red Tiger Mechan
+choice 1
+eot
+eot
+next
+next
+next
+Mountain
+Island
+Swamp
+Forest
+Red Tiger Mechan
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Red Tiger Mechan,Mountain,Island,Swamp,Forest
+life:20
+[PLAYER2]
+life:20
+[END]
