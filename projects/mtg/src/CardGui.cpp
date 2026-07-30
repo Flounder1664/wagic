@@ -2323,17 +2323,24 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     static const int kNumKeywords = (int)(sizeof(kKeywords) / sizeof(kKeywords[0]));
 
     JRenderer * renderer = JRenderer::GetInstance();
-    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
-    // MAIN_FONT is a shared singleton; save its scale and restore it before returning so
-    // our badge text doesn't shrink whatever is drawn next (e.g. the mana/counter labels).
+    // Draw with the single-byte (ASCII) companion font directly. MAIN_FONT delegates Latin
+    // text to it, so only this font's own GetHeight()/GetStringWidth() match what actually
+    // gets rendered -- which we need to size the box and centre the two-letter badge.
+    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT + Fonts::kSingleByteFontOffset);
+    // Shared singleton; save/restore its scale so our badge text doesn't affect other text.
     const float oldFontScale = font->GetScale();
 
-    // Geometry uses the BigWidth/BigHeight (200x285) reference frame scaled by actZ, the
-    // same convention as RenderCountersBig. A vertical column down the left edge, starting
-    // below the title bar so it sits over the art rather than the name/mana line.
-    const float badgeW = 13.f;
-    const float badgeH = 12.f;
-    const float stepY  = 15.f;
+    font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.9f * pos.actZ);
+    font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
+
+    // Each box is sized from the actual text metrics (+ padding), so the two-letter badge
+    // is always snugly framed and centred. Column down the left edge, below the title bar
+    // (over the art) in the BigWidth/BigHeight (200x285) reference frame scaled by actZ.
+    const float padX  = 3.f * pos.actZ;
+    const float padY  = 2.f * pos.actZ;
+    const float gapY  = 3.f * pos.actZ;
+    const float bh    = font->GetHeight() + 2.f * padY;
+    const float stepY = bh + gapY;
     const int   maxIcons = 12;
     float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
     float y0 = pos.actY + (-BigHeight / 2 + 46) * pos.actZ;
@@ -2344,7 +2351,7 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
         if (!card->has(kKeywords[k].id))
             continue;
 
-        float y = y0 + shown * stepY * pos.actZ;
+        float y = y0 + shown * stepY;
 
         // Optional user-supplied icon; cached path ("" == not present -> letter badge).
         const string keyName = kKeywords[k].icon;
@@ -2365,23 +2372,18 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
             JQuadPtr q = WResourceManager::Instance()->RetrieveTempQuad(gfx);
             if (q.get() && q->mTex)
             {
-                float scale = (badgeH * pos.actZ) / q->mHeight;
+                float scale = bh / q->mHeight;
                 q->SetColor(ARGB((int)pos.actA, 255, 255, 255));
                 renderer->RenderQuad(q.get(), x, y, 0, scale, scale);
             }
         }
         else
         {
-            float bw = badgeW * pos.actZ;
-            float bh = badgeH * pos.actZ;
+            const float bw = font->GetStringWidth(kKeywords[k].badge) + 2.f * padX;
             renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
             renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
-            font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
-            font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.72f * pos.actZ);
-            // Centre the two-letter badge in the box: horizontally via JGETEXT_CENTER
-            // around the box mid-x, vertically using the scaled glyph height.
-            float ty = y + (bh - font->GetHeight()) / 2.f;
-            font->DrawString(kKeywords[k].badge, x + bw / 2.f, ty, JGETEXT_CENTER);
+            // box == text + padding on all sides, so a padded top-left draw is centred
+            font->DrawString(kKeywords[k].badge, x + padX, y + padY);
         }
 
         ++shown;
