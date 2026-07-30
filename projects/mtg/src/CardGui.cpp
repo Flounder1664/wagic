@@ -2340,7 +2340,11 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     const float padX  = 3.f * pos.actZ;
     const float padY  = 2.f * pos.actZ;
     const float gapY  = 3.f * pos.actZ;
-    const float bh    = font->GetHeight() + 2.f * padY;
+    // GetStringWidth() is scaled but GetHeight() returns the *unscaled* line height, so the
+    // real rendered glyph height is GetHeight() * GetScale(). Use that or the box is too
+    // tall and the text rides up to the top-left instead of sitting centred.
+    const float textH = font->GetHeight() * font->GetScale();
+    const float bh    = textH + 2.f * padY;
     const float stepY = bh + gapY;
     const int   maxIcons = 12;
     float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
