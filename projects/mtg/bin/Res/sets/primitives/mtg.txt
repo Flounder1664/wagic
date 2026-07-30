@@ -2864,6 +2864,7 @@ name=All-Fates Stalker
 abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=(blink)forsrc target(creature|opponentbattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -22418,6 +22419,7 @@ name=Codecracker Hound
 abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=draw:1 && mill:1
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
@@ -33938,6 +33940,7 @@ name=Drix Fatemaker
 abilities=canplayfromexile
 grade=borderline
 other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -39497,6 +39500,7 @@ type=Sorcery
 name=Eusocial Engineering
 abilities=canplayfromexile
 other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 grade=borderline
 # REVIEW 2026-07-19 [P:med] no warp cast option (warp mechanic pending)
 auto=_LANDFALL__ROBOTTOKEN_
@@ -48026,6 +48030,7 @@ name=Germinating Wurm
 abilities=canplayfromexile
 grade=borderline
 other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=life:2
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -54973,6 +54978,7 @@ name=Haliya, Guided by Light
 abilities=canplayfromexile
 grade=borderline
 other={W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(creature,artifact|mybattlefield):life:1
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -67214,6 +67220,7 @@ name=Knight Luminary
 abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=_HUMANSOLDIERTOKEN_
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -76524,6 +76531,7 @@ name=Mechanozoa
 abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=tap target(*[artifact;creature]|opponentbattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -85445,6 +85453,7 @@ toughness=2
 name=Nova Hellkite
 grade=borderline
 other={2}{R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,haste,canplayfromexile
 auto=damage:1 target(creature|opponentbattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
@@ -90125,6 +90134,7 @@ name=Perigee Beckoner
 abilities=canplayfromexile
 grade=borderline
 other={1}{B} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=pump(2/0) target(creature|mybattlefield) ueot
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -95332,6 +95342,7 @@ toughness=5
 name=Quantum Riddler
 grade=borderline
 other={1}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,canplayfromexile
 auto=draw:1
 auto=replacedraw if compare(phandcount)~lessthan~2 then draw:2 noreplace else draw:1 noreplace
@@ -97518,6 +97529,7 @@ name=Rayblade Trooper
 abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -98424,6 +98436,7 @@ type=Sorcery
 name=Red Tiger Mechan
 grade=borderline
 other={1}{R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=haste,canplayfromexile
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -111964,6 +111977,7 @@ name=Sinister Cryologist
 abilities=canplayfromexile
 grade=borderline
 other={U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=pump(-3/0) target(creature|opponentbattlefield) ueot
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -119051,6 +119065,7 @@ type=Artifact
 name=Starbreach Whale
 grade=borderline
 other={1}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,canplayfromexile
 auto=_SURVEIL2_
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
@@ -119083,6 +119098,7 @@ type=Enchantment
 name=Starfield Shepherd
 grade=borderline
 other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,canplayfromexile
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -119224,6 +119240,7 @@ name=Starwinder
 abilities=canplayfromexile
 grade=borderline
 other={2}{U}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@combatdamaged(player) from(creature|mybattlefield):may draw:1 controller
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -122870,6 +122887,7 @@ name=Susurian Voidborn
 abilities=canplayfromexile
 grade=borderline
 other={B} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(creature,artifact|mygraveyard) from(battlefield):life:-1 opponent && life:1 controller
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -140288,6 +140306,7 @@ name=Weftblade Enhancer
 abilities=canplayfromexile
 grade=borderline
 other={2}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -140303,6 +140322,7 @@ name=Weftstalker Ardent
 abilities=canplayfromexile
 grade=borderline
 other={R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(other creature|mybattlefield):damage:1 all(opponent)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.

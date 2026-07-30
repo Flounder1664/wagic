@@ -135294,12 +135294,15 @@ toughness=3
 name=Axebane Ferox
 grade=borderline
 abilities=deathtouch,haste
-#Ward is not C++: _WARDn_ is a DSL macro over pay[[<cost>]] ... donothing?fizzle, and
-#GenericPaidAbility feeds that cost through ManaCost::parseManaCost, which builds
-#ExtraCosts. So a ward paid by exiling cards is expressible after all - this is the
-#mana-only _WARD4_ macro with the mana swapped for two graveyard exiles.
-auto=@targeted(this) from(*|opponentzones):choice name(Collect evidence 4) name(Collect evidence 4) target(*|opponentzones) transforms((,newability[pay[[{evidence4(*|mygraveyard)}]] name(Exile 2 cards from your graveyard) donothing?fizzle])) oneshot
-#REVIEW-V Ward cannot be driven from the harness (it needs the OPPONENT to target this creature, which is AI-driven), so this is verified only as "parses and breaks nothing". Confirm in game that targeting Axebane Ferox offers the exile-or-fizzle choice.
+#MISSING Ward-Collect evidence 4 is NOT implemented, and must not be re-added in the
+#obvious way. A ward built on the _WARD4_ macro with the mana swapped for
+#pay[[{evidence4(*|mygraveyard)}]] SOFT-LOCKED the game (John, 2026-07-30): the ward
+#is meant to be paid by the player who TARGETED this creature, but the graveyard
+#chooser inside pay[[...]] resolves "my" against this card's controller instead, so it
+#prompted the wrong player and then hung with no way to complete or cancel.
+#_WARDn_ only survives this because {N} is pure mana with no target chooser at all.
+#A ward with a TARGETED extra cost needs the chooser bound to the spell's controller,
+#which is an engine fix, not a DSL one. Card ships as a vanilla deathtouch/haste beater.
 text=Deathtouch, haste -- Ward-Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)
 mana={2}{G}{G}
 type=Creature
@@ -135355,6 +135358,7 @@ grade=borderline
 #exile+recast chunk below is lifted verbatim from the _ADVENTURE_ macro; the only
 #new part is delaying it to the next end step with phaseaction[end once].
 other={3} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
@@ -135369,6 +135373,7 @@ name=Memorial Team Leader
 abilities=canplayfromexile
 grade=borderline
 other={1}{R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=this(variable{controllerturn}>0) lord(other creature|mybattlefield) 1/0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -135383,6 +135388,7 @@ toughness=3
 name=Exalted Sunborn
 grade=borderline
 other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,lifelink,canplayfromexile
 #Token doubling is the Doubling Season listener, not the trigger-doubling engine ability.
 auto=@tokencreated(*|myBattlefield):name(Double the token) all(trigger) clone options(notrigger)
@@ -135400,6 +135406,7 @@ name=Loading Zone
 abilities=canplayfromexile
 grade=borderline
 other={G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@totalcounteradded(any) from(creature|myBattlefield) duplicate(all) nocost:ability$!name(Double the counter) donothing!$ controller
 #MISSING Doubling is applied to counters on CREATURES only. The card also covers Spacecraft and Planet, which are not modelled as types here.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
@@ -135413,6 +135420,7 @@ name=Broodguard Elite
 abilities=canplayfromexile
 grade=borderline
 other={X}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1,X)
 #MISSING The leaves-the-battlefield trigger ("put its counters on target creature you control") is absent: there is no way to read back how many +1/+1 counters this had at the moment it left. That matters more on this card than most, because warp exiles it at the next end step, which is exactly when the trigger should fire.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
@@ -135429,6 +135437,7 @@ name=Starfield Vocalist
 abilities=canplayfromexile
 grade=borderline
 other={1}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 #MISSING Its whole ability - "if a permanent ENTERING causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time" - is Panharmonicon, i.e. the CAUSE axis of trigger doubling. The engine gained doubletrigger(<scope>) on 2026-07-27, but only the SOURCE axis; doubletrigger(*|mybattlefield) here would double every trigger regardless of cause, which plays quite differently. Left out rather than approximated. Ships as a vanilla 3/4 with warp.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
