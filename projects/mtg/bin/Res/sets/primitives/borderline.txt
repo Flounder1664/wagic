@@ -135313,7 +135313,7 @@ toughness=4
 name=Tenth District Hero
 grade=borderline
 auto={1}{W}{E(*|mygraveyard)}:name(Collect evidence 2 - become a Detective) counter(0/0,1,detective) && transforms((Human Detective,setpower=4,settoughness=4,vigilance)) forever
-auto={2}{W}{E(*|mygraveyard)}{E(*|mygraveyard)} restriction{compare(hascntdetective)~morethan~0}:name(Collect evidence 4 - become Mileva) transforms((Legendary Creature,setpower=5,settoughness=5,newability[lord(other creature|mybattlefield) indestructible])) forever
+auto={2}{W}{E(*|mygraveyard)}{E(*|mygraveyard)} restriction{compare(hascntdetective)~morethan~0}:name(Collect evidence 4 - become Mileva) counter(0/0,1,mileva) && transforms((Legendary Creature,setpower=5,settoughness=5,newability[lord(other creature|mybattlefield) indestructible])) forever
 #MISSING Collect evidence 2 is approximated as exiling 1 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 2 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
 #MISSING Collect evidence 4 is approximated as exiling 2 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 4 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
 #MISSING The second ability does not rename the creature to Mileva, the Stalwart (cosmetic only). "If this creature is a Detective" is enforced with a named counter stamped by the first ability rather than by reading the type line.
@@ -135341,12 +135341,13 @@ toughness=4
 [card]
 name=Polygraph Orb
 grade=borderline
-auto=draw:2
-auto=deplete:2
+auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<4>*|reveal) moveto(ownergraveyard) optiontwoend revealend
+#REVIEW-V Cannot be harness-tested: casting a multi-card reveal segfaults the HEADLESS
+#harness only (fake renderer). Verified in game via Collected Company, same construct.
 auto=life:-2 controller
 auto={2}{T}{E(*|mygraveyard)}{E(*|mygraveyard)}:name(Collect evidence 3 - Drain) life:-3 opponent
 #MISSING Collect evidence 3 is approximated as exiling 2 card(s) from your graveyard: the real cost is any cards whose TOTAL mana value is 3 or more, and Wagic cannot total mana value across a chosen set. Cheap graveyards therefore pay slightly less than they should, expensive ones slightly more.
-#MISSING Two approximations. The enter trigger should let you LOOK at the top four and choose which two to keep; here it simply draws 2 and mills 2, so the choice is lost. The activated ability should let each opponent discard a card or sacrifice a creature INSTEAD of losing 3 life; the opponent-choice construct is known to no-op against the harness AI, so the life loss is applied unconditionally, making it strictly better than the real card.
+#MISSING The activated ability should let each opponent discard a card or sacrifice a creature INSTEAD of losing 3 life; the opponent-choice construct is known to no-op against the harness AI, so the life loss is applied unconditionally, making it strictly better than the real card.
 text=When this artifact enters, look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life. -- {2}, {T}, Collect evidence 3: Each opponent loses 3 life unless they discard a card or sacrifice a creature. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
 mana={4}{B}
 type=Artifact
