@@ -187,6 +187,20 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                                 SAFE_DELETE(energytopay);
                             }
                         }
+                        else if(value.substr(0,8) == "evidence")
+                        {//collect evidence N - "evidenceN(...)" pays by exiling any cards from the
+                         //graveyard with total mana value >= N, the same shape as crewN's power total.
+                            int evidenceNeeded = 0;
+                            size_t paren = value.find("(");
+                            if (paren != string::npos && paren > 8)
+                                evidenceNeeded = atoi(value.substr(8, paren - 8).c_str());
+                            if (evidenceNeeded > 0 && tc)
+                            {
+                                tc->maxtargets = 20;
+                                tc->targetMin = false;
+                            }
+                            manaCost->addExtraCost(NEW ExileTargetCost(tc, evidenceNeeded));
+                        }
                         else
                         //Exile
                         manaCost->addExtraCost(NEW ExileTargetCost(tc));

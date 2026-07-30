@@ -972,9 +972,57 @@ ExileTargetCost * ExileTargetCost::clone() const
     return ec;
 }
 
-ExileTargetCost::ExileTargetCost(TargetChooser *_tc)
-    : ExtraCost("Exile Target", _tc)
+ExileTargetCost::ExileTargetCost(TargetChooser *_tc, int _evidenceNeeded)
+    : ExtraCost("Exile Target", _tc), evidenceNeeded(_evidenceNeeded)
 {
+}
+
+//collect evidence N: total the mana value of everything chosen so far, dropping any
+//card that has since left the graveyard. Mirrors TapTargetCost::crewPowerPaid().
+int ExileTargetCost::evidencePaid()
+{
+    int paid = 0;
+    if (!tc)
+        return 0;
+    vector<Targetable*> targetlist = tc->getTargetsFrom();
+    for (vector<Targetable*>::iterator it = targetlist.begin(); it != targetlist.end(); it++)
+    {
+        MTGCardInstance * t = dynamic_cast<MTGCardInstance*>(*it);
+        if (!t)
+            continue;
+        if (!t->controller() || !t->controller()->game->graveyard->hasCard(t))
+        {
+            tc->removeTarget(t);
+            t->isExtraCostTarget = false;
+            if (target == t)
+                target = NULL;
+            continue;
+        }
+        paid += t->getManaCost()->getConvertedCost();
+    }
+    return paid;
+}
+
+int ExileTargetCost::isPaymentSet()
+{
+    if (evidenceNeeded > 0)
+        return (evidencePaid() >= evidenceNeeded);
+    return (target != NULL);
+}
+
+void ExileTargetCost::Render()
+{
+    if (evidenceNeeded > 0)
+    {
+        char buf[64];
+        sprintf(buf, "Exile from graveyard: %d/%d mana value", evidencePaid(), evidenceNeeded);
+        WFont * mFont = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        mFont->SetScale(DEFAULT_MAIN_FONT_SCALE);
+        mFont->SetColor(ARGB(255,255,255,255));
+        mFont->DrawString(buf, 40, 20, JGETEXT_LEFT);
+        return;
+    }
+    ExtraCost::Render();
 }
 
 int ExileTargetCost::doPay()
