@@ -1,0 +1,19 @@
+#SOS: Vibrant Outburst can deal 3 damage to a player (any target).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:vibrant outburst
+manapool:{U}{R}
+[PLAYER2]
+life:20
+[DO]
+vibrant outburst
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:vibrant outburst
+manapool:{0}
+[PLAYER2]
+life:17
+[END]

@@ -122,13 +122,15 @@
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0c09</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;odbc32.lib;odbccp32.lib;SDL.lib;libpng.lib;fmodvc.lib;zdll.lib;libjpeg-static-mt.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;odbc32.lib;odbccp32.lib;SDL.lib;libpng.lib;fmodvc.lib;zdll.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\JGE\Dependencies\lib;..\..\JGE\lib\win;..\..\Boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBCD;LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -172,6 +174,7 @@
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -224,6 +227,7 @@
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -276,6 +280,7 @@
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -325,6 +330,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Counters.cpp" />
+    <ClCompile Include="src\CrashLog.cpp" />
     <ClCompile Include="src\Credits.cpp" />
     <ClCompile Include="src\Damage.cpp" />
     <ClCompile Include="src\DamagerDamaged.cpp" />
@@ -368,6 +374,7 @@
     <ClCompile Include="src\GameState.cpp" />
     <ClCompile Include="src\GameStateAwards.cpp" />
     <ClCompile Include="src\GameStateDeckViewer.cpp" />
+    <ClCompile Include="src\GameStateDraft.cpp" />
     <ClCompile Include="src\GameStateDuel.cpp" />
     <ClCompile Include="src\GameStateMenu.cpp" />
     <ClCompile Include="src\GameStateOptions.cpp" />
@@ -402,6 +409,7 @@
     <ClCompile Include="src\MTGCardInstance.cpp" />
     <ClCompile Include="src\MTGDeck.cpp" />
     <ClCompile Include="src\MTGDefinitions.cpp" />
+    <ClCompile Include="src\MTGDraft.cpp" />
     <ClCompile Include="src\MTGGamePhase.cpp" />
     <ClCompile Include="src\MTGGameZones.cpp" />
     <ClCompile Include="src\MTGPack.cpp" />
@@ -481,6 +489,7 @@
     <ClInclude Include="include\CarouselDeckView.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\Counters.h" />
+    <ClInclude Include="include\CrashLog.h" />
     <ClInclude Include="include\Credits.h" />
     <ClInclude Include="include\Damage.h" />
     <ClInclude Include="include\DamagerDamaged.h" />
@@ -501,6 +510,7 @@
     <ClInclude Include="include\GameState.h" />
     <ClInclude Include="include\GameStateAwards.h" />
     <ClInclude Include="include\GameStateDeckViewer.h" />
+    <ClInclude Include="include\GameStateDraft.h" />
     <ClInclude Include="include\GameStateDuel.h" />
     <ClInclude Include="include\GameStateMenu.h" />
     <ClInclude Include="include\GameStateOptions.h" />
@@ -530,6 +540,7 @@
     <ClInclude Include="include\MTGCardInstance.h" />
     <ClInclude Include="include\MTGDeck.h" />
     <ClInclude Include="include\MTGDefinitions.h" />
+    <ClInclude Include="include\MTGDraft.h" />
     <ClInclude Include="include\MTGGamePhase.h" />
     <ClInclude Include="include\MTGGameZones.h" />
     <ClInclude Include="include\MTGPack.h" />

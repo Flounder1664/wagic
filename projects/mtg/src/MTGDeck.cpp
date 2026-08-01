@@ -1719,6 +1719,7 @@ MTGSetInfo::MTGSetInfo(const string& _id)
     }
     bZipped = false;
     bThemeZipped = false;
+    autounlock = false;
 }
 
 void MTGSetInfo::count(MTGCard*c)
@@ -1798,6 +1799,8 @@ void MTGSetInfo::processConfLine(string line)
         year = atoi(value.substr(0,4).c_str());
     } else if (key.compare("total") == 0) 
         total = atoi(value.c_str());
-    else if (key.compare("orderindex") == 0) 
+    else if (key.compare("orderindex") == 0)
         orderindex = value; // Added new tag for different sorting of sets.
+    else if (key.compare("autounlock") == 0)
+        autounlock = (value == "true" || value == "1");
 }

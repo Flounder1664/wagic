@@ -1,0 +1,30 @@
+#KELLAN'S LIGHTBLADES bargain. John reported that paying the bargain did nothing and
+#the mana was never consumed. The card targets creature[attacking;blocking], so OUTSIDE
+#COMBAT there is no legal target and the cast correctly aborts and refunds - which
+#looks exactly like a broken card. This test gives it a legal target.
+#Air Elemental (4/4) attacks; bargained the spell DESTROYS it, where the unbargained
+#3 damage would leave it alive. So "Air Elemental in the graveyard" proves the bargain
+#branch ran, and "Ornithopter in the graveyard" proves the sacrifice was taken.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Air Elemental,Ornithopter
+hand:Kellan's Lightblades
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Air Elemental
+Kellan's Lightblades
+choice 1
+Ornithopter
+Air Elemental
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+graveyard:Air Elemental,Ornithopter,Kellan's Lightblades
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -49,6 +49,12 @@ public:
     {
         return mDrawMode;
     }
+    // Object currently under the selection cursor (hand/battlefield card, or a
+    // zone pile). NULL when nothing is selected. Used by the bug-flag hotkey.
+    virtual PlayGuiObject* getActiveObject()
+    {
+        return NULL;
+    }
 
 protected:
     int mDrawMode;
@@ -91,6 +97,7 @@ public:
     void Limit(LimitorFunctor<PlayGuiObject>* limitor, CardView::SelectorZone);
     void PushLimitor();
     void PopLimitor();
+    PlayGuiObject* getActiveObject() { return active; }
 
     typedef PlayGuiObject Target;
 };

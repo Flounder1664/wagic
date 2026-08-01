@@ -1,0 +1,22 @@
+#BLB Camellia: sacrifice a Food (Gingerbrute's {2}{T}{S}: gain 3 life, choice 1) -> 1/1 Squirrel token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669121,gingerbrute
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+gingerbrute
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669121,*
+graveyard:gingerbrute
+manapool:{0}
+life:23
+[PLAYER2]
+life:20
+[END]

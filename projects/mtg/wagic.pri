@@ -69,6 +69,7 @@ SOURCES += \
         src/CarouselDeckView.cpp\
         src/Closest.cpp\
         src/Counters.cpp\
+        src/CrashLog.cpp\
         src/Credits.cpp\
         src/Damage.cpp\
         src/DamagerDamaged.cpp\
@@ -89,6 +90,7 @@ SOURCES += \
         src/GameStateAwards.cpp\
         src/GameState.cpp\
         src/GameStateDeckViewer.cpp\
+        src/GameStateDraft.cpp\
         src/GameStateDuel.cpp\
         src/GameStateMenu.cpp\
         src/GameStateOptions.cpp\
@@ -118,6 +120,7 @@ SOURCES += \
         src/MTGCardInstance.cpp\
         src/MTGDeck.cpp\
         src/MTGDefinitions.cpp\
+        src/MTGDraft.cpp\
         src/MTGGamePhase.cpp\
         src/MTGGameZones.cpp\
         src/MTGPack.cpp\
@@ -201,11 +204,13 @@ HEADERS  += \
         include/MTGCard.h\
         include/AIMomirPlayer.h\
         include/GameStateDeckViewer.h\
+        include/GameStateDraft.h\
         include/MTGCardInstance.h\
         include/Targetable.h\
         include/AIPlayer.h\
         include/GameStateDuel.h\
         include/MTGDeck.h\
+        include/MTGDraft.h\
         include/TargetChooser.h\
         include/AIStats.h\
         include/GameState.h\
@@ -246,6 +251,7 @@ HEADERS  += \
         include/GuiCombat.h\
         include/Player.h\
         include/utils.h\
+        include/CrashLog.h\
         include/Credits.h\
         include/GuiFrame.h\
         include/PlayGuiObjectController.h\

@@ -64,6 +64,10 @@ int ModRulesMenuItem::strToAction(string str)
          return MENUITEM_EXIT;
      if (str.compare("trophies") == 0)
          return MENUITEM_TROPHIES;
+     if (str.compare("classic") == 0)
+         return MENUITEM_CLASSIC;
+     if (str.compare("otherModes") == 0)
+         return MENUITEM_OTHER_MODES;
 
      return MENUITEM_PLAY;
 }

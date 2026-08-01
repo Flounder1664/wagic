@@ -1,0 +1,23 @@
+#WOE Questing Druid: cast Seek the Beast (choice 1) -> top two library cards exiled playable; druid exiled too.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:questing druid // seek the beast
+library:15780,ornithopter,goblin piker
+manapool:{1}{G}{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+questing druid // seek the beast
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:*,*,*
+library:*
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

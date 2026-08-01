@@ -1,0 +1,21 @@
+#SOS M1: Foolish Fate with NO life gained -> destroy only, no -3 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:foolish fate
+manapool:{2}{B}
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+foolish fate
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:foolish fate
+manapool:{0}
+[PLAYER2]
+graveyard:grizzly bears
+life:20
+[END]

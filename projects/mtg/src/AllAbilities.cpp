@@ -993,6 +993,10 @@ int GenericActivatedAbility::isReactingToClick(MTGCardInstance * card, ManaCost 
 {
     if (dynamic_cast<AAMorph*> (ability) && !card->isMorphed && !card->morphed && card->turningOver)
         return 0;
+    //Serum Powder's redraw is only available "any time you could mulligan"
+    if (AAMulligan * mulligan = dynamic_cast<AAMulligan*> (ability))
+        if (!mulligan->mulliganWindowOpen())
+            return 0;
     return ActivatedAbility::isReactingToClick(card, mana);
 }
 
@@ -1371,6 +1375,58 @@ AAAlterDungeonCompleted * AAAlterDungeonCompleted::clone() const
 }
 
 AAAlterDungeonCompleted::~AAAlterDungeonCompleted()
+{
+}
+
+//AA Door Unlocked (Duskmourn Rooms)
+AAAlterDoorUnlocked::AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, int doorNumber, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0), doorNumber(doorNumber)
+{
+    target = _target;
+    aType = MTGAbility::COUNTERS;
+}
+
+int AAAlterDoorUnlocked::resolve()
+{
+    // Always operate on the ability's source — the Room card itself. `target`
+    // here is whatever the wrapping activated ability bound (e.g. a creature
+    // selected for a chained bounce effect), which is the wrong card to
+    // mutate.
+    MTGCardInstance * room = source;
+    if (!room || !room->counters) return 0;
+
+    // Walk to the live instance (counter mutations follow the same pattern as AACounter).
+    while (room->next) room = room->next;
+
+    // Counter names match the engine's `hascntdoorN` lookup, which extracts
+    // the suffix lowercase (addMagicText lowercases the entire auto= line).
+    const char * counterName = (doorNumber == 2) ? "door2" : "door1";
+    const char * otherName   = (doorNumber == 2) ? "door1" : "door2";
+
+    if (room->counters->hasCounter(counterName, 0, 0))
+        return 0;
+
+    room->counters->addCounter(counterName, 0, 0, false, false, source);
+
+    if (room->counters->hasCounter(otherName, 0, 0))
+    {
+        WEvent * e = NEW WEventRoomFullyUnlocked(room, room->controller()->getDisplayName());
+        game->receiveEvent(e);
+    }
+    return 1;
+}
+
+const string AAAlterDoorUnlocked::getMenuText()
+{
+    return doorNumber == 2 ? _("Unlock Door 2").c_str() : _("Unlock Door 1").c_str();
+}
+
+AAAlterDoorUnlocked * AAAlterDoorUnlocked::clone() const
+{
+    return NEW AAAlterDoorUnlocked(*this);
+}
+
+AAAlterDoorUnlocked::~AAAlterDoorUnlocked()
 {
 }
 
@@ -6155,6 +6211,17 @@ int AACloner::resolve()
         spell->source->model->data = spell->source;
         spell->source->tokCard = spell->source->clone();
         spell->source->TokenAndAbility = _target->TokenAndAbility;//token andAbility
+        //'Exile it at the beginning of the next end step' / unearth-style
+        //riders are delayed effects attached by whatever created the
+        //ORIGINAL - they are not copiable characteristics, so a copy
+        //(populate, Clone...) must not inherit them (upstream issue #1145,
+        //Zektar Shrine Expedition's populated Elemental). The flag survives
+        //instance copies and masks the bits whenever basicAbilities are
+        //rebuilt from the (shared) token model.
+        spell->source->exileRiderSuppressed = true;
+        spell->source->basicAbilities[Constants::UNEARTH] = 0;
+        spell->source->basicAbilities[Constants::EXILEDEATH] = 0;
+        spell->source->basicAbilities[Constants::GAINEDEXILEDEATH] = 0;
         //if the token doesn't have cda/dynamic pt then allow this...
         if((_target->isToken) && (!_target->isCDA))
         {
@@ -6328,6 +6395,45 @@ ACastRestriction::~ACastRestriction()
 {
     SAFE_DELETE(value);
     SAFE_DELETE(restrictionsScope);
+}
+
+//--- Trigger doubling -------------------------------------------------------
+//Passive marker: TriggeredAbility::extraTriggerCount() walks the action layer
+//looking for these and fires the trigger one extra time per match.
+ATriggerDoubler::ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope) :
+    MTGAbility(observer, _id, card), doubleScope(_doubleScope)
+{
+}
+
+bool ATriggerDoubler::doubles(MTGCardInstance * triggerSource)
+{
+    if (!triggerSource || !doubleScope || !source)
+        return false;
+    //"a permanent YOU control" - a doubler never doubles an opponent's triggers
+    if (triggerSource->controller() != source->controller())
+        return false;
+    //Self-inclusion is decided by the scope, not hardcoded: Harmonic Prodigy IS a
+    //Shaman and doubles its own prowess, while Sanctum of All says "another Shrine"
+    //and so is written with an "other" target chooser.
+    return doubleScope->canTarget(triggerSource);
+}
+
+const string ATriggerDoubler::getMenuText()
+{
+    return "Trigger Doubler";
+}
+
+ATriggerDoubler * ATriggerDoubler::clone() const
+{
+    ATriggerDoubler * a = NEW ATriggerDoubler(*this);
+    if (doubleScope)
+        a->doubleScope = doubleScope->clone();
+    return a;
+}
+
+ATriggerDoubler::~ATriggerDoubler()
+{
+    SAFE_DELETE(doubleScope);
 }
 
 
@@ -6799,6 +6905,32 @@ AAShuffle::~AAShuffle()
 AAMulligan::AAMulligan(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target, ManaCost * _cost, int who) :
     ActivatedAbilityTP(observer, _id, card, _target, _cost, who)
 {
+}
+
+bool AAMulligan::mulliganWindowOpen()
+{
+    //"Any time you could mulligan" (Serum Powder): only while the
+    //opening-hand window is open, same as the Mulligan menu entry -
+    //the first player's first main phase, or the second player's first
+    //turn before drawing, with no game actions taken yet. Cards exiled
+    //by previous Serum Powder redraws don't end the window (issue #979).
+    Player * p = source->controller();
+    GamePhase phase = (GamePhase)game->getCurrentGamePhase();
+    if (!((game->turn == 0 && phase == MTG_PHASE_FIRSTMAIN) || (game->turn == 1 && phase < MTG_PHASE_DRAW)))
+        return false;
+    if (p != game->currentPlayer || game->currentlyActing() != p)
+        return false;
+    if (p->game->inPlay->nb_cards != 0 || p->game->graveyard->nb_cards != 0
+        || p->game->exile->nb_cards != p->exiledBySerum)
+        return false;
+    return true;
+}
+
+int AAMulligan::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
+{
+    if (!mulliganWindowOpen())
+        return 0;
+    return ActivatedAbilityTP::isReactingToClick(card, mana);
 }
 
 int AAMulligan::resolve()
@@ -9051,6 +9183,16 @@ MTGAbility(observer, _id, card),sAbility(sAbility), phase(_phase),forcedestroy(f
         psMenuText = sAbility.c_str();
     delete (ability);
 
+    //The 'next' keyword guards against firing during the very phase the
+    //ability was created in: a new ability's first Update synthesizes a
+    //phase 'transition' into the current phase (currentPhase starts as
+    //MTG_PHASE_INVALID), which would fire the action immediately.
+    //When created during any OTHER phase, the first genuine occurrence of
+    //the target phase already IS "the next <phase>" - leaving the guard
+    //armed made every such delayed trigger fire a full turn late
+    //(upstream issue #1126, Arcane Denial's upkeep draws).
+    if (!this->next && game && game->getCurrentGamePhase() != phase)
+        this->next = true;
 }
 
 void APhaseAction::Update(float dt)
@@ -9071,7 +9213,7 @@ void APhaseAction::Update(float dt)
             /*(myturn && opponentturn)*/)
         {
             if(newPhase == phase && next )
-            {
+{
                 MTGCardInstance * _target = NULL;
                 bool isTargetable = false;
                 
@@ -9081,17 +9223,22 @@ void APhaseAction::Update(float dt)
                     isTargetable = (_target && !_target->currentZone && _target != this->source);
                 }
                 
-                if(!sAbility.size() || (!target || isTargetable))
+                //Die without firing when there is nothing to do, or when the
+                //card this action was tracking has vanished from the game.
+                //A NULL target is NOT a reason to skip: self-directed delayed
+                //actions ("you draw a card at the beginning of the next
+                //upkeep" - upstream issue #1126) have no card target and act
+                //from their own source instead.
+                if(!sAbility.size() || (target && isTargetable))
                 {
                     this->forceDestroy = 1;
                     return;
                 }
-                else
-                {
-                    while(_target && _target->next)
-                        _target = _target->next;
-                }
-                
+                while(_target && _target->next)
+                    _target = _target->next;
+                if (!_target)
+                    _target = source;
+
                 AbilityFactory af(game);
                 MTGAbility * ability = af.parseMagicLine(sAbility, abilityId, NULL, _target);
 

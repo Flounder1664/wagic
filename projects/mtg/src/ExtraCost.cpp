@@ -816,13 +816,42 @@ TapTargetCost * TapTargetCost::clone() const
     return ec;
 }
 
-TapTargetCost::TapTargetCost(TargetChooser *_tc, bool crew)
-    : ExtraCost("Tap Target", _tc), crew(crew)
+TapTargetCost::TapTargetCost(TargetChooser *_tc, bool crew, int crewPowerNeeded)
+    : ExtraCost("Tap Target", _tc), crew(crew), crewPowerNeeded(crewPowerNeeded)
 {
+}
+
+//crew/saddle N: sum the power of currently selected valid creatures,
+//pruning any that became invalid (tapped, phased out, can't crew, left play).
+int TapTargetCost::crewPowerPaid()
+{
+    int paid = 0;
+    if (!tc)
+        return 0;
+    vector<Targetable*> targetlist = tc->getTargetsFrom();
+    for (vector<Targetable*>::iterator it = targetlist.begin(); it != targetlist.end(); it++)
+    {
+        MTGCardInstance * t = dynamic_cast<MTGCardInstance*>(*it);
+        if (!t)
+            continue;
+        if (t->isTapped() || t->isPhased || t->has(Constants::CANTCREW)
+            || !t->controller()->game->battlefield->hasCard(t))
+        {
+            tc->removeTarget(t);
+            t->isExtraCostTarget = false;
+            if (target == t)
+                target = NULL;
+            continue;
+        }
+        paid += t->power;
+    }
+    return paid;
 }
 
 int TapTargetCost::isPaymentSet()
 {
+    if (crew && crewPowerNeeded > 0)
+        return (crewPowerPaid() >= crewPowerNeeded) ? 1 : 0;
     if (target && target->isTapped())
     {
         tc->removeTarget(target);
@@ -840,6 +869,21 @@ int TapTargetCost::isPaymentSet()
     if (target)
         return 1;
     return 0;
+}
+
+void TapTargetCost::Render()
+{
+    if (crew && crewPowerNeeded > 0)
+    {
+        char buf[64];
+        sprintf(buf, "Tap creatures: %d/%d power", crewPowerPaid(), crewPowerNeeded);
+        WFont * mFont = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        mFont->SetScale(DEFAULT_MAIN_FONT_SCALE);
+        mFont->SetColor(ARGB(255,255,255,255));
+        mFont->DrawString(buf, 40, 20, JGETEXT_LEFT);
+        return;
+    }
+    ExtraCost::Render();
 }
 
 int TapTargetCost::doPay()
@@ -928,9 +972,57 @@ ExileTargetCost * ExileTargetCost::clone() const
     return ec;
 }
 
-ExileTargetCost::ExileTargetCost(TargetChooser *_tc)
-    : ExtraCost("Exile Target", _tc)
+ExileTargetCost::ExileTargetCost(TargetChooser *_tc, int _evidenceNeeded)
+    : ExtraCost("Exile Target", _tc), evidenceNeeded(_evidenceNeeded)
 {
+}
+
+//collect evidence N: total the mana value of everything chosen so far, dropping any
+//card that has since left the graveyard. Mirrors TapTargetCost::crewPowerPaid().
+int ExileTargetCost::evidencePaid()
+{
+    int paid = 0;
+    if (!tc)
+        return 0;
+    vector<Targetable*> targetlist = tc->getTargetsFrom();
+    for (vector<Targetable*>::iterator it = targetlist.begin(); it != targetlist.end(); it++)
+    {
+        MTGCardInstance * t = dynamic_cast<MTGCardInstance*>(*it);
+        if (!t)
+            continue;
+        if (!t->controller() || !t->controller()->game->graveyard->hasCard(t))
+        {
+            tc->removeTarget(t);
+            t->isExtraCostTarget = false;
+            if (target == t)
+                target = NULL;
+            continue;
+        }
+        paid += t->getManaCost()->getConvertedCost();
+    }
+    return paid;
+}
+
+int ExileTargetCost::isPaymentSet()
+{
+    if (evidenceNeeded > 0)
+        return (evidencePaid() >= evidenceNeeded);
+    return (target != NULL);
+}
+
+void ExileTargetCost::Render()
+{
+    if (evidenceNeeded > 0)
+    {
+        char buf[64];
+        sprintf(buf, "Exile from graveyard: %d/%d mana value", evidencePaid(), evidenceNeeded);
+        WFont * mFont = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+        mFont->SetScale(DEFAULT_MAIN_FONT_SCALE);
+        mFont->SetColor(ARGB(255,255,255,255));
+        mFont->DrawString(buf, 40, 20, JGETEXT_LEFT);
+        return;
+    }
+    ExtraCost::Render();
 }
 
 int ExileTargetCost::doPay()

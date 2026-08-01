@@ -45,6 +45,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/CardSelector.cpp \
         $(MTG_PATH)/src/CardSelectorSingleton.cpp \
         $(MTG_PATH)/src/Counters.cpp \
+        $(MTG_PATH)/src/CrashLog.cpp \
         $(MTG_PATH)/src/Credits.cpp \
         $(MTG_PATH)/src/Damage.cpp \
         $(MTG_PATH)/src/DamagerDamaged.cpp \
@@ -64,6 +65,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/GameStateAwards.cpp \
         $(MTG_PATH)/src/GameState.cpp \
         $(MTG_PATH)/src/GameStateDeckViewer.cpp \
+        $(MTG_PATH)/src/GameStateDraft.cpp \
         $(MTG_PATH)/src/GameStateDuel.cpp \
         $(MTG_PATH)/src/GameStateMenu.cpp \
         $(MTG_PATH)/src/GameStateOptions.cpp \
@@ -92,6 +94,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.cpp \
         $(MTG_PATH)/src/MTGCardInstance.cpp \
         $(MTG_PATH)/src/MTGDeck.cpp \
         $(MTG_PATH)/src/MTGDefinitions.cpp \
+        $(MTG_PATH)/src/MTGDraft.cpp \
         $(MTG_PATH)/src/MTGGamePhase.cpp \
         $(MTG_PATH)/src/MTGGameZones.cpp \
         $(MTG_PATH)/src/MTGPack.cpp \

@@ -222,7 +222,16 @@ void GameStateDuel::Start()
         // only reset "Played Games" and "Victories" info if we didn't come here from within a match
         tournament->Start();
 
-        if (tournament->getOpLevel()< OPLEVEL_NEXT_GAME)
+        if (mParent->quickGame && tournament->getOpLevel() < OPLEVEL_NEXT_GAME)
+        {
+            // Quick Game: restore last match type or default to single game
+            int nbGames = options["quickgame_nbgames"].number;
+            int matchMode = options["quickgame_matchmode"].number;
+            if (nbGames <= 0) { nbGames = 1; matchMode = MATCHMODE_FIXED; }
+            tournament->setMatchType(nbGames, matchMode);
+            setGamePhase(DUEL_STATE_CHOOSE_DECK1);
+        }
+        else if (tournament->getOpLevel()< OPLEVEL_NEXT_GAME)
             setGamePhase(DUEL_STATE_PREPARE_CNOGMENU);
         else
         {
@@ -317,6 +326,55 @@ void GameStateDuel::Start()
     }
 
     mEngine->ResetInput();
+
+    setupPendingDraftTournament();
+}
+
+// See GameApp.h for why this is a static flag rather than GameStateDraft
+// calling a public method directly: GameApp::mGameStates is private, so
+// GameStateDraft has no way to reach this (long-lived, singleton) instance
+// after transitioning to GAME_STATE_DUEL to configure it there instead.
+//
+// Mirrors the exact sequence MENUITEM_KO_TOURNAMENT's handler uses
+// (addDeck(0,...) before enableTournamantMode -- Tournament::addDeck()
+// behaves differently once mTournamentMode is no longer 0, see
+// Tournament::addDeck's two branches -- then enableTournamantMode(KO,1),
+// then addDeck(1,...) per opponent, then initTournament(), then loadPlayer()
+// for both seats using tournament->getDeckNumber() rather than assuming the
+// ids come back in the order they were added), except it jumps straight to
+// DUEL_STATE_PLAY instead of DUEL_STATE_CHOOSE_DECK2_TO_PLAY: that state
+// only advances once an actual deckmenu/opponentMenu reports isClosed(), and
+// this path never creates one, so it would otherwise hang forever every
+// frame doing nothing.
+void GameStateDuel::setupPendingDraftTournament()
+{
+    if (!GameApp::pendingDraftTournament)
+        return;
+    GameApp::pendingDraftTournament = false;
+
+    SAFE_DELETE(deckmenu);
+    SAFE_DELETE(opponentMenu);
+
+    // Best of 3 per round, like a real draft pod -- never set explicitly
+    // before, so each match played out as a single game using whatever
+    // mNbGames/mMatchMode the long-lived Tournament object happened to
+    // already have (leftover from the last normal game session). An 8-seat
+    // KO bracket is 3 rounds either way (quarterfinal/semifinal/final --
+    // correct for 8 entrants), so a single-game match made every round of
+    // the whole event resolve in exactly one game each.
+    tournament->setMatchType(3, MATCHMODE_BESTOF);
+
+    tournament->addDeck(0, GameApp::pendingDraftHumanDeckId, mParent->players[0]);
+    tournament->enableTournamantMode(TOURNAMENTMODES_KO, 1);
+    for (size_t i = 0; i < GameApp::pendingDraftBotDeckIds.size(); i++)
+        tournament->addDeck(1, GameApp::pendingDraftBotDeckIds[i], mParent->players[1]);
+    tournament->initTournament();
+
+    game->loadPlayer(0, mParent->players[0], tournament->getDeckNumber(0), false);
+    game->loadPlayer(1, mParent->players[1], tournament->getDeckNumber(1), false);
+    setAISpeed();
+
+    setGamePhase(DUEL_STATE_PLAY);
 }
 
 void GameStateDuel::initRand(unsigned int seed)
@@ -333,6 +391,10 @@ void GameStateDuel::loadTestSuitePlayers()
     initRand(testSuite->seed);
     SAFE_DELETE(game);
     game = new GameObserver(WResourceManager::Instance(), JGE::GetInstance());
+    //The GameObserver ctor reseeds from time(0), which clobbered the test's
+    //"seed" directive and made AI chance gates nondeterministic per run.
+    if (testSuite->seed)
+        game->resetSeed(testSuite->seed);
     testSuite->setObserver(game);
     for (int i = 0; i < 2; i++)
     {
@@ -410,7 +472,10 @@ void GameStateDuel::ConstructOpponentMenu()
                     opponentMenu->Add(MENUITEM_GAUNTLET,"Gauntlet",_("Prove your mettle against each and every opponent, one at a time.").c_str());
                 opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
                 if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+                {
                    opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+                   opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+                }
             }
             else
             {
@@ -423,7 +488,10 @@ void GameStateDuel::ConstructOpponentMenu()
                 else
                 {
                      if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+                     {
                         opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+                        opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+                     }
                      opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
                 }
 
@@ -431,7 +499,10 @@ void GameStateDuel::ConstructOpponentMenu()
         } else if (mParent->gameType == GAME_TYPE_STONEHEWER && mParent->players[1] == PLAYER_TYPE_CPU){
             opponentMenu->Add(MENUITEM_RANDOM_AI, "Random");
             if (mParent->players[0] ==  PLAYER_TYPE_HUMAN)
+            {
                opponentMenu->Add(MENUITEM_RANDOM_AI_HARD, "Random (Not easy)",_("Selects a random AI deck with hard or normal difficulty.").c_str());
+               opponentMenu->Add(MENUITEM_RANDOM_AI_LEAST_PLAYED, "Random (Least Played)",_("Selects a random AI deck you have played against least.").c_str());
+            }
         }
         if (options[Options::EVILTWIN_MODE_UNLOCKED].number && !tournamentSelection)
             opponentMenu->Add(MENUITEM_EVIL_TWIN, "Evil Twin", _("Can you defeat yourself?").c_str());
@@ -911,6 +982,19 @@ void GameStateDuel::Update(float dt)
                     testSuite->initGame(game);
                 }
                 else {
+                    //The main thread running out of test files does NOT mean
+                    //the suite is done: worker threads may still be mid-test.
+                    //Tearing down without joining them discarded their results
+                    //and occasionally crashed at the end of the suite.
+                    testSuite->joinWorkers();
+                    //Headless runs (WAGIC_TESTSUITE=1) exit with a
+                    //CI-friendly status code when the suite completes.
+                    if (getenv("WAGIC_TESTSUITE"))
+                    {
+                        fprintf(stderr, "Test suite finished: %d tests (%d failed), %d AI tests (%d failed)\n",
+                                testSuite->nbTests, testSuite->nbFailed, testSuite->nbAITests, testSuite->nbAIFailed);
+                        exit((testSuite->nbFailed + testSuite->nbAIFailed) ? 1 : 0);
+                    }
                     setGamePhase(DUEL_STATE_END);
                 }
             }
@@ -960,9 +1044,14 @@ void GameStateDuel::Update(float dt)
                     //almosthumane - mulligan
                     if (((game->turn == 0 && game->getCurrentGamePhase() == MTG_PHASE_FIRSTMAIN) || (game->turn == 1 && game->getCurrentGamePhase() < MTG_PHASE_DRAW))
                         && game->currentPlayer->game->hand->nb_cards > 0 && game->currentPlayer->game->inPlay->nb_cards == 0 && game->currentPlayer->game->graveyard->nb_cards == 0
-                        && game->currentPlayer->game->exile->nb_cards == 0 && game->currentlyActing() == (Player*)game->currentPlayer) //Now you can mulligan even if you didn't start as first.
+                        && game->currentPlayer->game->exile->nb_cards == game->currentPlayer->exiledBySerum && game->currentlyActing() == (Player*)game->currentPlayer) //Now you can mulligan even if you didn't start as first. Serum Powder exiles don't end the window (issue #979).
                     {
-                        menu->Add(MENUITEM_MULLIGAN, "Mulligan");
+                        if (!game->currentPlayer->keptOpeningHand)
+                            menu->Add(MENUITEM_MULLIGAN, "Mulligan");
+                        //London mulligan: once you have mulliganed you must Keep
+                        //Hand to commit, which makes you put N cards on the bottom.
+                        if (game->currentPlayer->handMulligans > 0 && !game->currentPlayer->keptOpeningHand)
+                            menu->Add(MENUITEM_KEEP_HAND, "Keep Hand");
                     }
                     //END almosthumane - mulligan
                     if(game->getCurrentGamePhase() == MTG_PHASE_COMBATATTACKERS && game->currentlyActing() == (Player*)game->currentPlayer){ // During attack phase it shows a button to toggle all creatures to attack mode
@@ -1382,6 +1471,9 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
                 return;
           }
         }
+        // Remember last match type for Quick Game
+        options["quickgame_nbgames"].number = tournament->getGamesToPlay();
+        options["quickgame_matchmode"].number = tournament->getMatchMode();
         cnogmenu->Close();
         setGamePhase(DUEL_STATE_CNOGMENU_IS_CLOSING);
         break;
@@ -1443,6 +1535,23 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
         case MENUITEM_RANDOM_AI_HARD:
             {
                 int deck = tournament->getRandomDeck(true, mParent->gameType);
+                if (deck>0)
+                {
+                    game->loadPlayer(1, mParent->players[1], deck, premadeDeck);
+                    tournament->addDeck(1,game->players.at(1)->deckId,mParent->players[1]);
+                }
+            }
+            setAISpeed();
+            if (opponentMenu) opponentMenu->Close();
+            if (tournamentSelection)
+                setGamePhase(DUEL_STATE_CHOOSE_DECK2_TO_2);
+            else
+                setGamePhase(DUEL_STATE_CHOOSE_DECK2_TO_PLAY);
+
+            break;
+        case MENUITEM_RANDOM_AI_LEAST_PLAYED:
+            {
+                int deck = tournament->getRandomDeck(false, mParent->gameType, true);
                 if (deck>0)
                 {
                     game->loadPlayer(1, mParent->players[1], deck, premadeDeck);
@@ -1700,6 +1809,24 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
             }
             else
 #endif //NETWORK_SUPPORT
+            if (mParent->quickGame)
+            {
+                // Quick Game: auto-select least-played opponent
+                int deck = tournament->getRandomDeck(false, mParent->gameType, true);
+                if (deck > 0)
+                {
+                    game->loadPlayer(1, mParent->players[1], deck);
+                    tournament->addDeck(1, game->players.at(1)->deckId, mParent->players[1]);
+                    setAISpeed();
+                    setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_PLAY);
+                }
+                else
+                {
+                    // No AI decks available: fall back to manual opponent selection
+                    setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_2);
+                }
+            }
+            else
             {
                 setGamePhase(DUEL_STATE_CHOOSE_DECK1_TO_2);
             }
@@ -1816,6 +1943,16 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
             //almosthumane - mulligan
             game->Mulligan();
 
+            menu->Close();
+            setGamePhase(DUEL_STATE_CANCEL);
+            break;
+        case MENUITEM_KEEP_HAND:
+            //London mulligan: commit to the current hand. Owe one bottomed
+            //card per mulligan taken; the player now clicks that many hand
+            //cards to send them to the bottom of the library.
+            game->currentPlayer->keptOpeningHand = true;
+            game->currentPlayer->cardsToBottom = game->currentPlayer->handMulligans;
+            game->logAction(game->currentPlayer, "keephand");
             menu->Close();
             setGamePhase(DUEL_STATE_CANCEL);
             break;
@@ -1987,7 +2124,7 @@ void Tournament::initTournamentResults()
 
 
 
-int Tournament::getRandomDeck(bool noEasyDecks, GameType type)
+int Tournament::getRandomDeck(bool noEasyDecks, GameType type, bool leastPlayed)
 {
     DeckManager *deckManager = DeckManager::GetInstance();
     vector<DeckMetaData *> *deckList =  deckManager->getAIDeckOrderList();
@@ -2011,6 +2148,20 @@ int Tournament::getRandomDeck(bool noEasyDecks, GameType type)
                 decks.push_back(i);
             }
         }
+    }
+
+    // Least-played filter: keep only decks with the fewest games played
+    if (leastPlayed && decks.size() > 0)
+    {
+        int minPlayed = deckList->at(decks[0])->getGamesPlayed();
+        for (unsigned int i = 1; i < decks.size(); i++)
+            if (deckList->at(decks[i])->getGamesPlayed() < minPlayed)
+                minPlayed = deckList->at(decks[i])->getGamesPlayed();
+        vector<unsigned int> filtered;
+        for (unsigned int i = 0; i < decks.size(); i++)
+            if (deckList->at(decks[i])->getGamesPlayed() == minPlayed)
+                filtered.push_back(decks[i]);
+        decks = filtered;
     }
     while(isDouble && decks.size()>0)
     {

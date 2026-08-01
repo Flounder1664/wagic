@@ -1,0 +1,19 @@
+#FIN Summon: Choco/Mog chapter I: other creatures get +1/+0 (Grizzly Bears 2/2 -> attacks for 3).
+#Saga-creature enters, chapter I fires on the first lore counter; assert the saga in play + it survives turn 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:summon: choco/mog,grizzly bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:summon: choco/mog,grizzly bears
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,23 @@
+#MKM Eliminate the Impossible: investigate (Clue token appears); the -2/-0 sweep resolves (not zone-assertable).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:eliminate the impossible
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+eliminate the impossible
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:eliminate the impossible
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[END]

@@ -588,12 +588,14 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                 }
                 int comparisonMode = COMPARISON_NONE;
                 int comparisonCriterion = 0;
+                string comparisonExpression = "";
                 if (attribute.size() > 1)
                 {
                     size_t operatorPosition = attribute.find("=", 1);
                     if (operatorPosition != string::npos)
                     {
                         string numberCD = attribute.substr(operatorPosition + 1, attribute.size() - operatorPosition - 1);
+                        comparisonExpression = numberCD;
                         WParsedInt * val = NEW WParsedInt(numberCD,NULL, card);
                         comparisonCriterion = val->getValue();
                         delete val;           
@@ -1098,6 +1100,16 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                     //Manacost restrictions
                     cd->convertedManacost = comparisonCriterion;
                     cd->manacostComparisonMode = comparisonMode;
+                    //"manacost<=power" (Dreadhorde Arcanist): the criterion
+                    //depends on the source card's CURRENT stats - store the
+                    //expression so the descriptor re-evaluates it at match
+                    //time instead of freezing the parse-time value (#1125).
+                    if (comparisonExpression.size()
+                        && comparisonExpression.find_first_not_of("0123456789") != string::npos)
+                    {
+                        cd->dynamicManacostExpression = comparisonExpression;
+                        cd->dynamicManacostSource = card;
+                    }
                 }
                 else if (attribute.find("share!") != string::npos)
                 {
@@ -2441,18 +2453,17 @@ bool dredgeChooser::equals(TargetChooser * tc)
 /*Proliferate Target */
 bool ProliferateChooser::canTarget(Targetable * target, bool withoutProtections)
 {
+    //Proliferate does not target (CR 701.27a): you CHOOSE permanents and
+    //players, so shroud, hexproof and protection are all irrelevant. The
+    //only requirement is that the chosen permanent/player already has at
+    //least one counter. (Upstream issue #1130: shrouded creatures with
+    //counters, e.g. Blastoderm, were excluded.)
     if (Player * p = dynamic_cast<Player*>(target))
     {
-        if (source && (source->controller() != source->controller()->opponent()) && (source->controller()->opponent()->game->inPlay->hasAbility(Constants::CONTROLLERSHROUD)) && source->controller() != target)
-            return source->bypassTC;
-        if (source && (source->controller()->opponent()->game->inPlay->hasAbility(Constants::PLAYERSHROUD)) && source->controller()->opponent() == target)
-            return source->bypassTC;
-        if (source && (source->controller()->game->inPlay->hasAbility(Constants::PLAYERSHROUD)) && source->controller() == target)
-            return source->bypassTC;
         if(source && source->controller()->isAI() && p == source->controller() && p->poisonCount)
-            return false; // prevent AI to target itself when it has some poison counters.
+            return false; // AI guidance: don't worsen our own poison.
         if(source && source->controller()->isAI() && p != source->controller() && !p->poisonCount)
-            return false; // prevent AI to target opponent when there are no poison counters.
+            return false; // AI guidance: nothing useful to add on the opponent.
         if(!p->poisonCount && !p->energyCount && !p->experienceCount)
             return false;
         return true;
@@ -2461,17 +2472,6 @@ bool ProliferateChooser::canTarget(Targetable * target, bool withoutProtections)
     {
         if(!observer || !card->isInPlay(observer))
             return false;
-        if (source && !withoutProtections)
-        { 
-            if (card->has(Constants::SHROUD)) return source->bypassTC;
-            if (card->protectedAgainst(source)) return source->bypassTC;
-            if (card->CantBeTargetby(source)) return source->bypassTC;
-            if ((source->controller() != card->controller()) && card->has(Constants::HEXPROOF)) return source->bypassTC;
-            if (card->has(Constants::PROTECTIONFROMCOLOREDSPELLS)){
-                if((source->spellTargetType.size()) && (source->hasColor(1)||source->hasColor(2)||source->hasColor(3)||source->hasColor(4)||source->hasColor(5)))
-                    return source->bypassTC;
-            }
-        }
         if(!card->counters || (card->counters && card->counters->counters.empty()))
             return false;
         return true;

@@ -44,7 +44,8 @@ void MenuItem::Render()
         renderer->FillRect(255, 0, SCREEN_WIDTH - 165, SCREEN_HEIGHT, colors);//color on main menu right side
         // set additive blending
         renderer->SetTexBlend(BLEND_SRC_ALPHA, BLEND_ONE);
-        mParticleSys->Render();
+        if (mParticleSys)
+            mParticleSys->Render();
         // set normal blending
         renderer->SetTexBlend(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA);
         mFont->SetColor(ARGB(255,255,255,255));

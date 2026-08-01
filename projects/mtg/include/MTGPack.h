@@ -103,6 +103,14 @@ public:
     }
     ;
     static WSrcCards * getPool(string poolstr);
+    // Override the pack's card pool after load() -- used by draft mode to
+    // point one loaded template pack at whichever set the player chose
+    // (assemblePack() reads this member, MTGPack.cpp:108), rather than
+    // shipping/generating a separate pack file per set.
+    void setPool(const string& p)
+    {
+        pool = p;
+    }
 protected:
     void countCards();
     string name; //Name of the pack.

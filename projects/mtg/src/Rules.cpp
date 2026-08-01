@@ -183,7 +183,15 @@ void Rules::addExtraRules(GameObserver* g)
                 a->canBeInterrupted = false;
                 if (a->oneShot)
                 {
-                    if (a->aType != MTGAbility::STANDARD_DRAW)
+                    if (a->aType == MTGAbility::STANDARD_DRAW && p->game->hand->nb_cards > 0)
+                    {
+                        // Hand already populated from a saved/network-sync state — skip the
+                        // initial card deal (draw:7, sethand:7, etc.) to avoid doubling the
+                        // opening hand.  This happens when load() calls initGame() after the
+                        // player zones have been restored from serialized data.
+                        SAFE_DELETE(a);
+                    }
+                    else if (a->aType != MTGAbility::STANDARD_DRAW)
                         a->resolve();
                     else if (p->isAI() && (p->playMode == Player::MODE_AI && p->opponent()->playMode== Player::MODE_AI))
                     {

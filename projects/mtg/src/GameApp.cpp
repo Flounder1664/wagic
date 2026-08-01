@@ -12,6 +12,7 @@
 #include "WResourceManager.h"
 #include "ExtraCost.h"
 #include "GameApp.h"
+#include "CrashLog.h"
 #include "Subtypes.h"
 #include "GameStateTransitions.h"
 #include "GameStateDeckViewer.h"
@@ -21,6 +22,7 @@
 #include "GameStateShop.h"
 #include "GameStateAwards.h"
 #include "GameStateStory.h"
+#include "GameStateDraft.h"
 #include "DeckStats.h"
 #include "DeckMetaData.h"
 #include "DeckManager.h"
@@ -35,6 +37,12 @@
 #define DEFAULT_DURATION .25
 
 PlayerType GameApp::players[] = { PLAYER_TYPE_CPU, PLAYER_TYPE_CPU };
+bool GameApp::pendingDraftTournament = false;
+int GameApp::pendingDraftHumanDeckId = 0;
+vector<int> GameApp::pendingDraftBotDeckIds;
+bool GameApp::pendingDraftDeckEdit = false;
+bool GameApp::pendingProfileRestore = false;
+string GameApp::pendingProfileRestoreValue = "";
 bool GameApp::HasMusic = true;
 JMusic * GameApp::music = NULL;
 string GameApp::currentMusicFile = "";
@@ -75,6 +83,7 @@ GameApp::GameApp() :
     players[0] = PLAYER_TYPE_CPU;
     players[1] = PLAYER_TYPE_CPU;
     gameType = GAME_TYPE_CLASSIC;
+    quickGame = false;
 
     mCurrentState = NULL;
     mNextState = NULL;
@@ -99,6 +108,7 @@ void GameApp::Create()
 #endif
 #endif //QT_CONFIG
     //_CrtSetBreakAlloc(368);
+    CrashLog::install(); // capture card-ability crashes to crash_log.txt (see CrashLog.h)
     LOG("starting Game");
 
     string systemFolder = "Res/";
@@ -284,6 +294,9 @@ void GameApp::Create()
 
     mGameStates[GAME_STATE_STORY] = NEW GameStateStory(this);
     mGameStates[GAME_STATE_STORY]->Create();
+
+    mGameStates[GAME_STATE_DRAFT] = NEW GameStateDraft(this);
+    mGameStates[GAME_STATE_DRAFT]->Create();
 
     mGameStates[GAME_STATE_TRANSITION] = NULL;
 

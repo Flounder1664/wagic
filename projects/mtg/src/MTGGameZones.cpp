@@ -1924,6 +1924,11 @@ bool MTGPlayerCards::parseLine(const string& s)
             removedFromGame->parseLine(s.substr(limiter+1));
             return true;
         }
+        else if (areaS.compare("command") == 0 || areaS.compare("commandzone") == 0)
+        {
+            commandzone->parseLine(s.substr(limiter+1));
+            return true;
+        }
     }
 
     return false;

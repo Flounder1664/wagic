@@ -1,0 +1,29 @@
+#BARGAIN AS A COST REDUCTION. Hamlet Glutton costs {5}{G}{G} but {2} less if
+#bargained. That shape needs no branch at all: the alternative cost IS the reduced
+#mana plus the sacrifice.
+#The mana pool here is exactly {3}{G}{G} - five mana, NOT the seven the normal cast
+#needs - so the spell can only resolve via the discounted alternative. Glutton in
+#play is therefore proof the reduction applied, and the Ornithopter in the graveyard
+#is proof the sacrifice was really taken. Life 23 from its own ETB.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Hamlet Glutton
+manapool:{3}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hamlet Glutton
+choice 1
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hamlet Glutton
+graveyard:Ornithopter
+life:23
+[PLAYER2]
+life:20
+[END]

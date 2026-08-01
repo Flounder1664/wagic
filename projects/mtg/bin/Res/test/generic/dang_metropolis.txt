@@ -1,0 +1,23 @@
+#Metropolis Reformer: when dealt damage, gain that much life. Shock it for 2 -> gain 2 (18->20... start 20, take 2 dmg via shock? shock targets a creature). Use Shock on Reformer: it survives? 2/3 takes 2, gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:metropolis reformer
+hand:shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+shock
+metropolis reformer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:metropolis reformer
+graveyard:shock
+manapool:{0}
+life:22
+[PLAYER2]
+life:20
+[END]

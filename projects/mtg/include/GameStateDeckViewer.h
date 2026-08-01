@@ -28,6 +28,7 @@ enum
     MENU_CARD_PURCHASE = 2,
     MENU_DECK_SELECTION = 10,
     MENU_DECK_BUILDER = 11,
+    MENU_DECK_DELETE_CONFIRM = 12,
     MENU_FIRST_DUEL_SUBMENU = 102,
     MENU_LANGUAGE_SELECTION = 103,
     SBMENU_CHOICE = 802,
@@ -55,6 +56,7 @@ enum DECK_VIEWER_MENU_ITEMS
     MENU_ITEM_NO = 21,
     MENU_ITEM_FILTER_BY = 22,
     MENU_ITEM_TOGGLE_VIEW = 23,
+    MENU_ITEM_DELETE_DECK = 24,
     MENUITEM_MORE_INFO = kInfoMenuID
 };
 
@@ -119,6 +121,11 @@ private:
     void insertSideBoard();
     void insertCommandZone();
     void insertDungeonZone();
+    // Normally transitions to the main menu, but if a draft is routing through
+    // the editor (GameApp::pendingDraftDeckEdit) it hands off to the draft
+    // tournament instead. Replaces the bare GAME_STATE_MENU transitions at the
+    // editor's exit points so both flows funnel through one place.
+    void exitEditor();
 public:
     GameStateDeckViewer(GameApp* parent);
     virtual ~GameStateDeckViewer();

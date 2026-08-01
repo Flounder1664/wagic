@@ -1,0 +1,31 @@
+#BARGAIN mechanic, BARGAINED path. Candy Grapple's alternative cost is its normal
+#mana plus the sacrifice of an artifact/enchantment/token, expressed with the
+#established hasotherkicker + other= route (cf. Realm-Scorcher Hellkite, Blazing
+#Shoal). Bargained it gives -5/-5, which kills a 4/4 Air Elemental; unbargained it
+#gives only -3/-3 and the Elemental survives (see bargain_candy_grapple.txt).
+#So "Air Elemental in graveyard" proves the alternative cost really resolved, and
+#"Ornithopter in graveyard" proves the sacrifice was actually paid.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Candy Grapple
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Air Elemental
+life:20
+[DO]
+Candy Grapple
+choice 1
+Ornithopter
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Candy Grapple,Ornithopter
+life:20
+[PLAYER2]
+graveyard:Air Elemental
+life:20
+[END]

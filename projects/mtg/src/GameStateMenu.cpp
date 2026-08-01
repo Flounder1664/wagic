@@ -81,7 +81,7 @@ void GameStateMenu::Create()
     int n = 0;
     char buf[512];
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         for (int j = 0; j < 2; j++)
         {
@@ -137,6 +137,21 @@ void GameStateMenu::Destroy()
 void GameStateMenu::Start()
 {
     LOG("GameStateMenu::Start");
+
+    // See GameApp.h -- restores whatever profile was active before
+    // GameStateDraft switched to the temp draft profile, whether we got here
+    // by finishing the whole tournament or quitting mid-tournament back to
+    // the main menu. Both paths end up at GAME_STATE_MENU, so this one hook
+    // catches both instead of needing a second one inside GameStateDuel.
+    if (GameApp::pendingProfileRestore)
+    {
+        options[Options::ACTIVE_PROFILE] = GameApp::pendingProfileRestoreValue;
+        options.reloadProfile();
+        GameApp::pendingProfileRestore = false;
+        GameApp::pendingProfileRestoreValue = "";
+        genNbCardsStr();
+    }
+
     JRenderer::GetInstance()->EnableVSync(true);
     subMenuController = NULL;
     SAFE_DELETE(mGuiController);
@@ -158,6 +173,10 @@ void GameStateMenu::Start()
     hasChosenGameType = false;
     mParent->gameType = GAME_TYPE_CLASSIC;
 
+    // Keep bgTexture locked across ClearUnlocked() so the menu background isn't
+    // evicted and reloaded from disk (reload fails after a game session).
+    JTexture* oldBg = bgTexture;
+
     //Manual clean up of some cache Data. Ideally those should clean themselves up, so this is kind of a hack for now
     WResourceManager::Instance()->ClearUnlocked();
 
@@ -174,6 +193,9 @@ void GameStateMenu::Start()
 
     if (MENU_STATE_MAJOR_MAINMENU == currentState)
         currentState = currentState | MENU_STATE_MINOR_FADEIN;
+
+    if (oldBg)
+        WResourceManager::Instance()->Release(oldBg);
 
     wallpaper = "";
     scrollerSet = 0; // This will force-update the scroller text
@@ -327,8 +349,6 @@ int GameStateMenu::nextSetFolder(const string & root, const string & file)
 void GameStateMenu::End()
 {
     JRenderer::GetInstance()->EnableVSync(false);
-
-    WResourceManager::Instance()->Release(bgTexture);
     SAFE_DELETE(mGuiController);
 }
 
@@ -604,6 +624,28 @@ void GameStateMenu::Update(float dt)
 
             //Reload list of unlocked sets, now that we know about the sets.
             options.reloadProfile();
+
+            //Auto-unlock any set marked autounlock=true in its [meta] block (e.g. custom/fan sets).
+            {
+                bool anyNewUnlock = false;
+                for (int i = 0; i < setlist.size(); i++)
+                {
+                    MTGSetInfo* si = setlist.getInfo(i);
+                    if (si && si->autounlock && options[Options::optionSet(i)].number == 0)
+                    {
+                        GameOptionAward* goa = dynamic_cast<GameOptionAward*>(&options[Options::optionSet(i)]);
+                        if (goa)
+                        {
+                            goa->giveAward();
+                            anyNewUnlock = true;
+                            DebugTrace("Auto-unlocked set: " << setlist[i]);
+                        }
+                    }
+                }
+                if (anyNewUnlock)
+                    options.save();
+            }
+
             genNbCardsStr();
             //All major things have been loaded, resize the cache to use it as efficiently as possible
             WResourceManager::Instance()->ResetCacheLimits();
@@ -613,8 +655,26 @@ void GameStateMenu::Update(float dt)
         currentState &= MENU_STATE_MAJOR_MAINMENU;
         options.reloadProfile(); //Handles building a new deck, if needed.
         break;
-    case MENU_STATE_MAJOR_MAINMENU: 
+    case MENU_STATE_MAJOR_MAINMENU:
         {
+#ifdef TESTSUITE
+            //Headless-ish test runs: WAGIC_TESTSUITE=1 jumps straight into
+            //the test suite from the main menu (same effect as selecting it
+            //in the debug submenu). Results land in test/results.html.
+            static bool autoTestSuiteTried = false;
+            if (!autoTestSuiteTried && getenv("WAGIC_TESTSUITE"))
+            {
+                autoTestSuiteTried = true;
+                fprintf(stderr, "WAGIC_TESTSUITE: auto-launching test suite\n");
+                mParent->rules = Rules::getRulesByFilename("testsuite.txt");
+                hasChosenGameType = true;
+                mParent->gameType = GAME_TYPE_CLASSIC;
+                mParent->players[0] = PLAYER_TYPE_TESTSUITE;
+                mParent->players[1] = PLAYER_TYPE_TESTSUITE;
+                currentState = MENU_STATE_MAJOR_DUEL;
+                break;
+            }
+#endif
             if (!scrollerSet)
                 fillScroller();
             ensureMGuiController();
@@ -695,7 +755,7 @@ void GameStateMenu::Update(float dt)
                         bool unlocked = rules->unlockOption == INVALID_OPTION 
                             ? (rules->mUnlockOptionString.size() == 0 ||  options[rules->mUnlockOptionString].number !=0)
                             :  options[rules->unlockOption].number != 0;
-                        if (!rules->hidden && (unlocked))
+                        if (!rules->hidden && (unlocked) && rules->gamemode != GAME_TYPE_STORY)
                         {
                             subMenuController->Add(SUBMENUITEM_END_OFFSET + i, rules->displayName.c_str());
                         }
@@ -910,6 +970,22 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
     default:
         switch (controlId)
         {
+        case MENUITEM_CLASSIC:
+            mParent->players[0] = PLAYER_TYPE_HUMAN;
+            mParent->players[1] = PLAYER_TYPE_CPU;
+            this->hasChosenGameType = true;
+            mParent->quickGame = true;
+            mParent->rules = Rules::getRulesByFilename("classic.txt");
+            if (!mParent->rules) break; // classic.txt missing; game resources are broken
+            mParent->gameType = GAME_TYPE_CLASSIC;
+            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_NONE;
+            break;
+        case MENUITEM_OTHER_MODES:
+            mParent->players[0] = PLAYER_TYPE_HUMAN;
+            mParent->players[1] = PLAYER_TYPE_CPU;
+            mParent->quickGame = false;
+            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_NONE;
+            break;
         case MENUITEM_PLAY:
             subMenuController = NEW SimpleMenu(JGE::GetInstance(), WResourceManager::Instance(), MENU_FIRST_DUEL_SUBMENU, this, Fonts::MENU_FONT, 150, 60);
             if (subMenuController)
@@ -924,12 +1000,12 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
 #ifdef NETWORK_SUPPORT
                 subMenuController->Add(SUBMENUITEM_2PLAYERS, "2 Players");
 #endif //NETWORK_SUPPORT
-                subMenuController->Add(SUBMENUITEM_DEMO, _("Demo").c_str());
                 subMenuController->Add(SUBMENUITEM_CANCEL, _("Cancel").c_str());
 #ifdef TESTSUITE
                 if (Rules::getRulesByFilename("testsuite.txt"))
                     subMenuController->Add(SUBMENUITEM_TESTSUITE, "Test Suite");
 #endif
+                subMenuController->Add(SUBMENUITEM_DRAFT, _("Draft").c_str());
 
 #ifdef AI_CHANGE_TESTING
                 subMenuController->Add(SUBMENUITEM_TESTAI, "AI A/B Testing");
@@ -982,13 +1058,6 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
             break;
         }
 #endif //NETWORK_SUPPORT
-        case SUBMENUITEM_DEMO:
-            mParent->players[0] = PLAYER_TYPE_CPU;
-            mParent->players[1] = PLAYER_TYPE_CPU;
-            mParent->gameType = GAME_TYPE_DEMO;
-            subMenuController->Close();
-            currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_SUBMENU_CLOSING;
-            break;
         case SUBMENUITEM_CANCEL:
         case kInfoMenuID: // Triangle button
             if (subMenuController != NULL)
@@ -1021,6 +1090,10 @@ void GameStateMenu::ButtonPressed(int controllerId, int controlId)
             currentState = MENU_STATE_MAJOR_DUEL | MENU_STATE_MINOR_SUBMENU_CLOSING;
             break;
 #endif
+        case SUBMENUITEM_DRAFT:
+            subMenuController->Close();
+            mParent->DoTransition(TRANSITION_FADE, GAME_STATE_DRAFT);
+            break;
             default: //Game modes
             this->hasChosenGameType = true;
             mParent->rules = Rules::RulesList[controlId - SUBMENUITEM_END_OFFSET];

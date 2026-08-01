@@ -254,9 +254,12 @@ class TapTargetCost : public ExtraCost
 {
 public:
     bool crew;
-    TapTargetCost(TargetChooser *_tc = NULL, bool crew = false);
+    int crewPowerNeeded; //crew/saddle N: pay by tapping any creatures with total power >= N (0 = legacy single target)
+    TapTargetCost(TargetChooser *_tc = NULL, bool crew = false, int crewPowerNeeded = 0);
+    int crewPowerPaid();
     virtual int isPaymentSet();
     virtual int doPay();
+    virtual void Render();
     virtual TapTargetCost * clone() const;
 };
 //untap a target as cost
@@ -273,8 +276,12 @@ public:
 class ExileTargetCost : public ExtraCost
 {
 public:
-  ExileTargetCost(TargetChooser *_tc = NULL);
+  int evidenceNeeded; //collect evidence N: exile cards with total mana value >= N (0 = legacy single target)
+  ExileTargetCost(TargetChooser *_tc = NULL, int evidenceNeeded = 0);
+  int evidencePaid();
+  virtual int isPaymentSet();
   virtual int doPay();
+  virtual void Render();
   virtual ExileTargetCost * clone() const;
 };
 

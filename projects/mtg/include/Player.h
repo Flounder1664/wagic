@@ -53,6 +53,27 @@ public:
     int surveilOffset;
     int devotionOffset;
     int lastShuffleTurn;
+    //Number of cards this player exiled via Serum Powder's redraw. The
+    //opening-hand rules (Leylines, the Mulligan menu) detect the pre-game
+    //window by "graveyard and exile are empty"; Serum Powder legitimately
+    //fills exile before the game starts, so those checks compare against
+    //this count instead of zero.
+    int exiledBySerum;
+    //London mulligan: number of times this player has mulliganed. On each
+    //mulligan the player redraws a FULL opening hand; when they keep, they
+    //put this many cards from hand on the bottom of their library.
+    int handMulligans;
+    //>0 while the player is choosing which cards to put on the bottom after
+    //keeping a mulliganed hand (one click per card). Serialized so save/undo
+    //mid-selection is consistent.
+    int cardsToBottom;
+    //Set when the player commits to keeping a mulliganed hand. Until then,
+    //a player who has mulliganed (handMulligans>0) is held in the opening
+    //window: they must Mulligan again or Keep Hand (which bottoms cards).
+    bool keptOpeningHand;
+    //Move a card from this player's hand to the bottom of their library
+    //(London-mulligan bottoming). Mirrors AALibraryBottom's placement.
+    void bottomCardFromHand(MTGCardInstance * card);
     int epic;
     int forcefield;
     int dealsdamagebycombat;

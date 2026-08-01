@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #if (defined FORCE_GLES)
 #undef GL_ES_VERSION_2_0
 #undef GL_VERSION_2_0
@@ -64,6 +65,20 @@ int SDL_ResumeSyncTime = 0;
 class SdlApp;
 
 SdlApp *g_SdlApp = NULL;
+
+static SDL_Joystick* g_joystick = NULL;
+
+static const JButton gJoyBtnMap[] = {
+    JGE_BTN_OK,     // 0: A
+    JGE_BTN_CANCEL, // 1: B
+    JGE_BTN_SEC,    // 2: X
+    JGE_BTN_PRI,    // 3: Y
+    JGE_BTN_PREV,   // 4: left shoulder
+    JGE_BTN_NEXT,   // 5: right shoulder
+    JGE_BTN_NONE,   // 6: (unused)
+    JGE_BTN_MENU,   // 7: start/options
+};
+static const int gJoyBtnMapSize = sizeof(gJoyBtnMap) / sizeof(gJoyBtnMap[0]);
 
 
 #ifdef ANDROID
@@ -284,6 +299,62 @@ public:
             DebugTrace("Flick gesture detected, x: " << Event->jball.xrel << ", y: " << Event->jball.yrel);
             g_engine->Scroll(Event->jball.xrel, Event->jball.yrel);
             break;
+
+        case SDL_JOYBUTTONDOWN:
+            {
+                int btn = Event->jbutton.button;
+                if (btn < gJoyBtnMapSize && gJoyBtnMap[btn] != JGE_BTN_NONE)
+                    g_engine->HoldKey_NoRepeat(gJoyBtnMap[btn]);
+            }
+            break;
+
+        case SDL_JOYBUTTONUP:
+            {
+                int btn = Event->jbutton.button;
+                if (btn < gJoyBtnMapSize && gJoyBtnMap[btn] != JGE_BTN_NONE)
+                    g_engine->ReleaseKey(gJoyBtnMap[btn]);
+            }
+            break;
+
+        case SDL_JOYHATMOTION:
+            {
+                static Uint8 lastHat = SDL_HAT_CENTERED;
+                Uint8 hat = Event->jhat.value;
+                if ((lastHat & SDL_HAT_UP)    && !(hat & SDL_HAT_UP))    g_engine->ReleaseKey(JGE_BTN_UP);
+                if ((lastHat & SDL_HAT_DOWN)  && !(hat & SDL_HAT_DOWN))  g_engine->ReleaseKey(JGE_BTN_DOWN);
+                if ((lastHat & SDL_HAT_LEFT)  && !(hat & SDL_HAT_LEFT))  g_engine->ReleaseKey(JGE_BTN_LEFT);
+                if ((lastHat & SDL_HAT_RIGHT) && !(hat & SDL_HAT_RIGHT)) g_engine->ReleaseKey(JGE_BTN_RIGHT);
+                if ((hat & SDL_HAT_UP)    && !(lastHat & SDL_HAT_UP))    g_engine->HoldKey_NoRepeat(JGE_BTN_UP);
+                if ((hat & SDL_HAT_DOWN)  && !(lastHat & SDL_HAT_DOWN))  g_engine->HoldKey_NoRepeat(JGE_BTN_DOWN);
+                if ((hat & SDL_HAT_LEFT)  && !(lastHat & SDL_HAT_LEFT))  g_engine->HoldKey_NoRepeat(JGE_BTN_LEFT);
+                if ((hat & SDL_HAT_RIGHT) && !(lastHat & SDL_HAT_RIGHT)) g_engine->HoldKey_NoRepeat(JGE_BTN_RIGHT);
+                lastHat = hat;
+            }
+            break;
+
+        case SDL_JOYAXISMOTION:
+            {
+                static bool axisHeld[4] = { false, false, false, false };
+                // axisHeld[0]=up, [1]=down, [2]=left, [3]=right
+                const int deadzone = 8000;
+                int axis  = Event->jaxis.axis;
+                int value = Event->jaxis.value;
+                if (axis == 0)
+                {
+                    if (value < -deadzone && !axisHeld[2]) { g_engine->HoldKey_NoRepeat(JGE_BTN_LEFT);  axisHeld[2] = true; }
+                    if (value >  deadzone && !axisHeld[3]) { g_engine->HoldKey_NoRepeat(JGE_BTN_RIGHT); axisHeld[3] = true; }
+                    if (value >= -deadzone && axisHeld[2]) { g_engine->ReleaseKey(JGE_BTN_LEFT);        axisHeld[2] = false; }
+                    if (value <=  deadzone && axisHeld[3]) { g_engine->ReleaseKey(JGE_BTN_RIGHT);       axisHeld[3] = false; }
+                }
+                else if (axis == 1)
+                {
+                    if (value < -deadzone && !axisHeld[0]) { g_engine->HoldKey_NoRepeat(JGE_BTN_UP);   axisHeld[0] = true; }
+                    if (value >  deadzone && !axisHeld[1]) { g_engine->HoldKey_NoRepeat(JGE_BTN_DOWN); axisHeld[1] = true; }
+                    if (value >= -deadzone && axisHeld[0]) { g_engine->ReleaseKey(JGE_BTN_UP);         axisHeld[0] = false; }
+                    if (value <=  deadzone && axisHeld[1]) { g_engine->ReleaseKey(JGE_BTN_DOWN);       axisHeld[1] = false; }
+                }
+            }
+            break;
         }
     }
 
@@ -291,6 +362,11 @@ public:
 
     void OnCleanup()
     {
+        if (g_joystick)
+        {
+            SDL_JoystickClose(g_joystick);
+            g_joystick = NULL;
+        }
         SDL_FreeSurface(Surf_Display);
         SDL_Quit();
     }
@@ -321,6 +397,7 @@ static const struct { LocalKeySym keysym; JButton keycode; } gDefaultBindings[] 
 	{ SDLK_j,             JGE_BTN_PRI },
 	{ SDLK_b,             JGE_BTN_SOUND },
 	{ SDLK_f,             JGE_BTN_FULLSCREEN },
+	{ SDLK_t,             JGE_BTN_TAGBUG },
 
 	/* old Qt ones, basically modified to comply with the N900 keyboard
 	{ SDLK_a,             JGE_BTN_NEXT },
@@ -334,6 +411,7 @@ static const struct { LocalKeySym keysym; JButton keycode; } gDefaultBindings[] 
 	/* Android/maemo volume button mapping */
 	{ SDLK_VOLUMEUP,      JGE_BTN_PREV },
 	{ SDLK_VOLUMEDOWN,    JGE_BTN_SEC},
+
 };
 
 void JGECreateDefaultBindings()
@@ -648,7 +726,8 @@ bool SdlApp::OnInit()
 {
 	int window_w, window_h;
 
-	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) 
+	// SDL_INIT_EVERYTHING includes CDROM which crashes on modern Windows 10/11
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) < 0)
 	{
 		return false;
 	}
@@ -732,6 +811,19 @@ bool SdlApp::OnInit()
 	glEnable(GL_SCISSOR_TEST);				// Enable Clipping
 
 	JGECreateDefaultBindings();
+
+#ifndef ANDROID
+	// Android routes gamepad buttons through Java keysym events; opening an
+	// SDL joystick and enabling its event stream causes SDL on Android to
+	// pump sensor/touch data into the joystick queue, starving real touch
+	// dispatch (S9 taps drop). Keep this PC/Linux-only.
+	if (SDL_NumJoysticks() > 0)
+	{
+		g_joystick = SDL_JoystickOpen(0);
+		if (g_joystick)
+			SDL_JoystickEventState(SDL_ENABLE);
+	}
+#endif
 
 	if (!InitGame())
 	{

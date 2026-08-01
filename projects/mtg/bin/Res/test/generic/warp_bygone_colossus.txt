@@ -1,0 +1,27 @@
+#WARP. Bygone Colossus is a vanilla 9/9 that costs {9}, with Warp {3}. That gap is
+#what makes it the right card to prove the mechanic on: the pool here is exactly
+#{3}, so the Colossus can ONLY reach the battlefield through the warp cost.
+#Then the delayed half: at the beginning of the next end step it must exile itself
+#(in a state where it can be cast again later). So "in exile, not on the
+#battlefield" is the whole assertion - it proves both that the alternative cost was
+#taken and that the phaseaction fired.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bygone Colossus
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bygone Colossus
+choice 1
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+exile:Bygone Colossus
+life:20
+[PLAYER2]
+life:20
+[END]

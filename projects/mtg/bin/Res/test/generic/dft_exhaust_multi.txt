@@ -1,0 +1,25 @@
+#DFT Exhaust multi-ability independence: Loot's draw-3 exhaust ({U}{T}) spends, draws 3;
+#the used ability locks (exhaustu) but the distinct gates leave others available.
+#Loot has 4 available actions untapped; menu: choice 1 = draw three (mana G unaffordable makes add-mana unavailable).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690649
+library:15780,ornithopter,goblin piker,hill giant
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+loot, the pathfinder
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690649
+hand:*,*,*
+library:*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

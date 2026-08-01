@@ -14,7 +14,13 @@ Mod by: Vitty85
 /* Wagic versions */
 #define WAGIC_VERSION_MAJOR     0
 #define WAGIC_VERSION_MEDIUM    25
-#define WAGIC_VERSION_MINOR     5
+#define WAGIC_VERSION_MINOR     7
+
+/* Resource version is bumped only when core.zip content changes,
+   NOT on every display-version bump. Update manually when pushing new core.zip. */
+#define WAGIC_RESOURCE_MAJOR    0
+#define WAGIC_RESOURCE_MEDIUM   25
+#define WAGIC_RESOURCE_MINOR    7
 
 #define VERSION_DOT(a, b, c) a ##.## b ##.## c
 #define VERSION_WITHOUT_DOT(a, b, c) a ## b ## c
@@ -24,12 +30,12 @@ Mod by: Vitty85
 #define VERSION_STRINGIFY(a) VERSION_TOSTRING(a)
 
 #define WAGIC_VERSION           VERSION_GAME(WAGIC_VERSION_MAJOR, WAGIC_VERSION_MEDIUM, WAGIC_VERSION_MINOR)
-#define WAGIC_RESOURCE_VERSION  VERSION_FILE(WAGIC_VERSION_MAJOR, WAGIC_VERSION_MEDIUM, WAGIC_VERSION_MINOR)
+#define WAGIC_RESOURCE_VERSION  VERSION_FILE(WAGIC_RESOURCE_MAJOR, WAGIC_RESOURCE_MEDIUM, WAGIC_RESOURCE_MINOR)
 #define WAGIC_VERSION_STRING    VERSION_STRINGIFY(WAGIC_VERSION)
 #define WAGIC_CORE_VERSION_STRING "core_" VERSION_STRINGIFY(WAGIC_RESOURCE_VERSION)
 #define WAGIC_RESOURCE_NAME     "Wagic-core-" VERSION_STRINGIFY(WAGIC_RESOURCE_VERSION) ".zip"
 #define WAGIC_RELEASE_NAME      "wagic-v" WAGIC_VERSION_STRING
-#define WAGIC_RESOURCE_URL      "https://github.com/WagicProject/wagic/releases/download/" WAGIC_RELEASE_NAME "/" WAGIC_RESOURCE_NAME
+#define WAGIC_RESOURCE_URL      "https://github.com/Flounder1664/wagic/releases/download/" WAGIC_RELEASE_NAME "/" WAGIC_RESOURCE_NAME
 
 #endif
 

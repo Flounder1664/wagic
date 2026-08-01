@@ -48,6 +48,7 @@ public:
 
     GameType gameType;
     Rules * rules;
+    bool quickGame;
 #ifdef NETWORK_SUPPORT
     string mServerAddress;
     JNetwork* mpNetwork;
@@ -83,6 +84,33 @@ public:
     static void resumeMusic();
     static PlayerType players[2];
 
+    // Set by GameStateDraft before transitioning to GAME_STATE_DUEL, consumed
+    // once by GameStateDuel::Start(). GameStateDraft can't reach the live
+    // GameStateDuel instance directly (GameApp::mGameStates is private, no
+    // accessor) to configure its Tournament object across the transition, so
+    // this mirrors the existing `players[2]` pattern of passing config via a
+    // static rather than adding a new access path.
+    static bool pendingDraftTournament;
+    static int pendingDraftHumanDeckId;
+    static vector<int> pendingDraftBotDeckIds;
+
+    // Set by GameStateDraft before transitioning to GAME_STATE_DECK_VIEWER so
+    // the human can tweak their auto-built draft deck before the bracket.
+    // Consumed by GameStateDeckViewer: while set, the editor's exit routes
+    // into the draft tournament (sets pendingDraftTournament + transitions to
+    // GAME_STATE_DUEL) instead of back to the main menu.
+    static bool pendingDraftDeckEdit;
+
+    // Set by GameStateDraft to the player's real ACTIVE_PROFILE value right
+    // before switching to the temp draft profile; consumed by
+    // GameStateMenu::Start() (reached both when the tournament finishes
+    // normally and when the player quits mid-tournament back to the main
+    // menu -- one hook catches both exits rather than needing a second one
+    // inside GameStateDuel). Empty string means "nothing pending" -- also
+    // the correct value when no profile was active to begin with, since
+    // ACTIVE_PROFILE's own default is "".
+    static bool pendingProfileRestore;
+    static string pendingProfileRestoreValue;
 };
 
 extern vector<JQuadPtr> manaIcons;

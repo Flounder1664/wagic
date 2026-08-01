@@ -137,7 +137,7 @@ void DeckMenuItem::checkUserClick()
 {
     int x1 = -1, y1 = -1;
     if (mEngine->GetLeftClickCoordinates(x1, y1))
-    {   
+    {
         mIsValidSelection = false;
         int x2 = kItemXOffset, y2 = static_cast<int>(mY + mYOffset);
         if ( (x1 >= x2) && (x1 <= (x2 + ITEM_PX_WIDTH)) && (y1 >= y2) && (y1 < (y2 + kItemYHeight)))

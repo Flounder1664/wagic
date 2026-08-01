@@ -1,0 +1,21 @@
+#SOS M6: Silverquill Charm mode 2 (drain 3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:silverquill charm
+manapool:{W}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+silverquill charm
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:silverquill charm
+manapool:{0}
+life:23
+[PLAYER2]
+life:17
+[END]

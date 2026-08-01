@@ -187,6 +187,20 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                                 SAFE_DELETE(energytopay);
                             }
                         }
+                        else if(value.substr(0,8) == "evidence")
+                        {//collect evidence N - "evidenceN(...)" pays by exiling any cards from the
+                         //graveyard with total mana value >= N, the same shape as crewN's power total.
+                            int evidenceNeeded = 0;
+                            size_t paren = value.find("(");
+                            if (paren != string::npos && paren > 8)
+                                evidenceNeeded = atoi(value.substr(8, paren - 8).c_str());
+                            if (evidenceNeeded > 0 && tc)
+                            {
+                                tc->maxtargets = 20;
+                                tc->targetMin = false;
+                            }
+                            manaCost->addExtraCost(NEW ExileTargetCost(tc, evidenceNeeded));
+                        }
                         else
                         //Exile
                         manaCost->addExtraCost(NEW ExileTargetCost(tc));
@@ -338,8 +352,18 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                                 manaCost->addExtraCost(NEW CycleCost(tc));
                             }
                             else if(value.substr(0,4) == "crew")
-                            {//tap crew
-                                manaCost->addExtraCost(NEW TapTargetCost(tc,true));
+                            {//tap crew - "crewN(...)" pays by tapping any creatures with total power >= N,
+                             //bare "crew(...)" keeps the legacy single-target behavior.
+                                int crewPowerNeeded = 0;
+                                size_t paren = value.find("(");
+                                if (paren != string::npos && paren > 4)
+                                    crewPowerNeeded = atoi(value.substr(4, paren - 4).c_str());
+                                if (crewPowerNeeded > 0 && tc)
+                                {
+                                    tc->maxtargets = 20;
+                                    tc->targetMin = false;
+                                }
+                                manaCost->addExtraCost(NEW TapTargetCost(tc,true,crewPowerNeeded));
                             }
                             else if(value.find("(") != string::npos)
                             {
@@ -384,13 +408,37 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                             break;
                         }
                         int intvalue = atoi(value.c_str());
-                        int colors[2];
-                        int values[2];
+                        // IMPORTANT: zero-initialise these. If a character fails to
+                        // match any known color (e.g. '/' in "w/b", or 'p' in "w/p"
+                        // Phyrexian), the slot would otherwise stay as uninitialised
+                        // stack, and become a garbage color index in ManaCostHybrid.
+                        // Downstream CardGui::AlternateRender does
+                        // manaIcons[hybrid->colorN] without bounds-checking, so a
+                        // garbage byte reads out-of-bounds into freed heap memory
+                        // and crashes under MTE on Android 13.
+                        int colors[2] = {Constants::MTG_COLOR_ARTIFACT, Constants::MTG_COLOR_ARTIFACT};
+                        int values[2] = {0, 0};
                         if (intvalue < 10 && value.size() > 1)
                         {
+                            // Hybrid mana can appear as "w/b", "2/w", "w/p" (Phyrexian),
+                            // or legacy "wb" with no separator. Pick the right character
+                            // positions depending on whether there's a '/' separator.
+                            char parts[2] = {0, 0};
+                            size_t slashPos = value.find('/');
+                            if (slashPos != string::npos && slashPos >= 1 && slashPos + 1 < value.size())
+                            {
+                                parts[0] = value[slashPos - 1];
+                                parts[1] = value[slashPos + 1];
+                            }
+                            else if (value.size() >= 2)
+                            {
+                                parts[0] = value[0];
+                                parts[1] = value[1];
+                            }
                             for (int i = 0; i < 2; i++)
                             {
-                                char c = value[i];
+                                char c = parts[i];
+                                if (c == 0) continue;
                                 if (c >= '0' && c <= '9')
                                 {
                                     colors[i] = Constants::MTG_COLOR_ARTIFACT;
@@ -404,6 +452,7 @@ ManaCost * ManaCost::parseManaCost(string s, ManaCost * _manaCost, MTGCardInstan
                                         {
                                             colors[i] = j;
                                             values[i] = 1;
+                                            break;
                                         }
                                     }
                                 }

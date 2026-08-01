@@ -105,10 +105,21 @@ bool ActionLayer::CheckUserInput(JButton key)
                 //being cancelled. currently only menuability and paidability will care.
             }
         }
-        if (observer->mExtraPayment->costs.size() && observer->mExtraPayment->costs[0]->tc)
+        for (size_t i = 0; i < observer->mExtraPayment->costs.size(); i++)
         {
-            //if we cancel, clear the targets list so that when you try again you dont already have targets from before.
-            observer->mExtraPayment->costs[0]->tc->initTargets();
+            //if we cancel, clear the targets lists so that when you try again you dont already have targets from before.
+            ExtraCost * cost = observer->mExtraPayment->costs[i];
+            if (!cost->tc)
+                continue;
+            vector<Targetable*> targetlist = cost->tc->getTargetsFrom();
+            for (size_t k = 0; k < targetlist.size(); k++)
+            {
+                MTGCardInstance * t = dynamic_cast<MTGCardInstance*>(targetlist[k]);
+                if (t)
+                    t->isExtraCostTarget = false;
+            }
+            cost->tc->initTargets();
+            cost->target = NULL;
         }
         observer->mExtraPayment = NULL;
         return 1;
@@ -465,6 +476,13 @@ void ActionLayer::doReactTo(int menuIndex)
 
     if (menuObject)
     {
+        //An out-of-range index (a test script's stray "choice N", an AI
+        //picking a stale option) crashed on the unchecked vector access.
+        if (!abilitiesMenu || menuIndex < 0 || (size_t)menuIndex >= abilitiesMenu->mObjects.size())
+        {
+            DebugTrace("ActionLayer::doReactTo ignoring out-of-range menu index " << menuIndex);
+            return;
+        }
         int controlid = abilitiesMenu->mObjects[menuIndex]->GetId();
         DebugTrace("ActionLayer::doReactTo " << controlid);
         if (abilitiesMenu && abilitiesMenu->isMultipleChoice)

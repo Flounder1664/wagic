@@ -1,0 +1,22 @@
+#SOS M6: Lorehold Charm mode 0 (destroy opponent artifact). Card crashed pre-fix (bad combined gy filter in mode 1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:lorehold charm
+manapool:{R}{W}
+[PLAYER2]
+inplay:ornithopter
+life:20
+[DO]
+lorehold charm
+choice 0
+ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:lorehold charm
+manapool:{0}
+[PLAYER2]
+graveyard:ornithopter
+life:20
+[END]

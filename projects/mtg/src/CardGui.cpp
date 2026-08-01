@@ -40,6 +40,20 @@ namespace
         return cosf(2 * M_PI * (value - 35) / 256.0f);
     }
 
+    // Safely fetch a mana-icon quad. Returns NULL (not UB) if idx is
+    // negative or past the end of manaIcons. Belt-and-braces guard:
+    // a bad index here used to read out of the vector's heap buffer
+    // and the resulting MTE-tagged pointer would crash RenderQuad on
+    // Android 13. RenderQuad already null-checks, so a NULL from here
+    // skips the draw safely. The real fix lives in ManaCost.cpp; this
+    // just stops any future regression from being a crash.
+    inline JQuad* SafeManaIcon(int idx)
+    {
+        if (idx < 0) return NULL;
+        if ((size_t) idx >= manaIcons.size()) return NULL;
+        return manaIcons[idx].get();
+    }
+
 }
 
 CardGui::CardGui(MTGCardInstance* card, float x, float y)
@@ -736,9 +750,12 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
                             {
                                 float _color = (float)card->data->getColor() -1;
                                 JQuadPtr ExtraManas = WResourceManager::Instance()->RetrieveQuad("menuicons.png", 2 + _color * 36, 76, 32, 32, "c_extra", RETRIEVE_MANAGE);
-                                ExtraManas->SetHotSpot(16, 16);
-                                renderer->RenderQuad(ExtraManas.get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
-                                * pos.actZ, 0.4f * pos.actZ);
+                                if (ExtraManas)
+                                {
+                                    ExtraManas->SetHotSpot(16, 16);
+                                    renderer->RenderQuad(ExtraManas.get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
+                                    * pos.actZ, 0.4f * pos.actZ);
+                                }
                             }
                    
                         ++j;
@@ -752,19 +769,19 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
 
                     if (scale < 0)
                     {
-                        renderer->RenderQuad(manaIcons[h->color1].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color1), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) t)) * pos.actZ, 0, 0.4f + scale, 0.4f
                             + scale);
-                        renderer->RenderQuad(manaIcons[h->color2].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color2), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) v)) * pos.actZ, 0, 0.4f - scale, 0.4f
                             - scale);
                     }
                     else
                     {
-                        renderer->RenderQuad(manaIcons[h->color2].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color2), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) v)) * pos.actZ, 0, 0.4f - scale, 0.4f
                             - scale);
-                        renderer->RenderQuad(manaIcons[h->color1].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color1), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) t)) * pos.actZ, 0, 0.4f + scale, 0.4f
                             + scale);
                     }
@@ -776,7 +793,7 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
                      int cost;
                     for (cost = manacost->getCost(i); cost > 0; --cost)
                     {
-                        renderer->RenderQuad(manaIcons[i].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
+                        renderer->RenderQuad(SafeManaIcon(i), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
                             * pos.actZ, 0.4f * pos.actZ);
                         ++j;
                     }
@@ -787,7 +804,7 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
                 {
                     char buffer[10];
                     sprintf(buffer, "%d", cost);
-                    renderer->RenderQuad(manaIcons[0].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
+                    renderer->RenderQuad(SafeManaIcon(0), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
                         0.4f * pos.actZ);
                     float w = font->GetStringWidth(buffer);
                     font->DrawString(buffer, x + (-12 * j + (Carditem->mPosX +1) - w / 2) * pos.actZ, pos.actY + (yOffset - 5) * pos.actZ);
@@ -798,7 +815,7 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
                 {
                     char buffer[10];
                     sprintf(buffer, "X");
-                    renderer->RenderQuad(manaIcons[0].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
+                    renderer->RenderQuad(SafeManaIcon(0), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
                         0.4f * pos.actZ);
                     float w = font->GetStringWidth(buffer);
                     font->DrawString(buffer, x + (-12 * j + (Carditem->mPosX + 1) - w / 2) * pos.actZ, pos.actY + (yOffset - 5) * pos.actZ);
@@ -809,10 +826,12 @@ void CardGui::AlternateRender(MTGCard * card, const Pos& pos)
             {
                 float yOffseticon = (float)Carditem->mPosY;
                 JQuadPtr ExtraIcons = WResourceManager::Instance()->RetrieveQuad(Carditem->mFileName.c_str(), 2 + (float)(Carditem->mIconPosX - 1) * 36, (float)(Carditem->mIconPosY -1) * 38 , 32, 32, "", RETRIEVE_MANAGE);
-                ExtraIcons->SetHotSpot(16,16);
-                renderer->RenderQuad(ExtraIcons.get(), x + (Carditem->mPosX) * pos.actZ, pos.actY + (yOffseticon) * pos.actZ, 0, (float)Carditem->mSizeIcon * 0.4f
-                * pos.actZ, (float)Carditem->mSizeIcon* 0.4f * pos.actZ);
-
+                if (ExtraIcons)
+                {
+                    ExtraIcons->SetHotSpot(16,16);
+                    renderer->RenderQuad(ExtraIcons.get(), x + (Carditem->mPosX) * pos.actZ, pos.actY + (yOffseticon) * pos.actZ, 0, (float)Carditem->mSizeIcon * 0.4f
+                    * pos.actZ, (float)Carditem->mSizeIcon* 0.4f * pos.actZ);
+                }
             }
             else 
             {
@@ -1045,9 +1064,12 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
                             {
                                 float _color = (float)card->data->getColor() -1;
                                 JQuadPtr ExtraManas = WResourceManager::Instance()->RetrieveQuad("menuicons.png", 2 + _color * 36, 76, 32, 32, "c_extra", RETRIEVE_MANAGE);
-                                ExtraManas->SetHotSpot(16, 16);
-                                renderer->RenderQuad(ExtraManas.get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
-                                * pos.actZ, 0.4f * pos.actZ);
+                                if (ExtraManas)
+                                {
+                                    ExtraManas->SetHotSpot(16, 16);
+                                    renderer->RenderQuad(ExtraManas.get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
+                                    * pos.actZ, 0.4f * pos.actZ);
+                                }
                             }
                    
                         ++j;
@@ -1061,19 +1083,19 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
 
                     if (scale < 0)
                     {
-                        renderer->RenderQuad(manaIcons[h->color1].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color1), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) t)) * pos.actZ, 0, 0.4f + scale, 0.4f
                             + scale);
-                        renderer->RenderQuad(manaIcons[h->color2].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color2), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) v)) * pos.actZ, 0, 0.4f - scale, 0.4f
                             - scale);
                     }
                     else
                     {
-                        renderer->RenderQuad(manaIcons[h->color2].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color2), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) v)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) v)) * pos.actZ, 0, 0.4f - scale, 0.4f
                             - scale);
-                        renderer->RenderQuad(manaIcons[h->color1].get(), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
+                        renderer->RenderQuad(SafeManaIcon(h->color1), x + (-12 * j + Carditem->mPosX + 3 * SineHelperFunction((float) t)) * pos.actZ,
                             pos.actY + (yOffset + 3 * CosineHelperFunction((float) t)) * pos.actZ, 0, 0.4f + scale, 0.4f
                             + scale);
                     }
@@ -1085,7 +1107,7 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
                      int cost;
                     for (cost = manacost->getCost(i); cost > 0; --cost)
                     {
-                        renderer->RenderQuad(manaIcons[i].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
+                        renderer->RenderQuad(SafeManaIcon(i), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f
                             * pos.actZ, 0.4f * pos.actZ);
                         ++j;
                     }
@@ -1096,7 +1118,7 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
                 {
                     char buffer[10];
                     sprintf(buffer, "%d", cost);
-                    renderer->RenderQuad(manaIcons[0].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
+                    renderer->RenderQuad(SafeManaIcon(0), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
                         0.4f * pos.actZ);
                     float w = font->GetStringWidth(buffer);
                     font->DrawString(buffer, x + (-12 * j + (Carditem->mPosX +1) - w / 2) * pos.actZ, pos.actY + (yOffset - 5) * pos.actZ);
@@ -1107,7 +1129,7 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
                 {
                     char buffer[10];
                     sprintf(buffer, "X");
-                    renderer->RenderQuad(manaIcons[0].get(), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
+                    renderer->RenderQuad(SafeManaIcon(0), x + (-12 * j + Carditem->mPosX) * pos.actZ, pos.actY + (yOffset) * pos.actZ, 0, 0.4f * pos.actZ,
                         0.4f * pos.actZ);
                     float w = font->GetStringWidth(buffer);
                     font->DrawString(buffer, x + (-12 * j + (Carditem->mPosX + 1) - w / 2) * pos.actZ, pos.actY + (yOffset - 5) * pos.actZ);
@@ -1118,10 +1140,12 @@ void CardGui::TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad)
             {
                 float yOffseticon = (float)Carditem->mPosY;
                 JQuadPtr ExtraIcons = WResourceManager::Instance()->RetrieveQuad(Carditem->mFileName.c_str(), 2 + (float)(Carditem->mIconPosX - 1) * 36, (float)(Carditem->mIconPosY -1) * 38 , 32, 32, "", RETRIEVE_MANAGE);
-                ExtraIcons->SetHotSpot(16,16);
-                renderer->RenderQuad(ExtraIcons.get(), x + (Carditem->mPosX) * pos.actZ, pos.actY + (yOffseticon) * pos.actZ, 0, (float)Carditem->mSizeIcon * 0.4f
-                * pos.actZ, (float)Carditem->mSizeIcon* 0.4f * pos.actZ);
-
+                if (ExtraIcons)
+                {
+                    ExtraIcons->SetHotSpot(16,16);
+                    renderer->RenderQuad(ExtraIcons.get(), x + (Carditem->mPosX) * pos.actZ, pos.actY + (yOffseticon) * pos.actZ, 0, (float)Carditem->mSizeIcon * 0.4f
+                    * pos.actZ, (float)Carditem->mSizeIcon* 0.4f * pos.actZ);
+                }
             }
             else 
             {

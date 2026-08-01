@@ -23,8 +23,28 @@ public class StorageOptions
     public static int                count   = 0;
     public static String             defaultMountPoint;
 
+    /** True when MANAGE_EXTERNAL_STORAGE has been granted (API 30+) or when
+     *  running below API 30 where legacy storage access is unrestricted.
+     *  Set automatically at the start of determineStorageOptions(). */
+    public static boolean hasManageStoragePermission = false;
+
     public static void determineStorageOptions(android.content.Context mContext)
     {
+        // Update permission flag so every call site sees the current state.
+        // API 30 (R) introduced MANAGE_EXTERNAL_STORAGE; below that, legacy storage is unrestricted.
+        // We use reflection so this file compiles against the API 23 build target.
+        if (Build.VERSION.SDK_INT >= 30) {
+            try {
+                java.lang.reflect.Method m = Environment.class.getMethod("isExternalStorageManager");
+                hasManageStoragePermission = (Boolean) m.invoke(null);
+            } catch (Exception e) {
+                hasManageStoragePermission = false;
+                Log.w(TAG, "isExternalStorageManager unavailable: " + e.getMessage());
+            }
+        } else {
+            hasManageStoragePermission = true; // legacy storage: unrestricted below API 30
+        }
+
         initializeMountPoints();
         if (findForcemount()){
             readMountsFileTest();
@@ -38,7 +58,14 @@ public class StorageOptions
         testAndCleanMountsList();
         File[] externalStorageVolumes = mContext.getExternalFilesDirs("");
         for(int i = 0; i < externalStorageVolumes.length; i++){
-            mMounts.add(externalStorageVolumes[i].getAbsolutePath());
+            String path = externalStorageVolumes[i].getAbsolutePath();
+            if (hasManageStoragePermission) {
+                // Strip the app-scoped suffix to expose the volume root.
+                // e.g. /storage/XXXX-XXXX/Android/data/net.wagic.app/files → /storage/XXXX-XXXX
+                int idx = path.indexOf("/Android/data/");
+                if (idx > 0) path = path.substring(0, idx);
+            }
+            mMounts.add(path);
         }
         for(int i = 0; i < mMounts.size(); i++){
             for(int j = 0; j < mMounts.size(); j++){
@@ -215,7 +242,12 @@ public class StorageOptions
             t++;
             String mount = mMounts.get(i);
             File root = new File(mount);
-            if (!root.exists() || !root.isDirectory() || !root.canWrite())
+            // File.canWrite() is unreliable under FUSE with MANAGE_EXTERNAL_STORAGE:
+            // the FUSE daemon grants access via AppOps, but access() returns EACCES.
+            // Keep the path if we hold the permission, even if canWrite() is false.
+            boolean accessible = root.exists() && root.isDirectory() &&
+                (root.canWrite() || hasManageStoragePermission);
+            if (!accessible)
                 mMounts.remove(i--);
         }
 
@@ -227,14 +259,16 @@ public class StorageOptions
                 File root = new File(System.getenv("EXTERNAL_STORAGE"));
                 if (root.exists() && root.isDirectory() && root.canWrite())
                 {
-                    if(!isRooted())
+                    if (!isRooted() && !hasManageStoragePermission)
                     {
+                        // No broad storage access: fall back to app-scoped directory.
                         File folder = new File(System.getenv("EXTERNAL_STORAGE")+"/Android/data/net.wagic.app/files");
                         folder.mkdirs();
                         mMounts.add(folder.toString());
                     }
                     else
                     {
+                        // Rooted or MANAGE_EXTERNAL_STORAGE granted: use volume root directly.
                         mMounts.add(System.getenv("EXTERNAL_STORAGE"));
                     }
                 }
@@ -245,14 +279,16 @@ public class StorageOptions
                 File root = new File(System.getenv("SECONDARY_STORAGE"));
                 if (root.exists() && root.isDirectory() && root.canWrite())
                 {
-                    if(!isRooted())
+                    if (!isRooted() && !hasManageStoragePermission)
                     {
+                        // No broad storage access: fall back to app-scoped directory.
                         File folder = new File(System.getenv("SECONDARY_STORAGE")+"/Android/data/net.wagic.app/files");
                         folder.mkdirs();
                         mMounts.add(folder.toString());
                     }
                     else
                     {
+                        // Rooted or MANAGE_EXTERNAL_STORAGE granted: use volume root directly.
                         mMounts.add(System.getenv("SECONDARY_STORAGE"));
                     }
                 }

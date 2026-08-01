@@ -1,0 +1,20 @@
+#SOS M1: Withering Curse base (no life gained) -2/-2 all kills a 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:withering curse
+manapool:{1}{B}{B}
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+withering curse
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:withering curse
+manapool:{0}
+[PLAYER2]
+graveyard:grizzly bears
+life:20
+[END]

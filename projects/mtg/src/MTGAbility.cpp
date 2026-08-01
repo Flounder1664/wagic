@@ -1634,8 +1634,20 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             playerName = card->controller()->opponent()->getDisplayName();
         } else if(from.size() && from[1] == "controller"){
             playerName = card->controller()->getDisplayName();
-        } 
+        }
         return NEW TrCardDungeonCompleted(observer, id, card, tc, once, limitOnceATurn, totaldng, playerName);
+    }
+
+    //A Room has been fully unlocked (Duskmourn Rooms)
+    if (TargetChooser * tc = parseSimpleTC(s, "roomfullyunlocked", card)){
+        string playerName = "";
+        vector<string>from = parseBetween(s, "from(",")");
+        if(from.size() && from[1] == "opponent"){
+            playerName = card->controller()->opponent()->getDisplayName();
+        } else if(from.size() && from[1] == "controller"){
+            playerName = card->controller()->getDisplayName();
+        }
+        return NEW TrCardRoomFullyUnlocked(observer, id, card, tc, once, limitOnceATurn, playerName);
     }
 
     //Roll die has been performed from a card
@@ -2591,6 +2603,15 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
                 tc->targetter->bypassTC = false;
         sWithoutTc = splitTarget[0];
         sWithoutTc.append(splitTarget[2]);
+        //Let the AI judge the targeting decision by the ability's own effect
+        //rather than by its source card. Historically this was only set for
+        //activated abilities (below, with the cost prefix); triggered
+        //abilities fell back to "is the source card good?", which made the
+        //AI aim hostile triggers of its own good permanents at itself -
+        //e.g. Hand of the Praetors handing its controller the poison
+        //counter (issue #594). The activated-ability path overwrites this
+        //with the full costed string, preserving its previous behavior.
+        tc->belongsToAbility = sWithoutTc;
     }
 
     size_t delimiter = sWithoutTc.find("}:");
@@ -2757,6 +2778,57 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             return mainAbility;
         }
     }
+    //A plain spell-effect line carrying its own target(...) - Agony
+    //Warp's second line, Carom's redirect leg, Rites of Reaping... -
+    //historically lost its chooser: no leaf parser consumes `tc` on
+    //these paths, so the secondary effect silently fizzled when the
+    //spell resolved. Give such lines the mandatory-choice treatment
+    //(same wrapping the 'choice ' keyword gets) so the target is
+    //prompted for at resolution. Spell context only: the same card
+    //text parsed outside a resolving spell keeps its old meaning.
+    if (tc && spell)
+    {
+        //Only plain leaf effects opt in: the target() extraction above is
+        //not bracket-aware, so lines whose target(...) belongs to a NESTED
+        //ability (teach/transforms/newability grants, conditionals...)
+        //must fall through to their structural parsers untouched.
+        string trimmed = sWithoutTc;
+        size_t firstChar = trimmed.find_first_not_of(" ");
+        if (firstChar != string::npos)
+            trimmed = trimmed.substr(firstChar);
+        bool plainDamage = (trimmed.find("damage:") == 0);
+        bool plainPT = false;
+        {
+            size_t pos = 0;
+            if (pos < trimmed.size() && (trimmed[pos] == '+' || trimmed[pos] == '-')) pos++;
+            size_t digits = 0;
+            while (pos < trimmed.size() && isdigit(trimmed[pos])) { pos++; digits++; }
+            if (digits && pos < trimmed.size() && trimmed[pos] == '/')
+                plainPT = true;
+        }
+        //A bare zone move with its own target() (Memory Leak's "exile a
+        //nonland card from that player's hand") fizzled the same way.
+        //Only the leaf form opts in: a chained/structural line keeps its
+        //old parse, since its target() may belong to the nested part.
+        bool plainMove = (trimmed.find("moveto(") == 0)
+            && trimmed.find("and!(") == string::npos
+            && trimmed.find("transforms(") == string::npos
+            && trimmed.find("newability") == string::npos
+            && trimmed.find("teach(") == string::npos
+            && trimmed.find("&&") == string::npos;
+        if (plainDamage || plainPT || plainMove)
+        {
+            MTGAbility * a1 = parseMagicLine(sWithoutTc, id, spell, card);
+            if (a1)
+            {
+                a1 = NEW GenericTargetAbility(observer, newName, castRestriction, id, card, tc, a1);
+                return NEW MayAbility(observer, id, a1, card, true, castRestriction);
+            }
+            SAFE_DELETE(tc);
+            return NULL;
+        }
+    }
+
     // Generic "Until end of turn" effect
     if (s.find("ueot ") == 0)
     {
@@ -2780,14 +2852,40 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     }
     
         // neverending effect
-    if (s.find("emblem ") == 0)
+    if (s.find("emblem") == 0 && s.size() > 6 && (s[6] == ' ' || s[6] == '('))
     {
-        string s1 = s.substr(7);
-        MTGAbility * a1 = parseMagicLine(s1, id, spell, card);
+        string rest = s.substr(6);
+        //Explicit-emblem marker (issue #23): a REAL, displayable emblem is
+        //written  emblem("rules text") <effect> . The quoted text both marks it
+        //as a true emblem (so a card is shown in the command zone) and becomes
+        //the card's body. Plain  emblem <effect>  (no quoted text) stays an
+        //invisible internal/global effect - this cleanly excludes the overloaded
+        //non-emblem uses (perpetuals, ueot globals like High Tide) with no guess.
+        string emblemText = "";
+        size_t firstNonSpace = rest.find_first_not_of(" ");
+        if (firstNonSpace != string::npos && rest[firstNonSpace] == '(')
+        {
+            size_t q1 = rest.find('"', firstNonSpace);
+            size_t q2 = (q1 != string::npos) ? rest.find('"', q1 + 1) : string::npos;
+            size_t closeParen = (q2 != string::npos) ? rest.find(')', q2) : string::npos;
+            if (q1 != string::npos && q2 != string::npos && closeParen != string::npos)
+            {
+                emblemText = rest.substr(q1 + 1, q2 - q1 - 1);
+                rest = rest.substr(closeParen + 1);
+            }
+        }
+        MTGAbility * a1 = parseMagicLine(rest, id, spell, card);
         if (!a1)
             return NULL;
 
-        return NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
+        GenericAbilityMod * gmod = NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
+        if (!emblemText.empty())
+        {
+            gmod->isEmblem = true;
+            gmod->emblemSource = card;
+            gmod->emblemText = emblemText;
+        }
+        return gmod;
     }
 
     //choose a color
@@ -4373,6 +4471,17 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //unlock a Room door (Duskmourn Rooms)
+    vector<string> splitUnlockDoor = parseBetween(s, "unlockdoor:", " ", false);
+    if (splitUnlockDoor.size())
+    {
+        int doorNum = atoi(splitUnlockDoor[1].c_str());
+        if (doorNum != 1 && doorNum != 2) doorNum = 1;
+        MTGAbility * a = NEW AAAlterDoorUnlocked(observer, id, card, card, doorNum, NULL);
+        a->oneShot = 1;
+        return a;
+    }
+
     //alter yidaro counter
     vector<string> splitYidaroCounter = parseBetween(s, "alteryidarocount:", " ", false);
     if (splitYidaroCounter.size())
@@ -5660,6 +5769,20 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //Trigger doubling: doubletrigger(<scope>) - abilities of permanents matching
+    //<scope> that you control trigger one additional time (Harmonic Prodigy,
+    //Sanctum of All, Panharmonicon...). Use an "other ..." scope for cards that
+    //say "another". Unrelated to Doubling Season, which doubles tokens/counters.
+    vector<string> splitDoubleTrigger = parseBetween(s, "doubletrigger(", ")");
+    if (splitDoubleTrigger.size())
+    {
+        TargetChooserFactory tcf(observer);
+        TargetChooser * doubleScope = tcf.createTargetChooser(splitDoubleTrigger[1], card);
+        if (!doubleScope)
+            return NULL;
+        return NEW ATriggerDoubler(observer, id, card, doubleScope);
+    }
+
     //identify what a leveler creature will max out at.
     vector<string> splitMaxlevel = parseBetween(s, "maxlevel:", " ", false);
     if (splitMaxlevel.size())
@@ -5899,9 +6022,23 @@ MTGAbility * AbilityFactory::parsePhaseActionAbility(string s,MTGCardInstance * 
     bool once = (s1.find("once") != string::npos);
 
     MTGCardInstance * _target = NULL;
+    bool stackTargetSuppressed = false;
     if (spell)
+    {
         _target = spell->getNextCardTarget();
-    if(!_target)
+        //Counterspells target a spell on the stack, which is gone by the
+        //time a delayed phase action fires; their delayed effects act from
+        //the casting card instead ("You draw a card at the beginning of
+        //the next turn's upkeep" - Arcane Denial, upstream issue #1126).
+        //Card-directed delayed effects on countered spells go through
+        //transforms(newability[...]), which does not pass a spell here.
+        if (_target && _target->currentZone && _target->currentZone == _target->controller()->game->stack)
+        {
+            _target = NULL;
+            stackTargetSuppressed = true;
+        }
+    }
+    if(!_target && !stackTargetSuppressed)
         _target = target;
 
     return NEW APhaseActionGeneric(observer, id, card, _target, trim(splitActions[2]), restrictions, phase, sourceinPlay, next, myturn, opponentturn, once, checkexile);
@@ -6122,7 +6259,10 @@ int AbilityFactory::abilityEfficiency(MTGAbility * a, Player * p, int mode, Targ
     if (AALifer * abi = dynamic_cast<AALifer *>(a))
         return abi->getLife() > 0 ? BAKA_EFFECT_GOOD : BAKA_EFFECT_BAD;
     if (AAAlterPoison * abi = dynamic_cast<AAAlterPoison *>(a))
-        return abi->poison > 0 ? BAKA_EFFECT_GOOD : BAKA_EFFECT_BAD;
+        //Getting poison counters is bad for the affected player (10 = death),
+        //losing them is good. This was inverted, making the AI aim its own
+        //infect triggers (Hand of the Praetors...) at itself (issue #594).
+        return abi->poison > 0 ? BAKA_EFFECT_BAD : BAKA_EFFECT_GOOD;
     if (dynamic_cast<AADepleter *> (a))
         return BAKA_EFFECT_BAD;
     if (dynamic_cast<AADrawer *> (a))
@@ -6454,6 +6594,18 @@ int AbilityFactory::magicText(int id, Spell * spell, MTGCardInstance * card, int
             if (a->oneShot)
             {
                 a->resolve();
+                //Trigger doubling for ENTER-THE-BATTLEFIELD abilities. A permanent's
+                //bare auto= lines are its ETB triggers, but they are oneShots resolved
+                //here rather than through TriggeredAbility, so the doubler has to be
+                //applied at this point too (this is the Panharmonicon path).
+                //Gated on the source actually being in play, so a resolving instant or
+                //sorcery - whose effects are oneShots on this same path - is untouched.
+                MTGCardInstance * etbSource = (spell && spell->source) ? spell->source : card;
+                if (etbSource && etbSource->isInPlay(observer))
+                {
+                    for (int extra = countTriggerDoublers(observer, etbSource); extra > 0; extra--)
+                        a->resolve();
+                }
                 delete (a);
             }
             else
@@ -7256,6 +7408,25 @@ NestedAbility::NestedAbility(MTGAbility * _ability)
     ability = _ability;
 }
 
+void MTGAbility::propagateSource(MTGAbility * a, MTGCardInstance * newSource)
+{
+    if (!a || !newSource)
+        return;
+    a->source = newSource;
+    //Wrappers (GenericActivatedAbility & co) hold the real effect nested
+    //inside; resolve() forwards target but reads source from the child.
+    if (NestedAbility * na = dynamic_cast<NestedAbility *>(a))
+    {
+        if (na->ability != a) //defensive: avoid pathological self-nesting
+            propagateSource(na->ability, newSource);
+    }
+    if (MultiAbility * ma = dynamic_cast<MultiAbility *>(a))
+    {
+        for (size_t i = 0; i < ma->abilities.size(); ++i)
+            propagateSource(ma->abilities[i], newSource);
+    }
+}
+
 //
 
 ActivatedAbility::ActivatedAbility(GameObserver* observer, int id, MTGCardInstance * card, ManaCost * _cost, int restrictions,string limit,MTGAbility * sideEffect,string usesBeforeSideEffects,string castRestriction) :
@@ -7777,19 +7948,50 @@ int TriggeredAbility::receiveEvent(WEvent * e)
     {
         resolve();
         return 1;
-        //triggers that resolve from stack events must resolve instantly or by the time they do the cards that triggered them 
+        //triggers that resolve from stack events must resolve instantly or by the time they do the cards that triggered them
         //have already been put in play or graveyard.
     }
         fireAbility();
+        for (int extra = extraTriggerCount(); extra > 0; extra--)
+            fireAbility();
         return 1;
     }
     return 0;
 }
 
+//Trigger doubling (Harmonic Prodigy, Sanctum of All, Panharmonicon...): count the
+//permanents in play whose doubleScope matches triggerSource. Each one makes the
+//trigger fire one ADDITIONAL time. Firing twice is safe: ActionStack::addAbility
+//wraps the ability in a fresh StackAbility per call, and StackAbility neither owns
+//nor deletes the ability (its resolve() is just ability->resolve()).
+int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource)
+{
+    if (!triggerSource || !observer || !observer->mLayers || !observer->mLayers->actionLayer())
+        return 0;
+    int extra = 0;
+    ActionLayer * al = observer->mLayers->actionLayer();
+    for (size_t i = 1; i < al->mObjects.size(); i++)
+    {
+        ATriggerDoubler * doubler = dynamic_cast<ATriggerDoubler *>((MTGAbility *) al->mObjects[i]);
+        if (doubler && doubler->doubles(triggerSource))
+            extra++;
+    }
+    return extra;
+}
+
+int TriggeredAbility::extraTriggerCount()
+{
+    return countTriggerDoublers(game, source);
+}
+
 void TriggeredAbility::Update(float)
 {
     if (trigger())
+    {
         fireAbility();
+        for (int extra = extraTriggerCount(); extra > 0; extra--)
+            fireAbility();
+    }
 }
 
 ostream& TriggeredAbility::toString(ostream& out) const
@@ -8324,6 +8526,16 @@ AManaProducer::AManaProducer(GameObserver* observer, int id, MTGCardInstance * c
 int AManaProducer::isReactingToClick(MTGCardInstance * _card, ManaCost * mana)
 {
     int result = 0;
+    //This override bypasses ActivatedAbility::isReactingToClick entirely,
+    //so restriction{...} on mana abilities was silently ignored (e.g.
+    //Adarkar Unicorn's upkeep-only mana, #1085 list). Enforce it here the
+    //same way the base class does.
+    if (castRestriction.size())
+    {
+        AbilityFactory af(game);
+        if (!af.parseCastRestrictions(_card, _card->controller(), castRestriction))
+            return 0;
+    }
     if (!mana)
         mana = game->currentlyActing()->getManaPool();
     //please do not condense the following, I broke it apart for readability, it was far to difficult to tell what exactly happened before with it all in a single line.

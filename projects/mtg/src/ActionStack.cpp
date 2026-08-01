@@ -16,7 +16,10 @@ The Action Stack contains all information for Game Events that can be interrupte
 #include "ModRules.h"
 #include "AllAbilities.h"
 #include "CardSelector.h"
+#include "CrashLog.h"
+#include "MTGCardInstance.h"
 #include <typeinfo>
+#include <sstream>
 
 namespace
 {
@@ -917,6 +920,22 @@ int ActionStack::resolve()
         return 0;
 
     DebugTrace("Resolving Action on stack: " << action->getDisplayName());
+
+    // Crash breadcrumb (see CrashLog.h): action->resolve() runs card-defined
+    // effect code and is the most crash-prone spot in the engine. Record what
+    // is about to resolve, and the source card, so an unhandled exception can
+    // name the card to fix rather than closing silently.
+    {
+        std::ostringstream crumb;
+        crumb << "turn " << (observer ? observer->turn : -1);
+        if (observer)
+            crumb << " " << observer->getCurrentGamePhaseName();
+        crumb << ": resolving '" << action->getDisplayName() << "'";
+        if (action->source)
+            crumb << " [source card: " << action->source->name << "]";
+        CrashLog::setBreadcrumb(crumb.str());
+    }
+
     if (action->resolve())
     {
         action->state = RESOLVED_OK;
@@ -1370,7 +1389,15 @@ void ActionStack::Fizzle(Interruptible * action, MTGCardInstance * fizzler, Fizz
         unsigned int position = 0;
         switch (fizzleMode) {
         case PUT_IN_GRAVEARD:
-            spell->source->controller()->game->putInGraveyard(spell->source);
+            //Flashback-cast spells are exiled wherever they would leave
+            //the stack - including when countered (CR 702.34a). The
+            //resolved path already does this; the countered path sent
+            //them back to the graveyard (Dread Return report in #1085).
+            if (spell->source->alternateCostPaid[ManaCost::MANA_PAID_WITH_FLASHBACK] > 0
+                || spell->source->basicAbilities[(int)Constants::TEMPFLASHBACK])
+                spell->source->controller()->game->putInExile(spell->source);
+            else
+                spell->source->controller()->game->putInGraveyard(spell->source);
             break;
         case PUT_IN_HAND:
             spell->source->controller()->game->putInHand(spell->source);

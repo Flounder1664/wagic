@@ -1,0 +1,22 @@
+#SOS M6: Glorious Decay mode 0 (destroy artifact).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:glorious decay
+manapool:{1}{G}
+[PLAYER2]
+inplay:ornithopter
+life:20
+[DO]
+glorious decay
+choice 0
+ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:glorious decay
+manapool:{0}
+[PLAYER2]
+graveyard:ornithopter
+life:20
+[END]

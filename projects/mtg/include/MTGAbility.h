@@ -56,6 +56,11 @@ protected:
      // returns target itself if it is a player, or its controller if it is a card
      static Player * getPlayerFromDamageable(Damageable * target);
 public:
+    // Repoints the source of an ability AND its nested/multi children.
+    // Needed when an ability is granted to another card (teach): effects
+    // that depend on the damage/effect source (deathtouch, lifelink...)
+    // must see the taught card, not the teaching aura/equipment.
+    static void propagateSource(MTGAbility * a, MTGCardInstance * newSource);
     enum
     {
         NO_RESTRICTION = 0,
@@ -256,10 +261,19 @@ public:
 
     int receiveEvent(WEvent * e);
     virtual int resolve() = 0;
-    virtual TriggeredAbility* clone() const = 0; 
+    virtual TriggeredAbility* clone() const = 0;
     virtual ostream& toString(ostream& out) const;
+    //Number of ADDITIONAL times this trigger should fire, from trigger-doubling
+    //permanents in play (Harmonic Prodigy, Panharmonicon...). 0 = normal.
+    int extraTriggerCount();
     string castRestriction;
 };
+
+//How many trigger-doubling permanents in play match triggerSource. Shared by
+//TriggeredAbility::extraTriggerCount and the ETB (oneShot) path in
+//AbilityFactory::magicText, since Wagic resolves enter-the-battlefield effects
+//directly rather than as TriggeredAbilities.
+int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource);
 
 
 //Triggers are not "real" abilities. They don't resolve, they just "trigger" and are associated to other abilities that will be addedToGame when the Trigger triggers

@@ -1,0 +1,22 @@
+#SOS M6 charm-mode regression.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:artistic process
+manapool:{3}{R}{R}
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+artistic process
+choice 0
+hill giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:artistic process
+manapool:{0}
+[PLAYER2]
+graveyard:hill giant
+life:20
+[END]

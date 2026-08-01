@@ -1,0 +1,21 @@
+#SOS M6: Splatter Technique mode 0 (draw four).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:splatter technique
+library:plains,island,swamp,forest
+manapool:{1}{U}{U}{R}{R}
+[PLAYER2]
+life:20
+[DO]
+splatter technique
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:plains,island,swamp,forest
+graveyard:splatter technique
+manapool:{0}
+[PLAYER2]
+life:20
+[END]

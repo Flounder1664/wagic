@@ -1,0 +1,24 @@
+#BARGAIN on a new card, UNBARGAINED path. Torch the Tower deals 2 damage unbargained
+#and 3 bargained, so a 3/3 Hill Giant is the discriminator: here it must SURVIVE.
+#This also proves the bargain option does not break the ordinary cast.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Torch the Tower
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Torch the Tower
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Torch the Tower
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

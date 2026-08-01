@@ -53,7 +53,10 @@ int OrderedAIAction::getEfficiency(AADamager * aad)
     if (dTarget && aad && (aad->getDamage() == dTarget->toughness))
         return 100;
     else if (dTarget && aad && (aad->getDamage() > dTarget->toughness))
-        return 10 * (10 - (aad->getDamage() - dTarget->toughness)); //less eff the more dmg above toughness
+        //A kill with slight overkill must still outrank chip damage to the
+        //player's face (90 - otherTargets above); waste-heavy overkill
+        //decays below it (upstream issue #1079 / ai/goblin_artillery.txt).
+        return 95 - 10 * (aad->getDamage() - dTarget->toughness - 1);
     else
         return 10;
 
@@ -2941,6 +2944,11 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
                 }
                 int randomChance = randomGenerator.random();
                 int chance = randomChance % 100;
+                //FORCEABILITY tests: any card worth playing at all is played,
+                //so scripted AI tests don't depend on the (process-global,
+                //thread-shared) rand() stream. Deliberate zeros still skip.
+                if (forceBestAbilityUse && shouldPlayPercentage > 0)
+                    chance = 0;
                 if (chance > shouldPlayPercentage)
                     continue;
                 if(shouldPlayPercentage <= 10)
@@ -3101,6 +3109,11 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
             }
             int randomChance = randomGenerator.random();
             int chance = randomChance % 100;
+            //FORCEABILITY tests: any card worth playing at all is played,
+            //so scripted AI tests don't depend on the (process-global,
+            //thread-shared) rand() stream. Deliberate zeros still skip.
+            if (forceBestAbilityUse && shouldPlayPercentage > 0)
+                chance = 0;
             if (chance > shouldPlayPercentage)
                 continue;
             if(shouldPlayPercentage <= 10)
@@ -3231,6 +3244,11 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
             }
             int randomChance = randomGenerator.random();
             int chance = randomChance % 100;
+            //FORCEABILITY tests: any card worth playing at all is played,
+            //so scripted AI tests don't depend on the (process-global,
+            //thread-shared) rand() stream. Deliberate zeros still skip.
+            if (forceBestAbilityUse && shouldPlayPercentage > 0)
+                chance = 0;
             if (chance > shouldPlayPercentage)
                 continue;
             if(shouldPlayPercentage <= 10)
@@ -3448,6 +3466,11 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
             }
             int randomChance = randomGenerator.random();
             int chance = randomChance % 100;
+            //FORCEABILITY tests: any card worth playing at all is played,
+            //so scripted AI tests don't depend on the (process-global,
+            //thread-shared) rand() stream. Deliberate zeros still skip.
+            if (forceBestAbilityUse && shouldPlayPercentage > 0)
+                chance = 0;
             if (chance > shouldPlayPercentage)
                 continue;
             if(shouldPlayPercentage <= 10)

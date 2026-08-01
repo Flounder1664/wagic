@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -26,11 +27,15 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
+
+// android.provider.Settings constants for MANAGE_ALL_FILES_ACCESS_PERMISSION are API 30+;
+// we use the action string literal directly so this compiles against the API 23 build target.
 
 import android.util.Log;
 
@@ -102,6 +107,11 @@ public class SDLActivity extends Activity implements OnKeyListener {
 
     //public final static String RES_FOLDER = Environment.getExternalStorageDirectory().getPath() + "/Wagic/Res/";
     public static String RES_FILENAME = "";
+    // Point at upstream WagicProject for now: it hosts a real (non-prerelease)
+    // CardImageLinks.csv, whereas the fork's only release is a prerelease and the
+    // /releases/latest/ endpoint 404s on it. Limitation: the upstream CSV does not
+    // index fork-added sets, so cards in those sets fall back to the slow scrape
+    // path. See LOCAL_CHANGES.md "Image downloader" note for the follow-up.
     public static String databaseurl = "https://github.com/WagicProject/wagic/releases/latest/download/CardImageLinks.csv";
 
     // Preferences
@@ -442,12 +452,19 @@ public class SDLActivity extends Activity implements OnKeyListener {
                     !internalPath.equalsIgnoreCase(selectedRemovableCardPath)) {
                 wagicMediaPath = new File(selectedRemovableCardPath);
 
-                if (!wagicMediaPath.exists() || !wagicMediaPath.canWrite()) {
+                // File.canWrite() uses the Unix access() syscall which checks group
+                // membership; MANAGE_EXTERNAL_STORAGE is enforced by the FUSE daemon
+                // instead, so canWrite() returns false even when actual writes succeed.
+                // Accept the path if we hold MANAGE_EXTERNAL_STORAGE as a fallback.
+                boolean pathOk = wagicMediaPath.exists() &&
+                    (wagicMediaPath.canWrite() || StorageOptions.hasManageStoragePermission);
+                if (!pathOk) {
                     Log.e(TAG,
                         "Error in initializing system folder: " +
                         selectedRemovableCardPath);
                 } else { // found a removable media location
                     sdcardPath = selectedRemovableCardPath + "/Wagic";
+                    new File(sdcardPath).mkdirs(); // ensure the Wagic directory exists
                 }
             }
 
@@ -797,8 +814,16 @@ public class SDLActivity extends Activity implements OnKeyListener {
                                         res = "SET " + set + ":\n" + details;
                                     }
                                 }
-                            } catch (Exception e) {
-                                res = res + "\n" + e.getMessage();
+                            } catch (Throwable e) {
+                                // Catch Throwable (not just Exception): the slow
+                                // scrape path can hit NoClassDefFoundError (e.g.
+                                // a missing third-party lib like jsoup) or
+                                // OutOfMemoryError, both of which are Errors and
+                                // would otherwise propagate out of this thread and
+                                // crash the whole app. Degrade to a failed-set
+                                // message instead.
+                                res = res + "\nSET " + set + " failed: " +
+                                    e.toString();
                                 error = true;
                             }
                         }
@@ -1156,6 +1181,46 @@ public class SDLActivity extends Activity implements OnKeyListener {
 		mSingleton = this;
 		mContext = this.getApplicationContext();
 		RES_FILENAME = getResourceName();
+
+		// On Android 11+ (API 30+) request MANAGE_EXTERNAL_STORAGE so Wagic's
+		// data directory is accessible to companion apps (e.g. deck editor).
+		// Without it the storage picker falls back to the app-scoped path which
+		// other apps cannot read.  We show a one-time dialog; the user can also
+		// grant it later via Settings → Storage Data Options.
+		// Note: API 30 constants (VERSION_CODES.R, isExternalStorageManager,
+		// ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION) are accessed via reflection /
+		// string literals so this code compiles against the API 23 build target.
+		if (Build.VERSION.SDK_INT >= 30) {
+		    try {
+		        java.lang.reflect.Method isManager =
+		            Environment.class.getMethod("isExternalStorageManager");
+		        boolean hasPermission = (Boolean) isManager.invoke(null);
+		        if (!hasPermission) {
+		            AlertDialog.Builder permDialog = new AlertDialog.Builder(this);
+		            permDialog.setTitle("All Files Access");
+		            permDialog.setMessage(
+		                "Wagic needs \"All files access\" permission to store game data " +
+		                "where companion apps (like the deck editor) can reach it.\n\n" +
+		                "Tap \"Grant\" to open Settings, then enable the permission for Wagic. " +
+		                "You can also grant it later via the in-game Settings menu.");
+		            permDialog.setPositiveButton("Grant",
+		                new DialogInterface.OnClickListener() {
+		                    public void onClick(DialogInterface dialog, int which) {
+		                        // "android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION" is the
+		                        // string value of Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+		                        Intent intent = new Intent(
+		                            "android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION");
+		                        startActivity(intent);
+		                    }
+		                });
+		            permDialog.setNegativeButton("Not now", null);
+		            permDialog.show();
+		        }
+		    } catch (Exception e) {
+		        Log.e(TAG, "Error checking MANAGE_EXTERNAL_STORAGE permission: " + e.getMessage());
+		    }
+		}
+
 		StorageOptions.determineStorageOptions(mContext);
 		checkStorageLocationPreference();
 		prepareOptionMenu(null);
@@ -1829,7 +1894,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // EGL buffer flip
     public void flipEGL() {
         if (!mSurfaceValid) {
-            createSurface(this.getHolder());
+            try {
+                createSurface(this.getHolder());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "flipEGL: surface not ready, skipping frame: " + e.getMessage());
+                return;
+            }
         }
 
         try {
@@ -1924,7 +1994,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                 float xVelocity = mVelocityTracker.getXVelocity(0);
                 float yVelocity = mVelocityTracker.getYVelocity(0);
 
-                if ((Math.abs(xVelocity) > 300) || (Math.abs(yVelocity) > 300)) {
+                if ((Math.abs(xVelocity) > 300) || (Math.abs(yVelocity) > 800)) {
                     SDLActivity.onNativeFlickGesture(xVelocity, yVelocity);
                 }
 

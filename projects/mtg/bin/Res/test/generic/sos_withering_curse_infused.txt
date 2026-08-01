@@ -1,0 +1,23 @@
+#SOS M1: gain life (Chaplain's Blessing) then Withering Curse -> destroy all (Hill Giant dies).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:chaplain's blessing,withering curse
+manapool:{W}{1}{B}{B}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+chaplain's blessing
+withering curse
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:chaplain's blessing,withering curse
+manapool:{0}
+life:25
+[PLAYER2]
+graveyard:hill giant
+life:20
+[END]

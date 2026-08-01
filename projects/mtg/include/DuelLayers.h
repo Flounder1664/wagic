@@ -15,6 +15,7 @@ class GuiAvatars;
 class CardSelectorBase;
 struct Pos;
 class MTGGamePhase;
+class MTGCardInstance;
 
 class DuelLayers
 {
@@ -32,6 +33,12 @@ protected:
     int mPlayerViewIndex;
     CardSelectorBase* mCardSelector;
 
+    // Bug-flag hotkey state (JGE_BTN_TAGBUG): on-screen confirmation and a
+    // simple debounce so a single keypress logs the card exactly once.
+    string mTagMessage;
+    float mTagMessageTimer;
+    MTGCardInstance* mLastTagged;
+
 public:
     DuelLayers(GameObserver* go, int playerViewIndex = 0);
     virtual ~DuelLayers();
@@ -43,6 +50,7 @@ public:
     MTGGamePhase* getPhaseHandler() {return phaseHandler;};
     virtual void Update(float dt, Player * player);
     void CheckUserInput(int isAI);
+    void TagBuggyCard();
     void Render();
     void Add(GuiLayer * layer);
     void Remove();

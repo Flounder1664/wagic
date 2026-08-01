@@ -1,0 +1,20 @@
+#FIN Mysidian Elder: ETB creates a 0/1 Wizard token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:mysidian elder
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+mysidian elder
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:mysidian elder,*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

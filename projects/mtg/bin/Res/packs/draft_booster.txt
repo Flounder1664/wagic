@@ -1,0 +1,18 @@
+<PACK name="Draft" type="Booster" pool="all set:4ED;" price="0">
+	<slot copies="1">
+		<random_card>rarity:mythic;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+		<random_card>rarity:rare;</random_card>
+	</slot>
+	<slot copies="3">
+		<random_card>rarity:uncommon;</random_card>
+	</slot>
+	<slot copies="10">
+		<random_card>rarity:common;</random_card>
+	</slot>
+</PACK>

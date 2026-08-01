@@ -1186,6 +1186,37 @@ public:
     }
 };
 
+class TrCardRoomFullyUnlocked: public Trigger
+{
+public:
+    bool limitOnceATurn;
+    int triggeredTurn;
+    string playerName;
+    TrCardRoomFullyUnlocked(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool limitOnceATurn = false, string playerName = "") :
+    Trigger(observer, id, source, once, tc), limitOnceATurn(limitOnceATurn), playerName(playerName)
+    {
+        triggeredTurn = -1;
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        WEventRoomFullyUnlocked * e = dynamic_cast<WEventRoomFullyUnlocked *> (event);
+        if (!e) return 0;
+        if (limitOnceATurn && triggeredTurn == game->turn)
+            return 0;
+        if (playerName != "" && playerName != e->playerName)
+            return 0;
+        if (!tc->canTarget(e->card)) return 0;
+        triggeredTurn = game->turn;
+        return 1;
+    }
+
+    TrCardRoomFullyUnlocked * clone() const
+    {
+        return NEW TrCardRoomFullyUnlocked(*this);
+    }
+};
+
 class TrCardRolledDie: public Trigger
 {
 public:
@@ -2374,6 +2405,27 @@ public:
 };
 
 
+/* Trigger doubling: "If an ability of <scope> you control would trigger, that
+   ability triggers an additional time" (Harmonic Prodigy, Sanctum of All,
+   Panharmonicon...). A passive ability that simply advertises itself in the
+   action layer; TriggeredAbility::extraTriggerCount() finds it and fires the
+   trigger once more per matching doubler.
+   NOTE: this is unrelated to Doubling Season, which doubles a *result* (tokens
+   or counters) and is already handled in pure DSL. */
+class ATriggerDoubler: public MTGAbility
+{
+public:
+    TargetChooser * doubleScope; //whose triggered abilities get doubled
+
+    ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope);
+    //true when a trigger belonging to triggerSource should fire an extra time
+    bool doubles(MTGCardInstance * triggerSource);
+    const string getMenuText();
+    ATriggerDoubler * clone() const;
+    ~ATriggerDoubler();
+};
+
+
 class  AInstantCastRestrictionUEOT: public InstantAbilityTP
 {
 public:
@@ -3101,8 +3153,16 @@ public:
 class GenericAbilityMod: public InstantAbility, public NestedAbility
 {
 public:
+    //Explicit emblems (issue #23): set when the line was  emblem("rules text")
+    //<effect> . resolve() then drops a "<source> Emblem" card carrying that text
+    //into the controller's command zone (the "C" box) so the emblem is visible.
+    //Permanent by nature, so the card just persists (no lifetime hook). Multiple
+    //activations make multiple cards (emblems aren't unique).
+    bool isEmblem;
+    MTGCardInstance * emblemSource;
+    string emblemText;
     GenericAbilityMod(GameObserver* observer, int _id, MTGCardInstance * _source, Damageable * _target, MTGAbility * ability) :
-      InstantAbility(observer, _id, _source,_target), NestedAbility(ability)
+      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemSource(NULL)
       {
           ability->target = _target;
       }
@@ -3124,6 +3184,29 @@ public:
               return 1;
           }
           toAdd->addToGame();
+          //Emblem (issue #23): drop a "<source> Emblem" card carrying the
+          //rules text into the controller's command zone (the "C" box). Only
+          //explicitly-marked emblems reach here. Permanent => the card simply
+          //persists (no removal hook). Type Emblem => never castable
+          //(MTGPutInPlayRule guard).
+          if (isEmblem && emblemSource)
+          {
+              Player * ctrl = emblemSource->controller();
+              if (ctrl)
+              {
+                  Token * tok = NEW Token(emblemSource->name + " Emblem", emblemSource, 0, 0);
+                  tok->addType(Subtypes::TYPE_EMBLEM);
+                  if (!emblemText.empty())
+                      tok->setText(emblemText);
+                  //Force the generic card frame: the Token ctor copies the
+                  //source's (negated) id, which resolves to wrong art (e.g. the
+                  //token the emblem creates). id 0 => clean frame for all (#23).
+                  tok->setMTGId(0);
+                  tok->owner = ctrl;
+                  tok->isToken = 1;
+                  ctrl->game->commandzone->addCard(tok);
+              }
+          }
           return 1;
       }
 
@@ -3558,7 +3641,10 @@ public:
         {
             if (d->type_as_damageable == Damageable::DAMAGEABLE_MTGCARDINSTANCE)
             {
-                a->source = (MTGCardInstance *) d;
+                //Repoint the whole ability tree, not just the wrapper: the
+                //nested effect's source is what damage/deathtouch/lifelink
+                //rules inspect (upstream issue #1142).
+                MTGAbility::propagateSource(a, (MTGCardInstance *) d);
             }
             if (oneShot)
             {
@@ -3709,7 +3795,10 @@ public:
         {
             if (d->type_as_damageable == Damageable::DAMAGEABLE_MTGCARDINSTANCE)
             {
-                a->source = (MTGCardInstance *) d;
+                //Repoint the whole ability tree, not just the wrapper: the
+                //nested effect's source is what damage/deathtouch/lifelink
+                //rules inspect (upstream issue #1142).
+                MTGAbility::propagateSource(a, (MTGCardInstance *) d);
             }
             if (oneShot)
             {
@@ -4808,6 +4897,20 @@ public:
     const string getMenuText();
     AAAlterDungeonCompleted * clone() const;
     ~AAAlterDungeonCompleted();
+};
+
+//Door Unlocked (Duskmourn Rooms): adds DoorN counter to source; fires
+//WEventRoomFullyUnlocked when both Door1 and Door2 counters are present.
+class AAAlterDoorUnlocked: public ActivatedAbility
+{
+public:
+    int doorNumber;
+
+    AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, int doorNumber, ManaCost * _cost = NULL);
+    int resolve();
+    const string getMenuText();
+    AAAlterDoorUnlocked * clone() const;
+    ~AAAlterDoorUnlocked();
 };
 
 //Yidaro Counter
@@ -6933,6 +7036,8 @@ class AAMulligan: public ActivatedAbilityTP
 public:
     AAMulligan(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target, ManaCost * _cost = NULL, int who =
             TargetChooser::UNSET);
+    bool mulliganWindowOpen();
+    int isReactingToClick(MTGCardInstance * card, ManaCost * mana = NULL);
     int resolve();
     const string getMenuText();
     AAMulligan * clone() const;

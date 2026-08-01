@@ -1,0 +1,22 @@
+#SOS M6 charm-mode regression.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:witherbloom charm
+manapool:{B}{G}
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+witherbloom charm
+choice 2
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:witherbloom charm
+manapool:{0}
+[PLAYER2]
+graveyard:grizzly bears
+life:20
+[END]

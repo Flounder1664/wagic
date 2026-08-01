@@ -1,0 +1,21 @@
+#WOE Gingerbread Hunter: cast the creature side -> giant + ETB Food token.
+#(The Puny Snack targeted adventure half can't be driven from the suite - in-game V loop.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:gingerbread hunter // puny snack
+manapool:{4}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+gingerbread hunter // puny snack
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:gingerbread hunter // puny snack,*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]
