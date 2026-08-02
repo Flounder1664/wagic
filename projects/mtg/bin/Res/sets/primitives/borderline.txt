@@ -137108,10 +137108,10 @@ abilities=adventure
 other={1}{G/U}{G/U} name(Adventure)
 auto=lord(other elf|mybattlefield) 1/1
 auto=_LANDFALL_token(Elf,Creature Elf,1/1,green)
-auto=alternative name(Mill four) mill:4 controller scrycore delayed target(<upto:2>land|myreveal) moveto(hand) scrycoreend scryend
+auto=alternative reveal:4 optionone name(Get lands) target(<upto:2>land|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; mill-then-take-lands-from-among-milled approximated via scry-block wrapper reused for post-mill reveal
+# REVIEW 2026-08-02 [P:low] HOB preview build; mill-then-take-lands approximated via reveal+manual-graveyard-move (scrycore/scryend removed -- that pairing only works after scry:, caused a soft-lock)
 text=Other Elves you control get +1/+1. -- Landfall -- Whenever a land you control enters, create a 1/1 green Elf creature token. // Mill four cards, then put up to two land cards from among them into your hand.
 mana={2}{G/U}{G/U}
 type=Legendary Creature
@@ -137286,8 +137286,10 @@ name=Most Decrepit Old Bird
 abilities=adventure,flying
 other={1}{U} name(Adventure)
 auto=aslongas(*|mygraveyard) 1/1 >6
-auto=alternative mill:4 controller scrycore delayed target(<upto:1>*[instant,sorcery]|myreveal) moveto(hand) scrycoreend scryend
+auto=alternative reveal:4 optionone name(Get instant/sorcery) target(<upto:1>*[instant,sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; scrycore/scryend removed (only valid after scry:, caused a soft-lock) -- replaced with proven reveal+manual-graveyard-move idiom
 text=Flying -- Threshold -- This creature gets +1/+1 as long as there are seven or more cards in your graveyard. // Mill four cards, then put an instant or sorcery card from among them into your hand.
 mana={U}
 type=Creature
@@ -137545,7 +137547,7 @@ name=Cantankerous Keepers
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; affinity-for-Elves not implemented (no per-subtype-affinity primitive exists)
 #MISSING Affinity for Elves cost reduction not implemented
-auto=reveal:4 scrycore delayed all(*[elf]|reveal) moveto(hand) and!( all(*|reveal) bottomoflibrary )! scrycoreend scryend
+auto=reveal:4 optionone name(Get elves) all(*[elf]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Affinity for Elves (This spell costs {1} less to cast for each Elf you control.) -- When this creature enters, mill four cards, then put all Elf cards from among them into your hand.
 mana={5}{G}
 type=Creature
@@ -137594,10 +137596,10 @@ toughness=1
 [/card]
 [card]
 name=Part in Friendship
-auto=_DIES_restriction{} turnlimited:reveal:1 scrycore delayed if type(creature[zpos<=1]|myreveal)~morethan~0 then donothing else name(Keep revealing) reveal:1 scrycoreend scryend
+auto=_DIES_restriction{} turnlimited:Reveal:1 revealzone(mylibrary) revealuntil(creature|mylibrary) optionone target(<1>creature|reveal) moveto(hand) optiononeend optiontwo all(*|reveal) bottomoflibrary optiontwoend revealend
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; reveal-until-creature-then-conditionally-battlefield-or-hand not fully implemented
-#MISSING reveal-until-a-creature-card-then-put-onto-battlefield-or-hand-by-cost-comparison not implemented; approximated as a single-card reveal only
+# REVIEW 2026-08-02 [P:low] HOB preview build; scrycore/scryend removed (only valid after scry:, caused a soft-lock) -- replaced with proven revealuntil() idiom
+#MISSING mana-value-vs-lands-controlled battlefield/hand split not implemented; approximated as always-to-hand
 text=Whenever a nontoken creature you control dies, reveal cards from the top of your library until you reveal a creature card. If its mana value is less than or equal to the number of lands you control, put it onto the battlefield. Otherwise, put it into your hand. Put the rest on the bottom of your library in a random order. This ability triggers only once each turn.
 mana={4}{G}
 type=Enchantment
@@ -137616,8 +137618,11 @@ toughness=5
 [/card]
 [card]
 name=Through the Forest Gate
-auto=reveal:20 scrycore delayed all(land|reveal) moveto(mybattlefield) and!( tap(noevent) )! scrycoreend scryend
+auto=reveal:20 optionone name(Take lands) target(<anyamount>land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo name(None) donothing optiontwoend revealend
+auto=shuffle
 auto=life:8 controller
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; scrycore/scryend removed (only valid after scry:, caused a soft-lock with no cancel) -- replaced with proven reveal+anyamount idiom
 text=Look at the top twenty cards of your library, put any number of land cards from among them onto the battlefield tapped, then shuffle. You gain 8 life.
 mana={6}{G}{G}
 type=Sorcery
@@ -137746,7 +137751,7 @@ abilities=adventure
 other={3}{U} name(Adventure)
 auto=lord(this) transforms((,newability[changecost(colorless:-sourcept)]))
 auto={2}:equip
-auto=alternative mill:6 controller scrycore delayed all(*[instant,sorcery]|myreveal) moveto(hand) scrycoreend scryend
+auto=alternative reveal:6 optionone name(Get instants/sorceries) all(*[instant,sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; instant/sorcery-cost-reduction-equal-to-equipped-power approximated
@@ -137894,9 +137899,10 @@ name=Gandalf, Goblins' Bane
 abilities=adventure
 other={1}{R} name(Adventure)
 auto=@each mycast noncreature:counter(1/1) this ueot && damage:1 all(opponent)
-auto=alternative mill:2 controller scrycore delayed all(*|myreveal) moveto(myexile) and!( transforms((,newability[restriction{}!controls(wizard|mybattlefield):cantcast],newability[canplayfromexile forever])) forever )! scrycoreend scryend
+auto=alternative all(*[zpos<=2]|mylibrary) moveto(myexile) and!( transforms((,newability[restriction{}!controls(wizard|mybattlefield):cantcast],newability[canplayfromexile forever])) forever )!
 auto=alternative _ADVENTURE_
 grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; scrycore/scryend removed (only valid after scry:, caused a soft-lock) -- replaced with direct zpos-filtered exile
 #MISSING exiled-cards playable only while controlling a Wizard approximated via cantcast restriction, unverified syntax
 text=Whenever you cast a noncreature spell, Gandalf gets +1/+1 until end of turn and deals 1 damage to each opponent. // Look at the top two cards of your library and exile them face down. For as long as they remain exiled, you may play them if you control a Wizard.
 mana={2}{R}
