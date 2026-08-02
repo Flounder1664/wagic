@@ -25,6 +25,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     manaPool = NEW ManaPool(this);
     nomaxhandsize = false;
     cityBlessing = false;
+    enduringStory = false;
     poisonCount = 0;
     damageCount = 0;
     nonCombatDamage = 0;

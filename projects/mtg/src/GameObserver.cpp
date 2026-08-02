@@ -1014,6 +1014,19 @@ void GameObserver::gameStateBasedEffects()
         //ever set it -- never clear it back to false.
         if(!p->cityBlessing && z->nb_cards >= 10)
             p->cityBlessing = true;
+        //Storied: once true, the enduring story never goes away either.
+        if(!p->enduringStory)
+        {
+            int storiedCount = 0;
+            for (int k = z->nb_cards - 1; k >= 0 && storiedCount < 3; k--)
+            {
+                MTGCardInstance * sc = z->cards[k];
+                if (sc->hasType(Subtypes::TYPE_ARTIFACT) || sc->hasType(Subtypes::TYPE_LEGENDARY) || sc->hasSubtype("Saga"))
+                    storiedCount++;
+            }
+            if (storiedCount >= 3)
+                p->enduringStory = true;
+        }
         //////////////////////////////////
         //clear will attack player or pw//
         //////////////////////////////////

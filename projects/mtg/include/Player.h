@@ -35,6 +35,9 @@ public:
     //Ascend: once you control 10+ permanents, you have the city's blessing
     //for the rest of the game -- never resets once true.
     bool cityBlessing;
+    //Storied: once you control 3+ artifacts/legendaries/Sagas, you have an
+    //enduring story for the rest of the game -- never resets once true.
+    bool enduringStory;
     MTGPlayerCards * game;
     MTGDeck * mDeck;
     string deckFile;
