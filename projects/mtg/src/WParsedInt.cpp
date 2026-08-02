@@ -33,6 +33,11 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         intValue = card->controller()->cityBlessing ? 1 : 0;
         return;
     }
+    if (s == "enduringstory")
+    {
+        intValue = card->controller()->enduringStory ? 1 : 0;
+        return;
+    }
     bool halfup = false;
     bool halfdown = false;
     bool thirdup = false;
