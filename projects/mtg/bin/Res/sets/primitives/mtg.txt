@@ -65531,6 +65531,14 @@ type=Land
 subtype=Planet
 [/card]
 [card]
+name=Kavu
+type=Creature
+subtype=Kavu
+power=3
+toughness=3
+color=black
+[/card]
+[card]
 name=Kavu Aggressor
 abilities=cantblock
 kicker={4}
@@ -141063,6 +141071,14 @@ text=Equipped creature is unblockable. -- Equipped creature has shroud. (It can'
 mana={3}
 type=Artifact
 subtype=Equipment
+[/card]
+[card]
+name=White Cat
+type=Creature
+subtype=Cat
+power=2
+toughness=2
+color=white
 [/card]
 [card]
 name=White Knight

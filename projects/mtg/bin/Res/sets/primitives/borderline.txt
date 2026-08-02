@@ -106061,7 +106061,7 @@ toughness=3
 [/card]
 [card]
 name=Sophia, Dogged Detective
-auto=create(Tiny:legendary Dog Detective creature:2/2:green:trample)
+auto=create(Tiny:legendary Dog Detective creature:2/2:green:trample:tnum.1)
 auto={1}{S(artifact[token]|myBattlefield)}:counter(1/1) all(dog|myBattlefield)
 auto=@combatdamaged(player) from(dog|myBattlefield):_FOOD_ && _CLUE_
 text=When Sophia, Dogged Detective enters, create Tiny, a legendary 2/2 green Dog Detective creature token with trample. -- {1}, Sacrifice an artifact token: Put a +1/+1 counter on each Dog you control. -- Whenever a Dog you control deals combat damage to a player, create a Food token, then investigate.
@@ -119743,6 +119743,16 @@ text=Deathtouch -- When Toxic Scorpion enters, another target creature you contr
 mana={1}{G}
 type=Creature
 subtype=Scorpion
+power=1
+toughness=1
+[/card]
+[card]
+name=Toxic Snake
+auto=poisontoxic
+text=Whenever this creature deals damage to a player, that player gets a poison counter. (A player with ten or more poison counters loses the game.)
+#MISSING: poisontoxic (poisonous 1) only triggers on combat damage; the real card's "deals damage" is broader (would also trigger on noncombat damage). Minor gap.
+type=Artifact Creature
+subtype=Snake
 power=1
 toughness=1
 [/card]
