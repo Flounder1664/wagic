@@ -137803,3 +137803,184 @@ text=({T}: Add {R}.) -- This land enters tapped unless you control an Equipment.
 type=Land
 subtype=Mountain
 [/card]
+[card]
+name=Gleaming Splendor
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; "opponent's second card drawn this turn" trigger approximated via a per-turn draw counter
+auto=@each opponent draw:all(trigger[to]) counter(0/0,1,DrawCount)
+auto=@counteradded(0/0,1,DrawCount) from(*) restriction{controller:opponent} turnlimited:_TREASURE_
+auto=@each end:removeallcounters(0/0,1,DrawCount)
+auto={2}{W}:target(<2>player) draw:1 targetedplayer
+#MISSING draw-count tracked via counters on the opponent's permanents rather than a true per-player turn-draw-count primitive; may misfire if counters can't be placed on players
+text=Whenever an opponent draws their second card each turn, you create a Treasure token. -- {2}{W}: Two target players each draw a card.
+mana={1}{W}
+type=Enchantment
+[/card]
+[card]
+name=The Queen of Dale
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; "opponent's first noncreature spell each turn" trigger approximated
+auto=@each opponent cast noncreature:restriction{} turnlimited:ability$!name(Recruit) draw:1 controller and!( ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller )!$ controller
+text=Whenever an opponent casts their first noncreature spell each turn, you recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Noble
+power=2
+toughness=1
+[/card]
+[card]
+name=Bilbo, Thief in the Night
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; cost reduction for spells cast from non-hand zones not implemented, attack-trigger cast-from-graveyard implemented
+#MISSING "spells you cast from anywhere other than your hand cost {1} less" not implemented (no verified zone-agnostic cost-reduction primitive)
+auto=_ATTACKING_may name(Cast from graveyard) target(<upto:1>*[artifact,instant,sorcery]|mygraveyard) cast and!( this(castfromgy) transforms((,newability[_DIES_moveto(exile)])) forever )!
+text=Spells you cast from anywhere other than your hand cost {1} less to cast. -- Whenever Bilbo attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
+mana={1}{U}
+type=Legendary Creature
+subtype=Halfling Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Elrond, Moon-Reader
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build
+auto=@activate ability(*[-mana]) source(creature|mybattlefield) restriction{} turnlimited:draw:1 controller
+auto={5}{U}{U}:target(<2>other permanent[-land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
+text=Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn. -- {5}{U}{U}: Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+mana={2}{U}
+type=Legendary Creature
+subtype=Elf Noble
+power=3
+toughness=3
+[/card]
+[card]
+name=Fateful Discovery
+auto=@movedTo(artifact|myBattlefield):all(trigger[to]) draw:1 controller
+text=Whenever an artifact you control enters, draw a card.
+mana={3}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Gollum, Riddle Master
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; choose-odd/even and once-per-quality tracking approximated
+auto=choice name(Choose odd) this(chooseodd) forever
+auto=choice name(Choose even) this(chooseeven) forever
+auto=@each opponent cast:if this(chooseodd) then if compare(sourcemanavalueparity)~equalto~1 then choice name(Counter) counter(1/1) this endchoice choice name(Drain) life:-2 opponent && life:2 controller endchoice choice name(Draw) draw:1 controller endchoice
+auto=@each opponent cast:if this(chooseeven) then if compare(sourcemanavalueparity)~equalto~0 then choice name(Counter) counter(1/1) this endchoice choice name(Drain) life:-2 opponent && life:2 controller endchoice choice name(Draw) draw:1 controller endchoice
+grade=borderline
+#MISSING "choose one that hasn't been chosen" restriction not enforced -- all three modes remain selectable every trigger rather than being consumed permanently
+text=As Gollum enters, choose odd or even. (Zero is even.) -- Whenever an opponent casts a spell with mana value of the chosen quality, choose one that hasn't been chosen -- Put a +1/+1 counter on Gollum. -- Each opponent loses 2 life and you gain 2 life. -- Draw a card.
+mana={1}{B}
+type=Legendary Creature
+subtype=Halfling Horror
+power=3
+toughness=1
+[/card]
+[card]
+name=Inside Information
+target=player
+auto=target(player) mill:mycastx targetedplayer
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; exile-and-play-with-alternate-life-cost not implemented, approximated as a straight mill
+#MISSING exile (not mill) + "may play those cards this turn, paying life equal to mana value instead of mana cost" not implemented
+text=Exile the top X cards of target opponent's library. You may play those cards this turn. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+mana={X}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Gandalf, Goblins' Bane
+abilities=adventure
+other={1}{R} name(Adventure)
+auto=@each mycast noncreature:counter(1/1) this ueot && damage:1 all(opponent)
+auto=alternative mill:2 controller scrycore delayed all(*|myreveal) moveto(myexile) and!( transforms((,newability[restriction{}!controls(wizard|mybattlefield):cantcast],newability[canplayfromexile forever])) forever )! scrycoreend scryend
+auto=alternative _ADVENTURE_
+grade=borderline
+#MISSING exiled-cards playable only while controlling a Wizard approximated via cantcast restriction, unverified syntax
+text=Whenever you cast a noncreature spell, Gandalf gets +1/+1 until end of turn and deals 1 damage to each opponent. // Look at the top two cards of your library and exile them face down. For as long as they remain exiled, you may play them if you control a Wizard.
+mana={2}{R}
+type=Legendary Creature
+subtype=Avatar Wizard
+power=2
+toughness=3
+[/card]
+[card]
+name=Thorin, Mountain-king
+abilities=trample
+target=creature|mybattlefield
+auto=target(<anyamount>equipment|mybattlefield) rehook mytgt2 && target(creature|mybattlefield) mytgt2 tag(mytgt2) && foreach(mytgt2) attach
+auto=if type(*[equipment;attached]|mybattlefield.count>0) then damage:targetpower target(<upto:1>creature) source(mytgt2)
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; multi-equip-then-conditional-damage approximated, exact targeting/attach syntax unverified
+#MISSING dynamic damage amount tied to the newly-equipped creature's power not fully verified
+text=Trample -- When Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
+mana={3}{R}
+type=Legendary Creature
+subtype=Dwarf Noble
+power=3
+toughness=4
+[/card]
+[card]
+name=Beorn the Fierce
+abilities=trample
+auto=lord(*[bear;-this]|mybattlefield) 2/2
+auto=@combat begin:controller:target(<upto:1>creature|mybattlefield) counter(1/1.trample) && transforms((,newability[bear])) forever && if type(bear|mybattlefield.count>=3) then draw:2 controller
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; "trample counter" approximated as a +1/+1 counter granting trample via type-add
+#MISSING true "trample counter" (a distinct counter type) not implemented; approximated with a +1/+1-style counter plus a forever trample grant
+text=Trample -- Other Bears you control get +2/+2. -- At the beginning of combat on your turn, put a trample counter on up to one target creature you control. It becomes a Bear in addition to its other types. Then if you control three or more Bears, draw two cards.
+mana={3}{G}{G}
+type=Legendary Creature
+subtype=Bear Shapeshifter Warrior
+power=6
+toughness=6
+[/card]
+[card]
+name=Dancing from Dark to Dawn
+target=creature|mybattlefield
+auto=@each mycast creature:target(creature|mybattlefield) counter(1/1) foreach(sourcemanavalue)
+auto=_LANDFALL_token(Bear,Creature Bear,2/2,green)
+text=Whenever you cast a creature spell, put X +1/+1 counters on target creature you control, where X is that spell's mana value. -- Landfall -- Whenever a land you control enters, create a 2/2 green Bear creature token.
+mana={3}{G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Bard, King of Dale
+abilities=reach,vigilance
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; both replacement effects (extra draw step card, doubled tokens) not implemented -- no verified draw-step-replacement or token-doubling primitive
+#MISSING "except the first draw step card, draw two instead" and "tokens created are doubled" both not implemented
+text=Reach, vigilance -- If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead. -- If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+mana={4}{W}{U}
+type=Legendary Creature
+subtype=Human Noble Archer
+power=3
+toughness=5
+[/card]
+[card]
+name=The Arkenstone
+abilities=adventure
+other={2}{W} name(Adventure)
+auto=lord(other creature|mybattlefield) 1/1
+auto=@each my end:draw:1 controller
+auto=alternative target(legendary creature|mylibrary,myhand) moveto(hand) and!( shuffle )!
+auto=alternative _ADVENTURE_
+text=Creatures you control get +1/+1. -- At the beginning of your end step, draw a card. // Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
+mana={5}
+type=Legendary Artifact
+[/card]
+[card]
+name=Orcrist, Goblin-cleaver
+abilities=trample
+auto=lord(this) transforms((,newability[2/2]))
+auto={3}:equip
+auto=_ATTACKING_choice name(Goblin type) foreach(creature[goblin;equipped]|mybattlefield) _TREASURE_ endchoice choice name(Dwarf type) foreach(creature[dwarf;equipped]|mybattlefield) _TREASURE_ endchoice choice name(Elf type) foreach(creature[elf;equipped]|mybattlefield) _TREASURE_ endchoice choice name(Human type) foreach(creature[human;equipped]|mybattlefield) _TREASURE_ endchoice
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; choose-a-creature-type approximated as a fixed menu of 4 common HOB tribal types rather than any type
+#MISSING true "choose any creature type" not implemented; limited to a fixed choice of Goblin/Dwarf/Elf/Human
+text=Equipped creature gets +2/+2 and has trample. -- Whenever equipped creature deals combat damage to a player, choose a creature type. Create a Treasure token for each creature you control of that type. -- Equip {3}
+mana={3}
+type=Legendary Artifact
+subtype=Equipment
+[/card]
