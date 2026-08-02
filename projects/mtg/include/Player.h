@@ -32,6 +32,9 @@ public:
     string mAvatarName;
     Mode playMode;
     bool nomaxhandsize;
+    //Ascend: once you control 10+ permanents, you have the city's blessing
+    //for the rest of the game -- never resets once true.
+    bool cityBlessing;
     MTGPlayerCards * game;
     MTGDeck * mDeck;
     string deckFile;
