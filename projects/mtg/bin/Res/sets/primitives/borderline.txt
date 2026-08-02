@@ -135615,3 +135615,246 @@ subtype=Phoenix
 power=2
 toughness=2
 [/card]
+[card]
+name=Anduril, Narsil Reforged
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build, ahead of 2026-08-14 release
+auto=@combat(attacking) source(mytgt):if compare(cityblessing)~equalto~1 then counter(1/1.2) all(creature|mybattlefield) else counter(1/1) all(creature|mybattlefield)
+auto={3}:equip
+text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever equipped creature attacks, put a +1/+1 counter on each creature you control. If you have the city's blessing, put two +1/+1 counters on each creature you control instead. -- Equip {3}
+mana={2}
+type=Legendary Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Gandalf, Party Guest
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+abilities=hasnokicker
+text=At the beginning of combat on your turn, you may cast an instant or sorcery spell with mana value X or less from your hand without paying its mana cost, where X is twice the number of legendary Wizards you control.
+#MISSING free-cast-from-hand-by-cost trigger not implemented (no cast-from-hand-without-paying primitive exists); card is vanilla stats only for now
+mana={1}{U}{R}{W}
+type=Legendary Creature
+subtype=Avatar Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Thorin, King of Durin's Folk
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=@movedTo(dwarf|myBattlefield):all(trigger[to]) _TREASURE_
+auto=lord(other dwarf|mybattlefield) foreach(*[artifact;token]|mybattlefield) 1/0
+text=Whenever Thorin or another Dwarf you control enters, create a Treasure token. -- Other Dwarves you control get +1/+0 for each artifact token you control.
+mana={3}{R}{W}
+type=Legendary Creature
+subtype=Dwarf Noble
+power=4
+toughness=4
+[/card]
+[card]
+name=Bilbo, Fellow Conspirator
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=@tokencreated(food|myBattlefield):_TREASURE_
+text=If you would create a Food token, instead create a Food token and a Treasure token.
+mana={2}{G}
+type=Legendary Creature
+subtype=Halfling Citizen
+power=2
+toughness=3
+[/card]
+[card]
+name=Dragon-Cursed Halls
+auto={T}:Add{C}
+auto={1}{T}:name(Grant treasure on damage) target(creature) transforms((,newability[@combatdamaged(player) from(this):_TREASURE_])) ueot
+text={T}: Add {C}. -- {1}, {T}: Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, create a Treasure token."
+type=Land
+[/card]
+[card]
+name=Bilbo's Burglaring
+target=<upto:1>artifact|opponentbattlefield
+auto=target(<upto:1>artifact|opponentbattlefield) moveto(mybattlefield)
+text=For each opponent, gain control of up to one target artifact that player controls.
+mana={4}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Necklace of Girion
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=@movedTo(green|mystack):all(trigger[to]) target(creature|mybattlefield) counter(1/1)
+auto=@movedTo(forest|myBattlefield):all(trigger[to]) target(creature|mybattlefield) counter(1/1)
+auto={T}:Add{G}
+text=Whenever you cast a green spell and whenever a Forest you control enters, put a +1/+1 counter on target creature you control. -- {T}: Add {G}.
+mana={2}{G}
+type=Legendary Artifact
+[/card]
+[card]
+name=Galadriel's Dismissal
+kicker={2}{W}
+auto=if compare(kicked)~equalto~0 then target(creature) phaseout
+auto=if compare(kicked)~equalto~1 then target(player) all(creature|targetedplayer) phaseout
+text=Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.) -- Target creature phases out. If this spell was kicked, each creature target player controls phases out instead.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Call Forth the Tempest
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+autostack=if casted(this) then cascade:plibrarycount && cascade:plibrarycount
+text=Cascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order. Then do it again.) -- Call Forth the Tempest deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn.
+#MISSING damage-equal-to-total-mv-of-spells-cast-this-turn clause not implemented (no spell-cost-accumulator primitive); cascade x2 still works
+mana={5}{R}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Galadriel, Light of Valinor
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+abilities=hasnokicker
+text=Alliance -- Whenever another creature you control enters, choose one that hasn't been chosen this turn -- Add {G}{G}{G}. -- Put a +1/+1 counter on each creature you control. -- Scry 2, then draw a card.
+#MISSING Alliance's "choose one that hasn't been chosen this turn" modal ETB trigger not implemented (no per-turn-mode-exclusion tracking primitive); card is vanilla stats only for now
+mana={2}{G}{W}{U}
+type=Legendary Creature
+subtype=Elf Noble
+power=3
+toughness=3
+[/card]
+[card]
+name=Minas Morgul, Dark Fortress
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=tap(noevent)
+auto={T}:Add{B}
+text=Minas Morgul enters tapped. -- {T}: Add {B}. -- {3}{B}, {T}: Put a shadow counter on target creature. For as long as that creature has a shadow counter on it, it's a Wraith in addition to its other types.
+#MISSING shadow-counter/Wraith-block-restriction ability not implemented (shadow evasion keyword doesn't exist in this engine)
+type=Legendary Land
+[/card]
+[card]
+name=Bilbo, Unexpected Adventurer
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=cantbeblockedby(creature[power>=3])
+auto=@combatdamaged(player,battle) source(this):name(Return permanent from graveyard) target(<upto:1>*[-land;manacost<=3]|graveyard) moveto(ownerbattlefield)
+text=Bilbo can't be blocked by creatures with power 3 or greater. -- Whenever Bilbo deals combat damage to a player or battle, put up to one target nonland permanent card with mana value 3 or less from a graveyard onto the battlefield under its owner's control.
+mana={3}{W}
+type=Legendary Creature
+subtype=Halfling Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Gandalf, Shadow's Foe
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+abilities=vigilance
+auto=target(<upto:3>land|mybattlefield) moveto(myexile) and!( moveto(mybattlefield) all(this) and!( tap(noevent) )! )!
+auto=@movedTo(land|myBattlefield):all(trigger[to]) draw:1 controller && counter(1/1) this
+text=Vigilance -- When Gandalf enters, exile up to three target lands you control, then return them to the battlefield tapped under their owner's control. -- Landfall -- Whenever a land you control enters, draw a card and put a +1/+1 counter on Gandalf.
+mana={5}{U}{U}
+type=Legendary Creature
+subtype=Avatar Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Thorin, Company's Leader
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=@combatdamaged(player,battle) source(dwarf|mybattlefield):_TREASURE_*2
+auto={10}:name(Double strike all) all(creature|mybattlefield) double strike ueot
+text=Whenever a Dwarf you control deals combat damage to a player or battle, create two Treasure tokens. -- {10}: Creatures you control gain double strike until end of turn.
+mana={4}{R}
+type=Legendary Creature
+subtype=Dwarf Warrior
+power=4
+toughness=5
+[/card]
+[card]
+name=Bard, Heir of Girion
+abilities=reach,vigilance
+auto=lord(other creature|mybattlefield) 1/1
+auto=_ATTACKING_draw:1 controller
+text=Reach, vigilance -- Other creatures you control get +1/+1. -- Whenever you attack, draw a card.
+mana={2}{W}{U}
+type=Legendary Creature
+subtype=Human Archer
+power=4
+toughness=4
+[/card]
+[card]
+name=Bolg, Erebor's Reckoning
+abilities=trample
+auto=@combat(begin) source(this):all(*[goblin;orc]|mybattlefield) transforms((,newability[2/2])) ueot && all(creature|opponentbattlefield) transforms((,newability[-1/-1])) ueot
+text=Trample -- At the beginning of each combat, other Goblins and Orcs you control get +2/+2 until end of turn. Creatures your opponents control get -1/-1 until end of turn.
+mana={4}{B}{R}
+type=Legendary Creature
+subtype=Goblin Soldier
+power=6
+toughness=6
+[/card]
+[card]
+name=Chief of the Wilds
+abilities=menace
+auto=@movedTo(other wolf|myBattlefield):all(trigger[to]) counter(1/1.2) this
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+text=Menace -- Whenever another Wolf you control enters, put two +1/+1 counters on Chief of the Wilds. -- If an ability of another Wolf or battle you control triggers, that ability triggers an additional time.
+#MISSING trigger-doubling-for-wolves-and-battles clause not implemented on this card (a general doubletrigger primitive exists for other cards; not wired to Chief of the Wilds' specific wolf/battle restriction yet)
+mana={2}{B}{G}
+type=Legendary Creature
+subtype=Wolf
+power=4
+toughness=4
+[/card]
+[card]
+name=Dain of the Ancient Halls
+abilities=vigilance,haste
+auto=_ATTACKING_damage:type:Dwarf:mybattlefield opponent
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+text=Vigilance, haste -- Whenever Dain attacks, he deals damage equal to the number of Dwarves you control to each opponent.
+mana={3}{R}{W}
+type=Legendary Creature
+subtype=Dwarf Noble
+power=4
+toughness=5
+[/card]
+[card]
+name=Great Goblin, Foul-Hearted
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOC preview build
+auto=@movedTo(this|myBattlefield):if type(army|mybattlefield)~morethan~0 then all(trigger[to]) counter(1/1.3) notatarget(army|myBattlefield) else all(trigger[to]) token(Goblin Army,Creature Goblin Army,0/0,red) and!( counter(1/1.3) notatarget(army|myBattlefield) )!
+auto=_ATTACKING_if type(army|mybattlefield)~morethan~0 then counter(1/1.3) notatarget(army|myBattlefield) else token(Goblin Army,Creature Goblin Army,0/0,red) and!( counter(1/1.3) notatarget(army|myBattlefield) )!
+auto=lord(army|mybattlefield) trample
+text=Whenever Great Goblin enters or attacks, amass Goblins 3. -- Armies you control have trample.
+mana={3}{B}{R}
+type=Legendary Creature
+subtype=Goblin Noble
+power=3
+toughness=3
+[/card]
+[card]
+name=Thranduil the Strategist
+auto=lord(other elf|mybattlefield) transforms((,newability[{T}:Add{G}],newability[{T}:Add{U}]))
+auto=@movedTo(land|myBattlefield):all(trigger[to]) token(Elf,Creature Elf,1/1,green)
+text=Other Elves you control have "{T}: Add {G} or {U}." -- Landfall -- Whenever a land you control enters, create a 1/1 green Elf creature token.
+mana={3}{G}{U}
+type=Legendary Creature
+subtype=Elf Noble
+power=4
+toughness=4
+[/card]
+[card]
+name=Minas Tirith Garrison
+anyzone=phandcount/5end cdaactive
+auto=_ATTACKING_may name(Tap Humans) target(<anyamount>human[-tapped]|mybattlefield) tap && draw:1 controller
+text=Minas Tirith Garrison's power is equal to the number of cards in your hand. -- Whenever this creature attacks, you may tap any number of untapped Humans you control. Draw a card for each Human tapped this way.
+mana={3}{U}
+type=Creature
+subtype=Human Soldier
+power=*
+toughness=5
+[/card]

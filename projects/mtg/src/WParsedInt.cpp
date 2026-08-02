@@ -23,6 +23,16 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     if(!card->storedCard)
         card->storedCard = card->storedSourceCard;
     intValue = 0;
+    //Ascend -- controller has the city's blessing. Checked as an early,
+    //un-nested return rather than another link in the else-if chain below:
+    //that chain is already at MSVC's "blocks nested too deeply" (C1061)
+    //limit, so any addition to it (regardless of position) fails the
+    //Windows build even though it compiles fine on g++/WSL.
+    if (s == "cityblessing")
+    {
+        intValue = card->controller()->cityBlessing ? 1 : 0;
+        return;
+    }
     bool halfup = false;
     bool halfdown = false;
     bool thirdup = false;

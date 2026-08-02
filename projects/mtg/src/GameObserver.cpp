@@ -1010,6 +1010,10 @@ void GameObserver::gameStateBasedEffects()
             p->nomaxhandsize = true;
         else
             p->nomaxhandsize = false;
+        //Ascend: once true, the city's blessing never goes away, so only
+        //ever set it -- never clear it back to false.
+        if(!p->cityBlessing && z->nb_cards >= 10)
+            p->cityBlessing = true;
         //////////////////////////////////
         //clear will attack player or pw//
         //////////////////////////////////
