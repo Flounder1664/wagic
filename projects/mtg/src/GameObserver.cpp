@@ -1002,7 +1002,11 @@ void GameObserver::gameStateBasedEffects()
         Player * p = players[i];
         MTGGameZone * z = players[i]->game->inPlay;
         //------------------------------
-        if(z->hasAbility(Constants::NOMAXHAND)||p->opponent()->inPlay()->hasAbility(Constants::OPPNOMAXHAND))
+        //Static/keyword abilities granted by a command-zone card (emblems,
+        //e.g. Mordenkainen's "You have no maximum hand size.") apply just
+        //like a battlefield permanent's would -- inPlay alone misses them.
+        if(z->hasAbility(Constants::NOMAXHAND)||players[i]->game->commandzone->hasAbility(Constants::NOMAXHAND)
+           ||p->opponent()->inPlay()->hasAbility(Constants::OPPNOMAXHAND)||p->opponent()->game->commandzone->hasAbility(Constants::OPPNOMAXHAND))
             p->nomaxhandsize = true;
         else
             p->nomaxhandsize = false;
