@@ -136566,7 +136566,7 @@ toughness=1
 [/card]
 [card]
 name=Celebrate the Mountain-king
-target=<upto:1>*[-land]|opponentbattlefield
+# REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
 auto=target(<upto:1>*[-land]|opponentbattlefield) transforms((,newability[moveto(myexile)],newability[@leaves(this):all(trigger[from]) moveto(ownerbattlefield)])) forever
 auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
 grade=borderline
@@ -137346,7 +137346,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Along the Crooked Way
-target=creature|mygraveyard
+# REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
 auto=target(creature|mygraveyard) moveto(hand)
 auto=@movedTo(creature|myexile) from(mygraveyard):all(trigger[from]) _AMASSGOBLIN1_
 auto={1}{B}:lord(*[goblin,orc]|mybattlefield) menace ueot
@@ -137914,7 +137914,7 @@ toughness=3
 [card]
 name=Thorin, Mountain-king
 abilities=trample
-target=creature|mybattlefield
+# REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() calls
 auto=target(<anyamount>equipment|mybattlefield) rehook mytgt2 && target(creature|mybattlefield) mytgt2 tag(mytgt2) && foreach(mytgt2) attach
 auto=if type(*[equipment;attached]|mybattlefield.count>0) then damage:targetpower target(<upto:1>creature) source(mytgt2)
 grade=borderline
@@ -137944,7 +137944,8 @@ toughness=6
 [/card]
 [card]
 name=Dancing from Dark to Dawn
-target=creature|mybattlefield
+grade=borderline
+# REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field) that forced an upfront cast-time target prompt on a plain Enchantment -- targeting belongs only in the per-trigger inline target() call
 auto=@each mycast creature:target(creature|mybattlefield) counter(1/1) foreach(sourcemanavalue)
 auto=_LANDFALL_token(Bear,Creature Bear,2/2,green)
 text=Whenever you cast a creature spell, put X +1/+1 counters on target creature you control, where X is that spell's mana value. -- Landfall -- Whenever a land you control enters, create a 2/2 green Bear creature token.
