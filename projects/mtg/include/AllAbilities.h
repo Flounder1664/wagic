@@ -3198,10 +3198,20 @@ public:
                   tok->addType(Subtypes::TYPE_EMBLEM);
                   if (!emblemText.empty())
                       tok->setText(emblemText);
-                  //Force the generic card frame: the Token ctor copies the
-                  //source's (negated) id, which resolves to wrong art (e.g. the
-                  //token the emblem creates). id 0 => clean frame for all (#23).
-                  tok->setMTGId(0);
+                  //The Token ctor copies the source's (negated) id, which
+                  //collides with whatever other token the same source card
+                  //also creates. Disambiguate the same way tnum. does for
+                  //regular tokens (AllAbilities.h ATokenCreator): append a
+                  //fixed suffix to the source's own id and reparse, keeping
+                  //the emblem's id in the same numeric neighborhood as
+                  //whichever set-printing generated it (#23).
+                  {
+                      ostringstream emblemIdStr;
+                      emblemIdStr << abs(tok->getId());
+                      string customEmblemId = emblemIdStr.str() + "99";
+                      WParsedInt newEmblemId(customEmblemId, NULL, emblemSource);
+                      tok->setMTGId(-newEmblemId.getValue());
+                  }
                   tok->owner = ctrl;
                   tok->isToken = 1;
                   ctrl->game->commandzone->addCard(tok);
