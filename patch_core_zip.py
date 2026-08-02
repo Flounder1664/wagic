@@ -33,7 +33,8 @@ for _code in ("2X2", "2XM", "5ED", "6ED", "A25", "AFC", "AKH", "AKR", "ALL", "AP
               "MM3", "MOM", "NCC", "OTC", "OTJ", "OTP", "PLIST", "PZ1", "RIX", "SNC",
               "SOI", "STX", "TDC", "TDM", "THB", "TLA", "WOE", "WOT", "XLN", "YMID",
               "ALA", "DMR", "EMA", "GN2", "HA4", "IMA", "J22", "JVV", "M19",
-              "M20", "ME1", "MUL", "NEC", "ONC", "PZ2", "RTR", "SLD", "SPG", "TSR", "VOW"):
+              "M20", "ME1", "MUL", "NEC", "ONC", "PZ2", "RTR", "SLD", "SPG", "TSR", "VOW",
+              "DIS"):
     REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
 
 # Brand-new entries to inject (files that don't yet exist in core.zip, e.g.
