@@ -2296,29 +2296,34 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     // which is deliberate -- see #31 on the WotC-artwork licensing question); `badge` is
     // the copyright-free two-letter fallback drawn with the main font. Two letters because
     // single initials collide (Flying/First strike/Flash, Deathtouch/Defender/Double strike).
-    struct KeywordIcon { int id; const char* icon; const char* badge; };
+    // `warn` marks a non-keyword alert badge (currently only MISSING) so it can be
+    // tinted red instead of the neutral keyword styling.
+    struct KeywordIcon { int id; const char* icon; const char* badge; bool warn; };
     static const KeywordIcon kKeywords[] = {
-        { Constants::FLYING,         "flying",         "FL" },
-        { Constants::FIRSTSTRIKE,    "firststrike",    "FS" },
-        { Constants::DOUBLESTRIKE,   "doublestrike",   "DS" },
-        { Constants::DEATHTOUCH,     "deathtouch",     "DT" },
-        { Constants::TRAMPLE,        "trample",        "TR" },
-        { Constants::LIFELINK,       "lifelink",       "LL" },
-        { Constants::VIGILANCE,      "vigilance",      "VG" },
-        { Constants::MENACE,         "menace",         "MN" },
-        { Constants::INTIMIDATE,     "intimidate",     "IT" },
-        { Constants::REACH,          "reach",          "RC" },
-        { Constants::HASTE,          "haste",          "HS" },
-        { Constants::FLASH,          "flash",          "FH" },
-        { Constants::DEFENDER,       "defender",       "DF" },
-        { Constants::HEXPROOF,       "hexproof",       "HX" },
-        { Constants::SHROUD,         "shroud",         "SH" },
-        { Constants::INDESTRUCTIBLE, "indestructible", "ID" },
-        { Constants::FEAR,           "fear",           "FE" },
-        { Constants::UNBLOCKABLE,    "unblockable",    "UB" },
-        { Constants::CHANGELING,     "changeling",     "CH" },
-        { Constants::INFECT,         "infect",         "IF" },
-        { Constants::WITHER,         "wither",         "WI" },
+        // Listed first so it is never crowded out by the maxIcons cap, and is the
+        // first thing read. Ships with no artwork: the letter badge is the whole point.
+        { Constants::MISSING,        "missing",        "!?", true  },
+        { Constants::FLYING,         "flying",         "FL", false },
+        { Constants::FIRSTSTRIKE,    "firststrike",    "FS" , false },
+        { Constants::DOUBLESTRIKE,   "doublestrike",   "DS" , false },
+        { Constants::DEATHTOUCH,     "deathtouch",     "DT" , false },
+        { Constants::TRAMPLE,        "trample",        "TR" , false },
+        { Constants::LIFELINK,       "lifelink",       "LL" , false },
+        { Constants::VIGILANCE,      "vigilance",      "VG" , false },
+        { Constants::MENACE,         "menace",         "MN" , false },
+        { Constants::INTIMIDATE,     "intimidate",     "IT" , false },
+        { Constants::REACH,          "reach",          "RC" , false },
+        { Constants::HASTE,          "haste",          "HS" , false },
+        { Constants::FLASH,          "flash",          "FH" , false },
+        { Constants::DEFENDER,       "defender",       "DF" , false },
+        { Constants::HEXPROOF,       "hexproof",       "HX" , false },
+        { Constants::SHROUD,         "shroud",         "SH" , false },
+        { Constants::INDESTRUCTIBLE, "indestructible", "ID" , false },
+        { Constants::FEAR,           "fear",           "FE" , false },
+        { Constants::UNBLOCKABLE,    "unblockable",    "UB" , false },
+        { Constants::CHANGELING,     "changeling",     "CH" , false },
+        { Constants::INFECT,         "infect",         "IF" , false },
+        { Constants::WITHER,         "wither",         "WI" , false },
     };
     static const int kNumKeywords = (int)(sizeof(kKeywords) / sizeof(kKeywords[0]));
 
@@ -2385,8 +2390,11 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
         else
         {
             const float bw = font->GetStringWidth(kKeywords[k].badge) + 2.f * padX;
-            renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
-            renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
+            const bool warn = kKeywords[k].warn;
+            renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ,
+                warn ? ARGB((int)(pos.actA * 0.85f), 120, 20, 20) : ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
+            renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ,
+                warn ? ARGB((int)pos.actA, 255, 190, 190) : ARGB((int)pos.actA, 225, 225, 232));
             // box == text + padding on all sides, so a padded top-left draw is centred
             font->DrawString(kKeywords[k].badge, x + padX, y + padY);
         }

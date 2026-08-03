@@ -298,6 +298,11 @@ void CardPrimitive::setText(const string& value)
     text = value;
 }
 
+void CardPrimitive::setMissingText(const string& value)
+{
+    missingText = value;
+}
+
 /* This alters the card structure, but this is intentional for performance and
 *  space purpose: The only time we get the card text is to render it
 *  on the screen, in a formatted way.
@@ -308,6 +313,16 @@ void CardPrimitive::setText(const string& value)
 */
 const vector<string>& CardPrimitive::getFormattedText(bool noremove)
 {
+    //Surface the unimplemented-ability note with the rules text so the player can
+    //see WHAT is missing, not just that something is (the MISSING keyword badge is
+    //the at-a-glance flag). Appended at display time only -- text= itself stays
+    //faithful to the printed oracle text.
+    if (missingText.size())
+    {
+        text.append("\n-- NOT IMPLEMENTED: ");
+        text.append(missingText);
+        missingText = "";
+    }
     if (!text.size())
         return formattedText;
 

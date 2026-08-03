@@ -271,7 +271,8 @@ const char* Constants::MTGBasicAbilities[] = {
     "canplayenchantmentlibrarytop", // May play enchantments from top
 	"affinitytwoalldeadcreatures", // Costs {2} less to cast for each creature that died this turn
     "ascend", //Card has Ascend -- controlling 10+ permanents grants the city's blessing (e.g. "Kumena's Awakening")
-    "storied" //Card has Storied -- controlling 3+ artifacts/legendaries/Sagas grants an enduring story (e.g. "Balin, Loremaster")
+    "storied", //Card has Storied -- controlling 3+ artifacts/legendaries/Sagas grants an enduring story (e.g. "Balin, Loremaster")
+    "missing" //Card has one or more abilities that are not implemented (see the missing= field); shown as a warning badge
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;
