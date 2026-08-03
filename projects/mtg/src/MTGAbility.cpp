@@ -8498,7 +8498,7 @@ GenericTriggeredAbility* GenericTriggeredAbility::clone() const
     GenericTriggeredAbility * a =  NEW GenericTriggeredAbility(*this);
     a->t = t->clone();
     a->ability = ability->clone();
-    a->destroyCondition = destroyCondition->clone();
+    a->destroyCondition = destroyCondition ? destroyCondition->clone() : NULL;
     return a;
 }
 
