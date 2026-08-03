@@ -1,0 +1,28 @@
+#Beorn the Fierce gives OTHER Bears +2/+2 -- he must not buff himself.
+#Regression: the lord originally used *[bear;-this], which is not valid
+#exclusion syntax anywhere in this codebase, so Beorn buffed himself.
+#Power isn't directly assertable, so this proves it through combat damage.
+#Beorn is 6/6; Ordinary Bear is 4/5 base and 6/7 under the lord. Both attack
+#unblocked = 12 damage, leaving the opponent on 8. If Beorn wrongly buffed
+#himself he'd be 8/8, dealing 14 and leaving 6.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Beorn the Fierce,Ordinary Bear
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Beorn the Fierce
+Ordinary Bear
+next
+next
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:Beorn the Fierce,Ordinary Bear
+[PLAYER2]
+life:8
+[END]

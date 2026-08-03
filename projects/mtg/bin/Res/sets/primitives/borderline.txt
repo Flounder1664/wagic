@@ -136386,7 +136386,10 @@ toughness=2
 [card]
 name=Little Bear
 abilities=flash
-auto=target(other creature|mybattlefield) untap and!( name(Counter if Bear) if type(bear|mybattlefield) then counter(1/1) mytgt else donothing )!
+# REVIEW 2026-08-03 [P:med] HOB fix: never added the counter. It tested type(bear|mybattlefield)
+# -- 'do I control any Bear', with no comparison operator so it never evaluated -- instead of
+# 'is the TARGETED creature a Bear'. Correct idiom is if cantargetcard(<type>) (cf. Holy Justiciar).
+auto=untap target(other creature|mybattlefield) && if cantargetcard(bear) then counter(1/1)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; conditional-counter-if-Bear approximated
 text=Flash -- When this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.
@@ -137957,7 +137960,9 @@ toughness=4
 [card]
 name=Beorn the Fierce
 abilities=trample
-auto=lord(*[bear;-this]|mybattlefield) 2/2
+# REVIEW 2026-08-03 [P:med] HOB fix: buffed itself. `*[bear;-this]` is not valid exclusion
+# syntax (zero uses anywhere in mtg.txt); the proven form is lord(other creature[sub]|...).
+auto=lord(other creature[bear]|mybattlefield) 2/2
 auto=@combat begin:controller:target(<upto:1>creature|mybattlefield) counter(1/1.trample) && transforms((,newability[bear])) forever && if type(bear|mybattlefield.count>=3) then draw:2 controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "trample counter" approximated as a +1/+1 counter granting trample via type-add
