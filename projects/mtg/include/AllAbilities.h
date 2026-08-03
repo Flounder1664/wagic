@@ -223,7 +223,12 @@ public:
 
     TrCardAddedToZone * clone() const
     {
-        return NEW TrCardAddedToZone(*this);
+        TrCardAddedToZone * t = NEW TrCardAddedToZone(*this);
+        t->toTcZone = toTcZone ? toTcZone->clone() : NULL;
+        t->toTcCard = toTcCard ? toTcCard->clone() : NULL;
+        t->fromTcZone = fromTcZone ? fromTcZone->clone() : NULL;
+        t->fromTcCard = fromTcCard ? fromTcCard->clone() : NULL;
+        return t;
     }
 };
 
