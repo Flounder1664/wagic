@@ -137805,7 +137805,8 @@ type=Land
 [/card]
 [card]
 name=The Lonely Mountain
-auto=this(type(equipment|mybattlefield)~equalto~0) tap(noevent)
+# REVIEW 2026-08-03 [P:med] HOB fix: entered untapped with no Equipment. Used this(...) -- a CONTINUOUS conditional wrapper that re-evaluates -- for a one-shot enters-tapped check. Correct idiom is the plain `if type(...) then tap(noevent)` used by Canopy Vista et al.
+auto=if type(equipment|mybattlefield)~equalto~0 then tap(noevent)
 auto={4}{R}{T}:token(Dwarf,Creature Dwarf,2/2,red)
 grade=borderline
 # REVIEW 2026-08-03 [P:med] HOB fix: had a redundant explicit {T}:Add{R} on top of the mana ability the engine already grants automatically to any subtype=Mountain permanent (confirmed against Madblind Mountain, an existing card with the same subtype that never restates it) -- was showing as two separate tap-for-R abilities. Removed the duplicate.
@@ -137997,13 +137998,6 @@ text=Equipped creature gets +2/+2 and has trample. -- Whenever equipped creature
 mana={3}
 type=Legendary Artifact
 subtype=Equipment
-[/card]
-[card]
-name=City's Blessing
-restriction=never
-abilities=shroud,indestructible,nofizzle,nomovetrigger
-text=You have the city's blessing for the rest of the game. (Ascend -- if you control ten or more permanents, you get the city's blessing.)
-type=Emblem
 [/card]
 [card]
 name=Enduring Story
