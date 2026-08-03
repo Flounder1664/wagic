@@ -2350,6 +2350,9 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     // tall and the text rides up to the top-left instead of sitting centred.
     const float textH = font->GetHeight() * font->GetScale();
     const float bh    = textH + 2.f * padY;
+    // One box size for every badge, icon or letters. Every badge string is two
+    // characters, so sizing from a representative pair keeps them all identical.
+    const float boxW  = font->GetStringWidth("!?") + 2.f * padX;
     const float stepY = bh + gapY;
     const int   maxIcons = 12;
     float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
@@ -2380,16 +2383,21 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
         if (gfx.size())
         {
             JQuadPtr q = WResourceManager::Instance()->RetrieveTempQuad(gfx);
-            if (q.get() && q->mTex)
+            // mWidth/mHeight are guarded: a cache miss or a malformed PNG can hand back
+            // a 0-sized quad, and dividing by it produced an inf scale (renderer crash).
+            if (q.get() && q->mTex && q->mWidth > 0 && q->mHeight > 0)
             {
-                float scale = bh / q->mHeight;
+                // Stretch to the SAME box every badge uses, so icon and letter badges are
+                // visually identical in size (they were not: the icon was scaled to bh but
+                // laid out from its own origin, giving a smaller box than the text badge).
                 q->SetColor(ARGB((int)pos.actA, 255, 255, 255));
-                renderer->RenderQuad(q.get(), x, y, 0, scale, scale);
+                renderer->RenderQuad(q.get(), x, y, 0, boxW / q->mWidth, bh / q->mHeight);
+                q->SetColor(ARGB(255, 255, 255, 255)); // shared quad: restore
             }
         }
         else
         {
-            const float bw = font->GetStringWidth(kKeywords[k].badge) + 2.f * padX;
+            const float bw = boxW;
             const bool warn = kKeywords[k].warn;
             renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ,
                 warn ? ARGB((int)(pos.actA * 0.85f), 120, 20, 20) : ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
