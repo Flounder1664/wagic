@@ -117,6 +117,7 @@ const float CardGui::BigHeight = 285.0;
 const float kWidthScaleFactor = 0.8f;
 
 map<string, string> CardGui::counterGraphics;
+map<string, string> CardGui::keywordGraphics;
 
 namespace
 {
@@ -307,16 +308,22 @@ void CardGui::Render()
         tc = game->getCurrentTargetChooser();
 
     bool alternate = true;
-    JQuadPtr quad = game? game->getResourceManager()->RetrieveCard(card, CACHE_THUMB):WResourceManager::Instance()->RetrieveCard(card, CACHE_THUMB);
+    // #32: the thumbnail texture is only ~120x172, so it looks blurry once a card is
+    // drawn magnified (focus zoom 1.4x, combat/damage zoom 2.2x). Above ~1.2x draw
+    // scale, pull the full-resolution card image instead. Only the one or two focused
+    // cards ever hit this, and their full image is usually already resident because the
+    // preview panel is showing it, so the extra cache pressure is negligible.
+    int cardStyle = (actZ > 1.2f) ? RETRIEVE_NORMAL : CACHE_THUMB;
+    JQuadPtr quad = game? game->getResourceManager()->RetrieveCard(card, cardStyle):WResourceManager::Instance()->RetrieveCard(card, cardStyle);
     if(card && !card->isToken && card->name != card->model->data->name)
     {
         MTGCard * fcard = MTGCollection()->getCardByName(card->name);
-        quad = game->getResourceManager()->RetrieveCard(fcard, CACHE_THUMB);
+        quad = game->getResourceManager()->RetrieveCard(fcard, cardStyle);
     }
     if (game && card->hasCopiedToken && !quad.get())
     {
         MTGCard * tcard = MTGCollection()->getCardById(abs(card->copiedID));
-        quad = game->getResourceManager()->RetrieveCardToken(tcard, CACHE_THUMB, 1, abs(card->copiedID));
+        quad = game->getResourceManager()->RetrieveCardToken(tcard, cardStyle, 1, abs(card->copiedID));
     }
     if (quad.get())
         alternate = false;
@@ -1517,6 +1524,7 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
         renderer->RenderQuad(quad.get(), x, pos.actY, pos.actT, (scale-0.005f)+modxscale+gdvadd, (scale-0.005f)+modyscale+gdvadd);
 
         RenderCountersBig(card, pos);
+        RenderAbilityIconsBig(card, pos);
         return;
     }
 
@@ -2271,7 +2279,122 @@ void CardGui::RenderCountersBig(MTGCard * mtgcard, const Pos& pos, int drawMode)
             font->DrawString(buf, x + 5, y + 5);
         }
     }
-    
+
+}
+
+void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
+{
+    // Only in-play card instances carry a live ability set (basicAbilities is rebuilt
+    // as auras/equipment/lords/counters change), so this reflects *current* abilities,
+    // including granted ones -- which is the whole point of the feature.
+    MTGCardInstance * card = dynamic_cast<MTGCardInstance*>(mtgcard);
+    if (!card)
+        return;
+
+    // Curated evergreen keywords, in display order. `id` is the Constants basic-ability
+    // index; `icon` is looked up as Res/graphics/keywords/<icon>.png (absent by default,
+    // which is deliberate -- see #31 on the WotC-artwork licensing question); `badge` is
+    // the copyright-free two-letter fallback drawn with the main font. Two letters because
+    // single initials collide (Flying/First strike/Flash, Deathtouch/Defender/Double strike).
+    struct KeywordIcon { int id; const char* icon; const char* badge; };
+    static const KeywordIcon kKeywords[] = {
+        { Constants::FLYING,         "flying",         "FL" },
+        { Constants::FIRSTSTRIKE,    "firststrike",    "FS" },
+        { Constants::DOUBLESTRIKE,   "doublestrike",   "DS" },
+        { Constants::DEATHTOUCH,     "deathtouch",     "DT" },
+        { Constants::TRAMPLE,        "trample",        "TR" },
+        { Constants::LIFELINK,       "lifelink",       "LL" },
+        { Constants::VIGILANCE,      "vigilance",      "VG" },
+        { Constants::MENACE,         "menace",         "MN" },
+        { Constants::INTIMIDATE,     "intimidate",     "IT" },
+        { Constants::REACH,          "reach",          "RC" },
+        { Constants::HASTE,          "haste",          "HS" },
+        { Constants::FLASH,          "flash",          "FH" },
+        { Constants::DEFENDER,       "defender",       "DF" },
+        { Constants::HEXPROOF,       "hexproof",       "HX" },
+        { Constants::SHROUD,         "shroud",         "SH" },
+        { Constants::INDESTRUCTIBLE, "indestructible", "ID" },
+        { Constants::FEAR,           "fear",           "FE" },
+        { Constants::UNBLOCKABLE,    "unblockable",    "UB" },
+        { Constants::CHANGELING,     "changeling",     "CH" },
+        { Constants::INFECT,         "infect",         "IF" },
+        { Constants::WITHER,         "wither",         "WI" },
+    };
+    static const int kNumKeywords = (int)(sizeof(kKeywords) / sizeof(kKeywords[0]));
+
+    JRenderer * renderer = JRenderer::GetInstance();
+    // Use MAIN_FONT. In a Latin build this *is* the single-byte "simon" font (the companion
+    // at MAIN_FONT+kSingleByteFontOffset only exists for CJK, so fetching that id directly
+    // returns null and crashes). GetStringWidth() delegates to the ASCII glyphs with scale
+    // applied either way, so box sizing from these metrics is correct.
+    WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+    // Shared singleton; save/restore its scale so our badge text doesn't affect other text.
+    const float oldFontScale = font->GetScale();
+
+    font->SetScale(DEFAULT_MAIN_FONT_SCALE * 0.9f * pos.actZ);
+    font->SetColor(ARGB((int)pos.actA, 245, 245, 250));
+
+    // Each box is sized from the actual text metrics (+ padding), so the two-letter badge
+    // is always snugly framed and centred. Column down the left edge, below the title bar
+    // (over the art) in the BigWidth/BigHeight (200x285) reference frame scaled by actZ.
+    const float padX  = 3.f * pos.actZ;
+    const float padY  = 2.f * pos.actZ;
+    const float gapY  = 3.f * pos.actZ;
+    // GetStringWidth() is scaled but GetHeight() returns the *unscaled* line height, so the
+    // real rendered glyph height is GetHeight() * GetScale(). Use that or the box is too
+    // tall and the text rides up to the top-left instead of sitting centred.
+    const float textH = font->GetHeight() * font->GetScale();
+    const float bh    = textH + 2.f * padY;
+    const float stepY = bh + gapY;
+    const int   maxIcons = 12;
+    float x  = pos.actX + (-BigWidth / 2 + 8) * pos.actZ;
+    float y0 = pos.actY + (-BigHeight / 2 + 46) * pos.actZ;
+
+    int shown = 0;
+    for (int k = 0; k < kNumKeywords && shown < maxIcons; ++k)
+    {
+        if (!card->has(kKeywords[k].id))
+            continue;
+
+        float y = y0 + shown * stepY;
+
+        // Optional user-supplied icon; cached path ("" == not present -> letter badge).
+        const string keyName = kKeywords[k].icon;
+        if (keywordGraphics.find(keyName) == keywordGraphics.end())
+        {
+            string rel = "keywords/";
+            rel.append(keyName);
+            rel.append(".png");
+            string _gfx = WResourceManager::Instance()->graphicsFile(rel);
+            if (!fileExists(_gfx.c_str()))
+                _gfx = "";
+            keywordGraphics[keyName] = _gfx;
+        }
+        const string& gfx = keywordGraphics[keyName];
+
+        if (gfx.size())
+        {
+            JQuadPtr q = WResourceManager::Instance()->RetrieveTempQuad(gfx);
+            if (q.get() && q->mTex)
+            {
+                float scale = bh / q->mHeight;
+                q->SetColor(ARGB((int)pos.actA, 255, 255, 255));
+                renderer->RenderQuad(q.get(), x, y, 0, scale, scale);
+            }
+        }
+        else
+        {
+            const float bw = font->GetStringWidth(kKeywords[k].badge) + 2.f * padX;
+            renderer->FillRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
+            renderer->DrawRoundRect(x, y, bw, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
+            // box == text + padding on all sides, so a padded top-left draw is centred
+            font->DrawString(kKeywords[k].badge, x + padX, y + padY);
+        }
+
+        ++shown;
+    }
+
+    font->SetScale(oldFontScale);
 }
 
 MTGCardInstance* CardView::getCard()
