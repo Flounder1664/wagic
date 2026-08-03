@@ -33,11 +33,12 @@ protected:
     int mPlayerViewIndex;
     CardSelectorBase* mCardSelector;
 
-    // Bug-flag hotkey state (JGE_BTN_TAGBUG): on-screen confirmation and a
-    // simple debounce so a single keypress logs the card exactly once.
+    // Card-status hotkey state (BROKEN=T / VERIFIED=V / PARTIAL=P): on-screen
+    // confirmation and a simple debounce so one keypress records the card once.
     string mTagMessage;
     float mTagMessageTimer;
     MTGCardInstance* mLastTagged;
+    string mLastStatus;
 
 public:
     DuelLayers(GameObserver* go, int playerViewIndex = 0);
@@ -50,7 +51,7 @@ public:
     MTGGamePhase* getPhaseHandler() {return phaseHandler;};
     virtual void Update(float dt, Player * player);
     void CheckUserInput(int isAI);
-    void TagBuggyCard();
+    void RecordCardStatus(const char* status);   // "BROKEN" / "VERIFIED" / "PARTIAL"
     void Render();
     void Add(GuiLayer * layer);
     void Remove();

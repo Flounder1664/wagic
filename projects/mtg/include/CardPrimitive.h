@@ -66,6 +66,7 @@ public:
     map<string,string> magicTexts;
     string magicText;
     int alias;
+    int grade;   // Constants::GRADE_* — persisted implementation grade (file default + grade= override)
     string spellTargetType;
     int power;
     int toughness;

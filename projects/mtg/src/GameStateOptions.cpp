@@ -69,6 +69,7 @@ void GameStateOptions::Start()
     optionsList->Add(NEW OptionInteger(Options::SORTINGDECKS, "Sort decks by date"));
     //show tokens in editor
     optionsList->Add(NEW OptionInteger(Options::SHOWTOKENS, "Show Tokens in Editor"));
+    optionsList->Add(NEW WDecoEnum(NEW OptionInteger(Options::CARDSTATUS_BADGES, "Card status badges", 2, 1, 0)));
     WDecoStyled * wMisc = NEW WDecoStyled(NEW WGuiHeader("Warning!!!"));
     wMisc->mStyle = WDecoStyled::DS_STYLE_ALERT;
     optionsList->Add(wMisc);

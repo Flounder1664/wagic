@@ -507,6 +507,12 @@ int MTGAllCards::load(const string& config_file, const string &set_name)
 int MTGAllCards::load(const string &config_file, int set_id)
 {
     conf_read_mode = 0;
+    // Default grade for this file — the fork's convention is "grade = which
+    // primitive file" (mtg.txt supported, borderline.txt borderline,
+    // unsupported.txt unsupported). A per-card grade= line still overrides it.
+    mFileGrade = Constants::GRADE_SUPPORTED;
+    if (config_file.find("unsupported") != string::npos) mFileGrade = Constants::GRADE_UNSUPPORTED;
+    else if (config_file.find("borderline") != string::npos) mFileGrade = Constants::GRADE_BORDERLINE;
     MTGSetInfo *si = setlist.getInfo(set_id);
 
     int lineNumber = 0;
@@ -540,7 +546,7 @@ int MTGAllCards::load(const string &config_file, int set_id)
         case MTGAllCards::READ_ANYTHING:
             if (s[0] == '[')
             {
-                currentGrade = Constants::GRADE_SUPPORTED; // Default value
+                currentGrade = mFileGrade; // default to the file's grade; grade= overrides
                 if (s.size() < 2)
                 {
                     DebugTrace("FATAL: Card file incorrect");
@@ -740,6 +746,7 @@ CardPrimitive * MTGAllCards::addPrimitive(CardPrimitive * primitive, MTGCard * c
         SAFE_DELETE(primitive);
         return NULL;
     }
+    if (primitive) primitive->grade = currentGrade; // persist grade for runtime (badge / worklist)
     string key;
     if (card)
     {

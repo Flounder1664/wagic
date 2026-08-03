@@ -13,6 +13,20 @@ class MTGCard;
 class MTGCardInstance;
 class PlayGuiObject;
 
+// In-memory mirror of User/card_grades.tsv — human verification mapped onto
+// Wagic's grade vocabulary (Supported/Borderline/Crappy = Constants::GRADE_*).
+// Keyed by card name, one entry per card (deduped, rewritten on update so the
+// file can't grow unbounded). reload() at duel start; set() by the V/P/T
+// hotkeys; read by CardView to colour the badge.
+namespace CardStatusStore
+{
+    static const int UNTESTED = -1;              // no entry for this card
+    const char* gradeName(int grade);
+    void reload();
+    int  get(const string& name);                // a Constants::GRADE_* value, or UNTESTED
+    void set(const string& name, int grade);     // GRADE_* ; persists (dedup rewrite)
+}
+
 namespace DrawMode
 {
     enum
@@ -29,6 +43,7 @@ struct CardGui: public PlayGuiObject
 protected:
 
     static map<string, string>counterGraphics;
+    static map<string, string>keywordGraphics;
 
     /*
     ** Tries to render the Big version of a card picture, backups to text version in case of failure
@@ -36,6 +51,9 @@ protected:
     static void RenderBig(MTGCard * card, const Pos& pos, bool thumb = false, bool noborder = false, bool gdv = false);
 
     static void RenderCountersBig(MTGCard * card, const Pos& pos, int drawMode = DrawMode::kNormal);
+    // #31: overlay small icons/badges for the keyword abilities a card currently has
+    // (including granted ones). Shown on the big preview only, to avoid board clutter.
+    static void RenderAbilityIconsBig(MTGCard * card, const Pos& pos);
     static void AlternateRender(MTGCard * card, const Pos& pos);
     static void TinyCropRender(MTGCard * card, const Pos& pos, JQuad * quad);
     static string FormattedData (string data, string replace, string value);
@@ -78,11 +96,8 @@ public:
     CardView(const SelectorZone, MTGCardInstance* card, const Pos& ref);
     virtual ~CardView();
 
-    void Render()
-    {
-        CardGui::Render();
-    }
-    
+    void Render();   // CardGui::Render() + verification status badge (defined in CardGui.cpp)
+
     void Render(JQuad* q)
     {
         Pos::Render(q);

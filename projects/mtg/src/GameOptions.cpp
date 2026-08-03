@@ -71,6 +71,7 @@ const string Options::optionNames[] = {
   "interruptEndTurn",
   "interruptCleanup",
   "interruptAfterEnd",
+  "card_status_badges",
 //Unlocked modes
   "prx_handler",
   "prx_eviltwin",
@@ -488,6 +489,11 @@ GameOption * GameOptions::get(int optionID)
         case Options::MANADISPLAY:
             goEnum = NEW GameOptionEnum();
             goEnum->def = OptionManaDisplay::getInstance();
+            go = goEnum;
+            break;
+        case Options::CARDSTATUS_BADGES:
+            goEnum = NEW GameOptionEnum();
+            goEnum->def = OptionCardBadges::getInstance();
             go = goEnum;
             break;
         case Options::MAX_GRADE:
@@ -1026,6 +1032,14 @@ OptionManaDisplay::OptionManaDisplay()
         //Both should still work as always however the enum and this dont want to pair up, no "both" in options now.
 }
 ;
+OptionCardBadges OptionCardBadges::mDef;
+OptionCardBadges::OptionCardBadges()
+{
+    mDef.values.push_back(EnumDefinition::assoc(OFF, "Off"));
+    mDef.values.push_back(EnumDefinition::assoc(FLAGGED_ONLY, "Flagged only"));
+    mDef.values.push_back(EnumDefinition::assoc(ALL, "All"));
+}
+
 OptionVolume OptionVolume::mDef;
 OptionVolume::OptionVolume()
 {

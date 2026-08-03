@@ -556,8 +556,10 @@ typedef enum Buttons
     JGE_BTN_NEXT,    // Right trigger
     JGE_BTN_FULLSCREEN,    // Switch to fullscreen (obviously, PC only)
     JGE_BTN_TAGBUG,    // Flag the selected card as misbehaving (PC debug aid)
+    JGE_BTN_VERIFY,    // Mark the selected card verified 100% correct (PC test aid)
+    JGE_BTN_PARTIAL,   // Mark the selected card as mostly-works / partial (PC test aid)
 
-    JGE_BTN_MAX = JGE_BTN_TAGBUG + 1
+    JGE_BTN_MAX = JGE_BTN_PARTIAL + 1
   } JButton;
 
 

@@ -76,6 +76,7 @@ CardPrimitive::CardPrimitive(CardPrimitive * source)
         magicTexts[it->first] = source->magicTexts[it->first];
     spellTargetType = source->spellTargetType;
     alias = source->alias;
+    grade = source->grade;
 }
 
 CardPrimitive::~CardPrimitive()
@@ -94,6 +95,7 @@ int CardPrimitive::init()
     magicTexts.clear();
     spellTargetType = "";
     alias = 0;
+    grade = Constants::GRADE_SUPPORTED;
     restrictions = NULL;
     dredgeAmount = 0;
 
