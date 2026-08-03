@@ -136591,9 +136591,9 @@ toughness=2
 [card]
 name=Iron Hills Blacksmith
 abilities=double strike
-auto=token(Axe,Artifact Equipment,0/0,notrigger) and!( transforms((,newability[1/0])) forever )! and!( equip )!
+auto=token(Axe,Artifact Equipment,0/0,notrigger) and!( transforms((,newability[teach(creature) 1/0],newability[{2}:equip])) forever )! and!( equip )!
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; named-Equipment-token creation approximated
+# REVIEW 2026-08-03 [P:med] HOB fix: token lacked a real equip {2} ability and used the wrong keyword (newability[1/0], which applies to the equipment itself, not the equipped creature) for the +1/0 bonus -- both fixed to match the proven token(...)/newability[teach(creature) ...]/newability[{2}:equip] idiom used elsewhere.
 text=Double strike -- When this creature enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}.
 mana={1}{W}
 type=Creature
@@ -137437,10 +137437,8 @@ type=Instant
 [card]
 name=Balin, Loremaster
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; discard-hand-draw-X approximated, damage-to-opponents-if-enduring-story condition unverified as a single line
-auto=@movedTo(dwarf|myBattlefield):all(trigger[to]) may ability$!name(Discard hand) all(*|myhand) reject!$ controller
-auto=this(variable{enduringstory} >= 1) restriction{} damage:2 opponent
-#MISSING "draw X cards where X = number discarded" and "Balin deals X damage" dynamic-X linkage not implemented; discard/draw approximated as discard-hand-draw-nothing, damage is a flat 2 while storied rather than tied to X
+# REVIEW 2026-08-03 [P:med] HOB fix: neither the draw-X-after-discard nor the enduring-story damage actually fired. The draw was never wired to the discard count (just discarded with no draw at all), and `this(variable{enduringstory} >= 1) restriction{} damage:2 opponent` used the continuous-static-ability template on a one-shot damage effect, which the engine can't resolve as an event -- it silently no-oped. Rewrote using the proven count(...)+draw:countedamount idiom, with the enduring-story damage chained as a nested conditional off the same counted amount so X stays linked correctly.
+auto=@movedTo(dwarf|myBattlefield):all(trigger[to]) may name(Discard and draw) count(type:*:myhand) && reject all(*|myhand) && draw:countedamount controller and!( if this(variable{enduringstory} >= 1) then damage:countedamount opponent )!
 text=Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.) -- Whenever Balin or another Dwarf you control enters, you may discard your hand. Draw X cards, where X is the number of cards discarded this way. If you have an enduring story, Balin deals X damage to each opponent.
 mana={3}{R}{R}
 type=Legendary Creature
@@ -137450,7 +137448,9 @@ toughness=4
 [/card]
 [card]
 name=Dain Ironfoot
-auto=token(Axe,Artifact Equipment,0/0,notrigger) and!( transforms((,newability[1/0])) forever )! and!( target(creature|mybattlefield) rehook mytgt )!
+grade=borderline
+# REVIEW 2026-08-03 [P:med] HOB fix: token lacked a real equip {2} ability and used the wrong keyword (newability[1/0], which applies to the equipment itself, not the equipped creature) for the +1/0 bonus -- both fixed to match the proven token(...)/newability[teach(creature) ...]/newability[{2}:equip] idiom used elsewhere.
+auto=token(Axe,Artifact Equipment,0/0,notrigger) and!( transforms((,newability[teach(creature) 1/0],newability[{2}:equip])) forever )! and!( target(creature|mybattlefield) rehook mytgt )!
 auto=_ATTACKING_all(creature[equipped;attacking]|mybattlefield) transforms((,double strike)) ueot
 text=When Dain enters, create a colorless Equipment artifact token named Axe with "Equipped creature gets +1/+0" and equip {2}. When you do, attach it to target creature you control. -- Whenever Dain attacks, each equipped attacking creature gains double strike until end of turn.
 mana={2}{R}
@@ -137557,13 +137557,14 @@ toughness=3
 [/card]
 [card]
 name=Down in the Valley
-auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@each my firstmain:restriction{} turnlimited:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=) target(land[basic]|mylibrary) moveto(hand) and!( shuffle )!
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _LANDFALL_token(Elf,Creature Elf,1/1,green)
-auto=@counteradded(0/0,1,Lore) from(this) restriction{} turnlimited:this(counter{0/0.3.Lore}) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot
+auto=_LANDFALL_if this(counter{0/0.2.Lore}) then token(Elf,Creature Elf,1/1,green)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot && sacrifice(this)
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; chapter II grants landfall for the rest of the game (approximated as always-on once reached) rather than only after chapter II
+# REVIEW 2026-08-03 [P:med] HOB fix: chapter I search was firing correctly but landfall (ch. II) was malformed (a trigger-prefix macro nested inside another trigger's action, producing a garbled always-firing duplicate); rewrote using the proven `_LANDFALL_if this(counter{...}) then` idiom. Chapter IV now sacrifices the Saga (was missing entirely, so lore kept climbing past IV forever).
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) -- I -- Search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- II -- This Saga gains "Landfall -- Whenever a land you control enters, create a 1/1 green Elf creature token." -- III, IV -- Elves you control get +1/+0 and gain vigilance until end of turn.
 mana={2}{G}
 type=Enchantment
@@ -137799,9 +137800,9 @@ type=Land
 [card]
 name=The Lonely Mountain
 auto=this(type(equipment|mybattlefield)~equalto~0) tap(noevent)
-auto={T}:Add{R}
 auto={4}{R}{T}:token(Dwarf,Creature Dwarf,2/2,red)
 grade=borderline
+# REVIEW 2026-08-03 [P:med] HOB fix: had a redundant explicit {T}:Add{R} on top of the mana ability the engine already grants automatically to any subtype=Mountain permanent (confirmed against Madblind Mountain, an existing card with the same subtype that never restates it) -- was showing as two separate tap-for-R abilities. Removed the duplicate.
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-Equipment cost reduction on the activated ability not implemented
 #MISSING cost reduction of {1} per Equipment controlled not implemented on the activated ability
 text=({T}: Add {R}.) -- This land enters tapped unless you control an Equipment. -- {4}{R}, {T}: Create a 2/2 red Dwarf creature token. This ability costs {1} less to activate for each Equipment you control.
