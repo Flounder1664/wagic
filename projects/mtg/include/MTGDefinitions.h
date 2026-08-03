@@ -367,7 +367,8 @@ class Constants
       AFFINITYTWOALLDEADCREATURES = 238,
       ASCEND = 239,
       STORIED = 240,
-      NB_BASIC_ABILITIES = 241,
+      MISSING = 241,
+      NB_BASIC_ABILITIES = 242,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

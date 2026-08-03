@@ -52,6 +52,10 @@ protected:
 public:
     vector<string> formattedText;
     string text;
+    //Human-readable description of what this card does NOT implement. Kept
+    //separate from text= so text= stays faithful to the printed oracle text
+    //(see the set text audit, #34); appended for display by getFormattedText().
+    string missingText;
     string name;
     string nameOrig;
     string backSide;
@@ -105,6 +109,7 @@ public:
     int has(int ability);
 
     void setText(const string& value);
+    void setMissingText(const string& value);
     const vector<string>& getFormattedText(bool noremove = false);
 
     void addMagicText(string value);

@@ -253,7 +253,15 @@ int MTGAllCards::processConfLine(string &s, MTGCard *card, CardPrimitive * primi
     case 'm': //mana
         if (!primitive) primitive = NEW CardPrimitive();
         {
-            if( key == "modular")//modular
+            if( key == "missing")//missing: this card has abilities that are NOT implemented
+            {
+                //Flag it as a real basic ability so the card carries a visible
+                //warning badge in game (CardGui::RenderAbilityIconsBig), and keep
+                //the note for display alongside the rules text.
+                primitive->basicAbilities.set(Constants::MISSING);
+                primitive->setMissingText(val);
+            }
+            else if( key == "modular")//modular
             {
                 primitive->setModularValue(val);
             }
