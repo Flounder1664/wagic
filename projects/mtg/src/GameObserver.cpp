@@ -21,6 +21,7 @@
 #endif
 #ifdef NETWORK_SUPPORT
 #include "NetworkPlayer.h"
+#include "Token.h"
 #endif
 
 
@@ -625,6 +626,27 @@ void GameObserver::Update(float dt)
     oldGamePhase = mCurrentGamePhase;
 }
 
+//Drops a visible reminder card into a player's command zone the first time
+//a perpetual player-state condition (Ascend's city's blessing, Storied's
+//enduring story) becomes true, so the player can see a designation that
+//otherwise has no board presence at all.
+//
+//Follows the two existing conventions for engine-level marker cards rather
+//than inventing a third: they're real registered primitives (like the AFR
+//Dungeons, which likewise live in the command zone and carry
+//restriction=never + shroud/indestructible), and they use reserved 999xxx
+//ids (like Day/Night, 999993/999994 in MID/_cards.dat). Instantiating the
+//registered primitive by name -- instead of synthesising a bare Token --
+//is what gives the card its real name, rules text, type and art.
+static void dropStateMarker(Player * p, const string& primitiveName)
+{
+    MTGCard * proto = MTGCollection()->getCardByName(primitiveName);
+    if (!proto) return; //primitive missing from the collection: show nothing rather than crash
+    MTGCardInstance * marker = NEW MTGCardInstance(proto, p->game);
+    marker->owner = p;
+    p->game->commandzone->addCard(marker);
+}
+
 //applies damage to creatures after updates
 //Players life test
 //Handles game state based effects
@@ -1011,11 +1033,21 @@ void GameObserver::gameStateBasedEffects()
         else
             p->nomaxhandsize = false;
         //Ascend: once true, the city's blessing never goes away, so only
-        //ever set it -- never clear it back to false.
-        if(!p->cityBlessing && z->nb_cards >= 10)
+        //ever set it -- never clear it back to false. Gated on actually
+        //controlling an Ascend card: per the real rule the blessing is
+        //granted BY an Ascend permanent, not by merely having 10 permanents,
+        //so an unrelated deck that happens to reach 10 must not get it (and
+        //must not get a command-zone marker card it never earned).
+        if(!p->cityBlessing && z->nb_cards >= 10
+           && (z->hasAbility(Constants::ASCEND) || p->game->commandzone->hasAbility(Constants::ASCEND)))
+        {
             p->cityBlessing = true;
+            dropStateMarker(p, "City's Blessing");
+        }
         //Storied: once true, the enduring story never goes away either.
-        if(!p->enduringStory)
+        //Gated on controlling a Storied card, same reasoning as Ascend above.
+        if(!p->enduringStory
+           && (z->hasAbility(Constants::STORIED) || p->game->commandzone->hasAbility(Constants::STORIED)))
         {
             int storiedCount = 0;
             for (int k = z->nb_cards - 1; k >= 0 && storiedCount < 3; k--)
@@ -1025,7 +1057,10 @@ void GameObserver::gameStateBasedEffects()
                     storiedCount++;
             }
             if (storiedCount >= 3)
+            {
                 p->enduringStory = true;
+                dropStateMarker(p, "Enduring Story");
+            }
         }
         //////////////////////////////////
         //clear will attack player or pw//

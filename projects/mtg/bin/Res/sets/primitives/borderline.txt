@@ -135617,6 +135617,7 @@ toughness=2
 [/card]
 [card]
 name=Anduril, Narsil Reforged
+abilities=ascend
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build, ahead of 2026-08-14 release
 auto=@combat(attacking) source(mytgt):if compare(cityblessing)~equalto~1 then counter(1/1.2) all(creature|mybattlefield) else counter(1/1) all(creature|mybattlefield)
@@ -135949,6 +135950,7 @@ type=Sorcery
 [/card]
 [card]
 name=Ori, Keeper of Songs
+abilities=storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} >= 1) transforms((,newability[1/0],vigilance))
@@ -136253,6 +136255,7 @@ toughness=5
 [/card]
 [card]
 name=Oin the Brave
+abilities=storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} >= 1) transforms((,newability[1/0],haste))
@@ -136577,7 +136580,7 @@ type=Enchantment
 [/card]
 [card]
 name=Dain, Lord of the Iron Hills
-abilities=vigilance
+abilities=vigilance,storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} >= 1) lord(creature|opponentbattlefield) transforms((,newability[attackpwcost:1]))
@@ -136817,6 +136820,7 @@ toughness=4
 [/card]
 [card]
 name=Bombur, Gentle Dreamer
+abilities=storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} =0) restriction{} phaseaction[my untap once] donothing
@@ -137091,7 +137095,7 @@ toughness=2
 [/card]
 [card]
 name=Thorin Oakenshield
-abilities=trample
+abilities=trample,storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} >= 1) lord(*[artifact,creature]|mybattlefield) transforms((,newability[ward1]))
@@ -137202,6 +137206,7 @@ type=Instant
 [/card]
 [card]
 name=Fili the Pathfinder
+abilities=storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 auto=this(variable{enduringstory} >= 1) lord(other creature|mybattlefield) 1/1
@@ -137436,6 +137441,7 @@ type=Instant
 [/card]
 [card]
 name=Balin, Loremaster
+abilities=storied
 grade=borderline
 # REVIEW 2026-08-03 [P:med] HOB fix: neither the draw-X-after-discard nor the enduring-story damage actually fired. The draw was never wired to the discard count (just discarded with no draw at all), and `this(variable{enduringstory} >= 1) restriction{} damage:2 opponent` used the continuous-static-ability template on a one-shot damage effect, which the engine can't resolve as an event -- it silently no-oped. Rewrote using the proven count(...)+draw:countedamount idiom, with the enduring-story damage chained as a nested conditional off the same counted amount so X stays linked correctly.
 auto=@movedTo(dwarf|myBattlefield):all(trigger[to]) may name(Discard and draw) count(type:*:myhand) && reject all(*|myhand) && draw:countedamount controller and!( if this(variable{enduringstory} >= 1) then damage:countedamount opponent )!
@@ -137991,4 +137997,18 @@ text=Equipped creature gets +2/+2 and has trample. -- Whenever equipped creature
 mana={3}
 type=Legendary Artifact
 subtype=Equipment
+[/card]
+[card]
+name=City's Blessing
+restriction=never
+abilities=shroud,indestructible,nofizzle,nomovetrigger
+text=You have the city's blessing for the rest of the game. (Ascend -- if you control ten or more permanents, you get the city's blessing.)
+type=Emblem
+[/card]
+[card]
+name=Enduring Story
+restriction=never
+abilities=shroud,indestructible,nofizzle,nomovetrigger
+text=You have an enduring story for the rest of the game. (Storied -- if you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story.)
+type=Emblem
 [/card]

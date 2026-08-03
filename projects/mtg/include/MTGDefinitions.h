@@ -365,7 +365,9 @@ class Constants
       CANLOYALTYASINST = 236,
       CANPLAYENCHANTMENTTOPLIBRARY = 237,//enchantment
       AFFINITYTWOALLDEADCREATURES = 238,
-      NB_BASIC_ABILITIES = 239,
+      ASCEND = 239,
+      STORIED = 240,
+      NB_BASIC_ABILITIES = 241,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics
