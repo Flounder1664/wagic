@@ -57,6 +57,10 @@ CardPrimitive::CardPrimitive(CardPrimitive * source)
         manaCost.getRetrace()->alternativeName = source->getManaCost()->getRetrace()->alternativeName;
 
     text = source->text;
+    //Must be copied like text/formattedText: this is a hand-written field-by-field
+    //copy ctor, so a new member silently defaults to empty in every copied primitive
+    //(the MISSING badge showed but its explanatory note vanished).
+    missingText = source->missingText;
     formattedText = source->formattedText;
     setName(source->name);
 

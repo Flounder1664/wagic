@@ -137569,12 +137569,15 @@ toughness=3
 [/card]
 [card]
 name=Down in the Valley
-auto=@each my firstmain:restriction{} turnlimited:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=) target(land[basic]|mylibrary) moveto(hand) and!( shuffle )!
+auto=@each my firstmain:restriction{} turnlimited:counter(0/0,1,Lore)
+# Chapter I is a plain ETB action, NOT an @counteradded trigger: the Saga enters
+# WITH its first lore counter, so that trigger fires before it is registered and
+# never resolves. This mirrors The Legend of Kuruk, the one Saga with a passing test.
+auto=target(land[basic]|mylibrary) moveto(hand) and!( shuffle )!
 auto=_LANDFALL_if this(counter{0/0.2.Lore}) then token(Elf,Creature Elf,1/1,green)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot && sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=4) all(elf|mybattlefield) transforms((,newability[1/0],vigilance)) ueot && sacrifice(this)
 grade=borderline
 # REVIEW 2026-08-03 [P:med] HOB fix: chapter I search was firing correctly but landfall (ch. II) was malformed (a trigger-prefix macro nested inside another trigger's action, producing a garbled always-firing duplicate); rewrote using the proven `_LANDFALL_if this(counter{...}) then` idiom. Chapter IV now sacrifices the Saga (was missing entirely, so lore kept climbing past IV forever).
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) -- I -- Search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- II -- This Saga gains "Landfall -- Whenever a land you control enters, create a 1/1 green Elf creature token." -- III, IV -- Elves you control get +1/+0 and gain vigilance until end of turn.
@@ -137962,7 +137965,10 @@ toughness=6
 name=Dancing from Dark to Dawn
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field) that forced an upfront cast-time target prompt on a plain Enchantment -- targeting belongs only in the per-trigger inline target() call
-auto=@each mycast creature:target(creature|mybattlefield) counter(1/1) foreach(sourcemanavalue)
+# REVIEW 2026-08-03 [P:med] HOB fix: never fired. `@each mycast creature:` is invented syntax
+# (zero uses in mtg.txt); the proven cast trigger is @movedTo(creature|mystack).
+auto=@movedTo(creature|mystack):target(creature|mybattlefield) counter(1/1)
+missing=puts only one +1/+1 counter, not X equal to the creature spell's mana value
 auto=_LANDFALL_token(Bear,Creature Bear,2/2,green)
 text=Whenever you cast a creature spell, put X +1/+1 counters on target creature you control, where X is that spell's mana value. -- Landfall -- Whenever a land you control enters, create a 2/2 green Bear creature token.
 mana={3}{G}{G}
