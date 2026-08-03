@@ -4409,8 +4409,9 @@ toughness=0
 [/card]
 [card]
 name=Arch of Orazca
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[{5}{T}:draw:1]))
 auto={T}:Add{C}
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- {T}: Add {C}. -- {5}, {T}: Draw a card. Activate this ability only if you have the city's blessing.
@@ -25889,9 +25890,9 @@ type=Enchantment
 [/card]
 [card]
 name=Deadeye Brawler
-abilities=deathtouch
+abilities=deathtouch,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[@combatdamaged(player) from(this):draw:1]))
 text=Deathtouch -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
 mana={2}{U}{B}
@@ -27793,8 +27794,9 @@ type=Land
 [/card]
 [card]
 name=Detective of the Month
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[lord(detective|myBattlefield) unblockable]))
 auto=_SECOND_DRAW_ create(detective:creature detective:2/2:white:blue)
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- As long as you have the city's blessing, Detectives you control can't be blocked. -- Whenever you draw your second card each turn, create a 2/2 white and blue Detective creature token.
@@ -31723,8 +31725,9 @@ type=Sorcery
 [/card]
 [card]
 name=Dusk Charger
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ 2/2
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Dusk Charger gets +2/+2 as long as you have the city's blessing.
 mana={3}{B}
@@ -36840,6 +36843,7 @@ type=Instant
 [/card]
 [card]
 name=Expel from Orazca
+abilities=ascend
 target=*[-land]
 auto=_ASCEND_ controller
 auto=choice name(owner's hand) moveTo(hand)
@@ -47524,8 +47528,9 @@ toughness=3
 [/card]
 [card]
 name=Golden Demise
+abilities=ascend
 auto=_ASCEND_
-auto=if type(City's Blessing|mybattlefield)~equalto~0 then all(creature|myBattlefield) -2/-2 ueot
+auto=if type(City's Blessing|mycommandzone)~equalto~0 then all(creature|myBattlefield) -2/-2 ueot
 auto=all(creature|opponentBattlefield) -2/-2 ueot
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.
 mana={1}{B}{B}
@@ -55901,8 +55906,9 @@ toughness=1
 [/card]
 [card]
 name=Illustrious Wanderglyph
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ lord(other creature[artifact]|myBattlefield) +2/+2
 auto=@each upkeep:_GNOMETOKEN_
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Other artifact creatures you control get +2/+2 as long as you have the city's blessing. -- At the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
@@ -64224,10 +64230,11 @@ subtype=Aura
 [/card]
 [card]
 name=Kumena's Awakening
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=@each my upkeep:name(Draw a card) draw:1 controller
-auto=@each my upkeep restriction{type(City's Blessing|mybattlefield)~equalto~0}:name(Opponent draws a card) draw:1 opponent
+auto=@each my upkeep restriction{type(City's Blessing|mycommandzone)~equalto~0}:name(Opponent draws a card) draw:1 opponent
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- At the beginning of your upkeep, each player draws a card. If you have the city's blessing, instead only you draw a card.
 mana={2}{U}{U}
 type=Enchantment
@@ -70750,10 +70757,10 @@ subtype=Equipment
 [/card]
 [card]
 name=Mausoleum Harpy
-abilities=flying
+abilities=flying,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
-auto=@movedto(other creature|graveyard) from(mybattlefield) restriction{type(City's Blessing|mybattlefield)~morethan~0}:name(Put 1/1 counter) counter(1/1)
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
+auto=@movedto(other creature|graveyard) from(mybattlefield) restriction{type(City's Blessing|mycommandzone)~morethan~0}:name(Put 1/1 counter) counter(1/1)
 text=Flying -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on Mausoleum Harpy.
 mana={4}{B}
 type=Creature
@@ -78896,9 +78903,9 @@ toughness=5
 [/card]
 [card]
 name=Ocelot Pride
-abilities=first strike,lifelink
+abilities=first strike,lifelink,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=@each my end restriction{compare(lifegain)~morethan~0}:_CITY'S_BLESSING_all(*[token;fresh]|mybattlefield) clone
 auto=@each my end restriction{compare(lifegain)~morethan~0}:create(cat:creature cat:1/1:white)
 text=First strike, lifelink -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- At the beginning of your end step, if you gained life this turn, create a 1/1 white Cat creature token. Then if you have the city's blessing, for each token you control that entered the battlefield this turn, create a token that's a copy of it.
@@ -80472,8 +80479,9 @@ toughness=4
 [/card]
 [card]
 name=Orazca Relic
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[{T}{S}:name(Gain life and draw) life:3 && draw:1]))
 auto={T}:Add{C}
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- {T}: Add {C}. -- {T}, Sacrifice Orazca Relic: You gain 3 life and draw a card. Activate this ability only if you have the city's blessing.
@@ -85918,6 +85926,7 @@ toughness=2
 [/card]
 [card]
 name=Pride of Conquerors
+abilities=ascend
 auto=_ASCEND_
 auto=choice _CITY'S_BLESSING_ all(creature|mybattlefield) 1/1
 auto=all(creature|mybattlefield) 1/1
@@ -88208,8 +88217,9 @@ toughness=3
 [/card]
 [card]
 name=Radiant Destiny
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=activatechooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 1/1],newability[_CITY'S_BLESSING_ lord(creature[chosentype]|mybattlefield) vigilance])) forever activatechooseend
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- As Radiant Destiny enters, choose a creature type. -- Creatures you control of the chosen type get +1/+1. As long as you have the city's blessing, they also have vigilance.
 mana={2}{W}
@@ -91793,9 +91803,9 @@ toughness=3
 [/card]
 [card]
 name=Resplendent Griffin
-abilities=flying
+abilities=flying,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[_ATTACKING_counter(1/1)]))
 text=Flying -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Resplendent Griffin attacks, if you have the city's blessing, put a +1/+1 counter on it.
 mana={1}{W}{U}
@@ -99269,6 +99279,7 @@ type=Conspiracy
 [/card]
 [card]
 name=Secrets of the Golden City
+abilities=ascend
 auto=_ASCEND_
 auto=choice _CITY'S_BLESSING_ draw:1 controller
 auto=draw:2 controller
@@ -104337,8 +104348,9 @@ toughness=2
 [/card]
 [card]
 name=Skymarcher Aspirant
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,flying))
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Skymarcher Aspirant has flying as long as you have the city's blessing.
 mana={W}
@@ -104802,8 +104814,9 @@ type=Instant
 [/card]
 [card]
 name=Slippery Scoundrel
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,unblockable,hexproof))
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- As long as you have the city's blessing, Slippery Scoundrel has hexproof and can't be blocked.
 mana={2}{U}
@@ -105466,8 +105479,9 @@ toughness=5
 [/card]
 [card]
 name=Snubhorn Sentry
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ 3/0
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Snubhorn Sentry gets +3/+0 as long as you have the city's blessing.
 mana={W}
@@ -107850,9 +107864,9 @@ toughness=4
 [/card]
 [card]
 name=Spire Winder
-abilities=flying
+abilities=flying,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ 1/1
 text=Flying -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Spire Winder gets +1/+1 as long as you have the city's blessing.
 mana={3}{U}
@@ -110151,8 +110165,9 @@ toughness=2
 [/card]
 [card]
 name=Storm Fleet Swashbuckler
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,double strike))
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Storm Fleet Swashbuckler has double strike as long as you have the city's blessing.
 mana={1}{R}
@@ -114801,8 +114816,9 @@ toughness=2
 [/card]
 [card]
 name=Tendershoot Dryad
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ lord(Saproling|myBattlefield) 2/2
 auto=@each upkeep:_SAPROLINGTOKEN_
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- At the beginning of each upkeep, create a 1/1 green Saproling creature token. -- Saprolings you control get +2/+2 as long as you have the city's blessing.
@@ -118181,10 +118197,11 @@ toughness=1
 [/card]
 [card]
 name=Tilonalli's Summoner
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_ATTACKING_ pay({X}{R}) name(Create X elemental tokens) token(Elemental,Creature Elemental Tilonalli,1/1,red,battleready)*x
-auto=@each my endstep restriction{type(City's Blessing|mybattlefield)~equalto~0}:name(Exile Elementals) moveto(exile) all(Tilonalli[token;fresh]|myBattlefield)
+auto=@each my endstep restriction{type(City's Blessing|mycommandzone)~equalto~0}:name(Exile Elementals) moveto(exile) all(Tilonalli[token;fresh]|myBattlefield)
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Tilonalli's Summoner attacks, you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing.
 mana={1}{R}
 type=Creature
@@ -118323,8 +118340,9 @@ subtype=Aura
 [/card]
 [card]
 name=Timestream Navigator
+abilities=ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[{2}{U}{U}{T}:(this|bottomoflibrary) && turns:+1 controller]))
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- {2}{U}{U},{T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate this ability only if you have the city's blessing.
 mana={1}{U}
@@ -121164,10 +121182,10 @@ toughness=2
 [/card]
 [card]
 name=Twilight Prophet
-abilities=flying
+abilities=flying,ascend
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
-auto=@each my upkeep restriction{type(City's Blessing|mybattlefield)~morethan~0}:name(Reveal top card) all(*[zpos=1]|mylibrary) moveto(hand) and!( transforms((,newability[damage:manacost opponent],newability[life:manacost controller])) ueot )!
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
+auto=@each my upkeep restriction{type(City's Blessing|mycommandzone)~morethan~0}:name(Reveal top card) all(*[zpos=1]|mylibrary) moveto(hand) and!( transforms((,newability[damage:manacost opponent],newability[life:manacost controller])) ueot )!
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's mana value.
 mana={2}{B}{B}
 type=Creature
@@ -126524,9 +126542,10 @@ toughness=4
 [/card]
 [card]
 name=Vona's Hunger
+abilities=ascend
 auto=_ASCEND_
-auto=if type(City's Blessing|mybattlefield)~morethan~0 then ability$!name(sacrifice half creatures) name(sacrifice half creatures) notaTarget(<halfuptype:creature:myBattlefield>creature|myBattlefield) sacrifice!$ opponent
-auto=if type(City's Blessing|mybattlefield)~equalto~0 then ability$!name(sacrifice a creature) name(sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent
+auto=if type(City's Blessing|mycommandzone)~morethan~0 then ability$!name(sacrifice half creatures) name(sacrifice half creatures) notaTarget(<halfuptype:creature:myBattlefield>creature|myBattlefield) sacrifice!$ opponent
+auto=if type(City's Blessing|mycommandzone)~equalto~0 then ability$!name(sacrifice a creature) name(sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Each opponent sacrifices a creature. If you have the city's blessing, instead each opponent sacrifices half the creatures they control, rounded up.
 mana={2}{B}
 type=Instant
@@ -128101,10 +128120,10 @@ toughness=2
 [/card]
 [card]
 name=Wayward Swordtooth
-abilities=cantattack,cantpwattack,cantblock
+abilities=cantattack,cantpwattack,cantblock,ascend
 auto=maxPlay(land)+1
 auto=_ASCEND_
-auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mybattlefield)~equalto~0}:_ASCEND_
+auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
 auto=_CITY'S_BLESSING_ transforms((,newability[-cantattack]))
 auto=_CITY'S_BLESSING_ transforms((,newability[-cantpwattack]))
 auto=_CITY'S_BLESSING_ transforms((,newability[-cantblock]))

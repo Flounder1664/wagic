@@ -137,7 +137,13 @@
 #AUTO_DEFINE _SCAVENGE_($power) name(scavenge) counter(1/1.$power) target(creature) asSorcery
 
 # Ascend, Set XLN
-#AUTO_DEFINE _ASCEND_ if type(City's Blessing|mybattlefield)~lessthan~1 then transforms((,newability[if type(*|mybattlefield)~morethan~9 then token(City's Blessing^notrigger)])) oneshot
+#AUTO_DEFINE _ASCEND_ donothing
+# 2026-08-03: Ascend's city's blessing is a DESIGNATION, not a permanent -- it can't be
+# bounced/destroyed and must not be counted by 'permanents you control' effects (a
+# battlefield token skewed exact-count cards). It now lives in the command zone, dropped
+# by GameObserver::gameStateBasedEffects() like Enduring Story. This macro is kept as a
+# no-op so the 47 existing call sites stay valid; the abilities=ascend keyword on those
+# cards is what the engine now gates on.
 
 # Effect with the City's blessing, Set XLN
 #AUTO_DEFINE _CITY'S_BLESSING_ aslongas(City's Blessing|mybattlefield)>0

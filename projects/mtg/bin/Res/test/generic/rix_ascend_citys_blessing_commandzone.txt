@@ -1,0 +1,26 @@
+#Ascend: with an Ascend card and 10+ permanents you get the city's blessing.
+#The city's blessing is a DESIGNATION, not a permanent -- it can't be bounced
+#or destroyed and must not be counted by "permanents you control" effects --
+#so it lives in the command zone with emblems/Dungeons, not on the battlefield
+#(where it used to sit as a token and skew exact permanent counts).
+#Snubhorn Sentry has Ascend; 9 Plains + the Sentry = 10 permanents.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snubhorn Sentry,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+#battlefield must still be exactly the 10 real permanents -- the blessing is
+#NOT among them
+inplay:*,*,*,*,*,*,*,*,*,*
+commandzone:City's Blessing
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1038,16 +1038,20 @@ void GameObserver::gameStateBasedEffects()
         //granted BY an Ascend permanent, not by merely having 10 permanents,
         //so an unrelated deck that happens to reach 10 must not get it (and
         //must not get a command-zone marker card it never earned).
-        //No marker card is dropped here: Ascend already has a complete,
-        //long-standing implementation of its own (the _ASCEND_ macro puts a
-        //real "City's Blessing" Emblem token onto the battlefield, and ~28
-        //cards test for it with type(City's Blessing|mybattlefield)). This
-        //flag exists only for the handful of cards that read it via
-        //variable{cityblessing}/compare(cityblessing); duplicating the
-        //visible card here would collide with that primitive.
+        //The city's blessing is a DESIGNATION, not a permanent: it can't be
+        //bounced or destroyed, and must not be counted by "permanents you
+        //control" effects. It used to be a battlefield token created by the
+        //_ASCEND_ macro, which skewed exact-permanent-count cards and needed
+        //shroud/indestructible purely to survive being in the wrong zone.
+        //It now goes to the command zone alongside emblems and Enduring
+        //Story; the _ASCEND_ macro is a no-op and the 26 Ascend cards carry
+        //the ascend keyword, which is what gates this.
         if(!p->cityBlessing && z->nb_cards >= 10
            && (z->hasAbility(Constants::ASCEND) || p->game->commandzone->hasAbility(Constants::ASCEND)))
+        {
             p->cityBlessing = true;
+            dropStateMarker(p, "City's Blessing");
+        }
         //Storied: once true, the enduring story never goes away either.
         //Gated on controlling a Storied card, same reasoning as Ascend above.
         if(!p->enduringStory
