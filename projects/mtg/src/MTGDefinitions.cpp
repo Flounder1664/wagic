@@ -269,7 +269,9 @@ const char* Constants::MTGBasicAbilities[] = {
     "eqpasinst", // Can equip as instant
     "canloyaltyasinst", // Can activate loyalty abilities as instant (e.g. "The Wandering Emperor").
     "canplayenchantmentlibrarytop", // May play enchantments from top
-	"affinitytwoalldeadcreatures" // Costs {2} less to cast for each creature that died this turn
+	"affinitytwoalldeadcreatures", // Costs {2} less to cast for each creature that died this turn
+    "ascend", //Card has Ascend -- controlling 10+ permanents grants the city's blessing (e.g. "Kumena's Awakening")
+    "storied" //Card has Storied -- controlling 3+ artifacts/legendaries/Sagas grants an enduring story (e.g. "Balin, Loremaster")
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;
