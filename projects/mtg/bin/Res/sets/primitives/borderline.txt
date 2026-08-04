@@ -136057,6 +136057,7 @@ abilities=vigilance
 auto=@seconddrawofturn:counter(1/1) this
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw-each-turn trigger unverified keyword
+missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
 mana={1}{U}
 type=Creature
@@ -136249,6 +136250,7 @@ abilities=reach,trample
 auto=target(<upto:1>equipment|mybattlefield) target(<upto:1>creature|mybattlefield) rehook mytgt2
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; dual-target attach-equipment-to-creature approximated
+missing=the Equipment is not attached to the chosen creature (second-target reference is not a real keyword)
 text=Reach, trample -- When this creature enters, attach target Equipment you control to up to one target creature you control.
 mana={4}{R}
 type=Creature
@@ -136700,6 +136702,7 @@ auto=lord(this) foreach(*[graveyard;sevenormorecards]|graveyard) 2/0
 auto=@seconddrawofturn:target(player) mill:3 targetedplayer
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-graveyard-of-7+ count and second-draw trigger both unverified
+missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
 text=Vigilance -- This creature gets +2/+0 for each graveyard with seven or more cards in it. -- Whenever you draw your second card each turn, target player mills three cards.
 mana={1}{U}
 type=Creature
@@ -136935,7 +136938,7 @@ auto=_LANDFALL_target(creature|mybattlefield) counter(1/1)
 auto={5}{G}{G}:transforms((Creature Bear,newability[this(variable{controlledlands}) setpower],forever)) forever
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; becomes-a-creature-with-pt=lands-controlled clause approximated, may not compile as written
-missing=becomes-Bear-creature-with-dynamic-pt-equal-to-lands-controlled not fully verified
+missing=becomes-Bear-creature-with-dynamic-pt-equal-to-lands-controlled not fully verified; the Bear's power is not set to the number of lands you control
 text=Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. -- {5}{G}{G}: This enchantment becomes a Bear creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lands you control."
 mana={1}{G}
 type=Enchantment
@@ -136955,6 +136958,7 @@ toughness=4
 [card]
 name=Mirkwood Pathmaker
 anyzone=controlledlands/controlledlandsend cdaactive
+missing=power/toughness do not track the number of lands you control
 text=Mirkwood Pathmaker's power and toughness are each equal to the number of lands you control.
 mana={2}{G}
 type=Creature
@@ -137022,6 +137026,7 @@ abilities=reach
 auto=@seconddrawofturn:target(creature) counter(1/1) && transforms((,lifelink)) ueot
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw trigger unverified
+missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
 text=Reach -- Whenever you draw your second card each turn, put a +1/+1 counter on target creature. It gains lifelink until end of turn.
 mana={1}{W}{U}
 type=Legendary Creature
@@ -137048,7 +137053,7 @@ name=Bolg of the North
 auto=may name(Sacrifice a creature) notaTarget(other creature|mybattlefield) sacrifice and!( name(Deal damage) target(creature) damage:sourcepower )!
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; excess-damage-to-amass clause not implemented
-missing=excess-damage-becomes-amass-X not implemented (no verified excess-damage-tracking primitive)
+missing=excess-damage-becomes-amass-X not implemented (no verified excess-damage-tracking primitive); the damage is not equal to the sacrificed creature's power
 text=When Bolg enters, you may sacrifice another creature. When you do, Bolg deals damage equal to that creature's power to another target creature. If excess damage was dealt this way, amass Goblins X, where X is that excess damage.
 mana={3}{B}{R}
 type=Legendary Creature
@@ -137264,7 +137269,7 @@ grade=borderline
 auto=lord(dwarf|mybattlefield) 2/2
 abilities=adventure
 other={X}{2}{W} name(Adventure)
-auto=alternative token(Dwarf,Creature Dwarf,2/2,red) foreach(mycastx)
+auto=alternative token(Dwarf,Creature Dwarf,2/2,red) foreach(castx)
 auto=alternative _ADVENTURE_
 missing=choose-a-creature-type is hardcoded to Dwarf (matching the adventure half's token type) rather than a real chosen-type prompt
 text=Creatures you control of the chosen type get +2/+2. // Create X 2/2 red Dwarf creature tokens.
@@ -137342,7 +137347,7 @@ name=Uncover the Moon-Letters
 auto=@movedTo(*[-creature]|mystack):all(trigger[to]) may name(Draw and discard) draw:manaspentx controller && ability$!name(Discard two cards) name(Discard two cards) target(<2>*|myhand) reject!$ controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; draw-X-equal-to-mana-spent approximated via manaspentx, unverified keyword
-missing=mana-spent-tracking (manaspentx) not confirmed to exist; may need a different mana-value primitive
+missing=mana-spent-tracking (manaspentx) not confirmed to exist; may need a different mana-value primitive; draws nothing -- the amount of mana spent on the spell is not tracked
 text=Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards.
 mana={3}{U}
 type=Enchantment
@@ -137378,7 +137383,7 @@ name=Azog, Moria's Ruin
 auto=target(<upto:1>other creature) destroy and!( name(Amass equal to power) _AMASSGOBLIN1_ )! and!( if compare(iscontrolled)~equalto~1 then draw:1 controller )!
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; amass-X-equal-to-destroyed-creature's-power approximated as a flat amass 1, draw-if-you-controlled-it condition unverified
-missing=amass amount is fixed at 1 rather than dynamically equal to the destroyed creature's power (no verified post-destroy power-capture primitive)
+missing=amass amount is fixed at 1 rather than dynamically equal to the destroyed creature's power (no verified post-destroy power-capture primitive); the 'if you controlled that creature, draw a card' clause never fires
 text=When Azog enters, destroy up to one other target creature. Its controller amasses Goblins X, where X is that creature's power. If you controlled that creature, draw a card.
 mana={2}{B}
 type=Legendary Creature
@@ -137406,7 +137411,7 @@ auto=@each lifelost:all(trigger[to]) mill:lifelostamount targetedplayer
 auto=_DIES_source(this) anyzone=countbattlefieldcreature/5end:draw:type:graveyard:sevenormorecards controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; player-loses-life-mills-that-many and draw-per-7-card-graveyard both approximated, keywords unverified
-missing=both triggered abilities use guessed/unverified keyword forms (lifelostamount, sevenormorecards) and may not resolve correctly
+missing=both triggered abilities use guessed/unverified keyword forms (lifelostamount, sevenormorecards) and may not resolve correctly; mills nothing -- the amount of life lost is not tracked
 text=Deathtouch -- Whenever a player loses life, that player mills that many cards. -- When The Master of Lake-town dies, draw a card for each graveyard with seven or more cards in it.
 mana={1}{B}{B}
 type=Legendary Creature
@@ -137763,6 +137768,7 @@ auto={1}:name(Sac for cards) notaTarget(other creature|mybattlefield) sacrifice 
 auto=_DIES_source(this) if type(this|graveyard)~morethan~0 then transforms((,newability[moveto(mybattlefield)],newability[artifact],newability[removetypes(creature)]))
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; draw-equal-to-sacrificed-power approximated via sourcepower keyword, dies-return-as-artifact approximated
+missing=draws nothing -- the sacrificed creature's power is not tracked
 text={1}, Sacrifice another creature: Draw cards equal to the sacrificed creature's power, then discard a card. -- When Tom, Bert, and William die, if they were a creature, return them to the battlefield. They're an artifact.
 mana={3}{B}{G}
 type=Legendary Creature
@@ -137901,7 +137907,7 @@ auto=choice name(Choose even) this(chooseeven) forever
 auto=@each opponent cast:if this(chooseodd) then if compare(sourcemanavalueparity)~equalto~1 then choice name(Counter) counter(1/1) this endchoice choice name(Drain) life:-2 opponent && life:2 controller endchoice choice name(Draw) draw:1 controller endchoice
 auto=@each opponent cast:if this(chooseeven) then if compare(sourcemanavalueparity)~equalto~0 then choice name(Counter) counter(1/1) this endchoice choice name(Drain) life:-2 opponent && life:2 controller endchoice choice name(Draw) draw:1 controller endchoice
 grade=borderline
-missing="choose one that hasn't been chosen" restriction not enforced -- all three modes remain selectable every trigger rather than being consumed permanently
+missing="choose one that hasn't been chosen" restriction not enforced -- all three modes remain selectable every trigger rather than being consumed permanently; the odd/even mana value test never matches, so none of the three modes trigger
 text=As Gollum enters, choose odd or even. (Zero is even.) -- Whenever an opponent casts a spell with mana value of the chosen quality, choose one that hasn't been chosen -- Put a +1/+1 counter on Gollum. -- Each opponent loses 2 life and you gain 2 life. -- Draw a card.
 mana={1}{B}
 type=Legendary Creature
@@ -137912,7 +137918,7 @@ toughness=1
 [card]
 name=Inside Information
 target=player
-auto=target(player) mill:mycastx targetedplayer
+auto=target(player) mill:castx targetedplayer
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exile-and-play-with-alternate-life-cost not implemented, approximated as a straight mill
 missing=exile (not mill) + "may play those cards this turn, paying life equal to mana value instead of mana cost" not implemented
@@ -137945,7 +137951,7 @@ auto=target(<anyamount>equipment|mybattlefield) rehook mytgt2 && target(creature
 auto=if type(*[equipment;attached]|mybattlefield.count>0) then damage:targetpower target(<upto:1>creature) source(mytgt2)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; multi-equip-then-conditional-damage approximated, exact targeting/attach syntax unverified
-missing=dynamic damage amount tied to the newly-equipped creature's power not fully verified
+missing=dynamic damage amount tied to the newly-equipped creature's power not fully verified; the Equipment are not attached and the damage-equal-to-power clause never fires
 text=Trample -- When Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
 mana={3}{R}
 type=Legendary Creature
