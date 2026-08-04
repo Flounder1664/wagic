@@ -136373,7 +136373,12 @@ abilities=flash
 # REVIEW 2026-08-03 [P:med] HOB fix: never added the counter. It tested type(bear|mybattlefield)
 # -- 'do I control any Bear', with no comparison operator so it never evaluated -- instead of
 # 'is the TARGETED creature a Bear'. Correct idiom is if cantargetcard(<type>) (cf. Holy Justiciar).
-auto=untap target(other creature|mybattlefield) && if cantargetcard(bear) then counter(1/1)
+# REVIEW 2026-08-03 [P:med] HOB fix (2nd attempt): the counter landed on non-Bears too.
+# cantargetcard() falls back to TRUE when the ability has no live target (AllAbilities.cpp
+# ~7418: checkCond keeps its cast-restriction value unless aTarget is set). Elder Cathar
+# solves the same 'if that creature is a X' wording by applying the conditional inside
+# transforms() on the target, where the target is unambiguous.
+auto=target(other creature|mybattlefield) transforms((,newability[untap],newability[if cantargetcard(bear) then counter(1/1)])) forever
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; conditional-counter-if-Bear approximated
 text=Flash -- When this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.
@@ -137634,7 +137639,11 @@ toughness=5
 [/card]
 [card]
 name=Through the Forest Gate
-auto=reveal:20 optionone name(Take lands) target(<anyamount>land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo name(None) donothing optiontwoend revealend
+# REVIEW 2026-08-03 [P:high] HOB fix: soft-locked again. optiontwo was `donothing`, which
+# leaves all 20 revealed cards stranded in the reveal zone with no way to dismiss them.
+# Mirrors Animist's Awakening, the proven reveal-any-number-of-lands card, whose optiontwo
+# bottoms the remainder.
+auto=reveal:20 optionone all(land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo name(bottom of library) target(<1>*|reveal) transforms((,newability[all(*|reveal) bottomoflibrary])) oneshot optiontwoend revealend
 auto=shuffle
 auto=life:8 controller
 grade=borderline
@@ -137950,7 +137959,13 @@ abilities=trample
 # REVIEW 2026-08-03 [P:med] HOB fix: buffed itself. `*[bear;-this]` is not valid exclusion
 # syntax (zero uses anywhere in mtg.txt); the proven form is lord(other creature[sub]|...).
 auto=lord(other creature[bear]|mybattlefield) 2/2
-auto=@combat begin:controller:target(<upto:1>creature|mybattlefield) counter(1/1.trample) && transforms((,newability[bear])) forever && if type(bear|mybattlefield.count>=3) then draw:2 controller
+# REVIEW 2026-08-03 [P:med] HOB fix: never fired. `@combat begin:controller:` is invented
+# (proven form is @each my combatbegins:), and type(bear|mybattlefield.count>=3) is malformed
+# -- the count comparison goes outside the selector as ~morethan~2. The phase is
+# `combatbegins` (128 uses); the singular `combatbegin` is an unrecognised phase name
+# and crashed the engine outright at card load.
+auto=@each my combatbegins:target(<upto:1>creature|mybattlefield) counter(1/1) && transforms((,newability[bear])) forever
+auto=@each my combatbegins:if type(bear|mybattlefield)~morethan~2 then draw:2 controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "trample counter" approximated as a +1/+1 counter granting trample via type-add
 missing=true "trample counter" (a distinct counter type) not implemented; approximated with a +1/+1-style counter plus a forever trample grant
