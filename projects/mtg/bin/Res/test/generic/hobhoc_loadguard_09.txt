@@ -1,0 +1,25 @@
+#Auto-generated load guard 9: puts HOB/HOC permanents into play to prove the
+#engine can construct and resolve them. This catches the FATAL failure mode --
+#an unrecognised phase/trigger name yields a null card and kills the engine in
+#TestSuiteGame::initGame (Spell(observer, NULL)), as Beorn the Fierce did.
+#Cards are referenced by id because many HOB/HOC names contain commas and the
+#zone parser splits on commas.
+#NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
+#rules behaviour. This guards against crashes and silent card-load failure, not
+#against a card doing the wrong thing.
+#Covers: Dain Ironfoot, Dain of the Ancient Halls, Dain's Company, Dain, Lord of the Iron Hills, Dancing from Dark to Dawn, Dawn of a New Age
+[INIT]
+firstmain
+[PLAYER1]
+inplay:700091,701104,700152,700008,700123,701013
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:*,*,*,*,*,*
+[PLAYER2]
+life:20
+[END]
