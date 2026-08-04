@@ -19,7 +19,10 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*,*,*
+inplay:*,*,*
+graveyard:*
+hand:*,*
+life:18
 [PLAYER2]
 life:20
 [END]

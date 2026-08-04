@@ -116442,7 +116442,7 @@ toughness=3
 [/card]
 [card]
 name=The Raven Man
-auto=@discarded(*|hand) turnlimited:phaseaction[once,end] create(bird:creature bird:1/1:black:flying:cantblock)
+auto=@discarded(*|hand) turnlimited:phaseaction[once;end] create(bird:creature bird:1/1:black:flying:cantblock)
 auto={3}{B}{T}:ability$!name(discard) reject notaTarget(*|myhand)!$ opponent assorcery
 text=At the beginning of each end step, if a player discarded a card this turn, create a 1/1 black Bird creature token with flying and "This creature can't block." -- {3}{B}, {T}: Each opponent discards a card. Activate only as a sorcery.
 mana={1}{B}
@@ -136054,7 +136054,7 @@ toughness=5
 [card]
 name=Lakeshore Apothecary
 abilities=vigilance
-auto=@seconddrawofturn:counter(1/1) this
+# REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:counter(1/1) this
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw-each-turn trigger unverified keyword
 missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
@@ -136571,7 +136571,10 @@ toughness=1
 name=Bofur, Reliable Guardian
 abilities=adventure,lifelink
 other={1}{W} name(Adventure)
-auto=alternative target(*[artifact,creature]) transforms((,newability[hexproof],newability[indestructible])) ueot
+# REVIEW 2026-08-03 [P:high] HOB fix: *[artifact,creature] is invented -- a comma-separated
+# type list inside *[...] has zero uses in mtg.txt and made createTargetChooser return NULL,
+# which CRASHED the engine while parsing the card. Proven form is target(artifact,creature).
+auto=alternative target(artifact,creature|mybattlefield) transforms((,newability[hexproof],newability[indestructible])) ueot
 auto=alternative _ADVENTURE_
 text=Lifelink // Target artifact or creature you control gains hexproof and indestructible until end of turn.
 mana={W}
@@ -136583,10 +136586,11 @@ toughness=1
 [card]
 name=Celebrate the Mountain-king
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
-auto=target(<upto:1>*[-land]|opponentbattlefield) transforms((,newability[moveto(myexile)],newability[@leaves(this):all(trigger[from]) moveto(ownerbattlefield)])) forever
+# REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=target(<upto:1>*[-land]|opponentbattlefield) transforms((,newability[moveto(myexile)],newability[@leaves(
 auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exile-until-this-leaves approximated, recruit approximated inline
+missing=the exiled permanent is not returned when this leaves the battlefield (@leaves is not a real trigger)
 text=When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield. -- When this enchantment enters, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
 mana={3}{W}
 type=Enchantment
@@ -136684,7 +136688,7 @@ toughness=2
 name=Lake-town Mariners
 abilities=adventure,vigilance,ward2
 other={3}{U} name(Adventure)
-auto=alternative target(<2>*[creature,land]|mybattlefield) transforms((,newability[moveto(myexile)],newability[phaseaction[end once] moveto(ownerbattlefield)])) forever
+auto=alternative target(<2>*[creature;land]|mybattlefield) transforms((,newability[moveto(myexile)],newability[phaseaction[end once] moveto(ownerbattlefield)])) forever
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; flicker-two-targets approximated via exile-then-return-at-end-of-step
@@ -136699,7 +136703,7 @@ toughness=5
 name=Master's Councillors
 abilities=vigilance
 auto=lord(this) foreach(*[graveyard;sevenormorecards]|graveyard) 2/0
-auto=@seconddrawofturn:target(player) mill:3 targetedplayer
+# REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(player) mill:3 targetedplayer
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-graveyard-of-7+ count and second-draw trigger both unverified
 missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
@@ -137023,7 +137027,7 @@ toughness=2
 [card]
 name=Bard the Bowman
 abilities=reach
-auto=@seconddrawofturn:target(creature) counter(1/1) && transforms((,lifelink)) ueot
+# REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(creature) counter(1/1) && transforms((,lifelink)) ueot
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw trigger unverified
 missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
@@ -137114,7 +137118,7 @@ name=Thorin Oakenshield
 abilities=trample,storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
-auto=this(variable{enduringstory} >= 1) lord(*[artifact,creature]|mybattlefield) transforms((,newability[ward1]))
+auto=this(variable{enduringstory} >= 1) lord(*[artifact;creature]|mybattlefield) transforms((,newability[ward1]))
 text=Trample -- Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.) -- As long as you have an enduring story, artifacts and creatures you control have ward {1}.
 mana={R}{W}
 type=Legendary Creature
@@ -137238,7 +137242,7 @@ toughness=2
 name=Kili the Resourceful
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; free-first-equip-per-turn-while-Storied not implemented, draw-once-per-turn approximated
-auto=@movedTo(*[dwarf,equipment;-token]|myBattlefield) restriction{} turnlimited:all(trigger[to]) draw:1 controller
+auto=@movedTo(*[dwarf;equipment;-token]|myBattlefield) restriction{} turnlimited:all(trigger[to]) draw:1 controller
 missing=pay-{0}-for-first-equip-ability-while-enduring-story not implemented (no verified per-turn free-activated-cost primitive)
 text=Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.) -- As long as you have an enduring story, you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn. -- Whenever another Dwarf or Equipment you control enters, draw a card. This ability triggers only once each turn.
 mana={1}{W}
@@ -137307,7 +137311,7 @@ name=Most Decrepit Old Bird
 abilities=adventure,flying
 other={1}{U} name(Adventure)
 auto=aslongas(*|mygraveyard) 1/1 >6
-auto=alternative reveal:4 optionone name(Get instant/sorcery) target(<upto:1>*[instant,sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=alternative reveal:4 optionone name(Get instant/sorcery) target(<upto:1>*[instant;sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; scrycore/scryend removed (only valid after scry:, caused a soft-lock) -- replaced with proven reveal+manual-graveyard-move idiom
@@ -137333,7 +137337,7 @@ name=Roll-Roll-Roll-Roll
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}~equalto~0) donothing
-auto=name(Blink target) target(<upto:1>*[creature,land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
+auto=name(Blink target) target(<upto:1>*[creature;land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-chapter blink approximated as a single reusable blink ability, not gated per chapter number
 missing=chapters I-IV each individually gating the blink (currently fires whenever the ability is available, not once per chapter specifically)
@@ -137370,7 +137374,7 @@ name=Along the Crooked Way
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
 auto=target(creature|mygraveyard) moveto(hand)
 auto=@movedTo(creature|myexile) from(mygraveyard):all(trigger[from]) _AMASSGOBLIN1_
-auto={1}{B}:lord(*[goblin,orc]|mybattlefield) menace ueot
+auto={1}{B}:lord(*[goblin;orc]|mybattlefield) menace ueot
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "creature card leaves your graveyard" trigger approximated as leaves-to-exile only
 missing="leaves your graveyard" trigger only covers moving to exile, not other zones (hand/battlefield/library)
@@ -137435,7 +137439,7 @@ toughness=2
 [/card]
 [card]
 name=The Sackville-Bagginses
-auto=may name(Sacrifice for treasure) notaTarget(other *[artifact,creature]|mybattlefield) sacrifice and!( draw:1 controller && _TREASURE_ )!
+auto=may name(Sacrifice for treasure) notaTarget(other *[artifact;creature]|mybattlefield) sacrifice and!( draw:1 controller && _TREASURE_ )!
 auto=@sacrificed(token|mybattlefield) source(controller):life:-1 opponent
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; sacrifice-a-token trigger approximated
@@ -137686,7 +137690,7 @@ toughness=2
 [card]
 name=Dain's Company
 auto=this(type(dwarf|mybattlefield)~morethan~1) lifelink
-auto=reveal:4 optionone name(Get a Dwarf or Equipment) target(<upto:1>*[dwarf,equipment]|reveal) moveto(hand) optiononeend optiontwo name(Bottom the rest) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+auto=reveal:4 optionone name(Get a Dwarf or Equipment) target(<upto:1>*[dwarf;equipment]|reveal) moveto(hand) optiononeend optiontwo name(Bottom the rest) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=This creature has lifelink as long as you control another Dwarf. -- When this creature enters, look at the top four cards of your library. You may reveal a Dwarf or Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={R}{W}
 type=Creature
@@ -137714,8 +137718,8 @@ toughness=1
 name=The Great Goblin
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counter-added trigger and dies-exile-play-window trigger both approximated
-auto=@counteradded(*) from(*[goblin,orc,army]|mybattlefield):damage:2 opponent
-auto=@movedTo(*[goblin,orc,army]|myGraveyard) from(mybattlefield) restriction{} turnlimited:all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
+auto=@counteradded(*) from(*[goblin;orc;army]|mybattlefield):damage:2 opponent
+auto=@movedTo(*[goblin;orc;army]|myGraveyard) from(mybattlefield) restriction{} turnlimited:all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
 missing="another" Goblin/Orc/Army restriction (excluding this card itself) not enforced on either trigger
 text=Whenever you put one or more counters on a Goblin, Orc, or Army you control, The Great Goblin deals 2 damage to target opponent. -- Whenever another Goblin, Orc, or Army you control dies, exile the top card of your library. You may play it until the end of your next turn.
 mana={1}{B/R}{B/R}
@@ -137743,7 +137747,7 @@ name=Thranduil, the Elvenking
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "has all activated abilities of all Elf cards in graveyard" not implemented, other legendary-elf-ETB draw2discard1 works
 missing="has all activated abilities of all Elf cards in your graveyard" not implemented (no verified dynamic-ability-copy-from-graveyard primitive)
-auto=@movedTo(*[elf,legendary;-token]|myBattlefield) restriction{} notatarget(this):all(trigger[to]) draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
+auto=@movedTo(*[elf;legendary;-token]|myBattlefield) restriction{} notatarget(this):all(trigger[to]) draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
 text=Thranduil has all activated abilities of all Elf cards in your graveyard. -- Whenever another legendary Elf you control enters, draw two cards, then discard a card.
 mana={2}{B}{G}{U}
 type=Legendary Creature
@@ -137782,7 +137786,7 @@ abilities=adventure
 other={3}{U} name(Adventure)
 auto=lord(this) transforms((,newability[changecost(colorless:-sourcept)]))
 auto={2}:equip
-auto=alternative reveal:6 optionone name(Get instants/sorceries) all(*[instant,sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=alternative reveal:6 optionone name(Get instants/sorceries) all(*[instant;sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; instant/sorcery-cost-reduction-equal-to-equipped-power approximated
@@ -137870,7 +137874,7 @@ name=Bilbo, Thief in the Night
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; cost reduction for spells cast from non-hand zones not implemented, attack-trigger cast-from-graveyard implemented
 missing="spells you cast from anywhere other than your hand cost {1} less" not implemented (no verified zone-agnostic cost-reduction primitive)
-auto=_ATTACKING_may name(Cast from graveyard) target(<upto:1>*[artifact,instant,sorcery]|mygraveyard) cast and!( this(castfromgy) transforms((,newability[_DIES_moveto(exile)])) forever )!
+auto=_ATTACKING_may name(Cast from graveyard) target(<upto:1>*[artifact;instant;sorcery]|mygraveyard) cast and!( this(castfromgy) transforms((,newability[_DIES_moveto(exile)])) forever )!
 text=Spells you cast from anywhere other than your hand cost {1} less to cast. -- Whenever Bilbo attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
 mana={1}{U}
 type=Legendary Creature
@@ -137882,8 +137886,9 @@ toughness=2
 name=Elrond, Moon-Reader
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
-auto=@activate ability(*[-mana]) source(creature|mybattlefield) restriction{} turnlimited:draw:1 controller
+# REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@activate ability(*[-mana]) source(creature|mybattlefield) restriction{} turnlimited:draw:1 controller
 auto={5}{U}{U}:target(<2>other permanent[-land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
+missing=the 'whenever you activate an ability of a creature, draw a card' trigger is not implemented (@activate is not a real trigger and crashed the engine)
 text=Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn. -- {5}{U}{U}: Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 mana={2}{U}
 type=Legendary Creature

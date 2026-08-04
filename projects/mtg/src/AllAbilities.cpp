@@ -4081,12 +4081,20 @@ int GenericPaidAbility::resolve()
         //not fixing this since its been heavily modified from the orginal implementation.
         nomenu = true;
         baseAbility = Af.parseMagicLine(baseAbilityStrSplit[0], this->GetId(), NULL, source);
-        baseAbility->target = target;
-        optionalCost =  ManaCost::parseManaCost(baseCost, NULL, source);
-        MTGAbility * set = baseAbility->clone();
-        nomenuAbility = baseAbility->clone();
-        set->oneShot = true;
-        selection.push_back(set);
+        //The comment above is right that the line might not parse -- it now really can
+        //return NULL (an unparseable/empty transforms is rejected rather than read off
+        //the end of a vector). Dereferencing it crashed the game while resolving the
+        //spell. Nothing is pushed on failure and the selection.size() check below
+        //already handles an empty selection, so skipping is enough.
+        if (baseAbility)
+        {
+            baseAbility->target = target;
+            optionalCost =  ManaCost::parseManaCost(baseCost, NULL, source);
+            MTGAbility * set = baseAbility->clone();
+            nomenuAbility = baseAbility->clone();
+            set->oneShot = true;
+            selection.push_back(set);
+        }
     }
 
     if (selection.size())
