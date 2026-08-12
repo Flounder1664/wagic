@@ -1198,7 +1198,10 @@ int AbilityFactory::parsePowerToughness(string s, int *power, int *toughness)
     {
         splitPT = splitPTCheck;
     }
-    if(!splitPT.size())
+    //Both [0] and [1] are indexed below, so an empty check is not enough: a spec
+    //with no separator (e.g. a bare "*") splits to size 1 and splitPT[1] read off
+    //the end of the vector, crashing inside atoi.
+    if(splitPT.size() < 2)
     {
         return 0;
     }
