@@ -60,6 +60,60 @@ void CrashLog::logCrash(const std::string& reason)
 }
 
 #if defined(WIN32)
+// Append the faulting address and a stack walk, as module+offset lines.
+// The breadcrumbs say WHEN a crash happened (which game action) but never
+// WHERE. That left GUI-only crashes undiagnosable, because the console
+// TestSuite build does no rendering and so cannot reach them at all -- a green
+// harness run is not evidence about the GUI path.
+// CaptureStackBackTrace is kernel32-only: no dbghelp, no Debugging Tools
+// install, nothing to configure. Map a line like "Wagic.exe+0x1a2b3c" back to
+// source using the build's .map/.pdb.
+static void appendCrashStack(EXCEPTION_POINTERS* info)
+{
+    FILE* f = fopen("crash_log.txt", "a");
+    if (!f)
+        return;
+
+    if (info && info->ExceptionRecord)
+    {
+        fprintf(f, "Faulting address: 0x%p\n", info->ExceptionRecord->ExceptionAddress);
+        // For an access violation the first two parameters say read vs write, and the target.
+        if (info->ExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION &&
+            info->ExceptionRecord->NumberParameters >= 2)
+        {
+            fprintf(f, "Access violation: %s address 0x%p\n",
+                    info->ExceptionRecord->ExceptionInformation[0] ? "write to" : "read from",
+                    (void*)info->ExceptionRecord->ExceptionInformation[1]);
+        }
+    }
+
+    void* frames[48];
+    USHORT n = CaptureStackBackTrace(0, 48, frames, NULL);
+    fprintf(f, "Stack (%u frames, innermost first):\n", (unsigned)n);
+    for (USHORT i = 0; i < n; i++)
+    {
+        HMODULE mod = NULL;
+        if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                               (LPCSTR)frames[i], &mod) && mod)
+        {
+            char full[MAX_PATH];
+            const char* shortName = "?";
+            if (GetModuleFileNameA(mod, full, MAX_PATH))
+            {
+                const char* slash = strrchr(full, '\\');
+                shortName = slash ? slash + 1 : full;
+            }
+            fprintf(f, "  %-20s +0x%lx\n", shortName,
+                    (unsigned long)((char*)frames[i] - (char*)mod));
+        }
+        else
+        {
+            fprintf(f, "  %-20s 0x%p\n", "(unknown module)", frames[i]);
+        }
+    }
+    fclose(f);
+}
+
 static LONG WINAPI wagicCrashFilter(EXCEPTION_POINTERS* info)
 {
     unsigned long code = (info && info->ExceptionRecord) ? info->ExceptionRecord->ExceptionCode : 0;
@@ -67,6 +121,7 @@ static LONG WINAPI wagicCrashFilter(EXCEPTION_POINTERS* info)
     _snprintf(reason, sizeof(reason), "Unhandled exception 0x%08lx", code);
     reason[sizeof(reason) - 1] = '\0';
     CrashLog::logCrash(reason);
+    appendCrashStack(info);
     return EXCEPTION_EXECUTE_HANDLER; // log written; let the process terminate
 }
 
