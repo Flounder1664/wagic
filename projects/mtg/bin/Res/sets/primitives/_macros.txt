@@ -169,6 +169,11 @@
 # Adventure
 #AUTO_DEFINE _ADVENTURE_ name(Adventure) transforms((,newability[moveto(exile) and!( transforms((,newability[canplayfromexile forever])) forever )!])) forever
 
+# Room (Duskmourn) — door 1 is paid at cast, door 2 unlocks via activated ability while in play.
+# unlockdoor:N adds a "DoorN" counter (0/0) to source and fires WEventRoomFullyUnlocked when both Door1 and Door2 are present.
+#AUTO_DEFINE _ROOM_DOOR1_ unlockdoor:1 controller
+#AUTO_DEFINE _ROOM_DOOR2_ unlockdoor:2 controller
+
 # Extort
 #AUTO_DEFINE _EXTORT_ @movedto(*|mystack):pay({WB}) life:-1 opponent && life:1 controller
 

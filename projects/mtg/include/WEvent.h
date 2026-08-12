@@ -501,6 +501,13 @@ struct WEventCardDungeonCompleted : public WEventCardUpdate {
     virtual Targetable * getTarget(int target);
 };
 
+//room fully unlocked event
+struct WEventRoomFullyUnlocked : public WEventCardUpdate {
+    string playerName;
+    WEventRoomFullyUnlocked(MTGCardInstance * card, string playerName);
+    virtual Targetable * getTarget(int target);
+};
+
 //roll die event
 struct WEventCardRollDie : public WEventCardUpdate {
     string playerName;

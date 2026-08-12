@@ -1634,8 +1634,20 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             playerName = card->controller()->opponent()->getDisplayName();
         } else if(from.size() && from[1] == "controller"){
             playerName = card->controller()->getDisplayName();
-        } 
+        }
         return NEW TrCardDungeonCompleted(observer, id, card, tc, once, limitOnceATurn, totaldng, playerName);
+    }
+
+    //Room has been fully unlocked
+    if (TargetChooser * tc = parseSimpleTC(s, "roomfullyunlocked", card)){
+        string playerName = "";
+        vector<string>from = parseBetween(s, "from(",")");
+        if(from.size() && from[1] == "opponent"){
+            playerName = card->controller()->opponent()->getDisplayName();
+        } else if(from.size() && from[1] == "controller"){
+            playerName = card->controller()->getDisplayName();
+        }
+        return NEW TrCardRoomFullyUnlocked(observer, id, card, tc, once, limitOnceATurn, playerName);
     }
 
     //Roll die has been performed from a card
@@ -4369,6 +4381,22 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         }
         Targetable * t = spell ? spell->getNextTarget() : NULL;
         MTGAbility * a = NEW AAAlterDungeonCompleted(observer, id, card, t, dungeoncompleted, NULL, who);
+        a->oneShot = 1;
+        return a;
+    }
+
+    //unlock room door
+    vector<string> splitUnlockDoor = parseBetween(s, "unlockdoor:", " ", false);
+    if (splitUnlockDoor.size())
+    {
+        int doorNumber = 1;
+        WParsedInt* parser = NEW WParsedInt(splitUnlockDoor[1], card);
+        if(parser){
+            doorNumber = parser->intValue;
+            SAFE_DELETE(parser);
+        }
+        Targetable * t = spell ? spell->getNextTarget() : NULL;
+        MTGAbility * a = NEW AAAlterDoorUnlocked(observer, id, card, t, doorNumber, NULL, who);
         a->oneShot = 1;
         return a;
     }

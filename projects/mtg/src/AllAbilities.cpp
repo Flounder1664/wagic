@@ -1374,6 +1374,43 @@ AAAlterDungeonCompleted::~AAAlterDungeonCompleted()
 {
 }
 
+//AA Door Unlocked
+AAAlterDoorUnlocked::AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int doorNumber, ManaCost * _cost,
+        int who) :
+    ActivatedAbilityTP(observer, _id, _source, _target, _cost, who), doorNumber(doorNumber)
+{
+}
+
+int AAAlterDoorUnlocked::resolve()
+{
+    if (!source || !source->counters) return 0;
+    char counterName[8];
+    snprintf(counterName, sizeof(counterName), "Door%d", doorNumber);
+    if (source->counters->hasCounter(counterName, 0, 0))
+        return 0;
+    source->counters->addCounter(counterName, 0, 0);
+    if (source->counters->hasCounter("Door1", 0, 0) && source->counters->hasCounter("Door2", 0, 0))
+    {
+        WEvent * e = NEW WEventRoomFullyUnlocked(source, source->controller()->getDisplayName());
+        game->receiveEvent(e);
+    }
+    return 0;
+}
+
+const string AAAlterDoorUnlocked::getMenuText()
+{
+    return _("Unlock Door").c_str();
+}
+
+AAAlterDoorUnlocked * AAAlterDoorUnlocked::clone() const
+{
+    return NEW AAAlterDoorUnlocked(*this);
+}
+
+AAAlterDoorUnlocked::~AAAlterDoorUnlocked()
+{
+}
+
 //AA Yidaro Count
 AAAlterYidaroCount::AAAlterYidaroCount(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int yidarocount, ManaCost * _cost,
         int who) :

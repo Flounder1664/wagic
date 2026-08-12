@@ -1186,6 +1186,37 @@ public:
     }
 };
 
+class TrCardRoomFullyUnlocked: public Trigger
+{
+public:
+    bool limitOnceATurn;
+    int triggeredTurn;
+    string playerName;
+    TrCardRoomFullyUnlocked(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool limitOnceATurn = false, string playerName = "") :
+    Trigger(observer, id, source, once, tc), limitOnceATurn(limitOnceATurn), playerName(playerName)
+    {
+        triggeredTurn = -1;
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        WEventRoomFullyUnlocked * e = dynamic_cast<WEventRoomFullyUnlocked *> (event);
+        if (!e) return 0;
+        if (limitOnceATurn && triggeredTurn == game->turn)
+            return 0;
+        if (playerName != "" && playerName != e->playerName)
+            return 0;
+        if (!tc->canTarget(e->card)) return 0;
+        triggeredTurn = game->turn;
+        return 1;
+    }
+
+    TrCardRoomFullyUnlocked * clone() const
+    {
+        return NEW TrCardRoomFullyUnlocked(*this);
+    }
+};
+
 class TrCardRolledDie: public Trigger
 {
 public:
@@ -4808,6 +4839,20 @@ public:
     const string getMenuText();
     AAAlterDungeonCompleted * clone() const;
     ~AAAlterDungeonCompleted();
+};
+
+//Room Door Unlocked
+class AAAlterDoorUnlocked: public ActivatedAbilityTP
+{
+public:
+    int doorNumber;
+
+    AAAlterDoorUnlocked(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int doorNumber, ManaCost * _cost = NULL,
+            int who = TargetChooser::UNSET);
+    int resolve();
+    const string getMenuText();
+    AAAlterDoorUnlocked * clone() const;
+    ~AAAlterDoorUnlocked();
 };
 
 //Yidaro Counter

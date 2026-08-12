@@ -13228,6 +13228,18 @@ mana={4}
 type=Artifact
 [/card]
 [card]
+name=Bottomless Pool // Locker Room
+mana={2}{U}
+other={U} name(Bottomless Pool)
+type=Enchantment
+subtype=Room
+auto=paidmana unlockdoor:1 controller and!( may name(Return creature) target(creature|battlefield) moveTo(ownerHand) )!
+auto=alternative unlockdoor:2 controller and!( draw:1 controller )!
+auto={2}{U}restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Locker Room) unlockdoor:1 controller and!( may name(Return creature) target(creature|battlefield) moveTo(ownerHand) )! asSorcery
+auto={U}restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Bottomless Pool) unlockdoor:2 controller and!( draw:1 controller )! asSorcery
+text=Locker Room {2}{U} (Enchantment Room): When you unlock this door, return target creature to its owner's hand. // Bottomless Pool {U} (Enchantment Room): When you unlock this door, draw a card. // Pay either half's cost to enter; pay the other to unlock the second door (sorcery speed).
+[/card]
+[card]
 name=Boulderborn Dragon
 abilities=flying,vigilance
 auto=_ATTACKING__SURVEIL1_
