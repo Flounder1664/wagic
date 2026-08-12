@@ -1275,6 +1275,10 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             toTcCard = tcf.createTargetChooser(starget.substr(0, end).append("|*"), card);
             found = end + 1;
         }
+        //createTargetChooser returns NULL for a selector it cannot parse. Bailing out
+        //keeps one malformed card from killing the engine while parsing its trigger.
+        if (!toTcCard)
+            return NULL;
         toTcCard->setAllZones();
         toTcCard->targetter = NULL; //avoid protection from
         starget = starget.substr(found, end - found).insert(0, "*|");
@@ -2508,13 +2512,19 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     if (splitTrigger.size())
     {
         TriggeredAbility * trigger = parseTrigger(splitTrigger[1], s, id, spell, card, target);
-        if (splitTrigger[1].find("restriction{") != string::npos)//using other/cast restrictions for abilities.
+        //parseTrigger returns NULL for a trigger name it does not recognise. The
+        //`if (trigger)` test below shows that was already known -- but these two
+        //restriction assignments run BEFORE it and dereferenced the null, so ANY card
+        //combining an unrecognised trigger with a restriction{} clause killed the
+        //engine while parsing it. That is one bad card taking down the whole game,
+        //and it is how several malformed HOB cards presented.
+        if (trigger && splitTrigger[1].find("restriction{") != string::npos)//using other/cast restrictions for abilities.
         {
             vector<string> splitRest = parseBetween(s,"restriction{","}");
             if (splitRest.size())
                 trigger->castRestriction = splitRest[1];
         }
-        if (splitTrigger[1].find("restriction{{") != string::npos)
+        if (trigger && splitTrigger[1].find("restriction{{") != string::npos)
         {
             vector<string> splitRest = parseBetween(s,"restriction{{","}}");
             if (splitRest.size())
@@ -2593,14 +2603,23 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         tc = tcf.createTargetChooser(splitTarget[1], card);
         tcString = splitTarget[1];
 
-        if (!isTarget)
+        //createTargetChooser returns NULL for a selector it cannot parse (e.g. a
+        //comma-separated type list written inside *[...] instead of as
+        //target(a,b)). Dereferencing that killed the engine at card-parse time,
+        //making one bad card fatal for the whole game rather than just broken.
+        //Note the !isTarget branch also assumed targetter was non-NULL while the
+        //else branch already checked it; both are guarded now.
+        if (tc)
         {
-            tc->targetter->bypassTC = true;
-            tc->targetter = NULL;
-        }
-        else
-            if (tc->targetter)
+            if (!isTarget)
+            {
+                if (tc->targetter)
+                    tc->targetter->bypassTC = true;
+                tc->targetter = NULL;
+            }
+            else if (tc->targetter)
                 tc->targetter->bypassTC = false;
+        }
         sWithoutTc = splitTarget[0];
         sWithoutTc.append(splitTarget[2]);
         //Let the AI judge the targeting decision by the ability's own effect
@@ -5323,6 +5342,12 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             transformsParamsString.erase(stypesStartIndex, real_end - stypesStartIndex);
         }
         vector<string> effectParameters = split( transformsParamsString, ',');
+        //An empty transforms(()) -- which earlier extraction passes can produce, and
+        //which a malformed card can also spell directly -- leaves nothing to split,
+        //so effectParameters[0] read off the end of the vector and crashed inside
+        //std::string's copy ctor. Treat it as an unparseable line instead.
+        if (effectParameters.empty())
+            return NULL;
         string stypes = effectParameters[0];
 
         string sabilities = transformsParamsString.substr(stypes.length());

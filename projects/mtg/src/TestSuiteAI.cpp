@@ -1010,6 +1010,20 @@ void TestSuiteGame::initGame()
                     {
                         //MTGCardInstance * copy = p->game->putInZone(card, p->game->library, p->game->stack);
                         MTGCardInstance * copy = zone->owner->game->putInZone(card, p->game->library, p->game->stack);
+                        //putInZone returns NULL when the card is not actually in that
+                        //library. Rules::getCardByMTGId searches BOTH players and ALL
+                        //zones, so it can hand back a card an earlier INIT card's ETB
+                        //(or a shuffle) already moved out of the library -- and whether
+                        //that happens depends on RNG state carried over from previous
+                        //tests, which is why this presented as an order-dependent,
+                        //"random" segfault. Spell's ctor dereferences its source, so a
+                        //NULL here killed the whole run. Skip and report instead: the
+                        //!card case below is already handled the same way.
+                        if (!copy)
+                        {
+                            LOG ("TESTUITE ERROR, card not in library (moved by an earlier card's effect?)\n");
+                            continue;
+                        }
                         Spell * spell = NEW Spell(observer, copy);
                         spell->resolve();
                         if (!summoningSickness && (size_t)p->game->inPlay->nb_cards > k) p->game->inPlay->cards[k]->summoningSickness = 0;
