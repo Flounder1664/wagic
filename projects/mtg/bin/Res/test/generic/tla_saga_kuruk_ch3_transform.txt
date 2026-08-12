@@ -1,0 +1,35 @@
+#The Legend of Kuruk chapter III: exile the Saga and return it transformed as
+#Avatar Kuruk. This is the transform that CRASHED reproducibly (unhandled
+#exception, first logged 2026-07-19) and was reverted to sacrifice(this) on
+#2026-08-02 because the root cause was unknown.
+#Re-applied to retest against the five null-deref engine fixes -- fix #5
+#(parseTrigger returning NULL while the restriction{} assignment dereferenced
+#it) is exactly this crash's shape.
+#Saga enters with lore 1; two more upkeeps take it to 3 and fire chapter III.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:the legend of kuruk
+library:ornithopter,goblin piker,ornithopter,goblin piker,ornithopter,goblin piker
+life:20
+[PLAYER2]
+library:ornithopter,goblin piker,ornithopter,goblin piker
+life:20
+[DO]
+eot
+eot
+eot
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+#the Saga is gone and the transformed back face is on the battlefield
+inplay:Avatar Kuruk
+hand:*,*
+library:*,*,*,*
+life:20
+[PLAYER2]
+hand:*,*
+library:*,*
+life:20
+[END]

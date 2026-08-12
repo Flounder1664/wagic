@@ -133322,8 +133322,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=_SCRY2_ draw:1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _SCRY2_ draw:1 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip(backside) crashes reproducibly (unhandled exception, confirmed pre-dates this session -- 2026-07-19 crash log), not just missing art -- reverted 2026-08-02 pending real root-cause debugging
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Scry 2, then draw a card. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{U}{U}
 type=Enchantment
@@ -133348,8 +133347,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=all(*[zpos<=3]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip(backside) crashes reproducibly (unhandled exception, confirmed pre-dates this session -- 2026-07-19 crash log), not just missing art -- reverted 2026-08-02 pending real root-cause debugging
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Exile the top three cards of your library. Until the end of your next turn, you may play those cards. -- II - Add one mana of any color. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{R}{R}
 type=Enchantment
@@ -133375,8 +133373,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=name(Exile a permanent) target(*[-land;manacost>=3]|opponentbattlefield) moveto(exile)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may draw:3 opponent && draw:3 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip(backside) crashes reproducibly (unhandled exception, confirmed pre-dates this session -- 2026-07-19 crash log), not just missing art -- reverted 2026-08-02 pending real root-cause debugging; chapter I is each-player-chooses-up-to-one (political); approximated as exile one opponent permanent with mv>=3
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents. -- II - You may have target opponent draw three cards. If you do, draw three cards. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={3}{W}{W}
 type=Enchantment
@@ -133402,8 +133399,7 @@ anyzone={0}:doubleside(backside)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy all(creature|battlefield)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip(backside) crashes reproducibly (unhandled exception, confirmed pre-dates this session -- 2026-07-19 crash log), not just missing art -- reverted 2026-08-02 pending real root-cause debugging; chapter II (name a card, exile up to four copies from an opponent's zones) has no DSL form; skipped
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Destroy all creatures. -- II - Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{B}{B}
 type=Enchantment
@@ -133429,8 +133425,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=draw:3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _EARTHBEND2_
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip(backside) crashes reproducibly (unhandled exception, confirmed pre-dates this session -- 2026-07-19 crash log), not just missing art -- reverted 2026-08-02 pending real root-cause debugging; ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Draw cards equal to the greatest power among creatures you control. -- II - Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{G}{G}
 type=Enchantment
@@ -137718,9 +137713,13 @@ toughness=1
 name=The Great Goblin
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counter-added trigger and dies-exile-play-window trigger both approximated
-auto=@counteradded(*) from(*[goblin;orc;army]|mybattlefield):damage:2 opponent
+# REVIEW 2026-08-03 [P:high] HOB fix: @counteradded(*) is invented -- zero uses in mtg.txt,
+# which only ever names a specific counter. The wildcard reached parsePowerToughness as a
+# bare "*" and crashed in atoi. Narrowed to +1/+1, which is what amass actually puts on.
+auto=@counteradded(1/1) from(*[goblin;orc;army]|mybattlefield):damage:2 opponent
 auto=@movedTo(*[goblin;orc;army]|myGraveyard) from(mybattlefield) restriction{} turnlimited:all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
 missing="another" Goblin/Orc/Army restriction (excluding this card itself) not enforced on either trigger
+missing=only +1/+1 counters trigger this, not every counter type
 text=Whenever you put one or more counters on a Goblin, Orc, or Army you control, The Great Goblin deals 2 damage to target opponent. -- Whenever another Goblin, Orc, or Army you control dies, exile the top card of your library. You may play it until the end of your next turn.
 mana={1}{B/R}{B/R}
 type=Legendary Creature
