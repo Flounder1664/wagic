@@ -48038,8 +48038,8 @@ toughness=5
 [/card]
 [card]
 name=Germinating Wurm
+grade=supported
 abilities=canplayfromexile
-grade=borderline
 other={1}{G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=life:2
@@ -117059,15 +117059,22 @@ text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapp
 [/card]
 [card]
 name=Spider-Punk
-auto=choice name(Counter) counter(1/1)
-auto=choice name(Haste) haste ueot
-auto=lord(spider|mybattlefield) haste
+auto=choice name(Counter) counter(1/1) name(Haste) transforms((,haste)) forever
+auto=lord(other spider|mybattlefield) haste
+#Riot is ONE choice, so both modes belong on a SINGLE choice line. Two separate
+#"auto=choice ..." lines are two independent abilities and both resolve, which is why
+#John got a +1/+1 counter AND haste. Single-line form copied from Auntie's Sentence.
+#Riot's haste is permanent, not until end of turn, hence transforms((,haste)) forever.
+#MISSING "Other Spiders you control have riot" is approximated as a permanent haste grant
+#to other Spiders: the engine cannot offer each of them the counter-or-haste choice as it
+#enters, and haste is the mode that can be expressed as a lord().
+#MISSING "Spells and abilities can't be countered" and "Damage can't be prevented" are
+#global statics affecting both players; Wagic has no route for either.
 mana={1}{R}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=1
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -- Other Spiders you control have riot. -- Spells and abilities can't be countered. -- Damage can't be prevented.
 [/card]
 [card]
@@ -117091,8 +117098,7 @@ text=Equipped creature gets +2/+2. Equip {2}.
 [/card]
 [card]
 name=Spider-UK
-grade=borderline
-# REVIEW 2026-07-19 [P:high] web-sling needs the bounce (alt-cost approximation, no bounce)
+grade=supported
 other={2}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 auto=@each my endstep:if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 && life:2 controller

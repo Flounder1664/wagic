@@ -7416,6 +7416,7 @@ toughness=1
 [/card]
 [card]
 name=Bake into a Pie
+grade=supported
 target=creature
 auto=destroy
 auto=_FOOD_
@@ -8217,6 +8218,7 @@ toughness=3
 [/card]
 [card]
 name=Bartered Cow
+grade=supported
 auto=_DIES__FOOD_
 auto=@movedTo(this|mygraveyard) from(myHand):_FOOD_
 text=When Bartered Cow dies or when you discard it, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
@@ -9237,6 +9239,7 @@ toughness=6
 [/card]
 [card]
 name=Belligerent Guest
+grade=supported
 abilities=trample
 auto=@combatdamaged(player) from(this):name(Create Blood) _BLOOD_
 text=Trample -- Whenever Belligerent Guest deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
@@ -11275,6 +11278,7 @@ toughness=2
 [/card]
 [card]
 name=Blood
+grade=supported
 auto={1}{T}{D(*|myhand)}{S}:name(Draw a card) draw:1 controller
 text={1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
 type=Artifact
@@ -11282,6 +11286,7 @@ subtype=Blood
 [/card]
 [card]
 name=Food
+grade=supported
 auto={2}{T}{S}:name(Gain 3 life) life:3 controller
 text={2}, {T}, Sacrifice this artifact: You gain 3 life.
 type=Artifact
@@ -29266,6 +29271,7 @@ toughness=2
 [/card]
 [card]
 name=Dockside Extortionist
+grade=supported
 auto=name(Create treasures) _TREASURE_*type:artifact:opponentbattlefield
 auto=name(Create treasures) _TREASURE_*type:enchantment:opponentbattlefield
 text=When Dockside Extortionist enters, create X Treasure tokens, where X is the number of artifacts and enchantments your opponents control. (Treasure tokens are artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
@@ -56695,6 +56701,7 @@ type=Artifact
 [/card]
 [card]
 name=Indatha Triome
+grade=supported
 abilities=cycling
 auto=tap(noevent)
 autohand=__CYCLING__({3})
@@ -74567,6 +74574,7 @@ toughness=4
 [/card]
 [card]
 name=Mosswort Bridge
+grade=supported
 auto=tap(noevent)
 aicode=activate target(*[zpos<=4]|mylibrary) imprint and!( all(*[zpos<=4]|opponentlibrary) moveto(myreveal) and!( bottomoflibrary )! )!
 auto=name(look) reveal:4 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
@@ -90790,6 +90798,7 @@ toughness=2
 [/card]
 [card]
 name=Reflections of Littjara
+grade=supported
 auto=chooseatype all(this) transforms((,newability[@movedTo(*[chosentype]|mystack):all(trigger[to]) clone])) forever chooseend
 text=As Reflections of Littjara enters, choose a creature type. -- Whenever you cast a spell of the chosen type, copy that spell. (A copy of a permanent spell becomes a token.)
 mana={4}{U}
@@ -117121,6 +117130,7 @@ toughness=2
 [/card]
 [card]
 name=Thorough Investigation
+grade=supported
 auto=@each my blockers:name(Investigation) name(Create clue) _CLUE_ controller
 auto=@sacrificed(Clue|mybattlefield) restriction{compare(type:*[nodngplr]:mybattlefieldplustype:*[nodngopp]:opponentbattlefieldplusend)~equalto~0}:name(Venture into dungeon) transforms((,newability[if type(*[dungeon]|mycommandzone)~morethan~0 then name(Explore the dungeon) name(Explore the dungeon) all(*[dungeon]|mycommandzone) counter(0/0.1.Explore)],newability[if type(*[dungeon]|mycommandzone)~equalto~0 then name(Choose a new dungeon) name(Choose a new dungeon) target(*[dungeon]|mysideboard) moveTo(mycommandzone) and!( counter(0/0.1.Explore) )!])) oneshot
 text=Whenever you attack, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") -- Whenever you sacrifice a Clue, venture into the dungeon. (Enter the first room or advance to the next room.)
@@ -134582,6 +134592,7 @@ toughness=1
 [/card]
 [card]
 name=Bridled Bighorn
+grade=supported
 abilities=vigilance
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Sheep,creature sheep,1/1,white)
@@ -134595,6 +134606,7 @@ toughness=4
 [/card]
 [card]
 name=Alacrian Jaguar
+grade=supported
 abilities=vigilance
 auto={crew1(other creature|myBattlefield)}:name(Saddle 1) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~0}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:2/2 ueot
@@ -134964,7 +134976,7 @@ toughness=5
 [/card]
 [card]
 name=Ravenhill Flock
-grade=borderline
+grade=supported
 abilities=flying
 auto=@drawof(player):counter(1/1)
 text=Flying -- Whenever you draw a card, put a +1/+1 counter on this creature.
@@ -134988,7 +135000,7 @@ toughness=5
 [/card]
 [card]
 name=Nighthowl Pursuer
-grade=borderline
+grade=supported
 abilities=menace
 auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:2/2 ueot
 text=Menace -- Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, this creature gets +2/+2 until end of turn.
@@ -135039,7 +135051,7 @@ toughness=3
 [/card]
 [card]
 name=Dragon's Desire
-grade=borderline
+grade=supported
 auto=foreach(artifact|opponentbattlefield) Add{R}
 text=Add {R} for each artifact your opponents control.
 mana={2}{R}{R}
@@ -135107,7 +135119,7 @@ toughness=7
 [/card]
 [card]
 name=Candy Grapple
-grade=borderline
+grade=supported
 abilities=hasotherkicker
 target=creature
 other={1}{B}{S(artifact,enchantment|myBattlefield)} name(Bargain)
@@ -135121,7 +135133,7 @@ type=Instant
 [/card]
 [card]
 name=Archon's Glory
-grade=borderline
+grade=supported
 abilities=hasotherkicker
 target=creature
 other={W}{S(artifact,enchantment|myBattlefield)} name(Bargain)
@@ -135192,7 +135204,7 @@ type=Instant
 [/card]
 [card]
 name=Agatha's Champion
-grade=borderline
+grade=supported
 abilities=trample,hasotherkicker
 other={4}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
@@ -135259,7 +135271,7 @@ toughness=5
 [/card]
 [card]
 name=Hamlet Glutton
-grade=borderline
+grade=supported
 abilities=trample,hasotherkicker
 other={3}{G}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
@@ -135274,7 +135286,7 @@ toughness=6
 [/card]
 [card]
 name=Diminisher Witch
-grade=borderline
+grade=supported
 abilities=hasotherkicker
 other={2}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
@@ -135362,7 +135374,7 @@ toughness=4
 [/card]
 [card]
 name=Polygraph Orb
-grade=borderline
+grade=supported
 auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<1>*|reveal) moveto(ownergraveyard) and!( all(*|reveal) moveto(ownergraveyard) )! optiontwoend revealend
 #Uses <upto:2>, NOT <2>: John found Dig Through Time (<2>) never presented its cards
 #while Collected Company (<upto:2>) did. Trade-off: the player may take fewer than 2.
@@ -135396,8 +135408,8 @@ toughness=9
 [/card]
 [card]
 name=Memorial Team Leader
+grade=supported
 abilities=canplayfromexile
-grade=borderline
 other={1}{R} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=this(variable{controllerturn}>0) lord(other creature|mybattlefield) 1/0
@@ -135412,7 +135424,7 @@ toughness=3
 [/card]
 [card]
 name=Exalted Sunborn
-grade=borderline
+grade=supported
 other={1}{W} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 abilities=flying,lifelink,canplayfromexile
@@ -135429,8 +135441,8 @@ toughness=5
 [/card]
 [card]
 name=Loading Zone
+grade=supported
 abilities=canplayfromexile
-grade=borderline
 other={G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=@totalcounteradded(any) from(creature|myBattlefield) duplicate(all) nocost:ability$!name(Double the counter) donothing!$ controller
@@ -135489,7 +135501,7 @@ toughness=4
 [/card]
 [card]
 name=Stonesplitter Bolt
-grade=borderline
+grade=supported
 abilities=hasotherkicker
 other={X}{R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
@@ -135608,7 +135620,7 @@ toughness=3
 [/card]
 [card]
 name=Detective's Phoenix
-grade=borderline
+grade=supported
 abilities=flying,haste
 auto=bestow bstw
 auto=bestow teach(creature) 2/2
