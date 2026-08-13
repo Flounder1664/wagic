@@ -135332,7 +135332,21 @@ name=Kylox's Voltstrider
 grade=borderline
 auto={evidence6(*|mygraveyard)}:name(Collect evidence 6 - animate) becomes(Artifact Creature) ueot
 auto=_CREW2_
-#MISSING The attack trigger ("you may cast an instant or sorcery from among cards exiled with it, and it goes to the bottom of the library instead of the graveyard") is absent: nothing tracks which cards were exiled BY this permanent, so there is no set to cast from. Note this also means the collect-evidence exiles are not recoverable the way the real card intends.
+#The attack trigger IS partly implementable - my earlier note claimed "nothing tracks which
+#cards were exiled BY this permanent", which is wrong. The engine tracks exiled cards two ways:
+#(blink)forsrc for returning them, and a named counter for referencing them later
+#(Banishment marks with counter(0/0.1.BanishmentExiled); Rona grants
+#lord(*[counter{0/0.1.RonaExiled}]|myexile) canplayfromexile).
+#What blocks the exact wording here is narrower: the cards are exiled by the ENGINE as the
+#{evidence6(...)} cost is paid, so the DSL never gets a chance to mark them, and "exiled with
+#this" cannot be told apart from anything else in exile.
+auto=_ATTACKING_all(*[instant;sorcery]|myexile) transforms((,canplayfromexile)) ueot
+#MISSING Two approximations remain. The grant covers EVERY instant/sorcery in your exile for
+#the turn, not only the ones this Vehicle exiled - unmarkable for the reason above, though in
+#practice its own collect-evidence payments are usually why they are there. And a spell cast
+#this way still goes to the graveyard rather than the bottom of the library.
+#REVIEW-V Verify in game: pay collect evidence 6, attack, and check an exiled instant or
+#sorcery becomes castable that turn.
 text=Collect evidence 6: This Vehicle becomes an artifact creature until end of turn. -- Whenever this Vehicle attacks, you may cast an instant or sorcery spell from among cards exiled with it. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead. -- Crew 2
 mana={1}{U}{R}
 type=Artifact
