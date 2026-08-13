@@ -1,0 +1,24 @@
+#Control for the nofizzle test: WITHOUT Spider-Punk, Erayo's Essence really does counter
+#the Mirkwood Spider, so it ends up in the graveyard.
+#Without this control the positive test is satisfied by an Erayo's Essence that never
+#counters anything, and the nofizzle line would look proven when it does nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mirkwood Spider
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[DO]
+Mirkwood Spider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Mirkwood Spider
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[END]

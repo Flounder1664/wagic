@@ -117061,15 +117061,26 @@ text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapp
 name=Spider-Punk
 auto=choice name(Counter) counter(1/1) name(Haste) transforms((,haste)) forever
 auto=lord(other spider|mybattlefield) haste
+auto=lord(*|stack) nofizzle
 #Riot is ONE choice, so both modes belong on a SINGLE choice line. Two separate
 #"auto=choice ..." lines are two independent abilities and both resolve, which is why
 #John got a +1/+1 counter AND haste. Single-line form copied from Auntie's Sentence.
 #Riot's haste is permanent, not until end of turn, hence transforms((,haste)) forever.
-#MISSING "Other Spiders you control have riot" is approximated as a permanent haste grant
-#to other Spiders: the engine cannot offer each of them the counter-or-haste choice as it
-#enters, and haste is the mode that can be expressed as a lord().
-#MISSING "Spells and abilities can't be countered" and "Damage can't be prevented" are
-#global statics affecting both players; Wagic has no route for either.
+#"Spells and abilities can't be countered" IS implementable: lord(*|stack) nofizzle, the
+#shape Prowling Serpopard uses, widened from mystack to stack because this static is
+#symmetric. No emblem needed - a lord() already lapses when the source leaves play.
+#Proven by spm_spider_punk_nofizzle{,_control}: Erayo's Essence under the opponent counters
+#the spell without this card and cannot with it.
+#MISSING "Other Spiders you control have riot" stays a flat haste grant, which drops the
+#counter mode. The trigger route works as far as it goes - @movedTo(other spider|
+#mybattlefield) fires, and all(trigger[to]) counter(1/1) lands - but every form of the
+#CHOICE inside that trigger was measured non-exclusive: picking haste still handed out the
+#counter, which is the same bug this card started with. Not shipped for that reason.
+#MISSING "Damage can't be prevented" has no route in the DSL. Prevention arrives by two
+#paths in Damage::resolve - REDamagePrevention replacement effects, and the target's
+#preventable counter - and no basic ability switches either off. REDamagePrevention is its
+#own class, so an engine fix would be small and well-targeted, but it is still an engine
+#change and would have to ship as exe + core.zip together.
 mana={1}{R}
 type=Legendary Creature
 subtype=Spider Human Hero
