@@ -111301,7 +111301,7 @@ name=Summoning Trap
 other={0} name(Creature was countered)
 otherrestriction=thisturn(instant|opponentstack)~morethan~0,thisturn(creature|mystack)~morethan~0,type(creature[fresh]|mygraveyard)~morethan~0
 aicode=activate transforms((,newability[target(creature[zpos<=7]|mylibrary) moveto(mybattlefield)],newability[all(*[zpos<=7]|mylibrary) moveto(myreveal) and!( bottomoflibrary )!])) oneshot
-auto=name(Look top 7) reveal:7 optionone name(Get a creature) target(<upto:1>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(Put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look top 7) reveal:7 optionone name(Get a creature) target(<upto:1>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(Put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost. -- Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
 mana={4}{G}{G}
 type=Instant

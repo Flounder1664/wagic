@@ -3615,7 +3615,7 @@ name=Ancestral Knowledge
 auto=cumulativeupcost[{1}] sacrifice
 auto=@movedto(this|nonbattlezone):shuffle controller
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=10]|mylibrary) moverandom(*[zpos<=10]) from(mylibrary) to(mylibrary)])) ueot
-auto=name(look) reveal:10 optionone name(Choose cards to exile) target(<anyamount>*|reveal) moveto(myexile) optiononeend optiontwo name(put on top) target(<10>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto=name(look) reveal:10 optionone name(Choose cards to exile) target(<anyamount>*|reveal) moveto(myexile) optiononeend optiontwo name(put on top) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text=Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.) -- When Ancestral Knowledge enters, look at the top ten cards of your library, then exile any number of them and put the rest back on top of your library in any order. -- When Ancestral Knowledge leaves the battlefield, shuffle your library.
 mana={1}{U}
 type=Enchantment
@@ -3632,7 +3632,7 @@ subtype=Aura
 [card]
 name=Ancestral Memories
 aicode=name(look) activate name(look) transforms((,newability[target(<2>*[zpos<=7]|mylibrary) moveto(hand)],newability[deplete:5])) ueot
-auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<7>*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<1>*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend
 text=Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
 mana={2}{U}{U}{U}
 type=Sorcery
@@ -30147,7 +30147,7 @@ toughness=3
 [card]
 name=Deploy the Gatewatch
 aicode=activate target(<upto:2>*[planeswalker;zpos<=7]|mylibrary) moveto(mybattlefield)
-auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*[planeswalker]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*[planeswalker]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 mana={4}{W}{W}
 type=Sorcery
@@ -30270,7 +30270,7 @@ toughness=1
 [card]
 name=Descendant of Soramaro
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=phandcount]|mylibrary) moverandom(*[zpos<=phandcount]) from(mylibrary) to(mylibrary)])) ueot
-auto={1}{U}:name(Look) reveal:type:*:myhand optionone name(Look) target(*|reveal) donothing optiononeend optiontwo target(<60>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={1}{U}:name(Look) reveal:type:*:myhand optionone name(Look) target(*|reveal) donothing optiononeend optiontwo target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
 mana={3}{U}
 type=Creature
@@ -31005,7 +31005,7 @@ name=Dig Through Time
 #exactly two in hand, so <upto:2> also permits taking fewer - accepted over a card
 #that does nothing. 78 other cards still use the exact-count form; not touched.
 aicode=activate target(<2>*[zpos<=7]|mylibrary) moveto(hand)
-auto=name(look) reveal:7 optionone name(Get Card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:7 optionone name(Get Card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Delve (Each card you exile from your graveyard while casting this spell pays for {1}.) -- Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
 mana={6}{U}{U}
 other={delve} name(Delve)
@@ -38380,7 +38380,7 @@ toughness=1
 [card]
 name=Enshrined Memories
 aicode=activate target(<castx>*[zpos<=castx]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature]|*) then bottomoflibrary)!
-auto=reveal:x optionone name(Get creatures) target(<upto:50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<50>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:x optionone name(Get creatures) target(<upto:50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={X}{G}
 type=Sorcery
@@ -61563,7 +61563,7 @@ type=Instant
 [card]
 name=Information Dealer
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=type:wizard:mybattlefield]|mylibrary) moverandom(*[zpos<=type:wizard:mybattlefield]) from(mylibrary) to(mylibrary)])) ueot
-auto={t}:name(Look) reveal:type:wizard:mybattlefield optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo target(<60>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={t}:name(Look) reveal:type:wizard:mybattlefield optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={T}: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
 mana={1}{U}
 type=Creature
@@ -73447,7 +73447,7 @@ toughness=4
 [card]
 name=Machinate
 aicode=name(look) activate name(look) transforms((,newability[moverandom(*[zpos<=type:artifact:mybattlefield]) from(mylibrary) to(myhand)])) ueot
-auto=name(Look) reveal:type:artifact:mybattlefield optionone name(Look) target(*|reveal) moveto(hand) optiononeend optiontwo target(<60>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:type:artifact:mybattlefield optionone name(Look) target(*|reveal) moveto(hand) optiononeend optiontwo target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 mana={1}{U}{U}
 type=Instant
@@ -79585,7 +79585,7 @@ type=Land
 [card]
 name=Mitotic Manipulation
 aicode=activate transforms((,newability[target(*[zpos<=7]|mylibrary) transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then moveto(mybattlefield) and!( all(*[zpos<=7]|mylibrary) moveto(myreveal) and!( bottomoflibrary )! )!],newability[if type(*[share!name!]|battlefield)~equalto~0 then all(*[zpos<=7]|mylibrary) moveto(myreveal) and!( bottomoflibrary )!])) ueot])) ueot
-auto=name(Look top 7 cards) reveal:7 optionone name(Get a card with same name) target(<upto:1>*|reveal) moveTo(mylibrary) and!( transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then becomes(tobemit) ueot])) ueot )! optiononeend optiontwo name(Put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend afterrevealed all(tobemit|mylibrary) moveto(mybattlefield) afterrevealedend revealend
+auto=name(Look top 7 cards) reveal:7 optionone name(Get a card with same name) target(<upto:1>*|reveal) moveTo(mylibrary) and!( transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then becomes(tobemit) ueot])) ueot )! optiononeend optiontwo name(Put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend afterrevealed all(tobemit|mylibrary) moveto(mybattlefield) afterrevealedend revealend
 text=Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
 mana={1}{U}{U}
 type=Sorcery
@@ -87618,7 +87618,7 @@ toughness=1
 [card]
 name=Orcish Librarian
 aicode=activate transforms((,newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)])) ueot
-auto={R}{t}:reveal:8 optionone name(Exile 4 cards) moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) optiononeend optiontwo name(put on top) target(<8>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={R}{t}:reveal:8 optionone name(Exile 4 cards) moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) optiononeend optiontwo name(put on top) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={R}, {T}: Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
 mana={1}{R}
 type=Creature
@@ -104525,7 +104525,7 @@ toughness=1
 [/card]
 [card]
 name=Sanity Grinding
-auto=reveal:10 optionone name(Look) target(*|reveal) deplete:type:manau opponent optiononeend optiontwo name(put on bottom) target(<10>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:10 optionone name(Look) target(*|reveal) deplete:type:manau opponent optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. Then put the cards you revealed this way on the bottom of your library in any order.
 mana={U}{U}{U}
 type=Sorcery
@@ -106842,7 +106842,7 @@ type=Enchantment
 [/card]
 [card]
 name=Sealed Fate
-auto=name(Look) reveal:x revealzone(opponentlibrary) optionone name(exile a card) target(<1>*|reveal) moveto(ownerexile) optiononeend optiontwo target(<60>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=name(Look) reveal:x revealzone(opponentlibrary) optionone name(exile a card) target(<1>*|reveal) moveto(ownerexile) optiononeend optiontwo target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) )! optiontwoend revealend
 text=Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
 mana={X}{U}{B}
 type=Sorcery
@@ -115333,7 +115333,7 @@ type=Instant
 [card]
 name=Soothsaying
 auto={3}{U}{U}:shuffle
-auto={x}:name(Look at top X cards) reveal:x optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo name(put back) target(<20>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={x}:name(Look at top X cards) reveal:x optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={3}{U}{U}: Shuffle your library. -- {X}: Look at the top X cards of your library and put them back in any order.
 mana={U}
 type=Enchantment
@@ -120090,7 +120090,7 @@ subtype=Mountain Forest
 [/card]
 [card]
 name=Stomping Slabs
-auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<upto:7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<upto:7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.
 mana={2}{R}
 type=Sorcery
@@ -143278,7 +143278,7 @@ toughness=2
 [card]
 name=Worldly Counsel
 aicode=activate target(*[zpos<=pbasiclandtypes]|mylibrary) moveto(hand)
-auto=name(Look) reveal:pbasiclandtypes optionone name(Get a Card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo target(<10>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:pbasiclandtypes optionone name(Get a Card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 mana={1}{U}
 type=Instant
