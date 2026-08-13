@@ -135343,7 +135343,7 @@ toughness=4
 [card]
 name=Polygraph Orb
 grade=borderline
-auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<4>*|reveal) moveto(ownergraveyard) optiontwoend revealend
+auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<1>*|reveal) moveto(ownergraveyard) and!( all(*|reveal) moveto(ownergraveyard) )! optiontwoend revealend
 #Uses <upto:2>, NOT <2>: John found Dig Through Time (<2>) never presented its cards
 #while Collected Company (<upto:2>) did. Trade-off: the player may take fewer than 2.
 #REVIEW-V Cannot be harness-tested: casting a multi-card reveal segfaults the HEADLESS
@@ -135531,8 +135531,10 @@ abilities=hasotherkicker
 other={2}{U}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
 #<upto:2>, never a bare <2>: an exact multi-count take never presents the cards.
-auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
-auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<8>*|reveal) bottomoflibrary optiontwoend revealend
+#optiontwo takes <1> then sweeps the remainder with all(*|reveal) - the Lay of the Land
+#shape. An explicit count there makes the player click every leftover card one at a time.
+auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 #REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
@@ -135545,8 +135547,8 @@ grade=borderline
 abilities=hasotherkicker
 other={6}{G}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<20>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
-auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<20>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
+auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
+auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 #REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
