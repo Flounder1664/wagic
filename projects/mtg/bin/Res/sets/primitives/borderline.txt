@@ -135618,3 +135618,47 @@ subtype=Phoenix
 power=2
 toughness=2
 [/card]
+[card]
+name=Vanille, Cheerful l'Cie
+grade=borderline
+auto=deplete:2 && moveTo(myhand) target(*[-instant&-sorcery]|mygraveyard)
+#The meld trigger lives on ONE front face (cf. Gisela, the Broken Blade). pay[[...]]
+#carries the {3}{B}{G}; the @each my firstmain shape matches the printed timing.
+auto=@each my firstmain:name(Meld into Ragnarok) pay[[{3}{B}{G}]] name(Pay {3}{B}{G}) target(Fang^ Fearless l'Cie|mybattlefield) meld(Ragnarok, Divine Deliverance)
+#MISSING The printed trigger also checks that you OWN both halves, not just control them.
+text=When Vanille enters, mill two cards, then return a permanent card from your graveyard to your hand. -- At the beginning of your first main phase, if you both own and control Vanille and a creature named Fang, Fearless l'Cie, you may pay {3}{B}{G}. If you do, exile them, then meld them into Ragnarok, Divine Deliverance.
+mana={3}{G}
+type=Legendary Creature
+subtype=Human Cleric
+power=3
+toughness=2
+[/card]
+[card]
+name=Fang, Fearless l'Cie
+grade=borderline
+#"Leave your graveyard" needs the destinations spelling out - a from() trigger matches
+#on where the card LANDS. Comma-separated zones are valid (cf. Eternal Scourge).
+#turnlimited gives the printed "only once each turn".
+auto=@movedTo(*|myhand,mybattlefield,myexile,mylibrary,mystack) from(mygraveyard) turnlimited:draw:1 controller && life:-1 controller
+text=Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn. (Melds with Vanille, Cheerful l'Cie.)
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Warrior
+power=2
+toughness=3
+[/card]
+[card]
+name=Ragnarok, Divine Deliverance
+grade=borderline
+abilities=vigilance,menace,trample,reach,haste
+auto=meldfrom(Vanille, Cheerful l'Cie|Fang, Fearless l'Cie)
+#Two targets, so two _DIES_ lines - one auto with both would break cast-time targeting.
+auto=_DIES_destroy target(*|battlefield)
+auto=_DIES_moveTo(mybattlefield) target(*[-legendary&-instant&-sorcery]|mygraveyard)
+text=Vigilance, menace, trample, reach, haste -- When Ragnarok dies, destroy target permanent and return target nonlegendary permanent card from your graveyard to the battlefield.
+mana={3}{B}{G}
+type=Legendary Creature
+subtype=Beast Avatar
+power=7
+toughness=6
+[/card]
