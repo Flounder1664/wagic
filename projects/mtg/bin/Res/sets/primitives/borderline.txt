@@ -135428,30 +135428,20 @@ grade=borderline
 other={X}{G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1,X)
-#Counter transfer uses the MODULAR mechanism - thisforeach(counter{1/1.1}) repeats the
-#effect once per +1/+1 counter still on this card (cf. Arcbound Worker). The trigger is
-#the leave-the-battlefield form rather than _DIES_, because this must also fire when warp
-#exiles it at the next end step.
+#Counter transfer is the MODULAR mechanism: thisforeach(counter{1/1.1}) repeats the
+#effect once per +1/+1 counter, and `may` is what opens target selection - without it the
+#prompt flashes up and the counters go nowhere. Identical in shape to Arcbound Worker,
+#which arcbound.txt proves works.
 auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
+#VERIFIED in game 2026-07-30: dying moves the counters and prompts for the target.
+#MISSING The warp-EXILE path does NOT move them, and no listener is kept for it because
+#none works. Leave-triggers themselves are fine (Thalakos Seer's draw:1 on
+#@movedTo(this|nonbattlezone) passes in the harness); what fails is reading a PROPERTY
+#off a card that has already changed zone - the counters read as zero once exiled, the
+#same failure that makes shipped Ukkima, Stalking Shadow pay nothing for life:power.
+#Warp exiling is this card's usual exit, so this is a real gap, not a rounding error.
 #MISSING The real card moves ALL its counters; this moves only +1/+1 counters. In practice
 #Broodguard Elite only ever carries +1/+1 counters, from its own X.
-#STILL BROKEN on the warp-exile path (John, 2026-07-30) - the counters do not move.
-#Ruled out: the trigger zone. nonbattlezone DOES include exile (TargetChooser.cpp ~332),
-#so @movedTo(this|nonbattlezone) from(battlefield) is the right listener; _DIES_ would be
-#WORSE, it is graveyard-only (@movedTo(this|graveyard)) and would miss the exile entirely.
-#SOLVED 2026-07-30. Leave-the-battlefield triggers DO fire - Thalakos Seer
-#(@movedTo(this|nonbattlezone) from(battlefield):draw:1) passes in the harness, so the
-#trigger family and the capital-T spelling are both fine. Counter transfer works too:
-#arcbound.txt proves _DIES_ + thisforeach(counter{1/1.1}) really moves counters.
-#What FAILS is reading a PROPERTY off a card that has already left - Ukkima, Stalking
-#Shadow pays life:power on the same nonbattlezone trigger and pays nothing.
-#So: the proven _DIES_ form for the graveyard exit, plus a separate exile listener for
-#the warp exit.
-#MISSING The warp-EXILE path does NOT move the counters (John, in game 2026-07-30) and
-#the listener for it has been removed rather than left in doing nothing. Death works,
-#exile does not, which points at the counters being cleared as the card is exiled - a
-#property read on a departed card, the same failure that makes Ukkima's life:power pay
-#nothing. Since warp exiling is how this card usually leaves, that is a real gap.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
