@@ -135433,9 +135433,12 @@ auto=counter(1/1,X)
 #prompt flashes up and the counters go nowhere. Identical in shape to Arcbound Worker,
 #which arcbound.txt proves works.
 auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
+auto=@movedTo(this|exile) from(battlefield):may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
 #VERIFIED in game 2026-07-30: dying moves the counters and prompts for the target.
-#MISSING The warp-EXILE path does NOT move them, and no listener is kept for it because
-#none works. Leave-triggers themselves are fine (Thalakos Seer's draw:1 on
+#REVIEW-V The exile line is BACK and needs re-testing. It was judged broken on a build
+#that lacked `may` - the same omission that broke the death path - so the earlier
+#"exile does not move counters" result proves nothing about exile specifically.
+#Leave-triggers themselves are fine (Thalakos Seer's draw:1 on
 #@movedTo(this|nonbattlezone) passes in the harness); what fails is reading a PROPERTY
 #off a card that has already changed zone - the counters read as zero once exiled, the
 #same failure that makes shipped Ukkima, Stalking Shadow pay nothing for life:power.
