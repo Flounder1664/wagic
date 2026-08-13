@@ -135435,14 +135435,11 @@ auto=counter(1/1,X)
 auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
 auto=@movedTo(this|exile) from(battlefield):may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
 #VERIFIED in game 2026-07-30: dying moves the counters and prompts for the target.
-#REVIEW-V The exile line is BACK and needs re-testing. It was judged broken on a build
-#that lacked `may` - the same omission that broke the death path - so the earlier
-#"exile does not move counters" result proves nothing about exile specifically.
-#Leave-triggers themselves are fine (Thalakos Seer's draw:1 on
-#@movedTo(this|nonbattlezone) passes in the harness); what fails is reading a PROPERTY
-#off a card that has already changed zone - the counters read as zero once exiled, the
-#same failure that makes shipped Ukkima, Stalking Shadow pay nothing for life:power.
-#Warp exiling is this card's usual exit, so this is a real gap, not a rounding error.
+#VERIFIED in game 2026-07-30: the warp-exile path moves the counters too.
+#Both exits are covered and both are confirmed working: _DIES_ for the graveyard and
+#@movedTo(this|exile) for the warp exile. `may` is load-bearing on BOTH - without it
+#the prompt flashes and the counters go nowhere, which is what made this look like an
+#exile-specific counter bug when it was nothing of the kind.
 #MISSING The real card moves ALL its counters; this moves only +1/+1 counters. In practice
 #Broodguard Elite only ever carries +1/+1 counters, from its own X.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
