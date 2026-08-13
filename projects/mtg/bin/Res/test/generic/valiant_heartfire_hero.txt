@@ -1,0 +1,31 @@
+#VALIANT: Heartfire Hero (1/1) - "whenever this becomes the target of a spell or
+#ability you control for the first time each turn, put a +1/+1 counter on it".
+#Target it with Giant Growth (+3/+3 ueot):
+#   valiant working  -> 1/1 +1/+1 counter +3/+3 = 5/5, deals 5 (opponent 15)
+#   valiant dead     -> 1/1 +3/+3          = 4/4, deals 4 (opponent 16)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Heartfire Hero,Forest
+hand:Giant Growth
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Giant Growth
+Heartfire Hero
+goto attackers
+Heartfire Hero
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Heartfire Hero,Forest
+graveyard:Giant Growth
+life:20
+[PLAYER2]
+life:15
+[END]

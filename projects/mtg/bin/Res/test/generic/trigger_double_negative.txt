@@ -1,0 +1,26 @@
+#Trigger doubling NEGATIVE: the doubler's scope must NOT be over-broad.
+#Carven Caryatid is a Spirit - neither Shaman nor Wizard - so Harmonic Prodigy must
+#leave its ETB "draw:1" alone. Exactly one card is drawn.
+#This is the test that catches a doubler matching everything.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonic Prodigy,Forest,Forest,Forest
+hand:Carven Caryatid
+library:Mountain,Mountain,Mountain
+manapool:{1}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Carven Caryatid
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonic Prodigy,Forest,Forest,Forest,Carven Caryatid
+hand:*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

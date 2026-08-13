@@ -135196,7 +135196,13 @@ grade=borderline
 abilities=trample,hasotherkicker
 other={4}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-auto=if paid(alternative) then fight target(creature|opponentbattlefield)
+auto=alternative _FIGHT_
+#The verb was the bug, not the bargain gate. A bare `fight target(...)` on a creature's
+#own ETB never resolves; _FIGHT_ (transforms + powerstrike eachother) does. Measured all
+#six combinations in generic/woe_agathas_champion_bargain_fight.txt: `fight target()`
+#fails ungated, under `alternative`, and under `if paid(alternative) then`, while _FIGHT_
+#passes under all three. The earlier conversion to the `if paid(...) then` form was
+#therefore treating the wrong half, and changed nothing John could see.
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Trample -- When this creature enters, if it was bargained, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 mana={4}{G}
@@ -135211,7 +135217,7 @@ grade=borderline
 abilities=hasotherkicker
 other={1}{G}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-auto=if paid(alternative) then moveTo(exile) target(artifact,enchantment|opponentbattlefield)
+auto=alternative moveTo(exile) target(artifact,enchantment|opponentbattlefield)
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, exile target artifact or enchantment an opponent controls.
 mana={1}{G}
@@ -135226,7 +135232,7 @@ grade=borderline
 abilities=hasotherkicker
 other={2}{U}{S(artifact,enchantment|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-auto=if paid(alternative) then moveTo(myhand) target(*[instant;sorcery]|mygraveyard)
+auto=alternative moveTo(myhand) target(*[instant;sorcery]|mygraveyard)
 #MISSING Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered as fodder.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, return target instant or sorcery card from your graveyard to your hand.
 mana={2}{U}

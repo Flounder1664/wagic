@@ -1,0 +1,30 @@
+#Negative half of the Agatha's Champion pair: cast WITHOUT bargain ("choice 0" is the
+#plain cast, "choice 1" the bargained one) and the fight must not happen.
+#This is the test that catches an ungated _FIGHT_, which passes the positive test happily
+#while fighting on every cast. The trailing "choice 0 / Grizzly Bears" deliberately OFFERS
+#a fight target: if the gate is missing the prompt takes it and the Bears die, so the test
+#fails. With the gate there is no prompt and the spare input is simply ignored.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Agatha's Champion
+inplay:Ornithopter
+manapool:{4}{G}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Agatha's Champion
+choice 0
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Agatha's Champion,Ornithopter
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]

@@ -35473,11 +35473,14 @@ name=Earthbender Ascension
 auto=_EARTHBEND2_
 auto=name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 auto=_LANDFALL_counter(0/0,1,Quest)
-auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):1/1 ueot
-auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):trample ueot
+auto=_LANDFALL_this(counter{0/0.4.Quest}) counter(1/1) target(creature|mybattlefield) and!( transforms((,trample)) ueot )!
 mana={2}{G}
 type=Enchantment
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+#Rewritten against the verified Scryfall text. The old pair of lines were wrong three
+#ways: they pumped ALL your creatures instead of putting a counter on ONE target, the
+#pump was temporary where the card gives a permanent +1/+1 counter, and the
+#"if <cond> then all(...):<effect>" shape put a colon where the guard belongs, so the
+#four-counter gate was not gating anything.
 text=When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Landfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.
 [/card]
 [card]
@@ -42650,14 +42653,18 @@ toughness=1
 [/card]
 [card]
 name=Figure of Fable
-auto=this(variable{hascntlevel}=0) {G/W}:name(Scout) counter(0/0,1,Level) asSorcery
-auto=this(variable{hascntlevel}=1) {1}{G/W}{G/W}:name(Soldier) counter(0/0,1,Level) asSorcery
-auto=this(variable{hascntlevel}=2) {3}{G/W}{G/W}{G/W}:name(Avatar) counter(0/0,1,Level) asSorcery
-auto=restriction{compare(hascntlevel)~equalto~0}:+1/+1
-auto=restriction{compare(hascntlevel)~equalto~1}:+3/+4
-auto=restriction{compare(hascntlevel)~equalto~2}:+6/+7
-auto=counter(0/0,1,Level)
-mana={G/W}
+auto=this(cantargetcard(*[soldier]) {3}{GW}{GW}{GW}:name(Avatar) becomes(Kithkin Avatar,7/8) forever )
+auto=this(cantargetcard(*[scout]) {1}{GW}{GW}:name(Soldier) becomes(Kithkin Soldier,4/5) forever )
+auto={GW}:name(Scout) becomes(Kithkin Scout,2/3) forever
+#Figure of Destiny is the same card shape and the pattern is taken from it verbatim.
+#The previous version was wrong twice over: it counted Level counters and applied
+#CUMULATIVE +N/+N pumps, but the printed card SETS base power and toughness, and it
+#stamped a Level counter on entry so the creature started a step up the ladder.
+#becomes(...) sets the base P/T and replaces the creature type, which is what makes the
+#next step's "if this is a Scout / Soldier" check work.
+#MISSING The Avatar step also grants protection from each opponent. Wagic has no
+#per-opponent protection, so only the 7/8 body is granted.
+mana={GW}
 type=Creature
 subtype=Kithkin
 power=1

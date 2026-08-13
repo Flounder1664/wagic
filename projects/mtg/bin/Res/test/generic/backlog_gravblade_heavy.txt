@@ -1,0 +1,25 @@
+#Backlog P1: Gravblade Heavy had NO implementation at all - the real card reads
+#"As long as you control an artifact, this creature gets +1/+0 and has deathtouch."
+#Proof via combat: the 3/3 Heavy with an artifact out is a 4/3 deathtoucher, so an
+#unblocked attack deals 4 (not 3). Deathtouch is asserted separately by the kill.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gravblade Heavy,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto attackers
+Gravblade Heavy
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Gravblade Heavy,Ornithopter
+life:20
+[PLAYER2]
+life:16
+[END]

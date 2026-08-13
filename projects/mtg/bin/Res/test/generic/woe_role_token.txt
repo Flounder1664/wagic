@@ -1,0 +1,25 @@
+#WOE Role tokens: Cursed Courtier's ETB creates a real Cursed Role aura token.
+#Asserting the token BY NAME (not a wildcard) proves token(Cursed) resolved to the
+#registered Role primitive, and that the aura is not binned by the state-based
+#check that culls untargeted auras (GameObserver::Update).
+#The ATTACH step uses a target prompt, which the console harness cannot drive
+#(known blind spot) - attachment is verified in-game via the V loop.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Plains,Plains
+hand:Cursed Courtier
+manapool:{2}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cursed Courtier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Plains,Plains,Cursed Courtier,Cursed
+life:20
+[PLAYER2]
+life:20
+[END]

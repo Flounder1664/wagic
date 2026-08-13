@@ -1,0 +1,26 @@
+#Trigger doubling POSITIVE: Harmonic Prodigy doubles a Shaman's triggered ability.
+#Elvish Visionary (Elf Shaman) has ETB "draw:1". With Harmonic Prodigy in play that
+#trigger fires twice, so two cards are drawn, not one.
+#Library is three identical Mountains so the assert is draw-order independent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonic Prodigy,Forest,Forest
+hand:Elvish Visionary
+library:Mountain,Mountain,Mountain
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Elvish Visionary
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonic Prodigy,Forest,Forest,Elvish Visionary
+hand:*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

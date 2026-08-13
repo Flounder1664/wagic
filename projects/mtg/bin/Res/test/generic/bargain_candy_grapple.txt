@@ -1,0 +1,24 @@
+#BARGAIN mechanic, UNKICKED path: Candy Grapple gives -3/-3, so a 4/4 Air Elemental
+#survives as a 1/1. This also proves the optional sacrifice cost does not break the
+#normal cast (the failure mode that broke the sneak spells).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Candy Grapple
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Air Elemental
+life:20
+[DO]
+Candy Grapple
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Candy Grapple
+life:20
+[PLAYER2]
+inplay:Air Elemental
+life:20
+[END]
