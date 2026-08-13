@@ -1,0 +1,31 @@
+#FIN transform DFC, the plain end-step shape: Exdeath, Void Warlock (702220) checks
+#"six or more permanent cards in your graveyard" at the beginning of your end step and
+#transforms into Neo Exdeath, Dimension's End (702979).
+#Six creatures in the graveyard clear the threshold; the ETB life gain is not exercised
+#here because the card starts in play rather than being cast.
+#The +3 life is Exdeath's own ETB trigger: the harness resolves it for cards placed
+#straight into play, so the expected total is 23 rather than 20.
+#Asserting by id, not by name: the back face's name has a comma in it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702220
+graveyard:grizzly bears,hill giant,ornithopter,goblin piker,llanowar elves,bog imp
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+next
+next
+next
+[ASSERT]
+END
+[PLAYER1]
+inplay:702979
+graveyard:grizzly bears,hill giant,ornithopter,goblin piker,llanowar elves,bog imp
+life:23
+[PLAYER2]
+life:20
+[END]

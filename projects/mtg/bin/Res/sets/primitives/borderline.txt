@@ -135731,3 +135731,729 @@ text=This land enters tapped. -- {T}: Add {G}. // Create a 1/1 colorless Hero cr
 type=Land
 subtype=Town
 [/card]
+[card]
+name=Cecil, Dark Knight
+abilities=deathtouch
+backside=Cecil, Redeemed Paladin
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@damaged(anytarget) from(this):life:-thatmuch controller
+auto=@damaged(anytarget) from(this) restriction{compare(lifetotal)~lessthan~11}:all(this) untap
+auto=@damaged(anytarget) from(this) restriction{compare(lifetotal)~lessthan~11}:flip(backside)
+text=Deathtouch -- Darkness - Whenever Cecil deals damage, you lose that much life. Then if your life total is less than or equal to half your starting life total, untap Cecil and transform it. (Half of a 20-life start.) // Cecil, Redeemed Paladin
+mana={B}
+type=Legendary Creature
+subtype=Human Knight
+power=2
+toughness=3
+[/card]
+[card]
+name=Cecil, Redeemed Paladin
+abilities=lifelink
+backside=Cecil, Dark Knight
+auto=@combat(attacking) source(this):all(other creature[attacking]|mybattlefield) indestructible ueot
+text=Lifelink -- Protect - Whenever Cecil attacks, other attacking creatures gain indestructible until end of turn. // Cecil, Dark Knight
+color=white
+type=Legendary Creature
+subtype=Human Knight
+power=4
+toughness=4
+[/card]
+[card]
+name=Vincent Valentine
+backside=Galian Beast
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@movedTo(creature|opponentgraveyard) from(battlefield):all(trigger[to]) dynamicability<!mytgt powercountersoneone tosrc!>
+auto=@combat(attacking) source(this):may name(Transform Vincent Valentine) flip(backside)
+text=Whenever a creature an opponent controls dies, put a number of +1/+1 counters on Vincent Valentine equal to that creature's power. -- Whenever Vincent Valentine attacks, you may transform it. // Galian Beast
+mana={2}{B}{B}
+type=Legendary Creature
+subtype=Assassin
+power=2
+toughness=2
+[/card]
+[card]
+name=Galian Beast
+abilities=trample,lifelink
+backside=Vincent Valentine
+auto=@movedTo(this|graveyard) from(mybattlefield):all(trigger[to]) transforms((,newability[flip(backside)],newability[moveto(mybattlefield)],newability[tap(noevent)])) forever
+text=Trample, lifelink -- When Galian Beast dies, return it to the battlefield tapped (front face up). // Vincent Valentine
+color=black
+type=Legendary Creature
+subtype=Werewolf Beast
+power=3
+toughness=2
+[/card]
+[card]
+name=Zenos yae Galvus
+backside=Shinryu, Transcendent Rival
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=name(My First Friend) target(creature|opponentbattlefield) transforms((,newability[counter(0/0,1,ChosenOne)])) forever
+auto=all(other creature[-counter{0/0.1.ChosenOne}]) -2/-2 ueot
+auto=@movedTo(*[counter{0/0.1.ChosenOne}]|graveyard,hand,library,exile) from(battlefield):flip(backside)
+text=My First Friend - When Zenos yae Galvus enters, choose a creature an opponent controls. Until end of turn, creatures other than Zenos yae Galvus and the chosen creature get -2/-2. -- When the chosen creature leaves the battlefield, transform Zenos yae Galvus. // Shinryu, Transcendent Rival
+mana={3}{B}{B}
+type=Legendary Creature
+subtype=Human Noble Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Shinryu, Transcendent Rival
+abilities=flying
+backside=Zenos yae Galvus
+auto=@each my upkeep restriction{compare(opponentlifetotal)~lessthan~1}:winGame controller
+text=Flying -- As this creature transforms into Shinryu, choose an opponent. -- Burning Chains - When the chosen player loses the game, you win the game. (Two-player game: the chosen opponent is your only opponent.) // Zenos yae Galvus
+color=black
+type=Legendary Creature
+subtype=Dragon
+power=8
+toughness=8
+[/card]
+[card]
+name=Emet-Selch, Unsundered
+abilities=vigilance
+backside=Hades, Sorcerer of Eld
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=draw:1 controller && name(Discard a card) target(<1>*|myhand) reject
+auto=@combat(attacking) source(this):draw:1 controller && name(Discard a card) target(<1>*|myhand) reject
+auto=@each my upkeep restriction{type(*|mygraveyard)~morethan~13}:may name(Transform Emet-Selch) flip(backside)
+text=Vigilance -- Whenever Emet-Selch enters or attacks, draw a card, then discard a card. -- At the beginning of your upkeep, if there are fourteen or more cards in your graveyard, you may transform Emet-Selch. // Hades, Sorcerer of Eld
+mana={1}{U}{B}
+type=Legendary Creature
+subtype=Elder Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Hades, Sorcerer of Eld
+abilities=vigilance
+backside=Emet-Selch, Unsundered
+auto=lord(*|mygraveyard) canPlayFromGraveyard
+auto=@movedTo(*|mygraveyard):all(trigger) moveTo(exile)
+text=Vigilance -- Echo of the Lost - During your turn, you may play cards from your graveyard. (Approximation: no during-your-turn restriction.) -- If a card or token would be put into your graveyard from anywhere, exile it instead. // Emet-Selch, Unsundered
+color=black
+type=Legendary Creature
+subtype=Avatar
+power=6
+toughness=6
+[/card]
+[card]
+name=The Emperor of Palamecia
+backside=The Lord Master of Hell
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto={T}:Add{U}
+auto={T}:Add{R}
+auto=@movedTo(*[-creature][manacost>=4]|mystack):counter(1/1)
+auto=@counteradded(1/1) from(this):this(counter{1/1.3}) flip(backside)
+text={T}: Add {U} or {R}. Spend this mana only to cast a noncreature spell. (Approximation: the mana is unrestricted.) -- Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on The Emperor of Palamecia. Then if it has three or more +1/+1 counters on it, transform it. // The Lord Master of Hell
+mana={U}{R}
+type=Legendary Creature
+subtype=Human Noble Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=The Lord Master of Hell
+backside=The Emperor of Palamecia
+auto=@combat(attacking) source(this):damage:type:*[-creature;-land]:mygraveyard opponent
+text=Starfall - Whenever The Lord Master of Hell attacks, it deals X damage to each opponent, where X is the number of noncreature, nonland cards in your graveyard. // The Emperor of Palamecia
+color=red
+type=Legendary Creature
+subtype=Demon Noble Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Exdeath, Void Warlock
+backside=Neo Exdeath, Dimension's End
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=life:3 controller
+auto=@each my end restriction{type(*[-instant;-sorcery]|mygraveyard)~morethan~5}:flip(backside)
+text=When Exdeath enters, you gain 3 life. -- At the beginning of your end step, if there are six or more permanent cards in your graveyard, transform Exdeath. // Neo Exdeath, Dimension's End
+mana={1}{B}{G}
+type=Legendary Creature
+subtype=Spirit Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Neo Exdeath, Dimension's End
+abilities=trample
+backside=Exdeath, Void Warlock
+anyzone=type:*[-instant;-sorcery]:mygraveyard/3 cdaactive
+text=Trample -- Neo Exdeath's power is equal to the number of permanent cards in your graveyard. // Exdeath, Void Warlock
+color=black,green
+type=Legendary Creature
+subtype=Spirit Avatar
+power=*
+toughness=3
+[/card]
+[card]
+name=Garland, Knight of Cornelia
+backside=Chaos, the Endless
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@movedTo(*[-creature]|mystack):_SURVEIL1_
+autograveyard={3}{B}{B}{R}{R}:name(Return transformed) moveTo(mybattlefield) and!( flip(backside) )! asSorcery
+text=Whenever you cast a noncreature spell, surveil 1. -- {3}{B}{B}{R}{R}: Return this card from your graveyard to the battlefield transformed. Activate only as a sorcery. // Chaos, the Endless
+mana={B}{R}
+type=Legendary Creature
+subtype=Human Knight
+power=3
+toughness=2
+[/card]
+[card]
+name=Chaos, the Endless
+abilities=flying,bottomlibrarydeath
+backside=Garland, Knight of Cornelia
+text=Flying -- When Chaos dies, put it on the bottom of its owner's library. // Garland, Knight of Cornelia
+color=black,red
+type=Legendary Creature
+subtype=Demon
+power=5
+toughness=5
+[/card]
+[card]
+name=Kefka, Court Mage
+backside=Kefka, Ruler of Ruin
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=name(Discard a card) target(<1>*|myhand) reject && draw:1 controller
+auto=ability$!name(discard) target(<1>*|myhand) reject!$ opponent
+auto=@combat(attacking) source(this):name(Discard a card) target(<1>*|myhand) reject && draw:1 controller
+auto=@combat(attacking) source(this):ability$!name(discard) target(<1>*|myhand) reject!$ opponent
+auto={8}:name(Transform Kefka) ability$! sacrifice notaTarget(*|mybattlefield) !$ opponent && flip(backside) asSorcery
+text=Whenever Kefka enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way. (Approximation: always draws exactly one card.) -- {8}: Each opponent sacrifices a permanent of their choice. Transform Kefka. Activate only as a sorcery. // Kefka, Ruler of Ruin
+mana={2}{U}{B}{R}
+type=Legendary Creature
+subtype=Human Wizard
+power=4
+toughness=5
+[/card]
+[card]
+name=Kefka, Ruler of Ruin
+abilities=flying
+backside=Kefka, Court Mage
+auto=@lifelostfoeof(player) restriction{myturnonly}:draw:thatmuch controller
+text=Flying -- Whenever an opponent loses life during your turn, you draw that many cards. // Kefka, Court Mage
+color=blue,black,red
+type=Legendary Creature
+subtype=Avatar Wizard
+power=5
+toughness=7
+[/card]
+[card]
+name=Kuja, Genome Sorcerer
+backside=Trance Kuja, Fate Defied
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@each my end:create(Wizard:creature wizard:0/1:black:tapped) and!( transforms((,newability[@movedTo(*[-creature]|mystack):damage:1 opponent])) forever )!
+auto=@each my end restriction{type(wizard|mybattlefield)~morethan~3}:flip(backside)
+text=At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if you control four or more Wizards, transform Kuja. // Trance Kuja, Fate Defied
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Human Mutant Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Trance Kuja, Fate Defied
+backside=Kuja, Genome Sorcerer
+auto=@damaged(creature) from(*[wizard]|mybattlefield):damage:thatmuch all(trigger[to])
+auto=@damaged(player) from(*[wizard]|mybattlefield):damage:thatmuch all(trigger[to])
+auto=@damaged(planeswalker) from(*[wizard]|mybattlefield):damage:thatmuch all(trigger[to])
+text=Flare Star - If a Wizard you control would deal damage to a permanent or player, it deals double that damage instead. // Kuja, Genome Sorcerer
+color=black,red
+type=Legendary Creature
+subtype=Avatar Wizard
+power=4
+toughness=6
+[/card]
+[card]
+name=Serah Farron
+backside=Crystallized Serah
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=lord(creature[legendary]|mycastingzone) altercost(colorless,-2)
+auto=@each my combatbegins restriction{type(other creature[legendary]|mybattlefield)~morethan~1}:may name(Transform Serah Farron) flip(backside)
+text=The first legendary creature spell you cast each turn costs {2} less to cast. (Approximation: every legendary creature spell costs {2} less.) -- At the beginning of combat on your turn, if you control two or more other legendary creatures, you may transform Serah Farron. // Crystallized Serah
+mana={1}{G}{W}
+type=Legendary Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
+name=Crystallized Serah
+backside=Serah Farron
+auto=lord(creature[legendary]|mycastingzone) altercost(colorless,-2)
+auto=lord(creature[legendary]|mybattlefield) 2/2
+text=The first legendary creature spell you cast each turn costs {2} less to cast. (Approximation: every legendary creature spell costs {2} less.) -- Legendary creatures you control get +2/+2. // Serah Farron
+color=green,white
+type=Legendary Artifact
+[/card]
+[card]
+name=Ultimecia, Time Sorceress
+backside=Ultimecia, Omnipotent
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=_SURVEIL2_
+auto=@combat(attacking) source(this):_SURVEIL2_
+auto=@each my end:may name(Time Compression) pay[[{4}{U}{U}{B}{B}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] flip(backside)
+text=Whenever Ultimecia enters or attacks, surveil 2. -- At the beginning of your end step, you may pay {4}{U}{U}{B}{B} and exile eight cards from your graveyard. If you do, transform Ultimecia. // Ultimecia, Omnipotent
+mana={3}{U}{B}
+type=Legendary Creature
+subtype=Human Warlock
+power=4
+toughness=5
+[/card]
+[card]
+name=Ultimecia, Omnipotent
+abilities=menace
+backside=Ultimecia, Time Sorceress
+auto=transforms((,newability[phaseaction[end next once sourceinplay] turns:+1 controller])) oneshot
+text=Menace -- Time Compression - When this creature transforms into Ultimecia, Omnipotent, take an extra turn after this one. // Ultimecia, Time Sorceress
+color=blue,black
+type=Legendary Creature
+subtype=Nightmare Warlock
+power=7
+toughness=7
+[/card]
+[card]
+name=Sephiroth, Fabled SOLDIER
+backside=Sephiroth, One-Winged Angel
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may name(Sacrifice another creature) sacrifice notaTarget(other creature|mybattlefield) && draw:1 controller
+auto=@combat(attacking) source(this):may name(Sacrifice another creature) sacrifice notaTarget(other creature|mybattlefield) && draw:1 controller
+auto=@movedTo(other creature|graveyard) from(battlefield):life:-1 opponent && life:1 controller
+auto=@movedTo(other creature|graveyard) from(battlefield) restriction{thisturn(other creature|graveyard)~equalto~3}:flip(backside)
+text=Whenever Sephiroth enters or attacks, you may sacrifice another creature. If you do, draw a card. -- Whenever another creature dies, target opponent loses 1 life and you gain 1 life. If this is the fourth time this ability has resolved this turn, transform Sephiroth. // Sephiroth, One-Winged Angel
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Avatar Soldier
+power=3
+toughness=3
+[/card]
+[card]
+name=Sephiroth, One-Winged Angel
+abilities=flying
+backside=Sephiroth, Fabled SOLDIER
+auto=emblem transforms((,newability[@movedTo(creature|graveyard) from(battlefield):life:-1 opponent && life:1 controller])) forever dontremove
+auto=@combat(attacking) source(this):may name(Sacrifice another creature) sacrifice notaTarget(other creature|mybattlefield) && draw:1 controller
+text=Flying -- Super Nova - As this creature transforms into Sephiroth, One-Winged Angel, you get an emblem with "Whenever a creature dies, target opponent loses 1 life and you gain 1 life." -- Whenever Sephiroth attacks, you may sacrifice any number of other creatures. If you do, draw that many cards. (Approximation: one creature per attack.) // Sephiroth, Fabled SOLDIER
+color=black
+type=Legendary Creature
+subtype=Angel Nightmare Avatar
+power=5
+toughness=5
+[/card]
+[card]
+name=Venat, Heart of Hydaelyn
+backside=Hydaelyn, the Mothercrystal
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@movedTo(*[legendary]|mystack) turnlimited:draw:1 controller
+auto={7}{T}:name(Hero's Sundering) moveTo(exile) target(*[-land]) and!( flip(backside) )! asSorcery
+text=Whenever you cast a legendary spell, draw a card. This ability triggers only once each turn. -- Hero's Sundering - {7}, {T}: Exile target nonland permanent. Transform Venat. Activate only as a sorcery. // Hydaelyn, the Mothercrystal
+mana={1}{W}{W}
+type=Legendary Creature
+subtype=Elder Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Hydaelyn, the Mothercrystal
+abilities=indestructible
+backside=Venat, Heart of Hydaelyn
+auto=@each my combatbegins:name(Blessing of Light) target(other creature|mybattlefield) counter(1/1) and!( transforms((,indestructible)) ueot )!
+text=Indestructible -- Blessing of Light - At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control. Until your next turn, it gains indestructible. If that creature is legendary, draw a card. (Approximations: indestructible lasts until end of turn, and the legendary draw is omitted.) // Venat, Heart of Hydaelyn
+color=white
+type=Legendary Creature
+subtype=God
+power=4
+toughness=4
+[/card]
+[card]
+name=Sidequest: Catch a Fish
+backside=Cooking Campsite
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@each my upkeep:name(look) reveal:1 optionone name(take artifact or creature) target(*[artifact;creature]|reveal) moveto(hand) and!( all(this) transforms((,newability[_FOOD_],newability[flip(backside)])) forever )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(mylibrary) optiontwoend revealend
+text=At the beginning of your upkeep, look at the top card of your library. If it's an artifact or creature card, you may reveal it and put it into your hand. If you put a card into your hand this way, create a Food token and transform this enchantment. // Cooking Campsite
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Cooking Campsite
+backside=Sidequest: Catch a Fish
+auto={T}:Add{W}
+auto={3}{T}{S(artifact|mybattlefield)}:name(Strengthen the party) all(creature|mybattlefield) counter(1/1) asSorcery
+text={T}: Add {W}. -- {3}, {T}, Sacrifice an artifact: Put a +1/+1 counter on each creature you control. Activate only as a sorcery. // Sidequest: Catch a Fish
+type=Land
+[/card]
+[card]
+name=Sidequest: Card Collection
+backside=Magicked Card
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=draw:3 controller && name(Discard two cards) target(<2>*|myhand) reject
+auto=@each my end restriction{type(*|mygraveyard)~morethan~7}:flip(backside)
+text=When this enchantment enters, draw three cards, then discard two cards. -- At the beginning of your end step, if eight or more cards are in your graveyard, transform this enchantment. // Magicked Card
+mana={3}{U}
+type=Enchantment
+[/card]
+[card]
+name=Magicked Card
+abilities=flying
+backside=Sidequest: Card Collection
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+text=Flying -- Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.) // Sidequest: Card Collection
+color=blue
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Sidequest: Hunt the Mark
+backside=Yiazmat, Ultimate Mark
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may destroy target(creature)
+auto=@each my end restriction{thisturn(creature|opponentgraveyard)~morethan~0}:_TREASURE_
+auto=@each my end restriction{type(treasure|mybattlefield)~morethan~2}:flip(backside)
+text=When this enchantment enters, destroy up to one target creature. -- At the beginning of your end step, if a creature died under an opponent's control this turn, create a Treasure token. Then if you control three or more Treasures, transform this enchantment. // Yiazmat, Ultimate Mark
+mana={3}{B}{B}
+type=Enchantment
+[/card]
+[card]
+name=Yiazmat, Ultimate Mark
+backside=Sidequest: Hunt the Mark
+auto={1}{B}{S(other creature,artifact|mybattlefield)}:name(Indestructible until end of turn) indestructible ueot && tap
+text={1}{B}, Sacrifice another creature or artifact: Yiazmat gains indestructible until end of turn. Tap it. // Sidequest: Hunt the Mark
+color=black
+type=Legendary Creature
+subtype=Dragon
+power=5
+toughness=6
+[/card]
+[card]
+name=Sidequest: Play Blitzball
+backside=World Champion, Celestial Weapon
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@each my combatbegins:target(creature|mybattlefield) 2/0 ueot
+auto=@each my combatends restriction{didcombatdamagetofoe}:flip(backside)
+text=At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn. -- At the end of combat on your turn, if a player was dealt 6 or more combat damage this turn, transform this enchantment, then attach it to a creature you control. (Approximations: any combat damage to an opponent transforms it, and it is not attached automatically.) // World Champion, Celestial Weapon
+mana={2}{R}
+type=Enchantment
+[/card]
+[card]
+name=World Champion, Celestial Weapon
+backside=Sidequest: Play Blitzball
+auto={3}:equip
+auto=teach(creature) 2/0
+auto=teach(creature) double strike
+text=Double Overdrive - Equipped creature gets +2/+0 and has double strike. -- Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.) // Sidequest: Play Blitzball
+color=red
+type=Legendary Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Sidequest: Raise a Chocobo
+backside=Black Chocobo
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=create(Bird:creature bird:2/2:green) and!( transforms((,newability[@movedTo(land|mybattlefield):1/0 ueot])) forever )!
+auto=@each my firstmain restriction{type(bird|mybattlefield)~morethan~3}:flip(backside)
+text=When this enchantment enters, create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn." -- At the beginning of your first main phase, if you control four or more Birds, transform this enchantment. // Black Chocobo
+mana={1}{G}
+type=Enchantment
+[/card]
+[card]
+name=Black Chocobo
+backside=Sidequest: Raise a Chocobo
+auto=target(land|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
+auto=@movedTo(land|mybattlefield):all(bird|mybattlefield) 1/0 ueot
+text=When this permanent transforms into Black Chocobo, search your library for a land card, put it onto the battlefield tapped, then shuffle. -- Landfall - Whenever a land you control enters, Birds you control get +1/+0 until end of turn. // Sidequest: Raise a Chocobo
+color=green
+type=Creature
+subtype=Bird
+power=2
+toughness=2
+[/card]
+[card]
+name=Crystal Fragments
+backside=Summon: Alexander
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto={1}:equip
+auto=teach(creature) 1/1
+auto={5}{W}{W}:name(Transform Crystal Fragments) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=Equipped creature gets +1/+1. -- {5}{W}{W}: Exile this Equipment, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. -- Equip {1} // Summon: Alexander
+mana={W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Summon: Alexander
+abilities=flying
+backside=Crystal Fragments
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) all(creature|mybattlefield) transforms((,newability[preventalldamage to(this)])) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(creature|mybattlefield) transforms((,newability[preventalldamage to(this)])) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) tap all(creature|opponentbattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I, II - Prevent all damage that would be dealt to creatures you control this turn. -- III - Tap all creatures your opponents control. -- Flying // Crystal Fragments
+color=white
+type=Enchantment Creature
+subtype=Saga Construct
+power=4
+toughness=3
+[/card]
+[card]
+name=Dion, Bahamut's Dominant
+backside=Bahamut, Warden of Light
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=while(restriction{myturnonly}) lord(knight|mybattlefield) flying
+auto=create(Knight:creature knight:2/2:white)
+auto={4}{W}{W}{T}:name(Transform Dion) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=Dragonfire Dive - During your turn, Dion and other Knights you control have flying. -- When Dion enters, create a 2/2 white Knight creature token. -- {4}{W}{W}, {T}: Exile Dion, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Bahamut, Warden of Light
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Noble Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Bahamut, Warden of Light
+backside=Dion, Bahamut's Dominant
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Wings of Light) all(other creature|mybattlefield) counter(1/1) and!( transforms((,flying)) ueot )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Wings of Light) all(other creature|mybattlefield) counter(1/1) and!( transforms((,flying)) ueot )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Gigaflare) destroy target(*|battlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Wings of Light - Put a +1/+1 counter on each other creature you control. Those creatures gain flying until end of turn. -- III - Gigaflare - Destroy target permanent. Exile Bahamut, then return it to the battlefield (front face up). // Dion, Bahamut's Dominant
+color=white
+type=Legendary Enchantment Creature
+subtype=Saga Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Jill, Shiva's Dominant
+backside=Shiva, Warden of Ice
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may name(Return to hand) target(<upto:1>other *[-land]|battlefield) moveTo(ownerhand)
+auto={3}{U}{U}{T}:name(Transform Jill) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=When Jill enters, return up to one other target nonland permanent to its owner's hand. -- {3}{U}{U}, {T}: Exile Jill, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Shiva, Warden of Ice
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Noble Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=Shiva, Warden of Ice
+backside=Jill, Shiva's Dominant
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Mesmerize) target(creature) unblockable ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Mesmerize) target(creature) unblockable ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Cold Snap) tap all(land|opponentbattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Mesmerize - Target creature can't be blocked this turn. -- III - Cold Snap - Tap all lands your opponents control. Exile Shiva, then return it to the battlefield (front face up). // Jill, Shiva's Dominant
+color=blue
+type=Legendary Enchantment Creature
+subtype=Saga Elemental
+power=4
+toughness=5
+[/card]
+[card]
+name=Jecht, Reluctant Guardian
+abilities=menace
+backside=Braska's Final Aeon
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=@combatdamaged(player) from(this):may name(Transform Jecht) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )!
+text=Menace -- Whenever Jecht deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control. // Braska's Final Aeon
+mana={3}{B}
+type=Legendary Creature
+subtype=Human Warrior
+power=4
+toughness=3
+[/card]
+[card]
+name=Braska's Final Aeon
+abilities=menace
+backside=Jecht, Reluctant Guardian
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Jecht Beam) ability$!name(discard) target(<1>*|myhand) reject!$ opponent && draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Jecht Beam) ability$!name(discard) target(<1>*|myhand) reject!$ opponent && draw:1 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Ultimate Jecht Shot) ability$! sacrifice notaTarget(<2>creature|mybattlefield) !$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I, II - Jecht Beam - Each opponent discards a card and you draw a card. -- III - Ultimate Jecht Shot - Each opponent sacrifices two creatures of their choice. -- Menace // Jecht, Reluctant Guardian
+color=black
+type=Legendary Enchantment Creature
+subtype=Saga Nightmare
+power=7
+toughness=7
+[/card]
+[card]
+name=Clive, Ifrit's Dominant
+backside=Ifrit, Warden of Inferno
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may name(Discard your hand and draw) all(*|myhand) reject and!( draw:type:*[red]:mybattlefield controller )!
+auto={4}{R}{R}{T}:name(Transform Clive) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=When Clive enters, you may discard your hand, then draw cards equal to your devotion to red. (Approximation: draws one card for each red permanent you control rather than counting each {R} in their mana costs.) -- {4}{R}{R}, {T}: Exile Clive, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Ifrit, Warden of Inferno
+mana={4}{R}{R}
+type=Legendary Creature
+subtype=Human Noble Warrior
+power=5
+toughness=5
+[/card]
+[card]
+name=Ifrit, Warden of Inferno
+backside=Clive, Ifrit's Dominant
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Lunge) fight target(<upto:1>other creature)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Brimstone) Add{R}{R}{R}{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Brimstone) Add{R}{R}{R}{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Lunge - Ifrit fights up to one other target creature. -- II, III - Brimstone - Add {R}{R}{R}{R}. If Ifrit has three or more lore counters on it, exile it, then return it to the battlefield (front face up). // Clive, Ifrit's Dominant
+color=red
+type=Legendary Enchantment Creature
+subtype=Saga Demon
+power=9
+toughness=9
+[/card]
+[card]
+name=Joshua, Phoenix's Dominant
+backside=Phoenix, Warden of Fire
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may name(Discard up to two cards) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
+auto={3}{R}{W}{T}:name(Transform Joshua) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=When Joshua enters, discard up to two cards, then draw that many cards. (Approximation: always draws two.) -- {3}{R}{W}, {T}: Exile Joshua, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Phoenix, Warden of Fire
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Human Noble Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Phoenix, Warden of Fire
+backside=Joshua, Phoenix's Dominant
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(Rising Flames) damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Rising Flames) damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Flames of Rebirth) target(<upto:3>creature[manacost<=2]|mygraveyard) moveTo(mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Rising Flames - Phoenix deals 2 damage to each opponent. -- III - Flames of Rebirth - Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. (Approximation: up to three creature cards of mana value 2 or less.) Exile Phoenix, then return it to the battlefield (front face up). // Joshua, Phoenix's Dominant
+color=red,white
+type=Legendary Enchantment Creature
+subtype=Saga Phoenix
+power=4
+toughness=4
+[/card]
+[card]
+name=Terra, Magical Adept
+backside=Esper Terra
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=mill:5 controller and!( may name(Take an enchantment) target(<upto:1>enchantment|mygraveyard) moveTo(ownerhand) )!
+auto={4}{R}{G}{T}:name(Trance) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
+text=When Terra enters, mill five cards. Put up to one enchantment card milled this way into your hand. (Approximation: any enchantment card in your graveyard.) -- Trance - {4}{R}{G}, {T}: Exile Terra, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Esper Terra
+mana={1}{R}{G}
+type=Legendary Creature
+subtype=Human Wizard Warrior
+power=4
+toughness=2
+[/card]
+[card]
+name=Esper Terra
+backside=Terra, Magical Adept
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) target(enchantment[-legendary]|mybattlefield) clone with(haste) and!( transforms((,newability[@each my end:sacrifice(this)])) forever )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(enchantment[-legendary]|mybattlefield) clone with(haste) and!( transforms((,newability[@each my end:sacrifice(this)])) forever )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) target(enchantment[-legendary]|mybattlefield) clone with(haste) and!( transforms((,newability[@each my end:sacrifice(this)])) forever )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) Add{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II, III - Create a token that's a copy of target nonlegendary enchantment you control. It gains haste. If it's a Saga, put up to three lore counters on it. Sacrifice it at the beginning of your next end step. (Approximation: no extra lore counters.) -- IV - Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Exile Esper Terra, then return it to the battlefield (front face up). // Terra, Magical Adept
+color=red,green
+type=Legendary Enchantment Creature
+subtype=Saga Wizard
+power=6
+toughness=6
+[/card]
+[card]
+name=Esper Origins
+backside=Summon: Esper Maduin
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+flashback={3}{G}
+auto=_SURVEIL2_
+auto=life:2 controller
+text=Surveil 2. You gain 2 life. If this spell was cast from a graveyard, exile it, then put it onto the battlefield transformed under its owner's control with a finality counter on it. (Approximation: the flashback copy is exiled as normal rather than transforming.) -- Flashback {3}{G} // Summon: Esper Maduin
+mana={1}{G}
+type=Sorcery
+[/card]
+[card]
+name=Summon: Esper Maduin
+backside=Esper Origins
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(look) reveal:1 optionone name(take permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) Add{G}{G}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(other creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(other creature|mybattlefield) transforms((,trample)) ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Reveal the top card of your library. If it's a permanent card, put it into your hand. -- II - Add {G}{G}. -- III - Other creatures you control get +2/+2 and gain trample until end of turn. // Esper Origins
+color=green
+type=Enchantment Creature
+subtype=Saga Elemental
+power=4
+toughness=4
+[/card]
+[card]
+name=Balamb Garden, SeeD Academy
+backside=Balamb Garden, Airborne
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{U}
+auto={5}{G}{U}{T}:name(Transform Balamb Garden) flip(backside) forcetype(Legendary Artifact)
+text=This land enters tapped. -- {T}: Add {G} or {U}. -- {5}{G}{U}, {T}: Transform this land. This ability costs {1} less to activate for each other Town you control. (Approximation: no Town discount.) // Balamb Garden, Airborne
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Balamb Garden, Airborne
+abilities=flying
+backside=Balamb Garden, SeeD Academy
+auto=@combat(attacking) source(this):draw:1 controller
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+text=Flying -- Whenever Balamb Garden attacks, draw a card. -- Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.) // Balamb Garden, SeeD Academy
+color=green,blue
+type=Legendary Artifact
+subtype=Vehicle
+power=5
+toughness=4
+[/card]
