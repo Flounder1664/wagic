@@ -135432,8 +135432,7 @@ auto=counter(1/1,X)
 #effect once per +1/+1 counter still on this card (cf. Arcbound Worker). The trigger is
 #the leave-the-battlefield form rather than _DIES_, because this must also fire when warp
 #exiles it at the next end step.
-auto=_DIES_thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
-auto=@movedTo(this|exile) from(battlefield):thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
+auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
 #MISSING The real card moves ALL its counters; this moves only +1/+1 counters. In practice
 #Broodguard Elite only ever carries +1/+1 counters, from its own X.
 #STILL BROKEN on the warp-exile path (John, 2026-07-30) - the counters do not move.
@@ -135448,9 +135447,11 @@ auto=@movedTo(this|exile) from(battlefield):thisforeach(counter{1/1.1}) counter(
 #Shadow pays life:power on the same nonbattlezone trigger and pays nothing.
 #So: the proven _DIES_ form for the graveyard exit, plus a separate exile listener for
 #the warp exit.
-#REVIEW-V The EXILE half is the unproven one, and it is this card's main exit. Check in
-#game that a warp-exiled Broodguard moves its counters; if not, they are cleared before
-#that trigger resolves and only the death path can ever work.
+#MISSING The warp-EXILE path does NOT move the counters (John, in game 2026-07-30) and
+#the listener for it has been removed rather than left in doing nothing. Death works,
+#exile does not, which points at the counters being cleared as the card is exiled - a
+#property read on a departed card, the same failure that makes Ukkima's life:power pay
+#nothing. Since warp exiling is how this card usually leaves, that is a real gap.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
