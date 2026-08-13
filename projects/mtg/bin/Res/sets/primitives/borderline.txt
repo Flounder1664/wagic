@@ -135662,3 +135662,72 @@ subtype=Beast Avatar
 power=7
 toughness=6
 [/card]
+[card]
+name=Ishgard, the Holy See
+grade=borderline
+abilities=adventure
+auto=tap(noevent)
+auto={T}:Add{W}
+other={3}{W}{W} name(Faith & Grief)
+auto=alternative moveTo(myhand) target(<upto:2>*[artifact;enchantment]|mygraveyard)
+auto=alternative _ADVENTURE_
+text=This land enters tapped. -- {T}: Add {W}. // Return up to two target artifact and/or enchantment cards from your graveyard to your hand. (Then exile this card. You may play the land later from exile.)
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Jidoor, Aristocratic Capital
+grade=borderline
+abilities=adventure
+auto=tap(noevent)
+auto={T}:Add{U}
+other={4}{U}{U} name(Overture)
+auto=alternative deplete:halfdownopponentlibrarycount opponent
+auto=alternative _ADVENTURE_
+#REVIEW-V "half their library, rounded down" relies on the halfdown... variable resolving
+#against the opponent's library. If it mills nothing, replace with a flat count and note it.
+text=This land enters tapped. -- {T}: Add {U}. // Target opponent mills half their library, rounded down. (Then exile this card. You may play the land later from exile.)
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Lindblum, Industrial Regency
+grade=borderline
+abilities=adventure
+auto=tap(noevent)
+auto={T}:Add{R}
+other={2}{R} name(Mage Siege)
+auto=alternative token(Wizard,Creature Wizard,0/1,black,newability[@movedTo(*[-creature]|mystack) from(myhand):damage:1 opponent])
+auto=alternative _ADVENTURE_
+text=This land enters tapped. -- {T}: Add {R}. // Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Midgar, City of Mako
+grade=borderline
+abilities=adventure
+auto=tap(noevent)
+auto={T}:Add{B}
+other={2}{B} name(Reactor Raid)
+auto=alternative may {S(artifact,creature|myBattlefield)} draw:2 controller
+auto=alternative _ADVENTURE_
+#REVIEW-V The "sacrifice, and only THEN draw" link is written as an optional sacrifice cost
+#on the effect. If the draw happens without the sacrifice, split it into a paid ability.
+text=This land enters tapped. -- {T}: Add {B}. // You may sacrifice an artifact or creature. If you do, draw two cards. (Then exile this card. You may play the land later from exile.)
+type=Land
+subtype=Town
+[/card]
+[card]
+name=Zanarkand, Ancient Metropolis
+grade=borderline
+abilities=adventure
+auto=tap(noevent)
+auto={T}:Add{G}
+other={4}{G}{G} name(Lasting Fayth)
+auto=alternative token(Hero,Creature Hero,1/1) and!( counter(1/1)*type:land:mybattlefield )!
+auto=alternative _ADVENTURE_
+text=This land enters tapped. -- {T}: Add {G}. // Create a 1/1 colorless Hero creature token. Put a +1/+1 counter on it for each land you control. (Then exile this card. You may play the land later from exile.)
+type=Land
+subtype=Town
+[/card]
