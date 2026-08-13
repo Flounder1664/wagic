@@ -135439,12 +135439,13 @@ auto=@movedTo(this|nonbattlezone) from(battlefield):thisforeach(counter{1/1.1}) 
 #Ruled out: the trigger zone. nonbattlezone DOES include exile (TargetChooser.cpp ~332),
 #so @movedTo(this|nonbattlezone) from(battlefield) is the right listener; _DIES_ would be
 #WORSE, it is graveyard-only (@movedTo(this|graveyard)) and would miss the exile entirely.
-#Prime suspect: moveto(exile) inside phaseaction[...] may not emit the zone-change event
-#the trigger listens for, in which case nothing fires at all. Second suspect: the counters
-#are cleared as the card changes zone, so thisforeach(counter{1/1.1}) counts zero on the
-#new instance - modular cards would share that fault, so check an Arcbound creature dying
-#before blaming this card. Distinguish the two by giving the trigger a visible effect
-#(life:1) temporarily: if THAT fires, the trigger is fine and the counter read is the bug.
+#The life:1 experiment was run and is INCONCLUSIVE - it could not be set up in the
+#harness, so do not repeat it there. Two dead ends: an X spell cannot be cast from the
+#suite (neither warp nor normal - the X menu cannot be driven), and putting this 0/0
+#straight in with inplay: kills it during SETUP, before triggers are live - the proven
+#_DIES_ form does not fire there either, which is what shows the probe was at fault
+#rather than the card. Next attempt must be IN GAME: cast it for X=2, swap the effect
+#for life:1, and see whether life moves when it dies and when warp exiles it.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
