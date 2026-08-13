@@ -1027,7 +1027,7 @@ type=Instant
 name=Advice from the Fae
 abilities=hiddenface
 aicode=activate transforms((,newability[if control more creatures then name(Pick 2) target(<2>*[zpos<=5]|mylibrary) moveto(hand) else name(pick 1) target(<1>*[zpos<=5]|mylibrary) moveto(hand)])) ueot
-auto=name(look) reveal:5 optionone if control more creatures then name(Pick 2) target(<2>*|reveal) moveto(hand) else name(pick 1) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put On Bottom) target(<5>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:5 optionone if control more creatures then name(Pick 2) target(<upto:2>*|reveal) moveto(hand) else name(pick 1) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put On Bottom) target(<5>*|reveal) bottomoflibrary optiontwoend revealend
 text=({(2/u)} can be paid with any two mana or with {U}. This card's mana value is 6.) -- Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 mana={2U}{2U}{2U}
 type=Sorcery
@@ -1883,7 +1883,7 @@ type=Instant
 name=Agonizing Memories
 target=player
 aicode=activate target(<2>*|targetedpersonshand) moveTo(targetedpersonslibrary)
-auto=name(look) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose cards) target(<2>*|reveal) moveto(ownerlibrary) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=name(look) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose cards) target(<upto:2>*|reveal) moveto(ownerlibrary) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 mana={2}{B}{B}
 type=Sorcery
@@ -3632,7 +3632,7 @@ subtype=Aura
 [card]
 name=Ancestral Memories
 aicode=name(look) activate name(look) transforms((,newability[target(<2>*[zpos<=7]|mylibrary) moveto(hand)],newability[deplete:5])) ueot
-auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<7>*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<7>*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
 mana={2}{U}{U}{U}
 type=Sorcery
@@ -9194,7 +9194,7 @@ toughness=3
 [card]
 name=Bamboozle
 target=player
-auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) target(<2>*|reveal) moveTo(myLibrary) optiontwoend revealend
+auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<upto:2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) target(<2>*|reveal) moveTo(myLibrary) optiontwoend revealend
 text=Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order.
 mana={2}{U}
 type=Sorcery
@@ -10609,7 +10609,7 @@ type=Instant
 [card]
 name=Beast Hunt
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature]|*) then moveto(mygraveyard))!
-auto=reveal:3 optionone name(Reveal) target(<3>creature|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=reveal:3 optionone name(Reveal) target(<upto:3>creature|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
 mana={3}{G}
 type=Sorcery
@@ -10814,7 +10814,7 @@ name=Behold the Beyond
 auto=reject all(*|myhand)
 abilities=hiddenface
 aicode=activate moveto(hand) target(<3>*|mylibrary)
-auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 text=Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle.
 mana={5}{B}{B}
 type=Sorcery
@@ -11522,7 +11522,7 @@ subtype=Aura
 [card]
 name=Bitter Revelation
 aicode=activate transforms((,newability[moveto(hand) all(*[zpos<=2]|mylibrary) && deplete:2 && life:-2])) ueot
-auto=name(look) reveal:4 optionone name(Get 2 card) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<4>*|reveal) moveto(graveyard) optiontwoend afterrevealed choice life:-2 afterrevealedend revealend
+auto=name(look) reveal:4 optionone name(Get 2 card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<4>*|reveal) moveto(graveyard) optiontwoend afterrevealed choice life:-2 afterrevealedend revealend
 text=Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
 mana={3}{B}
 type=Sorcery
@@ -14584,7 +14584,7 @@ name=Borborygmos Enraged
 abilities=trample
 auto={D(land|myhand)}:target(anytarget) damage:3
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then moveto(mygraveyard))!
-auto=@combatdamaged(player) from(this):reveal:3 optionone name(Reveal) target(<3>land|reveal) moveto(hand) optiononeend optiontwo name(Send To Grave) choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@combatdamaged(player) from(this):reveal:3 optionone name(Reveal) target(<upto:3>land|reveal) moveto(hand) optiononeend optiontwo name(Send To Grave) choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Trample -- Whenever Borborygmos Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard. -- Discard a land card: Borborygmos Enraged deals 3 damage to any target.
 mana={4}{R}{R}{G}{G}
 type=Legendary Creature
@@ -15343,7 +15343,7 @@ toughness=1
 [card]
 name=Brass Herald
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-chosentype]|*) then bottomoflibrary)!
-auto=chooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 1/1],newability[reveal:4 optionone name(Reveal) target(<4>creature[chosentype]|reveal) moveto(hand) optiononeend optiontwo target(<4>*|reveal) bottomoflibrary optiontwoend revealend])) forever chooseend
+auto=chooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 1/1],newability[reveal:4 optionone name(Reveal) target(<upto:4>creature[chosentype]|reveal) moveto(hand) optiononeend optiontwo target(<4>*|reveal) bottomoflibrary optiontwoend revealend])) forever chooseend
 text=As Brass Herald enters, choose a creature type. -- When Brass Herald enters, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order. -- Creatures of the chosen type get +1/+1.
 mana={6}
 type=Artifact Creature
@@ -20798,7 +20798,7 @@ toughness=2
 name=Chromescale Drake
 abilities=affinityartifacts,flying
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-artifact]|*) then moveto(mygraveyard))!
-auto=name(Reveal 3 cards) reveal:3 optionone name(Artifacts) target(<3>artifact|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Reveal 3 cards) reveal:3 optionone name(Artifacts) target(<upto:3>artifact|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.) -- Flying -- When Chromescale Drake enters, reveal the top three cards of your library. Put all artifact cards revealed this way into your hand and the rest into your graveyard.
 mana={6}{U}{U}{U}
 type=Creature
@@ -35596,7 +35596,7 @@ name=Earwig Squad
 other={2}{B} name(Prowl)
 otherrestriction=prowl
 aicode=activate moveto(exile) target(<3>*|targetedpersonslibrary)
-auto=alternative name(target opponent) target(opponent) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
+auto=alternative name(target opponent) target(opponent) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<upto:3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
 text=Prowl {2}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.) -- When Earwig Squad enters, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.
 mana={3}{B}{B}
 type=Creature
@@ -36301,7 +36301,7 @@ toughness=3
 [card]
 name=Elder Pine of Jukai
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then bottomoflibrary)!
-auto=@movedTo(arcane,spirit|mystack):reveal:4 optionone name(Get Lands) target(<4>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=@movedTo(arcane,spirit|mystack):reveal:4 optionone name(Get Lands) target(<upto:4>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 auto=_DIES_may moveto(hand) target(spirit[manacost<=2]|mygraveyard)
 text=Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order. -- Soulshift 2 (When this creature dies, you may return target Spirit card with mana value 2 or less from your graveyard to your hand.)
 mana={2}{G}
@@ -38320,7 +38320,7 @@ toughness=5
 [card]
 name=Enlistment Officer
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-soldier]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Soldiers) target(<4>soldier|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Soldiers) target(<upto:4>soldier|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=First strike -- When Enlistment Officer enters, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{W}
 type=Creature
@@ -38380,7 +38380,7 @@ toughness=1
 [card]
 name=Enshrined Memories
 aicode=activate target(<castx>*[zpos<=castx]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature]|*) then bottomoflibrary)!
-auto=reveal:x optionone name(Get creatures) target(<50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<50>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:x optionone name(Get creatures) target(<upto:50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<50>*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={X}{G}
 type=Sorcery
@@ -39576,7 +39576,7 @@ type=Sorcery
 [card]
 name=Everbark Shaman
 aicode=activate moveTo(myBattlefield) and!(tap(noevent))! target(<2>forest|myLibrary)
-auto={T}{E(treefolk|mygraveyard)}:name(search card) reveal:plibrarycount optionone name(choose card) target(<2>forest|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
+auto={T}{E(treefolk|mygraveyard)}:name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:2>forest|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 text={T}, Exile a Treefolk card from your graveyard: Search your library for two Forest cards and put them onto the battlefield tapped. Then shuffle.
 mana={4}{G}
 type=Creature
@@ -41187,7 +41187,7 @@ type=Sorcery
 [card]
 name=Far Wanderings
 aicode=activate transforms((,newability[_THRESHOLD_ moveto(mybattlefield) and!(tap(noevent))! target(<3>land[basic]|mylibrary)],newability[if type(*|mygraveyard)~lessthan~7 then moveto(mybattlefield) and!(tap(noevent))! target(land[basic]|mylibrary)])) ueot
-auto=_THRESHOLD_ name(search card) reveal:plibrarycount optionone name(choose card) target(<3>land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
+auto=_THRESHOLD_ name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:3>land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 auto=if type(*|mygraveyard)~lessthan~7 then name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 text=Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle. -- Threshold - If seven or more cards are in your graveyard, instead search your library for three basic land cards and put them onto the battlefield tapped. Then shuffle.
 mana={2}{G}
@@ -41489,7 +41489,7 @@ toughness=3
 [/card]
 [card]
 name=Fathom Trawl
-auto=Reveal:3 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone choice name(Get Cards) target(<3>*[-land]|reveal) moveto(hand) optiononeend optiontwo choice name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=Reveal:3 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone choice name(Get Cards) target(<upto:3>*[-land]|reveal) moveto(hand) optiononeend optiontwo choice name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.
 mana={3}{U}{U}
 type=Sorcery
@@ -45269,7 +45269,7 @@ type=Sorcery
 [card]
 name=Foresight
 aicode=activate target(<3>*|mylibrary) moveto(exile)
-auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 auto=@next upkeep:draw:1 controller
 text=Search your library for three cards, exile them, then shuffle. -- Draw a card at the beginning of the next turn's upkeep.
 mana={1}{U}
@@ -51008,7 +51008,7 @@ toughness=2
 name=Goblin Ringleader
 abilities=haste
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-goblin]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Goblin) target(<4>Goblin|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Goblin) target(<upto:4>Goblin|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=Haste -- When Goblin Ringleader enters, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{R}
 type=Creature
@@ -52405,7 +52405,7 @@ toughness=4
 [card]
 name=Grave Defiler
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-zombie]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Zombie) target(<4>zombie|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Zombie) target(<upto:4>zombie|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Grave Defiler enters, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library. -- {1}{B}: Regenerate Grave Defiler.
 auto={1}{B}:regenerate
 mana={3}{B}
@@ -54011,7 +54011,7 @@ name=Gruesome Discovery
 target=player
 aicode=activate reject notaTarget(<2>*|targetedpersonshand)
 auto=ifnot morbid then ability$!name(discard 2 cards) target(<2>*|myhand) reject!$ targetedplayer
-auto=if morbid then reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) target(<2>*|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=if morbid then reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) target(<upto:2>*|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Target player discards two cards. -- Morbid - If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards.
 mana={2}{B}{B}
 type=Sorcery
@@ -61115,7 +61115,7 @@ name=Increasing Ambition
 abilities=hiddenface
 aicode=activate transforms((,newability[ifnot gravecast then target(*|myLibrary) moveto(hand)],newability[if gravecast then target(<2>*|myLibrary) moveto(hand)])) ueot
 auto=ifnot gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
-auto=if gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(<2>*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
+auto=if gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:2>*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
 flashback={7}{B}
 text=Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle. -- Flashback {7}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={4}{B}
@@ -63729,7 +63729,7 @@ toughness=1
 [card]
 name=Jester's Cap
 aicode=activate moveto(exile) target(<3>*|targetedpersonslibrary)
-auto={2}{T}{S}:name(exile cards) target(player) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
+auto={2}{T}{S}:name(exile cards) target(player) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<upto:3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
 text={2}, {T}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles their library.
 mana={4}
 type=Artifact
@@ -65577,7 +65577,7 @@ toughness=1
 [card]
 name=Kavu Howler
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-kavu]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Kavu) target(<4>kavu|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Kavu) target(<upto:4>kavu|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Kavu Howler enters, reveal the top four cards of your library. Put all Kavu cards revealed this way into your hand and the rest on the bottom of your library.
 mana={4}{G}{G}
 type=Creature
@@ -69151,7 +69151,7 @@ toughness=4
 [card]
 name=Lair Delve
 aicode=activate target(<2>*[zpos<=2]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature;-land]|*) then bottomoflibrary)!
-auto=reveal:2 optionone name(Get creature and land) target(<2>*[creature;land]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:2 optionone name(Get creature and land) target(<upto:2>*[creature;land]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={2}{G}
 type=Sorcery
@@ -74845,7 +74845,7 @@ toughness=2
 [card]
 name=Manipulate Fate
 aicode=activate target(<3>*|mylibrary) moveto(exile)
-auto=name(exile cards) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose cards) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(exile cards) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose cards) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 auto=draw:1 controller
 text=Search your library for three cards, exile them, then shuffle. -- Draw a card.
 mana={1}{U}
@@ -77338,7 +77338,7 @@ toughness=2
 name=Merfolk Wayfinder
 abilities=flying
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-island]|*) then bottomoflibrary)!
-auto=reveal:3 optionone name(Get islands) target(<3>island|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:3 optionone name(Get islands) target(<upto:3>island|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
 text=Flying -- When Merfolk Wayfinder enters, reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={2}{U}
 type=Creature
@@ -81628,7 +81628,7 @@ toughness=2
 [card]
 name=Mulch
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then moveto(mygraveyard))!
-auto=reveal:4 optionone name(Get land) target(<4>land|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=reveal:4 optionone name(Get land) target(<upto:4>land|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 mana={1}{G}
 type=Sorcery
@@ -85176,7 +85176,7 @@ type=Artifact
 name=Noggin Whack
 other={1}{B} name(Prowl)
 otherrestriction=prowl
-auto=Reveal:3 revealzone(opponenthand) optionone choice name(choose Discards) target(<2>*|reveal) transforms((,newability[moveto(hand) and!(reject)!])) oneshot optiononeend optiontwo name(Put Back) target(*|reveal) transforms((,newability[all(*|reveal) moveto(hand)])) oneshot optiontwoend revealend
+auto=Reveal:3 revealzone(opponenthand) optionone choice name(choose Discards) target(<upto:2>*|reveal) transforms((,newability[moveto(hand) and!(reject)!])) oneshot optiononeend optiontwo name(Put Back) target(*|reveal) transforms((,newability[all(*|reveal) moveto(hand)])) oneshot optiontwoend revealend
 text=Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.) -- Target player reveals three cards from their hand. You choose two of them. That player discards those cards.
 mana={2}{B}{B}
 type=Kindred Sorcery
@@ -86831,7 +86831,7 @@ toughness=8
 [card]
 name=Omen
 aicode=activate transforms((,newability[foreach(*[zpos<=3]|mylibrary) moverandom(*[zpos<=3]) from(mylibrary) to(mylibrary)],newability[draw:1])) ueot
-auto=name(Look top 3 cards) reveal:3 optionone name(Put back cards) target(<3>*|reveal) moveto(mylibrary) optiononeend optiontwo donothing optiontwoend afterrevealed transforms((,newability[choice name(Shuffle and draw) shuffle && draw:1],newability[choice name(Don't shuffle and draw) draw:1])) ueot afterrevealedend revealend
+auto=name(Look top 3 cards) reveal:3 optionone name(Put back cards) target(<upto:3>*|reveal) moveto(mylibrary) optiononeend optiontwo donothing optiontwoend afterrevealed transforms((,newability[choice name(Shuffle and draw) shuffle && draw:1],newability[choice name(Don't shuffle and draw) draw:1])) ueot afterrevealedend revealend
 text=Look at the top three cards of your library, then put them back in any order. You may shuffle your library. -- Draw a card.
 mana={1}{U}
 type=Sorcery
@@ -103723,7 +103723,7 @@ toughness=5
 [card]
 name=Sages of the Anima
 aicode=activate target(<3>creature[zpos<=3]|mylibrary) moveto(hand)
-auto=replacedraw reveal:3 optionone name(Get creatures) target(<3>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
+auto=replacedraw reveal:3 optionone name(Get creatures) target(<upto:3>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
 text=If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={3}{G}{U}
 type=Creature
@@ -107258,7 +107258,7 @@ type=Sorcery
 [/card]
 [card]
 name=See the Unwritten
-auto=_FEROCIOUS_ reveal:8 revealzone(mylibrary) optionone target(<2>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
+auto=_FEROCIOUS_ reveal:8 revealzone(mylibrary) optionone target(<upto:2>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
 auto=if type(creature[power>=3]|mybattlefield)~lessthan~1 then reveal:8 revealzone(mylibrary) optionone target(<1>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
 text=Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard. -- Ferocious -- If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
 mana={4}{G}{G}
@@ -120090,7 +120090,7 @@ subtype=Mountain Forest
 [/card]
 [card]
 name=Stomping Slabs
-auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<upto:7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.
 mana={2}{R}
 type=Sorcery
@@ -123566,7 +123566,7 @@ toughness=2
 [card]
 name=Sylvan Messenger
 abilities=trample
-auto=reveal:4 optionone name(Get Elf) target(<4>elf|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Elf) target(<upto:4>elf|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=Trample -- When Sylvan Messenger enters, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{G}
 type=Creature
@@ -128369,7 +128369,7 @@ type=Instant
 [/card]
 [card]
 name=Tidal Courier
-auto=reveal:4 optionone name(Get Merfolk) target(<4>merfolk|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Merfolk) target(<upto:4>merfolk|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Tidal Courier enters, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library. -- {3}{U}: Tidal Courier gains flying until end of turn.
 auto={3}{U}:flying ueot
 mana={3}{U}
