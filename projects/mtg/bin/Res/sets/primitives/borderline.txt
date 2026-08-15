@@ -136655,8 +136655,7 @@ toughness=3
 [card]
 name=Luxurious Locomotive
 grade=borderline
-auto=@combat(attacking) source(this) turnlimited:token(Treasure)*type:*[creature;counter{0/0.1.Crewed}]:mybattlefield
-auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
+auto=@combat(attacking) source(this) turnlimited:token(Treasure)*type:creature[counter{0/0.1.crewed}]:mybattlefield
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot limit:1 restriction{compare(crewtotalpower)~morethan~0}
 #"A Treasure for each creature that crewed it" now works: the Crewed counter stamped in
 #TapTargetCost::doPay makes the crew set countable by the )*type: multiplier.
@@ -137575,8 +137574,7 @@ subtype=Lesson
 name=Getaway Car
 abilities=haste
 grade=borderline
-auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>*[creature;counter{0/0.1.Crewed}]|mybattlefield) moveTo(ownerhand)
-auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
+auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>creature[counter{0/0.1.crewed}]|mybattlefield) moveTo(ownerhand)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crew list now exists: TapTargetCost::doPay stamps a Crewed counter on each creature
 #tapped to crew, so the bounce can be restricted to one of them.
@@ -137590,10 +137588,11 @@ toughness=3
 [card]
 name=Turtle Van
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(*[creature;counter{0/0.1.Crewed}]|mybattlefield)
-auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.crewed}]|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#The crewed-by restriction now works via the Crewed counter stamped in TapTargetCost::doPay.
+#The crewed-by filter is measured good: an all() sweep with this exact filter selects the
+#crewer and nothing else. The targeting half cannot be checked here - the harness has no way
+#to feed a target to a combat trigger - so this one needs an in-game look (deck60).
 #MISSING the Mutant/Ninja/Turtle counter-doubling rider.
 text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (No doubling.) -- Crew 1
 mana={3}
@@ -137606,13 +137605,14 @@ toughness=4
 name=Golden Argosy
 grade=borderline
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-auto=@combat(attacking) source(this):all(*[creature;counter{0/0.1.Crewed}]|mybattlefield) moveTo(exile) and!( counter(0/0,1,ArgosyExiled) )!
-auto=@each my end:all(*[counter{0/0.1.ArgosyExiled}]|myexile) moveTo(mybattlefield) and!( tap(noevent) )!
-auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
-#The crew list now exists (a Crewed counter stamped in TapTargetCost::doPay), so this
-#really does exile the creatures that crewed it, and an ArgosyExiled counter brings them
-#back tapped at end of turn - the Bomat Courier / Intet shape.
-text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. -- Crew 1
+#MISSING the attack trigger entirely. The crew list itself works - a crewed counter is
+#stamped in TapTargetCost::doPay and all(creature[counter{0/0.1.crewed}]|mybattlefield)
+#is measured to select the crewer and nothing else. What does not work is moving those
+#cards: all(...) moveto(exile) inside the attack trigger spins the engine forever once the
+#filter actually matches (harness hangs at 99% CPU; it only appeared to "work" before
+#because the filter was dead). A hang is worse for a player than a missing ability, so the
+#trigger stays out until the exile-from-battlefield form is understood.
+text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. (The attack trigger is not implemented.) -- Crew 1
 mana={4}
 type=Legendary Artifact
 subtype=Vehicle
@@ -137622,8 +137622,7 @@ toughness=6
 [card]
 name=Subterranean Schooner
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(*[creature;counter{0/0.1.Crewed}]|mybattlefield)
-auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.crewed}]|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crewed-by restriction now works via the Crewed counter.
 #MISSING explore proper (reveal, land to hand, else counter and choose); this is the

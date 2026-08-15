@@ -1,0 +1,33 @@
+#PROBE: does GOLDEN ARGOSY attack once crewed? probe_attack_crewed proves Turtle Van does,
+#with the identical crew line, so if this fails the difference is something on Golden Argosy
+#itself and not the crew machinery.
+#Golden Argosy is 3/6: player 2 on 17 means it attacked.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Golden Argosy,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Golden Argosy
+Grizzly Bears
+next
+#combat begins
+next
+#attackers
+Golden Argosy
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Golden Argosy,Grizzly Bears
+life:20
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,39 @@
+#Turtle Van: "put a +1/+1 counter on target creature that crewed it this turn."
+#This is the card in John's deck60, and it was inert - not because the trigger was wrong but
+#because the crewed counter was stamped with a capital C from C++ while every auto= line is
+#lowercased on load, so the filter matched nothing. 3/3 means the whole chain works: crew
+#stamps, the filter finds the crewer, the trigger resolves on it.
+#Player 2 on 16 proves the 4/4 Vehicle actually attacked, so a 2/2 Grizzly Bears would mean
+#the trigger, not a Vehicle that never got into combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Turtle Van
+Grizzly Bears
+next
+#combat begins
+next
+#attackers
+Turtle Van
+next
+#blockers
+next
+#damage
+next
+next
+#combat end - the attack trigger eats a beat, hence the extra step
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+pt:Grizzly Bears=3/3
+counter:Grizzly Bears=Crewed:1
+life:20
+[PLAYER2]
+life:16
+[END]

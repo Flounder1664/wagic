@@ -1,0 +1,35 @@
+#PROBE, variable: can a CREWED VEHICLE attack in the harness?
+#Same shape as probe_attack_plain, but the attacker is Turtle Van (4/4) crewed by Grizzly
+#Bears. Player 2 on 16 means the Vehicle attacked; on 20 means it never did, and every
+#"the crew trigger did not fire" conclusion drawn from such a test is worthless.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Turtle Van
+Grizzly Bears
+next
+#combat begins
+next
+#attackers
+Turtle Van
+next
+#blockers
+next
+#damage
+next
+next
+#combat end - the attack trigger eats a beat, hence the extra step
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+counter:Grizzly Bears=Crewed:1
+life:20
+[PLAYER2]
+life:16
+[END]
