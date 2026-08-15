@@ -136874,3 +136874,308 @@ subtype=Insect Druid
 power=1
 toughness=3
 [/card]
+[card]
+name=Korvold and the Noble Thief
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) _TREASURE_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) _TREASURE_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(*[zpos<=3]|opponentlibrary) moveTo(opponentexile)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING chapter III should also let you PLAY the exiled cards this turn; granting
+#canplayfromexile to an opponent's exiled cards has no route.
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I, II - Create a Treasure token. -- III - Exile the top three cards of target opponent's library. You may play those cards this turn. (Playing them is not implemented.)
+mana={3}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The Huntsman's Redemption
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) create(Beast:creature beast:3/3:green)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may name(Sacrifice a creature to search) sacrifice notaTarget(creature|mybattlefield) && target(creature|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING chapter III targets "up to two" creatures and also grants trample; this pumps
+#every creature you control instead, which is broader but expressible.
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create a 3/3 green Beast creature token. -- II - You may sacrifice a creature. If you do, search your library for a creature card (basic land option not implemented), reveal it, put it into your hand, then shuffle. -- III - Up to two target creatures each get +2/+2 and gain trample until end of turn. (Approximated as +2/+2 to all your creatures, no trample.)
+mana={2}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Yotia Declares War
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) token(Ornithopter,Artifact Creature Thopter,0/2,,flying)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) lord(artifact|mybattlefield) 1/1
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead. Also chapter II should let you TAP artifacts as part of the trigger;
+#this reads the artifacts you have already tapped instead.
+text=Read ahead (Not implemented - this Saga always starts at chapter I.) -- I - Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter. -- II - Tap any number of untapped artifacts you control. When you do, this Saga deals that much damage to any target. -- III - Artifact creatures you control get +1/+1.
+mana={1}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The Elder Dragon War
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) damage:2 all(creature)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead. Chapter II is "discard any number, draw that many"; the engine has no
+#variable count, so it offers up to two.
+text=Read ahead (Not implemented.) -- I - This Saga deals 2 damage to each creature and each opponent. -- II - Discard any number of cards, then draw that many cards. (Approximated as up to two.) -- III - Create a 4/4 red Dragon creature token with flying.
+mana={2}{R}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The Weatherseed Treaty
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,5)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead, and chapter III's domain scaling (counters equal to basic land types
+#among lands you control) - fixed at five, the maximum.
+text=Read ahead (Not implemented.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
+mana={2}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Love Song of Night and Day
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) draw:2 controller && draw:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead.
+text=Read ahead (Not implemented.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
+mana={2}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Braids's Frightful Return
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield) && ability$!name(discard) target(<1>*|myhand) reject!$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead. Chapter III's "may sacrifice a creature, otherwise lose life" choice
+#is reduced to the sacrifice.
+text=Read ahead (Not implemented.) -- I - You may sacrifice a creature. If you do, each opponent discards a card. -- II - Return target creature card from your graveyard to your hand. -- III - Target opponent sacrifices a creature.
+mana={2}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Founding the Third Path
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+#MISSING chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for
+#free"; there is no route to put a card from hand onto the stack and zero its cost.
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) mill:4 target
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead.
+text=Read ahead (Not implemented.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from a graveyard.
+mana={1}{U}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The Phasing of Zhalfir
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) target(*[-land]) phaseout
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) destroy all(creature)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead, "can't phase in while you control this Saga", and chapter III's
+#card-draw-per-creature-destroyed rider.
+text=Read ahead (Not implemented.) -- I, II - Another target nonland permanent phases out. -- III - Destroy all creatures.
+mana={2}{U}{U}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The Cruelty of Gix
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|graveyard) moveTo(mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead, and mode one should let YOU choose the discarded card.
+text=Read ahead (Not implemented.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
+mana={3}{B}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Urza Assembles the Titans
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) _SCRY4_
+#MISSING chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are
+#not supported by the engine at all (wagic#6).
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead, and the chapter I reveal-a-planeswalker rider.
+text=Read ahead (Not implemented.) -- I - Scry 4. -- II - You may put a planeswalker card from your hand onto the battlefield. -- III - Creatures you control get +2/+2 until end of turn.
+mana={3}{W}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=The World Spell
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Put a permanent into play) target(*[-instant;-sorcery]|myhand) moveTo(mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#MISSING read ahead, and the "non-Saga" restriction on what you may take.
+text=Read ahead (Not implemented.) -- I, II - Look at the top seven cards of your library. You may reveal a non-Saga permanent card from among them and put it into your hand. -- III - Put any number of permanent cards from your hand onto the battlefield. (One card.)
+mana={5}{G}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Divine Resilience
+grade=borderline
+kicker={2}{W}
+auto=target(creature|mybattlefield) indestructible ueot
+auto=if paid(kicker) then all(creature|mybattlefield) indestructible ueot
+text=Kicker {2}{W} -- Target creature you control gains indestructible until end of turn. If this spell was kicked, instead any number of target creatures you control gain indestructible until end of turn.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Galadriel's Dismissal
+grade=borderline
+kicker={2}{W}
+auto=ifnot paid(kicker) then target(creature) phaseout
+auto=if paid(kicker) then all(creature|opponentbattlefield) phaseout
+text=Kicker {2}{W} -- Target creature phases out. If this spell was kicked, each creature target player controls phases out instead. (The kicked mode always hits the opponent's creatures.)
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Zuko's Conviction
+grade=borderline
+kicker={4}
+auto=ifnot paid(kicker) then moveTo(ownerhand) target(creature|mygraveyard)
+auto=kicker moveTo(mybattlefield) target(creature|mygraveyard) and!( tap(noevent) )!
+text=Kicker {4} -- Return target creature card from your graveyard to your hand. If this spell was kicked, instead put that card onto the battlefield tapped.
+mana={B}
+type=Instant
+[/card]
+[card]
+name=Stomped by the Foot
+grade=borderline
+abilities=hasotherkicker
+other={1}{B}{S(artifact,creature|myBattlefield)} name(Kicker - sacrifice)
+auto=ifnot paid(alternative) then target(creature) -2/-2 ueot
+auto=alternative target(creature) -5/-5 ueot
+text=Kicker-Sacrifice an artifact or creature. -- Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Jet's Brainwashing
+grade=borderline
+kicker={3}
+auto=target(creature) cantblock ueot
+auto=_CLUE_
+#MISSING the kicked mode (gain control, untap, haste); a gain-control rider inside a
+#kicker conditional needs the target the conditional would overwrite.
+text=Kicker {3} -- Target creature can't block this turn. If this spell was kicked, gain control of that creature until end of turn, untap it, and it gains haste until end of turn. (Kicked mode not implemented.) -- Create a Clue token.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Waste Management
+grade=borderline
+kicker={3}{B}
+auto=moveTo(exile) target(<upto:2>*|graveyard)
+auto=if paid(kicker) then all(*|opponentgraveyard) moveTo(exile)
+#MISSING the 2/2 Rogue per creature card exiled.
+text=Kicker {3}{B} -- Exile up to two target cards from a single graveyard. If this spell was kicked, instead exile target player's graveyard. Create a 2/2 black Rogue creature token for each creature card exiled this way. (Tokens not implemented.)
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Aang's Journey
+grade=borderline
+kicker={2}
+auto=target(land[basic]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
+auto=life:2 controller
+#MISSING the kicked extra Shrine card search; a second library search inside a kicker
+#conditional loses its target.
+text=Kicker {2} -- Search your library for a basic land card. If this spell was kicked, instead search for a basic land card and a Shrine card. Reveal them, put them into your hand, then shuffle. (Kicked extra card not implemented.) -- You gain 2 life.
+mana={2}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Temporal Firestorm
+grade=borderline
+kicker={1}{W}
+auto=damage:5 all(creature)
+auto=if paid(kicker) then all(creature|mybattlefield) phaseout
+#MISSING the second, independent {1}{U} kicker and the "up to X where X is times kicked"
+#count; Wagic supports one kicker cost per card.
+text=Kicker {1}{W} and/or {1}{U} -- Choose up to X creatures and/or planeswalkers you control, where X is the number of times this spell was kicked. Those permanents phase out. (Approximated: if kicked, your creatures phase out.) -- Temporal Firestorm deals 5 damage to each creature and each planeswalker.
+mana={3}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Consult the Star Charts
+grade=borderline
+kicker={1}{U}
+auto=name(look) reveal:3 optionone name(take a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=if paid(kicker) then draw:1 controller
+#MISSING the kicked mode takes a SECOND card from the looked-at pile; approximated as a
+#plain extra draw.
+text=Kicker {1}{U} -- Look at the top X cards of your library, where X is the number of lands you control. (Fixed at three.) Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. (Approximated as a plain extra draw.) Put the rest on the bottom of your library in a random order.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Wastescape Battlemage
+grade=borderline
+kicker={G}
+auto=if paid(kicker) then moveTo(exile) target(artifact,enchantment|opponentbattlefield)
+#MISSING the second, independent {1}{U} kicker (bounce a creature); Wagic supports one
+#kicker cost per card, so only the {G} half is here.
+text=Kicker {G} and/or {1}{U} -- When you cast this spell, if it was kicked with its {G} kicker, exile target artifact or enchantment an opponent controls. -- When you cast this spell, if it was kicked with its {1}{U} kicker, return target creature an opponent controls to its owner's hand. (Second kicker not implemented.)
+mana={1}{C}
+type=Creature
+subtype=Eldrazi Wizard
+power=2
+toughness=2
+[/card]
