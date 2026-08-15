@@ -140889,3 +140889,123 @@ abilities=shroud,indestructible,nofizzle,nomovetrigger
 text=You have an enduring story for the rest of the game. (Storied -- if you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story.)
 type=Emblem
 [/card]
+[card]
+name=Electrosiphon
+grade=borderline
+target=*|stack
+auto=fizzle
+missing=you get an amount of {E} equal to the countered spell's mana value
+text=Counter target spell. You get an amount of {E} (energy counters) equal to its mana value. (The energy is not granted.)
+mana={U}{U}{R}
+type=Instant
+[/card]
+[card]
+name=Almost Perfect
+grade=borderline
+target=creature
+auto=teach(creature) transforms((,setpower=9,settoughness=10,indestructible))
+text=Enchant creature -- Enchanted creature has base power and toughness 9/10 and has indestructible.
+mana={4}{G}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Super Mutant Scavenger
+grade=borderline
+abilities=trample
+auto=may name(Return an Aura or Equipment) target(<upto:1>*[aura;equipment]|mygraveyard) moveTo(myhand)
+auto=@movedTo(this|graveyard) from(battlefield):may name(Return an Aura or Equipment) target(<upto:1>*[aura;equipment]|mygraveyard) moveTo(myhand)
+text=Trample -- When this creature enters or dies, return up to one target Aura or Equipment card from your graveyard to your hand.
+mana={4}{G}
+type=Creature
+subtype=Mutant Warrior
+power=5
+toughness=5
+[/card]
+[card]
+name=Intelligence Bobblehead
+grade=borderline
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto={5}{T}:draw:type:bobblehead:mybattlefield controller
+text={T}: Add one mana of any color. -- {5}, {T}: Draw X cards, where X is the number of Bobbleheads you control.
+mana={3}
+type=Artifact
+subtype=Bobblehead
+[/card]
+[card]
+name=Charisma Bobblehead
+grade=borderline
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto={4}{T}:asSorcery token(Soldier,Creature Soldier,1/1,white)*type:bobblehead:mybattlefield
+text={T}: Add one mana of any color. -- {4}, {T}: Create X 1/1 white Soldier creature tokens, where X is the number of Bobbleheads you control. Activate only as a sorcery.
+mana={3}
+type=Artifact
+subtype=Bobblehead
+[/card]
+[card]
+name=Strength Bobblehead
+grade=borderline
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+missing={3}, {T}: Put X +1/+1 counters on target creature, where X is the number of Bobbleheads you control
+text={T}: Add one mana of any color. -- {3}, {T}: Put X +1/+1 counters on target creature, where X is the number of Bobbleheads you control. Activate only as a sorcery.
+mana={3}
+type=Artifact
+subtype=Bobblehead
+[/card]
+[card]
+name=Panharmonicon
+grade=borderline
+auto=doubletrigger(*|mybattlefield)
+missing=the doubling should apply only when an ARTIFACT or CREATURE entering caused the trigger; here every triggered ability of your permanents is doubled
+text=If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Approximated: all your permanents' triggers are doubled.)
+mana={4}
+type=Artifact
+[/card]
+[card]
+name=White Glove Gourmand
+grade=borderline
+auto=token(Human Soldier,Creature Human Soldier,1/1,white)*2
+missing=at the beginning of your end step, if another Human died under your control this turn, create a Food token
+text=When this creature enters, create two 1/1 white Human Soldier creature tokens. -- At the beginning of your end step, if another Human died under your control this turn, create a Food token.
+mana={2}{W}{B}
+type=Creature
+subtype=Human Noble
+power=2
+toughness=2
+[/card]
+[card]
+name=Marcus, Mutant Mayor
+grade=borderline
+abilities=vigilance,trample
+missing=whenever a creature you control deals combat damage to a player, draw a card if it has a +1/+1 counter, otherwise put one on it
+text=Vigilance, trample -- Whenever a creature you control deals combat damage to a player, draw a card if that creature has a +1/+1 counter on it. If it doesn't, put a +1/+1 counter on it.
+mana={3}{G}{U}
+type=Legendary Creature
+subtype=Mutant Advisor
+power=4
+toughness=4
+[/card]
+[card]
+name=Armory Paladin
+grade=borderline
+abilities=trample
+missing=whenever you cast an Aura or Equipment spell, exile the top card of your library and you may play it until the end of your next turn
+text=Trample -- Whenever you cast an Aura or Equipment spell, exile the top card of your library. You may play that card until the end of your next turn.
+mana={1}{R}{W}
+type=Creature
+subtype=Human Knight
+power=3
+toughness=3
+[/card]
