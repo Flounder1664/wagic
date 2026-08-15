@@ -1107,6 +1107,18 @@ void TestSuiteGame::initGame()
                     {
                         //MTGCardInstance * copy = p->game->putInZone(card, p->game->library, p->game->stack);
                         MTGCardInstance * copy = zone->owner->game->putInZone(card, p->game->library, p->game->stack);
+                        //putInZone returns NULL when the move does not happen, and Spell's
+                        //constructor dereferences its card immediately (getCurrentZone), so
+                        //passing the result through unchecked turns a bad [INIT] line into a
+                        //hard crash at startup with no indication of which card caused it.
+                        //Name it and carry on instead.
+                        if (!copy)
+                        {
+                            DebugTrace("TESTSUITE: could not put '" << card->getName()
+                                       << "' into play for player " << i
+                                       << " - skipping it. Check the [INIT] inplay: line.");
+                            continue;
+                        }
                         Spell * spell = NEW Spell(observer, copy);
                         spell->resolve();
                         if (!summoningSickness && (size_t)p->game->inPlay->nb_cards > k) p->game->inPlay->cards[k]->summoningSickness = 0;

@@ -130,7 +130,7 @@
       <Culture>0x0c09</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;odbc32.lib;odbccp32.lib;SDL.lib;libpng.lib;fmodvc.lib;zdll.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;odbc32.lib;odbccp32.lib;SDL.lib;libpng.lib;fmodvc.lib;zdll.lib;freetype.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\JGE\Dependencies\lib;..\..\JGE\lib\win;..\..\Boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBCD;LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>

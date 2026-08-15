@@ -7,6 +7,7 @@
 
 #if defined(WIN32)
 #include <windows.h>
+#include <dbghelp.h>
 #endif
 
 namespace
@@ -76,7 +77,27 @@ static void appendCrashStack(EXCEPTION_POINTERS* info)
 
     if (info && info->ExceptionRecord)
     {
-        fprintf(f, "Faulting address: 0x%p\n", info->ExceptionRecord->ExceptionAddress);
+        // Report the faulting address as module+offset as well as absolutely. Resolving a
+        // bare absolute address by hand against a linker map is the step that made this
+        // class of crash expensive to diagnose; module+offset drops straight into a map.
+        void* fa = info->ExceptionRecord->ExceptionAddress;
+        fprintf(f, "Faulting address: 0x%p\n", fa);
+        {
+            HMODULE fmod = NULL;
+            if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                                   (LPCSTR)fa, &fmod) && fmod)
+            {
+                char full[MAX_PATH];
+                const char* shortName = "?";
+                if (GetModuleFileNameA(fmod, full, MAX_PATH))
+                {
+                    const char* slash = strrchr(full, '\\');
+                    shortName = slash ? slash + 1 : full;
+                }
+                fprintf(f, "Faulting module: %s +0x%lx\n", shortName,
+                        (unsigned long)((char*)fa - (char*)fmod));
+            }
+        }
         // For an access violation the first two parameters say read vs write, and the target.
         if (info->ExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION &&
             info->ExceptionRecord->NumberParameters >= 2)
@@ -88,7 +109,60 @@ static void appendCrashStack(EXCEPTION_POINTERS* info)
     }
 
     void* frames[48];
-    USHORT n = CaptureStackBackTrace(0, 48, frames, NULL);
+    USHORT n = 0;
+
+    // CaptureStackBackTrace walks the CURRENT call stack, which by the time an unhandled
+    // exception filter runs is the handler's own - appendCrashStack, wagicCrashFilter, then
+    // straight into ntdll. That is what every crash_log.txt written so far recorded: where
+    // the handler was, never where the crash was.
+    //
+    // The faulting thread's real register state is in info->ContextRecord. StackWalk64
+    // walks from there, and unlike a hand-rolled EBP chain it copes with the frame-pointer
+    // omission that /O2 does to this build. StackWalk64 modifies the CONTEXT it is given,
+    // so it gets a copy.
+    if (info && info->ContextRecord)
+    {
+        HANDLE proc = GetCurrentProcess();
+        SymInitialize(proc, NULL, TRUE);
+
+        CONTEXT ctx = *info->ContextRecord;
+        STACKFRAME64 sf;
+        memset(&sf, 0, sizeof(sf));
+#if defined(_M_IX86)
+        DWORD machine = IMAGE_FILE_MACHINE_I386;
+        sf.AddrPC.Offset = ctx.Eip;
+        sf.AddrFrame.Offset = ctx.Ebp;
+        sf.AddrStack.Offset = ctx.Esp;
+#elif defined(_M_X64)
+        DWORD machine = IMAGE_FILE_MACHINE_AMD64;
+        sf.AddrPC.Offset = ctx.Rip;
+        sf.AddrFrame.Offset = ctx.Rbp;
+        sf.AddrStack.Offset = ctx.Rsp;
+#else
+        DWORD machine = 0;
+#endif
+        sf.AddrPC.Mode = AddrModeFlat;
+        sf.AddrFrame.Mode = AddrModeFlat;
+        sf.AddrStack.Mode = AddrModeFlat;
+
+        while (machine && n < 48 &&
+               StackWalk64(machine, proc, GetCurrentThread(), &sf, &ctx, NULL,
+                           SymFunctionTableAccess64, SymGetModuleBase64, NULL))
+        {
+            if (!sf.AddrPC.Offset) break;
+            frames[n++] = (void*)(ULONG_PTR)sf.AddrPC.Offset;
+        }
+        SymCleanup(proc);
+    }
+
+    // Fall back to the old behaviour only if the real walk produced nothing, so a crash
+    // still logs something rather than nothing.
+    if (!n)
+    {
+        n = CaptureStackBackTrace(0, 48, frames, NULL);
+        fprintf(f, "(no ContextRecord - falling back to the handler's own stack)\n");
+    }
+
     fprintf(f, "Stack (%u frames, innermost first):\n", (unsigned)n);
     for (USHORT i = 0; i < n; i++)
     {
