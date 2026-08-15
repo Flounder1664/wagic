@@ -1,17 +1,26 @@
-#SCENARIO, not a test: it hands control to you and asserts nothing.
+#SCENARIO, not a test: hands control to you and asserts nothing.
 #Excluded from the unattended suite automatically (filename contains "scenario").
-#Run it with:   WAGIC_TESTSUITE=1 WAGIC_TESTSUITE_ONLY=scenario_crew_argosy Wagic.exe
 #
-#Board: Golden Argosy plus three creatures, all untapped, first main, plenty of mana.
-#What to check - this is the card the crew marker was built for:
-#  1. Crew Golden Argosy, tapping TWO of the three creatures.
-#  2. Attack with it. Both creatures that crewed should be EXILED; the third stays.
-#  3. At end of turn both should return to the battlefield TAPPED.
-#Before the crew marker existed the attack trigger did nothing at all.
+#Three crew Vehicles on one board, so one run isolates the suspect. Test them in THIS
+#ORDER, and stop at whichever one crashes - that alone tells us which line is at fault.
+#
+#  1. TURTLE VAN            crew 1, attack.  Expect: a +1/+1 counter on the crewer only.
+#  2. SUBTERRANEAN SCHOONER crew 1, attack.  Expect: a +1/+1 counter on the crewer only.
+#         Both of these use a plain single-target counter(1/1) target(...) with the Crewed
+#         filter. If either crashes, the crew MARKER itself is the problem.
+#
+#  3. GOLDEN ARGOSY         crew with TWO creatures, attack.
+#         Expect: both crewers exiled, the third creature untouched, both back TAPPED at
+#         end of turn.
+#         This is the suspect. It is the only one that applies "and!( counter(...) )!" to
+#         an all() sweep rather than a single target, and that extrapolation is mine and
+#         untested. If 1 and 2 pass and this crashes, it is that line.
+#
+#Five creatures so every Vehicle can be crewed without running out of bodies.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
-inplay:Golden Argosy,Grizzly Bears,Hill Giant,Ornithopter
+inplay:Golden Argosy,Turtle Van,Subterranean Schooner,Grizzly Bears,Hill Giant,Ornithopter,Llanowar Elves,Bog Imp
 hand:Shock
 manapool:{5}{R}
 life:20
