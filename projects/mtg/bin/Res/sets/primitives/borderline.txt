@@ -137980,3 +137980,483 @@ text={T}: Mill a card. -- Craft with Island {3}{U} (Not implemented.)
 mana={U}
 type=Artifact
 [/card]
+[card]
+name=Glider Kids
+abilities=flying
+grade=borderline
+auto=_SCRY1_
+text=Flying -- When this creature enters, scry 1.
+mana={2}{W}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=3
+[/card]
+[card]
+name=Compassionate Healer
+grade=borderline
+auto=@tapped(this):life:1 controller
+auto=@tapped(this):_SCRY1_
+text=Whenever this creature becomes tapped, you gain 1 life and scry 1.
+mana={1}{W}
+type=Creature
+subtype=Human Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Invasion Reinforcements
+abilities=flash
+grade=borderline
+auto=token(Ally,Creature Ally,1/1,white)
+text=Flash -- When this creature enters, create a 1/1 white Ally creature token.
+mana={1}{W}
+type=Creature
+subtype=Human Soldier Ally
+power=1
+toughness=1
+[/card]
+[card]
+name=Featherbrained Filcher
+abilities=flying
+grade=borderline
+auto=@movedTo(this|nonbattlezone) from(mybattlefield):_FOOD_
+text=Flying -- When this creature leaves the battlefield, create a Food token.
+mana={W}
+type=Creature
+subtype=Bird Rogue
+power=0
+toughness=2
+[/card]
+[card]
+name=White Lotus Reinforcements
+abilities=vigilance
+grade=borderline
+auto=lord(other ally|mybattlefield) 1/1
+text=Vigilance -- Other Allies you control get +1/+1.
+mana={1}{G}{W}
+type=Creature
+subtype=Human Soldier Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=Iguana Parrot
+abilities=flying,vigilance,prowess
+grade=borderline
+text=Flying, vigilance -- Prowess
+mana={2}{U}
+type=Creature
+subtype=Bird Lizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Forecasting Fortune Teller
+grade=borderline
+auto=_CLUE_
+text=When this creature enters, create a Clue token.
+mana={1}{U}
+type=Creature
+subtype=Human Advisor
+power=1
+toughness=3
+[/card]
+[card]
+name=Buzz Bots
+abilities=flying,vigilance
+grade=borderline
+auto=@movedTo(this|graveyard) from(battlefield):draw:1 controller
+text=Flying, vigilance -- When this creature dies, draw a card.
+mana={1}{U}
+type=Artifact Creature
+subtype=Robot
+power=1
+toughness=1
+[/card]
+[card]
+name=Matoya, Archon Elder
+grade=borderline
+#MISSING "whenever you scry or surveil, draw a card" - neither scry nor surveil raises a
+#trigger the DSL can hook, so this creature is a body only.
+text=Whenever you scry or surveil, draw a card. (Not implemented.)
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=1
+toughness=4
+[/card]
+[card]
+name=Highspire Bell-Ringer
+abilities=flying
+grade=borderline
+auto=lord(*|mycastingzone) altercost(colorless,-1)
+#MISSING the discount should apply only to the SECOND spell each turn; here it applies to
+#every spell.
+text=Flying -- The second spell you cast each turn costs {1} less to cast. (Approximation: every spell costs {1} less.)
+mana={2}{U}
+type=Creature
+subtype=Bird Cleric
+power=1
+toughness=4
+[/card]
+[card]
+name=Uthros Psionicist
+grade=borderline
+auto=lord(*|mycastingzone) altercost(colorless,-2)
+#MISSING the discount should apply only to the SECOND spell each turn; here it applies to
+#every spell.
+text=The second spell you cast each turn costs {2} less to cast. (Approximation: every spell costs {2} less.)
+mana={2}{U}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Mai, Scornful Striker
+abilities=first strike
+grade=borderline
+auto=@movedTo(*[-creature;-land]|stack):life:-1 targetedplayer
+text=First strike -- Whenever a player casts a noncreature spell, they lose 1 life.
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Assassin
+power=2
+toughness=2
+[/card]
+[card]
+name=Primordial Gnawer
+grade=borderline
+auto=@movedTo(this|graveyard) from(battlefield):draw:1 controller
+#MISSING discover 3 - the mechanic exiles until a nonland of mana value 3 or less and casts
+#it free; approximated as drawing a card.
+text=When this creature dies, discover 3. (Approximated as drawing a card.)
+mana={4}{B}
+type=Creature
+subtype=Rat
+power=5
+toughness=2
+[/card]
+[card]
+name=Masked Meower
+abilities=haste
+grade=borderline
+auto={D}{S(this)}:name(Discard and sacrifice to draw) draw:1 controller
+text=Haste -- Discard a card, Sacrifice this creature: Draw a card.
+mana={R}
+type=Creature
+subtype=Cat Hero
+power=1
+toughness=1
+[/card]
+[card]
+name=Treetop Freedom Fighters
+abilities=haste
+grade=borderline
+auto=token(Ally,Creature Ally,1/1,white)
+text=Haste -- When this creature enters, create a 1/1 white Ally creature token.
+mana={2}{R}
+type=Creature
+subtype=Human Rebel Ally
+power=2
+toughness=1
+[/card]
+[card]
+name=Flowstone Salamander
+grade=borderline
+auto={R}:damage:1 target(creature[blocking]|opponentbattlefield)
+text={R}: This creature deals 1 damage to target creature blocking it.
+mana={3}{R}{R}
+type=Creature
+subtype=Lizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Nosy Goblin
+grade=borderline
+auto={T}{S(this)}:name(Destroy a creature) destroy target(creature|opponentbattlefield)
+#MISSING the real card only destroys a FACE-DOWN creature; face-down permanents are not
+#modelled, so this destroys any creature an opponent controls, which is stronger.
+text={T}, Sacrifice this creature: Destroy target face-down creature. (Approximated: destroys any creature an opponent controls.)
+mana={2}{R}
+type=Creature
+subtype=Goblin
+power=2
+toughness=1
+[/card]
+[card]
+name=Innocent Bystander
+grade=borderline
+auto=@damaged(this):_CLUE_
+#MISSING the real trigger needs 3 or more damage at once; this fires on any damage.
+text=Whenever this creature is dealt 3 or more damage, investigate. (Approximated: any damage.)
+mana={1}{R}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=1
+[/card]
+[card]
+name=Primordial Pachyderm
+abilities=reach,trample
+grade=borderline
+auto=life:2 controller
+text=Reach, trample -- When this creature enters, you gain 2 life.
+mana={3}{G}
+type=Creature
+subtype=Elephant
+power=4
+toughness=4
+[/card]
+[card]
+name=Zoo Escapees
+grade=borderline
+auto=@movedTo(this|nonbattlezone) from(mybattlefield):_FOOD_
+#MISSING the real token is a Mutagen; no Mutagen token exists in the collection, so a Food
+#token stands in for it.
+text=When this creature leaves the battlefield, create a Mutagen token. (A Food token stands in.)
+mana={1}{G}
+type=Creature
+subtype=Beast
+power=2
+toughness=2
+[/card]
+[card]
+name=Sentinel of the Nameless City
+abilities=vigilance
+grade=borderline
+auto=_CLUE_
+auto=@combat(attacking) source(this):_CLUE_
+#MISSING the real token is a Map; no Map token exists in the collection, so a Clue token
+#stands in for it.
+text=Vigilance -- Whenever this creature enters or attacks, create a Map token. (A Clue token stands in.)
+mana={2}{G}
+type=Creature
+subtype=Merfolk Soldier
+power=3
+toughness=4
+[/card]
+[card]
+name=Spyglass Siren
+abilities=flying
+grade=borderline
+auto=_CLUE_
+#MISSING the real token is a Map; a Clue token stands in for it.
+text=Flying -- When this creature enters, create a Map token. (A Clue token stands in.)
+mana={U}
+type=Creature
+subtype=Siren Pirate
+power=1
+toughness=1
+[/card]
+[card]
+name=Waterwind Scout
+abilities=flying
+grade=borderline
+auto=_CLUE_
+#MISSING the real token is a Map; a Clue token stands in for it.
+text=Flying -- When this creature enters, create a Map token. (A Clue token stands in.)
+mana={2}{U}
+type=Creature
+subtype=Merfolk Scout
+power=2
+toughness=2
+[/card]
+[card]
+name=Cartographer's Companion
+grade=borderline
+auto=_CLUE_
+#MISSING the real token is a Map; a Clue token stands in for it.
+text=When this creature enters, create a Map token. (A Clue token stands in.)
+mana={3}
+type=Artifact Creature
+subtype=Scout
+power=2
+toughness=1
+[/card]
+[card]
+name=Aven Soulgazer
+abilities=flying
+grade=borderline
+text=Flying -- {2}{W}: Look at target face-down creature. (Face-down permanents are not modelled; the look ability is omitted.)
+mana={3}{W}{W}
+type=Creature
+subtype=Bird Soldier
+power=3
+toughness=3
+[/card]
+[card]
+name=Valeron Wardens
+grade=borderline
+auto=@counteradded(1/1) from(*[creature]|mybattlefield):draw:1 controller
+#MISSING renown 2 on this creature itself.
+text=Renown 2 (Not implemented.) -- Whenever a creature you control becomes renowned, draw a card. (Approximated: whenever a creature you control gets a +1/+1 counter.)
+mana={2}{G}
+type=Creature
+subtype=Human Soldier
+power=1
+toughness=3
+[/card]
+[card]
+name=Geyser Drake
+abilities=flying
+grade=borderline
+auto=lord(*|mycastingzone) altercost(colorless,-1)
+#MISSING the discount should apply only on turns other than yours; a turn-gated static
+#cost reduction is unattested, so it applies always.
+text=Flying -- During turns other than yours, spells you cast cost {1} less to cast. (Approximation: always.)
+mana={2}{U}
+type=Creature
+subtype=Drake
+power=2
+toughness=3
+[/card]
+[card]
+name=Streaking Oilgorger
+abilities=flying,haste,lifelink
+grade=borderline
+#MISSING "start your engines / max speed" gates the lifelink; here it is always on.
+text=Flying, haste -- Start your engines! -- Max speed - This creature has lifelink. (Approximated: lifelink is always on.)
+mana={4}{B}
+type=Creature
+subtype=Phyrexian Beast
+power=3
+toughness=3
+[/card]
+[card]
+name=Walking Sarcophagus
+grade=borderline
+#MISSING "start your engines / max speed" gates the bonus; the printed 2/1 body is given
+#the +1/+2 permanently instead, so it reads as a 3/3.
+text=Start your engines! -- Max speed - This creature gets +1/+2. (Approximated: the bonus is always on.)
+mana={2}
+type=Artifact Creature
+subtype=Skeleton
+power=3
+toughness=3
+[/card]
+[card]
+name=Endrider Catalyzer
+grade=borderline
+auto={T}:Add{R}{R}
+#MISSING "start your engines / max speed" gates the mana ability; here it is always on.
+text=Start your engines! -- Max speed - {T}: Add {R}{R}. (Approximated: always available.)
+mana={1}{R}
+type=Creature
+subtype=Phyrexian Scout
+power=3
+toughness=1
+[/card]
+[card]
+name=Chief Engineer
+grade=borderline
+#MISSING "artifact spells you cast have convoke" - granting convoke to other spells has no
+#route; convoke is a printed keyword only.
+text=Artifact spells you cast have convoke. (Not implemented.)
+mana={1}{U}
+type=Creature
+subtype=Vedalken Artificer
+power=1
+toughness=3
+[/card]
+[card]
+name=Transdimensional Bovine
+abilities=flying
+grade=borderline
+auto={T}:Add{W}{W}
+auto={T}:Add{U}{U}
+auto={T}:Add{B}{B}
+auto={T}:Add{R}{R}
+auto={T}:Add{G}{G}
+text=Flying -- {T}: Add two mana of any one color.
+mana={2}{G}
+type=Creature
+subtype=Ox
+power=0
+toughness=4
+[/card]
+[card]
+name=Crustacean Commando
+grade=borderline
+auto=_FOOD_
+#MISSING the real token is a Mutagen; a Food token stands in for it.
+text=When this creature enters, create a Mutagen token. (A Food token stands in.)
+mana={1}{U}
+type=Creature
+subtype=Crab Soldier
+power=0
+toughness=3
+[/card]
+[card]
+name=Slithering Cryptid
+grade=borderline
+auto=_FOOD_
+#MISSING the real token is a Mutagen; a Food token stands in for it.
+text=When this creature enters, create a Mutagen token. (A Food token stands in.)
+mana={2}{GU}
+type=Creature
+subtype=Lizard
+power=2
+toughness=3
+[/card]
+[card]
+name=Groundchuck & Dirtbag
+abilities=trample
+grade=borderline
+#MISSING "whenever you tap a land for mana, add {G}" - there is no tapped-for-mana trigger.
+text=Trample -- Whenever you tap a land for mana, add {G}. (Not implemented.)
+mana={4}{G}{G}
+type=Legendary Creature
+subtype=Rhino Warthog
+power=8
+toughness=8
+[/card]
+[card]
+name=Armaggon, Future Shark
+abilities=flash
+grade=borderline
+auto=destroy target(<upto:3>creature|battlefield)
+text=Flash -- When Armaggon enters, destroy up to three target creatures.
+mana={6}{B}{B}
+type=Legendary Creature
+subtype=Shark Mutant
+power=9
+toughness=6
+[/card]
+[card]
+name=Vindictive Warden
+abilities=menace
+grade=borderline
+auto={3}:name(Ping each opponent) damage:1 opponent
+#MISSING firebending 1 - the keyword is unimplemented engine-wide.
+text=Menace -- Firebending 1 (Not implemented.) -- {3}: This creature deals 1 damage to each opponent.
+mana={2}{BR}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=3
+[/card]
+[card]
+name=Cat-Owl
+abilities=flying
+grade=borderline
+auto=@combat(attacking) source(this):untap target(*[artifact;creature]|mybattlefield)
+text=Flying -- Whenever this creature attacks, untap target artifact or creature you control.
+mana={3}{WU}
+type=Creature
+subtype=Cat Bird
+power=3
+toughness=3
+[/card]
+[card]
+name=Smoke Teller
+grade=borderline
+text={1}{U}: Look at target face-down creature. (Face-down permanents are not modelled; the look ability is omitted.)
+mana={1}{G}
+type=Creature
+subtype=Human Scout
+power=2
+toughness=2
+[/card]
