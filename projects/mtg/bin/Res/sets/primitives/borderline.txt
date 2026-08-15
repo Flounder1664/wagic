@@ -141009,3 +141009,179 @@ subtype=Human Knight
 power=3
 toughness=3
 [/card]
+[card]
+name=Happy Hogan, Dauntless Driver
+grade=borderline
+mana={R}
+type=Legendary Creature
+subtype=Human Pilot
+power=2
+toughness=1
+[/card]
+[card]
+name=Black Widow, Natasha Romanoff
+grade=borderline
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Assassin Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=The Whizzer, Classic Speedster
+grade=borderline
+abilities=first strike,haste
+text=First strike, haste
+mana={3}{R}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Hawkeye, Clint Barton
+grade=borderline
+abilities=vigilance
+text=Vigilance (Attacking doesn't cause this creature to tap.)
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Archer Hero
+power=3
+toughness=5
+[/card]
+[card]
+name=A.I.M. Bot
+grade=borderline
+abilities=flying
+text=Flying (This creature can't be blocked except by creatures with flying or reach.)
+mana={2}{U}
+type=Artifact Creature
+subtype=Robot Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Glamorous Grapplers
+grade=borderline
+abilities=menace
+text=Menace (This creature can't be blocked except by two or more creatures.)
+mana={3}{B}
+type=Creature
+subtype=Human Performer Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Quicksilver, Pietro Maximoff
+grade=borderline
+abilities=haste
+text=Haste (This creature can attack and {T} as soon as he comes under your control.)
+mana={2}{R}
+type=Legendary Creature
+subtype=Mutant Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=The Fabulous Frog-Man
+grade=borderline
+abilities=reach
+text=Reach (This creature can block creatures with flying.)
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Feral Ferocity
+grade=borderline
+target=creature
+auto=4/4 ueot
+text=Target creature gets +4/+4 until end of turn.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Boomerang, Blade Flinger
+grade=borderline
+auto=@combat(attacking) source(this):damage:1 opponent && life:1 controller
+text=Whenever Boomerang attacks, he deals 1 damage to each opponent and you gain 1 life.
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=1
+toughness=3
+[/card]
+[card]
+name=Jarvis, Earth's Mightiest Butler
+grade=borderline
+missing=whenever you cast a Hero spell, draw a card
+text=Whenever you cast a Hero spell, draw a card.
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Advisor
+power=1
+toughness=4
+[/card]
+[card]
+name=Venomthrope
+grade=borderline
+abilities=flying,deathtouch,hexproof
+text=Flying, deathtouch, hexproof
+mana={1}{G}{U}
+type=Creature
+subtype=Tyranid
+power=2
+toughness=2
+[/card]
+[card]
+name=For the Emperor!
+grade=borderline
+auto=all(creature|mybattlefield) 2/2 ueot
+auto=all(creature|mybattlefield) transforms((,vigilance,lifelink)) ueot
+text=Creatures you control get +2/+2 and gain vigilance and lifelink until end of turn.
+mana={3}{W}
+type=Sorcery
+[/card]
+[card]
+name=Their Name Is Death
+grade=borderline
+auto=all(creature[-artifact]|battlefield) destroy
+text=Destroy all nonartifact creatures.
+mana={3}{B}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Cryptothrall
+grade=borderline
+auto=lord(other *[creature&artifact]|mybattlefield) hexproof
+text=Protector — Other artifact creatures you control have hexproof.
+mana={4}
+type=Artifact Creature
+subtype=Construct
+power=3
+toughness=3
+[/card]
+[card]
+name=Settlement Blacksmith
+grade=borderline
+auto=if type(equipment|mybattlefield)~morethan~0 then draw:1 controller
+text=When this creature enters, if you control an Equipment, draw a card.
+mana={2}{W}
+type=Creature
+subtype=Human Artificer
+power=3
+toughness=3
+[/card]
+[card]
+name=Brotherhood Patriarch
+grade=borderline
+auto=@movedTo(this|graveyard) from(battlefield):life:-2 opponent && life:2 controller
+text=When this creature dies, each opponent loses 2 life and you gain 2 life.
+mana={3}{B}
+type=Creature
+subtype=Human Assassin
+power=4
+toughness=1
+[/card]
