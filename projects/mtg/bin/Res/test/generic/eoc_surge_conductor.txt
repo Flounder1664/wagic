@@ -1,0 +1,20 @@
+#EOC Surge Conductor cast-safety (proliferate-on-artifact-enter trigger parse).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:surge conductor
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+surge conductor
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:surge conductor
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,22 @@
+#DFT Defend the Rider: mode 1 (choice 1) -> Pilot token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:defend the rider
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+defend the rider
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:defend the rider
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

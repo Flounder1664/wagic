@@ -1,0 +1,28 @@
+#"Spells and abilities can't be countered" as lord(*|stack) nofizzle, the shape Prowling
+#Serpopard uses, widened from mystack to stack because Spider-Punk's static is symmetric.
+#Erayo's Essence, under P2's control, counters the first spell an opponent casts each turn,
+#so it is the counter-source the harness cannot otherwise provide.
+#With Spider-Punk in play the Mirkwood Spider must resolve anyway.
+#Answer Spider-Punk's own riot choice first ("choice 0"), or it sits pending.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spider-Punk
+hand:Mirkwood Spider
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[DO]
+choice 0
+Mirkwood Spider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spider-Punk,Mirkwood Spider
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[END]

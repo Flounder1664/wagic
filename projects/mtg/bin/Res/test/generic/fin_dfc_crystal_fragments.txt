@@ -1,0 +1,26 @@
+#FIN transform DFC, the exile-and-return-transformed shape, and the only one of the 27
+#that changes card type across the flip: Crystal Fragments (702013) is an Artifact -
+#Equipment; its {5}{W}{W} sorcery-speed ability exiles it and returns it as
+#Summon: Alexander (702997), an Enchantment Creature - Saga.
+#This is the same moveto(exile) and!( flip(backside) forcetype(...) )! construct the TLA
+#sagas use, driven from an activated ability rather than a chapter trigger, so it is the
+#one worth pinning: without forcetype the returned permanent keeps the Equipment type.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702013
+manapool:{5}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+702013
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702997
+life:20
+[PLAYER2]
+life:20
+[END]

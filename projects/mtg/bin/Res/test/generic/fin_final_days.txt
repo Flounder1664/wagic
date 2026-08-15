@@ -1,0 +1,22 @@
+#The Final Days: create two tapped 2/2 Horror tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:the final days
+manapool:{2}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+the final days
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+tappedinplay:2
+graveyard:the final days
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,32 @@
+#PROBE, control: can a creature that starts in play attack on the first turn at all?
+#Grizzly Bears is 2/2 and unblocked, so player 2 must be on 18 by end of combat.
+#If this fails, no combat-trigger test in the suite means anything.
+#Phases are stepped one "next" at a time, the way attacks_each_turn.txt does it - a single
+#"goto combatattackers" gets there but the run then stops short of the damage step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears
+life:20
+[PLAYER2]
+life:18
+[END]

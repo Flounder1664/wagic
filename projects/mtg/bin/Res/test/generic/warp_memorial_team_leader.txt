@@ -1,0 +1,25 @@
+#WARP on a newly written card. Memorial Team Leader costs {3}{R} with Warp {1}{R}.
+#The pool is exactly {1}{R}, so it can only arrive through the warp cost, and it
+#must have exiled itself by the next end step. This is a cast-and-exile smoke test
+#for the new primitive; its anthem ("during your turn, other creatures you control
+#get +1/+0") is a static the harness cannot assert, so that half is unverified here.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Memorial Team Leader
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Memorial Team Leader
+choice 1
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+exile:Memorial Team Leader
+life:20
+[PLAYER2]
+life:20
+[END]

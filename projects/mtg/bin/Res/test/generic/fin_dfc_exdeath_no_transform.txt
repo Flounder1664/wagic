@@ -1,0 +1,26 @@
+#Negative case for the same card: five permanent cards in the graveyard is one short of
+#the six the card demands, so Exdeath, Void Warlock (702220) must still be face up at the
+#end step. Without this, a transform that fired unconditionally would pass the positive test.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702220
+graveyard:grizzly bears,hill giant,ornithopter,goblin piker,llanowar elves
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+next
+next
+next
+[ASSERT]
+END
+[PLAYER1]
+inplay:702220
+graveyard:grizzly bears,hill giant,ornithopter,goblin piker,llanowar elves
+life:23
+[PLAYER2]
+life:20
+[END]

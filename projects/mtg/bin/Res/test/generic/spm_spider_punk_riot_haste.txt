@@ -1,0 +1,24 @@
+#The other half of the riot choice: picking haste ("choice 1") must NOT also grant the
+#counter. Spider-Punk stays a 2/1 and dies to Geistflame's single point of damage.
+#Without this the counter test alone is satisfied by a version that grants both.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spider-Punk,Geistflame
+manapool:{1}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Spider-Punk
+choice 1
+Geistflame
+Spider-Punk
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Spider-Punk,Geistflame
+life:20
+[PLAYER2]
+life:20
+[END]

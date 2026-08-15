@@ -1,0 +1,24 @@
+#TMT Evil Reawakened regression (user-reported): reanimates the target (counter rider
+#rewritten as moveTo and!( counter )!; counters not zone-assertable, reanimation is).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:evil reawakened
+graveyard:grizzly bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+evil reawakened
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:grizzly bears
+graveyard:evil reawakened
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

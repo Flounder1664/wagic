@@ -1,0 +1,20 @@
+#FIC Amarant Coral cast-safety (trample + mustattack parse).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:amarant coral
+manapool:{2}{R}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+amarant coral
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:amarant coral
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

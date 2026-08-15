@@ -1,0 +1,28 @@
+#Saddling District Mascot must NOT put +1/+1 counters on it - saddling only stamps a
+#"saddled" counter, and the +1/+1 arrives later, when it ATTACKS while saddled.
+#John saw four +1/+1 counters appear around the saddle popup, so this pins the activation
+#itself. Same survival proxy: still 1/1 after saddling, so Shock kills it.
+#Mascot in the graveyard = saddling added nothing. Mascot alive = saddling is inflating it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:District Mascot,Grizzly Bears
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+District Mascot
+Grizzly Bears
+Shock
+District Mascot
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:District Mascot,Shock
+life:20
+[PLAYER2]
+life:20
+[END]

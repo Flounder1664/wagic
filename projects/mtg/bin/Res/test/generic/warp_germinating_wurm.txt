@@ -1,0 +1,28 @@
+#WARP on a card that also has an ETB trigger. Germinating Wurm costs {4}{G} with
+#Warp {1}{G} and gains 2 life on entry.
+#This is the case that could break silently: adventure cards taught us that a bare
+#auto= ETB line placed AFTER an "alternative" line misparses, so the warp line is
+#appended after the existing autos rather than next to other=. If that ordering
+#were wrong the life gain would go missing while everything still looked fine.
+#Pool is exactly {1}{G}, so only the warp cast is affordable. Asserts all three:
+#it resolved (life 22), and it exiled itself at the next end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Germinating Wurm
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Germinating Wurm
+choice 1
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+exile:Germinating Wurm
+life:22
+[PLAYER2]
+life:20
+[END]

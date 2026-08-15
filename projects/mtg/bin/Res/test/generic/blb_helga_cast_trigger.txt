@@ -1,0 +1,25 @@
+#BLB Helga: cast a mv>=4 creature -> draw 1 + gain 1 life; a mv<4 cast must not trigger (life stays 21, one draw).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669131
+hand:hill giant,grizzly bears
+library:15780,ornithopter
+manapool:{3}{R}{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+hill giant
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669131,hill giant,grizzly bears
+hand:*
+library:*
+manapool:{0}
+life:21
+[PLAYER2]
+life:20
+[END]

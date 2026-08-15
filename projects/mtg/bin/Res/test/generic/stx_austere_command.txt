@@ -1,0 +1,25 @@
+#Austere Command choose-two (crash coverage for the modal): pick "destroy all creatures" (choice 5)
+#-> both Hill Giant and Grizzly Bears die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:austere command
+inplay:grizzly bears
+manapool:{4}{W}{W}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+austere command
+choice 5
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:austere command,grizzly bears
+manapool:{0}
+life:20
+[PLAYER2]
+graveyard:hill giant
+life:20
+[END]

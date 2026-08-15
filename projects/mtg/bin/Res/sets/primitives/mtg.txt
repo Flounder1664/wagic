@@ -134,13 +134,15 @@ toughness=6
 [card]
 name=Abigale, Eloquent First-Year
 abilities=flying,first strike,lifelink
-auto=target(creature[-this]|mybattlefield) effect(+0/+0) ueot
+auto=target(other creature) transforms((,newability[loseabilities],flying,first strike,lifelink)) forever
+#MISSING the three keywords should arrive as flying/first strike/lifelink COUNTERS (keyword counters on another creature are not expressible)
 mana={W/B}{W/B}
 type=Creature
 subtype=Bird Bard
 power=1
 toughness=1
-text=Flying, first strike, lifelink -- When Abigale enters, another target creature gains flying, first strike, and lifelink until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, first strike, lifelink -- When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
 [/card]
 [card]
 name=Abjure
@@ -1025,7 +1027,7 @@ type=Instant
 name=Advice from the Fae
 abilities=hiddenface
 aicode=activate transforms((,newability[if control more creatures then name(Pick 2) target(<2>*[zpos<=5]|mylibrary) moveto(hand) else name(pick 1) target(<1>*[zpos<=5]|mylibrary) moveto(hand)])) ueot
-auto=name(look) reveal:5 optionone if control more creatures then name(Pick 2) target(<2>*|reveal) moveto(hand) else name(pick 1) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put On Bottom) target(<5>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:5 optionone if control more creatures then name(Pick 2) target(<upto:2>*|reveal) moveto(hand) else name(pick 1) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put On Bottom) target(<5>*|reveal) bottomoflibrary optiontwoend revealend
 text=({(2/u)} can be paid with any two mana or with {U}. This card's mana value is 6.) -- Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 mana={2U}{2U}{2U}
 type=Sorcery
@@ -1881,7 +1883,7 @@ type=Instant
 name=Agonizing Memories
 target=player
 aicode=activate target(<2>*|targetedpersonshand) moveTo(targetedpersonslibrary)
-auto=name(look) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose cards) target(<2>*|reveal) moveto(ownerlibrary) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=name(look) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose cards) target(<upto:2>*|reveal) moveto(ownerlibrary) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 mana={2}{B}{B}
 type=Sorcery
@@ -2859,8 +2861,14 @@ type=Artifact
 [/card]
 [card]
 name=All-Fates Stalker
+abilities=canplayfromexile
+grade=borderline
+other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=(blink)forsrc target(creature|opponentbattlefield)
-text=When this creature enters, exile up to one target creature an opponent controls until this creature leaves the battlefield.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, exile up to one target non-Assassin creature until this creature leaves the battlefield. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}
 type=Creature
 subtype=Drix Assassin
@@ -3607,7 +3615,7 @@ name=Ancestral Knowledge
 auto=cumulativeupcost[{1}] sacrifice
 auto=@movedto(this|nonbattlezone):shuffle controller
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=10]|mylibrary) moverandom(*[zpos<=10]) from(mylibrary) to(mylibrary)])) ueot
-auto=name(look) reveal:10 optionone name(Choose cards to exile) target(<anyamount>*|reveal) moveto(myexile) optiononeend optiontwo name(put on top) target(<10>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto=name(look) reveal:10 optionone name(Choose cards to exile) target(<anyamount>*|reveal) moveto(myexile) optiononeend optiontwo name(put on top) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text=Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.) -- When Ancestral Knowledge enters, look at the top ten cards of your library, then exile any number of them and put the rest back on top of your library in any order. -- When Ancestral Knowledge leaves the battlefield, shuffle your library.
 mana={1}{U}
 type=Enchantment
@@ -3624,7 +3632,7 @@ subtype=Aura
 [card]
 name=Ancestral Memories
 aicode=name(look) activate name(look) transforms((,newability[target(<2>*[zpos<=7]|mylibrary) moveto(hand)],newability[deplete:5])) ueot
-auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<7>*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<1>*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend
 text=Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
 mana={2}{U}{U}{U}
 type=Sorcery
@@ -4831,9 +4839,10 @@ toughness=1
 [/card]
 [card]
 name=April O'Neil, Live on the Scene
-abilities=flash
-auto=draw:1 controller
-text=Flash -- When April O'Neil enters, draw a card.
+auto=@movedTo(*[mutant;ninja;turtle]|mybattlefield):_CLUE_
+#MISSING Partner-Character select
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever a Mutant, Ninja, or Turtle you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- Partner—Character select
 mana={2}{U}
 type=Legendary Creature
 subtype=Human
@@ -4951,11 +4960,7 @@ toughness=6
 [card]
 name=Aradara Express
 abilities=menace
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text=Menace -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={5}
 type=Artifact
@@ -6561,7 +6566,8 @@ toughness=2
 [card]
 name=Ashe, Princess of Dalmasca
 auto=@combat(attacking) source(this):name(search) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose artifact) target(<1>artifact|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
-text=Whenever Ashe attacks, search your library for an artifact card and put it into your hand, then shuffle.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever Ashe attacks, look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={2}{W}
 type=Legendary Creature
 subtype=Human Rebel Noble
@@ -6706,7 +6712,8 @@ auto=choice name(damage creatures) all(creature|opponentbattlefield) damage:2
 auto=choice name(two treasures) _TREASURE_ && _TREASURE_
 mana={3}{U}{R}
 type=Instant
-text=Choose two: copy target Elemental you control; or draw two cards; or deal 2 damage to each creature an opponent controls; or create two Treasure tokens.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Choose two — -- • Create a token that's a copy of target Elemental you control. -- • Target player draws two cards. -- • Ashling's Command deals 2 damage to each creature target player controls. -- • Target player creates two Treasure tokens.
 [/card]
 [card]
 name=Ashling, Rekindled
@@ -9010,9 +9017,7 @@ toughness=1
 [card]
 name=Ballista Charger
 auto=_ATTACKING_damage:1 target(anytarget)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Whenever Ballista Charger attacks, it deals 1 damage to any target. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={5}
 type=Artifact
@@ -9189,7 +9194,7 @@ toughness=3
 [card]
 name=Bamboozle
 target=player
-auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) target(<2>*|reveal) moveTo(myLibrary) optiontwoend revealend
+auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<upto:2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) target(<2>*|reveal) moveTo(myLibrary) optiontwoend revealend
 text=Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order.
 mana={2}{U}
 type=Sorcery
@@ -10604,7 +10609,7 @@ type=Instant
 [card]
 name=Beast Hunt
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature]|*) then moveto(mygraveyard))!
-auto=reveal:3 optionone name(Reveal) target(<3>creature|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=reveal:3 optionone name(Reveal) target(<upto:3>creature|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
 mana={3}{G}
 type=Sorcery
@@ -10809,7 +10814,7 @@ name=Behold the Beyond
 auto=reject all(*|myhand)
 abilities=hiddenface
 aicode=activate moveto(hand) target(<3>*|mylibrary)
-auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 text=Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle.
 mana={5}{B}{B}
 type=Sorcery
@@ -10817,6 +10822,7 @@ type=Sorcery
 [card]
 name=Behold the Sinister Six!
 grade=borderline
+# REVIEW 2026-07-12 [P:med] allows selecting duplicates
 auto=moveto(mybattlefield) target(<upto:6>creature[-token]|mygraveyard)
 mana={6}{B}
 type=Sorcery
@@ -11383,12 +11389,13 @@ toughness=2
 name=Biorganic Carapace
 auto=equip target(creature|mybattlefield)
 auto={2}:equip
-auto=teach(creature) 0/3
-auto=teach(creature) ward2
+auto=teach(creature) 2/2
+#MISSING equipped creature's 'draw a card for each modified creature' combat-damage trigger
 mana={2}{W}{U}
 type=Artifact
 subtype=Equipment
-text=When Biorganic Carapace enters, attach it to target creature you control. Equipped creature gets +0/+3 and has ward {2}. Equip {2}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this Equipment enters, attach it to target creature you control. -- Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control." (Equipment, Auras you control, and counters are modifications.) -- Equip {2}
 [/card]
 [card]
 name=Biorhythm
@@ -11515,7 +11522,7 @@ subtype=Aura
 [card]
 name=Bitter Revelation
 aicode=activate transforms((,newability[moveto(hand) all(*[zpos<=2]|mylibrary) && deplete:2 && life:-2])) ueot
-auto=name(look) reveal:4 optionone name(Get 2 card) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<4>*|reveal) moveto(graveyard) optiontwoend afterrevealed choice life:-2 afterrevealedend revealend
+auto=name(look) reveal:4 optionone name(Get 2 card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<4>*|reveal) moveto(graveyard) optiontwoend afterrevealed choice life:-2 afterrevealedend revealend
 text=Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
 mana={3}{B}
 type=Sorcery
@@ -13540,6 +13547,8 @@ type=Creature
 subtype=Plant Scorpion
 power=2
 toughness=2
+abilities=deathtouch
+auto=target(other creature|mybattlefield) deathtouch forever
 text=Blooming Stinger
 [/card]
 [card]
@@ -14041,9 +14050,10 @@ toughness=1
 [/card]
 [card]
 name=Boggart Mischief
-auto=may token(Goblin,creature goblin,1/1,black red)*2
+auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(Goblin,creature goblin,1/1,black red)*2
 auto=@movedTo(creature[goblin]|graveyard) from(mybattlefield):life:-1 opponent && life:1 controller
-text=When this enchantment enters, you may put a -1/-1 counter on a creature you control. If you do, create two 1/1 black and red Goblin creature tokens. (Blight 1 approximated: token creation is optional.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
 mana={2}{B}
 type=Enchantment
 [/card]
@@ -14255,9 +14265,7 @@ toughness=4
 [card]
 name=Bomat Bazaar Barge
 auto=draw:1 controller
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=When Bomat Bazaar Barge enters, draw a card. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}
 type=Artifact
@@ -14576,7 +14584,7 @@ name=Borborygmos Enraged
 abilities=trample
 auto={D(land|myhand)}:target(anytarget) damage:3
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then moveto(mygraveyard))!
-auto=@combatdamaged(player) from(this):reveal:3 optionone name(Reveal) target(<3>land|reveal) moveto(hand) optiononeend optiontwo name(Send To Grave) choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@combatdamaged(player) from(this):reveal:3 optionone name(Reveal) target(<upto:3>land|reveal) moveto(hand) optiononeend optiontwo name(Send To Grave) choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Trample -- Whenever Borborygmos Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard. -- Discard a land card: Borborygmos Enraged deals 3 damage to any target.
 mana={4}{R}{R}{G}{G}
 type=Legendary Creature
@@ -15335,7 +15343,7 @@ toughness=1
 [card]
 name=Brass Herald
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-chosentype]|*) then bottomoflibrary)!
-auto=chooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 1/1],newability[reveal:4 optionone name(Reveal) target(<4>creature[chosentype]|reveal) moveto(hand) optiononeend optiontwo target(<4>*|reveal) bottomoflibrary optiontwoend revealend])) forever chooseend
+auto=chooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 1/1],newability[reveal:4 optionone name(Reveal) target(<upto:4>creature[chosentype]|reveal) moveto(hand) optiononeend optiontwo target(<4>*|reveal) bottomoflibrary optiontwoend revealend])) forever chooseend
 text=As Brass Herald enters, choose a creature type. -- When Brass Herald enters, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order. -- Creatures of the chosen type get +1/+1.
 mana={6}
 type=Artifact Creature
@@ -17002,15 +17010,6 @@ type=Creature
 subtype=Spirit Cleric
 power=2
 toughness=3
-[/card]
-[card]
-name=Bygone Colossus
-text=Warp {3} (not supported)
-mana={9}
-type=Artifact Creature
-subtype=Robot Giant
-power=9
-toughness=9
 [/card]
 [card]
 name=Byway Courier
@@ -20799,7 +20798,7 @@ toughness=2
 name=Chromescale Drake
 abilities=affinityartifacts,flying
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-artifact]|*) then moveto(mygraveyard))!
-auto=name(Reveal 3 cards) reveal:3 optionone name(Artifacts) target(<3>artifact|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Reveal 3 cards) reveal:3 optionone name(Artifacts) target(<upto:3>artifact|reveal) moveto(hand) optiononeend optiontwo choice all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.) -- Flying -- When Chromescale Drake enters, reveal the top three cards of your library. Put all artifact cards revealed this way into your hand and the rest into your graveyard.
 mana={6}{U}{U}{U}
 type=Creature
@@ -20851,6 +20850,10 @@ subtype=Aura
 name=Chronicle of Victory
 mana={6}
 type=Artifact
+auto=chooseatype lord(creature[chosentype]|mybattlefield) 2/2 chooseend
+auto=chooseatype lord(creature[chosentype]|mybattlefield) first strike chooseend
+auto=chooseatype lord(creature[chosentype]|mybattlefield) trample chooseend
+#MISSING 'whenever you cast a spell of the chosen type, draw a card' (cast trigger filtered by the chosen type is not expressible)
 text=As this enters, choose a creature type. Creatures you control of the chosen type get +2/+2 and have first strike and trample. Whenever you cast a spell of the chosen type, draw a card.
 [/card]
 [card]
@@ -22413,8 +22416,15 @@ toughness=4
 [/card]
 [card]
 name=Codecracker Hound
+abilities=canplayfromexile
+grade=borderline
+other={2}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=draw:1 && mill:1
-text=When this creature enters, draw a card and mill a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, look at the top two cards of your library. Put one into your hand and the other into your graveyard. -- Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
 type=Creature
 subtype=Dog
@@ -23322,17 +23332,7 @@ type=Enchantment
 [/card]
 [card]
 name=Consulate Dreadnought
-auto={crew(other creature[power>=6]|myBattlefield)}:name(crew 6[1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=6]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=5]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=3]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~2,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 6[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 6[5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~5}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 6 [6 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~5,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~5,compare(crewtotalpower)~morethan~5}
+auto={crew6(other creature|myBattlefield)}:name(Crew 6) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~5}
 text=Crew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={1}
 type=Artifact
@@ -26151,9 +26151,7 @@ auto={T}:Add{U}
 auto={T}:Add{B}
 auto={T}:Add{R}
 auto={T}:Add{G}
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text={T}: Add one mana of any color. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -26880,13 +26878,15 @@ toughness=4
 [/card]
 [card]
 name=Damage Control Crew
-auto=choice name(repair) moveto(hand) target(land|mygraveyard) name(reinforce) counter(1/1) target(creature|mybattlefield)
+auto=choice name(Repair) moveTo(hand) target(*[manacost>=4]|mygraveyard)
+auto=choice name(Impound) moveTo(exile) target(*[artifact;enchantment])
 mana={3}{G}
 type=Creature
 subtype=Human Citizen
 power=3
 toughness=3
-text=When Damage Control Crew enters, choose one — Return a land from your graveyard to your hand; or put a +1/+1 counter on target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, choose one — -- • Repair — Return target card with mana value 4 or greater from your graveyard to your hand. -- • Impound — Exile target artifact or enchantment.
 [/card]
 [card]
 name=Damia, Sage of Stone
@@ -27026,7 +27026,6 @@ name=Daredevil Dragster
 auto=@each combatends restriction{didattack}:counter(0/0,1,Velocity) && if compare(counter{0%0.1.Velocity})~morethan~1 then sacrifice and!(draw:2 controller)!
 auto=@each combatends restriction{didblock}:counter(0/0,1,Velocity) && if compare(counter{0%0.1.Velocity})~morethan~1 then sacrifice and!(draw:2 controller)!
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=At end of combat, if Daredevil Dragster attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -28056,7 +28055,8 @@ toughness=1
 [/card]
 [card]
 name=Dawnsire, Sunstar Dreadnought
-text=Station -- Tap another creature you control: Put charge counters equal to its power on this Spacecraft. It's an artifact creature at 10+ and gains abilities at 10+ and 20+.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.) -- 10+ | Whenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker. -- 20+ | Flying
 mana={5}
 type=Legendary Artifact Creature
 subtype=Spacecraft
@@ -29852,13 +29852,7 @@ type=Sorcery
 [card]
 name=Demolition Stomper
 auto=cantbeblockedby(creature[power<=2])
-auto={crew(other creature[power>=5]|myBattlefield)}:name(crew 5 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=5]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=4]|myBattlefield)}:name(crew 5 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 5 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 5 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 5 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 5 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~4}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 5 [5 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~4,compare(crewtotalpower)~morethan~4}
+auto={crew5(other creature|myBattlefield)}:name(Crew 5) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~4}
 text=Demolition Stomper can't be blocked by creatures with power 2 or less. -- Crew 5 (Tap any number of creatures you control with total power 5 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={6}
 type=Artifact
@@ -30153,7 +30147,7 @@ toughness=3
 [card]
 name=Deploy the Gatewatch
 aicode=activate target(<upto:2>*[planeswalker;zpos<=7]|mylibrary) moveto(mybattlefield)
-auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*[planeswalker]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:7 optionone name(Get 2 cards) target(<upto:2>*[planeswalker]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 mana={4}{W}{W}
 type=Sorcery
@@ -30276,7 +30270,7 @@ toughness=1
 [card]
 name=Descendant of Soramaro
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=phandcount]|mylibrary) moverandom(*[zpos<=phandcount]) from(mylibrary) to(mylibrary)])) ueot
-auto={1}{U}:name(Look) reveal:type:*:myhand optionone name(Look) target(*|reveal) donothing optiononeend optiontwo target(<60>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={1}{U}:name(Look) reveal:type:*:myhand optionone name(Look) target(*|reveal) donothing optiononeend optiontwo target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
 mana={3}{U}
 type=Creature
@@ -31006,8 +31000,12 @@ type=Artifact
 [/card]
 [card]
 name=Dig Through Time
+#REVIEW-V <2> presented no cards to choose in game (John 2026-07-30); switched to
+#<upto:2>, the form Collected Company uses and which does prompt. The real card puts
+#exactly two in hand, so <upto:2> also permits taking fewer - accepted over a card
+#that does nothing. 78 other cards still use the exact-count form; not touched.
 aicode=activate target(<2>*[zpos<=7]|mylibrary) moveto(hand)
-auto=name(look) reveal:7 optionone name(Get Card) target(<2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:7 optionone name(Get Card) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Delve (Each card you exile from your graveyard while casting this spell pays for {1}.) -- Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
 mana={6}{U}{U}
 other={delve} name(Delve)
@@ -32130,7 +32128,8 @@ toughness=4
 name=Doc Ock's Henchmen
 abilities=flash
 auto=@combat(attacking) source(this):draw:1 && discard:1
-text=Flash -- Whenever this creature attacks, draw a card then discard a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flash -- Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 mana={2}{U}
 type=Creature
 subtype=Human Villain
@@ -32139,13 +32138,14 @@ toughness=1
 [/card]
 [card]
 name=Doc Ock's Tentacles
-auto={2}:equip
-auto=teach(creature) 2/0
-auto=teach(creature) transforms((,newability[{T}:tap target(creature|opponentbattlefield)]))
+auto={5}:equip
+auto=teach(creature) 4/4
+#MISSING auto-attach when a creature with mana value 5 or greater enters
 mana={1}
 type=Artifact
 subtype=Equipment
-text=Equipped creature gets +2/+0 and has "{T}: Tap target creature an opponent controls." -- Equip {2}
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it. -- Equipped creature gets +4/+4. -- Equip {5}
 [/card]
 [card]
 name=Doc Ock, Sinister Scientist
@@ -32434,7 +32434,8 @@ type=Creature
 subtype=Treefolk Druid
 power=0
 toughness=5
-text=Each creature spell you cast with toughness greater than its power costs {1} less. Creatures you control get +X/+X when attacking, where X is the difference between toughness and power.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Each creature spell you cast with toughness greater than its power costs {1} less to cast. -- Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
 [/card]
 [card]
 name=Doran, the Siege Tower
@@ -33144,7 +33145,8 @@ auto=token(Hero,Creature Hero,1/1,,) controller
 auto={4}:equip
 auto=teach(creature) 1/0
 auto=teach(creature) flying
-text=Job select -- When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it. -- Equipped creature gets +1/+0 and has flying. -- Equip {4}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +1/+0 and is a Knight in addition to its other types. -- During your turn, equipped creature has flying. -- Gae Bolg — Equip {4}
 mana={1}{W}
 type=Artifact
 subtype=Equipment
@@ -33568,7 +33570,8 @@ name=Dream Harvest
 auto=draw:3 && target(player|opponentbattlefield) discard:3
 mana={5}{U/B}{U/B}
 type=Sorcery
-text=Draw three cards. Each opponent discards three cards.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
 [/card]
 [card]
 name=Dream Leash
@@ -33938,8 +33941,14 @@ toughness=2
 [/card]
 [card]
 name=Drix Fatemaker
+abilities=canplayfromexile
+grade=borderline
+other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
-text=When this creature enters, put a +1/+1 counter on target creature you control. Each creature you control with a +1/+1 counter on it has trample. (Trample static not supported)
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, put a +1/+1 counter on target creature. -- Each creature you control with a +1/+1 counter on it has trample. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{G}
 type=Creature
 subtype=Drix Wizard
@@ -35464,11 +35473,15 @@ name=Earthbender Ascension
 auto=_EARTHBEND2_
 auto=name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 auto=_LANDFALL_counter(0/0,1,Quest)
-auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):1/1 ueot
-auto=_LANDFALL_if this(counter{0/0.4.Quest}) then all(creature|mybattlefield):trample ueot
+auto=_LANDFALL_this(counter{0/0.4.Quest}) counter(1/1) target(creature|mybattlefield) and!( transforms((,trample)) ueot )!
 mana={2}{G}
 type=Enchantment
-text=When Earthbender Ascension enters, earthbend 2 and search your library for a basic land card and put that card onto the battlefield tapped, then shuffle. -- Landfall — Whenever a land enters the battlefield under your control, put a quest counter on Earthbender Ascension. Then if it has four or more quest counters on it, creatures you control get +1/+1 and gain trample until end of turn.
+#Rewritten against the verified Scryfall text. The old pair of lines were wrong three
+#ways: they pumped ALL your creatures instead of putting a counter on ONE target, the
+#pump was temporary where the card gives a permanent +1/+1 counter, and the
+#"if <cond> then all(...):<effect>" shape put a colon where the guard belongs, so the
+#four-counter gate was not gating anything.
+text=When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Landfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.
 [/card]
 [card]
 name=Earthbending Lesson
@@ -35586,7 +35599,7 @@ name=Earwig Squad
 other={2}{B} name(Prowl)
 otherrestriction=prowl
 aicode=activate moveto(exile) target(<3>*|targetedpersonslibrary)
-auto=alternative name(target opponent) target(opponent) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
+auto=alternative name(target opponent) target(opponent) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<upto:3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
 text=Prowl {2}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.) -- When Earwig Squad enters, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.
 mana={3}{B}{B}
 type=Creature
@@ -35937,7 +35950,8 @@ subtype=Aura
 name=Edge Rover
 abilities=reach
 auto=_DIES__LANDERTOKEN_
-text=Reach -- When this creature dies, create a Lander token.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- When this creature dies, each player creates a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
 mana={G}
 type=Artifact Creature
 subtype=Robot Scout
@@ -36290,7 +36304,7 @@ toughness=3
 [card]
 name=Elder Pine of Jukai
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then bottomoflibrary)!
-auto=@movedTo(arcane,spirit|mystack):reveal:4 optionone name(Get Lands) target(<4>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=@movedTo(arcane,spirit|mystack):reveal:4 optionone name(Get Lands) target(<upto:4>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 auto=_DIES_may moveto(hand) target(spirit[manacost<=2]|mygraveyard)
 text=Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order. -- Soulshift 2 (When this creature dies, you may return target Spirit card with mana value 2 or less from your graveyard to your hand.)
 mana={2}{G}
@@ -37910,7 +37924,8 @@ name=End-Blaze Epiphany
 auto=damage:* target(creature|any) && draw:1
 mana={X}{R}
 type=Instant
-text=End-Blaze Epiphany deals X damage to target creature. Draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
 [/card]
 [card]
 name=Endangered Armodon
@@ -38308,7 +38323,7 @@ toughness=5
 [card]
 name=Enlistment Officer
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-soldier]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Soldiers) target(<4>soldier|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Soldiers) target(<upto:4>soldier|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=First strike -- When Enlistment Officer enters, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{W}
 type=Creature
@@ -38368,7 +38383,7 @@ toughness=1
 [card]
 name=Enshrined Memories
 aicode=activate target(<castx>*[zpos<=castx]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature]|*) then bottomoflibrary)!
-auto=reveal:x optionone name(Get creatures) target(<50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<50>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:x optionone name(Get creatures) target(<upto:50>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={X}{G}
 type=Sorcery
@@ -39490,8 +39505,15 @@ type=Sorcery
 [/card]
 [card]
 name=Eusocial Engineering
-auto=_LANDFALL_:_ROBOTTOKEN_
-text=Landfall — Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token.
+abilities=canplayfromexile
+other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+grade=borderline
+# REVIEW 2026-07-19 [P:med] no warp cast option (warp mechanic pending)
+auto=_LANDFALL__ROBOTTOKEN_
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Landfall - Whenever a land you control enters, create a 2/2 colorless Robot artifact creature token. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{G}{G}
 type=Enchantment
 [/card]
@@ -39557,7 +39579,7 @@ type=Sorcery
 [card]
 name=Everbark Shaman
 aicode=activate moveTo(myBattlefield) and!(tap(noevent))! target(<2>forest|myLibrary)
-auto={T}{E(treefolk|mygraveyard)}:name(search card) reveal:plibrarycount optionone name(choose card) target(<2>forest|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
+auto={T}{E(treefolk|mygraveyard)}:name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:2>forest|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 text={T}, Exile a Treefolk card from your graveyard: Search your library for two Forest cards and put them onto the battlefield tapped. Then shuffle.
 mana={4}{G}
 type=Creature
@@ -39669,7 +39691,9 @@ subtype=Aura
 [card]
 name=Evil Reawakened
 grade=borderline
-auto=counter(1/1,2) moveto(mybattlefield) target(creature|mygraveyard)
+# REVIEW 2026-07-12 [P:med] doesn't add the +1/+1 counters
+target=creature|mygraveyard
+auto=moveTo(myBattlefield) and!( counter(1/1,2) )!
 text=Return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it. (Approximation: counters added while in graveyard, carry over on entry.)
 mana={4}{B}
 type=Sorcery
@@ -41166,7 +41190,7 @@ type=Sorcery
 [card]
 name=Far Wanderings
 aicode=activate transforms((,newability[_THRESHOLD_ moveto(mybattlefield) and!(tap(noevent))! target(<3>land[basic]|mylibrary)],newability[if type(*|mygraveyard)~lessthan~7 then moveto(mybattlefield) and!(tap(noevent))! target(land[basic]|mylibrary)])) ueot
-auto=_THRESHOLD_ name(search card) reveal:plibrarycount optionone name(choose card) target(<3>land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
+auto=_THRESHOLD_ name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:3>land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 auto=if type(*|mygraveyard)~lessthan~7 then name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 text=Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle. -- Threshold - If seven or more cards are in your graveyard, instead search your library for three basic land cards and put them onto the battlefield tapped. Then shuffle.
 mana={2}{G}
@@ -41468,7 +41492,7 @@ toughness=3
 [/card]
 [card]
 name=Fathom Trawl
-auto=Reveal:3 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone choice name(Get Cards) target(<3>*[-land]|reveal) moveto(hand) optiononeend optiontwo choice name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=Reveal:3 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone choice name(Get Cards) target(<upto:3>*[-land]|reveal) moveto(hand) optiononeend optiontwo choice name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.
 mana={3}{U}{U}
 type=Sorcery
@@ -42629,14 +42653,18 @@ toughness=1
 [/card]
 [card]
 name=Figure of Fable
-auto=this(variable{hascntlevel}=0) {G/W}:name(Scout) counter(0/0,1,Level) asSorcery
-auto=this(variable{hascntlevel}=1) {1}{G/W}{G/W}:name(Soldier) counter(0/0,1,Level) asSorcery
-auto=this(variable{hascntlevel}=2) {3}{G/W}{G/W}{G/W}:name(Avatar) counter(0/0,1,Level) asSorcery
-auto=restriction{compare(hascntlevel)~equalto~0}:+1/+1
-auto=restriction{compare(hascntlevel)~equalto~1}:+3/+4
-auto=restriction{compare(hascntlevel)~equalto~2}:+6/+7
-auto=counter(0/0,1,Level)
-mana={G/W}
+auto=this(cantargetcard(*[soldier]) {3}{GW}{GW}{GW}:name(Avatar) becomes(Kithkin Avatar,7/8) forever )
+auto=this(cantargetcard(*[scout]) {1}{GW}{GW}:name(Soldier) becomes(Kithkin Soldier,4/5) forever )
+auto={GW}:name(Scout) becomes(Kithkin Scout,2/3) forever
+#Figure of Destiny is the same card shape and the pattern is taken from it verbatim.
+#The previous version was wrong twice over: it counted Level counters and applied
+#CUMULATIVE +N/+N pumps, but the printed card SETS base power and toughness, and it
+#stamped a Level counter on entry so the creature started a step up the ladder.
+#becomes(...) sets the base P/T and replaces the creature type, which is what makes the
+#next step's "if this is a Scout / Soldier" check work.
+#MISSING The Avatar step also grants protection from each opponent. Wagic has no
+#per-opponent protection, so only the 7/8 body is granted.
+mana={GW}
 type=Creature
 subtype=Kithkin
 power=1
@@ -44102,7 +44130,6 @@ name=Fleetwheel Cruiser
 abilities=trample,haste
 auto=becomes(Artifact Creature) ueot
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Trample, haste -- When Fleetwheel Cruiser enters, it becomes an artifact creature until end of turn. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}
 type=Artifact
@@ -45249,7 +45276,7 @@ type=Sorcery
 [card]
 name=Foresight
 aicode=activate target(<3>*|mylibrary) moveto(exile)
-auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 auto=@next upkeep:draw:1 controller
 text=Search your library for three cards, exile them, then shuffle. -- Draw a card at the beginning of the next turn's upkeep.
 mana={1}{U}
@@ -47086,7 +47113,8 @@ type=Artifact
 [card]
 name=Galvanizing Sawship
 abilities=flying,haste
-text=Station -- Tap another creature you control: Put charge counters on this Spacecraft. At 3+ counters: Flying, haste.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 3+.) -- 3+ | Flying, haste
 mana={5}{R}
 type=Artifact Creature
 subtype=Spacecraft
@@ -47406,7 +47434,8 @@ name=Gathering Stone
 auto=@each my upkeep:_SCRY1_
 mana={4}
 type=Artifact
-text=Spells you cast of the chosen type cost {1} less. At the beginning of your upkeep, surveil 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 [/card]
 [card]
 name=Gatstaf Arsonists
@@ -48009,8 +48038,14 @@ toughness=5
 [/card]
 [card]
 name=Germinating Wurm
+grade=supported
+abilities=canplayfromexile
+other={1}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=life:2
-text=When this creature enters, you gain 2 life.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, you gain 2 life. -- Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{G}
 type=Creature
 subtype=Plant Wurm
@@ -49105,7 +49140,8 @@ toughness=1
 [card]
 name=Gigantoplasm
 auto=may copy notaTarget(creature) and!( {X}:name(Base X) transforms((,setpower=X,settoughness=X)) ueot )!
-text=You may have Gigantoplasm enter the battlefield as a copy of any creature on the battlefield except it gains "{X}: This creature has base power and toughness X/X."
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=You may have this creature enter as a copy of any creature on the battlefield, except it has "{X}: This creature has base power and toughness X/X."
 mana={3}{U}
 type=Creature
 subtype=Shapeshifter
@@ -50979,7 +51015,7 @@ toughness=2
 name=Goblin Ringleader
 abilities=haste
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-goblin]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Goblin) target(<4>Goblin|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Goblin) target(<upto:4>Goblin|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=Haste -- When Goblin Ringleader enters, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{R}
 type=Creature
@@ -52333,6 +52369,8 @@ type=Land
 [/card]
 [card]
 name=Gravblade Heavy
+auto=aslongas(artifact|mybattlefield) 1/0
+auto=aslongas(artifact|mybattlefield) deathtouch
 text=As long as you control an artifact, this creature gets +1/+0 and has deathtouch. (Conditional bonus not supported)
 mana={3}{B}
 type=Creature
@@ -52374,7 +52412,7 @@ toughness=4
 [card]
 name=Grave Defiler
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-zombie]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Zombie) target(<4>zombie|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Zombie) target(<upto:4>zombie|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Grave Defiler enters, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library. -- {1}{B}: Regenerate Grave Defiler.
 auto={1}{B}:regenerate
 mana={3}{B}
@@ -53980,7 +54018,7 @@ name=Gruesome Discovery
 target=player
 aicode=activate reject notaTarget(<2>*|targetedpersonshand)
 auto=ifnot morbid then ability$!name(discard 2 cards) target(<2>*|myhand) reject!$ targetedplayer
-auto=if morbid then reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) target(<2>*|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=if morbid then reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) target(<upto:2>*|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Target player discards two cards. -- Morbid - If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards.
 mana={2}{B}{B}
 type=Sorcery
@@ -54948,8 +54986,14 @@ toughness=3
 [/card]
 [card]
 name=Haliya, Guided by Light
+abilities=canplayfromexile
+grade=borderline
+other={W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(creature,artifact|mybattlefield):life:1
-text=Whenever Haliya or another creature or artifact you control enters, you gain 1 life.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Whenever Haliya or another creature or artifact you control enters, you gain 1 life. -- At the beginning of your end step, draw a card if you've gained 3 or more life this turn. -- Warp {W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{W}
 type=Legendary Creature
 subtype=Human Soldier
@@ -56179,9 +56223,7 @@ type=Enchantment
 [card]
 name=Heart of Kiran
 abilities=flying,vigilance
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 auto={C(0/0,-1,Loyalty),planeswalker|mybattlefield}:name(Pay 1 loyalty) becomes(Artifact Creature) ueot restriction{type(planeswalker|mybattlefield)~morethan~0}
 text=Flying, vigilance -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.) -- You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
 mana={2}
@@ -59732,6 +59774,8 @@ toughness=7
 [/card]
 [card]
 name=Hydra Omnivore
+auto=@combatdamaged(player) from(this):damage:thatmuch opponent
+#MISSING multiplayer only - hits 'each other opponent'; in a 1v1 game this is a no-op
 text=Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.
 mana={4}{G}{G}
 type=Creature
@@ -60126,9 +60170,11 @@ type=Sorcery
 [/card]
 [card]
 name=Icetill Explorer
+grade=borderline
+# REVIEW 2026-07-17 [P:high] doesn t mill a card on landfall
 auto=maxPlay(land)+1
 auto=lord(land|mygraveyard) canPlayFromGraveyard
-auto=_LANDFALL_mill:1 controller
+auto=_LANDFALL_deplete:1 controller
 text=Landfall -- Whenever a land you control enters, mill a card.
 mana={2}{G}{G}
 type=Creature
@@ -61076,7 +61122,7 @@ name=Increasing Ambition
 abilities=hiddenface
 aicode=activate transforms((,newability[ifnot gravecast then target(*|myLibrary) moveto(hand)],newability[if gravecast then target(<2>*|myLibrary) moveto(hand)])) ueot
 auto=ifnot gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
-auto=if gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(<2>*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
+auto=if gravecast then name(search card) reveal:plibrarycount optionone name(choose card) target(<upto:2>*|reveal) moveto(hand) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) and!(moveto(mylibrary))! afterrevealedend revealend
 flashback={7}{B}
 text=Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle. -- Flashback {7}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={4}{B}
@@ -61524,7 +61570,7 @@ type=Instant
 [card]
 name=Information Dealer
 aicode=name(look) activate name(look) transforms((,newability[foreach(*[zpos<=type:wizard:mybattlefield]|mylibrary) moverandom(*[zpos<=type:wizard:mybattlefield]) from(mylibrary) to(mylibrary)])) ueot
-auto={t}:name(Look) reveal:type:wizard:mybattlefield optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo target(<60>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={t}:name(Look) reveal:type:wizard:mybattlefield optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={T}: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
 mana={1}{U}
 type=Creature
@@ -62693,9 +62739,7 @@ toughness=1
 [/card]
 [card]
 name=Irontread Crusher
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={4}
 type=Artifact
@@ -63548,7 +63592,8 @@ toughness=3
 [card]
 name=Jenova, Ancient Calamity
 auto=@each my combatbegins:counter(1/1) target(other creature|mybattlefield)
-text=At the beginning of combat on your turn, put a +1/+1 counter on up to one other target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of combat on your turn, put a number of +1/+1 counters equal to Jenova's power on up to one other target creature. That creature becomes a Mutant in addition to its other types. -- Whenever a Mutant you control dies during your turn, you draw cards equal to its power.
 mana={2}{B}{G}
 type=Legendary Creature
 subtype=Alien
@@ -63691,7 +63736,7 @@ toughness=1
 [card]
 name=Jester's Cap
 aicode=activate moveto(exile) target(<3>*|targetedpersonslibrary)
-auto={2}{T}{S}:name(exile cards) target(player) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
+auto={2}{T}{S}:name(exile cards) target(player) reveal:type:*:targetedpersonslibrary revealzone(targetedpersonslibrary) optionone name(choose card) target(<upto:3>*|reveal) moveto(exile) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
 text={2}, {T}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles their library.
 mana={4}
 type=Artifact
@@ -65539,7 +65584,7 @@ toughness=1
 [card]
 name=Kavu Howler
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-kavu]|*) then bottomoflibrary)!
-auto=reveal:4 optionone name(Get Kavu) target(<4>kavu|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Kavu) target(<upto:4>kavu|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Kavu Howler enters, reveal the top four cards of your library. Put all Kavu cards revealed this way into your hand and the rest on the bottom of your library.
 mana={4}{G}{G}
 type=Creature
@@ -67183,8 +67228,14 @@ toughness=2
 [/card]
 [card]
 name=Knight Luminary
+abilities=canplayfromexile
+grade=borderline
+other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=_HUMANSOLDIERTOKEN_
-text=When this creature enters, create a 1/1 white Human Soldier creature token.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, create a 1/1 white Human Soldier creature token. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}
 type=Creature
 subtype=Human Knight
@@ -69107,7 +69158,7 @@ toughness=4
 [card]
 name=Lair Delve
 aicode=activate target(<2>*[zpos<=2]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-creature;-land]|*) then bottomoflibrary)!
-auto=reveal:2 optionone name(Get creature and land) target(<2>*[creature;land]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:2 optionone name(Get creature and land) target(<upto:2>*[creature;land]|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={2}{G}
 type=Sorcery
@@ -69762,7 +69813,8 @@ type=Sorcery
 name=Lavaleaper
 auto=lord(creature|battlefield) haste
 auto=@tappedformana(land[basic]|mybattlefield):Add{1}
-text=All creatures have haste. -- Whenever you tap a basic land for mana, add one mana of any type that land produced. (Approximated as add one extra mana of any color.)
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=All creatures have haste. -- Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
 mana={3}{R}
 type=Creature
 subtype=Elemental
@@ -73402,7 +73454,7 @@ toughness=4
 [card]
 name=Machinate
 aicode=name(look) activate name(look) transforms((,newability[moverandom(*[zpos<=type:artifact:mybattlefield]) from(mylibrary) to(myhand)])) ueot
-auto=name(Look) reveal:type:artifact:mybattlefield optionone name(Look) target(*|reveal) moveto(hand) optiononeend optiontwo target(<60>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:type:artifact:mybattlefield optionone name(Look) target(*|reveal) moveto(hand) optiononeend optiontwo target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 mana={1}{U}{U}
 type=Instant
@@ -74800,7 +74852,7 @@ toughness=2
 [card]
 name=Manipulate Fate
 aicode=activate target(<3>*|mylibrary) moveto(exile)
-auto=name(exile cards) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose cards) target(<3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+auto=name(exile cards) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose cards) target(<upto:3>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(exile)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 auto=draw:1 controller
 text=Search your library for three cards, exile them, then shuffle. -- Draw a card.
 mana={1}{U}
@@ -74928,7 +74980,8 @@ type=Creature
 subtype=Elf Faerie Noble
 power=4
 toughness=5
-text=Flying -- Whenever an Elf or Faerie you control enters, mill two cards of target opponent.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library. -- Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
 [/card]
 [card]
 name=Marang River Prowler
@@ -76486,8 +76539,14 @@ subtype=Aura
 [/card]
 [card]
 name=Mechanozoa
+abilities=canplayfromexile
+grade=borderline
+other={2}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=tap target(*[artifact;creature]|opponentbattlefield)
-text=When this creature enters, tap target artifact or creature an opponent controls.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{U}{U}
 type=Artifact Creature
 subtype=Robot Jellyfish
@@ -77286,7 +77345,7 @@ toughness=2
 name=Merfolk Wayfinder
 abilities=flying
 aicode=activate target(<3>*[zpos<=3]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-island]|*) then bottomoflibrary)!
-auto=reveal:3 optionone name(Get islands) target(<3>island|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:3 optionone name(Get islands) target(<upto:3>island|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
 text=Flying -- When Merfolk Wayfinder enters, reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={2}{U}
 type=Creature
@@ -79533,7 +79592,7 @@ type=Land
 [card]
 name=Mitotic Manipulation
 aicode=activate transforms((,newability[target(*[zpos<=7]|mylibrary) transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then moveto(mybattlefield) and!( all(*[zpos<=7]|mylibrary) moveto(myreveal) and!( bottomoflibrary )! )!],newability[if type(*[share!name!]|battlefield)~equalto~0 then all(*[zpos<=7]|mylibrary) moveto(myreveal) and!( bottomoflibrary )!])) ueot])) ueot
-auto=name(Look top 7 cards) reveal:7 optionone name(Get a card with same name) target(<upto:1>*|reveal) moveTo(mylibrary) and!( transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then becomes(tobemit) ueot])) ueot )! optiononeend optiontwo name(Put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend afterrevealed all(tobemit|mylibrary) moveto(mybattlefield) afterrevealedend revealend
+auto=name(Look top 7 cards) reveal:7 optionone name(Get a card with same name) target(<upto:1>*|reveal) moveTo(mylibrary) and!( transforms((,newability[if type(*[share!name!]|battlefield)~morethan~0 then becomes(tobemit) ueot])) ueot )! optiononeend optiontwo name(Put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend afterrevealed all(tobemit|mylibrary) moveto(mybattlefield) afterrevealedend revealend
 text=Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
 mana={1}{U}{U}
 type=Sorcery
@@ -79648,6 +79707,7 @@ type=Sorcery
 [card]
 name=Mob Lookout
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 auto=draw:1 && discard:1 controller
 mana={1}{U/B}
 type=Creature
@@ -79679,7 +79739,6 @@ toughness=6
 name=Mobile Garrison
 auto=_ATTACKING_untap target(other *[artifact;creature]|mybattlefield)
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever Mobile Garrison attacks, untap another target artifact or creature you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -80937,7 +80996,8 @@ name=Mornsong Aria
 auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary) && and!(shuffle)!
 mana={1}{B}{B}
 type=Legendary Enchantment
-text=Whenever you draw a card, you lose 3 life. Put target permanent mylibrary onto its owner's hand. and!(shuffle)!.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 [/card]
 [card]
 name=Moroii
@@ -81575,7 +81635,7 @@ toughness=2
 [card]
 name=Mulch
 aicode=activate target(<4>*[zpos<=4]|mylibrary) name(revealed card) moveto(hand) name(revealed card) and!(if cantargetcard(*[-land]|*) then moveto(mygraveyard))!
-auto=reveal:4 optionone name(Get land) target(<4>land|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=reveal:4 optionone name(Get land) target(<upto:4>land|reveal) moveto(hand) optiononeend optiontwo name(put in grave) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 mana={1}{G}
 type=Sorcery
@@ -84399,10 +84459,11 @@ subtype=Equipment
 [card]
 name=Nightmare Sower
 abilities=flying,lifelink
-auto=counter(-1/-1,1) target(creature|opponentbattlefield)
+auto=@movedTo(*|mystack) restriction{opponentturnonly}:may counter(-1/-1,1) target(creature)
 mana={3}{B}
 type=Creature
-text=When Nightmare Sower enters the battlefield, put 1 -1/-1 counter on target creature an opponent controls.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, lifelink -- Whenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.
 subtype=Faerie Assassin
 power=2
 toughness=3
@@ -85081,7 +85142,8 @@ toughness=2
 name=Noctis, Prince of Lucis
 abilities=lifelink
 autograveyard={3}:moveto(mybattlefield) target(artifact|mygraveyard) asSorcery
-text=Lifelink -- {3}: Return target artifact from your graveyard to the battlefield.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Lifelink -- You may cast artifact spells from your graveyard by paying 3 life in addition to paying their other costs. If you cast a spell this way, that artifact enters with a finality counter on it.
 mana={1}{W}{U}{B}
 type=Legendary Creature
 subtype=Human Noble
@@ -85121,7 +85183,7 @@ type=Artifact
 name=Noggin Whack
 other={1}{B} name(Prowl)
 otherrestriction=prowl
-auto=Reveal:3 revealzone(opponenthand) optionone choice name(choose Discards) target(<2>*|reveal) transforms((,newability[moveto(hand) and!(reject)!])) oneshot optiononeend optiontwo name(Put Back) target(*|reveal) transforms((,newability[all(*|reveal) moveto(hand)])) oneshot optiontwoend revealend
+auto=Reveal:3 revealzone(opponenthand) optionone choice name(choose Discards) target(<upto:2>*|reveal) transforms((,newability[moveto(hand) and!(reject)!])) oneshot optiononeend optiontwo name(Put Back) target(*|reveal) transforms((,newability[all(*|reveal) moveto(hand)])) oneshot optiontwoend revealend
 text=Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.) -- Target player reveals three cards from their hand. You choose two of them. That player discards those cards.
 mana={2}{B}{B}
 type=Kindred Sorcery
@@ -85400,9 +85462,14 @@ toughness=2
 [/card]
 [card]
 name=Nova Hellkite
-abilities=flying,haste
+grade=borderline
+other={2}{R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+abilities=flying,haste,canplayfromexile
 auto=damage:1 target(creature|opponentbattlefield)
-text=Flying, haste. When this creature enters, it deals 1 damage to target creature an opponent controls.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Flying, haste -- When this creature enters, it deals 1 damage to target creature an opponent controls. -- Warp {2}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{R}{R}
 type=Creature
 subtype=Dragon
@@ -86771,7 +86838,7 @@ toughness=8
 [card]
 name=Omen
 aicode=activate transforms((,newability[foreach(*[zpos<=3]|mylibrary) moverandom(*[zpos<=3]) from(mylibrary) to(mylibrary)],newability[draw:1])) ueot
-auto=name(Look top 3 cards) reveal:3 optionone name(Put back cards) target(<3>*|reveal) moveto(mylibrary) optiononeend optiontwo donothing optiontwoend afterrevealed transforms((,newability[choice name(Shuffle and draw) shuffle && draw:1],newability[choice name(Don't shuffle and draw) draw:1])) ueot afterrevealedend revealend
+auto=name(Look top 3 cards) reveal:3 optionone name(Put back cards) target(<upto:3>*|reveal) moveto(mylibrary) optiononeend optiontwo donothing optiontwoend afterrevealed transforms((,newability[choice name(Shuffle and draw) shuffle && draw:1],newability[choice name(Don't shuffle and draw) draw:1])) ueot afterrevealedend revealend
 text=Look at the top three cards of your library, then put them back in any order. You may shuffle your library. -- Draw a card.
 mana={1}{U}
 type=Sorcery
@@ -87558,7 +87625,7 @@ toughness=1
 [card]
 name=Orcish Librarian
 aicode=activate transforms((,newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)],newability[moverandom(*[zpos<=8]) from(mylibrary) to(myexile)])) ueot
-auto={R}{t}:reveal:8 optionone name(Exile 4 cards) moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) optiononeend optiontwo name(put on top) target(<8>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={R}{t}:reveal:8 optionone name(Exile 4 cards) moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) && moverandom(*) from(reveal) to(myexile) optiononeend optiontwo name(put on top) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={R}, {T}: Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
 mana={1}{R}
 type=Creature
@@ -88014,6 +88081,7 @@ toughness=2
 [card]
 name=Oroku Saki, Shredder Rising
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 id=1520068
 auto=@combat(attackdamage) source(this):draw:1 controller && life:-1 controller
 mana={2}{B}
@@ -88691,7 +88759,8 @@ type=Sorcery
 [card]
 name=Painful Quandary
 auto=@movedTo(*|opponentstack):ability$!choice name(Lose 5 life) life:-5 _ if type(*|myhand)~morethan~0 then choice name(discard) target(*|myhand) reject!$ opponent
-text=Whenever an opponent casts a spell, that player loses 5 life unless they discards a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.
 mana={3}{B}{B}
 type=Enchantment
 [/card]
@@ -88769,7 +88838,8 @@ name=Paladin's Arms
 auto=token(Hero,Creature Hero,1/1,,) controller
 auto={4}:equip
 auto=teach(creature) 2/1
-text=Job select -- When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it. -- Equipped creature gets +2/+1. -- Equip {4}.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +2/+1, has ward {1}, and is a Knight in addition to its other types. -- Lightbringer and Hero's Shield — Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
 mana={2}{W}
 type=Artifact
 subtype=Equipment
@@ -89645,11 +89715,7 @@ toughness=1
 [card]
 name=Peacewalker Colossus
 auto={1}{W}:target(other *[vehicle]|mybattlefield) becomes(Artifact Creature) ueot
-auto={crew(other creature[power>=4]|myBattlefield)}:name(crew 4 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=4]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=2]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=3]|myBattlefield)}:name(crew 4 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 4 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=1]|mybattlefield)~morethan~1,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~3}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 4 [4 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~3,compare(crewtotalpower)~morethan~3}
+auto={crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
 text={1}{W}: Another target Vehicle you control becomes an artifact creature until end of turn. -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -90076,8 +90142,14 @@ toughness=4
 [/card]
 [card]
 name=Perigee Beckoner
+abilities=canplayfromexile
+grade=borderline
+other={1}{B} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=pump(2/0) target(creature|mybattlefield) ueot
-text=When this creature enters, until end of turn, another target creature you control gets +2/+0.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." -- Warp {1}{B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{B}
 type=Creature
 subtype=Horror
@@ -90828,7 +90900,8 @@ toughness=3
 [card]
 name=Phoenix Down
 auto={1}{W}{T}{S(this|mybattlefield)}:moveto(mybattlefield) target(creature[manacost<=4]|mygraveyard) tapped
-text={1}{W}, {T}, Sacrifice Phoenix Down: Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={1}{W}, {T}, Exile this artifact: Choose one — -- • Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped. -- • Exile target Skeleton, Spirit, or Zombie.
 mana={W}
 type=Artifact
 [/card]
@@ -95278,10 +95351,15 @@ toughness=5
 [/card]
 [card]
 name=Quantum Riddler
-abilities=flying
+grade=borderline
+other={1}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+abilities=flying,canplayfromexile
 auto=draw:1
 auto=replacedraw if compare(phandcount)~lessthan~2 then draw:2 noreplace else draw:1 noreplace
-text=Flying. When this creature enters, draw a card. As long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Flying -- When this creature enters, draw a card. -- As long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead. -- Warp {1}{U}
 mana={3}{U}{U}
 type=Creature
 subtype=Sphinx
@@ -96100,13 +96178,15 @@ toughness=1
 [/card]
 [card]
 name=Raging Goblinoids
-abilities=haste,trample
+abilities=haste
+#MISSING Mayhem {2}{R} (cast from graveyard if discarded this turn) - not expressible
 mana={4}{R}
 type=Creature
 subtype=Goblin Berserker Villain
 power=5
 toughness=4
-text=Haste, trample
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Haste -- Mayhem {2}{R} (You may cast this card from your graveyard for {2}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Raging Gorilla
@@ -96816,7 +96896,8 @@ type=Creature
 subtype=Dragon
 power=4
 toughness=4
-text=Flying. -- Firebending 2. (Whenever Ran and Shaw attack, add {R}{R}.) -- When Ran and Shaw enters, if you have three or more Dragon or Lesson cards in your graveyard, create a non-legendary token that's a copy of it. (Not yet implemented.) -- {3}{R}: Dragons you control get +2/+0 until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying, firebending 2 -- When Ran and Shaw enter, if you cast them and there are three or more Dragon and/or Lesson cards in your graveyard, create a token that's a copy of Ran and Shaw, except it's not legendary. -- {3}{R}: Dragons you control get +2/+0 until end of turn.
 [/card]
 [card]
 name=Rancid Earth
@@ -97456,8 +97537,14 @@ type=Instant
 [/card]
 [card]
 name=Rayblade Trooper
+abilities=canplayfromexile
+grade=borderline
+other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
-text=When this creature enters, put a +1/+1 counter on target creature you control.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, put a +1/+1 counter on target creature you control. -- Whenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{W}
 type=Creature
 subtype=Human Soldier
@@ -98358,8 +98445,13 @@ type=Sorcery
 [/card]
 [card]
 name=Red Tiger Mechan
-abilities=haste
-text=Haste.
+grade=borderline
+other={1}{R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+abilities=haste,canplayfromexile
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Haste -- Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{R}
 type=Artifact Creature
 subtype=Robot Cat
@@ -98985,7 +99077,6 @@ name=Renegade Freighter
 auto=this(attacking) 1/1
 auto=this(attacking) trample
 auto=_CREW2_
-auto=_CREW2COMPLEMENT_
 text=Whenever Renegade Freighter attacks, it gets +1/+1 and gains trample until end of turn. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -99649,11 +99740,14 @@ toughness=2
 [/card]
 [card]
 name=Retched Wretch
+auto=_DIES_restriction{compare(hascnt-1-1)~morethan~0}:moveTo(ownerBattlefield)
+#MISSING the -1/-1 counter gate is approximated by a counter check at death time
 mana={2}{B}
 type=Creature
 subtype=Goblin
 power=4
 toughness=2
+text=When this creature dies, if it had a -1/-1 counter on it, return it to the battlefield under its owner's control and it loses all abilities.
 [/card]
 [card]
 name=Rethink
@@ -103636,7 +103730,7 @@ toughness=5
 [card]
 name=Sages of the Anima
 aicode=activate target(<3>creature[zpos<=3]|mylibrary) moveto(hand)
-auto=replacedraw reveal:3 optionone name(Get creatures) target(<3>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
+auto=replacedraw reveal:3 optionone name(Get creatures) target(<upto:3>creature|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
 text=If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 mana={3}{G}{U}
 type=Creature
@@ -104006,7 +104100,8 @@ type=Creature
 subtype=Goblin Sorcerer
 power=2
 toughness=4
-text=At the beginning of your first main phase, draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
 [/card]
 [card]
 name=Sanctified Charge
@@ -104437,7 +104532,7 @@ toughness=1
 [/card]
 [card]
 name=Sanity Grinding
-auto=reveal:10 optionone name(Look) target(*|reveal) deplete:type:manau opponent optiononeend optiontwo name(put on bottom) target(<10>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:10 optionone name(Look) target(*|reveal) deplete:type:manau opponent optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. Then put the cards you revealed this way on the bottom of your library in any order.
 mana={U}{U}{U}
 type=Sorcery
@@ -105221,13 +105316,18 @@ toughness=2
 [/card]
 [card]
 name=Scarlet Spider, Ben Reilly
-auto=@movedTo(other creature|mybattlefield):counter(1/1) target(creature|mybattlefield)
+grade=borderline
+other={R}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+abilities=trample
+auto=if paid(alternative) then counter(1/1) all(this)
+#MISSING Sensational Save scales with the RETURNED creature's mana value (X counters); approximated as one +1/+1 counter
 mana={1}{R}{G}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=4
 toughness=3
-text=Whenever a creature you control enters, put a +1/+1 counter on target creature you control.
+text=Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.) -- Trample -- Sensational Save - If Scarlet Spider was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
 [/card]
 [card]
 name=Scarlet Spider, Kaine
@@ -105238,7 +105338,8 @@ type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=1
-text=Menace -- When Scarlet Spider, Kaine enters, it deals 1 damage to target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace (This creature can't be blocked except by two or more creatures.) -- When Scarlet Spider enters, you may discard a card. If you do, put a +1/+1 counter on him. -- Mayhem {B/R} (You may cast this card from your graveyard for {B/R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Scarmaker
@@ -106440,10 +106541,11 @@ toughness=1
 [/card]
 [card]
 name=Scuzzback Scrounger
-auto=@each my mainphase:choice name(blight 1) counter(-1/-1,1) && _TREASURE_ name(skip)
+auto=@each my firstmain:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && _TREASURE_
 mana={1}{R}
 type=Creature
-text=@each my mainphase:choice name(blight 1) counter(-1/-1,1). Create a Treasure token name(skip).
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 subtype=Goblin Warrior
 power=3
 toughness=2
@@ -106747,7 +106849,7 @@ type=Enchantment
 [/card]
 [card]
 name=Sealed Fate
-auto=name(Look) reveal:x revealzone(opponentlibrary) optionone name(exile a card) target(<1>*|reveal) moveto(ownerexile) optiononeend optiontwo target(<60>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=name(Look) reveal:x revealzone(opponentlibrary) optionone name(exile a card) target(<1>*|reveal) moveto(ownerexile) optiononeend optiontwo target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) )! optiontwoend revealend
 text=Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
 mana={X}{U}{B}
 type=Sorcery
@@ -107163,7 +107265,7 @@ type=Sorcery
 [/card]
 [card]
 name=See the Unwritten
-auto=_FEROCIOUS_ reveal:8 revealzone(mylibrary) optionone target(<2>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
+auto=_FEROCIOUS_ reveal:8 revealzone(mylibrary) optionone target(<upto:2>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
 auto=if type(creature[power>=3]|mybattlefield)~lessthan~1 then reveal:8 revealzone(mylibrary) optionone target(<1>creature|reveal) moveto(mybattlefield) and!( all(*|reveal) moveto(ownergraveyard) )! optiononeend optiontwo all(*|reveal) moveto(ownergraveyard) optiontwoend revealend
 text=Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard. -- Ferocious -- If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
 mana={4}{G}{G}
@@ -108836,7 +108938,8 @@ name=Shadow Urchin
 auto=_ATTACKING_:counter(-1/-1,1)
 mana={2}{BR}
 type=Creature
-text=Whenever Shadow Urchin attacks, put 1 -1/-1 counter on Shadow Urchin.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.) -- Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
 subtype=Ouphe
 power=3
 toughness=4
@@ -111229,13 +111332,18 @@ type=Instant
 [/card]
 [card]
 name=Silk, Web Weaver
-auto=@movedTo(other creature[reach]|mybattlefield):token(Spider,Creature Spider,2/1,reach,green) controller
+grade=borderline
+other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=@movedTo(creature|mystack):token(Human Citizen,Creature Human Citizen,1/1,green white) controller
+auto={3}{G}{W}:all(creature|mybattlefield) 2/2 ueot
+auto={3}{G}{W}:all(creature|mybattlefield) vigilance ueot
 mana={2}{G}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=3
 toughness=5
-text=Whenever a creature you control with reach enters, create a 2/1 green Spider creature token with reach.
+text=Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Whenever you cast a creature spell, create a 1/1 green and white Human Citizen creature token. -- {3}{G}{W}: Creatures you control get +2/+2 and gain vigilance until end of turn.
 [/card]
 [card]
 name=Silkbind Faerie
@@ -111877,8 +111985,14 @@ type=Enchantment
 [/card]
 [card]
 name=Sinister Cryologist
+abilities=canplayfromexile
+grade=borderline
+other={U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=pump(-3/0) target(creature|opponentbattlefield) ueot
-text=When this creature enters, target creature an opponent controls gets -3/-0 until end of turn.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, target creature an opponent controls gets -3/-0 until end of turn. -- Warp {U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
 type=Creature
 subtype=Jellyfish Wizard
@@ -113334,9 +113448,7 @@ name=Skysovereign, Consul Flagship
 abilities=flying
 auto=damage:3 target(creature,planeswalker|opponentbattlefield)
 auto=_ATTACKING_damage:3 target(creature,planeswalker|opponentbattlefield)
-auto={crew(other creature[power>=3]|myBattlefield)}:name(crew 3 [1 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=3]|mybattlefield)~morethan~0,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=2]|myBattlefield)}:name(crew 3 [2 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~0,type(other creature[-tapped;power>=2]|mybattlefield)~morethan~0,type(other creature[-tapped;-cantcrew]|mybattlefield)~morethan~1,compare(crewtotalpower)~morethan~2}
-auto={crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}{crew(other creature[power>=1]|myBattlefield)}:name(crew 3 [3 creature]) becomes(Artifact Creature) ueot restriction{type(other creature[-tapped;power>=1]|mybattlefield)~morethan~2,compare(crewtotalpower)~morethan~2}
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
 text=Flying -- Whenever Skysovereign, Consul Flagship enters or attacks, it deals 3 damage to target creature or planeswalker an opponent controls. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={5}
 type=Legendary Artifact
@@ -115228,7 +115340,7 @@ type=Instant
 [card]
 name=Soothsaying
 auto={3}{U}{U}:shuffle
-auto={x}:name(Look at top X cards) reveal:x optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo name(put back) target(<20>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={x}:name(Look at top X cards) reveal:x optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) )! optiontwoend revealend
 text={3}{U}{U}: Shuffle your library. -- {X}: Look at the top X cards of your library and put them back in any order.
 mana={U}
 type=Enchantment
@@ -116843,7 +116955,8 @@ type=Creature
 subtype=Spider Avatar
 power=2
 toughness=2
-text=Reach -- {T}: Add {R} or {G}. -- When Spider Manifestation enters, put a +1/+1 counter on it.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- {T}: Add {R} or {G}. -- Whenever you cast a spell with mana value 4 or greater, untap this creature.
 [/card]
 [card]
 name=Spider Spawning
@@ -116894,7 +117007,8 @@ type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=3
-text=Reach -- Tap, Discard a card: Draw a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Reach -- Whenever Spider-Gwen becomes tapped, you may discard a card. If you do, draw a card.
 [/card]
 [card]
 name=Spider-Ham, Peter Porker
@@ -116909,14 +117023,15 @@ text=When Spider-Ham enters, create a Food token.
 [card]
 name=Spider-Islanders
 grade=borderline
-abilities=haste
 autograveyard={1}{R}{D} restriction{compare(oplifelost)~morethan~0}:moveto(mybattlefield) this asSorcery
+#MISSING the real card has NO haste; Mayhem's 'only if you discarded it this turn' gate is approximated by a life-lost restriction
 mana={3}{R}
 type=Creature
 subtype=Spider Horror Citizen
 power=4
 toughness=3
-text=Haste -- Mayhem {1}{R} (approx: cast from graveyard for {1}{R} plus discard a card).
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Spider-Man Noir
@@ -116927,31 +117042,51 @@ type=Legendary Creature
 subtype=Spider Hero
 power=3
 toughness=3
-text=Menace -- Whenever Spider-Man Noir attacks alone, put a +1/+1 counter on it and mill a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace -- Whenever a creature you control attacks alone, put a +1/+1 counter on it. Then surveil X, where X is the number of counters on it. (Look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 [/card]
 [card]
 name=Spider-Man, Web-Slinger
+other={W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 grade=borderline
-auto=@combat(attacking) source(this):token(Spider,Creature Spider,2/1,reach,green) controller
 mana={2}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=3
 toughness=3
-text=Web-slinging (approx). Whenever Spider-Man attacks, create a 2/1 green Spider creature token with reach.
+text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)
 [/card]
 [card]
 name=Spider-Punk
-abilities=haste
-auto=choice name(Counter) counter(1/1)
-auto=choice name(Haste) haste ueot
-auto=lord(spider|mybattlefield) haste
+auto=choice name(Counter) counter(1/1) name(Haste) transforms((,haste)) forever
+auto=lord(other spider|mybattlefield) haste
+auto=lord(*|stack) nofizzle
+#Riot is ONE choice, so both modes belong on a SINGLE choice line. Two separate
+#"auto=choice ..." lines are two independent abilities and both resolve, which is why
+#John got a +1/+1 counter AND haste. Single-line form copied from Auntie's Sentence.
+#Riot's haste is permanent, not until end of turn, hence transforms((,haste)) forever.
+#"Spells and abilities can't be countered" IS implementable: lord(*|stack) nofizzle, the
+#shape Prowling Serpopard uses, widened from mystack to stack because this static is
+#symmetric. No emblem needed - a lord() already lapses when the source leaves play.
+#Proven by spm_spider_punk_nofizzle{,_control}: Erayo's Essence under the opponent counters
+#the spell without this card and cannot with it.
+#MISSING "Other Spiders you control have riot" stays a flat haste grant, which drops the
+#counter mode. The trigger route works as far as it goes - @movedTo(other spider|
+#mybattlefield) fires, and all(trigger[to]) counter(1/1) lands - but every form of the
+#CHOICE inside that trigger was measured non-exclusive: picking haste still handed out the
+#counter, which is the same bug this card started with. Not shipped for that reason.
+#MISSING "Damage can't be prevented" has no route in the DSL. Prevention arrives by two
+#paths in Damage::resolve - REDamagePrevention replacement effects, and the target's
+#preventable counter - and no basic ability switches either off. REDamagePrevention is its
+#own class, so an engine fix would be small and well-targeted, but it is still an engine
+#change and would have to ship as exe + core.zip together.
 mana={1}{R}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=2
 toughness=1
-text=Riot (enters with +1/+1 counter or haste; you choose). Other Spiders you control have haste.
+text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -- Other Spiders you control have riot. -- Spells and abilities can't be countered. -- Damage can't be prevented.
 [/card]
 [card]
 name=Spider-Rex, Daring Dino
@@ -116974,6 +117109,9 @@ text=Equipped creature gets +2/+2. Equip {2}.
 [/card]
 [card]
 name=Spider-UK
+grade=supported
+other={2}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 auto=@each my endstep:if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 && life:2 controller
 text=At the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, draw a card and gain 2 life.
 mana={3}{W}
@@ -117400,7 +117538,8 @@ auto=enchanted cantblock
 auto={1}{W}:moveto(exile) target(creature|opponentbattlefield)
 mana={1}{W}
 type=Enchantment
-text=Enchanted creature gains cantattack.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Enchant creature -- Enchanted creature can't attack or block. -- {1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature. (To blight 1, put a -1/-1 counter on a creature you control.)
 subtype=Aura
 [/card]
 [card]
@@ -118952,9 +119091,14 @@ type=Artifact
 [/card]
 [card]
 name=Starbreach Whale
-abilities=flying
+grade=borderline
+other={1}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+abilities=flying,canplayfromexile
 auto=_SURVEIL2_
-text=Flying. When this creature enters, surveil 2.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Flying -- When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{U}
 type=Creature
 subtype=Whale
@@ -118980,8 +119124,13 @@ type=Enchantment
 [/card]
 [card]
 name=Starfield Shepherd
-abilities=flying
-text=Flying. When this creature enters, search your library for a basic Plains card or a creature card with mana value 1 or less. (Search not supported)
+grade=borderline
+other={1}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+abilities=flying,canplayfromexile
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Flying -- When this creature enters, search your library for a basic Plains card or a creature card with mana value 1 or less, reveal it, put it into your hand, then shuffle. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}{W}
 type=Creature
 subtype=Angel
@@ -119116,8 +119265,14 @@ toughness=1
 [/card]
 [card]
 name=Starwinder
+abilities=canplayfromexile
+grade=borderline
+other={2}{U}{U} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@combatdamaged(player) from(creature|mybattlefield):may draw:1 controller
-text=Whenever a creature you control deals combat damage to a player, you may draw a card.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Whenever a creature you control deals combat damage to a player, you may draw that many cards. -- Warp {2}{U}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={5}{U}{U}
 type=Creature
 subtype=Leviathan
@@ -119523,7 +119678,8 @@ type=Legendary Creature
 subtype=Dinosaur Villain
 power=5
 toughness=4
-text=Menace -- When Stegron enters, target noncreature artifact you control becomes a 7/7 creature until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Dinosaur Formula — {1}{R}, Discard this card: Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.
 [/card]
 [card]
 name=Stench of Decay
@@ -119958,7 +120114,7 @@ subtype=Mountain Forest
 [/card]
 [card]
 name=Stomping Slabs
-auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<7>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:7 optionone if type(stomping slabs|reveal)~morethan~0 then name(stomp) target(anytarget|reveal) damage:7 else name(put on bottom) target(<upto:7>*|reveal) bottomoflibrary optiononeend optiontwo name(put on bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.
 mana={2}{R}
 type=Sorcery
@@ -122756,8 +122912,14 @@ toughness=3
 [/card]
 [card]
 name=Susurian Voidborn
+abilities=canplayfromexile
+grade=borderline
+other={B} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(creature,artifact|mygraveyard) from(battlefield):life:-1 opponent && life:1 controller
-text=Whenever this creature or another creature or artifact you control dies, target opponent loses 1 life and you gain 1 life.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Whenever this creature or another creature or artifact you control dies, target opponent loses 1 life and you gain 1 life. -- Warp {B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{B}
 type=Creature
 subtype=Vampire Soldier
@@ -123319,7 +123481,8 @@ auto=choice name(draw) draw:1
 auto=choice name(tap creature) tap target(creature|opponentbattlefield)
 mana={1}{W}{U}
 type=Sorcery
-text=Choose two: copy target Merfolk you control; or creatures you control gain lifelink until end of turn; or draw a card; or tap target creature.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Choose two — -- • Create a token that's a copy of target Merfolk you control. -- • Creatures target player controls gain lifelink until end of turn. -- • Target player draws a card. -- • Tap target creature. Put a stun counter on it.
 [/card]
 [card]
 name=Sygg, River Cutthroat
@@ -123427,7 +123590,7 @@ toughness=2
 [card]
 name=Sylvan Messenger
 abilities=trample
-auto=reveal:4 optionone name(Get Elf) target(<4>elf|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Elf) target(<upto:4>elf|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=Trample -- When Sylvan Messenger enters, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
 mana={3}{G}
 type=Creature
@@ -124683,7 +124846,8 @@ type=Creature
 subtype=Goblin Warlock
 power=3
 toughness=2
-text=When this creature enters, target opponent discards a card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
 [/card]
 [card]
 name=Tatsumasa, the Dragon's Fang
@@ -124866,6 +125030,7 @@ type=Instant
 [card]
 name=Technodrome
 grade=borderline
+# REVIEW 2026-07-12 [P:med] 
 id=1520179
 abilities=reach,trample
 auto=@each my combatbegins:if compare(power)~lessthan~6 then cantattack ueot
@@ -125937,7 +126102,8 @@ auto=2/2 ueot
 auto=lifelink ueot
 mana={3}{G}
 type=Instant
-text=Two target creatures each get +2/+2 and gain lifelink until end of turn.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=This spell costs {2} less to cast if you control a permanent with mana value 4 or greater. -- One or two target creatures you control each get +1/+0 until end of turn. They each deal damage equal to their power to target creature an opponent controls.
 [/card]
 [card]
 name=Terrifying Presence
@@ -126503,14 +126669,16 @@ type=Sorcery
 name=The Earth Crystal
 auto=lord(*[green]|mycastingzone) altercost(colorless,-1)
 auto={4}{G}{G}{T}:counter(1/1) target(<upto:2>creature|mybattlefield)
-text=Green spells you cast cost {1} less to cast. -- {4}{G}{G}, {T}: Put a +1/+1 counter on each of up to two target creatures you control.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Green spells you cast cost {1} less to cast. -- If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead. -- {4}{G}{G}, {T}: Distribute two +1/+1 counters among one or two target creatures you control.
 mana={2}{G}{G}
 type=Legendary Artifact
 [/card]
 [card]
 name=The Eternity Elevator
 auto={T}:Add{C}{C}{C}
-text={T}: Add {C}{C}{C}. Station -- Tap another creature you control: Put charge counters on this Spacecraft.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={T}: Add {C}{C}{C}. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.) -- 20+ | {T}: Add X mana of any one color, where X is the number of charge counters on The Eternity Elevator.
 mana={5}
 type=Legendary Artifact
 subtype=Spacecraft
@@ -126751,7 +126919,8 @@ toughness=3
 name=Thespian's Stage
 auto={T}:Add{1}
 auto={2}{T}:copy target(other land|battlefield) and!( {2}{T}:copy target(other land|battlefield) )!
-text={T}: Add {1}. -- {2}, {T}: Thespian's Stage becomes a copy of target land and gains this ability.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text={T}: Add {C}. -- {2}, {T}: This land becomes a copy of target land, except it has this ability.
 type=Land
 [/card]
 [card]
@@ -128224,7 +128393,7 @@ type=Instant
 [/card]
 [card]
 name=Tidal Courier
-auto=reveal:4 optionone name(Get Merfolk) target(<4>merfolk|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
+auto=reveal:4 optionone name(Get Merfolk) target(<upto:4>merfolk|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=When Tidal Courier enters, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library. -- {3}{U}: Tidal Courier gains flying until end of turn.
 auto={3}{U}:flying ueot
 mana={3}{U}
@@ -131856,7 +132025,8 @@ name=Twilight Diviner
 auto=_SCRY1_ && _SCRY1_
 mana={2}{B}
 type=Creature
-text=When Twilight Diviner enters the battlefield, scry 1. Scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
 subtype=Elf Cleric
 power=3
 toughness=3
@@ -133375,7 +133545,8 @@ abilities=flying
 auto=_SCRY1_ && _SCRY1_
 mana={1}{U}
 type=Creature
-text=When Unwelcome Sprite enters the battlefield, scry 1. Scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
 subtype=Faerie Rogue
 power=2
 toughness=1
@@ -137586,7 +137757,8 @@ abilities=flying
 auto=life:-1 controller && draw:1 controller
 mana={UB}{UB}{UB}
 type=Creature
-text=When Voracious Tome-Skimmer enters the battlefield, you lose 1 life. Draw 1 card.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Flying -- Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
 subtype=Faerie Rogue
 power=2
 toughness=3
@@ -139485,10 +139657,11 @@ toughness=2
 [/card]
 [card]
 name=Wary Farmer
-auto=@each my endstep:_SCRY1_
+auto=@each my endstep restriction{type(other creature[fresh]|mybattlefield)~morethan~0}:_SURVEIL1_
 mana={1}{GW}{GW}
 type=Creature
-text=At the beginning of your end step, scry 1.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=At the beginning of your end step, if another creature entered the battlefield under your control this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 subtype=Kithkin Citizen
 power=3
 toughness=3
@@ -140088,7 +140261,8 @@ name=Web Up
 auto=(blink)forsrc target(*[-land]|opponentbattlefield)
 mana={2}{W}
 type=Enchantment
-text=When Web Up enters, exile target nonland permanent an opponent controls. Return it when Web Up leaves the battlefield.
+#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.
 [/card]
 [card]
 name=Web-Shooters
@@ -140157,8 +140331,14 @@ toughness=3
 [/card]
 [card]
 name=Weftblade Enhancer
+abilities=canplayfromexile
+grade=borderline
+other={2}{W} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=counter(1/1) target(creature|mybattlefield)
-text=When this creature enters, put a +1/+1 counter on target creature you control.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=When this creature enters, put a +1/+1 counter on each of up to two target creatures. -- Warp {2}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={5}{W}
 type=Creature
 subtype=Drix Artificer
@@ -140167,8 +140347,14 @@ toughness=4
 [/card]
 [card]
 name=Weftstalker Ardent
+abilities=canplayfromexile
+grade=borderline
+other={R} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
 auto=@movedTo(other creature|mybattlefield):damage:1 all(opponent)
-text=Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent.
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+#MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+text=Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent. -- Warp {R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{R}
 type=Creature
 subtype=Drix Artificer
@@ -143116,7 +143302,7 @@ toughness=2
 [card]
 name=Worldly Counsel
 aicode=activate target(*[zpos<=pbasiclandtypes]|mylibrary) moveto(hand)
-auto=name(Look) reveal:pbasiclandtypes optionone name(Get a Card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo target(<10>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look) reveal:pbasiclandtypes optionone name(Get a Card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 mana={1}{U}
 type=Instant

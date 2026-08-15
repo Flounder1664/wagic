@@ -1,0 +1,36 @@
+#Does the "_DIES_ may thisforeach(counter{1/1.1}) counter(1/1) target(...)" line
+#actually MOVE counters, or does it only prompt for a target?
+#Arcbound Worker is the control: it is the long-standing card this line was copied from.
+#It is 0/0 with modular 1, so it sits at 1/1 and a Shock kills it.
+#The assertion is survival, not power, because the harness cannot assert P/T: Ornithopter
+#is 0/2, so the second Shock kills it UNLESS it picked up the +1/+1 counter and became 0/3.
+#Ornithopter in play  => counters really moved.
+#Ornithopter in graveyard => the prompt appears but the counters go nowhere.
+#The "choice 0" is answering the may-prompt YES. Without it the trigger is declined and
+#the test fails - which is a harness artifact, not a card bug, and is exactly the trap
+#that made this mechanism look broken.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Arcbound Worker,Ornithopter
+hand:Shock,Shock
+manapool:{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Arcbound Worker
+choice 0
+Ornithopter
+Shock
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Arcbound Worker,Shock,Shock
+life:20
+[PLAYER2]
+life:20
+[END]

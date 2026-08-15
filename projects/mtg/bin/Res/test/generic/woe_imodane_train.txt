@@ -1,0 +1,22 @@
+#WOE Imodane's Recruiter: cast Train Troops (choice 1) -> two 2/2 Knights; card exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:imodane's recruiter // train troops
+manapool:{2}{R}{4}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+imodane's recruiter // train troops
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+exile:*
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[END]

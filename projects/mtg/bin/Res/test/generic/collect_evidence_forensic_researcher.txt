@@ -1,0 +1,33 @@
+#COLLECT EVIDENCE as a real MANA-VALUE threshold, not a card count.
+#Forensic Researcher's second ability is "{T}, Collect evidence 3: Tap target creature
+#you don't control" - exile cards from your graveyard with TOTAL MANA VALUE 3 or more.
+#Hill Giant is mana value 4, so it alone satisfies evidence 3 and must end up exiled.
+#This is also the regression test for the old approximation: the previous version
+#exiled a fixed TWO cards regardless of what they cost.
+#No manapool - the ability costs only {T} plus the evidence, so leftover mana fails.
+#"choice 1" picks the evidence ability, then the graveyard card paying the evidence,
+#then the opponent creature to tap.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+graveyard:Hill Giant
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[DO]
+Forensic Researcher
+choice 1
+Hill Giant
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forensic Researcher
+exile:Hill Giant
+life:20
+[PLAYER2]
+inplay:grizzly bears
+life:20
+[END]

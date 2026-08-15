@@ -1,0 +1,21 @@
+#FIN White Auracite cast-safety: with no opponent permanent the ETB exile is skipped, artifact resolves.
+#(The targeted-ETB exile is a harness blind spot - in-game V.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:white auracite
+manapool:{2}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+white auracite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:white auracite
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

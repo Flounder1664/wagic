@@ -1,0 +1,32 @@
+#Agatha's Champion: "When this creature enters, if it was bargained, it fights up to one
+#target creature you don't control." John reports it never fights when bargained.
+#Bargain here is the other= cost, which sacrifices the Ornithopter as the extra cost.
+#Champion is 4/4, so the fight must kill the 2/2 Grizzly Bears outright.
+#"choice 1" is how the harness picks the bargain cast rather than the plain one.
+#Bears in P2's graveyard = the fight happened. Bears alive = the bargained half is inert.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Agatha's Champion
+inplay:Ornithopter
+manapool:{4}{G}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Agatha's Champion
+choice 1
+Ornithopter
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Agatha's Champion
+graveyard:Ornithopter
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

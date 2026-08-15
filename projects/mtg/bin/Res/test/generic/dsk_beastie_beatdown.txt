@@ -1,0 +1,27 @@
+#DSK Beastie Beatdown crash-smoke: cast with a valid cast-time target; the granted powerstrike
+#prompt can't be driven from the suite (harness blind spot for ETB/granted target prompts),
+#so only stable zones are asserted. Behavior verified in-game via the V loop.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:grizzly bears
+hand:beastie beatdown
+manapool:{R}{G}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[DO]
+beastie beatdown
+grizzly bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:grizzly bears
+graveyard:beastie beatdown
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:hill giant
+life:20
+[END]

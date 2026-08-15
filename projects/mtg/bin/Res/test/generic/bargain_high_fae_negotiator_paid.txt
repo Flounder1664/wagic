@@ -1,0 +1,26 @@
+#BARGAIN on a creature, BARGAINED branch. Same card and same mana, but an
+#Ornithopter is sacrificed to bargain, so the ETB drains 3: 23 and 17, and the
+#Ornithopter must be in the graveyard. Life totals make this the clearest proof in
+#the bargain set that the upgraded branch really fired.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:High Fae Negotiator
+manapool:{3}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+High Fae Negotiator
+choice 1
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:High Fae Negotiator
+graveyard:Ornithopter
+life:23
+[PLAYER2]
+life:17
+[END]

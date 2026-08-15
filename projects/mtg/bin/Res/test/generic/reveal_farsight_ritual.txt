@@ -1,0 +1,25 @@
+#Same Impulse clone, but Farsight Ritual's main printing is re-registered at the
+#free low id 3756 instead of 629550. Tests whether the id VALUE matters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Farsight Ritual
+library:Mountain,Forest,Island,Swamp
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Farsight Ritual
+choice 0
+Mountain
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mountain
+library:Forest,Island,Swamp
+graveyard:Farsight Ritual
+life:20
+[PLAYER2]
+life:20
+[END]

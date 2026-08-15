@@ -1,0 +1,24 @@
+#WOE Tempest Hart: cast Scan the Clouds (choice 1) -> draw 2, discard 2; card exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:tempest hart // scan the clouds,eager cadet,goblin piker
+library:15780,ornithopter
+manapool:{3}{G}{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+tempest hart // scan the clouds
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+graveyard:*,*
+exile:*
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

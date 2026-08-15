@@ -30,6 +30,9 @@ ADD_FILES = {
     'packs/draft_booster.txt':
         os.path.join(_RES, "packs", "draft_booster.txt"),
 }
+# 2026-07-19 intake: 6 previously-missing sets, register-only reprints.
+for _code in ("FIC", "UNF", "EOC", "EOS", "GN3", "FCA", "HOB", "HOC"):
+    ADD_FILES['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
 
 print(f'Rebuilding {CORE_ZIP} with updated primitives...')
 replaced = set()

@@ -1,0 +1,24 @@
+#District Mascot is a 0/0 that "enters with a +1/+1 counter on it" - exactly one.
+#John saw it pick up four. Survival is the proxy for counting them: at 1/1 it dies to
+#Shock, and it only survives if it entered with more counters than the card grants.
+#Mascot in the graveyard = correct. Mascot still in play = too many counters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:District Mascot,Shock
+manapool:{G}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+District Mascot
+Shock
+District Mascot
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:District Mascot,Shock
+life:20
+[PLAYER2]
+life:20
+[END]

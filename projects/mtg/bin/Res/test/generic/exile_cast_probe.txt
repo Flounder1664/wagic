@@ -1,0 +1,24 @@
+#PROBE: can the harness cast a card from EXILE at all?
+#Misthollow Griffin is an old shipped card whose whole point is "You may cast this
+#from exile" (abilities=flying,canplayfromexile). It starts in exile here with the
+#mana already available. If THIS cannot be cast, the harness simply cannot drive
+#casting from exile and the warp recast can only be verified in game. If it CAN,
+#then the problem is specific to the warp cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+exile:Misthollow Griffin
+manapool:{2}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Misthollow Griffin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Misthollow Griffin
+life:20
+[PLAYER2]
+life:20
+[END]

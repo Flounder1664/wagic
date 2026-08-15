@@ -1,0 +1,36 @@
+#FORAGE, the cost John reported as not working on Camellia, the Seedmiser.
+#Forage is "exile three cards from your graveyard OR sacrifice a Food", so it is a
+#choice of costs and is modelled as two activated abilities. This exercises the
+#exile-three branch: all three graveyard cards must be gone afterwards. If the cost
+#were free (the failure mode that made bargain look implemented when it was not)
+#the graveyard would still hold them.
+#Camellia is referred to by id 669121 (BLB): the harness splits these lists on
+#commas, so a card whose name contains one cannot be named here. Squirrel Mob is
+#present so the ability has a recipient for its +1/+1 counters.
+#"choice 1" picks the exile-three branch: the menu lists BOTH forage costs even
+#though the sacrifice-a-Food branch is unpayable here, so the branches are not
+#renumbered by payability.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669121,Squirrel Mob
+graveyard:Mountain,Forest,Island
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+669121
+choice 1
+Mountain
+Forest
+Island
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669121,Squirrel Mob
+exile:Mountain,Forest,Island
+life:20
+[PLAYER2]
+life:20
+[END]

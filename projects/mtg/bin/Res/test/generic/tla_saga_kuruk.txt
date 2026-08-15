@@ -1,0 +1,23 @@
+#TLA The Legend of Kuruk saga-transform: enters, chapter I scry2+draw fires on ETB (a card drawn).
+#Full chapter-III transform across turns is the in-game V check (multi-turn lore accrual);
+#this asserts the saga is in play and chapter I resolved.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:the legend of kuruk
+library:15780,ornithopter,goblin piker
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:the legend of kuruk
+hand:*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

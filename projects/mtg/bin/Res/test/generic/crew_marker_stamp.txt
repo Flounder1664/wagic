@@ -1,0 +1,23 @@
+#Control half of a pair. TapTargetCost::doPay stamps a "Crewed" counter on every creature
+#tapped to pay a crew cost, so cards can ask which creatures crewed them this turn.
+#This asserts the stamp LANDS, so if crew_marker_cleared fails it cannot be blamed on the
+#stamp never having happened in the first place.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Turtle Van
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+counter:Grizzly Bears=Crewed:1
+life:20
+[PLAYER2]
+life:20
+[END]

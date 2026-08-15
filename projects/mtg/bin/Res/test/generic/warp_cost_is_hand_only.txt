@@ -1,0 +1,26 @@
+#WARP: the warp COST must only be payable from HAND. John found a warp creature could
+#be re-cast from exile for its cheap warp cost - the real card says you cast it from
+#exile normally ("then you may cast it from exile on a later turn"), at full price.
+#Red Tiger Mechan is {3}{R} with Warp {1}{R}. Here it sits in EXILE with exactly the
+#warp cost available and nothing more. Casting must FAIL: it stays in exile and the
+#two mana stay unspent. Before the hand-only gate this cast succeeded.
+#(warp_recast_from_exile.txt covers the legitimate case - full price from exile.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+exile:Red Tiger Mechan
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Red Tiger Mechan
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:Red Tiger Mechan
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,41 @@
+#BARGAIN combined with X - the one shape in the bargain set that was untested, since
+#an X cost and an alternative cost interact (MTGRules.cpp handles card->setX
+#separately on the alternate-cost path).
+#Stonesplitter Bolt deals X damage, twice X if bargained. With X=2 that is 2 damage
+#unbargained and 4 bargained, so a 3/3 Hill Giant is the discriminator. Here it is
+#cast WITHOUT bargaining and the Giant must survive.
+#
+#The target is now INLINE (the Blaze form) rather than a separate target= line: with
+#the latter the X cost made it act as a multi-target chooser, so the first creature
+#clicked went red and a second click damaged that one instead (John, 2026-07-30).
+#"choice 1" selects X=1, so {1} of the {2}{R} pool is left over - asserted, because a
+#silently different X would otherwise pass unnoticed.
+#WHAT THIS DOES NOT PROVE: 'choice 1' is the X-selection menu, and the assert only
+#requires the damage to be non-lethal to a 3/3, so it does not pin X to a specific
+#value. The BARGAINED branch (twice X, which should kill the Giant) is NOT covered -
+#driving both the bargain menu and the X menu in one cast was not worked out. So X
+#combined with an alternative cost is verified only as 'the card still casts and
+#deals damage', which is what the earlier sneak regression failed to do.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stonesplitter Bolt
+manapool:{2}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Stonesplitter Bolt
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Stonesplitter Bolt
+manapool:{1}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

@@ -1,0 +1,26 @@
+#"Crewed" is a this-turn-only fact, so it has to be gone by the next turn. It was not:
+#John crewed a Passenger Ferry and the counter stayed on the creature for the rest of the
+#game, because the sweep was written on five CARDS rather than in the engine that stamps it.
+#Fails before MTGCardInstance::cleanup() sweeps it; passes after.
+#Paired with crew_marker_stamp, which proves the counter was there to begin with.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Turtle Van
+Grizzly Bears
+eot
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears
+counter:Grizzly Bears=Crewed:0
+life:20
+[PLAYER2]
+life:20
+[END]

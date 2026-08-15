@@ -1,0 +1,27 @@
+#Figure of Fable's first level-up SETS base power and toughness to 2/3 - it does not pump.
+#John saw it enter as 2/13 and then refuse to change at all, because the old version
+#counted Level counters and applied cumulative +N/+N.
+#The harness cannot assert power/toughness, so survival is the proxy: a 1/1 Figure dies to
+#Shock, a 2/3 Kithkin Scout does not.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Figure of Fable
+hand:Shock
+manapool:{G}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Figure of Fable
+Shock
+Figure of Fable
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Figure of Fable
+graveyard:Shock
+life:20
+[PLAYER2]
+life:20
+[END]

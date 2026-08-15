@@ -1,0 +1,27 @@
+#WARP GATING. John saw a warp creature that was NOT warp-cast end up in exile
+#(Exalted Sunborn, killed by a bargained Candy Grapple).
+#The self-exile lives on an "auto=alternative" line, so it must arm ONLY when the
+#warp cost was paid. Here Exalted Sunborn is cast for its FULL {3}{W}{W} with no
+#warp, and after the end step it must still be on the battlefield.
+#If this fails, all 26 warp cards exile themselves even when cast normally.
+#"choice 0" is the normal cast; "choice 1" would be the warp cost.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Exalted Sunborn
+manapool:{3}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Exalted Sunborn
+choice 0
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:Exalted Sunborn
+life:20
+[PLAYER2]
+life:20
+[END]
