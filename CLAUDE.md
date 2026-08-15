@@ -9,9 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `master`                = upstream `WagicProject/wagic`
 - `wagic-v146-windows`    = **trunk** — the only branch anything is ever built or deployed from
 - `feature/*`, `claude/*` = short-lived: branch from trunk, merge back the same session
-- `wip/*`                 = deliberately parked, not expected to land
-- `john/android-rp5`      = Android port — tag `verified-android-2026-04-19`
-- `wagic-v145-windows`    = superseded by v146
+- `wip/*`                 = deliberately parked, each one commit of unlanded work
+
+Everything else was merged into trunk and deleted on 2026-08-15. The Android port lives on
+in trunk and in the tags `verified-android-2026-04-19` / `verified-android-2026-05-07`;
+`wagic-v145-windows` is superseded by v146 and its history is in trunk.
 
 ### Rules that keep it that way
 
