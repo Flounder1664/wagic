@@ -136475,3 +136475,194 @@ subtype=Vehicle
 power=5
 toughness=4
 [/card]
+[card]
+name=Fire Nation Warship
+abilities=reach
+grade=borderline
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+auto=@movedTo(this|graveyard) from(battlefield):token(Clue)
+text=Reach -- When this Vehicle dies, create a Clue token. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Turtle Blimp
+abilities=flying
+grade=borderline
+auto=create(Mutant:creature mutant:2/2:red)
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=Flying -- When this Vehicle enters, create a 2/2 red Mutant creature token. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={5}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=4
+[/card]
+[card]
+name=Spider-Mobile
+abilities=trample
+grade=borderline
+auto=@combat(attacking,blocking) source(this):1/1 ueot
+#MISSING scaling by Spider count: the )*type: multiplier is only attested on token
+#creation, not on a pump, so this is a flat +1/+1 rather than one per Spider.
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=Trample -- Whenever this Vehicle attacks or blocks, it gets +1/+1 until end of turn for each Spider you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=Magmatic Galleon
+grade=borderline
+auto=damage:5 target(creature|opponentbattlefield)
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING "Whenever one or more creatures your opponents control are dealt excess noncombat
+#damage, create a Treasure" - the engine does not expose excess damage as an event.
+text=When this Vehicle enters, it deals 5 damage to target creature an opponent controls. -- Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token. (Second ability not implemented.) -- Crew 2
+mana={3}{R}{R}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=The Fire Nation Drill
+abilities=trample
+grade=borderline
+auto=may name(Tap to destroy) tap(noevent) and!( destroy target(creature[power<=4]) )!
+#MISSING "{1}: Permanents your opponents control lose hexproof and indestructible" -
+#loseabilities is attested only as all(...) loseabilities on your own permanents, never
+#scoped to an opponent for a turn, so it is left out rather than guessed at.
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=Trample -- When The Fire Nation Drill enters, you may tap it. When you do, destroy target creature with power 4 or less. -- {1}: Permanents your opponents control lose hexproof and indestructible until end of turn. -- Crew 2
+mana={2}{B}{B}
+type=Legendary Artifact
+subtype=Vehicle
+power=6
+toughness=3
+[/card]
+[card]
+name=The Indomitable
+abilities=trample
+grade=borderline
+auto=@combatdamaged(player) from(creature|mybattlefield):draw:1 controller
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+#MISSING "cast from your graveyard while you control three or more tapped Pirates and/or
+#Vehicles" - the combined subtype+tapped filter form is unattested.
+text=Trample -- Whenever a creature you control deals combat damage to a player, draw a card. -- Crew 3 -- You may cast this card from your graveyard as long as you control three or more tapped Pirates and/or Vehicles.
+mana={2}{U}{U}
+type=Legendary Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Hoard Hauler
+abilities=trample
+grade=borderline
+auto=@combatdamaged(player) from(this):token(Treasure)*type:artifact:opponentbattlefield
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+text=Trample -- Whenever this Vehicle deals combat damage to a player, create a Treasure token for each artifact they control. -- Crew 3
+mana={3}{R}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Capenna Express
+grade=borderline
+auto={S(treasure|mybattlefield)}:name(Sacrifice a Treasure) becomes(Artifact Creature) ueot
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+text=Sacrifice a Treasure: This Vehicle becomes an artifact creature until end of turn. -- Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={3}{G}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Tundra Tank
+grade=borderline
+auto=target(creature|mybattlefield) indestructible ueot
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+#MISSING firebending 1 - the keyword is unimplemented engine-wide; three other cards
+#already say so in their own text rather than pretending otherwise.
+text=Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.) (Firebending not implemented.) -- When this Vehicle enters, target creature you control gains indestructible until end of turn. -- Crew 1
+mana={2}{B}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Passenger Ferry
+grade=borderline
+auto=@combat(attacking) source(this):may name(Pay U to make a creature unblockable) pay[[{U}]] target(other creature[attacking]|mybattlefield) unblockable ueot
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=Whenever this Vehicle attacks, you may pay {U}. When you do, another target attacking creature can't be blocked this turn. -- Crew 2
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
+name=Subway Train
+grade=borderline
+auto=may name(Pay G to search for a basic land) pay[[{G}]] target(land[basic]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=When this Vehicle enters, you may pay {G}. If you do, search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- Crew 2
+mana={2}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=1
+[/card]
+[card]
+name=Smoldering Stagecoach
+grade=borderline
+anyzone=type:*[instant;sorcery]:mygraveyard/5 cdaactive
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING "the next instant and the next sorcery you cast this turn each have cascade" -
+#granting cascade to a not-yet-cast spell has no route in the DSL.
+text=Smoldering Stagecoach's power is equal to the number of instant and sorcery cards in your graveyard. -- Whenever this Vehicle attacks, the next instant spell and the next sorcery spell you cast this turn each have cascade. (Cascade grant not implemented.) -- Crew 2
+mana={3}{R}
+type=Artifact
+subtype=Vehicle
+power=*
+toughness=5
+[/card]
+[card]
+name=War Balloon
+abilities=flying
+grade=borderline
+auto={1}:name(Put a fire counter) counter(0/0,1,Fire)
+auto=this(counter{0/0.3.Fire}) becomes(Artifact Creature) forever
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+text=Flying -- {1}: Put a fire counter on this Vehicle. -- As long as this Vehicle has three or more fire counters on it, it's an artifact creature. -- Crew 3
+mana={2}{R}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
+name=Luxurious Locomotive
+grade=borderline
+auto=@combat(attacking) source(this) turnlimited:_TREASURE_
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot limit:1 restriction{compare(crewtotalpower)~morethan~0}
+#MISSING "a Treasure for each creature that crewed it this turn" - the engine does not
+#record WHICH creatures crewed a Vehicle, so this makes exactly one Treasure.
+text=Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (Approximation: exactly one Treasure.) -- Crew 1. Activate only once each turn.
+mana={5}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=5
+[/card]
