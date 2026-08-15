@@ -136655,11 +136655,12 @@ toughness=3
 [card]
 name=Luxurious Locomotive
 grade=borderline
-auto=@combat(attacking) source(this) turnlimited:_TREASURE_
+auto=@combat(attacking) source(this) turnlimited:token(Treasure)*type:creature[counter{0/0.1.Crewed}]:mybattlefield
+auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot limit:1 restriction{compare(crewtotalpower)~morethan~0}
-#MISSING "a Treasure for each creature that crewed it this turn" - the engine does not
-#record WHICH creatures crewed a Vehicle, so this makes exactly one Treasure.
-text=Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. (Approximation: exactly one Treasure.) -- Crew 1. Activate only once each turn.
+#"A Treasure for each creature that crewed it" now works: the Crewed counter stamped in
+#TapTargetCost::doPay makes the crew set countable by the )*type: multiplier.
+text=Whenever this Vehicle attacks, create a Treasure token for each creature that crewed it this turn. -- Crew 1. Activate only once each turn.
 mana={5}
 type=Artifact
 subtype=Vehicle
@@ -136946,10 +136947,11 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,5)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,type:land[basic]:mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-#MISSING read ahead, and chapter III's domain scaling (counters equal to basic land types
-#among lands you control) - fixed at five, the maximum.
+#MISSING read ahead. Chapter III now scales with a dynamic counter amount, though it counts
+#BASIC LANDS rather than distinct basic land TYPES - closer than the old flat five, but
+#still not domain proper.
 text=Read ahead (Not implemented.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
 mana={2}{G}
 type=Enchantment
@@ -137573,11 +137575,12 @@ subtype=Lesson
 name=Getaway Car
 abilities=haste
 grade=borderline
-auto=@combat(attacking,blocking) source(this):may name(Bounce a creature) target(<upto:1>creature|mybattlefield) moveTo(ownerhand)
+auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>creature[counter{0/0.1.Crewed}]|mybattlefield) moveTo(ownerhand)
+auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#MISSING the bounce should be limited to a creature that CREWED this Vehicle this turn; the
-#engine keeps no crew list, so any creature you control may be chosen.
-text=Haste -- Whenever this Vehicle attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand. (Any creature you control may be chosen.) -- Crew 1
+#The crew list now exists: TapTargetCost::doPay stamps a Crewed counter on each creature
+#tapped to crew, so the bounce can be restricted to one of them.
+text=Haste -- Whenever this Vehicle attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand. -- Crew 1
 mana={3}
 type=Artifact
 subtype=Vehicle
@@ -137587,11 +137590,12 @@ toughness=3
 [card]
 name=Turtle Van
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.Crewed}]|mybattlefield)
+auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#MISSING the crewed-by restriction (no crew list is kept) and the Mutant/Ninja/Turtle
-#counter-doubling rider.
-text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (Any creature you control may be chosen; no doubling.) -- Crew 1
+#The crewed-by restriction now works via the Crewed counter stamped in TapTargetCost::doPay.
+#MISSING the Mutant/Ninja/Turtle counter-doubling rider.
+text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (No doubling.) -- Crew 1
 mana={3}
 type=Artifact
 subtype=Vehicle
@@ -137602,9 +137606,13 @@ toughness=4
 name=Golden Argosy
 grade=borderline
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#MISSING the whole attack trigger - it exiles each creature that CREWED this Vehicle and
-#returns them at end of turn, and the engine keeps no crew list.
-text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. (Not implemented.) -- Crew 1
+auto=@combat(attacking) source(this):all(creature[counter{0/0.1.Crewed}]|mybattlefield) moveTo(exile) and!( counter(0/0,1,ArgosyExiled) )!
+auto=@each my end:all(*[counter{0/0.1.ArgosyExiled}]|myexile) moveTo(mybattlefield) and!( tap(noevent) )!
+auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
+#The crew list now exists (a Crewed counter stamped in TapTargetCost::doPay), so this
+#really does exile the creatures that crewed it, and an ArgosyExiled counter brings them
+#back tapped at end of turn - the Bomat Courier / Intet shape.
+text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. -- Crew 1
 mana={4}
 type=Legendary Artifact
 subtype=Vehicle
@@ -137614,11 +137622,13 @@ toughness=6
 [card]
 name=Subterranean Schooner
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.Crewed}]|mybattlefield)
+auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#MISSING explore proper (reveal, land to hand else counter and choose) and the crewed-by
-#restriction; approximated as the +1/+1 counter half of explore on a creature you control.
-text=Whenever this Vehicle attacks, target creature that crewed it this turn explores. (Approximated as a +1/+1 counter on a creature you control.) -- Crew 1
+#The crewed-by restriction now works via the Crewed counter.
+#MISSING explore proper (reveal, land to hand, else counter and choose); this is the
+#+1/+1 counter half only.
+text=Whenever this Vehicle attacks, target creature that crewed it this turn explores. (Approximated as the +1/+1 counter half of explore.) -- Crew 1
 mana={1}{U}
 type=Artifact
 subtype=Vehicle
@@ -137655,11 +137665,12 @@ toughness=5
 [card]
 name=Unlicensed Hearse
 grade=borderline
-auto={T}:name(Exile cards from a graveyard) moveTo(exile) target(<upto:2>*|graveyard)
+auto={T}:name(Exile cards from a graveyard) moveTo(exile) target(<upto:2>*|graveyard) and!( counter(0/0,1,HearseExiled) )!
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-#MISSING power and toughness should equal the number of cards exiled WITH this permanent;
-#the engine tracks cards exiled by a source only via a counter the exiler stamps, which a
-#plain moveTo(exile) does not do. Fixed at 4/4.
+#The exile now stamps a HearseExiled counter, so the cards exiled with this permanent are
+#identifiable (the Bomat Courier shape).
+#MISSING power and toughness should EQUAL that count; a cda whose filter is a counter in
+#exile is not attested, so the body stays 4/4 rather than inventing the syntax.
 text={T}: Exile up to two target cards from a single graveyard. -- Unlicensed Hearse's power and toughness are each equal to the number of cards exiled with it. (Fixed at 4/4.) -- Crew 2
 mana={2}
 type=Artifact
@@ -137685,11 +137696,16 @@ toughness=5
 [card]
 name=Mysterious Limousine
 grade=borderline
-auto=may name(Exile a creature) moveTo(exile) target(<upto:1>other creature)
-auto=@combat(attacking) source(this):may name(Exile a creature) moveTo(exile) target(<upto:1>other creature)
+auto=may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( counter(0/0,1,LimoExiled) )!
+auto=@combat(attacking) source(this):may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( counter(0/0,1,LimoExiled) )!
+auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.LimoExiled}]|exile) moveto(battlefield)
 auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-#MISSING the exile is permanent here; it should last only until this Vehicle leaves the
-#battlefield, and the earlier exiled cards should return when a new one is exiled.
+#The exile now lasts only while this Vehicle is on the battlefield: the exiling ability
+#stamps a LimoExiled counter (the Bomat Courier / Intet shape) and a leave trigger hands
+#every card carrying it back. No engine change needed - I had this filed as an engine
+#gap and it is not one.
+#MISSING the earlier exiled cards should return when a NEW one is exiled; here they all
+#return together when the Vehicle leaves.
 text=Whenever this Vehicle enters or attacks, exile up to one other target creature until this Vehicle leaves the battlefield. (The exile is permanent.) -- Crew 3
 mana={3}{W}{W}
 type=Artifact
@@ -137700,11 +137716,14 @@ toughness=4
 [card]
 name=Foreboding Steamboat
 grade=borderline
-auto=may name(Exile two creatures) moveTo(exile) target(<upto:2>creature[-token]|opponentbattlefield)
+auto=may name(Exile two creatures) moveTo(exile) target(<upto:2>creature[-token]|opponentbattlefield) and!( counter(0/0,1,SteamboatExiled) )!
+auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.SteamboatExiled}]|exile) moveto(battlefield)
 auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-#MISSING each player should exile two of their own creatures and get them back when this
-#leaves; here only the opponent's are exiled, permanently, and the attack trigger that
-#converts an exiled card into a graveyard card plus a Treasure is not implemented.
+#The exiled creatures now come back when this Vehicle leaves, via a stamped
+#SteamboatExiled counter and a leave trigger.
+#MISSING each player should exile two of their OWN creatures; here only the opponent's
+#are taken. The attack trigger that converts an exiled card into a graveyard card plus a
+#Treasure is also not implemented.
 text=When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield. -- Whenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, create a Treasure token. (Approximated: exiles two of the opponent's creatures permanently.) -- Crew 3
 mana={3}{B}{B}
 type=Artifact
@@ -137745,7 +137764,10 @@ abilities=flying
 grade=borderline
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
 #MISSING "as long as you control eight or more permanents named Phoenix Fleet Airship,
-#this is an artifact creature" - aslongas has no count threshold.
+#this is an artifact creature". The " >N" count threshold on aslongas IS real - it feeds
+#AAsLongAs(mini,maxi) and ships on cards like "aslongas(*|mygraveyard) shroud >6" - but
+#MEASURED here it does not combine with becomes(): at 8 and at 9 copies the Vehicle
+#still could not be destroyed as a creature. Reverted rather than shipped on a guess.
 #MISSING the end-step self-copy gated on having sacrificed a permanent this turn.
 text=Flying -- At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle. (Not implemented.) -- As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature. -- Crew 2
 mana={2}{B}{B}
@@ -137863,9 +137885,11 @@ toughness=4
 [card]
 name=The Boulder, Ready to Rumble
 grade=borderline
-auto=@combat(attacking) source(this):_EARTHBEND2_
-#MISSING earthbend X should scale with the number of creatures you control with power 4 or
-#greater; fixed at 2.
+auto=@combat(attacking) source(this):name(Earthbend X) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1,type:creature[power>=4]:mybattlefield)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped])) forever
+#Earthbend X now scales: counter(1/1,<count>) takes a dynamic amount, the shape
+#counter(1/1,type:creature:mygraveyard) already ships on other cards. Written out rather
+#than using _EARTHBEND2_ because the macros hardcode their counter count, and those
+#macros are validated in game and should not be disturbed.
 text=Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or greater. (Fixed at 2.)
 mana={3}{G}
 type=Legendary Creature
