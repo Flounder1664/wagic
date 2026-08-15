@@ -136666,3 +136666,211 @@ subtype=Vehicle
 power=6
 toughness=5
 [/card]
+[card]
+name=Earth Kingdom General
+grade=borderline
+auto=_EARTHBEND2_
+text=When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+mana={3}{G}
+type=Creature
+subtype=Human Soldier Ally
+power=2
+toughness=2
+[/card]
+[card]
+name=Dai Li Agents
+grade=borderline
+auto=_EARTHBEND1_
+auto=_EARTHBEND1_
+text=When this creature enters, earthbend 1, then earthbend 1. (To earthbend 1, target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
+mana={3}{B}{G}
+type=Creature
+subtype=Human Soldier
+power=3
+toughness=4
+[/card]
+[card]
+name=Earth Village Ruffians
+grade=borderline
+auto=@movedTo(this|graveyard) from(battlefield):_EARTHBEND2_
+text=When this creature dies, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+mana={2}{BG}
+type=Creature
+subtype=Human Soldier Rogue
+power=3
+toughness=1
+[/card]
+[card]
+name=Haru, Hidden Talent
+grade=borderline
+auto=@movedTo(other ally|mybattlefield):_EARTHBEND1_
+text=Whenever another Ally you control enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
+mana={1}{G}
+type=Legendary Creature
+subtype=Human Peasant
+power=1
+toughness=1
+[/card]
+[card]
+name=Sandbenders' Storm
+grade=borderline
+auto=choice name(Destroy a big creature) destroy target(creature[power>=4]) name(Earthbend 3) _EARTHBEND3_
+text=Choose one -- Destroy target creature with power 4 or greater. -- Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+mana={3}{W}
+type=Instant
+[/card]
+[card]
+name=Dai Li Indoctrination
+grade=borderline
+auto=choice name(Opponent discards a card) ability$!name(discard) target(<1>*[-land]|myhand) reject!$ opponent name(Earthbend 2) _EARTHBEND2_
+#MISSING mode one should let YOU pick the card out of the revealed hand; the engine has no
+#"reveal hand, caster chooses" form, so the opponent chooses which nonland card to discard.
+text=Choose one -- Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. (Approximation: the opponent chooses.) -- Earthbend 2.
+mana={1}{B}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Rebellious Captives
+grade=borderline
+auto={6} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - counters and earthbend 2) counter(0/0,1,exhaust) && counter(1/1,2) && _EARTHBEND2_
+text=Exhaust -- {6}: Put two +1/+1 counters on this creature, then earthbend 2. (An exhaust ability can be activated only once.)
+mana={1}{G}
+type=Creature
+subtype=Human Peasant Ally
+power=2
+toughness=2
+[/card]
+[card]
+name=Bitter Work
+grade=borderline
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:draw:1 controller
+auto={4} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - Earthbend 4) counter(0/0,1,exhaust) && _EARTHBEND4_ restriction{myturnonly}
+text=Whenever you attack a player with one or more creatures with power 4 or greater, draw a card. -- Exhaust -- {4}: Earthbend 4. Activate only during your turn.
+mana={1}{R}{G}
+type=Enchantment
+[/card]
+[card]
+name=Ba Sing Se
+grade=borderline
+auto=tap(noevent)
+#MISSING "unless you control a basic land" - a conditional enters-tapped needs a
+#restriction on tap(noevent), which is unattested, so it always enters tapped.
+auto={T}:Add{G}
+auto={2}{G}{T}:name(Earthbend 2) _EARTHBEND2_ asSorcery
+text=This land enters tapped unless you control a basic land. -- {T}: Add {G}. -- {2}{G}, {T}: Earthbend 2. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Earth Rumble
+grade=borderline
+auto=_EARTHBEND2_
+auto=target(creature|mybattlefield) _FIGHT_
+text=Earthbend 2. When you do, up to one target creature you control fights target creature an opponent controls.
+mana={3}{G}
+type=Sorcery
+[/card]
+[card]
+name=Toph, the Blind Bandit
+grade=borderline
+#MISSING power should equal the number of LAND CREATURES you control; a creature[land]
+#style filter is unattested in a cda, so power is fixed at 3.
+auto=_EARTHBEND2_
+text=When Toph enters, earthbend 2. -- Toph's power is equal to the number of land creatures you control.
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Toph, the First Metalbender
+grade=borderline
+auto=@each my end:_EARTHBEND2_
+#MISSING "Nontoken artifacts you control are lands in addition to their other types" -
+#adding a type to a whole class of permanents has no route in the DSL.
+text=Nontoken artifacts you control are lands in addition to their other types. (Not implemented.) -- At the beginning of your end step, earthbend 2.
+mana={1}{R}{G}{W}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Glyph Elemental
+grade=borderline
+bestow={1}{W}
+auto=bestow bstw
+auto=@movedTo(land|myBattlefield):counter(1/1)
+text=Bestow {1}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.) -- Landfall - Whenever a land you control enters, put a +1/+1 counter on this permanent.
+mana={1}{W}
+type=Enchantment Creature
+subtype=Elemental
+power=2
+toughness=2
+[/card]
+[card]
+name=Quest for the Necropolis
+grade=borderline
+auto=@movedTo(land|myBattlefield):counter(0/0,1,Quest)
+auto={5}{B}{S(this)}:name(Reanimate a creature) target(creature|graveyard) moveTo(mybattlefield)
+#MISSING the activation cost should drop by {1} per quest counter; altercost does not apply
+#to a card's own activated ability, so the cost is flat.
+text=Landfall - Whenever a land you control enters, put a quest counter on this enchantment. -- {5}{B}, Sacrifice this enchantment: Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on this enchantment. (Cost reduction not implemented.)
+mana={B}
+type=Enchantment
+[/card]
+[card]
+name=Territory Culler
+abilities=reach
+grade=borderline
+auto=@movedTo(land|myBattlefield):name(look) reveal:1 optionone name(take creature) target(creature|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<1>*|reveal) moveto(ownergraveyard) optiontwoend revealend
+text=Devoid -- Reach -- Landfall - Whenever a land you control enters, look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand. If you don't put the card into your hand this way, put it into your graveyard.
+mana={4}{G}
+type=Creature
+subtype=Eldrazi
+#MISSING devoid - the card should be colorless despite its green cost.
+power=7
+toughness=5
+[/card]
+[card]
+name=The Necrobloom
+grade=borderline
+auto=@movedTo(land|myBattlefield):create(Plant:creature plant:0/1:green)
+#MISSING the seven-lands-with-different-names upgrade to a 2/2 Zombie, and "land cards in
+#your graveyard have dredge 3" - neither distinct-name counting nor granting dredge from
+#the graveyard has a route in the DSL.
+text=Landfall - Whenever a land you control enters, create a 0/1 green Plant creature token. If you control seven or more lands with different names, create a 2/2 black Zombie creature token instead. (Upgrade not implemented.) -- Land cards in your graveyard have dredge 3. (Not implemented.)
+mana={1}{W}{B}{G}
+type=Legendary Creature
+subtype=Plant
+power=2
+toughness=7
+[/card]
+[card]
+name=Weather Maker
+grade=borderline
+auto=@movedTo(land|myBattlefield):counter(0/0,1,Charge)
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+text=Landfall - Whenever a land you control enters, put a charge counter on this artifact. -- {T}: Add one mana of any color. (The charge-counter mana abilities are not implemented.)
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Genemorph Imago
+abilities=flying
+grade=borderline
+auto=@movedTo(land|myBattlefield):target(creature) transforms((,setpower=3,settoughness=3)) ueot
+#MISSING the six-lands upgrade to base 6/6; a second trigger gated on land count would
+#stack with this one rather than replace it.
+text=Flying -- Landfall - Whenever a land you control enters, target creature has base power and toughness 3/3 until end of turn. If you control six or more lands, that creature has base power and toughness 6/6 until end of turn instead. (Upgrade not implemented.)
+mana={G}{U}
+type=Creature
+subtype=Insect Druid
+power=1
+toughness=3
+[/card]
