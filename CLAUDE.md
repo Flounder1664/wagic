@@ -4,12 +4,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Fork branch map
 
+**`wagic-v146-windows` is the trunk. There is exactly one build, and it comes from trunk.**
+
 - `master`                = upstream `WagicProject/wagic`
-- `john/android-rp5`      = Android port (gamepad mapping, swipe fix, ECL crash fix) — tag `verified-android-2026-04-19`
-- `wagic-v145-windows`    = unified release branch (Android port + VS2022 v145 + zipFS + cherry-picks)
-- `feature/*`             = work ready to land (deck-editor delete, version display)
-- `wip/*`                 = work parked / preserved (Steam Deck, S9-fix attempts, card-data testing, build tooling, uncategorized notes)
-- `john/android-s9-fix`   = active branch for the S9 Tablet input regression hunt
+- `wagic-v146-windows`    = **trunk** — the only branch anything is ever built or deployed from
+- `feature/*`, `claude/*` = short-lived: branch from trunk, merge back the same session
+- `wip/*`                 = deliberately parked, not expected to land
+- `john/android-rp5`      = Android port — tag `verified-android-2026-04-19`
+- `wagic-v145-windows`    = superseded by v146
+
+### Rules that keep it that way
+
+1. **Branch from trunk, merge to trunk, same session.** A branch that outlives the work
+   becomes a second game. On 2026-08-15 two lines had run in parallel for six weeks —
+   131 and 120 commits — and John ended up with features in one build that were missing
+   from the other.
+2. **Merge; never re-port by hand.** Cherry-picking a fix "across" instead of merging is
+   how the crash handler and the TestSuite null-guard each got written twice, differently,
+   and how one line's `missing=` fields became the other's inert `#MISSING` comments.
+3. **Build only from trunk**, and only after merging your branch into it. Building from a
+   feature branch silently ships whatever trunk has that the branch lacks — or worse, drops
+   what trunk has.
+4. **Before finishing a session, run `tools/check-branch-divergence.sh`.** Anything it lists
+   is unmerged work that will diverge further.
 
 See `LOCAL_CHANGES.md` for one-row-per-change history and `BUILD_LOG.md` for the device-install log.
 
