@@ -897,6 +897,26 @@ int TapTargetCost::doPay()
         //crew ability
         if(crew)
         {
+            //Mark the creature as having crewed this turn. storedCard only keeps the LAST
+            //creature tapped, so it cannot answer "each creature that crewed this Vehicle" -
+            //cards like Golden Argosy and Getaway Car need the whole set. A named counter on
+            //each crewer makes the set queryable from the DSL with no new machinery, the same
+            //trick the exile cards use (Bomat Courier's BomatExiled). Cards clear it with
+            //removeallcounters(0/0,1,Crewed), exactly as they already do for "saddled".
+            {
+                AbilityFactory afc(_target->getObserver());
+                MTGAbility * c = afc.parseMagicLine("counter(0/0,1,Crewed)", -1, NULL, _target, false, true);
+                if (c)
+                {
+                    MTGAbility * crewedMark = c->clone();
+                    SAFE_DELETE(c);
+                    crewedMark->target = _target;
+                    crewedMark->oneShot = true;
+                    crewedMark->canBeInterrupted = false;
+                    crewedMark->resolve();
+                    SAFE_DELETE(crewedMark);
+                }
+            }
             if(_target->getCrewAbility().size())
             {
                 AbilityFactory af(_target->getObserver());
