@@ -8,6 +8,10 @@
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
 #Covers: The Lord of the Eagles, The Master of Lake-town, The Misty Mountains Cold, The Mountain-king's Return, The Notary Hobbits, The One Ring
+#UPDATED 2026-08-15: these numbers moved because Saga chapter I now actually fires.
+#It was written as an @counteradded trigger listening for the Lore counter the Saga
+#adds as it enters - which lands before the trigger is registered, so chapter I was
+#silently skipped on 41 Sagas. Chapter I is a plain ETB line now.
 [INIT]
 firstmain
 [PLAYER1]
@@ -20,6 +24,7 @@ next
 COMBATBEGIN
 [PLAYER1]
 inplay:*,*,*,*,*,*
+hand:*
 [PLAYER2]
 life:20
 [END]
