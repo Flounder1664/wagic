@@ -137922,3 +137922,37 @@ mana={3}{R}
 type=Enchantment
 subtype=Saga
 [/card]
+[card]
+name=Isengard Unleashed
+grade=borderline
+flashback={4}{R}{R}{R}
+auto=emblem transforms((,newability[@damaged(player) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch],newability[@damaged(creature) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch])) ueot
+#MISSING "damage can't be prevented this turn" - prevention is applied inside
+#Damage::resolve as REDamagePrevention replacement effects plus the target's preventable
+#counter, and no keyword switches either off. The TRIPLE damage half is implemented, using
+#the Fiery Emancipation shape (an extra twicethatmuch on top of the original hit).
+text=Damage can't be prevented this turn. (Not implemented.) If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
+mana={2}{R}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Spring-Loaded Sawblades
+abilities=flash
+grade=borderline
+auto=damage:5 target(creature[tapped]|opponentbattlefield)
+#MISSING craft with artifact {3}{W} - craft exiles this plus another artifact to return it
+#transformed, and the transformed face is not registered as a card here.
+text=Flash -- When this artifact enters, it deals 5 damage to target tapped creature an opponent controls. -- Craft with artifact {3}{W} (Not implemented.)
+mana={1}{W}
+type=Artifact
+[/card]
+[card]
+name=Waterlogged Hulk
+grade=borderline
+auto={T}:mill:1 controller
+#MISSING craft with Island {3}{U} - craft exiles this plus an Island to return it
+#transformed, and the transformed face is not registered as a card here.
+text={T}: Mill a card. -- Craft with Island {3}{U} (Not implemented.)
+mana={U}
+type=Artifact
+[/card]
