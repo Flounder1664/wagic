@@ -137569,3 +137569,356 @@ mana={2}{R}
 type=Instant
 subtype=Lesson
 [/card]
+[card]
+name=Getaway Car
+abilities=haste
+grade=borderline
+auto=@combat(attacking,blocking) source(this):may name(Bounce a creature) target(<upto:1>creature|mybattlefield) moveTo(ownerhand)
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+#MISSING the bounce should be limited to a creature that CREWED this Vehicle this turn; the
+#engine keeps no crew list, so any creature you control may be chosen.
+text=Haste -- Whenever this Vehicle attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand. (Any creature you control may be chosen.) -- Crew 1
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
+name=Turtle Van
+grade=borderline
+auto=@combat(attacking) source(this):counter(1/1) target(creature|mybattlefield)
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+#MISSING the crewed-by restriction (no crew list is kept) and the Mutant/Ninja/Turtle
+#counter-doubling rider.
+text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (Any creature you control may be chosen; no doubling.) -- Crew 1
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Golden Argosy
+grade=borderline
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+#MISSING the whole attack trigger - it exiles each creature that CREWED this Vehicle and
+#returns them at end of turn, and the engine keeps no crew list.
+text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. (Not implemented.) -- Crew 1
+mana={4}
+type=Legendary Artifact
+subtype=Vehicle
+power=3
+toughness=6
+[/card]
+[card]
+name=Subterranean Schooner
+grade=borderline
+auto=@combat(attacking) source(this):counter(1/1) target(creature|mybattlefield)
+auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
+#MISSING explore proper (reveal, land to hand else counter and choose) and the crewed-by
+#restriction; approximated as the +1/+1 counter half of explore on a creature you control.
+text=Whenever this Vehicle attacks, target creature that crewed it this turn explores. (Approximated as a +1/+1 counter on a creature you control.) -- Crew 1
+mana={1}{U}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=4
+[/card]
+[card]
+name=Mobile Homestead
+grade=borderline
+auto=aslongas(*[mount]|myBattlefield) haste
+auto=@combat(attacking) source(this):name(look) reveal:1 optionone name(put the land into play) target(land|reveal) moveTo(myBattlefield) and!( tap(noevent) )! optiononeend optiontwo name(leave it) target(<1>*|reveal) moveto(mylibrary) optiontwoend revealend
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=This Vehicle has haste as long as you control a Mount. -- Whenever this Vehicle attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. -- Crew 2
+mana={2}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=The Belligerent
+grade=borderline
+auto=@combat(attacking) source(this):_TREASURE_
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+#MISSING "you may play lands and cast spells from the top of your library until end of
+#turn" - there is no temporary play-from-library grant.
+text=Whenever The Belligerent attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library. (Play-from-top not implemented.) -- Crew 3
+mana={2}{U}{R}
+type=Legendary Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Unlicensed Hearse
+grade=borderline
+auto={T}:name(Exile cards from a graveyard) moveTo(exile) target(<upto:2>*|graveyard)
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING power and toughness should equal the number of cards exiled WITH this permanent;
+#the engine tracks cards exiled by a source only via a counter the exiler stamps, which a
+#plain moveTo(exile) does not do. Fixed at 4/4.
+text={T}: Exile up to two target cards from a single graveyard. -- Unlicensed Hearse's power and toughness are each equal to the number of cards exiled with it. (Fixed at 4/4.) -- Crew 2
+mana={2}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Dodgy Jalopy
+abilities=trample
+grade=borderline
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+autograveyard={2}{G}:name(Scavenge) moveTo(exile) and!( counter(1/1,5) target(creature|mybattlefield) )! asSorcery
+#MISSING power should equal the greatest mana value among creatures you control (fixed at
+#5), and scavenge should add counters equal to that power.
+text=Trample -- Dodgy Jalopy's power is equal to the greatest mana value among creatures you control. (Fixed at 5.) -- Crew 3 -- Scavenge {2}{G}
+mana={2}{G}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Mysterious Limousine
+grade=borderline
+auto=may name(Exile a creature) moveTo(exile) target(<upto:1>other creature)
+auto=@combat(attacking) source(this):may name(Exile a creature) moveTo(exile) target(<upto:1>other creature)
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+#MISSING the exile is permanent here; it should last only until this Vehicle leaves the
+#battlefield, and the earlier exiled cards should return when a new one is exiled.
+text=Whenever this Vehicle enters or attacks, exile up to one other target creature until this Vehicle leaves the battlefield. (The exile is permanent.) -- Crew 3
+mana={3}{W}{W}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Foreboding Steamboat
+grade=borderline
+auto=may name(Exile two creatures) moveTo(exile) target(<upto:2>creature[-token]|opponentbattlefield)
+auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+#MISSING each player should exile two of their own creatures and get them back when this
+#leaves; here only the opponent's are exiled, permanently, and the attack trigger that
+#converts an exiled card into a graveyard card plus a Treasure is not implemented.
+text=When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield. -- Whenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, create a Treasure token. (Approximated: exiles two of the opponent's creatures permanently.) -- Crew 3
+mana={3}{B}{B}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=7
+[/card]
+[card]
+name=Filigree Racer
+grade=borderline
+auto=alterenergy:4 controller
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING the attack trigger that pays {E}{E} to grant jump-start to a graveyard spell;
+#granting jump-start has no route.
+text=When this Vehicle enters, you get {E}{E}{E}{E} (four energy counters). -- Whenever this Vehicle attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (Not implemented.) -- Crew 2
+mana={3}{R}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Smuggler's Buggy
+grade=borderline
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING hideaway 4 and the combat-damage payoff that casts the hidden card for free;
+#hideaway appears once in the corpus and not in a form that can be reused here.
+text=Hideaway 4 -- Whenever this Vehicle deals combat damage to a player, you may cast the exiled card without paying its mana cost. (Neither implemented.) -- Crew 2
+mana={4}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Phoenix Fleet Airship
+abilities=flying
+grade=borderline
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+#MISSING "as long as you control eight or more permanents named Phoenix Fleet Airship,
+#this is an artifact creature" - aslongas has no count threshold.
+#MISSING the end-step self-copy gated on having sacrificed a permanent this turn.
+text=Flying -- At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle. (Not implemented.) -- As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature. -- Crew 2
+mana={2}{B}{B}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Scythecat Cub
+abilities=trample
+grade=borderline
+auto=@movedTo(land|myBattlefield):counter(1/1) target(creature|mybattlefield)
+#MISSING the second-resolution-this-turn doubling.
+text=Trample -- Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead. (No doubling.)
+mana={1}{G}
+type=Creature
+subtype=Cat
+power=2
+toughness=2
+[/card]
+[card]
+name=Territorial Bruntar
+abilities=reach
+grade=borderline
+auto=@movedTo(land|myBattlefield):Reveal:1 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone name(take the card) target(*[-land]|reveal) moveto(hand) optiononeend optiontwo name(leave it) target(<1>*|reveal) moveto(hand) optiontwoend revealend
+#MISSING the card should be exiled and castable this turn; it goes to your hand instead.
+text=Reach -- Landfall - Whenever a land you control enters, exile cards from the top of your library until you exile a nonland card. You may cast that card this turn. (Approximated: the card goes to your hand.)
+mana={4}{R}{R}
+type=Creature
+subtype=Beast
+power=6
+toughness=6
+[/card]
+[card]
+name=Nissa, Worldsoul Speaker
+grade=borderline
+auto=@movedTo(land|myBattlefield):alterenergy:2 controller
+#MISSING "you may pay eight {E} rather than the mana cost for permanent spells you cast" -
+#an energy alternative cost applying to other cards has no route.
+text=Landfall - Whenever a land you control enters, you get {E}{E} (two energy counters). -- You may pay eight {E} rather than pay the mana cost for permanent spells you cast. (Not implemented.)
+mana={3}{G}
+type=Legendary Creature
+subtype=Elf Druid
+power=3
+toughness=3
+[/card]
+[card]
+name=Mightform Harmonizer
+grade=borderline
+abilities=canplayfromexile
+other={2}{G} name(Warp)
+otherrestriction=type(this|myhand)~morethan~0
+auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+auto=@movedTo(land|myBattlefield):target(creature|mybattlefield) dynamicability<!mytgt powerpumppow!>
+text=Landfall - Whenever a land you control enters, double the power of target creature you control until end of turn. -- Warp {2}{G}
+mana={2}{G}{G}
+type=Creature
+subtype=Insect Druid
+power=4
+toughness=4
+[/card]
+[card]
+name=Springheart Nantuko
+grade=borderline
+bestow={1}{G}
+auto=bestow bstw
+auto=bestow teach(creature) 1/1
+#MISSING the landfall clone trigger - copying the enchanted creature for {1}{G} needs the
+#bestow attachment target at trigger time, which is not reachable.
+text=Bestow {1}{G} -- Enchanted creature gets +1/+1. -- Landfall - Whenever a land you control enters, you may pay {1}{G} if this permanent is attached to a creature you control. If you do, create a token that's a copy of that creature. (Not implemented.)
+mana={1}{G}
+type=Enchantment Creature
+subtype=Insect Monk
+power=1
+toughness=1
+[/card]
+[card]
+name=Zimone, Mystery Unraveler
+grade=borderline
+auto=@movedTo(land|myBattlefield) turnlimited:_MANIFEST_DREAD_
+#MISSING the "otherwise turn a permanent face up" branch on later resolutions.
+text=Landfall - Whenever a land you control enters, manifest dread if this is the first time this ability has resolved this turn. Otherwise, you may turn a permanent you control face up. (Only the first resolution is implemented.)
+mana={2}{G}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Toph, Hardheaded Teacher
+grade=borderline
+auto=may name(Discard to return a spell) target(<1>*|myhand) reject and!( target(*[instant;sorcery]|mygraveyard) moveTo(ownerhand) )!
+auto=@movedTo(*|mystack):_EARTHBEND1_
+#MISSING the extra +1/+1 counter when the spell cast was a Lesson.
+text=When Toph enters, you may discard a card. If you do, return target instant or sorcery card from your graveyard to your hand. -- Whenever you cast a spell, earthbend 1. If that spell is a Lesson, put an additional +1/+1 counter on that land. (No Lesson bonus.)
+mana={2}{R}{G}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=4
+[/card]
+[card]
+name=Beifong's Bounty Hunters
+grade=borderline
+auto=@movedTo(other creature|mygraveyard) from(mybattlefield):_EARTHBEND2_
+#MISSING earthbend X should scale with the dead creature's power; fixed at 2.
+text=Whenever a nonland creature you control dies, earthbend X, where X is that creature's power. (Fixed at 2.)
+mana={2}{B}{G}
+type=Creature
+subtype=Human Mercenary
+power=4
+toughness=4
+[/card]
+[card]
+name=The Boulder, Ready to Rumble
+grade=borderline
+auto=@combat(attacking) source(this):_EARTHBEND2_
+#MISSING earthbend X should scale with the number of creatures you control with power 4 or
+#greater; fixed at 2.
+text=Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or greater. (Fixed at 2.)
+mana={3}{G}
+type=Legendary Creature
+subtype=Human Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Bumi, Unleashed
+abilities=trample
+grade=borderline
+auto=_EARTHBEND4_
+auto=@combatdamaged(player) from(this):untap all(land|mybattlefield)
+#MISSING the additional combat phase in which only land creatures may attack.
+text=Trample -- When Bumi enters, earthbend 4. -- Whenever Bumi deals combat damage to a player, untap all lands you control. After this phase, there is an additional combat phase. Only land creatures can attack during that combat phase. (No extra combat phase.)
+mana={3}{R}{G}
+type=Legendary Creature
+subtype=Human Noble Advisor
+power=5
+toughness=4
+[/card]
+[card]
+name=Bumi, King of Three Trials
+grade=borderline
+auto=choice name(Three +1/+1 counters) counter(1/1,3) name(Scry 3) _SCRY3_ name(Earthbend 3) _EARTHBEND3_
+#MISSING "choose up to X, where X is the number of Lesson cards in your graveyard" - the
+#engine's choice menu takes exactly one mode and cannot scale the number of picks.
+text=When Bumi enters, choose up to X, where X is the number of Lesson cards in your graveyard -- Put three +1/+1 counters on Bumi. -- Target player scries 3. -- Earthbend 3. (Exactly one mode may be chosen.)
+mana={5}{G}
+type=Legendary Creature
+subtype=Human Noble Advisor
+power=4
+toughness=4
+[/card]
+[card]
+name=Fatal Fissure
+grade=borderline
+auto=target(creature) transforms((,newability[@movedTo(this|graveyard) from(battlefield):_EARTHBEND4_])) ueot
+text=Choose target creature. When that creature dies this turn, you earthbend 4.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=The Cave of Two Lovers
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.1.Lore}=1) token(Ally,Creature Ally,1/1,white)*2
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*[mountain]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) _EARTHBEND3_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create two 1/1 white Ally creature tokens. -- II - Search your library for a Mountain card (the Cave option is not implemented), reveal it, put it into your hand, then shuffle. -- III - Earthbend 3.
+mana={3}{R}
+type=Enchantment
+subtype=Saga
+[/card]
