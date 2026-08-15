@@ -1,0 +1,24 @@
+#Safety guard for the invented-syntax sweep. Beorn the Fierce proved that an
+#unrecognised trigger/phase name does not merely no-op -- it produced a null
+#card and crashed the engine at load (Spell(observer, NULL) in initGame).
+#These cards all carry a token that exists nowhere in mtg.txt and is unknown to
+#the C++ parser (seconddrawofturn, mytgt2, controlledlands, sourcepower,
+#lifelostamount). Putting them all into play at once proves they are inert
+#rather than fatal. Names must stay comma-free -- the zone parser splits on commas.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Lakeshore Apothecary,Bard the Bowman,Iron Hills Stalwart,Bolg of the North
+[PLAYER2]
+inplay:Mirkwood Pathmaker,The Master of Lake-town
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:*,*,*,*
+[PLAYER2]
+inplay:*,*
+life:20
+[END]

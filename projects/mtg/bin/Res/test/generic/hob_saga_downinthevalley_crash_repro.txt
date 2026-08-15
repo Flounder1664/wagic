@@ -1,0 +1,32 @@
+#Repro attempt for the multi-chapter Saga StackAbility crash (0xc0000005)
+#seen on Down in the Valley turn 15. Puts the Saga in play at INIT so its
+#per-turn lore-counter trigger accumulates across several eot passes,
+#reaching chapter III (lore=3) quickly instead of over many real turns.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:down in the valley
+library:ornithopter,goblin piker,ornithopter,goblin piker,ornithopter,goblin piker,ornithopter,goblin piker
+life:20
+[PLAYER2]
+library:ornithopter,goblin piker,ornithopter,goblin piker,ornithopter,goblin piker,ornithopter,goblin piker
+life:20
+[DO]
+eot
+eot
+eot
+eot
+eot
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:*
+hand:*,*
+library:*,*,*,*,*,*
+life:20
+[PLAYER2]
+hand:*,*,*
+library:*,*,*,*,*
+life:20
+[END]

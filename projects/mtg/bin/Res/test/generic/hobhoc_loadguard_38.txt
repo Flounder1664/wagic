@@ -1,0 +1,25 @@
+#Auto-generated load guard 38: puts HOB/HOC permanents into play to prove the
+#engine can construct and resolve them. This catches the FATAL failure mode --
+#an unrecognised phase/trigger name yields a null card and kills the engine in
+#TestSuiteGame::initGame (Spell(observer, NULL)), as Beorn the Fierce did.
+#Cards are referenced by id because many HOB/HOC names contain commas and the
+#zone parser splits on commas.
+#NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
+#rules behaviour. This guards against crashes and silent card-load failure, not
+#against a card doing the wrong thing.
+#Covers: The Black Arrow, The Black Gate, The Chief Warg, The Gaffer, The Great Goblin, The Lonely Mountain
+[INIT]
+firstmain
+[PLAYER1]
+inplay:700171,701047,700150,701015,700158,700187
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:*,*,*,*,*,*
+[PLAYER2]
+life:20
+[END]

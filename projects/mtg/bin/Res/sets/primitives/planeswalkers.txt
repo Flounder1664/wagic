@@ -1988,7 +1988,7 @@ name=Koth of the Hammer
 auto=counter(0/0,3,loyalty)
 auto={C(0/0,1,Loyalty)}:name(+1: Untap target land and becomes a 4/4 Elemental) untap target(mountain) && transforms((Elemental Creature,setpower=4,settoughness=4,red)) ueot
 auto={C(0/0,-2,Loyalty)}:name(-2: Add red mana for each mountain) foreach(mountain|myBattlefield) add{R}
-auto={C(0/0,-5,Loyalty)}:name(-5: Emblem: "Mountains gains: Deals 1 damage any target") emblem("Mountains you control have '{T}: This land deals 1 damage to target creature or player.'") transforms((,newability[lord(mountain|mybattlefield) {T}:damage:1 target(creature)],newability[lord(mountain|mybattlefield) {T}:damage:1 target(player)])) forever dontremove
+auto={C(0/0,-5,Loyalty)}:name(-5: Emblem: "Mountains gains: Deals 1 damage any target") emblem("Mountains you control have '{T}: This land deals 1 damage to target creature or player.'") transforms((,newability[lord(mountain|mybattlefield) {T}:name(Deal 1 damage to a creature) damage:1 target(creature)],newability[lord(mountain|mybattlefield) {T}:name(Deal 1 damage to a player) damage:1 target(player)])) forever dontremove
 text=+1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land. -- -2: Add {R} for each Mountain you control. -- -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
 mana={2}{R}{R}
 type=Legendary Planeswalker
@@ -2265,7 +2265,7 @@ name=Mordenkainen
 auto=counter(0/0,5,Loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: Draw 2 cards) draw:2 && transforms((,newability[name(Put on bottom) target(*|myhand) bottomoflibrary])) forever
 auto={C(0/0,-2,Loyalty)}:name(-2: Create Dog Illusion) token(Dog Mor)
-auto={C(0/0,-10,Loyalty)}:name(-10: Exchange hand and library) token(Mordenkainen Emblem,Emblem,0/0,shroud,indestructible,notrigger) and!( transforms((,newability[nomaxhand],newability[all(*|myhand) moveto(myreveal) and!( all(*|mylibrary) moveto(myhand) and!( all(*|myreveal) moveto(mylibrary) )! )!])) forever )!
+auto={C(0/0,-10,Loyalty)}:name(-10: Exchange hand and library) emblem("You have no maximum hand size.") transforms((,newability[nomaxhand],newability[all(*|myhand) moveto(myreveal) and!( all(*|mylibrary) moveto(myhand) and!( all(*|myreveal) moveto(mylibrary) )! )!])) forever dontremove
 text=+2: Draw two cards, then put a card from your hand on the bottom of your library. -- -2: Create a blue Dog Illusion creature token with "This creature's power and toughness are each equal to twice the number of cards in your hand." -- -10: Exchange your hand and library, then shuffle. You get an emblem with "You have no maximum hand size."
 mana={4}{U}{U}
 type=Legendary Planeswalker
@@ -2988,7 +2988,7 @@ name=Serra the Benevolent
 auto=counter(0/0,4,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: Creatures you control with flying gets +1/+1) all(creature[flying]|myBattlefield) 1/1 ueot
 auto={C(0/0,-3,Loyalty)}:name(-3: Create a White Creature Angel 4/4) token(Angel,Creature Angel,4/4,white,flying,vigilance)
-auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: "Worship") emblem("If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.") this(variable{worshipped} >= 1) transforms((,newability[reduceto:1])) forever dontremove
+auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: "Worship") emblem("If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.") this(variable{worshipped} >= 1) transforms((,newability[reduceto:1])) dontremove
 text=+2: Creatures you control with flying get +1/+1 until end of turn. -- -3: Create a 4/4 white Angel creature token with flying and vigilance. -- -6: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
 mana={2}{W}{W}
 type=Legendary Planeswalker
@@ -3566,7 +3566,7 @@ type=Legendary Planeswalker
 name=Tibalt, Cosmic Impostor
 backside=Valki, God of Lies
 auto=counter(0/0,5,Loyalty)
-auto=token(Tibalt Emblem,Emblem,0/0,shroud,indestructible,notrigger) and!( transforms((,newability[lord(*[counter{0/0.1.TibaltExiled}]|myexile) canplayfromexile],newability[lord(*[counter{0/0.1.TibaltExiled}]|myexile) anytypeofmana],newability[{0}:name(Cast from opponent exile) target(*[counter{0/0.1.TibaltExiled}]|opponentexile) moveto(myexile) and!( transforms((,newability[counter(0/0.1.TibaltExiled)],newability[canplayfromexile],newability[anytypeofmana],newability[phaseaction[end once checkex] moveTo(ownerexile)],newability[phaseaction[untap once checkex] counter(0/0.1.TibaltExiled)])) ueot )!])) forever )!
+auto=emblem("You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.") transforms((,newability[lord(*[counter{0/0.1.TibaltExiled}]|myexile) canplayfromexile],newability[lord(*[counter{0/0.1.TibaltExiled}]|myexile) anytypeofmana],newability[{0}:name(Cast from opponent exile) target(*[counter{0/0.1.TibaltExiled}]|opponentexile) moveto(myexile) and!( transforms((,newability[counter(0/0.1.TibaltExiled)],newability[canplayfromexile],newability[anytypeofmana],newability[phaseaction[end once checkex] moveTo(ownerexile)],newability[phaseaction[untap once checkex] counter(0/0.1.TibaltExiled)])) ueot )!])) forever dontremove
 auto={C(0/0,2,Loyalty)}:name(+2: Exile the top card) all(*[zpos=1]|library) moveto(ownerexile) and!( counter(0/0,1,TibaltExiled) )!
 auto={C(0/0,-3,Loyalty)}:name(-3: Exile target artifact or creature) target(*[artifact;creature]|battlefield) moveto(ownerexile) and!( counter(0/0,1,TibaltExiled) )!
 auto={C(0/0,-8,Loyalty)}:name(-8: Exile all cards from all graveyards) add{R}{R}{R} && ability$!all(*|graveyard) moveto(ownerexile) and!( counter(0/0.1.TibaltExiled) )! !$ controller

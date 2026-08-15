@@ -1,0 +1,26 @@
+#Storied: controlling 3+ artifacts/legendaries/Sagas while you control a
+#card with the storied keyword grants the enduring story, which drops a
+#visible "Enduring Story" marker card into the command zone (the same way
+#AFR Dungeons and MID's Day/Night are shown as real command-zone cards).
+#All three of these are legendary and carry storied, so the 3-permanent
+#threshold is met. (Card names here must not contain commas -- the test
+#format splits zone lists on commas.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fili the Pathfinder,Oin the Brave,Thorin Oakenshield
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+#the 3 named legendaries + the 2 Dwarf tokens Fili makes as they enter
+inplay:*,*,*,*,*
+commandzone:Enduring Story
+life:20
+[PLAYER2]
+life:20
+[END]

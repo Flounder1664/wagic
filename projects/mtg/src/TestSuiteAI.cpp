@@ -1127,12 +1127,18 @@ void TestSuiteGame::initGame()
                         //constructor dereferences its card immediately (getCurrentZone), so
                         //passing the result through unchecked turns a bad [INIT] line into a
                         //hard crash at startup with no indication of which card caused it.
-                        //Name it and carry on instead.
+                        //It is not always the test file's fault: Rules::getCardByMTGId
+                        //searches BOTH players and ALL zones, so it can hand back a card an
+                        //earlier INIT card's ETB (or a shuffle) already moved out of the
+                        //library - which depends on RNG state carried over from previous
+                        //tests, and is why this once presented as a random, order-dependent
+                        //segfault. Name the card and carry on either way.
                         if (!copy)
                         {
                             DebugTrace("TESTSUITE: could not put '" << card->getName()
                                        << "' into play for player " << i
-                                       << " - skipping it. Check the [INIT] inplay: line.");
+                                       << " - skipping it. It may not be in that library:"
+                                       << " an earlier card's effect can move it.");
                             continue;
                         }
                         Spell * spell = NEW Spell(observer, copy);

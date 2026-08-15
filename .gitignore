@@ -295,3 +295,7 @@ tsos_scryfall.json
 
 # Packaged release builds (APK + core zip bundles for distribution)
 /dist-release/
+
+# Locally generated ability keyword icons (see tools/build_ability_icons.sh; #31)
+# Derived from third-party artwork -- must NOT be committed. Keep icons out of the repo.
+projects/mtg/bin/Res/graphics/keywords/

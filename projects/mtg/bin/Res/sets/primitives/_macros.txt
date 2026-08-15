@@ -64,6 +64,12 @@
 #AUTO_DEFINE _AMASSZOMBIE4_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Zombie,newability[counter(1/1.4)])) forever else name(Create Zombie Army) token(Zombie Army^Creature Zombie Army^0/0^black) and!( name(Put 1/1 counters) counter(1/1.4) notatarget(army|myBattlefield) )!
 #AUTO_DEFINE _AMASSZOMBIE5_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Zombie,newability[counter(1/1.5)])) forever else name(Create Zombie Army) token(Zombie Army^Creature Zombie Army^0/0^black) and!( name(Put 1/1 counters) counter(1/1.5) notatarget(army|myBattlefield) )!
 
+# Amass Goblins, Set HOB
+#AUTO_DEFINE _AMASSGOBLIN1_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counter) name(Put 1/1 counter) notatarget(army|myBattlefield) transforms((Goblin,newability[counter(1/1)])) forever else name(Create Goblin Army) token(Goblin Army^Creature Goblin Army^0/0^red) and!( name(Put 1/1 counter) counter(1/1) notatarget(army|myBattlefield) )!
+#AUTO_DEFINE _AMASSGOBLIN2_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Goblin,newability[counter(1/1.2)])) forever else name(Create Goblin Army) token(Goblin Army^Creature Goblin Army^0/0^red) and!( name(Put 1/1 counters) counter(1/1.2) notatarget(army|myBattlefield) )!
+#AUTO_DEFINE _AMASSGOBLIN3_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Goblin,newability[counter(1/1.3)])) forever else name(Create Goblin Army) token(Goblin Army^Creature Goblin Army^0/0^red) and!( name(Put 1/1 counters) counter(1/1.3) notatarget(army|myBattlefield) )!
+#AUTO_DEFINE _AMASSGOBLIN4_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Goblin,newability[counter(1/1.4)])) forever else name(Create Goblin Army) token(Goblin Army^Creature Goblin Army^0/0^red) and!( name(Put 1/1 counters) counter(1/1.4) notatarget(army|myBattlefield) )!
+
 # Amass Orcs, Set LTR
 #AUTO_DEFINE _AMASSORC1_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counter) name(Put 1/1 counter) notatarget(army|myBattlefield) transforms((Orc,newability[counter(1/1)])) forever else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black) and!( name(Put 1/1 counter) counter(1/1) notatarget(army|myBattlefield) )!
 #AUTO_DEFINE _AMASSORC2_ if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Orc,newability[counter(1/1.2)])) forever else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black) and!( name(Put 1/1 counters) counter(1/1.2) notatarget(army|myBattlefield) )!
@@ -131,7 +137,13 @@
 #AUTO_DEFINE _SCAVENGE_($power) name(scavenge) counter(1/1.$power) target(creature) asSorcery
 
 # Ascend, Set XLN
-#AUTO_DEFINE _ASCEND_ if type(City's Blessing|mybattlefield)~lessthan~1 then transforms((,newability[if type(*|mybattlefield)~morethan~9 then token(City's Blessing^notrigger)])) oneshot
+#AUTO_DEFINE _ASCEND_ donothing
+# 2026-08-03: Ascend's city's blessing is a DESIGNATION, not a permanent -- it can't be
+# bounced/destroyed and must not be counted by 'permanents you control' effects (a
+# battlefield token skewed exact-count cards). It now lives in the command zone, dropped
+# by GameObserver::gameStateBasedEffects() like Enduring Story. This macro is kept as a
+# no-op so the 47 existing call sites stay valid; the abilities=ascend keyword on those
+# cards is what the engine now gates on.
 
 # Effect with the City's blessing, Set XLN
 #AUTO_DEFINE _CITY'S_BLESSING_ aslongas(City's Blessing|mybattlefield)>0

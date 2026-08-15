@@ -21,6 +21,22 @@ REPLACEMENTS = {
         os.path.join(_RES, "sets", "primitives", "_macros.txt"),
 }
 
+# 2026-07-31/08-01: token/emblem registration-gap batches -- new [card] rows
+# appended to these sets' _cards.dat (existing entries in core.zip, so they
+# go through REPLACEMENTS, not ADD_FILES).
+for _code in ("2X2", "2XM", "5ED", "6ED", "A25", "AFC", "AKH", "AKR", "ALL", "APC",
+              "ARC", "ATQ", "BBD", "BFZ", "BIG", "BLB", "BLC",
+              "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C21", "CLB", "CLU", "CMD",
+              "CMM", "CMR", "DBL", "DFT", "DMC", "DRC", "DSC", "DSK", "EOC", "FCA", "FDN", "FIC",
+              "HOC", "INR", "J21", "J25", "JMP", "JOU", "LCC", "LCI", "LTR",
+              "M3C", "MB1", "MH2", "MH3", "MIC", "MKC", "MKM", "PRM",
+              "MM3", "MOM", "NCC", "OTC", "OTJ", "OTP", "PLIST", "PZ1", "RIX", "SNC",
+              "SOI", "STX", "TDC", "TDM", "THB", "TLA", "WOE", "WOT", "XLN", "YMID",
+              "ALA", "DMR", "EMA", "GN2", "HA4", "IMA", "J22", "JVV", "M19",
+              "M20", "ME1", "MUL", "NEC", "ONC", "PZ2", "RTR", "SLD", "SPG", "TSR", "VOW",
+              "DIS"):
+    REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
+
 # Brand-new entries to inject (files that don't yet exist in core.zip, e.g.
 # a new set's _cards.dat). Directory markers for their parents are emitted
 # automatically below so JGE scanfolder finds the set.

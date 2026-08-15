@@ -46324,7 +46324,7 @@ toughness=2
 [card]
 name=Frostwind Invoker
 abilities=flying
-auto={8}:flying all(creature|myBattlefield) ueot
+auto={8}:all(creature|myBattlefield) flying ueot
 text={8}: Creatures you control gain flying until end of turn.
 mana={4}{U}
 type=Creature
@@ -65536,6 +65536,14 @@ auto={T}:Add{R}
 text=This land enters tapped. {T}: Add {R}.
 type=Land
 subtype=Planet
+[/card]
+[card]
+name=Kavu
+type=Creature
+subtype=Kavu
+power=3
+toughness=3
+color=black
 [/card]
 [card]
 name=Kavu Aggressor
@@ -100044,7 +100052,7 @@ toughness=1
 [/card]
 [card]
 name=Reverent Mantra
-other={E(*[white]|myhand)} name(Exile a White Card from Hand)
+other={E(other *[white]|myhand)} name(Exile a White Card from Hand)
 auto=choice name(all creatures gain protection from white) lord(creature) protection from white
 auto=choice name(all creatures gain protection from blue) lord(creature) protection from blue
 auto=choice name(all creatures gain protection from black) lord(creature) protection from black
@@ -106350,7 +106358,7 @@ type=Artifact
 [card]
 name=Scroll of the Masters
 auto=@movedTo(*[-creature]|mystack):counter(0/0,1,Lore)
-auto={3}{T}:thisforeach(counter{0/0.1.Lore}) 1/1 target(creature|mybattlefield) ueot
+auto={3}{T}:thisforeach(counter{0/0.1.Lore}) target(creature|mybattlefield) 1/1 ueot
 text=Whenever you cast a noncreature spell, put a lore counter on Scroll of the Masters. -- {3}{T}: Target creature you control gets +1/+1 until end of turn for each lore counter on Scroll of the Masters.
 mana={2}
 type=Artifact
@@ -109091,10 +109099,10 @@ type=Sorcery
 [/card]
 [card]
 name=Shamble Back
-target=creature|mygraveyard
+target=creature|graveyard
 auto=moveto(exile)
-auto=life:2 controller
 auto=_ZOMBIETOKEN_
+auto=life:2 controller
 text=Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield. You gain 2 life.
 mana={B}
 type=Sorcery
@@ -141087,6 +141095,14 @@ text=Equipped creature is unblockable. -- Equipped creature has shroud. (It can'
 mana={3}
 type=Artifact
 subtype=Equipment
+[/card]
+[card]
+name=White Cat
+type=Creature
+subtype=Cat
+power=2
+toughness=2
+color=white
 [/card]
 [card]
 name=White Knight
