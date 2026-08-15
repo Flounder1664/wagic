@@ -49,6 +49,18 @@ bool TestSuiteAI::parseLine(const string& s)
         expectedTappedInPlay = atoi(s.c_str() + kTapped.size());
         return true;
     }
+    static const string kPT = "pt:";
+    if (s.compare(0, kPT.size(), kPT) == 0)
+    {
+        expectedPT.push_back(s.substr(kPT.size()));
+        return true;
+    }
+    static const string kCounter = "counter:";
+    if (s.compare(0, kCounter.size(), kCounter) == 0)
+    {
+        expectedCounters.push_back(s.substr(kCounter.size()));
+        return true;
+    }
     return AIPlayerBaka::parseLine(s);
 }
 
@@ -451,6 +463,91 @@ void TestSuiteGame::assertGame()
                                 endState.players[i]->expectedTappedInPlay, tapped);
                 Log(result);
                 error++;
+            }
+        }
+        //pt:<name-or-id>=<P>/<T>
+        for (size_t e = 0; e < endState.players[i]->expectedPT.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedPT[e];
+            size_t eq = spec.find('=');
+            size_t sl = spec.find('/', eq == string::npos ? 0 : eq);
+            if (eq == string::npos || sl == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed pt: assertion '%s' (want pt:name=P/T)==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            int wantP = atoi(spec.c_str() + eq + 1);
+            int wantT = atoi(spec.c_str() + sl + 1);
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==pt: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            if (found->getPower() != wantP || found->getToughness() != wantT)
+            {
+                sprintf(result, "<span class=\"error\">==pt problem for '%s' (player %i). Expected %i/%i, got %i/%i==</span><br />",
+                                who.c_str(), i, wantP, wantT, found->getPower(), found->getToughness());
+                Log(result); error++;
+            }
+        }
+        //counter:<name-or-id>=<CounterName>[:<count>]
+        for (size_t e = 0; e < endState.players[i]->expectedCounters.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedCounters[e];
+            size_t eq = spec.find('=');
+            if (eq == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed counter: assertion '%s' (want counter:name=CounterName[:n])==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            string rest = spec.substr(eq + 1);
+            int wantN = -1;
+            size_t colon = rest.find(':');
+            if (colon != string::npos) { wantN = atoi(rest.c_str() + colon + 1); rest = rest.substr(0, colon); }
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==counter: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            //The harness lowercases every line it reads, but Counter::sameAs compares the
+            //name exactly, so hasCounter() would never match a counter the DSL declared with
+            //any capital in it ("Crewed", "Lore"). Walk the list case-insensitively instead.
+            int got = 0;
+            if (found->counters)
+            {
+                for (int ci = 0; ci < found->counters->mCount; ci++)
+                {
+                    Counter * c2 = found->counters->counters[ci];
+                    if (!c2 || c2->nb <= 0) continue;
+                    string a = c2->name, b = rest;
+                    std::transform(a.begin(), a.end(), a.begin(), ::tolower);
+                    std::transform(b.begin(), b.end(), b.begin(), ::tolower);
+                    if (a == b) { got = c2->nb; break; }
+                }
+            }
+            if ((wantN < 0 && got <= 0) || (wantN >= 0 && got != wantN))
+            {
+                sprintf(result, "<span class=\"error\">==counter problem for '%s' (player %i). Expected %s%s%i, got %i==</span><br />",
+                                who.c_str(), i, rest.c_str(), wantN < 0 ? " at least " : " exactly ", wantN < 0 ? 1 : wantN, got);
+                Log(result); error++;
             }
         }        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
         {

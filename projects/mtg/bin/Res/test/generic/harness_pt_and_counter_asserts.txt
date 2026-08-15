@@ -1,0 +1,29 @@
+#Self-test for the two new [ASSERT] keys, and the direct proof of the Crewed marker that
+#the survival-proxy approach could not give.
+#  pt:<name>=<P>/<T>            asserts a battlefield card's power/toughness
+#  counter:<name>=<Name>[:<n>]  asserts a named counter (omit :n for "at least one")
+#Grizzly Bears crews Turtle Van, so it must carry a Crewed counter and still be 2/2;
+#Mirkwood Spider did not crew and must have none - that ':0' line is what makes this
+#discriminating rather than a test that passes on a marker stamped on everything.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears,Mirkwood Spider
+life:20
+[PLAYER2]
+life:20
+[DO]
+Turtle Van
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turtle Van,Grizzly Bears,Mirkwood Spider
+pt:grizzly bears=2/2
+pt:mirkwood spider=1/1
+counter:grizzly bears=Crewed:1
+counter:mirkwood spider=Crewed:0
+life:20
+[PLAYER2]
+life:20
+[END]
