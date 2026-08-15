@@ -688,6 +688,22 @@ TestSuite::TestSuite(const char * filename)
             if (s[0] == '/' && s[1] == '*') comment = 1;
             if (s[0] && s[0] != '#' && !comment)
             {
+                //WAGIC_TESTSUITE_ONLY=<substring> runs just the matching tests. The full
+                //suite is the right default for regression, but useless for "check this
+                //one card" - which is most of what the suite gets used for by hand. Inert
+                //when the variable is unset, so the default run is unchanged.
+                const char * onlyFilter = getenv("WAGIC_TESTSUITE_ONLY");
+                if (onlyFilter && *onlyFilter)
+                {
+                    if (s.find(onlyFilter) == string::npos) continue;
+                }
+                else if (s.find("scenario") != string::npos)
+                {
+                    //Scenarios hand control to a human ([DO] ... human) and never assert,
+                    //so they would stall an unattended run. They are opt-in only: name one
+                    //in WAGIC_TESTSUITE_ONLY to play it.
+                    continue;
+                }
                 files[nbfiles] = s;
                 nbfiles++;
             }

@@ -1,0 +1,29 @@
+#SCENARIO, not a test: it hands control to you and asserts nothing.
+#Excluded from the unattended suite automatically (filename contains "scenario").
+#Run it with:   WAGIC_TESTSUITE=1 WAGIC_TESTSUITE_ONLY=scenario_crew_argosy Wagic.exe
+#
+#Board: Golden Argosy plus three creatures, all untapped, first main, plenty of mana.
+#What to check - this is the card the crew marker was built for:
+#  1. Crew Golden Argosy, tapping TWO of the three creatures.
+#  2. Attack with it. Both creatures that crewed should be EXILED; the third stays.
+#  3. At end of turn both should return to the battlefield TAPPED.
+#Before the crew marker existed the attack trigger did nothing at all.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Golden Argosy,Grizzly Bears,Hill Giant,Ornithopter
+hand:Shock
+manapool:{5}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+human
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:20
+[PLAYER2]
+life:20
+[END]
