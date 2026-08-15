@@ -136655,7 +136655,7 @@ toughness=3
 [card]
 name=Luxurious Locomotive
 grade=borderline
-auto=@combat(attacking) source(this) turnlimited:token(Treasure)*type:creature[counter{0/0.1.Crewed}]:mybattlefield
+auto=@combat(attacking) source(this) turnlimited:token(Treasure)*type:*[creature;counter{0/0.1.Crewed}]:mybattlefield
 auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot limit:1 restriction{compare(crewtotalpower)~morethan~0}
 #"A Treasure for each creature that crewed it" now works: the Crewed counter stamped in
@@ -137575,7 +137575,7 @@ subtype=Lesson
 name=Getaway Car
 abilities=haste
 grade=borderline
-auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>creature[counter{0/0.1.Crewed}]|mybattlefield) moveTo(ownerhand)
+auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>*[creature;counter{0/0.1.Crewed}]|mybattlefield) moveTo(ownerhand)
 auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crew list now exists: TapTargetCost::doPay stamps a Crewed counter on each creature
@@ -137590,7 +137590,7 @@ toughness=3
 [card]
 name=Turtle Van
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.Crewed}]|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(*[creature;counter{0/0.1.Crewed}]|mybattlefield)
 auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crewed-by restriction now works via the Crewed counter stamped in TapTargetCost::doPay.
@@ -137606,7 +137606,7 @@ toughness=4
 name=Golden Argosy
 grade=borderline
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-auto=@combat(attacking) source(this):all(creature[counter{0/0.1.Crewed}]|mybattlefield) moveTo(exile) and!( counter(0/0,1,ArgosyExiled) )!
+auto=@combat(attacking) source(this):all(*[creature;counter{0/0.1.Crewed}]|mybattlefield) moveTo(exile) and!( counter(0/0,1,ArgosyExiled) )!
 auto=@each my end:all(*[counter{0/0.1.ArgosyExiled}]|myexile) moveTo(mybattlefield) and!( tap(noevent) )!
 auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 #The crew list now exists (a Crewed counter stamped in TapTargetCost::doPay), so this
@@ -137622,7 +137622,7 @@ toughness=6
 [card]
 name=Subterranean Schooner
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.Crewed}]|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(*[creature;counter{0/0.1.Crewed}]|mybattlefield)
 auto=@each my end:removeallcounters(0/0,1,Crewed) all(creature|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crewed-by restriction now works via the Crewed counter.
