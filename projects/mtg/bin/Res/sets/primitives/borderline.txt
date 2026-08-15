@@ -137179,3 +137179,393 @@ subtype=Eldrazi Wizard
 power=2
 toughness=2
 [/card]
+[card]
+name=Malamet Battle Glyph
+grade=borderline
+auto=target(creature|mybattlefield) _FIGHT_
+#MISSING the "+1/+1 counter if it entered this turn" rider; a fresh-this-turn test on the
+#chosen creature would need the target the _FIGHT_ macro already consumes.
+text=Choose target creature you control and target creature you don't control. If the creature you control entered this turn, put a +1/+1 counter on it. Then those creatures fight each other. (Counter rider not implemented.)
+mana={G}
+type=Sorcery
+[/card]
+[card]
+name=Tail Swipe
+grade=borderline
+auto=target(creature|mybattlefield) _FIGHT_
+#MISSING the "+1/+1 until end of turn if cast during your main phase" rider - there is no
+#cast-phase test available to a resolving spell.
+text=Choose target creature you control and target creature you don't control. If you cast this spell during your main phase, the creature you control gets +1/+1 until end of turn. Then those creatures fight each other. (Pump rider not implemented.)
+mana={G}
+type=Instant
+[/card]
+[card]
+name=The Last Agni Kai
+grade=borderline
+auto=target(creature|mybattlefield) _FIGHT_
+#MISSING the excess-damage-to-red-mana rider and the "you don't lose unspent red mana"
+#clause; neither excess damage nor mana-burn suppression is exposed to the DSL.
+text=Target creature you control fights target creature an opponent controls. If the creature the opponent controls is dealt excess damage this way, add that much {R}. -- Until end of turn, you don't lose unspent red mana as steps and phases end. (Both riders not implemented.)
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Clash of the Eikons
+grade=borderline
+auto=choice name(Creatures fight) target(creature|mybattlefield) _FIGHT_ name(Add a lore counter) target(*[saga]|mybattlefield) counter(0/0,1,Lore) name(Remove a lore counter) target(*[saga]|mybattlefield) counter(0/0,-1,Lore)
+#MISSING "choose one or more" - the engine's choice menu takes exactly one mode.
+text=Choose one or more -- Target creature you control fights target creature an opponent controls. -- Remove a lore counter from target Saga you control. -- Put a lore counter on target Saga you control. (Only one mode may be chosen.)
+mana={G}
+type=Sorcery
+[/card]
+[card]
+name=Novel Nunchaku
+grade=borderline
+auto=teach(creature) 1/1
+auto=teach(creature) trample
+auto={2}:equip
+#MISSING the enters-attached-then-fight trigger; attaching an Equipment from its own ETB
+#and then fighting with the equipped creature has no route.
+text=When this Equipment enters, attach it to target creature you control. When you do, equipped creature fights up to one target creature an opponent controls. (Not implemented.) -- Equipped creature gets +1/+1 and has trample. -- Equip {2}
+mana={2}{G}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Gimli's Reckless Might
+grade=borderline
+auto=lord(creature|mybattlefield) haste
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(pwrtotatt)~morethan~7}:target(creature[attacking]|mybattlefield) _FIGHT_
+text=Creatures you control have haste. -- Formidable - Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control.
+mana={3}{R}
+type=Enchantment
+[/card]
+[card]
+name=Wayta, Trainer Prodigy
+abilities=haste
+grade=borderline
+auto={2}{G}{T}:name(Creatures fight) target(creature|mybattlefield) _FIGHT_
+#MISSING the {2} discount when both targets are yours, and the "damage-triggered abilities
+#of your permanents trigger an additional time" clause.
+text=Haste -- {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control. (No discount.) -- If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Not implemented.)
+mana={R}{G}{W}
+type=Legendary Creature
+subtype=Human Warrior
+power=1
+toughness=5
+[/card]
+[card]
+name=Boxing Ring
+grade=borderline
+auto=@movedTo(creature|mybattlefield):all(trigger[to]) _FIGHT_
+auto={T}:_TREASURE_ asSorcery
+#MISSING "with the same mana value" on the fight target, and the activation restriction
+#that a creature must have fought this turn.
+text=Whenever a creature you control enters, it fights up to one target creature you don't control with the same mana value. (Mana-value matching not implemented.) -- {T}: Create a Treasure token. Activate only if you control a creature that fought this turn. (Restriction not implemented.)
+mana={1}{G}
+type=Artifact
+[/card]
+[card]
+name=Slinza, the Spiked Stampede
+grade=borderline
+auto=lord(*[beast]|mycastingzone) altercost(colorless,-2)
+auto=@movedTo(other creature[beast]|mybattlefield):all(trigger[to]) counter(1/1)
+auto=@movedTo(creature[power>=4]|mybattlefield):may name(Pay to fight) pay[[{1}{RG}]] _FIGHT_
+text=Beast spells you cast cost {2} less to cast. -- Each other Beast creature you control enters with an additional +1/+1 counter on it. -- Whenever Slinza or another creature with power 4 or greater enters, you may pay {1}{R/G}. When you do, Slinza fights up to one target creature you don't control.
+mana={4}{G}
+type=Legendary Creature
+subtype=Beast
+power=5
+toughness=5
+[/card]
+[card]
+name=Sample Collector
+grade=borderline
+auto=@combat(attacking) source(this):may name(Collect evidence 3) pay[[{evidence3(*|mygraveyard)}]] counter(1/1) target(creature|mybattlefield)
+text=Whenever this creature attacks, you may collect evidence 3. When you do, put a +1/+1 counter on target creature you control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
+mana={2}{G}
+type=Creature
+subtype=Troll Detective
+power=2
+toughness=3
+[/card]
+[card]
+name=Surveillance Monitor
+grade=borderline
+auto=may name(Collect evidence 4) pay[[{evidence4(*|mygraveyard)}]] token(Thopter,Artifact Creature Thopter,1/1,,flying)
+text=When this creature enters, you may collect evidence 4. -- Whenever you collect evidence, create a 1/1 colorless Thopter artifact creature token with flying. (The two abilities are merged: collecting evidence on entry makes the Thopter.)
+mana={3}{U}
+type=Creature
+subtype=Vedalken Detective
+power=3
+toughness=3
+[/card]
+[card]
+name=Evidence Examiner
+grade=borderline
+auto=@each my combatbegins:may name(Collect evidence 4) pay[[{evidence4(*|mygraveyard)}]] _CLUE_
+text=At the beginning of combat on your turn, you may collect evidence 4. -- Whenever you collect evidence, investigate. (The two abilities are merged: collecting evidence makes the Clue.)
+mana={G}{U}
+type=Creature
+subtype=Merfolk Detective
+power=2
+toughness=2
+[/card]
+[card]
+name=Izoni, Center of the Web
+abilities=menace
+grade=borderline
+auto=may name(Collect evidence 4) pay[[{evidence4(*|mygraveyard)}]] create(Spider:creature spider:2/1:black:reach)*2
+auto=@combat(attacking) source(this):may name(Collect evidence 4) pay[[{evidence4(*|mygraveyard)}]] create(Spider:creature spider:2/1:black:reach)*2
+auto={S(*[token]|mybattlefield)}{S(*[token]|mybattlefield)}{S(*[token]|mybattlefield)}{S(*[token]|mybattlefield)}:name(Sacrifice four tokens) _SURVEIL2_ && draw:2 controller && life:2 controller
+#MISSING the Spider tokens should also have menace, and be black AND green.
+text=Menace -- Whenever Izoni enters or attacks, you may collect evidence 4. If you do, create two 2/1 black and green Spider creature tokens with reach and menace. -- Sacrifice four tokens: Surveil 2, then draw two cards. You gain 2 life.
+mana={4}{B}{G}
+type=Legendary Creature
+subtype=Elf Insect
+power=5
+toughness=4
+[/card]
+[card]
+name=Vitu-Ghazi Inspector
+abilities=reach,hasotherkicker
+grade=borderline
+other={1}{G}{evidence6(*|mygraveyard)} name(Collect evidence 6)
+auto=alternative counter(1/1) target(creature)
+auto=alternative life:3 controller
+text=As an additional cost to cast this spell, you may collect evidence 6. -- Reach -- When this creature enters, if evidence was collected, put a +1/+1 counter on target creature and you gain 3 life.
+mana={1}{G}
+type=Creature
+subtype=Elf Detective
+power=1
+toughness=3
+[/card]
+[card]
+name=Lethal Scheme
+abilities=convoke
+grade=borderline
+auto=destroy target(creature)
+#MISSING "each creature that convoked this spell connives" - the engine does not record
+#which creatures were tapped for convoke.
+text=Convoke -- Destroy target creature or planeswalker. Each creature that convoked this spell connives. (Connive not implemented.)
+mana={2}{B}{B}
+type=Instant
+[/card]
+[card]
+name=Web of Life and Destiny
+abilities=convoke
+grade=borderline
+auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+text=Convoke -- At the beginning of combat on your turn, look at the top five cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+mana={6}{G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Saber-Tooth Moose-Lion
+abilities=reach
+grade=borderline
+aicode=activate target(*[forest]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[forest]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Reach -- Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)
+mana={4}{G}{G}
+type=Creature
+subtype=Elk Cat
+power=7
+toughness=7
+[/card]
+[card]
+name=Canyon Crawler
+abilities=deathtouch
+grade=borderline
+auto=_FOOD_
+aicode=activate target(*[swamp]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[swamp]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Deathtouch -- When this creature enters, create a Food token. -- Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)
+mana={4}{B}{B}
+type=Creature
+subtype=Spider Beast
+power=6
+toughness=6
+[/card]
+[card]
+name=Bebop, Warthog Warrior
+abilities=menace
+grade=borderline
+auto=lord(rhino|mybattlefield) menace
+aicode=activate target(*[swamp]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[swamp]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Menace -- Rhinos you control have menace. -- Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)
+mana={4}{B}
+type=Legendary Creature
+subtype=Boar Warrior
+power=5
+toughness=4
+[/card]
+[card]
+name=Jennika, Bad Apple Big Sister
+grade=borderline
+auto=create(Mutant:creature mutant:2/2:red)
+aicode=activate target(*[plains]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[plains]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=When Jennika enters, create a 2/2 red Mutant creature token. -- Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)
+mana={4}{W}
+type=Legendary Creature
+subtype=Mutant Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Rabaroo Troop
+grade=borderline
+auto=@movedTo(land|myBattlefield):all(this) transforms((,flying)) ueot
+auto=@movedTo(land|myBattlefield):life:1 controller
+aicode=activate target(*[plains]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[plains]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Landfall - Whenever a land you control enters, this creature gains flying until end of turn and you gain 1 life. -- Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)
+mana={3}{W}{W}
+type=Creature
+subtype=Rabbit Kangaroo
+power=3
+toughness=5
+[/card]
+[card]
+name=Mongoose Lizard
+abilities=menace
+grade=borderline
+auto=damage:1 target(anytarget)
+aicode=activate target(*[mountain]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[mountain]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Menace -- When this creature enters, it deals 1 damage to any target. -- Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)
+mana={4}{R}{R}
+type=Creature
+subtype=Mongoose Lizard
+power=5
+toughness=6
+[/card]
+[card]
+name=Zog, Triceraton Castaway
+abilities=reach,trample
+grade=borderline
+auto=target(creature) cantblock ueot
+aicode=activate target(*[mountain]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[mountain]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Reach, trample -- When Zog enters, target creature can't block this turn. -- Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)
+mana={4}{R}
+type=Legendary Creature
+subtype=Dinosaur Warrior
+power=5
+toughness=4
+[/card]
+[card]
+name=Stockman, Mad Fly-entist
+abilities=flying
+grade=borderline
+auto=draw:1 controller && name(Discard a card) target(<1>*|myhand) reject
+aicode=activate target(*[island]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[island]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Flying -- When Stockman enters, draw a card, then discard a card. -- Islandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)
+mana={4}{U}
+type=Legendary Creature
+subtype=Insect Scientist
+power=3
+toughness=4
+[/card]
+[card]
+name=Rocksteady, Crash Courser
+abilities=oneblocker
+grade=borderline
+auto=lord(boar|mybattlefield) oneblocker
+aicode=activate target(*[forest]|mylibrary) moveto(hand)
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*[forest]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Rocksteady can't be blocked by more than one creature. -- Boars you control can't be blocked by more than one creature. -- Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)
+mana={4}{G}{G}
+type=Legendary Creature
+subtype=Rhino Warrior
+power=7
+toughness=7
+[/card]
+[card]
+name=Fire Nation Attacks
+grade=borderline
+flashback={8}{R}
+auto=create(Soldier:creature soldier:2/2:red)*2
+#MISSING the tokens' firebending 1 - the keyword is unimplemented engine-wide.
+text=Create two 2/2 red Soldier creature tokens with firebending 1. (Firebending not implemented.) -- Flashback {8}{R}
+mana={4}{R}
+type=Instant
+[/card]
+[card]
+name=Wreck and Rebuild
+grade=borderline
+flashback={3}{R}{G}
+auto=choice name(Destroy an artifact or enchantment) destroy target(artifact,enchantment) name(Mill five and reclaim a land) mill:5 controller && may name(Return a land) target(land|mygraveyard) moveTo(myBattlefield) and!( tap(noevent) )!
+text=Choose one -- Destroy target artifact or enchantment. -- Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped. -- Flashback {3}{R}{G}
+mana={1}{R}{G}
+type=Sorcery
+[/card]
+[card]
+name=Welcome the Dead
+grade=borderline
+flashback={5}{B}
+auto=draw:2 controller && name(Discard a card) target(<1>*|myhand) reject && life:-2 controller
+auto=create(Zombie Druid:creature zombie druid:2/2:black:tapped)*2
+#MISSING X should be the number of cards put into your graveyard from hand or library this
+#turn; there is no such counter, so it makes two tokens.
+text=Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn. (Fixed at two.) -- Flashback {5}{B}
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Random Encounter
+grade=borderline
+flashback={6}{R}{R}
+auto=shuffle
+auto=mill:4 controller
+#MISSING putting the milled creatures onto the battlefield with haste and bouncing them at
+#end of turn - there is no route to act on "each card milled this way".
+text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. (Only the shuffle and mill are implemented.) -- Flashback {6}{R}{R}
+mana={4}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Memories Returning
+grade=borderline
+flashback={5}{U}{U}
+auto=name(look) reveal:5 optionone name(take a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary optiontwoend revealend
+#MISSING the alternating you/opponent draft over five cards; approximated as taking one.
+text=Reveal the top five cards of your library. Put one of them into your hand. Then choose an opponent. They put one on the bottom of your library. Then you put one into your hand. Then they put one on the bottom of your library. Put the other card into your hand. (Approximated: you take one card.) -- Flashback {5}{U}{U}
+mana={2}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Prisoner's Dilemma
+grade=borderline
+flashback={7}{R}{R}
+auto=damage:4 opponent
+#MISSING the secret silence/snitch choice that scales the damage to 4, 8 or a split; the
+#engine has no hidden simultaneous choice.
+text=Each opponent secretly chooses silence or snitch, then the choices are revealed. If each opponent chose silence, this deals 4 damage to each of them. If each opponent chose snitch, it deals 8 damage to each of them. Otherwise it deals 12 damage to each opponent who chose silence. (Fixed at 4 damage.) -- Flashback {7}{R}{R}
+mana={3}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=March from Velis Vel
+grade=borderline
+flashback={4}{U}
+#MISSING the whole effect: "each land you control of a chosen nonbasic land type becomes a
+#copy of target creature" needs a chosen land TYPE plus a mass copy, neither expressible.
+text=Choose a nonbasic land type. Each land you control of that type becomes a copy of target creature you control until end of turn and gains haste until end of turn. (Not implemented.) -- Flashback {4}{U}
+mana={2}{U}
+type=Sorcery
+[/card]
+[card]
+name=Solstice Revelations
+grade=borderline
+flashback={4}{R}
+auto=Reveal:1 revealzone(mylibrary) revealuntil(*[-land]|mylibrary) optionone name(take the card) target(*[-land]|reveal) moveto(hand) optiononeend optiontwo name(leave it) target(<1>*|reveal) moveto(hand) optiontwoend revealend
+#MISSING the free cast gated on Mountain count; the card is put into your hand instead.
+text=Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than the number of Mountains you control. If you don't cast that card this way, put it into your hand. (Approximated: the card always goes to your hand.) -- Flashback {4}{R}
+mana={2}{R}
+type=Instant
+subtype=Lesson
+[/card]
