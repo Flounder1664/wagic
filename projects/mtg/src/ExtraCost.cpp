@@ -897,6 +897,33 @@ int TapTargetCost::doPay()
         //crew ability
         if(crew)
         {
+            //Mark the creature as having crewed this turn. storedCard only keeps the LAST
+            //creature tapped, so it cannot answer "each creature that crewed this Vehicle" -
+            //cards like Golden Argosy and Getaway Car need the whole set. A named counter on
+            //each crewer makes the set queryable from the DSL with no new machinery, the same
+            //trick the exile cards use (Bomat Courier's BomatExiled). It is swept at end of
+            //turn by MTGCardInstance::cleanup(), next to the other this-turn-only flags -
+            //NOT by the Vehicles, or crewing any Vehicle without a sweep of its own would
+            //leave the counter on the creature permanently.
+            {
+                AbilityFactory afc(_target->getObserver());
+                //Lower case deliberately. CardPrimitive::addMagicText lowercases every
+                //auto= line, so a card asking for counter{0/0.1.Crewed} is really asking
+                //for "crewed" - and Counter::sameAs compares names case-sensitively. A
+                //capital here makes the counter invisible to every card that reads it,
+                //silently, which is exactly how Golden Argosy came to exile nothing.
+                MTGAbility * c = afc.parseMagicLine("counter(0/0,1,crewed)", -1, NULL, _target, false, true);
+                if (c)
+                {
+                    MTGAbility * crewedMark = c->clone();
+                    SAFE_DELETE(c);
+                    crewedMark->target = _target;
+                    crewedMark->oneShot = true;
+                    crewedMark->canBeInterrupted = false;
+                    crewedMark->resolve();
+                    SAFE_DELETE(crewedMark);
+                }
+            }
             if(_target->getCrewAbility().size())
             {
                 AbilityFactory af(_target->getObserver());

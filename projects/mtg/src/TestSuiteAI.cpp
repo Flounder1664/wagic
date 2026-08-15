@@ -49,6 +49,18 @@ bool TestSuiteAI::parseLine(const string& s)
         expectedTappedInPlay = atoi(s.c_str() + kTapped.size());
         return true;
     }
+    static const string kPT = "pt:";
+    if (s.compare(0, kPT.size(), kPT) == 0)
+    {
+        expectedPT.push_back(s.substr(kPT.size()));
+        return true;
+    }
+    static const string kCounter = "counter:";
+    if (s.compare(0, kCounter.size(), kCounter) == 0)
+    {
+        expectedCounters.push_back(s.substr(kCounter.size()));
+        return true;
+    }
     return AIPlayerBaka::parseLine(s);
 }
 
@@ -452,6 +464,91 @@ void TestSuiteGame::assertGame()
                 Log(result);
                 error++;
             }
+        }
+        //pt:<name-or-id>=<P>/<T>
+        for (size_t e = 0; e < endState.players[i]->expectedPT.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedPT[e];
+            size_t eq = spec.find('=');
+            size_t sl = spec.find('/', eq == string::npos ? 0 : eq);
+            if (eq == string::npos || sl == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed pt: assertion '%s' (want pt:name=P/T)==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            int wantP = atoi(spec.c_str() + eq + 1);
+            int wantT = atoi(spec.c_str() + sl + 1);
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==pt: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            if (found->getPower() != wantP || found->getToughness() != wantT)
+            {
+                sprintf(result, "<span class=\"error\">==pt problem for '%s' (player %i). Expected %i/%i, got %i/%i==</span><br />",
+                                who.c_str(), i, wantP, wantT, found->getPower(), found->getToughness());
+                Log(result); error++;
+            }
+        }
+        //counter:<name-or-id>=<CounterName>[:<count>]
+        for (size_t e = 0; e < endState.players[i]->expectedCounters.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedCounters[e];
+            size_t eq = spec.find('=');
+            if (eq == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed counter: assertion '%s' (want counter:name=CounterName[:n])==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            string rest = spec.substr(eq + 1);
+            int wantN = -1;
+            size_t colon = rest.find(':');
+            if (colon != string::npos) { wantN = atoi(rest.c_str() + colon + 1); rest = rest.substr(0, colon); }
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==counter: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            //The harness lowercases every line it reads, but Counter::sameAs compares the
+            //name exactly, so hasCounter() would never match a counter the DSL declared with
+            //any capital in it ("Crewed", "Lore"). Walk the list case-insensitively instead.
+            int got = 0;
+            if (found->counters)
+            {
+                for (int ci = 0; ci < found->counters->mCount; ci++)
+                {
+                    Counter * c2 = found->counters->counters[ci];
+                    if (!c2 || c2->nb <= 0) continue;
+                    string a = c2->name, b = rest;
+                    std::transform(a.begin(), a.end(), a.begin(), ::tolower);
+                    std::transform(b.begin(), b.end(), b.begin(), ::tolower);
+                    if (a == b) { got = c2->nb; break; }
+                }
+            }
+            if ((wantN < 0 && got <= 0) || (wantN >= 0 && got != wantN))
+            {
+                sprintf(result, "<span class=\"error\">==counter problem for '%s' (player %i). Expected %s%s%i, got %i==</span><br />",
+                                who.c_str(), i, rest.c_str(), wantN < 0 ? " at least " : " exactly ", wantN < 0 ? 1 : wantN, got);
+                Log(result); error++;
+            }
         }        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
         {
             sprintf(result, "<span class=\"error\">==Mana problem. Was expecting %i but got %i for player %i==</span><br />",
@@ -591,6 +688,22 @@ TestSuite::TestSuite(const char * filename)
             if (s[0] == '/' && s[1] == '*') comment = 1;
             if (s[0] && s[0] != '#' && !comment)
             {
+                //WAGIC_TESTSUITE_ONLY=<substring> runs just the matching tests. The full
+                //suite is the right default for regression, but useless for "check this
+                //one card" - which is most of what the suite gets used for by hand. Inert
+                //when the variable is unset, so the default run is unchanged.
+                const char * onlyFilter = getenv("WAGIC_TESTSUITE_ONLY");
+                if (onlyFilter && *onlyFilter)
+                {
+                    if (s.find(onlyFilter) == string::npos) continue;
+                }
+                else if (s.find("scenario") != string::npos)
+                {
+                    //Scenarios hand control to a human ([DO] ... human) and never assert,
+                    //so they would stall an unattended run. They are opt-in only: name one
+                    //in WAGIC_TESTSUITE_ONLY to play it.
+                    continue;
+                }
                 files[nbfiles] = s;
                 nbfiles++;
             }
@@ -1010,18 +1123,16 @@ void TestSuiteGame::initGame()
                     {
                         //MTGCardInstance * copy = p->game->putInZone(card, p->game->library, p->game->stack);
                         MTGCardInstance * copy = zone->owner->game->putInZone(card, p->game->library, p->game->stack);
-                        //putInZone returns NULL when the card is not actually in that
-                        //library. Rules::getCardByMTGId searches BOTH players and ALL
-                        //zones, so it can hand back a card an earlier INIT card's ETB
-                        //(or a shuffle) already moved out of the library -- and whether
-                        //that happens depends on RNG state carried over from previous
-                        //tests, which is why this presented as an order-dependent,
-                        //"random" segfault. Spell's ctor dereferences its source, so a
-                        //NULL here killed the whole run. Skip and report instead: the
-                        //!card case below is already handled the same way.
+                        //putInZone returns NULL when the move does not happen, and Spell's
+                        //constructor dereferences its card immediately (getCurrentZone), so
+                        //passing the result through unchecked turns a bad [INIT] line into a
+                        //hard crash at startup with no indication of which card caused it.
+                        //Name it and carry on instead.
                         if (!copy)
                         {
-                            LOG ("TESTUITE ERROR, card not in library (moved by an earlier card's effect?)\n");
+                            DebugTrace("TESTSUITE: could not put '" << card->getName()
+                                       << "' into play for player " << i
+                                       << " - skipping it. Check the [INIT] inplay: line.");
                             continue;
                         }
                         Spell * spell = NEW Spell(observer, copy);

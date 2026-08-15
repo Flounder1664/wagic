@@ -136,6 +136,16 @@ public:
     //[ASSERT]-only: expected number of tapped battlefield cards (-1 = don't check)
     int expectedTappedInPlay;
 
+    //[ASSERT]-only: per-card expectations on the battlefield.
+    //  pt:<name-or-id>=<P>/<T>       power/toughness of a card in play
+    //  counter:<name-or-id>=<Name>[:<n>]  a named counter, optionally with a count
+    //Both exist because the harness could otherwise only assert WHICH cards are in a zone.
+    //Anything about a card's state had to be inferred from whether it survived a burn
+    //spell, which is indirect, needs a damage source chosen to straddle the exact value
+    //being measured, and silently passes when the effect under test does nothing.
+    std::vector<std::string> expectedPT;
+    std::vector<std::string> expectedCounters;
+
     TestSuiteAI(TestSuiteGame *tsGame, int playerId);
     virtual int Act(float dt);
     virtual int displayStack();

@@ -782,6 +782,16 @@ int MTGCardInstance::cleanup()
     regenerateTokens = 0;
     preventable = 0;
     thatmuch = 0;
+    //"Crewed this turn" is a this-turn-only fact, so it has to expire with the turn. The
+    //counter is stamped by the engine (TapTargetCost::doPay) on every creature tapped to
+    //pay a crew or saddle cost, so the sweep belongs in the engine too: written on the
+    //Vehicles instead, crewing any of the other ~200 Vehicles left the counter on the
+    //creature for the rest of the game.
+    if (counters)
+    {
+        while (counters->hasCounter("crewed", 0, 0))
+            counters->removeCounter("crewed", 0, 0, true);
+    }
     return 1;
 }
 
