@@ -143092,3 +143092,61 @@ text=At the beginning of your draw step, draw two additional cards. -- At the be
 type=Emblem
 subtype=Sarkhan
 [/card]
+[card]
+name=Ape
+grade=borderline
+type=Creature
+subtype=Ape
+power=3
+toughness=3
+color=green
+[/card]
+[card]
+name=Forest Dryad
+grade=borderline
+missing=(This creature is affected by summoning sickness, and it has "{T}: Add {G}.")
+text=(This creature is affected by summoning sickness, and it has "{T}: Add {G}.")
+type=Land Creature
+subtype=Forest Dryad
+power=1
+toughness=1
+color=green
+[/card]
+[card]
+name=Goblin
+grade=borderline
+type=Creature
+subtype=Goblin
+power=1
+toughness=1
+color=red
+[/card]
+[card]
+name=Lizard
+grade=borderline
+type=Creature
+subtype=Lizard
+power=8
+toughness=8
+color=red
+[/card]
+[card]
+name=Rabbit
+grade=borderline
+type=Creature
+subtype=Rabbit
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Boo
+grade=borderline
+abilities=trample,haste
+text=Trample, haste
+type=Legendary Creature
+subtype=Hamster
+power=1
+toughness=1
+color=red
+[/card]
