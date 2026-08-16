@@ -142167,3 +142167,928 @@ text=When this enchantment enters, draw a card. -- You may cast Hero spells as t
 mana={2}{W}
 type=Enchantment
 [/card]
+[card]
+name=Soldier
+grade=borderline
+type=Creature
+subtype=Soldier
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Alien
+grade=borderline
+type=Creature
+subtype=Alien
+power=0
+toughness=0
+color=blue
+[/card]
+[card]
+name=Zombie Mutant
+grade=borderline
+type=Creature
+subtype=Zombie Mutant
+power=2
+toughness=2
+color=black
+[/card]
+[card]
+name=Robot
+grade=borderline
+type=Artifact Creature
+subtype=Robot
+power=3
+toughness=3
+[/card]
+[card]
+name=Thopter
+grade=borderline
+abilities=flying
+text=Flying
+type=Artifact Creature
+subtype=Thopter
+power=1
+toughness=1
+[/card]
+[card]
+name=Human Knight
+grade=borderline
+missing=this creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn
+text=This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn.
+type=Creature
+subtype=Human Knight
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Eldrazi Spawn
+grade=borderline
+missing=Sacrifice this creature: Add {C}.
+text=Sacrifice this creature: Add {C}.
+type=Creature
+subtype=Eldrazi Spawn
+power=0
+toughness=1
+[/card]
+[card]
+name=Contract
+grade=borderline
+missing=Enchant creature Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life.
+text=Enchant creature -- Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life.
+type=Enchantment
+subtype=Aura
+color=white
+[/card]
+[card]
+name=Goat
+grade=borderline
+type=Creature
+subtype=Goat
+power=0
+toughness=1
+color=white
+[/card]
+[card]
+name=Pegasus
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Pegasus
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Spirit
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Spirit
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Illusion
+grade=borderline
+type=Creature
+subtype=Illusion
+power=*
+toughness=*
+color=blue
+[/card]
+[card]
+name=Phyrexian Myr
+grade=borderline
+type=Artifact Creature
+subtype=Phyrexian Myr
+power=2
+toughness=1
+color=blue
+[/card]
+[card]
+name=Phyrexian Germ
+grade=borderline
+type=Creature
+subtype=Phyrexian Germ
+power=0
+toughness=0
+color=black
+[/card]
+[card]
+name=Zombie
+grade=borderline
+missing=Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)
+text=Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)
+type=Creature
+subtype=Zombie
+power=2
+toughness=2
+color=black
+[/card]
+[card]
+name=Dragon Illusion
+grade=borderline
+abilities=flying,haste
+text=Flying, haste
+type=Creature
+subtype=Dragon Illusion
+power=*
+toughness=*
+color=red
+[/card]
+[card]
+name=Beast
+grade=borderline
+type=Creature
+subtype=Beast
+power=3
+toughness=3
+color=green
+[/card]
+[card]
+name=Frog Lizard
+grade=borderline
+type=Creature
+subtype=Frog Lizard
+power=3
+toughness=3
+color=green
+[/card]
+[card]
+name=Fungus Beast
+grade=borderline
+abilities=trample
+text=Trample
+type=Creature
+subtype=Fungus Beast
+power=4
+toughness=4
+color=green
+[/card]
+[card]
+name=Inkling
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Inkling
+power=2
+toughness=1
+[/card]
+[card]
+name=Pest
+grade=borderline
+missing=When this creature dies, you gain 1 life.
+text=When this creature dies, you gain 1 life.
+type=Creature
+subtype=Pest
+power=1
+toughness=1
+[/card]
+[card]
+name=Primo, the Indivisible
+grade=borderline
+type=Legendary Creature
+subtype=Fractal
+power=0
+toughness=0
+[/card]
+[card]
+name=Worm
+grade=borderline
+type=Creature
+subtype=Worm
+power=1
+toughness=1
+[/card]
+[card]
+name=Manifest
+grade=borderline
+missing=A manifested creature card can be turned face up any time for its mana cost. A face-down card can also be turned face up for its morph cost.)
+text=(You can cover a face-down manifested creature with this reminder card. -- A manifested creature card can be turned face up any time for its mana cost. A face-down card can also be turned face up for its morph cost.)
+type=Creature
+power=2
+toughness=2
+[/card]
+[card]
+name=Wall
+grade=borderline
+abilities=defender
+text=Defender
+type=Creature
+subtype=Wall
+power=0
+toughness=4
+[/card]
+[card]
+name=Hero
+grade=borderline
+abilities=vigilance
+text=Vigilance
+type=Creature
+subtype=Hero
+power=3
+toughness=2
+color=white
+[/card]
+[card]
+name=Merfolk
+grade=borderline
+type=Creature
+subtype=Merfolk
+power=1
+toughness=1
+color=blue
+[/card]
+[card]
+name=Redwing
+grade=borderline
+abilities=flying
+missing=Whenever Redwing attacks, surveil 1.
+text=Flying -- Whenever Redwing attacks, surveil 1.
+type=Legendary Creature
+subtype=Bird Scout
+power=1
+toughness=1
+color=blue
+[/card]
+[card]
+name=Galactus
+grade=borderline
+abilities=flying,trample
+missing=Whenever Galactus attacks, destroy target land.
+text=Flying, trample -- Whenever Galactus attacks, destroy target land.
+type=Legendary Creature
+subtype=Elder Alien
+power=16
+toughness=16
+color=black
+[/card]
+[card]
+name=Villain
+grade=borderline
+abilities=menace
+text=Menace
+type=Creature
+subtype=Villain
+power=2
+toughness=1
+color=black
+[/card]
+[card]
+name=The Void
+grade=borderline
+abilities=flying,indestructible
+missing=The Void attacks each combat if able.
+text=Flying, indestructible -- The Void attacks each combat if able.
+type=Legendary Creature
+subtype=Horror Villain
+power=5
+toughness=5
+color=black
+[/card]
+[card]
+name=Insect
+grade=borderline
+type=Creature
+subtype=Insect
+power=1
+toughness=1
+color=green
+[/card]
+[card]
+name=Moloid
+grade=borderline
+missing=Whenever this token attacks, you may mill a card.
+text=Whenever this token attacks, you may mill a card.
+type=Creature
+subtype=Minion
+power=1
+toughness=1
+color=green
+[/card]
+[card]
+name=The Tiger God
+grade=borderline
+missing=The Tiger God can't be blocked by more than one creature.
+text=The Tiger God can't be blocked by more than one creature.
+type=Legendary Creature
+subtype=Cat God
+power=4
+toughness=4
+color=green
+[/card]
+[card]
+name=Zabu
+grade=borderline
+missing=Landfall — Whenever a land you control enters, put a +1/+1 counter on Zabu.
+text=Landfall — Whenever a land you control enters, put a +1/+1 counter on Zabu.
+type=Legendary Creature
+subtype=Cat
+power=2
+toughness=2
+color=green
+[/card]
+[card]
+name=Doombot
+grade=borderline
+type=Artifact Creature
+subtype=Robot Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Robot Villain
+grade=borderline
+type=Artifact Creature
+subtype=Robot Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Sturdy Shield
+grade=borderline
+missing=Equipped creature gets +1/+2. Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+text=Equipped creature gets +1/+2. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Plant
+grade=borderline
+type=Creature
+subtype=Plant
+power=0
+toughness=1
+color=green
+[/card]
+[card]
+name=Rhino Warrior
+grade=borderline
+type=Creature
+subtype=Rhino Warrior
+power=4
+toughness=4
+color=green
+[/card]
+[card]
+name=Human Rogue
+grade=borderline
+type=Creature
+subtype=Human Rogue
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Assassin
+grade=borderline
+abilities=menace
+text=Menace (This creature can't be blocked except by two or more creatures.)
+type=Creature
+subtype=Assassin
+power=1
+toughness=1
+color=black
+[/card]
+[card]
+name=Phobos
+grade=borderline
+type=Legendary Creature
+subtype=Horse
+power=3
+toughness=2
+color=red
+[/card]
+[card]
+name=The Capitoline Triad Emblem
+grade=borderline
+missing=Creatures you control have base power and toughness 9/9.
+text=Creatures you control have base power and toughness 9/9.
+type=Emblem
+[/card]
+[card]
+name=A Mysterious Creature
+grade=borderline
+missing=You can cover a face-down creature with this reminder card. A face-down creature that was cloaked or cast with disguise has ward {2}. (Whenever that creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+text=You can cover a face-down creature with this reminder card. A face-down creature that was cloaked or cast with disguise has ward {2}. (Whenever that creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+type=Creature
+power=2
+toughness=2
+[/card]
+[card]
+name=Angel
+grade=borderline
+abilities=flying,vigilance
+text=Flying, vigilance
+type=Creature
+subtype=Angel
+power=4
+toughness=4
+color=white
+[/card]
+[card]
+name=Bird
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Bird
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Ox
+grade=borderline
+type=Creature
+subtype=Ox
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Council of Reeds
+grade=borderline
+missing=The "legend rule" doesn't apply to creatures you control. At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of Council of Reeds.
+text=The "legend rule" doesn't apply to creatures you control. -- At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of Council of Reeds. -- (This token's mana cost is {2}{U}.)
+type=Legendary Creature
+subtype=Human Scientist Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Ape Villain
+grade=borderline
+abilities=haste
+text=Haste
+type=Creature
+subtype=Ape Villain
+power=3
+toughness=3
+color=red
+[/card]
+[card]
+name=Rhino
+grade=borderline
+abilities=trample
+text=Trample
+type=Creature
+subtype=Rhino
+power=4
+toughness=4
+color=green
+[/card]
+[card]
+name=Vibranium
+grade=borderline
+abilities=indestructible
+missing={T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
+text=Indestructible -- {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
+type=Artifact
+subtype=Vibranium
+[/card]
+[card]
+name=Robot Hero
+grade=borderline
+abilities=flying
+text=Flying (This token can't be blocked except by creatures with flying or reach.)
+type=Artifact Creature
+subtype=Robot Hero
+power=2
+toughness=1
+[/card]
+[card]
+name=Astartes Warrior
+grade=borderline
+abilities=vigilance
+text=Vigilance
+type=Creature
+subtype=Astartes Warrior
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Space Marine Devastator
+grade=borderline
+missing=When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.
+text=When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.
+type=Creature
+subtype=Astartes Warrior
+power=3
+toughness=3
+color=white
+[/card]
+[card]
+name=Ultramarines Honour Guard
+grade=borderline
+missing=Other creatures you control get +1/+1.
+text=Other creatures you control get +1/+1.
+type=Creature
+subtype=Astartes Warrior
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Zephyrim
+grade=borderline
+abilities=flying,vigilance
+text=Flying, vigilance
+type=Creature
+subtype=Human Warrior
+power=3
+toughness=3
+color=white
+[/card]
+[card]
+name=Sicarian Infiltrator
+grade=borderline
+missing=When Sicarian Infiltrator enters the battlefield, draw a card.
+text=When Sicarian Infiltrator enters the battlefield, draw a card.
+type=Artifact Creature
+subtype=Human Soldier
+power=1
+toughness=2
+color=blue
+[/card]
+[card]
+name=Tyranid Gargoyle
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Tyranid Gargoyle
+power=1
+toughness=1
+color=blue
+[/card]
+[card]
+name=Vanguard Suppressor
+grade=borderline
+abilities=flying
+missing=Whenever Vanguard Suppressor deals combat damage to a player, draw a card.
+text=Flying -- Whenever Vanguard Suppressor deals combat damage to a player, draw a card.
+type=Creature
+subtype=Astartes Warrior
+power=3
+toughness=2
+color=blue
+[/card]
+[card]
+name=Arco-Flagellant
+grade=borderline
+missing=Arco-Flagellant can't block. Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
+text=Arco-Flagellant can't block. -- Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
+type=Creature
+subtype=Human
+power=3
+toughness=1
+color=black
+[/card]
+[card]
+name=Cherubael
+grade=borderline
+abilities=flying
+text=Flying
+type=Legendary Creature
+subtype=Demon
+power=4
+toughness=4
+color=black
+[/card]
+[card]
+name=Necron Warrior
+grade=borderline
+type=Artifact Creature
+subtype=Necron Warrior
+power=2
+toughness=2
+color=black
+[/card]
+[card]
+name=Plaguebearer of Nurgle
+grade=borderline
+type=Creature
+subtype=Demon
+power=1
+toughness=3
+color=black
+[/card]
+[card]
+name=Spawn
+grade=borderline
+type=Creature
+subtype=Spawn
+power=3
+toughness=3
+color=red
+[/card]
+[card]
+name=Tyranid
+grade=borderline
+type=Creature
+subtype=Tyranid
+power=1
+toughness=1
+color=green
+[/card]
+[card]
+name=Tyranid Warrior
+grade=borderline
+abilities=trample
+text=Trample
+type=Creature
+subtype=Tyranid Warrior
+power=3
+toughness=3
+color=green
+[/card]
+[card]
+name=Blue Horror
+grade=borderline
+missing=Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.
+text=Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.
+type=Creature
+subtype=Demon Horror
+power=2
+toughness=2
+[/card]
+[card]
+name=Alien Rhino
+grade=borderline
+type=Creature
+subtype=Alien Rhino
+power=4
+toughness=4
+color=white
+[/card]
+[card]
+name=Horse
+grade=borderline
+missing=Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
+text=Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
+type=Creature
+subtype=Horse
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Human
+grade=borderline
+missing=Doctor spells you cast cost {1} less to cast.
+text=Doctor spells you cast cost {1} less to cast.
+type=Creature
+subtype=Human
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Human Noble
+grade=borderline
+missing=Vanishing 3 Prevent all damage that would be dealt to this creature.
+text=Vanishing 3 -- Prevent all damage that would be dealt to this creature.
+type=Creature
+subtype=Human Noble
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Fish
+grade=borderline
+type=Creature
+subtype=Fish
+power=1
+toughness=1
+color=blue
+[/card]
+[card]
+name=Alien Angel
+grade=borderline
+abilities=first strike,vigilance
+missing=Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn.
+text=First strike, vigilance -- Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn.
+type=Artifact Creature
+subtype=Alien Angel
+power=2
+toughness=2
+color=black
+[/card]
+[card]
+name=Dalek
+grade=borderline
+abilities=menace
+text=Menace
+type=Artifact Creature
+subtype=Dalek
+power=3
+toughness=3
+color=black
+[/card]
+[card]
+name=Alien Warrior
+grade=borderline
+type=Creature
+subtype=Alien Warrior
+power=2
+toughness=2
+color=red
+[/card]
+[card]
+name=Mark of the Rani
+grade=borderline
+missing=Enchant creature Enchanted creature gets +2/+2 and is goaded.
+text=Enchant creature -- Enchanted creature gets +2/+2 and is goaded.
+type=Enchantment
+subtype=Aura
+color=red
+[/card]
+[card]
+name=Alien Salamander
+grade=borderline
+missing=Islandwalk
+text=Islandwalk
+type=Creature
+subtype=Alien Salamander
+power=2
+toughness=2
+color=green
+[/card]
+[card]
+name=Mutant
+grade=borderline
+abilities=deathtouch
+text=Deathtouch
+type=Creature
+subtype=Mutant
+power=3
+toughness=3
+color=green
+[/card]
+[card]
+name=Alien Insect
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Alien Insect
+power=1
+toughness=1
+[/card]
+[card]
+name=Dinosaur
+grade=borderline
+abilities=flying,haste
+text=Flying, haste
+type=Creature
+subtype=Dinosaur
+power=2
+toughness=2
+[/card]
+[card]
+name=Cyberman
+grade=borderline
+text=(You can cover a face-down creature that has become a Cyberman with this reminder card. It's a 2/2 Cyberman artifact creature.)
+type=Artifact Creature
+subtype=Cyberman
+power=2
+toughness=2
+[/card]
+[card]
+name=Osgood, Operation Double
+grade=borderline
+missing={T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact. Paradox — Whenever you cast a spell from anywhere other than your hand, investigate.
+text={T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact. -- Paradox — Whenever you cast a spell from anywhere other than your hand, investigate. -- (This token's mana cost is {2}{U}{U}.)
+type=Creature
+subtype=Human Alien Shapeshifter
+power=2
+toughness=2
+color=blue
+[/card]
+[card]
+name=Eldrazi
+grade=borderline
+type=Creature
+subtype=Eldrazi
+power=10
+toughness=10
+[/card]
+[card]
+name=Cat Bird
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Cat Bird
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Human Warrior
+grade=borderline
+type=Creature
+subtype=Human Warrior
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Faerie
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Faerie
+power=1
+toughness=1
+color=blue
+[/card]
+[card]
+name=Demon
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Demon
+power=*
+toughness=*
+color=black
+[/card]
+[card]
+name=Zombie Knight
+grade=borderline
+abilities=menace
+text=Menace (This creature can't be blocked except by two or more creatures.)
+type=Creature
+subtype=Zombie Knight
+power=2
+toughness=2
+color=black
+[/card]
+[card]
+name=Karox Bladewing
+grade=borderline
+abilities=flying
+text=Flying
+type=Legendary Creature
+subtype=Dragon
+power=4
+toughness=4
+color=red
+[/card]
+[card]
+name=Ogre
+grade=borderline
+type=Creature
+subtype=Ogre
+power=3
+toughness=3
+color=red
+[/card]
+[card]
+name=Ob Nixilis Reignited Emblem
+grade=borderline
+missing=Whenever a player draws a card, you lose 2 life.
+text=Whenever a player draws a card, you lose 2 life.
+type=Emblem
+subtype=Nixilis
+[/card]
+[card]
+name=Sarkhan, the Dragonspeaker Emblem
+grade=borderline
+missing=At the beginning of your draw step, draw two additional cards. At the beginning of your end step, discard your hand.
+text=At the beginning of your draw step, draw two additional cards. -- At the beginning of your end step, discard your hand.
+type=Emblem
+subtype=Sarkhan
+[/card]
