@@ -87317,7 +87317,7 @@ subtype=Aura
 [card]
 name=Ophiomancer
 text=At the beginning of each upkeep, if you control no Snakes, put a 1/1 black Snake creature token with deathtouch onto the battlefield.
-auto=@each upkeep restriction{type(snake|mybattlefield)~lessthan~1}:token(Snake,Creature Snake,1/1,deathtouch,black) controller
+auto=@each upkeep restriction{type(snake|mybattlefield)~lessthan~1}:token(Snake Soc) controller
 mana={2}{B}
 type=Creature
 subtype=Human Shaman

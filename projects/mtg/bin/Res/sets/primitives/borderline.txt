@@ -1553,7 +1553,7 @@ type=Enchantment
 [card]
 name=Ajani's Chosen
 auto=@movedTo(enchantment[aura]|myBattlefield):all(trigger[to]) transforms((,newability[may name(Attach aura to cat) rehook target(cat[token;fresh]|mybattlefield)])) oneshot
-auto=_CONSTELLATION_token(Cat,Creature Cat,2/2,white)
+auto=_CONSTELLATION_token(Cat Soc)
 text=Whenever an enchantment enters under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token.
 mana={2}{W}{W}
 type=Creature
@@ -22059,7 +22059,7 @@ toughness=0
 name=Contraband Livestock
 target=creature
 auto=moveto(exile)
-auto=name(Roll a d20) rolld20 20 winability token(Goat,Creature Goat,0/1,white) targetcontroller winabilityend loseability if compare(lastrollresult)~lessthan~10 then token(Ox,Creature Ox,4/4,green) targetcontroller else token(Boar,Creature Boar,2/2,green) targetcontroller loseabilityend rolld20end
+auto=name(Roll a d20) rolld20 20 winability token(Goat,Creature Goat,0/1,white) targetcontroller winabilityend loseability if compare(lastrollresult)~lessthan~10 then token(Ox,Creature Ox,4/4,green) targetcontroller else token(Boar Soc) targetcontroller loseabilityend rolld20end
 text=Exile target creature, then roll a d20. -- 1-9 | Its controller creates a 4/4 green Ox creature token. -- 10-19 | Its controller creates a 2/2 green Boar creature token. -- 20 | Its controller creates a 0/1 white Goat creature token.
 mana={1}{W}
 type=Instant
@@ -143149,4 +143149,33 @@ subtype=Hamster
 power=1
 toughness=1
 color=red
+[/card]
+[card]
+name=Cat Soc
+grade=borderline
+type=Creature
+subtype=Cat
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Boar Soc
+grade=borderline
+type=Creature
+subtype=Boar
+power=2
+toughness=2
+color=green
+[/card]
+[card]
+name=Snake Soc
+grade=borderline
+abilities=deathtouch
+text=Deathtouch
+type=Creature
+subtype=Snake
+power=1
+toughness=1
+color=black
 [/card]
