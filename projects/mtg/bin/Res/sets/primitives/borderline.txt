@@ -141685,3 +141685,163 @@ subtype=Spuzzem Advisor
 power=4
 toughness=4
 [/card]
+[card]
+name=A.I.M. Labs
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{U}
+auto={T}:Add{B}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {U} or {B}.
+type=Land
+[/card]
+[card]
+name=Asgardian Citadel
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{R}
+auto={T}:Add{W}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {R} or {W}.
+type=Land
+[/card]
+[card]
+name=Avengers Hangar
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{W}
+auto={T}:Add{U}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {W} or {U}.
+type=Land
+[/card]
+[card]
+name=Birnin Zana Plaza
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{G}
+auto={T}:Add{W}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {G} or {W}.
+type=Land
+[/card]
+[card]
+name=Fisk Tower
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{W}
+auto={T}:Add{B}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {W} or {B}.
+type=Land
+[/card]
+[card]
+name=Hell's Kitchen
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{B}
+auto={T}:Add{R}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {B} or {R}.
+type=Land
+[/card]
+[card]
+name=Los Diablos Missile Base
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{R}
+auto={T}:Add{G}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {R} or {G}.
+type=Land
+[/card]
+[card]
+name=Pym Technologies
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{G}
+auto={T}:Add{U}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {G} or {U}.
+type=Land
+[/card]
+[card]
+name=Stark Industries
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{U}
+auto={T}:Add{R}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {U} or {R}.
+type=Land
+[/card]
+[card]
+name=Bushmaster, Coiled Henchman
+grade=borderline
+abilities=deathtouch
+auto=lord(other creature[counter{1/1}]|mybattlefield) deathtouch
+text=Deathtouch -- Each other creature you control with a +1/+1 counter on it has deathtouch.
+mana={1}{G}
+type=Legendary Creature
+subtype=Snake Human Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Hammerhead, Maggia Boss
+grade=borderline
+missing=sacrifice another creature or artifact: put a +1/+1 counter on him
+text=Sacrifice another creature or artifact: Put a +1/+1 counter on Hammerhead.
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Mister Immortal
+grade=borderline
+missing={2}{G}: return this card from your graveyard or exile to the battlefield tapped
+text={2}{G}: Return this card from your graveyard or from exile to the battlefield tapped.
+mana={1}{G}
+type=Legendary Creature
+subtype=Mutant Hero
+power=2
+toughness=1
+[/card]
+[card]
+name=Kingpin's Enforcers
+grade=borderline
+abilities=lifelink
+missing={2}{B}, sacrifice an artifact or creature: draw a card
+text=Lifelink -- {2}{B}, Sacrifice an artifact or creature: Draw a card.
+mana={2}{B}
+type=Creature
+subtype=Human Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Absorbing Man and Titania
+grade=borderline
+missing=double all damage your creature sources would deal
+text=Double all damage that creature sources you control would deal.
+mana={3}{R}{G}
+type=Legendary Creature
+subtype=Human Villain
+power=4
+toughness=5
+[/card]
+[card]
+name=Mox Poison
+grade=borderline
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+missing=you get two poison counters when the mana ability is used
+text={T}: Add one mana of any color. You get two poison counters.
+mana={0}
+type=Artifact
+[/card]
