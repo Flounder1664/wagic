@@ -142034,3 +142034,136 @@ text=This spell costs {2} less to cast if it targets a tapped creature. -- Exile
 mana={4}{W}
 type=Sorcery
 [/card]
+[card]
+name=Sodden Verdure
+grade=borderline
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{U}
+missing=it should enter untapped if you control two or more basic lands
+text=({T}: Add {G} or {U}.) -- This land enters tapped unless you control two or more basic lands.
+type=Land
+subtype=Forest Island
+[/card]
+[card]
+name=Scorched Geyser
+grade=borderline
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{R}
+missing=it should enter untapped if you control two or more basic lands
+text=({T}: Add {U} or {R}.) -- This land enters tapped unless you control two or more basic lands.
+type=Land
+subtype=Island Mountain
+[/card]
+[card]
+name=Eclipsed Steppe
+grade=borderline
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{B}
+missing=it should enter untapped if you control two or more basic lands
+text=({T}: Add {W} or {B}.) -- This land enters tapped unless you control two or more basic lands.
+type=Land
+subtype=Plains Swamp
+[/card]
+[card]
+name=Agent of Atlas
+grade=borderline
+abilities=prowess
+text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
+mana={1}{W}
+type=Creature
+subtype=Human Spy Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Shared Roots
+grade=borderline
+auto=target(land[basic]|mylibrary) moveTo(mybattlefield) and!( tap(noevent) )! && shuffle
+text=Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+mana={1}{G}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Machinesmith Automaton
+grade=borderline
+abilities=trample
+auto=@movedTo(other artifact|myBattlefield):counter(1/1)
+text=Trample -- Whenever another artifact you control enters, put a +1/+1 counter on this creature.
+mana={2}{R}
+type=Artifact Creature
+subtype=Robot Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Atlantean Cavalry
+grade=borderline
+abilities=vigilance
+missing=whenever you draw your second card each turn, put a +1/+1 counter on it
+text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
+mana={2}{U}
+type=Creature
+subtype=Merfolk Soldier
+power=3
+toughness=2
+[/card]
+[card]
+name=Medusa, Inhuman Queen
+grade=borderline
+abilities=reach,vigilance
+missing=whenever a player casts a noncreature spell, put a +1/+1 counter on her
+text=Reach, vigilance -- Whenever a player casts a noncreature spell, put a +1/+1 counter on Medusa.
+mana={2}{G}
+type=Legendary Creature
+subtype=Inhuman Noble Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Agents of S.H.I.E.L.D.
+grade=borderline
+missing=whenever a creature you control attacks alone, it gets +1/+1 until end of turn
+text=Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.
+mana={2}{W}
+type=Creature
+subtype=Human Spy Hero
+power=2
+toughness=4
+[/card]
+[card]
+name=Terry Pin, Turboturtle
+grade=borderline
+abilities=flash,haste
+missing=ignoring 'activate only as a sorcery' on abilities you activate
+text=Flash -- Haste -- You may ignore the words "Activate only as a sorcery" while activating abilities.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Turtle Athlete
+power=4
+toughness=3
+[/card]
+[card]
+name=Vexilus Praetor
+grade=borderline
+abilities=flash,vigilance
+missing=commanders you control have protection from everything
+text=Flash -- Vigilance -- Aegis of the Emperor — Commanders you control have protection from everything.
+mana={3}{W}
+type=Creature
+subtype=Custodes Warrior
+power=3
+toughness=4
+[/card]
+[card]
+name=Blur of Heroism
+grade=borderline
+auto=draw:1 controller
+missing=you may cast Hero spells as though they had flash
+text=When this enchantment enters, draw a card. -- You may cast Hero spells as though they had flash.
+mana={2}{W}
+type=Enchantment
+[/card]
