@@ -141185,3 +141185,194 @@ subtype=Human Assassin
 power=4
 toughness=1
 [/card]
+[card]
+name=Warriors of Wakanda
+grade=borderline
+abilities=trample
+text=Trample (This creature can deal excess combat damage to the player it's attacking.)
+mana={3}{G}
+type=Creature
+subtype=Human Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Wakandan Shield Guard
+grade=borderline
+auto=token(Soldier,Creature Soldier,1/1,white)
+text=When this creature enters, create a 1/1 white Soldier creature token.
+mana={1}{W}
+type=Creature
+subtype=Human Soldier
+power=1
+toughness=1
+[/card]
+[card]
+name=Void Helix
+grade=borderline
+target=creature,player
+auto=damage:5 && life:5 controller
+text=Void Helix deals 5 damage to any target and you gain 5 life.
+mana={4}{B}{B}
+type=Instant
+[/card]
+[card]
+name=Ant-Man, Scott Lang
+grade=borderline
+auto={4}:counter(1/1)
+text={4}: Put a +1/+1 counter on Ant-Man.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Hero in Training
+grade=borderline
+auto=draw:1 controller
+auto=if type(hero|mybattlefield)~morethan~1 then life:2 controller
+text=When this creature enters, draw a card. If you control another Hero, you gain 2 life.
+mana={2}{W}
+type=Creature
+subtype=Human Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Mandroid Squadron
+grade=borderline
+auto=life:2 controller
+text=When this creature enters, you gain 2 life.
+mana={1}{W}
+type=Artifact Creature
+subtype=Human Soldier
+power=0
+toughness=4
+[/card]
+[card]
+name=Soldier On
+grade=borderline
+target=creature
+auto=counter(1/1,2) && untap
+text=Put two +1/+1 counters on target creature. Untap it.
+mana={2}{W}
+type=Instant
+[/card]
+[card]
+name=Winter Soldier, Bucky Barnes
+grade=borderline
+auto=tap(noevent)
+text=Winter Soldier enters tapped.
+mana={W}
+type=Legendary Creature
+subtype=Human Soldier Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Concentrated Fire
+grade=borderline
+target=creature
+auto=damage:5
+text=Concentrated Fire deals 5 damage to target creature.
+mana={3}{R}
+type=Instant
+[/card]
+[card]
+name=Hulk, Bruce Banner
+grade=borderline
+abilities=trample
+text=Trample (This creature can deal excess combat damage to the player he's attacking.)
+mana={3}{R}{R}
+type=Legendary Creature
+subtype=Gamma Berserker Hero
+power=7
+toughness=4
+[/card]
+[card]
+name=Power Boost
+grade=borderline
+auto=lord(creature|mybattlefield) 1/0
+text=Creatures you control get +1/+0.
+mana={2}{R}
+type=Enchantment
+[/card]
+[card]
+name=Repulsor Rays
+grade=borderline
+target=creature
+auto=damage:3
+text=Repulsor Rays deals 3 damage to target creature.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Scarlet Witch, Wanda Maximoff
+grade=borderline
+abilities=menace
+text=Menace (This creature can't be blocked except by two or more creatures.)
+mana={2}{R}
+type=Legendary Creature
+subtype=Mutant Warlock Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Wondrous Revival
+grade=borderline
+target=<upto:3>creature[hero]|mygraveyard
+auto=moveTo(mybattlefield)
+text=Return up to three target Hero creature cards from your graveyard to the battlefield.
+mana={4}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Black Tom Cassidy
+grade=borderline
+auto={T}:Add{G}
+missing=if you control another Mutant, you also gain 1 life
+text={T}: Add {G}. If you control another Mutant, you gain 1 life.
+mana={1}{G}
+type=Legendary Creature
+subtype=Mutant Villain
+power=1
+toughness=3
+[/card]
+[card]
+name=Dark Deed
+grade=borderline
+target=creature
+auto=-4/-4 ueot
+text=Target creature gets -4/-4 until end of turn.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Project Deathlok Soldier
+grade=borderline
+autograveyard={2}{B}:moveTo(myhand)
+text={2}{B}: Return this card from your graveyard to your hand.
+mana={B}
+type=Artifact Creature
+subtype=Zombie Soldier
+power=1
+toughness=2
+[/card]
+[card]
+name=Flatline
+grade=borderline
+auto=lord(creature|opponentbattlefield) transforms((,setpower=0,settoughness=1)) ueot
+text=Creatures your opponents control have base power and toughness 0/1 until end of turn.
+mana={2}{U}
+type=Instant
+[/card]
+[card]
+name=Wrath of Leknif
+grade=borderline
+auto=all(creature|battlefield) destroy
+missing=they can't be regenerated, and untap up to four lands you control
+text=Destroy all creatures. They can't be regenerated. Untap up to four lands you control.
+mana={1}{W}{W}{U}
+type=Sorcery
+[/card]
