@@ -7669,10 +7669,10 @@ type=Enchantment
 [/card]
 [card]
 name=Auxiliary Boosters
-auto=_ROBOTTOKEN_
+auto=livingweapontoken(Robot,Artifact Creature Robot,2/2)
 auto={3}:equip
 auto=teach(creature) +1/+2,flying
-text=When this Equipment enters, create a 2/2 colorless Robot artifact creature token. Equipped creature gets +1/+2 and has flying. Equip {3}
+text=When this Equipment enters, create a 2/2 colorless Robot artifact creature token and attach this Equipment to it. -- Equipped creature gets +1/+2 and has flying. Equip {3}
 mana={4}{W}
 type=Artifact
 subtype=Equipment
@@ -57129,7 +57129,7 @@ type=Land
 [/card]
 [card]
 name=Herald of Anafenza
-auto={2}{W}{T}:token(Warrior,Creature Warrior,1/1,white) && counter(1/1) asSorcery
+auto={2}{W}{T}:token(Warrior Pip) && counter(1/1) asSorcery
 text=Outlast {2}{W} ({2}{W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.) -- Whenever you activate Herald of Anafenza's outlast ability, put a 1/1 white Warrior creature token onto the battlefield.
 mana={W}
 type=Creature
@@ -66154,7 +66154,7 @@ toughness=2
 [/card]
 [card]
 name=Kemba, Kha Regent
-auto=@each my upkeep:thisforeach(gear) token(Cat,Creature Cat,2/2,white)
+auto=@each my upkeep:thisforeach(gear) token(Cat Scd)
 text=At the beginning of your upkeep, put a 2/2 white Cat creature token onto the battlefield for each equipment attached to Kemba, Kha Regent.
 mana={1}{W}{W}
 type=Legendary Creature
@@ -75173,7 +75173,7 @@ toughness=4
 name=Mardu Charm
 aicode=activate reject notaTarget(*[-creature;-land]|targetedpersonshand)
 auto=choice name(4 Damage) damage:4 target(creature)
-auto=choice name(2 Warrior tokens) token(Warrior,Creature Warrior,1/1,white) and!( transforms((,newability[first strike ueot])) )!*2
+auto=choice name(2 Warrior tokens) token(Warrior Pip) and!( transforms((,newability[first strike ueot])) )!*2
 auto=choice name(discard opponent) target(opponent) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Choose one: -- Mardu Charm deals 4 damage to target creature. -- Put two 1/1 white Warrior creature tokens onto the battlefield. They gain first strike until end of turn. -- Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
 mana={R}{W}{B}
@@ -75201,7 +75201,7 @@ toughness=3
 [/card]
 [card]
 name=Mardu Hordechief
-auto=if raid then token(Warrior,Creature Warrior,1/1,white)
+auto=if raid then token(Warrior Pip)
 text=Raid - When Mardu Hordechief enters, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield.
 mana={2}{W}
 type=Creature
@@ -89897,7 +89897,7 @@ type=Enchantment
 [/card]
 [card]
 name=Pegasus Stampede
-auto=token(Pegasus,Creature Pegasus,1/1,flying,white)
+auto=token(Pegasus Scd)
 buyback={1}{W}{S(land|myBattlefield)}
 text=Buyback - Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.) -- Put a 1/1 white Pegasus creature token with flying onto the battlefield.
 mana={1}{W}
@@ -107176,7 +107176,7 @@ type=Enchantment
 [/card]
 [card]
 name=Secure the Wastes
-auto=token(Warrior,Creature Warrior,1/1,white)*X
+auto=token(Warrior Pip)*X
 text=Put X 1/1 white Warrior creature tokens onto the battlefield.
 mana={X}{W}
 type=Instant
@@ -120527,7 +120527,7 @@ type=Enchantment
 [/card]
 [card]
 name=Storm Herd
-auto=token(Pegasus,Creature Pegasus,1/1,flying,white)*lifetotal
+auto=token(Pegasus Scd)*lifetotal
 text=Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
 mana={8}{W}{W}
 type=Sorcery
@@ -124157,7 +124157,7 @@ abilities=split second
 [/card]
 [card]
 name=Take Up Arms
-auto=token(Warrior,Creature Warrior,1/1,white)*3
+auto=token(Warrior Pip)*3
 text=Put three 1/1 white Warrior creature tokens onto the battlefield.
 mana={4}{W}
 type=Instant
@@ -129055,7 +129055,7 @@ toughness=1
 [card]
 name=Titania, Protector of Argoth
 auto=moveto(mybattlefield) target(land|mygraveyard)
-auto=@movedto(land|graveyard) from(mybattlefield):token(Elemental,Creature Elemental,5/3,green) controller
+auto=@movedto(land|graveyard) from(mybattlefield):token(Elemental Mb2) controller
 text=When Titania, Protector of Argoth enters, return target land card from your graveyard to the battlefield. -- Whenever a land you control is put into a graveyard from the battlefield, put a 5/3 green Elemental creature token onto the battlefield.
 mana={3}{G}{G}
 type=Legendary Creature
@@ -141156,7 +141156,7 @@ toughness=1
 [/card]
 [card]
 name=White Sun's Zenith
-auto=token(Cat,Creature Cat,2/2,white)*X
+auto=token(Cat Scd)*X
 alias=135262
 text=Put X 2/2 Cat creature tokens onto the battlefield. Shuffle White Sun's Zenith into its owner's library.
 mana={X}{W}{W}{W}

@@ -55898,7 +55898,7 @@ subtype=Aura
 [/card]
 [card]
 name=Illustrious Historian
-autograveyard={5}{E}:token(Spirit,Creature Spirit,3/2,red,white) and!( tap(noevent) )!
+autograveyard={5}{E}:token(Spirit Soc) and!( tap(noevent) )!
 text={5}, Exile Illustrious Historian from your graveyard: Create a tapped 3/2 red and white Spirit creature token.
 mana={1}{R}
 type=Creature
@@ -67645,9 +67645,9 @@ type=Land
 [/card]
 [card]
 name=Lorehold Command
-auto=choice name(Create Spirit and give 1/0 to creatures) token(Spirit,Creature Spirit,3/2,white,red) && all(creature|mybattlefield) transforms((,newability[1/0],haste,indestructible)) ueot
-auto=choice name(Create Spirit and deal 3 damage) token(Spirit,Creature Spirit,3/2,white,red) && target(anytarget) damage:3 && ability$!name(Target player gains 3 life) name(Target player gains 3 life) life:3 target(player)!$ controller
-auto=choice name(Create Spirit and sacrifice permanent) token(Spirit,Creature Spirit,3/2,white,red) && ability$!name(Sacrifice a permanent) name(Sacrifice a permanent) target(*|mybattlefield) sacrifice and!( draw:2 controller )! !$ controller
+auto=choice name(Create Spirit and give 1/0 to creatures) token(Spirit Soc) && all(creature|mybattlefield) transforms((,newability[1/0],haste,indestructible)) ueot
+auto=choice name(Create Spirit and deal 3 damage) token(Spirit Soc) && target(anytarget) damage:3 && ability$!name(Target player gains 3 life) name(Target player gains 3 life) life:3 target(player)!$ controller
+auto=choice name(Create Spirit and sacrifice permanent) token(Spirit Soc) && ability$!name(Sacrifice a permanent) name(Sacrifice a permanent) target(*|mybattlefield) sacrifice and!( draw:2 controller )! !$ controller
 auto=choice name(Give 1/0 to creatures and deal 3 damage) all(creature|mybattlefield) transforms((,newability[1/0],haste,indestructible)) ueot && target(anytarget) damage:3 && ability$!name(Target player gains 3 life) name(Target player gains 3 life) life:3 target(player)!$ controller
 auto=choice name(Give 1/0 to creatures and sacrifice permanent) all(creature|mybattlefield) transforms((,newability[1/0],haste,indestructible)) ueot && ability$!name(Sacrifice a permanent) name(Sacrifice a permanent) target(*|mybattlefield) sacrifice and!( draw:2 controller )! !$ controller
 auto=choice name(Deal 3 damage and sacrifice permanent) target(anytarget) damage:3 && ability$!name(Target player gains 3 life) name(Target player gains 3 life) life:3 target(player)!$ controller && ability$!name(Sacrifice a permanent) name(Sacrifice a permanent) name(Sacrifice a permanent) target(*|mybattlefield) transforms((,newability[sacrifice],newability[draw:2 controller])) oneshot !$ controller
@@ -67659,7 +67659,7 @@ type=Instant
 name=Lorehold Excavation
 auto=@each my end restriction{type(land[zpos=1]|mylibrary)~morethan~0}:deplete:1 controller && life:1 controller
 auto=@each my end restriction{type(land[zpos=1]|mylibrary)~equalto~0}:deplete:1 controller && damage:1 opponent
-auto={5}{E(creature|mygraveyard)}:token(Spirit,Creature Spirit,3/2,red,white) and!( tap(noevent) )!
+auto={5}{E(creature|mygraveyard)}:token(Spirit Soc) and!( tap(noevent) )!
 text=At the beginning of your end step, mill a card. If a land card was milled this way, you gain 1 life. Otherwise, Lorehold Excavation deals 1 damage to each opponent. (To mill a card, put the top card of your library into your graveyard.) -- {5}, Exile a creature card from your graveyard: Create a tapped 3/2 red and white Spirit creature token.
 mana={R}{W}
 type=Enchantment
@@ -70465,7 +70465,7 @@ toughness=1
 [card]
 name=Mascot Exhibition
 auto=token(Inkling,Creature Inkling,2/1,white,black,flying)
-auto=token(Spirit,Creature Spirit,3/2,red,white)
+auto=token(Spirit Soc)
 auto=token(Elemental,Creature Elemental,4/4,blue,red)
 text=Create a 2/1 white and black Inkling creature token with flying, a 3/2 red and white Spirit creature token, and a 4/4 blue and red Elemental creature token.
 mana={7}
@@ -78615,7 +78615,7 @@ auto=_FOOD_
 auto=_FOOD_ opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}) name(Create treasure) name(Create treasure) _TREASURE_
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}) name(Opponent loses life) name(Opponent loses life) life:-3 opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Create spirits) name(Create spirits) token(Spirit,Creature Spirit,1/1,white,flying)*3 and!( tap(noevent) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Create spirits) name(Create spirits) token(Spirit Soc Flying)*3 and!( tap(noevent) )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I- You and target opponent each create a Food token. -- II- Each opponent loses 3 life. Create a Treasure token. -- III- Create three tapped 1/1 white Spirit creature tokens with flying.
 mana={3}{B}
@@ -88075,7 +88075,7 @@ type=Sorcery
 [card]
 name=Quintorius, Field Historian
 auto=lord(spirit|mybattlefield) 1/0
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Create Spirit) token(Spirit,Creature Spirit,3/2,white,red)
+auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Create Spirit) token(Spirit Soc)
 text=Spirits you control get +1/+0. -- Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.
 mana={3}{R}{W}
 type=Legendary Creature
@@ -88087,7 +88087,7 @@ toughness=4
 name=Quintorius, Loremaster
 abilities=vigilance
 auto=@each my end restriction{type(*[-creature;-land]|mygraveyard)~morethan~0}:name(Exile a card) target(*[-creature;-land]|mygraveyard) moveto(myexile) and!( counter(0/0.1.QuintoriusExiled) notrg )!
-auto=@each my end restriction{type(*[-creature;-land]|mygraveyard)~morethan~0}:name(Create spirit) token(Spirit,Creature Spirit,3/2,red,white)
+auto=@each my end restriction{type(*[-creature;-land]|mygraveyard)~morethan~0}:name(Create spirit) token(Spirit Soc)
 auto={1}{R}{W}{T}{S(spirit|myBattlefield)}:name(Choose exiled card) target(*[counter{0/0.1.QuintoriusExiled}]|myexile) transforms((,newability[zerocast],newability[canplayfromexile],newability[bottomlibrarydeath])) ueot
 text=Vigilance -- At the beginning of your end step, exile target noncreature, nonland card from your graveyard. Create a 3/2 red and white Spirit creature token. -- {1}{R}{W}, {T}, Sacrifice a Spirit: Choose target card exiled with Quintorius. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.
 mana={3}{R}{W}
@@ -100493,7 +100493,7 @@ toughness=4
 [/card]
 [card]
 name=Shadow Summoning
-auto=name(Create 2 spirits) token(Spirit,Creature Spirit,1/1,white,flying)*2 and!( tap(noevent) )!
+auto=name(Create 2 spirits) token(Spirit Soc Flying)*2 and!( tap(noevent) )!
 text=Create two tapped 1/1 white Spirit creature tokens with flying.
 mana={W}{B}
 type=Sorcery
@@ -104119,7 +104119,7 @@ toughness=1
 name=Skyclave Apparition
 other={1}{W}{W}{E(*[-land;-token;manacost<=4]|opponentBattlefield)} name(Exile opponent card)
 otherrestriction=type(*[-land;-token;manacost<=4]|opponentbattlefield)~morethan~0
-auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~0}:token(Illusion,Creature Illusion,0/0,blue) opponent
+auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~0}:token(Illusion Mb2) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~1}:token(Illusion,Creature Illusion,1/1,blue) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~2}:token(Illusion,Creature Illusion,2/2,blue) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~3}:token(Illusion,Creature Illusion,3/3,blue) opponent
@@ -107898,7 +107898,7 @@ color=white
 [/card]
 [card]
 name=Spirit Summoning
-auto=token(Spirit,Creature Spirit,3/2,white,red)
+auto=token(Spirit Soc)
 text=Create a 3/2 red and white Spirit creature token.
 mana={1}{RW}{RW}
 type=Sorcery
@@ -108752,7 +108752,7 @@ type=Artifact
 [/card]
 [card]
 name=Staff of the Storyteller
-auto=choice token(Spirit,Creature Spirit,1/1,white,flying)
+auto=choice token(Spirit Soc Flying)
 auto=@tokencreated(*|myBattlefield):name(Add story counter) counter(0/0,1,Story)
 auto={W}{T}{C(0/0,-1,Story)}:name(Draw a card) draw:1 controller
 text=When Staff of the Storyteller enters, create a 1/1 white Spirit creature token with flying. -- Whenever you create one or more creature tokens, put a story counter on Staff of the Storyteller. -- {W}, {T}, Remove a story counter from Staff of the Storyteller: Draw a card.
@@ -136714,7 +136714,8 @@ toughness=1
 [card]
 name=Sandbenders' Storm
 grade=borderline
-auto=choice name(Destroy a big creature) destroy target(creature[power>=4]) name(Earthbend 3) _EARTHBEND3_
+auto=choice name(Destroy a big creature) target(creature[power>=4]) destroy
+auto=choice name(Earthbend 3) _EARTHBEND3_
 text=Choose one -- Destroy target creature with power 4 or greater. -- Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
 mana={3}{W}
 type=Instant
@@ -143178,4 +143179,72 @@ subtype=Snake
 power=1
 toughness=1
 color=black
+[/card]
+[card]
+name=Warrior Pip
+grade=borderline
+type=Creature
+subtype=Warrior
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Cat Scd
+grade=borderline
+type=Creature
+subtype=Cat
+power=2
+toughness=2
+color=white
+[/card]
+[card]
+name=Pegasus Scd
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Pegasus
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Spirit Soc
+grade=borderline
+type=Creature
+subtype=Spirit
+power=3
+toughness=2
+color=red,white
+[/card]
+[card]
+name=Spirit Soc Flying
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Spirit
+power=1
+toughness=1
+color=white
+[/card]
+[card]
+name=Elemental Mb2
+grade=borderline
+type=Creature
+subtype=Elemental
+power=5
+toughness=3
+color=green
+[/card]
+[card]
+name=Illusion Mb2
+grade=borderline
+missing=its power and toughness are variable (*/*); fixed at 0/0 here
+type=Creature
+subtype=Illusion
+power=0
+toughness=0
+color=blue
 [/card]
