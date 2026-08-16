@@ -141376,3 +141376,312 @@ text=Destroy all creatures. They can't be regenerated. Untap up to four lands yo
 mana={1}{W}{W}{U}
 type=Sorcery
 [/card]
+[card]
+name=Ghost, Spectral Saboteur
+grade=borderline
+abilities=flash,unblockable
+text=Flash -- Intangibility — Ghost can't be blocked.
+mana={2}{U/B}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Ultron, Machine Overlord
+grade=borderline
+abilities=flying
+auto=lord(other *[robot;construct]|mybattlefield) 2/2
+text=Flying -- Other Robots and Constructs you control get +2/+2.
+mana={5}
+type=Legendary Artifact Creature
+subtype=Robot Villain
+power=4
+toughness=4
+[/card]
+[card]
+name=Detained by Legionnaires
+grade=borderline
+target=creature
+auto=teach(creature) cantattack
+auto=teach(creature) cantblock
+text=Enchant creature -- Enchanted creature can't attack or block.
+mana={1}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Blight Grenade
+grade=borderline
+target=creature
+auto=destroy
+auto=all(creature|battlefield) -3/-3 ueot
+text=Destroy target creature. -- All creatures get -3/-3 until end of turn.
+mana={4}{B}
+type=Sorcery
+[/card]
+[card]
+name=Flayed One
+grade=borderline
+abilities=lifelink
+auto=deplete:3 controller
+text=Lifelink -- Flesh Flayer — When this creature enters, mill three cards.
+mana={2}{B}
+type=Artifact Creature
+subtype=Necron
+power=4
+toughness=1
+[/card]
+[card]
+name=Bloodcrusher of Khorne
+grade=borderline
+abilities=trample
+auto=lord(other creature|mybattlefield) trample
+text=Trample -- Devastating Charge — Other creatures you control have trample.
+mana={3}{R}
+type=Creature
+subtype=Demon Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Thanos, Death's Consort
+grade=borderline
+abilities=lifelink
+auto=@movedTo(other creature|graveyard) from(battlefield):counter(1/1)
+text=Lifelink -- Whenever another creature dies, put a +1/+1 counter on Thanos.
+mana={2}{B}{B}
+type=Legendary Creature
+subtype=Eternal Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Tigra, Feline Fury
+grade=borderline
+abilities=flash,trample
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1)
+text=Flash -- Trample -- Whenever you gain life, put a +1/+1 counter on Tigra.
+mana={1}{G}
+type=Legendary Creature
+subtype=Cat Human Hero
+power=2
+toughness=1
+[/card]
+[card]
+name=Captain's Defense
+grade=borderline
+target=creature[blocking]
+auto=2/2 ueot && draw:1 controller
+text=Target blocking creature gets +2/+2 until end of turn. -- Draw a card.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Agent Phil Coulson
+grade=borderline
+abilities=vigilance
+auto={T}:all(other creature[hero]|mybattlefield) counter(1/1)
+text=Vigilance -- {T}: Put a +1/+1 counter on each other Hero you control.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Spy Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Indicate
+grade=borderline
+target=*|battlefield
+auto=donothing
+text=Target permanent.
+mana={0}
+type=Sorcery
+[/card]
+[card]
+name=Sif's Spearmaster
+grade=borderline
+missing={T}: deals damage equal to its power to target opponent
+text={T}: This creature deals damage equal to its power to target opponent.
+mana={2}{R}
+type=Creature
+subtype=God Warrior Hero
+power=1
+toughness=4
+[/card]
+[card]
+name=Intrepid Ace
+grade=borderline
+missing=+2/+0 while it is not attacking or blocking
+text=This creature gets +2/+0 as long as it isn't attacking or blocking.
+mana={R}
+type=Creature
+subtype=Human Pilot
+power=2
+toughness=1
+[/card]
+[card]
+name=Hit-Monkey
+grade=borderline
+abilities=reach,vigilance,deathtouch,hexproof,haste
+auto=lord(*|stack) nofizzle
+text=This spell can't be countered. -- Reach, vigilance, deathtouch, hexproof, haste
+mana={3}{G}
+type=Legendary Creature
+subtype=Monkey Assassin
+power=3
+toughness=3
+[/card]
+[card]
+name=S.H.I.E.L.D. Deployment Drone
+grade=borderline
+abilities=flying
+auto=token(Soldier,Creature Soldier,1/1,white)
+text=Flying -- When this creature enters, create a 1/1 white Soldier creature token.
+mana={2}{U}
+type=Artifact Creature
+subtype=Robot
+power=2
+toughness=2
+[/card]
+[card]
+name=Unstable Molecule Suit
+grade=borderline
+auto=teach(creature) 2/2
+auto=teach(creature) indestructible
+auto={4}:equip
+missing=equip commander {2}
+text=Equipped creature gets +2/+2 and has indestructible. -- Equip commander {2} -- Equip {4}
+mana={3}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Hulk, Always Angry
+grade=borderline
+abilities=trample,mustattack
+auto=all(artifact|battlefield) destroy
+text=Trample -- When Hulk enters, destroy all artifacts. -- Hulk attacks each combat if able.
+mana={5}{R}{R}
+type=Legendary Creature
+subtype=Gamma Berserker Hero
+power=9
+toughness=9
+[/card]
+[card]
+name=Towering Viewpoint
+grade=borderline
+abilities=defender,reach
+auto={3}:target(creature) flying ueot
+text=Defender, reach -- Leap of Faith — {3}: Target creature gains flying until end of turn.
+mana={2}
+type=Artifact Creature
+subtype=Wall
+power=0
+toughness=4
+[/card]
+[card]
+name=Team Transmitter
+grade=borderline
+auto=@movedTo(*[hero]|myBattlefield):life:1 controller
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+text=Whenever a Hero you control enters, you gain 1 life. -- {T}: Add one mana of any color.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Hydraulic Helper
+grade=borderline
+abilities=defender
+auto={T}:Add{U}
+missing=the mana restriction (artifact spells only)
+text=Defender -- {T}: Add {U}. This mana can't be spent to cast a nonartifact spell.
+mana={1}{U}
+type=Artifact Creature
+subtype=Robot
+power=2
+toughness=3
+[/card]
+[card]
+name=Citizen V, Helmut Zemo
+grade=borderline
+abilities=lifelink
+auto=@lifeof(player) from(*[-lifefaker]|*):all(*[villain]|mybattlefield) counter(1/1)
+text=Lifelink -- Whenever you gain life, put a +1/+1 counter on each Villain you control.
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Noble Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Crisis of Conscience
+grade=borderline
+auto=choice name(Destroy all tokens) all(*[token]|battlefield) destroy
+auto=choice name(Destroy nonland nontoken permanents) all(*[-land&-token]|battlefield) destroy
+text=Choose one — -- • Destroy all tokens. -- • Destroy all nonland, nontoken permanents.
+mana={4}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Quinjet Technician
+grade=borderline
+auto={T}:Add{R}
+missing=the second mana ability, restricted to power-up abilities
+text={T}: Add {R}. -- {T}: Add {R}{R}. Spend this mana only to activate power-up abilities.
+mana={1}{R}
+type=Creature
+subtype=Human Artificer
+power=2
+toughness=1
+[/card]
+[card]
+name=Count Nefaria
+grade=borderline
+abilities=flying
+missing=costs {3} less if you have sacrificed a permanent this turn
+text=This spell costs {3} less to cast if you've sacrificed a permanent this turn. -- Flying
+mana={6}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=6
+toughness=6
+[/card]
+[card]
+name=Mister Fantastic, Reed Richards
+grade=borderline
+abilities=reach
+missing=whenever one or more tokens you control enter, you may draw a card
+text=Reach -- Whenever one or more tokens you control enter, you may draw a card.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Scientist Hero
+power=2
+toughness=4
+[/card]
+[card]
+name=Narod, the Beige Flower
+grade=borderline
+missing=each creature assigns combat damage equal to its mana value rather than its power
+text=Each creature assigns combat damage equal to its mana value rather than its power.
+mana={W}{U}{B}
+type=Legendary Creature
+subtype=Plant Rogue
+power=0
+toughness=5
+[/card]
+[card]
+name=Spuzzem Strategist
+grade=borderline
+missing=you make all choices for Spuzzems you control
+text=You make all choices for Spuzzems you control.
+mana={3}{G}
+type=Creature
+subtype=Spuzzem Advisor
+power=4
+toughness=4
+[/card]
