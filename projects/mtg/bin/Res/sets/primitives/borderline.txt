@@ -141845,3 +141845,192 @@ text={T}: Add one mana of any color. You get two poison counters.
 mana={0}
 type=Artifact
 [/card]
+[card]
+name=Subterranean Cavern
+grade=borderline
+auto=tap(noevent)
+auto=life:1 controller
+auto={T}:Add{B}
+auto={T}:Add{G}
+text=This land enters tapped. -- When this land enters, you gain 1 life. -- {T}: Add {B} or {G}.
+type=Land
+[/card]
+[card]
+name=Lord of Change
+grade=borderline
+abilities=flying
+auto=_WARD3_
+auto=draw:3 controller
+text=Flying, ward {3} -- Architect of Deception — When this creature enters, draw three cards.
+mana={6}{U}
+type=Creature
+subtype=Demon
+power=6
+toughness=6
+[/card]
+[card]
+name=Futurist Forge
+grade=borderline
+auto=draw:1 controller
+missing={3}{U}, sacrifice this artifact: draw two cards
+text=When this artifact enters, draw a card. -- {3}{U}, Sacrifice this artifact: Draw two cards.
+mana={1}{U}
+type=Artifact
+[/card]
+[card]
+name=Assassin Initiate
+grade=borderline
+abilities=deathtouch
+auto={1}:flying ueot
+auto={1}:deathtouch ueot
+auto={1}:lifelink ueot
+missing=the three modes are separate abilities here rather than one choice
+text={1}: This creature gains your choice of flying, deathtouch, or lifelink until end of turn.
+mana={B}
+type=Creature
+subtype=Human Assassin
+power=1
+toughness=1
+[/card]
+[card]
+name=Deathleaper, Terror Weapon
+grade=borderline
+abilities=flash,haste
+auto=lord(creature[fresh]|mybattlefield) double strike
+text=Flash -- Haste -- Flesh Hooks — Creatures you control that entered this turn have double strike.
+mana={2}{R}{G}
+type=Legendary Creature
+subtype=Tyranid
+power=3
+toughness=3
+[/card]
+[card]
+name=Fogwell's Gym
+grade=borderline
+auto={T}:Add{R}
+missing=the 1 damage to you from the mana ability, and the {2}{R} discard-to-draw ability
+text={T}: Add {R}. This land deals 1 damage to you. -- {2}{R}, {T}, Discard a card: Draw a card.
+type=Land
+[/card]
+[card]
+name=Professor Hulk
+grade=borderline
+abilities=trample
+missing=whenever he deals combat damage to a player, draw that many cards
+text=Trample -- Whenever Professor Hulk deals combat damage to a player, draw that many cards.
+mana={4}{U}{U}
+type=Legendary Creature
+subtype=Gamma Scientist Hero
+power=6
+toughness=6
+[/card]
+[card]
+name=Plague Drone
+grade=borderline
+abilities=flying
+missing=if an opponent would gain life, that player loses that much life instead
+text=Flying -- Rot Fly — If an opponent would gain life, that player loses that much life instead.
+mana={3}{B}
+type=Creature
+subtype=Demon
+power=3
+toughness=3
+[/card]
+[card]
+name=Clamavus
+grade=borderline
+missing=each creature you control gets +1/+1 for each +1/+1 counter on it
+text=Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it.
+mana={4}{G}
+type=Creature
+subtype=Human Tyranid Artificer
+power=3
+toughness=3
+[/card]
+[card]
+name=Lady Spider, Maybelle Reilly
+grade=borderline
+abilities=reach
+missing=whenever you discard a card, put a +1/+1 counter on target Spider you control
+text=Reach -- Whenever you discard a card, put a +1/+1 counter on target Spider you control.
+mana={1}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=1
+toughness=3
+[/card]
+[card]
+name=Quake, Agent of S.H.I.E.L.D.
+grade=borderline
+missing=whenever you cast a noncreature spell, tap target creature or land
+text=Seismic Takedown — Whenever you cast a noncreature spell, tap target creature or land.
+mana={2}{W}
+type=Legendary Creature
+subtype=Inhuman Spy Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Misty Knight, Hero for Hire
+grade=borderline
+missing={2}, {T}, discard a card: draw a card for each card discarded this turn
+text={2}, {T}, Discard a card: Draw a card for each card you've discarded this turn.
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Detective Hero
+power=3
+toughness=1
+[/card]
+[card]
+name=Flatman
+grade=borderline
+missing={2}{G}: switch his power and toughness until end of turn
+text=Origami-Fu — {2}{G}: Switch Flatman's power and toughness until end of turn.
+mana={3}{G}
+type=Legendary Creature
+subtype=Mutant Hero
+power=1
+toughness=10
+[/card]
+[card]
+name=Vision of Love
+grade=borderline
+missing=you may sacrifice an artifact or discard a card; if you do, draw two cards
+text=You may sacrifice an artifact or discard a card. If you do, draw two cards.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Delete
+grade=borderline
+missing=X damage to each nonartifact creature and each player
+text=Delete deals X damage to each nonartifact creature and each player.
+mana={X}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Cyber Conversion
+grade=borderline
+missing=turning a creature face down as a 2/2 Cyberman artifact creature
+text=Turn target creature face down. It's a 2/2 Cyberman artifact creature.
+mana={U}{U}
+type=Instant
+[/card]
+[card]
+name=Torpor Orb
+grade=borderline
+missing=creatures entering do not cause abilities to trigger
+text=Creatures entering don't cause abilities to trigger.
+mana={2}
+type=Artifact
+[/card]
+[card]
+name=Hawkeye's Shot
+grade=borderline
+target=creature
+auto=moveTo(exile)
+missing=costs {2} less if it targets a tapped creature
+text=This spell costs {2} less to cast if it targets a tapped creature. -- Exile target creature.
+mana={4}{W}
+type=Sorcery
+[/card]
