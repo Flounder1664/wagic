@@ -80,29 +80,47 @@ And the split that settles the mechanism — grouping inline calls by token **na
 
 ## Decision
 
-**A hybrid, split by whether the token's name is unambiguous — not by taste.**
+**By id by default. By name only where the body is fixed by the rules of the game.**
 
-- **237 unambiguous names → by name** (`token(Treasure)`). Keeps the per-set art
-  preference, invents no names. 560 calls.
-- **128 ambiguous names → by id** (`token(-<id>)`). 1,581 calls.
-- **Everything else, low priority → leave inline**, and stage art at `<creator id>t.jpg`
-  in that card's own set zip. No primitive, no registration, no card edit.
+- **Predefined resource tokens → by name**: Treasure, Clue, Food, Blood, Gold, Powerstone,
+  Incubator, Map, Junk. These have one body defined by the game itself, so the name is a
+  stable key and `getCardByName(name, setId)` gives the creating card's own set art for
+  free. Treasure/Food/Clue/Blood are already converted.
+- **Everything else → by id** (`token(-<id>)`). 
+- **Low-priority tail → leave inline**, and stage art at `<creator id>t.jpg` in that card's
+  own set zip. No primitive, no registration, no card edit.
 
-The reasoning that forces this: **once a name needs disambiguating, by-name degenerates
-into by-id with a worse key.** By-name's only advantage is `getCardByName(name, setId)`
-picking the creating card's own printing, and that only works while the bare name is
-unambiguous. Invent `Elemental Soc 4/4` and it exists in one set, resolving to exactly one
-registration — that is by-id, spelled as a made-up string. So for the 128 collision names,
-the id is the honest key.
+Two things force this, and the second one overturned the first draft of this plan.
+
+**First:** once a name needs disambiguating, by-name degenerates into by-id with a worse
+key. By-name's only advantage is the per-set preference, and that only works while the bare
+name is unambiguous. Invent `Elemental Soc 4/4` and it exists in one set, resolving to
+exactly one registration — that is by-id, spelled as a made-up string.
+
+**Second — the one that matters more: a name that is unambiguous today is not a stable
+key.** Any future set can print a differently-statted token of the same name, and the
+binding lives in a single shared primitive, so whoever intakes that set either overwrites
+the shared body (silently changing every existing card that makes one) or invents a
+suffix (at which point see above). The measurement shows how thin the "unambiguous" class
+really is: of 237 such names, **155 (65%) appear in exactly one call site** — unambiguous
+because rare, not because stable — and only 15 appear five or more times. Those 15 are
+creature tokens (Fractal, Orc Army, Monkey, Goat, Pilot, Wurm, Sliver…), and nothing in the
+rules fixes a Monkey token at 2/2 green. Only the predefined artifact tokens carry a
+guarantee, and of the unambiguous names exactly three are in that class: Clue, Food, Shard.
+
+**Enforcement**: `intake_tokens.py` already refuses to register a token against an existing
+primitive whose body differs, and refuses to author a second primitive under a name already
+taken. That check is what keeps the by-name list honest as sets arrive; it must not be
+loosened.
 
 ## Order of work
 
 1. **The eleven newly intaken sets' tokens** — the ones actually being played.
 2. **The 416 granted calls.** Nothing else fixes them; they are wrong *in play*, not merely
    missing art, and that is true however old or low-priority the card is.
-3. **Top 20 unambiguous bodies by name** — 20 primitives covering 508 calls (Orc Army ×64,
-   Wolf ×51, Fractal ×74 across two spellings, Bird ×32, Saproling ×27, Devil ×27,
-   Inkling ×26). Best breadth per unit of work.
+3. **Top 20 bodies by call count, by id** — 508 calls (Orc Army ×64, Wolf ×51, Fractal ×74
+   across two spellings, Bird ×32, Saproling ×27, Devil ×27, Inkling ×26). Best breadth per
+   unit of work. By id, not by name, even where the name looks unambiguous today.
 4. **The 729 singleton bodies** — probably never worth a primitive each. Art staging at the
    creator id if anything at all.
 
@@ -116,6 +134,11 @@ the id is the honest key.
 
 ## Lessons this note exists to prevent repeating
 
+- **"Unambiguous today" is not a stable key.** The first draft of this plan split the work
+  by whether a token name currently maps to one body. John's question — "surely any named
+  token may become ambiguous with a new set release?" — is correct, and the numbers agreed:
+  65% of the unambiguous names appear exactly once. Design against the invariant the rules
+  guarantee, not against the shape of today's data.
 - **"An image exists at this id" is not "the right image."** 1,687 card images were
   downloaded by name, unscoped, so every reprint got its *default* printing — Fallout's
   Impassioned Orator carried M20 art. Every audit passed. Only playing the game showed it.
