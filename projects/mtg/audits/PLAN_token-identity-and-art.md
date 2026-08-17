@@ -132,6 +132,21 @@ loosened.
   Its body is already correct; only art is missing, and art staging fixes that without a
   change that reaches every Dragon-making card in the game.
 
+## TODO carried in
+
+**Radiation (`scryfall.com/card/tpip/22`) needs the marker-card treatment.** It is layout
+`token`, type `Card`, and carries the rad-counter rules text: "At the beginning of your
+precombat main phase, if you have any rad counters, mill that many cards. For each nonland
+card milled this way, you lose 1 life and a rad counter." `intake_tokens.py` skipped it as
+"not a creatable token", which is right for a creature-token pass and wrong for this card.
+
+It is the same shape as The Monarch (CN2, LTC) and Enduring Story (HOB), which Wagic
+already registers as real command-zone marker cards — a designation with no board presence
+otherwise. So Radiation wants a primitive, a registration, art, and a drop into the command
+zone when a player first gets a rad counter. That last part is the display half of the rad
+counter mechanic, which is engine work and is why 22 Fallout cards are still unwritten.
+Energy Reserve (tpip #21) is the same class.
+
 ## Lessons this note exists to prevent repeating
 
 - **"Unambiguous today" is not a stable key.** The first draft of this plan split the work
