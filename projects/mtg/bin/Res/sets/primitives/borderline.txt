@@ -140959,7 +140959,7 @@ auto={T}:Add{U}
 auto={T}:Add{B}
 auto={T}:Add{R}
 auto={T}:Add{G}
-missing={3}, {T}: Put X +1/+1 counters on target creature, where X is the number of Bobbleheads you control
+missing={3}, {T}: X +1/+1 counters on target creature, X = Bobbleheads you control. Measured 2026-08-17: the *type: multiplier does NOT combine with target() in an activated ability - both orderings leave the ability unparsed, so it does nothing and costs nothing. Charisma's token()*type: works because it has no target.
 text={T}: Add one mana of any color. -- {3}, {T}: Put X +1/+1 counters on target creature, where X is the number of Bobbleheads you control. Activate only as a sorcery.
 mana={3}
 type=Artifact

@@ -1,0 +1,26 @@
+#Does a granted ability create its token at all, and does token(-id) work inside teach()?
+#Presence of Gond enchants a creature and gives it "{T}: create a 1/1 green Elf Warrior".
+#The card count is the discriminator: 2 permanents means no token was made, 3 means it was.
+#Run FIRST against the card's original inline form as a control - if the control cannot
+#make a token, a failure after conversion would say nothing about token(-id).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Arachnoid
+hand:Presence of Gond
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Presence of Gond
+Arachnoid
+Arachnoid
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Arachnoid,Presence of Gond,Elf Warrior
+life:20
+[PLAYER2]
+life:20
+[END]

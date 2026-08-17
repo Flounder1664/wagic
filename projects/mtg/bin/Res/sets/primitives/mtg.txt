@@ -93106,7 +93106,7 @@ toughness=4
 [card]
 name=Presence of Gond
 target=creature
-auto=teach(creature) {T}:token(Elf Warrior, Creature Elf Warrior,1/1,green)
+auto=teach(creature) {T}:token(-728521)
 text=Enchant creature -- Enchanted creature has "{T}: Put a 1/1 green Elf Warrior creature token onto the battlefield."
 mana={2}{G}
 type=Enchantment
@@ -118652,7 +118652,7 @@ toughness=2
 [card]
 name=Squirrel Nest
 target=land
-auto=teach(land) {T}:_SQUIRRELTOKEN_
+auto=teach(land) {T}:token(-720509)
 text=Enchant land -- Enchanted land has "{T}: Put a 1/1 green Squirrel creature token onto the battlefield."
 mana={1}{G}{G}
 type=Enchantment
