@@ -9194,7 +9194,7 @@ toughness=3
 [card]
 name=Bamboozle
 target=player
-auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<upto:2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) target(<2>*|reveal) moveTo(myLibrary) optiontwoend revealend
+auto=reveal:4 revealzone(targetedpersonslibrary) optionone name(Put in graveyard) target(<upto:2>*|reveal) moveto(ownergraveyard) optiononeend optiontwo name(put on top) all(*|reveal) moveTo(myLibrary) optiontwoend revealend
 text=Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order.
 mana={2}{U}
 type=Sorcery
@@ -82660,7 +82660,7 @@ toughness=3
 name=Nagging Thoughts
 abilities=madness,hiddenface
 aicode=activate transforms((,newability[choice all(*[zpos=2]|mylibrary) moveto(hand) and!(deplete:1)!],newability[choice all(*[zpos=1]|mylibrary) moveto(hand) and!(deplete:1)!])) ueot
-auto=name(look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<1>*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 autoexile=restriction{discarded} pay({1}{U}) name(pay 1U to cast) activate name(pay 1U to cast) castcard(normal)?name(put in graveyard) moveto(ownergraveyard)
 text=Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard. -- Madness {1}{U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 mana={1}{U}

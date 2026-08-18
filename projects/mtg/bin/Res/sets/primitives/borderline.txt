@@ -28244,7 +28244,7 @@ toughness=3
 name=Dimir Charm
 auto=choice target(sorcery|stack) fizzle
 auto=choice destroy target(creature[power<=2])
-auto=choice target(player) name(Look) reveal:3 optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=choice target(player) name(Look) reveal:3 optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 text=Choose one -- Counter target sorcery spell. -- Destroy target creature with power 2 or less. -- Look at the top three cards of target player's library. Put one back and the rest into that player's graveyard.
 mana={U}{B}
 type=Instant
@@ -30495,7 +30495,7 @@ subtype=Equipment
 [card]
 name=Drawn from Dreams
 aicode=activate target(*[zpos<=7]|mylibrary) moveto(hand)
-auto=name(look) reveal:7 optionone name(Get two cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<5>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:7 optionone name(Get two cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in a random order.
 mana={2}{U}{U}
 type=Sorcery
@@ -36894,7 +36894,7 @@ toughness=1
 [card]
 name=Experimental Augury
 aicode=activate transforms((,newability[target(*[zpos<=3]|mylibrary) moveto(hand) and!( transforms((,newability[_PROLIFERATE_],newability[all(other *[zpos<=3]|mylibrary) moveto(myreveal) and!( bottomoflibrary )!])) oneshot)!])) oneshot
-auto=name(Look top 3 cards) reveal:3 optionone name(Get a card) target(*|reveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend afterrevealed _PROLIFERATE_ afterrevealedend revealend
+auto=name(Look top 3 cards) reveal:3 optionone name(Get a card) target(*|reveal) moveto(hand) optiononeend optiontwo name(Put on bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed _PROLIFERATE_ afterrevealedend revealend
 text=Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 mana={1}{U}
 type=Instant
@@ -76697,7 +76697,7 @@ toughness=2
 [card]
 name=Nessian Wanderer
 aicode=activate target(land[zpos<=3]|mylibrary) moveto(hand)
-auto=_CONSTELLATION_name(look three) reveal:3 optionone name(Get a land) target(<upto:1>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+auto=_CONSTELLATION_name(look three) reveal:3 optionone name(Get a land) target(<upto:1>land|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Constellation - Whenever an enchantment enters under your control, look at the top three cards of your library. You may reveal a land card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
 mana={1}{G}
 type=Creature
@@ -78350,7 +78350,7 @@ toughness=6
 [card]
 name=Nymris, Oona's Trickster
 abilities=flash,flying
-auto=@movedto(*|mystack) restriction{opponentturnonly,thisturn(*|mystack)~equalto~0}:name(Look 2 cards) reveal:2 optionone name(Put in hand) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put in graveyard) target(<1>*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@movedto(*|mystack) restriction{opponentturnonly,thisturn(*|mystack)~equalto~0}:name(Look 2 cards) reveal:2 optionone name(Put in hand) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(Put in graveyard) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Flash -- Flying -- Whenever you cast your first spell during each opponent's turn, look at the top two cards of your library. Put one of those cards into your hand and the other into your graveyard.
 mana={3}{U}{B}
 type=Legendary Creature
@@ -79140,7 +79140,7 @@ toughness=4
 [card]
 name=Oglor, Devoted Assistant
 aicode=activate transforms((,newability[target(*[zpos<=2]|mylibrary) moveto(mygraveyard)])) ueot
-auto=@each my upkeep:name(Look top 2 card) reveal:2 optionone name(Put in graveyard) target(*|reveal) moveto(mylibrary) and!( moveto(mygraveyard) )! optiononeend optiontwo name(Put back) target(*|reveal) moveto(mylibrary) optiontwoend revealend
+auto=@each my upkeep:name(Look top 2 card) reveal:2 optionone name(Put in graveyard) target(*|reveal) moveto(mylibrary) and!( moveto(mygraveyard) )! optiononeend optiontwo name(Put back) all(*|reveal) moveto(mylibrary) optiontwoend revealend
 auto=@movedto(creature|mygraveyard) from(mylibrary):name(Gains ability) all(trigger[to]) name(Gains ability) counter(0/0.1.PerpetualZombie) notrg
 auto=emblem transforms((,newability[@movedto(*|myzones) from(mygraveyard):name(Create zombie) all(trigger[to]) name(Create zombie) transforms((,newability[if compare(hascntperpetualzombie)~morethan~0 then _ZOMBIETOKEN_ and!( tap(noevent) )!])) oneshot])) forever dontremove
 text=At the beginning of your upkeep, look at the top two cards of your library, then put one of them into your graveyard. -- Whenever a creature card is put into your graveyard from your library, it perpetually gains "When this card leaves your graveyard, create a 2/2 tapped black Zombie creature token."
@@ -97281,7 +97281,7 @@ toughness=3
 name=Satoru Umezawa
 aicode=activate transforms((,newability[target(*[zpos<=3]|mylibrary) moveto(hand) and!( all(*[zpos<=3|mylibrary]) moveto(myreveal) and!( bottomoflibrary )! )!])) oneshot
 auto=lord(creature|myhand) transforms((,newability[{2}{U}{B}{N}:ninjutsu]))
-auto=@ninjutsued(creature|myBattlefield) turnlimited:name(Look top 3 cards) reveal:3 optionone name(Get a card) target(*|reveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+auto=@ninjutsued(creature|myBattlefield) turnlimited:name(Look top 3 cards) reveal:3 optionone name(Get a card) target(*|reveal) moveto(hand) optiononeend optiontwo name(Put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn. -- Each creature card in your hand has ninjutsu {2}{U}{B}.
 mana={1}{U}{B}
 type=Legendary Creature
@@ -99358,7 +99358,7 @@ subtype=Aura
 name=See the Truth
 aicode=activate target(*[zpos<=3]|mylibrary) moveto(hand)
 auto=name(look) reveal:3 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
-auto=if gravecast then name(look) reveal:3 optionone name(Get a card) target(<upto:3>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(*|reveal) bottomoflibrary optiontwoend revealend
+auto=if gravecast then name(look) reveal:3 optionone name(Get a card) target(<upto:3>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. If this spell was cast from anywhere other than your hand, put each of those cards into your hand instead.
 mana={1}{U}
 type=Sorcery
@@ -109869,7 +109869,7 @@ toughness=1
 [/card]
 [card]
 name=Stock Up
-auto=name(look) reveal:5 optionone name(Get two cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<3>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:5 optionone name(Get two cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
 mana={2}{U}
 type=Sorcery
@@ -115848,9 +115848,9 @@ aicode=activate transforms((,newability[target(*[zpos<=3]|mylibrary) moveto(myex
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=life:2 controller
-auto=name(Look top 3 cards) reveal:3 optionone name(Exile a card) target(*|reveal) moveto(myexile) and!( counter(0/0.1.Hatching) )! optiononeend optiontwo name(Put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(Look top 3 cards) reveal:3 optionone name(Exile a card) target(*|reveal) moveto(myexile) and!( counter(0/0.1.Hatching) )! optiononeend optiontwo name(Put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}<=2) name(Gain 2 life) name(Gain 2 life) life:2 controller
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}<=2) name(Look top 3 cards) name(Look top 3 cards) reveal:3 optionone name(Exile a card) target(*|reveal) moveto(myexile) and!( counter(0/0.1.Hatching) )! optiononeend optiontwo name(Put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}<=2) name(Look top 3 cards) name(Look top 3 cards) reveal:3 optionone name(Exile a card) target(*|reveal) moveto(myexile) and!( counter(0/0.1.Hatching) )! optiononeend optiontwo name(Put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )!
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - You gain 2 life. Look at the top three cards of your library. Exile one of them face down with a hatching counter on it, then put the rest on the bottom of your library in any order. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{G}
@@ -125518,7 +125518,7 @@ toughness=3
 [card]
 name=Vineshaper Prodigy
 kicker={1}{U}
-auto=if paid(kicker) then name(look) reveal:3 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+auto=if paid(kicker) then name(look) reveal:3 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.) -- When Vineshaper Prodigy enters, if it was kicked, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 mana={1}{G}
 type=Creature
@@ -137054,8 +137054,8 @@ name=The World Spell
 grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Put a permanent into play) target(*[-instant;-sorcery]|myhand) moveTo(mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 missing=read ahead, and the "non-Saga" restriction on what you may take.
@@ -137157,11 +137157,9 @@ type=Sorcery
 name=Consult the Star Charts
 grade=borderline
 kicker={1}{U}
-auto=name(look) reveal:3 optionone name(take a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
-auto=if paid(kicker) then draw:1 controller
-missing=the kicked mode takes a SECOND card from the looked-at pile; approximated as a
-#plain extra draw.
-text=Kicker {1}{U} -- Look at the top X cards of your library, where X is the number of lands you control. (Fixed at three.) Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. (Approximated as a plain extra draw.) Put the rest on the bottom of your library in a random order.
+auto=ifnot paid(kicker) then name(look) reveal:type:land:mybattlefield optionone name(take a card) target(<upto:1>*|reveal) moveto(hand) optiononeend optiontwo name(put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=if paid(kicker) then name(look) reveal:type:land:mybattlefield optionone name(take two cards) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+text=Kicker {1}{U} -- Look at the top X cards of your library, where X is the number of lands you control. Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. Put the rest on the bottom of your library in a random order.
 mana={1}{U}
 type=Instant
 [/card]
@@ -137355,7 +137353,7 @@ type=Instant
 name=Web of Life and Destiny
 abilities=convoke
 grade=borderline
-auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) optiontwoend revealend
+auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 text=Convoke -- At the beginning of combat on your turn, look at the top five cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 mana={6}{G}{G}
 type=Enchantment
@@ -137531,7 +137529,7 @@ type=Sorcery
 name=Memories Returning
 grade=borderline
 flashback={5}{U}{U}
-auto=name(look) reveal:5 optionone name(take a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary optiontwoend revealend
+auto=name(look) reveal:5 optionone name(take a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put back) all(*|reveal) bottomoflibrary optiontwoend revealend
 missing=the alternating you/opponent draft over five cards; approximated as taking one.
 text=Reveal the top five cards of your library. Put one of them into your hand. Then choose an opponent. They put one on the bottom of your library. Then you put one into your hand. Then they put one on the bottom of your library. Put the other card into your hand. (Approximated: you take one card.) -- Flashback {5}{U}{U}
 mana={2}{U}{U}
@@ -140352,7 +140350,7 @@ type=Sorcery
 [/card]
 [card]
 name=Getaway Barrel
-auto=_DIES_reveal:13 optionone name(Put random creature) target(<1>creature|reveal) moveto(mybattlefield) optiononeend revealend
+auto=_DIES_reveal:13 optionone name(Put random creature) target(<1>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; random-creature-selection approximated as a chosen reveal-menu pick, no true-random-pick primitive verified
 missing=true random selection among revealed creatures not implemented; player chooses instead
