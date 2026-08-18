@@ -104119,7 +104119,7 @@ toughness=1
 name=Skyclave Apparition
 other={1}{W}{W}{E(*[-land;-token;manacost<=4]|opponentBattlefield)} name(Exile opponent card)
 otherrestriction=type(*[-land;-token;manacost<=4]|opponentbattlefield)~morethan~0
-auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~0}:token(Illusion Mb2) opponent
+auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~0}:token(Illusion,Creature Illusion,0/0,blue) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~1}:token(Illusion,Creature Illusion,1/1,blue) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~2}:token(Illusion,Creature Illusion,2/2,blue) opponent
 auto=@movedTo(this|mygraveyard) from(battlefield) restriction{compare(storedmanacost)~equalto~3}:token(Illusion,Creature Illusion,3/3,blue) opponent
