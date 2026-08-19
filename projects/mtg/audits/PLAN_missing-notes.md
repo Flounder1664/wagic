@@ -110,7 +110,7 @@ architectural, and the notes on them are already accurate — they should stay a
 | 0 — Map / Mutagen | **done.** Both are real registered tokens now (`-637012` in LCI, `-910900` in TMT) and the seven cards create them by name. Mutagen is exact; Map is the +1/+1 half, because `explore` appears **zero** times in the engine. |
 | 0.5 — the 15 guesses | **done, and worse than expected.** Twelve keywords they used exist nowhere in the engine and nowhere in upstream: `addmulti`, `controlledlands`, `copysourcept`, `countbattlefieldcreature`, `gifted`, `lifelostamount`, `manaspentx`, `mytgt2`, `sevenormorecards`, `sourcept`, `spendonly`, `targetpower`. Thirteen lines across ten cards were dead and are removed. |
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |
-| 2 — bargain | **fixed.** New `ortoken` filter attribute; all 16 cards now accept a token as fodder. See below. |
+| 2 — bargain | **fixed and verified in game.** New `ortoken` filter attribute; all 16 cards accept a token as fodder, and the artifact route still works. See below. |
 | 3 — read ahead | **blocked, and measured.** A modal `choice` ETB on a permanent adds nothing, and `counter(0/0,N,Lore)` adds the counters but fires no chapter, because chapter triggers are `@counteradded(0/0,1,Lore)`. All ten notes now carry that. |
 | 4 — Avatar Saga backs | **done.** All six back faces already had art in TLA.zip, so the crash that caused the disable was gone. The five Legend Sagas transform on chapter III again, and Aang, at the Crossroads transforms when another creature leaves. Verified in the harness. |
 
@@ -141,7 +141,9 @@ parsed in `TargetChooser.cpp` *before* the `token` branch, which it contains as 
 substring. All 16 cards now read
 `S(*[artifact;enchantment;ortoken]|myBattlefield)` with a matching restriction.
 
-Both paths are asserted in the suite: `bargain_torch_the_tower_paid.txt` (sacrifice an
+Confirmed in game 2026-08-19 on `scenario_bargain`: Bargain offered on a board of nothing
+but Goblin tokens, and the Ornithopter route unaffected. Both paths are also asserted in
+the suite: `bargain_torch_the_tower_paid.txt` (sacrifice an
 Ornithopter) and `bargain_token_fodder.txt` (a board of nothing but Dragon Fodder's
 Goblins). `token_sac_control.txt` guards the assumption underneath, that a Goblin can pay
 a `{S(*[token])}` cost at all.
