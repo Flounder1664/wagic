@@ -144,12 +144,20 @@ extra-cost `S()`. And `token` exists only as a bracketed attribute (`cd->isToken
 The restriction half parses fine on its own, but opening it changes nothing, because the
 cost still cannot be paid - so the cards are left alone.
 
-**A creature token cannot be sacrificed to an extra cost at all.** Every spelling was
-re-measured with the token test genuinely in `_tests.txt`, including `S(*[token])` alone
-with the restriction opened to match, and a second entry hung off the free kicker slot.
-All fail. A control that attempts NO bargain passes on the same board (two Goblins live,
-the Hill Giant survives on 2 damage), so the harness sequence is sound and the failures
-are real.
+**Tokens CAN pay a sacrifice cost - the block is narrower than that.** 210 cards in the
+collection already sacrifice a Clue token (`{S(clue[token]|myBattlefield)}`), and
+`generic/token_sac_control.txt` proves it directly on the same kind of board this test
+uses: Glimmer Bairn's `{S(*[token]|myBattlefield)}: +2/+2` happily eats one of Dragon
+Fodder's Goblins. That test passes and is in the suite.
+
+**Where bargain actually stops.** With the fodder set to `S(*[token])` and the restriction
+opened to match, the Goblin IS sacrificed - every player-0 assertion passes, including
+exactly one Goblin left on the battlefield - but the spell still deals 2, not 3. The
+bargained branch never fires, under `auto=alternative damage:3` and under
+`auto=if paid(alternative) then damage:3` alike. So the cost is paid and `paid(alternative)`
+is somehow not set for this fodder, while the identical shape with
+`S(artifact,enchantment)` sets it fine. That is as far as this got; the reason is not
+established, and it is the thread to pull next.
 
 **Methodology warning, learned the hard way.** `WAGIC_TESTSUITE_ONLY` filters the list
 collected from `_tests.txt`. If the test is not listed, nothing runs and a

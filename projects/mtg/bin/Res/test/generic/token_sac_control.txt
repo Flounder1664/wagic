@@ -1,0 +1,26 @@
+#CONTROL: can a Goblin token pay a {S(*[token])} cost at all?
+#Glimmer Bairn: {S(*[token]|myBattlefield)}: gets +2/+2 until end of turn.
+#Dragon Fodder makes two Goblins; sacrifice one, Bairn must be pumped and one Goblin left.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glimmer Bairn
+hand:Dragon Fodder
+manapool:{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dragon Fodder
+Glimmer Bairn
+Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glimmer Bairn,Goblin
+graveyard:Dragon Fodder
+pt:Glimmer Bairn=3/4
+life:20
+[PLAYER2]
+life:20
+[END]
