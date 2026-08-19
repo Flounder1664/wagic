@@ -106,7 +106,7 @@ architectural, and the notes on them are already accurate — they should stay a
 | phase | outcome |
 |---|---|
 | 0 — token bodies | 22 of 31 written, 15 complete. Verified by assertion, not by a passing suite. |
-| 0 — inert cards | 7 of 39 written. |
+| 0 — inert cards | 14 of 39 written. The remainder are mostly genuinely blocked - face-down permanents, `@seconddrawofturn`, granting convoke, protection from everything. |
 | 0 — Map / Mutagen | **done.** Both are real registered tokens now (`-637012` in LCI, `-910900` in TMT) and the seven cards create them by name. Mutagen is exact; Map is the +1/+1 half, because `explore` appears **zero** times in the engine. |
 | 0.5 — the 15 guesses | **done, and worse than expected.** Twelve keywords they used exist nowhere in the engine and nowhere in upstream: `addmulti`, `controlledlands`, `copysourcept`, `countbattlefieldcreature`, `gifted`, `lifelostamount`, `manaspentx`, `mytgt2`, `sevenormorecards`, `sourcept`, `spendonly`, `targetpower`. Thirteen lines across ten cards were dead and are removed. |
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |

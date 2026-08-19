@@ -139764,8 +139764,8 @@ toughness=4
 [/card]
 [card]
 name=Mirkwood Pathmaker
+anyzone=type:land:mybattlefield/type:land:mybattlefield cdaactive
 anyzone=controlledlands/controlledlandsend cdaactive
-missing=power/toughness do not track the number of lands you control
 text=Mirkwood Pathmaker's power and toughness are each equal to the number of lands you control.
 mana={2}{G}
 type=Creature
@@ -141744,8 +141744,8 @@ toughness=1
 [/card]
 [card]
 name=Hammerhead, Maggia Boss
+auto={S(other *[creature;artifact]|mybattlefield)}:counter(1/1)
 grade=borderline
-missing=sacrifice another creature or artifact: put a +1/+1 counter on him
 text=Sacrifice another creature or artifact: Put a +1/+1 counter on Hammerhead.
 mana={1}{B}
 type=Legendary Creature
@@ -141767,9 +141767,9 @@ toughness=1
 [/card]
 [card]
 name=Kingpin's Enforcers
+auto={2}{B}{S(*[artifact;creature]|myBattlefield)}:draw:1
 grade=borderline
 abilities=lifelink
-missing={2}{B}, sacrifice an artifact or creature: draw a card
 text=Lifelink -- {2}{B}, Sacrifice an artifact or creature: Draw a card.
 mana={2}{B}
 type=Creature
@@ -141939,8 +141939,9 @@ toughness=1
 [/card]
 [card]
 name=Flatman
+auto={2}{G}:swap
 grade=borderline
-missing={2}{G}: switch his power and toughness until end of turn
+missing=the switch should last only until end of turn; the engine's swap carries no duration here
 text=Origami-Fu — {2}{G}: Switch Flatman's power and toughness until end of turn.
 mana={3}{G}
 type=Legendary Creature
@@ -142626,9 +142627,10 @@ color=green
 [/card]
 [card]
 name=Vibranium
+auto={T}:add{C}
 grade=borderline
 abilities=indestructible
-missing={T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
+missing=the mana restriction - it should only be spendable on artifact spells; unrestricted here
 text=Indestructible -- {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
 type=Artifact
 subtype=Vibranium
@@ -142793,8 +142795,8 @@ color=green
 [/card]
 [card]
 name=Blue Horror
+auto=@movedTo(instant,sorcery|mystack):damage:1 target(creature,player)
 grade=borderline
-missing=Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.
 text=Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.
 type=Creature
 subtype=Demon Horror
@@ -142948,8 +142950,9 @@ toughness=2
 [/card]
 [card]
 name=Osgood, Operation Double
+auto={T}:add{C}
 grade=borderline
-missing={T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact. Paradox — Whenever you cast a spell from anywhere other than your hand, investigate.
+missing=the mana restriction (artifact spells and artifact abilities only), and the Paradox trigger
 text={T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact. -- Paradox — Whenever you cast a spell from anywhere other than your hand, investigate. -- (This token's mana cost is {2}{U}{U}.)
 type=Creature
 subtype=Human Alien Shapeshifter
