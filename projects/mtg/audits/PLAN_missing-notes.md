@@ -112,7 +112,19 @@ architectural, and the notes on them are already accurate — they should stay a
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |
 | 2 — bargain | not attempted. On inspection these cards already work; bargain just cannot take a creature token as fodder, so the payoff is smaller than the card count suggests. |
 | 3 — read ahead | **blocked, and measured.** A modal `choice` ETB on a permanent adds nothing, and `counter(0/0,N,Lore)` adds the counters but fires no chapter, because chapter triggers are `@counteradded(0/0,1,Lore)`. All ten notes now carry that. |
-| 4 — Avatar Saga backs | not reached. |
+| 4 — Avatar Saga backs | **done.** All six back faces already had art in TLA.zip, so the crash that caused the disable was gone. The five Legend Sagas transform on chapter III again, and Aang, at the Crossroads transforms when another creature leaves. Verified in the harness. |
+
+### The reveal audit had a hole
+
+The stranding sweep only looked at lines containing `revealend`, so it never saw reveal
+blocks that were missing their terminator entirely - which is a worse bug, since
+`parseBetween(s, "reveal:", " revealend")` cannot match and the whole construct fails to
+parse. Six cards were in that state, one of them upstream's (Expressive Iteration, House
+Cartographer, Kethek, Moment of Truth, Aang at the Crossroads, and mtg.txt's Moment of
+Truth twin). All six are terminated now, and both audits report zero.
+
+Lesson: an audit keyed on a token can only find lines that already have it. Ask instead
+which lines *should* have it.
 
 ### A caution about the keyword audit
 

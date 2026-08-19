@@ -37048,7 +37048,7 @@ type=Instant
 [card]
 name=Expressive Iteration
 aicode=activate transforms((,newability[all(*[zpos=1]|mylibrary) moveto(hand)],newability[all(*[zpos=2]|mylibrary) bottomoflibrary],newability[all(*[zpos=3]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) ueot )! ])) ueot
-auto=name(look top 3 cards) reveal:3 optionone name(Put in my hand) target(*|reveal) moveto(hand) optiononeend optiontwo choice name(Choose one for Bottom) target(*|reveal) bottomoflibrary and!( all(other *|reveal) moveto(myexile) and!( transforms((,newability[canplayfromexile])) ueot )! )! optiontwoend
+auto=name(look top 3 cards) reveal:3 optionone name(Put in my hand) target(*|reveal) moveto(hand) optiononeend optiontwo choice name(Choose one for Bottom) target(*|reveal) bottomoflibrary and!( all(other *|reveal) moveto(myexile) and!( transforms((,newability[canplayfromexile])) ueot )! )! optiontwoend revealend
 text=Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn.
 mana={U}{R}
 type=Sorcery
@@ -54551,7 +54551,7 @@ type=Artifact
 [/card]
 [card]
 name=House Cartographer
-auto=@each my secondmain sourceTap:reveal:1 revealzone(mylibrary) revealuntil(land|mylibrary) optionone choice all(land|reveal) moveto(hand) optiononeend optiontwo all(*|reveal) bottomoflibrary optiontwoend
+auto=@each my secondmain sourceTap:reveal:1 revealzone(mylibrary) revealuntil(land|mylibrary) optionone choice all(land|reveal) moveto(hand) optiononeend optiontwo all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Survival - At the beginning of your second main phase, if House Cartographer is tapped, reveal cards from the top of your library until you reveal a land card. Put that card into your hand and the rest on the bottom of your library in a random order.
 mana={1}{G}
 type=Creature
@@ -62298,7 +62298,7 @@ toughness=4
 [card]
 name=Kethek, Crucible Goliath
 aicode=activate transforms((,newability[target(creature[-legendary;manacost<=manacostminus1minusend]|mylibrary) moveto(myBattlefield) and!( shuffle )! ])) oneshot
-auto=@each my end:may name(Sacrifice another creature) target(creature|myBattlefield) sacrifice and!( transforms((,newability[name(Reveal top cards) reveal:1 revealzone(mylibrary) revealuntil(creature[-legendary;manacost<=manacostminus1minusend]|mylibrary) optionone target(creature[-legendary;manacost<=manacostminus1minusend]|reveal) moveto(myBattlefield) optiononeend optiontwo choice name(Put on Bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed afterrevealedend])) ueot )!
+auto=@each my end:may name(Sacrifice another creature) target(creature|myBattlefield) sacrifice and!( transforms((,newability[name(Reveal top cards) reveal:1 revealzone(mylibrary) revealuntil(creature[-legendary;manacost<=manacostminus1minusend]|mylibrary) optionone target(creature[-legendary;manacost<=manacostminus1minusend]|reveal) moveto(myBattlefield) optiononeend optiontwo choice name(Put on Bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed afterrevealedend revealend])) ueot )!
 text=At the beginning of your end step, you may sacrifice another creature. If you do, reveal cards from the top of your library until you reveal a nonlegendary creature card with lesser mana value, put it onto the battlefield, then put the rest on the bottom of your library in a random order.
 mana={2}{B}{R}
 type=Legendary Creature
@@ -73922,7 +73922,7 @@ type=Instant
 [card]
 name=Moment of Truth
 aicode=activate transforms((,newability[moveto(hand) all(*[zpos=1]|mylibrary) && moveto(myGraveyard) all(*[zpos=2]|mylibrary)])) ueot
-auto=choice name(look) reveal:3 optionone name(Put in my hand) target(*|reveal) moveto(hand) optiononeend optiontwo choice name(one into your graveyard) target(*|reveal) moveto(myGraveyard) && all(*|reveal) bottomoflibrary optiontwoend
+auto=choice name(look) reveal:3 optionone name(Put in my hand) target(*|reveal) moveto(hand) optiononeend optiontwo choice name(one into your graveyard) target(*|reveal) moveto(myGraveyard) && all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library.
 mana={1}{U}
 type=Instant
@@ -133317,8 +133317,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=_SCRY2_ draw:1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _SCRY2_ draw:1 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I, II - Scry 2, then draw a card. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{U}{U}
 type=Enchantment
@@ -133343,8 +133342,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=all(*[zpos<=3]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uynt])) uynt )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) ability$! choice add{W} _ choice add{U} _ choice add{B} _ choice add{R} _ choice add{G} !$ controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Exile the top three cards of your library. Until the end of your next turn, you may play those cards. -- II - Add one mana of any color. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={2}{R}{R}
 type=Enchantment
@@ -133370,8 +133368,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=name(Exile a permanent) target(*[-land;manacost>=3]|opponentbattlefield) moveto(exile)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may draw:3 opponent && draw:3 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix) -- chapter I is each-player-chooses-up-to-one (political); approximated as exile one opponent permanent with mv>=3
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+missing=chapter I is each-player-chooses-up-to-one (political); approximated as exile one opponent permanent with mv>=3
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents. -- II - You may have target opponent draw three cards. If you do, draw three cards. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={3}{W}{W}
 type=Enchantment
@@ -133397,8 +133395,8 @@ anyzone={0}:doubleside(backside)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy all(creature|battlefield)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix) -- chapter II (name a card, exile up to four copies from an opponent's zones) has no DSL form; skipped
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+missing=chapter II (name a card, exile up to four copies from an opponent's zones) has no DSL form; skipped
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Destroy all creatures. -- II - Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{B}{B}
 type=Enchantment
@@ -133424,8 +133422,8 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=draw:3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _EARTHBEND2_
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch III should transform to the Avatar back; flip crashed in-game on the imageless back, so it sacrifices instead (pending render fix) -- ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
+missing=ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Draw cards equal to the greatest power among creatures you control. -- II - Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{G}{G}
 type=Enchantment
@@ -133473,8 +133471,9 @@ toughness=6
 [card]
 name=Aang, at the Crossroads
 abilities=flying
-auto=reveal:5 optionone name(Put a creature into play) target(creature[manacost<=4]|reveal) moveto(mybattlefield) optiononeend
-missing=transform on a creature leaving (flip to imageless back crashed in-game; disabled pending render fix) -- ETB should bottom the unchosen revealed cards; the transform should wait until the next upkeep (here it flips immediately when a creature leaves)
+auto=reveal:5 optionone name(Put a creature into play) target(<upto:1>creature[manacost<=4]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=@movedTo(other creature|nonbattlezone) from(mybattlefield):all(this) flip(backside)
+missing=the transform should wait until the BEGINNING OF THE NEXT UPKEEP; it happens immediately when another creature you control leaves. The back face's art now exists, so the flip no longer crashes.
 text=Flying -- When Aang enters, look at the top five cards of your library. You may put a creature card with mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order. -- When another creature you control leaves the battlefield, transform Aang at the beginning of the next upkeep.
 mana={2}{G}{W}{U}
 type=Legendary Creature

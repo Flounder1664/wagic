@@ -1,0 +1,23 @@
+#Aang, at the Crossroads transforms when another creature you control leaves the
+#battlefield. Its back face has art now, so the flip no longer crashes.
+#Sacrifice the Ornithopter and Aang must become Aang, Destined Savior.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aang, at the Crossroads,Ornithopter,Nantuko Husk
+life:20
+[PLAYER2]
+life:20
+[DO]
+Nantuko Husk
+Ornithopter
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:Aang, Destined Savior,Nantuko Husk
+graveyard:Ornithopter
+life:20
+[PLAYER2]
+life:20
+[END]

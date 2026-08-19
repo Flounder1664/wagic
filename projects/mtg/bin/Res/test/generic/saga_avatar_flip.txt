@@ -1,0 +1,27 @@
+#Avatar Sagas transform on chapter III instead of being sacrificed. This was disabled
+#because the flip crashed on an imageless back face; all six backs now have art in TLA.zip.
+#Cast it (lore 1), pass turns until lore 3, then the BACK FACE must be on the battlefield.
+#Note the "choice 0" - the doubleside(backside) ability puts a menu on the card, so a
+#bare click does not cast it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Legend of Kuruk
+manapool:{U}{U}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Legend of Kuruk
+choice 0
+eot
+eot
+eot
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:Avatar Kuruk
+[PLAYER2]
+life:20
+[END]
