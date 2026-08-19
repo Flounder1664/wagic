@@ -1,0 +1,52 @@
+#SCENARIO, not a test: hands control to you and asserts nothing.
+#
+#PHASE 2 SHORTFALL - bargain cannot eat a token.
+#
+#Real rule:  "You may sacrifice an artifact, ENCHANTMENT, OR TOKEN as you cast this spell."
+#Wagic:       other={R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
+#             otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
+#
+#Only artifacts and enchantments count as fodder. Creature tokens do not, and because the
+#restriction also gates the MENU, a board full of tokens means Bargain is not even offered.
+#
+#Reminder: Wagic never taps lands for you - tap Mountains yourself before each cast.
+#
+#RUN IT IN THIS ORDER, and watch the CAST MENU each time. That menu is the whole point.
+#
+#  1. Tap 2 Mountains, cast DRAGON FODDER.
+#     -> two 1/1 Goblin TOKENS arrive. By the real rules these are now legal bargain fodder.
+#
+#  2. Tap 1 Mountain, cast TORCH THE TOWER at a Hill Giant.
+#     -> *** THE SHORTFALL *** No "Bargain" entry appears, even though you control two
+#        tokens you are entitled to sacrifice. You get the unbargained spell: 2 damage,
+#        and the 3/3 Hill Giant SURVIVES.
+#
+#  3. Cast ORNITHOPTER (it costs {0}). It is an artifact creature.
+#
+#  4. Tap 1 Mountain, cast the second TORCH THE TOWER at the OTHER Hill Giant.
+#     -> Now "Bargain" DOES appear, because an artifact is on the battlefield. Take it.
+#        3 damage, and that Hill Giant DIES.
+#
+#The contrast between step 2 and step 4 is the bug: same board otherwise, same spell, and
+#the only thing that changed is whether the fodder happened to be an artifact.
+#
+#Note it also eats your Ornithopter rather than a spare Goblin - with real bargain you
+#would choose the token and keep the artifact.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dragon Fodder,Torch the Tower,Torch the Tower,Ornithopter
+inplay:Mountain,Mountain,Mountain,Mountain,Mountain
+life:20
+[PLAYER2]
+inplay:Hill Giant,Hill Giant
+life:20
+[DO]
+human
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:20
+[PLAYER2]
+life:20
+[END]
