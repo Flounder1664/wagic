@@ -148,6 +148,38 @@ which is worse than today, so the cards are left alone.
 Fixing this means making a bracketed CardDescriptor work in the extra-cost path, which is
 engine work in `ManaCost.cpp`/`ExtraCost.cpp`, not card authoring.
 
+#### Root cause, and why neither fix is cheap (2026-08-19)
+
+Dug into it on John's ask, including his suggestion of a second "Bargain (token)" menu
+entry as a simpler route. Both dead ends, for different reasons.
+
+**The real defect is in TargetChooser, not in extra costs.**
+`TargetChooserFactory::createTargetChooser` declares ONE `CardDescriptor * cd`
+(`TargetChooser.cpp:487`) and builds ONE `DescriptorTargetChooser` from it (line 1386).
+The comma clauses share that single descriptor, so a bracketed attribute in *any* clause
+is applied to *all* of them. `S(artifact,enchantment,creature[token])` therefore means
+"(artifact OR enchantment OR creature) AND is-a-token", which rejects an Ornithopter and
+empties the fodder set - breaking bargain even for artifacts. Compounding it,
+`isToken` is checked unconditionally at `CardDescriptor.cpp:579`, outside the `CD_OR`
+branch, so it can never be one of the OR'd alternatives.
+
+Fixing it properly means per-clause descriptors OR'd together. That is one function, but
+it changes target parsing for every card in the collection - and 154 existing brackets
+already pair `token` with `;` (`[token;fresh]` x20, `[-token;...]`) and depend on today's
+AND behaviour. High blast radius for 16 cards.
+
+**A second `other=` line does not work.** `ManaCost::setAlternative` is
+`SAFE_DELETE(alternative); alternative = aMana;` - one slot, last wins. Verified in the
+harness: adding a token `other=` line silently REPLACED the artifact one, so the artifact
+test started failing while the token test passed. Making `alternative` a list means 44
+`getAlternative()` call sites, 11 of them in AIPlayerBaka and 9 in MTGRules, plus the cast
+menu and `paid(alternative)`. Not simpler than the parser fix.
+
+**What shrinks the problem:** Treasure, Clue, Food and Blood are all `type=Artifact`, so
+they ALREADY qualify as bargain fodder today. The gap is only *creature* tokens - the
+Goblins in `generic/bargain_token_fodder.txt`. That is a much narrower loss than "bargain
+cannot eat tokens" suggests, and it is why this stays parked.
+
 ### The reveal audit had a hole
 
 The stranding sweep only looked at lines containing `revealend`, so it never saw reveal
