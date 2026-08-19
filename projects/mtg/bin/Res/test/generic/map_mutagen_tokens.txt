@@ -1,0 +1,22 @@
+#Map and Mutagen are now real registered tokens instead of a Clue/Food standing in.
+#Spyglass Siren's ETB must create a Map; Zoo Escapees leaving must create a Mutagen.
+#Both are resolved BY NAME, so this also proves the registration is reachable.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spyglass Siren
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Spyglass Siren
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:Spyglass Siren,Map
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -138196,10 +138196,8 @@ toughness=4
 [card]
 name=Zoo Escapees
 grade=borderline
-auto=@movedTo(this|nonbattlezone) from(mybattlefield):_FOOD_
-missing=the real token is a Mutagen; no Mutagen token exists in the collection, so a Food
-#token stands in for it.
-text=When this creature leaves the battlefield, create a Mutagen token. (A Food token stands in.)
+auto=@movedTo(this|nonbattlezone) from(mybattlefield):token(Mutagen)
+text=When this creature leaves the battlefield, create a Mutagen token. 
 mana={1}{G}
 type=Creature
 subtype=Beast
@@ -138210,11 +138208,9 @@ toughness=2
 name=Sentinel of the Nameless City
 abilities=vigilance
 grade=borderline
-auto=_CLUE_
-auto=@combat(attacking) source(this):_CLUE_
-missing=the real token is a Map; no Map token exists in the collection, so a Clue token
-#stands in for it.
-text=Vigilance -- Whenever this creature enters or attacks, create a Map token. (A Clue token stands in.)
+auto=token(Map)
+auto=@combat(attacking) source(this):token(Map)
+text=Vigilance -- Whenever this creature enters or attacks, create a Map token. 
 mana={2}{G}
 type=Creature
 subtype=Merfolk Soldier
@@ -138225,9 +138221,8 @@ toughness=4
 name=Spyglass Siren
 abilities=flying
 grade=borderline
-auto=_CLUE_
-missing=the real token is a Map; a Clue token stands in for it.
-text=Flying -- When this creature enters, create a Map token. (A Clue token stands in.)
+auto=token(Map)
+text=Flying -- When this creature enters, create a Map token.
 mana={U}
 type=Creature
 subtype=Siren Pirate
@@ -138238,9 +138233,8 @@ toughness=1
 name=Waterwind Scout
 abilities=flying
 grade=borderline
-auto=_CLUE_
-missing=the real token is a Map; a Clue token stands in for it.
-text=Flying -- When this creature enters, create a Map token. (A Clue token stands in.)
+auto=token(Map)
+text=Flying -- When this creature enters, create a Map token.
 mana={2}{U}
 type=Creature
 subtype=Merfolk Scout
@@ -138250,9 +138244,8 @@ toughness=2
 [card]
 name=Cartographer's Companion
 grade=borderline
-auto=_CLUE_
-missing=the real token is a Map; a Clue token stands in for it.
-text=When this creature enters, create a Map token. (A Clue token stands in.)
+auto=token(Map)
+text=When this creature enters, create a Map token. 
 mana={3}
 type=Artifact Creature
 subtype=Scout
@@ -138363,9 +138356,8 @@ toughness=4
 [card]
 name=Crustacean Commando
 grade=borderline
-auto=_FOOD_
-missing=the real token is a Mutagen; a Food token stands in for it.
-text=When this creature enters, create a Mutagen token. (A Food token stands in.)
+auto=token(Mutagen)
+text=When this creature enters, create a Mutagen token. 
 mana={1}{U}
 type=Creature
 subtype=Crab Soldier
@@ -138375,9 +138367,8 @@ toughness=3
 [card]
 name=Slithering Cryptid
 grade=borderline
-auto=_FOOD_
-missing=the real token is a Mutagen; a Food token stands in for it.
-text=When this creature enters, create a Mutagen token. (A Food token stands in.)
+auto=token(Mutagen)
+text=When this creature enters, create a Mutagen token. 
 mana={2}{GU}
 type=Creature
 subtype=Lizard
@@ -143229,4 +143220,21 @@ subtype=Illusion
 power=0
 toughness=0
 color=blue
+[/card]
+[card]
+name=Mutagen
+grade=borderline
+auto={1}{T}{S}:name(Put a +1/+1 counter) target(creature) counter(1/1)
+text={1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.
+type=Artifact
+subtype=Mutagen
+[/card]
+[card]
+name=Map
+grade=borderline
+auto={1}{T}{S}:name(Explore) target(creature|mybattlefield) counter(1/1)
+missing=explore proper - reveal the top card, put it in hand if it is a land, otherwise the +1/+1 counter and a keep-or-bin choice. explore appears nowhere in the engine (0 uses), so this is the +1/+1 half only, matching how Subterranean Schooner already approximates it.
+text={1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+type=Artifact
+subtype=Map
 [/card]
