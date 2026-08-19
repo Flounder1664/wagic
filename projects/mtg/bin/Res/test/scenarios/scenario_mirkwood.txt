@@ -1,0 +1,41 @@
+#SCENARIO, not a test: hands control to you and asserts nothing.
+#
+#MIRKWOOD PATHMAKER - "power and toughness are each equal to the number of lands you
+#control". It had no working body at all: its CDA was written against 'controlledlands',
+#a keyword that does not exist in the engine, so the card arrived as a 0/0 and DIED
+#immediately. (A load-guard test had quietly recorded that as normal.) It now uses
+#   anyzone=type:land:mybattlefield/type:land:mybattlefield cdaactive
+#
+#WHAT TO CHECK
+#
+#  1. It is alive, and reads 3/3 with the three Forests already out.
+#     Before this change it never even survived arriving.
+#
+#  2. Play a Forest from your hand -> it must become 4/4. Play another -> 5/5.
+#     That is the real test: it must TRACK the count, not sit on a fixed number.
+#
+#  3. Attack with it if you like - a 5/5 body should trade accordingly with the
+#     Hill Giants opposite.
+#
+#KNOWN QUIRK, not worth reporting as a bug: two "cdaactive" creatures on the SAME
+#battlefield interfere, and the Pathmaker mis-reads when another one is beside it. That
+#is pre-existing engine behaviour, not something this change introduced, which is why
+#there is only one such creature on this board.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mirkwood Pathmaker,Forest,Forest,Forest
+hand:Forest,Forest,Forest
+life:20
+[PLAYER2]
+inplay:Hill Giant,Hill Giant
+life:20
+[DO]
+human
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:20
+[PLAYER2]
+life:20
+[END]

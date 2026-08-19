@@ -1,24 +1,30 @@
 #Safety guard for the invented-syntax sweep. Beorn the Fierce proved that an
 #unrecognised trigger/phase name does not merely no-op -- it produced a null
 #card and crashed the engine at load (Spell(observer, NULL) in initGame).
-#These cards all carry a token that exists nowhere in mtg.txt and is unknown to
-#the C++ parser (seconddrawofturn, mytgt2, controlledlands, sourcepower,
-#lifelostamount). Putting them all into play at once proves they are inert
-#rather than fatal. Names must stay comma-free -- the zone parser splits on commas.
+#
+#REWRITTEN 2026-08-19. Most of the original cast is now grade=unsupported, because their
+#only ability was built on a keyword the engine does not have, so they are filtered out of
+#the collection and cannot be forced into play by name any more. Mirkwood Pathmaker was
+#repaired outright and no longer carries invented syntax at all.
+#
+#Bolg of the North still does, so it stays: proving it loads and is inert rather than
+#fatal is the whole point. Mirkwood Pathmaker is kept on the other side as a live check
+#that its CDA is real - with NO lands it is a 0/0 and must die, which a fixed body cannot
+#fake. Names must stay comma-free; the zone parser splits on commas.
 [INIT]
 firstmain
 [PLAYER1]
-inplay:Lakeshore Apothecary,Bard the Bowman,Iron Hills Stalwart,Bolg of the North
+inplay:Bolg of the North
 [PLAYER2]
-inplay:Mirkwood Pathmaker,The Master of Lake-town
+inplay:Mirkwood Pathmaker
 life:20
 [DO]
 next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*
+inplay:*
 [PLAYER2]
-inplay:*,*
+graveyard:*
 life:20
 [END]

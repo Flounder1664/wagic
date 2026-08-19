@@ -7,6 +7,10 @@
 #NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
+#UPDATED 2026-08-19: Mirkwood Pathmaker used to arrive as a 0/0 and die immediately -
+#its CDA was written against 'controlledlands', a keyword the engine does not have - so
+#this guard had recorded 5 in play and 1 in the graveyard. With the CDA on the attested
+#type:land:mybattlefield form it survives, so all six stay in play.
 #Covers: Mirkwood, Mirkwood Elk, Mirkwood Meditator, Mirkwood Nurturer, Mirkwood Pathmaker, Misty Mountains Raider
 [INIT]
 firstmain
@@ -19,8 +23,7 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*,*
-graveyard:*
+inplay:*,*,*,*,*,*
 [PLAYER2]
 life:20
 [END]

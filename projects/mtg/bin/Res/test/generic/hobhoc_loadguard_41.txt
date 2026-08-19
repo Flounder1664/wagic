@@ -1,3 +1,6 @@
+#UPDATED 2026-08-19: ids whose primitive is now grade=unsupported were removed - an
+#unsupported card is filtered out of the collection, so forcing it into play by id yields
+#a null card. That is a property of this test method, not a real-play risk.
 #Auto-generated load guard 41: puts HOB/HOC permanents into play to prove the
 #engine can construct and resolve them. This catches the FATAL failure mode --
 #an unrecognised phase/trigger name yields a null card and kills the engine in
@@ -11,7 +14,7 @@
 [INIT]
 firstmain
 [PLAYER1]
-inplay:701003,700114,701106,700168,700166,700167
+inplay:701003,701106,700168,700166,700167
 [PLAYER2]
 life:20
 [DO]
@@ -19,7 +22,7 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*,*,*,*
+inplay:*,*,*,*,*
 [PLAYER2]
 life:20
 [END]

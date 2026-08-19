@@ -106,7 +106,7 @@ architectural, and the notes on them are already accurate — they should stay a
 | phase | outcome |
 |---|---|
 | 0 — token bodies | 22 of 31 written, 15 complete. Verified by assertion, not by a passing suite. |
-| 0 — inert cards | 14 of 39 written. The remainder are mostly genuinely blocked - face-down permanents, `@seconddrawofturn`, granting convoke, protection from everything. |
+| 0 — inert cards | 14 written; the remaining **41 are now `grade=unsupported`** (John's call: a card missing its only or primary ability should not sit in the playable pool). Two kept as borderline because their ability is present but ungated, not missing: Streaking Oilgorger, Walking Sarcophagus. |
 | 0 — Map / Mutagen | **done.** Both are real registered tokens now (`-637012` in LCI, `-910900` in TMT) and the seven cards create them by name. Mutagen is exact; Map is the +1/+1 half, because `explore` appears **zero** times in the engine. |
 | 0.5 — the 15 guesses | **done, and worse than expected.** Twelve keywords they used exist nowhere in the engine and nowhere in upstream: `addmulti`, `controlledlands`, `copysourcept`, `countbattlefieldcreature`, `gifted`, `lifelostamount`, `manaspentx`, `mytgt2`, `sevenormorecards`, `sourcept`, `spendonly`, `targetpower`. Thirteen lines across ten cards were dead and are removed. |
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |
@@ -154,6 +154,19 @@ whole round of "this works" readings was void that way; always confirm
 `failed test: N out of 1 total`. And a bug in the *gate* can look exactly like a bug in the
 *payment*: three separate mechanisms were blamed before the trivially-true restriction
 isolated it.
+
+### Grading a card unsupported removes it from the collection
+
+`grade=` is per-card and overrides the file default (`MTGDeck.cpp:557`), so a card can be
+marked unsupported **in place** in `borderline.txt` - it does not have to be physically
+moved to `unsupported.txt`. Moving it there is in fact worse: the primitive leaves the
+collection either way, but the move also loses the card's history in the file.
+
+Either way the card is filtered out of the collection, which has a consequence worth
+knowing: the `hobhoc_loadguard_*` tests force cards into play **by id**, so an unsupported
+id yields a null card and the guard fails. Twelve guards had to be updated. That is a
+property of those tests, not a real-play risk - a filtered card simply never reaches a
+deck - but it is the tripwire that catches this, and it is doing its job.
 
 ### The reveal audit had a hole
 

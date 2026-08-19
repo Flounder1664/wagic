@@ -110774,6 +110774,7 @@ type=Instant
 [/card]
 [card]
 name=Strict Proctor
+grade=unsupported
 missing=counter ability
 abilities=flying
 text=Flying -- Whenever a permanent entering the battlefield causes a triggered ability to trigger, counter that ability unless its controller pays {2}.
@@ -135306,7 +135307,7 @@ toughness=3
 [/card]
 [card]
 name=Axebane Ferox
-grade=borderline
+grade=unsupported
 abilities=deathtouch,haste
 missing=Ward-Collect evidence 4 is NOT implemented, and must not be re-added in the
 #obvious way. A ward built on the _WARD4_ macro with the mana swapped for
@@ -137528,7 +137529,7 @@ type=Sorcery
 [/card]
 [card]
 name=March from Velis Vel
-grade=borderline
+grade=unsupported
 flashback={4}{U}
 missing=the whole effect: "each land you control of a chosen nonbasic land type becomes a
 #copy of target creature" needs a chosen land TYPE plus a mass copy, neither expressible.
@@ -138049,7 +138050,7 @@ toughness=1
 [/card]
 [card]
 name=Matoya, Archon Elder
-grade=borderline
+grade=unsupported
 missing="whenever you scry or surveil, draw a card" - neither scry nor surveil raises a
 #trigger the DSL can hook, so this creature is a body only.
 text=Whenever you scry or surveil, draw a card. (Not implemented.)
@@ -138317,7 +138318,7 @@ toughness=1
 [/card]
 [card]
 name=Chief Engineer
-grade=borderline
+grade=unsupported
 missing="artifact spells you cast have convoke" - granting convoke to other spells has no
 #route; convoke is a printed keyword only.
 text=Artifact spells you cast have convoke. (Not implemented.)
@@ -138368,7 +138369,7 @@ toughness=3
 [card]
 name=Groundchuck & Dirtbag
 abilities=trample
-grade=borderline
+grade=unsupported
 missing="whenever you tap a land for mana, add {G}" - there is no tapped-for-mana trigger.
 text=Trample -- Whenever you tap a land for mana, add {G}. (Not implemented.)
 mana={4}{G}{G}
@@ -138448,7 +138449,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Gandalf, Party Guest
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOC preview build
 abilities=hasnokicker
 text=At the beginning of combat on your turn, you may cast an instant or sorcery spell with mana value X or less from your hand without paying its mana cost, where X is twice the number of legendary Wizards you control.
@@ -138522,7 +138523,7 @@ type=Sorcery
 [/card]
 [card]
 name=Galadriel, Light of Valinor
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOC preview build
 abilities=hasnokicker
 text=Alliance -- Whenever another creature you control enters, choose one that hasn't been chosen this turn -- Add {G}{G}{G}. -- Put a +1/+1 counter on each creature you control. -- Scry 2, then draw a card.
@@ -138717,7 +138718,8 @@ subtype=Equipment
 [/card]
 [card]
 name=Esgaroth Garrison
-anyzone=countbattlefieldcreature/5end cdaactive
+anyzone=type:creature:mybattlefield/5 cdaactive
+missing=the power is one too low: type:creature:mybattlefield excludes the source, so the Garrison does not count itself. Also the ETB draw-then-discard.
 auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline, CDA power formula unverified
@@ -138862,7 +138864,7 @@ toughness=5
 name=Lakeshore Apothecary
 abilities=vigilance
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:counter(1/1) this
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw-each-turn trigger unverified keyword
 missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
@@ -139054,7 +139056,7 @@ toughness=2
 [card]
 name=Iron Hills Stalwart
 abilities=reach,trample
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; dual-target attach-equipment-to-creature approximated
 missing=the Equipment is not attached to the chosen creature: 'mytgt2' (a second-target reference) does not exist in the engine, so that line was dead and has been removed.
 text=Reach, trample -- When this creature enters, attach target Equipment you control to up to one target creature you control.
@@ -139509,7 +139511,7 @@ toughness=5
 name=Master's Councillors
 abilities=vigilance
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(player) mill:3 targetedplayer
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-graveyard-of-7+ count and second-draw trigger both unverified
 missing=the graveyard-size condition: 'sevenormorecards' does not exist in the engine, so that line was dead and has been removed. The 'second card you draw each turn' trigger is also absent.
 text=Vigilance -- This creature gets +2/+0 for each graveyard with seven or more cards in it. -- Whenever you draw your second card each turn, target player mills three cards.
@@ -139585,7 +139587,7 @@ subtype=Saga
 name=Dreaded Bat-Cloud
 abilities=flying,deathtouch
 restriction=if died then changecost(-3)
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; cost-reduction-if-creature-died-this-turn not implemented
 missing=cost reduction if a creature died this turn not implemented (no restriction-based cast-cost-reduction primitive verified)
 text=This spell costs {3} less to cast if a creature died this turn. -- Flying, deathtouch
@@ -139682,7 +139684,7 @@ subtype=Saga
 [/card]
 [card]
 name=Dwarven Mauler
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; targeted-equip-cost-reduction not implemented
 missing=equip-cost-reduction-when-targeting-this clause not implemented
 text=Equip abilities you activate that target this creature cost {2} less to activate.
@@ -139753,7 +139755,7 @@ type=Enchantment
 [/card]
 [card]
 name=Galion, Elvenking's Butler
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; copy-attacker's-power-toughness-to-another-creature approximated, may need a real dynamic-copy primitive
 missing=base power/toughness becoming Galion's: 'copysourcept' and 'sourcept' do not exist in the engine, so that line was dead and has been removed.
 mana={2}{G}{G}
@@ -139765,7 +139767,6 @@ toughness=4
 [card]
 name=Mirkwood Pathmaker
 anyzone=type:land:mybattlefield/type:land:mybattlefield cdaactive
-anyzone=controlledlands/controlledlandsend cdaactive
 text=Mirkwood Pathmaker's power and toughness are each equal to the number of lands you control.
 mana={2}{G}
 type=Creature
@@ -139831,7 +139832,7 @@ toughness=2
 name=Bard the Bowman
 abilities=reach
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(creature) counter(1/1) && transforms((,lifelink)) ueot
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw trigger unverified
 missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
 text=Reach -- Whenever you draw your second card each turn, put a +1/+1 counter on target creature. It gains lifelink until end of turn.
@@ -140097,7 +140098,7 @@ toughness=4
 [card]
 name=The Lord of the Eagles
 abilities=flash,flying
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; cost-reduction-by-total-flying-power not implemented
 missing=cost reduction equal to total power of flying creatures you control not implemented
 text=Flash -- This spell costs {X} less to cast, where X is the total power of creatures you control with flying. -- Flying
@@ -140149,7 +140150,7 @@ subtype=Saga
 [/card]
 [card]
 name=Uncover the Moon-Letters
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; draw-X-equal-to-mana-spent approximated via manaspentx, unverified keyword
 missing=the draw-equal-to-mana-spent: 'manaspentx' does not exist in the engine, so that line was dead and has been removed.
 text=Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards.
@@ -140211,7 +140212,7 @@ toughness=3
 [card]
 name=The Master of Lake-town
 abilities=deathtouch
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; player-loses-life-mills-that-many and draw-per-7-card-graveyard both approximated, keywords unverified
 missing=both triggered abilities were dead and have been removed: 'lifelostamount', 'countbattlefieldcreature' and 'sevenormorecards' are none of them engine keywords.
 text=Deathtouch -- Whenever a player loses life, that player mills that many cards. -- When The Master of Lake-town dies, draw a card for each graveyard with seven or more cards in it.
@@ -140250,7 +140251,7 @@ toughness=2
 [/card]
 [card]
 name=Supper for Spiders
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; mass-reanimation-of-this-turn's-battlefield-deaths not implemented, no verified primitive tracks this precisely
 missing=mass-reanimate-creatures-that-died-from-battlefield-this-turn not implemented (no verified this-turn-death-tracking-by-zone-origin primitive)
 text=Put onto the battlefield under your control all creature cards in your opponents' graveyards that were put there from the battlefield this turn. They are Food artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life." (They lose all other types and subtypes.)
@@ -140433,7 +140434,7 @@ type=Enchantment
 [/card]
 [card]
 name=Radagast of Rhosgobel
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; first-creature-spell-per-turn-cost-reduction-and-flash not implemented
 missing=first-creature-spell-each-turn-costs-2-less-and-may-be-cast-with-flash not implemented (no verified once-per-turn-cast-modifier primitive)
 text=The first creature spell you cast each turn costs {2} less to cast and can be cast as though it had flash.
@@ -140752,7 +140753,7 @@ toughness=3
 name=Thorin, Mountain-king
 abilities=trample
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() calls
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; multi-equip-then-conditional-damage approximated, exact targeting/attach syntax unverified
 missing=the Equipment are not attached and the damage is not tied to the equipped creature's power: 'mytgt2' and 'targetpower' do not exist in the engine, so both lines were dead and have been removed.
 text=Trample -- When Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
@@ -140801,7 +140802,7 @@ type=Enchantment
 [card]
 name=Bard, King of Dale
 abilities=reach,vigilance
-grade=borderline
+grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; both replacement effects (extra draw step card, doubled tokens) not implemented -- no verified draw-step-replacement or token-doubling primitive
 missing="except the first draw step card, draw two instead" and "tokens created are doubled" both not implemented
 text=Reach, vigilance -- If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead. -- If one or more tokens would be created under your control, twice that many of those tokens are created instead.
@@ -140942,7 +140943,7 @@ toughness=2
 [/card]
 [card]
 name=Marcus, Mutant Mayor
-grade=borderline
+grade=unsupported
 abilities=vigilance,trample
 missing=whenever a creature you control deals combat damage to a player, draw a card if it has a +1/+1 counter, otherwise put one on it
 text=Vigilance, trample -- Whenever a creature you control deals combat damage to a player, draw a card if that creature has a +1/+1 counter on it. If it doesn't, put a +1/+1 counter on it.
@@ -140954,7 +140955,7 @@ toughness=4
 [/card]
 [card]
 name=Armory Paladin
-grade=borderline
+grade=unsupported
 abilities=trample
 missing=whenever you cast an Aura or Equipment spell, exile the top card of your library and you may play it until the end of your next turn
 text=Trample -- Whenever you cast an Aura or Equipment spell, exile the top card of your library. You may play that card until the end of your next turn.
@@ -141455,7 +141456,7 @@ type=Sorcery
 [/card]
 [card]
 name=Sif's Spearmaster
-grade=borderline
+grade=unsupported
 missing={T}: deals damage equal to its power to target opponent
 text={T}: This creature deals damage equal to its power to target opponent.
 mana={2}{R}
@@ -141466,7 +141467,7 @@ toughness=4
 [/card]
 [card]
 name=Intrepid Ace
-grade=borderline
+grade=unsupported
 missing=+2/+0 while it is not attacking or blocking
 text=This creature gets +2/+0 as long as it isn't attacking or blocking.
 mana={R}
@@ -141596,7 +141597,7 @@ toughness=1
 [/card]
 [card]
 name=Count Nefaria
-grade=borderline
+grade=unsupported
 abilities=flying
 missing=costs {3} less if you have sacrificed a permanent this turn
 text=This spell costs {3} less to cast if you've sacrificed a permanent this turn. -- Flying
@@ -141620,7 +141621,7 @@ toughness=4
 [/card]
 [card]
 name=Narod, the Beige Flower
-grade=borderline
+grade=unsupported
 missing=each creature assigns combat damage equal to its mana value rather than its power
 text=Each creature assigns combat damage equal to its mana value rather than its power.
 mana={W}{U}{B}
@@ -141631,7 +141632,7 @@ toughness=5
 [/card]
 [card]
 name=Spuzzem Strategist
-grade=borderline
+grade=unsupported
 missing=you make all choices for Spuzzems you control
 text=You make all choices for Spuzzems you control.
 mana={3}{G}
@@ -141779,7 +141780,7 @@ toughness=3
 [/card]
 [card]
 name=Absorbing Man and Titania
-grade=borderline
+grade=unsupported
 missing=double all damage your creature sources would deal
 text=Double all damage that creature sources you control would deal.
 mana={3}{R}{G}
@@ -141882,7 +141883,7 @@ toughness=6
 [/card]
 [card]
 name=Plague Drone
-grade=borderline
+grade=unsupported
 abilities=flying
 missing=if an opponent would gain life, that player loses that much life instead
 text=Flying -- Rot Fly — If an opponent would gain life, that player loses that much life instead.
@@ -141894,7 +141895,7 @@ toughness=3
 [/card]
 [card]
 name=Clamavus
-grade=borderline
+grade=unsupported
 missing=each creature you control gets +1/+1 for each +1/+1 counter on it
 text=Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it.
 mana={4}{G}
@@ -141928,7 +141929,7 @@ toughness=3
 [/card]
 [card]
 name=Misty Knight, Hero for Hire
-grade=borderline
+grade=unsupported
 missing={2}, {T}, discard a card: draw a card for each card discarded this turn
 text={2}, {T}, Discard a card: Draw a card for each card you've discarded this turn.
 mana={1}{R}
@@ -141951,7 +141952,7 @@ toughness=10
 [/card]
 [card]
 name=Vision of Love
-grade=borderline
+grade=unsupported
 missing=you may sacrifice an artifact or discard a card; if you do, draw two cards
 text=You may sacrifice an artifact or discard a card. If you do, draw two cards.
 mana={1}{R}
@@ -141959,7 +141960,7 @@ type=Instant
 [/card]
 [card]
 name=Delete
-grade=borderline
+grade=unsupported
 missing=X damage to each nonartifact creature and each player
 text=Delete deals X damage to each nonartifact creature and each player.
 mana={X}{R}{R}
@@ -141967,7 +141968,7 @@ type=Sorcery
 [/card]
 [card]
 name=Cyber Conversion
-grade=borderline
+grade=unsupported
 missing=turning a creature face down as a 2/2 Cyberman artifact creature
 text=Turn target creature face down. It's a 2/2 Cyberman artifact creature.
 mana={U}{U}
@@ -141975,7 +141976,7 @@ type=Instant
 [/card]
 [card]
 name=Torpor Orb
-grade=borderline
+grade=unsupported
 missing=creatures entering do not cause abilities to trigger
 text=Creatures entering don't cause abilities to trigger.
 mana={2}
@@ -142058,7 +142059,7 @@ toughness=2
 [/card]
 [card]
 name=Atlantean Cavalry
-grade=borderline
+grade=unsupported
 abilities=vigilance
 missing=whenever you draw your second card each turn, put a +1/+1 counter on it
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
@@ -142083,7 +142084,7 @@ toughness=2
 [/card]
 [card]
 name=Agents of S.H.I.E.L.D.
-grade=borderline
+grade=unsupported
 missing=whenever a creature you control attacks alone, it gets +1/+1 until end of turn
 text=Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.
 mana={2}{W}
@@ -142094,7 +142095,7 @@ toughness=4
 [/card]
 [card]
 name=Terry Pin, Turboturtle
-grade=borderline
+grade=unsupported
 abilities=flash,haste
 missing=ignoring 'activate only as a sorcery' on abilities you activate
 text=Flash -- Haste -- You may ignore the words "Activate only as a sorcery" while activating abilities.
@@ -142106,7 +142107,7 @@ toughness=3
 [/card]
 [card]
 name=Vexilus Praetor
-grade=borderline
+grade=unsupported
 abilities=flash,vigilance
 missing=commanders you control have protection from everything
 text=Flash -- Vigilance -- Aegis of the Emperor — Commanders you control have protection from everything.
