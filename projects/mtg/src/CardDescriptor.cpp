@@ -14,6 +14,7 @@ CardDescriptor::CardDescriptor()
     counterPower = 0;
     counterToughness = 0;
     counterNB = 0;
+    orToken = 0;
     mode = CD_AND;
     foretoldComparisonMode = COMPARISON_NONE;
     kickedComparisonMode = COMPARISON_NONE;
@@ -579,6 +580,15 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
     if ((isToken == -1 && card->isToken) || (isToken == 1 && !card->isToken))
     {
         match = NULL;
+    }
+
+    //"ortoken" is an alternative, not a requirement: a token satisfies the filter on its
+    //own. match_or only ORs over types, and being a token is not a type, so without this
+    //there is no way to say "artifact, enchantment OR token" - which is exactly what
+    //bargain needs.
+    if (orToken == 1 && card->isToken)
+    {
+        match = card;
     }
 
     if (attacker == 1)

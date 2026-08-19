@@ -36,6 +36,9 @@ class CardDescriptor: public MTGCardInstance
   };
 
   Operator mode;
+  //"ortoken": being a token SATISFIES an OR filter, rather than being an extra requirement.
+  //Distinct from isToken, which is always an AND and which 154 existing cards rely on.
+  int orToken;
   int powerComparisonMode;
   int foretoldComparisonMode;
   int kickedComparisonMode;

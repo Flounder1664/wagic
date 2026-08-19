@@ -110,95 +110,48 @@ architectural, and the notes on them are already accurate — they should stay a
 | 0 — Map / Mutagen | **done.** Both are real registered tokens now (`-637012` in LCI, `-910900` in TMT) and the seven cards create them by name. Mutagen is exact; Map is the +1/+1 half, because `explore` appears **zero** times in the engine. |
 | 0.5 — the 15 guesses | **done, and worse than expected.** Twelve keywords they used exist nowhere in the engine and nowhere in upstream: `addmulti`, `controlledlands`, `copysourcept`, `countbattlefieldcreature`, `gifted`, `lifelostamount`, `manaspentx`, `mytgt2`, `sevenormorecards`, `sourcept`, `spendonly`, `targetpower`. Thirteen lines across ten cards were dead and are removed. |
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |
-| 2 — bargain | **measured, needs an engine fix.** Not a data edit: every DSL spelling either leaves tokens out or breaks bargain entirely. See below. |
+| 2 — bargain | **fixed.** New `ortoken` filter attribute; all 16 cards now accept a token as fodder. See below. |
 | 3 — read ahead | **blocked, and measured.** A modal `choice` ETB on a permanent adds nothing, and `counter(0/0,N,Lore)` adds the counters but fires no chapter, because chapter triggers are `@counteradded(0/0,1,Lore)`. All ten notes now carry that. |
 | 4 — Avatar Saga backs | **done.** All six back faces already had art in TLA.zip, so the crash that caused the disable was gone. The five Legend Sagas transform on chapter III again, and Aang, at the Crossroads transforms when another creature leaves. Verified in the harness. |
 
-### Bargain: why it cannot be fixed in the cards
+### Bargain: fixed with an `ortoken` filter attribute
 
-Bargain should take an artifact, an enchantment **or a token**. The cards declare
-`other={..}{S(artifact,enchantment|myBattlefield)}` with
-`otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0`, and because the
-restriction gates the cast menu as well, a board of only tokens is not offered Bargain at
-all - the option is invisible, not merely unusable.
+Bargain takes an artifact, an enchantment **or a token**. The cards only offered
+`S(artifact,enchantment|myBattlefield)`, and `otherrestriction` gated the cast menu on the
+same filter, so a board of only tokens was not offered Bargain at all.
 
-Every spelling was tried against two harness tests, one that sacrifices an artifact
-(pre-existing) and one that can only sacrifice a Goblin token (added as
-`generic/bargain_token_fodder.txt`, deliberately NOT in `_tests.txt` since it documents a
-gap rather than a regression):
+**The blocker was the restriction, not the fodder.** With a trivially-true restriction and
+`S(*[token])`, bargain worked immediately. The restriction failed because `isToken` is
+checked unconditionally at `CardDescriptor.cpp:579`, outside the `CD_OR` branch, so
+`type(*[artifact;enchantment;token]|...)` means "(artifact OR enchantment) AND is-a-token"
+- zero on any board. `match_or` only ORs over *types*, and being a token is not a type, so
+there was no way to spell "artifact, enchantment or token".
 
-| `S(...)` fodder | artifact path | token path |
-|---|---|---|
-| `artifact,enchantment` (today) | works | fails |
-| `*[artifact;enchantment]` | works | fails |
-| `artifact,enchantment,token` | works | fails - clause is inert |
-| `*[artifact;enchantment;token]` | **breaks** | fails |
-| `artifact,enchantment,creature[token]` | **breaks** | fails |
-| `artifact,enchantment,*[token]` | **breaks** | fails |
+**The fix** is additive rather than a change to `isToken`, because 154 existing brackets
+pair `token` with `;` (`[token;fresh]` x20, `[-token;...]`) and rely on the AND behaviour.
+A new attribute `ortoken` sets `CardDescriptor::orToken`, and `match()` lets a token
+satisfy the filter on its own:
 
-So the note those 16 cards carried was close but wrong: it is not the *third clause* that
-breaks the chooser - three bare clauses are fine - it is any **bracketed** clause in an
-extra-cost `S()`. And `token` exists only as a bracketed attribute (`cd->isToken`,
-`TargetChooser.cpp:797`), so there is no spelling that reaches it.
+```cpp
+if (orToken == 1 && card->isToken)
+    match = card;
+```
 
-The restriction half parses fine on its own, but opening it changes nothing, because the
-cost still cannot be paid - so the cards are left alone.
+parsed in `TargetChooser.cpp` *before* the `token` branch, which it contains as a
+substring. All 16 cards now read
+`S(*[artifact;enchantment;ortoken]|myBattlefield)` with a matching restriction.
 
-**Tokens CAN pay a sacrifice cost - the block is narrower than that.** 210 cards in the
-collection already sacrifice a Clue token (`{S(clue[token]|myBattlefield)}`), and
-`generic/token_sac_control.txt` proves it directly on the same kind of board this test
-uses: Glimmer Bairn's `{S(*[token]|myBattlefield)}: +2/+2` happily eats one of Dragon
-Fodder's Goblins. That test passes and is in the suite.
+Both paths are asserted in the suite: `bargain_torch_the_tower_paid.txt` (sacrifice an
+Ornithopter) and `bargain_token_fodder.txt` (a board of nothing but Dragon Fodder's
+Goblins). `token_sac_control.txt` guards the assumption underneath, that a Goblin can pay
+a `{S(*[token])}` cost at all.
 
-**Where bargain actually stops.** With the fodder set to `S(*[token])` and the restriction
-opened to match, the Goblin IS sacrificed - every player-0 assertion passes, including
-exactly one Goblin left on the battlefield - but the spell still deals 2, not 3. The
-bargained branch never fires, under `auto=alternative damage:3` and under
-`auto=if paid(alternative) then damage:3` alike. So the cost is paid and `paid(alternative)`
-is somehow not set for this fodder, while the identical shape with
-`S(artifact,enchantment)` sets it fine. That is as far as this got; the reason is not
-established, and it is the thread to pull next.
-
-**Methodology warning, learned the hard way.** `WAGIC_TESTSUITE_ONLY` filters the list
-collected from `_tests.txt`. If the test is not listed, nothing runs and a
-`grep -c "Test Failed"` returns 0 - indistinguishable from a pass. A whole round of
-"this fixes it" readings was void for exactly that reason. Always confirm
-`TestSuite done: failed test: N out of 1 total` before believing a targeted run.
-
-Fixing this means making a bracketed CardDescriptor work in the extra-cost path, which is
-engine work in `ManaCost.cpp`/`ExtraCost.cpp`, not card authoring.
-
-#### Root cause, and why neither fix is cheap (2026-08-19)
-
-Dug into it on John's ask, including his suggestion of a second "Bargain (token)" menu
-entry as a simpler route. Both dead ends, for different reasons.
-
-**The real defect is in TargetChooser, not in extra costs.**
-`TargetChooserFactory::createTargetChooser` declares ONE `CardDescriptor * cd`
-(`TargetChooser.cpp:487`) and builds ONE `DescriptorTargetChooser` from it (line 1386).
-The comma clauses share that single descriptor, so a bracketed attribute in *any* clause
-is applied to *all* of them. `S(artifact,enchantment,creature[token])` therefore means
-"(artifact OR enchantment OR creature) AND is-a-token", which rejects an Ornithopter and
-empties the fodder set - breaking bargain even for artifacts. Compounding it,
-`isToken` is checked unconditionally at `CardDescriptor.cpp:579`, outside the `CD_OR`
-branch, so it can never be one of the OR'd alternatives.
-
-Fixing it properly means per-clause descriptors OR'd together. That is one function, but
-it changes target parsing for every card in the collection - and 154 existing brackets
-already pair `token` with `;` (`[token;fresh]` x20, `[-token;...]`) and depend on today's
-AND behaviour. High blast radius for 16 cards.
-
-**A second `other=` line does not work.** `ManaCost::setAlternative` is
-`SAFE_DELETE(alternative); alternative = aMana;` - one slot, last wins. Verified in the
-harness: adding a token `other=` line silently REPLACED the artifact one, so the artifact
-test started failing while the token test passed. Making `alternative` a list means 44
-`getAlternative()` call sites, 11 of them in AIPlayerBaka and 9 in MTGRules, plus the cast
-menu and `paid(alternative)`. Not simpler than the parser fix.
-
-**What shrinks the problem:** Treasure, Clue, Food and Blood are all `type=Artifact`, so
-they ALREADY qualify as bargain fodder today. The gap is only *creature* tokens - the
-Goblins in `generic/bargain_token_fodder.txt`. That is a much narrower loss than "bargain
-cannot eat tokens" suggests, and it is why this stays parked.
+**Two traps this cost me.** `WAGIC_TESTSUITE_ONLY` silently runs nothing when the test is
+not in `_tests.txt`, and `grep -c "Test Failed"` then returns 0 - identical to a pass. A
+whole round of "this works" readings was void that way; always confirm
+`failed test: N out of 1 total`. And a bug in the *gate* can look exactly like a bug in the
+*payment*: three separate mechanisms were blamed before the trivially-true restriction
+isolated it.
 
 ### The reveal audit had a hole
 

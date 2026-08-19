@@ -793,6 +793,11 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                         cd->unsecureSetIsPermanent(1);
                     }
                 }
+                //Token as an OR alternative - must be tested BEFORE "token", which it contains
+                else if (attribute.find("ortoken") != string::npos)
+                {
+                    cd->orToken = minus ? -1 : 1;
+                }
                 //Token
                 else if (attribute.find("token") != string::npos)
                 {
