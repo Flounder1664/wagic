@@ -122,6 +122,39 @@ tokens and is mostly noise — counter names (`saddled`, `incubate`) and strings
 builds at runtime (`hascnt<counter>`, `mybattlefieldplus<type>`). It needs a filter that
 knows where in a line a real keyword can appear before it is worth running wholesale.
 
+## Multikicker: known behaviour, deliberately not fixed (2026-08-19)
+
+Wagic only ever spends mana already in the pool - it does not tap lands for you. On top of
+that, `MTGRules.cpp:544` discards the player's answer (`card->kicked = 0`) and then kicks as
+many times as the pool can afford, paying for every one.
+
+The two facts together mean **the kick count is chosen by how much mana you tap before
+casting**, and it is exact and repeatable. Verified in game on both cards:
+
+| tapped | Apex Hawks ({2}{W}, printed 2/2) | Marshal's Anthem ({2}{W}{W}) |
+|---:|---|---|
+| 6 Plains | 3/3 - one kick | one creature returned |
+| 8 Plains | 4/4 - two kicks | both creatures returned |
+
+So multikicker is **not broken**, and neither is Marshal's Anthem - the earlier suspicion
+was wrong. The real gap is only that the engine never *asks*: float spare mana and it gets
+spent on kicks you did not request, and you cannot kick fewer times than your pool allows.
+
+Fixing that properly means adding "Kick x1 / x2 / ... xN" entries to the cast menu, because
+casting with kicker is a menu entry (`MTGKickerRule`), not a count prompt. That touches the
+cast path for every kicker card in the game, for a usability gain over a workaround that
+already works precisely. John's call, 2026-08-19: leave it and record it. Do not "fix" this
+without asking again.
+
+Two measurement notes worth keeping:
+
+* The WSL harness **requires** a `manapool:` line and will not tap lands; the GUI scenario
+  handover **drops** the pool and expects you to tap. A scenario written with `manapool:`
+  and no lands has no mana at all.
+* The harness AI auto-declines optional `<upto:>` targets, so it can never confirm an
+  optional-target ability. `Marshals_Anthem_MULTIKICKER.txt` failed for exactly that reason
+  and was deleted rather than left standing as a false accusation.
+
 ## Conventions this plan assumes
 
 - A `missing=` note is a promise that the rest of the card is right. When a phase closes a
