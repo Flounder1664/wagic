@@ -139073,10 +139073,9 @@ toughness=2
 [card]
 name=Iron Hills Stalwart
 abilities=reach,trample
-auto=target(<upto:1>equipment|mybattlefield) target(<upto:1>creature|mybattlefield) rehook mytgt2
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; dual-target attach-equipment-to-creature approximated
-missing=the Equipment is not attached to the chosen creature (second-target reference is not a real keyword)
+missing=the Equipment is not attached to the chosen creature: 'mytgt2' (a second-target reference) does not exist in the engine, so that line was dead and has been removed.
 text=Reach, trample -- When this creature enters, attach target Equipment you control to up to one target creature you control.
 mana={4}{R}
 type=Creature
@@ -139528,11 +139527,10 @@ toughness=5
 [card]
 name=Master's Councillors
 abilities=vigilance
-auto=lord(this) foreach(*[graveyard;sevenormorecards]|graveyard) 2/0
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(player) mill:3 targetedplayer
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; per-graveyard-of-7+ count and second-draw trigger both unverified
-missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
+missing=the graveyard-size condition: 'sevenormorecards' does not exist in the engine, so that line was dead and has been removed. The 'second card you draw each turn' trigger is also absent.
 text=Vigilance -- This creature gets +2/+0 for each graveyard with seven or more cards in it. -- Whenever you draw your second card each turn, target player mills three cards.
 mana={1}{U}
 type=Creature
@@ -139765,20 +139763,18 @@ toughness=3
 [card]
 name=Beorn's Hospitality
 auto=_LANDFALL_target(creature|mybattlefield) counter(1/1)
-auto={5}{G}{G}:transforms((Creature Bear,newability[this(variable{controlledlands}) setpower],forever)) forever
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; becomes-a-creature-with-pt=lands-controlled clause approximated, may not compile as written
-missing=becomes-Bear-creature-with-dynamic-pt-equal-to-lands-controlled not fully verified; the Bear's power is not set to the number of lands you control
+missing=the Bear's power should equal the lands you control: 'controlledlands' does not exist in the engine, so the animation line was dead and has been removed.
 text=Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. -- {5}{G}{G}: This enchantment becomes a Bear creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lands you control."
 mana={1}{G}
 type=Enchantment
 [/card]
 [card]
 name=Galion, Elvenking's Butler
-auto=_ATTACKING_target(<upto:1>other creature|mybattlefield) transforms((,newability[copysourcept])) ueot
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; copy-attacker's-power-toughness-to-another-creature approximated, may need a real dynamic-copy primitive
-missing=base-power-toughness-becomes-equal-to-Galion's not fully verified (copysourcept is a guessed keyword)
+missing=base power/toughness becoming Galion's: 'copysourcept' and 'sourcept' do not exist in the engine, so that line was dead and has been removed.
 mana={2}{G}{G}
 type=Legendary Creature
 subtype=Elf Advisor
@@ -140029,12 +140025,10 @@ toughness=2
 [card]
 name=Bilbo's Gambit
 target=*|mystack
-auto=may name(Gift a Treasure) _TREASURE_ tapped opponent and!( this(gifted) )!
 auto=target(*|mystack) moveto(ownerhand)
-auto=this(gifted) restriction{} phaseaction[end once] cantcast
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; Gift mechanic and players-cant-cast-this-turn-if-gifted approximated
-missing="players can't cast spells this turn" (if gift promised) not fully verified as a global effect
+missing=the gift half: 'gifted' is not an engine marker, so both lines that used it were dead and have been removed; 'players can't cast spells this turn' was never verified either.
 text=Gift a Treasure -- Return target spell to its owner's hand. If the gift was promised, players can't cast spells this turn.
 mana={1}{W}
 type=Instant
@@ -140174,10 +140168,9 @@ subtype=Saga
 [/card]
 [card]
 name=Uncover the Moon-Letters
-auto=@movedTo(*[-creature]|mystack):all(trigger[to]) may name(Draw and discard) draw:manaspentx controller && ability$!name(Discard two cards) name(Discard two cards) target(<2>*|myhand) reject!$ controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; draw-X-equal-to-mana-spent approximated via manaspentx, unverified keyword
-missing=mana-spent-tracking (manaspentx) not confirmed to exist; may need a different mana-value primitive; draws nothing -- the amount of mana spent on the spell is not tracked
+missing=the draw-equal-to-mana-spent: 'manaspentx' does not exist in the engine, so that line was dead and has been removed.
 text=Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards.
 mana={3}{U}
 type=Enchantment
@@ -140237,11 +140230,9 @@ toughness=3
 [card]
 name=The Master of Lake-town
 abilities=deathtouch
-auto=@each lifelost:all(trigger[to]) mill:lifelostamount targetedplayer
-auto=_DIES_source(this) anyzone=countbattlefieldcreature/5end:draw:type:graveyard:sevenormorecards controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; player-loses-life-mills-that-many and draw-per-7-card-graveyard both approximated, keywords unverified
-missing=both triggered abilities use guessed/unverified keyword forms (lifelostamount, sevenormorecards) and may not resolve correctly; mills nothing -- the amount of life lost is not tracked
+missing=both triggered abilities were dead and have been removed: 'lifelostamount', 'countbattlefieldcreature' and 'sevenormorecards' are none of them engine keywords.
 text=Deathtouch -- Whenever a player loses life, that player mills that many cards. -- When The Master of Lake-town dies, draw a card for each graveyard with seven or more cards in it.
 mana={1}{B}{B}
 type=Legendary Creature
@@ -140328,10 +140319,9 @@ toughness=5
 [card]
 name=Desolation of Smaug
 auto=damage:3 all(creature[-dragon]|battlefield)
-auto=addmulti{4} restriction{spendonly:dragon}
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; restricted-mana-for-Dragon-spells-only approximated, spendonly restriction unverified
-missing=mana restricted to Dragon spells only not verified
+missing=the Dragon-only mana restriction: neither 'addmulti' nor 'spendonly' exists in the engine, so that line was dead and has been removed.
 text=Desolation of Smaug deals 3 damage to each non-Dragon creature. -- Add four mana in any combination of colors. Spend this mana only to cast Dragon spells.
 mana={2}{R}{R}
 type=Sorcery
@@ -140614,13 +140604,12 @@ toughness=5
 name=Glamdring, Foe-hammer
 abilities=adventure
 other={3}{U} name(Adventure)
-auto=lord(this) transforms((,newability[changecost(colorless:-sourcept)]))
 auto={2}:equip
 auto=alternative reveal:6 optionone name(Get instants/sorceries) all(*[instant;sorcery]|reveal) moveto(hand) and!( all(*|reveal) moveto(mygraveyard) )! optiononeend optiontwo name(None) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; instant/sorcery-cost-reduction-equal-to-equipped-power approximated
-missing=cost reduction dynamically equal to equipped creature's power not verified (uses a guessed sourcept-based changecost)
+missing=the cost reduction equal to the equipped creature's power: 'sourcept' does not exist in the engine, so that line was dead and has been removed.
 text=Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power. // Mill six cards, then put all instant and sorcery cards from among them into your hand.
 mana={2}
 type=Legendary Artifact
@@ -140782,11 +140771,9 @@ toughness=3
 name=Thorin, Mountain-king
 abilities=trample
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() calls
-auto=target(<anyamount>equipment|mybattlefield) rehook mytgt2 && target(creature|mybattlefield) mytgt2 tag(mytgt2) && foreach(mytgt2) attach
-auto=if type(*[equipment;attached]|mybattlefield.count>0) then damage:targetpower target(<upto:1>creature) source(mytgt2)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; multi-equip-then-conditional-damage approximated, exact targeting/attach syntax unverified
-missing=dynamic damage amount tied to the newly-equipped creature's power not fully verified; the Equipment are not attached and the damage-equal-to-power clause never fires
+missing=the Equipment are not attached and the damage is not tied to the equipped creature's power: 'mytgt2' and 'targetpower' do not exist in the engine, so both lines were dead and have been removed.
 text=Trample -- When Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
 mana={3}{R}
 type=Legendary Creature
