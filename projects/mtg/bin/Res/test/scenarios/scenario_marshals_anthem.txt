@@ -1,42 +1,36 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #
-#QUESTION: is multikicker broken for Marshal's Anthem specifically, or is the payment UI
-#only ever offering ONE kick?
+#Multikicker is GREEDY (MTGRules.cpp:544): it throws away your answer and kicks as many
+#times as your mana pool can afford. That is why Apex Hawks took five counters last run -
+#the pool had eight mana in it. So this board gives EXACTLY enough for one kick and has
+#NO LANDS, so nothing extra can be tapped and greedy == what you intended.
 #
-#What the automated harness already established:
-#  * Multikicker works engine-wide. Apex_Hawks_MULTIKICKER.txt passes in the suite.
-#  * Marshal's Anthem declares it the same way (kicker=multi{1}{W}) and <upto:kicked> is
-#    a real symbol resolving to card->kicked.
-#  * Cast with 8 mana and two creatures in the graveyard, the enchantment resolves and
-#    BOTH creatures stay in the graveyard. Not clause order - reordering changed nothing.
+#  APEX HAWKS ({2}{W}, multikicker {1}{W}) - the control, known good.
+#     Six white. Base 3 + one kick 2 = 5; a second kick would need 7, so it cannot.
+#     EXPECT: a 2/2 flier - the 1/1 body with exactly ONE +1/+1 counter.
+#     If it takes more than one counter, the greedy loop is worse than understood.
 #
-#TEST THIS ORDER, both cards are in hand and you have plenty of white mana:
+#  MARSHAL'S ANTHEM ({2}{W}{W}, multikicker {1}{W}) - the suspect.
+#     Six white. Base 4 + one kick 2 = 6; a second kick would need 8, so it cannot.
+#     Two creatures in the graveyard.
+#     EXPECT by the real card: exactly ONE of them returns to the battlefield.
 #
-#  1. APEX HAWKS - the CONTROL, known good. {2}{W}, multikicker {1}{W}.
-#     Note how many times the game offers to kick, and what the prompt looks like.
-#     Expect: kicked twice -> a 3/3 flier (1/1 plus two +1/+1 counters).
+#     This is the decisive one. kicked can now only be 1, so:
+#       * one creature returns  -> multikicker was never the problem, the greedy payment
+#                                  was, and Marshal's Anthem is fine
+#       * NO target prompt      -> <upto:kicked> is resolving to 0
+#       * prompt but nothing moves -> the moveto is at fault, not the count
 #
-#  2. MARSHAL'S ANTHEM - the suspect. {2}{W}{W}, multikicker {1}{W}.
-#     Kick it TWICE. Expect by the real card: Grizzly Bears AND Hill Giant both return
-#     from the graveyard to the battlefield.
-#
-#     Watch for these three things, they are what the harness cannot see:
-#       a. Does it offer to kick more than once? (If not, it is the payment UI.)
-#       b. After it resolves, does a TARGET prompt appear for the graveyard creatures?
-#          (If no prompt appears, <upto:kicked> is resolving to 0.)
-#       c. If a prompt appears, how many creatures does it let you pick?
-#
-#Twelve Plains as well as the mana pool, so you cannot run out mid-experiment.
+#Six mana forces exactly ONE kick on EITHER card. The pool only funds one of them, so
+#cast Apex Hawks, note the result, then RELAUNCH and cast Marshal's Anthem on a fresh pool.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
-hand:Marshal's Anthem,Apex Hawks
+hand:Apex Hawks,Marshal's Anthem
 graveyard:Grizzly Bears,Hill Giant
-inplay:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
-manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+manapool:{W}{W}{W}{W}{W}{W}
 life:20
 [PLAYER2]
-inplay:Grizzly Bears
 life:20
 [DO]
 human
