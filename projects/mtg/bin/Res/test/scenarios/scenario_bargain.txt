@@ -1,37 +1,36 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #
-#PHASE 2 SHORTFALL - bargain cannot eat a token.
+#BARGAIN AND TOKENS - this board now demonstrates the FIX, not the shortfall.
 #
-#Real rule:  "You may sacrifice an artifact, ENCHANTMENT, OR TOKEN as you cast this spell."
-#Wagic:       other={R}{S(artifact,enchantment|myBattlefield)} name(Bargain)
-#             otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0
-#
-#Only artifacts and enchantments count as fodder. Creature tokens do not, and because the
-#restriction also gates the MENU, a board full of tokens means Bargain is not even offered.
+#Real rule:  "You may sacrifice an artifact, enchantment, OR TOKEN as you cast this spell."
+#Before:     S(artifact,enchantment|myBattlefield) - tokens were not fodder, and because
+#            otherrestriction gates the cast MENU, a board of only tokens was not offered
+#            Bargain at all. The option was invisible, not merely unusable.
+#Now:        S(*[artifact;enchantment;ortoken]|myBattlefield), with a matching restriction.
+#            "ortoken" is a new filter attribute: being a token SATISFIES the filter
+#            instead of being an extra requirement on top of it.
 #
 #Reminder: Wagic never taps lands for you - tap Mountains yourself before each cast.
 #
-#RUN IT IN THIS ORDER, and watch the CAST MENU each time. That menu is the whole point.
+#RUN IT IN THIS ORDER, and watch the CAST MENU each time.
 #
 #  1. Tap 2 Mountains, cast DRAGON FODDER.
-#     -> two 1/1 Goblin TOKENS arrive. By the real rules these are now legal bargain fodder.
+#     -> two 1/1 Goblin TOKENS arrive, and no artifact or enchantment anywhere.
 #
 #  2. Tap 1 Mountain, cast TORCH THE TOWER at a Hill Giant.
-#     -> *** THE SHORTFALL *** No "Bargain" entry appears, even though you control two
-#        tokens you are entitled to sacrifice. You get the unbargained spell: 2 damage,
-#        and the 3/3 Hill Giant SURVIVES.
+#     -> *** THE FIX *** "Bargain" IS now offered, with the Goblins as fodder. Take it,
+#        feed it a Goblin: 3 damage, and the 3/3 Hill Giant DIES.
+#        Before this change no Bargain entry appeared here at all and it dealt 2.
 #
-#  3. Cast ORNITHOPTER (it costs {0}). It is an artifact creature.
+#  3. Cast ORNITHOPTER ({0}) - an artifact.
 #
 #  4. Tap 1 Mountain, cast the second TORCH THE TOWER at the OTHER Hill Giant.
-#     -> Now "Bargain" DOES appear, because an artifact is on the battlefield. Take it.
-#        3 damage, and that Hill Giant DIES.
+#     -> Bargain is offered again, and this time you should be able to choose EITHER the
+#        Ornithopter OR the remaining Goblin. Feed it whichever you prefer.
+#        The artifact route is the one that always worked - check it still does.
 #
-#The contrast between step 2 and step 4 is the bug: same board otherwise, same spell, and
-#the only thing that changed is whether the fodder happened to be an artifact.
-#
-#Note it also eats your Ornithopter rather than a spare Goblin - with real bargain you
-#would choose the token and keep the artifact.
+#Step 2 is the new behaviour. Step 4 is the regression check: the fix must not have cost
+#us the artifact route, which is exactly what my first two attempts at this did.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
