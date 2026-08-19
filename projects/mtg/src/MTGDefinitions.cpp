@@ -272,7 +272,9 @@ const char* Constants::MTGBasicAbilities[] = {
 	"affinitytwoalldeadcreatures", // Costs {2} less to cast for each creature that died this turn
     "ascend", //Card has Ascend -- controlling 10+ permanents grants the city's blessing (e.g. "Kumena's Awakening")
     "storied", //Card has Storied -- controlling 3+ artifacts/legendaries/Sagas grants an enduring story (e.g. "Balin, Loremaster")
-    "missing" //Card has one or more abilities that are not implemented (see the missing= field); shown as a warning badge
+    "missing", //Card has one or more abilities that are not implemented (see the missing= field); shown as a warning badge
+    "noprevention", //Damage dealt BY this card can't be prevented
+    "nopreventionall" //While this permanent is on the battlefield, no damage can be prevented at all
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;

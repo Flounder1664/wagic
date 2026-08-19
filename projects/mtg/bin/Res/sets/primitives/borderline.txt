@@ -1897,8 +1897,8 @@ toughness=1
 [/card]
 [card]
 name=Alchemist's Gambit
-missing=Damage can't be prevented
-abilities=exiledeath
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
+abilities=exiledeath,noprevention
 other={4}{U}{U}{R} name(Cleave)
 auto=turns:+1 controller
 auto=ifnot paid(alternative) then emblem transforms((,newability[@each my upkeep:phaseaction[end once] winGame opponent])) forever dontremove
@@ -12761,10 +12761,9 @@ toughness=3
 [/card]
 [card]
 name=Bonecrusher Giant // Stomp
-abilities=adventure,asflash
+abilities=adventure,asflash,noprevention
 restriction=can play creature
 other={1}{R} name(Adventure)
-missing=damage can't be prevented
 auto=alternative name(Deals 2 damage) name(Deals 2 damage) damage:2 target(anytarget)
 auto=alternative _ADVENTURE_
 auto=@targeted(this) from(*|opponentzones):name(Deals 2 damage) damage:2 opponent
@@ -35976,8 +35975,7 @@ toughness=2
 [/card]
 [card]
 name=Everlasting Torment
-missing=Damage can't be prevented
-abilities=nolifegain,nolifegainopponent
+abilities=nolifegain,nolifegainopponent,nopreventionall
 auto=lord(creature|battlefield) transforms((,newability[undamageable],newability[_ENRAGE_counter(-1/-1.thatmuch)]))
 text=Players can't gain life. -- Damage can't be prevented. -- All damage is dealt as though its source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
 mana={2}{BR}
@@ -36636,7 +36634,7 @@ type=Enchantment
 [/card]
 [card]
 name=Excruciator
-missing=damage can't be prevented -- damage-cannot-be-prevented has no DSL form (engine wall)
+abilities=noprevention
 text=Damage that would be dealt by Excruciator can't be prevented.
 mana={6}{R}{R}
 type=Creature
@@ -38639,7 +38637,8 @@ toughness=5
 [/card]
 [card]
 name=Fear, Fire, Foes!
-missing=Damage can't be prevented
+abilities=noprevention
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
 target=creature
 auto=damage:fullpaid && all(other creature|targetcontrollerbattlefield) damage:1
 text=Damage can't be prevented this turn. Fear, Fire, Foes! deals X damage to target creature and 1 damage to each other creature with the same controller.
@@ -40664,7 +40663,7 @@ toughness=3
 [/card]
 [card]
 name=Flames of the Blood Hand
-missing=damage can't be prevented
+abilities=noprevention
 auto=choice name(Damage opponent) damage:4 opponent && all(*|mybattlefield) transforms((,newability[nolifegainopponent])) ueot && all(*|opponentbattlefield) transforms((,newability[nolifegain])) ueot
 auto=choice name(Damage yourself) damage:4 controller && all(*|mybattlefield) transforms((,newability[nolifegain])) ueot && all(*|opponentbattlefield) transforms((,newability[nolifegainopponent])) ueot
 text=Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented. If that player would gain life this turn, that player gains no life instead.
@@ -57848,8 +57847,8 @@ toughness=1
 [/card]
 [card]
 name=Insult // Injury
-missing=damage can't be prevented
-abilities=hasaftermath
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
+abilities=hasaftermath,noprevention
 otherrestriction=type(creature|battlefield)~morethan~0
 flashback={2}{R} name(Injury)
 auto=ifnot paid(flashback) then token(Insult Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth) and!( transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-Insult Emblem]|*):damage:thatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-Insult Emblem]|*):damage:thatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-Insult Emblem]|*):damage:thatmuch opponent],newability[@damaged(planeswalker|myBattlefield) from(*[-Insult Emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damaged(creature|myBattlefield) from(*[-Insult Emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damageof(player) from(*[-Insult Emblem]|myzones):damage:thatmuch controller])) ueot )!
@@ -64926,7 +64925,7 @@ type=Sorcery
 [/card]
 [card]
 name=Lava Burst
-missing=damage can't be prevented
+abilities=noprevention
 target=anytarget
 auto=damage:X
 text=Lava Burst deals X damage to target creature or player. If Lava Burst would deal damage to a creature, that damage can't be prevented or dealt instead to another creature or player.
@@ -65882,8 +65881,7 @@ type=Enchantment
 [/card]
 [card]
 name=Leyline of Punishment
-missing=Damage can't be prevented
-abilities=leyline,nolifegain,nolifegainopponent
+abilities=leyline,nolifegain,nolifegainopponent,nopreventionall
 text=If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield. -- Players can't gain life. -- Damage can't be prevented.
 mana={2}{R}{R}
 type=Enchantment
@@ -69442,7 +69440,7 @@ type=Sorcery
 [/card]
 [card]
 name=Malignus
-missing=Damage can't be prevented
+abilities=noprevention
 anyzone=halfupopponentlifetotal/halfupopponentlifetotal cdaactive
 text=Malignus's power and toughness are each equal to half the highest life total among your opponents, rounded up. -- Damage that would be dealt by Malignus can't be prevented.
 mana={3}{R}{R}
@@ -84140,7 +84138,7 @@ toughness=2
 [/card]
 [card]
 name=Pinpoint Avalanche
-missing=damage can't be prevented
+abilities=noprevention
 target=creature
 auto=damage:4
 text=Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
@@ -87952,10 +87950,9 @@ type=Enchantment
 [/card]
 [card]
 name=Questing Beast
-abilities=vigilance,deathtouch,haste
+abilities=vigilance,deathtouch,haste,noprevention
 auto=cantbeblockedby(creature[power<=2])
 auto=@combatdamagefoeof(player) from(this):damage:thatmuch target(planeswalker|opponentbattlefield)
-missing=damage can't be prevented
 text=Vigilance, deathtouch, haste -- Questing Beast can't be blocked by creatures with power 2 or less. -- Combat damage that would be dealt by creatures you control can't be prevented. -- Whenever Questing Beast deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
 mana={2}{G}{G}
 type=Legendary Creature
@@ -103900,7 +103897,8 @@ toughness=1
 [/card]
 [card]
 name=Skullcrack
-missing=Damage can't be prevented
+abilities=noprevention
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
 target=player
 auto=transforms((,newability[nolifegain],newability[nolifegainopponent])) ueot
 auto=damage:3
@@ -122807,7 +122805,7 @@ toughness=3
 [/card]
 [card]
 name=Unstable Footing
-missing=Damage can't be prevented is not supported ATM
+abilities=noprevention
 kicker={3}{R}
 auto=if paid(kicker) then damage:5 target(player)
 text=Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.) -- Damage can't be prevented this turn. If Unstable Footing was kicked, it deals 5 damage to target player.
@@ -123208,9 +123206,8 @@ type=Artifact
 [/card]
 [card]
 name=Urza's Rage
-missing=damage can't be prevented not supported ATM
 target=anytarget
-abilities=nofizzle
+abilities=nofizzle,noprevention
 kicker={8}{R}
 auto=damage:3
 auto=if paid(kicker) then damage:7
@@ -128913,7 +128910,8 @@ type=Instant
 [/card]
 [card]
 name=Wild Slash
-missing=Damage can't be prevented is not supported ATM
+abilities=noprevention
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
 target=anytarget
 auto=damage:2
 text=Ferocious - If you control a creature with power 4 or greater, damage can't be prevented this turn. -- Wild Slash deals 2 damage to target creature or player.
@@ -137943,13 +137941,11 @@ subtype=Saga
 [/card]
 [card]
 name=Isengard Unleashed
+abilities=noprevention
 grade=borderline
 flashback={4}{R}{R}{R}
 auto=emblem transforms((,newability[@damaged(player) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch],newability[@damaged(creature) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch])) ueot
-missing="damage can't be prevented this turn" - prevention is applied inside
-#Damage::resolve as REDamagePrevention replacement effects plus the target's preventable
-#counter, and no keyword switches either off. The TRIPLE damage half is implemented, using
-#the Fiery Emancipation shape (an extra twicethatmuch on top of the original hit).
+missing=the "damage can't be prevented THIS TURN" half, which applies to every source, not just this spell; this card's own damage is now unpreventable via the noprevention keyword
 text=Damage can't be prevented this turn. (Not implemented.) If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
 mana={2}{R}{R}{R}
 type=Sorcery

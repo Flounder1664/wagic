@@ -368,7 +368,9 @@ class Constants
       ASCEND = 239,
       STORIED = 240,
       MISSING = 241,
-      NB_BASIC_ABILITIES = 242,
+      NOPREVENTION = 242,
+      NOPREVENTIONALL = 243,
+      NB_BASIC_ABILITIES = 244,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

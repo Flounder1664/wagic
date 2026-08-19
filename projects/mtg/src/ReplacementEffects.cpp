@@ -19,6 +19,24 @@ WEvent * REDamagePrevention::replace(WEvent *event)
     if (!e) return event;
     Damage *d = e->damage;
     if (d->typeOfDamage != typeOfDamage && typeOfDamage != Damage::DAMAGE_ALL_TYPES) return event;
+    //"Damage can't be prevented": leave the event untouched so no other replacement,
+    //including this one, can zero it. Two scopes - the damage this source deals
+    //(noprevention, e.g. Malignus), and a permanent that switches prevention off for
+    //everyone while it is in play (nopreventionall, e.g. Leyline of Punishment).
+    if (d->source)
+    {
+        if (d->source->has(Constants::NOPREVENTION)) return event;
+        GameObserver * g = d->source->getObserver();
+        if (g)
+        {
+            for (int i = 0; i < 2; ++i)
+            {
+                MTGGameZone * z = g->players[i]->game->battlefield;
+                for (int j = 0; j < z->nb_cards; ++j)
+                    if (z->cards[j]->has(Constants::NOPREVENTIONALL)) return event;
+            }
+        }
+    }
     if ((!tcSource || tcSource->canTarget(d->source)) && (!tcTarget || tcTarget->canTarget(d->target)))
     {
         if (damage == -1)
