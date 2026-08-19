@@ -1,0 +1,29 @@
+#Can bargain eat a TOKEN? Real rule: "sacrifice an artifact, enchantment, or token".
+#No artifacts or enchantments anywhere - Dragon Fodder makes two 1/1 Goblin TOKENS, and
+#the only way Torch the Tower can be bargained is by sacrificing one of them.
+#If it is, the Hill Giant takes 3 and dies. If not, it takes 2 and lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dragon Fodder,Torch the Tower
+manapool:{R}{R}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Dragon Fodder
+Torch the Tower
+choice 1
+Goblin
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Goblin
+graveyard:Dragon Fodder,Torch the Tower
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

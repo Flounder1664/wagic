@@ -110,9 +110,43 @@ architectural, and the notes on them are already accurate — they should stay a
 | 0 — Map / Mutagen | **done.** Both are real registered tokens now (`-637012` in LCI, `-910900` in TMT) and the seven cards create them by name. Mutagen is exact; Map is the +1/+1 half, because `explore` appears **zero** times in the engine. |
 | 0.5 — the 15 guesses | **done, and worse than expected.** Twelve keywords they used exist nowhere in the engine and nowhere in upstream: `addmulti`, `controlledlands`, `copysourcept`, `countbattlefieldcreature`, `gifted`, `lifelostamount`, `manaspentx`, `mytgt2`, `sevenormorecards`, `sourcept`, `spendonly`, `targetpower`. Thirteen lines across ten cards were dead and are removed. |
 | 1 — damage can't be prevented | **done.** Two new basic abilities, `noprevention` and `nopreventionall`, and one early-out in `REDamagePrevention::replace`. 17 cards. Six keep a narrowed note for the turn-wide half. |
-| 2 — bargain | not attempted. On inspection these cards already work; bargain just cannot take a creature token as fodder, so the payoff is smaller than the card count suggests. |
+| 2 — bargain | **measured, needs an engine fix.** Not a data edit: every DSL spelling either leaves tokens out or breaks bargain entirely. See below. |
 | 3 — read ahead | **blocked, and measured.** A modal `choice` ETB on a permanent adds nothing, and `counter(0/0,N,Lore)` adds the counters but fires no chapter, because chapter triggers are `@counteradded(0/0,1,Lore)`. All ten notes now carry that. |
 | 4 — Avatar Saga backs | **done.** All six back faces already had art in TLA.zip, so the crash that caused the disable was gone. The five Legend Sagas transform on chapter III again, and Aang, at the Crossroads transforms when another creature leaves. Verified in the harness. |
+
+### Bargain: why it cannot be fixed in the cards
+
+Bargain should take an artifact, an enchantment **or a token**. The cards declare
+`other={..}{S(artifact,enchantment|myBattlefield)}` with
+`otherrestriction=type(*[artifact;enchantment]|mybattlefield)~morethan~0`, and because the
+restriction gates the cast menu as well, a board of only tokens is not offered Bargain at
+all - the option is invisible, not merely unusable.
+
+Every spelling was tried against two harness tests, one that sacrifices an artifact
+(pre-existing) and one that can only sacrifice a Goblin token (added as
+`generic/bargain_token_fodder.txt`, deliberately NOT in `_tests.txt` since it documents a
+gap rather than a regression):
+
+| `S(...)` fodder | artifact path | token path |
+|---|---|---|
+| `artifact,enchantment` (today) | works | fails |
+| `*[artifact;enchantment]` | works | fails |
+| `artifact,enchantment,token` | works | fails - clause is inert |
+| `*[artifact;enchantment;token]` | **breaks** | fails |
+| `artifact,enchantment,creature[token]` | **breaks** | fails |
+| `artifact,enchantment,*[token]` | **breaks** | fails |
+
+So the note those 16 cards carried was close but wrong: it is not the *third clause* that
+breaks the chooser - three bare clauses are fine - it is any **bracketed** clause in an
+extra-cost `S()`. And `token` exists only as a bracketed attribute (`cd->isToken`,
+`TargetChooser.cpp:797`), so there is no spelling that reaches it.
+
+The restriction half is safe on its own: `type(*[artifact;enchantment;token]|...)` passes
+both tests. Changing only that would open the menu on a cost that still cannot be paid,
+which is worse than today, so the cards are left alone.
+
+Fixing this means making a bracketed CardDescriptor work in the extra-cost path, which is
+engine work in `ManaCost.cpp`/`ExtraCost.cpp`, not card authoring.
 
 ### The reveal audit had a hole
 
