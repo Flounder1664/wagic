@@ -141,9 +141,21 @@ breaks the chooser - three bare clauses are fine - it is any **bracketed** claus
 extra-cost `S()`. And `token` exists only as a bracketed attribute (`cd->isToken`,
 `TargetChooser.cpp:797`), so there is no spelling that reaches it.
 
-The restriction half is safe on its own: `type(*[artifact;enchantment;token]|...)` passes
-both tests. Changing only that would open the menu on a cost that still cannot be paid,
-which is worse than today, so the cards are left alone.
+The restriction half parses fine on its own, but opening it changes nothing, because the
+cost still cannot be paid - so the cards are left alone.
+
+**A creature token cannot be sacrificed to an extra cost at all.** Every spelling was
+re-measured with the token test genuinely in `_tests.txt`, including `S(*[token])` alone
+with the restriction opened to match, and a second entry hung off the free kicker slot.
+All fail. A control that attempts NO bargain passes on the same board (two Goblins live,
+the Hill Giant survives on 2 damage), so the harness sequence is sound and the failures
+are real.
+
+**Methodology warning, learned the hard way.** `WAGIC_TESTSUITE_ONLY` filters the list
+collected from `_tests.txt`. If the test is not listed, nothing runs and a
+`grep -c "Test Failed"` returns 0 - indistinguishable from a pass. A whole round of
+"this fixes it" readings was void for exactly that reason. Always confirm
+`TestSuite done: failed test: N out of 1 total` before believing a targeted run.
 
 Fixing this means making a bracketed CardDescriptor work in the extra-cost path, which is
 engine work in `ManaCost.cpp`/`ExtraCost.cpp`, not card authoring.

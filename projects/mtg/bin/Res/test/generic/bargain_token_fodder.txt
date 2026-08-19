@@ -2,6 +2,8 @@
 #No artifacts or enchantments anywhere - Dragon Fodder makes two 1/1 Goblin TOKENS, and
 #the only way Torch the Tower can be bargained is by sacrificing one of them.
 #If it is, the Hill Giant takes 3 and dies. If not, it takes 2 and lives.
+#The token entry lives in the KICKER slot - a card holds only one "alternative" cost,
+#so the second Bargain option has to be carried somewhere else.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
