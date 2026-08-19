@@ -1,0 +1,28 @@
+#Marshal's Anthem: Multikicker {1}{W}. "return up to X target creature cards from your
+#graveyard to the battlefield, where X is the number of times this was kicked."
+#Mirrors Apex_Hawks_MULTIKICKER.txt, which proves multikicker itself works.
+#{2}{W}{W} base + two kicks at {1}{W} = 8 mana, so BOTH creatures should come back.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Marshal's Anthem
+graveyard:Grizzly Bears,Hill Giant
+manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Marshal's Anthem
+choice 1
+next
+Grizzly Bears
+Hill Giant
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Marshal's Anthem,Grizzly Bears,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[END]
