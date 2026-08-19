@@ -1,0 +1,49 @@
+#SCENARIO, not a test: hands control to you and asserts nothing.
+#
+#QUESTION: is multikicker broken for Marshal's Anthem specifically, or is the payment UI
+#only ever offering ONE kick?
+#
+#What the automated harness already established:
+#  * Multikicker works engine-wide. Apex_Hawks_MULTIKICKER.txt passes in the suite.
+#  * Marshal's Anthem declares it the same way (kicker=multi{1}{W}) and <upto:kicked> is
+#    a real symbol resolving to card->kicked.
+#  * Cast with 8 mana and two creatures in the graveyard, the enchantment resolves and
+#    BOTH creatures stay in the graveyard. Not clause order - reordering changed nothing.
+#
+#TEST THIS ORDER, both cards are in hand and you have plenty of white mana:
+#
+#  1. APEX HAWKS - the CONTROL, known good. {2}{W}, multikicker {1}{W}.
+#     Note how many times the game offers to kick, and what the prompt looks like.
+#     Expect: kicked twice -> a 3/3 flier (1/1 plus two +1/+1 counters).
+#
+#  2. MARSHAL'S ANTHEM - the suspect. {2}{W}{W}, multikicker {1}{W}.
+#     Kick it TWICE. Expect by the real card: Grizzly Bears AND Hill Giant both return
+#     from the graveyard to the battlefield.
+#
+#     Watch for these three things, they are what the harness cannot see:
+#       a. Does it offer to kick more than once? (If not, it is the payment UI.)
+#       b. After it resolves, does a TARGET prompt appear for the graveyard creatures?
+#          (If no prompt appears, <upto:kicked> is resolving to 0.)
+#       c. If a prompt appears, how many creatures does it let you pick?
+#
+#Twelve Plains as well as the mana pool, so you cannot run out mid-experiment.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Marshal's Anthem,Apex Hawks
+graveyard:Grizzly Bears,Hill Giant
+inplay:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
+manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+human
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:20
+[PLAYER2]
+life:20
+[END]
