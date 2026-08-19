@@ -1,44 +1,36 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #
-#IMPORTANT - the manapool: line does NOT survive into the handover (John confirmed the
-#pool was empty in the last run), so the SIX PLAINS below are your only mana. That is
-#deliberate and the whole point of this board.
+#ROUND 2 - both cards behaved correctly on six Plains (Apex Hawks 3/3, one creature back),
+#which settles it: Marshal's Anthem was never broken, and the greedy multikicker payment
+#was the whole story. This board proves the count SCALES, by forcing exactly TWO kicks.
 #
-#WHY SIX. Multikicker is greedy (MTGRules.cpp:544): the engine discards your answer and
-#kicks as many times as the mana POOL can afford, then pays for all of them. Last run had
-#twelve Plains, so it bought five kicks. Six Plains makes greedy and correct agree:
+#The manapool: line does NOT survive into the handover, so the EIGHT PLAINS are your only
+#mana. Multikicker is greedy (MTGRules.cpp:544) - it kicks as many times as the pool can
+#afford - so eight is chosen to make greedy land on exactly two for both cards:
 #
-#   APEX HAWKS      {2}{W} + kick {1}{W} = 5. A SECOND kick would need 7. Six is not 7.
-#   MARSHAL'S ANTHEM {2}{W}{W} + kick {1}{W} = 6. A SECOND kick would need 8.
+#   APEX HAWKS       {2}{W}   + 2 kicks = 7.  A THIRD kick needs 9. Eight is not 9.
+#   MARSHAL'S ANTHEM {2}{W}{W} + 2 kicks = 8.  A THIRD kick needs 10.
 #
-#So both cards can be kicked exactly ONCE, no matter how greedy the engine is.
+#HOW TO RUN:
+#   1. TAP ALL EIGHT PLAINS FIRST so the pool holds eight - auto-tap may only cover base.
+#   2. Cast the card and accept the kicker.
+#   3. Eight mana funds ONE card. Relaunch before trying the other.
 #
-#HOW TO RUN - this matters, because auto-tapping may only cover the base cost:
-#   1. TAP ALL SIX PLAINS FIRST, so the pool holds six.
-#   2. Then cast the card and accept the kicker.
-#   3. Six mana funds ONE card only. Relaunch before trying the other.
+#  A. APEX HAWKS (printed 2/2)
+#     EXPECT: 4/4 - the 2/2 body with exactly TWO +1/+1 counters.
 #
-#  A. APEX HAWKS - the control. Printed body is 2/2 (NOT 1/1 - I got this wrong once).
-#     EXPECT: 3/3, i.e. the 2/2 with exactly ONE +1/+1 counter.
-#     More than one counter here means the greed is worse than the code reads.
+#  B. MARSHAL'S ANTHEM
+#     EXPECT: BOTH Grizzly Bears AND Hill Giant return from the graveyard.
+#     The target prompt should let you pick two this time, not one.
 #
-#  B. MARSHAL'S ANTHEM - the suspect. Two creatures wait in the graveyard.
-#     The harness confirms the kicker IS paid (kicked=2 when given the mana), so the
-#     count is not the problem. What the harness CANNOT show is whether you get a target
-#     prompt, because its AI declines optional <upto:> targets automatically.
-#     EXPECT by the real card: exactly ONE creature returns to the battlefield.
-#
-#     THE QUESTION: after it resolves, does a target prompt appear at all?
-#       * prompt appears, you pick one, it returns -> the card is FINE and greedy
-#         payment was the whole story
-#       * no prompt at all                        -> <upto:kicked> resolves to 0
-#       * prompt appears but nothing moves        -> the moveto is at fault
+#If either lands on two, kicked is scaling correctly and the ONLY thing left to fix is
+#that the engine never asks how many times you want to kick.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Apex Hawks,Marshal's Anthem
 graveyard:Grizzly Bears,Hill Giant
-inplay:Plains,Plains,Plains,Plains,Plains,Plains
+inplay:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
 life:20
 [PLAYER2]
 life:20
