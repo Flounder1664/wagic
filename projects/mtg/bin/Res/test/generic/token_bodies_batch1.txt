@@ -1,0 +1,23 @@
+#Verifies the token bodies authored 2026-08-19 actually PARSE. An unparsed ability is
+#silent, so a passing suite proves nothing without an assertion on the effect itself.
+#  Ultramarines Honour Guard  lord(other creature|mybattlefield) 1/1  -> Bears 3/3, self 2/2
+#  The Capitoline Triad Emblem  lord + transforms setpower/settoughness -> Hill Giant 9/9
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ultramarines Honour Guard,Grizzly Bears
+life:20
+[PLAYER2]
+inplay:The Capitoline Triad Emblem,Hill Giant
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ultramarines Honour Guard,Grizzly Bears
+pt:Grizzly Bears=3/3
+pt:Ultramarines Honour Guard=2/2
+[PLAYER2]
+inplay:The Capitoline Triad Emblem,Hill Giant
+pt:Hill Giant=9/9
+[END]

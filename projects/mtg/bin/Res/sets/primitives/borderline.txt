@@ -142224,8 +142224,8 @@ color=white
 [/card]
 [card]
 name=Eldrazi Spawn
+auto={S}:add{C}
 grade=borderline
-missing=Sacrifice this creature: Add {C}.
 text=Sacrifice this creature: Add {C}.
 type=Creature
 subtype=Eldrazi Spawn
@@ -142301,8 +142301,9 @@ color=black
 [/card]
 [card]
 name=Zombie
+auto=cantblock
+auto=_ATTACKING_phaseaction[combatends,sourceinplay] sacrifice
 grade=borderline
-missing=Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)
 text=Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)
 type=Creature
 subtype=Zombie
@@ -142362,8 +142363,8 @@ toughness=1
 [/card]
 [card]
 name=Pest
+auto=_DIES_life:1 controller
 grade=borderline
-missing=When this creature dies, you gain 1 life.
 text=When this creature dies, you gain 1 life.
 type=Creature
 subtype=Pest
@@ -142427,9 +142428,9 @@ color=blue
 [/card]
 [card]
 name=Redwing
+auto=@combat(attacking) source(this):_SURVEIL1_
 grade=borderline
 abilities=flying
-missing=Whenever Redwing attacks, surveil 1.
 text=Flying -- Whenever Redwing attacks, surveil 1.
 type=Legendary Creature
 subtype=Bird Scout
@@ -142439,9 +142440,9 @@ color=blue
 [/card]
 [card]
 name=Galactus
+auto=_ATTACKING_target(land) destroy
 grade=borderline
 abilities=flying,trample
-missing=Whenever Galactus attacks, destroy target land.
 text=Flying, trample -- Whenever Galactus attacks, destroy target land.
 type=Legendary Creature
 subtype=Elder Alien
@@ -142462,9 +142463,9 @@ color=black
 [/card]
 [card]
 name=The Void
+auto=mustattack
 grade=borderline
 abilities=flying,indestructible
-missing=The Void attacks each combat if able.
 text=Flying, indestructible -- The Void attacks each combat if able.
 type=Legendary Creature
 subtype=Horror Villain
@@ -142483,8 +142484,8 @@ color=green
 [/card]
 [card]
 name=Moloid
+auto=@combat(attacking) source(this):may mill:1 controller
 grade=borderline
-missing=Whenever this token attacks, you may mill a card.
 text=Whenever this token attacks, you may mill a card.
 type=Creature
 subtype=Minion
@@ -142505,8 +142506,8 @@ color=green
 [/card]
 [card]
 name=Zabu
+auto=@movedTo(land|myBattlefield):counter(1/1)
 grade=borderline
-missing=Landfall — Whenever a land you control enters, put a +1/+1 counter on Zabu.
 text=Landfall — Whenever a land you control enters, put a +1/+1 counter on Zabu.
 type=Legendary Creature
 subtype=Cat
@@ -142532,8 +142533,9 @@ toughness=2
 [/card]
 [card]
 name=Sturdy Shield
+auto={2}:equip
+auto=teach(creature) 1/2
 grade=borderline
-missing=Equipped creature gets +1/+2. Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 text=Equipped creature gets +1/+2. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 type=Artifact
 subtype=Equipment
@@ -142587,8 +142589,8 @@ color=red
 [/card]
 [card]
 name=The Capitoline Triad Emblem
+auto=lord(creature|mybattlefield) transforms((,setpower=9,settoughness=9))
 grade=borderline
-missing=Creatures you control have base power and toughness 9/9.
 text=Creatures you control have base power and toughness 9/9.
 type=Emblem
 [/card]
@@ -142696,8 +142698,8 @@ color=white
 [/card]
 [card]
 name=Space Marine Devastator
+auto=target(<upto:1>*[artifact;enchantment]) destroy
 grade=borderline
-missing=When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.
 text=When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.
 type=Creature
 subtype=Astartes Warrior
@@ -142707,8 +142709,8 @@ color=white
 [/card]
 [card]
 name=Ultramarines Honour Guard
+auto=lord(other creature|mybattlefield) 1/1
 grade=borderline
-missing=Other creatures you control get +1/+1.
 text=Other creatures you control get +1/+1.
 type=Creature
 subtype=Astartes Warrior
@@ -142729,8 +142731,8 @@ color=white
 [/card]
 [card]
 name=Sicarian Infiltrator
+auto=draw:1
 grade=borderline
-missing=When Sicarian Infiltrator enters the battlefield, draw a card.
 text=When Sicarian Infiltrator enters the battlefield, draw a card.
 type=Artifact Creature
 subtype=Human Soldier
@@ -142751,9 +142753,9 @@ color=blue
 [/card]
 [card]
 name=Vanguard Suppressor
+auto=@combatdamaged(player) from(this):draw:1
 grade=borderline
 abilities=flying
-missing=Whenever Vanguard Suppressor deals combat damage to a player, draw a card.
 text=Flying -- Whenever Vanguard Suppressor deals combat damage to a player, draw a card.
 type=Creature
 subtype=Astartes Warrior
@@ -142763,8 +142765,9 @@ color=blue
 [/card]
 [card]
 name=Arco-Flagellant
+auto=cantblock
 grade=borderline
-missing=Arco-Flagellant can't block. Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
+missing=the "Pay 3 life: gains indestructible" ability - life as an activation cost has no attested DSL form
 text=Arco-Flagellant can't block. -- Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
 type=Creature
 subtype=Human
@@ -142851,8 +142854,8 @@ color=white
 [/card]
 [card]
 name=Horse
+auto=lord(creature[doctor]|mybattlefield) horsemanship
 grade=borderline
-missing=Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
 text=Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
 type=Creature
 subtype=Horse
@@ -142873,8 +142876,9 @@ color=white
 [/card]
 [card]
 name=Human Noble
+auto=preventalldamage to(this)
 grade=borderline
-missing=Vanishing 3 Prevent all damage that would be dealt to this creature.
+missing=Vanishing 3 (no vanishing keyword in this engine); the damage prevention is implemented
 text=Vanishing 3 -- Prevent all damage that would be dealt to this creature.
 type=Creature
 subtype=Human Noble
@@ -142925,8 +142929,9 @@ color=red
 [/card]
 [card]
 name=Mark of the Rani
+auto=teach(creature) 2/2
 grade=borderline
-missing=Enchant creature Enchanted creature gets +2/+2 and is goaded.
+missing=the goaded rider; the +2/+2 is implemented
 text=Enchant creature -- Enchanted creature gets +2/+2 and is goaded.
 type=Enchantment
 subtype=Aura
@@ -142934,8 +142939,8 @@ color=red
 [/card]
 [card]
 name=Alien Salamander
+auto=islandwalk
 grade=borderline
-missing=Islandwalk
 text=Islandwalk
 type=Creature
 subtype=Alien Salamander
@@ -143077,16 +143082,18 @@ color=red
 [/card]
 [card]
 name=Ob Nixilis Reignited Emblem
+auto=@drawn(controller):life:-2 controller
+auto=@drawn(opponent):life:-2 controller
 grade=borderline
-missing=Whenever a player draws a card, you lose 2 life.
 text=Whenever a player draws a card, you lose 2 life.
 type=Emblem
 subtype=Nixilis
 [/card]
 [card]
 name=Sarkhan, the Dragonspeaker Emblem
+auto=@each my draw:draw:2
 grade=borderline
-missing=At the beginning of your draw step, draw two additional cards. At the beginning of your end step, discard your hand.
+missing=the end-step "discard your hand" half; the extra draws are implemented
 text=At the beginning of your draw step, draw two additional cards. -- At the beginning of your end step, discard your hand.
 type=Emblem
 subtype=Sarkhan
@@ -143102,8 +143109,8 @@ color=green
 [/card]
 [card]
 name=Forest Dryad
+auto={T}:add{G}
 grade=borderline
-missing=(This creature is affected by summoning sickness, and it has "{T}: Add {G}.")
 text=(This creature is affected by summoning sickness, and it has "{T}: Add {G}.")
 type=Land Creature
 subtype=Forest Dryad
