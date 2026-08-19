@@ -136914,8 +136914,7 @@ auto=token(Ornithopter,Artifact Creature Thopter,0/2,,flying)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) lord(artifact|mybattlefield) 1/1
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Also chapter II should let you TAP artifacts as part of the trigger;
-#this reads the artifacts you have already tapped instead.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Also chapter II should let you TAP artifacts as part of the trigger;
 text=Read ahead (Not implemented - this Saga always starts at chapter I.) -- I - Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter. -- II - Tap any number of untapped artifacts you control. When you do, this Saga deals that much damage to any target. -- III - Artifact creatures you control get +1/+1.
 mana={1}{R}
 type=Enchantment
@@ -136931,8 +136930,7 @@ auto=damage:2 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Chapter II is "discard any number, draw that many"; the engine has no
-#variable count, so it offers up to two.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter II is "discard any number, draw that many"; the engine has no
 text=Read ahead (Not implemented.) -- I - This Saga deals 2 damage to each creature and each opponent. -- II - Discard any number of cards, then draw that many cards. (Approximated as up to two.) -- III - Create a 4/4 red Dragon creature token with flying.
 mana={2}{R}{R}
 type=Enchantment
@@ -136947,9 +136945,7 @@ auto=target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newa
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,type:land[basic]:mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Chapter III now scales with a dynamic counter amount, though it counts
-#BASIC LANDS rather than distinct basic land TYPES - closer than the old flat five, but
-#still not domain proper.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter III now scales with a dynamic counter amount, though it counts
 text=Read ahead (Not implemented.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
 mana={2}{G}
 type=Enchantment
@@ -136964,7 +136960,7 @@ auto=draw:2 controller && draw:2 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work.
 text=Read ahead (Not implemented.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
 mana={2}{W}
 type=Enchantment
@@ -136979,8 +136975,7 @@ auto=may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Chapter III's "may sacrifice a creature, otherwise lose life" choice
-#is reduced to the sacrifice.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter III's "may sacrifice a creature, otherwise lose life" choice
 text=Read ahead (Not implemented.) -- I - You may sacrifice a creature. If you do, each opponent discards a card. -- II - Return target creature card from your graveyard to your hand. -- III - Target opponent sacrifices a creature.
 mana={2}{B}
 type=Enchantment
@@ -136991,8 +136986,7 @@ name=Founding the Third Path
 grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-missing=chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for -- read ahead.
-#free"; there is no route to put a card from hand onto the stack and zero its cost.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for --
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) mill:4 target
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
@@ -137010,8 +137004,7 @@ auto=target(*[-land]) phaseout
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) destroy all(creature)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead, "can't phase in while you control this Saga", and chapter III's
-#card-draw-per-creature-destroyed rider.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, "can't phase in while you control this Saga", and chapter III's
 text=Read ahead (Not implemented.) -- I, II - Another target nonland permanent phases out. -- III - Destroy all creatures.
 mana={2}{U}{U}
 type=Enchantment
@@ -137026,7 +137019,7 @@ auto=ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ 
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|graveyard) moveTo(mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead, and mode one should let YOU choose the discarded card.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, and mode one should let YOU choose the discarded card.
 text=Read ahead (Not implemented.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
 mana={3}{B}{B}
 type=Enchantment
@@ -137038,8 +137031,7 @@ grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=_SCRY4_
-missing=chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are -- read ahead, and the chapter I reveal-a-planeswalker rider.
-#not supported by the engine at all (wagic#6).
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are -- read ahead, and the chapter I reveal-a-planeswalker rider.
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=Read ahead (Not implemented.) -- I - Scry 4. -- II - You may put a planeswalker card from your hand onto the battlefield. -- III - Creatures you control get +2/+2 until end of turn.
@@ -137056,7 +137048,7 @@ auto=name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sor
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Put a permanent into play) target(*[-instant;-sorcery]|myhand) moveTo(mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead, and the "non-Saga" restriction on what you may take.
+missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, and the "non-Saga" restriction on what you may take.
 text=Read ahead (Not implemented.) -- I, II - Look at the top seven cards of your library. You may reveal a non-Saga permanent card from among them and put it into your hand. -- III - Put any number of permanent cards from your hand onto the battlefield. (One card.)
 mana={5}{G}{G}
 type=Enchantment
