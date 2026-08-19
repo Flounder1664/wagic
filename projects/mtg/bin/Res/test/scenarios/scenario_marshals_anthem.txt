@@ -1,34 +1,44 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #
-#Multikicker is GREEDY (MTGRules.cpp:544): it throws away your answer and kicks as many
-#times as your mana pool can afford. That is why Apex Hawks took five counters last run -
-#the pool had eight mana in it. So this board gives EXACTLY enough for one kick and has
-#NO LANDS, so nothing extra can be tapped and greedy == what you intended.
+#IMPORTANT - the manapool: line does NOT survive into the handover (John confirmed the
+#pool was empty in the last run), so the SIX PLAINS below are your only mana. That is
+#deliberate and the whole point of this board.
 #
-#  APEX HAWKS ({2}{W}, multikicker {1}{W}) - the control, known good.
-#     Six white. Base 3 + one kick 2 = 5; a second kick would need 7, so it cannot.
-#     EXPECT: a 2/2 flier - the 1/1 body with exactly ONE +1/+1 counter.
-#     If it takes more than one counter, the greedy loop is worse than understood.
+#WHY SIX. Multikicker is greedy (MTGRules.cpp:544): the engine discards your answer and
+#kicks as many times as the mana POOL can afford, then pays for all of them. Last run had
+#twelve Plains, so it bought five kicks. Six Plains makes greedy and correct agree:
 #
-#  MARSHAL'S ANTHEM ({2}{W}{W}, multikicker {1}{W}) - the suspect.
-#     Six white. Base 4 + one kick 2 = 6; a second kick would need 8, so it cannot.
-#     Two creatures in the graveyard.
-#     EXPECT by the real card: exactly ONE of them returns to the battlefield.
+#   APEX HAWKS      {2}{W} + kick {1}{W} = 5. A SECOND kick would need 7. Six is not 7.
+#   MARSHAL'S ANTHEM {2}{W}{W} + kick {1}{W} = 6. A SECOND kick would need 8.
 #
-#     This is the decisive one. kicked can now only be 1, so:
-#       * one creature returns  -> multikicker was never the problem, the greedy payment
-#                                  was, and Marshal's Anthem is fine
-#       * NO target prompt      -> <upto:kicked> is resolving to 0
-#       * prompt but nothing moves -> the moveto is at fault, not the count
+#So both cards can be kicked exactly ONCE, no matter how greedy the engine is.
 #
-#Six mana forces exactly ONE kick on EITHER card. The pool only funds one of them, so
-#cast Apex Hawks, note the result, then RELAUNCH and cast Marshal's Anthem on a fresh pool.
+#HOW TO RUN - this matters, because auto-tapping may only cover the base cost:
+#   1. TAP ALL SIX PLAINS FIRST, so the pool holds six.
+#   2. Then cast the card and accept the kicker.
+#   3. Six mana funds ONE card only. Relaunch before trying the other.
+#
+#  A. APEX HAWKS - the control. Printed body is 2/2 (NOT 1/1 - I got this wrong once).
+#     EXPECT: 3/3, i.e. the 2/2 with exactly ONE +1/+1 counter.
+#     More than one counter here means the greed is worse than the code reads.
+#
+#  B. MARSHAL'S ANTHEM - the suspect. Two creatures wait in the graveyard.
+#     The harness confirms the kicker IS paid (kicked=2 when given the mana), so the
+#     count is not the problem. What the harness CANNOT show is whether you get a target
+#     prompt, because its AI declines optional <upto:> targets automatically.
+#     EXPECT by the real card: exactly ONE creature returns to the battlefield.
+#
+#     THE QUESTION: after it resolves, does a target prompt appear at all?
+#       * prompt appears, you pick one, it returns -> the card is FINE and greedy
+#         payment was the whole story
+#       * no prompt at all                        -> <upto:kicked> resolves to 0
+#       * prompt appears but nothing moves        -> the moveto is at fault
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Apex Hawks,Marshal's Anthem
 graveyard:Grizzly Bears,Hill Giant
-manapool:{W}{W}{W}{W}{W}{W}
+inplay:Plains,Plains,Plains,Plains,Plains,Plains
 life:20
 [PLAYER2]
 life:20
