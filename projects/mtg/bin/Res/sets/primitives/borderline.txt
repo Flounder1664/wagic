@@ -143232,3 +143232,191 @@ text={1}, {T}, Sacrifice this artifact: Target creature you control explores. Ac
 type=Artifact
 subtype=Map
 [/card]
+[card]
+name=Direct Hit
+grade=borderline
+target=creature
+auto=damage:5
+text=Direct Hit deals 5 damage to target creature.
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
+name=Evasive Maneuvers
+grade=borderline
+target=creature[blocking]|mybattlefield
+auto=2/2 ueot
+auto=draw:1 controller
+text=Target blocking creature you control gets +2/+2 until end of turn. -- Draw a card.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Gin'tak Charge
+grade=borderline
+target=anytarget
+auto=damage:2
+text=Gin'tak Charge deals 2 damage to any target.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Will Riker, Assuming Command
+grade=borderline
+auto=target(other creature|myBattlefield) counter(1/1)
+text=When Will Riker enters, put a +1/+1 counter on another target creature you control.
+mana={4}{W}
+type=Legendary Creature
+subtype=Human Officer
+power=4
+toughness=5
+[/card]
+[card]
+name=Cha'DIch Investigator
+grade=borderline
+auto=create(Klingon Warrior:creature Klingon Warrior:2/1:red:haste)
+text=When this creature enters, create a 2/1 red Klingon Warrior creature token with haste.
+mana={4}{B}
+type=Creature
+subtype=Klingon Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Munitions Enthusiast
+grade=borderline
+auto=_DIES_damage:1 target(anytarget)
+text=Trample -- When this creature dies, it deals 1 damage to any target.
+mana={1}{R}
+type=Creature
+subtype=Klingon Warrior
+power=3
+toughness=2
+[/card]
+[card]
+name=Aang's Defense
+grade=borderline
+target=creature[blocking]|mybattlefield
+auto=2/2 ueot
+auto=draw:1 controller
+text=Target blocking creature you control gets +2/+2 until end of turn. -- Draw a card.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Explosive Shot
+grade=borderline
+target=creature
+auto=damage:4
+text=Explosive Shot deals 4 damage to target creature.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Kindly Customer
+grade=borderline
+auto=draw:1
+text=When this creature enters, draw a card.
+mana={1}{W}
+type=Creature
+subtype=Human Citizen
+power=1
+toughness=1
+[/card]
+[card]
+name=Koala-Sheep
+grade=borderline
+auto=life:3
+text=When this creature enters, you gain 3 life.
+mana={2}{W}
+type=Creature
+subtype=Bear Sheep
+power=3
+toughness=2
+[/card]
+[card]
+name=Toucan-Puffin
+grade=borderline
+abilities=flying
+missing=the ETB "target creature you control gets +2/+0 until end of turn". Measured 2026-09-04: auto=target(creature|mybattlefield) 2/0 ueot as an ETB does not apply the pump - to the target or to itself - even given a phase step to resolve. The flying is implemented.
+text=Flying -- When this creature enters, target creature you control gets +2/+0 until end of turn.
+mana={2}{W}
+type=Creature
+subtype=Bird
+power=2
+toughness=2
+[/card]
+[card]
+name=Zuko's Offense
+grade=borderline
+target=anytarget
+auto=damage:2
+text=Zuko's Offense deals 2 damage to any target.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Foe-liage
+grade=borderline
+auto=@movedTo(land|myBattlefield) restriction{myturnonly}:counter(1/1)
+text=Whenever a land enters during your turn, put a +1/+1 counter on this creature.
+mana={3}{G}
+type=Creature
+subtype=Plant Mutant
+power=3
+toughness=3
+[/card]
+[card]
+name=Amateur Hero
+grade=borderline
+auto=life:2
+text=When this creature enters, you gain 2 life.
+mana={2}{W}
+type=Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Donatello, Way with Machines
+grade=borderline
+abilities=flying
+auto=@movedTo(artifact|myBattlefield):counter(1/1)
+text=Flying -- Whenever an artifact you control enters, put a +1/+1 counter on Donatello.
+mana={2}{U}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=1
+toughness=2
+[/card]
+[card]
+name=Mechanized Ninja Cavalry
+grade=borderline
+auto=create(Robot:artifact creature Robot:1/1)
+text=When this creature enters, create a 1/1 colorless Robot artifact creature token.
+mana={1}{R/W}
+type=Artifact Creature
+subtype=Robot Ninja
+power=1
+toughness=1
+[/card]
+[card]
+name=Vengeful Townsfolk
+grade=borderline
+auto=@movedTo(other creature|graveyard) from(mybattlefield):counter(1/1)
+text=Whenever one or more other creatures you control die, put a +1/+1 counter on this creature.
+mana={2}{W}
+type=Creature
+subtype=Human Citizen
+power=3
+toughness=3
+[/card]
+[card]
+name=Hamato Ninpō
+grade=borderline
+target=creature[attacking;blocking]
+auto=damage:4
+text=Hamato Ninpō deals 4 damage to target attacking or blocking creature.
+mana={1}{W}
+type=Instant
+[/card]

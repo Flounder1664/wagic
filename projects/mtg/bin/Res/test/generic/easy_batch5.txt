@@ -1,0 +1,22 @@
+#Remaining distinct forms in the easy batch.
+#  Zuko's Offense       target=anytarget + damage:2   -> opponent to 18
+#  Munitions Enthusiast trample; _DIES_ damage:1      -> dies to Direct Hit, pings opponent
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Zuko's Offense
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Zuko's Offense
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Zuko's Offense
+life:20
+[PLAYER2]
+life:18
+[END]

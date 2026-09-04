@@ -1,0 +1,22 @@
+#Direct Hit: 5 damage to target creature. Hill Giant is 3/3 and must die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Direct Hit
+manapool:{2}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Direct Hit
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Direct Hit
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

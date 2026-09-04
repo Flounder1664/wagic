@@ -1,0 +1,24 @@
+#More of the easy batch, asserted by effect. Names must stay comma-free - the zone parser
+#splits on commas, so "Will Riker, Assuming Command" cannot be placed by name and is
+#verified by inspection of its auto= line instead.
+#  Mechanized Ninja Cavalry  ETB -> a 1/1 Robot token appears alongside it
+#  Toucan-Puffin             ETB -> target creature you control gets +2/+0 ueot
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Mechanized Ninja Cavalry
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mechanized Ninja Cavalry
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Mechanized Ninja Cavalry,Robot
+life:20
+[PLAYER2]
+life:20
+[END]

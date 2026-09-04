@@ -1,0 +1,26 @@
+#First verified batch from worklist.tsv bucket=easy (2026-09-04). A passing suite proves
+#nothing for new cards - an unparsed ability is silent - so each effect is asserted.
+#  Kindly Customer  ETB draw a card  |  Amateur Hero  ETB gain 2  |  Koala-Sheep  ETB gain 3
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kindly Customer,Amateur Hero,Koala-Sheep
+library:Mountain,Mountain,Mountain,Mountain
+manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Kindly Customer
+Amateur Hero
+Koala-Sheep
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kindly Customer,Amateur Hero,Koala-Sheep
+hand:*
+library:*,*,*
+life:25
+[PLAYER2]
+life:20
+[END]
