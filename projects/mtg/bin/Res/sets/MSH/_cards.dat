@@ -1,14 +1,199 @@
 [meta]
 author=Wagic Team
-name=Marvel Super Heroes
-year=2026-06-26
-total=58
+name=MSH
+year=
+total=295
 orderindex=UBZ-ZZZ.MSH
 autounlock=true
 [/meta]
 [card]
+primitive=Agent 13, Sharon Carter
+id=712006
+rarity=U
+[/card]
+[card]
+primitive=Agent Maria Hill
+id=712007
+rarity=U
+[/card]
+[card]
+primitive=Agent of Atlas
+id=712009
+rarity=C
+[/card]
+[card]
+primitive=Agent Phil Coulson
+id=712008
+rarity=R
+[/card]
+[card]
+primitive=Agents of S.H.I.E.L.D.
+id=712011
+rarity=C
+[/card]
+[card]
+primitive=Avengers Assemble!
+id=712023
+rarity=M
+[/card]
+[card]
+primitive=Borough Backup
+id=712038
+rarity=C
+[/card]
+[card]
+primitive=Brave Brawler
+id=712039
+rarity=C
+[/card]
+[card]
+primitive=Captain America, Super-Soldier
+id=712045
+rarity=M
+[/card]
+[card]
+primitive=Captain America, Wings of Freedom
+id=712046
+rarity=R
+[/card]
+[card]
+primitive=Captain Marvel, Earth's Protector
+id=712048
+rarity=M
+[/card]
+[card]
+primitive=Captain Mar-Vell, Space-Born
+id=712047
+rarity=U
+[/card]
+[card]
+primitive=Colleen Wing, Street Samurai
+id=712052
+rarity=U
+[/card]
+[card]
+primitive=Crowd of True Believers
+id=712057
+rarity=C
+[/card]
+[card]
+primitive=Helicarrier Strike
+id=712097
+rarity=C
+[/card]
+[card]
+primitive=Hero in Training
+id=712101
+rarity=C
+[/card]
+[card]
+primitive=Invisible Woman, Sue Storm
+id=712112
+rarity=U
+[/card]
+[card]
+primitive=Kree Commandos
+id=712132
+rarity=C
+[/card]
+[card]
+primitive=Luke Cage, Power Man
+id=712139
+rarity=U
+[/card]
+[card]
+primitive=The Mind Stone
+id=712230
+rarity=M
+[/card]
+[card]
+primitive=Mockingbird, Ace Agent
+id=712148
+rarity=U
+[/card]
+[card]
+primitive=Murdock's Crusade
+id=712156
+rarity=C
+[/card]
+[card]
+primitive=Nick Fury, Agent of S.H.I.E.L.D.
+id=712158
+rarity=R
+[/card]
+[card]
+primitive=Night Nurse, Healer of Heroes
+id=712159
+rarity=U
+[/card]
+[card]
+primitive=Okoye, Dora Milaje Leader
+id=712161
+rarity=U
+[/card]
+[card]
+primitive=Origin of the Avengers
+id=712162
+rarity=R
+[/card]
+[card]
+primitive=Panther Pounce
+id=712163
+rarity=C
+[/card]
+[card]
+primitive=Patriot, Shield Wielder
+id=712164
+rarity=U
+[/card]
+[card]
+primitive=Political Triumph
+id=712168
+rarity=U
+[/card]
+[card]
+primitive=Quake, Agent of S.H.I.E.L.D.
+id=712174
+rarity=U
+[/card]
+[card]
+primitive=Raft Security Officer
+id=712176
+rarity=C
+[/card]
+[card]
+primitive=Red Guardian, Super-Soldier
+id=712178
+rarity=U
+[/card]
+[card]
+primitive=The Sentry, Golden Guardian
+id=712233
+rarity=R
+[/card]
+[card]
+primitive=S.H.I.E.L.D. Spy Kit
+id=712192
+rarity=C
+[/card]
+[card]
+primitive=Super Villain Lockup
+id=712214
+rarity=U
+[/card]
+[card]
+primitive=Super-Soldier Serum
+id=712217
+rarity=R
+[/card]
+[card]
 primitive=Take Up the Shield
 id=712221
+rarity=C
+[/card]
+[card]
+primitive=Wakandan Drone Flock
+id=712265
 rarity=C
 [/card]
 [card]
@@ -17,13 +202,493 @@ id=712269
 rarity=C
 [/card]
 [card]
+primitive=White Widow, Free Agent
+id=712272
+rarity=U
+[/card]
+[card]
+primitive=Aerial Doombot
+id=712005
+rarity=C
+[/card]
+[card]
+primitive=A.I.M. Scientists
+id=712001
+rarity=C
+[/card]
+[card]
+primitive=Atlantean Cavalry
+id=712020
+rarity=C
+[/card]
+[card]
+primitive=Atlantis Attacks
+id=712021
+rarity=C
+[/card]
+[card]
+primitive=Attuma, Atlantean Warlord
+id=712022
+rarity=U
+[/card]
+[card]
+primitive=Bold Biochemist
+id=712037
+rarity=C
+[/card]
+[card]
+primitive=Depower
+id=712065
+rarity=C
+[/card]
+[card]
+primitive=Echo, Perceptive Prodigy
+id=712070
+rarity=U
+[/card]
+[card]
+primitive=Falcon, Winged Wonder
+id=712075
+rarity=U
+[/card]
+[card]
+primitive=Falcon's Wing Harness
+id=712074
+rarity=U
+[/card]
+[card]
+primitive=Frozen in Ice
+id=712079
+rarity=C
+[/card]
+[card]
+primitive=Futurist Forge
+id=712080
+rarity=C
+[/card]
+[card]
+primitive=Giant-Sized Flying Ant
+id=712084
+rarity=C
+[/card]
+[card]
+primitive=Hydraulic Helper
+id=712110
+rarity=C
+[/card]
+[card]
+primitive=I Am Iron Man
+id=712111
+rarity=C
+[/card]
+[card]
+primitive=Iron Lad, Diverging Destiny
+id=712114
+rarity=U
+[/card]
+[card]
+primitive=Ironheart, Clever Champion
+id=712117
+rarity=R
+[/card]
+[card]
+primitive=Justice, Vance Astrovik
+id=712121
+rarity=U
+[/card]
+[card]
+primitive=Kang the Conqueror
+id=712124
+rarity=M
+[/card]
+[card]
+primitive=Kid Loki
+id=712126
+rarity=U
+[/card]
+[card]
+primitive=Leader, Super-Genius
+id=712134
+rarity=R
+[/card]
+[card]
+primitive=Loki, God of Mischief
+id=712137
+rarity=R
+[/card]
+[card]
+primitive=Mister Fantastic, Reed Richards
+id=712144
+rarity=U
+[/card]
+[card]
+primitive=Ms. Marvel, Kamala Khan
+id=712154
+rarity=R
+[/card]
+[card]
+primitive=Multiversal Incursion
+id=712155
+rarity=M
+[/card]
+[card]
+primitive=Namor the Sub-Mariner
+id=712157
+rarity=M
+[/card]
+[card]
+primitive=Pym Particles
+id=712172
+rarity=U
+[/card]
+[card]
+primitive=Rewrite History
+id=712184
+rarity=U
+[/card]
+[card]
+primitive=Secret Invasion
+id=712195
+rarity=R
+[/card]
+[card]
+primitive=S.H.I.E.L.D. Deployment Drone
+id=712189
+rarity=C
+[/card]
+[card]
+primitive=S.H.I.E.L.D. Flying Car
+id=712190
+rarity=R
+[/card]
+[card]
+primitive=Shuri, Wakandan Inventor
+id=712199
+rarity=U
+[/card]
+[card]
+primitive=Stature, Size Shifter
+id=712206
+rarity=U
+[/card]
+[card]
+primitive=Super Intelligence
+id=712210
+rarity=U
+[/card]
+[card]
+primitive=Super Suit
+id=712213
+rarity=C
+[/card]
+[card]
 primitive=Thirst for Knowledge
 id=712241
 rarity=U
 [/card]
 [card]
+primitive=Trickster's Stratagem
+id=712251
+rarity=C
+[/card]
+[card]
+primitive=We Say Thee Nay!
+id=712268
+rarity=C
+[/card]
+[card]
+primitive=Wiccan, Rising Magician
+id=712273
+rarity=U
+[/card]
+[card]
+primitive=The Wondrous Wasp
+id=712240
+rarity=R
+[/card]
+[card]
+primitive=Agents of HYDRA
+id=712010
+rarity=C
+[/card]
+[card]
+primitive=Arnim Zola, Bio-Fanatic
+id=712018
+rarity=U
+[/card]
+[card]
+primitive=Baron Helmut Zemo
+id=712028
+rarity=R
+[/card]
+[card]
+primitive=Baron Strucker, HYDRA Overlord
+id=712029
+rarity=U
+[/card]
+[card]
+primitive=Black Widow, Super Spy
+id=712035
+rarity=M
+[/card]
+[card]
+primitive=Construct a Cosmic Cube
+id=712053
+rarity=R
+[/card]
+[card]
+primitive=Crossbones, Malicious Mercenary
+id=712056
+rarity=U
+[/card]
+[card]
+primitive=Cruel Alliance
+id=712058
+rarity=C
+[/card]
+[card]
+primitive=Dark Deed
+id=712060
+rarity=U
+[/card]
+[card]
+primitive=Decoy Ploy
+id=712063
+rarity=C
+[/card]
+[card]
+primitive=Doctor Doom
+id=712067
+rarity=M
+[/card]
+[card]
+primitive=Doom Reigns Supreme
+id=712068
+rarity=R
+[/card]
+[card]
+primitive=Elektra, Daughter of the Hand
+id=712071
+rarity=R
+[/card]
+[card]
+primitive=Grim Reaper, Lethal Legionnaire
+id=712087
+rarity=U
+[/card]
+[card]
+primitive=Hour of Defeat
+id=712106
+rarity=C
+[/card]
+[card]
+primitive=HYDRA Infiltration
+id=712092
+rarity=C
+[/card]
+[card]
+primitive=HYDRA Troopers
+id=712093
+rarity=C
+[/card]
+[card]
+primitive=Kingpin's Enforcers
+id=712129
+rarity=C
+[/card]
+[card]
+primitive=Klaw, Sonic Subjugator
+id=712130
+rarity=U
+[/card]
+[card]
+primitive=Madame Masque
+id=712143
+rarity=U
+[/card]
+[card]
+primitive=The Masters of Evil
+id=712228
+rarity=U
+[/card]
+[card]
+primitive=M.O.D.O.K.
+id=712140
+rarity=M
+[/card]
+[card]
+primitive=Moonstone, Harsh Mistress
+id=712152
+rarity=U
+[/card]
+[card]
+primitive=Ninja of the Hand
+id=712160
+rarity=C
+[/card]
+[card]
+primitive=Project Deathlok Soldier
+id=712170
+rarity=C
+[/card]
+[card]
+primitive=Red Room Recruit
+id=712180
+rarity=C
+[/card]
+[card]
+primitive=Robot Domination
+id=712186
+rarity=U
+[/card]
+[card]
+primitive=Ronin, Shadow Stalker
+id=712187
+rarity=U
+[/card]
+[card]
+primitive=Roxxon Brutes
+id=712188
+rarity=C
+[/card]
+[card]
+primitive=Stolen Stark Tech
+id=712207
+rarity=C
+[/card]
+[card]
+primitive=Super-Skrull
+id=712216
+rarity=R
+[/card]
+[card]
+primitive=Swordsman, Sharp Scoundrel
+id=712220
+rarity=U
+[/card]
+[card]
+primitive=Thunderbolts Conspiracy
+id=712244
+rarity=R
+[/card]
+[card]
+primitive=Too Evil to Stay Dead
+id=712248
+rarity=U
+[/card]
+[card]
+primitive=Unliving Legionnaire
+id=712257
+rarity=C
+[/card]
+[card]
+primitive=Visions of Villainy
+id=712262
+rarity=C
+[/card]
+[card]
+primitive=Whiplash, Vengeful Engineer
+id=712270
+rarity=U
+[/card]
+[card]
+primitive=Widow's Bite
+id=712274
+rarity=C
+[/card]
+[card]
+primitive=Yellowjacket, Heartless Marauder
+id=712280
+rarity=U
+[/card]
+[card]
+primitive=Avengers Disassembled
+id=712024
+rarity=R
+[/card]
+[card]
 primitive=Blazing Crescendo
 id=712036
+rarity=C
+[/card]
+[card]
+primitive=Crimson Operative
+id=712055
+rarity=C
+[/card]
+[card]
+primitive=Death to Our Enemies
+id=712062
+rarity=U
+[/card]
+[card]
+primitive=Evil's Thrall
+id=712073
+rarity=U
+[/card]
+[card]
+primitive=Fin Fang Foom
+id=712076
+rarity=R
+[/card]
+[card]
+primitive=Hawkeye, Master Marksman
+id=712095
+rarity=R
+[/card]
+[card]
+primitive=Hawkeye, Young Avenger
+id=712096
+rarity=U
+[/card]
+[card]
+primitive=Hawkeye's Bow
+id=712094
+rarity=C
+[/card]
+[card]
+primitive=Hex Magic
+id=712103
+rarity=U
+[/card]
+[card]
+primitive=Hire a Crew
+id=712105
+rarity=C
+[/card]
+[card]
+primitive=HULK SMASH!
+id=712090
+rarity=C
+[/card]
+[card]
+primitive=Human Torch, Johnny Storm
+id=712109
+rarity=U
+[/card]
+[card]
+primitive=HYDRA Assault Robot
+id=712091
+rarity=C
+[/card]
+[card]
+primitive=Iron Fist, Living Weapon
+id=712113
+rarity=U
+[/card]
+[card]
+primitive=Jessica Jones, Private Eye
+id=712120
+rarity=U
+[/card]
+[card]
+primitive=K'un-Lun Warrior
+id=712122
+rarity=C
+[/card]
+[card]
+primitive=Kree Sentinel
+id=712133
 rarity=C
 [/card]
 [card]
@@ -32,9 +697,669 @@ id=712135
 rarity=C
 [/card]
 [card]
+primitive=Loki Laufeyson
+id=712136
+rarity=U
+[/card]
+[card]
+primitive=Machinesmith Automaton
+id=712141
+rarity=C
+[/card]
+[card]
+primitive=Misty Knight, Hero for Hire
+id=712146
+rarity=U
+[/card]
+[card]
+primitive=Mjölnir, Hammer of Thor
+id=712147
+rarity=M
+[/card]
+[card]
+primitive=Photon Blast Barrage
+id=712166
+rarity=U
+[/card]
+[card]
+primitive=Quicksilver, Brash Blur
+id=712175
+rarity=R
+[/card]
+[card]
+primitive=Red Hulk
+id=712179
+rarity=U
+[/card]
+[card]
+primitive=Repulsor Blast
+id=712182
+rarity=C
+[/card]
+[card]
+primitive=The Scarlet Witch
+id=712232
+rarity=R
+[/card]
+[card]
+primitive=Speed, Young Avenger
+id=712200
+rarity=U
+[/card]
+[card]
+primitive=Stark Industries Executive
+id=712205
+rarity=C
+[/card]
+[card]
+primitive=Super Speed
+id=712211
+rarity=C
+[/card]
+[card]
+primitive=Team Tactics
+id=712223
+rarity=U
+[/card]
+[card]
+primitive=Thor, God of Thunder
+id=712243
+rarity=M
+[/card]
+[card]
+primitive=Truck Toss
+id=712252
+rarity=U
+[/card]
+[card]
+primitive=Vision of Love
+id=712261
+rarity=C
+[/card]
+[card]
+primitive=Volcanic Villain
+id=712264
+rarity=C
+[/card]
+[card]
+primitive=Wonder Man, Hollywood Hero
+id=712277
+rarity=U
+[/card]
+[card]
+primitive=Ant-Man's Army
+id=712013
+rarity=C
+[/card]
+[card]
+primitive=Call Damage Control
+id=712042
+rarity=C
+[/card]
+[card]
+primitive=Claim the Kingdom
+id=712050
+rarity=U
+[/card]
+[card]
+primitive=Doc Samson, Super Psychiatrist
+id=712066
+rarity=U
+[/card]
+[card]
+primitive=Earth's Mightiest Heroes
+id=712069
+rarity=M
+[/card]
+[card]
+primitive=Epic Fight
+id=712072
+rarity=R
+[/card]
+[card]
 primitive=Giant Growth
 id=712083
 rarity=C
+[/card]
+[card]
+primitive=Go Nuts!
+id=712086
+rarity=C
+[/card]
+[card]
+primitive=Guerrilla Gorilla
+id=712088
+rarity=C
+[/card]
+[card]
+primitive=Hellcat, Undying Vigilante
+id=712099
+rarity=U
+[/card]
+[card]
+primitive=Hercules, Prince of Power
+id=712100
+rarity=U
+[/card]
+[card]
+primitive=Heroic Feast
+id=712102
+rarity=R
+[/card]
+[card]
+primitive=Hulkling, Burgeoning Bruiser
+id=712108
+rarity=U
+[/card]
+[card]
+primitive=Ka-Zar of the Savage Land
+id=712123
+rarity=U
+[/card]
+[card]
+primitive=Knight of Wundagore
+id=712131
+rarity=C
+[/card]
+[card]
+primitive=Mister Hyde, Monster Within
+id=712145
+rarity=U
+[/card]
+[card]
+primitive=Mole Man, Moloid Master
+id=712149
+rarity=R
+[/card]
+[card]
+primitive=Pet Avengers
+id=712165
+rarity=C
+[/card]
+[card]
+primitive=Powerful Broker
+id=712169
+rarity=C
+[/card]
+[card]
+primitive=Punishing Punch
+id=712171
+rarity=U
+[/card]
+[card]
+primitive=Rapid Rescue
+id=712177
+rarity=C
+[/card]
+[card]
+primitive=Reptil, Dinomorpher
+id=712181
+rarity=U
+[/card]
+[card]
+primitive=Restorative Technique
+id=712183
+rarity=C
+[/card]
+[card]
+primitive=Rick Jones, Destined Sidekick
+id=712185
+rarity=U
+[/card]
+[card]
+primitive=Savage Land Dinosaur
+id=712193
+rarity=C
+[/card]
+[card]
+primitive=Serpent Specialist
+id=712196
+rarity=C
+[/card]
+[card]
+primitive=Shang-Chi, Master of Kung Fu
+id=712197
+rarity=M
+[/card]
+[card]
+primitive=She-Hulk, Jade Defender
+id=712198
+rarity=U
+[/card]
+[card]
+primitive=Super Strength
+id=712212
+rarity=C
+[/card]
+[card]
+primitive=The Thing, Ben Grimm
+id=712237
+rarity=U
+[/card]
+[card]
+primitive=Tigra, Feline Fury
+id=712245
+rarity=U
+[/card]
+[card]
+primitive=Training Regimen
+id=712250
+rarity=U
+[/card]
+[card]
+primitive=The Unbeatable Squirrel Girl
+id=712238
+rarity=R
+[/card]
+[card]
+primitive=Undercover Skrull
+id=712256
+rarity=C
+[/card]
+[card]
+primitive=Wakandan Royal Guard
+id=712266
+rarity=C
+[/card]
+[card]
+primitive=White Tiger, Ava Ayala
+id=712271
+rarity=U
+[/card]
+[card]
+primitive=World War Hulk
+id=712278
+rarity=R
+[/card]
+[card]
+primitive=Abomination, Terrifying Titan
+id=712003
+rarity=U
+[/card]
+[card]
+primitive=Absorbing Man
+id=712004
+rarity=R
+[/card]
+[card]
+primitive=Alien Invasion
+id=712012
+rarity=R
+[/card]
+[card]
+primitive=Ant-Man, Colony Commander
+id=712014
+rarity=U
+[/card]
+[card]
+primitive=Ares, God of War
+id=712016
+rarity=R
+[/card]
+[card]
+primitive=Armor Wars
+id=712017
+rarity=R
+[/card]
+[card]
+primitive=The Astonishing Ant-Man
+id=712225
+rarity=R
+[/card]
+[card]
+primitive=Avengers: Under Siege
+id=712027
+rarity=R
+[/card]
+[card]
+primitive=Beast, Erudite Aerialist
+id=712031
+rarity=U
+[/card]
+[card]
+primitive=Black Panther, Vanguard
+id=712033
+rarity=U
+[/card]
+[card]
+primitive=Black Widow, Double Agent
+id=712034
+rarity=U
+[/card]
+[card]
+primitive=Bullseye, Death Dealer
+id=712041
+rarity=U
+[/card]
+[card]
+primitive=Captain America, Living Legend
+id=712044
+rarity=U
+[/card]
+[card]
+primitive=Cloak and Dagger, Entwined
+id=712051
+rarity=R
+[/card]
+[card]
+primitive=The Coming of Galactus
+id=712226
+rarity=M
+[/card]
+[card]
+primitive=Daredevil, Man Without Fear
+id=712059
+rarity=R
+[/card]
+[card]
+primitive=Ghost, Spectral Saboteur
+id=712082
+rarity=U
+[/card]
+[card]
+primitive=Hulk, Gamma Goliath
+id=712107
+rarity=U
+[/card]
+[card]
+primitive=Iron Man, Master of Machines
+id=712116
+rarity=U
+[/card]
+[card]
+primitive=Kang, Temporal Tyrant
+id=712125
+rarity=U
+[/card]
+[card]
+primitive=Killmonger, Scourge of Wakanda
+id=712127
+rarity=U
+[/card]
+[card]
+primitive=The Kingpin of Crime
+id=712227
+rarity=R
+[/card]
+[card]
+primitive=Madame Hydra
+id=712142
+rarity=U
+[/card]
+[card]
+primitive=The Mighty Thor, Jane Foster
+id=712229
+rarity=R
+[/card]
+[card]
+primitive=Moon Girl and Devil Dinosaur
+id=712151
+rarity=R
+[/card]
+[card]
+primitive=The Ruinous Wrecking Crew
+id=712231
+rarity=R
+[/card]
+[card]
+primitive=Scientist Supreme of A.I.M.
+id=712194
+rarity=R
+[/card]
+[card]
+primitive=The Serpent Society
+id=712234
+rarity=R
+[/card]
+[card]
+primitive=Speedball, New Warrior
+id=712201
+rarity=U
+[/card]
+[card]
+primitive=Spider-Man, To the Rescue
+id=712202
+rarity=U
+[/card]
+[card]
+primitive=Spider-Woman, Secret Agent
+id=712203
+rarity=U
+[/card]
+[card]
+primitive=Storm, Windrider
+id=712208
+rarity=R
+[/card]
+[card]
+primitive=The Super Hero Civil War
+id=712235
+rarity=R
+[/card]
+[card]
+primitive=Taskmaster, Mercenary Mimic
+id=712222
+rarity=R
+[/card]
+[card]
+primitive=Thanos, the Mad Titan
+id=712224
+rarity=M
+[/card]
+[card]
+primitive=Thor Odinson
+id=712242
+rarity=U
+[/card]
+[card]
+primitive=Titania, Rugged Rumbler
+id=712246
+rarity=U
+[/card]
+[card]
+primitive=U.S.Agent, John Walker
+id=712253
+rarity=U
+[/card]
+[card]
+primitive=Vision Quest
+id=712260
+rarity=R
+[/card]
+[card]
+primitive=War Machine, Legacy of Iron
+id=712267
+rarity=U
+[/card]
+[card]
+primitive=Winter Soldier, Icy Assassin
+id=712275
+rarity=R
+[/card]
+[card]
+primitive=Wolverine, Fierce Fighter
+id=712276
+rarity=R
+[/card]
+[card]
+primitive=Worlds Within Worlds
+id=712279
+rarity=R
+[/card]
+[card]
+primitive=A.I.M. Synthoids
+id=712002
+rarity=C
+[/card]
+[card]
+primitive=Arc Reactor
+id=712015
+rarity=R
+[/card]
+[card]
+primitive=Captain America's Shield
+id=712043
+rarity=R
+[/card]
+[card]
+primitive=Cosmic Cube
+id=712054
+rarity=M
+[/card]
+[card]
+primitive=Dependable Quinjet
+id=712064
+rarity=C
+[/card]
+[card]
+primitive=H.E.R.B.I.E. Scout Unit
+id=712089
+rarity=C
+[/card]
+[card]
+primitive=Iron Man Armor
+id=712115
+rarity=M
+[/card]
+[card]
+primitive=S.H.I.E.L.D. Helicarrier
+id=712191
+rarity=U
+[/card]
+[card]
+primitive=Super-Adaptoid
+id=712215
+rarity=R
+[/card]
+[card]
+primitive=The Ten Rings
+id=712236
+rarity=M
+[/card]
+[card]
+primitive=Ultron, Artificial Malevolence
+id=712255
+rarity=M
+[/card]
+[card]
+primitive=Ultron Drone
+id=712254
+rarity=C
+[/card]
+[card]
+primitive=Vibranium Energy Daggers
+id=712258
+rarity=C
+[/card]
+[card]
+primitive=The Vision
+id=712239
+rarity=R
+[/card]
+[card]
+primitive=Viv Vision, Teen Synthezoid
+id=712263
+rarity=U
+[/card]
+[card]
+primitive=A.I.M. Labs
+id=712000
+rarity=C
+[/card]
+[card]
+primitive=Asgardian Citadel
+id=712019
+rarity=C
+[/card]
+[card]
+primitive=Avengers Hangar
+id=712025
+rarity=C
+[/card]
+[card]
+primitive=Avengers Tower
+id=712026
+rarity=U
+[/card]
+[card]
+primitive=Baxter Building
+id=712030
+rarity=U
+[/card]
+[card]
+primitive=Birnin Zana Plaza
+id=712032
+rarity=C
+[/card]
+[card]
+primitive=Castle Doom
+id=712049
+rarity=R
+[/card]
+[card]
+primitive=Dark Fortress
+id=712061
+rarity=R
+[/card]
+[card]
+primitive=Fisk Tower
+id=712077
+rarity=C
+[/card]
+[card]
+primitive=Gathering Place
+id=712081
+rarity=R
+[/card]
+[card]
+primitive=Gleaming Bastion
+id=712085
+rarity=R
+[/card]
+[card]
+primitive=Hell's Kitchen
+id=712098
+rarity=C
+[/card]
+[card]
+primitive=Hidden Lair
+id=712104
+rarity=R
+[/card]
+[card]
+primitive=Los Diablos Missile Base
+id=712138
+rarity=C
+[/card]
+[card]
+primitive=Pym Technologies
+id=712173
+rarity=C
+[/card]
+[card]
+primitive=Stark Industries
+id=712204
+rarity=C
+[/card]
+[card]
+primitive=Subterranean Cavern
+id=712209
+rarity=C
+[/card]
+[card]
+primitive=Surveillance Room
+id=712218
+rarity=C
+[/card]
+[card]
+primitive=Training Compound
+id=712249
+rarity=R
+[/card]
+[card]
+primitive=Villainous Hideout
+id=712259
+rarity=U
 [/card]
 [card]
 primitive=Plains
@@ -59,146 +1384,6 @@ rarity=C
 [card]
 primitive=Forest
 id=712078
-rarity=C
-[/card]
-[card]
-primitive=Hero in Training
-id=712101
-rarity=C
-[/card]
-[card]
-primitive=Dark Deed
-id=712060
-rarity=U
-[/card]
-[card]
-primitive=Project Deathlok Soldier
-id=712170
-rarity=C
-[/card]
-[card]
-primitive=Ghost, Spectral Saboteur
-id=712082
-rarity=U
-[/card]
-[card]
-primitive=Tigra, Feline Fury
-id=712245
-rarity=U
-[/card]
-[card]
-primitive=Agent Phil Coulson
-id=712008
-rarity=R
-[/card]
-[card]
-primitive=S.H.I.E.L.D. Deployment Drone
-id=712189
-rarity=C
-[/card]
-[card]
-primitive=Hydraulic Helper
-id=712110
-rarity=C
-[/card]
-[card]
-primitive=Mister Fantastic, Reed Richards
-id=712144
-rarity=U
-[/card]
-[card]
-primitive=A.I.M. Labs
-id=712000
-rarity=C
-[/card]
-[card]
-primitive=Asgardian Citadel
-id=712019
-rarity=C
-[/card]
-[card]
-primitive=Avengers Hangar
-id=712025
-rarity=C
-[/card]
-[card]
-primitive=Birnin Zana Plaza
-id=712032
-rarity=C
-[/card]
-[card]
-primitive=Fisk Tower
-id=712077
-rarity=C
-[/card]
-[card]
-primitive=Hell's Kitchen
-id=712098
-rarity=C
-[/card]
-[card]
-primitive=Los Diablos Missile Base
-id=712138
-rarity=C
-[/card]
-[card]
-primitive=Pym Technologies
-id=712173
-rarity=C
-[/card]
-[card]
-primitive=Stark Industries
-id=712204
-rarity=C
-[/card]
-[card]
-primitive=Kingpin's Enforcers
-id=712129
-rarity=C
-[/card]
-[card]
-primitive=Subterranean Cavern
-id=712209
-rarity=C
-[/card]
-[card]
-primitive=Futurist Forge
-id=712080
-rarity=C
-[/card]
-[card]
-primitive=Quake, Agent of S.H.I.E.L.D.
-id=712174
-rarity=U
-[/card]
-[card]
-primitive=Misty Knight, Hero for Hire
-id=712146
-rarity=U
-[/card]
-[card]
-primitive=Vision of Love
-id=712261
-rarity=C
-[/card]
-[card]
-primitive=Agent of Atlas
-id=712009
-rarity=C
-[/card]
-[card]
-primitive=Machinesmith Automaton
-id=712141
-rarity=C
-[/card]
-[card]
-primitive=Atlantean Cavalry
-id=712020
-rarity=C
-[/card]
-[card]
-primitive=Agents of S.H.I.E.L.D.
-id=712011
 rarity=C
 [/card]
 [card]
