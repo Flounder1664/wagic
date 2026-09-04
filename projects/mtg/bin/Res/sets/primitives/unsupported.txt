@@ -25862,3 +25862,879 @@ mana={4}{R}{G}{W}
 type=Legendary Artifact Creature
 subtype=Robot
 [/card]
+[card]
+name=A Good Thing
+text=Spells and abilities you control can't destroy, exile, target, or cause you to sacrifice A Good Thing. -- At the beginning of your upkeep, double your life total. Then, if you have 1,000 or more life, you lose the game.
+mana={4}{W}{B}
+type=Enchantment
+[/card]
+[card]
+name=Aggressive Crag
+text=At the beginning of your combat step, tap Aggressive Crag. -- {T}: Add {R} or {W}.
+type=Land
+[/card]
+[card]
+name=Animate Spell
+text=Flash -- Enchant instant or sorcery spell on the stack -- When Animate Spell becomes attached to an instant or sorcery, put that card onto the battlefield under its owner's control. It's a creature in addition to its other types with power and toughness each equal to its converted mana cost. -- When Animate Spell leaves the battlefield, enchanted card's owner sacrifices it unless they cast it.
+mana={U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Banding Sliver
+text=All Slivers have banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
+mana={3}{W}{W}
+type=Creature
+subtype=Sliver
+power=3
+toughness=3
+[/card]
+[card]
+name=Baneslayer Aspirant
+text=Baneslayer Aspirant gets +3/+3 and has flying, first strike, and lifelink as long as you have one or more emblems.
+mana={1}{W}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Barry's Land
+text={T}: Add {C}.
+type=Basic Land
+subtype=Cloud
+[/card]
+[card]
+name=Bear with Set's Mechanic
+text=Vigilance -- Aggressive (During your turn, there is an additional combat phase after the first, and only creatures with aggressive may attack during it.)
+mana={1}{G}
+type=Creature
+subtype=Bear
+power=2
+toughness=2
+[/card]
+[card]
+name=Bind // Liberate
+text=Counter target activated ability. (Mana abilities can't be targeted.) -- Draw a card.
+mana={1}{G} // {1}{W}
+type=Instant
+[/card]
+[card]
+name=Biting Remark
+text=Scrycast {0} (If you see this card while scrying, you may reveal it and cast it by paying {0}.) -- Flying
+mana={3}{U}
+type=Creature
+subtype=Elemental
+power=3
+toughness=3
+[/card]
+[card]
+name=Blood Poet
+text=Spark (Activate spark abilities by spending or giving yourself spark counters. Activate only one spark ability per turn, and only as a sorcery.) -- +1: Blood Poet gains lifelink until end of turn. -- −3: Target opponent discards a card. You gain life equal to its converted mana cost.
+mana={2}{B}
+type=Creature
+subtype=Vampire Cleric
+power=3
+toughness=2
+[/card]
+[card]
+name=Bombardment
+text=Until end of turn, cards you own that aren't on the battlefield lose all card types, costs, names, and abilities and become red sorceries named Missile that cost {R} with "Missile deals 2 damage to any target."
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Bone Rattler
+text=When Bone Rattler is put into your graveyard from anywhere, exile it. When you do, create four Reassembling Skeleton token cards and put them into your graveyard.
+mana={3}{B}{B}
+type=Creature
+subtype=Skeleton
+power=4
+toughness=4
+[/card]
+[card]
+name=Bucket List
+text=Whenever you cast a spell of a type showing on Bucket List, put a counter over that type and draw a card. If all five types on Bucket List have counters over them, sacrifice it and draw one more card. -- ☐ artifact ☐ creature ☐ enchantment ☐ instant ☐ sorcery
+mana={1}{U}{R}
+type=Enchantment
+[/card]
+[card]
+name=Buried Ogre
+text=You may begin the game with Buried Ogre in your graveyard. If you do, you lose 1 life.
+mana={1}{B}{B}{B}
+type=Creature
+subtype=Zombie Ogre
+power=6
+toughness=4
+[/card]
+[card]
+name=Celestine Cave Witch
+text=When Celestine Cave Witch enters, create two 1/1 black Insect creature tokens. -- Whenever Celestine Cave Witch attacks, you may sacrifice an Insect. When you do, curse defending player. (Create a black Aura Curse enchantment token that's attached to that player. It has enchant player and "At the beginning of your upkeep, you lose 1 life.")
+mana={3}{B}
+type=Creature
+subtype=Human Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Chimney Goyf
+text=Flying -- Chimney Goyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1. -- When Chimney Goyf dies, target opponent puts a card from their hand on top of their library.
+mana={4}{B}
+type=Creature
+subtype=Lhurgoyf Imp
+power=*
+toughness=*+1
+[/card]
+[card]
+name=Chronobot
+text=When Chronobot enters, switch upkeep steps with target opponent for as long as it remains on the battlefield. (You take your upkeep on their turn, and they take their upkeep on your turn.)
+mana={2}
+type=Artifact Creature
+subtype=Construct
+power=2
+toughness=2
+[/card]
+[card]
+name=Command the Chaff
+text=Look at target opponent's sideboard. You may cast a card from that sideboard without paying its mana cost. -- Exile Command the Chaff.
+mana={4}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Control Win Condition
+text=This spell can't be countered. -- Shroud -- Control Win Condition's power and toughness are each equal to the number of turns you've taken this game. (If this is in your deck, please keep track of your turns. This means you, Mark.)
+mana={4}{U}{U}
+type=Creature
+subtype=Whale
+power=*
+toughness=*
+[/card]
+[card]
+name=Corrupted Key
+text=As long as Corrupted Key is tapped, creatures you control have menace and deathtouch.
+mana={B}
+type=Artifact
+subtype=Key
+[/card]
+[card]
+name=Cyclopean Titan
+text=When Cyclopean Titan dies, two target lands become Swamps. Exile Cyclopean Titan. -- {3}, {T}: Tap target creature, then return Cyclopean Titan to its owner's hand.
+mana={4}{B}{B}{B}{B}
+type=Creature
+subtype=Zombie Giant
+power=8
+toughness=4
+[/card]
+[card]
+name=Do-Over
+text=Restart the turn, except with Do-Over in exile. (First, return all cards to where they were as the turn began. For information from hidden zones like the hand, reconstruct as best you can, and do the rest at random.)
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Domesticated Mammoth
+text=Domesticated Mammoth enters with a token copy of Pacifism attached to it.
+mana={1}{G}
+type=Snow Creature
+subtype=Mammoth
+power=5
+toughness=4
+[/card]
+[card]
+name=Domesticated Watercourse
+text=Domesticated Watercourse enters tapped. -- {T}: Add {U} or {B}. -- {U}{B}: Until end of turn, Domesticated Watercourse becomes an Equipment artifact with equip {2}. -- Whenever equipped creature deals combat damage to a player, draw a card.
+type=Land
+[/card]
+[card]
+name=Enchanted Prairie
+text=Enchanted Prairie enters tapped. -- {T}: Add {W} or {U}.
+type=Enchantment Land
+[/card]
+[card]
+name=Enchantmentize
+text=Enchant creature or enchantment -- Enchanted permanent is an enchantment and loses all other card types. (It still has its abilities, but it's no longer a creature.)
+mana={3}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Enroll in the Coalition
+text=You are a Flagbearer. -- While choosing targets as part of casting a spell or activating an ability, your opponents must choose at least one Flagbearer if able.
+mana={3}{W}
+type=Enchantment
+[/card]
+[card]
+name=Everlasting Lich
+text=Everlasting Lich can't block. -- Everlasting Lich can't die. (This creature has indestructible, can't be sacrificed, and doesn't go to the graveyard for having 0 toughness.)
+mana={2}{B}{B}{B}
+type=Creature
+subtype=Zombie
+power=4
+toughness=0
+[/card]
+[card]
+name=Evil Boros Charm
+text=Choose one — -- • Evil Boros Charm deals 2 damage to any target and you gain 2 life. -- • Unblocked attacking creatures get +1/+0 until end of turn. -- • Create a 1/1 colorless Spirit creature token with lifelink and haste.
+mana={B/R}{W/B}
+type=Instant
+[/card]
+[card]
+name=Experiment Five
+text={1}{Z}: Put a +1/+2 counter on Experiment Five. ({Z} is paid with one mana from any source that could produce two or more colors of mana.)
+mana={G}
+type=Creature
+subtype=Bear Snake Mutant
+power=1
+toughness=1
+[/card]
+[card]
+name=Five Kids in a Trenchcoat
+text=Five Kids in a Trenchcoat counts as five creatures for spells and effects that count the number of creatures you control.
+mana={2}{W}
+type=Creature
+subtype=Human Citizen
+power=1
+toughness=5
+[/card]
+[card]
+name=Form of the Mulldrifter
+text=When Form of the Mulldrifter enters, draw two cards. -- You may cast creature cards from your hand as though they were the card Mulldrifter. (You can still evoke this way. They're Mulldrifters.)
+mana={4}{U}
+type=Tribal Enchantment
+subtype=Elemental
+[/card]
+[card]
+name=Frenemy of the Guildpact
+text=Protection from enemy-colored multicolored (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything that's two enemy colors, such as blue and green.)
+mana={1}{G}
+type=Creature
+subtype=Spirit
+power=3
+toughness=2
+[/card]
+[card]
+name=Frogkin Kidnapper
+text=When Frogkin Kidnapper enters, target opponent reveals their hand. Choose a nonland card from it. Ransom that card. (Exile it. Its owner may pay {3} at any time to return it to their hand.)
+mana={1}{B}
+type=Creature
+subtype=Frog Rogue
+power=2
+toughness=1
+[/card]
+[card]
+name=Frontier Explorer
+text={3}, {T}: Until end of turn, you may play one basic Plains card from outside the game.
+mana={W}
+type=Creature
+subtype=Cat Scout
+power=2
+toughness=1
+[/card]
+[card]
+name=Generated Horizons
+text=At the beginning of your upkeep, create a Forest land token.
+mana={2}{G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Geometric Weird
+text=At the beginning of each end step, you may have Geometric Weird's base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
+mana={R}
+type=Creature
+subtype=Weird
+power=1
+toughness=1
+[/card]
+[card]
+name=Gold Mine
+text={T}: Add {C}. -- Legacy — {T}, Mark one of Gold Mine's unmarked nodes: Add one mana of any color. -- ☐, ☐, ☐, ☐, ☐
+type=Land
+[/card]
+[card]
+name=Golgari Death Swarm
+text=Flying, vigilance
+mana={3}{B}{G}
+type=Creature
+subtype=Bat Fungus Horror
+power=4
+toughness=4
+[/card]
+[card]
+name=Gorilla Tactics
+text=Create a 2/2 green Gorilla creature token. -- When a spell or ability an opponent controls causes you to discard Gorilla Tactics, create two 2/2 green Gorilla creature tokens.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Graveyard Dig
+text=Return up to two target [black or green] creature cards from your graveyard to your hand. -- You may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.
+mana={1}{B/G}
+type=Sorcery
+[/card]
+[card]
+name=Growth Charm
+text=Choose one — -- • Rampant Growth -- • Giant Growth -- • Regrowth
+mana={1}{G}{G}
+type=Instant
+[/card]
+[card]
+name=Gunk Slug
+text=When Gunk Slug enters, create three Gunk token cards and shuffle them into target opponent's library. (Gunk is a colorless sorcery card with no mana cost that has cycling {4}.)
+mana={2}{B}
+type=Creature
+subtype=Slug
+power=2
+toughness=3
+[/card]
+[card]
+name=High Troller
+text=All targeted spells and abilities cost {2} less and have their targets chosen randomly.
+mana={3}{R}
+type=Creature
+subtype=Troll Shaman
+power=4
+toughness=1
+[/card]
+[card]
+name=How to Keep an Izzet Mage Busy
+text=Return How to Keep an Izzet Mage Busy to its owner's hand.
+mana={U/R}
+type=Sorcery
+[/card]
+[card]
+name=Imaginary Friends
+text=Create three 0/0 white Spirit creature tokens with flying.
+mana={1}{W}
+type=Sorcery
+subtype=Arcane
+[/card]
+[card]
+name=Impatient Iguana
+text=If Impatient Iguana is in your opening hand and you're not the starting player, you may reveal it. If you do, you become the starting player. -- Haste
+mana={1}{R}
+type=Creature
+subtype=Lizard Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Innocuous Insect
+text=Buyback {1}{U} (You may pay an additional {1}{U} as you cast this spell. If you do, put this card into your hand as it resolves.) -- Flash -- Flying -- When you cast this spell, draw a card.
+mana={1}{U}{U}
+type=Creature
+subtype=Eldrazi Insect
+power=2
+toughness=1
+[/card]
+[card]
+name=Inspirational Antelope
+text=Legacy — Before the game starts, choose a keyword or ability word and write it below. -- Spells with __________ you cast cost {1} less to cast.
+mana={1}{G}
+type=Creature
+subtype=Antelope
+power=1
+toughness=3
+[/card]
+[card]
+name=Interplanar Brushwagg
+text=Interplanar (This creature enters onto the interplanar battlefield. Players can't control creatures on the interplanar battlefield.) -- Vigilance, haste -- Whenever a player attacks with a creature with power 4 or greater, Interplanar Brushwagg also attacks the player or planeswalker that creature is attacking.
+mana={3}{G}
+type=Creature
+subtype=Brushwagg
+power=6
+toughness=4
+[/card]
+[card]
+name=Jasconian Isle
+text=(Jasconian Isle isn't a spell, it's affected by summoning sickness, it's blue, and it has "{T}: Add {U}.") -- Jasconian Isle enters tapped. -- Jasconian Isle doesn't untap during your untap step. -- At the beginning of your upkeep, you may pay {U}{U}. If you do, untap Jasconian Isle.
+type=Land Creature
+subtype=Island Fish
+power=3
+toughness=4
+[/card]
+[card]
+name=Kaya, Ghost Haunter
+text=0: Exile Kaya, Ghost Haunter haunting target creature for as long as that creature remains on the battlefield. -- −1: You get an emblem with, "At the beginning of your upkeep, this emblem deals 3 damage to the owner of target haunted creature." -- −2: You get an emblem with, "At the beginning of your upkeep, gain control of target haunted creature for as long as it remains haunted."
+mana={2}{W}{B}
+type=Legendary Planeswalker
+subtype=Kaya
+[/card]
+[card]
+name=Khod, Etlan Shiis Envoy
+text=All lands are Islands in addition to their other types. -- Other Homarids, Camarids, Cephalids, Nautilids, and Merfolk you control get +1/+1.
+mana={2}{U}
+type=Legendary Creature
+subtype=Homarid Warrior
+power=2
+toughness=3
+[/card]
+[card]
+name=Krosan Adaptation
+text=Enchant creature -- Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies. The copies enter as tokens.) -- Enchanted creature gets +1/+0 and has vigilance.
+mana={G}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Lantern of Undersight
+text=You draw cards from the bottom of your library instead of the top of your library.
+mana={1}
+type=Artifact
+[/card]
+[card]
+name=Largepox
+text=Each player discards a card, then loses 1 life, then sacrifices an artifact, a creature, an enchantment, a land, a planeswalker, and a tribal permanent, then exiles a card from their graveyard, then puts the top card of their library into their graveyard, then removes a counter from a permanent they control, then gets a poison counter.
+mana={B}{B}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Lazier Goblin
+text=Motivate {3}{R} (This creature can't attack or block unless you have paid its motivate cost once. Motivate only as a sorcery.) -- When Lazier Goblin enters, it deals 2 damage to any target.
+mana={R}
+type=Creature
+subtype=Goblin
+power=2
+toughness=1
+[/card]
+[card]
+name=Learned Learner
+text=As long as you have a maximum hand size other than 7, Learned Learner has "{T}: Draw a card."
+mana={U}
+type=Creature
+subtype=Cephalid Wizard
+power=0
+toughness=3
+[/card]
+[card]
+name=Lightning Colt
+text=When Lightning Colt enters, it deals 3 damage to any target.
+mana={3}{R}{R}
+type=Instant Creature
+subtype=Horse
+power=3
+toughness=3
+[/card]
+[card]
+name=Loopy Lobster
+text=Four-faced (Whenever this becomes tapped, move it to the next stage, or to stage 1 if it's at stage 4.) -- Stage 1 — (1/4) -- Stage 2 — (4/1) Evolve -- Stage 3 — (2/4) {U}: Loopy Lobster gets +1/-1 until end of turn. -- Stage 4 — (4/4) Vigilance. {T}: Draw 2 cards.
+mana={2}{U}
+type=Creature
+subtype=Lobster
+power=?
+toughness=?
+[/card]
+[card]
+name=Louvaq, the Aberrant
+text=Protection from modified creatures (Modified creatures have a power, toughness, or ability different than their printed versions.) -- At the beginning of each player's end step, you may put a +1/+1 counter on target creature that player controls.
+mana={2}{G}{U}
+type=Legendary Creature
+subtype=Mutant
+power=3
+toughness=4
+[/card]
+[card]
+name=Mana Abundance
+text=If a player would add mana, instead all players add that mana.
+mana={2}{R}
+type=World Enchantment
+[/card]
+[card]
+name=Maro's Gone Nuts
+text=Double any effect that doubles. (It quadruples.)
+mana={G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Memory Bank
+text=Draw a card. -- Bank (If you cast Memory Bank from your hand, exile it until the end of the match. You may cast it from exile during another game this match. It still counts toward your deck minimum.)
+mana={1}{U}
+type=Sorcery
+[/card]
+[card]
+name=Metagamer
+text=Cards in the winning deck(s) of the latest Mythic Championship cost {1} more to cast.
+mana={W}{W}
+type=Creature
+subtype=Human Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=Mirrored Lotus
+text=Reflect {0} (As this enters, each opponent may pay {0}. When they do, they create a token copy of this except it lacks this ability.) -- {T}, Exile Mirrored Lotus: Add three mana of any one color.
+mana={0}
+type=Artifact
+[/card]
+[card]
+name=Noxious Bayou
+text={T}: Add {B} or {G}. You get a poison counter.
+type=Land
+[/card]
+[card]
+name=One with Death
+text=You lose the game.
+mana={B}
+type=Instant
+[/card]
+[card]
+name=Patient Turtle
+text=Patient Turtle enters with two +1/+1 counters on it if you didn't go first this game.
+mana={2}{G}{G}
+type=Creature
+subtype=Turtle
+power=3
+toughness=3
+[/card]
+[card]
+name=Pithing Spyglass
+text=As Pithing Spyglass enters, name a keyword ability or ability word. -- All cards in all zones lose that keyword ability or ability word and all text tied to that ability.
+mana={2}
+type=Artifact
+[/card]
+[card]
+name=Plane-Merge Elf
+text=Landship — At the beginning of your upkeep, you may look at the top card of your library. If it's a land, you may reveal it. If you do, create a 1/1 green Elf Warrior creature token. -- Kinfall — Whenever a creature enters the battlefield under your control, if it shares a creature type with Plane-Merge Elf, creatures you control get +1/+1 until end of turn.
+mana={4}{G}
+type=Creature
+subtype=Elf Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Planequake
+text=Planequake deals X damage to each creature without flying and each planeswalker. If X is 10 or more, open the "Uncovered Cavern" plot booster.
+mana={X}{R}
+type=Sorcery
+[/card]
+[card]
+name=Priority Avenger
+text=Flying -- Players can't cast instant spells unless a spell or ability is on the stack.
+mana={3}{W}
+type=Creature
+subtype=Bird Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Problematic Volcano
+text=When Problematic Volcano enters, it deals 4 damage to any target. Then, starting with you, each player assigns their creatures to the left or right of the volcano. Creatures enter to the left or right of the volcano. -- Creatures can't block creatures on the other side of the volcano.
+mana={1}{R}{R}
+type=World Enchantment
+[/card]
+[card]
+name=Puresteel Angel
+text=Flying, indestructible -- When Puresteel Angel enters, exile all artifacts that aren't colorless. -- Whenever Puresteel Angel deals combat damage to a player, you get an emblem with "If you would lose the game, instead your life total becomes 20, shuffle your graveyard into your library, you lose all poison counters, and you lose this emblem."
+mana={8}
+type=Artifact Creature
+subtype=Angel
+power=4
+toughness=4
+[/card]
+[card]
+name=Queue of Beetles
+text=Haste -- The stack is now first in, first out instead of last in, first out. (The first spell or ability on the stack is the first one to resolve.)
+mana={3}{R}
+type=Creature
+subtype=Insect
+power=3
+toughness=3
+[/card]
+[card]
+name=Ral's Vanguard
+text=Requirement — Your starting deck contains only instant, sorcery, and land cards. -- Starting hand size +1 Starting life total -5 -- If an instant or sorcery spell you cast would cause you to draw one or more cards, draw an additional card. If an instant or sorcery spell you cast would deal damage to a permanent or player, it deals 1 additional damage to that permanent or player.
+type=Vanguard
+[/card]
+[card]
+name=Recycla-bird
+text=Flying -- When Recycla-bird dies, put a flying counter on target creature you control.
+mana={U}
+type=Creature
+subtype=Bird
+power=1
+toughness=1
+[/card]
+[card]
+name=Rift
+text=Before drawing your hand, you may start the game with Rift in your opening hand. If you do, draw one fewer card. (Mulligans continue as normal.) -- Rift enters tapped. -- {T}: Add {C}.
+type=Legendary Land
+[/card]
+[card]
+name=Ruff, Underdog Champ
+text=All Hounds are Dogs. (We'll errata this to be true.) -- First strike, lifelink -- Underdog — If you've lost a game this match, Ruff, Underdog Champ and other Dogs you control get +1/+1.
+mana={2}{W}{W}
+type=Legendary Creature
+subtype=Dog Soldier
+power=3
+toughness=2
+[/card]
+[card]
+name=Sarah's Wings
+text=Target creature or player gains flying until end of turn. (Players with flying can't be dealt damage by creatures without flying.)
+mana={W}
+type=Tribal Instant
+subtype=Angel
+[/card]
+[card]
+name=Scaled Destruction
+text=Choose one or more — -- • Destroy all small creatures. -- • Destroy all medium creatures. -- • Destroy all large creatures. -- (A small creature has total power and toughness 4 or less, medium is 5—8, and large is 9 or more.)
+mana={4}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Seasoned Weaponsmith
+text=Tasty (This creature can be attacked directly. If it is attacked, it can't block creatures that didn't attack it.)
+mana={2}{R}
+type=Creature
+subtype=Bird Warrior
+power=5
+toughness=2
+[/card]
+[card]
+name=Seek Bolas's Counsel
+text=Choose one at random — -- • You get an emblem with "At the beginning of your upkeep, pay {U}{B}{R}. If you don't, you lose the game." -- • Each player discards their hand. -- • Planeswalk to Pools of Becoming. (Once there, you can roll the planar die only if you're playing Planechase.) -- • For each opponent, exile cards from the top of their library until you exile a nonland card. You may cast those cards without paying their mana costs. -- • Destroy all creatures and non-Bolas planeswalkers. -- • You get an emblem with "You can cast nonland cards from your sideboard."
+mana={U}{B}{R}
+type=Sorcery
+[/card]
+[card]
+name=Siege Elemental
+text=Trample -- Untapped creatures can't block. -- Tapped creatures can block.
+mana={4}{R}{R}
+type=Creature
+subtype=Elemental
+power=6
+toughness=6
+[/card]
+[card]
+name=Sliv-Mizzet, Hivemind
+text=Slivers you control have flying and "Whenever you draw a card, this creature deals 1 damage to any target" and "{T}: Draw a card."
+mana={2}{U}{U}{R}{R}
+type=Legendary Creature
+subtype=Dragon Sliver
+power=4
+toughness=4
+[/card]
+[card]
+name=Slivdrazi Monstrosity
+text=Eldrazi you control are Slivers in addition to their other types. -- Slivers you control have devoid and annihilator 1. -- {3}: Create a 1/1 colorless Eldrazi Sliver creature token. It has "Sacrifice this creature: Add {C}."
+mana={C}{W}{U}{B}{R}{G}
+type=Legendary Creature
+subtype=Sliver Eldrazi
+power=8
+toughness=8
+[/card]
+[card]
+name=Smelt // Herd // Saw
+text=Destroy target artifact.
+mana={R} // {5}{G} // {1}{B}
+type=Instant
+[/card]
+[card]
+name=Soulmates
+text=Enchant two creatures -- Enchanted creatures each get +1/+1 and have hexproof. -- When one of the enchanted creatures dies, destroy the other.
+mana={2}{G}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Spellmorph Raise Dead
+text=Return target creature card from your graveyard to your hand. -- Spellmorph {B} (You may cast this card face down as a 2/2 creature for {3}. Cast it any time for its spellmorph cost.)
+mana={B}
+type=Instant
+[/card]
+[card]
+name=Squidnapper
+text=When Squidnapper enters, gain control of target creature an opponent controls until Squidnapper leaves the battlefield or that player pays the ransom. -- Ransom — {6} and 2 life
+mana={3}{U}{U}
+type=Creature
+subtype=Squid Pirate
+power=3
+toughness=4
+[/card]
+[card]
+name=Stack of Paperwork
+text=When Stack of Paperwork enters, draw a card. -- Combat damage uses the stack. (Combat damage assignment can be responded to before damage is dealt. You know, like it used to.)
+mana={W}
+type=Enchantment
+[/card]
+[card]
+name=Start // Fire
+text=Create two 1/1 white Warrior creature tokens with vigilance.
+mana={2}{W} // {1}{R}
+type=Instant
+[/card]
+[card]
+name=Sunimret
+text=Reverse miracle {B} (If this card is on the bottom of your library as you begin searching it, you may cast it by paying its reverse miracle cost.) -- Exile all creatures.
+mana={4}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Swarm of Locus
+text=Flying -- Whenever Swarm of Locus attacks, it gets +1/+0 until end of turn for each Locus you control.
+mana={1}{B}
+type=Creature
+subtype=Insect Locus
+power=1
+toughness=1
+[/card]
+[card]
+name=Taiga Stadium
+text=Taiga Stadium enters tapped unless you control a white, blue, or black permanent. -- {T}: Add {R} or {G}.
+type=Land
+[/card]
+[card]
+name=The Grand Tour
+text=Exile target permanent, then put it into its owner's hand. That player discards that card, then puts it on top of their library. Then they put it onto the battlefield.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Throat Wolf
+text=You may cast Throat Wolf during an opponent's combat phase. -- Firstest strike (This creature deals combat damage to creatures before creatures with first strike.) -- After each opponent's first combat phase of each turn, there is an additional combat phase. Only Throat Wolf can attack during that combat phase.
+mana={1}{R}{R}
+type=Summon Wolf
+power=3
+toughness=1
+[/card]
+[card]
+name=Tibalt the Chaotic
+text=+1: Cast a copy of one of the following cards chosen at random—Ignorant Bliss, Crack the Earth, Blazing Volley. -- −3: Cast a copy of one of the following cards chosen at random—Seething Song, Dance with Devils, Flamebreak. -- −6: Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World.
+mana={1}{R}{R}
+type=Legendary Planeswalker
+subtype=Tibalt
+[/card]
+[card]
+name=Time Sidewalk
+text=Take an extra turn after this one. -- If this card is in your opening hand, you may exile it. If you do, create four Time Walk token cards and shuffle them into your deck.
+mana={4}{U}{U}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Transcantation
+text=Target instant or sorcery spell becomes a copy of Lightning Bolt. Its controller may choose new targets for it.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Trial and Error
+text=Whenever Trial and Error is countered or fizzles, you may copy it and choose new targets for the copy. -- Trial and Error deals 3 damage to any target.
+mana={R}{R}
+type=Elemental Instant
+subtype=Fire
+[/card]
+[card]
+name=Truth or Dare
+text=Target opponent chooses one — -- • Truth — That player plays with their hand revealed for the rest of the game. -- • Dare — Mill all but the bottom ten cards of that player's library. (To mill, put the top card of that library into its owner's graveyard.)
+mana={1}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Underdark Beholder
+text=Underdark Beholder enters the battlefield with ten eyestalk counters on it. -- If Underdark Beholder would be dealt damage, remove that many eyestalk counters from it instead. If you can't, sacrifice it. -- Whenever Underdark Beholder attacks, reveal cards from the top of your library until you reveal an instant, sorcery, or enchantment card with converted mana cost less than the number of eyestalk counters on Underdark Beholder. You may cast it without paying its mana cost. Shuffle your library.
+mana={4}{B}{B}
+type=Creature
+subtype=Beholder
+power=6
+toughness=6
+[/card]
+[card]
+name=Unicycle
+text=First strike, haste -- Equipped creature has first strike and haste. -- Equip {1} -- Crew 1
+mana={2}
+type=Artifact
+subtype=Equipment Vehicle
+power=3
+toughness=1
+[/card]
+[card]
+name=Vazal, the Compleat
+text=Megalegendary (Your deck can have only one copy of this card.) -- Vigilance, trample -- Vazal, the Compleat has the activated abilities of all other permanents on the battlefield.
+mana={3}{G}{G}{G}
+type=Legendary Artifact Creature
+subtype=Phyrexian
+power=7
+toughness=7
+[/card]
+[card]
+name=Visitor from Planet Q
+text=All creature cards you own with flash are instants in addition to their other types. -- Whenever you cast another spell with two or more card types, you may draw a card, then discard a card.
+mana={1}{U}
+type=Instant Creature
+subtype=Alien
+power=0
+toughness=4
+[/card]
+[card]
+name=Waste Land
+text={T}: Add {C}. -- {T}, Sacrifice Waste Land: Destroy target nonbasic land. That land's controller creates a Wastes token. (It's a land with {T}: Add {C}.)
+type=Land
+[/card]
+[card]
+name=Weaponized Scrap
+text=Upgrade (This creature enters covering another artifact you control. If it can't, exile it. Ignore the artifact it's covering. Anywhere this card goes, cards underneath it also go. It has haste.)
+mana={4}
+type=Artifact Creature
+subtype=Construct
+power=6
+toughness=6
+[/card]
+[card]
+name=Whammy Burn
+text=Shuffle your whammy deck, then reveal cards from the top of your whammy deck until you reveal an Island or choose to stop. Then, if no Islands were revealed this way, Whammy Burn deals X damage to any target, where X is the number of cards revealed. (A whammy deck consists of a Plains, Island, Swamp, Mountain, and Forest.)
+mana={R}
+type=Instant
+[/card]
+[card]
+name=Witty Demon
+text=Flying -- When Witty Demon enters, if your starting library had at least 13 cards over the minimum, search your library for a card and put that card into your hand, then shuffle your library. Otherwise, Witty Demon deals 4 damage to you.
+mana={1}{B}{B}
+type=Creature
+subtype=Demon
+power=4
+toughness=3
+[/card]
+[card]
+name=Wizened Arbiter
+text=When Wizened Arbiter enters, you may reveal a white card you own from outside the game. If you do, exchange that card with a card in your hand.
+mana={W}{W}
+type=Creature
+subtype=Human Soldier Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Wrath of Sod
+text=Put a manabond counter on all creatures. (They lose all other abilities and become lands with "{T}: Add one mana of this card's color.")
+mana={2}{G}{W}
+type=Sorcery
+[/card]
+[card]
+name=Xyru Specter
+text=Flying -- Whenever Xyru Specter deals damage to an opponent, that player discards a card unless they challenge you. If challenged, and you show them two black cards in your hand, they must discard two cards.
+mana={2}{B}{B}
+type=Summon
+subtype=Specter
+power=2
+toughness=2
+[/card]
+[card]
+name=Yawgmoth's Testament
+text=Until end of turn, you may play face-up cards you own from exile. -- If a card would be put into your graveyard or exile from anywhere this turn, put it on the bottom of your library instead.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=You're in Command
+text=Choose target creature you own and control. That creature becomes your commander. Any other commanders you have are no longer your commander. (That creature starts with a commander tax of {0}.)
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Zyym, Mesmeric Lord
+text=Flying, deathtouch -- When Zyym, Mesmeric Lord enters the battlefield, target opponent chooses an order for the cards in their hand, then reveals them one by one until you say stop. That player then discards the most recently revealed card.
+mana={1}{U}{B}{B}
+type=Legendary Creature
+subtype=Vampire Wizard
+power=3
+toughness=4
+[/card]
