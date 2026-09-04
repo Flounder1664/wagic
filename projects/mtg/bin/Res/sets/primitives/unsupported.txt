@@ -13553,15 +13553,6 @@ mana={3}{U}{U}
 type=Enchantment
 [/card]
 [card]
-name=Omniclown Colossus
-text=Affinity for Clowns (This spell costs {1} less to cast for each Clown you control.) -- Trample
-mana={8}{R}{R}
-type=Artifact Creature
-subtype=Clown Robot
-power=7
-toughness=7
-[/card]
-[card]
 name=One-Clown Band
 text={2}{R}: Target Robot gets +2/+0 until end of turn.
 mana={1}{R}
@@ -17430,13 +17421,6 @@ power=2
 toughness=1
 [/card]
 [card]
-name=Bruce Banner
-text={X}{X}, {T}: Draw X cards. Activate only as a sorcery. -- {2}{R}{R}{G}{G}: Transform Bruce Banner. Activate only as a sorcery.
-mana={U}
-type=Legendary Creature
-subtype=Human Scientist Hero
-[/card]
-[card]
 name=Bullseye, Death Dealer
 text=When Bullseye enters, you may sacrifice an artifact or discard a nonland card. When you do, Bullseye deals 2 damage to any target. -- {3}, {T}, Sacrifice an artifact or discard a nonland card: Bullseye deals 2 damage to any target.
 mana={2}{B/R}
@@ -17952,13 +17936,6 @@ power=3
 toughness=4
 [/card]
 [card]
-name=Jennifer Walters
-text=Your opponents can't cast spells during your turn. -- {3}{G}{W}{W}: Transform Jennifer Walters. Activate only as a sorcery.
-mana={1}{W}
-type=Legendary Creature
-subtype=Human Advisor Hero
-[/card]
-[card]
 name=Jessica Jones, Private Eye
 text={T}, Put a stun counter on Jessica Jones: Exile the top X cards of your library, where X is Jessica Jones's power. You may play those cards this turn. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 mana={2}{R}
@@ -18029,13 +18006,6 @@ type=Legendary Creature
 subtype=Human Mercenary Villain
 power=3
 toughness=3
-[/card]
-[card]
-name=King T'Challa
-text=Flash -- Whenever a player draws their second card each turn, you draw a card. -- {4}{W}{U}: Transform King T'Challa. Activate only as a sorcery.
-mana={1}{W}{U}
-type=Legendary Creature
-subtype=Human Noble Hero
 [/card]
 [card]
 name=Klaw, Sonic Subjugator
@@ -18169,13 +18139,6 @@ type=Legendary Creature
 subtype=Human Villain
 power=1
 toughness=1
-[/card]
-[card]
-name=Monica Rambeau
-text=Flying, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {2}{R}{W}{W}: Transform Monica Rambeau. Activate only as a sorcery.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Hero
 [/card]
 [card]
 name=Moon Girl and Devil Dinosaur
@@ -18861,13 +18824,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Tony Stark
-text={1}, {T}: Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. -- {4}{U}{R}: Transform Tony Stark. Activate only as a sorcery.
-mana={1}{U}
-type=Legendary Creature
-subtype=Human Artificer Hero
-[/card]
-[card]
 name=Too Evil to Stay Dead
 text=Teamwork 4 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 4 or more.) -- Choose target creature card in your graveyard with mana value 4 or less. If this spell was cast using teamwork, instead choose target creature card in your graveyard. Return the chosen card to the battlefield.
 mana={2}{B}
@@ -19469,15 +19425,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Hildibrand Manderville
-text=Creature tokens you control get +1/+1. -- When Hildibrand Manderville dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
-mana={1}{W} // {2}{B}
-type=Legendary Creature
-subtype=Human Detective
-power=2
-toughness=2
-[/card]
-[card]
 name=Hraesvelgr of the First Brood
 text=Flying, vigilance, ward {2} -- Shiva's Aid — When Hraesvelgr enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
 mana={4}{U}
@@ -19485,15 +19432,6 @@ type=Legendary Creature
 subtype=Elder Dragon
 power=5
 toughness=5
-[/card]
-[card]
-name=Hypnotic Sprite
-text=Flying
-mana={U}{U} // {2}{U}
-type=Creature
-subtype=Faerie
-power=2
-toughness=1
 [/card]
 [card]
 name=Interceptor, Shadow's Hound
@@ -19602,15 +19540,6 @@ type=Legendary Creature
 subtype=Moogle Warrior
 power=1
 toughness=2
-[/card]
-[card]
-name=Murderous Rider
-text=Lifelink -- When this creature dies, put it on the bottom of its owner's library.
-mana={1}{B}{B} // {1}{B}{B}
-type=Creature
-subtype=Zombie Knight
-power=2
-toughness=3
 [/card]
 [card]
 name=Noctis, Heir Apparent
@@ -20219,51 +20148,6 @@ type=Sorcery
 subtype=Lesson
 [/card]
 [card]
-name=Emeritus of Abundance
-text=Vigilance -- This creature enters prepared. -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
-mana={2}{G} // {1}{G}
-type=Creature
-subtype=Elf Druid
-power=3
-toughness=4
-[/card]
-[card]
-name=Emeritus of Conflict
-text=First strike -- Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{R} // {R}
-type=Creature
-subtype=Human Wizard
-power=2
-toughness=2
-[/card]
-[card]
-name=Emeritus of Ideation
-text=Flying, ward {2} -- This creature enters prepared. -- Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
-mana={3}{U}{U} // {U}
-type=Creature
-subtype=Human Wizard
-power=5
-toughness=5
-[/card]
-[card]
-name=Emeritus of Truce
-text=When this creature enters, target player creates a 1/1 white and black Inkling creature token with flying. Then if an opponent controls more creatures than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{W}{W} // {W}
-type=Creature
-subtype=Cat Cleric
-power=3
-toughness=3
-[/card]
-[card]
-name=Emeritus of Woe
-text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
-mana={3}{B} // {1}{B}
-type=Creature
-subtype=Vampire Warlock
-power=5
-toughness=4
-[/card]
-[card]
 name=Erode
 text=Destroy target creature or planeswalker. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
 mana={W}
@@ -20307,15 +20191,6 @@ type=Sorcery
 subtype=Lesson
 [/card]
 [card]
-name=Grave Researcher
-text=At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{B} // {B}
-type=Creature
-subtype=Troll Warlock
-power=3
-toughness=3
-[/card]
-[card]
 name=Great Hall of the Biblioplex
 text={T}: Add {C}. -- {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. -- {5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.
 type=Land
@@ -20327,15 +20202,6 @@ mana={R}{W}
 type=Creature
 subtype=Bird Cleric
 power=2
-toughness=1
-[/card]
-[card]
-name=Harmonized Trio
-text={T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={U} // {U}
-type=Creature
-subtype=Merfolk Bard Wizard
-power=1
 toughness=1
 [/card]
 [card]
@@ -20355,24 +20221,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Jadzi, Steward of Fate
-text=Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When Jadzi enters, draw two cards, then discard two cards.
-mana={2}{U} // {X}{X}{U}
-type=Legendary Creature
-subtype=Human Wizard
-power=2
-toughness=4
-[/card]
-[card]
-name=Joined Researchers
-text=First strike -- At the beginning of each end step, if an opponent has more cards in hand than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{W} // {1}{W}{W}
-type=Creature
-subtype=Human Cleric Wizard
-power=2
-toughness=2
-[/card]
-[card]
 name=Lorehold, the Historian
 text=Flying, haste -- Each instant and sorcery card in your hand has miracle {2}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.) -- At the beginning of each opponent's upkeep, you may discard a card. If you do, draw a card.
 mana={3}{R}{W}
@@ -20380,15 +20228,6 @@ type=Legendary Creature
 subtype=Elder Dragon
 power=5
 toughness=5
-[/card]
-[card]
-name=Maelstrom Artisan
-text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{R}{R} // {1}{R}
-type=Creature
-subtype=Minotaur Sorcerer
-power=3
-toughness=2
 [/card]
 [card]
 name=Magmablood Archaic
@@ -20537,15 +20376,6 @@ type=Sorcery
 subtype=Lesson
 [/card]
 [card]
-name=Scheming Silvertongue
-text=Flying, lifelink -- At the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{B} // {B}{B}
-type=Creature
-subtype=Vampire Warlock
-power=1
-toughness=3
-[/card]
-[card]
 name=Silverquill, the Disputant
 text=Flying, vigilance -- Each instant and sorcery spell you cast has casualty 1. (As you cast that spell, you may sacrifice a creature with power 1 or greater. When you do, copy the spell and you may choose new targets for the copy.)
 mana={2}{W}{B}
@@ -20553,15 +20383,6 @@ type=Legendary Creature
 subtype=Elder Dragon
 power=4
 toughness=4
-[/card]
-[card]
-name=Skycoach Conductor
-text=Flash -- Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{U} // {U}
-type=Creature
-subtype=Bird Pilot
-power=2
-toughness=3
 [/card]
 [card]
 name=Slumbering Trudge
@@ -20607,15 +20428,6 @@ name=Together as One
 text=Converge — Target player draws X cards, Together as One deals X damage to any target, and you gain X life, where X is the number of colors of mana spent to cast this spell.
 mana={6}
 type=Sorcery
-[/card]
-[card]
-name=Vastlands Scavenger
-text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{G}{G} // {4}{G}
-type=Creature
-subtype=Bear Druid
-power=4
-toughness=4
 [/card]
 [card]
 name=Vicious Rivalry
@@ -20727,15 +20539,6 @@ power=2
 toughness=4
 [/card]
 [card]
-name=Crescendo Conductor
-text=Reach -- Whenever you conjure one or more cards, this creature becomes prepared.
-mana={1}{R} // {R}
-type=Creature
-subtype=Orc Sorcerer
-power=2
-toughness=2
-[/card]
-[card]
 name=Distracted Botanist
 text=Deathtouch -- Lifelink -- When this creature dies, permanent cards in your graveyard perpetually gain "When this permanent enters, you draw a card and gain 1 life."
 mana={1}{B}{G}
@@ -20755,15 +20558,6 @@ name=Feed the Bog
 text=Replicate {1}{B} -- Creature cards in your graveyard perpetually get +1/+1. Then return target creature card with mana value 3 or less from your graveyard to the battlefield.
 mana={1}{B}
 type=Sorcery
-[/card]
-[card]
-name=Galathul Galecaller
-text=Flash -- Flying -- Whenever this creature attacks, it becomes prepared.
-mana={1}{U} // {1}{U}
-type=Creature
-subtype=Bird Wizard
-power=2
-toughness=1
 [/card]
 [card]
 name=Glorifying Verse
@@ -20880,15 +20674,6 @@ type=Creature
 subtype=Spirit Soldier
 power=2
 toughness=1
-[/card]
-[card]
-name=Ursine Guide
-text=This creature enters prepared. -- Whenever you cast a spell that isn't from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
-mana={2}{G} // {3}{G}{G}
-type=Creature
-subtype=Bear Druid
-power=3
-toughness=3
 [/card]
 [card]
 name=Variable Solutions
