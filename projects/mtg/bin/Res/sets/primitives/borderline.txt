@@ -143479,3 +143479,29 @@ subtype=Human Warrior Ally
 power=4
 toughness=3
 [/card]
+[card]
+name=Magmablood Archaic
+grade=borderline
+abilities=reach,trample
+auto=counter(1/1,converge)
+missing=the second ability: "whenever you cast an instant or sorcery, creatures you control get +1/+0 ueot for each color of mana spent to cast THAT spell" - converge reports the colors spent on THIS card, not on another spell, so the per-spell figure is not available.
+text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.
+mana={2/R}{2/R}{2/R}
+type=Creature
+subtype=Avatar
+power=2
+toughness=2
+[/card]
+[card]
+name=Wildgrowth Archaic
+grade=borderline
+abilities=reach,trample
+auto=counter(1/1,converge)
+missing=the second ability: "whenever you cast a creature spell, it enters with X additional +1/+1 counters where X is the colors of mana spent to cast IT" - same limitation, converge reports this card's colors, not another spell's.
+text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of colors of mana spent to cast it.
+mana={2/G}{2/G}
+type=Creature
+subtype=Avatar
+power=0
+toughness=0
+[/card]
