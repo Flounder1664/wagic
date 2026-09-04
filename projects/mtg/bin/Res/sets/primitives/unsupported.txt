@@ -20114,3 +20114,982 @@ subtype=Human Cleric
 power=1
 toughness=5
 [/card]
+[card]
+name=Ambitious Augmenter
+text=Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.) -- When this creature dies, if it had one or more counters on it, create a 0/0 green and blue Fractal creature token, then put this creature's counters on that token.
+mana={G}
+type=Creature
+subtype=Turtle Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Applied Geometry
+text=Create a token that's a copy of target non-Aura permanent you control, except it's a 0/0 Fractal creature in addition to its other types. Put six +1/+1 counters on it.
+mana={2}{G}{U}
+type=Sorcery
+[/card]
+[card]
+name=Ark of Hunger
+text=Whenever one or more cards leave your graveyard, this artifact deals 1 damage to each opponent and you gain 1 life. -- {T}: Mill a card. You may play that card this turn.
+mana={2}{R}{W}
+type=Artifact
+[/card]
+[card]
+name=Aziza, Mage Tower Captain
+text=Whenever you cast an instant or sorcery spell, you may tap three untapped creatures you control. If you do, copy that spell. You may choose new targets for the copy.
+mana={R}{W}
+type=Legendary Creature
+subtype=Djinn Sorcerer
+power=2
+toughness=2
+[/card]
+[card]
+name=Berta, Wise Extrapolator
+text=Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.) -- Whenever one or more +1/+1 counters are put on Berta, add one mana of any color. -- {X}, {T}: Create a 0/0 green and blue Fractal creature token and put X +1/+1 counters on it.
+mana={2}{G}{U}
+type=Legendary Creature
+subtype=Frog Druid
+power=1
+toughness=4
+[/card]
+[card]
+name=Blech, Loafing Pest
+text=Whenever you gain life, put a +1/+1 counter on each Pest, Bat, Insect, Snake, and Spider you control.
+mana={1}{B}{G}
+type=Legendary Creature
+subtype=Pest
+power=3
+toughness=4
+[/card]
+[card]
+name=Cauldron of Essence
+text=Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life. -- {1}{B}{G}, {T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
+mana={1}{B}{G}
+type=Artifact
+[/card]
+[card]
+name=Choreographed Sparks
+text=This spell can't be copied. -- Choose one or both — -- • Copy target instant or sorcery spell you control. You may choose new targets for the copy. -- • Copy target creature spell you control. The copy gains haste and "At the beginning of the end step, sacrifice this token."
+mana={R}{R}
+type=Instant
+[/card]
+[card]
+name=Colorstorm Stallion
+text=Ward {1}, haste -- Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature.
+mana={1}{U}{R}
+type=Creature
+subtype=Elemental Horse
+power=3
+toughness=3
+[/card]
+[card]
+name=Comforting Counsel
+text=Whenever you gain life, put a growth counter on this enchantment. -- As long as there are five or more growth counters on this enchantment, creatures you control get +3/+3.
+mana={1}{G}
+type=Enchantment
+[/card]
+[card]
+name=Conciliator's Duelist
+text=When this creature enters, draw a card. Each player loses 1 life. -- Repartee — Whenever you cast an instant or sorcery spell that targets a creature, exile up to one target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+mana={W}{W}{B}{B}
+type=Creature
+subtype=Kor Warlock
+power=4
+toughness=3
+[/card]
+[card]
+name=Decorum Dissertation
+text=Target player draws two cards and loses 2 life. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={3}{B}{B}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Dina's Guidance
+text=Search your library for a creature card, reveal it, put it into your hand or graveyard, then shuffle.
+mana={1}{B}{G}
+type=Instant
+[/card]
+[card]
+name=Echocasting Symposium
+text=Target player creates a token that's a copy of target creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={4}{U}{U}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Emeritus of Abundance
+text=Vigilance -- This creature enters prepared. -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
+mana={2}{G} // {1}{G}
+type=Creature
+subtype=Elf Druid
+power=3
+toughness=4
+[/card]
+[card]
+name=Emeritus of Conflict
+text=First strike -- Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{R} // {R}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Emeritus of Ideation
+text=Flying, ward {2} -- This creature enters prepared. -- Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
+mana={3}{U}{U} // {U}
+type=Creature
+subtype=Human Wizard
+power=5
+toughness=5
+[/card]
+[card]
+name=Emeritus of Truce
+text=When this creature enters, target player creates a 1/1 white and black Inkling creature token with flying. Then if an opponent controls more creatures than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{W}{W} // {W}
+type=Creature
+subtype=Cat Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Emeritus of Woe
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
+mana={3}{B} // {1}{B}
+type=Creature
+subtype=Vampire Warlock
+power=5
+toughness=4
+[/card]
+[card]
+name=Erode
+text=Destroy target creature or planeswalker. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Exhibition Tidecaller
+text=Opus — Whenever you cast an instant or sorcery spell, target player mills three cards. If five or more mana was spent to cast that spell, that player mills ten cards instead.
+mana={U}
+type=Creature
+subtype=Djinn Wizard
+power=0
+toughness=2
+[/card]
+[card]
+name=Fix What's Broken
+text=As an additional cost to cast this spell, pay X life. -- Return each artifact and creature card with mana value X from your graveyard to the battlefield.
+mana={2}{W}{B}
+type=Sorcery
+[/card]
+[card]
+name=Flashback
+text=Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+mana={R}
+type=Instant
+[/card]
+[card]
+name=Geometer's Arthropod
+text=Whenever you cast a spell with {X} in its mana cost, look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
+mana={G}{U}
+type=Creature
+subtype=Fractal Crab
+power=1
+toughness=4
+[/card]
+[card]
+name=Germination Practicum
+text=Put two +1/+1 counters on each creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={3}{G}{G}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Grave Researcher
+text=At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={2}{B} // {B}
+type=Creature
+subtype=Troll Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Great Hall of the Biblioplex
+text={T}: Add {C}. -- {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. -- {5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.
+type=Land
+[/card]
+[card]
+name=Hardened Academic
+text=Flying, haste -- Discard a card: This creature gains lifelink until end of turn. -- Whenever one or more cards leave your graveyard, put a +1/+1 counter on target creature you control.
+mana={R}{W}
+type=Creature
+subtype=Bird Cleric
+power=2
+toughness=1
+[/card]
+[card]
+name=Harmonized Trio
+text={T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={U} // {U}
+type=Creature
+subtype=Merfolk Bard Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Improvisation Capstone
+text=Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={5}{R}{R}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Informed Inkwright
+text=Vigilance -- Repartee — Whenever you cast an instant or sorcery spell that targets a creature, create a 1/1 white and black Inkling creature token with flying.
+mana={1}{W}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Jadzi, Steward of Fate
+text=Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When Jadzi enters, draw two cards, then discard two cards.
+mana={2}{U} // {X}{X}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Joined Researchers
+text=First strike -- At the beginning of each end step, if an opponent has more cards in hand than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{W} // {1}{W}{W}
+type=Creature
+subtype=Human Cleric Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Lorehold, the Historian
+text=Flying, haste -- Each instant and sorcery card in your hand has miracle {2}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.) -- At the beginning of each opponent's upkeep, you may discard a card. If you do, draw a card.
+mana={3}{R}{W}
+type=Legendary Creature
+subtype=Elder Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Maelstrom Artisan
+text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{R}{R} // {1}{R}
+type=Creature
+subtype=Minotaur Sorcerer
+power=3
+toughness=2
+[/card]
+[card]
+name=Magmablood Archaic
+text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.
+mana={2/R}{2/R}{2/R}
+type=Creature
+subtype=Avatar
+power=2
+toughness=2
+[/card]
+[card]
+name=Mana Sculpt
+text=Counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase.
+mana={1}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Mathemagics
+text=Target player draws 2ˣ cards. (2⁰ = 1, 2¹ = 2, 2² = 4, 2³ = 8, 2⁴ = 16, 2⁵ = 32, and so on.)
+mana={X}{X}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Mind into Matter
+text=Draw X cards. Then you may put a permanent card with mana value X or less from your hand onto the battlefield tapped.
+mana={X}{G}{U}
+type=Sorcery
+[/card]
+[card]
+name=Molten-Core Maestro
+text=Menace -- Opus — Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. If five or more mana was spent to cast that spell, add an amount of {R} equal to this creature's power.
+mana={1}{R}
+type=Creature
+subtype=Goblin Bard
+power=2
+toughness=2
+[/card]
+[card]
+name=Moment of Reckoning
+text=Choose up to four. You may choose the same mode more than once. -- • Destroy target nonland permanent. -- • Return target nonland permanent card from your graveyard to the battlefield.
+mana={3}{W}{W}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Moseo, Vein's New Dean
+text=Flying -- When Moseo enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life." -- Infusion — At the beginning of your end step, if you gained life this turn, return up to one target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
+mana={2}{B}
+type=Legendary Creature
+subtype=Bird Skeleton Warlock
+power=2
+toughness=1
+[/card]
+[card]
+name=Nita, Forum Conciliator
+text=Whenever you cast a spell you don't own, put a +1/+1 counter on each creature you control. -- {2}, Sacrifice another creature: Exile target instant or sorcery card from an opponent's graveyard. You may cast it this turn, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead. Activate only as a sorcery.
+mana={1}{W}{B}
+type=Legendary Creature
+subtype=Human Advisor
+power=2
+toughness=3
+[/card]
+[card]
+name=Pensive Professor
+text=Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.) -- Whenever one or more +1/+1 counters are put on this creature, draw a card.
+mana={1}{U}{U}
+type=Creature
+subtype=Human Wizard
+power=0
+toughness=2
+[/card]
+[card]
+name=Petrified Hamlet
+text=When this land enters, choose a land card name. -- Activated abilities of sources with the chosen name can't be activated unless they're mana abilities. -- Lands with the chosen name have "{T}: Add {C}." -- {T}: Add {C}.
+type=Land
+[/card]
+[card]
+name=Planar Engineering
+text=Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then shuffle.
+mana={3}{G}
+type=Sorcery
+[/card]
+[card]
+name=Postmortem Professor
+text=This creature can't block. -- Whenever this creature attacks, each opponent loses 1 life and you gain 1 life. -- {1}{B}, Exile an instant or sorcery card from your graveyard: Return this card from your graveyard to the battlefield.
+mana={1}{B}
+type=Creature
+subtype=Zombie Warlock
+power=2
+toughness=2
+[/card]
+[card]
+name=Pox Plague
+text=Each player loses half their life, then discards half the cards in their hand, then sacrifices half the permanents they control of their choice. Round down each time.
+mana={B}{B}{B}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Practiced Offense
+text=Put a +1/+1 counter on each creature target player controls. Target creature gains your choice of double strike or lifelink until end of turn. -- Flashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+mana={2}{W}
+type=Sorcery
+[/card]
+[card]
+name=Prismari, the Inspiration
+text=Flying -- Ward—Pay 5 life. -- Instant and sorcery spells you cast have storm. (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+mana={5}{U}{R}
+type=Legendary Creature
+subtype=Elder Dragon
+power=7
+toughness=7
+[/card]
+[card]
+name=Professor Dellian Fel
+text=+2: You gain 3 life. -- 0: You draw a card and lose 1 life. -- −3: Destroy target creature. -- −6: You get an emblem with "Whenever you gain life, target opponent loses that much life."
+mana={2}{B}{G}
+type=Legendary Planeswalker
+subtype=Dellian
+[/card]
+[card]
+name=Quandrix, the Proof
+text=Flying, trample -- Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.) -- Instant and sorcery spells you cast from your hand have cascade.
+mana={4}{G}{U}
+type=Legendary Creature
+subtype=Elder Dragon
+power=6
+toughness=6
+[/card]
+[card]
+name=Ral Zarek, Guest Lecturer
+text=+1: Surveil 2. -- −1: Any number of target players each discard a card. -- −2: Return target creature card with mana value 3 or less from your graveyard to the battlefield. -- −7: Flip five coins. Target opponent skips their next X turns, where X is the number of coins that came up heads.
+mana={1}{B}{B}
+type=Legendary Planeswalker
+subtype=Ral
+[/card]
+[card]
+name=Resonating Lute
+text=Lands you control have "{T}: Add two mana of any one color. Spend this mana only to cast instant and sorcery spells." -- {T}: Draw a card. Activate only if you have seven or more cards in your hand.
+mana={2}{U}{R}
+type=Artifact
+[/card]
+[card]
+name=Restoration Seminar
+text=Return target nonland permanent card from your graveyard to the battlefield. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={5}{W}{W}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Scheming Silvertongue
+text=Flying, lifelink -- At the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{B} // {B}{B}
+type=Creature
+subtype=Vampire Warlock
+power=1
+toughness=3
+[/card]
+[card]
+name=Silverquill, the Disputant
+text=Flying, vigilance -- Each instant and sorcery spell you cast has casualty 1. (As you cast that spell, you may sacrifice a creature with power 1 or greater. When you do, copy the spell and you may choose new targets for the copy.)
+mana={2}{W}{B}
+type=Legendary Creature
+subtype=Elder Dragon
+power=4
+toughness=4
+[/card]
+[card]
+name=Skycoach Conductor
+text=Flash -- Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={2}{U} // {U}
+type=Creature
+subtype=Bird Pilot
+power=2
+toughness=3
+[/card]
+[card]
+name=Slumbering Trudge
+text=This creature enters with a number of stun counters on it equal to three minus X. If X is 2 or less, it enters tapped. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+mana={X}{G}
+type=Creature
+subtype=Plant Beast
+power=6
+toughness=6
+[/card]
+[card]
+name=Steal the Show
+text=Choose one or both — -- • Target player discards any number of cards, then draws that many cards. -- • Steal the Show deals damage equal to the number of instant and sorcery cards in your graveyard to target creature or planeswalker.
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
+name=Stirring Hopesinger
+text=Flying, lifelink -- Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on each creature you control.
+mana={2}{W}
+type=Creature
+subtype=Bird Bard
+power=1
+toughness=3
+[/card]
+[card]
+name=Suspend Aggression
+text=Exile target nonland permanent and the top card of your library. For each of those cards, its owner may play it until the end of their next turn.
+mana={1}{R}{W}
+type=Instant
+[/card]
+[card]
+name=The Dawning Archaic
+text=This spell costs {1} less to cast for each instant and sorcery card in your graveyard. -- Reach -- Whenever The Dawning Archaic attacks, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
+mana={10}
+type=Legendary Creature
+subtype=Avatar
+power=7
+toughness=7
+[/card]
+[card]
+name=Together as One
+text=Converge — Target player draws X cards, Together as One deals X damage to any target, and you gain X life, where X is the number of colors of mana spent to cast this spell.
+mana={6}
+type=Sorcery
+[/card]
+[card]
+name=Vastlands Scavenger
+text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{G}{G} // {4}{G}
+type=Creature
+subtype=Bear Druid
+power=4
+toughness=4
+[/card]
+[card]
+name=Vicious Rivalry
+text=As an additional cost to cast this spell, pay X life. -- Destroy all artifacts and creatures with mana value X or less.
+mana={2}{B}{G}
+type=Sorcery
+[/card]
+[card]
+name=Wildgrowth Archaic
+text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of colors of mana spent to cast it.
+mana={2/G}{2/G}
+type=Creature
+subtype=Avatar
+power=0
+toughness=0
+[/card]
+[card]
+name=Wisdom of Ages
+text=Return all instant and sorcery cards from your graveyard to your hand. You have no maximum hand size for the rest of the game. -- Exile Wisdom of Ages.
+mana={4}{U}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Witherbloom, the Balancer
+text=Affinity for creatures (This spell costs {1} less to cast for each creature you control.) -- Flying, deathtouch -- Instant and sorcery spells you cast have affinity for creatures.
+mana={6}{B}{G}
+type=Legendary Creature
+subtype=Elder Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Zaffai and the Tempests
+text=Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.
+mana={5}{U}{R}
+type=Legendary Creature
+subtype=Human Bard Sorcerer
+power=5
+toughness=7
+[/card]
+[card]
+name=Cut Down
+text=Destroy target creature with total power and toughness 5 or less.
+mana={B}
+type=Instant
+[/card]
+[card]
+name=Glimpse the Impossible
+text=Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
+name=Raffine, Scheming Seer
+text=Flying, ward {1} -- Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)
+mana={W}{U}{B}
+type=Legendary Creature
+subtype=Sphinx Demon
+power=1
+toughness=4
+[/card]
+[card]
+name=Advanced Floral Invocations
+text=Landfall — Whenever a land you control enters, mill two cards. -- {B/G}: Level 2 -- Whenever a land you control enters, creature cards in your graveyard perpetually get +1/+1. -- {4}{B/G}{B/G}: Level 3 -- You may play lands and cast creature spells from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it.
+mana={B/G}
+type=Enchantment
+subtype=Class
+[/card]
+[card]
+name=Algorithmic Ferocity
+text=Until end of turn, target creature you control gains indestructible and gets +1/+0 for each card in your hand with mana value 4 or greater. Then it fights target creature an opponent controls.
+mana={G}
+type=Sorcery
+[/card]
+[card]
+name=Anina, Natural Parallelist
+text=Whenever you cast a spell with {X} in its mana cost, conjure a random creature card with mana value X onto the battlefield. -- {T}: Add {G}{U}. Spend this mana only to cast spells with {X} in their mana costs.
+mana={1}{G}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=1
+toughness=3
+[/card]
+[card]
+name=Archaeomancer's Spade
+text=When this artifact enters, seek two cards with flashback and put them into your graveyard. -- {T}: Add {R}{W}. This mana can't be spent to cast spells from your hand.
+mana={1}{R}{W}
+type=Artifact
+[/card]
+[card]
+name=Blood Age Muster
+text=Whenever one or more cards leave your graveyard, conjure a random card from Blood Age Muster's spellbook onto the battlefield. Its base power and toughness perpetually become 2/2. This ability triggers only once each turn.
+mana={R}{W}
+type=Enchantment
+[/card]
+[card]
+name=Consumed by History
+text=Until end of turn, whenever a nontoken creature dies, it perpetually gains unearth {5}. -- Consumed by History deals 3 damage to each creature.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Corpseweaver Prodigy
+text=Deathtouch -- If a creature an opponent controls would die, exile it instead. -- Infusion — At the beginning of your second main phase, if you gained life this turn, conjure a card named Bridge from Below into your graveyard.
+mana={2}{B}
+type=Creature
+subtype=Treefolk Warlock
+power=2
+toughness=4
+[/card]
+[card]
+name=Crescendo Conductor
+text=Reach -- Whenever you conjure one or more cards, this creature becomes prepared.
+mana={1}{R} // {R}
+type=Creature
+subtype=Orc Sorcerer
+power=2
+toughness=2
+[/card]
+[card]
+name=Distracted Botanist
+text=Deathtouch -- Lifelink -- When this creature dies, permanent cards in your graveyard perpetually gain "When this permanent enters, you draw a card and gain 1 life."
+mana={1}{B}{G}
+type=Creature
+subtype=Frog Druid
+power=3
+toughness=2
+[/card]
+[card]
+name=Expansive Reapplication
+text=X can't be 0. -- Counter target spell. Conjure a random creature card with mana value X onto the battlefield.
+mana={X}{G}{U}
+type=Instant
+[/card]
+[card]
+name=Feed the Bog
+text=Replicate {1}{B} -- Creature cards in your graveyard perpetually get +1/+1. Then return target creature card with mana value 3 or less from your graveyard to the battlefield.
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Galathul Galecaller
+text=Flash -- Flying -- Whenever this creature attacks, it becomes prepared.
+mana={1}{U} // {1}{U}
+type=Creature
+subtype=Bird Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Glorifying Verse
+text=Exalted -- Repartee — Whenever you cast an instant or sorcery spell that targets a creature, conjure a card named Glorifying Verse into your hand.
+mana={W/B}
+type=Enchantment
+[/card]
+[card]
+name=Grave Studies
+text=Conjure a card named Teacher's Pest onto the battlefield, then each player sacrifices a creature.
+mana={B}{G}
+type=Instant
+[/card]
+[card]
+name=Head of the Class
+text=The first spell you cast during each of your turns that targets a creature costs {W}{B} less to cast. This effect reduces only the amount of colored mana you pay. -- Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature perpetually gets +1/+1.
+mana={W}{B}
+type=Creature
+subtype=Kithkin Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Honor the Past
+text=Return target creature card with mana value 6 or less from your graveyard to the battlefield. It's an artifact. (It's no longer a creature.)
+mana={2}{W}
+type=Sorcery
+[/card]
+[card]
+name=Impose Hierarchy
+text=Destroy target creature with mana value 4 or less. You gain 1 life for each creature card in its controller's hand.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Inspiring Easel
+text={T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. -- {T}: Choose an instant or sorcery card in your hand. It perpetually incorporates {U}{R} and gains "When you cast this spell, copy it. You may choose new targets for the copy." Activate only as a sorcery.
+mana={U}{R}
+type=Artifact
+[/card]
+[card]
+name=Interdisciplinary Studies
+text=Seek a multicolored card. -- Learn.
+mana={2}{U}
+type=Instant
+[/card]
+[card]
+name=Paradigm Shifter
+text=When this creature enters, conjure a card of your choice from the Paradigm Spellbook into your hand. -- {T}: Add two mana in any combination of colors. Spend this mana only to cast instant and sorcery spells.
+mana={1}{U}{R}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Phoenix of Iteration
+text=Flying -- Opus — Whenever you cast an instant or sorcery spell, Phoenix of Iteration perpetually gets +1/+1. If five or more mana was spent to cast that spell, you may exile Phoenix of Iteration, then return it to the battlefield tapped under its owner's control. This ability also triggers if this card is in your graveyard.
+mana={U}{R}
+type=Creature
+subtype=Elemental Phoenix
+power=2
+toughness=1
+[/card]
+[card]
+name=Scalar Scholar
+text=Increment -- When this creature enters, each card you own with {X} in its mana cost perpetually gains "This spell costs {1} less to cast."
+mana={G}{U}
+type=Creature
+subtype=Salamander Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Scintillating Encore
+text=Target creature you control perpetually gets +2/+0. When that creature dies this turn, return it to the battlefield tapped under its owner's control.
+mana={W/B}
+type=Instant
+[/card]
+[card]
+name=Soovril, Patient Antiquarian
+text=Vigilance -- {T}: Put two time counters on target nonland card in exile that was put there from your graveyard this turn. If it doesn't have suspend, it gains suspend.
+mana={R}{W}
+type=Legendary Creature
+subtype=Orc Cleric
+power=2
+toughness=3
+[/card]
+[card]
+name=Summitfest Closing Ceremony
+text=Starting intensity 3 -- Covercast — Whenever you cast another instant or sorcery spell, if five or more mana was spent to cast it, this card intensifies. -- Add X {U} and X {R}, where X is this spell's intensity. -- Draw a card.
+mana={3}{U}{R}
+type=Instant
+[/card]
+[card]
+name=Sundering Sentinel
+text=Starting intensity 2 -- When this creature enters, it deals X damage to any target and you gain X life, where X is this creature's intensity. Then it intensifies. -- At the beginning of your end step, exile this creature. At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
+mana={2}{R}{R}{W}{W}
+type=Artifact Creature
+subtype=Construct
+power=6
+toughness=7
+[/card]
+[card]
+name=The Mystical Archive
+text=As this land enters, draft a card from The Mystical Archive's spellbook and exile it face down. -- {T}: Add {C}. -- {1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast spells that aren't from your starting deck. -- {2}, {T}: Put a card exiled with this land into its owner's hand.
+type=Land
+[/card]
+[card]
+name=Unbreakable Remnant
+text=Escape—{1}{W}, Exile two other cards from your graveyard. -- When you cast this spell from your graveyard, all cards you own named Unbreakable Remnant perpetually get +1/+1.
+mana={W}
+type=Creature
+subtype=Spirit Soldier
+power=2
+toughness=1
+[/card]
+[card]
+name=Ursine Guide
+text=This creature enters prepared. -- Whenever you cast a spell that isn't from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
+mana={2}{G} // {3}{G}{G}
+type=Creature
+subtype=Bear Druid
+power=3
+toughness=3
+[/card]
+[card]
+name=Variable Solutions
+text=If X is 1, seek a basic land card and put it onto the battlefield tapped. -- If X is 2, each opponent sacrifices an artifact of their choice. -- If X is 3, conjure a random creature card with mana value X onto the battlefield. -- If X is 4 or more, you gain 2 life. Then do all of the above.
+mana={X}{G}
+type=Sorcery
+[/card]
+[card]
+name=Emeritus of Abundance // Regrowth
+text=Vigilance -- This creature enters prepared. -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
+mana={2}{G} // {1}{G}
+type=Creature
+subtype=Elf Druid
+power=3
+toughness=4
+[/card]
+[card]
+name=Emeritus of Conflict // Lightning Bolt
+text=First strike -- Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{R} // {R}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Emeritus of Ideation // Ancestral Recall
+text=Flying, ward {2} -- This creature enters prepared. -- Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
+mana={3}{U}{U} // {U}
+type=Creature
+subtype=Human Wizard
+power=5
+toughness=5
+[/card]
+[card]
+name=Emeritus of Truce // Swords to Plowshares
+text=When this creature enters, target player creates a 1/1 white and black Inkling creature token with flying. Then if an opponent controls more creatures than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{W}{W} // {W}
+type=Creature
+subtype=Cat Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Emeritus of Woe // Demonic Tutor
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
+mana={3}{B} // {1}{B}
+type=Creature
+subtype=Vampire Warlock
+power=5
+toughness=4
+[/card]
+[card]
+name=Grave Researcher // Reanimate
+text=At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={2}{B} // {B}
+type=Creature
+subtype=Troll Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Harmonized Trio // Brainstorm
+text={T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={U} // {U}
+type=Creature
+subtype=Merfolk Bard Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Jadzi, Steward of Fate // Oracle's Gift
+text=Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When Jadzi enters, draw two cards, then discard two cards.
+mana={2}{U} // {X}{X}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Joined Researchers // Secret Rendezvous
+text=First strike -- At the beginning of each end step, if an opponent has more cards in hand than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{W} // {1}{W}{W}
+type=Creature
+subtype=Human Cleric Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Maelstrom Artisan // Rocket Volley
+text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{R}{R} // {1}{R}
+type=Creature
+subtype=Minotaur Sorcerer
+power=3
+toughness=2
+[/card]
+[card]
+name=Scheming Silvertongue // Sign in Blood
+text=Flying, lifelink -- At the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{B} // {B}{B}
+type=Creature
+subtype=Vampire Warlock
+power=1
+toughness=3
+[/card]
+[card]
+name=Skycoach Conductor // All Aboard
+text=Flash -- Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={2}{U} // {U}
+type=Creature
+subtype=Bird Pilot
+power=2
+toughness=3
+[/card]
+[card]
+name=Vastlands Scavenger // Bind to Life
+text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+mana={1}{G}{G} // {4}{G}
+type=Creature
+subtype=Bear Druid
+power=4
+toughness=4
+[/card]
+[card]
+name=Bruce Banner // The Incredible Hulk
+text={X}{X}, {T}: Draw X cards. Activate only as a sorcery. -- {2}{R}{R}{G}{G}: Transform Bruce Banner. Activate only as a sorcery.
+mana={U}
+type=Legendary Creature
+subtype=Human Scientist Hero
+[/card]
+[card]
+name=Jennifer Walters // The Sensational She-Hulk
+text=Your opponents can't cast spells during your turn. -- {3}{G}{W}{W}: Transform Jennifer Walters. Activate only as a sorcery.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Advisor Hero
+[/card]
+[card]
+name=King T'Challa // Black Panther, Hope Enduring
+text=Flash -- Whenever a player draws their second card each turn, you draw a card. -- {4}{W}{U}: Transform King T'Challa. Activate only as a sorcery.
+mana={1}{W}{U}
+type=Legendary Creature
+subtype=Human Noble Hero
+[/card]
+[card]
+name=Monica Rambeau // Photon, Living Light
+text=Flying, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {2}{R}{W}{W}: Transform Monica Rambeau. Activate only as a sorcery.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Hero
+[/card]
+[card]
+name=Tony Stark // The Invincible Iron Man
+text={1}, {T}: Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. -- {4}{U}{R}: Transform Tony Stark. Activate only as a sorcery.
+mana={1}{U}
+type=Legendary Creature
+subtype=Human Artificer Hero
+[/card]
+[card]
+name=Hildibrand Manderville // Gentleman's Rise
+text=Creature tokens you control get +1/+1. -- When Hildibrand Manderville dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
+mana={1}{W} // {2}{B}
+type=Legendary Creature
+subtype=Human Detective
+power=2
+toughness=2
+[/card]
+[card]
+name=Omniclown Colossus // Pie-roclasm
+text=Affinity for Clowns (This spell costs {1} less to cast for each Clown you control.) -- Trample
+mana={8}{R}{R} // {3}{R}{R}
+type=Artifact Creature
+subtype=Clown Robot
+power=7
+toughness=7
+[/card]
+[card]
+name=Crescendo Conductor // Boltwave
+text=Reach -- Whenever you conjure one or more cards, this creature becomes prepared.
+mana={1}{R} // {R}
+type=Creature
+subtype=Orc Sorcerer
+power=2
+toughness=2
+[/card]
+[card]
+name=Galathul Galecaller // Corvid Squall
+text=Flash -- Flying -- Whenever this creature attacks, it becomes prepared.
+mana={1}{U} // {1}{U}
+type=Creature
+subtype=Bird Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Ursine Guide // Ranger's Merit
+text=This creature enters prepared. -- Whenever you cast a spell that isn't from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
+mana={2}{G} // {3}{G}{G}
+type=Creature
+subtype=Bear Druid
+power=3
+toughness=3
+[/card]
