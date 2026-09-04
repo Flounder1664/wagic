@@ -143454,3 +143454,28 @@ mana={2}{W}
 type=Enchantment
 subtype=Saga
 [/card]
+[card]
+name=Airbending Lesson
+grade=borderline
+target=*[-land]
+auto=_AIRBEND_
+auto=draw:1 controller
+missing=the airbended card should be castable for {2} rather than its mana cost; here it is exiled and simply playable from exile.
+text=Airbend target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.) -- Draw a card.
+mana={2}{W}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Geyser Leaper
+grade=borderline
+abilities=flying
+auto={4}:draw:1 controller && discard:1 controller
+missing=waterbend {4} lets you tap artifacts and creatures to help pay ({1} each) - that half is not modelled, so the cost is plain {4}.
+text=Flying -- Waterbend {4}: Draw a card, then discard a card. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+mana={4}{U}
+type=Creature
+subtype=Human Warrior Ally
+power=4
+toughness=3
+[/card]

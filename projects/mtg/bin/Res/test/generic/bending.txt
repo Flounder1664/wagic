@@ -1,0 +1,29 @@
+#waterbend and airbend were both marked engine-blocked. Neither is: airbend is exile plus
+#canplayfromexile (374 attested uses) and waterbend is convoke-shaped (117 attested).
+#Airbending Lesson exiles a permanent and draws - Hill Giant must leave the battlefield
+#and the caster's hand must hold the drawn card. Note the exile is the OWNER's, which is
+#what the real card says - it lands in player 2's exile, not the caster's.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Airbending Lesson
+library:Mountain,Mountain
+manapool:{2}{W}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Airbending Lesson
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+library:*
+graveyard:Airbending Lesson
+life:20
+[PLAYER2]
+exile:*
+life:20
+[END]

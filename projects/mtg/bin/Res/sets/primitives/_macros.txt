@@ -409,6 +409,7 @@
 #AUTO_DEFINE _EARTHBEND5_ name(Earthbend 5) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.5)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
 
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
+#AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile])) forever )!
 #AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R}
 #AUTO_DEFINE _FIREBEND2_ @combat(attacking) source(this):Add{R}{R}
 #AUTO_DEFINE _FIREBEND3_ @combat(attacking) source(this):Add{R}{R}{R}
