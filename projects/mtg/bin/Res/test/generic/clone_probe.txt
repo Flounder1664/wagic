@@ -1,0 +1,25 @@
+#Does the clone primitive actually make a token copy? mechanics.tsv marks copy-spell
+#engine-blocked, but a 2026-07-27 probe noted the primitive works. Cackling Counterpart
+#is "create a token that's a copy of target creature you control" written as
+#target=creature|mybattlefield + auto=clone. If it works there are TWO Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Cackling Counterpart
+manapool:{U}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cackling Counterpart
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Grizzly Bears
+graveyard:Cackling Counterpart
+life:20
+[PLAYER2]
+life:20
+[END]

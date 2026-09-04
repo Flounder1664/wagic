@@ -1,0 +1,22 @@
+#Three Blind Mice - written after copy-spell was verified NOT engine-blocked.
+#Chapter I creates a 1/1 Mouse token. Cast it and the Mouse must be on the battlefield
+#alongside the Saga - asserted as a COUNT of two permanents, because the token's own name
+#does not resolve in an [ASSERT] zone list. One permanent would mean chapter I never fired.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Three Blind Mice
+manapool:{2}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Three Blind Mice
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

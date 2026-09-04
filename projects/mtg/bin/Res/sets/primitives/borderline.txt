@@ -143439,3 +143439,18 @@ text=Creatures you control get +1/+0.
 mana={2}{R}
 type=Enchantment
 [/card]
+[card]
+name=Three Blind Mice
+grade=borderline
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=create(Mouse:creature mouse:1/1:white)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) clone target(*[token]|mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) clone target(*[token]|mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.4.Lore}) sacrifice(this)
+missing=chapter IV ("creatures you control get +1/+1 and gain vigilance until end of turn") - a lord() pump carrying a ueot duration is not attested, so it was not guessed at.
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) -- I — Create a 1/1 white Mouse creature token. -- II, III — Create a token that's a copy of target token you control. -- IV — Creatures you control get +1/+1 and gain vigilance until end of turn.
+mana={2}{W}
+type=Enchantment
+subtype=Saga
+[/card]
