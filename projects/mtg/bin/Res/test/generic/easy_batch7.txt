@@ -1,0 +1,25 @@
+#Static anthems matched by the proven-shape pass.
+#  Fire Nation's Conquest  creatures you control get +1/+0  -> Grizzly Bears 3/2
+#  Assault Drone           artifact creatures get +1/+0     -> only the Drone itself (2/4 -> 3/4),
+#                                                              Grizzly Bears unaffected on the other side
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation's Conquest,Grizzly Bears
+life:20
+[PLAYER2]
+inplay:Assault Drone,Hill Giant
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation's Conquest,Grizzly Bears
+pt:Grizzly Bears=3/2
+life:20
+[PLAYER2]
+inplay:Assault Drone,Hill Giant
+pt:Assault Drone=3/4
+pt:Hill Giant=3/3
+life:20
+[END]
