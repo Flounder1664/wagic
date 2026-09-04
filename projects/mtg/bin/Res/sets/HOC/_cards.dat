@@ -1,25 +1,30 @@
 [meta]
 author=Wagic Team
-name=The Hobbit Eternal
-year=2026-08-14
-total=122
+name=HOC
+year=
+total=131
 orderindex=UBZ-ZZZ.HOC
 autounlock=true
 [/meta]
 [card]
-primitive=Aragorn and Arwen, Wed
-id=701028
-rarity=M
+primitive=Fíli and Kíli, Joyous
+id=701001
+rarity=R
 [/card]
 [card]
-primitive=Aragorn, the Uniter
-id=701029
-rarity=M
+primitive=Gandalf, Party Guest
+id=701002
+rarity=R
 [/card]
 [card]
-primitive=Arcane Signet
-id=701095
-rarity=M
+primitive=Thorin, King of Durin's Folk
+id=701003
+rarity=R
+[/card]
+[card]
+primitive=Bilbo, Fellow Conspirator
+id=701004
+rarity=R
 [/card]
 [card]
 primitive=Bag End Banquet
@@ -27,33 +32,8 @@ id=701005
 rarity=R
 [/card]
 [card]
-primitive=Cavern-Hoard Dragon
-id=701023
-rarity=M
-[/card]
-[card]
-primitive=Delighted Halfling
-id=701025
-rarity=M
-[/card]
-[card]
-primitive=Dragon's Desire
-id=701011
-rarity=R
-[/card]
-[card]
-primitive=Dwarven Warriors
-id=701093
-rarity=M
-[/card]
-[card]
-primitive=Flame of Anor
-id=701031
-rarity=M
-[/card]
-[card]
-primitive=Fíli and Kíli, Joyous
-id=701001
+primitive=Ori, Plate Stacker
+id=701006
 rarity=R
 [/card]
 [card]
@@ -62,44 +42,9 @@ id=701007
 rarity=R
 [/card]
 [card]
-primitive=Mount Doom
-id=701050
-rarity=M
-[/card]
-[card]
-primitive=Mox Amber
-id=701096
-rarity=M
-[/card]
-[card]
-primitive=Orcish Bowmasters
-id=701019
-rarity=M
-[/card]
-[card]
-primitive=Ori, Plate Stacker
-id=701006
+primitive=Dragon-Cursed Halls
+id=701008
 rarity=R
-[/card]
-[card]
-primitive=Reprieve
-id=701017
-rarity=M
-[/card]
-[card]
-primitive=Rivendell
-id=701051
-rarity=M
-[/card]
-[card]
-primitive=Saruman of Many Colors
-id=701035
-rarity=M
-[/card]
-[card]
-primitive=Sauron, the Dark Lord
-id=701036
-rarity=M
 [/card]
 [card]
 primitive=Smaug the Impenetrable
@@ -107,59 +52,19 @@ id=701009
 rarity=R
 [/card]
 [card]
-primitive=The One Ring
-id=701044
-rarity=M
+primitive=Bilbo's Burglaring
+id=701010
+rarity=R
 [/card]
 [card]
-primitive=The Reaver Cleaver
-id=701094
-rarity=M
+primitive=Dragon's Desire
+id=701011
+rarity=R
 [/card]
 [card]
-primitive=The Shire
-id=701052
-rarity=M
-[/card]
-[card]
-primitive=Tom Bombadil
-id=701038
-rarity=M
-[/card]
-[card]
-primitive=Treasure Vault
-id=701097
-rarity=M
-[/card]
-[card]
-primitive=Witch-king, Bringer of Ruin
-id=701021
-rarity=M
-[/card]
-[card]
-primitive=Food
-id=-701005
-rarity=T
-[/card]
-[card]
-primitive=Treasure
-id=-701023
-rarity=T
-[/card]
-[card]
-primitive=Treasure
-id=-701009
-rarity=T
-[/card]
-[card]
-primitive=Food
-id=-701052
-rarity=T
-[/card]
-[card]
-primitive=Dawn of a New Age
-id=701013
-rarity=M
+primitive=Necklace of Girion
+id=701012
+rarity=R
 [/card]
 [card]
 primitive=Flowering of the White Tree
@@ -172,8 +77,23 @@ id=701015
 rarity=M
 [/card]
 [card]
+primitive=Galadriel's Dismissal
+id=701016
+rarity=M
+[/card]
+[card]
+primitive=Reprieve
+id=701017
+rarity=M
+[/card]
+[card]
 primitive=Raise the Palisade
 id=701018
+rarity=M
+[/card]
+[card]
+primitive=Orcish Bowmasters
+id=701019
 rarity=M
 [/card]
 [card]
@@ -182,8 +102,28 @@ id=701020
 rarity=M
 [/card]
 [card]
+primitive=Witch-king, Bringer of Ruin
+id=701021
+rarity=M
+[/card]
+[card]
+primitive=Call Forth the Tempest
+id=701022
+rarity=M
+[/card]
+[card]
+primitive=Cavern-Hoard Dragon
+id=701023
+rarity=M
+[/card]
+[card]
 primitive=Arwen, Weaver of Hope
 id=701024
+rarity=M
+[/card]
+[card]
+primitive=Delighted Halfling
+id=701025
 rarity=M
 [/card]
 [card]
@@ -197,8 +137,33 @@ id=701027
 rarity=M
 [/card]
 [card]
+primitive=Aragorn and Arwen, Wed
+id=701028
+rarity=M
+[/card]
+[card]
+primitive=Aragorn, the Uniter
+id=701029
+rarity=M
+[/card]
+[card]
 primitive=Arwen, Mortal Queen
 id=701030
+rarity=M
+[/card]
+[card]
+primitive=Flame of Anor
+id=701031
+rarity=M
+[/card]
+[card]
+primitive=Galadriel, Light of Valinor
+id=701032
+rarity=M
+[/card]
+[card]
+primitive=Gríma, Saruman's Footman
+id=701995
 rarity=M
 [/card]
 [card]
@@ -207,8 +172,33 @@ id=701034
 rarity=M
 [/card]
 [card]
+primitive=Saruman of Many Colors
+id=701035
+rarity=M
+[/card]
+[card]
+primitive=Sauron, the Dark Lord
+id=701036
+rarity=M
+[/card]
+[card]
 primitive=Sauron, the Lidless Eye
 id=701037
+rarity=M
+[/card]
+[card]
+primitive=Tom Bombadil
+id=701038
+rarity=M
+[/card]
+[card]
+primitive=Andúril, Flame of the West
+id=701999
+rarity=M
+[/card]
+[card]
+primitive=Andúril, Narsil Reforged
+id=701998
 rarity=M
 [/card]
 [card]
@@ -227,6 +217,16 @@ id=701043
 rarity=M
 [/card]
 [card]
+primitive=The One Ring
+id=701044
+rarity=M
+[/card]
+[card]
+primitive=Palantír of Orthanc
+id=701992
+rarity=M
+[/card]
+[card]
 primitive=Relic of Sauron
 id=701046
 rarity=M
@@ -237,14 +237,114 @@ id=701047
 rarity=M
 [/card]
 [card]
+primitive=Minas Morgul, Dark Fortress
+id=701048
+rarity=M
+[/card]
+[card]
 primitive=Minas Tirith
 id=701049
+rarity=M
+[/card]
+[card]
+primitive=Mount Doom
+id=701050
+rarity=M
+[/card]
+[card]
+primitive=Rivendell
+id=701051
+rarity=M
+[/card]
+[card]
+primitive=The Shire
+id=701052
+rarity=M
+[/card]
+[card]
+primitive=Dwarven Warriors
+id=701093
+rarity=M
+[/card]
+[card]
+primitive=The Reaver Cleaver
+id=701094
+rarity=M
+[/card]
+[card]
+primitive=Arcane Signet
+id=701095
+rarity=M
+[/card]
+[card]
+primitive=Mox Amber
+id=701096
+rarity=M
+[/card]
+[card]
+primitive=Treasure Vault
+id=701097
+rarity=M
+[/card]
+[card]
+primitive=Bilbo, Unexpected Adventurer
+id=701098
+rarity=M
+[/card]
+[card]
+primitive=Gandalf, Shadow's Foe
+id=701099
+rarity=M
+[/card]
+[card]
+primitive=Thorin, Company's Leader
+id=701100
+rarity=M
+[/card]
+[card]
+primitive=Bard, Heir of Girion
+id=701101
+rarity=M
+[/card]
+[card]
+primitive=Bolg, Erebor's Reckoning
+id=701102
+rarity=M
+[/card]
+[card]
+primitive=Chief of the Wilds
+id=701103
+rarity=M
+[/card]
+[card]
+primitive=Dáin of the Ancient Halls
+id=701997
+rarity=M
+[/card]
+[card]
+primitive=Great Goblin, Foul-Hearted
+id=701105
+rarity=M
+[/card]
+[card]
+primitive=Thranduil the Strategist
+id=701106
 rarity=M
 [/card]
 [card]
 primitive=Banishing Light
 id=701161
 rarity=U
+[/card]
+[card]
+primitive=Dawn of a New Age
+id=701013
+rarity=M
+[/card]
+[card]
+primitive=Dúnedain Blade
+id=701996
+rarity=C
 [/card]
 [card]
 primitive=Eagles of the North
@@ -322,6 +422,16 @@ id=701178
 rarity=C
 [/card]
 [card]
+primitive=Lórien Revealed
+id=701993
+rarity=C
+[/card]
+[card]
+primitive=Minas Tirith Garrison
+id=701180
+rarity=R
+[/card]
+[card]
 primitive=Nimrodel Watcher
 id=701181
 rarity=C
@@ -370,6 +480,11 @@ rarity=C
 primitive=Shadow of the Enemy
 id=701190
 rarity=M
+[/card]
+[card]
+primitive=Troll of Khazad-dûm
+id=701991
+rarity=C
 [/card]
 [card]
 primitive=Battle-Scarred Goblin
@@ -457,6 +572,11 @@ id=701208
 rarity=U
 [/card]
 [card]
+primitive=Lothlórien Lookout
+id=701994
+rarity=C
+[/card]
+[card]
 primitive=Mirkwood Elk
 id=701210
 rarity=R
@@ -470,6 +590,26 @@ rarity=C
 primitive=Rogue's Passage
 id=701212
 rarity=U
+[/card]
+[card]
+primitive=Food
+id=-701005
+rarity=T
+[/card]
+[card]
+primitive=Treasure
+id=-701023
+rarity=T
+[/card]
+[card]
+primitive=Treasure
+id=-701009
+rarity=T
+[/card]
+[card]
+primitive=Food
+id=-701052
+rarity=T
 [/card]
 [card]
 primitive=Grima, Saruman's Footman
@@ -512,104 +652,9 @@ id=701040
 rarity=M
 [/card]
 [card]
-primitive=Gandalf, Party Guest
-id=701002
-rarity=R
-[/card]
-[card]
-primitive=Thorin, King of Durin's Folk
-id=701003
-rarity=R
-[/card]
-[card]
-primitive=Bilbo, Fellow Conspirator
-id=701004
-rarity=R
-[/card]
-[card]
-primitive=Dragon-Cursed Halls
-id=701008
-rarity=R
-[/card]
-[card]
-primitive=Bilbo's Burglaring
-id=701010
-rarity=R
-[/card]
-[card]
-primitive=Necklace of Girion
-id=701012
-rarity=R
-[/card]
-[card]
-primitive=Galadriel's Dismissal
-id=701016
-rarity=M
-[/card]
-[card]
-primitive=Call Forth the Tempest
-id=701022
-rarity=M
-[/card]
-[card]
-primitive=Galadriel, Light of Valinor
-id=701032
-rarity=M
-[/card]
-[card]
-primitive=Minas Morgul, Dark Fortress
-id=701048
-rarity=M
-[/card]
-[card]
-primitive=Bilbo, Unexpected Adventurer
-id=701098
-rarity=M
-[/card]
-[card]
-primitive=Gandalf, Shadow's Foe
-id=701099
-rarity=M
-[/card]
-[card]
-primitive=Thorin, Company's Leader
-id=701100
-rarity=M
-[/card]
-[card]
-primitive=Bard, Heir of Girion
-id=701101
-rarity=M
-[/card]
-[card]
-primitive=Bolg, Erebor's Reckoning
-id=701102
-rarity=M
-[/card]
-[card]
-primitive=Chief of the Wilds
-id=701103
-rarity=M
-[/card]
-[card]
 primitive=Dain of the Ancient Halls
 id=701104
 rarity=M
-[/card]
-[card]
-primitive=Great Goblin, Foul-Hearted
-id=701105
-rarity=M
-[/card]
-[card]
-primitive=Thranduil the Strategist
-id=701106
-rarity=M
-[/card]
-[card]
-primitive=Minas Tirith Garrison
-id=701180
-rarity=R
 [/card]
 [card]
 primitive=Dawn of a New Age
