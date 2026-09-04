@@ -7510,7 +7510,7 @@ type=Sorcery
 [card]
 name=Odds // Ends
 text=Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy. // Target player sacrifices two attacking creatures.
-mana={U}{R} // {3}{R}{W}
+mana={U}{R}
 type=Instant // Instant
 [/card]
 [card]
@@ -12499,4 +12499,1773 @@ name=capital offense
 text=target creature gets -x/-x until end of turn, where x is the number of times a capital letter appears in its rules text. (ignore reminder text and flavor text.)
 mana={2}{B}{B}
 type=instant
+[/card]
+[card]
+name="Brims" Barone, Midway Mobster
+text=When "Brims" Barone, Midway Mobster enters, put a +1/+1 counter on each other creature you control that has a hat. -- "Brims" Barone, Midway Mobster has menace as long as you're wearing a hat.
+mana={3}{W}{B}
+type=Legendary Creature
+subtype=Human Rogue
+power=5
+toughness=4
+[/card]
+[card]
+name="Lifetime" Pass Holder
+text=This creature enters tapped. -- When this creature dies, open an Attraction. -- Whenever you roll to visit your Attractions, if you roll a 6, you may return this card from your graveyard to the battlefield.
+mana={B}
+type=Creature
+subtype=Zombie Guest
+power=2
+toughness=1
+[/card]
+[card]
+name="Name Sticker" Goblin
+text=When this creature enters from anywhere other than a graveyard or exile, if it's on the battlefield and you control 9 or fewer creatures named "Name Sticker" Goblin, roll a 20-sided die. -- 1-6 | Add {R}{R}{R}{R}. -- 7-14 | Add {R}{R}{R}{R}{R}. -- 15-20 | Add {R}{R}{R}{R}{R}{R}.
+mana={2}{R}
+type=Creature
+subtype=Goblin Guest
+power=2
+toughness=2
+[/card]
+[card]
+name=A Good Day to Pie
+text=Tap up to two target creatures. -- Whenever you put a name sticker on a creature, you may return this card from your graveyard to your hand.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=A Real Handful
+text=As long as one or more hands are touching this creature, it gets +2/+2. -- As long as two or more hands are touching this creature, it has menace. -- As long as three or more hands are touching this creature, it has lifelink.
+mana={3}{B}
+type=Creature
+subtype=Alien Child Guest
+power=1
+toughness=1
+[/card]
+[card]
+name=Aardwolf's Advantage
+text=Creatures you control get +2/+0 and gain alpha strike until end of turn. (A creature with alpha strike has first strike as long as it's blocking or being blocked by a creature that comes after it alphabetically.)
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
+name=Aerialephant
+text=Flying -- When Aerialephant enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={3}{W}
+type=Creature
+subtype=Elephant Performer
+power=3
+toughness=2
+[/card]
+[card]
+name=Alpha Guard
+text=When this creature enters, choose a letter. -- {T}: Untap another target permanent whose name starts with the chosen letter.
+mana={1}{G}
+type=Creature
+subtype=Elf Employee
+power=1
+toughness=2
+[/card]
+[card]
+name=Ambassador Blorpityblorpboop
+text=When Ambassador Blorpityblorpboop enters, you get {TK}{TK}{TK}, then you may put a sticker on a nonland permanent you own. -- At the beginning of each combat, you may have Ambassador Blorpityblorpboop's base power become equal to the total power of all stickers on permanents you control and its base toughness become equal to those stickers' total toughness.
+mana={3}{G}{U}
+type=Legendary Creature
+subtype=Alien Advisor Guest
+power=3
+toughness=3
+[/card]
+[card]
+name=Amped Up
+text=This spell costs {1} less to cast for each electrical socket in a wall or floor you can see from your seat. -- Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gets +3/+0 and gains haste.
+mana={5}{R}
+type=Sorcery
+[/card]
+[card]
+name=An Incident Has Occurred
+text=Choose one or both — -- • Destroy target creature with flying. -- • Destroy target Attraction. (It's put into its owner's junkyard.) -- You may apologize. If you do, you gain 3 life.
+mana={1}{G}
+type=Sorcery
+[/card]
+[card]
+name=Angelic Harold
+text=Flying -- When Angelic Harold enters, you may put a name sticker on a nonland permanent you own. -- Each creature you control with three or more words in its name gets +1/+1.
+mana={1}{W}{U}
+type=Legendary Creature
+subtype=Angel Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Animate Graveyard
+text=Enchant your graveyard -- Enchanted graveyard is a creature on the battlefield with base power and toughness each equal to the number of cards in it. It has the text boxes of all creature cards in it. It's still a graveyard. -- If enchanted graveyard would leave the battlefield, instead exile this Aura.
+mana={3}{B}{B}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Animate Object
+text=You get seven {TK}. Choose an inanimate object you own from outside the game. Put a power and toughness sticker on it. You may also put a name sticker, an art sticker, and/or an ability sticker on it. Put it onto the battlefield as a creature token.
+mana={4}{U}
+type=Sorcery
+[/card]
+[card]
+name=Art Appreciation
+text=Put an art sticker on a nonland permanent you own. Then ask a person outside the game to rate its new art on a scale from 1 to 5, where 5 is the best. When they rate the art, up to that many target creatures can't block this turn.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Assembled Ensemble
+text=Vigilance -- Assembled Ensemble's power is equal to the number of Robots you control. -- Whenever you cast a spell with an artifact creature in its art, create a 1/1 white Clown Robot artifact creature token.
+mana={4}{W}
+type=Artifact Creature
+subtype=Clown Robot Bard
+power=*
+toughness=6
+[/card]
+[card]
+name=Astroquarium
+text=When this artifact enters, you may put an art sticker on it. -- {1}, {T}: Until end of turn, target creature becomes a blue Shark with base power and toughness 4/4. If the cracks in this artifact's art are completely covered, that creature becomes a blue Octopus with base power and toughness 8/8 instead. Activate only as a sorcery.
+mana={2}{U}
+type=Artifact
+[/card]
+[card]
+name=Atomwheel Acrobats
+text=Whenever you roll a 1 or 2, put that many +1/+1 counters on this creature. -- {2}{G}: Roll a six-sided die.
+mana={3}{G}
+type=Creature
+subtype=Elf Performer
+power=3
+toughness=2
+[/card]
+[card]
+name=Attempted Murder
+text=Choose target creature. Roll X six-sided dice. For each even result, put two -1/-1 counters on that creature. For each odd result, create a 1/2 blue Bird creature token with flying named Storm Crow.
+mana={X}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Autograph Book
+text=This artifact enters with a page counter on it for each person who has signed it. -- {3}, {T}, Remove a page counter from this artifact: Draw a card.
+mana={2}
+type=Artifact
+subtype=Book
+[/card]
+[card]
+name=Baaallerina
+text=Flying -- When this creature enters, you may put a name sticker on a nonland permanent you own. -- {2}{U}: Another target creature with a name sticker on it gains flying until end of turn.
+mana={3}{U}
+type=Creature
+subtype=Sheep Performer
+power=3
+toughness=3
+[/card]
+[card]
+name=Bag Check
+text=Counter target spell, then ask a person outside the game if that spell looks dangerous to them. If they say yes, draw a card, then discard a card.
+mana={1}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Balloon Stand
+text=Visit — Choose one. -- • Create a 1/1 red Balloon creature token with flying. -- • Sacrifice a Balloon. If you do, target creature gains flying until end of turn.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Bamboozling Beeble
+text=Protection from Robots -- {1}, {T}: The next time target player would roll one or more dice this turn, instead they roll that many dice plus one and you choose one of those rolls to ignore.
+mana={U}
+type=Creature
+subtype=Beeble
+power=1
+toughness=1
+[/card]
+[card]
+name=Bar Entry
+text=Choose one — -- • Destroy target creature with power 4 or greater. -- • Destroy target creature with any part of its head higher than the bar. (Align the tops of both cards to check.)
+mana={3}{W}
+type=Instant
+[/card]
+[card]
+name=Big Winner
+text=This creature has trample as long as you control a stickered permanent.
+mana={3}{R}
+type=Creature
+subtype=Ogre Warrior Guest
+power=5
+toughness=2
+[/card]
+[card]
+name=Bioluminary
+text=Whenever Bioluminary deals combat damage to a player, you get {TK}{TK}, then you may put a sticker on a nonland permanent you own.
+mana={2}{U}
+type=Creature
+subtype=Merfolk Performer
+power=1
+toughness=3
+[/card]
+[card]
+name=Black Hole
+text=Destroy target creature and up to X other target creatures, where X is the number of Attractions you've visited this turn.
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Blorbian Buddy
+text=Trample -- {G}, {T}: You get {TK} (a ticket counter).
+mana={G}
+type=Creature
+subtype=Alien Guest
+power=1
+toughness=1
+[/card]
+[card]
+name=Blue Ribbon
+text=When this Equipment enters, ask a person outside the game which creature you control is most deserving of a blue ribbon. Attach this Equipment to that creature. -- Equipped creature has best in show. (Whenever another creature becomes the target of a spell or ability you control, you may copy that spell or ability. If you do, the copy targets this creature.) -- Equip {3}
+mana={1}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Blufferfish
+text={3}{U}: An opponent tells you a statement about themselves and secretly notes whether it's true or false. You guess which it is. If you guessed correctly, this creature gets +2/+0 and can't be blocked this turn.
+mana={4}{U}{U}
+type=Creature
+subtype=Fish
+power=3
+toughness=6
+[/card]
+[card]
+name=Boing!
+text=Return target creature to its owner's hand, then roll a six-sided die. If the result is 3 or less, scry a number of cards equal to the result.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Bounce Chamber
+text=Visit — Return a creature you don't control with the lowest toughness among creatures you don't control to its owner's hand. (If multiple creatures are tied, choose any one of them.)
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Bumper Cars
+text=Visit — Target creature must be blocked this turn if able.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Busted!
+text=Counter target spell unless its controller pays {X}, where X is the number of words in the name with the most words among permanents you control.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Captain Rex Nebula
+text=At the beginning of combat on your turn, choose target nonland permanent you control. Until end of turn, it becomes a Vehicle artifact with base power and toughness each equal to its mana value, and it gains crew 2 and "Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target."
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Human Pilot Employee
+power=2
+toughness=2
+[/card]
+[card]
+name=Carnival Barker
+text={T}: You have thirty seconds to laud a creature you control to any people outside the game. Until end of turn, that creature gains trample and haste and gets +X/+0, where X is the number of those people who applauded. Activate only as a sorcery and only once.
+mana={2}{R}
+type=Creature
+subtype=Dog Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Carnival Carnivore
+text=Deathtouch -- When Carnival Carnivore enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={5}{B}
+type=Creature
+subtype=Alien Crab Horror
+power=4
+toughness=6
+[/card]
+[card]
+name=Celebr-8000
+text=At the beginning of combat on your turn, roll two six-sided dice. For each result of 1, this creature gets +1/+1 until end of turn. For each other result, it gains the indicated ability until end of turn. If you rolled doubles, it also gains double strike until end of turn. -- • 2 — menace -- • 3 — vigilance -- • 4 — lifelink -- • 5 — flying -- • 6 — indestructible
+mana={5}
+type=Artifact Creature
+subtype=Clown Robot
+power=3
+toughness=3
+[/card]
+[card]
+name=Centaur of Attention
+text=When this creature enters, roll five six-sided dice and store those results on it. -- At the beginning of combat on your turn, you may reroll any number of this creature's stored results. -- This creature gets +X/+X, where X is the greatest number of stored results on it of the same value.
+mana={3}{G}{G}
+type=Creature
+subtype=Centaur Performer
+power=3
+toughness=3
+[/card]
+[card]
+name=Centrifuge
+text=Visit — Each player draws a card from the library of the player to their right. You create three Treasure tokens.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Chicken Troupe
+text=Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- When Chicken Troupe enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={1}{G}
+type=Creature
+subtype=Bird Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Circuits Act
+text=Roll three six-sided dice. For each different result, create a 1/1 white Clown Robot artifact creature token.
+mana={2}{R}
+type=Sorcery
+[/card]
+[card]
+name=Claire D'Loon, Joy Sculptor
+text=When Claire D'Loon, Joy Sculptor enters, for the rest of the game, tokens you own become cards that are still tokens. (They continue to exist after they leave the battlefield.) -- {1}{W}{U}, {T}: You may put a token from your graveyard or hand onto the battlefield.
+mana={W}{U}
+type=Legendary Creature
+subtype=Human Performer
+power=2
+toughness=3
+[/card]
+[card]
+name=Clandestine Chameleon
+text=When Clandestine Chameleon enters, you get {TK}{TK}, then you may put a sticker on a nonland permanent you own. -- Clandestine Chameleon has all abilities of ability stickers on other permanents you own and cards in your graveyard.
+mana={3}{G}
+type=Creature
+subtype=Lizard Guest
+power=4
+toughness=3
+[/card]
+[card]
+name=Clown Car
+text=When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle. -- Crew 2
+mana={X}
+type=Artifact
+subtype=Vehicle
+power=1
+toughness=1
+[/card]
+[card]
+name=Clown Extruder
+text=Visit — Create a 1/1 white Clown Robot artifact creature token.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Clowning Around
+text=Create two 1/1 white Clown Robot artifact creature tokens, then roll a six-sided die. If the result is equal to or less than the number of Robots you control, create a 1/1 white Clown Robot artifact creature token.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Comet, Stellar Pup
+text=0: Roll a six-sided die. -- 1 or 2 — [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn. -- 3 — [−1], then return a card with mana value 2 or less from your graveyard to your hand. -- 4 or 5 — Comet deals damage equal to the number of loyalty counters on him to a creature or player, then [−2]. -- 6 — [+1], and you may activate Comet's loyalty ability two more times this turn.
+mana={2}{R}{W}
+type=Legendary Planeswalker
+subtype=Comet
+[/card]
+[card]
+name=Coming Attraction
+text=Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Command Performance
+text=Choose two — -- • Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- • Roll to visit your Attractions. -- • You get {TK}{TK}. -- • You may put a sticker on a nonland permanent you own.
+mana={1}{U}
+type=Sorcery
+[/card]
+[card]
+name=Complaints Clerk
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- Whenever you roll a 1, create a 1/1 white Clown Robot artifact creature token.
+mana={3}{W}
+type=Creature
+subtype=Sloth Beast Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Concession Stand
+text=Visit — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Costume Shop
+text=Visit — You may put a sticker on a nonland permanent you own.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Cover the Spot
+text=Visit — Drop three cards you own from outside the game one at a time onto the playing area from a height of at least one foot (about 0.3 meters). If those cards completely cover this Attraction, claim the prize! -- Prize — You get {TK}{TK}{TK}{TK}, then you may put a sticker on a nonland permanent you own. Sacrifice this Attraction, then open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Croakid Amphibonaut
+text=This creature has flying as long as you control a stickered permanent.
+mana={4}{U}
+type=Creature
+subtype=Frog Guest
+power=4
+toughness=3
+[/card]
+[card]
+name=D00-DL, Caricaturist
+text=When D00-DL, Caricaturist enters, create a 4/4 colorless Sketch creature token, which you have fifteen seconds to draw. The token has flying if it has wings in its art. The same is true for first strike and a sword, vigilance and a shield, menace and mean eyes, trample and horns, deathtouch and claws, lifelink and fangs, and haste and footwear.
+mana={6}
+type=Legendary Artifact Creature
+subtype=Robot
+power=1
+toughness=1
+[/card]
+[card]
+name=Dart Throw
+text=Visit — Throw a card you own from outside the game onto the playing area from a distance of three feet (about one meter). If that card touches this Attraction, claim the prize! -- Prize — Create two 2/2 pink Teddy Bear creature tokens. Sacrifice this Attraction, then open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Deadbeat Attendant
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={1}{B}
+type=Creature
+subtype=Vampire Employee
+power=1
+toughness=1
+[/card]
+[card]
+name=Decisions, Decisions
+text=Reveal the top three cards of your library, then choose a consonant. (Y counts.) Put each card that has the chosen letter in the first word of its name from among them into your hand and the rest on the bottom of your library in any order.
+mana={3}{U}
+type=Sorcery
+[/card]
+[card]
+name=Dee Kay, Finder of the Lost
+text=When Dee Kay enters, open an Attraction. -- Whenever you roll a 2, each opponent loses 1 life and you gain 1 life. -- Whenever you roll a 4, you may tap or untap target artifact or creature. -- Whenever you roll a 6, return target creature card from your graveyard to your hand.
+mana={1}{U}{B}
+type=Legendary Creature
+subtype=Zombie Employee
+power=1
+toughness=4
+[/card]
+[card]
+name=Devil K. Nevil
+text=Haste -- When Devil K. Nevil enters, jump it over any number of creatures. If it clears those creatures, put that many +1/+1 counters on it. (You can see a jumping demonstration at DevilKNevil.com.)
+mana={2}{R}
+type=Legendary Creature
+subtype=Devil Performer
+power=2
+toughness=1
+[/card]
+[card]
+name=Discourtesy Clerk
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- At the beginning of your end step, if you control three or more Attractions, you draw a card and you lose 1 life.
+mana={3}{B}
+type=Creature
+subtype=Vampire Employee
+power=3
+toughness=2
+[/card]
+[card]
+name=Disemvowel
+text=Destroy target creature. That creature's controller loses 1 life for each unique vowel in the creature's name. (The vowels are A, E, I, O, U, and Y.)
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Dissatisfied Customer
+text=Flying, haste -- When this creature enters, roll a six-sided die. If the result is 3 or less, you lose that much life.
+mana={2}{B}
+type=Creature
+subtype=Vampire Guest
+power=2
+toughness=1
+[/card]
+[card]
+name=Don't Try This at Home
+text=If a hot source you control would deal damage to a permanent or player, it deals that much damage plus 1 instead. (Something is hot if it has hot things in its art, like fire or explosions.) -- {1}{R}, Sacrifice this enchantment: It deals damage equal to twice the number of hot cards in your graveyard to target creature or planeswalker.
+mana={1}{R}
+type=Enchantment
+[/card]
+[card]
+name=Done for the Day
+text=At the beginning of your end step, if you control an Employee, a Performer, or a Robot, you may get {TK} or create a Treasure token. If you control all three, you may put a sticker on a nonland permanent you own.
+mana={2}{G}
+type=Enchantment
+[/card]
+[card]
+name=Down for Repairs
+text=Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Destroy up to one target Attraction that player controls. (It's put into their junkyard.)
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Draconian Gate-Bot
+text=When this creature enters, choose one — -- • Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- • Destroy target Attraction. (It's put into its owner's junkyard.)
+mana={5}
+type=Artifact Creature
+subtype=Robot
+power=4
+toughness=2
+[/card]
+[card]
+name=Drop Tower
+text=Visit — Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Eelectrocute
+text=Eelectrocute deals 2 damage to any target. -- You may cast this card from your graveyard as long as you've rolled a 6 this turn. If you cast it this way and it would be put into your graveyard, exile it instead.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Embiggen
+text=Until end of turn, target non-Brushwagg creature gets +1/+1 for each supertype, card type, and subtype it has.
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Exchange of Words
+text=When this enchantment enters, choose two target creatures. For as long as this enchantment remains on the battlefield, exchange the text boxes of those creatures.
+mana={1}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Exit Through the Grift Shop
+text=Yell "Who wants a souvenir?" and announce the name of a nonland card in your graveyard. Each player in an Un-game who can hear you may bid life. You start the bidding at 0. The high bidder loses life equal to the high bid. They copy the card and may cast the copy without paying its mana cost. If you didn't win the bid, you gain life equal to the high bid and create that many Treasure tokens.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Far Out
+text=Rather than choose the indicated number of modes for spells and abilities you control, you may choose one or more modes. You can't choose any mode more than once.
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Ferris Wheel
+text=Visit — Choose target creature that hasn't been phased out with this Attraction. That creature phases out until you roll a 3 or less while rolling to visit your Attractions.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Fight the _____ Fight
+text=Enchant creature you control -- When this Aura enters, you may put a name sticker on it. When you do, enchanted creature fights up to one target creature you don't control. -- Enchanted creature gets +0/+2 for each name sticker on this Aura with eight or more letters.
+mana={1}{G}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Finishing Move
+text=You get {TK}{TK}, then you may put a sticker on a nonland permanent you own. Target creature you control deals damage equal to its power to target creature you don't control.
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Fluros of Myra's Marvels
+text=As Fluros of Myra's Marvels enters, choose a number greater than 0. -- Whenever you cast a spell with power, toughness, or loyalty equal to the chosen number, target artifact or creature becomes an artifact creature with base power and toughness X/X until end of turn, where X is the chosen number. -- Partner
+mana={2}{U}{U}
+type=Legendary Creature
+subtype=Merfolk Performer
+power=3
+toughness=4
+[/card]
+[card]
+name=Foam Weapons Kiosk
+text=Visit — Put a +1/+1 counter on target creature you control. That creature gains vigilance until end of turn.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Focused Funambulist
+text=Flash -- As this creature enters, you may put an art sticker on the empty side of the balancing pole. When you do, ask a person outside the game "Does this look balanced?" If they say yes, you may tap or untap target creature.
+mana={1}{U}
+type=Creature
+subtype=Human Performer
+power=2
+toughness=1
+[/card]
+[card]
+name=Form of the Approach of the Second Sun
+text=When this enchantment enters, you gain 7 life. You become a card until you leave your library or that library is shuffled. Put yourself seventh from the top, balancing the cards on top of you on your head. -- When you draw yourself, you win the game. -- When one or more cards fall off your head, exile them and all cards on your head, then sacrifice this enchantment.
+mana={4}{W}
+type=Enchantment
+[/card]
+[card]
+name=Fortune Teller
+text=Visit — Scry 1.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Gallery of Legends
+text=Visit — Exile cards from the top of your library until you exile a nonland card, then choose a legendary creature card name with the same mana value as that card. Create a token that's a copy of the card with the chosen name. That token gains haste. Exile it at the beginning of the next end step.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Get Your Head in the Game
+text=Flash -- When this enchantment enters, exile target nonland permanent until it (this card) leaves the battlefield, then touch it (this card) to your head. When it (this card) stops touching it (your head), sacrifice it (the card, not your head).
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Gift Shop
+text=Visit — Choose one that hasn't been chosen. -- • Create a 1/1 red Balloon creature token with flying. -- • Create a 2/2 pink Teddy Bear creature token. -- • Create two Food tokens. -- • You get {TK}{TK}{TK}. -- • You may put a sticker on a nonland permanent you own.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Glitterflitter
+text=Flying -- When Glitterflitter enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={2}{U}
+type=Creature
+subtype=Faerie Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Goblin Airbrusher
+text=Whenever you place a sticker, create a Treasure token. If it's an art sticker, instead create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={1}{R}
+type=Creature
+subtype=Goblin Employee
+power=2
+toughness=1
+[/card]
+[card]
+name=Goblin Blastronauts
+text=When this creature enters, open an Attraction. -- Whenever you roll a 6, you may copy the spell, ability, or Attraction visit that caused you to roll that die. You may choose new targets for the copy.
+mana={3}{R}{R}
+type=Creature
+subtype=Goblin Employee
+power=5
+toughness=4
+[/card]
+[card]
+name=Goblin Cruciverbalist
+text=Haste -- When this creature enters, create a colorless artifact token named your choice of A, E, I, O, or U. -- Whenever this creature attacks, using the first letters of the names of permanents you control, spell a word you haven't spelled this game. It gets +1/+0 until end of turn for each letter in that word.
+mana={2}{R}
+type=Creature
+subtype=Goblin Wizard Guest
+power=1
+toughness=4
+[/card]
+[card]
+name=Goblin Girder Gang
+text=Reach -- Whenever you roll a die, if the result isn't stored on this creature, you may store that result on it. When you do, this creature deals 1 damage to any target without a hat. -- This creature gets +1/+0 for each result stored on it.
+mana={3}{R}
+type=Creature
+subtype=Goblin Employee
+power=0
+toughness=4
+[/card]
+[card]
+name=Gobsmacked
+text=Enchant nonland permanent -- As this Aura enters, choose a person outside the game. -- As long as you can see the chosen person from your seat, enchanted permanent can't attack or block, and its activated abilities can't be activated.
+mana={1}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Grabby Tabby
+text=This creature has vigilance as long as you control a stickered permanent.
+mana={3}{G}
+type=Creature
+subtype=Cat Guest
+power=4
+toughness=3
+[/card]
+[card]
+name=Grand Marshal Macie
+text=You may choose not to untap Grand Marshal Macie during your untap step. If you do, put a pause counter on it, then you lose 1 life for each pause counter on it. -- Whenever Macie becomes untapped, remove all pause counters from it. -- {2}, {T}: Choose an "until end of turn" or "this turn" effect. As long as Macie remains tapped, that effect doesn't end.
+mana={1}{W}{B}
+type=Legendary Creature
+subtype=Human Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Gray Merchant of Alphabet
+text=When this creature enters, choose a letter. For each creature you control that has the chosen letter in its name, you gain 1 life and each opponent loses 1 life.
+mana={3}{B}{B}
+type=Creature
+subtype=Zombie Performer
+power=2
+toughness=4
+[/card]
+[card]
+name=Greatest Show in the Multiverse
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- As an additional cost to cast this spell, exile five instant and/or sorcery cards you own with the same artist and different names from outside the game. -- I, II, III — Choose one of the exiled cards at random. You may cast it without paying its mana cost.
+mana={7}
+type=Artifact Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Guess Your Fate
+text=Visit — Look at the bottom card of your library, then give a person outside the game a one-word clue not on that card. They guess a word. If their guess appears in that card's name, claim the prize! -- Prize — Reveal the card, put it into your hand, then sacrifice this Attraction and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Haberthrasher
+text=Deathtouch -- Whenever another creature you control that has a hat enters or a hat sticker is put on a creature you control, each opponent loses 1 life.
+mana={1}{B}
+type=Creature
+subtype=Human Hatificer Assassin
+power=2
+toughness=2
+[/card]
+[card]
+name=Hall of Mirrors
+text=Visit — Choose target creature you control. Each other creature you control becomes a copy of that creature until end of turn, except it isn't legendary.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Hardy of Myra's Marvels
+text=As Hardy of Myra's Marvels enters, choose a number. -- Whenever you cast a spell with the chosen number of lines of flavor text, put that many +1/+1 counters on target creature. -- Partner (You can have two commanders if both have partner.)
+mana={2}{G}{G}
+type=Legendary Creature
+subtype=Elf Performer
+power=4
+toughness=4
+[/card]
+[card]
+name=Hat Trick
+text=Target blocking or blocked creature you control gets +1/+1 and gains first strike until end of turn. If it has a hat, it gains double strike until end of turn. If you and that creature each have a hat, the creature gains triple strike until end of turn.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Haunted House
+text=Visit — Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next end step.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=How Is This a Par Three?!
+text=Whenever you cast a spell, you may have target player mill X cards, where X is the number of words in that spell's name.
+mana={2}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Icing Manipulator
+text=Each +1/+1 counter on a creature you control is also a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") -- {3}{G}, {T}: Roll two six-sided dice. For each odd result, put a +1/+1 counter on a creature of your choice. Activate only as a sorcery.
+mana={1}{G}
+type=Creature
+subtype=Human Employee
+power=1
+toughness=3
+[/card]
+[card]
+name=Ignacio of Myra's Marvels
+text=As Ignacio of Myra's Marvels enters, choose armor, blood, book, bottle, fang, fire, scroll, spear, sword, or water. -- Whenever you cast a spell with the chosen object in its art, create two Treasure tokens. -- Partner (You can have two commanders if both have partner.)
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=Lizard Performer
+power=4
+toughness=3
+[/card]
+[card]
+name=Impounding Lot-Bot
+text=When this creature enters, you may say "INCARCERATE!" in a robot voice. If you do, exile another target artifact or enchantment until this creature leaves the battlefield.
+mana={3}{W}
+type=Artifact Creature
+subtype=Robot
+power=3
+toughness=4
+[/card]
+[card]
+name=Information Booth
+text=Visit — Draw a card.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=It Came from Planet Glurg
+text=You may have It Came from Planet Glurg enter as a copy of X different creatures on the battlefield. (It has their total power, total toughness, combined mana costs, all text boxes, names, art, and so on.)
+mana={X}{X}{G}{U}
+type=Legendary Creature
+subtype=Alien Ooze
+power=0
+toughness=0
+[/card]
+[card]
+name=Jermane, Pride of the Circus
+text={G}, {T}: Put two +1/+1 counters on target creature with four or more legs. -- {1}{G}{G}, {T}: Until end of turn, all creatures able to block target creature with four or more legs do so.
+mana={G}{G}
+type=Legendary Creature
+subtype=Cat Performer
+power=2
+toughness=3
+[/card]
+[card]
+name=Jetpack Janitor
+text=Alpha strike (This creature has first strike as long as it's blocking or being blocked by a creature that comes after it alphabetically.)
+mana={2}{W}
+type=Creature
+subtype=Human Employee
+power=3
+toughness=2
+[/card]
+[card]
+name=Juggletron
+text=Trample -- Whenever this creature attacks, you may put an art sticker on it. -- This creature gets +3/+0 for each item in its art that's not touching Juggletron, another item, or the card frame.
+mana={2}{R}
+type=Artifact Creature
+subtype=Clown Robot
+power=0
+toughness=4
+[/card]
+[card]
+name=Katerina of Myra's Marvels
+text=As Katerina of Myra's Marvels enters, choose a letter. -- Whenever you cast a spell whose name begins with the chosen letter, create a white 2/2 Cat creature token with flying. -- Partner (You can have two commanders if they both have partner.)
+mana={2}{W}{W}
+type=Legendary Creature
+subtype=Human Performer
+power=3
+toughness=3
+[/card]
+[card]
+name=Kiddie Coaster
+text=Visit — Creatures you control get +1/+0 until end of turn.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Killer Cosplay
+text=Whenever this Equipment becomes attached to a creature, choose a creature card name with an identical mana cost. That creature becomes a copy of the card with the chosen name until this Equipment becomes unattached from it. -- Equip {3}
+mana={G}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Knife and Death
+text=Just a second (As long as this spell is on the stack, players can't move permanents.) -- One at a time, throw ten cards you own from outside the game onto the playing area from a distance of at least three feet (about one meter). For each of those cards, Knife and Death deals 1 damage to each creature or planeswalker you don't control that card is touching. You gain life equal to the damage dealt this way.
+mana={2}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Knight in _____ Armor
+text=First strike -- As this creature enters, you may put a name sticker on it. -- This creature has protection from names that start with the same letter as a name sticker on it.
+mana={1}{W}
+type=Creature
+subtype=Human Knight Performer
+power=2
+toughness=1
+[/card]
+[card]
+name=Last Voyage of the _____
+text=When this enchantment enters, you may put a name sticker on it, then it becomes an Aura with enchant creature. Return a creature card from your graveyard to the battlefield and attach this Aura to it. -- Enchanted creature gets +2/+0 for each name sticker on this Aura with seven or fewer letters. -- When this Aura leaves the battlefield, sacrifice enchanted creature.
+mana={3}{B}
+type=Enchantment
+[/card]
+[card]
+name=Leading Performance
+text=Choose two letters. Put a +1/+1 counter on each creature you control whose name begins with either of the chosen letters.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Lila, Hospitality Hostess
+text=You may look at the top card of your library any time. -- You may cast common spells from the top of your library. -- Guests you control get +1/+1.
+mana={2}{G}{W}
+type=Legendary Creature
+subtype=Elf Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Line Cutter
+text=When this creature enters, roll to visit your Attractions.
+mana={3}{B}
+type=Creature
+subtype=Human Rogue Guest
+power=3
+toughness=4
+[/card]
+[card]
+name=Lineprancers
+text=When Lineprancers enters, you get {TK}{TK}, then you may put a power and toughness sticker on a creature you own. -- {3}{G}: Target creature you don't control blocks target creature you control with a power and toughness sticker on it other than Lineprancers this turn if able.
+mana={1}{G}
+type=Creature
+subtype=Centaur Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Log Flume
+text=Visit — Choose up to four creatures you control. Those creatures jump in a log until end of turn. (Creatures in a log together can't be blocked unless they're all blocked. If a spell or ability you control targets one of them, it targets all of them.)
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Magar of the Magic Strings
+text={1}{B}{R}: Note the name of target instant or sorcery card in your graveyard and put it onto the battlefield face down. It's a 3/3 creature with "Whenever this creature deals combat damage to a player, you may create a copy of the card with the noted name. You may cast the copy without paying its mana cost" and "If this creature would leave the battlefield, exile it instead of putting it anywhere else."
+mana={1}{B}{R}
+type=Legendary Creature
+subtype=Minotaur Performer
+power=3
+toughness=3
+[/card]
+[card]
+name=Main Event Horizon
+text=As an additional cost to cast this spell, choose A through M or N through Z. -- Destroy each creature whose name begins with a letter in the chosen range.
+mana={3}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Make a _____ Splash
+text=Flash -- When this enchantment enters, you may put a name sticker on it. -- Whenever you put a sticker on this enchantment, tap up to X target creatures, where X is the number of u's in name stickers on this enchantment.
+mana={2}{U}
+type=Enchantment
+[/card]
+[card]
+name=Meet and Greet "Sisay"
+text=Whenever you cast a spell, choose one — -- • Flavor — Meet and Greet "Sisay" gets +1/+1 until end of turn for each line of flavor text that spell has. -- • History — Create a Treasure token if that spell doesn't share an expansion symbol with a permanent you control or a card in your graveyard.
+mana={R}{G}
+type=Legendary Creature
+subtype=Elf Performer
+power=1
+toughness=1
+[/card]
+[card]
+name=Memory Test
+text=When this Attraction enters, target opponent exiles cards from the bottom of their library until they exile five nonland cards, then turns those nonland cards face down. -- Visit — Name the exiled face-down cards, then look at them. If you named them correctly, turn them face up, then claim the prize! -- Prize — Create three 1/1 red Balloon creature tokens with flying, then sacrifice this Attraction and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Merry-Go-Round
+text=Visit — Creatures you control with power 2 or less gain horsemanship until end of turn. (They can't be blocked except by creatures with horsemanship.)
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Minotaur de Force
+text=Haste -- When this creature enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={1}{R}
+type=Creature
+subtype=Minotaur Performer
+power=2
+toughness=1
+[/card]
+[card]
+name=Mistakes Were Made
+text=Destroy target artifact or enchantment. Create a 1/1 green Squirrel creature token for each fire extinguisher you can see from your seat.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Mobile Clone
+text=Using a mobile device, take a picture of target creature. That device enters as a token that's a photocopy of the pictured creature. (Photocopies include Auras, Equipment, counters, and stickers in the shot. Don't touch other people's phones without permission and be careful if you do.)
+mana={2}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Monitor Monitor
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- Once each turn, you may pay {1} to reroll one or more dice you rolled.
+mana={2}{U}{U}
+type=Creature
+subtype=Human Employee
+power=2
+toughness=5
+[/card]
+[card]
+name=Monoxa, Midway Manager
+text=Whenever you roll a 3 or higher, Monoxa gains first strike until end of turn. If the roll was 4 or higher, it gains menace until end of turn. If the roll was 5 or higher, it gains lifelink until end of turn. -- {6}: Roll a six-sided die.
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Vampire Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Motion Sickness
+text=Enchant creature -- When this Aura enters, tap enchanted creature. -- Enchanted creature doesn't untap during its controller's untap step. -- Whenever you visit an Attraction, you may attach this Aura to target tapped creature.
+mana={3}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Myra the Magnificent
+text=Whenever you cast an instant or sorcery spell from your hand, open an Attraction. -- {X}, {T}: Exile target instant or sorcery card with mana value X from your graveyard and choose an Attraction you control that doesn't have a midway counter on it. Put a midway counter on it. For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Human Performer
+power=2
+toughness=4
+[/card]
+[card]
+name=Nearby Planet
+text=Rangeling (This card is every land type, including Plains, Island, Swamp, Mountain, Forest, Desert, Gate, Lair, Locus, and all those Urza's ones.) -- This land enters tapped. -- When this land enters, sacrifice it unless you pay {1}.
+type=Land
+[/card]
+[card]
+name=Night Shift of the Living Dead
+text=After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn. -- Whenever you roll a 6, create a 2/2 black Zombie Employee creature token.
+mana={3}{B}
+type=Enchantment
+[/card]
+[card]
+name=Nocturno of Myra's Marvels
+text=As Nocturno of Myra's Marvels enters, choose a word with five or more letters. -- Whenever you cast a spell with the chosen word in its rules text, you draw a card and you lose 2 life. -- Partner (You can have two commanders if both have partner.)
+mana={2}{B}{B}
+type=Legendary Creature
+subtype=Vampire Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Non-Human Cannonball
+text=When this creature dies, roll a six-sided die. If the result is 4 or less, this creature deals that much damage to you.
+mana={2}{R}
+type=Artifact Creature
+subtype=Clown Robot
+power=4
+toughness=3
+[/card]
+[card]
+name=Now You See Me . . .
+text=Exile target creature you control, then return it to the battlefield under its owner's control with X +1/+1 counters on it, where X is the number of mirrors on walls you can see from your seat.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Octo Opus
+text=When this enchantment enters, create a 4/4 blue Octopus Performer creature token named Contortionist with "At the beginning of your upkeep, you may fold this token in half." (It becomes 2/2, then 1/1, ½/½, and so on.) -- Sacrifice this enchantment: Draw a card and an additional card for each of Contortionist's folds.
+mana={3}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Omniclown Colossus
+text=Affinity for Clowns (This spell costs {1} less to cast for each Clown you control.) -- Trample
+mana={8}{R}{R}
+type=Artifact Creature
+subtype=Clown Robot
+power=7
+toughness=7
+[/card]
+[card]
+name=One-Clown Band
+text={2}{R}: Target Robot gets +2/+0 until end of turn.
+mana={1}{R}
+type=Artifact Creature
+subtype=Clown Robot Bard
+power=1
+toughness=3
+[/card]
+[card]
+name=Opening Ceremony
+text=Add {W}{U}{B}{R}{G}{C}. You may open a sealed Magic booster pack. Until end of turn, you may cast spells from among the cards in that booster pack.
+mana={4}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Pair o' Dice Lost
+text=Roll two six-sided dice. Return any number of cards with total mana value X or less from your graveyard to your hand, where X is the total of those results. Exile Pair o' Dice Lost.
+mana={3}{G}{G}
+type=Instant
+[/card]
+[card]
+name=Park Bleater
+text=Whenever another creature you own enters, you get {TK}. -- {W}, {T}: You may put a sticker on a creature you own that entered this turn.
+mana={2}{W}
+type=Creature
+subtype=Goat Employee
+power=2
+toughness=2
+[/card]
+[card]
+name=Park Map
+text={1}, Sacrifice this artifact: Search your library for a land card that doesn't have the same art as a permanent you control, reveal it, put it into your hand, then shuffle.
+mana={1}
+type=Artifact
+[/card]
+[card]
+name=Park Re-Entry
+text=Return up to two target creature cards that each have a hat and/or mana value 3 or less from your graveyard to the battlefield.
+mana={3}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Petting Zookeeper
+text=Reach -- When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={2}{G}
+type=Creature
+subtype=Elf Employee
+power=0
+toughness=4
+[/card]
+[card]
+name=Phone a Friend
+text=Call someone and ask them to choose one. If they don't answer, an opponent chooses one. (Don't explain anything else. You choose targets.) -- • A — Gain control of target creature you don't control. -- • B — Choose target creature you control. Create two tokens that are each copies of it. -- • C — Take an extra turn after this one. -- • D — Draw seven cards.
+mana={3}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Photo Op
+text=Before the game begins, you may post a picture of yourself posing like the art of any Magic card with #GuessThatMagicCard and no other text. -- You may reveal a reply posted today with a guess and a card you own from outside the game with the same name as that guess. Put that card into your hand. Exile Photo Op.
+mana={B}
+type=Sorcery
+[/card]
+[card]
+name=Pick-a-Beeble
+text=Visit — Roll a six-sided die. Put a number of luck counters on Pick-a-Beeble equal to the result and create a Treasure token. Then if there are six or more luck counters on Pick-a-Beeble, claim the prize! -- Prize — Create two Treasure tokens, then sacrifice Pick-a-Beeble and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Pie-Eating Contest
+text=As an additional cost to cast this spell, gobble X. (Each time you gobble, take a bite of food or sacrifice a Food token.) -- X target creatures you control each get +2/+2 and gain trample until end of turn.
+mana={4}{G}
+type=Sorcery
+[/card]
+[card]
+name=Pietra, Crafter of Clowns
+text=Haste -- Robots you control get +1/+1. -- {R}{W}, {T}, Tell a joke you haven't told this game to someone outside the game: Create a 1/1 white Clown Robot artifact creature token. If that person laughed, the token gains haste until end of turn.
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Human Clown Artificer
+power=3
+toughness=2
+[/card]
+[card]
+name=Pin Collection
+text=When this Equipment enters, you may put an ability sticker with ticket cost X or less on it without paying that sticker's ticket cost. -- Equipped creature gets +1/+1 and has all abilities of ability stickers on this Equipment. -- Equip {2}
+mana={X}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Plate Spinning
+text=Whenever you cast a spell, copy it and you may choose new targets for the copy. Then balance a card from outside the game on one of your fingertips. When that card falls or touches another card, sacrifice this enchantment.
+mana={3}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Plot Armor
+text=Enchant creature -- Enchanted creature gets +2/+2 and can't be blocked except by creatures with flavor text.
+mana={2}{G}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Priority Boarding
+text=Whenever you roll a die, you may reveal the top card of your library. Do this only once each turn. Whenever you reveal a card with mana value less than the result this way, you may exile it. If you do, you may play it this turn.
+mana={2}{R}
+type=Enchantment
+[/card]
+[card]
+name=Prize Wall
+text=Defender -- {U}, {T}: You get {TK}. -- {4}{U}, {T}: You may put a sticker on a nonland permanent you own. Activate only as a sorcery.
+mana={1}{U}
+type=Creature
+subtype=Wall
+power=0
+toughness=4
+[/card]
+[card]
+name=Proficient Pyrodancer
+text=When this creature enters, you may put an art sticker on a nonland permanent you own. -- {2}{R}: Another target creature with an art sticker on it gets +2/+0 and gains menace until end of turn.
+mana={2}{R}
+type=Creature
+subtype=Human Performer
+power=2
+toughness=3
+[/card]
+[card]
+name=Push Your Luck
+text=Visit — Reveal cards from the top of your library until you decide to stop. If the total mana value of the cards revealed this way is 7 or less, create a 2/2 pink Teddy Bear creature token. If the total is exactly 7, claim the prize Shuffle the revealed cards into your library. -- Prize — Put five +1/+1 counters on a Teddy Bear you control. It gains haste. Sacrifice this Attraction and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Questionable Cuisine
+text=Return up to two target creature cards from your graveyard to your hand. Create a Food token for each trash can you can see from your seat. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Quick Fixer
+text=Menace -- Whenever this creature deals combat damage to a player, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={2}{B}
+type=Creature
+subtype=Azra Employee
+power=2
+toughness=3
+[/card]
+[card]
+name=Rad Rascal
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={3}{R}
+type=Creature
+subtype=Devil Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Rat in the Hat
+text={T}, Sacrifice this creature: Until end of turn, you may cast target creature card that has a hat from your graveyard.
+mana={B}
+type=Creature
+subtype=Rat Rogue
+power=1
+toughness=2
+[/card]
+[card]
+name=Resolute Veggiesaur
+text=Trample -- Whenever you roll your third die each turn, put a +1/+1 counter on this creature.
+mana={2}{G}
+type=Creature
+subtype=Dinosaur Employee
+power=3
+toughness=3
+[/card]
+[card]
+name=Ride Guide
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={4}{W}
+type=Creature
+subtype=Human Employee
+power=4
+toughness=4
+[/card]
+[card]
+name=Robo-Piñata
+text=When Robo-Piñata dies, choose one — -- • You get {TK}{TK}. -- • You may put a sticker on a nonland permanent you own.
+mana={2}{W}
+type=Artifact Creature
+subtype=Clown Robot
+power=2
+toughness=1
+[/card]
+[card]
+name=Rock Star
+text=Reach -- When this creature enters, you may discard a card. If you do, reveal the top five cards of your library. Ask a person outside the game to choose which of them is most like a rock band. Put that card into your hand and the rest on the bottom of your library in a random order.
+mana={4}{R}
+type=Creature
+subtype=Elemental Performer
+power=4
+toughness=5
+[/card]
+[card]
+name=Roller Coaster
+text=Visit — Creatures you control get +2/+0 until end of turn.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Roxi, Publicist to the Stars
+text=Flying -- Roxi's power is equal to the number of permanents you control with an art sticker plus the number of cards in your graveyard with an art sticker. -- When Roxi enters, distribute up to two art stickers among one or two nonland permanents you own.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Human Employee
+power=*
+toughness=4
+[/card]
+[card]
+name=Sanguine Sipper
+text=This creature has lifelink as long as you control a stickered permanent.
+mana={1}{W}
+type=Creature
+subtype=Vampire Guest
+power=3
+toughness=1
+[/card]
+[card]
+name=Saw in Half
+text=Destroy target creature. If that creature dies this way, its controller creates two tokens that are copies of that creature, except their power is half that creature's power and their toughness is half that creature's toughness. Round up each time.
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Scampire
+text=When Scampire enters, you get {TK}, then you may put a sticker on a creature card in your graveyard. -- {3}{B}: Return target creature card with a sticker on it from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step. Activate only as a sorcery.
+mana={2}{B}
+type=Creature
+subtype=Vampire Employee
+power=1
+toughness=3
+[/card]
+[card]
+name=Scared Stiff
+text=This creature has menace as long as you control a stickered permanent.
+mana={2}{B}
+type=Creature
+subtype=Zombie Coward Guest
+power=3
+toughness=2
+[/card]
+[card]
+name=Scavenger Hunt
+text=Visit — Choose "a creature wearing a hat," "a book or scroll," or "teeth" at random. You have ten seconds to search your library and reveal a card with the chosen item in its art. If you do, claim the prize! Then shuffle. -- Prize — You get {TK}{TK}, then you may put a sticker on a nonland permanent you own. Sacrifice Scavenger Hunt and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Scooch
+text=Add or subtract 1 from target creature's power, target player's life total, or target die roll's result. -- Draw a card.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Seasoned Buttoneer
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={2}{U}
+type=Creature
+subtype=Vedalken Employee
+power=2
+toughness=2
+[/card]
+[card]
+name=Six-Sided Die
+text=Choose target creature. Roll a six-sided die. -- 1 — It has base toughness 1 until end of turn. -- 2 — Put two -1/-1 counters on it. -- 3 — Six-Sided Die deals 3 damage to it and you gain 3 life. -- 4 — It gets -4/-4 until end of turn. -- 5 — Destroy it. -- 6 — Exile it.
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Slight Malfunction
+text=Choose one — -- • Destroy target artifact. -- • Roll a six-sided die. When you do, Slight Malfunction deals 1 damage to each of up to X target creatures, where X is the result.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Solaflora, Intergalactic Icon
+text=Auras and Equipment you control attached to Solaflora, Intergalactic Icon affect other creatures you control as though those Auras and Equipment were attached to them. -- Counters and stickers on Solaflora affect other creatures you control as though those counters and stickers were on them.
+mana={3}{W}{W}
+type=Legendary Creature
+subtype=Human Guest
+power=3
+toughness=3
+[/card]
+[card]
+name=Sole Performer
+text={T}: Add {T}{T}. Activate only once each turn. (While activating an ability, use {T} rather than tapping the permanent to pay for {T}.)
+mana={2}{G}{G}
+type=Creature
+subtype=Elf Performer
+power=2
+toughness=2
+[/card]
+[card]
+name=Soul Swindler
+text=As long as you've visited an Attraction this turn, this creature has indestructible. (Damage and effects that say "destroy" don't destroy it.) -- When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+mana={4}{B}
+type=Creature
+subtype=Demon Employee
+power=5
+toughness=3
+[/card]
+[card]
+name=Souvenir T-Shirt
+text=Gear Up, sponsored by Wizards of the Coast — As this Equipment enters, roll two six-sided dice. For each Magic-branded item you're wearing, roll an additional six-sided die. Choose two of those results. -- Equipped creature gets +X/+Y, where X is the first chosen result and Y is the second. -- Equip {4}
+mana={3}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Space Beleren
+text=Space sculptor (Space Beleren divides the battlefield into alpha, beta, and gamma sectors. If a creature isn't assigned to a sector, its controller assigns it to one. Opponents assign first.) -- +1: Creatures in each sector can be blocked this turn only by creatures in the same sector. -- −1: Put a +1/+1 counter on each creature in the sector of your choice. -- −5: Destroy all creatures in the sector of your choice.
+mana={2}{W}{U}
+type=Legendary Planeswalker
+subtype=Jace
+[/card]
+[card]
+name=Spelling Bee
+text=Flying, deathtouch -- Whenever this creature deals combat damage to a player, that player looks at the top card of your library and chooses a word on that card. You spell that word. If you spell it correctly, draw a card. Otherwise, scry 1.
+mana={2}{G}
+type=Creature
+subtype=Alien Insect
+power=1
+toughness=1
+[/card]
+[card]
+name=Spinnerette, Arachnobat
+text=Reach -- When Spinnerette enters, open an Attraction. -- As long as you control three or more Attractions, Spinnerette gets +2/+0 and has menace.
+mana={3}{B}{G}
+type=Legendary Creature
+subtype=Spider Performer
+power=2
+toughness=4
+[/card]
+[card]
+name=Spinny Ride
+text=Visit — Tap target creature an opponent controls.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Squirrel Squatters
+text=When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.) -- Whenever this creature attacks, create a 1/1 green Squirrel creature token that's tapped and attacking for each Attraction you've visited this turn.
+mana={3}{G}{G}
+type=Creature
+subtype=Squirrel
+power=4
+toughness=4
+[/card]
+[card]
+name=Squirrel Stack
+text=Visit — You have five seconds to stack dice on top of one another. If you stack at least five dice, claim the prize -- Prize — Create a 1/1 green Squirrel creature token for each die you stacked above the fourth, then sacrifice this Attraction and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Standard Procedure
+text={1}, Reveal Standard Procedure from your hand: Choose an instant or sorcery card with mana value 3 or less currently legal in the Standard format. Standard Procedure becomes that card until end of turn.
+type=Instant
+[/card]
+[card]
+name=Starlight Spectacular
+text=Parade! — At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it. (Places everyone! The first creature in line gets +0/+0.)
+mana={2}{W}{W}
+type=Enchantment
+[/card]
+[card]
+name=Step Right Up
+text=Open two Attractions. (Put the top two cards of your Attraction deck onto the battlefield.)
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Stiltstrider
+text=Reach -- When Stiltstrider enters, you get {TK}{TK}, then you may put a sticker on a nonland permanent you own.
+mana={3}{G}{G}
+type=Creature
+subtype=Rhino Performer
+power=5
+toughness=4
+[/card]
+[card]
+name=Storybook Ride
+text=Visit — Exile the top X cards of your library, where X is the number of Attractions you've visited this turn (including this one). You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them on the bottom of your library in any order.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Strength-Testing Hammer
+text=Whenever equipped creature attacks, roll a six-sided die. That creature gets +X/+0 until end of turn, where X is the result. Then if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card. -- Equip {3}
+mana={1}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Super-Duper Lost
+text=Put target creature into its owner's library just beneath the top X cards of that library, where X is the number of doors you can see from your seat.
+mana={4}{U}
+type=Instant
+[/card]
+[card]
+name=Surprise Party
+text=When this enchantment enters, yell "Surprise!" and put onto the battlefield any number of printed Clown Robot tokens that aren't touching each other, that you hid on the battlefield before you cast this enchantment, and that weren't spotted by an opponent before you cast this enchantment. -- Robots you control get +1/+0 and have vigilance.
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Swinging Ship
+text=Visit — After the first combat phase this turn, there's an additional combat phase. At the beginning of that combat, untap all creatures that attacked this turn.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Sword-Swallowing Seraph
+text=Flying, vigilance -- When this creature enters, you may put a name sticker on a nonland permanent you own. -- {1}{W}, {T}: Put a +1/+1 counter on another target creature with a name sticker on it. Activate only as a sorcery.
+mana={4}{W}{W}
+type=Creature
+subtype=Angel Performer
+power=4
+toughness=4
+[/card]
+[card]
+name=T.A.P.P.E.R.
+text={T}, Tap an untapped creature you control that has a hat: Tap target creature.
+mana={W}
+type=Artifact Creature
+subtype=Clown Robot
+power=1
+toughness=2
+[/card]
+[card]
+name=Tchotchke Elemental
+text=Whenever you create a token or put a counter or a sticker on another permanent, put a knickknack counter on this creature. Use a unique item that completely fits on this creature for each knickknack counter. -- This creature gets +1/+1 for each knickknack counter on it.
+mana={G}
+type=Creature
+subtype=Elemental
+power=1
+toughness=1
+[/card]
+[card]
+name=The Big Top
+text={T}: Add one mana of any color that appears on your top. (A top is an outerwear garment worn on the upper body.)
+type=Land
+[/card]
+[card]
+name=The Most Dangerous Gamer
+text=Deathtouch -- Whenever The Most Dangerous Gamer enters or attacks, open an Attraction. -- Whenever you open an Attraction, put a +1/+1 counter on The Most Dangerous Gamer. -- Whenever you claim the prize of an Attraction, destroy target permanent.
+mana={2}{B}{G}
+type=Legendary Creature
+subtype=Human Gamer Guest
+power=2
+toughness=2
+[/card]
+[card]
+name=The Space Family Goblinson
+text=The Space Family Goblinson has trample as long as you've rolled three or more dice this turn. -- Whenever you roll a die, put a +1/+1 counter on The Space Family Goblinson.
+mana={2}{R}{G}
+type=Legendary Creature
+subtype=Goblin Guest
+power=1
+toughness=1
+[/card]
+[card]
+name=The Superlatorium
+text=Visit — An opponent chooses "the cleanest," "the hungriest," or "the strangest." You choose a creature, then ask a person outside the game to choose the creature that best fits the chosen criteria. If they chose the same creature you chose, claim the prize! -- Prize — Create two 1/1 red Balloon creature tokens with flying, then sacrifice The Superlatorium and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Ticket Turbotubes
+text={T}: Add one mana of any color. -- {3}, {T}: You get {TK} (a ticket counter).
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Ticketomaton
+text=When Ticketomaton enters, you get {TK}, then you may put a sticker on a nonland permanent you own.
+mana={3}
+type=Artifact Creature
+subtype=Robot
+power=2
+toughness=2
+[/card]
+[card]
+name=Ticking Mime Bomb
+text=When this creature enters, without speaking or indicating any specific creature, pantomime to a person outside the game, then they choose a creature you don't control. This creature deals damage equal to twice the number of Robots you control to the chosen creature.
+mana={3}{R}
+type=Artifact Creature
+subtype=Clown Robot Mime
+power=2
+toughness=2
+[/card]
+[card]
+name=Trapeze Artist
+text=Flying -- This creature enters by being flipped from a height of at least one foot (about 0.3 meters). If it lands face down or didn't turn over completely at least once during the flip, return it to its owner's hand.
+mana={W}
+type=Creature
+subtype=Human Performer
+power=2
+toughness=1
+[/card]
+[card]
+name=Trash Bin
+text=Visit — Mill two cards, then return a card at random from your graveyard to your hand. (To mill a card, a player puts the top card of their library into their graveyard.)
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Treacherous Trapezist
+text=Flying -- Whenever you cast an alliterative spell, scry 2. (Anything with two or more capitalized words in its name that begin with the same letter is alliterative.) -- Other alliterative creatures you control have flying.
+mana={1}{U}{U}
+type=Creature
+subtype=Porcupine Performer
+power=2
+toughness=3
+[/card]
+[card]
+name=Trigger Happy
+text=Choose a triggered ability of target permanent. It triggers. You control that ability.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Trivia Contest
+text=Visit — An opponent chooses black card, artifact card, or expansion, then mills a card. You have ten seconds to name something from the chosen category that starts with the same letter as the milled card. If you do, claim the prize! -- Prize — You get {TK}{TK}{TK}, then you may put a sticker on a nonland permanent you own. Sacrifice Trivia Contest and open an Attraction.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Truss, Chief Engineer
+text=Whenever Truss, Chief Engineer enters or another creature dies, put a hack counter on Truss. -- {2}, {T}, Remove X hack counters from Truss: Add or subtract X from a number or number word on target spell or permanent until end of turn. This effect can't reduce a number below 1 or a number word below one.
+mana={U}{B}
+type=Legendary Creature
+subtype=Vedalken Rogue Employee
+power=1
+toughness=3
+[/card]
+[card]
+name=Tug of War
+text=Players play a subgame starting at 5 life and with up to three permanent cards with different names from their main-game library on the battlefield. As the subgame ends, the winner chooses one of the cards they put onto the battlefield as the subgame began and puts it onto the battlefield rather than shuffling it into their library.
+mana={4}{G}
+type=Sorcery
+[/card]
+[card]
+name=Tunnel of Love
+text=Visit — Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners' control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
+type=Artifact
+subtype=Attraction
+[/card]
+[card]
+name=Tusk and Whiskers
+text=Whenever you put an ability sticker on a creature, put a +1/+1 counter on that creature. -- {2}{G}{W}, {T}: You get {TK}. You may put a sticker on a nonland permanent you own.
+mana={3}{G}{W}
+type=Legendary Creature
+subtype=Elephant Mouse Performer
+power=4
+toughness=4
+[/card]
+[card]
+name=Unlawful Entry
+text=Target creature gets +1/+0 and gains flying until end of turn. -- Whenever you put an art sticker on a creature, you may return this card from your graveyard to your hand.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Urza's Fun House
+text={T}: Add {C}. -- {T}: Add {∞}. Activate only once and only if you control an Urza's Mine, an Urza's Power-Plant, and an Urza's Tower. -- {7}, {T}: Head to AskUrza.com and click Urza's Fun House.
+type=Land
+subtype=Urza's
+[/card]
+[card]
+name=Vedalken Squirrel-Whacker
+text=As this creature enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result. -- If you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature's base power or base toughness.
+mana={3}{U}
+type=Creature
+subtype=Vedalken Guest
+power=*
+toughness=*
+[/card]
+[card]
+name=Vegetation Abomination
+text=Deathtouch -- {T}, Sacrifice this creature: Roll a six-sided die. You gain life equal to the result.
+mana={2}{G}
+type=Artifact Creature
+subtype=Plant Mutant Food
+power=2
+toughness=2
+[/card]
+[card]
+name=Vorthos, Steward of Myth
+text=As Vorthos, Steward of Myth enters, choose a named Magic character. -- Each spell you cast with the chosen character in its name, flavor text, or art costs {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Gamer
+power=1
+toughness=3
+[/card]
+[card]
+name=Wee Champion
+text=Whenever you place a sticker, this creature gets +1/+1 until end of turn. If it's an art sticker, instead put a +1/+1 counter on this creature.
+mana={R}
+type=Creature
+subtype=Minotaur Child Guest
+power=0
+toughness=1
+[/card]
+[card]
+name=Well Done
+text=Well Done deals 5 damage to target creature. If that creature is rare or mythic rare, Well Done deals 3 damage to that creature's controller.
+mana={2}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Wicker Picker
+text=Creature spells you cast have sticker kicker {1}. (You may pay an additional {1} as you cast a creature spell. If you do, you get {TK}, then you may put a sticker on it.)
+mana={3}
+type=Artifact Creature
+subtype=Scarecrow Guest
+power=2
+toughness=3
+[/card]
+[card]
+name=Wizards of the _____
+text=When this creature enters, you may put a name sticker on it, then look at the top X cards of your library, where X is the number of unique vowels on that sticker. Put one of those cards into your hand and the rest on the bottom of your library in any order. (The vowels are A, E, I, O, U, and Y.)
+mana={2}{U}{U}
+type=Creature
+subtype=Human Wizard Performer
+power=3
+toughness=1
+[/card]
+[card]
+name=Wolf in _____ Clothing
+text=When this creature enters, you may put a name sticker on it. When you do, up to X target creatures each get -1/-1 until end of turn, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)
+mana={3}{B}
+type=Creature
+subtype=Wolf Guest
+power=2
+toughness=3
+[/card]
+[card]
+name=Xenosquirrels
+text=This creature enters with two +1/+1 counters on it. -- After you roll a die, you may remove a +1/+1 counter from this creature. If you do, increase or decrease the result by 1.
+mana={1}{B}
+type=Creature
+subtype=Alien Squirrel
+power=0
+toughness=0
+[/card]
+[card]
+name=_____ Balls of Fire
+text=When this enchantment enters, you may put a name sticker on it. -- Whenever you put a sticker on this enchantment, it deals damage equal to the number of o's in name stickers on this enchantment to any target.
+mana={3}{R}
+type=Enchantment
+[/card]
+[card]
+name=_____ Bird Gets the Worm
+text=Flying -- When this creature enters, you may put a name sticker on it. You gain X life, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)
+mana={3}{W}{W}
+type=Creature
+subtype=Bird Guest
+power=2
+toughness=4
+[/card]
+[card]
+name=_____ Goblin
+text=When this creature enters, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
+mana={2}{R}
+type=Creature
+subtype=Goblin Guest
+power=2
+toughness=2
+[/card]
+[card]
+name=_____ _____ Rocketship
+text=Flying -- When this Vehicle enters, you may put up to two name stickers on it. -- Whenever this Vehicle attacks, choose a letter. This Vehicle gets +1/+1 until end of turn for each name sticker on it that begins with the chosen letter. -- Crew 2
+mana={4}
+type=Artifact
+subtype=Vehicle
+power=2
+toughness=3
+[/card]
+[card]
+name=_____ _____ _____ Trespasser
+text=When this creature enters, you may put a name sticker on it. -- {3}{U}: This creature gets +1/+0 until end of turn for each name sticker on it. It can't be blocked this turn.
+mana={1}{U}
+type=Creature
+subtype=Human Rogue Guest
+power=2
+toughness=1
+[/card]
+[card]
+name=_____-o-saurus
+text=Trample -- When this creature enters, you may put a name sticker on it. Put a +1/+1 counter on it for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
+mana={4}{G}{G}
+type=Creature
+subtype=Alien Dinosaur
+power=3
+toughness=3
 [/card]
