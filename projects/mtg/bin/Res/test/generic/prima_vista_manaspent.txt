@@ -1,0 +1,36 @@
+#"mana-spent tracking unsupported" was the note on The Prima Vista. totmanaspent is real
+#and ships on eight cards, so the trigger is now written. Cast Concentrate for four mana
+#and the Vehicle must become a creature - proved by attacking with it for 5, since a
+#non-creature Vehicle cannot attack at all.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Prima Vista
+hand:Concentrate
+library:Grizzly Bears,Grizzly Bears,Grizzly Bears,Grizzly Bears
+manapool:{2}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Concentrate
+next
+#begin
+next
+#attackers
+The Prima Vista
+next
+#blockers
+next
+#damage
+[ASSERT]
+combatdamage
+[PLAYER1]
+inplay:The Prima Vista
+hand:*,*,*
+library:*
+graveyard:Concentrate
+life:20
+[PLAYER2]
+life:15
+[END]

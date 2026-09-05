@@ -1,0 +1,27 @@
+#Probe: is a modal "choice" as a permanent's ETB really inert? Ten read-ahead Sagas are
+#blocked on a 2026-08-19 note that says it "adds nothing at all". Archpriest of Shadows
+#ships that exact shape - two auto=choice lines as its Backup ETB - so cast it and take
+#mode 0. If the choice works it comes down 5/5 with a +1/+1 counter; if the note is right
+#it stays 4/4. Asserted through P/T rather than counter:, because a plain counter(1/1) is
+#stored with an EMPTY name and no counter: line can ever match it.
+#Result: 5/5. The note was wrong - an ETB modal choice fires.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Archpriest of Shadows
+manapool:{3}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Archpriest of Shadows
+choice 0
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Archpriest of Shadows
+pt:archpriest of shadows=5/5
+life:20
+[PLAYER2]
+life:20
+[END]

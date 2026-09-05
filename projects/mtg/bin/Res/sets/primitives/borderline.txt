@@ -136914,14 +136914,20 @@ subtype=Saga
 [card]
 name=Yotia Declares War
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=token(Ornithopter,Artifact Creature Thopter,0/2,,flying)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) lord(artifact|mybattlefield) 1/1
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Also chapter II should let you TAP artifacts as part of the trigger;
-text=Read ahead (Not implemented - this Saga always starts at chapter I.) -- I - Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter. -- II - Tap any number of untapped artifacts you control. When you do, this Saga deals that much damage to any target. -- III - Artifact creatures you control get +1/+1.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && token(Ornithopter,Artifact Creature Thopter,0/2,,flying)
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) lord(artifact|mybattlefield) 1/1
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+missing=Chapter II should let you TAP artifacts as part of the trigger;
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter. -- II - Tap any number of untapped artifacts you control. When you do, this Saga deals that much damage to any target. -- III - Artifact creatures you control get +1/+1.
 mana={1}{R}
 type=Enchantment
 subtype=Saga
@@ -136942,7 +136948,7 @@ auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
 auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
 auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter II is "discard any number, draw that many"; the engine has no
+missing=Chapter II is "discard any number, draw that many"; the engine has no
 text=Read ahead (Not implemented.) -- I - This Saga deals 2 damage to each creature and each opponent. -- II - Discard any number of cards, then draw that many cards. (Approximated as up to two.) -- III - Create a 4/4 red Dragon creature token with flying.
 mana={2}{R}{R}
 type=Enchantment
@@ -136951,14 +136957,20 @@ subtype=Saga
 [card]
 name=The Weatherseed Treaty
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,type:land[basic]:mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter III now scales with a dynamic counter amount, though it counts
-text=Read ahead (Not implemented.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,type:land[basic]:mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+missing=Chapter III now scales with a dynamic counter amount, though it counts
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
 mana={2}{G}
 type=Enchantment
 subtype=Saga
@@ -136966,12 +136978,18 @@ subtype=Saga
 [card]
 name=Love Song of Night and Day
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=draw:2 controller && draw:2 opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && draw:2 controller && draw:2 opponent
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
 mana={2}{W}
 type=Enchantment
@@ -136980,14 +136998,20 @@ subtype=Saga
 [card]
 name=Braids's Frightful Return
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield) && ability$!name(discard) target(<1>*|myhand) reject!$ opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter III's "may sacrifice a creature, otherwise lose life" choice
-text=Read ahead (Not implemented.) -- I - You may sacrifice a creature. If you do, each opponent discards a card. -- II - Return target creature card from your graveyard to your hand. -- III - Target opponent sacrifices a creature.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield) && ability$!name(discard) target(<1>*|myhand) reject!$ opponent
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+missing=Chapter III's "may sacrifice a creature, otherwise lose life" choice
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You may sacrifice a creature. If you do, each opponent discards a card. -- II - Return target creature card from your graveyard to your hand. -- III - Target opponent sacrifices a creature.
 mana={2}{B}
 type=Enchantment
 subtype=Saga
@@ -136995,13 +137019,20 @@ subtype=Saga
 [card]
 name=Founding the Third Path
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for --
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) mill:4 target
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-text=Read ahead (Not implemented.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from a graveyard.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore)
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+missing=Chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for --
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) mill:4 target
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from a graveyard.
 mana={1}{U}
 type=Enchantment
 subtype=Saga
@@ -137009,14 +137040,20 @@ subtype=Saga
 [card]
 name=The Phasing of Zhalfir
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=target(*[-land]) phaseout
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) destroy all(creature)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, "can't phase in while you control this Saga", and chapter III's
-text=Read ahead (Not implemented.) -- I, II - Another target nonland permanent phases out. -- III - Destroy all creatures.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && target(*[-land]) phaseout
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) destroy all(creature)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+missing="can't phase in while you control this Saga", and chapter III's
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I, II - Another target nonland permanent phases out. -- III - Destroy all creatures.
 mana={2}{U}{U}
 type=Enchantment
 subtype=Saga
@@ -137024,14 +137061,20 @@ subtype=Saga
 [card]
 name=The Cruelty of Gix
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|graveyard) moveTo(mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, and mode one should let YOU choose the discarded card.
-text=Read ahead (Not implemented.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ opponent
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(creature|graveyard) moveTo(mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+missing=Mode one should let YOU choose the discarded card.
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
 mana={3}{B}{B}
 type=Enchantment
 subtype=Saga
@@ -137039,13 +137082,19 @@ subtype=Saga
 [card]
 name=Urza Assembles the Titans
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=_SCRY4_
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are -- read ahead, and the chapter I reveal-a-planeswalker rider.
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-text=Read ahead (Not implemented.) -- I - Scry 4. -- II - You may put a planeswalker card from your hand onto the battlefield. -- III - Creatures you control get +2/+2 until end of turn.
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
+#several land at once, so the modes only add counters and the existing chapter triggers
+#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
+#whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && _SCRY4_
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+missing=Chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are -- the chapter I reveal-a-planeswalker rider.
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Scry 4. -- II - You may put a planeswalker card from your hand onto the battlefield. -- III - Creatures you control get +2/+2 until end of turn.
 mana={3}{W}{W}
 type=Enchantment
 subtype=Saga
@@ -137059,7 +137108,7 @@ auto=name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sor
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(look) reveal:7 optionone name(take a permanent) target(*[-instant;-sorcery]|reveal) moveto(hand) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Put a permanent into play) target(*[-instant;-sorcery]|myhand) moveTo(mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- read ahead, and the "non-Saga" restriction on what you may take.
+missing=read ahead is NOT implemented here, unlike the other nine: chapter I opens its own reveal menu, and nesting that inside a read-ahead choice mode was not attempted. The 2026-08-19 note this replaces was wrong on both counts - an ETB modal choice does fire, and @counteradded fires once per counter when several land at once. -- the "non-Saga" restriction on what you may take.
 text=Read ahead (Not implemented.) -- I, II - Look at the top seven cards of your library. You may reveal a non-Saga permanent card from among them and put it into your hand. -- III - Put any number of permanent cards from your hand onto the battlefield. (One card.)
 mana={5}{G}{G}
 type=Enchantment

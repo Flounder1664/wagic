@@ -1,0 +1,25 @@
+#The other end of read ahead on The Elder Dragon War: choose chapter I and chapter I must
+#happen - 2 damage to each creature and to the opponent, so the Grizzly Bears die and the
+#opponent drops to 18 - while no Dragon appears and the Saga stays on the battlefield.
+#Paired with read_ahead_chapter3, where the same card on mode III leaves the opponent on 20.
+[INIT]
+firstmain
+[PLAYER1]
+hand:The Elder Dragon War
+inplay:Grizzly Bears
+manapool:{2}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Elder Dragon War
+choice 0
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:The Elder Dragon War
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:18
+[END]

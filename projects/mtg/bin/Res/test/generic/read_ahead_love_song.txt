@@ -1,0 +1,29 @@
+#A second card on the read-ahead pattern, to show it is not specific to The Elder Dragon War.
+#Love Song of Night and Day chapter I is "you and target opponent each draw two cards", so
+#mode 0 must leave BOTH players two cards richer and no Bird token in play. Mode II would
+#make a Bird instead and draw nobody anything.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Love Song of Night and Day
+library:Mountain,Mountain,Mountain,Mountain
+manapool:{1}{W}{W}
+life:20
+[PLAYER2]
+library:Forest,Forest,Forest,Forest
+life:20
+[DO]
+Love Song of Night and Day
+choice 0
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Love Song of Night and Day
+hand:*,*
+library:*,*
+life:20
+[PLAYER2]
+hand:*,*
+library:*,*
+life:20
+[END]

@@ -1,0 +1,38 @@
+#The negative half of prima_vista_manaspent, and the half that makes it discriminating:
+#Divination costs three mana, one short of the four The Prima Vista wants, so the Vehicle
+#must stay a non-creature and be unable to attack: no attacker is declared, so the phases run
+#past combat to second main with the opponent still on 20. The positive test stops at combat
+#damage on 15. The pair is what proves the condition, not just the trigger.
+#Without this, the positive test passes just as well on a trigger with no condition at all.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Prima Vista
+hand:Divination
+library:Grizzly Bears,Grizzly Bears,Grizzly Bears,Grizzly Bears
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Divination
+next
+#begin
+next
+#attackers
+The Prima Vista
+next
+#blockers
+next
+#damage
+[ASSERT]
+secondmain
+[PLAYER1]
+inplay:The Prima Vista
+hand:*,*
+library:*,*
+graveyard:Divination
+life:20
+[PLAYER2]
+life:20
+[END]
