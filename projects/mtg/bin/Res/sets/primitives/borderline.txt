@@ -133453,7 +133453,7 @@ grade=borderline
 # REVIEW 2026-07-19 [P:med] may be firebending triggered but I had no opportunity to use the mana
 abilities=flying
 auto=_FIREBEND2_
-missing=draw when you waterbend/earthbend/firebend/airbend, and transform after doing all four this turn (waterbend/airbend engine-blocked)
+missing=draw when you waterbend/earthbend/firebend/airbend, and transform after doing all four this turn. Not blocked by the keywords - earthbend, airbend and firebend all have macros and waterbend is convoke-shaped - but by there being no event to hook: bending is a cost or a rider on other cards, so nothing fires a "you bent" trigger, and nothing counts how many kinds you did this turn.
 text=Flying, firebending 2 -- Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform Avatar Aang.
 mana={R}{G}{W}{U}
 type=Legendary Creature
@@ -133506,7 +133506,14 @@ toughness=4
 [card]
 name=Aang, Swift Savior
 abilities=flash,flying
-missing=ETB airbend up to one target (airbend engine-blocked); Waterbend {8}: Transform Aang (waterbend engine-blocked, no flip path)
+grade=borderline
+auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
+#REVIEW-V Unverifiable in the harness: a card with backside= cannot be cast from hand there
+#(measured 2026-09-05 - the click lands, no action reaches the stack, with or without these
+#lines and with mana to spare), so the ETB never fires. The airbend body copies Airbending
+#Lesson, which ships _AIRBEND_; the ETB target is inline like Flametongue Kavu. Verify in game.
+auto={8}:name(Waterbend - Transform Aang) flip(backside)
+missing=airbend can only take a creature here, not a spell on the stack. Waterbend's cost is a flat {8}: waterbend is convoke-shaped (other={convoke} elsewhere in this file), but convoke has no form on an activated ability, so the creature-tapping discount is not offered.
 text=Flash -- Flying -- When Aang enters, airbend up to one other target creature or spell. -- Waterbend {8}: Transform Aang.
 mana={1}{W}{U}
 type=Legendary Creature
