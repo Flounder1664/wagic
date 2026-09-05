@@ -1,0 +1,33 @@
+#The half that makes prepared_state discriminating: casting the copy UNPREPARES the creature,
+#so a second activation must do nothing. Two cards in the graveyard, activate twice: exactly
+#ONE comes back. Without the counter removal both would, and prepared_state alone still passes.
+#The removal needs all(this) - a bare counter(0/0,-1,Prepared) lands on the ability's TARGET,
+#which is a graveyard card, not on the creature.
+#The pool holds {2}{G}{G} - enough for BOTH activations - so the counter is the only thing
+#stopping the second one. With only {1}{G} this test would pass on affordability alone.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Abundance // Regrowth
+graveyard:Grizzly Bears,Raging Goblin
+manapool:{2}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Emeritus of Abundance // Regrowth
+Grizzly Bears
+Emeritus of Abundance // Regrowth
+Raging Goblin
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Abundance // Regrowth
+hand:Grizzly Bears
+graveyard:Raging Goblin
+counter:emeritus of abundance // regrowth=Prepared:0
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

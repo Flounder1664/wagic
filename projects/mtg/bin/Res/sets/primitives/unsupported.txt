@@ -20682,69 +20682,6 @@ mana={X}{G}
 type=Sorcery
 [/card]
 [card]
-name=Emeritus of Abundance // Regrowth
-text=Vigilance -- This creature enters prepared. -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
-mana={2}{G} // {1}{G}
-type=Creature
-subtype=Elf Druid
-power=3
-toughness=4
-[/card]
-[card]
-name=Emeritus of Conflict // Lightning Bolt
-text=First strike -- Whenever you cast your third spell each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{R} // {R}
-type=Creature
-subtype=Human Wizard
-power=2
-toughness=2
-[/card]
-[card]
-name=Emeritus of Ideation // Ancestral Recall
-text=Flying, ward {2} -- This creature enters prepared. -- Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
-mana={3}{U}{U} // {U}
-type=Creature
-subtype=Human Wizard
-power=5
-toughness=5
-[/card]
-[card]
-name=Emeritus of Truce // Swords to Plowshares
-text=When this creature enters, target player creates a 1/1 white and black Inkling creature token with flying. Then if an opponent controls more creatures than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{W}{W} // {W}
-type=Creature
-subtype=Cat Cleric
-power=3
-toughness=3
-[/card]
-[card]
-name=Emeritus of Woe // Demonic Tutor
-text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
-mana={3}{B} // {1}{B}
-type=Creature
-subtype=Vampire Warlock
-power=5
-toughness=4
-[/card]
-[card]
-name=Grave Researcher // Reanimate
-text=At the beginning of your upkeep, surveil 1. Then if there are three or more creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{B} // {B}
-type=Creature
-subtype=Troll Warlock
-power=3
-toughness=3
-[/card]
-[card]
-name=Harmonized Trio // Brainstorm
-text={T}, Tap two untapped creatures you control: This creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={U} // {U}
-type=Creature
-subtype=Merfolk Bard Wizard
-power=1
-toughness=1
-[/card]
-[card]
 name=Jadzi, Steward of Fate // Oracle's Gift
 text=Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When Jadzi enters, draw two cards, then discard two cards.
 mana={2}{U} // {X}{X}{U}
@@ -20754,15 +20691,6 @@ power=2
 toughness=4
 [/card]
 [card]
-name=Joined Researchers // Secret Rendezvous
-text=First strike -- At the beginning of each end step, if an opponent has more cards in hand than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{W} // {1}{W}{W}
-type=Creature
-subtype=Human Cleric Wizard
-power=2
-toughness=2
-[/card]
-[card]
 name=Maelstrom Artisan // Rocket Volley
 text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={1}{R}{R} // {1}{R}
@@ -20770,15 +20698,6 @@ type=Creature
 subtype=Minotaur Sorcerer
 power=3
 toughness=2
-[/card]
-[card]
-name=Scheming Silvertongue // Sign in Blood
-text=Flying, lifelink -- At the beginning of your second main phase, if you gained 2 or more life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{B} // {B}{B}
-type=Creature
-subtype=Vampire Warlock
-power=1
-toughness=3
 [/card]
 [card]
 name=Skycoach Conductor // All Aboard
@@ -20850,15 +20769,6 @@ type=Artifact Creature
 subtype=Clown Robot
 power=7
 toughness=7
-[/card]
-[card]
-name=Crescendo Conductor // Boltwave
-text=Reach -- Whenever you conjure one or more cards, this creature becomes prepared.
-mana={1}{R} // {R}
-type=Creature
-subtype=Orc Sorcerer
-power=2
-toughness=2
 [/card]
 [card]
 name=Galathul Galecaller // Corvid Squall
@@ -20963,15 +20873,6 @@ power=2
 toughness=3
 [/card]
 [card]
-name=Dirgur Focusmage // Braingeyser
-text=Instant and sorcery spells you cast cost {1} less to cast. -- Whenever you cast an instant or sorcery spell with mana value 5 or greater from your hand, this creature becomes prepared.
-mana={2}{U} // {X}{U}{U}
-type=Creature
-subtype=Djinn Monk
-power=1
-toughness=4
-[/card]
-[card]
 name=Eccentric Pestfinder // Turn Stones
 text=Trample -- At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={2}{B}{G} // {B}{G}
@@ -20979,15 +20880,6 @@ type=Creature
 subtype=Troll Druid
 power=5
 toughness=5
-[/card]
-[card]
-name=Eiganjo Dynastorian // Replenish
-text=Vigilance -- Whenever you attack with two or more creatures, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{W} // {3}{W}
-type=Creature
-subtype=Fox Advisor
-power=2
-toughness=3
 [/card]
 [card]
 name=Elusive Otter // Grove's Bounty
@@ -21156,15 +21048,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Naktamun Lorespinner // Wheel of Fortune
-text=At the beginning of your upkeep, if a player has one or fewer cards in hand, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{R} // {2}{R}
-type=Creature
-subtype=Jackal Wizard
-power=3
-toughness=3
-[/card]
-[card]
 name=Nev, the Practical Dean
 text=Creatures you control with counters on them have trample. -- Whenever you cast your first spell with {X} in its mana cost each turn, put X +1/+1 counters on Nev.
 mana={2}{G}
@@ -21321,15 +21204,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Stensian Sanguinist // Exsanguinate
-text=Whenever you attack, target creature gains deathtouch until end of turn. Whenever that creature deals combat damage to a player this combat, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{B} // {X}{B}{B}
-type=Creature
-subtype=Vampire Cleric
-power=2
-toughness=2
-[/card]
-[card]
 name=Striding Shotcaller // Run the Play
 text=Reach -- Whenever one or more creatures you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={G}{U} // {X}{G}{U}
@@ -21398,15 +21272,6 @@ text=Flying -- Spirits you control get +1/+1 for each time you've cast your comm
 mana={2}{W}
 type=Creature
 subtype=Spirit Knight
-power=2
-toughness=2
-[/card]
-[card]
-name=Yavimaya Bloomsage // Channel
-text=At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{G} // {G}{G}
-type=Creature
-subtype=Dryad Druid
 power=2
 toughness=2
 [/card]

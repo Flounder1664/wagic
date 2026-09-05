@@ -1,0 +1,28 @@
+#A second card on the prepared pattern, so it is not specific to the one it was built on.
+#Emeritus of Ideation enters prepared, and its half is Ancestral Recall: pay {U} once and
+#draw three. The pool holds {U}{U} - enough for two activations - so the Prepared counter
+#is the only thing stopping the second, exactly as in prepared_unprepares.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Ideation // Ancestral Recall
+library:Mountain,Mountain,Mountain,Mountain,Mountain
+manapool:{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Emeritus of Ideation // Ancestral Recall
+Emeritus of Ideation // Ancestral Recall
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Ideation // Ancestral Recall
+hand:*,*,*
+library:*,*
+counter:emeritus of ideation // ancestral recall=Prepared:0
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[END]

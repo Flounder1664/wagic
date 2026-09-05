@@ -8599,6 +8599,251 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=Emeritus of Conflict // Lightning Bolt
+grade=borderline
+abilities=firststrike
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=@movedTo(*|mystack) restriction{compare(pstormcount)~equalto~3}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && damage:3 target(anytarget) asSorcery
+missing=the third-spell trigger uses compare(pstormcount)~equalto~3, a form not attested elsewhere - pstormcount is otherwise only used as a VALUE. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{R} // {R}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Emeritus of Ideation // Ancestral Recall
+grade=borderline
+abilities=flying
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=counter(0/0,1,Prepared)
+auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && draw:3 controller asSorcery
+missing=ward {2} - there is no ward keyword in this engine. The attack trigger (exile eight cards from your graveyard to re-prepare) is not written. Ancestral Recall targets a player; here it always draws for you. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={3}{U}{U} // {U}
+type=Creature
+subtype=Human Wizard
+power=5
+toughness=5
+[/card]
+[card]
+name=Emeritus of Truce // Swords to Plowshares
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Swords to Plowshares) counter(0/0,-1,Prepared) all(this) && moveto(exile) target(creature) && dynamicability<!mytgt powerlifegain targetcontroller!> asSorcery
+missing=the ETB (target player creates an Inkling token, then re-prepare if an opponent controls more creatures than you) is not written, so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{W}{W} // {W}
+type=Creature
+subtype=Cat Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Emeritus of Woe // Demonic Tutor
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=counter(0/0,1,Prepared)
+auto={1}{B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Demonic Tutor) counter(0/0,-1,Prepared) all(this) && name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend revealend asSorcery
+missing=the end-step re-prepare (two or more creatures died this turn) is not written - nothing counts creature deaths per turn. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={3}{B} // {1}{B}
+type=Creature
+subtype=Vampire Warlock
+power=5
+toughness=4
+[/card]
+[card]
+name=Grave Researcher // Reanimate
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=@each my upkeep:name(Surveil 1) _SURVEIL1_
+auto=@each my upkeep restriction{type(creature|mygraveyard)~morethan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto={B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Reanimate) counter(0/0,-1,Prepared) all(this) && moveTo(myBattlefield) target(creature|graveyard) && life:-manacost controller asSorcery
+missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={2}{B} // {B}
+type=Creature
+subtype=Troll Warlock
+power=3
+toughness=3
+[/card]
+[card]
+name=Harmonized Trio // Brainstorm
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={T}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Brainstorm) counter(0/0,-1,Prepared) all(this) && draw:3 controller && moveTo(myLibrary) target(<2>*|myhand) asSorcery
+missing=the activation should also tap two other untapped creatures you control; only the self-tap is charged. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={U} // {U}
+type=Creature
+subtype=Merfolk Bard Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Joined Researchers // Secret Rendezvous
+grade=borderline
+abilities=firststrike
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={1}{W}{W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Secret Rendezvous) counter(0/0,-1,Prepared) all(this) && draw:3 controller && target(opponent) draw:3 targetedPlayer asSorcery
+missing=the end-step re-prepare (an opponent has more cards in hand than you) is not written, so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{W} // {1}{W}{W}
+type=Creature
+subtype=Human Cleric Wizard
+power=2
+toughness=2
+[/card]
+[card]
+name=Scheming Silvertongue // Sign in Blood
+grade=borderline
+abilities=flying,lifelink
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={B}{B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Sign in Blood) counter(0/0,-1,Prepared) all(this) && draw:2 target(player) && life:-2 targetedPlayer asSorcery
+missing=the second-main re-prepare (if you gained 2 or more life this turn) is not written - nothing tracks life gained per turn - so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{B} // {B}{B}
+type=Creature
+subtype=Vampire Warlock
+power=1
+toughness=3
+[/card]
+[card]
+name=Crescendo Conductor // Boltwave
+grade=borderline
+abilities=reach
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Boltwave) counter(0/0,-1,Prepared) all(this) && damage:3 all(opponent) asSorcery
+missing=the prepare trigger is "whenever you conjure one or more cards"; conjure is an Arena-only action with no engine equivalent, so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{R} // {R}
+type=Creature
+subtype=Orc Sorcerer
+power=2
+toughness=2
+[/card]
+[card]
+name=Dirgur Focusmage // Braingeyser
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=lord(*[instant;sorcery]|mycastingzone) altercost(colorless,-1)
+auto={X}{U}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Braingeyser) counter(0/0,-1,Prepared) all(this) && draw:X target(player) asSorcery
+missing=the prepare trigger (casting an instant or sorcery of mana value 5 or greater from hand) is not written; the cost reduction is. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={2}{U} // {X}{U}{U}
+type=Creature
+subtype=Djinn Monk
+power=1
+toughness=4
+[/card]
+[card]
+name=Eiganjo Dynastorian // Replenish
+grade=borderline
+abilities=vigilance
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=@each my combatattackers restriction{type(creature[attacking]|mybattlefield)~morethan~1}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto={3}{W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Replenish) counter(0/0,-1,Prepared) all(this) && moveTo(mybattlefield) all(enchantment|mygraveyard) asSorcery
+missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={2}{W} // {3}{W}
+type=Creature
+subtype=Fox Advisor
+power=2
+toughness=3
+[/card]
+[card]
+name=Naktamun Lorespinner // Wheel of Fortune
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto=@each my upkeep restriction{compare(phandcount)~lessthan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep restriction{compare(ohandcount)~lessthan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto={2}{R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Wheel of Fortune) counter(0/0,-1,Prepared) all(this) && reject all(*|hand) && all(player) draw:7 asSorcery
+missing="a player" is written as two upkeep triggers, one per player, so if BOTH are on one or fewer cards it prepares twice. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={2}{R} // {2}{R}
+type=Creature
+subtype=Jackal Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Stensian Sanguinist // Exsanguinate
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={X}{B}{B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Exsanguinate) counter(0/0,-1,Prepared) all(this) && lifeleech:-X opponent asSorcery
+missing=the attack trigger (grant a creature deathtouch, then re-prepare when THAT creature connects) is not written - nothing follows a chosen creature's later combat damage - so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={1}{B} // {X}{B}{B}
+type=Creature
+subtype=Vampire Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Yavimaya Bloomsage // Channel
+grade=borderline
+#Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
+#on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
+#the counter back off with all(this) - a bare negative counter lands on the ability's target.
+#Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+auto={G}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Channel) counter(0/0,-1,Prepared) all(this) && all(*|myBattlefield) transforms((,newability[{L:1}:Add{1}])) ueot asSorcery
+missing=the end-step trigger (a +1/+1 counter on target creature, then re-prepare if it has power 7 or more) is not written - the power check would have to read the creature just counted - so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+mana={2}{G} // {G}{G}
+type=Creature
+subtype=Dryad Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Emeritus of Abundance // Regrowth
+grade=borderline
+abilities=vigilance
+#"Prepared" is modelled as a named counter, and "cast a copy of its spell" as a {0}
+#sorcery-speed ability gated on that counter which performs the spell's body and takes
+#the counter back off. The engine has every piece: counters as state, negative counters
+#to remove them, and a compare(hascnt...) restriction on an activated ability.
+auto=counter(0/0,1,Prepared)
+auto={1}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Regrowth) counter(0/0,-1,Prepared) all(this) && moveto(hand) target(*|myGraveyard) asSorcery
+auto=@combat(attacking) source(this) restriction{type(land|mybattlefield)~morethan~7}:name(Becomes prepared) counter(0/0,1,Prepared)
+missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to. A prepared creature also shows its state as a Prepared counter rather than as a face-up back side.
+text=Vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
+mana={2}{G} // {1}{G}
+type=Creature
+subtype=Elf Druid
+power=3
+toughness=4
+[/card]
+[card]
 name=Battle for Bretagard
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)

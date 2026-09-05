@@ -1,0 +1,28 @@
+#"prepared-dfc" was marked engine-blocked for 32 SOS/PSOS cards. The blocker was assumed
+#to be DFC structure plus the prepared state, but prepared is just a STATE and "cast a copy
+#of its spell" is just that spell's body: a named counter, a {0} ability gated on it, and a
+#negative counter to take it back off. All three are attested primitives.
+#Emeritus of Abundance enters prepared, so its Regrowth half must be usable once - the
+#Grizzly Bears come back from the graveyard to hand - and the Prepared counter must be gone.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Abundance // Regrowth
+graveyard:Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Emeritus of Abundance // Regrowth
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Emeritus of Abundance // Regrowth
+hand:Grizzly Bears
+counter:emeritus of abundance // regrowth=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]
