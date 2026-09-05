@@ -133226,8 +133226,12 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
-other={U} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
+other={U}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
@@ -133236,8 +133240,12 @@ type=Sorcery
 [/card]
 [card]
 name=Jennika's Technique
-other={R} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
+other={R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=damage:2 all(creature|battlefield)
 text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
@@ -133247,8 +133255,12 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
-other={W}{B} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost. -- may choose BOTH modes (choose-one only here); Sneak's bounce payment
+other={W}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- may choose BOTH modes (choose-one only here); Sneak's bounce payment
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
 auto=choice name(-3/-3) target(creature) -3/-3 ueot
@@ -133258,8 +133270,12 @@ type=Sorcery
 [/card]
 [card]
 name=Leonardo's Technique
-other={1}{W} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
+other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
@@ -133269,8 +133285,12 @@ type=Sorcery
 [/card]
 [card]
 name=New Generation's Technique
-other={2}{G} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
+other={2}{G}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
@@ -133279,8 +133299,12 @@ type=Sorcery
 [/card]
 [card]
 name=Raphael's Technique
-other={2}{R} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost. -- each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
+other={2}{R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
 text=Sneak {2}{R} -- Each player may discard their hand and draw seven cards.
@@ -133289,8 +133313,12 @@ type=Instant
 [/card]
 [card]
 name=Shredder's Technique
-other={B} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost. -- you lose 2 life if an enchantment was destroyed; Sneak's bounce payment
+other={B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- you lose 2 life if an enchantment was destroyed; Sneak's bounce payment
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -133300,8 +133328,12 @@ type=Sorcery
 [/card]
 [card]
 name=Splinter's Technique
-other={1}{B} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost.
+other={1}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
@@ -133311,9 +133343,13 @@ type=Sorcery
 [card]
 name=The Last Ronin's Technique
 grade=borderline
-other={1}{W} name(Sneak)
-missing=Sneak's return-an-unblocked-attacker payment: the {n} (Ninja) extra cost hard-requires MTG_PHASE_COMBATBLOCKERS, which a sorcery-speed cast can never satisfy - it made the cards uncastable. Needs engine support for a non-mana payment on an alternative cost. -- if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
+other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
+#hand and resolved the spell. What could NOT be tested is the combination in combat, because this
+#harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
+missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
 auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
