@@ -9123,6 +9123,116 @@ power=2
 toughness=4
 [/card]
 [card]
+name=Restoration Seminar
+grade=borderline
+abilities=exiledeath
+#Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
+#the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
+#COPY - the card has to stay in exile and be offered again next turn.
+#REVIEW-V The self-exile half is verified on Germination Practicum
+#(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
+#not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
+#suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
+target=*[-land]|myGraveyard
+auto=moveTo(myBattlefield)
+auto=moveto(myexile)
+autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
+missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+text=Return target nonland permanent card from your graveyard to the battlefield. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={5}{W}{W}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Decorum Dissertation
+grade=borderline
+abilities=exiledeath
+#Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
+#the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
+#COPY - the card has to stay in exile and be offered again next turn.
+#REVIEW-V The self-exile half is verified on Germination Practicum
+#(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
+#not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
+#suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
+target=player
+auto=draw:2
+auto=life:-2
+auto=moveto(myexile)
+autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
+missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+text=Target player draws two cards and loses 2 life. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={3}{B}{B}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Echocasting Symposium
+grade=borderline
+abilities=exiledeath
+#Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
+#the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
+#COPY - the card has to stay in exile and be offered again next turn.
+#REVIEW-V The self-exile half is verified on Germination Practicum
+#(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
+#not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
+#suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
+target=creature|mybattlefield
+auto=clone
+auto=moveto(myexile)
+autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
+missing=the token should be created by a TARGET PLAYER, not always by you; a second target on a different axis is not expressible here -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+text=Target player creates a token that's a copy of target creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={4}{U}{U}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Improvisation Capstone
+grade=borderline
+abilities=exiledeath
+#Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
+#the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
+#COPY - the card has to stay in exile and be offered again next turn.
+#REVIEW-V The self-exile half is verified on Germination Practicum
+#(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
+#not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
+#suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
+auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) forever )!
+auto=moveto(myexile)
+autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
+missing=the real card exiles from the top until total mana value 4 or more is exiled, and lets you cast those spells FOR FREE. Here the top three are exiled and made playable from exile at their normal cost - an exile-until-total-mana-value has no form, and canplayfromexile has no free variant -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+text=Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={5}{R}{R}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Germination Practicum
+grade=borderline
+abilities=exiledeath
+#Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
+#the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
+#COPY - the card has to stay in exile and be offered again next turn.
+#REVIEW-V The self-exile half IS verified (generic/paradigm_exile.txt): the body resolves and
+#the card lands in exile, not the graveyard. The autoexile= free cast could not be driven
+#here - measured 2026-09-05 with and without "may", on firstmain and on upkeep, and with
+#exiledeath present. NOT ONE of the 1005 tests exercises an autoexile= trigger despite 176
+#uses of it, every suspend card included, so this is a harness gap rather than evidence the
+#line is wrong. Verify in game.
+auto=all(creature|mybattlefield) counter(1/1,2)
+auto=moveto(myexile)
+autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
+text=Put two +1/+1 counters on each creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
+mana={3}{G}{G}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
 name=Emeritus of Abundance // Regrowth
 grade=borderline
 abilities=vigilance

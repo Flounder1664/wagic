@@ -1,0 +1,26 @@
+#"cast-from-exile-copy" (Paradigm) was marked engine-blocked for 5 SOS Lessons. It is the
+#suspend template: Arc Blade already exiles ITSELF with auto=moveto(myexile) and carries an
+#autoexile= trigger that casts it from exile for free with activate castcard(...).
+#First half here: Germination Practicum resolves (both Bears become 4/4) and must end up in
+#EXILE, not the graveyard. If the self-exile failed it would be in the graveyard instead.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears,Grizzly Bears
+hand:Germination Practicum
+manapool:{3}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Germination Practicum
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears,Grizzly Bears
+exile:Germination Practicum
+pt:grizzly bears=4/4
+life:20
+[PLAYER2]
+life:20
+[END]

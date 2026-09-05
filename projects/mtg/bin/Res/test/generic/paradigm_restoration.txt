@@ -1,0 +1,24 @@
+#A second Paradigm card, to show the self-exile is not specific to Germination Practicum.
+#Restoration Seminar returns a nonland permanent from the graveyard to the battlefield and
+#must then exile ITSELF - the Bears come back and the Seminar is in exile, not the graveyard.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Restoration Seminar
+graveyard:Grizzly Bears
+manapool:{5}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Restoration Seminar
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+exile:Restoration Seminar
+life:20
+[PLAYER2]
+life:20
+[END]
