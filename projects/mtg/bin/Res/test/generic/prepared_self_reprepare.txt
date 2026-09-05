@@ -1,0 +1,29 @@
+#"At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared" -
+#written as @each my upkeep with restriction{compare(hascntprepared)~lessthan~1}.
+#Stingerquill Voxmancer enters UNPREPARED (no "enters prepared" clause), so reaching an
+#upkeep must give it exactly one Prepared counter.
+#Starts at untap and steps into upkeep: eot+next lands on the OPPONENT's upkeep, and
+#reaching a second of your own drifts the board (the 1/2 got attacked and died).
+#Referenced by id 735014: this card is in FRA, and the "Front // Back" name does not resolve in a
+#zone line. Zones are asserted as counts because passing the turn draws and plays lands.
+#What this does NOT assert is that a second upkeep declines to stack a second counter -
+#that needs several turns and the board drifts. The guard is the same compare(hascnt...)
+#form that prepared_unprepares already proves refuses when the count is wrong.
+[INIT]
+untap
+[PLAYER1]
+inplay:735014
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:735014
+counter:735014=Prepared:1
+life:20
+[PLAYER2]
+life:20
+[END]

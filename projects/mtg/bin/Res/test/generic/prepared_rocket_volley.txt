@@ -1,0 +1,32 @@
+#One of the 17 prepared cards whose back face had to be written from scratch rather than
+#copied. Maelstrom Artisan enters prepared; Rocket Volley destroys target nonbasic land.
+#The pool holds {2}{R}{R} - enough for TWO activations - so the Prepared counter is the
+#only thing that can stop the second, and only ONE of the two Ancient Tombs may die.
+#P2's zones are asserted as counts: two identical printings compare positionally and the
+#surviving one does not line up with the slot the assert expects.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Maelstrom Artisan // Rocket Volley
+manapool:{2}{R}{R}
+life:20
+[PLAYER2]
+inplay:Ancient Tomb,Ancient Tomb
+life:20
+[DO]
+Maelstrom Artisan // Rocket Volley
+Ancient Tomb
+Maelstrom Artisan // Rocket Volley
+Ancient Tomb
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Maelstrom Artisan // Rocket Volley
+counter:maelstrom artisan // rocket volley=Prepared:0
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:*
+graveyard:*
+life:20
+[END]

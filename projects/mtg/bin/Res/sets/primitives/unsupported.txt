@@ -20682,42 +20682,6 @@ mana={X}{G}
 type=Sorcery
 [/card]
 [card]
-name=Jadzi, Steward of Fate // Oracle's Gift
-text=Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When Jadzi enters, draw two cards, then discard two cards.
-mana={2}{U} // {X}{X}{U}
-type=Legendary Creature
-subtype=Human Wizard
-power=2
-toughness=4
-[/card]
-[card]
-name=Maelstrom Artisan // Rocket Volley
-text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{R}{R} // {1}{R}
-type=Creature
-subtype=Minotaur Sorcerer
-power=3
-toughness=2
-[/card]
-[card]
-name=Skycoach Conductor // All Aboard
-text=Flash -- Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{U} // {U}
-type=Creature
-subtype=Bird Pilot
-power=2
-toughness=3
-[/card]
-[card]
-name=Vastlands Scavenger // Bind to Life
-text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{G}{G} // {4}{G}
-type=Creature
-subtype=Bear Druid
-power=4
-toughness=4
-[/card]
-[card]
 name=Bruce Banner // The Incredible Hulk
 text={X}{X}, {T}: Draw X cards. Activate only as a sorcery. -- {2}{R}{R}{G}{G}: Transform Bruce Banner. Activate only as a sorcery.
 mana={U}
@@ -20769,24 +20733,6 @@ type=Artifact Creature
 subtype=Clown Robot
 power=7
 toughness=7
-[/card]
-[card]
-name=Galathul Galecaller // Corvid Squall
-text=Flash -- Flying -- Whenever this creature attacks, it becomes prepared.
-mana={1}{U} // {1}{U}
-type=Creature
-subtype=Bird Wizard
-power=2
-toughness=1
-[/card]
-[card]
-name=Ursine Guide // Ranger's Merit
-text=This creature enters prepared. -- Whenever you cast a spell that isn't from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
-mana={2}{G} // {3}{G}{G}
-type=Creature
-subtype=Bear Druid
-power=3
-toughness=3
 [/card]
 [card]
 name=Abstract Performance
@@ -20846,15 +20792,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Defacing Duskmage // Vandal's Edit
-text=Deathtouch -- Whenever an opponent draws their second card each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={W}{B} // {1}{W}{B}
-type=Creature
-subtype=Dog Warlock
-power=2
-toughness=2
-[/card]
-[card]
 name=Defiling Daemogoth
 text=Menace -- Whenever a creature you control deals combat damage to a player, you gain 1 life. -- At the beginning of your end step, each opponent loses X life, where X is the amount of life you gained this turn.
 mana={3}{B}{B}
@@ -20871,15 +20808,6 @@ type=Legendary Creature
 subtype=Dryad Druid
 power=2
 toughness=3
-[/card]
-[card]
-name=Eccentric Pestfinder // Turn Stones
-text=Trample -- At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{B}{G} // {B}{G}
-type=Creature
-subtype=Troll Druid
-power=5
-toughness=5
 [/card]
 [card]
 name=Elusive Otter // Grove's Bounty
@@ -20972,15 +20900,6 @@ power=0
 toughness=1
 [/card]
 [card]
-name=Inspired Skypainter // Maestro's Gift
-text=Flying -- When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={U}{R} // {3}{U}{R}
-type=Creature
-subtype=Lizard Wizard
-power=2
-toughness=2
-[/card]
-[card]
 name=Intermediate Chirography
 text=(Gain the next level as a sorcery to add its ability.) -- When this Class enters, create a 2/1 white and black Inkling creature token with flying. -- {1}{B}: Level 2 -- Whenever you lose life for the first time each turn, put a +1/+1 counter on target creature you control. -- {2}{B}: Level 3 -- At the beginning of each end step, if a modified creature died under your control this turn, create a 2/1 white and black Inkling creature token with flying. (Equipment, Auras you control, and counters are modifications.)
 mana={1}{B}
@@ -21018,15 +20937,6 @@ mana={2}{U}
 type=Creature
 subtype=Human Bard
 power=2
-toughness=2
-[/card]
-[card]
-name=Lorehold Archivist // Restore Relic
-text=First strike -- At the beginning of your upkeep, if there are three or more artifact and/or creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{R}{W} // {2}{R}{W}
-type=Creature
-subtype=Dwarf Artificer
-power=3
 toughness=2
 [/card]
 [card]
@@ -21204,15 +21114,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Striding Shotcaller // Run the Play
-text=Reach -- Whenever one or more creatures you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={G}{U} // {X}{G}{U}
-type=Creature
-subtype=Troll Druid
-power=0
-toughness=4
-[/card]
-[card]
 name=Thunderclap Drake
 text=Flying -- Instant and sorcery spells you cast cost {1} less to cast. -- {2}{U}, Sacrifice this creature: When you next cast an instant or sorcery spell this turn, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.
 mana={1}{U}
@@ -21314,15 +21215,6 @@ type=Legendary Planeswalker
 subtype=Ajani
 [/card]
 [card]
-name=Bloodline Recollector // Ancestral Craving
-text=At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={1}{B} // {B}
-type=Creature
-subtype=Vampire Warlock
-power=2
-toughness=2
-[/card]
-[card]
 name=Cast Away Doubt
 text=Draw two cards. Cast Away Doubt deals 2 damage to each player.
 mana={2}{B}
@@ -21392,28 +21284,10 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Paradox Shaper // Omit Variables
-text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. -- {2}: Put target card from your graveyard on the bottom of your library.
-mana={1}{U/B} // {U/B}
-type=Creature
-subtype=Octopus Wizard
-power=1
-toughness=3
-[/card]
-[card]
 name=Perfected Theory
 text=Choose one — -- • Target creature has base power and toughness 1/1 until end of turn. -- • Target creature has base power and toughness 4/5 until end of turn.
 mana={U}
 type=Instant
-[/card]
-[card]
-name=Prudent Fateseer // Peer Review
-text=This creature enters prepared. -- Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
-mana={1}{W/U}{W/U} // {2}{W/U}
-type=Creature
-subtype=Dwarf Wizard
-power=1
-toughness=4
 [/card]
 [card]
 name=Solitary Cell
@@ -21429,15 +21303,6 @@ type=Creature
 subtype=Human Wizard
 power=2
 toughness=1
-[/card]
-[card]
-name=Stingerquill Voxmancer // Vicious Verse
-text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={B/R} // {B/R}
-type=Creature
-subtype=Goblin Sorcerer
-power=1
-toughness=2
 [/card]
 [card]
 name=The Theorist, Jace Beleren
@@ -21462,24 +21327,6 @@ mana={3}{G}
 type=Legendary Creature
 subtype=Skeleton Druid
 power=4
-toughness=3
-[/card]
-[card]
-name=Vigorbloom Vanguard // Seed Suture
-text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Each creature you control with a +1/+1 counter on it has vigilance.
-mana={1}{G/W} // {G/W}
-type=Creature
-subtype=Troll Druid
-power=2
-toughness=2
-[/card]
-[card]
-name=Woodwork Prodigy // Soul Tether
-text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
-mana={2}{R/G} // {2}{R/G}
-type=Creature
-subtype=Cat Druid
-power=3
 toughness=3
 [/card]
 [card]
