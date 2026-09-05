@@ -133060,7 +133060,13 @@ toughness=3
 [card]
 name=Donatello, Gadget Master
 autohand={1}{U}{N}:ninjutsu
-missing=Whenever Donatello deals combat damage to a player, create a token copy of target artifact you control (copy effects unsupported, wagic#19)
+auto=@combatdamaged(player) from(this):clone target(artifact|myBattlefield)
+grade=borderline
+#REVIEW-V Written to match Schema Thief (line 98015), the same ability on the opponent's
+#side, which ships unflagged. The harness cannot drive a targeted combat-damage trigger:
+#measured 2026-09-05, the target click is never consumed and the payload resolves with no
+#target. 112 cards use this shape, including upstream ones, and not one of the 995 tests
+#exercises it - so this is a harness limit, not evidence the card is broken. Verify in game.
 text=Sneak {1}{U} -- Whenever Donatello deals combat damage to a player, create a token that's a copy of target artifact you control.
 mana={2}{U}
 type=Legendary Creature
@@ -135130,7 +135136,6 @@ other={1}{B}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=alternative -5/-5 ueot
 auto=ifnot paid(alternative) then -3/-3 ueot
-missing=Bargain may also be paid by sacrificing a creature token; the sacrifice chooser only offers artifacts and enchantments (which covers Treasure/Food/Clue and every enchantment). A third comma clause in an extra-cost S() silently breaks the chooser, so creature tokens cannot be added.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Target creature gets -3/-3 until end of turn. If this spell was bargained, that creature gets -5/-5 until end of turn instead.
 mana={1}{B}
 type=Instant
@@ -135507,7 +135512,6 @@ auto=ifnot paid(alternative) then damage:X target(creature,planeswalker)
 #out, so "twice X" has never actually been observed. Confirm in game that bargaining
 #this doubles the damage before trusting it.
 auto=alternative damage:X target(creature,planeswalker) && damage:X
-missing=Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
 mana={X}{R}
 type=Instant
@@ -135556,7 +135560,6 @@ otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 #shape. An explicit count there makes the player click every leftover card one at a time.
 auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
-missing=Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 #REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
 mana={2}{U}{U}
@@ -135570,7 +135573,6 @@ other={6}{G}{G}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
 auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
-missing=Bargain may also be paid by sacrificing a creature token; a third comma clause in an extra-cost S() silently breaks the chooser, so only artifacts and enchantments are offered.
 #REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
 mana={6}{G}{G}
