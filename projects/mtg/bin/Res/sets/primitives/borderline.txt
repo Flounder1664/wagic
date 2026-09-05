@@ -132424,7 +132424,13 @@ type=Instant
 name=Proft's Eidetic Memory
 abilities=nomaxhand
 auto=draw:1
-missing=At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control (cards-drawn-this-turn tracking unsupported)
+auto=@each my combatbegins restriction{compare(pdrewcount)~morethan~1}:name(Put +1/+1 counters) counter(1/1,pdrewcountminus1minusend) target(creature|mybattlefield)
+#REVIEW-V pdrewcount is real (WParsedInt.cpp:719 = controller()->drawCounter) and so is the
+#minus arithmetic (WParsedInt.cpp:183, <A>minus<B>minusend), so "cards-drawn-this-turn
+#tracking unsupported" was wrong. Not harness-verifiable: measured 2026-09-05, a trigger
+#that has to choose a target never opens a targeting step - the click is never consumed and
+#the payload resolves with nothing. Confirmed on @combatdamaged and @each my combatbegins
+#alike; the Bears stayed 2/2. Verify in game.
 text=When Proft's Eidetic Memory enters, draw a card. -- You have no maximum hand size. -- At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control, where X is the number of cards you've drawn this turn minus one.
 mana={1}{U}
 type=Legendary Enchantment
@@ -133711,7 +133717,7 @@ toughness=5
 name=The Prima Vista
 abilities=flying
 auto=_CREW2_
-missing=becomes a creature when you cast a noncreature spell with 4+ mana spent (mana-spent tracking unsupported)
+auto=@movedto(*[-creature]|mystack):name(Prima Vista becomes a creature) all(trigger[to]) transforms((,newability[if compare(totmanaspent)~morethan~3 then all(The Prima Vista|mybattlefield) becomes(Artifact Creature) ueot]))
 text=Flying -- Whenever you cast a noncreature spell, if at least four mana was spent to cast it, The Prima Vista becomes an artifact creature until end of turn. -- Crew 2
 mana={4}{U}
 type=Legendary Artifact
