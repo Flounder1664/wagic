@@ -1,0 +1,23 @@
+#"speed" (DFT Start your engines! / Max speed) was engine-blocked. It needed one thing the
+#engine lacked: a per-player 0..4 counter. speedCount was added 2026-09-05 alongside
+#experienceCount, deliberately NOT reusing it - 74 cards use experience for the real thing.
+#Walking Sarcophagus was shipped as a 3/3, its printed 2/1 body with the max-speed +1/+2
+#baked in permanently. It is now a 2/1 whose bonus is GATED, so entering at speed 1 it must
+#still be 2/1. Before this change it was a 3/3 the moment it hit the battlefield.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Walking Sarcophagus
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Walking Sarcophagus
+pt:walking sarcophagus=2/1
+life:20
+[PLAYER2]
+life:20
+[END]

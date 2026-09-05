@@ -4845,6 +4845,20 @@ public:
     ~AAAlterExperience();
 };
 
+//Alter a player's DFT speed (0..4)
+class AAAlterSpeed: public ActivatedAbilityTP
+{
+public:
+    int speed;
+
+    AAAlterSpeed(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int speed, ManaCost * _cost = NULL,
+            int who = TargetChooser::UNSET);
+    int resolve();
+    const string getMenuText();
+    AAAlterSpeed * clone() const;
+    ~AAAlterSpeed();
+};
+
 //Boast Event
 class AABoastEvent: public ActivatedAbilityTP
 {

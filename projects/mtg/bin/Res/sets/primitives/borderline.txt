@@ -133406,8 +133406,11 @@ toughness=5
 [/card]
 [card]
 name=Nesting Bot
+auto=_STARTENGINES_
+auto=_SPEEDUP_
+auto=this(variable{pspeed}>=4) 1/0
 auto=_DIES_token(Servo,artifact creature servo,1/1,colorless)
-missing=Start your engines! and Max speed - this creature gets +1/+0 (speed mechanic unsupported)
+missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
 text=Start your engines! -- When this creature dies, create a 1/1 colorless Servo artifact creature token. -- Max speed - This creature gets +1/+0.
 mana={W}
 type=Artifact Creature
@@ -133417,8 +133420,11 @@ toughness=1
 [/card]
 [card]
 name=Perilous Snare
+auto=_STARTENGINES_
+auto=_SPEEDUP_
 auto=(blink)forsrc target(*[-land]|opponentbattlefield)
-missing=Start your engines! and Max speed - {T}: put a +1/+1 counter on target creature or Vehicle (speed mechanic unsupported)
+auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - put a 1/1 counter) counter(1/1) target(creature,artifact[vehicle]|battlefield)
+missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
 text=Start your engines! -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- Max speed - {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
 mana={2}{W}
 type=Artifact
@@ -139040,10 +139046,13 @@ toughness=3
 [/card]
 [card]
 name=Streaking Oilgorger
-abilities=flying,haste,lifelink
+abilities=flying,haste
+auto=_STARTENGINES_
+auto=_SPEEDUP_
+auto=this(variable{pspeed}>=4) lifelink
 grade=borderline
-missing="start your engines / max speed" gates the lifelink; here it is always on.
-text=Flying, haste -- Start your engines! -- Max speed - This creature has lifelink. (Approximated: lifelink is always on.)
+missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+text=Flying, haste -- Start your engines! -- Max speed - This creature has lifelink.
 mana={4}{B}
 type=Creature
 subtype=Phyrexian Beast
@@ -139053,21 +139062,24 @@ toughness=3
 [card]
 name=Walking Sarcophagus
 grade=borderline
-missing="start your engines / max speed" gates the bonus; the printed 2/1 body is given
-#the +1/+2 permanently instead, so it reads as a 3/3.
-text=Start your engines! -- Max speed - This creature gets +1/+2. (Approximated: the bonus is always on.)
+auto=_STARTENGINES_
+auto=_SPEEDUP_
+auto=this(variable{pspeed}>=4) 1/2
+text=Start your engines! -- Max speed - This creature gets +1/+2.
 mana={2}
 type=Artifact Creature
 subtype=Skeleton
-power=3
-toughness=3
+power=2
+toughness=1
 [/card]
 [card]
 name=Endrider Catalyzer
 grade=borderline
-auto={T}:Add{R}{R}
-missing="start your engines / max speed" gates the mana ability; here it is always on.
-text=Start your engines! -- Max speed - {T}: Add {R}{R}. (Approximated: always available.)
+auto=_STARTENGINES_
+auto=_SPEEDUP_
+auto={T} restriction{compare(pspeed)~equalto~4}:Add{R}{R}
+missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+text=Start your engines! -- Max speed - {T}: Add {R}{R}. 
 mana={1}{R}
 type=Creature
 subtype=Phyrexian Scout

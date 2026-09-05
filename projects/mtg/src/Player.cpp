@@ -38,6 +38,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     drawCounter = 0;
     energyCount = 0;
     experienceCount = 0;
+    speedCount = 0;
     yidaroCount = 0;
     ringTemptations = 0;
     dungeonCompleted = 0;

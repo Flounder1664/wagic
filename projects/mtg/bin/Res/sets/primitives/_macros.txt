@@ -408,6 +408,15 @@
 #AUTO_DEFINE _EARTHBEND4_ name(Earthbend 4) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.4)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
 #AUTO_DEFINE _EARTHBEND5_ name(Earthbend 5) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.5)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
 
+# Speed (DFT) - "Start your engines!" sets your speed to 1 if you have none; thereafter it
+# rises by one the FIRST time each turn an opponent loses life, capping at max speed 4.
+# speedCount is a per-player counter added to the engine 2026-09-05 (Player.h), read as
+# pspeed and written with alterspeed: - deliberately NOT experienceCount, which 74 cards
+# already use for the real experience mechanic. The engine clamps the track to 0..4.
+# Every card printed with "Start your engines!" wants BOTH lines.
+#AUTO_DEFINE _STARTENGINES_ if compare(pspeed)~equalto~0 then alterspeed:1 controller
+#AUTO_DEFINE _SPEEDUP_ @lifelostfoeof(player) turnlimited restriction{compare(pspeed)~morethan~0}:alterspeed:1 controller
+
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
 #AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile])) forever )!
 #AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R}

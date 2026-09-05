@@ -4477,6 +4477,22 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //alter speed (DFT)
+    vector<string> splitSpeed = parseBetween(s, "alterspeed:", " ", false);
+    if (splitSpeed.size())
+    {
+        int spd = 0;
+        WParsedInt* parser = NEW WParsedInt(splitSpeed[1], card);
+        if(parser){
+            spd = parser->intValue;
+            SAFE_DELETE(parser);
+        }
+        Targetable * t = spell ? spell->getNextTarget() : NULL;
+        MTGAbility * a = NEW AAAlterSpeed(observer, id, card, t, spd, NULL, who);
+        a->oneShot = 1;
+        return a;
+    }
+
     //alter dungeon completed
     vector<string> splitDungeonCompleted = parseBetween(s, "completedungeon:", " ", false);
     if (splitDungeonCompleted.size())

@@ -1461,6 +1461,10 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
     {
         intValue = (s == "pexperience")?card->controller()->experienceCount:card->controller()->opponent()->experienceCount;
     }
+    else if (s == "pspeed" || s == "ospeed")
+    {
+        intValue = (s == "pspeed")?card->controller()->speedCount:card->controller()->opponent()->speedCount;
+    }
     else if (s == "plastshlturn" || s == "olastshlturn")
     {
         intValue = (s == "plastshlturn")?card->controller()->lastShuffleTurn:card->controller()->opponent()->lastShuffleTurn;

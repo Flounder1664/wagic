@@ -50,6 +50,11 @@ public:
     int drawCounter;
     int energyCount;
     int experienceCount;
+    //DFT "speed": a per-player 0..4 counter. Start your engines! sets it to 1, it rises
+    //by one the first time each turn an opponent loses life, and max speed means 4.
+    //Modelled here rather than on experienceCount, which 74 cards already use for the
+    //real experience mechanic and would collide with.
+    int speedCount;
     int yidaroCount;
     int ringTemptations;
     int dungeonCompleted;

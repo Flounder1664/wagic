@@ -1679,6 +1679,47 @@ int AAAlterExperience::resolve()
     return 0;
 }
 
+AAAlterSpeed::AAAlterSpeed(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, int speed, ManaCost * _cost,
+        int who) :
+    ActivatedAbilityTP(observer, _id, _source, _target, _cost, who), speed(speed)
+{
+}
+
+int AAAlterSpeed::resolve()
+{
+    Damageable * _target = (Damageable *) getTarget();
+    if (_target)
+    {
+        Player * pTarget = (Player*)_target;
+        if (pTarget)
+        {
+            pTarget->speedCount += speed;
+            //Speed is a 0..4 track: "start your engines!" cannot take it past 1 from 0 and
+            //max speed is 4, so clamping here keeps every card from having to say so.
+            if (pTarget->speedCount < 0)
+                pTarget->speedCount = 0;
+            if (pTarget->speedCount > 4)
+                pTarget->speedCount = 4;
+        }
+    }
+    return 0;
+}
+
+const string AAAlterSpeed::getMenuText()
+{
+    WParsedInt parsedNum(speed);
+    return _(parsedNum.getStringValue() + " Speed ").c_str();
+}
+
+AAAlterSpeed * AAAlterSpeed::clone() const
+{
+    return NEW AAAlterSpeed(*this);
+}
+
+AAAlterSpeed::~AAAlterSpeed()
+{
+}
+
 const string AAAlterExperience::getMenuText()
 {
     WParsedInt parsedNum(experience);
