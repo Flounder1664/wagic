@@ -136929,13 +136929,19 @@ subtype=Saga
 [card]
 name=The Elder Dragon War
 grade=borderline
-auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=damage:2 all(creature)
-auto=damage:2 opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) DOES fire when several counters
+#land at once - once per counter - so the modes only have to add the counters and the
+#existing chapter triggers do the rest. They need "once" or a three-counter entry runs
+#chapter III three times (it made four Dragons before this). Chapter I is the exception:
+#it was a bare auto=, which fires on entry whichever chapter you pick, so its body moves
+#into mode I. Guards do the rest - "=2" cannot match a Saga that entered on 3.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && damage:2 all(creature) && damage:2 opponent
+auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
+auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
+auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
 missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work. -- Chapter II is "discard any number, draw that many"; the engine has no
 text=Read ahead (Not implemented.) -- I - This Saga deals 2 damage to each creature and each opponent. -- II - Discard any number of cards, then draw that many cards. (Approximated as up to two.) -- III - Create a 4/4 red Dragon creature token with flying.
 mana={2}{R}{R}
@@ -136966,8 +136972,7 @@ auto=draw:2 controller && draw:2 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=read ahead. Measured 2026-08-19 and blocked twice over: a modal "choice" as a permanent's ETB adds nothing at all (the Lore counter came out 0), and entering with N counters via counter(0/0,N,Lore) does put N counters on but fires NO chapter trigger, because @counteradded(0/0,1,Lore) only matches a single-counter addition. Both would need engine work.
-text=Read ahead (Not implemented.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
 mana={2}{W}
 type=Enchantment
 subtype=Saga
