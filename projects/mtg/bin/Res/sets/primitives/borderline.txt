@@ -9229,6 +9229,7 @@ toughness=4
 [card]
 name=Restoration Seminar
 grade=borderline
+#Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9248,7 +9249,6 @@ abilities=exiledeath
 target=*[artifact;battle;creature;enchantment;planeswalker]|myGraveyard
 auto=moveTo(myBattlefield)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Return target nonland permanent card from your graveyard to the battlefield. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={5}{W}{W}
 type=Sorcery
@@ -9257,6 +9257,7 @@ subtype=Lesson
 [card]
 name=Decorum Dissertation
 grade=borderline
+#Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9275,7 +9276,6 @@ target=player
 auto=draw:2
 auto=life:-2
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Target player draws two cards and loses 2 life. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={3}{B}{B}
 type=Sorcery
@@ -9284,6 +9284,7 @@ subtype=Lesson
 [card]
 name=Echocasting Symposium
 grade=borderline
+#Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9301,7 +9302,7 @@ abilities=exiledeath
 target=creature|mybattlefield
 auto=clone
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=the token should be created by a TARGET PLAYER, not always by you; a second target on a different axis is not expressible here -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+missing=the token should be created by a TARGET PLAYER, not always by you; a second target on a different axis is not expressible here
 text=Target player creates a token that's a copy of target creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={4}{U}{U}
 type=Sorcery
@@ -9310,6 +9311,7 @@ subtype=Lesson
 [card]
 name=Improvisation Capstone
 grade=borderline
+#Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9344,7 +9346,7 @@ abilities=exiledeath
 #wrong about "without paying their mana costs" but right about everything else.
 auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) forever )!
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=exile-until-total-mana-value has no form, so a flat TWO cards are exiled - the usual result of the real count. The exiled cards are playable from exile at their PRINTED COST rather than free; see the note above for the four forms tried and why each was rejected. -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+missing=exile-until-total-mana-value has no form, so a flat TWO cards are exiled - the usual result of the real count. The exiled cards are playable from exile at their PRINTED COST rather than free; see the note above for the four forms tried and why each was rejected
 text=Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={5}{R}{R}
 type=Sorcery
@@ -133304,7 +133306,9 @@ grade=borderline
 # REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no cursed role token that could be removed or moved.
 abilities=lifelink
 auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-missing=Role replacement is now a state-based action in the engine (GameObserver::enchantmentStatus, CR 704.5s, added 2026-09-08) rather than anything on the card, because a Role cannot see its siblings from card data. NOT COVERED BY A TEST: the harness stops running state-based actions once the [DO] block starts - measured, enchantmentStatus fires 10 times and always on the opening board - and no test can start with an Aura already attached, so this one needs in-game confirmation
+#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
+#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
+#begins, and no test can start with an Aura already attached. Confirm in game.
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
 type=Creature
@@ -133461,7 +133465,9 @@ name=Shatter the Oath
 target=creature,enchantment|battlefield
 auto=destroy
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-missing=Role replacement is now a state-based action in the engine (GameObserver::enchantmentStatus, CR 704.5s, added 2026-09-08) rather than anything on the card, because a Role cannot see its siblings from card data. NOT COVERED BY A TEST: the harness stops running state-based actions once the [DO] block starts - measured, enchantmentStatus fires 10 times and always on the opening board - and no test can start with an Aura already attached, so this one needs in-game confirmation
+#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
+#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
+#begins, and no test can start with an Aura already attached. Confirm in game.
 text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}{B}
 type=Sorcery
@@ -133470,7 +133476,9 @@ type=Sorcery
 name=Eriette's Whisper
 auto=discard:2 opponent
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-missing=Role replacement is now a state-based action in the engine (GameObserver::enchantmentStatus, CR 704.5s, added 2026-09-08) rather than anything on the card, because a Role cannot see its siblings from card data. NOT COVERED BY A TEST: the harness stops running state-based actions once the [DO] block starts - measured, enchantmentStatus fires 10 times and always on the opening board - and no test can start with an Aura already attached, so this one needs in-game confirmation
+#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
+#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
+#begins, and no test can start with an Aura already attached. Confirm in game.
 text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}
 type=Sorcery
@@ -133479,7 +133487,9 @@ type=Sorcery
 name=Witch's Mark
 auto=may discard:1 && draw:2
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-missing=Role replacement is now a state-based action in the engine (GameObserver::enchantmentStatus, CR 704.5s, added 2026-09-08) rather than anything on the card, because a Role cannot see its siblings from card data. NOT COVERED BY A TEST: the harness stops running state-based actions once the [DO] block starts - measured, enchantmentStatus fires 10 times and always on the opening board - and no test can start with an Aura already attached, so this one needs in-game confirmation
+#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
+#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
+#begins, and no test can start with an Aura already attached. Confirm in game.
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={1}{R}
 type=Sorcery
@@ -133588,7 +133598,8 @@ name=Nesting Bot
 auto=_STARTENGINES_
 auto=this(variable{pspeed}>=4) 1/0
 auto=_DIES_token(Servo)
-missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
+#losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- When this creature dies, create a 1/1 colorless Servo artifact creature token. -- Max speed - This creature gets +1/+0.
 mana={W}
 type=Artifact Creature
@@ -133646,7 +133657,8 @@ auto=(blink)forsrc target(*[-land]|opponentbattlefield)
 #access violation reading 0x4C). A comma type-list with a bracketed subtype is not an
 #attested form anywhere in this file; "vehicle" is usable as a bare type.
 auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - put a 1/1 counter) counter(1/1) target(creature,vehicle|battlefield)
-missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
+#losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- Max speed - {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
 mana={2}{W}
 type=Artifact
@@ -134107,6 +134119,10 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
+#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
+#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
+#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
+#and inherits the UNGATED base canPay(), so no engine change was needed.
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
@@ -134119,7 +134135,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
@@ -134133,7 +134149,6 @@ other={R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=damage:2 all(creature|battlefield)
 text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
@@ -134143,6 +134158,10 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
+#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
+#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
+#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
+#and inherits the UNGATED base canPay(), so no engine change was needed.
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
@@ -134155,7 +134174,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- may choose BOTH modes (choose-one only here); Sneak's bounce payment
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
 auto=choice name(-3/-3) target(creature) -3/-3 ueot
@@ -134177,7 +134196,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
@@ -134199,7 +134218,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
@@ -134213,7 +134232,6 @@ other={2}{R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- each player chooses whether to discard and draw (mandatory for both here); Sneak's bounce payment
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
 text=Sneak {2}{R} -- Each player may discard their hand and draw seven cards.
@@ -134234,7 +134252,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- you lose 2 life if an enchantment was destroyed; Sneak's bounce payment
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -134256,7 +134274,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja.
+missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
@@ -134281,13 +134299,16 @@ toughness=1
 [card]
 name=The Last Ronin's Technique
 grade=borderline
+#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
+#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
+#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
+#and inherits the UNGATED base canPay(), so no engine change was needed.
 other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
-missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
 auto=token(Ninja Turtle Spirit)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
@@ -136287,7 +136308,9 @@ abilities=hasotherkicker
 other={2}{U}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=if paid(alternative) then token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|opponentbattlefield)])) oneshot )!
-missing=Role replacement is now a state-based action in the engine (GameObserver::enchantmentStatus, CR 704.5s, added 2026-09-08) rather than anything on the card, because a Role cannot see its siblings from card data. NOT COVERED BY A TEST: the harness stops running state-based actions once the [DO] block starts - measured, enchantmentStatus fires 10 times and always on the opening board - and no test can start with an Aura already attached, so this one needs in-game confirmation. Also inherits the open Cursed Courtier issue: the enchanted creature does become 1/1, but the Role token itself is not present as a removable/movable permanent.
+#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
+#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
+#begins, and no test can start with an Aura already attached. Confirm in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
 mana={2}{U}
 type=Creature
@@ -138876,6 +138899,7 @@ other={2}{G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 auto=@movedTo(land|myBattlefield):target(creature|mybattlefield) dynamicability<!mytgt powerpumppow!>
+missing=canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone. Shared by all seven warp cards.
 text=Landfall - Whenever a land you control enters, double the power of target creature you control until end of turn. -- Warp {2}{G}
 mana={2}{G}{G}
 type=Creature
@@ -139368,7 +139392,8 @@ abilities=flying,haste
 auto=_STARTENGINES_
 auto=this(variable{pspeed}>=4) lifelink
 grade=borderline
-missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
+#losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Flying, haste -- Start your engines! -- Max speed - This creature has lifelink.
 mana={4}{B}
 type=Creature
@@ -139393,7 +139418,8 @@ name=Endrider Catalyzer
 grade=borderline
 auto=_STARTENGINES_
 auto={T} restriction{compare(pspeed)~equalto~4}:Add{R}{R}
-missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
+#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
+#losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- Max speed - {T}: Add {R}{R}. 
 mana={1}{R}
 type=Creature
