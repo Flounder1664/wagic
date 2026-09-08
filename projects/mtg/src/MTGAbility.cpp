@@ -7187,6 +7187,27 @@ void AbilityFactory::addAbilities(int _id, Spell * spell)
         observer->addObserver(NEW AExalted(observer, _id, card));
     }
 
+    //Prowess. Constants::PROWESS was declared and never read, so every card wrote the trigger
+    //out longhand - 49 of the 50 that carry the keyword had the identical auto= line, and the
+    //ones that forgot (Agent of Atlas, Iguana Parrot, Queen Brahne) simply had prowess in name
+    //only, twice slipping past an audit because the keyword LOOKED like the implementation.
+    //Parsing the canonical line here rather than writing a new ability class is deliberate:
+    //the semantics are then identical to what those 49 cards already shipped, by construction.
+    //Same trick the crew marker uses in TapTargetCost::doPay.
+    //NOTE the caveat in the comment above: this fires from the card's own abilities, so prowess
+    //GRANTED to a creature later does not come through here. Wizard's Staff, which grants it to
+    //the equipped creature, therefore keeps its teach(creature) transforms(...) form.
+    if (card->basicAbilities[(int)Constants::PROWESS])
+    {
+        MTGAbility * prowess = parseMagicLine("@movedto(*[-creature]|mystack):1/1 ueot", _id, spell, card);
+        if (prowess)
+        {
+            prowess->addToGame();
+            if (prowess->source)
+                prowess->source->cardsAbilities.push_back(prowess);
+        }
+    }
+
     if (card->basicAbilities[(int)Constants::FLANKING])
     {
         observer->addObserver(NEW AFlankerAbility(observer, _id, card));

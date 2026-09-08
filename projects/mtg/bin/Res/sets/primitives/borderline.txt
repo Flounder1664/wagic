@@ -9691,7 +9691,6 @@ toughness=2
 name=Bearer of Overwhelming Truths
 backside=Daring Sleuth
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@combatdamagefoeof(player) from(this):name(Create clue) _CLUE_ controller
 auto=@combatdamageof(player) from(this):name(Create clue) _CLUE_ controller
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever Bearer of Overwhelming Truths deals combat damage to a player, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") // Daring Sleuth
@@ -12792,7 +12791,6 @@ toughness=6
 name=Bloodwater Entity
 abilities=flying,prowess
 auto=may moveto(mylibrary) target(instant,sorcery|mygraveyard)
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Bloodwater Entity enters, you may put target instant or sorcery card from your graveyard on top of your library.
 mana={1}{U}{R}
 type=Creature
@@ -34395,7 +34393,6 @@ name=Elsha of the Infinite
 abilities=prowess,showfromtoplibrary
 auto=this(variable{type:*[-land;-creature;zpos=1]:mylibrary}>0) lord(*[zpos=1]|mylibrary) flash
 auto=this(variable{type:*[-land;-creature;zpos=1]:mylibrary}>0) canplayfromlibrarytop
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- You may look at the top card of your library any time. -- You may cast the top card of your library if it's a noncreature, nonland card, and you may cast it as though it had flash.
 mana={2}{U}{R}{W}
 type=Legendary Creature
@@ -43115,7 +43112,6 @@ toughness=3
 [card]
 name=Frenzied Geistblaster
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):name(Gets 1/1) 1/1 ueot
 auto=if type(*[instant;sorcery]|mynonplaynonexile)~morethan~19 then may name(Discard and seek) name(Discard and seek) target(*|myhand) reject and!( transforms((,newability[name(Seek an instant or sorcery) moverandom(*[instant;sorcery]) from(mylibrary) to(myhand)])) oneshot )!
 text=Prowess -- When Frenzied Geistblaster enters, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.
 mana={1}{R}
@@ -48167,7 +48163,6 @@ type=Sorcery
 [card]
 name=Goblin Wiz
 abilities=prowess
-auto=@movedTo(*[-creature]|myStack):1/1 ueot
 text=Whenever you cast a noncreature spell, this get +1/+1 until end of turn.
 type=Creature
 subtype=Goblin Wizard
@@ -52061,7 +52056,6 @@ toughness=2
 [card]
 name=Harmonic Prodigy
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):name(Gains 1/1 ueot) 1/1 ueot
 auto=doubletrigger(other *[shaman;wizard]|mybattlefield)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- If an ability of a Shaman or another Wizard you control triggers, that ability triggers an additional time.
 mana={1}{R}
@@ -52876,7 +52870,6 @@ toughness=1
 [card]
 name=Heartfire Immolator
 abilities=prowess
-auto=@movedTo(*[-creature]|myStack):1/1 ueot
 auto={R}{S}:target(creature,planeswalker) dynamicability<!powerstrike!>
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {R}, Sacrifice Heartfire Immolator: It deals damage equal to its power to target creature or planeswalker.
 mana={1}{R}
@@ -67188,7 +67181,6 @@ type=Sorcery
 [card]
 name=Lightning Visionary
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{R}
 type=Creature
@@ -74260,7 +74252,6 @@ toughness=2
 [card]
 name=Mistral Singer
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{U}
 type=Creature
@@ -78461,7 +78452,6 @@ toughness=1
 [card]
 name=Nimble-Blade Khenra
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{R}
 type=Creature
@@ -96904,7 +96894,6 @@ toughness=1
 [card]
 name=Sage-Eye Avengers
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):name(Gets 1/1) 1/1 ueot
 auto=_ATTACKING_may name(Return creature) transforms((,newability[name(Choose creature) target(creature[power<=pminus1minusend]|battlefield) moveTo(hand)])) oneshot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever Sage-Eye Avengers attacks, you may return target creature to its owner's hand if its power is less than Sage-Eye Avengers's power.
 mana={4}{U}{U}
@@ -102482,7 +102471,6 @@ toughness=6
 [card]
 name=Shipwreck Dowser
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=moveto(hand) target(*[instant;sorcery]|myGraveyard)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Shipwreck Dowser enters, return target instant or sorcery card from your graveyard to your hand.
 mana={3}{U}{U}
@@ -107282,7 +107270,6 @@ type=Artifact
 [card]
 name=Soul-Scar Mage
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@damaged(creature|opponentbattlefield) from(*[-attacking;-blocking;-blocked]|mybattlefield):all(trigger[to]) counter(-1/-1,thatmuch)
 auto=@damaged(creature|opponentbattlefield) from(*[-attacking;-blocking;-blocked]|mybattlefield):all(trigger[to]) 0/thatmuch ueot
 auto=@damaged(creature|opponentbattlefield) from(*|mystack):all(trigger[to]) counter(-1/-1,thatmuch)
@@ -108268,7 +108255,6 @@ toughness=4
 [card]
 name=Spellweaver Eternal
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=_BLOCKED_life:-2 opponent
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)
 mana={1}{U}
@@ -111389,7 +111375,6 @@ abilities=flying,prowess
 aicode=activate transforms((,newability[all(*[zpos<=2]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
 anyzone=@movedTo(*[instant;sorcery]|mystack) once:changecost(colorless:-2) ueot forcedalive
 anyzone=@movedTo(*[instant;sorcery]|mystack) once:altercost(blue:-1) ueot forcedalive
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=_SCRY2_
 text=This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn. -- Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Stormwing Entity enters, scry 2.
 mana={3}{U}{U}
@@ -114745,7 +114730,6 @@ toughness=2
 [card]
 name=Target Minotaur
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{R}
 type=Creature
@@ -117926,7 +117910,6 @@ type=Instant
 [card]
 name=Thorned Moloch
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=this(attacking) first strike
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Thorned Moloch has first strike as long as it's attacking.
 mana={2}{R}
@@ -127461,7 +127444,6 @@ toughness=1
 [card]
 name=Voracious Reader
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=lord(*[instant;sorcery]|mycastingzone) altercost(colorless,-1)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Instant and sorcery spells you cast cost {1} less to cast.
 type=Creature
@@ -133868,7 +133850,6 @@ name=Mai, Jaded Edge
 grade=borderline
 # REVIEW 2026-07-19 [P:med] FIXED: prowess pump line added; exhaust double strike counter
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: double strike counter) counter(0/0,1,exhaust) && counter(0/0,1,doublestrike)
 auto=this(counter{0/0.1.doublestrike}>=1) double strike
 missing=the double strike is granted directly rather than via a keyword counter
@@ -139149,7 +139130,6 @@ grade=borderline
 #Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
 #engine - so every working prowess card writes the trigger out. 48 of the 51 did; this one
 #did not, so it had prowess in name only. Audited 2026-09-08.
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying, vigilance -- Prowess
 mana={2}{U}
 type=Creature
@@ -143207,7 +143187,6 @@ abilities=prowess
 #Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
 #engine - so every working prowess card writes the trigger out. 48 of the 51 did; this one
 #did not, so it had prowess in name only. Audited 2026-09-08.
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{W}
 type=Creature

@@ -76,7 +76,6 @@ toughness=3
 [card]
 name=Abbot of Keral Keep
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=moveto(exile) and!( transforms((,canplayfromexile)) ueot )! all(*[zpos=1]|mylibrary)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Abbot of Keral Keep enters, exile the top card of your library. Until end of turn, you may play that card.
 mana={1}{R}
@@ -10714,7 +10713,6 @@ type=Enchantment
 [card]
 name=Bedlam Reveler
 abilities=prowess,affinitygraveinstsorc
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=reject all(*|myhand) && draw:3
 text=Bedlam Reveler costs {1} less to cast for each instant and sorcery card in your graveyard. -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Bedlam Reveler enters, discard your hand, then draw three cards.
 mana={6}{R}{R}
@@ -13122,7 +13120,6 @@ toughness=2
 [card]
 name=Bloodfire Expert
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{R}
 type=Creature
@@ -32701,7 +32698,6 @@ type=Artifact
 [card]
 name=Dragon Bell Monk
 abilities=vigilance,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Vigilance. -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{W}
 type=Creature
@@ -32966,7 +32962,6 @@ toughness=2
 [card]
 name=Dragon-Style Twins
 abilities=double strike,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Double strike -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={3}{R}{R}
 type=Creature
@@ -61593,7 +61588,6 @@ type=Artifact
 [card]
 name=Ingenious Skaab
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto={U}:1/-1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {U}: Ingenious Skaab gets +1/-1 until end of turn.
 mana={2}{U}
@@ -63657,7 +63651,6 @@ type=Instant
 [card]
 name=Jeskai Elder
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@combatdamaged(player) from(this):may _LOOT_
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever Jeskai Elder deals combat damage to a player, you may draw a card. If you do, discard a card.
 mana={1}{U}
@@ -63690,7 +63683,6 @@ toughness=1
 [card]
 name=Jeskai Student
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{W}
 type=Creature
@@ -63701,7 +63693,6 @@ toughness=3
 [card]
 name=Jeskai Windscout
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{U}
 type=Creature
@@ -63784,7 +63775,6 @@ toughness=1
 name=Jhessian Thief
 abilities=prowess
 auto=@combatdamaged(player) from(this):draw:1 controller
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever Jhessian Thief deals combat damage to a player, draw a card.
 mana={2}{U}
 type=Creature
@@ -72550,7 +72540,6 @@ toughness=4
 [card]
 name=Lotus Path Djinn
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying. -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={3}{U}
 type=Creature
@@ -72583,7 +72572,6 @@ type=Land
 [card]
 name=Lotus-Eye Mystics
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=choice moveto(hand) target(enchantment|mygraveyard)
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- When Lotus-Eye Mystics enters, return target enchantment card from your graveyard to your hand.
 mana={3}{W}
@@ -73594,7 +73582,6 @@ type=Instant
 [card]
 name=Mage-Ring Bully
 abilities=mustattack,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Mage-Ring Bully attacks each combat if able.
 mana={1}{R}
 type=Creature
@@ -79321,7 +79308,6 @@ toughness=0
 [card]
 name=Mistfire Adept
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@movedTo(*[-creature]|mystack):target(creature) flying ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever you cast a noncreature spell, target creature gains flying until end of turn.
 mana={3}{U}
@@ -80296,7 +80282,6 @@ toughness=2
 [card]
 name=Monastery Mentor
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@movedTo(*[-creature]|mystack):choice name(Create Monk) token(Monk,Creature Monk,1/1,white) and!( transforms((,newability[@movedTo(*[-creature]|mystack):1/1 ueot])) forever )! controller
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever you cast a noncreature spell, put a 1/1 white Monk creature token with prowess onto the battlefield.
 mana={2}{W}
@@ -80308,7 +80293,6 @@ toughness=2
 [card]
 name=Monastery Swiftspear
 abilities=haste,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={R}
 type=Creature
@@ -84161,7 +84145,6 @@ toughness=2
 [card]
 name=Niblis of Dusk
 abilities=flying,prowess
-auto=@movedto(*[-creature]|mystack):1/1 ueot
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{U}
 type=Creature
@@ -84172,7 +84155,6 @@ toughness=1
 [card]
 name=Niblis of Frost
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@movedTo(instant,sorcery|mystack):target(creature|opponentBattlefield) freeze
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever you cast an instant or sorcery spell, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 mana={2}{U}{U}
@@ -89722,7 +89704,6 @@ toughness=4
 [card]
 name=Pearl Lake Ancient
 abilities=flash,nofizzle,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto={H(land|myBattlefield)}{H(land|myBattlefield)}{H(land|myBattlefield)}: moveto(hand)
 text=Flash. -- Pearl Lake Ancient can't be countered. -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Return three lands you control to their owner's hand: Return Pearl Lake Ancient to its owner's hand.
 mana={5}{U}{U}
@@ -100731,7 +100712,6 @@ subtype=Equipment
 [card]
 name=Ringwarden Owl
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={3}{U}{U}
 type=Creature
@@ -101326,7 +101306,6 @@ text=Target creature you control gets +2/+2 and gains first strike until end of 
 [card]
 name=Riverwheel Aerialists
 abilities=flying,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={5}{U}
 type=Creature
@@ -104440,7 +104419,6 @@ type=Sorcery
 [card]
 name=Sanguinary Mage
 abilities=prowess
-auto=@movedto(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{R}
 type=Creature
@@ -107401,7 +107379,6 @@ toughness=1
 [card]
 name=Seeker of the Way
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@movedTo(*[-creature]|mystack):lifelink ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever you cast a noncreature spell, Seeker of the Way gains lifelink until end of turn.
 mana={1}{W}
@@ -110619,7 +110596,6 @@ toughness=4
 [card]
 name=Shu Yun, the Silent Tempest
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 auto=@movedTo(*[-creature]|mystack):name(Pay {RW}{RW} for Double Strike) pay({RW}{RW}) name(double Strike) target(creature) double strike ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever you cast a noncreature spell, you may pay Red or WhiteRed or White. If you do, target creature gains double strike until end of turn.
 mana={2}{U}
@@ -120584,7 +120560,6 @@ toughness=3
 [card]
 name=Stormchaser Mage
 abilities=flying,haste,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying, haste -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={U}{R}
 type=Creature
@@ -132514,7 +132489,6 @@ toughness=1
 [card]
 name=Umara Entangler
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{U}
 type=Creature
@@ -134789,7 +134763,6 @@ toughness=2
 [card]
 name=Vedalken Blademaster
 abilities=prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={2}{U}
 type=Creature
@@ -140963,7 +140936,6 @@ type=Sorcery
 [card]
 name=Whirlwind Adept
 abilities=hexproof,prowess
-auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Hexproof (This creature can't be the target of spells or abilities your opponents control.) -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={4}{U}
 type=Creature
