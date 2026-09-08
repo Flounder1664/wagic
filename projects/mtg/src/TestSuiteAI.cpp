@@ -704,7 +704,7 @@ TestSuite::TestSuite(const char * filename)
                     //in WAGIC_TESTSUITE_ONLY to play it.
                     continue;
                 }
-                files[nbfiles] = s;
+                files.push_back(s);
                 nbfiles++;
             }
             if (s[0] == '*' && s[1] == '/') comment = 0;

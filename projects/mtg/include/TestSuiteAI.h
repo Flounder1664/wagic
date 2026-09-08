@@ -80,7 +80,10 @@ class TestSuite : public TestSuiteGame
 private:
     int currentfile;
     int nbfiles;
-    string files[1024];
+    //Was string files[1024]. _tests.txt reached 1025 entries and the 1025th write ran off
+    //the end of the array, corrupting the object and segfaulting in the constructor - a
+    //silent cap on how many tests the suite could ever hold.
+    vector<string> files;
 
     void cleanup();
     vector<boost::thread*> mWorkerThread;

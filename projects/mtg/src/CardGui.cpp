@@ -299,6 +299,11 @@ void CardGui::DrawCard(MTGCard* inCard, const Pos& inPosition, int inMode, bool 
 
 void CardGui::Render()
 {
+    //An empty slot in a card display has no card - CardView::Render already guards for it
+    //a few lines below, but this dereference ran first. A reveal display with fewer cards
+    //than slots (MTGRevealingCards::Render -> CardDisplay::Render) walked straight into it.
+    if (!card)
+        return;
     GameObserver * game = card->getObserver();
     WFont * mFont = game?game->getResourceManager()->GetWFont(Fonts::MAIN_FONT):WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
     JRenderer * renderer = JRenderer::GetInstance();
