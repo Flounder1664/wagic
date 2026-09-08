@@ -1258,6 +1258,37 @@ void GameObserver::enchantmentStatus()
                 card->auraParent = card->target;
             }
         }
+
+        //704.5s If a player controls two or more Role tokens attached to the same
+        //permanent, that player puts all but the newest into the graveyard.
+        //This has to live here rather than on the six Role primitives: a Role cannot
+        //see its siblings from card data. ChildrenChooser (all(mychild)) matches on
+        //auraParent == source, so only the ENCHANTED permanent can enumerate its
+        //Roles, and the Role tokens are attached by retargetfromplay after they enter
+        //- there is no moment at which a Role's own ability can look at the others.
+        //Runs immediately after the auraParent pass above so the links are current.
+        //Later in the battlefield array means more recently added, so the last Role
+        //attached to a given permanent is the one that survives. Victims are collected
+        //first because putInGraveyard shifts the zone out from under the loop.
+        vector<MTGCardInstance *> supersededRoles;
+        for (int j = 0; j < zone->nb_cards; j++)
+        {
+            MTGCardInstance * role = zone->cards[j];
+            if (!role || !role->auraParent || !role->isToken || !role->hasSubtype("role"))
+                continue;
+            for (int k = j + 1; k < zone->nb_cards; k++)
+            {
+                MTGCardInstance * newer = zone->cards[k];
+                if (newer && newer->isToken && newer->auraParent == role->auraParent
+                    && newer->hasSubtype("role"))
+                {
+                    supersededRoles.push_back(role);
+                    break;
+                }
+            }
+        }
+        for (size_t r = 0; r < supersededRoles.size(); r++)
+            players[i]->game->putInGraveyard(supersededRoles[r]);
     }
 }
 
