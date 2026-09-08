@@ -274,7 +274,15 @@ int MTGAllCards::processConfLine(string &s, MTGCard *card, CardPrimitive * primi
         }
         break;
 
-    case 'n': //name
+    case 'n': //name, note
+        //note= is documentation only and is deliberately NOT missing=. missing= sets
+        //Constants::MISSING (line ~261 below), which draws a "!?" warning badge on the card,
+        //so putting rationale, verification status or engine findings there marks a working
+        //card as broken - it did, on 21 cards, until 2026-09-08. Consumed and discarded here
+        //so the line is a first-class field rather than a comment: greppable by the audit
+        //tooling, and it cannot drift back into missing=.
+        if (key == "note")
+            break;
         if (!primitive) primitive = NEW CardPrimitive();
         primitive->setName(val);
         break;

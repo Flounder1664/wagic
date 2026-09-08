@@ -9229,7 +9229,7 @@ toughness=4
 [card]
 name=Restoration Seminar
 grade=borderline
-#Paradigm confirmed working in game by John, 2026-09-08.
+note=Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9257,7 +9257,7 @@ subtype=Lesson
 [card]
 name=Decorum Dissertation
 grade=borderline
-#Paradigm confirmed working in game by John, 2026-09-08.
+note=Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9284,7 +9284,7 @@ subtype=Lesson
 [card]
 name=Echocasting Symposium
 grade=borderline
-#Paradigm confirmed working in game by John, 2026-09-08.
+note=Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -9311,7 +9311,7 @@ subtype=Lesson
 [card]
 name=Improvisation Capstone
 grade=borderline
-#Paradigm confirmed working in game by John, 2026-09-08.
+note=Paradigm confirmed working in game by John, 2026-09-08.
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
@@ -133306,9 +133306,7 @@ grade=borderline
 # REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no cursed role token that could be removed or moved.
 abilities=lifelink
 auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
-#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
-#begins, and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
 type=Creature
@@ -133465,9 +133463,7 @@ name=Shatter the Oath
 target=creature,enchantment|battlefield
 auto=destroy
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
-#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
-#begins, and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}{B}
 type=Sorcery
@@ -133476,9 +133472,7 @@ type=Sorcery
 name=Eriette's Whisper
 auto=discard:2 opponent
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
-#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
-#begins, and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}
 type=Sorcery
@@ -133487,9 +133481,7 @@ type=Sorcery
 name=Witch's Mark
 auto=may discard:1 && draw:2
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
-#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
-#begins, and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={1}{R}
 type=Sorcery
@@ -133598,8 +133590,7 @@ name=Nesting Bot
 auto=_STARTENGINES_
 auto=this(variable{pspeed}>=4) 1/0
 auto=_DIES_token(Servo)
-#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
-#losing life, which this harness cannot drive. Nothing here is unimplemented.
+note=The speed GATE is proved by test; the climb to max speed needs four turns of an opponent losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- When this creature dies, create a 1/1 colorless Servo artifact creature token. -- Max speed - This creature gets +1/+0.
 mana={W}
 type=Artifact Creature
@@ -133657,8 +133648,7 @@ auto=(blink)forsrc target(*[-land]|opponentbattlefield)
 #access violation reading 0x4C). A comma type-list with a bracketed subtype is not an
 #attested form anywhere in this file; "vehicle" is usable as a bare type.
 auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - put a 1/1 counter) counter(1/1) target(creature,vehicle|battlefield)
-#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
-#losing life, which this harness cannot drive. Nothing here is unimplemented.
+note=The speed GATE is proved by test; the climb to max speed needs four turns of an opponent losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- Max speed - {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
 mana={2}{W}
 type=Artifact
@@ -134119,10 +134109,7 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
-#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
-#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
-#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
-#and inherits the UNGATED base canPay(), so no engine change was needed.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
@@ -134151,6 +134138,7 @@ other={R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=damage:2 all(creature|battlefield)
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 text=Sneak {R} -- Jennika's Technique deals 2 damage to each creature.
 mana={2}{R}
 type=Instant
@@ -134158,10 +134146,7 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
-#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
-#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
-#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
-#and inherits the UNGATED base canPay(), so no engine change was needed.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
@@ -134196,6 +134181,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
@@ -134218,6 +134204,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
@@ -134234,6 +134221,7 @@ other={2}{R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=all(*|myhand) moveTo(mygraveyard) && draw:7 controller && all(*|opponenthand) moveTo(opponentgraveyard) && draw:7 opponent
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 text=Sneak {2}{R} -- Each player may discard their hand and draw seven cards.
 mana={4}{R}{R}
 type=Instant
@@ -134252,6 +134240,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
@@ -134274,6 +134263,7 @@ abilities=flash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
@@ -134299,10 +134289,7 @@ toughness=1
 [card]
 name=The Last Ronin's Technique
 grade=borderline
-#Sneak's payment is the H(...) extra cost - BounceTargetCost, "return a target to hand".
-#An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS
-#(ExtraCost.cpp:1115) and made these uncastable. BounceTargetCost overrides only doPay()
-#and inherits the UNGATED base canPay(), so no engine change was needed.
+note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -136308,9 +136295,7 @@ abilities=hasotherkicker
 other={2}{U}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=if paid(alternative) then token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|opponentbattlefield)])) oneshot )!
-#REVIEW-V Role replacement is a state-based action (GameObserver::enchantmentStatus, CR
-#704.5s). Not covered by a test - the harness stops running state-based actions once [DO]
-#begins, and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
 mana={2}{U}
 type=Creature
@@ -139170,10 +139155,17 @@ toughness=4
 name=Highspire Bell-Ringer
 abilities=flying
 grade=borderline
-auto=lord(*|mycastingzone) altercost(colorless,-1)
-missing=the discount applies to EVERY spell, not just the second. Attempted 2026-09-08 and reverted: thisturn(*|mystack)~equalto~1 is the right count for "the second spell you cast each turn" - 33 cards use exactly that - but hanging a restriction{} on a static lord(...) altercost(...) does not gate it, it silently switches the whole ability off. Measured with two Lava Axes ({4}{R}) from a {9}{R}{R} pool: blanket discount leaves {3}, correct behaviour would leave {2}, and the gated version left {1} - the same as no Bell-Ringer at all. Blanket is wrong but strictly better than inert, so it stands.
+#"The second spell you cast each turn costs less." Copied from Monk Class, which carries
+#the identical printed line and works: a counter ticks up on every spell cast, the static
+#discount is gated on that count being exactly 1 with this(variable{hascnt...}=1) - NOT with
+#restriction{}, which silently switches a static lord off - and the count is cleared at end
+#of turn. The if-line catches the case where this creature is itself the first spell.
+auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,bellrung)
+auto=@movedto(*|mystack):counter(0/0,1,bellrung)
+auto=this(variable{hascntbellrung}=1) lord(*|mycastingzone) altercost(colorless,-1)
+auto=@each end restriction{compare(hascntbellrung)~morethan~0}:removeallcounters(0/0,1,bellrung)
 #every spell.
-text=Flying -- The second spell you cast each turn costs {1} less to cast. (Approximation: every spell costs {1} less.)
+text=Flying -- The second spell you cast each turn costs {1} less to cast.
 mana={2}{U}
 type=Creature
 subtype=Bird Cleric
@@ -139183,10 +139175,17 @@ toughness=4
 [card]
 name=Uthros Psionicist
 grade=borderline
-auto=lord(*|mycastingzone) altercost(colorless,-2)
-missing=the discount applies to EVERY spell, not just the second. Attempted 2026-09-08 and reverted: thisturn(*|mystack)~equalto~1 is the right count for "the second spell you cast each turn" - 33 cards use exactly that - but hanging a restriction{} on a static lord(...) altercost(...) does not gate it, it silently switches the whole ability off. Measured with two Lava Axes ({4}{R}) from a {9}{R}{R} pool: blanket discount leaves {3}, correct behaviour would leave {2}, and the gated version left {1} - the same as no Bell-Ringer at all. Blanket is wrong but strictly better than inert, so it stands.
+#"The second spell you cast each turn costs less." Copied from Monk Class, which carries
+#the identical printed line and works: a counter ticks up on every spell cast, the static
+#discount is gated on that count being exactly 1 with this(variable{hascnt...}=1) - NOT with
+#restriction{}, which silently switches a static lord off - and the count is cleared at end
+#of turn. The if-line catches the case where this creature is itself the first spell.
+auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,uthrosdiscount)
+auto=@movedto(*|mystack):counter(0/0,1,uthrosdiscount)
+auto=this(variable{hascntuthrosdiscount}=1) lord(*|mycastingzone) altercost(colorless,-2)
+auto=@each end restriction{compare(hascntuthrosdiscount)~morethan~0}:removeallcounters(0/0,1,uthrosdiscount)
 #every spell.
-text=The second spell you cast each turn costs {2} less to cast. (Approximation: every spell costs {2} less.)
+text=The second spell you cast each turn costs {2} less to cast.
 mana={2}{U}
 type=Creature
 subtype=Human Wizard
@@ -139392,8 +139391,7 @@ abilities=flying,haste
 auto=_STARTENGINES_
 auto=this(variable{pspeed}>=4) lifelink
 grade=borderline
-#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
-#losing life, which this harness cannot drive. Nothing here is unimplemented.
+note=The speed GATE is proved by test; the climb to max speed needs four turns of an opponent losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Flying, haste -- Start your engines! -- Max speed - This creature has lifelink.
 mana={4}{B}
 type=Creature
@@ -139418,8 +139416,7 @@ name=Endrider Catalyzer
 grade=borderline
 auto=_STARTENGINES_
 auto={T} restriction{compare(pspeed)~equalto~4}:Add{R}{R}
-#REVIEW-V The speed GATE is proved; the climb to max speed needs four turns of an opponent
-#losing life, which this harness cannot drive. Nothing here is unimplemented.
+note=The speed GATE is proved by test; the climb to max speed needs four turns of an opponent losing life, which this harness cannot drive. Nothing here is unimplemented.
 text=Start your engines! -- Max speed - {T}: Add {R}{R}. 
 mana={1}{R}
 type=Creature

@@ -1,0 +1,32 @@
+#"The second spell you cast each turn costs {1} less." This was a blanket discount on every
+#spell, and an earlier attempt to gate it with restriction{} switched it off entirely.
+#Monk Class carries the identical printed line and works: a counter ticks on every spell
+#cast, the static discount is gated on that count being exactly 1 via this(variable{...}=1),
+#and the count clears at end of turn. Both cards now copy that.
+#Two Lava Axes at {4}{R} from a {9}{R}{R} pool (11 mana). Full price twice = 10 spent, {1}
+#left. Discount on BOTH = 8 spent, {3} left. Correct - discount on the second only - is 9
+#spent, so exactly {2} must remain.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:693527
+hand:Lava Axe,Lava Axe
+manapool:{9}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lava Axe
+p2
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:693527
+manapool:{2}
+graveyard:*,*
+life:20
+[PLAYER2]
+life:10
+[END]
