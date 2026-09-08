@@ -143639,11 +143639,13 @@ toughness=1
 name=Pest Mrd
 #Nuisance Engine's Pest is a 0/1 COLORLESS ARTIFACT creature - a different body from the 1/1
 #black-green Pest every other card makes, so per project_token_images it gets a disambiguated
-#primitive rather than an edit to the shared one. Registered in MRD and HOP, the two sets that
-#Art is John's PROXY_Pest_0_1.jpg, staged at -50600 and -206100. Scryfall genuinely does not
-#carry this token - t:token t:pest returns 8 printings, all the 1/1 black-green one, none by
-#Stephen Tappin - because Mirrodin predates printed tokens. The source is 250x349, so it is
-#upscaled to the 672x936 standard and will look softer than a Scryfall scan.
+#primitive rather than an edit to the shared one. It is registered in MRD and HOP, the two
+#sets that print Nuisance Engine.
+#Art is the Stephen Tappin proxy from mtg.onl/token-list/pest_0_1, staged at -50600 and
+#-206100. Scryfall genuinely does not carry this token - t:token t:pest returns 8 printings,
+#all the 1/1 black-green one, none by Tappin - because Mirrodin predates printed tokens. The
+#largest rendition mtg.onl serves is 516x720, so it goes through the wagic-tools ComfyUI 4x
+#upscale (4x_NMKD-Siax_200k) and back down to the 672x936 standard rather than a flat stretch.
 grade=borderline
 text=0/1 colorless Pest artifact creature token.
 type=Artifact Creature
