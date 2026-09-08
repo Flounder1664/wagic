@@ -8628,6 +8628,9 @@ abilities=flying
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+#Ward {2}. The old note said there is no ward keyword in this engine; there are five
+#_WARDn_ macros in _macros.txt and this is one of them.
+auto=_WARD2_
 auto=_PREPARE_
 #The back face IS a real Magic card that this build already implements, so cast a copy of
 #IT rather than re-inlining an approximation of its text. That fixes three things at once:
@@ -8635,7 +8638,7 @@ auto=_PREPARE_
 #this on Brainstorm, whose put-back ran before the draw), and the card's real implementation
 #replaces a hand-written paraphrase. 14 more cards converted 2026-09-08 on that basis.
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:ancestral recall:!) asSorcery
-missing=ward {2} - there is no ward keyword in this engine. The attack trigger (exile eight cards from your graveyard to re-prepare) is not written. Ancestral Recall targets a player; here it always draws for you. -- the prepared state shows as a counter rather than a face-up back side.
+missing=the attack trigger (exile eight cards from your graveyard to re-prepare) is not written. -- the prepared state shows as a counter rather than a face-up back side.
 mana={3}{U}{U}
 type=Creature
 subtype=Human Wizard
@@ -134764,11 +134767,16 @@ subtype=Equipment
 [card]
 name=White Mage's Staff
 grade=supported
+#"...and is a Cleric." teach(creature) transforms((,<type>)) is the attested type grant -
+#the same shape as teach(creature) transforms((,blue,frog)) elsewhere in this file.
+#Untested: asserting a granted TYPE needs a card that cares about Clerics, and pt: cannot
+#address the Hero token this equips itself to. Verify in game.
+auto=teach(creature) transforms((,cleric))
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combat(attacking) source(mytgt):life:1 controller
 auto={3}:equip
-missing=equipped creature is a Cleric in addition to its other types
+missing=nothing known.
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric. -- Equip {3}
 mana={1}{W}
 type=Artifact
@@ -134790,11 +134798,16 @@ subtype=Equipment
 [/card]
 [card]
 name=Sage's Nouliths
+#"...and is a Cleric." teach(creature) transforms((,<type>)) is the attested type grant -
+#the same shape as teach(creature) transforms((,blue,frog)) elsewhere in this file.
+#Untested: asserting a granted TYPE needs a card that cares about Clerics, and pt: cannot
+#address the Hero token this equips itself to. Verify in game.
+auto=teach(creature) transforms((,cleric))
 auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/0
 auto=@combat(attacking) source(mytgt):may untap target(creature[attacking]|mybattlefield)
 auto={3}:equip
-missing=equipped creature is a Cleric in addition to its other types
+missing=nothing known.
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+0, has "Whenever this creature attacks, untap target attacking creature," and is a Cleric. -- Equip {3}
 mana={1}{U}
 type=Artifact
@@ -139939,7 +139952,15 @@ abilities=vigilance
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:counter(1/1) this
 grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw-each-turn trigger unverified keyword
-missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
+#"Whenever you draw your second card each turn". The old note said @seconddrawofturn is not
+#a real trigger, which is true but beside the point: the attested form is @drawof(player)
+#with a pdrewcount restriction, and three cards already use it at ~equalto~3 and ~equalto~5.
+#drawCounter is reset per turn in GameObserver, so equalto 2 is exactly the second draw.
+#NOT covered directly: this card cannot be put on the battlefield in the harness at all -
+#inplay: leaves it off whether seeded by name or by id, with or without this line. The
+#trigger form is pinned instead on Sneaky Snacker (generic/second_draw_trigger.txt).
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) counter(1/1) all(this)
+missing=nothing known.
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
 mana={1}{U}
 type=Creature
@@ -140907,7 +140928,15 @@ abilities=reach
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@seconddrawofturn:target(creature) counter(1/1) && transforms((,lifelink)) ueot
 grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; second-draw trigger unverified
-missing=the 'second card you draw each turn' trigger never fires (@seconddrawofturn is not a real trigger)
+#"Whenever you draw your second card each turn". The old note said @seconddrawofturn is not
+#a real trigger, which is true but beside the point: the attested form is @drawof(player)
+#with a pdrewcount restriction, and three cards already use it at ~equalto~3 and ~equalto~5.
+#drawCounter is reset per turn in GameObserver, so equalto 2 is exactly the second draw.
+#NOT covered directly: this card cannot be put on the battlefield in the harness at all -
+#inplay: leaves it off whether seeded by name or by id, with or without this line. The
+#trigger form is pinned instead on Sneaky Snacker (generic/second_draw_trigger.txt).
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) counter(1/1) target(creature) and!( transforms((,lifelink)) ueot )!
+missing=nothing known.
 text=Reach -- Whenever you draw your second card each turn, put a +1/+1 counter on target creature. It gains lifelink until end of turn.
 mana={1}{W}{U}
 type=Legendary Creature

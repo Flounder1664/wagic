@@ -1,0 +1,36 @@
+#Lakeshore Apothecary and Bard the Bowman were recorded as unfixable because
+#"@seconddrawofturn is not a real trigger". True, but beside the point: the attested form is
+#@drawof(player) with a pdrewcount restriction, which four shipped cards already use at
+#~equalto~3 and ~equalto~5, and Player::drawCounter is reset per turn in GameObserver. Both
+#cards are now written that way at ~equalto~2.
+#
+#Neither of those two can be instantiated in this harness - inplay: leaves them off the
+#battlefield whether seeded by name or by id, with or without the new line, so it is nothing
+#to do with the change. This pins the MECHANISM instead, on Sneaky Snacker, which carries the
+#same trigger at ~equalto~3: Ancestral Recall draws three, and the THIRD draw must bring it
+#back from the graveyard tapped. One draw earlier or later and it stays in the graveyard.
+[INIT]
+firstmain
+[PLAYER1]
+graveyard:Sneaky Snacker
+hand:Ancestral Recall
+library:Mountain,Mountain,Mountain,Mountain,Mountain
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ancestral Recall
+p1
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Sneaky Snacker
+tappedinplay:1
+graveyard:*
+hand:*,*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]
