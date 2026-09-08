@@ -136416,7 +136416,7 @@ grade=borderline
 other={3} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
-missing=canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={9}
 type=Artifact Creature
@@ -136432,7 +136432,7 @@ other={1}{R} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=this(variable{controllerturn}>0) lord(other creature|mybattlefield) 1/0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
-missing=canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=During your turn, other creatures you control get +1/+0. -- Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{R}
 type=Creature
@@ -136449,7 +136449,7 @@ abilities=flying,lifelink,canplayfromexile
 #Token doubling is the Doubling Season listener, not the trigger-doubling engine ability.
 auto=@tokencreated(*|myBattlefield):name(Double the token) all(trigger) clone options(notrigger)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
-missing=canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=Flying, lifelink -- If one or more tokens would be created under your control, twice that many of those tokens are created instead. -- Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{W}{W}
 type=Creature
@@ -136464,8 +136464,8 @@ abilities=canplayfromexile
 other={G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=@totalcounteradded(any) from(creature|myBattlefield) duplicate(all) nocost:ability$!name(Double the counter) donothing!$ controller
-missing=Doubling is applied to counters on CREATURES only. The card also covers Spacecraft and Planet, which are not modelled as types here. -- canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=If one or more counters would be put on a creature, Spacecraft, or Planet you control, twice that many of each of those kinds of counters are put on it instead. -- Warp {G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{G}
 type=Enchantment
@@ -136489,9 +136489,9 @@ auto=@movedTo(this|exile) from(battlefield):may thisforeach(counter{1/1.1}) coun
 #@movedTo(this|exile) for the warp exile. `may` is load-bearing on BOTH - without it
 #the prompt flashes and the counters go nowhere, which is what made this look like an
 #exile-specific counter bug when it was nothing of the kind.
-missing=The real card moves ALL its counters; this moves only +1/+1 counters. In practice -- canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 #Broodguard Elite only ever carries +1/+1 counters, from its own X.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=This creature enters with X +1/+1 counters on it. -- When this creature leaves the battlefield, put its counters on target creature you control. -- Warp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={X}{G}{G}
 type=Creature
@@ -136505,8 +136505,8 @@ abilities=canplayfromexile
 grade=borderline
 other={1}{U} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
-missing=Its whole ability - "if a permanent ENTERING causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time" - is Panharmonicon, i.e. the CAUSE axis of trigger doubling. The engine gained doubletrigger(<scope>) on 2026-07-27, but only the SOURCE axis; doubletrigger(*|mybattlefield) here would double every trigger regardless of cause, which plays quite differently. Left out rather than approximated. Ships as a vanilla 3/4 with warp. -- canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. -- Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={3}{U}
 type=Creature
@@ -138899,7 +138899,7 @@ other={2}{G} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 auto=@movedTo(land|myBattlefield):target(creature|mybattlefield) dynamicability<!mytgt powerpumppow!>
-missing=canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone. Shared by all seven warp cards.
+missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
 text=Landfall - Whenever a land you control enters, double the power of target creature you control until end of turn. -- Warp {2}{G}
 mana={2}{G}{G}
 type=Creature
