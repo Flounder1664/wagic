@@ -373,7 +373,9 @@ class Constants
       CREWPOWERONE = 244,   //crews/saddles as though its power were 1 greater (NEO Pilot)
       CREWPOWERTWO = 245,   //crews/saddles as though its power were 2 greater (DFT Pilot)
       CREWTOUGHNESS = 246,  //crews/saddles using its toughness rather than its power (Giant Ox)
-      NB_BASIC_ABILITIES = 247,
+      ALTFLASH = 247,       //this card's ALTERNATIVE cost may be paid at instant speed; the
+                            //normal cost keeps the card's own timing (Sneak)
+      NB_BASIC_ABILITIES = 248,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

@@ -885,7 +885,12 @@ int MTGAlternativeCostRule::isReactingToClick(MTGCardInstance * card, ManaCost *
         else
             return 0;
     }
-    else if ((card->hasType(Subtypes::TYPE_INSTANT)) || card->has(Constants::FLASH) || card->has(Constants::ASFLASH) || card->has(Constants::SPELLMASTERY) || card->has(Constants::OFFERING) || (card->StackIsEmptyandSorcerySpeed()))
+    //ALTFLASH sits here and ONLY here: this is MTGAlternativeCostRule, so it relaxes the timing
+    //of the alternative cost without touching MTGPutInPlayRule, which still governs the normal
+    //cost. Sneak needed that - it is paid by returning an unblocked attacker, which only exists
+    //during combat, and the previous workaround gave the whole card flash. SPELLMASTERY and
+    //OFFERING are the same idea, already here.
+    else if ((card->hasType(Subtypes::TYPE_INSTANT)) || card->has(Constants::FLASH) || card->has(Constants::ASFLASH) || card->has(Constants::SPELLMASTERY) || card->has(Constants::OFFERING) || card->has(Constants::ALTFLASH) || (card->StackIsEmptyandSorcerySpeed()))
     {
         if(card->controller()->epic)
             return 0;

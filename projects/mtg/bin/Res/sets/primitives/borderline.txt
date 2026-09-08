@@ -134128,16 +134128,15 @@ note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note b
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
@@ -134165,16 +134164,15 @@ note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note b
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=choice name(+3/+3) target(creature) 3/3 ueot
 auto=choice name(-3/-3) target(creature) -3/-3 ueot
@@ -134187,17 +134185,16 @@ name=Leonardo's Technique
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
@@ -134210,17 +134207,16 @@ name=New Generation's Technique
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
@@ -134246,17 +134242,16 @@ name=Shredder's Technique
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -134269,17 +134264,16 @@ name=Splinter's Technique
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
-#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
-#a real deviation, and the reason this is worth revisiting if a cost-conditional
-#timing mechanism ever exists.
-abilities=flash
+#altflash (added 2026-09-08) is that cost-conditional timing lever: it is read only in
+#MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
+#sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
+abilities=altflash
 
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
-missing=granting flash so the sneak cost can be paid during combat also makes the NORMAL cost instant-speed. A cost-conditional timing lever would fix it; there is none.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.

@@ -277,7 +277,8 @@ const char* Constants::MTGBasicAbilities[] = {
     "nopreventionall", //While this permanent is on the battlefield, no damage can be prevented at all
     "crewpower1", //Crews and saddles as though its power were 1 greater
     "crewpower2", //Crews and saddles as though its power were 2 greater
-    "crewtoughness" //Crews and saddles using its toughness rather than its power
+    "crewtoughness", //Crews and saddles using its toughness rather than its power
+    "altflash" //The ALTERNATIVE cost may be paid at instant speed; the normal cost is unaffected
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;

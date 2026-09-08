@@ -1,0 +1,28 @@
+#Sneak is paid by returning an unblocked attacker, which only exists during combat, so a
+#Sorcery could never pay it. The old workaround gave the card plain flash, which relaxed the
+#NORMAL cost too - a real deviation, recorded in missing=. altflash is read only in
+#MTGAlternativeCostRule, so it relaxes the alternative cost and nothing else.
+#This pins the half that regressing would break: the card still casts normally at sorcery
+#speed. The combat-time sneak cast itself is still not drivable here - this harness cannot
+#cast anything during the declare-blockers step, on any cost.
+[INIT]
+firstmain
+[PLAYER1]
+hand:1520039
+library:Mountain,Mountain,Mountain,Mountain
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+1520039
+[ASSERT]
+firstmain
+[PLAYER1]
+graveyard:1520039
+hand:*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]
