@@ -85555,7 +85555,10 @@ toughness=4
 [/card]
 [card]
 name=Nuisance Engine
-auto={2}{T}:token(Pest,artifact creature pest, 0/1, artifact)
+#Nuisance Engine's Pest is a 0/1 colorless ARTIFACT creature, a different body from the 1/1
+#black-green Pest every other card makes, so it has its own primitive (Pest Mrd) registered
+#in MRD and HOP. The inline form took -source->getMTGId() and had no art either way.
+auto={2}{T}:token(Pest Mrd)
 text={2}, {T}: Put a 0/1 colorless Pest artifact creature token onto the battlefield.
 mana={3}
 type=Artifact

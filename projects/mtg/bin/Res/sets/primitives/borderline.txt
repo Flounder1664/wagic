@@ -124445,7 +124445,10 @@ otherrestriction=can play creature,compare(isflipped)~equalto~1
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(Lisette, Dean of the Root)
 autostack=if paid(alternative) then name(Lisette, Dean of the Root) name(Lisette, Dean of the Root) flip(Lisette, Dean of the Root) forcetype(Legendary Creature)
-auto=@movedto(creature[-token]|graveyard) from(opponentbattlefield) restriction{compare(isflipped)~equalto~0}:transforms((,newability[all(creature[zpos=type:*:opponentgraveyard]|opponentgraveyard) moveto(opponentexile) and!( pay({2}) name(pay 2 and create pest) token(Pest^Creature Pest^1/1^green^blue) and!( transforms((,newability[_DIES_life:1 controller])) forever )! )! ])) oneshot
+#Valentin's Pest is the ORDINARY one - Scryfall: "create a 1/1 black and green Pest creature
+#token with 'When this token dies, you gain 1 life'". The inline form here said green^blue,
+#so the body was wrong as well as unregistered. Valentin is in STX, which now registers Pest.
+auto=@movedto(creature[-token]|graveyard) from(opponentbattlefield) restriction{compare(isflipped)~equalto~0}:transforms((,newability[all(creature[zpos=type:*:opponentgraveyard]|opponentgraveyard) moveto(opponentexile) and!( pay({2}) name(pay 2 and create pest) token(Pest) and!( transforms((,newability[_DIES_life:1 controller])) forever )! )! ])) oneshot
 text=Menace, lifelink -- If a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life." // {2}{G}{G} Lisette, Dean of the Root
 mana={B}
 type=Legendary Creature
@@ -143630,6 +143633,20 @@ text=Flying
 type=Creature
 subtype=Inkling
 power=2
+toughness=1
+[/card]
+[card]
+name=Pest Mrd
+#Nuisance Engine's Pest is a 0/1 COLORLESS ARTIFACT creature - a different body from the 1/1
+#black-green Pest every other card makes, so per project_token_images it gets a disambiguated
+#primitive rather than an edit to the shared one. Registered in MRD and HOP, the two sets that
+#print the card. NO ART: Scryfall has no artifact Pest token at all (searched 2026-09-08, 404),
+#so this one needs generating - the same gap as the emblems in issue #39.
+grade=borderline
+text=0/1 colorless Pest artifact creature token.
+type=Artifact Creature
+subtype=Pest
+power=0
 toughness=1
 [/card]
 [card]
