@@ -274,7 +274,9 @@ const char* Constants::MTGBasicAbilities[] = {
     "storied", //Card has Storied -- controlling 3+ artifacts/legendaries/Sagas grants an enduring story (e.g. "Balin, Loremaster")
     "missing", //Card has one or more abilities that are not implemented (see the missing= field); shown as a warning badge
     "noprevention", //Damage dealt BY this card can't be prevented
-    "nopreventionall" //While this permanent is on the battlefield, no damage can be prevented at all
+    "nopreventionall", //While this permanent is on the battlefield, no damage can be prevented at all
+    "crewpower1", //Crews and saddles as though its power were 1 greater
+    "crewpower2" //Crews and saddles as though its power were 2 greater
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;

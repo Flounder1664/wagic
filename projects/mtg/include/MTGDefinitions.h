@@ -370,7 +370,9 @@ class Constants
       MISSING = 241,
       NOPREVENTION = 242,
       NOPREVENTIONALL = 243,
-      NB_BASIC_ABILITIES = 244,
+      CREWPOWERONE = 244,   //crews/saddles as though its power were 1 greater (NEO Pilot)
+      CREWPOWERTWO = 245,   //crews/saddles as though its power were 2 greater (DFT Pilot)
+      NB_BASIC_ABILITIES = 246,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

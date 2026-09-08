@@ -1,0 +1,26 @@
+#The Pilot token "saddles Mounts and crews Vehicles as though its power were 2 greater".
+#Seven DFT cards carried that as a missing= note and the Pilot instead had a {0} ability the
+#player had to remember, which pumped it to 3/1 and then removed attacking and blocking.
+#crewpower2 is now a keyword added only when TapTargetCost totals a crew/saddle payment.
+#A lone 1/1 Pilot must therefore be able to crew a Vehicle that needs 3 power.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Fell Flagship,Pilot
+life:20
+[PLAYER2]
+life:20
+[DO]
+Fell Flagship
+Pilot
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Fell Flagship,Pilot
+counter:Pilot=Crewed:1
+pt:pilot=1/1
+
+life:20
+[PLAYER2]
+life:20
+[END]

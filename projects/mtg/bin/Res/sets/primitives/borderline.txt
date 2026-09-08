@@ -84893,9 +84893,19 @@ type=Land
 [card]
 name=Pilot
 grade=borderline
-# REVIEW 2026-07-17 [P:med] created by back on track. the saddle ability doesn t seem to work.
-auto={0} restriction{type(vehicle|myBattlefield)~morethan~0}:name(Can crew as 2 greater) transforms((,newability[2/0] ,cantattack,cantblock,cantpwattack)) ueot limit:1
-type=Artifact Creature
+#"This creature saddles and crews Vehicles as though its power were 2 greater." Until
+#2026-09-08 that was a {0} ability the player had to remember to activate, which pumped the
+#Pilot to 3/1 and then took away attacking and blocking to compensate - a visible, wrong
+#side effect the printed card does not have. crewpower2 is now a real keyword: TapTargetCost
+#::crewPowerPaid adds it when totalling a crew or saddle payment and nowhere else, so the
+#Pilot stays a 1/1 in combat and counts as a 3/1 only for paying that cost.
+#Checked against Scryfall 2026-09-08: tneo and tdft print the SAME body - 1/1, plain
+#Creature (NOT Artifact Creature, which is what this said), power-were-2-greater. DFT adds
+#"saddles Mounts", and saddle is paid through the same TapTargetCost, so one keyword covers
+#both and one primitive serves Shorikai, Reckoner Bankbuster and the seven DFT cards alike.
+abilities=crewpower2
+text=This creature saddles Mounts and crews Vehicles as though its power were 2 greater.
+type=Creature
 subtype=Pilot
 power=1
 toughness=1
@@ -133613,8 +133623,8 @@ toughness=1
 name=Back on Track
 target=creature,vehicle|mygraveyard
 auto=moveTo(myBattlefield)
-auto=token(Pilot,creature pilot,1/1,colorless)
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto=token(Pilot)
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=Return target creature or Vehicle card from your graveyard to the battlefield. Create a 1/1 colorless Pilot creature token.
 mana={4}{B}
 type=Sorcery
@@ -133622,8 +133632,8 @@ type=Sorcery
 [card]
 name=Defend the Rider
 auto=choice name(hexproof and indestructible) target(*[-land]|mybattlefield) transforms((,hexproof,indestructible)) ueot
-auto=choice name(create a Pilot) token(Pilot,creature pilot,1/1,colorless)
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto=choice name(create a Pilot) token(Pilot)
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=Choose one - -- - Target permanent you control gains hexproof and indestructible until end of turn. -- - Create a 1/1 colorless Pilot creature token.
 mana={G}
 type=Instant
@@ -133633,7 +133643,7 @@ name=Roadside Assistance
 grade=borderline
 # REVIEW 2026-07-17 [P:med] created the pilot but did not attach as an aura nor make the vehicle a creature
 target=creature,vehicle|battlefield
-auto=token(Pilot,creature pilot,1/1,colorless)
+auto=token(Pilot)
 auto=1/1
 auto=lifelink
 missing=the Pilot token's crew rider; aura grant on a noncreature Vehicle may not apply until it animates
@@ -133647,8 +133657,8 @@ name=Country Roads
 grade=supported
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{W}
-auto={1}{W}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto={1}{W}{T}{S}:token(Pilot) asSorcery
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {W}. -- {1}{W}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133656,8 +133666,8 @@ type=Land
 name=Foul Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{B}
-auto={1}{B}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto={1}{B}{T}{S}:token(Pilot) asSorcery
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {B}. -- {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133665,8 +133675,8 @@ type=Land
 name=Reef Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{U}
-auto={1}{U}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto={1}{U}{T}{S}:token(Pilot) asSorcery
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {U}. -- {1}{U}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133674,8 +133684,8 @@ type=Land
 name=Rocky Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{R}
-auto={1}{R}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto={1}{R}{T}{S}:token(Pilot) asSorcery
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {R}. -- {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133683,8 +133693,8 @@ type=Land
 name=Wild Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{G}
-auto={1}{G}{T}{S}:token(Pilot,creature pilot,1/1,colorless) asSorcery
-missing=the Pilot token's "saddles and crews as though its power were 2 greater" rider
+auto={1}{G}{T}{S}:token(Pilot) asSorcery
+missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {G}. -- {1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
