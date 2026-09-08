@@ -8614,7 +8614,9 @@ auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~2}:name(Becomes
 #the copy goes on the stack and can be responded to, its own sequencing is correct (John hit
 #this on Brainstorm, whose put-back ran before the draw), and the card's real implementation
 #replaces a hand-written paraphrase. 14 more cards converted 2026-09-08 on that basis.
-auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:lightning bolt:!) asSorcery
+#The back face is an INSTANT, so the copy is castable at instant speed - no asSorcery. John
+#found Lightning Bolt could not be cast during combat, which is most of what that card is for.
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:lightning bolt:!)
 missing=nothing known. The third-spell trigger was measured 2026-09-08: compare(pstormcount) does NOT fire (pstormcount is only ever a VALUE elsewhere, and the note was right to doubt it). The attested storm form is thisturn(*|mystack), which counts spells cast BEFORE the current one, so ~equalto~2 is the third spell. Pinned in generic/storm_third_spell.txt. -- the prepared state shows as a counter rather than a face-up back side.
 mana={1}{R}
 type=Creature
@@ -8639,7 +8641,9 @@ auto=_PREPARE_
 #the copy goes on the stack and can be responded to, its own sequencing is correct (John hit
 #this on Brainstorm, whose put-back ran before the draw), and the card's real implementation
 #replaces a hand-written paraphrase. 14 more cards converted 2026-09-08 on that basis.
-auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:ancestral recall:!) asSorcery
+#The back face is an INSTANT, so the copy is castable at instant speed - no asSorcery. John
+#found Lightning Bolt could not be cast during combat, which is most of what that card is for.
+auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:ancestral recall:!)
 missing=the attack trigger (exile eight cards from your graveyard to re-prepare) is not written. -- the prepared state shows as a counter rather than a face-up back side.
 mana={3}{U}{U}
 type=Creature
@@ -8656,14 +8660,16 @@ grade=borderline
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 #2026-09-06: John reported no Inkling. The ETB and the re-prepare were both listed under
 #missing= and simply never authored - the card only ever had its back-face ability.
-auto=token(Inkling)
+auto=token(Inkling Sos)
 auto=@each my end restriction{type(creature|opponentBattlefield)~morethan~type(creature|myBattlefield)}:name(Becomes prepared) _PREPARE_
 #The back face IS a real Magic card that this build already implements, so cast a copy of
 #IT rather than re-inlining an approximation of its text. That fixes three things at once:
 #the copy goes on the stack and can be responded to, its own sequencing is correct (John hit
 #this on Brainstorm, whose put-back ran before the draw), and the card's real implementation
 #replaces a hand-written paraphrase. 14 more cards converted 2026-09-08 on that basis.
-auto={W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Swords to Plowshares) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:swords to plowshares:!) asSorcery
+#The back face is an INSTANT, so the copy is castable at instant speed - no asSorcery. John
+#found Lightning Bolt could not be cast during combat, which is most of what that card is for.
+auto={W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Swords to Plowshares) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:swords to plowshares:!)
 missing=the Inkling is created by YOU rather than by a target player - a second target on a different axis from the back face's is not expressible here. -- the prepared state shows as a counter rather than a face-up back side.
 mana={1}{W}{W}
 type=Creature
@@ -8739,7 +8745,9 @@ auto={T}{T(other creature|myBattlefield)}{T(other creature|myBattlefield)}:name(
 #So cast the real card instead - the back face IS Brainstorm, and castcard(copied) resolves
 #a genuine copy with its own correct sequencing. Bonus: it goes on the stack, so this one is
 #no longer subject to the "performed rather than cast" caveat the other prepared cards carry.
-auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Brainstorm) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:brainstorm:!) asSorcery
+#The back face is an INSTANT, so the copy is castable at instant speed - no asSorcery. John
+#found Lightning Bolt could not be cast during combat, which is most of what that card is for.
+auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Brainstorm) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:brainstorm:!)
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={U}
 type=Creature
@@ -9112,7 +9120,11 @@ abilities=trample
 #already use thisturn against a graveyard), and lifegain is a WParsedInt reading
 #Player::lifeGainedThisTurn. "Each end step", not just mine, so @each end.
 auto=@each end restriction{compare(lifegain)~morethan~0}:name(Becomes prepared) _PREPARE_
-auto={B}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Turn Stones) counter(0/0,-1,Prepared) all(this) && create(Pest:creature pest:1/1:black green:and!( transforms((,newability[@movedTo(this|graveyard) from(battlefield):life:1 controller])) forever )!) asSorcery
+#John: the Pest had no image and showed as -708085, this card's own id - the inline create()
+#form takes -source->getMTGId(). SOC already registers a Pest at -708523 WITH art, and the
+#shared Pest primitive is the same body (1/1, dies-trigger gains you 1 life), so by name it
+#resolves to a real token with real art.
+auto={B}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Turn Stones) counter(0/0,-1,Prepared) all(this) && token(Pest) asSorcery
 missing="for each opponent" makes exactly one token here, which is right for a duel -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Trample -- At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={2}{B}{G}
@@ -10643,7 +10655,7 @@ toughness=2
 name=Bilbo's Ring
 auto=teach(creature) transforms((,newability[this(variable{controllerturn}>0) hexproof],newability[this(variable{controllerturn}>0) unblockable]))
 auto=teach(creature) transforms((,newability[@combat(attackedalone) source(this):name(Draw a card) draw:1 controller],newability[@combat(attackedalone) source(this):name(Lose 1 life) life:-1 controller]))
-auto={1}:name(Equip halfling) rehook target(halfling|mybattlefield)
+auto={1}:name(Equip halfling) rehook target(halfling|mybattlefield) asSorcery
 auto={4}:equip
 text=As long as it's your turn, equipped creature has hexproof and can't be blocked. -- Whenever equipped creature attacks alone, you draw a card and you lose 1 life. -- Equip Halfling {1} ({1}: Attach to target Halfling you control. Equip only as a sorcery.) -- Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
 mana={3}
@@ -12106,7 +12118,12 @@ subtype=Clue
 name=Monster
 grade=borderline
 target=creature
-auto=teach(creature) 1/1
+#John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
+#Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
+#applies to the enchanted creature - and these four Roles were the only ones adding teach() on
+#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
+#with a control that fails to attach even when the target is named in [DO].
+auto=1/1
 auto=teach(creature) trample
 text=Enchant creature -- Enchanted creature gets +1/+1 and has trample.
 type=Enchantment
@@ -12116,7 +12133,12 @@ subtype=Aura Role
 name=Sorcerer
 grade=borderline
 target=creature
-auto=teach(creature) 1/1
+#John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
+#Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
+#applies to the enchanted creature - and these four Roles were the only ones adding teach() on
+#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
+#with a control that fails to attach even when the target is named in [DO].
+auto=1/1
 auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Scry 1) _SCRY1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."
 type=Enchantment
@@ -12126,7 +12148,12 @@ subtype=Aura Role
 name=Royal
 grade=borderline
 target=creature
-auto=teach(creature) 1/1
+#John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
+#Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
+#applies to the enchanted creature - and these four Roles were the only ones adding teach() on
+#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
+#with a control that fails to attach even when the target is named in [DO].
+auto=1/1
 auto=teach(creature) transforms((,newability[_WARD1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has ward {1}.
 type=Enchantment
@@ -12145,7 +12172,12 @@ subtype=Aura Role
 name=Wicked
 grade=borderline
 target=creature
-auto=teach(creature) 1/1
+#John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
+#Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
+#applies to the enchanted creature - and these four Roles were the only ones adding teach() on
+#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
+#with a control that fails to attach even when the target is named in [DO].
+auto=1/1
 autograveyard=_DIES_life:-1 opponent
 text=Enchant creature -- Enchanted creature gets +1/+1. -- When this Aura is put into a graveyard from the battlefield, each opponent loses 1 life.
 type=Enchantment
@@ -32399,7 +32431,7 @@ toughness=1
 [card]
 name=Dunedain Blade
 auto=teach(creature) 2/1
-auto={1}:name(Equip human) rehook target(human|mybattlefield)
+auto={1}:name(Equip human) rehook target(human|mybattlefield) asSorcery
 auto={3}:equip
 text=Equipped creature gets +2/+1. -- Equip Human {1} -- Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
 mana={1}{W}
@@ -133520,7 +133552,10 @@ type=Sorcery
 [/card]
 [card]
 name=Witch's Mark
-auto=may discard:1 && draw:2
+#John: it discarded at random. discard:N is a RANDOM discard; the card says "you may discard
+#a card", the player's choice. target(*|myhand) reject and!( draw:2 controller )! is the
+#attested chosen-discard-then-draw shape, used by ~100 lines in this file.
+auto=may name(Discard a card, then draw two) target(*|myhand) reject and!( draw:2 controller )!
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
 note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
@@ -141327,7 +141362,7 @@ name=Wizard's Staff
 #Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
 #engine - so every working prowess card writes the trigger out. 48 of the 51 did; this Equipment had it on ITSELF, where it does nothing - it belongs on the equipped creature. Audited 2026-09-08.
 auto=teach(creature) transforms((,newability[@movedTo(*[-creature]|mystack):1/1 ueot]))
-auto={1}:name(Equip wizard) rehook target(wizard|mybattlefield)
+auto={1}:name(Equip wizard) rehook target(wizard|mybattlefield) asSorcery
 auto={3}:equip
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; trigger-doubling-for-equipped-creature not implemented
@@ -143489,6 +143524,23 @@ subtype=Fungus Beast
 power=4
 toughness=4
 color=green
+[/card]
+[card]
+name=Inkling Sos
+#John: Emeritus of Truce's Inkling came out 2/1 with STX art. The shared Inkling primitive IS
+#2/1 - that is STX's token and correct for Inkling Summoning - and token(Inkling) from a PSOS
+#card finds no own-set registration, so getCardByName falls through to an all-sets search and
+#returns whichever set answers first. Two different tokens under one name, which per
+#project_token_images means a disambiguated primitive rather than editing the shared one.
+grade=borderline
+abilities=flying
+text=Flying
+type=Creature
+subtype=Inkling
+color=white
+color=black
+power=1
+toughness=1
 [/card]
 [card]
 name=Inkling
