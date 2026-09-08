@@ -1,4 +1,7 @@
 #A second card on the prepared pattern, so it is not specific to the one it was built on.
+#Since 2026-09-08 the copy is a real castcard(copied named!:ancestral recall:!) rather than an
+#inlined draw:3, so it goes on the STACK and asks for Ancestral Recall's own target - the p1
+#line. That is the change working: before, nothing could have responded to it.
 #Emeritus of Ideation enters prepared, and its half is Ancestral Recall: pay {U} once and
 #draw three. The pool holds {U}{U} - enough for two activations - so the Prepared counter
 #is the only thing stopping the second, exactly as in prepared_unprepares.
@@ -13,7 +16,9 @@ life:20
 life:20
 [DO]
 Emeritus of Ideation // Ancestral Recall
+p1
 Emeritus of Ideation // Ancestral Recall
+
 [ASSERT]
 firstmain
 [PLAYER1]
