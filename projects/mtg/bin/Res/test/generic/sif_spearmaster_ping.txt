@@ -1,0 +1,24 @@
+#Sif's Spearmaster had no auto= at all: "{T}: This creature deals damage equal to its power
+#to target opponent." damage:power reads the SOURCE's power even on a line carrying a target
+#- that is the attested damage:power target(creature|opponentbattlefield) shape - and
+#target(opponent) is the player-side selector, used 193 times across the primitives.
+#A printed 1/4 must therefore take the opponent to 19 and leave itself tapped.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Sif's Spearmaster
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sif's Spearmaster
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Sif's Spearmaster
+tappedinplay:1
+life:20
+[PLAYER2]
+life:19
+[END]

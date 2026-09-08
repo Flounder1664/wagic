@@ -142738,8 +142738,11 @@ type=Sorcery
 [/card]
 [card]
 name=Sif's Spearmaster
-grade=unsupported
-missing={T}: deals damage equal to its power to target opponent
+grade=borderline
+#damage:power reads the SOURCE's power even on a line that carries a target - the attested
+#shape is damage:power target(creature|opponentbattlefield). target(opponent) is the
+#player-side equivalent, 193 uses across the primitives.
+auto={T}:damage:power target(opponent)
 text={T}: This creature deals damage equal to its power to target opponent.
 mana={2}{R}
 type=Creature
@@ -143111,7 +143114,9 @@ toughness=6
 name=Futurist Forge
 grade=borderline
 auto=draw:1 controller
-missing={3}{U}, sacrifice this artifact: draw two cards
+#Sacrifice-as-a-cost is {S} in the cost string, alongside the mana - 814 lines in mtg.txt
+#use it, including {1}{S}:draw:1 controller.
+auto={3}{U}{S}:name(Draw two cards) draw:2 controller
 text=When this artifact enters, draw a card. -- {3}{U}, Sacrifice this artifact: Draw two cards.
 mana={1}{U}
 type=Artifact
@@ -143353,9 +143358,13 @@ toughness=2
 [/card]
 [card]
 name=Atlantean Cavalry
-grade=unsupported
+grade=borderline
 abilities=vigilance
-missing=whenever you draw your second card each turn, put a +1/+1 counter on it
+#"Whenever you draw your second card each turn" is @drawof(player) with a pdrewcount
+#restriction - drawCounter resets per turn in GameObserver, so equalto 2 is exactly the
+#second draw. Same line as Lakeshore Apothecary and Bard the Bowman; the form is pinned
+#on Sneaky Snacker in generic/second_draw_trigger.txt.
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) counter(1/1) all(this)
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
 mana={2}{U}
 type=Creature
@@ -143378,8 +143387,12 @@ toughness=2
 [/card]
 [card]
 name=Agents of S.H.I.E.L.D.
-grade=unsupported
-missing=whenever a creature you control attacks alone, it gets +1/+1 until end of turn
+grade=borderline
+#This is exalted, printed in full rather than keyworded: "whenever a creature you control
+#attacks alone, that creature gets +1/+1 until end of turn" is exalted's reminder text
+#word for word. The engine wires EXALTED in AbilityFactory::addAbilities, so the keyword
+#is the whole implementation.
+abilities=exalted
 text=Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.
 mana={2}{W}
 type=Creature
@@ -143468,7 +143481,12 @@ toughness=1
 [card]
 name=Human Knight
 grade=borderline
-missing=this creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn
+#Written as a once-per-turn trigger rather than a static: an artifact entering pumps this
+#for the rest of the turn, and turnlimited stops a second artifact stacking another +2/+2.
+#@movedTo(artifact|myBattlefield):2/0 ueot is attested. It diverges in one case the engine
+#cannot express - a Human Knight that enters AFTER the artifact did misses the bonus.
+auto=@movedTo(artifact|myBattlefield) turnlimited:2/2 ueot
+missing=the +2/+2 is applied by an entering-artifact trigger, so it is not retroactive: a copy that enters later in the same turn does not get it
 text=This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn.
 type=Creature
 subtype=Human Knight

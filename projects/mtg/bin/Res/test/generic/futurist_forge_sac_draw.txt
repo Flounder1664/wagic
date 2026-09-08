@@ -1,0 +1,29 @@
+#Futurist Forge's "{3}{U}, Sacrifice this artifact: Draw two cards" was recorded as missing
+#when the sacrifice-as-a-cost token {S} sits right in the cost string next to the mana -
+#814 lines in mtg.txt use it, including {1}{S}:draw:1 controller.
+#Paying it must move the Forge itself to the graveyard AND draw two, on one click.
+#Seeding with inplay: fires the Forge's own enters-the-battlefield draw, so the baseline is
+#one card already in hand: three in hand and one left in library is ETB 1 + ability 2. An
+#ability that drew one, or none, lands on a different count.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Futurist Forge
+library:Mountain,Mountain,Mountain,Mountain
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Futurist Forge
+[ASSERT]
+firstmain
+[PLAYER1]
+graveyard:Futurist Forge
+hand:*,*,*
+library:*
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,32 @@
+#Atlantean Cavalry was one of three cards recorded as unfixable because
+#"@seconddrawofturn is not a real trigger". True, but beside the point - the attested form is
+#@drawof(player) gated on pdrewcount, and Player::drawCounter resets per turn, so equalto 2
+#is exactly the second draw. Unlike Lakeshore Apothecary and Bard the Bowman, this one CAN be
+#seeded, so it pins the card and not just the mechanism.
+#Ancestral Recall draws three: the counter must land exactly once, on the second draw, taking
+#a printed 3/2 to 4/3. Two counters would mean the restriction is not gating at all.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Atlantean Cavalry
+hand:Ancestral Recall
+library:Mountain,Mountain,Mountain,Mountain,Mountain
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ancestral Recall
+p1
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Atlantean Cavalry
+pt:atlantean cavalry=4/3
+graveyard:*
+hand:*,*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]
