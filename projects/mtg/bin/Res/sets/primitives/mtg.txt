@@ -42824,16 +42824,6 @@ mana={2}{G}{W}{U}
 type=Enchantment
 [/card]
 [card]
-name=Finish Line Finisher
-abilities=haste
-text=Haste.
-mana={3}{R}
-type=Creature
-subtype=Human Pilot
-power=4
-toughness=1
-[/card]
-[card]
 name=Firdoch Core
 abilities=changeling
 auto={T}:Add{W}
@@ -47581,16 +47571,6 @@ type=Creature
 subtype=Dwarf Pilot
 power=2
 toughness=1
-[/card]
-[card]
-name=Gearshift Gremlins
-auto=destroy target(artifact|opponentbattlefield)
-text=When Gearshift Gremlins enters, destroy target artifact an opponent controls.
-mana={2}{R}
-type=Creature
-subtype=Gremlin
-power=2
-toughness=2
 [/card]
 [card]
 name=Geier Reach Bandit
@@ -57681,16 +57661,6 @@ auto=emblem transforms((,newability[lord(island) produceextra:{U}])) ueot
 text=Until end of turn, whenever a player taps an Island for mana, that player adds {U} to their mana pool (in addition to the mana the land produces).
 mana={U}
 type=Instant
-[/card]
-[card]
-name=High-Octane Harvester
-auto=@combatdamaged(player) from(this):_TREASURE_
-text=Whenever High-Octane Harvester deals combat damage to a player, create a Treasure token.
-mana={3}{R}
-type=Artifact Creature
-subtype=Construct
-power=4
-toughness=3
 [/card]
 [card]
 name=Highborn Ghoul
@@ -70234,17 +70204,6 @@ mana={1}{B}{B}
 type=Creature
 subtype=Zombie
 power=2
-toughness=3
-[/card]
-[card]
-name=Leonardo, Tactical Leader
-abilities=vigilance
-auto=lord(creature[-this]|mybattlefield) +1/+1
-text=Vigilance -- Other creatures you control get +1/+1.
-mana={2}{W}{U}
-type=Legendary Creature
-subtype=Turtle Ninja
-power=3
 toughness=3
 [/card]
 [card]
@@ -84945,13 +84904,6 @@ mana={5}{G}{G}
 type=Sorcery
 [/card]
 [card]
-name=Nitrous Blast
-auto=damage:3 target(*[-land]|*)
-text=Nitrous Blast deals 3 damage to any target.
-mana={2}{R}
-type=Instant
-[/card]
-[card]
 name=Niv-Mizzet, Dracogenius
 auto=@damaged(player) from(this):may draw:1 controller
 auto={U}{R}:damage:1 target(anytarget)
@@ -91946,13 +91898,6 @@ type=Creature
 subtype=Faerie
 power=1
 toughness=1
-[/card]
-[card]
-name=Pizza Party
-auto=_FOOD_ && _FOOD_ && _FOOD_
-text=Create three Food tokens.
-mana={3}{G}
-type=Sorcery
 [/card]
 [card]
 name=Plagiarize
@@ -108774,14 +108719,6 @@ power=*
 toughness=*
 [/card]
 [card]
-name=Sewer Pipe Omenpath
-auto=tap(noevent)
-auto={T}:Add{U}
-auto={T}:Add{G}
-text=This land enters tapped. -- {T}: Add {U} or {G}.
-type=Land
-[/card]
-[card]
 name=Sewer Rats
 auto={L:1}{B}:1/0 limit:3
 text={B}, Pay 1 life: Sewer Rats gets +1/+0 until end of turn. Activate this ability no more than three times each turn.
@@ -116642,13 +116579,6 @@ power=2
 toughness=1
 [/card]
 [card]
-name=Speedway Siphon
-auto=damage:2 target(creature|opponentbattlefield) && life:2 controller
-text=Speedway Siphon deals 2 damage to target creature an opponent controls. You gain 2 life.
-mana={1}{R}
-type=Sorcery
-[/card]
-[card]
 name=Spell Blast
 target=*[manacost=prex]|stack
 auto=fizzle
@@ -118111,13 +118041,6 @@ text=Enchant creature ---Enchanted creature has "{T}: Put a token that's a copy 
 mana={2}{R}{R}
 type=Enchantment
 subtype=Aura
-[/card]
-[card]
-name=Splinter's Wisdom
-auto=draw:2 controller
-text=Draw two cards.
-mana={2}{U}
-type=Sorcery
 [/card]
 [card]
 name=Splinterfright

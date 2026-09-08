@@ -408,14 +408,23 @@
 #AUTO_DEFINE _EARTHBEND4_ name(Earthbend 4) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.4)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
 #AUTO_DEFINE _EARTHBEND5_ name(Earthbend 5) target(land|mybattlefield) transforms((Elemental Creature,newability[counter(1/1.5)],haste,newability[@movedTo(this|graveyard) from(battlefield):moveto(mybattlefield) tapped],newability[@movedTo(this|exile) from(battlefield):moveto(mybattlefield) tapped])) forever
 
+# Prepared (SOS/PSOS) - becoming prepared is a BOOLEAN state, so the cap belongs here,
+# once, not repeated in every card's restriction{}. John asked for exactly this after
+# seeing Grave Researcher reach two Prepared counters. The cap has to live in the EFFECT
+# (if..then) rather than a restriction{}, because a restriction attaches to the trigger
+# and a macro can only supply the part after the colon.
+#AUTO_DEFINE _PREPARE_ if compare(hascntprepared)~lessthan~1 then counter(0/0,1,Prepared)
+
 # Speed (DFT) - "Start your engines!" sets your speed to 1 if you have none; thereafter it
 # rises by one the FIRST time each turn an opponent loses life, capping at max speed 4.
 # speedCount is a per-player counter added to the engine 2026-09-05 (Player.h), read as
 # pspeed and written with alterspeed: - deliberately NOT experienceCount, which 74 cards
 # already use for the real experience mechanic. The engine clamps the track to 0..4.
 # Every card printed with "Start your engines!" wants BOTH lines.
-#AUTO_DEFINE _STARTENGINES_ if compare(pspeed)~equalto~0 then alterspeed:1 controller
-#AUTO_DEFINE _SPEEDUP_ @lifelostfoeof(player) turnlimited restriction{compare(pspeed)~morethan~0}:alterspeed:1 controller
+# The tracker token (DFT -692082 // -692083) is the PHYSICAL game's representation and
+# stands in for an on-screen counter: GuiStatic draws poison/energy/experience but not
+# speed, so without this a player cannot see their own speed at all. It has no abilities.
+#AUTO_DEFINE _STARTENGINES_ if compare(pspeed)~equalto~0 then alterspeed:1 controller && token(Start Your Engines)
 
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
 #AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile])) forever )!
