@@ -1,0 +1,32 @@
+#John's idea: if an altercost cannot be withdrawn once applied, cancel it with an equal
+#increase once the count passes the second spell. -1 while the count is exactly 1, +1 while it
+#is 2 or more.
+#Three Lava Axes at {4}{R} from {14}{R}{R}{R} (17 mana). Correct - full 5, discounted 4, full
+#5 - spends 14 and leaves {3}. Discount leaking to the third leaves {4}; leaking to all three
+#leaves {5}.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:693527
+hand:Lava Axe,Lava Axe,Lava Axe
+manapool:{14}{R}{R}{R}
+life:20
+[PLAYER2]
+life:40
+[DO]
+Lava Axe
+p2
+Lava Axe
+p2
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:693527
+manapool:{3}
+graveyard:*,*,*
+life:20
+[PLAYER2]
+life:25
+[END]

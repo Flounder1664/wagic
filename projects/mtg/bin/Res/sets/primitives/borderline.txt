@@ -139241,17 +139241,20 @@ toughness=4
 name=Highspire Bell-Ringer
 abilities=flying
 grade=borderline
-#"The second spell you cast each turn costs less." Copied from Monk Class, which carries
-#the identical printed line and works: a counter ticks up on every spell cast, the static
-#discount is gated on that count being exactly 1 with this(variable{hascnt...}=1) - NOT with
-#restriction{}, which silently switches a static lord off - and the count is cleared at end
-#of turn. The if-line catches the case where this creature is itself the first spell.
+#"The second spell you cast each turn costs less." A counter ticks on every spell cast and the
+#discount is gated on that count being exactly 1 - the Monk Class shape. That alone leaks: an
+#altercost cannot be WITHDRAWN once applied, so the discount stayed on for every later spell
+#too (measured: three Lava Axes spent 13 where 14 is right). John's fix - if it cannot be taken
+#away, cancel it - a matching altercost INCREASE gated on the count being 2 or more. Pinned in
+#generic/second_spell_discount_third.txt, which is the shortest case that can tell "second
+#only" from "second onward": two spells look identical under both.
+#Monk Class carries the uncancelled version and presumably still leaks.
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,bellrung)
 auto=@movedto(*|mystack):counter(0/0,1,bellrung)
 auto=this(variable{hascntbellrung}=1) lord(*|mycastingzone) altercost(colorless,-1)
+auto=this(variable{hascntbellrung}>1) lord(*|mycastingzone) altercost(colorless,+1)
 auto=@each end restriction{compare(hascntbellrung)~morethan~0}:removeallcounters(0/0,1,bellrung)
 #every spell.
-missing=the discount reaches the second spell each turn and every spell after it, not the second alone. Measured 2026-09-08 with three Lava Axes: 13 mana spent where 14 is correct and 12 would be a blanket discount. The counter is right - it reads 3 after three spells - and this(variable{...}=1) is a well-attested gate used by 31 Class and Talent cards, so what does not work is withdrawing an altercost once it has been applied to the casting zone: the discount switches on when the count reaches 1 and never switches off. Monk Class carries the identical construction and presumably has the same defect. Left in place because second-onward is closer to the card than the blanket discount it replaced.
 text=Flying -- The second spell you cast each turn costs {1} less to cast.
 mana={2}{U}
 type=Creature
@@ -139262,17 +139265,20 @@ toughness=4
 [card]
 name=Uthros Psionicist
 grade=borderline
-#"The second spell you cast each turn costs less." Copied from Monk Class, which carries
-#the identical printed line and works: a counter ticks up on every spell cast, the static
-#discount is gated on that count being exactly 1 with this(variable{hascnt...}=1) - NOT with
-#restriction{}, which silently switches a static lord off - and the count is cleared at end
-#of turn. The if-line catches the case where this creature is itself the first spell.
+#"The second spell you cast each turn costs less." A counter ticks on every spell cast and the
+#discount is gated on that count being exactly 1 - the Monk Class shape. That alone leaks: an
+#altercost cannot be WITHDRAWN once applied, so the discount stayed on for every later spell
+#too (measured: three Lava Axes spent 13 where 14 is right). John's fix - if it cannot be taken
+#away, cancel it - a matching altercost INCREASE gated on the count being 2 or more. Pinned in
+#generic/second_spell_discount_third.txt, which is the shortest case that can tell "second
+#only" from "second onward": two spells look identical under both.
+#Monk Class carries the uncancelled version and presumably still leaks.
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,uthrosdiscount)
 auto=@movedto(*|mystack):counter(0/0,1,uthrosdiscount)
 auto=this(variable{hascntuthrosdiscount}=1) lord(*|mycastingzone) altercost(colorless,-2)
+auto=this(variable{hascntuthrosdiscount}>1) lord(*|mycastingzone) altercost(colorless,+2)
 auto=@each end restriction{compare(hascntuthrosdiscount)~morethan~0}:removeallcounters(0/0,1,uthrosdiscount)
 #every spell.
-missing=the discount reaches the second spell each turn and every spell after it, not the second alone. Measured 2026-09-08 with three Lava Axes: 13 mana spent where 14 is correct and 12 would be a blanket discount. The counter is right - it reads 3 after three spells - and this(variable{...}=1) is a well-attested gate used by 31 Class and Talent cards, so what does not work is withdrawing an altercost once it has been applied to the casting zone: the discount switches on when the count reaches 1 and never switches off. Monk Class carries the identical construction and presumably has the same defect. Left in place because second-onward is closer to the card than the blanket discount it replaced.
 text=The second spell you cast each turn costs {2} less to cast.
 mana={2}{U}
 type=Creature
