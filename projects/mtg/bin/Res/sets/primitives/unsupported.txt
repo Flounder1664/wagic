@@ -303,6 +303,7 @@ toughness=4
 [card]
 name=Anurid Swarmsnapper
 abilities=reach
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Reach (This creature can block creatures with flying.) -- {1}{G}: Anurid Swarmsnapper can block an additional creature this turn.
 mana={2}{G}
 type=Creature
@@ -897,6 +898,7 @@ type=Artifact
 [/card]
 [card]
 name=Blaze of Glory
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Cast Blaze of Glory only during combat before blockers are declared. -- Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
 mana={W}
 type=Instant
@@ -2811,6 +2813,7 @@ type=Artifact
 [/card]
 [card]
 name=Echo Circlet
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Equipped creature can block an additional creature. -- Equip {1}
 mana={2}
 type=Artifact
@@ -2991,6 +2994,7 @@ toughness=1
 [/card]
 [card]
 name=Entangler
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Enchant creature -- Enchanted creature can block any number of creatures.
 mana={2}{W}{W}
 type=Enchantment
@@ -4682,6 +4686,7 @@ subtype=Arcane
 [/card]
 [card]
 name=High Ground
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Each creature you control can block an additional creature.
 mana={W}
 type=Enchantment
@@ -5837,6 +5842,7 @@ subtype=Azgol
 [/card]
 [card]
 name=Lairwatch Giant
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Lairwatch Giant can block an additional creature. -- Whenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.
 mana={5}{W}
 type=Creature
@@ -11050,6 +11056,7 @@ toughness=1
 [card]
 name=Thoughtweft Trio
 abilities=first strike,vigilance
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=First strike, vigilance -- Champion a Kithkin (When this enters the battlefield, sacrifice it unless you exile another Kithkin you control. When this leaves the battlefield, that card returns to the battlefield.) -- Thoughtweft Trio can block any number of creatures.
 mana={2}{W}{W}
 type=Creature
@@ -11562,6 +11569,7 @@ toughness=3
 [/card]
 [card]
 name=Valor Made Real
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
 text=Target creature can block any number of creatures this turn.
 mana={W}
 type=Instant
