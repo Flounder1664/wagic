@@ -10005,7 +10005,12 @@ toughness=2
 [card]
 name=Beledros Witherbloom
 abilities=flying
-auto=@each upkeep:name(Create Pest) token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=@each upkeep:name(Create Pest) token(Pest)
 auto={L:10}:all(land|myBattlefield) untap limit:1
 text=Flying -- At the beginning of each upkeep, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life." -- Pay 10 life: Untap all lands you control. Activate only once each turn.
 mana={5}{B}{G}
@@ -11778,7 +11783,12 @@ toughness=1
 [card]
 name=Blight Mound
 auto=lord(pest[attacking]|mybattlefield) transforms((,newability[1/0],menace))
-auto=@movedto(creature[-token]|graveyard) from(mybattlefield):token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=@movedto(creature[-token]|graveyard) from(mybattlefield):token(Pest)
 text=Attacking Pests you control get +1/+0 and have menace. -- Whenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 mana={2}{B}
 type=Enchantment
@@ -16657,7 +16667,12 @@ toughness=6
 [/card]
 [card]
 name=Callous Bloodmage
-auto=choice name(Create Pest) token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=choice name(Create Pest) token(Pest)
 auto=choice name(Draw and lose life) draw:1 controller && life:-1 controller
 auto=choice name(Exile opponent's graveyard) all(*|opponentgraveyard) moveto(exile)
 auto=choice name(Exile your graveyard) all(*|mygraveyard) moveto(exile)
@@ -22816,7 +22831,12 @@ toughness=3
 [/card]
 [card]
 name=Containment Breach
-auto=if type(*[artifact;enchantment;manacost<=2]|battlefield)~morethan~0 then choice name(Destroy artifact or enchantment with manacost 2 or less) name(Destroy artifact or enchantment with manacost 2 or less) target(*[artifact;enchantment;manacost<=2]|battlefield) destroy && token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=if type(*[artifact;enchantment;manacost<=2]|battlefield)~morethan~0 then choice name(Destroy artifact or enchantment with manacost 2 or less) name(Destroy artifact or enchantment with manacost 2 or less) target(*[artifact;enchantment;manacost<=2]|battlefield) destroy && token(Pest)
 auto=if type(*[artifact;enchantment;manacost>=3]|battlefield)~morethan~0 then choice name(Destroy artifact or enchantment with manacost 3 or more) name(Destroy artifact or enchantment with manacost 3 or more) target(*[artifact;enchantment;manacost>=3]|battlefield) destroy
 text=Destroy target artifact or enchantment. If its mana value is 2 or less, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 mana={2}{G}
@@ -55860,7 +55880,12 @@ type=Sorcery
 [/card]
 [card]
 name=Hunt for Specimens
-auto=token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=token(Pest)
 auto=_LEARN_
 text=Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life." -- Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
 mana={1}{B}
@@ -84068,15 +84093,25 @@ type=Sorcery
 [card]
 name=Pest Infestation
 auto=thisforeach(variable{halfpaid}>0) ability$!may name(Destroy artifact or enchantment) target(*[artifact;enchantment]|battlefield) destroy!$ controller
-auto=thisforeach(X) token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=thisforeach(X) token(Pest)
 text=Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
 mana={X}{X}{G}
 type=Sorcery
 [/card]
 [card]
 name=Pest Summoning
-auto=token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
-auto=token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=token(Pest)
+auto=token(Pest)
 text=Create two 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
 mana={1}{BG}{BG}
 type=Sorcery
@@ -84089,7 +84124,12 @@ otherrestriction=can play sorcery,compare(isflipped)~equalto~1
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(Restorative Burst)
 autostack=if paid(alternative) then transforms((,newability[moveto(myexile)],newability[activate castcard(copied named!:restorative burst:!)])) forever
-auto={T}{D(*|myhand)}:name(Create Pest) token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto={T}{D(*|myhand)}:name(Create Pest) token(Pest)
 auto={1}{T}:deplete:lifegain opponent
 auto={4}{T} restriction{type(*|mygraveyard)~morethan~3}:name(Exile from your graveyard) transforms((,newability[draw:1 controller],newability[name(Exile from your graveyard) target(<4>*|mygraveyard) moveto(exile)])) oneshot
 auto={4}{T} restriction{type(*|opponentgraveyard)~morethan~3}:name(Exile from opponent's graveyard) transforms((,newability[draw:1 controller],newability[name(Exile from opponent's graveyard) target(<4>*|opponentgraveyard) moveto(exile)])) oneshot
@@ -87374,7 +87414,12 @@ toughness=1
 [/card]
 [card]
 name=Professor of Zoomancy
-auto=token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=token(Pest)
 text=When Professor of Zoomancy enters, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 mana={3}{G}
 type=Creature
@@ -100205,7 +100250,12 @@ subtype=Aura
 name=Sedgemoor Witch
 abilities=menace
 auto=@targeted(this) from(*|opponentstack):choice name(This spell costs 3 life more) name(This spell costs 3 life more) target(*|opponentstack) transforms((,newability[pay[[{L:3}]] name(pay 3 life) donothing?fizzle])) oneshot
-auto=@movedto(*[instant;sorcery]|mystack):name(Create Pest) token(Pest,Creature Pest,1/1,black,green) and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=@movedto(*[instant;sorcery]|mystack):name(Create Pest) token(Pest)
 text=Menace -- Ward-Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.) -- Magecraft - Whenever you cast or copy an instant or sorcery spell, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 mana={2}{B}
 type=Creature
@@ -115684,7 +115734,12 @@ toughness=2
 [/card]
 [card]
 name=Tend the Pests
-auto=token(Pest,Creature Pest,1/1,black,green)*storedpower and!( transforms((,newability[_DIES_life:1 controller])) forever )!
+#The inline token(Pest) form takes -source->getMTGId(), so the
+#Pest had no registered id and no art. The shared Pest primitive is the same body, and the
+#token is now registered in all six sets that create one - each with its own printing's art -
+#so by name it resolves to a real token. Audited 2026-09-08 after John pointed out that
+#Sedgemoor Witch and Tend the Pests make Pests too, which my first grep had missed.
+auto=token(Pest)*storedpower and!( transforms((,newability[_DIES_life:1 controller])) forever )!
 text=As an additional cost to cast this spell, sacrifice a creature. -- Create X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.
 mana={B}{G}{S(creature|mybattlefield)}
 type=Instant
