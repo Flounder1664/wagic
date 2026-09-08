@@ -14861,7 +14861,13 @@ toughness=3
 [card]
 name=Briar Hydra
 abilities=trample
-auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield)
+#John: the chapter III bonus persisted past end of turn. Checked against Scryfall 2026-09-08 -
+#the printed line is "target creature YOU CONTROL gets +X/+X and gains trample UNTIL END OF
+#TURN, where X is the number of basic land types". It is not +1/+1 counters at all, so the
+#counter form was permanent when it should expire, and was missing trample and the you-control
+#restriction. transforms((,trample,newability[X/X])) ueot is the attested shape for a keyword
+#plus a dynamic pump.
+auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield):name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
 text=Trample -- Domain - Whenever Briar Hydra deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.
 mana={5}{G}
 type=Creature
@@ -133330,8 +133336,18 @@ name=Cursed Courtier
 grade=borderline
 # REVIEW 2026-07-17 [P:med] the creature becomes a 1/1 as expected but there is no cursed role token that could be removed or moved.
 abilities=lifelink
+#John: the Role could be put on any creature. The card says "create a Cursed Role token
+#attached to IT" - the Courtier itself. The other Role makers (Witch's Mark, Eriette's Whisper,
+#Shatter the Oath) DO choose, which is why they share this retarget line; this one should not.
+#NOT FIXED, measured 2026-09-08. retargetfromplay needs an interactive target( - all 18 attested
+#uses have one - and notaTarget(...) there silently attaches to nothing, which is worse than
+#attaching to the wrong creature. target(creature[fresh]|mybattlefield) would narrow the choice
+#to the creature that just entered and is the likeliest fix, but nothing here can be verified:
+#the attach prompt is not drivable in the harness at all, and a control run with THIS committed
+#line fails to attach even when the target is named in [DO].
 auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
 note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+missing=the Cursed Role attaches to a creature of your choice; the card attaches it to this creature itself. retargetfromplay needs an interactive target( and notaTarget there attaches to nothing, so the wrong-but-working form stands - see the comment above for what was measured. See https://github.com/Flounder1664/wagic/issues/38
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
 type=Creature
@@ -137985,14 +138001,16 @@ auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && target
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
-#John saw five counters go on with five lands in play. type:land[basic]:mybattlefield counts
-#basic LANDS; Domain counts basic land TYPES. pbasiclandtypes is the engine's own domain value
-#(WParsedInt.cpp:930, mtg rules 205.4c) and ~50 cards already use it - Hiveheart Shaman has
-#this exact line, counter(1/1,pbasiclandtypes) target(creature|myBattlefield).
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain +1/+1 counters) counter(1/1,pbasiclandtypes) target(creature|myBattlefield)
+#John: the chapter III bonus persisted past end of turn. Checked against Scryfall 2026-09-08:
+#the printed line is "target creature YOU CONTROL gets +X/+X and gains trample UNTIL END OF
+#TURN, where X is the number of basic land types". Not +1/+1 counters at all - so the counter
+#form was permanent when it should expire, and was missing both trample and the you-control
+#restriction. pbasiclandtypes is still the right value (it is domain); what changed is that
+#it now feeds transforms((,trample,newability[X/X])) ueot, the attested keyword-plus-pump shape.
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing=nothing known. Chapter III counts basic land types via pbasiclandtypes, which is the engine's own domain value.
-text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control.
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature you control gets +X/+X and gains trample until end of turn, where X is the number of basic land types among lands you control.
 mana={2}{G}
 type=Enchantment
 subtype=Saga
@@ -143143,39 +143161,42 @@ type=Sorcery
 [/card]
 [card]
 name=Sodden Verdure
+#John: the mana options appeared twice. A dual basic-land-type subtype grants those abilities
+#intrinsically - all 25 dual-type lands in mtg.txt declare no mana at all, Badlands is just
+#name/type/subtype - so the explicit {T}:Add lines here were a second copy of each.
 grade=borderline
 #"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
 #attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
 #lands. This land is a Forest Island but not Basic, so it never counts itself.
 auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
-auto={T}:Add{G}
-auto={T}:Add{U}
 text=({T}: Add {G} or {U}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Forest Island
 [/card]
 [card]
 name=Scorched Geyser
+#John: the mana options appeared twice. A dual basic-land-type subtype grants those abilities
+#intrinsically - all 25 dual-type lands in mtg.txt declare no mana at all, Badlands is just
+#name/type/subtype - so the explicit {T}:Add lines here were a second copy of each.
 grade=borderline
 #"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
 #attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
 #lands. This land is a Forest Island but not Basic, so it never counts itself.
 auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
-auto={T}:Add{U}
-auto={T}:Add{R}
 text=({T}: Add {U} or {R}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Island Mountain
 [/card]
 [card]
 name=Eclipsed Steppe
+#John: the mana options appeared twice. A dual basic-land-type subtype grants those abilities
+#intrinsically - all 25 dual-type lands in mtg.txt declare no mana at all, Badlands is just
+#name/type/subtype - so the explicit {T}:Add lines here were a second copy of each.
 grade=borderline
 #"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
 #attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
 #lands. This land is a Forest Island but not Basic, so it never counts itself.
 auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
-auto={T}:Add{W}
-auto={T}:Add{B}
 text=({T}: Add {W} or {B}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Plains Swamp

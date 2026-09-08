@@ -1,12 +1,10 @@
-#John: at The Weatherseed Treaty's chapter III "it added 5 which was correct for the 5 lands
-#I had in play". The card is Domain - basic land TYPES, not basic lands - so three Forests, a
-#Mountain and an Island is 3, not 5. Chapter III now uses pbasiclandtypes, the engine's own
-#domain value (WParsedInt.cpp:930), the same one ~50 other Domain cards use.
-#
-#The saga's own chapter III trigger cannot be driven in this harness - a probe with the OLD
-#type:land[basic] form scores 0 counters here too, so the gap is the trigger, not the change.
-#What IS pinned is the value the change turns on: Matca Rioters is */* equal to domain, and
-#on this exact board it must read 3/3. Five basic lands, three types.
+#John: "Weatherseed treaty's lore three +1s persisted past end of turn". They should - Scryfall
+#confirms chapter III is "target creature YOU CONTROL gets +X/+X and gains trample UNTIL END OF
+#TURN, where X is the number of basic land types", not +1/+1 counters. It was written as
+#counters, which are permanent.
+#The Saga's own chapter III trigger cannot be driven in this harness (a probe with the old
+#counter form scored nothing either), so this pins the VALUE the effect uses: Matca Rioters is
+#*/* equal to domain, and on five basic lands of three types it must read 3/3, not 5/5.
 [INIT]
 firstmain
 [PLAYER1]

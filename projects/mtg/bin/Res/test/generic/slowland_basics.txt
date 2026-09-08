@@ -1,8 +1,9 @@
-#"This land enters tapped unless you control two or more basic lands." Three lands carried
-#that as a missing= note and simply entered tapped always. aslongas(...) <2 oneshot is the
-#attested conditional-ETB-tapped form.
-#Two Forests out means Sodden Verdure enters UNTAPPED, so only the two Forests are tapped
-#after tapping everything for mana would be ambiguous - instead assert tappedinplay directly.
+#"This land enters tapped unless you control two or more basic lands", written as
+#aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot.
+#John also found these offered their mana options TWICE: a dual basic-land-type subtype grants
+#those abilities intrinsically, so the explicit {T}:Add lines were a second copy. All 25
+#dual-type lands in mtg.txt declare no mana at all - Badlands is just name/type/subtype.
+#Two Forests out, so Sodden Verdure enters UNTAPPED.
 [INIT]
 firstmain
 [PLAYER1]
