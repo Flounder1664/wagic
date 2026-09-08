@@ -116,6 +116,7 @@ toughness=1
 [/card]
 [card]
 name=Adventurers' Guildhouse
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Green legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
 [/card]
@@ -303,7 +304,7 @@ toughness=4
 [card]
 name=Anurid Swarmsnapper
 abilities=reach
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Reach (This creature can block creatures with flying.) -- {1}{G}: Anurid Swarmsnapper can block an additional creature this turn.
 mana={2}{G}
 type=Creature
@@ -604,6 +605,7 @@ subtype=Aura
 [card]
 name=Ayesha Tanaka
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- {T}: Counter target activated ability from an artifact source unless that ability's controller pays {W}. (Mana abilities can't be targeted.)
 mana={W}{W}{U}{U}
 type=Legendary Creature
@@ -734,12 +736,14 @@ toughness=+1
 [/card]
 [card]
 name=Baton of Morale
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={2}: Target creature gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}
 type=Artifact
 [/card]
 [card]
 name=Battering Ram
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=At the beginning of combat on your turn, Battering Ram gains banding until end of combat. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's blocking.) -- Whenever Battering Ram becomes blocked by a Wall, destroy that Wall at end of combat.
 mana={2}
 type=Artifact Creature
@@ -772,6 +776,7 @@ toughness=3
 [/card]
 [card]
 name=Beast Walkers
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={G}: Beast Walkers gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}{W}
 type=Creature
@@ -810,6 +815,7 @@ toughness=5
 [card]
 name=Benalish Hero
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={W}
 type=Creature
@@ -820,6 +826,7 @@ toughness=1
 [card]
 name=Benalish Infantry
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{W}
 type=Creature
@@ -898,7 +905,7 @@ type=Artifact
 [/card]
 [card]
 name=Blaze of Glory
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Cast Blaze of Glory only during combat before blockers are declared. -- Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
 mana={W}
 type=Instant
@@ -1327,6 +1334,7 @@ toughness=2
 [card]
 name=Camel
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- As long as Camel is attacking, prevent all damage Deserts would deal to Camel and to creatures banded with Camel.
 mana={W}
 type=Creature
@@ -1434,6 +1442,7 @@ type=Artifact
 [/card]
 [card]
 name=Cathedral of Serra
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=White legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
 [/card]
@@ -1957,6 +1966,7 @@ toughness=2
 [/card]
 [card]
 name=Cooperation
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Enchant creature -- Enchanted creature has banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{W}
 type=Enchantment
@@ -2488,6 +2498,7 @@ type=Sorcery
 [/card]
 [card]
 name=Dire Wolves
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Dire Wolves has banding as long as you control a Plains. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{G}
 type=Creature
@@ -2813,7 +2824,7 @@ type=Artifact
 [/card]
 [card]
 name=Echo Circlet
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Equipped creature can block an additional creature. -- Equip {1}
 mana={2}
 type=Artifact
@@ -2994,7 +3005,7 @@ toughness=1
 [/card]
 [card]
 name=Entangler
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Enchant creature -- Enchanted creature can block any number of creatures.
 mana={2}{W}{W}
 type=Enchantment
@@ -3074,6 +3085,7 @@ toughness=4
 [/card]
 [card]
 name=Errand of Duty
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Put a 1/1 white Knight creature token with banding onto the battlefield. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}
 type=Instant
@@ -3555,12 +3567,14 @@ type=Enchantment
 [/card]
 [card]
 name=Formation
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Target creature gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- Draw a card at the beginning of the next turn's upkeep.
 mana={1}{W}
 type=Instant
 [/card]
 [card]
 name=Fortified Area
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Wall creatures you control get +1/+0 and have banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}{W}
 type=Enchantment
@@ -4269,6 +4283,7 @@ toughness=*
 [/card]
 [card]
 name=Greater Morphling
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={2}: Greater Morphling gains your choice of banding, bushido 1, double strike, fear, flying, first strike, haste, landwalk of your choice, protection from a color of your choice, provoke, rampage 1, shadow, or trample until end of turn. -- {2}: Greater Morphling becomes the colors of your choice until end of turn. -- {2}: Greater Morphling's type becomes the creature type of your choice until end of turn. -- {2}: Greater Morphling's expansion symbol becomes the symbol of your choice until end of turn. -- {2}: Greater Morphling's artist becomes the artist of your choice until end of turn. -- {2}: Greater Morphling gets +2/-2 or -2/+2 until end of turn. -- {2}: Untap Greater Morphling.
 mana={6}{U}{U}
 type=Creature
@@ -4626,6 +4641,7 @@ toughness=3
 [/card]
 [card]
 name=Helm of Chatzuk
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={1}, {T}: Target creature gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}
 type=Artifact
@@ -4686,7 +4702,7 @@ subtype=Arcane
 [/card]
 [card]
 name=High Ground
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Each creature you control can block an additional creature.
 mana={W}
 type=Enchantment
@@ -4827,6 +4843,7 @@ type=Enchantment
 [/card]
 [card]
 name=Icatian Infantry
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={1}: Icatian Infantry gains first strike until end of turn. -- {1}: Icatian Infantry gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={W}
 type=Creature
@@ -4837,6 +4854,7 @@ toughness=1
 [card]
 name=Icatian Phalanx
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={4}{W}
 type=Creature
@@ -4847,6 +4865,7 @@ toughness=4
 [card]
 name=Icatian Skirmishers
 abilities=first strike,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=First strike; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- Whenever Icatian Skirmishers attacks, all creatures banded with it gain first strike until end of turn.
 mana={3}{W}
 type=Creature
@@ -5554,6 +5573,7 @@ subtype=Aura
 [card]
 name=Kjeldoran Escort
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{W}{W}
 type=Creature
@@ -5564,6 +5584,7 @@ toughness=3
 [card]
 name=Kjeldoran Knight
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- {1}{W}: Kjeldoran Knight gets +1/+0 until end of turn. -- {W}{W}: Kjeldoran Knight gets +0/+2 until end of turn.
 mana={W}{W}
 type=Creature
@@ -5574,6 +5595,7 @@ toughness=1
 [card]
 name=Kjeldoran Phalanx
 abilities=first strike,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=First strike; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={5}{W}
 type=Creature
@@ -5593,6 +5615,7 @@ toughness=5
 [card]
 name=Kjeldoran Skycaptain
 abilities=flying,first strike,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying; first strike; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={4}{W}
 type=Creature
@@ -5603,6 +5626,7 @@ toughness=2
 [card]
 name=Kjeldoran Skyknight
 abilities=flying,first strike,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying; first strike; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{W}
 type=Creature
@@ -5613,6 +5637,7 @@ toughness=1
 [card]
 name=Kjeldoran Warrior
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={W}
 type=Creature
@@ -5713,6 +5738,7 @@ toughness=*
 [card]
 name=Knights of Thorn
 abilities=protection from red,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Protection from red; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={3}{W}
 type=Creature
@@ -5842,7 +5868,7 @@ subtype=Azgol
 [/card]
 [card]
 name=Lairwatch Giant
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Lairwatch Giant can block an additional creature. -- Whenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.
 mana={5}{W}
 type=Creature
@@ -6425,6 +6451,7 @@ toughness=4
 [/card]
 [card]
 name=Master of the Hunt
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={2}{G}{G}: Put a 1/1 green Wolf creature token named Wolves of the Hunt onto the battlefield. It has "bands with other creatures named Wolves of the Hunt." (Any creatures named Wolves of the Hunt can attack in a band as long as at least one has "bands with other creatures named Wolves of the Hunt." Bands are blocked as a group. If at least two creatures named Wolves of the Hunt you control, one of which has "bands with other creatures named Wolves of the Hunt," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{G}{G}
 type=Creature
@@ -6559,6 +6586,7 @@ subtype=Chicken
 [card]
 name=Mesa Pegasus
 abilities=flying,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}
 type=Creature
@@ -6758,6 +6786,7 @@ toughness=5
 [card]
 name=Mishra's War Machine
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- At the beginning of your upkeep, unless you discard a card, tap Mishra's War Machine and it deals 3 damage to you.
 mana={7}
 type=Artifact Creature
@@ -6947,6 +6976,7 @@ subtype=Regatha
 [/card]
 [card]
 name=Mountain Stronghold
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Red legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
 [/card]
@@ -7127,6 +7157,7 @@ subtype=Amonkhet
 [/card]
 [card]
 name=Nalathni Dragon
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- {R}: Nalathni Dragon gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Nalathni Dragon at the beginning of the next end step.
 mana={2}{R}{R}
 type=Creature
@@ -7176,6 +7207,7 @@ type=Ongoing Scheme
 [/card]
 [card]
 name=Nature's Blessing
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={G}{W}, Discard a card: Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample. (This effect lasts indefinitely. Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{G}{W}
 type=Enchantment
@@ -7321,6 +7353,7 @@ toughness=3
 [card]
 name=Noble Elephant
 abilities=trample,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Trample; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={3}{W}
 type=Creature
@@ -7566,6 +7599,7 @@ toughness=3
 [/card]
 [card]
 name=Old Fogey
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Phasing, cumulative upkeep {1}, echo, fading 3, bands with other Dinosaurs, protection from Homarids, snow-covered plainswalk, flanking, rampage 2
 mana={G}{G}
 type=Summon
@@ -8005,6 +8039,7 @@ type=Enchantment
 [card]
 name=Pikemen
 abilities=first strike,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=First strike; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}
 type=Creature
@@ -9078,6 +9113,7 @@ subtype=Rabiah
 [/card]
 [card]
 name=Seafarer's Quay
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Blue legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
 [/card]
@@ -9327,6 +9363,7 @@ toughness=4
 [/card]
 [card]
 name=Shelkin Brownie
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={T}: Target creature loses all "bands with other" abilities until end of turn.
 mana={1}{G}
 type=Creature
@@ -9364,6 +9401,7 @@ subtype=Dragon
 [card]
 name=Shield Bearer
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}
 type=Creature
@@ -9738,6 +9776,7 @@ type=Sorcery
 [/card]
 [card]
 name=Soraya the Falconer
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Bird creatures get +1/+1. -- {1}{W}: Target Bird creature gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={1}{W}{W}
 type=Legendary Creature
@@ -10772,6 +10811,7 @@ subtype=Shenmeng
 [card]
 name=Teremko Griffin
 abilities=flying,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={3}{W}
 type=Creature
@@ -11056,7 +11096,7 @@ toughness=1
 [card]
 name=Thoughtweft Trio
 abilities=first strike,vigilance
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=First strike, vigilance -- Champion a Kithkin (When this enters the battlefield, sacrifice it unless you exile another Kithkin you control. When this leaves the battlefield, that card returns to the battlefield.) -- Thoughtweft Trio can block any number of creatures.
 mana={2}{W}{W}
 type=Creature
@@ -11147,6 +11187,7 @@ type=Enchantment
 [card]
 name=Timber Wolves
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={G}
 type=Creature
@@ -11218,6 +11259,7 @@ toughness=4
 [/card]
 [card]
 name=Tolaria
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={T}: Add {U} to your mana pool. -- {T}: Target creature loses banding and all "bands with other" abilities until end of turn. Activate this ability only during any upkeep step.
 type=Legendary Land
 [/card]
@@ -11501,6 +11543,7 @@ type=Land
 [/card]
 [card]
 name=Unholy Citadel
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Black legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
 [/card]
@@ -11528,6 +11571,7 @@ type=Artifact
 [card]
 name=Urza's Engine
 abilities=trample
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Trample -- {3}: Urza's Engine gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- {3}: Attacking creatures banded with Urza's Engine gain trample until end of turn.
 mana={5}
 type=Artifact Creature
@@ -11569,7 +11613,7 @@ toughness=3
 [/card]
 [card]
 name=Valor Made Real
-missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation.
+missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Target creature can block any number of creatures this turn.
 mana={W}
 type=Instant
@@ -11815,6 +11859,7 @@ toughness=1
 [card]
 name=Volunteer Reserves
 abilities=banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.) -- Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
 mana={1}{W}
 type=Creature
@@ -11855,6 +11900,7 @@ toughness=3
 [card]
 name=Wall of Caltrops
 abilities=defender
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Defender (This creature can't attack.) -- Whenever Wall of Caltrops blocks a creature, if no non-Wall creatures are blocking that creature, Wall of Caltrops gains banding until end of turn. (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)
 mana={1}{W}
 type=Creature
@@ -11894,6 +11940,7 @@ toughness=1
 [card]
 name=Wall of Shields
 abilities=defender
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Defender (This creature can't attack.) -- Banding (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)
 mana={3}
 type=Artifact Creature
@@ -11939,6 +11986,7 @@ type=Artifact
 [card]
 name=War Elephant
 abilities=trample,banding
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Trample; banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={3}{W}
 type=Creature
@@ -25444,6 +25492,7 @@ subtype=Aura
 [/card]
 [card]
 name=Banding Sliver
+missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=All Slivers have banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={3}{W}{W}
 type=Creature
