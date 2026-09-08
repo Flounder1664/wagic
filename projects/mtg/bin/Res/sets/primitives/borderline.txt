@@ -9111,7 +9111,7 @@ abilities=trample
 #Player::lifeGainedThisTurn. "Each end step", not just mine, so @each end.
 auto=@each end restriction{compare(lifegain)~morethan~0}:name(Becomes prepared) _PREPARE_
 auto={B}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Turn Stones) counter(0/0,-1,Prepared) all(this) && create(Pest:creature pest:1/1:black green:and!( transforms((,newability[@movedTo(this|graveyard) from(battlefield):life:1 controller])) forever )!) asSorcery
-missing="for each opponent" makes exactly one token here, which is right for a duel. The end-step re-prepare (if you gained life this turn) is not written - nothing tracks life gained per turn - so this creature never becomes prepared on its own -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+missing="for each opponent" makes exactly one token here, which is right for a duel -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Trample -- At the beginning of each end step, if you gained life this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={2}{B}{G}
 type=Creature
