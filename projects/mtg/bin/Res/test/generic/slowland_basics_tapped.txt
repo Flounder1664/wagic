@@ -1,0 +1,20 @@
+#The other half: with only ONE basic land out, Sodden Verdure still enters tapped.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Forest
+hand:Sodden Verdure
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sodden Verdure
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Forest,Sodden Verdure
+tappedinplay:1
+life:20
+[PLAYER2]
+life:20
+[END]

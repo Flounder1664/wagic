@@ -1,0 +1,24 @@
+#"This land enters tapped unless you control two or more basic lands." Three lands carried
+#that as a missing= note and simply entered tapped always. aslongas(...) <2 oneshot is the
+#attested conditional-ETB-tapped form.
+#Two Forests out means Sodden Verdure enters UNTAPPED, so only the two Forests are tapped
+#after tapping everything for mana would be ambiguous - instead assert tappedinplay directly.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Forest,Forest
+hand:Sodden Verdure
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sodden Verdure
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Forest,Forest,Sodden Verdure
+tappedinplay:0
+life:20
+[PLAYER2]
+life:20
+[END]

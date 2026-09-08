@@ -143013,10 +143013,12 @@ type=Sorcery
 [card]
 name=Sodden Verdure
 grade=borderline
-auto=tap(noevent)
+#"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
+#attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
+#lands. This land is a Forest Island but not Basic, so it never counts itself.
+auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
 auto={T}:Add{G}
 auto={T}:Add{U}
-missing=it should enter untapped if you control two or more basic lands
 text=({T}: Add {G} or {U}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Forest Island
@@ -143024,10 +143026,12 @@ subtype=Forest Island
 [card]
 name=Scorched Geyser
 grade=borderline
-auto=tap(noevent)
+#"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
+#attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
+#lands. This land is a Forest Island but not Basic, so it never counts itself.
+auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
 auto={T}:Add{U}
 auto={T}:Add{R}
-missing=it should enter untapped if you control two or more basic lands
 text=({T}: Add {U} or {R}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Island Mountain
@@ -143035,10 +143039,12 @@ subtype=Island Mountain
 [card]
 name=Eclipsed Steppe
 grade=borderline
-auto=tap(noevent)
+#"Enters tapped unless you control two or more basic lands." aslongas(...) <N oneshot is the
+#attested conditional-ETB-tapped form - the same one the DMU slow lands use with >2 other
+#lands. This land is a Forest Island but not Basic, so it never counts itself.
+auto=aslongas(land[basic]|myBattlefield) tap(noevent) <2 oneshot
 auto={T}:Add{W}
 auto={T}:Add{B}
-missing=it should enter untapped if you control two or more basic lands
 text=({T}: Add {W} or {B}.) -- This land enters tapped unless you control two or more basic lands.
 type=Land
 subtype=Plains Swamp
