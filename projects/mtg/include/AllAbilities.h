@@ -3720,6 +3720,43 @@ public:
     }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+// "<this> has all activated abilities of <selector>" - Necrotic Ooze, Myr Welder,
+// Conspicuous Snoop, Drana and Linvala and a dozen more.
+//
+// Both halves of this already existed and had never been put together. ATransformer
+// takes a list of ability LINES, parses each one with the receiving card as its source,
+// repoints the nested source pointers and remembers the results so it can tear them down
+// again - that is what newability[...] is. The cloner does the same with a whole
+// magicText. What was missing is only where the list of lines comes from: here it is
+// another card's own magicText, read at runtime.
+//
+// ListMaintainerAbility supplies the other half. It rescans every zone its TargetChooser
+// admits and calls added()/removed() as membership changes, so a graveyard (Necrotic
+// Ooze), an exile pile (Myr Welder) and the top card of a library (Conspicuous Snoop)
+// all work without a line of extra code, and a donor leaving takes its abilities with it.
+//
+// Which lines count as activated is decided by the parser, not by reading the text:
+// anything that does not parse to an ActivatedAbility is dropped. Mana abilities come
+// along for free because AManaProducer is an ActivatedAbility too, which is the whole
+// point of Manascape Refractor and Mirran Safehouse.
+class AAllActivatedAbilitiesOf: public ListMaintainerAbility
+{
+public:
+    map<MTGCardInstance *, vector<MTGAbility *> > granted;
+    string tcString;
+
+    AAllActivatedAbilitiesOf(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _tc, string _tcString);
+    ~AAllActivatedAbilitiesOf();
+
+    int canBeInList(MTGCardInstance * card);
+    int added(MTGCardInstance * card);
+    int removed(MTGCardInstance * card);
+    void dropGrant(MTGCardInstance * donor);
+    int destroy();
+    const string getMenuText() { return "Borrowed abilities"; }
+    AAllActivatedAbilitiesOf * clone() const;
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
 //a different lord for auras and enchantments. http://code.google.com/p/wagic/issues/detail?id=244
 class ATeach: public ListMaintainerAbility, public NestedAbility
 {

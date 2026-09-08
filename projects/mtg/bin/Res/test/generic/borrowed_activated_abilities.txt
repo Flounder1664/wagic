@@ -1,0 +1,35 @@
+#"<this> has all activated abilities of <selector>" - sixteen cards printed with it and not
+#one implemented, because there was no way to grant an ability that another card owns.
+#Both halves already existed: ATransformer parses a list of ability LINES onto a receiving
+#card (that is what newability[...] is), and ListMaintainerAbility keeps a live set of cards
+#matching a selector across every zone. allactivatedabilities(<selector>) joins them - the
+#list of lines is read from each matching card's own magicText at runtime.
+#
+#Drana and Linvala borrows from creatures the OPPONENT controls. Give player 2 a Llanowar
+#Elves and player 1 must be able to tap Drana and Linvala for {G}: one tapped permanent on
+#player 1's side, none on player 2's, which is what proves the borrowed {T} taps the
+#borrower and not the lender. Without the grant the click does nothing and the pool stays
+#empty - and the pool has to be asserted in the same phase, because it empties on a change.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:Llanowar Elves
+life:20
+[DO]
+Drana and Linvala
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+tappedinplay:1
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Llanowar Elves
+tappedinplay:0
+life:20
+[END]

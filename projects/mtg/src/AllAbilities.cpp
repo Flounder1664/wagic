@@ -2,6 +2,7 @@
 #include "AllAbilities.h"
 #include "Translate.h"
 #include "MTGRules.h"
+#include "AbilityParser.h" //AutoLineMacro, for the borrowed-abilities grant below
 
 //display a text animation, this is not a real ability.
 MTGEventText::MTGEventText(GameObserver* observer, int _id, MTGCardInstance * card, string textToShow) :
@@ -11200,6 +11201,133 @@ void PopulateColorIndexVector(list<int>& colors, const string& colorStringList, 
         }
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// AAllActivatedAbilitiesOf - see the header for why this is mostly assembly rather than
+// new machinery.
+
+AAllActivatedAbilitiesOf::AAllActivatedAbilitiesOf(GameObserver* observer, int _id, MTGCardInstance * card,
+                                                   TargetChooser * _tc, string _tcString)
+    : ListMaintainerAbility(observer, _id, card), tcString(_tcString)
+{
+    tc = _tc;
+    if (tc)
+        tc->targetter = NULL;
+}
+
+int AAllActivatedAbilitiesOf::canBeInList(MTGCardInstance * card)
+{
+    if (!card || !source || card == source)
+        return 0; //a card never lends to itself
+    if (card->isPhased || source->isPhased)
+        return 0;
+    if (!tc)
+        return 0;
+    return tc->canTarget(card) ? 1 : 0;
+}
+
+int AAllActivatedAbilitiesOf::added(MTGCardInstance * donor)
+{
+    if (!donor || !source)
+        return 0;
+    if (granted.find(donor) != granted.end())
+        return 1; //already lending
+
+    string text = donor->magicText;
+    if (!text.size() && donor->model && donor->model->data)
+        text = donor->model->data->magicText;
+    if (!text.size())
+        return 1;
+
+    //macros are expanded in AbilityFactory::getAbilities before the line split, never
+    //inside parseMagicLine, so a donor line like {1}{U}:_ADAPT1_ has to be expanded here
+    //or it simply fails to parse.
+    text = AutoLineMacro::Process(text);
+
+    const char kAutoLineBreak = 10; //a plain newline, written without an escape
+    AbilityFactory af(game);
+    vector<MTGAbility *> kept;
+    while (text.size())
+    {
+        string line;
+        size_t found = text.find(kAutoLineBreak);
+        if (found != string::npos)
+        {
+            line = text.substr(0, found);
+            text = text.substr(found + 1);
+        }
+        else
+        {
+            line = text;
+            text = "";
+        }
+        if (!line.size())
+            continue;
+
+        MTGAbility * a = af.parseMagicLine(line, GetId(), NULL, source);
+        if (!a)
+            continue;
+        //the parser decides what "activated" means. Everything else the donor prints -
+        //triggers, static lords, keywords - is not borrowed and is thrown away here.
+        if (!dynamic_cast<ActivatedAbility *>(a))
+        {
+            SAFE_DELETE(a);
+            continue;
+        }
+        MTGAbility::propagateSource(a, source);
+        a->target = source;
+        a->forcedAlive = 1;
+        a->addToGame();
+        kept.push_back(a);
+    }
+
+    if (kept.size())
+        granted[donor] = kept;
+    return 1;
+}
+
+void AAllActivatedAbilitiesOf::dropGrant(MTGCardInstance * donor)
+{
+    map<MTGCardInstance *, vector<MTGAbility *> >::iterator it = granted.find(donor);
+    if (it == granted.end())
+        return;
+    for (size_t i = 0; i < it->second.size(); ++i)
+    {
+        MTGAbility * a = it->second[i];
+        if (!a)
+            continue;
+        a->forcedAlive = 0;
+        game->removeObserver(a);
+    }
+    granted.erase(it);
+}
+
+int AAllActivatedAbilitiesOf::removed(MTGCardInstance * donor)
+{
+    dropGrant(donor);
+    return 1;
+}
+
+int AAllActivatedAbilitiesOf::destroy()
+{
+    while (granted.size())
+        dropGrant(granted.begin()->first);
+    return ListMaintainerAbility::destroy();
+}
+
+AAllActivatedAbilitiesOf::~AAllActivatedAbilitiesOf()
+{
+    //the observer owns the granted abilities once addToGame() has run; destroy() is what
+    //hands them back, so nothing is deleted here.
+}
+
+AAllActivatedAbilitiesOf * AAllActivatedAbilitiesOf::clone() const
+{
+    AAllActivatedAbilitiesOf * a = NEW AAllActivatedAbilitiesOf(*this);
+    a->granted.clear(); //a fresh copy lends nothing yet
+    return a;
+}
+
 
 void PopulateSubtypesIndexVector(list<int>& types, const string& subTypesStringList, char delimiter)
 {

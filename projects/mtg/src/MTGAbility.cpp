@@ -5591,6 +5591,22 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //"<this> has all activated abilities of <selector>". The selector carries its own
+    //zone, so allactivatedabilities(creature|graveyard) is Necrotic Ooze and
+    //allactivatedabilities(*[exiledwith]|exile) is Myr Welder - see AAllActivatedAbilitiesOf.
+    vector<string> splitBorrow = parseBetween(s, "allactivatedabilities(", ")");
+    if (splitBorrow.size())
+    {
+        TargetChooserFactory tcf(observer);
+        TargetChooser * donors = tcf.createTargetChooser(splitBorrow[1], card);
+        if (!donors)
+        {
+            DebugTrace("MTGABILITY: Parsing Error: " << s);
+            return NULL;
+        }
+        return NEW AAllActivatedAbilitiesOf(observer, id, card, donors, splitBorrow[1]);
+    }
+
     //Protection from...
     vector<string> splitProtection = parseBetween(s, "protection from(", ")");
     if (splitProtection.size())

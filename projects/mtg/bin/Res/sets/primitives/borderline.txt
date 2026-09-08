@@ -22657,9 +22657,14 @@ type=Sorcery
 [/card]
 [card]
 name=Conspicuous Snoop
-missing=has all activated abilities
+grade=borderline
 abilities=showfromtoplibrary
 auto=aslongas(goblin[zpos=1]|mylibrary) canplayfromlibrarytop >0
+#allactivatedabilities(<selector>) grants this card every activated ability printed on
+#each card the selector matches, re-read as the matching set changes. The same
+#goblin[zpos=1]|mylibrary selector the cast permission already uses does the work, so the
+#borrowed abilities follow the top card of the library from draw to draw.
+auto=allactivatedabilities(goblin[zpos=1]|mylibrary)
 text=Play with the top card of your library revealed. -- You may cast Goblin spells from the top of your library. -- As long as the top card of your library is a Goblin card, Conspicuous Snoop has all activated abilities of that card.
 mana={R}{R}
 type=Creature
@@ -31241,9 +31246,16 @@ toughness=4
 [/card]
 [card]
 name=Drana and Linvala
-missing=has all activated abilities
+grade=borderline
 abilities=flying,vigilance
 auto=lord(creature|opponentBattlefield) noactivatedability
+#The borrowed abilities are activated with THIS card as their source, so a {T} in a
+#borrowed cost taps Drana and Linvala and not the creature it was borrowed from - which
+#is what the rules say, and is the reason the shutdown lord above does not disable them.
+auto=allactivatedabilities(creature|opponentBattlefield)
+#Not written: "you may spend mana as though it were mana of any color to activate those
+#abilities". The borrowed ability keeps its printed cost.
+missing=you may spend mana as though it were mana of any colour to activate the borrowed abilities
 text=Flying, vigilance -- Activated abilities of creatures your opponents control can't be activated. -- Drana and Linvala has all activated abilities of all creatures your opponents control. You may spend mana as though it were mana of any color to activate those abilities.
 mana={1}{W}{W}{B}
 type=Legendary Creature
@@ -141829,8 +141841,10 @@ toughness=5
 [card]
 name=Thranduil, the Elvenking
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; "has all activated abilities of all Elf cards in graveyard" not implemented, other legendary-elf-ETB draw2discard1 works
-missing="has all activated abilities of all Elf cards in your graveyard" not implemented (no verified dynamic-ability-copy-from-graveyard primitive)
+#The graveyard is just another zone to the selector - ListMaintainerAbility rescans every
+#zone its TargetChooser admits - so "all Elf cards in your graveyard" needs no special
+#casing beyond elf|mygraveyard.
+auto=allactivatedabilities(elf|mygraveyard)
 auto=@movedTo(*[elf;legendary;-token]|myBattlefield) restriction{} notatarget(this):all(trigger[to]) draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
 text=Thranduil has all activated abilities of all Elf cards in your graveyard. -- Whenever another legendary Elf you control enters, draw two cards, then discard a card.
 mana={2}{B}{G}{U}
