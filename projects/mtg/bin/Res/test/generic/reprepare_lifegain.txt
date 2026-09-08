@@ -1,0 +1,32 @@
+#"At the beginning of each end step, if you gained life this turn, this creature becomes
+#prepared." The note said nothing tracks life gained per turn - not so: lifegain is a
+#WParsedInt reading Player::lifeGainedThisTurn. Healing Salve gains 3, so at the end step
+#Eccentric Pestfinder must pick up a Prepared counter.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:708085
+hand:Healing Salve
+manapool:{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Healing Salve
+choice 0
+p1
+next
+next
+next
+next
+next
+[ASSERT]
+END
+[PLAYER1]
+inplay:708085
+counter:708085=Prepared:1
+graveyard:*
+life:23
+[PLAYER2]
+life:20
+[END]

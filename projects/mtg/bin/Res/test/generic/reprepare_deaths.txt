@@ -1,0 +1,31 @@
+#"At the beginning of each end step, if two or more creatures died this turn, this creature
+#becomes prepared." The note said nothing counts creature deaths per turn - not so:
+#thisturn(creature|graveyard) does, and three other cards already use thisturn against a
+#graveyard. Nantuko Husk eats two creatures, so the end step must find the count at 2.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:707021,Nantuko Husk,Grizzly Bears,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Nantuko Husk
+Grizzly Bears
+Nantuko Husk
+Raging Goblin
+next
+next
+next
+next
+next
+[ASSERT]
+END
+[PLAYER1]
+inplay:707021,Nantuko Husk
+counter:707021=Prepared:1
+graveyard:*,*
+life:20
+[PLAYER2]
+life:20
+[END]
