@@ -1,0 +1,27 @@
+#Constants::PROWESS is declared in the engine and never read, so abilities=prowess on its own
+#does nothing - every working prowess card writes the trigger out as
+#@movedTo(*[-creature]|mystack):1/1 ueot. Three of the 51 had the keyword and no trigger, so
+#they had prowess in name only. Agent of Atlas is one.
+#Agent of Atlas is a 2/2; cast a Lava Axe (a noncreature spell) and it must read 3/3.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Agent of Atlas
+hand:Lava Axe
+manapool:{4}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Agent of Atlas
+pt:agent of atlas=3/3
+graveyard:*
+life:20
+[PLAYER2]
+life:15
+[END]

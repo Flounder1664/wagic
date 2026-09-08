@@ -139146,6 +139146,10 @@ toughness=3
 name=Iguana Parrot
 abilities=flying,vigilance,prowess
 grade=borderline
+#Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
+#engine - so every working prowess card writes the trigger out. 48 of the 51 did; this one
+#did not, so it had prowess in name only. Audited 2026-09-08.
+auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Flying, vigilance -- Prowess
 mana={2}{U}
 type=Creature
@@ -141322,7 +141326,9 @@ type=Enchantment
 [/card]
 [card]
 name=Wizard's Staff
-abilities=prowess
+#Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
+#engine - so every working prowess card writes the trigger out. 48 of the 51 did; this Equipment had it on ITSELF, where it does nothing - it belongs on the equipped creature. Audited 2026-09-08.
+auto=teach(creature) transforms((,newability[@movedTo(*[-creature]|mystack):1/1 ueot]))
 auto={1}:name(Equip wizard) rehook target(wizard|mybattlefield)
 auto={3}:equip
 grade=borderline
@@ -143198,6 +143204,10 @@ subtype=Plains Swamp
 name=Agent of Atlas
 grade=borderline
 abilities=prowess
+#Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
+#engine - so every working prowess card writes the trigger out. 48 of the 51 did; this one
+#did not, so it had prowess in name only. Audited 2026-09-08.
+auto=@movedTo(*[-creature]|mystack):1/1 ueot
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={1}{W}
 type=Creature
