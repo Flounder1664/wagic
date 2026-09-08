@@ -1,5 +1,5 @@
-#John: "Emeritus of truce did not create the inkling". The ETB was listed under missing=
-#and never authored. Casting it must put a 2/1 flying Inkling alongside it.
+#"Target player creates an Inkling token." The Inkling is now a 1/1 (Inkling Sos, registered in
+#PSOS with SOC art) and which player makes it is a choice - choice 0 keeps it for yourself.
 [INIT]
 firstmain
 [PLAYER1]
@@ -10,10 +10,11 @@ life:20
 life:20
 [DO]
 707020
+choice 0
 [ASSERT]
 firstmain
 [PLAYER1]
-inplay:707020,Inkling
+inplay:707020,Inkling Sos
 life:20
 [PLAYER2]
 life:20

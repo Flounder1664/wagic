@@ -8660,7 +8660,10 @@ grade=borderline
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 #2026-09-06: John reported no Inkling. The ETB and the re-prepare were both listed under
 #missing= and simply never authored - the card only ever had its back-face ability.
-auto=token(Inkling Sos)
+#"TARGET PLAYER creates an Inkling token" - John could not choose. token(...) opponent is the
+#attested way to give a token to the other player, so the two modes are offered as a choice.
+auto=choice name(You create the Inkling) token(Inkling Sos)
+auto=choice name(Opponent creates the Inkling) token(Inkling Sos) opponent
 auto=@each my end restriction{type(creature|opponentBattlefield)~morethan~type(creature|myBattlefield)}:name(Becomes prepared) _PREPARE_
 #The back face IS a real Magic card that this build already implements, so cast a copy of
 #IT rather than re-inlining an approximation of its text. That fixes three things at once:
@@ -133371,13 +133374,13 @@ abilities=lifelink
 #John: the Role could be put on any creature. The card says "create a Cursed Role token
 #attached to IT" - the Courtier itself. The other Role makers (Witch's Mark, Eriette's Whisper,
 #Shatter the Oath) DO choose, which is why they share this retarget line; this one should not.
-#NOT FIXED, measured 2026-09-08. retargetfromplay needs an interactive target( - all 18 attested
-#uses have one - and notaTarget(...) there silently attaches to nothing, which is worse than
-#attaching to the wrong creature. target(creature[fresh]|mybattlefield) would narrow the choice
-#to the creature that just entered and is the likeliest fix, but nothing here can be verified:
-#the attach prompt is not drivable in the harness at all, and a control run with THIS committed
-#line fails to attach even when the target is named in [DO].
-auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+#retargetfromplay needs an interactive target( - all 18 attested uses have one - and notaTarget
+#there silently attaches to nothing, so it cannot be made automatic. John's suggestion instead:
+#restrict the choice. The Courtier is a Human Noble, and [human&noble] is the attested AND form,
+#so the only legal target is normally the Courtier itself. Still not verifiable - the attach
+#prompt is not drivable in the harness, proved with a control that fails even when the target
+#is named in [DO].
+auto=token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature[human&noble]|mybattlefield)])) oneshot )!
 note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
 missing=the Cursed Role attaches to a creature of your choice; the card attaches it to this creature itself. retargetfromplay needs an interactive target( and notaTarget there attaches to nothing, so the wrong-but-working form stands - see the comment above for what was measured. See https://github.com/Flounder1664/wagic/issues/38
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
@@ -134197,6 +134200,7 @@ abilities=altflash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+other={U}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=draw:2
 text=Sneak {U} (You may cast this spell for {U} if you also return an unblocked attacker you control to hand during the declare blockers step.) -- Draw two cards.
@@ -134233,9 +134237,13 @@ abilities=altflash
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
+other={W}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
-auto=choice name(+3/+3) target(creature) 3/3 ueot
-auto=choice name(-3/-3) target(creature) -3/-3 ueot
+#"Choose one or both". Two choice lines give one OR the other; the attested one-or-both shape
+#is a separate optional ability per mode (Applied Biomancy, Aid the Fallen), so each is offered
+#independently and you may take both.
+auto=ability$!may name(+3/+3) target(creature) 3/3 ueot!$ controller
+auto=ability$!may name(-3/-3) target(creature) -3/-3 ueot!$ controller
 text=Sneak {W}{B} -- Choose one or both - -- - Target creature gets +3/+3 until end of turn. -- - Target creature gets -3/-3 until end of turn.
 mana={1}{W}{B}
 type=Sorcery
@@ -134255,6 +134263,7 @@ abilities=altflash
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
+other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=<upto:2>creature[manacost<=3]|mygraveyard
 auto=moveTo(myBattlefield)
@@ -134277,6 +134286,7 @@ abilities=altflash
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
+other={2}{G}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=may target(<2>land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Sneak {2}{G} -- Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
@@ -134312,6 +134322,7 @@ abilities=altflash
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
+other={B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 target=creature,enchantment|battlefield
 auto=destroy
@@ -134334,6 +134345,7 @@ abilities=altflash
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
+other={1}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 auto=target(*|mylibrary) moveto(hand)
 text=Sneak {1}{B} -- Search your library for a card, put that card into your hand, then shuffle.
@@ -139239,6 +139251,7 @@ auto=@movedto(*|mystack):counter(0/0,1,bellrung)
 auto=this(variable{hascntbellrung}=1) lord(*|mycastingzone) altercost(colorless,-1)
 auto=@each end restriction{compare(hascntbellrung)~morethan~0}:removeallcounters(0/0,1,bellrung)
 #every spell.
+missing=the discount reaches the second spell each turn and every spell after it, not the second alone. Measured 2026-09-08 with three Lava Axes: 13 mana spent where 14 is correct and 12 would be a blanket discount. The counter is right - it reads 3 after three spells - and this(variable{...}=1) is a well-attested gate used by 31 Class and Talent cards, so what does not work is withdrawing an altercost once it has been applied to the casting zone: the discount switches on when the count reaches 1 and never switches off. Monk Class carries the identical construction and presumably has the same defect. Left in place because second-onward is closer to the card than the blanket discount it replaced.
 text=Flying -- The second spell you cast each turn costs {1} less to cast.
 mana={2}{U}
 type=Creature
@@ -139259,6 +139272,7 @@ auto=@movedto(*|mystack):counter(0/0,1,uthrosdiscount)
 auto=this(variable{hascntuthrosdiscount}=1) lord(*|mycastingzone) altercost(colorless,-2)
 auto=@each end restriction{compare(hascntuthrosdiscount)~morethan~0}:removeallcounters(0/0,1,uthrosdiscount)
 #every spell.
+missing=the discount reaches the second spell each turn and every spell after it, not the second alone. Measured 2026-09-08 with three Lava Axes: 13 mana spent where 14 is correct and 12 would be a blanket discount. The counter is right - it reads 3 after three spells - and this(variable{...}=1) is a well-attested gate used by 31 Class and Talent cards, so what does not work is withdrawing an altercost once it has been applied to the casting zone: the discount switches on when the count reaches 1 and never switches off. Monk Class carries the identical construction and presumably has the same defect. Left in place because second-onward is closer to the card than the blanket discount it replaced.
 text=The second spell you cast each turn costs {2} less to cast.
 mana={2}{U}
 type=Creature
