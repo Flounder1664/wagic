@@ -1,0 +1,26 @@
+#"Prepared" is a boolean state, not a stack: John saw Grave Researcher reach TWO Prepared
+#counters. Ten of my prepare triggers had no cap, so any recurring one accumulated.
+#Grave Researcher prepares at upkeep with three creatures in the graveyard; run two of its
+#upkeeps and the count must still be exactly 1.
+[INIT]
+untap
+[PLAYER1]
+inplay:Grave Researcher // Reanimate
+graveyard:Grizzly Bears,Raging Goblin,Mirkwood Spider
+library:Mountain,Mountain,Mountain,Mountain
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Grave Researcher // Reanimate
+counter:grave researcher // reanimate=Prepared:1
+graveyard:*,*,*
+library:*,*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

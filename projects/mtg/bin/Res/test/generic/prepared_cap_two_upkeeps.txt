@@ -1,0 +1,33 @@
+#John: "Stingerquill voxmancer went to prepared 2". Its trigger is @each my upkeep, so it
+#fires every turn; the cap lives in the _PREPARE_ macro's if/then guard. prepared_cap only
+#reaches ONE upkeep, so it never actually proved the guard holds on a second firing - this
+#does. Two of the controller's upkeeps, count must still be exactly 1.
+#Opponent gets a land-only library so nothing attacks and the 1/2 survives.
+[INIT]
+untap
+[PLAYER1]
+inplay:735014
+library:Mountain,Mountain,Mountain,Mountain,Mountain,Mountain
+life:20
+[PLAYER2]
+library:Forest,Forest,Forest,Forest,Forest,Forest
+life:20
+[DO]
+next
+eot
+eot
+next
+
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:735014
+counter:735014=Prepared:1
+hand:*
+library:*,*,*,*,*
+life:20
+[PLAYER2]
+hand:*
+library:*,*,*,*,*
+life:20
+[END]

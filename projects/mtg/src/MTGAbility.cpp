@@ -2587,6 +2587,11 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         s.append(splitName[2]);
         //we erase the name section from the string to avoid 
         //accidently building an mtg ability with the text meant for menuText.
+        //Removing "name(...) " leaves the rest of the line starting with a space, and the
+        //keyword tests below are prefix matches (find(kw) == 0). "name(X) if C then E"
+        //therefore lost its if/then entirely and ran E unconditionally - which is why a
+        //capped prepare trigger still stacked a second Prepared counter.
+        trim(s);
     }
 
     TargetChooser * tc = NULL;
