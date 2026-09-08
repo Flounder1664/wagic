@@ -1,0 +1,25 @@
+#"Giant Ox crews Vehicles using its toughness rather than its power." It is a 0/6, so before
+#this it could never crew anything at all - and the card said nothing about that, no missing=
+#note, no warning badge. crewtoughness is read in the same two places as crewpower2.
+#Fell Flagship needs crew 3. A lone Giant Ox must be able to pay it on toughness 6, and stay
+#0/6 afterwards - the rider applies to the cost only, never to its real power.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Fell Flagship,Giant Ox
+life:20
+[PLAYER2]
+life:20
+[DO]
+Fell Flagship
+Giant Ox
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Fell Flagship,Giant Ox
+counter:Giant Ox=Crewed:1
+pt:giant ox=0/6
+life:20
+[PLAYER2]
+life:20
+[END]

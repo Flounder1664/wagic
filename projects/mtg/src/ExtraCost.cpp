@@ -846,7 +846,8 @@ int TapTargetCost::crewPowerPaid()
         //"crews/saddles as though its power were N greater" (the Pilot tokens). The rider
         //only ever applies to paying a crew/saddle cost, so it belongs here rather than in
         //the creature's real power - it must not make the Pilot a 3/1 in combat.
-        paid += t->power;
+        //"crews Vehicles using its toughness rather than its power" (Giant Ox, a 0/6).
+        paid += t->has(Constants::CREWTOUGHNESS) ? t->toughness : t->power;
         if (t->has(Constants::CREWPOWERTWO))
             paid += 2;
         else if (t->has(Constants::CREWPOWERONE))

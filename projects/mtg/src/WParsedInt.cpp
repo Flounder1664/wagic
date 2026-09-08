@@ -911,7 +911,7 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
             MTGCardInstance * crew = card->controller()->game->battlefield->cards[j];
             if (crew != card && crew->isCreature() && !crew->isTapped() && !crew->isPhased && !crew->has(Constants::CANTCREW))
             {
-                intValue += crew->power;
+                intValue += crew->has(Constants::CREWTOUGHNESS) ? crew->toughness : crew->power;
                 //Same rider TapTargetCost::crewPowerPaid applies. This value gates whether
                 //the crew/saddle ability is even offered, so without it here a lone Pilot
                 //could never reach the ability to pay for it.

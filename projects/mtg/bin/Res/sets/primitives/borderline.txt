@@ -42597,6 +42597,7 @@ toughness=3
 [/card]
 [card]
 name=Foriysian Brigade
+missing=can block an additional creature - no blocker-count keyword exists. Checked 2026-09-08: not one of the cards printed with "can block an additional creature" or "can block any number of creatures" implements it anywhere in this file.
 text=Foriysian Brigade can block an additional creature.
 mana={3}{W}
 type=Creature
@@ -45804,6 +45805,11 @@ type=Sorcery
 [card]
 name=Giant Ox
 text=Giant Ox crews Vehicles using its toughness rather than its power.
+#"Crews Vehicles using its toughness rather than its power." A 0/6 that could never crew
+#anything before. crewtoughness is read in the same two places as crewpower2: the crew/saddle
+#payment total (TapTargetCost::crewPowerPaid) and the gate that decides whether the ability
+#is offered at all (WParsedInt crewtotalpower).
+abilities=crewtoughness
 mana={1}{W}
 type=Creature
 subtype=Ox
@@ -57081,6 +57087,7 @@ toughness=2
 [/card]
 [card]
 name=Imperiosaur
+missing="spend only mana produced by basic lands" is not enforced - there is no per-source mana restriction (see wagic issue #24, the produce-then-use mana model).
 text=Spend only mana produced by basic lands to cast Imperiosaur.
 mana={2}{G}{G}
 type=Creature
@@ -57175,6 +57182,7 @@ type=Instant
 [/card]
 [card]
 name=Imposter Mech
+missing=the enter-as-a-copy replacement is not written, so it enters as a plain 0/0 artifact and dies.
 text=You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types. -- Crew 3
 mana={1}{U}
 type=Artifact
@@ -66244,6 +66252,7 @@ toughness=2
 [/card]
 [card]
 name=Legion Loyalty
+missing=grants myriad, which is not implemented; the card does nothing at all.
 text=Creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 mana={6}{W}{W}
 type=Enchantment
@@ -70934,6 +70943,7 @@ type=Artifact
 [/card]
 [card]
 name=Mardu Outrider
+missing=the additional cost "discard a card" is not written, so the creature is cast for its mana alone.
 text=As an additional cost to cast this spell, discard a card.
 mana={1}{B}{B}{D(other *|myhand)}
 type=Creature
@@ -78041,6 +78051,7 @@ type=Land
 [/card]
 [card]
 name=Night Market Guard
+missing=can block an additional creature each combat - no blocker-count keyword exists (see Foriysian Brigade).
 text=Night Market Guard can block an additional creature each combat.
 mana={3}
 type=Artifact Creature
@@ -82733,6 +82744,7 @@ toughness=3
 [/card]
 [card]
 name=Palace Guard
+missing=can block any number of creatures - no blocker-count keyword exists (see Foriysian Brigade).
 text=Palace Guard can block any number of creatures.
 mana={2}{W}
 type=Creature
@@ -108448,6 +108460,7 @@ toughness=1
 [/card]
 [card]
 name=Spike-Tailed Ceratops
+missing=can block an additional creature each combat - no blocker-count keyword exists (see Foriysian Brigade).
 text=Spike-Tailed Ceratops can block an additional creature each combat.
 mana={4}{G}
 type=Creature
@@ -128414,6 +128427,7 @@ subtype=Class
 [/card]
 [card]
 name=Warlord's Elite
+missing=the additional cost "tap two untapped artifacts, creatures and/or lands you control" is not written, so the creature is cast for its mana alone.
 text=As an additional cost to cast this spell, tap two untapped artifacts, creatures, and/or lands you control.
 mana={2}{W}{T(*[artifact;creature;land]|mybattlefield)}{T(*[artifact;creature;land]|mybattlefield)}
 type=Creature
@@ -131551,6 +131565,7 @@ toughness=1
 [/card]
 [card]
 name=Wyrm's Crossing Patrol
+missing=myriad is not implemented; the card does nothing at all.
 text=Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 mana={W}
 type=Creature
@@ -139527,6 +139542,7 @@ toughness=3
 [card]
 name=Smoke Teller
 grade=borderline
+missing=the {1}{U} look-at-a-face-down-creature ability is not written; the card does nothing.
 text={1}{U}: Look at target face-down creature. (Face-down permanents are not modelled; the look ability is omitted.)
 mana={1}{G}
 type=Creature

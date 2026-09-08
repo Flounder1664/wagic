@@ -276,7 +276,8 @@ const char* Constants::MTGBasicAbilities[] = {
     "noprevention", //Damage dealt BY this card can't be prevented
     "nopreventionall", //While this permanent is on the battlefield, no damage can be prevented at all
     "crewpower1", //Crews and saddles as though its power were 1 greater
-    "crewpower2" //Crews and saddles as though its power were 2 greater
+    "crewpower2", //Crews and saddles as though its power were 2 greater
+    "crewtoughness" //Crews and saddles using its toughness rather than its power
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;
