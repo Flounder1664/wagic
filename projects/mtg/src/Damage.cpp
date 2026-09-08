@@ -66,7 +66,37 @@ int Damage::resolve()
     //reserved for culmulitive absorb ability coding
 
     //prevent next damage-----------------------------
-    if (target->preventable > 0)
+    //"Damage can't be prevented" has to be honoured HERE as well as in
+    //ReplacementEffects. prevent:N (AADamagePrevent) does not go through a replacement
+    //effect at all - it just adds to Damageable::preventable, which this block spends - so
+    //nopreventionall guarded only half of the prevention in the game. Two scopes, matching
+    //ReplacementEffects.cpp: the damage this source deals (noprevention), and a permanent
+    //switching prevention off for everyone while it is in play (nopreventionall).
+    bool unpreventable = false;
+    if (source && source->has(Constants::NOPREVENTION))
+        unpreventable = true;
+    if (!unpreventable && source)
+    {
+        GameObserver * g = source->getObserver();
+        if (g)
+        {
+            for (int i = 0; i < 2 && !unpreventable; ++i)
+            {
+                MTGGameZone * z = g->players[i]->game->battlefield;
+                for (int j = 0; j < z->nb_cards; ++j)
+                    if (z->cards[j]->has(Constants::NOPREVENTIONALL))
+                    {
+                        unpreventable = true;
+                        break;
+                    }
+            }
+        }
+    }
+    if (unpreventable)
+    {
+        //leave the shield alone: it was never spent, so it still stands afterwards
+    }
+    else if (target->preventable > 0)
     {
         int preventing = MIN(target->preventable, damage);
         damage -= preventing;

@@ -1,0 +1,33 @@
+#"Damage can't be prevented this turn" is a GLOBAL effect and was written as
+#abilities=noprevention, which only ever covered the card's OWN damage. It now also puts out
+#an Emblem token carrying nopreventionall, which ReplacementEffects.cpp:36 honours for every
+#source while it is on the battlefield.
+#P2 gets a 3-point prevention shield. Skullcrack is aimed at ME, so it creates the emblem
+#without touching that shield (P1 20->17). Then LAVA AXE - a plain source with no
+#noprevention of its own - must get all 5 through: P2 20->15. Without the emblem the shield
+#would eat 3 and P2 would be on 18.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Healing Salve,Skullcrack,Lava Axe
+manapool:{W}{5}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Healing Salve
+choice 1
+p2
+Skullcrack
+p1
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:*
+graveyard:*,*,*
+life:17
+[PLAYER2]
+life:15
+[END]

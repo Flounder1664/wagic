@@ -415,6 +415,14 @@
 # and a macro can only supply the part after the colon.
 #AUTO_DEFINE _PREPARE_ if compare(hascntprepared)~lessthan~1 then counter(0/0,1,Prepared)
 
+# "Damage can't be prevented this turn" - a turn-long GLOBAL effect cast from a spell.
+# ReplacementEffects.cpp:36 switches prevention off while any battlefield permanent has
+# nopreventionall, so the effect is carried by an Emblem token that exiles itself at end of
+# turn. Emblem + shroud + indestructible + notrigger + unearth is the shape Insult // Injury
+# already uses for its own turn-long emblem; unearth is what removes it at end of turn.
+# noprevention on the card itself only ever covered that card's OWN damage.
+#AUTO_DEFINE _NOPREVENT_ token(No Prevention Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nopreventionall)
+
 # Speed (DFT) - "Start your engines!" sets your speed to 1 if you have none; thereafter it
 # rises by one the FIRST time each turn an opponent loses life, capping at max speed 4.
 # speedCount is a per-player counter added to the engine 2026-09-05 (Player.h), read as
