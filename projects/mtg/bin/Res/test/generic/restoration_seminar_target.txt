@@ -1,0 +1,25 @@
+#John: Restoration Seminar "allowed me to target Farsight Ritual". Its oracle is "return
+#target nonland PERMANENT card", but the target line said *[-land], which admits instants
+#and sorceries. With only a sorcery in the graveyard the spell must find nothing to target,
+#so it stays in hand and the mana is unspent.
+[INIT]
+firstmain
+[PLAYER1]
+hand:707057
+graveyard:Lava Axe
+manapool:{5}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707057
+[ASSERT]
+firstmain
+[PLAYER1]
+hand:707057
+graveyard:Lava Axe
+manapool:{5}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[END]

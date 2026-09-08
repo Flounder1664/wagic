@@ -1,0 +1,20 @@
+#John: "Emeritus of truce did not create the inkling". The ETB was listed under missing=
+#and never authored. Casting it must put a 2/1 flying Inkling alongside it.
+[INIT]
+firstmain
+[PLAYER1]
+hand:707020
+manapool:{1}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707020
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:707020,Inkling
+life:20
+[PLAYER2]
+life:20
+[END]

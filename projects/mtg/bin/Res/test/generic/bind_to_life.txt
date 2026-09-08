@@ -1,0 +1,25 @@
+#John: Bind to Life consumed the mana and did nothing. Vastlands Scavenger enters prepared;
+#its half is "mill seven, then put a creature card from among them onto the battlefield".
+#Only the mill is written. Seven cards must leave the library for the graveyard.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Vastlands Scavenger // Bind to Life
+library:Grizzly Bears,Mountain,Mountain,Mountain,Mountain,Mountain,Mountain,Mountain,Mountain
+manapool:{4}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Vastlands Scavenger // Bind to Life
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Vastlands Scavenger // Bind to Life
+library:*,*
+graveyard:*,*,*,*,*,*,*
+counter:vastlands scavenger // bind to life=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

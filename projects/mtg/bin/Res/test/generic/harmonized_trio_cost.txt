@@ -1,0 +1,22 @@
+#Harmonized Trio's ability had NO cost beyond tapping itself - John spotted the missing
+#"tap two other untapped creatures you control". crew is the engine's tap-other-creatures
+#cost. With only the Trio and ONE other creature the cost cannot be paid, so it must stay
+#unprepared; the discriminator is that no Prepared counter appears.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Harmonized Trio // Brainstorm,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Harmonized Trio // Brainstorm
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Harmonized Trio // Brainstorm,Raging Goblin
+counter:harmonized trio // brainstorm=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#Regression for a bug of my own making: _SPEEDUP_ was on all five speed cards, and
+#turnlimited is per-ABILITY - so two speed cards on the battlefield each fired once and
+#a single life loss raised speed TWICE. The rule now lives on the tracker token, of which
+#there is only ever one, so two speed cards must still give exactly one increment.
+#Walking Sarcophagus and Nesting Bot are both out; the Goblin connects once; speed = 2.
+[INIT]
+combatattackers
+[PLAYER1]
+inplay:Walking Sarcophagus,Nesting Bot,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Raging Goblin
+next
+next
+[ASSERT]
+combatdamage
+[PLAYER1]
+inplay:Walking Sarcophagus,Nesting Bot,Raging Goblin,Start Your Engines
+counter:start your engines=Speed:2
+life:20
+[PLAYER2]
+life:19
+[END]

@@ -8606,7 +8606,7 @@ abilities=firststrike
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@movedTo(*|mystack) restriction{compare(pstormcount)~equalto~3}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@movedTo(*|mystack) restriction{compare(pstormcount)~equalto~3}:name(Becomes prepared) _PREPARE_
 auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && damage:3 target(anytarget) asSorcery
 missing=the third-spell trigger uses compare(pstormcount)~equalto~3, a form not attested elsewhere - pstormcount is otherwise only used as a VALUE. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={1}{R}
@@ -8623,7 +8623,7 @@ abilities=flying
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && draw:3 controller asSorcery
 missing=ward {2} - there is no ward keyword in this engine. The attack trigger (exile eight cards from your graveyard to re-prepare) is not written. Ancestral Recall targets a player; here it always draws for you. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={3}{U}{U}
@@ -8639,8 +8639,12 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
+#2026-09-06: John reported no Inkling. The ETB and the re-prepare were both listed under
+#missing= and simply never authored - the card only ever had its back-face ability.
+auto=token(Inkling)
+auto=@each my end restriction{type(creature|opponentBattlefield)~morethan~type(creature|myBattlefield)}:name(Becomes prepared) _PREPARE_
 auto={W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Swords to Plowshares) counter(0/0,-1,Prepared) all(this) && moveto(exile) target(creature) && dynamicability<!mytgt powerlifegain targetcontroller!> asSorcery
-missing=the ETB (target player creates an Inkling token, then re-prepare if an opponent controls more creatures than you) is not written, so this creature never becomes prepared on its own. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+missing=the Inkling is created by YOU rather than by a target player - a second target on a different axis from the back face's is not expressible here. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={1}{W}{W}
 type=Creature
 subtype=Cat Cleric
@@ -8654,7 +8658,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={1}{B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Demonic Tutor) counter(0/0,-1,Prepared) all(this) && name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend revealend asSorcery
 missing=the end-step re-prepare (two or more creatures died this turn) is not written - nothing counts creature deaths per turn. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={3}{B}
@@ -8671,7 +8675,7 @@ grade=borderline
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 auto=@each my upkeep:name(Surveil 1) _SURVEIL1_
-auto=@each my upkeep restriction{type(creature|mygraveyard)~morethan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep restriction{type(creature|mygraveyard)~morethan~2}:name(Becomes prepared) _PREPARE_
 auto={B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Reanimate) counter(0/0,-1,Prepared) all(this) && moveTo(myBattlefield) target(creature|graveyard) && life:-manacost controller asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={2}{B}
@@ -8687,9 +8691,21 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto={T}:name(Becomes prepared) counter(0/0,1,Prepared)
-auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Brainstorm) counter(0/0,-1,Prepared) all(this) && draw:3 controller && moveTo(myLibrary) target(<2>*|myhand) asSorcery
-missing=the activation should also tap two other untapped creatures you control; only the self-tap is charged. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+#"{T(...)}" repeated per creature is the COUNT-based tap cost - Cryptbreaker taps three
+#Zombies exactly this way, Opposition and Glare of Subdual tap one. That is the printed cost
+#here: tap this creature and two OTHER untapped creatures you control. My first attempt used
+#crew2, which thresholds on total POWER and would have accepted a single 2/2.
+auto={T}{T(other creature|myBattlefield)}{T(other creature|myBattlefield)}:name(Becomes prepared) _PREPARE_
+#John: "forces the discard before the draw. then drew too many cards". Re-inlining
+#Brainstorm's body as draw:3 && moveTo(myLibrary) target(<2>*|myhand) cannot work in an
+#ACTIVATED ability: its targets are chosen at activation, so the two cards came out of the
+#pre-draw hand, and the multi-target made the chained draw run once per target. The real
+#Brainstorm gets this right only because it is a spell with two separate auto= lines.
+#So cast the real card instead - the back face IS Brainstorm, and castcard(copied) resolves
+#a genuine copy with its own correct sequencing. Bonus: it goes on the stack, so this one is
+#no longer subject to the "performed rather than cast" caveat the other prepared cards carry.
+auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Brainstorm) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:brainstorm:!) asSorcery
+missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={U}
 type=Creature
 subtype=Merfolk Bard Wizard
@@ -8768,7 +8784,7 @@ abilities=vigilance
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my combatattackers restriction{type(creature[attacking]|mybattlefield)~morethan~1}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my combatattackers restriction{type(creature[attacking]|mybattlefield)~morethan~1}:name(Becomes prepared) _PREPARE_
 auto={3}{W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Replenish) counter(0/0,-1,Prepared) all(this) && moveTo(mybattlefield) all(enchantment|mygraveyard) asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={2}{W}
@@ -8784,8 +8800,8 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my upkeep restriction{compare(phandcount)~lessthan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
-auto=@each my upkeep restriction{compare(ohandcount)~lessthan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep restriction{compare(phandcount)~lessthan~2}:name(Becomes prepared) _PREPARE_
+auto=@each my upkeep restriction{compare(ohandcount)~lessthan~2}:name(Becomes prepared) _PREPARE_
 auto={2}{R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Wheel of Fortune) counter(0/0,-1,Prepared) all(this) && reject all(*|hand) && all(player) draw:7 asSorcery
 missing="a player" is written as two upkeep triggers, one per player, so if BOTH are on one or fewer cards it prepares twice. -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 mana={2}{R}
@@ -8832,7 +8848,7 @@ abilities=haste
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={1}{R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Rocket Volley) counter(0/0,-1,Prepared) all(this) && destroy target(land[-basic]) asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Haste -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -8850,9 +8866,9 @@ abilities=deathtouch
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
-auto={4}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Bind to Life) counter(0/0,-1,Prepared) all(this) && mill:7 controller asSorcery
-missing=the back face should then put a creature card from among the milled seven onto the battlefield; choosing from among just-milled cards has no form here, so only the mill is done -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+auto=_PREPARE_
+auto={4}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Bind to Life) counter(0/0,-1,Prepared) all(this) && all(*[zpos<=7]|mylibrary) moveto(mygraveyard) asSorcery
+missing=the back face should then put a creature card from among the milled seven onto the battlefield; choosing from among just-milled cards has no form here, so only the mill is done. The mill itself is written as an explicit top-7 move: mill:N does nothing inside a chained activated ability (measured 2026-09-06 - the ability fired and spent the Prepared counter, and no card moved) -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={1}{G}{G}
 type=Creature
@@ -8868,7 +8884,7 @@ abilities=flash,flying,vigilance
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - All Aboard) counter(0/0,-1,Prepared) all(this) && moveTo(exile) target(creature[-pilot]|myBattlefield) and!( moveTo(ownerBattlefield) )! asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Flash -- Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -8885,7 +8901,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my upkeep restriction{compare(hascntprepared)~lessthan~1}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep:name(Becomes prepared) _PREPARE_
 auto={B/R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Vicious Verse) counter(0/0,-1,Prepared) all(this) && damage:1 target(opponent) asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -8902,7 +8918,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my upkeep restriction{compare(hascntprepared)~lessthan~1}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep:name(Becomes prepared) _PREPARE_
 auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && token(Heartwood,Artifact,0/0,red green,newability[{T}:Add{R}],newability[{T}:Add{G}]) asSorcery
 missing=the Heartwood token is given both mana abilities as separate options rather than one "add {R} or {G}" choice -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -8919,7 +8935,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my upkeep restriction{compare(hascntprepared)~lessthan~1}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep:name(Becomes prepared) _PREPARE_
 auto={2}:name(Card to bottom of library) bottomoflibrary target(*|mygraveyard)
 auto={U/B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Omit Variables) counter(0/0,-1,Prepared) all(this) && mill:3 controller asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
@@ -8937,7 +8953,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto=lord(creature[counter{1/1}]|myBattlefield) vigilance
 auto={G/W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Seed Suture) counter(0/0,-1,Prepared) all(this) && counter(1/1) target(creature) && life:1 controller asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
@@ -8955,7 +8971,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(Cadet,Creature Wizard Soldier,2/2) && _SURVEIL1_ asSorcery
 missing=the front face's "whenever you scry or surveil, creatures you control get +1/+0 until end of turn, once each turn" is not written - there is no scry-or-surveil trigger -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=This creature enters prepared. -- Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
@@ -9023,7 +9039,7 @@ abilities=flash,flying
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@combat(attacking) source(this):name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@combat(attacking) source(this):name(Becomes prepared) _PREPARE_
 auto={1}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Corvid Squall) counter(0/0,-1,Prepared) all(this) && token(Storm Crow,Creature Bird,1/2,blue,flying) asSorcery
 missing=the back face conjures a card named Storm Crow, an Arena-only action; a Storm Crow token is created instead. Its storm keyword is not written -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Flash -- Flying -- Whenever this creature attacks, it becomes prepared.
@@ -9041,7 +9057,7 @@ abilities=flying
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={3}{U}{R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Maestro's Gift) counter(0/0,-1,Prepared) all(this) && target(creature|myBattlefield) clone and!( transforms((,haste)) ueot )! asSorcery
 missing=the second prepare trigger (creature tokens you control dealing combat damage to a player) is not written -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Flying -- When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -9059,7 +9075,7 @@ abilities=firststrike
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my upkeep restriction{type(*[artifact;creature]|mygraveyard)~morethan~2}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@each my upkeep restriction{type(*[artifact;creature]|mygraveyard)~morethan~2}:name(Becomes prepared) _PREPARE_
 auto={2}{R}{W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Restore Relic) counter(0/0,-1,Prepared) all(this) && target(*[artifact;creature]|myGraveyard) clone and!( moveTo(myExile) )! asSorcery
 missing=the real card exiles the graveyard card and copies it; here the copy is made and the original is exiled afterwards, which is the same board state by a different route -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=First strike -- At the beginning of your upkeep, if there are three or more artifact and/or creature cards in your graveyard, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -9077,7 +9093,7 @@ abilities=reach
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@combatdamaged(player) from(creature|myBattlefield):name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@combatdamaged(player) from(creature|myBattlefield):name(Becomes prepared) _PREPARE_
 auto={X}{G}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Run the Play) counter(0/0,-1,Prepared) all(this) && counter(1/1) target(<upto:X>creature) && draw:1 controller asSorcery
 missing=the flying until end of turn on the countered creatures is not written - a pump carrying a duration onto an X-sized target set is not attested -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Reach -- Whenever one or more creatures you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
@@ -9094,7 +9110,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={3}{G}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ranger's Merit) counter(0/0,-1,Prepared) all(this) && all(creature[bear]|myBattlefield) counter(1/1) asSorcery
 missing=the trample until end of turn is not written, and the second prepare trigger conjures a Bear Cub - an Arena-only action - so the creature prepares only once, on entry -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=This creature enters prepared. -- Whenever you cast a spell that isn't from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
@@ -9111,7 +9127,7 @@ grade=borderline
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto=draw:2 controller && ability$!name(Discard two cards) target(<2>*|myhand) reject!$ controller
 auto={X}{X}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Oracle's Gift) counter(0/0,-1,Prepared) all(this) && create(Fractal:creature fractal:0/0:green blue) && all(creature[fractal]|myBattlefield) counter(1/1,X) asSorcery
 missing=the real card makes X Fractals and puts X counters on each; one Fractal is made and X counters go on every Fractal you control -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
@@ -9128,15 +9144,21 @@ grade=borderline
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#The spell's own trip to exile is done by abilities=exiledeath alone (PutInGraveyard::resolve,
+#ActionStack.cpp:591 diverts it), NOT by an auto=moveto(myexile). That auto was redundant on
+#the untargeted Lessons and actively wrong on the targeted ones: with a card-level target=
+#line every auto resolves against the TARGET, so it exiled the creature or graveyard card the
+#spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
 #REVIEW-V The self-exile half is verified on Germination Practicum
 #(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
 #not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
 #suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
-target=*[-land]|myGraveyard
+#John could target Farsight Ritual, a sorcery. "Nonland permanent card" is not *[-land] -
+#that admits instants and sorceries too - it is the explicit permanent-type list.
+target=*[artifact;battle;creature;enchantment;planeswalker]|myGraveyard
 auto=moveTo(myBattlefield)
-auto=moveto(myexile)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
 missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Return target nonland permanent card from your graveyard to the battlefield. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
@@ -9150,6 +9172,11 @@ grade=borderline
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#The spell's own trip to exile is done by abilities=exiledeath alone (PutInGraveyard::resolve,
+#ActionStack.cpp:591 diverts it), NOT by an auto=moveto(myexile). That auto was redundant on
+#the untargeted Lessons and actively wrong on the targeted ones: with a card-level target=
+#line every auto resolves against the TARGET, so it exiled the creature or graveyard card the
+#spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
 #REVIEW-V The self-exile half is verified on Germination Practicum
@@ -9159,7 +9186,6 @@ abilities=exiledeath
 target=player
 auto=draw:2
 auto=life:-2
-auto=moveto(myexile)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
 missing=the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Target player draws two cards and loses 2 life. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
@@ -9173,6 +9199,11 @@ grade=borderline
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#The spell's own trip to exile is done by abilities=exiledeath alone (PutInGraveyard::resolve,
+#ActionStack.cpp:591 diverts it), NOT by an auto=moveto(myexile). That auto was redundant on
+#the untargeted Lessons and actively wrong on the targeted ones: with a card-level target=
+#line every auto resolves against the TARGET, so it exiled the creature or graveyard card the
+#spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
 #REVIEW-V The self-exile half is verified on Germination Practicum
@@ -9181,7 +9212,6 @@ abilities=exiledeath
 #suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
 target=creature|mybattlefield
 auto=clone
-auto=moveto(myexile)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
 missing=the token should be created by a TARGET PLAYER, not always by you; a second target on a different axis is not expressible here -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Target player creates a token that's a copy of target creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
@@ -9195,16 +9225,38 @@ grade=borderline
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#The spell's own trip to exile is done by abilities=exiledeath alone (PutInGraveyard::resolve,
+#ActionStack.cpp:591 diverts it), NOT by an auto=moveto(myexile). That auto was redundant on
+#the untargeted Lessons and actively wrong on the targeted ones: with a card-level target=
+#line every auto resolves against the TARGET, so it exiled the creature or graveyard card the
+#spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
 #REVIEW-V The self-exile half is verified on Germination Practicum
 #(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
 #not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
 #suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
+#John: "exiled too much and didn't make them free". Both true. zpos<=3 took three cards
+#where "until total mana value 4 or greater" is usually two, and canplayfromexile has no
+#free variant - it only makes a card castable at its printed cost. Rebuilt on the reveal
+#John: "exiled too much and didn't make them free". The first half is fixed - zpos<=2, since
+#"until total mana value 4 or greater" is two cards at a typical curve, not the three that
+#zpos<=3 took. The second half is NOT fixed, and four attempts are recorded here so nobody
+#burns the same afternoon on it again:
+#  - Chaos Wand's reveal:/optionone/afterrevealed shape, which is exactly this effect on a
+#    real card, SEGFAULTS for this one inside MTGRevealingCards::Render -> CardDisplay ->
+#    CardGui::Render (a null card there is now guarded; the second crash is GetWFont).
+#  - moveto(myexile) and!( transforms((,newability[choice ... activate castcard(normal)]...)) )!
+#    runs, and costs no mana, but puts an instant or sorcery cast that way ONTO THE
+#    BATTLEFIELD instead of resolving it - Lava Axe sat in play and dealt no damage.
+#  - becomes(marker) + a top-level all(marker|myexile) activate castcard(normal), the exact
+#    form Chaos Wand's afterrevealed uses, does the same thing outside the reveal machinery.
+#  - if cantargetcard(*[instant;sorcery]|*) then ... else ... to split the two cases crashes.
+#So canplayfromexile stands: the cards are playable from exile at their printed cost. That is
+#wrong about "without paying their mana costs" but right about everything else.
 auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) forever )!
-auto=moveto(myexile)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=the real card exiles from the top until total mana value 4 or more is exiled, and lets you cast those spells FOR FREE. Here the top three are exiled and made playable from exile at their normal cost - an exile-until-total-mana-value has no form, and canplayfromexile has no free variant -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
+missing=exile-until-total-mana-value has no form, so a flat TWO cards are exiled - the usual result of the real count. The exiled cards are playable from exile at their PRINTED COST rather than free; see the note above for the four forms tried and why each was rejected. -- the free copy is offered by an autoexile= trigger that the harness cannot drive, so only the self-exile half is verified
 text=Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={5}{R}{R}
 type=Sorcery
@@ -9216,6 +9268,11 @@ grade=borderline
 abilities=exiledeath
 #Paradigm, on the Arc Blade (suspend) template: the spell exiles itself instead of going to
 #the graveyard, and carries an autoexile= trigger that offers the free cast each first main.
+#The spell's own trip to exile is done by abilities=exiledeath alone (PutInGraveyard::resolve,
+#ActionStack.cpp:591 diverts it), NOT by an auto=moveto(myexile). That auto was redundant on
+#the untargeted Lessons and actively wrong on the targeted ones: with a card-level target=
+#line every auto resolves against the TARGET, so it exiled the creature or graveyard card the
+#spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
 #REVIEW-V The self-exile half IS verified (generic/paradigm_exile.txt): the body resolves and
@@ -9225,7 +9282,6 @@ abilities=exiledeath
 #uses of it, every suspend card included, so this is a harness gap rather than evidence the
 #line is wrong. Verify in game.
 auto=all(creature|mybattlefield) counter(1/1,2)
-auto=moveto(myexile)
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
 text=Put two +1/+1 counters on each creature you control. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={3}{G}{G}
@@ -9240,9 +9296,9 @@ abilities=vigilance
 #sorcery-speed ability gated on that counter which performs the spell's body and takes
 #the counter back off. The engine has every piece: counters as state, negative counters
 #to remove them, and a compare(hascnt...) restriction on an activated ability.
-auto=counter(0/0,1,Prepared)
+auto=_PREPARE_
 auto={1}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Regrowth) counter(0/0,-1,Prepared) all(this) && moveto(hand) target(*|myGraveyard) asSorcery
-auto=@combat(attacking) source(this) restriction{type(land|mybattlefield)~morethan~7}:name(Becomes prepared) counter(0/0,1,Prepared)
+auto=@combat(attacking) source(this) restriction{type(land|mybattlefield)~morethan~7}:name(Becomes prepared) _PREPARE_
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to. A prepared creature also shows its state as a Prepared counter rather than as a face-up back side.
 text=Vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Whenever this creature attacks, if you control eight or more lands, this creature becomes prepared.
 mana={2}{G}
@@ -133407,9 +133463,8 @@ toughness=5
 [card]
 name=Nesting Bot
 auto=_STARTENGINES_
-auto=_SPEEDUP_
 auto=this(variable{pspeed}>=4) 1/0
-auto=_DIES_token(Servo,artifact creature servo,1/1,colorless)
+auto=_DIES_token(Servo)
 missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
 text=Start your engines! -- When this creature dies, create a 1/1 colorless Servo artifact creature token. -- Max speed - This creature gets +1/+0.
 mana={W}
@@ -133419,11 +133474,55 @@ power=1
 toughness=1
 [/card]
 [card]
+name=Servo
+#Authored 2026-09-06. Nesting Bot used the INLINE form token(Servo,artifact creature
+#servo,1/1,colorless), which per project_token_images takes -source->getMTGId() and so has
+#no registered id and no art. The newer convention is token(Name) resolving to a registered
+#primitive. 2XM already registers four Servo ids WITH art, but they were dangling because
+#no Servo primitive existed anywhere - authoring it fixes those registrations too.
+grade=supported
+text=1/1 colorless Servo artifact creature token.
+type=Artifact Creature
+subtype=Servo
+power=1
+toughness=1
+[/card]
+[card]
+name=Start Your Engines
+#The physical speed tracker (PLST TDFT-14). A marker, not a real permanent to play with:
+#its only ability flips it to Max Speed, so it cannot be attacked with or blocked with. It
+#exists so a player can SEE their speed, which GuiStatic does not draw.
+grade=borderline
+backside=Max Speed
+#A Speed counter shows the level the way a Saga shows its chapter - without it the tracker
+#says "engines started" and nothing else. It enters with 1 and _SPEEDUP_ adds one per rise.
+auto=counter(0/0,1,Speed)
+#The climb and the flip BOTH live here rather than on every speed card. _SPEEDUP_ used to
+#sit on all five, and turnlimited is per-ability - so two speed cards on the battlefield
+#raised your speed TWICE per life loss. One tracker, one increment. It also keeps working
+#when the card that started your engines has left the battlefield.
+auto=@lifelostfoeof(player) turnlimited restriction{compare(pspeed)~morethan~0}:name(Speed up) alterspeed:1 controller && counter(0/0,1,Speed)
+#Flip on the counter LANDING, not at the next upkeep - John saw it wait a whole turn after
+#hitting 4, which is wrong: max speed is reached the moment the fourth increase happens.
+auto=@counteradded(0/0,1,Speed) from(this) restriction{compare(pspeed)~equalto~4}:name(Max speed) flip(backside)
+text=Start your engines! (Your speed increases the first time each turn an opponent loses life. It cannot go above 4.)
+#Emblem, not Artifact: a marker must not be attackable, blockable or sacrificeable.
+type=Emblem
+[/card]
+[card]
+name=Max Speed
+grade=borderline
+text=Max Speed (Your speed is 4.)
+type=Emblem
+[/card]
+[card]
 name=Perilous Snare
 auto=_STARTENGINES_
-auto=_SPEEDUP_
 auto=(blink)forsrc target(*[-land]|opponentbattlefield)
-auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - put a 1/1 counter) counter(1/1) target(creature,artifact[vehicle]|battlefield)
+#target(creature,artifact[vehicle]|battlefield) CRASHED the game on cast (null deref,
+#access violation reading 0x4C). A comma type-list with a bracketed subtype is not an
+#attested form anywhere in this file; "vehicle" is usable as a bare type.
+auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - put a 1/1 counter) counter(1/1) target(creature,vehicle|battlefield)
 missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
 text=Start your engines! -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield. -- Max speed - {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
 mana={2}{W}
@@ -133885,7 +133984,14 @@ toughness=2
 [card]
 name=Donatello's Technique
 grade=borderline
-other={U}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -133914,7 +134020,14 @@ type=Instant
 [card]
 name=Karai's Technique
 grade=borderline
-other={W}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -133929,7 +134042,14 @@ type=Sorcery
 [/card]
 [card]
 name=Leonardo's Technique
-other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -133944,7 +134064,14 @@ type=Sorcery
 [/card]
 [card]
 name=New Generation's Technique
-other={2}{G}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -133972,7 +134099,14 @@ type=Instant
 [/card]
 [card]
 name=Shredder's Technique
-other={B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -133987,7 +134121,14 @@ type=Sorcery
 [/card]
 [card]
 name=Splinter's Technique
-other={1}{B}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
+#Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
+#attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
+#sneak did nothing on these six (the three Instant Techniques were unaffected).
+#flash is the only timing lever here, so the NORMAL cost also becomes instant-speed:
+#a real deviation, and the reason this is worth revisiting if a cost-conditional
+#timing mechanism ever exists.
+abilities=flash
+
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -134000,6 +134141,21 @@ mana={3}{B}
 type=Sorcery
 [/card]
 [card]
+name=Ninja Turtle Spirit
+#John: the Last Ronin's tokens had no image and a negative id. The card used the INLINE
+#token(Name,Type,P/T,colour) form, which takes -source->getMTGId() - the creating card's own
+#id - so there is no registered id for art to be looked up by. Authored as a primitive,
+#registered in TMT at -1520200 (TMT's own ids stop at 1520195, and no other set uses 15202xx)
+#with the real ttmt #3 art, and the call switched to the by-name token(Ninja Turtle Spirit).
+grade=supported
+text=1/1 white Ninja Turtle Spirit creature token.
+type=Creature
+subtype=Ninja Turtle Spirit
+color=white
+power=1
+toughness=1
+[/card]
+[card]
 name=The Last Ronin's Technique
 grade=borderline
 other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
@@ -134009,7 +134165,7 @@ other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
 missing=Sneak's payment is now the H(...) extra cost - BounceTargetCost, "return a target to hand". The old note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable, and concluded the engine needed new support for a non-mana payment on an alternative cost. It did not: BounceTargetCost overrides only doPay() and inherits the UNGATED base canPay(), unlike Ninja. -- -- if the sneak cost was paid the tokens enter tapped and attacking; Sneak's bounce payment
-auto=token(Ninja Turtle Spirit,creature ninja turtle spirit,1/1,white)*3
+auto=token(Ninja Turtle Spirit)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
 type=Instant
@@ -137612,15 +137768,15 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
 auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && token(Ornithopter,Artifact Creature Thopter,0/2,,flying)
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) lord(artifact|mybattlefield) 1/1
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) damage:type:artifact[tapped]:mybattlefield target(creature,player)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - artifacts get +1/+1) lord(artifact|mybattlefield) 1/1
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing=Chapter II should let you TAP artifacts as part of the trigger;
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter. -- II - Tap any number of untapped artifacts you control. When you do, this Saga deals that much damage to any target. -- III - Artifact creatures you control get +1/+1.
 mana={1}{R}
@@ -137637,12 +137793,15 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 #chapter III three times (it made four Dragons before this). Chapter I is the exception:
 #it was a bare auto=, which fires on entry whichever chapter you pick, so its body moves
 #into mode I. Guards do the rest - "=2" cannot match a Saga that entered on 3.
-auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && damage:2 all(creature) && damage:2 opponent
+#"damage:2 opponent" chained after "all(creature)" inherits the creature scope and hits the
+#opponent's CREATURES a second time (John saw every creature take 2, then theirs take more).
+#all(opponent) is the attested form for damaging the player - see Boltwave.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && damage:2 all(creature) && damage:2 all(opponent)
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) create(Dragon:creature dragon:4/4:red:flying)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) may name(Discard then draw) target(<upto:2>*|myhand) reject and!( draw:2 controller )!
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - create a 4/4 Dragon) create(Dragon:creature dragon:4/4:red:flying)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing=Chapter II is "discard any number, draw that many"; the engine has no
 text=Read ahead (Not implemented.) -- I - This Saga deals 2 damage to each creature and each opponent. -- II - Discard any number of cards, then draw that many cards. (Approximated as up to two.) -- III - Create a 4/4 red Dragon creature token with flying.
 mana={2}{R}{R}
@@ -137655,17 +137814,26 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
-auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
+#John: "didn't get a 2nd lore token on its 2nd turn in play. It did on turn 3." The saga was
+#running a turn behind because chapter I never gave it a lore counter at all: this line is the
+#only read-ahead chapter I in the game with a target(...) in its chain, and a bare counter()
+#alongside a target lands on the TARGET - here the basic land being fetched. all(this) pins it
+#back on the saga, the same way the prepared cards pin their negative counter.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && target(land[basic]|myLibrary) moveTo(myBattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle])) oneshot )!
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(creature|mybattlefield) counter(1/1,type:land[basic]:mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
-missing=Chapter III now scales with a dynamic counter amount, though it counts
-text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control. (Fixed at five.)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) create(Saproling:creature saproling:1/1:green)
+#John saw five counters go on with five lands in play. type:land[basic]:mybattlefield counts
+#basic LANDS; Domain counts basic land TYPES. pbasiclandtypes is the engine's own domain value
+#(WParsedInt.cpp:930, mtg rules 205.4c) and ~50 cards already use it - Hiveheart Shaman has
+#this exact line, counter(1/1,pbasiclandtypes) target(creature|myBattlefield).
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain +1/+1 counters) counter(1/1,pbasiclandtypes) target(creature|myBattlefield)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
+missing=nothing known. Chapter III counts basic land types via pbasiclandtypes, which is the engine's own domain value.
+text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature gets +1/+1 counters equal to the number of basic land types among lands you control.
 mana={2}{G}
 type=Enchantment
 subtype=Saga
@@ -137676,15 +137844,15 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
 auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && draw:2 controller && draw:2 opponent
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(<upto:2>creature) counter(1/1)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - a +1/+1 counter on up to two) target(<upto:2>creature) counter(1/1)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
 mana={2}{W}
 type=Enchantment
@@ -137696,15 +137864,19 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
-auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield) && ability$!name(discard) target(<1>*|myhand) reject!$ opponent
+#Chapter I's lore counter needs all(this): any target(...) or notaTarget(...) anywhere on the
+#line captures a bare counter(), so the counter landed on whatever the chapter targeted and the
+#saga entered on lore 0, running a whole turn behind. Found on The Weatherseed Treaty
+#(generic/weatherseed_lore2.txt); these are the other chapter I lines with the same shape.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && may name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield) && ability$!name(discard) target(<1>*|myhand) reject!$ opponent
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) target(creature|mygraveyard) moveTo(ownerhand)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - opponent sacrifices a creature) ability$! sacrifice notaTarget(creature|mybattlefield) !$ opponent
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing=Chapter III's "may sacrifice a creature, otherwise lose life" choice
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You may sacrifice a creature. If you do, each opponent discards a card. -- II - Return target creature card from your graveyard to your hand. -- III - Target opponent sacrifices a creature.
 mana={2}{B}
@@ -137717,16 +137889,16 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
 auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore)
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 missing=Chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for --
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) mill:4 target
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) mill:4 target
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - exile a spell from their graveyard) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from a graveyard.
 mana={1}{U}
 type=Enchantment
@@ -137738,15 +137910,19 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
-auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && target(*[-land]) phaseout
+#Chapter I's lore counter needs all(this): any target(...) or notaTarget(...) anywhere on the
+#line captures a bare counter(), so the counter landed on whatever the chapter targeted and the
+#saga entered on lore 0, running a whole turn behind. Found on The Weatherseed Treaty
+#(generic/weatherseed_lore2.txt); these are the other chapter I lines with the same shape.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && target(*[-land]) phaseout
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) destroy all(creature)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) target(*[-land]) phaseout
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - destroy all creatures) destroy all(creature)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing="can't phase in while you control this Saga", and chapter III's
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I, II - Another target nonland permanent phases out. -- III - Destroy all creatures.
 mana={2}{U}{U}
@@ -137759,15 +137935,19 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
-auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ opponent
+#Chapter I's lore counter needs all(this): any target(...) or notaTarget(...) anywhere on the
+#line captures a bare counter(), so the counter landed on whatever the chapter targeted and the
+#saga entered on lore 0, running a whole turn behind. Found on The Weatherseed Treaty
+#(generic/weatherseed_lore2.txt); these are the other chapter I lines with the same shape.
+auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && ability$!name(discard) target(<1>*[creature;planeswalker]|myhand) reject!$ opponent
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) target(creature|graveyard) moveTo(mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - reanimate a creature) target(creature|graveyard) moveTo(mybattlefield)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 missing=Mode one should let YOU choose the discarded card.
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
 mana={3}{B}{B}
@@ -137780,15 +137960,15 @@ grade=borderline
 auto=@each my firstmain:counter(0/0,1,Lore)
 #Read ahead. Measured 2026-09-05: @counteradded(0/0,1,Lore) fires once PER COUNTER when
 #several land at once, so the modes only add counters and the existing chapter triggers
-#do the rest - with "once" to stop the repeats, and the =N guards keeping skipped
+#do the rest - with "turnlimited" to stop the repeats, and the =N guards keeping skipped
 #chapters skipped. Chapter I moves into mode I because a bare auto= fires on entry
 #whichever chapter you pick. Pattern proved on The Elder Dragon War (read_ahead_*.txt).
 auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && _SCRY4_
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 missing=Chapter II puts a planeswalker from hand onto the battlefield; planeswalkers are -- the chapter I reveal-a-planeswalker rider.
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
-auto=@counteradded(0/0,1,Lore) from(this) once:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - your creatures get +2/+2) all(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Scry 4. -- II - You may put a planeswalker card from your hand onto the battlefield. -- III - Creatures you control get +2/+2 until end of turn.
 mana={3}{W}{W}
 type=Enchantment
@@ -139048,7 +139228,6 @@ toughness=3
 name=Streaking Oilgorger
 abilities=flying,haste
 auto=_STARTENGINES_
-auto=_SPEEDUP_
 auto=this(variable{pspeed}>=4) lifelink
 grade=borderline
 missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
@@ -139063,7 +139242,6 @@ toughness=3
 name=Walking Sarcophagus
 grade=borderline
 auto=_STARTENGINES_
-auto=_SPEEDUP_
 auto=this(variable{pspeed}>=4) 1/2
 text=Start your engines! -- Max speed - This creature gets +1/+2.
 mana={2}
@@ -139076,7 +139254,6 @@ toughness=1
 name=Endrider Catalyzer
 grade=borderline
 auto=_STARTENGINES_
-auto=_SPEEDUP_
 auto={T} restriction{compare(pspeed)~equalto~4}:Add{R}{R}
 missing=the speed climb itself is untestable in the harness - max speed needs four turns of an opponent losing life - so only the GATE is proved (the bonus is correctly off at speed 1, and a probe lowering the gate to pspeed>=1 turned it on).
 text=Start your engines! -- Max speed - {T}: Add {R}{R}. 
@@ -140830,7 +141007,7 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=target(<2>plains[basic]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile forever])) forever )! && life:2 controller && shuffle
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) target(<upto:1>*[counter{0/0.1.PerpetualPT}]|myexile) moveto(hand)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exiled-cards-put-into-hand chapters approximated, chapter IV attack-pump not implemented
 missing=chapter IV (attack trigger pumping creatures per Plains controlled) not implemented

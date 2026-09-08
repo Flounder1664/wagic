@@ -1,0 +1,26 @@
+#John: at The Weatherseed Treaty's chapter III "it added 5 which was correct for the 5 lands
+#I had in play". The card is Domain - basic land TYPES, not basic lands - so three Forests, a
+#Mountain and an Island is 3, not 5. Chapter III now uses pbasiclandtypes, the engine's own
+#domain value (WParsedInt.cpp:930), the same one ~50 other Domain cards use.
+#
+#The saga's own chapter III trigger cannot be driven in this harness - a probe with the OLD
+#type:land[basic] form scores 0 counters here too, so the gap is the trigger, not the change.
+#What IS pinned is the value the change turns on: Matca Rioters is */* equal to domain, and
+#on this exact board it must read 3/3. Five basic lands, three types.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Matca Rioters,Forest,Forest,Forest,Mountain,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:*,*,*,*,*,*
+pt:matca rioters=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

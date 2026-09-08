@@ -1,0 +1,27 @@
+#John: Improvisation Capstone "exiled too much and didn't make them free". The first half is
+#what this pins: exactly TWO cards leave the library, not three. ("until total mana value 4
+#or greater" has no form; two is the usual result of the real count.) The Capstone itself
+#exiles via abilities=exiledeath, so exile ends up with three cards and the library with two.
+#The free-cast half is NOT fixed - the primitive's comment records the four forms tried.
+[INIT]
+firstmain
+[PLAYER1]
+hand:707032
+library:Grizzly Bears,Lava Axe,Forest,Forest
+manapool:{5}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707032
+[ASSERT]
+firstmain
+[PLAYER1]
+#Asserted as counts: a card seeded into library: by NAME gets a printing whose id does not
+#match the one an exile: line resolves that same name to, so identities cannot be compared.
+exile:*,*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,38 @@
+#John saw Love Song jump from lore I to III and never leave the battlefield, and Elder
+#Dragon War not leave either. Both carry "once" on their chapter triggers, which I added
+#to stop a read-ahead-to-III entry firing chapter III three times. If "once" is consumed
+#when the trigger FIRES rather than when its guard PASSES, the first lore counter burns it
+#and no later chapter can ever happen - which is exactly what those two symptoms look like.
+#Cast on chapter I (lore 1), pass a turn: firstmain adds lore 2 and the Bird must appear.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Love Song of Night and Day
+library:Mountain,Mountain,Mountain,Mountain
+manapool:{2}{W}
+life:20
+[PLAYER2]
+library:Forest,Forest,Forest,Forest
+life:20
+[DO]
+Love Song of Night and Day
+choice 0
+eot
+eot
+next
+next
+next
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+counter:love song of night and day=Lore:2
+hand:*,*,*
+library:*
+life:20
+[PLAYER2]
+hand:*,*,*
+library:*
+life:20
+[END]

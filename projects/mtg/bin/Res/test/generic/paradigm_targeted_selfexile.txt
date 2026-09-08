@@ -1,0 +1,28 @@
+#John: Echocasting Symposium "did create a copy but it put the original creature in the
+#graveyard". The Paradigm template ends with auto=moveto(myexile) to exile the SPELL, which
+#is right on Germination Practicum - it has no card-level target= line, so the auto applies
+#to the spell itself. Echocasting Symposium and Restoration Seminar DO have one, so that
+#same auto resolves against the TARGET and removes it from the battlefield instead.
+#Cast it on a Grizzly Bears: the Bears must survive, a copy must exist, and 707016 (the
+#Symposium itself) must be the thing in exile.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+hand:707016
+manapool:{4}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707016
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears,Grizzly Bears
+exile:707016
+life:20
+[PLAYER2]
+life:20
+[END]

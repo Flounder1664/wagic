@@ -1,0 +1,26 @@
+#John reported speed going to 1 when he dealt damage on a LATER turn - it should already
+#have been 1 from "Start your engines!" and gone to 2. Reported twice, same each time.
+#The Speed counter on the tracker makes the level observable, so this test can measure it.
+#Walking Sarcophagus starts the engines (speed 1, tracker enters with 1 Speed counter).
+#A Raging Goblin connecting is a life loss, so _SPEEDUP_ must take it to 2 - the same
+#shape as John's report, where he dealt damage and watched it go to 1 instead.
+[INIT]
+combatattackers
+[PLAYER1]
+inplay:Walking Sarcophagus,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Raging Goblin
+next
+next
+[ASSERT]
+combatdamage
+[PLAYER1]
+inplay:Walking Sarcophagus,Raging Goblin,Start Your Engines
+counter:start your engines=Speed:2
+life:20
+[PLAYER2]
+life:19
+[END]

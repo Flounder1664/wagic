@@ -1,0 +1,39 @@
+#John: The Weatherseed Treaty "didn't get a 2nd lore token on its 2nd turn in play. It did on
+#turn 3." Chapter I's lore counter was landing on the basic land it fetches, not on the saga -
+#a bare counter() next to a target(...) goes to the target - so the saga entered on lore 0 and
+#every chapter arrived a turn late. Cast on chapter I, pass one round: lore must read 2.
+[INIT]
+firstmain
+[PLAYER1]
+hand:574668
+library:Forest,Forest,Forest,Forest,Forest,Forest,Forest,Forest
+manapool:{2}{G}
+life:20
+[PLAYER2]
+library:Mountain,Mountain,Mountain,Mountain,Mountain,Mountain,Mountain,Mountain
+life:20
+[DO]
+574668
+choice 0
+Forest
+eot
+eot
+next
+next
+next
+
+[ASSERT]
+FIRSTMAIN
+#Zones are counts: passing the turn draws and plays lands for both players, and chapter I
+#has already fetched a Forest onto the battlefield.
+[PLAYER1]
+counter:574668=Lore:2
+inplay:*,*,*
+hand:*
+library:*,*,*,*,*,*
+life:20
+[PLAYER2]
+hand:*
+library:*,*,*,*,*,*,*
+life:20
+[END]

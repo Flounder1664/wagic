@@ -1,0 +1,25 @@
+#John: "The Last Ronin's Technique's tokens have no image and a negative ID." The card used
+#the inline token(Name,Type,P/T,colour) form, which takes -source->getMTGId(), so the tokens
+#had no registered id and no art could be found. Now token(Ninja Turtle Spirit) resolves by
+#name to a real registration in TMT (-1520200) carrying the ttmt #3 art.
+#Cast it for its normal {3}{W}: three 1/1 Spirits must appear.
+[INIT]
+firstmain
+[PLAYER1]
+hand:1520012
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+1520012
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Ninja Turtle Spirit,Ninja Turtle Spirit,Ninja Turtle Spirit
+pt:ninja turtle spirit=1/1
+graveyard:1520012
+life:20
+[PLAYER2]
+life:20
+[END]

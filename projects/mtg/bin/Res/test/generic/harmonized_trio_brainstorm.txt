@@ -1,0 +1,37 @@
+#John: the Brainstorm copy "forces the discard before the draw. then drew too many cards".
+#Re-inlining Brainstorm's body (draw:3 && moveTo(myLibrary) target(<2>*|myhand)) cannot work
+#in an ACTIVATED ability - its targets are chosen at activation, so the two cards came out of
+#the pre-draw hand, and the multi-target made the chained draw run once per target. The real
+#Brainstorm avoids that only because it is a spell with two separate auto= lines.
+#Now the ability casts the real card with castcard(copied named!:brainstorm:!).
+#counter: is assert-only - no test sets one in [INIT] - so the Trio is prepared the real way
+#first, by tapping itself and two others, then the {U} copy is activated.
+#What this proves: the copy is cast, exactly THREE cards are drawn (not six, and not two
+#taken from the pre-draw hand), and the Prepared counter is spent. It does NOT prove the
+#put-back: naming cards in [DO] cannot drive that prompt, and the STOCK Brainstorm fails an
+#identical test the same way, so that half is a harness limit shared with the base card.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:707031,Raging Goblin,Grizzly Bears
+library:Mirkwood Spider,Lava Axe,Forest,Forest,Island,Island
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707031
+Raging Goblin
+Grizzly Bears
+707031
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:707031,Raging Goblin,Grizzly Bears
+counter:707031=Prepared:0
+hand:*,*,*
+library:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,28 @@
+#Chapter I is "deals 2 damage to each creature and each opponent". John saw every creature
+#take 2 and then the OPPONENT'S creatures take more: "damage:2 opponent" chained after
+#"all(creature)" inherits the creature scope instead of hitting the player.
+#The opponent's Hill Giant is 3/3 - it SURVIVES 2 damage and DIES to 4, so it is the
+#discriminator. The opponent must be on 18, and the Giant must still be standing.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+hand:The Elder Dragon War
+manapool:{2}{R}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+The Elder Dragon War
+choice 0
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:The Elder Dragon War
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:18
+[END]

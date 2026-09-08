@@ -1,0 +1,23 @@
+#The other half of the target fix: a creature card in the graveyard IS a legal target and
+#must come back to the battlefield, with the Seminar itself exiled by abilities=exiledeath.
+[INIT]
+firstmain
+[PLAYER1]
+hand:707057
+graveyard:Grizzly Bears
+manapool:{5}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707057
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+exile:707057
+life:20
+[PLAYER2]
+life:20
+[END]

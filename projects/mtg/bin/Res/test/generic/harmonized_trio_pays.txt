@@ -1,0 +1,25 @@
+#The positive half: with the Trio and TWO other untapped creatures the cost CAN be paid,
+#so it becomes prepared and all three end up tapped. Paired with harmonized_trio_cost,
+#where one other creature is not enough. Together they prove the count, which the earlier
+#crew2 version could not - crew thresholds on total power, so a single 2/2 would have paid.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Harmonized Trio // Brainstorm,Raging Goblin,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Harmonized Trio // Brainstorm
+Raging Goblin
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Harmonized Trio // Brainstorm,Raging Goblin,Grizzly Bears
+counter:harmonized trio // brainstorm=Prepared:1
+tappedinplay:3
+life:20
+[PLAYER2]
+life:20
+[END]

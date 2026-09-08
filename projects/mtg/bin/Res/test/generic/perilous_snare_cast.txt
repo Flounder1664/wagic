@@ -1,0 +1,24 @@
+#Repro: John crashed casting Perilous Snare ({2}{W} artifact), one of the speed cards
+#edited 2026-09-06. Access violation reading 0x4C - a null dereference.
+#The Start Your Engines tracker token enters too, hence two permanents.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Perilous Snare
+manapool:{2}{W}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Perilous Snare
+Grizzly Bears
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Perilous Snare,Start Your Engines
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]

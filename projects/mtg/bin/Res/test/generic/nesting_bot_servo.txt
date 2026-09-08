@@ -1,0 +1,33 @@
+#John, second report: the Servo appeared with CMM art. token(Servo) asks getCardByName with
+#the SOURCE's set first, then falls through to an all-sets search - and DFT had no Servo, so
+#it took whichever set did. Registered one in DFT at -692084 with tdft #8 art, which makes
+#getCardByName's forcedSetId scan (MTGDeck.cpp:866) hit before the all-sets fallback.
+#The harness cannot check WHICH printing was used - it matches tokens by name, and an
+#inplay: line naming 2XM's Servo id passes just as happily - so this only proves the token
+#still appears. The set choice is verified by reading getCardByName, and in game.
+#
+#Nesting Bot's Servo had no image: it used the inline token(Servo,artifact creature servo,
+#1/1,colorless) form, which takes -source->getMTGId() and so has no registered id to look
+#art up by. Switched to token(Servo), which resolves by NAME to a registered primitive -
+#2XM already registers four Servo ids and all four have art. The primitive itself did not
+#exist anywhere, so those registrations were dangling; authoring it fixes them too.
+#Nantuko Husk eats the Bot; its dies-trigger must produce the Servo.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Nesting Bot,Nantuko Husk
+life:20
+[PLAYER2]
+life:20
+[DO]
+Nantuko Husk
+Nesting Bot
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Nantuko Husk,Servo,Start Your Engines
+graveyard:Nesting Bot
+life:20
+[PLAYER2]
+life:20
+[END]

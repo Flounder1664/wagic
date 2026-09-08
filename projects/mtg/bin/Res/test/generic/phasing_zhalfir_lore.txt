@@ -1,0 +1,40 @@
+#The Phasing of Zhalfir is a second read-ahead saga whose chapter I carries a target(...), so
+#its lore counter went to the phased-out permanent instead of the saga - the same defect John
+#found on The Weatherseed Treaty. Cast on chapter I phasing out P2's Bears; after one round
+#the saga must be on lore 2.
+[INIT]
+firstmain
+[PLAYER1]
+hand:574539
+library:Island,Island,Island,Island,Island,Island
+manapool:{2}{U}{U}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+library:Mountain,Mountain,Mountain,Mountain,Mountain,Mountain
+life:20
+[DO]
+574539
+choice 0
+Grizzly Bears
+eot
+eot
+next
+next
+next
+
+[ASSERT]
+FIRSTMAIN
+#Zones as counts: passing the turn draws and plays lands for both players.
+[PLAYER1]
+counter:574539=Lore:2
+inplay:*
+hand:*
+library:*,*,*,*,*
+life:20
+[PLAYER2]
+inplay:*
+hand:*
+library:*,*,*,*,*
+life:20
+[END]
