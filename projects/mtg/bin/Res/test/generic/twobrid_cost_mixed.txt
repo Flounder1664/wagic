@@ -1,0 +1,22 @@
+#Magmablood Archaic is {2/R}{2/R}{2/R} - "two generic OR one red", three times. It RENDERS
+#wrong in game (CardGui draws SafeManaIcon(color1), and the generic half's colour index is 0,
+#so it draws an icon instead of the numeral 2 - it reads as R/W). This test checks the half
+#that matters: that the COST is right. Six generic must pay for it.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Magmablood Archaic
+manapool:{R}{R}{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Magmablood Archaic
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Magmablood Archaic
+life:20
+[PLAYER2]
+life:20
+[END]

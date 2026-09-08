@@ -1159,27 +1159,78 @@ void ManaCost::randomDiffHybrids(ManaCost * _cost, std::vector<int16_t>& diff)
 /**
     starting from the end of the array (diff) 
 */
+//Take `value` mana of `color` out of `diff`, recording what was spent so a failed branch
+//can put it back. MTG_COLOR_ARTIFACT on a hybrid half means GENERIC - the "2" side of a
+//twobrid like {2/R} - and generic is payable with mana of ANY colour. Checking only
+//diff[ARTIFACT] is why RRUB could not cast Magmablood Archaic ({2/R}{2/R}{2/R}): two
+//symbols took the R side and the third demanded literal colourless for its "2".
+static bool payHybridHalf(std::vector<int16_t>& diff, int color, int value,
+                          std::vector<std::pair<int, int> >& spent)
+{
+    if (value <= 0)
+        return true;
+    if (color != Constants::MTG_COLOR_ARTIFACT)
+    {
+        if (diff[color * 2 + 1] < value)
+            return false;
+        diff[color * 2 + 1] -= value;
+        spent.push_back(std::make_pair(color, value));
+        return true;
+    }
+    //generic: colourless surplus first, then any other colour that has spare mana
+    size_t mark = spent.size();
+    int need = value;
+    for (int c = 0; c < Constants::NB_Colors && need > 0; ++c)
+    {
+        int16_t have = diff[c * 2 + 1];
+        if (have <= 0)
+            continue;
+        int take = (have < need) ? have : need;
+        diff[c * 2 + 1] -= (int16_t) take;
+        spent.push_back(std::make_pair(c, take));
+        need -= take;
+    }
+    if (need > 0)
+    {
+        //not enough anywhere - undo the partial take
+        while (spent.size() > mark)
+        {
+            diff[spent.back().first * 2 + 1] += (int16_t) spent.back().second;
+            spent.pop_back();
+        }
+        return false;
+    }
+    return true;
+}
+
+static void refundHybridHalf(std::vector<int16_t>& diff, std::vector<std::pair<int, int> >& spent,
+                             size_t mark)
+{
+    while (spent.size() > mark)
+    {
+        diff[spent.back().first * 2 + 1] += (int16_t) spent.back().second;
+        spent.pop_back();
+    }
+}
+
 int ManaCost::tryToPayHybrids(const std::vector<ManaCostHybrid>& _hybrids, int _nbhybrids, std::vector<int16_t>& diff)
 {
     if (!_nbhybrids)
         return 1;
-    int result = 0;
     const ManaCostHybrid& h = _hybrids[_nbhybrids - 1];
-    if (diff[h.color1 * 2 + 1] >= h.value1)
+    std::vector<std::pair<int, int> > spent;
+    size_t mark = spent.size();
+    if (payHybridHalf(diff, h.color1, h.value1, spent))
     {
-        diff[h.color1 * 2 + 1] -= h.value1;
-        result = tryToPayHybrids(_hybrids, _nbhybrids - 1, diff);
-        if (result)
+        if (tryToPayHybrids(_hybrids, _nbhybrids - 1, diff))
             return 1;
-        diff[h.color1 * 2 + 1] += h.value1;
+        refundHybridHalf(diff, spent, mark);
     }
-    if (diff[h.color2 * 2 + 1] >= h.value2)
+    if (payHybridHalf(diff, h.color2, h.value2, spent))
     {
-        diff[h.color2 * 2 + 1] -= h.value2;
-        result = tryToPayHybrids(_hybrids, _nbhybrids - 1, diff);
-        if (result)
+        if (tryToPayHybrids(_hybrids, _nbhybrids - 1, diff))
             return 1;
-        diff[h.color2 * 2 + 1] += h.value2;
+        refundHybridHalf(diff, spent, mark);
     }
     return 0;
 }
