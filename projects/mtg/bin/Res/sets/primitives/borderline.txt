@@ -8617,7 +8617,8 @@ auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~2}:name(Becomes
 #The back face is an INSTANT, so the copy is castable at instant speed - no asSorcery. John
 #found Lightning Bolt could not be cast during combat, which is most of what that card is for.
 auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:lightning bolt:!)
-missing=nothing known. The third-spell trigger was measured 2026-09-08: compare(pstormcount) does NOT fire (pstormcount is only ever a VALUE elsewhere, and the note was right to doubt it). The attested storm form is thisturn(*|mystack), which counts spells cast BEFORE the current one, so ~equalto~2 is the third spell. Pinned in generic/storm_third_spell.txt. -- the prepared state shows as a counter rather than a face-up back side.
+note=The third-spell trigger was measured 2026-09-08: compare(pstormcount) does NOT fire (pstormcount is only ever a VALUE elsewhere, and the note was right to doubt it). The attested storm form is thisturn(*|mystack), which counts spells cast BEFORE the current one, so ~equalto~2 is the third spell. Pinned in generic/storm_third_spell.txt.
+missing=the prepared state shows as a counter rather than a face-up back side.
 mana={1}{R}
 type=Creature
 subtype=Human Wizard
@@ -39506,7 +39507,7 @@ toughness=5
 [card]
 name=Fear, Fire, Foes!
 abilities=noprevention
-missing=nothing known. The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
 target=creature
 #"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
 #only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
@@ -58736,7 +58737,7 @@ toughness=1
 [/card]
 [card]
 name=Insult // Injury
-missing=nothing known. The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
 abilities=hasaftermath,noprevention
 otherrestriction=type(creature|battlefield)~morethan~0
 flashback={2}{R} name(Injury)
@@ -104838,7 +104839,7 @@ toughness=1
 [card]
 name=Skullcrack
 abilities=noprevention
-missing=nothing known. The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
 target=player
 #"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
 #only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
@@ -129869,7 +129870,7 @@ type=Instant
 [card]
 name=Wild Slash
 abilities=noprevention
-missing=nothing known. The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
 target=anytarget
 #"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
 #only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
@@ -133811,7 +133812,7 @@ name=Back on Track
 target=creature,vehicle|mygraveyard
 auto=moveTo(myBattlefield)
 auto=token(Pilot)
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=Return target creature or Vehicle card from your graveyard to the battlefield. Create a 1/1 colorless Pilot creature token.
 mana={4}{B}
 type=Sorcery
@@ -133820,7 +133821,7 @@ type=Sorcery
 name=Defend the Rider
 auto=choice name(hexproof and indestructible) target(*[-land]|mybattlefield) transforms((,hexproof,indestructible)) ueot
 auto=choice name(create a Pilot) token(Pilot)
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=Choose one - -- - Target permanent you control gains hexproof and indestructible until end of turn. -- - Create a 1/1 colorless Pilot creature token.
 mana={G}
 type=Instant
@@ -133845,7 +133846,7 @@ grade=supported
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{W}
 auto={1}{W}{T}{S}:token(Pilot) asSorcery
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {W}. -- {1}{W}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133854,7 +133855,7 @@ name=Foul Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{B}
 auto={1}{B}{T}{S}:token(Pilot) asSorcery
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {B}. -- {1}{B}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133863,7 +133864,7 @@ name=Reef Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{U}
 auto={1}{U}{T}{S}:token(Pilot) asSorcery
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {U}. -- {1}{U}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133872,7 +133873,7 @@ name=Rocky Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{R}
 auto={1}{R}{T}{S}:token(Pilot) asSorcery
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {R}. -- {1}{R}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -133881,7 +133882,7 @@ name=Wild Roads
 auto=aslongas(*[mount;vehicle]|myBattlefield) tap(noevent) <1 oneshot
 auto={T}:add{G}
 auto={1}{G}{T}{S}:token(Pilot) asSorcery
-missing=nothing known. The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
+note=The Pilot token now carries the crewpower2 keyword and is created by name, so it resolves to DFT's own registered Pilot and its art.
 text=This land enters tapped unless you control a Mount or Vehicle. -- {T}: Add {G}. -- {1}{G}, {T}, Sacrifice this land: Create a 1/1 colorless Pilot creature token. Activate only as a sorcery.
 type=Land
 [/card]
@@ -134928,7 +134929,6 @@ auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fres
 auto=teach(creature) 1/1
 auto=@combat(attacking) source(mytgt):life:1 controller
 auto={3}:equip
-missing=nothing known.
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric. -- Equip {3}
 mana={1}{W}
 type=Artifact
@@ -134959,7 +134959,6 @@ auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fres
 auto=teach(creature) 1/0
 auto=@combat(attacking) source(mytgt):may untap target(creature[attacking]|mybattlefield)
 auto={3}:equip
-missing=nothing known.
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature gets +1/+0, has "Whenever this creature attacks, untap target attacking creature," and is a Cleric. -- Equip {3}
 mana={1}{U}
 type=Artifact
@@ -138119,7 +138118,7 @@ auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2
 #it now feeds transforms((,trample,newability[X/X])) ueot, the attested keyword-plus-pump shape.
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
-missing=nothing known. Chapter III counts basic land types via pbasiclandtypes, which is the engine's own domain value.
+note=Chapter III counts basic land types via pbasiclandtypes, which is the engine's own domain value.
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature you control gets +X/+X and gains trample until end of turn, where X is the number of basic land types among lands you control.
 mana={2}{G}
 type=Enchantment
@@ -139165,7 +139164,7 @@ flashback={4}{R}{R}{R}
 #shield in Damage.cpp) and removed at end of turn by unearth.
 auto=_NOPREVENT_
 auto=emblem transforms((,newability[@damaged(player) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch],newability[@damaged(creature) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch])) ueot
-missing=nothing known. The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
 text=Damage can't be prevented this turn. (Not implemented.) If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
 mana={2}{R}{R}{R}
 type=Sorcery
@@ -140141,7 +140140,6 @@ grade=unsupported
 #inplay: leaves it off whether seeded by name or by id, with or without this line. The
 #trigger form is pinned instead on Sneaky Snacker (generic/second_draw_trigger.txt).
 auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) counter(1/1) all(this)
-missing=nothing known.
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
 mana={1}{U}
 type=Creature
@@ -141117,7 +141115,6 @@ grade=unsupported
 #inplay: leaves it off whether seeded by name or by id, with or without this line. The
 #trigger form is pinned instead on Sneaky Snacker (generic/second_draw_trigger.txt).
 auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) counter(1/1) target(creature) and!( transforms((,lifelink)) ueot )!
-missing=nothing known.
 text=Reach -- Whenever you draw your second card each turn, put a +1/+1 counter on target creature. It gains lifelink until end of turn.
 mana={1}{W}{U}
 type=Legendary Creature
