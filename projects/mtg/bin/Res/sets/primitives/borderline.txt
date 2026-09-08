@@ -143640,8 +143640,10 @@ name=Pest Mrd
 #Nuisance Engine's Pest is a 0/1 COLORLESS ARTIFACT creature - a different body from the 1/1
 #black-green Pest every other card makes, so per project_token_images it gets a disambiguated
 #primitive rather than an edit to the shared one. Registered in MRD and HOP, the two sets that
-#print the card. NO ART: Scryfall has no artifact Pest token at all (searched 2026-09-08, 404),
-#so this one needs generating - the same gap as the emblems in issue #39.
+#Art is John's PROXY_Pest_0_1.jpg, staged at -50600 and -206100. Scryfall genuinely does not
+#carry this token - t:token t:pest returns 8 printings, all the 1/1 black-green one, none by
+#Stephen Tappin - because Mirrodin predates printed tokens. The source is 250x349, so it is
+#upscaled to the 672x936 standard and will look softer than a Scryfall scan.
 grade=borderline
 text=0/1 colorless Pest artifact creature token.
 type=Artifact Creature
