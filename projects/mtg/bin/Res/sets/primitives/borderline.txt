@@ -74874,7 +74874,12 @@ name=Monk Class
 auto=counter(0/0,1,Level)
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,MonkEffect)
 auto=@movedto(*|mystack):counter(0/0,1,MonkEffect)
+#"The second spell you cast each turn costs {1} less." The discount alone leaks: an altercost
+#cannot be withdrawn once applied, so it stayed on for every later spell too. John's fix -
+#cancel it with a matching increase once the count passes 2. Same pair as Highspire
+#Bell-Ringer and Uthros Psionicist, which copied this card's construction.
 auto=this(variable{hascntmonkeffect}=1) lord(*|mycastingzone) altercost(colorless,-1)
+auto=this(variable{hascntmonkeffect}>1) lord(*|mycastingzone) altercost(colorless,+1)
 auto=@each end restriction{compare(hascntmonkeffect)~morethan~0}:removeallcounters(0/0,1,MonkEffect)
 auto=this(variable{hascntlevel}=1) {W}{U}:name(Level 2) counter(0/0,1,Level) asSorcery
 auto=@counteradded(0/0.1.Level) from(this) restriction{compare(hascntlevel)~equalto~2}:may name(Return non-land permanent) target(*[-land]|battlefield) moveto(hand)
