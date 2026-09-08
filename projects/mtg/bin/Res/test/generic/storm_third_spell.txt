@@ -1,0 +1,32 @@
+#Emeritus of Conflict becomes prepared on the third spell you cast each turn, written as
+#@movedTo(*|mystack) restriction{compare(pstormcount)~equalto~3}. The note flagged that form
+#as unattested - pstormcount is used everywhere else as a VALUE, never inside compare() - so
+#this pins it - and it did NOT fire. The attested storm form is thisturn(*|mystack), which
+#counts the spells cast BEFORE the current one: 33 cards use ~equalto~1 for "the second spell
+#you cast each turn", so the third is ~equalto~2. Three Dark Rituals, each targetless: after
+#the third the counter must read 1,
+#and _PREPARE_'s own cap keeps it there.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:707018
+hand:Dark Ritual,Dark Ritual,Dark Ritual
+manapool:{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dark Ritual
+Dark Ritual
+Dark Ritual
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:707018
+counter:707018=Prepared:1
+manapool:{B}{B}{B}{B}{B}{B}{B}
+graveyard:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

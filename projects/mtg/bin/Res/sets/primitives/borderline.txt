@@ -8606,14 +8606,14 @@ abilities=firststrike
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@movedTo(*|mystack) restriction{compare(pstormcount)~equalto~3}:name(Becomes prepared) _PREPARE_
+auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~2}:name(Becomes prepared) _PREPARE_
 #The back face IS a real Magic card that this build already implements, so cast a copy of
 #IT rather than re-inlining an approximation of its text. That fixes three things at once:
 #the copy goes on the stack and can be responded to, its own sequencing is correct (John hit
 #this on Brainstorm, whose put-back ran before the draw), and the card's real implementation
 #replaces a hand-written paraphrase. 14 more cards converted 2026-09-08 on that basis.
 auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Lightning Bolt) counter(0/0,-1,Prepared) all(this) && activate castcard(copied noevent named!:lightning bolt:!) asSorcery
-missing=the third-spell trigger uses compare(pstormcount)~equalto~3, a form not attested elsewhere - pstormcount is otherwise only used as a VALUE. -- the prepared state shows as a counter rather than a face-up back side.
+missing=nothing known. The third-spell trigger was measured 2026-09-08: compare(pstormcount) does NOT fire (pstormcount is only ever a VALUE elsewhere, and the note was right to doubt it). The attested storm form is thisturn(*|mystack), which counts spells cast BEFORE the current one, so ~equalto~2 is the third spell. Pinned in generic/storm_third_spell.txt. -- the prepared state shows as a counter rather than a face-up back side.
 mana={1}{R}
 type=Creature
 subtype=Human Wizard
@@ -139147,7 +139147,7 @@ name=Highspire Bell-Ringer
 abilities=flying
 grade=borderline
 auto=lord(*|mycastingzone) altercost(colorless,-1)
-missing=the discount should apply only to the SECOND spell each turn; here it applies to
+missing=the discount applies to EVERY spell, not just the second. Attempted 2026-09-08 and reverted: thisturn(*|mystack)~equalto~1 is the right count for "the second spell you cast each turn" - 33 cards use exactly that - but hanging a restriction{} on a static lord(...) altercost(...) does not gate it, it silently switches the whole ability off. Measured with two Lava Axes ({4}{R}) from a {9}{R}{R} pool: blanket discount leaves {3}, correct behaviour would leave {2}, and the gated version left {1} - the same as no Bell-Ringer at all. Blanket is wrong but strictly better than inert, so it stands.
 #every spell.
 text=Flying -- The second spell you cast each turn costs {1} less to cast. (Approximation: every spell costs {1} less.)
 mana={2}{U}
@@ -139160,7 +139160,7 @@ toughness=4
 name=Uthros Psionicist
 grade=borderline
 auto=lord(*|mycastingzone) altercost(colorless,-2)
-missing=the discount should apply only to the SECOND spell each turn; here it applies to
+missing=the discount applies to EVERY spell, not just the second. Attempted 2026-09-08 and reverted: thisturn(*|mystack)~equalto~1 is the right count for "the second spell you cast each turn" - 33 cards use exactly that - but hanging a restriction{} on a static lord(...) altercost(...) does not gate it, it silently switches the whole ability off. Measured with two Lava Axes ({4}{R}) from a {9}{R}{R} pool: blanket discount leaves {3}, correct behaviour would leave {2}, and the gated version left {1} - the same as no Bell-Ringer at all. Blanket is wrong but strictly better than inert, so it stands.
 #every spell.
 text=The second spell you cast each turn costs {2} less to cast. (Approximation: every spell costs {2} less.)
 mana={2}{U}
