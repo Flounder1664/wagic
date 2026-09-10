@@ -2638,7 +2638,15 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         //e.g. Hand of the Praetors handing its controller the poison
         //counter (issue #594). The activated-ability path overwrites this
         //with the full costed string, preserving its previous behavior.
-        tc->belongsToAbility = sWithoutTc;
+        //
+        //Inside the NULL check, not after it. The guard above exists precisely
+        //because createTargetChooser returns NULL for a selector it cannot
+        //parse, and this assignment was added later, outside it - so the very
+        //case that guard was written for still dereferenced NULL and killed the
+        //process. Found 2026-09-10 parsing Airship Crash's
+        //"destroy target(artifact,enchantment,creature[flying])".
+        if (tc)
+            tc->belongsToAbility = sWithoutTc;
     }
 
     size_t delimiter = sWithoutTc.find("}:");

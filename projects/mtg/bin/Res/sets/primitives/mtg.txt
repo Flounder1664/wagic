@@ -2058,7 +2058,17 @@ toughness=2
 [/card]
 [card]
 name=Airship Crash
-auto=destroy target(artifact,enchantment,creature[flying])
+#"target(artifact,enchantment,creature[flying])" builds NO target chooser at all -
+#createTargetChooser returns NULL for a comma type list carrying a [..] restriction, so the
+#card could never target anything, and until 2026-09-10 it took the process down with it
+#(MTGAbility.cpp dereferenced that NULL). It cannot be folded into one *[..] either:
+#CardDescriptor::mode is a single flag for the whole descriptor, overwritten per term, so
+#*[artifact;enchantment;creature&flying] resolves to AND and matches nothing.
+#The attested shape for "target A, B, or C" is one gated choice per mode - Deface does
+#exactly this - which asks which kind to destroy before asking for the target.
+auto=choice name(Destroy target artifact) destroy target(artifact) restriction{type(artifact)~morethan~0}
+auto=choice name(Destroy target enchantment) destroy target(enchantment) restriction{type(enchantment)~morethan~0}
+auto=choice name(Destroy target creature with flying) destroy target(creature[flying]) restriction{type(creature[flying])~morethan~0}
 autohand={2}{cycle}:draw:1 controller
 text=Destroy target artifact, enchantment, or creature with flying. Cycling {2}.
 mana={2}{G}
@@ -74192,7 +74202,10 @@ type=Instant
 [/card]
 [card]
 name=Make Your Move
-auto=destroy target(artifact,enchantment,creature[power>=4])
+#Same NULL-target-chooser shape as Airship Crash - see the note there.
+auto=choice name(Destroy target artifact) destroy target(artifact) restriction{type(artifact)~morethan~0}
+auto=choice name(Destroy target enchantment) destroy target(enchantment) restriction{type(enchantment)~morethan~0}
+auto=choice name(Destroy target creature with power 4 or greater) destroy target(creature[power>=4]) restriction{type(creature[power>=4])~morethan~0}
 text=Destroy target artifact, enchantment, or creature with power 4 or greater.
 mana={2}{W}
 type=Instant

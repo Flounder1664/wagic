@@ -1,0 +1,43 @@
+#Airship Crash and Make Your Move both carried target(artifact,enchantment,creature[..]) -
+#a comma-separated type list with a [..] restriction on one member. createTargetChooser
+#returns NULL for that shape, and MTGAbility.cpp assigned tc->belongsToAbility OUTSIDE the
+#NULL guard that sits right above it, so parsing either card SEGFAULTED the process. The
+#guard was added for exactly this case and the assignment was appended after it.
+#Found while checking whether borrowing a graveyard creature's lines could crash the game
+#(wagic#42) - but it was never borrow-specific: casting either card did it.
+#
+#It cannot be written as one *[..]: CardDescriptor::mode is a single flag for the whole
+#descriptor, overwritten term by term, so *[artifact;enchantment;creature&flying] ends up
+#CD_AND and matches nothing. Rewritten as one gated choice per mode, the shape Deface uses.
+#
+#Make Your Move rather than Airship Crash: Airship Crash also carries an autohand cycling
+#ability, and a click in hand reaches that instead of the cast, which is a harness artefact
+#and not the thing under test. Both cards carry the identical broken selector.
+#Choosing the power>=4 mode must destroy Serra Angel (4/4) and leave Grizzly Bears (2/2)
+#alone - that is what shows the [power>=4] restriction survived the rewrite.
+#It is "choice 0", not "choice 2", because the restriction{} clauses gate which modes are
+#OFFERED: with no artifact and no enchantment on the board, the power>=4 mode is the only
+#one on the menu. That the index moves is itself evidence the gating works.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:make your move
+manapool:{2}{W}
+[PLAYER2]
+inplay:serra angel,grizzly bears
+[DO]
+make your move
+goto firstmain
+goto firstmain
+choice 0
+serra angel
+goto secondmain
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+graveyard:make your move
+[PLAYER2]
+inplay:grizzly bears
+graveyard:serra angel
+[END]
