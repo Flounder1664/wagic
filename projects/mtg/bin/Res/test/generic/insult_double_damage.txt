@@ -1,0 +1,32 @@
+#Insult // Injury's "if a source you control would deal damage this turn, it deals double
+#that damage instead" - John verified this one in game, and it is the control that showed
+#Isengard Unleashed's version was broken rather than the harness being unable to drive it.
+#Mogg Fanatic's {s}:damage:1 must take the opponent from 20 to 18.
+#Player 1 holds two permanents at the end, not one: the No Prevention emblem and the Insult
+#emblem. Mogg Fanatic sacrificed itself to its own cost.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:mogg fanatic
+hand:insult // injury
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+insult // injury
+goto firstmain
+goto firstmain
+mogg fanatic
+p2
+goto secondmain
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:*,*
+life:20
+[PLAYER2]
+life:18
+[END]

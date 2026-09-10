@@ -24210,7 +24210,7 @@ toughness=6
 [/card]
 [card]
 name=Cosmic Spider-Man
-abilities=flying,firststrike,trample,lifelink,haste
+abilities=flying,first strike,trample,lifelink,haste
 mana={W}{U}{B}{R}{G}
 type=Legendary Creature
 subtype=Spider Hero
@@ -49257,7 +49257,7 @@ text=Artifact creatures you control have trample. -- At the beginning of your en
 [/card]
 [card]
 name=Giott, King of the Dwarves
-abilities=doublestrike
+abilities=double strike
 auto=@movedTo(this,dwarf,equipment|mybattlefield):may draw:1 && discard:1
 text=Double strike -- Whenever Giott, another Dwarf you control, or an Equipment you control enters, you may discard a card. If you do, draw a card.
 mana={R}{W}
@@ -71183,7 +71183,7 @@ type=Instant
 [/card]
 [card]
 name=Lightning, Army of One
-abilities=firststrike,trample,lifelink
+abilities=first strike,trample,lifelink
 text=First strike, trample, lifelink.
 mana={1}{R}{W}
 type=Legendary Creature
@@ -81394,7 +81394,11 @@ type=Snow Land
 [/card]
 [card]
 name=Mouth of the Storm
-abilities=flying,ward:2
+abilities=flying
+#abilities=ward:2 set no flag: the loader matches abilities= by substring against
+#Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
+#that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
 auto=power:-3 all(creature|opponentbattlefield) ueot
 text=Flying. Ward {2}. When this creature enters, creatures your opponents control get -3/-0 until your next turn.
 mana={6}{U}
@@ -113452,7 +113456,10 @@ toughness=3
 [/card]
 [card]
 name=Skyward Spider
-abilities=ward2
+#abilities=ward2 set no flag: the loader matches abilities= by substring against
+#Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
+#that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
 mana={W/U}{W/U}
 type=Creature
 subtype=Spider Human Hero
@@ -117034,7 +117041,11 @@ text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -
 [/card]
 [card]
 name=Spider-Rex, Daring Dino
-abilities=reach,trample,ward2
+abilities=reach,trample
+#abilities=ward2 set no flag: the loader matches abilities= by substring against
+#Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
+#that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
 mana={4}{G}{G}
 type=Legendary Creature
 subtype=Spider Dinosaur
@@ -143426,7 +143437,7 @@ type=Sorcery
 [/card]
 [card]
 name=Wraith, Vicious Vigilante
-abilities=doublestrike,unblockable
+abilities=double strike,unblockable
 mana={1}{W}{U}
 type=Legendary Creature
 subtype=Human Detective

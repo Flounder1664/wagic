@@ -1,0 +1,36 @@
+#John: "Isengard unleashed didn't make a mogg fanatic do 3 damage it just did the normal 1."
+#The triple-damage half was written as "emblem transforms((...)) ueot" with the operands the
+#wrong way round - all(trigger[to]) BEFORE the verb - and with no self-exclusion, so the
+#emblem's own extra damage would have re-triggered off itself. It never fired at all.
+#Insult // Injury does the identical job and John confirmed that one works, so this is now
+#written on its shape: a real emblem TOKEN carrying the triggers, verb first with the
+#recipient after it, and the emblem excluded from its own source filter.
+#Triple = the original plus two more, so the payload is twicethatmuch, for the same reason
+#Insult's double is a plain thatmuch.
+#Mogg Fanatic's {s}:damage:1 must therefore take the opponent from 20 to 17, not 19.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:mogg fanatic
+hand:isengard unleashed
+manapool:{2}{R}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+isengard unleashed
+goto firstmain
+goto firstmain
+mogg fanatic
+p2
+goto secondmain
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:*,*
+life:20
+[PLAYER2]
+life:17
+[END]

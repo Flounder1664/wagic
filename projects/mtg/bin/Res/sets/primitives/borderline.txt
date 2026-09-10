@@ -8603,7 +8603,7 @@ subtype=Saga
 [card]
 name=Emeritus of Conflict // Lightning Bolt
 grade=borderline
-abilities=firststrike
+abilities=first strike
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
@@ -8762,7 +8762,7 @@ toughness=1
 [card]
 name=Joined Researchers // Secret Rendezvous
 grade=borderline
-abilities=firststrike
+abilities=first strike
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
@@ -9176,7 +9176,7 @@ toughness=2
 [card]
 name=Lorehold Archivist // Restore Relic
 grade=borderline
-abilities=firststrike
+abilities=first strike
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
@@ -134831,7 +134831,7 @@ toughness=3
 [/card]
 [card]
 name=Magitek Armor
-auto=token(Hero,creature hero,1/1,colorless)
+auto=token(Hero Fin)
 auto=_CREW1_
 text=When this Vehicle enters, create a 1/1 colorless Hero creature token. -- Crew 1
 mana={3}{W}
@@ -134920,7 +134920,7 @@ toughness=4
 [/card]
 [card]
 name=Monk's Fist
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/0
 auto={2}:equip
 missing=equipped creature is a Monk in addition to its other types
@@ -134937,7 +134937,7 @@ grade=supported
 #Untested: asserting a granted TYPE needs a card that cares about Clerics, and pt: cannot
 #address the Hero token this equips itself to. Verify in game.
 auto=teach(creature) transforms((,cleric))
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combat(attacking) source(mytgt):life:1 controller
 auto={3}:equip
@@ -134950,7 +134950,7 @@ subtype=Equipment
 name=Thief's Knife
 grade=borderline
 # REVIEW 2026-07-20 [P:med] FIXED: source(mytgt) -> from(mytgt) on the @combatdamaged draw (matches Sword of Fire and Ice).
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combatdamaged(player) from(mytgt):draw:1 controller
 auto={4}:equip
@@ -134967,7 +134967,7 @@ name=Sage's Nouliths
 #Untested: asserting a granted TYPE needs a card that cares about Clerics, and pt: cannot
 #address the Hero token this equips itself to. Verify in game.
 auto=teach(creature) transforms((,cleric))
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/0
 auto=@combat(attacking) source(mytgt):may untap target(creature[attacking]|mybattlefield)
 auto={3}:equip
@@ -134978,7 +134978,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Warrior's Sword
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 3/2
 auto={5}:equip
 missing=equipped creature is a Warrior in addition to its other types
@@ -134989,7 +134989,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Dark Knight's Greatsword
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 3/0
 auto={3}:equip limit:1
 missing=equip cost is "pay 3 life" (approximated as {3}); equipped creature is a Knight
@@ -135000,7 +135000,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Ninja's Blades
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/1
 auto=@combatdamaged(player) from(mytgt):draw:1 controller && discard:1
 auto={2}:equip
@@ -135012,7 +135012,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Black Mage's Rod
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/0
 auto={3}:equip
 missing=equipped creature has "cast a noncreature spell -> deal 1 to each opponent" and is a Wizard (controller-cast grant on equipped creature)
@@ -135023,7 +135023,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Red Mage's Rapier
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto={3}:equip
 missing=equipped creature has "cast a noncreature spell -> +2/+0 ueot" and is a Wizard (controller-cast grant on equipped creature)
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature has "Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn" and is a Wizard. -- Equip {3}
@@ -135033,7 +135033,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Astrologian's Planisphere
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto={2}:equip
 missing=equipped creature is a Wizard and has "cast a noncreature spell / draw your third card -> +1/+1 counter" (controller-cast grant on equipped creature)
 text=Job select (create a 1/1 Hero, attach this to it). -- Equipped creature is a Wizard and has "Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature." -- Diana - Equip {2}
@@ -135043,7 +135043,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Machinist's Arsenal
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 2/2
 auto={4}:equip
 missing=dynamic +2/+2 per artifact (approximated +1/+1 per artifact); equipped creature is an Artificer
@@ -135054,7 +135054,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Summoner's Grimoire
-auto=token(Hero,creature hero,1/1,colorless) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=token(Hero Fin) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=@combat(attacking) source(mytgt):may target(creature|myhand) moveto(mybattlefield)
 auto={3}:equip
 missing=equipped creature is a Shaman; an enchantment put this way enters tapped and attacking
@@ -136083,7 +136083,7 @@ toughness=3
 [/card]
 [card]
 name=Seraphic Steed
-abilities=firststrike,lifelink
+abilities=first strike,lifelink
 auto={crew4(other creature|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~3}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:token(Angel,creature angel,3/3,white,flying)
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
@@ -139175,8 +139175,22 @@ flashback={4}{R}{R}{R}
 #nopreventionall, honoured by both prevention paths (ReplacementEffects and the prevent:N
 #shield in Damage.cpp) and removed at end of turn by unearth.
 auto=_NOPREVENT_
-auto=emblem transforms((,newability[@damaged(player) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch],newability[@damaged(creature) from(*|myBattlefield,myStack,myGraveyard):all(trigger[to]) damage:twicethatmuch])) ueot
+#John: Mogg Fanatic still dealt 1, not 3. The triple-damage half was written on a shape that
+#does not fire - "emblem transforms((...)) ueot" with the operands the wrong way round
+#(all(trigger[to]) BEFORE the verb) and no self-exclusion, so the emblem's own extra damage
+#would re-trigger off itself. Insult // Injury does the identical job and John confirmed it
+#works, so this is now written on exactly its shape: a real emblem TOKEN carrying the
+#triggers, the verb first and the recipient after it as damage:N all(trigger[to]), and the
+#emblem excluded from its own source filter.
+#Triple means the original plus two more, so the payload is twicethatmuch - the same reason
+#Insult's double is a plain thatmuch.
+#The source filter is |* and not |myzones, which the card would prefer: measured 2026-09-10,
+#from(*[-Isengard Emblem]|myzones) makes the trigger not fire at all, while |* fires and
+#Mogg Fanatic's 1 becomes 3. Insult uses |* on its opponent-side triggers for the same
+#reason. Pinned in generic/isengard_triple_damage.txt against generic/insult_double_damage.txt.
+auto=token(Isengard Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth) and!( transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-Isengard Emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-Isengard Emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-Isengard Emblem]|*):damage:twicethatmuch opponent])) ueot )!
 note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+missing=the tripling applies to any source rather than only to sources you control, because restricting the trigger to myzones stops it firing
 text=Damage can't be prevented this turn. (Not implemented.) If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
 mana={2}{R}{R}{R}
 type=Sorcery
@@ -140127,7 +140141,10 @@ subtype=Aura
 [/card]
 [card]
 name=Gandalf, Wandering Wizard
-abilities=ward3
+#abilities=ward3 set no flag: the loader matches abilities= by substring against
+#Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
+#that actually have ward use the _WARD3_ macro as an auto= line.
+auto=_WARD3_
 auto={6}:name(Shuffle and draw 3) moveto(mylibrary) all(this) and!( shuffle )! && draw:3 controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; shuffle-self-in ordering approximated
@@ -140779,7 +140796,11 @@ toughness=2
 [/card]
 [card]
 name=Lake-town Mariners
-abilities=adventure,vigilance,ward2
+abilities=adventure,vigilance
+#abilities=ward2 set no flag: the loader matches abilities= by substring against
+#Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
+#that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
 other={3}{U} name(Adventure)
 auto=alternative target(<2>*[creature;land]|mybattlefield) transforms((,newability[moveto(myexile)],newability[phaseaction[end once] moveto(ownerbattlefield)])) forever
 auto=alternative _ADVENTURE_
@@ -143726,6 +143747,20 @@ type=Creature
 subtype=Wall
 power=0
 toughness=4
+[/card]
+[card]
+name=Hero Fin
+#Final Fantasy's "Job select" equipment make a 1/1 COLORLESS Hero (tfin 33) - a different
+#body from the 3/2 white vigilance Hero below, so per project_token_images it gets its own
+#disambiguated primitive rather than an edit to the shared one, the same call as Pest Mrd.
+#Subtype stays Hero so the equipment's rehook target(hero[token;fresh]|mybattlefield) still
+#finds it. Registered in FIN at -702033 (block base 702000 + collector number 33).
+grade=borderline
+text=1/1 colorless Hero creature token.
+type=Creature
+subtype=Hero
+power=1
+toughness=1
 [/card]
 [card]
 name=Hero
