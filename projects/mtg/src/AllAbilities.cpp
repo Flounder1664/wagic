@@ -11267,9 +11267,32 @@ int AAllActivatedAbilitiesOf::added(MTGCardInstance * donor)
         MTGAbility * a = af.parseMagicLine(line, GetId(), NULL, source);
         if (!a)
             continue;
-        //the parser decides what "activated" means. Everything else the donor prints -
-        //triggers, static lords, keywords - is not borrowed and is thrown away here.
-        if (!dynamic_cast<ActivatedAbility *>(a))
+        //Two tests, not one. ActivatedAbility is NOT "is an activated ability" in this
+        //codebase - it is "can carry a cost", and plain resolution effects inherit it too
+        //(ATokenCreator : public ActivatedAbility). John found that out in game: an
+        //opponent's Goblin Gang Leader, whose token-making is an ETB, handed Drana and
+        //Linvala a costless "create Goblin" entry in her ability menu, which also got in
+        //the way of declaring her as an attacker.
+        //oneShot is the flag that separates the two - AbilityFactory::magicText resolves
+        //and deletes oneShot abilities and only addToGame()s the rest. Measured: Birds of
+        //Paradise {t}:add{w}, Goblin Sharpshooter {t}:damage:1, Skirk Prospector's {s}
+        //sacrifice cost and Benthic Biomancer's {1}{u} adapt are all oneShot=0, while
+        //create(goblin...) is oneShot=1.
+        //
+        //oneShot alone is still not enough. A corpus sweep found AUpkeep is an
+        //ActivatedAbility with oneShot=0, so a donor's upkeep COST reads as a borrowable
+        //ability - Aboroth's cumulativeupcost and Acridian's upcost both got through, and
+        //Aboroth is a creature, so Necrotic Ooze would inherit a cumulative upkeep it never
+        //printed. The exclusion below is PRECAUTIONARY: the leak is measured, but no test
+        //pins it, because reaching the borrower's own upkeep to make the difference visible
+        //is beyond what a [DO] block reaches. Tracked on wagic#42.
+        //Lords and triggers were never at risk: ALord and GenericTriggeredAbility are not
+        //ActivatedAbility subclasses and the first test drops them.
+        //This is a blacklist and ~60 classes inherit ActivatedAbility, so it is not proved
+        //complete. AEquip, AThis and AAsLongAs wrap genuine activated abilities and are
+        //currently dropped, which under-grants rather than over-grants - the safe direction.
+        if (!dynamic_cast<ActivatedAbility *>(a) || a->oneShot
+            || dynamic_cast<AUpkeep *>(a))
         {
             SAFE_DELETE(a);
             continue;

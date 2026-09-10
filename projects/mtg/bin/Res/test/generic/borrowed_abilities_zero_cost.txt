@@ -1,0 +1,28 @@
+#John asked whether a printed {0} ability, or one paid with an alternate cost, still gets
+#borrowed - the worry being that tightening the filter to keep an ETB out might also throw
+#away abilities that legitimately cost nothing.
+#It does not, because the filter tests the CLASS the parser produced and its oneShot flag,
+#never whether a cost is present. Avizoa's "{0}: Avizoa gets +2/+2 until end of turn" parses
+#to a GenericActivatedAbility with oneShot=0, exactly like a {T} or {S} ability.
+#Drana and Linvala is a printed 3/4; borrowing Avizoa's {0} must make her 5/6.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:Avizoa
+life:20
+[DO]
+Drana and Linvala
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+pt:drana and linvala=5/6
+life:20
+[PLAYER2]
+inplay:Avizoa
+life:20
+[END]

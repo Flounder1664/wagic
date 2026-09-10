@@ -1,0 +1,43 @@
+#John, in game: Drana and Linvala offered a "create Goblin" option that came from an
+#opponent's Goblin Gang Leader, whose token-making is an ETB and not an activated ability
+#at all. She also could not be declared as an attacker or blocker while it was there, and
+#both symptoms went away together once the opponent's creatures died.
+#
+#One cause. dynamic_cast<ActivatedAbility*> is NOT a test for "is an activated ability" -
+#in this codebase ActivatedAbility means "can carry a cost", and plain resolution effects
+#inherit it (ATokenCreator : public ActivatedAbility). So the ETB was granted as a costless
+#entry in her ability menu, and a permanent with a spare {0} ability is exactly what makes
+#clicking it open a menu instead of declaring it as an attacker.
+#
+#oneShot is the real discriminator: AbilityFactory::magicText resolves and deletes oneShot
+#abilities and only addToGame()s the rest. Measured 2026-09-10 - Birds of Paradise
+#{t}:add{w}, Goblin Sharpshooter {t}:damage:1, Skirk Prospector's {s} sacrifice cost and
+#Benthic Biomancer's {1}{u} adapt are all oneShot=0; create(goblin...) is oneShot=1.
+#
+#Clicking Drana and Linvala with nothing but an ETB creature to borrow from must therefore
+#do NOTHING. Before the fix it put two Goblins on HER controller's side, which is what the
+#one-permanent assertion on player 1 catches.
+#Player 2 holds three permanents, not one: seeding with inplay: fires Goblin Gang Leader's
+#own ETB, which is correct and unrelated - the same thing Futurist Forge's test ran into.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:Goblin Gang Leader
+life:20
+[DO]
+Drana and Linvala
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Drana and Linvala
+tappedinplay:0
+manapool:{0}
+life:20
+[PLAYER2]
+inplay:*,*,*
+life:20
+[END]
