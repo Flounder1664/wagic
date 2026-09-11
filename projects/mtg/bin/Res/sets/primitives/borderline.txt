@@ -144970,7 +144970,12 @@ name=Amonkhet Raceway
 #drive.
 auto=_STARTENGINES_
 auto={T}:Add{C}
-auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - grant haste) target(creature) haste ueot
+#No name(...) on this line, deliberately. John found the ability was never offered at max speed:
+#it never reacted to a click, so with only the mana ability reacting the land opened no menu.
+#Probed on Perilous Snare (the harness cannot click a land's non-mana ability): the WORDING of the
+#name decides it - name(Go) works, name(Grant haste) and name(Max speed - grant it) do not - so a
+#keyword inside the name is being read as code before the name is stripped. No name is safe.
+auto={T} restriction{compare(pspeed)~equalto~4}:target(creature) haste ueot
 text=Start your engines! -- {T}: Add {C}. -- Max speed - {T}: Target creature gains haste until end of turn.
 type=Land
 [/card]
