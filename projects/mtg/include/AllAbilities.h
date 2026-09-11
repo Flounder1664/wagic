@@ -3967,6 +3967,11 @@ public:
         int who = 0, bool aLivingWeapon = false) :
     ActivatedAbility(observer, _id, _source, _cost, 0), tokenId(tokenId), starfound(starfound),multiplier(multiplier), who(who),aLivingWeapon(aLivingWeapon)
     {
+        //Every constructor must say what it is. Only the by-construction one did, so a token
+        //made by id or by name read aType=0, and AEquip::equip - which skips oneShot
+        //STANDARD_TOKENCREATORs - handed an equipment's job-select token line to the game as a
+        //costless activated ability (White Mage's Staff made free Heroes, 2026-09-11).
+        aType = MTGAbility::STANDARD_TOKENCREATOR;
         if (!multiplier) this->multiplier = NEW WParsedInt(1);
         MTGCard * card = MTGCollection()->getCardById(tokenId);
         if (card) name = card->data->getName();
@@ -3979,6 +3984,11 @@ public:
         int who = 0, bool aLivingWeapon = false) :
         ActivatedAbility(observer, _id, _source, _cost, 0), _cardName(cardName), starfound(starfound), multiplier(multiplier), who(who), aLivingWeapon(aLivingWeapon)
     {
+        //Every constructor must say what it is. Only the by-construction one did, so a token
+        //made by id or by name read aType=0, and AEquip::equip - which skips oneShot
+        //STANDARD_TOKENCREATORs - handed an equipment's job-select token line to the game as a
+        //costless activated ability (White Mage's Staff made free Heroes, 2026-09-11).
+        aType = MTGAbility::STANDARD_TOKENCREATOR;
         if (!multiplier) this->multiplier = NEW WParsedInt(1);
         MTGCard * card = MTGCollection()->getCardByName(_cardName, _source->setId); // Try to retrieve token id from the same set of source card (e.g. Urza's Saga).
         if (card) {

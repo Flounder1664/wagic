@@ -1,0 +1,22 @@
+#White Mage's Staff equipped by its {3} equip ability must not gain a costless "create Hero"
+#ability (John's playtest 2026-09-11). Its job-select token line is an ETB; AEquip::equip
+#skips oneShot STANDARD_TOKENCREATORs, but a token made BY ID reported aType 0 and got through.
+#Seeding puts the Staff in play through the stack, so its real job select makes one Hero (the
+#*) and attaches to it. Equip moves it to the Bears; the second click, with an empty pool, must
+#do nothing. Measured before the fix: 4 permanents (a second, free Hero); after: 3.
+[INIT]
+firstmain
+[PLAYER1]
+manapool:{3}
+inplay:white mage's staff,grizzly bears
+[PLAYER2]
+[DO]
+white mage's staff
+grizzly bears
+white mage's staff
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:white mage's staff,grizzly bears,*
+[PLAYER2]
+[END]
