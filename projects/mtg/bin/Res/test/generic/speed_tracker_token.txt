@@ -1,7 +1,7 @@
 #Speed had no on-screen representation at all: GuiStatic draws poison, energy and
 #experience next to the avatar but not speed, so a player could not see their own.
 #Rather than guess pixel offsets in the render path, this uses the PHYSICAL game's
-#tracker - the Start Your Engines // Max Speed token (DFT -692082 // -692083), with
+#tracker - the Start Your Engines! // Max Speed token (DFT -692082 // -692083), with
 #John's own scans of both faces.
 #_STARTENGINES_ now creates it alongside setting speed to 1, so putting Walking
 #Sarcophagus onto the battlefield must leave TWO permanents: the artifact and the tracker.
@@ -19,7 +19,7 @@ life:20
 [ASSERT]
 firstmain
 [PLAYER1]
-inplay:Walking Sarcophagus,Start Your Engines
+inplay:Walking Sarcophagus,Start Your Engines!
 pt:walking sarcophagus=2/1
 life:20
 [PLAYER2]

@@ -4,7 +4,7 @@
 #Walking Sarcophagus was shipped as a 3/3, its printed 2/1 body with the max-speed +1/+2
 #baked in permanently. It is now a 2/1 whose bonus is GATED, so entering at speed 1 it must
 #still be 2/1. Before this change it was a 3/3 the moment it hit the battlefield.
-#The Start Your Engines tracker token now enters alongside it - that is the speed display.
+#The Start Your Engines! tracker token now enters alongside it - that is the speed display.
 [INIT]
 firstmain
 [PLAYER1]
@@ -16,7 +16,7 @@ life:20
 [ASSERT]
 firstmain
 [PLAYER1]
-inplay:Walking Sarcophagus,Start Your Engines
+inplay:Walking Sarcophagus,Start Your Engines!
 pt:walking sarcophagus=2/1
 life:20
 [PLAYER2]

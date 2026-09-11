@@ -119176,7 +119176,7 @@ type=Instant
 [card]
 name=Start Your Engines
 auto=all(vehicle|mybattlefield) becomes(Artifact Creature) ueot
-auto=all(creature|mybattlefield) 2/2 ueot
+auto=all(creature|mybattlefield) 2/0 ueot
 text=Vehicles you control become artifact creatures until end of turn. Creatures you control get +2/+0 until end of turn.
 mana={3}{R}
 type=Sorcery

@@ -133786,7 +133786,10 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Start Your Engines
+name=Start Your Engines!
+#Named with the '!' it is printed with (TDFT 14). Without it the name collided with
+#Kaladesh's sorcery "Start Your Engines" (KLD 135). Primitives are keyed by name and the first
+#one loaded wins (MTGDeck.cpp), so this Emblem's body swallowed that card and it could not be cast.
 #The physical speed tracker (PLST TDFT-14). A marker, not a real permanent to play with:
 #its only ability flips it to Max Speed, so it cannot be attacked with or blocked with. It
 #exists so a player can SEE their speed, which GuiStatic does not draw.

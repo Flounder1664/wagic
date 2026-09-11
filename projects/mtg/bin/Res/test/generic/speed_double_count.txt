@@ -8,6 +8,8 @@
 #returns depends on what earlier tests looked up - this passed alone and failed after
 #speed_tracker_token once _STARTENGINES_ stopped creating the tracker by name. The tracker is
 #created by id (-692082), so the assertion pins that id.
+#The tracker has since been renamed "Start Your Engines!" - its printed name - which ends
+#the clash; the id stays the unambiguous key.
 [INIT]
 combatattackers
 [PLAYER1]
@@ -22,7 +24,7 @@ next
 [ASSERT]
 combatdamage
 [PLAYER1]
-inplay:Walking Sarcophagus,Nesting Bot,Raging Goblin,Start Your Engines
+inplay:Walking Sarcophagus,Nesting Bot,Raging Goblin,Start Your Engines!
 counter:-692082=Speed:2
 life:20
 [PLAYER2]

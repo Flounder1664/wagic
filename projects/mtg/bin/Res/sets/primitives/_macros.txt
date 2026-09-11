@@ -432,8 +432,9 @@
 # The tracker token (DFT -692082 // -692083) is the PHYSICAL game's representation and
 # stands in for an on-screen counter: GuiStatic draws poison/energy/experience but not
 # speed, so without this a player cannot see their own speed at all. It has no abilities.
-# Created BY ID (-692082), not by name: "Start Your Engines" is also a Kaladesh sorcery
-# (KLD 417708), and PLAN_token-identity-and-art.md makes by-id the default for tokens.
+# Created BY ID (-692082), per PLAN_token-identity-and-art.md. The tracker primitive is named
+# "Start Your Engines!" - with the '!' it is printed with - because Kaladesh has a sorcery called
+# "Start Your Engines", and two primitives cannot share a name.
 #AUTO_DEFINE _STARTENGINES_ if compare(pspeed)~equalto~0 then alterspeed:1 controller && token(-692082)
 
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)

@@ -1,0 +1,27 @@
+#Kaladesh's "Start Your Engines" (KLD 135) - "Vehicles you control become artifact creatures
+#until end of turn. Creatures you control get +2/+0 until end of turn." - shared its NAME with the
+#Aetherdrift speed tracker primitive. Primitives are keyed by name and the first definition wins
+#(MTGDeck.cpp), so the tracker's body swallowed this card: it could not be cast at all. The tracker
+#is now "Start Your Engines!", its printed name (TDFT 14). Its line also said 2/2 where the card
+#prints +2/+0. Grizzly Bears must end the spell 4/2.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Start Your Engines
+manapool:{3}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Start Your Engines
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+pt:grizzly bears=4/2
+graveyard:Start Your Engines
+life:20
+[PLAYER2]
+life:20
+[END]
