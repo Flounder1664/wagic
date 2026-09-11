@@ -1,0 +1,31 @@
+#The second-spell discount pattern (Monk Class, Highspire Bell-Ringer, Uthros Psionicist, Alisaie,
+#Raging Battle Mouse) cancelled its -N with a CONTINUOUS +N lord once two spells had been cast. A
+#lord applies to cards as they ENTER the casting zones, so a card reaching the hand after the
+#second spell got the +N without ever having had the -N and cost {N} MORE for the rest of the turn.
+#John saw it as Racers' Scoreboard's discount "not working" - the Mouse's +1 ate it. The +N is now a
+#one-shot at the moment the second spell is cast, reaching only the cards that got the -N.
+#Generic-only spells, so colour spending cannot muddy it: Mind Stone (1st, {2}), Ichor Wellspring
+#(2nd, {2}-{1}; its ETB draws the Juggernaut), then the Juggernaut must cost its printed {4}.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:527515
+hand:Mind Stone,Ichor Wellspring
+library:Juggernaut
+manapool:{7}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mind Stone
+Ichor Wellspring
+Juggernaut
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:527515,Mind Stone,Ichor Wellspring,Juggernaut
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -74902,7 +74902,10 @@ auto=@movedto(*|mystack):counter(0/0,1,MonkEffect)
 #cancel it with a matching increase once the count passes 2. Same pair as Highspire
 #Bell-Ringer and Uthros Psionicist, which copied this card's construction.
 auto=this(variable{hascntmonkeffect}=1) lord(*|mycastingzone) altercost(colorless,-1)
-auto=this(variable{hascntmonkeffect}>1) lord(*|mycastingzone) altercost(colorless,+1)
+#The +1 that ends the discount is a ONE-SHOT as the second spell is cast, not a lord: a lord
+#reaches cards as they enter the hand, so one drawn later got the +1 without the -1 and cost
+#{1} more (generic/monk_drawn_card_cost.txt). all() is the engine's one-shot lord.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Second spell cast - end the discount) all(*|mycastingzone) altercost(colorless,+1)
 auto=@each end restriction{compare(hascntmonkeffect)~morethan~0}:removeallcounters(0/0,1,MonkEffect)
 auto=this(variable{hascntlevel}=1) {W}{U}:name(Level 2) counter(0/0,1,Level) asSorcery
 auto=@counteradded(0/0.1.Level) from(this) restriction{compare(hascntlevel)~equalto~2}:may name(Return non-land permanent) target(*[-land]|battlefield) moveto(hand)
@@ -139361,7 +139364,10 @@ grade=borderline
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,bellrung)
 auto=@movedto(*|mystack):counter(0/0,1,bellrung)
 auto=this(variable{hascntbellrung}=1) lord(*|mycastingzone) altercost(colorless,-1)
-auto=this(variable{hascntbellrung}>1) lord(*|mycastingzone) altercost(colorless,+1)
+#The +1 that ends the discount is a ONE-SHOT as the second spell is cast, not a lord: a lord
+#reaches cards as they enter the hand, so one drawn later got the +1 without the -1 and cost
+#{1} more (generic/monk_drawn_card_cost.txt). all() is the engine's one-shot lord.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Second spell cast - end the discount) all(*|mycastingzone) altercost(colorless,+1)
 auto=@each end restriction{compare(hascntbellrung)~morethan~0}:removeallcounters(0/0,1,bellrung)
 #every spell.
 text=Flying -- The second spell you cast each turn costs {1} less to cast.
@@ -139385,7 +139391,10 @@ grade=borderline
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,uthrosdiscount)
 auto=@movedto(*|mystack):counter(0/0,1,uthrosdiscount)
 auto=this(variable{hascntuthrosdiscount}=1) lord(*|mycastingzone) altercost(colorless,-2)
-auto=this(variable{hascntuthrosdiscount}>1) lord(*|mycastingzone) altercost(colorless,+2)
+#The +2 that ends the discount is a ONE-SHOT as the second spell is cast, not a lord: a lord
+#reaches cards as they enter the hand, so one drawn later got the +2 without the -2 and cost
+#{2} more (generic/monk_drawn_card_cost.txt). all() is the engine's one-shot lord.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Second spell cast - end the discount) all(*|mycastingzone) altercost(colorless,+2)
 auto=@each end restriction{compare(hascntuthrosdiscount)~morethan~0}:removeallcounters(0/0,1,uthrosdiscount)
 #every spell.
 text=The second spell you cast each turn costs {2} less to cast.
@@ -145009,7 +145018,7 @@ name=Embalmed Ascendant
 #climb to max speed needs four turns of an opponent losing life, which the harness cannot
 #drive.
 auto=_STARTENGINES_
-auto=_ZOMBIETOKEN_
+auto=token(-692085)
 auto=@movedTo(creature|graveyard) from(mybattlefield) restriction{compare(pspeed)~equalto~4}:name(Max speed - drain 1) life:-1 opponent && life:1 controller
 text=Start your engines! -- When this creature enters, create a 2/2 black Zombie creature token. -- Max speed - Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.
 mana={1}{W}{B}
@@ -145147,7 +145156,7 @@ name=Hour of Victory
 #climb to max speed needs four turns of an opponent losing life, which the harness cannot
 #drive.
 auto=_STARTENGINES_
-auto=_ZOMBIETOKEN_
+auto=token(-692085)
 auto={1}{B}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - search your library) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend asSorcery
 text=Start your engines! -- When this enchantment enters, create a 2/2 black Zombie creature token. -- Max speed - {1}{B}, Sacrifice this enchantment: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
 mana={2}{B}
@@ -145198,7 +145207,7 @@ name=Risen Necroregent
 #climb to max speed needs four turns of an opponent losing life, which the harness cannot
 #drive.
 auto=_STARTENGINES_
-auto=@each my end restriction{compare(pspeed)~equalto~4}:name(Max speed - Zombie) _ZOMBIETOKEN_
+auto=@each my end restriction{compare(pspeed)~equalto~4}:name(Max speed - Zombie) token(-692085)
 text=Start your engines! -- Max speed - At the beginning of your end step, create a 2/2 black Zombie creature token.
 mana={4}{B}
 type=Creature
@@ -145260,7 +145269,7 @@ name=Zahur, Glory's Past
 #drive.
 auto=_STARTENGINES_
 auto={S(other creature|mybattlefield)}:name(Surveil 1) _SURVEIL1_ limit:1
-auto=@movedTo(creature[-token]|graveyard) from(mybattlefield) restriction{compare(pspeed)~equalto~4}:name(Max speed - tapped Zombie) _ZOMBIETOKEN_ and!( tap(noevent) )!
+auto=@movedTo(creature[-token]|graveyard) from(mybattlefield) restriction{compare(pspeed)~equalto~4}:name(Max speed - tapped Zombie) token(-692085) and!( tap(noevent) )!
 text=Start your engines! -- Sacrifice another creature: Surveil 1. Activate only once each turn. -- Max speed - Whenever a nontoken creature you control dies, create a tapped 2/2 black Zombie creature token.
 mana={W}{B}
 type=Legendary Creature
@@ -145275,7 +145284,7 @@ name=Howlsquad Heavy
 #drive.
 auto=_STARTENGINES_
 auto=lord(other goblin|mybattlefield) haste
-auto=@each my combatbegins:name(Goblin that attacks) create(goblin:creature goblin:1/1:red) and!( transforms((,mustattack)) ueot )!
+auto=@each my combatbegins:name(Goblin that attacks) token(-692086) and!( transforms((,mustattack)) ueot )!
 auto={T} restriction{compare(pspeed)~equalto~4}:foreach(goblin|mybattlefield) add{R}
 text=Start your engines! -- Other Goblins you control have haste. -- At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able. -- Max speed - {T}: Add {R} for each Goblin you control.
 mana={2}{R}
@@ -145537,7 +145546,10 @@ abilities=first strike
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,DualcastEffect)
 auto=@movedto(*|mystack):counter(0/0,1,DualcastEffect)
 auto=this(variable{hascntdualcasteffect}=1) lord(*|mycastingzone) altercost(colorless,-2)
-auto=this(variable{hascntdualcasteffect}>1) lord(*|mycastingzone) altercost(colorless,+2)
+#The +2 that ends the discount is a ONE-SHOT as the second spell is cast, not a lord: a lord
+#reaches cards as they enter the hand, so one drawn later got the +2 without the -2 and cost
+#{2} more (generic/monk_drawn_card_cost.txt). all() is the engine's one-shot lord.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Second spell cast - end the discount) all(*|mycastingzone) altercost(colorless,+2)
 auto=@each end restriction{compare(hascntdualcasteffect)~morethan~0}:removeallcounters(0/0,1,DualcastEffect)
 auto=may name(Search for Alphinaud Leveilleur) target(Alphinaud Leveilleur|mylibrary) moveto(myhand) and!( shuffle )!
 text=Partner with Alphinaud Leveilleur -- First strike -- Dualcast - The second spell you cast each turn costs {2} less to cast.
@@ -145569,7 +145581,10 @@ name=Raging Battle Mouse
 auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,MouseEffect)
 auto=@movedto(*|mystack):counter(0/0,1,MouseEffect)
 auto=this(variable{hascntmouseeffect}=1) lord(*|mycastingzone) altercost(colorless,-1)
-auto=this(variable{hascntmouseeffect}>1) lord(*|mycastingzone) altercost(colorless,+1)
+#The +1 that ends the discount is a ONE-SHOT as the second spell is cast, not a lord: a lord
+#reaches cards as they enter the hand, so one drawn later got the +1 without the -1 and cost
+#{1} more (generic/monk_drawn_card_cost.txt). all() is the engine's one-shot lord.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Second spell cast - end the discount) all(*|mycastingzone) altercost(colorless,+1)
 auto=@each end restriction{compare(hascntmouseeffect)~morethan~0}:removeallcounters(0/0,1,MouseEffect)
 auto=@each my combatbegins restriction{type(*[-land&fresh]|mybattlefield)~morethan~1}:name(Celebration) target(creature|mybattlefield) 1/1 ueot
 text=The second spell you cast each turn costs {1} less to cast. -- Celebration - At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
@@ -145581,7 +145596,11 @@ toughness=1
 [/card]
 [card]
 name=Shackle Slinger
-auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Stun or tap) target(creature|opponentbattlefield) transforms((,newability[if cantargetcard(creature[tapped]|*) then counter(0/0,1,stun) else tap])) oneshot
+#The if/else sits at the TRIGGER's level, not inside transforms(newability[...]): IfThenAbility
+#checks cantargetcard against its own target, and wrapped in a newability it has none, so the
+#stun branch never fired (John's playtest). Stun itself was unimplemented until
+#MTGCardInstance::untap() learned CR 122.1d.
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Stun or tap) target(creature|opponentbattlefield) if cantargetcard(*[tapped]|*) then counter(0/0,1,stun) else tap
 text=Whenever you cast your second spell each turn, choose target creature an opponent controls. If it's tapped, put a stun counter on it. Otherwise, tap it.
 mana={2}{U}
 type=Creature
@@ -145657,4 +145676,16 @@ type=Creature
 subtype=Spirit
 power=1
 toughness=1
+[/card]
+[card]
+name=Zombie Dft
+#Aetherdrift's Zombie token (tdft #3): a plain 2/2 black Zombie. The shared Zombie primitive is the
+#DECAYED one (can't block, sacrificed after attacking), so DFT's gets its own body. Registered in
+#DFT at -692085. Hour of Victory, Embalmed Ascendant, Risen Necroregent and Zahur create it by id;
+#their old inline _ZOMBIETOKEN_ looked its art up at each creator's id, where one wrong image sat.
+type=Creature
+subtype=Zombie
+power=2
+toughness=2
+color=black
 [/card]

@@ -693,6 +693,16 @@ void MTGCardInstance::untap()
 {
     if (!tapped)
         return;
+    //Stun (CR 122.1d): if a permanent with a stun counter on it would become untapped, a stun
+    //counter is removed from it instead. Nothing in the engine handled stun before - it was a
+    //counter with a name and no effect - so Cryogen Relic, Ice Flan, Summon: Shiva, Tonberry and
+    //Shackle Slinger all "stunned" a creature that then untapped as normal. Found by John
+    //playtesting Shackle Slinger. DSL lines are lowercased on load, hence "stun".
+    if (counters && counters->hasCounter("stun", 0, 0))
+    {
+        counters->removeCounter("stun", 0, 0);
+        return;
+    }
     tapped = 0;
     WEvent * e = NEW WEventCardTap(this, 1, 0);
     observer->receiveEvent(e);

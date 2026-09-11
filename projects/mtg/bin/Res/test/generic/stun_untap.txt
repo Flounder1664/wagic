@@ -1,0 +1,34 @@
+#Stun (CR 122.1d): "if a permanent with a stun counter on it would become untapped, instead
+#remove a stun counter from it." The engine had no stun at all - the counter was a name with no
+#effect - so every stun card stunned nothing. Found playtesting Shackle Slinger.
+#Icy Manipulator taps player 2's Grizzly Bears, Cryogen Relic stuns them, and at player 2's next
+#untap step the Bears must STAY tapped with the stun counter gone. (Cryogen Relic draws on entering
+#and on dying, hence two cards in player 1's hand.)
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Icy Manipulator,Cryogen Relic
+library:Forest,Forest,Forest
+manapool:{2}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Icy Manipulator
+Grizzly Bears
+Cryogen Relic
+Grizzly Bears
+eot
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Icy Manipulator
+graveyard:Cryogen Relic
+hand:*,*
+library:*
+tappedinplay:1
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+counter:grizzly bears=stun:0
+[END]

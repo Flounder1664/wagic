@@ -1,0 +1,16 @@
+#John: Hour of Victory's Zombie had the wrong image. _ZOMBIETOKEN_ is inline, so its art was looked
+#up at the creating card's own id - where one wrong picture had been staged for five DFT cards.
+#It now creates DFT's registered Zombie token by id (Zombie Dft, -692085, tdft #3 art). Asserted by
+#name: an inline token would be called plain "Zombie", so this fails if the conversion is lost.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Hour of Victory
+[PLAYER2]
+[DO]
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Hour of Victory,Start Your Engines!,Zombie Dft
+[PLAYER2]
+[END]
