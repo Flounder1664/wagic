@@ -139810,7 +139810,7 @@ toughness=3
 [card]
 name=Dragon-Cursed Halls
 auto={T}:Add{C}
-auto={1}{T}:name(Grant treasure on damage) target(creature) transforms((,newability[@combatdamaged(player) from(this):_TREASURE_])) ueot
+auto={1}{T}:name(Treasure on damage) target(creature) transforms((,newability[@combatdamaged(player) from(this):_TREASURE_])) ueot
 text={T}: Add {C}. -- {1}, {T}: Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, create a Treasure token."
 type=Land
 [/card]
@@ -144972,9 +144972,10 @@ auto=_STARTENGINES_
 auto={T}:Add{C}
 #No name(...) on this line, deliberately. John found the ability was never offered at max speed:
 #it never reacted to a click, so with only the mana ability reacting the land opened no menu.
-#Probed on Perilous Snare (the harness cannot click a land's non-mana ability): the WORDING of the
-#name decides it - name(Go) works, name(Grant haste) and name(Max speed - grant it) do not - so a
-#keyword inside the name is being read as code before the name is stripped. No name is safe.
+#Probed on Perilous Snare (the harness cannot click a land's non-mana ability): name(Go) works,
+#name(Grant haste) does not. parseMagicLine runs its "grant "..." grantend" split on the whole
+#lowercased line BEFORE name(...) is stripped, and does not require the grantend - so any label
+#containing "grant " swallows the rest of the line. Never put "grant " in a name().
 auto={T} restriction{compare(pspeed)~equalto~4}:target(creature) haste ueot
 text=Start your engines! -- {T}: Add {C}. -- Max speed - {T}: Target creature gains haste until end of turn.
 type=Land
