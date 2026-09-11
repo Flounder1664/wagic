@@ -3,6 +3,11 @@
 #a single life loss raised speed TWICE. The rule now lives on the tracker token, of which
 #there is only ever one, so two speed cards must still give exactly one increment.
 #Walking Sarcophagus and Nesting Bot are both out; the Goblin connects once; speed = 2.
+#Asserted by id, not by name: "Start Your Engines" is ALSO a Kaladesh sorcery (KLD 417708).
+#Rules::getMTGId resolves an unqualified name through getCardByName's cache, so which card it
+#returns depends on what earlier tests looked up - this passed alone and failed after
+#speed_tracker_token once _STARTENGINES_ stopped creating the tracker by name. The tracker is
+#created by id (-692082), so the assertion pins that id.
 [INIT]
 combatattackers
 [PLAYER1]
@@ -18,7 +23,7 @@ next
 combatdamage
 [PLAYER1]
 inplay:Walking Sarcophagus,Nesting Bot,Raging Goblin,Start Your Engines
-counter:start your engines=Speed:2
+counter:-692082=Speed:2
 life:20
 [PLAYER2]
 life:19
