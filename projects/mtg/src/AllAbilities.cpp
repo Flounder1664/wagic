@@ -7509,6 +7509,10 @@ IfThenAbility * IfThenAbility::clone() const
 {
     IfThenAbility * a = NEW IfThenAbility(*this);
     a->delayedAbility = delayedAbility->clone();
+    //The else branch must be deep-copied too. Sharing it meant every resolved clone freed the
+    //original's else ability, and the next resolution cloned freed memory (Shackle Slinger's
+    //"else tap" crashed on its second firing, 2026-09-11).
+    a->delayedElseAbility = delayedElseAbility ? delayedElseAbility->clone() : NULL;
     return a;
 }
 
