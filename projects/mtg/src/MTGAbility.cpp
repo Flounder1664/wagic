@@ -5612,7 +5612,9 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             DebugTrace("MTGABILITY: Parsing Error: " << s);
             return NULL;
         }
-        return NEW AAllActivatedAbilitiesOf(observer, id, card, donors, splitBorrow[1]);
+        //trailing "nonmana" = "...except mana abilities" (Sharkey, Tyrant of the Shire)
+        bool nonMana = s.find(" nonmana") != string::npos;
+        return NEW AAllActivatedAbilitiesOf(observer, id, card, donors, splitBorrow[1], nonMana);
     }
 
     //Protection from...

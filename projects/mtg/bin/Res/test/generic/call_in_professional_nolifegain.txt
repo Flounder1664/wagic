@@ -1,0 +1,27 @@
+#Call In a Professional - "players can't gain life this turn" - puts out an end-of-turn emblem
+#carrying nolifegain and nolifegainopponent; Player::gainLife refuses while either applies.
+#Healing Salve afterwards must be CAST (it has to reach the graveyard, or the test would pass
+#for the wrong reason) and still leave player 1 at 20.
+[INIT]
+firstmain
+[PLAYER1]
+hand:Call In a Professional,Healing Salve
+manapool:{2}{R}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Call In a Professional
+p2
+Healing Salve
+choice 0
+p1
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:*,*
+graveyard:Call In a Professional,Healing Salve
+life:20
+[PLAYER2]
+life:17
+[END]

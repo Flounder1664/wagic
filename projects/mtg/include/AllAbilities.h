@@ -3744,8 +3744,9 @@ class AAllActivatedAbilitiesOf: public ListMaintainerAbility
 public:
     map<MTGCardInstance *, vector<MTGAbility *> > granted;
     string tcString;
+    bool nonMana; //"except mana abilities" - Sharkey, Tyrant of the Shire
 
-    AAllActivatedAbilitiesOf(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _tc, string _tcString);
+    AAllActivatedAbilitiesOf(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _tc, string _tcString, bool _nonMana = false);
     ~AAllActivatedAbilitiesOf();
 
     int canBeInList(MTGCardInstance * card);

@@ -1,0 +1,22 @@
+#Skill Borrower borrows from the top card of your library "if it is an artifact or creature".
+#A descriptor has ONE AND/OR mode, so that is two selectors: artifact[zpos=1] and
+#creature[-artifact&zpos=1]. The second - a negated type ANDed with a position - is not
+#attested anywhere else, so this pins it: a non-artifact creature on top must lend its {T}.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Skill Borrower
+library:Llanowar Elves
+manapool:{0}
+[PLAYER2]
+[DO]
+Skill Borrower
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Skill Borrower
+tappedinplay:1
+library:Llanowar Elves
+manapool:{G}
+[PLAYER2]
+[END]

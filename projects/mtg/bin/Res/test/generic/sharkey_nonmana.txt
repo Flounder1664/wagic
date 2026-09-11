@@ -1,0 +1,23 @@
+#Sharkey, Tyrant of the Shire borrows the activated abilities of opponents' lands "except mana
+#abilities" - allactivatedabilities(...) nonmana, added for this card. An opponent with only a
+#Forest therefore lends Sharkey NOTHING: clicking it must not tap it or add {G}. Without
+#nonmana it would tap for green off the opponent's land. 617059 is Sharkey's LTR id - its name
+#has a comma, which a zone line cannot hold.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:617059
+manapool:{0}
+[PLAYER2]
+inplay:Forest
+[DO]
+617059
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:617059
+tappedinplay:0
+manapool:{0}
+[PLAYER2]
+inplay:Forest
+[END]

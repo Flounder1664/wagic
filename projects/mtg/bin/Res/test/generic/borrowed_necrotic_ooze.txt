@@ -1,0 +1,21 @@
+#Necrotic Ooze - "has all activated abilities of all creature cards in all graveyards" - is
+#allactivatedabilities(creature|graveyard). A bare "graveyard" admits BOTH graveyards
+#(TargetChooser.cpp). With Llanowar Elves in the graveyard the Ooze must tap for {G} itself.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Necrotic Ooze
+graveyard:Llanowar Elves
+manapool:{0}
+[PLAYER2]
+[DO]
+Necrotic Ooze
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Necrotic Ooze
+tappedinplay:1
+graveyard:Llanowar Elves
+manapool:{G}
+[PLAYER2]
+[END]

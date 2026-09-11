@@ -1,0 +1,28 @@
+#Otter-Penguin - "whenever you draw your second card each turn, this creature gets +1/+2 until
+#end of turn and can't be blocked this turn". Ancestral Recall draws three; the second fires it
+#once, so a 2/1 becomes 3/3. 4/5 would mean it fired on the third as well.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Otter-Penguin
+hand:Ancestral Recall
+library:Forest,Forest,Forest,Forest,Forest
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ancestral Recall
+p1
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Otter-Penguin
+pt:otter-penguin=3/3
+hand:*,*,*
+library:*,*
+graveyard:*
+life:20
+[PLAYER2]
+life:20
+[END]

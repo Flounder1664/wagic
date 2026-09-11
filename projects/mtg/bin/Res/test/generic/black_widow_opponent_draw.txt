@@ -1,0 +1,33 @@
+#Black Widow, Agile Avenger - "whenever an opponent draws their second card each turn, put a
+#+1/+1 counter on Black Widow and you draw a card" - is @drawfoeof(player) gated on odrewcount,
+#the opponent's own per-turn draw counter. Ancestral Recall on player 2 draws them three: the
+#second must fire it exactly once - a 3/3 Black Widow and one card for player 1. 711045 is her
+#MSC id (comma in the name).
+[INIT]
+firstmain
+[PLAYER1]
+inplay:711045
+hand:Ancestral Recall
+library:Forest,Forest
+manapool:{U}
+life:20
+[PLAYER2]
+library:Mountain,Mountain,Mountain,Mountain,Mountain
+life:20
+[DO]
+Ancestral Recall
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:711045
+pt:711045=3/3
+hand:*
+library:*
+graveyard:*
+life:20
+[PLAYER2]
+hand:*,*,*
+library:*,*
+life:20
+[END]

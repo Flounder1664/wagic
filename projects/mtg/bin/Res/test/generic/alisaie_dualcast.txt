@@ -1,0 +1,30 @@
+#Alisaie Leveilleur - "the second spell you cast each turn costs {2} less" - is Monk Class's
+#cancel-the-discount pattern with {2}. Three Lava Axes ({4}{R} each) from {14}{R}{R}{R}:
+#5 + 3 + 5 = 13 spent, {4} left. {2} left would mean the discount leaked onto the third spell;
+#{2} left again, or {1}, would mean it never switched off.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Alisaie Leveilleur
+hand:Lava Axe,Lava Axe,Lava Axe
+manapool:{14}{R}{R}{R}
+life:20
+[PLAYER2]
+life:40
+[DO]
+Lava Axe
+p2
+Lava Axe
+p2
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Alisaie Leveilleur
+manapool:{4}
+graveyard:*,*,*
+life:20
+[PLAYER2]
+life:25
+[END]

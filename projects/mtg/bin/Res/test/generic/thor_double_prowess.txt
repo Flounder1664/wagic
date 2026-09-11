@@ -1,0 +1,24 @@
+#Thor Odinson prints prowess twice. The keyword is one flag, so the second instance is a second
+#trigger line. One noncreature spell must take a 4/4 Thor to 6/6; 5/5 means only the keyword fired.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Thor Odinson
+hand:Lava Axe
+manapool:{4}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Thor Odinson
+pt:thor odinson=6/6
+graveyard:*
+life:20
+[PLAYER2]
+life:15
+[END]

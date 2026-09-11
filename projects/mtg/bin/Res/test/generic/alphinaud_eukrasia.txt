@@ -1,0 +1,29 @@
+#Alphinaud Leveilleur - "whenever you cast your second spell each turn, draw a card" - is
+#@movedto(*|mystack) gated on thisturn(*|mystack)~equalto~1: thisturn counts spells cast BEFORE
+#the current one, so 1 is the second spell. Two Lava Axes must draw exactly one card.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:Alphinaud Leveilleur
+hand:Lava Axe,Lava Axe
+library:Forest,Forest,Forest
+manapool:{8}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lava Axe
+p2
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Alphinaud Leveilleur
+hand:*
+library:*,*
+graveyard:*,*
+life:20
+[PLAYER2]
+life:10
+[END]

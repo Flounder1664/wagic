@@ -3217,15 +3217,6 @@ power=1
 toughness=2
 [/card]
 [card]
-name=Experiment Kraj
-text=Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it. -- {T}: Put a +1/+1 counter on target creature.
-mana={2}{G}{G}{U}{U}
-type=Legendary Creature
-subtype=Ooze Mutant
-power=4
-toughness=6
-[/card]
-[card]
 name=Expropriate
 text=Council's dilemma - Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile Expropriate.
 mana={7}{U}{U}
@@ -3452,12 +3443,6 @@ type=Instant
 name=Fistful of Force
 text=Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 mana={1}{G}
-type=Instant
-[/card]
-[card]
-name=Flaring Pain
-text=Damage can't be prevented this turn. -- Flashback {R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-mana={1}{R}
 type=Instant
 [/card]
 [card]
@@ -6344,12 +6329,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Manascape Refractor
-text=Manascape Refractor enters the battlefield tapped. -- Manascape Refractor has all activated abilities of all lands on the battlefield. -- You may spend mana as though it were mana of any color to pay the activation costs of Manascape Refractor's abilities.
-mana={3}
-type=Artifact
-[/card]
-[card]
 name=Mandate of Peace
 restriction=during battle
 auto=ueot maxCast(*)0 opponent
@@ -6705,12 +6684,6 @@ name=Mine, Mine, Mine!
 text=When Mine, Mine, Mine comes into play, each player puts his or her library into his or her hand. -- Each player skips his or her discard phase and does not lose as a result of being unable to draw a card. -- Each player cannot play more than one spell each turn. -- If Mine, Mine, Mine leaves play, each player shuffles his or her hand and graveyard into his or her library.
 mana={4}{G}{G}
 type=Enchantment
-[/card]
-[card]
-name=Mirran Safehouse
-text=As long as Mirran Safehouse is on the battlefield, it has all activated abilities of all land cards in all graveyards.
-mana={3}
-type=Artifact
 [/card]
 [card]
 name=Mirrodin Besieged
@@ -7242,15 +7215,6 @@ name=Necromancy
 text=You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step. -- When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.
 mana={2}{B}
 type=Enchantment
-[/card]
-[card]
-name=Necrotic Ooze
-text=As long as Necrotic Ooze is on the battlefield, it has all activated abilities of all creature cards in all graveyards.
-mana={2}{B}{B}
-type=Creature
-subtype=Ooze
-power=4
-toughness=3
 [/card]
 [card]
 name=Necrotic Plague
@@ -9353,15 +9317,6 @@ mana={B}
 type=Sorcery
 [/card]
 [card]
-name=Sharkey, Tyrant of the Shire
-text=Activated abilities of lands your opponents control can't be activated unless they're mana abilities. -- Sharkey, Tyrant of the Shire has all activated abilities of lands your opponents control except mana abilities. -- Mana of any type can be spent to activate Sharkey's abilities.
-mana={2}{U}{B}
-type=Legendary Creature
-subtype=Avatar Rogue
-power=2
-toughness=4
-[/card]
-[card]
 name=Shelkin Brownie
 missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text={T}: Target creature loses all "bands with other" abilities until end of turn.
@@ -9571,15 +9526,6 @@ name=Siren's Call
 text=Cast Siren's Call only during an opponent's turn, before attackers are declared. -- Creatures the active player controls attack this turn if able. -- At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
 mana={U}
 type=Instant
-[/card]
-[card]
-name=Skill Borrower
-text=Play with the top card of your library revealed. -- As long as the top card of your library is an artifact or creature card, Skill Borrower has all activated abilities of that card. (If any of the abilities use that card's name, use this creature's name instead.)
-mana={2}{U}
-type=Artifact Creature
-subtype=Human Wizard
-power=1
-toughness=3
 [/card]
 [card]
 name=Skirk Alarmist
@@ -14560,15 +14506,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Black Widow, Agile Avenger
-text=Menace -- Whenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card.
-mana={1}{R}{W}
-type=Legendary Creature
-subtype=Human Spy Hero
-power=2
-toughness=2
-[/card]
-[card]
 name=Black Widow, Daring Operative
 text=Menace (This creature can't be blocked except by two or more creatures.) -- When Black Widow enters, mill three cards. (Put the top three cards of your library into your graveyard.) -- Whenever Black Widow deals combat damage to a player, each opponent loses life equal to the number of creature cards in your graveyard.
 mana={4}{B}
@@ -16248,15 +16185,6 @@ type=Legendary Creature
 subtype=Human Scientist Villain
 power=3
 toughness=5
-[/card]
-[card]
-name=Red Ghost, Intangible Genius
-text=Ward {2} -- Red Ghost can't be blocked. -- Whenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste.
-mana={2}{U}{R}
-type=Legendary Creature
-subtype=Human Scientist Villain
-power=2
-toughness=3
 [/card]
 [card]
 name=Reed Richards, Smartest Man
@@ -18082,15 +18010,6 @@ power=2
 toughness=1
 [/card]
 [card]
-name=Kree Commandos
-text=Flying, vigilance -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
-mana={2}{W}
-type=Creature
-subtype=Kree Soldier Villain
-power=2
-toughness=1
-[/card]
-[card]
 name=Kree Sentinel
 text=Reach -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
 mana={4}{R}
@@ -18847,15 +18766,6 @@ power=2
 toughness=1
 [/card]
 [card]
-name=Thor Odinson
-text=Flying, vigilance, prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.)
-mana={3}{R}{W}
-type=Legendary Creature
-subtype=God Warrior Hero
-power=4
-toughness=4
-[/card]
-[card]
 name=Thor, God of Thunder
 text=Flying -- When Thor enters, exile target Equipment, instant, or sorcery card from your graveyard. Until the end of your next turn, you may play that card. -- Whenever you cast a noncreature spell, Thor deals damage equal to that spell's mana value to any target.
 mana={3}{R}{R}
@@ -19130,24 +19040,6 @@ power=3
 toughness=5
 [/card]
 [card]
-name=Alisaie Leveilleur
-text=Partner with Alphinaud Leveilleur (When this creature enters, target player may put Alphinaud Leveilleur into their hand from their library, then shuffle.) -- First strike -- Dualcast — The second spell you cast each turn costs {2} less to cast.
-mana={2}{W}
-type=Legendary Creature
-subtype=Elf Wizard
-power=3
-toughness=2
-[/card]
-[card]
-name=Alphinaud Leveilleur
-text=Partner with Alisaie Leveilleur (When this creature enters, target player may put Alisaie Leveilleur into their hand from their library, then shuffle.) -- Vigilance -- Eukrasia — Whenever you cast your second spell each turn, draw a card.
-mana={3}{U}
-type=Legendary Creature
-subtype=Elf Wizard
-power=2
-toughness=4
-[/card]
-[card]
 name=Ardbert, Warrior of Darkness
 text=Whenever you cast a white spell, put a +1/+1 counter on each legendary creature you control. They gain vigilance until end of turn. -- Whenever you cast a black spell, put a +1/+1 counter on each legendary creature you control. They gain menace until end of turn.
 mana={1}{W}{B}
@@ -19305,13 +19197,6 @@ type=Legendary Creature
 subtype=Human Samurai
 power=3
 toughness=3
-[/card]
-[card]
-name=Dancer's Chakrams
-text=Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.) -- Equipped creature gets +2/+2, has lifelink and "Other commanders you control get +2/+2 and have lifelink," and is a Performer in addition to its other types. -- Krishna — Equip {3}
-mana={3}{W}
-type=Artifact
-subtype=Equipment
 [/card]
 [card]
 name=Duelist's Flame

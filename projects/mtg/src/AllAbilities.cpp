@@ -11207,8 +11207,8 @@ void PopulateColorIndexVector(list<int>& colors, const string& colorStringList, 
 // new machinery.
 
 AAllActivatedAbilitiesOf::AAllActivatedAbilitiesOf(GameObserver* observer, int _id, MTGCardInstance * card,
-                                                   TargetChooser * _tc, string _tcString)
-    : ListMaintainerAbility(observer, _id, card), tcString(_tcString)
+                                                   TargetChooser * _tc, string _tcString, bool _nonMana)
+    : ListMaintainerAbility(observer, _id, card), tcString(_tcString), nonMana(_nonMana)
 {
     tc = _tc;
     if (tc)
@@ -11293,6 +11293,15 @@ int AAllActivatedAbilitiesOf::added(MTGCardInstance * donor)
         //currently dropped, which under-grants rather than over-grants - the safe direction.
         if (!dynamic_cast<ActivatedAbility *>(a) || a->oneShot
             || dynamic_cast<AUpkeep *>(a))
+        {
+            SAFE_DELETE(a);
+            continue;
+        }
+        //"...except mana abilities". A mana line is recognised two ways because the parser
+        //does not always return a bare AManaProducer: {T}:foreach(...) add{G} comes back as a
+        //GenericActivatedAbility wrapping one. Every Wagic mana effect is written add{...},
+        //and magicText is lowercased on load, so the line itself is a reliable second test.
+        if (nonMana && (dynamic_cast<AManaProducer *>(a) || line.find("add{") != string::npos))
         {
             SAFE_DELETE(a);
             continue;

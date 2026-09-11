@@ -144923,3 +144923,735 @@ subtype=Avatar
 power=0
 toughness=0
 [/card]
+[card]
+name=Gastal Raider
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=target(*[instant;sorcery]|opponenthand) reject
+auto=this(variable{pspeed}>=4) 1/1
+auto=this(variable{pspeed}>=4) menace
+text=Start your engines! -- When this creature enters, target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card. -- Max speed - This creature gets +1/+1 and has menace.
+mana={2}{B}
+type=Creature
+subtype=Vampire Rogue
+power=2
+toughness=1
+[/card]
+[card]
+name=Aether Syphon
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={2}{T}:draw:1 controller
+auto=@drawof(player) restriction{compare(pspeed)~equalto~4}:name(Max speed - mill two) deplete:2 opponent
+text=Start your engines! -- {2}, {T}: Draw a card. -- Max speed - Whenever you draw a card, each opponent mills two cards.
+mana={1}{U}{U}
+type=Artifact
+[/card]
+[card]
+name=Amonkhet Raceway
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={T}:Add{C}
+auto={T} restriction{compare(pspeed)~equalto~4}:name(Max speed - grant haste) target(creature) haste ueot
+text=Start your engines! -- {T}: Add {C}. -- Max speed - {T}: Target creature gains haste until end of turn.
+type=Land
+[/card]
+[card]
+name=Avishkar Raceway
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={T}:Add{C}
+auto={3}{T}{D(*|myhand)} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+text=Start your engines! -- {T}: Add {C}. -- Max speed - {3}, {T}, Discard a card: Draw a card.
+type=Land
+[/card]
+[card]
+name=Muraganda Raceway
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={T}:Add{C}
+auto={T} restriction{compare(pspeed)~equalto~4}:Add{C}{C}
+text=Start your engines! -- {T}: Add {C}. -- Max speed - {T}: Add {C}{C}.
+type=Land
+[/card]
+[card]
+name=Burnout Bashtronaut
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=menace
+auto=_STARTENGINES_
+auto={2}:1/0 ueot
+auto=this(variable{pspeed}>=4) double strike
+text=Menace -- Start your engines! -- {2}: This creature gets +1/+0 until end of turn. -- Max speed - This creature has double strike.
+mana={R}
+type=Creature
+subtype=Goblin Warrior
+power=1
+toughness=1
+[/card]
+[card]
+name=Embalmed Ascendant
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=_ZOMBIETOKEN_
+auto=@movedTo(creature|graveyard) from(mybattlefield) restriction{compare(pspeed)~equalto~4}:name(Max speed - drain 1) life:-1 opponent && life:1 controller
+text=Start your engines! -- When this creature enters, create a 2/2 black Zombie creature token. -- Max speed - Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.
+mana={1}{W}{B}
+type=Creature
+subtype=Zombie
+power=1
+toughness=2
+[/card]
+[card]
+name=Gas Guzzler
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=tap(noevent)
+auto={B}{S(other *[creature;vehicle]|mybattlefield)} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+text=Start your engines! -- This creature enters tapped. -- Max speed - {B}, Sacrifice another creature or Vehicle: Draw a card.
+mana={B}
+type=Creature
+subtype=Vampire Rogue
+power=2
+toughness=1
+[/card]
+[card]
+name=Gastal Thrillseeker
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=damage:1 target(opponent) && life:1 controller
+auto=this(variable{pspeed}>=4) deathtouch
+auto=this(variable{pspeed}>=4) haste
+text=Start your engines! -- When this creature enters, it deals 1 damage to target opponent and you gain 1 life. -- Max speed - This creature has deathtouch and haste.
+mana={B}{R}
+type=Creature
+subtype=Lizard Berserker
+power=2
+toughness=3
+[/card]
+[card]
+name=Glitch Ghost Surveyor
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=flying
+auto=_STARTENGINES_
+autograveyard={3}{E} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+text=Flying -- Start your engines! -- Max speed - {3}, Exile this card from your graveyard: Draw a card.
+mana={2}{U}
+type=Creature
+subtype=Spirit Scout
+power=2
+toughness=2
+[/card]
+[card]
+name=Goblin Surveyor
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=trample
+auto=_STARTENGINES_
+autograveyard={3}{E} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+text=Trample -- Start your engines! -- Max speed - {3}, Exile this card from your graveyard: Draw a card.
+mana={2}{R}
+type=Creature
+subtype=Goblin Scout
+power=3
+toughness=2
+[/card]
+[card]
+name=Leonin Surveyor
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+autograveyard={3}{E} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+auto=@each my upkeep:first strike ueot
+missing=first strike is granted at your upkeep, so a copy that enters later in your turn does not have it that turn
+text=Start your engines! -- During your turn, this creature has first strike. -- Max speed - {3}, Exile this card from your graveyard: Draw a card.
+mana={1}{W}
+type=Creature
+subtype=Cat Scout
+power=2
+toughness=2
+[/card]
+[card]
+name=Loxodon Surveyor
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+autograveyard={3}{E} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+text=Start your engines! -- Max speed - {3}, Exile this card from your graveyard: Draw a card.
+mana={2}{G}
+type=Creature
+subtype=Elephant Scout
+power=3
+toughness=3
+[/card]
+[card]
+name=Mutant Surveyor
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+autograveyard={3}{E} restriction{compare(pspeed)~equalto~4}:name(Max speed - draw a card) draw:1 controller
+auto={2}:1/1 ueot
+text=Start your engines! -- {2}: This creature gets +1/+1 until end of turn. -- Max speed - {3}, Exile this card from your graveyard: Draw a card.
+mana={2}{B}
+type=Creature
+subtype=Mutant Scout
+power=2
+toughness=3
+[/card]
+[card]
+name=Hazoret, Godseeker
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=indestructible,haste
+auto=_STARTENGINES_
+auto={1}{T}:target(creature[power<=2]) unblockable ueot
+auto=this(variable{pspeed}<4) cantattack
+auto=this(variable{pspeed}<4) cantblock
+text=Indestructible, haste -- Start your engines! -- {1}, {T}: Target creature with power 2 or less can't be blocked this turn. -- Hazoret can't attack or block unless you have max speed.
+mana={1}{R}
+type=Legendary Creature
+subtype=God
+power=5
+toughness=3
+[/card]
+[card]
+name=Hour of Victory
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=_ZOMBIETOKEN_
+auto={1}{B}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - search your library) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend asSorcery
+text=Start your engines! -- When this enchantment enters, create a 2/2 black Zombie creature token. -- Max speed - {1}{B}, Sacrifice this enchantment: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
+mana={2}{B}
+type=Enchantment
+[/card]
+[card]
+name=Kickoff Celebrations
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=may name(Discard a card, then draw two) target(*|myhand) reject and!( draw:2 controller )!
+auto={S} restriction{compare(pspeed)~equalto~4}:name(Max speed - haste) all(*[creature;vehicle]|mybattlefield) haste ueot
+text=Start your engines! -- When this enchantment enters, you may discard a card. If you do, draw two cards. -- Max speed - Sacrifice this enchantment: Creatures and Vehicles you control gain haste until end of turn.
+mana={1}{R}
+type=Enchantment
+[/card]
+[card]
+name=Pride of the Road
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=vigilance
+auto=_STARTENGINES_
+auto=@each my combatbegins restriction{compare(pspeed)~equalto~4}:name(Max speed - double strike) target(*[creature;vehicle]|mybattlefield) double strike ueot
+text=Vigilance -- Start your engines! -- Max speed - At the beginning of combat on your turn, target creature or Vehicle you control gains double strike until end of turn.
+mana={3}{W}
+type=Creature
+subtype=Zombie Cat Warrior
+power=2
+toughness=5
+[/card]
+[card]
+name=Racers' Scoreboard
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
+auto=this(variable{pspeed}>=4) lord(*|mycastingzone) altercost(colorless,-1)
+text=Start your engines! -- When this artifact enters, draw two cards, then discard a card. -- Max speed - Spells you cast cost {1} less to cast.
+mana={4}
+type=Artifact
+[/card]
+[card]
+name=Risen Necroregent
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=@each my end restriction{compare(pspeed)~equalto~4}:name(Max speed - Zombie) _ZOMBIETOKEN_
+text=Start your engines! -- Max speed - At the beginning of your end step, create a 2/2 black Zombie creature token.
+mana={4}{B}
+type=Creature
+subtype=Zombie Cat Knight
+power=5
+toughness=4
+[/card]
+[card]
+name=Starting Column
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto={T}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - loot two) draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
+text=Start your engines! -- {T}: Add one mana of any color. -- Max speed - {T}, Sacrifice this artifact: Draw two cards, then discard a card.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Swiftwing Assailant
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=flying
+auto=_STARTENGINES_
+auto=this(variable{pspeed}>=4) 0/1
+auto=this(variable{pspeed}>=4) vigilance
+text=Flying -- Start your engines! -- Max speed - This creature gets +0/+1 and has vigilance.
+mana={3}{W}
+type=Creature
+subtype=Bird Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=The Speed Demon
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+abilities=flying,trample
+auto=_STARTENGINES_
+auto=@each my end:name(Draw and lose X) draw:pspeed controller && life:-pspeed controller
+text=Flying, trample -- Start your engines! -- At the beginning of your end step, you draw X cards and lose X life, where X is your speed.
+mana={3}{B}{B}
+type=Legendary Creature
+subtype=Demon
+power=5
+toughness=5
+[/card]
+[card]
+name=Zahur, Glory's Past
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto={S(other creature|mybattlefield)}:name(Surveil 1) _SURVEIL1_ limit:1
+auto=@movedTo(creature[-token]|graveyard) from(mybattlefield) restriction{compare(pspeed)~equalto~4}:name(Max speed - tapped Zombie) _ZOMBIETOKEN_ and!( tap(noevent) )!
+text=Start your engines! -- Sacrifice another creature: Surveil 1. Activate only once each turn. -- Max speed - Whenever a nontoken creature you control dies, create a tapped 2/2 black Zombie creature token.
+mana={W}{B}
+type=Legendary Creature
+subtype=Zombie Cat Warrior
+power=3
+toughness=2
+[/card]
+[card]
+name=Howlsquad Heavy
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=lord(other goblin|mybattlefield) haste
+auto=@each my combatbegins:name(Goblin that attacks) create(goblin:creature goblin:1/1:red) and!( transforms((,mustattack)) ueot )!
+auto={T} restriction{compare(pspeed)~equalto~4}:foreach(goblin|mybattlefield) add{R}
+text=Start your engines! -- Other Goblins you control have haste. -- At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able. -- Max speed - {T}: Add {R} for each Goblin you control.
+mana={2}{R}
+type=Creature
+subtype=Goblin Mercenary
+power=2
+toughness=3
+[/card]
+[card]
+name=Momentum Breaker
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive.
+auto=_STARTENGINES_
+auto=ability$!name(sacrifice) notaTarget(*[creature;vehicle]|mybattlefield) sacrifice!$ opponent
+auto={2}{S}:name(Gain life equal to your speed) life:pspeed controller
+missing=an opponent who cannot sacrifice a creature or Vehicle should discard a card instead; that fallback is not written
+text=Start your engines! -- When this enchantment enters, each opponent sacrifices a creature or Vehicle of their choice. Each opponent who can't discards a card. -- {2}, Sacrifice this enchantment: You gain life equal to your speed.
+mana={1}{B}
+type=Enchantment
+[/card]
+[card]
+name=Besotted Knight // Betroth the Beast
+abilities=adventure
+other={W} name(Adventure)
+auto=alternative name(Create Royal Role) token(-632903) and!( transforms((,newability[name(Attach Royal Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+auto=alternative _ADVENTURE_
+text=// Create a Royal Role token attached to target creature you control.
+mana={3}{W}
+type=Creature
+subtype=Human Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Conceited Witch // Price of Beauty
+abilities=adventure,menace
+other={B} name(Adventure)
+auto=alternative name(Create Wicked Role) token(-632905) and!( transforms((,newability[name(Attach Wicked Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+auto=alternative _ADVENTURE_
+text=Menace // Create a Wicked Role token attached to target creature you control.
+mana={2}{B}
+type=Creature
+subtype=Human Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Ferocious Werefox // Guard Change
+#Guard Change is an INSTANT adventure: altflash gives flash only to the alternative
+#(adventure) cost, so the creature half stays sorcery-speed.
+abilities=adventure,trample,altflash
+other={1}{G} name(Adventure)
+auto=alternative name(Create Monster Role) token(-632901) and!( transforms((,newability[name(Attach Monster Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
+auto=alternative _ADVENTURE_
+text=Trample // Create a Monster Role token attached to target creature you control.
+mana={3}{G}
+type=Creature
+subtype=Elf Fox Warrior
+power=4
+toughness=3
+[/card]
+[card]
+name=Vantress Transmuter // Croaking Curse
+abilities=adventure
+other={1}{U} name(Adventure)
+auto=alternative name(Tap target creature) target(creature) tap
+auto=alternative name(Create Cursed Role) token(-632906) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature)])) oneshot )!
+auto=alternative _ADVENTURE_
+missing=the Cursed Role's creature is chosen when it is created rather than locked to the creature Croaking Curse tapped - choose the same one
+text=// Tap target creature. Create a Cursed Role token attached to it.
+mana={3}{U}
+type=Creature
+subtype=Human Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Necrotic Ooze
+#allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs are paid by
+#this card.
+auto=allactivatedabilities(creature|graveyard)
+text=As long as this creature is on the battlefield, it has all activated abilities of all creature cards in all graveyards.
+mana={2}{B}{B}
+type=Creature
+subtype=Ooze
+power=4
+toughness=3
+[/card]
+[card]
+name=Mirran Safehouse
+#allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs are paid by
+#this card.
+auto=allactivatedabilities(land|graveyard)
+text=As long as this artifact is on the battlefield, it has all activated abilities of all land cards in all graveyards.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Manascape Refractor
+#allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs are paid by
+#this card.
+auto=tap(noevent)
+auto=allactivatedabilities(land|battlefield)
+missing=mana cannot be spent as though it were mana of any colour to activate its abilities
+text=This artifact enters tapped. -- This artifact has all activated abilities of all lands on the battlefield. -- You may spend mana as though it were mana of any color to pay the activation costs of this artifact's abilities.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Skill Borrower
+#Two selectors, not one: a descriptor carries a single AND/OR mode, so 'artifact or creature,
+#on top' cannot be one *[..]. The second excludes artifacts so an artifact creature is not
+#lent twice. allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs
+#are paid by this card.
+abilities=showfromtoplibrary
+auto=allactivatedabilities(artifact[zpos=1]|mylibrary)
+auto=allactivatedabilities(creature[-artifact&zpos=1]|mylibrary)
+text=Play with the top card of your library revealed. -- As long as the top card of your library is an artifact or creature card, this creature has all activated abilities of that card.
+mana={2}{U}
+type=Artifact Creature
+subtype=Human Wizard
+power=1
+toughness=3
+[/card]
+[card]
+name=Experiment Kraj
+#allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs are paid by
+#this card.
+auto=allactivatedabilities(creature[counter{1/1}]|battlefield)
+auto={T}:name(Put a +1/+1 counter) counter(1/1) target(creature)
+text=Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it. -- {T}: Put a +1/+1 counter on target creature.
+mana={2}{G}{G}{U}{U}
+type=Legendary Creature
+subtype=Ooze Mutant
+power=4
+toughness=6
+[/card]
+[card]
+name=Sharkey, Tyrant of the Shire
+#nonmana = 'except mana abilities', added to allactivatedabilities for this card.
+#allactivatedabilities(<selector>) - see AAllActivatedAbilitiesOf. Borrowed costs are paid by
+#this card.
+auto=lord(land|opponentbattlefield) onlymanaability
+auto=allactivatedabilities(land|opponentbattlefield) nonmana
+missing=mana of any type cannot be spent as though it were any type to activate Sharkey's borrowed abilities
+text=Activated abilities of lands your opponents control can't be activated unless they're mana abilities. -- Sharkey has all activated abilities of lands your opponents control except mana abilities. -- Mana of any type can be spent to activate Sharkey's abilities.
+mana={2}{U}{B}
+type=Legendary Creature
+subtype=Avatar Rogue
+power=2
+toughness=4
+[/card]
+[card]
+name=Dynamite Diver
+abilities=crewpower2
+auto=_DIES_damage:1 target(anytarget)
+text=This creature saddles Mounts and crews Vehicles as though its power were 2 greater. -- When this creature dies, it deals 1 damage to any target.
+mana={R}
+type=Creature
+subtype=Goblin Pilot
+power=1
+toughness=1
+[/card]
+[card]
+name=Deathless Pilot
+abilities=crewpower2
+autograveyard={3}{B}:name(Return to hand) moveTo(hand)
+text=This creature saddles Mounts and crews Vehicles as though its power were 2 greater. -- {3}{B}: Return this card from your graveyard to your hand.
+mana={1}{B}
+type=Creature
+subtype=Zombie Pilot
+power=2
+toughness=2
+[/card]
+[card]
+name=Cloudspire Captain
+abilities=crewpower2
+auto=lord(*[mount;vehicle]|mybattlefield) 1/1
+text=Mounts and Vehicles you control get +1/+1. -- This creature saddles Mounts and crews Vehicles as though its power were 2 greater.
+mana={2}{W}
+type=Creature
+subtype=Human Pilot
+power=2
+toughness=3
+[/card]
+[card]
+name=Interface Ace
+abilities=crewtoughness
+auto=@tapped(this) turnlimited restriction{myturnonly}:name(Untap) untap
+text=This creature saddles Mounts and crews Vehicles using its toughness rather than its power. -- Whenever this creature becomes tapped during your turn, untap it. This ability triggers only once each turn.
+mana={1}{W}
+type=Artifact Creature
+subtype=Robot Pilot
+power=0
+toughness=4
+[/card]
+[card]
+name=Otter-Penguin
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) 1/2 ueot && unblockable ueot
+text=Whenever you draw your second card each turn, this creature gets +1/+2 until end of turn and can't be blocked this turn.
+mana={1}{U}
+type=Creature
+subtype=Otter Bird
+power=2
+toughness=1
+[/card]
+[card]
+name=Tiger-Seal
+abilities=vigilance
+auto=@each my upkeep:tap
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) untap
+text=Vigilance -- At the beginning of your upkeep, tap this creature. -- Whenever you draw your second card each turn, untap this creature.
+mana={U}
+type=Creature
+subtype=Cat Seal
+power=3
+toughness=3
+[/card]
+[card]
+name=Red Ghost, Intangible Genius
+abilities=unblockable
+auto=_WARD2_
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) token(-711910)
+text=Ward {2} -- Red Ghost can't be blocked. -- Whenever you draw your second card each turn, create a 3/3 red Ape Villain creature token with haste.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Black Widow, Agile Avenger
+abilities=menace
+auto=@drawfoeof(player) restriction{compare(odrewcount)~equalto~2}:name(Opponent's second draw) counter(1/1) && draw:1 controller
+text=Menace -- Whenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card.
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Human Spy Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Foggy Swamp Spirit Keeper
+abilities=lifelink
+auto=@drawof(player) restriction{compare(pdrewcount)~equalto~2}:name(Second draw) token(-1510503)
+text=Lifelink -- Whenever you draw your second card each turn, create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+mana={1}{U}{B}
+type=Creature
+subtype=Human Druid Ally
+power=2
+toughness=4
+[/card]
+[card]
+name=Alisaie Leveilleur
+#Dualcast is Monk Class's discount with {2}: the -2 lands on the second spell and a +2
+#cancels it from the third, because an altercost cannot be withdrawn once applied.
+abilities=first strike
+auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,DualcastEffect)
+auto=@movedto(*|mystack):counter(0/0,1,DualcastEffect)
+auto=this(variable{hascntdualcasteffect}=1) lord(*|mycastingzone) altercost(colorless,-2)
+auto=this(variable{hascntdualcasteffect}>1) lord(*|mycastingzone) altercost(colorless,+2)
+auto=@each end restriction{compare(hascntdualcasteffect)~morethan~0}:removeallcounters(0/0,1,DualcastEffect)
+auto=may name(Search for Alphinaud Leveilleur) target(Alphinaud Leveilleur|mylibrary) moveto(myhand) and!( shuffle )!
+text=Partner with Alphinaud Leveilleur -- First strike -- Dualcast - The second spell you cast each turn costs {2} less to cast.
+mana={2}{W}
+type=Legendary Creature
+subtype=Elf Wizard
+power=3
+toughness=2
+[/card]
+[card]
+name=Alphinaud Leveilleur
+#thisturn(*|mystack) counts spells cast BEFORE the current one, so equalto 1 is the second
+#spell (generic/storm_third_spell.txt pins equalto 2 as the third).
+abilities=vigilance
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Eukrasia) draw:1 controller
+auto=may name(Search for Alisaie Leveilleur) target(Alisaie Leveilleur|mylibrary) moveto(myhand) and!( shuffle )!
+text=Partner with Alisaie Leveilleur -- Vigilance -- Eukrasia - Whenever you cast your second spell each turn, draw a card.
+mana={3}{U}
+type=Legendary Creature
+subtype=Elf Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Raging Battle Mouse
+#Celebration counts with *[-land&fresh] (AND). The older celebration cards write
+#*[-land;fresh], which a single-mode descriptor reads as 'not a land OR fresh' - effectively
+#any two nonland permanents.
+auto=if thisturn(*|mystack)~equalto~1 then counter(0/0,1,MouseEffect)
+auto=@movedto(*|mystack):counter(0/0,1,MouseEffect)
+auto=this(variable{hascntmouseeffect}=1) lord(*|mycastingzone) altercost(colorless,-1)
+auto=this(variable{hascntmouseeffect}>1) lord(*|mycastingzone) altercost(colorless,+1)
+auto=@each end restriction{compare(hascntmouseeffect)~morethan~0}:removeallcounters(0/0,1,MouseEffect)
+auto=@each my combatbegins restriction{type(*[-land&fresh]|mybattlefield)~morethan~1}:name(Celebration) target(creature|mybattlefield) 1/1 ueot
+text=The second spell you cast each turn costs {1} less to cast. -- Celebration - At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Mouse
+power=2
+toughness=1
+[/card]
+[card]
+name=Shackle Slinger
+auto=@movedto(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Stun or tap) target(creature|opponentbattlefield) transforms((,newability[if cantargetcard(creature[tapped]|*) then counter(0/0,1,stun) else tap])) oneshot
+text=Whenever you cast your second spell each turn, choose target creature an opponent controls. If it's tapped, put a stun counter on it. Otherwise, tap it.
+mana={2}{U}
+type=Creature
+subtype=Human Soldier
+power=3
+toughness=2
+[/card]
+[card]
+name=Kree Commandos
+abilities=flying,vigilance,prowess
+text=Flying, vigilance -- Prowess
+mana={2}{W}
+type=Creature
+subtype=Kree Soldier Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Thor Odinson
+#Printed prowess twice. The keyword is one flag, so the second instance is its own trigger -
+#the same line AbilityFactory wires for PROWESS.
+abilities=flying,vigilance,prowess
+auto=@movedTo(*[-creature]|mystack):name(Prowess) 1/1 ueot
+text=Flying, vigilance, prowess, prowess
+mana={3}{R}{W}
+type=Legendary Creature
+subtype=God Warrior Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=Flaring Pain
+auto=_NOPREVENT_
+flashback={R}
+text=Damage can't be prevented this turn. -- Flashback {R}
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Call In a Professional
+#'Players can't gain life this turn' is an end-of-turn emblem you control carrying nolifegain
+#(you) and nolifegainopponent (them) - Player::gainLife checks both, Player.cpp:185.
+abilities=noprevention
+target=anytarget
+auto=_NOPREVENT_
+auto=token(No Lifegain Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nolifegain,nolifegainopponent)
+auto=damage:3
+text=Players can't gain life this turn. Damage can't be prevented this turn. Call In a Professional deals 3 damage to any target.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Dancer's Chakrams
+auto=teach(creature) transforms((,performer,lifelink))
+auto=token(-702633) and!( rehook target(hero[token;fresh]|mybattlefield) )!
+auto=teach(creature) 2/2
+auto={3}:equip
+missing=the granted 'other commanders you control get +2/+2 and have lifelink' is not written
+text=Job select -- Equipped creature gets +2/+2, has lifelink and "Other commanders you control get +2/+2 and have lifelink," and is a Performer in addition to its other types. -- Krishna - Equip {3}
+mana={3}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Spirit Tla
+#Foggy Swamp Spirit Keeper's token (ttla #3): a 1/1 COLORLESS Spirit that can't block or be blocked
+#by non-Spirit creatures - a different body from the shared 1/1 white flying Spirit, so it gets
+#its own primitive. Registered in TLA at -1510503 (TLA 1510000 + 500 + collector 3).
+auto=cantbeblockedby(creature[-spirit])
+missing=it can block non-Spirit creatures; only the can't-be-blocked half has a DSL form
+text=This token can't block or be blocked by non-Spirit creatures.
+type=Creature
+subtype=Spirit
+power=1
+toughness=1
+[/card]
