@@ -1,0 +1,27 @@
+#Point the Way searches for up to X basic lands, X = your speed. Start your engines! sets speed
+#1 as it enters, so exactly one Forest leaves the library and the enchantment is sacrificed.
+#Asserted by COUNT: a basic land seeded by name gets a printing id that "Forest" in an assert
+#line does not resolve to, and the speed tracker token is the second permanent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690612
+library:Forest,Forest
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+point the way
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+library:*
+graveyard:690612
+life:20
+[PLAYER2]
+life:20
+[END]

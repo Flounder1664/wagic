@@ -1,0 +1,26 @@
+#Outpace Oblivion: enters dealing 5 damage to a creature (Grizzly Bears dies), then {2}, sac:
+#2 damage to each player who is not at max speed. Neither player is, so both go to 18.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:690576
+manapool:{2}{R}{2}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+690576
+choice 0
+Grizzly Bears
+690576
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:690576
+life:18
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]

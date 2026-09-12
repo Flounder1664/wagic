@@ -1,0 +1,25 @@
+#Far Fortune, End Boss: "Whenever you attack, deals 1 damage to each opponent" - written as
+#@each my blockers. Phases are stepped one next at a time; the opponent takes 1 from the
+#trigger and 4 from the unblocked attacker, 20 -> 15.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690640
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+690640
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:690640,*
+life:20
+[PLAYER2]
+life:15
+[END]

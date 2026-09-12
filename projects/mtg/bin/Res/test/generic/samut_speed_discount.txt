@@ -1,0 +1,22 @@
+#Samut makes noncreature spells cost {X} less, X = your speed (1 here). Mind Stone costs {2},
+#so {1} in the pool must be enough. Generic-only spell on purpose: colour payment order
+#confounds cost probes.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690659
+hand:Mind Stone
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690659,Mind Stone,*
+life:20
+[PLAYER2]
+life:20
+[END]

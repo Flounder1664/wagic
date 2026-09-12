@@ -145695,3 +145695,157 @@ power=2
 toughness=2
 color=black
 [/card]
+[card]
+name=Endrider Spikespitter
+abilities=reach
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+auto=@each my upkeep restriction{compare(pspeed)~equalto~4}:name(Max speed - exile top card) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!
+text=Reach -- Start your engines! -- Max speed - At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+mana={3}{R}
+type=Creature
+subtype=Human Mercenary
+power=3
+toughness=4
+[/card]
+[card]
+name=Far Fortune, End Boss
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#'Whenever you attack' is @each my blockers, the step after attackers are declared (Adeline,
+#Augusta and Battlesong Berserker all use it).
+auto=@each my blockers:name(Damage each opponent) damage:1 opponent
+#The max speed half adds 1 to damage your sources deal, on Fiendish Duo's shape. The source
+#exclusion uses ^ for the comma in the name (a descriptor reads ^ as ,).
+auto=@damagefoeof(player) from(*[-Far Fortune^ End Boss]|myzones) restriction{compare(pspeed)~equalto~4}:damage:1 opponent
+missing=at max speed the extra damage is only added to damage dealt to OPPONENTS, not to permanents they control
+text=Start your engines! -- Whenever you attack, Far Fortune deals 1 damage to each opponent. -- Max speed - If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Human Mercenary
+power=4
+toughness=5
+[/card]
+[card]
+name=Lightwheel Enhancements
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+auto=teach(creature) 1/1
+auto=teach(creature) vigilance
+autograveyard=this(variable{pspeed}>=4) canplayfromgraveyard
+missing=it can only enchant a creature, not a Vehicle that is not currently a creature
+text=Enchant creature or Vehicle -- Start your engines! -- Enchanted permanent gets +1/+1 and has vigilance. -- Max speed - You may cast this card from your graveyard.
+mana={W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Mendicant Core, Guidelight
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#*/3: printed power 0 plus one for each artifact, itself included.
+auto=foreach(artifact|mybattlefield) 1/0
+auto=@movedto(artifact|mystack) restriction{compare(pspeed)~equalto~4}:may pay({1}) name(Max speed - copy it) all(trigger[to]) transforms((,newability[clone])) oneshot
+text=Mendicant Core's power is equal to the number of artifacts you control. -- Start your engines! -- Max speed - Whenever you cast an artifact spell, you may pay {1}. If you do, copy it.
+mana={W}{U}
+type=Legendary Artifact Creature
+subtype=Robot
+power=0
+toughness=3
+[/card]
+[card]
+name=Outpace Oblivion
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+auto=may name(Deal 5 damage) damage:5 target(creature,planeswalker)
+#'each player who does not have max speed' is written as the two speeds the engine tracks.
+auto={2}{S}:name(Damage players below max speed) if compare(ospeed)~lessthan~4 then damage:2 opponent && if compare(pspeed)~lessthan~4 then damage:2 controller
+text=Start your engines! -- When this enchantment enters, it deals 5 damage to up to one target creature or planeswalker. -- {2}, Sacrifice this enchantment: It deals 2 damage to each player who doesn't have max speed.
+mana={2}{R}
+type=Enchantment
+[/card]
+[card]
+name=Point the Way
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#X is your speed, so one gated ability per speed - only one of the four is ever legal.
+auto={3}{G}{S} restriction{compare(pspeed)~equalto~1}:name(Search a basic land) notaTarget(<upto:1>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto={3}{G}{S} restriction{compare(pspeed)~equalto~2}:name(Search 2 basic lands) notaTarget(<upto:2>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto={3}{G}{S} restriction{compare(pspeed)~equalto~3}:name(Search 3 basic lands) notaTarget(<upto:3>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto={3}{G}{S} restriction{compare(pspeed)~equalto~4}:name(Search 4 basic lands) notaTarget(<upto:4>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+text=Start your engines! -- {3}{G}, Sacrifice this enchantment: Search your library for up to X basic land cards, where X is your speed. Put those cards onto the battlefield tapped, then shuffle.
+mana={G}
+type=Enchantment
+[/card]
+[card]
+name=Samut, the Driving Force
+abilities=first strike,vigilance,haste
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#+X/+0 where X is your speed: one +1/+0 per speed step, so they stack to exactly X.
+auto=this(variable{pspeed}>=1) lord(other creature|mybattlefield) 1/0
+auto=this(variable{pspeed}>=2) lord(other creature|mybattlefield) 1/0
+auto=this(variable{pspeed}>=3) lord(other creature|mybattlefield) 1/0
+auto=this(variable{pspeed}>=4) lord(other creature|mybattlefield) 1/0
+#Same ladder for the discount, on the altercost shape the second-spell cards use.
+auto=this(variable{pspeed}>=1) lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+auto=this(variable{pspeed}>=2) lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+auto=this(variable{pspeed}>=3) lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+auto=this(variable{pspeed}>=4) lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+text=First strike, vigilance, haste -- Start your engines! -- Other creatures you control get +X/+0, where X is your speed. -- Noncreature spells you cast cost {X} less to cast, where X is your speed.
+mana={3}{R}{G}{W}
+type=Legendary Creature
+subtype=Human Warrior Cleric
+power=4
+toughness=5
+[/card]
+[card]
+name=Slick Imitator
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#Two lines, as Overloaded Mage-Ring has: a permanent spell is copied by clone, an instant or
+#sorcery by castcard(copied). A descriptor has ONE mode, so they cannot be one line.
+auto={1}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - copy permanent spell) target(*[-instant;-sorcery]|mystack) transforms((,newability[clone])) oneshot
+auto={1}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - copy instant or sorcery) target(*[instant;sorcery]|mystack) transforms((,newability[activate castcard(copied noevent)])) oneshot
+text=Start your engines! -- Max speed - {1}, Sacrifice this creature: Copy target spell you control. You may choose new targets for the copy.
+mana={1}{U}
+type=Creature
+subtype=Ooze
+power=1
+toughness=3
+[/card]
+[card]
+name=Vnwxt, Verbose Host
+abilities=nomaxhand
+#Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
+#climb to max speed needs four turns of an opponent losing life, which the harness cannot
+#drive, so every 'Max speed -' half below needs John's eyes.
+auto=_STARTENGINES_
+#Draw replacement on Alhammarret's Archive's shape, gated on max speed.
+#The max speed gate MUST be an inline if, not restriction{}: a restriction on a replacedraw
+#line kills the replacement outright (probed 2026-09-12 - the draw stayed single). This is
+#Alhammarret's Archive's shape.
+auto=replacedraw if compare(pspeed)~equalto~4 then draw:2 noreplace else draw:1 noreplace
+text=Start your engines! -- You have no maximum hand size. -- Max speed - If you would draw a card, draw two cards instead.
+mana={1}{U}
+type=Legendary Creature
+subtype=Homunculus
+power=0
+toughness=4
+[/card]
