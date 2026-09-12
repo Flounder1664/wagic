@@ -358,6 +358,7 @@ toughness=3
 [/card]
 [card]
 name=Arcanum Wings
+target=creature
 text=Enchant creature -- Enchanted creature has flying. -- Aura swap {2}{U} ({2}{U}: Exchange this Aura with an Aura card in your hand.)
 mana={1}{U}
 type=Enchantment
@@ -436,6 +437,7 @@ toughness=2
 [/card]
 [card]
 name=Artifact Possession
+target=artifact
 text=Enchant artifact -- Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.
 mana={2}{B}
 type=Enchantment
@@ -597,6 +599,7 @@ type=Instant
 [/card]
 [card]
 name=Awesome Presence
+target=creature
 text=Enchant creature -- Enchanted creature can't be blocked unless defending player pays {3} for each creature he or she controls that's blocking it.
 mana={U}
 type=Enchantment
@@ -1299,6 +1302,7 @@ type=Enchantment
 [/card]
 [card]
 name=Call to the Kindred
+target=creature
 text=Enchant creature -- At the beginning of your upkeep, you may look at the top five cards of your library. If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield, then you put the rest of those cards on the bottom of your library in any order.
 mana={3}{U}
 type=Enchantment
@@ -1381,6 +1385,7 @@ toughness=4
 [/card]
 [card]
 name=Captivating Glance
+target=creature
 text=Enchant creature -- At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 mana={2}{U}
 type=Enchantment
@@ -1388,6 +1393,7 @@ subtype=Aura
 [/card]
 [card]
 name=Captured by the Consulate
+target=creature
 text=Enchant creature you don't control -- Enchanted creature can't attack. -- Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
 mana={3}{W}
 type=Enchantment
@@ -1577,6 +1583,7 @@ type=Phenomenon
 [/card]
 [card]
 name=Charisma
+target=creature
 text=Enchant creature -- Whenever enchanted creature deals damage to a creature, gain control of the other creature for as long as Charisma remains on the battlefield.
 mana={U}{U}{U}
 type=Enchantment
@@ -1667,6 +1674,7 @@ type=Scheme
 [/card]
 [card]
 name=Chromatic Armor
+target=creature
 text=Enchant creature -- As Chromatic Armor enters the battlefield, choose a color. -- Chromatic Armor enters the battlefield with a sleight counter on it. -- Prevent all damage that would be dealt to enchanted creature by sources of the last chosen color. -- {X}: Put a sleight counter on Chromatic Armor and choose a color. X is the number of sleight counters on Chromatic Armor.
 mana={1}{W}{U}
 type=Enchantment
@@ -1774,6 +1782,7 @@ type=Instant
 [/card]
 [card]
 name=Coalition Flag
+target=creature
 text=Enchant creature you control -- Enchanted creature is a Flagbearer. -- While choosing targets as part of casting a spell or activating an ability, your opponents must choose at least one Flagbearer on the battlefield if able.
 mana={W}
 type=Enchantment
@@ -1790,6 +1799,7 @@ toughness=4
 [/card]
 [card]
 name=Cocoon
+target=creature
 text=Enchant creature you control -- Enchanted creature doesn't untap during your untap step if Cocoon has a pupa counter on it. -- When Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon. -- At the beginning of your upkeep, remove a pupa counter from Cocoon. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying. (This effect lasts indefinitely.)
 mana={G}
 type=Enchantment
@@ -1966,6 +1976,7 @@ toughness=2
 [/card]
 [card]
 name=Cooperation
+target=creature
 missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Enchant creature -- Enchanted creature has banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 mana={2}{W}
@@ -2037,6 +2048,7 @@ type=Snow Enchantment
 [/card]
 [card]
 name=Cowed by Wisdom
+target=creature
 text=Enchant creature -- Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
 mana={W}
 type=Enchantment
@@ -2543,6 +2555,7 @@ subtype=Contraption
 [/card]
 [card]
 name=Disruption Aura
+target=artifact
 text=Enchant artifact -- Enchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
 mana={2}{U}
 type=Enchantment
@@ -2838,6 +2851,7 @@ subtype=Belenon
 [/card]
 [card]
 name=Elemental Resonance
+target=*
 text=Enchant permanent -- At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost to your mana pool. (Mana cost includes color. If a mana symbol has multiple colors, choose one.)
 mana={2}{G}{G}
 type=Enchantment
@@ -3005,6 +3019,7 @@ toughness=1
 [/card]
 [card]
 name=Entangler
+target=creature
 missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Enchant creature -- Enchanted creature can block any number of creatures.
 mana={2}{W}{W}
@@ -3057,6 +3072,7 @@ type=Instant
 [/card]
 [card]
 name=Equinox
+target=land
 text=Enchant land -- Enchanted land has "{T}: Counter target spell if it would destroy a land you control."
 mana={W}
 type=Enchantment
@@ -3092,6 +3108,7 @@ type=Instant
 [/card]
 [card]
 name=Errant Minion
+target=creature
 text=Enchant creature -- At the beginning of the upkeep of enchanted creature's controller, that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
 mana={2}{U}
 type=Enchantment
@@ -3123,6 +3140,7 @@ subtype=Alara
 [/card]
 [card]
 name=Essence Leak
+target=*
 text=Enchant permanent -- As long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
 mana={U}
 type=Enchantment
@@ -3340,6 +3358,7 @@ type=Sorcery
 [/card]
 [card]
 name=Fatal Mutation
+target=creature
 text=Enchant creature -- When enchanted creature is turned face up, destroy it. It can't be regenerated.
 mana={B}
 type=Enchantment
@@ -3468,6 +3487,7 @@ toughness=2
 [/card]
 [card]
 name=Flickerform
+target=creature
 text=Enchant creature -- {2}{W}{W}: Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature.
 mana={1}{W}
 type=Enchantment
@@ -3939,6 +3959,7 @@ subtype=Contraption
 [/card]
 [card]
 name=Gift of Doom
+target=creature
 text=Enchant creature -- Enchanted creature has deathtouch and indestructible. -- Morph-Sacrifice another creature. (You may cast this card face down as a 2/2 creature for 3 . Turn it face up any time for its morph cost.) -- As Gift of Doom is turned face up, you may attach it to a creature.
 mana={4}{B}
 type=Enchantment
@@ -4026,6 +4047,7 @@ type=Instant
 [/card]
 [card]
 name=Gleam of Authority
+target=creature
 text=Enchant creature -- Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control. -- Enchanted creature has vigilance and "{W}, {T}: Bolster 1." (To bolster 1, choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 mana={1}{W}
 type=Enchantment
@@ -4580,6 +4602,7 @@ toughness=5
 [/card]
 [card]
 name=Hazmat Suit (Used)
+target=creature
 text=Enchant creature -- Enchanted creature gets +2/+1 and has menace. -- Whenever a player's skin or fingernail touches enchanted creature, that player loses 2 life.
 mana={3}{B}
 type=Enchantment
@@ -4655,6 +4678,7 @@ type=Enchantment
 [/card]
 [card]
 name=Heroic Defiance
+target=creature
 text=Enchant creature -- Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
 mana={1}{W}
 type=Enchantment
@@ -4948,6 +4972,7 @@ type=Instant
 [/card]
 [card]
 name=Illusory Gains
+target=creature
 text=Enchant creature -- You control enchanted creature. -- Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
 mana={3}{U}{U}
 type=Enchantment
@@ -4979,6 +5004,7 @@ type=Instant
 [/card]
 [card]
 name=Imprison
+target=creature
 text=Enchant creature -- Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison. -- Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.
 mana={B}
 type=Enchantment
@@ -5085,6 +5111,7 @@ toughness=9
 [/card]
 [card]
 name=Infinite Authority
+target=creature
 text=Enchant creature -- Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
 mana={W}{W}{W}
 type=Enchantment
@@ -5092,6 +5119,7 @@ subtype=Aura
 [/card]
 [card]
 name=Infinite Reflection
+target=creature
 text=Enchant creature -- When Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature. -- Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
 mana={5}{U}
 type=Enchantment
@@ -5192,6 +5220,7 @@ subtype=Cridhe
 [/card]
 [card]
 name=Ironclaw Curse
+target=creature
 text=Enchant creature -- Enchanted creature gets -0/-1. -- Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
 mana={R}
 type=Enchantment
@@ -5550,6 +5579,7 @@ type=Legendary Artifact
 [/card]
 [card]
 name=Kithkin Armor
+target=creature
 text=Enchant creature -- Enchanted creature can't be blocked by creatures with power 3 or greater. -- Sacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.
 mana={W}
 type=Enchantment
@@ -5808,6 +5838,7 @@ toughness=3
 [/card]
 [card]
 name=Laccolith Rig
+target=creature
 text=Enchant creature -- Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
 mana={R}
 type=Enchantment
@@ -6181,6 +6212,7 @@ type=Sorcery
 [/card]
 [card]
 name=Lost in Thought
+target=creature
 text=Enchant creature -- Enchanted creature can't attack or block, and its activated abilities can't be activated. Its controller may exile three cards from his or her graveyard for that player to ignore this effect until end of turn.
 mana={1}{U}
 type=Enchantment
@@ -6231,6 +6263,7 @@ type=Artifact
 [/card]
 [card]
 name=Magic Word
+target=creature
 text=Enchant creature -- As Magic Word enters the battlefield, choose a word. -- Whisper the chosen word: Tap enchanted creature.
 mana={2}{U}
 type=Enchantment
@@ -6383,6 +6416,7 @@ toughness=4
 [/card]
 [card]
 name=Mark of Eviction
+target=creature
 text=Enchant creature -- At the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
 mana={U}
 type=Enchantment
@@ -6550,6 +6584,7 @@ toughness=3
 [/card]
 [card]
 name=Merseine
+target=creature
 text=Enchant creature  -- Merseine enters the battlefield with three net counters on it.  -- Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it. -- Pay enchanted creature's mana cost: Remove a net counter from Merseine. Any player may activate this ability, but only if he or she controls the enchanted creature.
 mana={2}{U}{U}
 type=Enchantment
@@ -6816,6 +6851,7 @@ type=Sorcery
 [/card]
 [card]
 name=Mob Mentality
+target=creature
 text=Enchant creature -- Enchanted creature has trample. -- Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
 mana={R}
 type=Enchantment
@@ -7218,6 +7254,7 @@ type=Enchantment
 [/card]
 [card]
 name=Necrotic Plague
+target=creature
 text=Enchant creature -- Enchanted creature has "At the beginning of your upkeep, sacrifice this creature." -- When enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
 mana={2}{B}{B}
 type=Enchantment
@@ -7250,6 +7287,7 @@ type=Land
 [/card]
 [card]
 name=Nettlevine Blight
+target=creature
 text=Enchant creature or land -- Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."
 mana={4}{B}{B}
 type=Enchantment
@@ -7641,6 +7679,7 @@ toughness=2
 [/card]
 [card]
 name=Oppressive Rays
+target=creature
 text=Enchant creature -- Enchanted creature can't attack or block unless its controller pays {3}. -- Activated abilities of enchanted creature cost {3} more to activate.
 mana={W}
 type=Enchantment
@@ -7672,6 +7711,7 @@ toughness=2
 [/card]
 [card]
 name=Orcish Mine
+target=land
 text=Enchant land -- Orcish Mine enters the battlefield with three ore counters on it. -- At the beginning of your upkeep and whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine. -- When the last ore counter is removed from Orcish Mine, destroy enchanted land and Orcish Mine deals 2 damage to its controller.
 mana={1}{R}{R}
 type=Enchantment
@@ -8114,6 +8154,7 @@ type=Enchantment
 [/card]
 [card]
 name=Power Artifact
+target=artifact
 text=Enchant artifact -- Enchanted artifact's activated abilities cost {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
 mana={U}{U}
 type=Enchantment
@@ -8253,6 +8294,7 @@ type=Instant
 [/card]
 [card]
 name=Puppet Master
+target=creature
 text=Enchant creature -- When enchanted creature dies, return that card to its owner's hand. If that card is returned to its owner's hand this way, you may pay {U}{U}{U}. If you do, return Puppet Master to its owner's hand.
 mana={U}{U}{U}
 type=Enchantment
@@ -8596,6 +8638,7 @@ type=Sorcery
 [/card]
 [card]
 name=Reins of the Vinesteed
+target=creature
 text=Enchant creature -- Enchanted creature gets +2/+2. -- When enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
 mana={3}{G}
 type=Enchantment
@@ -8929,6 +8972,7 @@ type=Instant
 [/card]
 [card]
 name=Sage's Reverie
+target=creature
 text=Enchant creature -- When Sage's Reverie enters the battlefield, draw a card for each Aura you control that's attached to a creature. -- Enchanted creature gets +1/+1 for each Aura you control that's attached to a creature.
 mana={3}{W}
 type=Enchantment
@@ -9274,6 +9318,7 @@ toughness=1
 [/card]
 [card]
 name=Shape of the Wiitigo
+target=creature
 text=Enchant creature -- When Shape of the Wiitigo enters the battlefield, put six +1/+1 counters on enchanted creature. -- At the beginning of your upkeep, put a +1/+1 counter on enchanted creature if it attacked or blocked since your last upkeep. Otherwise, remove a +1/+1 counter from it.
 mana={3}{G}{G}{G}
 type=Enchantment
@@ -9684,6 +9729,7 @@ type=Snow Enchantment
 [/card]
 [card]
 name=Snowblind
+target=creature
 text=Enchant creature -- Enchanted creature gets -X/-Y. If that creature is attacking, X is the number of snow lands defending player controls. Otherwise, X is the number of snow lands its controller controls. Y is equal to X or to enchanted creature's toughness minus 1, whichever is smaller.
 mana={3}{G}
 type=Enchantment
@@ -9755,6 +9801,7 @@ type=Enchantment
 [/card]
 [card]
 name=Soul Ransom
+target=creature
 text=Enchant creature -- You control enchanted creature. -- Discard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
 mana={2}{U}{B}
 type=Enchantment
@@ -10147,6 +10194,7 @@ type=Instant
 [/card]
 [card]
 name=Steam Vines
+target=land
 text=Enchant land -- When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller. That player attaches Steam Vines to a land of his or her choice.
 mana={1}{R}{R}
 type=Enchantment
@@ -10308,6 +10356,7 @@ type=Sorcery
 [/card]
 [card]
 name=Street Savvy
+target=creature
 text=Enchant creature -- Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.
 mana={G}
 type=Enchantment
@@ -10597,6 +10646,7 @@ toughness=1
 [/card]
 [card]
 name=Takklemaggot
+target=creature
 text=Enchant creature -- At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature. -- When enchanted creature dies, that creature's controller chooses a creature that Takklemaggot could enchant. If he or she does, return Takklemaggot to the battlefield under your control attached to that creature. If he or she doesn't, return Takklemaggot to the battlefield under your control as a non-Aura enchantment. It loses "enchant creature" and gains "At the beginning of that player's upkeep, Takklemaggot deals 1 damage to him or her."
 mana={2}{B}{B}
 type=Enchantment
@@ -11328,6 +11378,7 @@ type=Sorcery
 [/card]
 [card]
 name=Traveling Plague
+target=creature
 text=Enchant creature -- At the beginning of each upkeep, put a plague counter on Traveling Plague. -- Enchanted creature gets -1/-1 for each plague counter on Traveling Plague. -- When enchanted creature leaves the battlefield, that creature's controller returns Traveling Plague from its owner's graveyard to the battlefield.
 mana={3}{B}{B}
 type=Enchantment
@@ -11782,6 +11833,7 @@ toughness=3
 [/card]
 [card]
 name=Volrath's Curse
+target=creature
 text=Enchant creature -- Enchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn. -- {1}{U}: Return Volrath's Curse to its owner's hand.
 mana={1}{U}
 type=Enchantment
@@ -11951,6 +12003,7 @@ toughness=3
 [/card]
 [card]
 name=Ward of Lights
+target=creature
 text=You may cast Ward of Lights as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step. -- Enchant creature -- As Ward of Lights enters the battlefield, choose a color. -- Enchanted creature has protection from the chosen color. This effect doesn't remove Ward of Lights.
 mana={W}{W}
 type=Enchantment
@@ -11958,6 +12011,7 @@ subtype=Aura
 [/card]
 [card]
 name=Ward of Piety
+target=creature
 text=Enchant creature -- {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
 mana={1}{W}
 type=Enchantment
@@ -12043,6 +12097,7 @@ type=Sorcery
 [/card]
 [card]
 name=Weight of Conscience
+target=creature
 text=Enchant creature -- Enchanted creature can't attack. -- Tap two untapped creatures you control that share a creature type: Exile enchanted creature.
 mana={1}{W}
 type=Enchantment
@@ -13066,6 +13121,7 @@ subtype=Attraction
 [/card]
 [card]
 name=Fight the _____ Fight
+target=creature
 text=Enchant creature you control -- When this Aura enters, you may put a name sticker on it. When you do, enchanted creature fights up to one target creature you don't control. -- Enchanted creature gets +0/+2 for each name sticker on this Aura with eight or more letters.
 mana={1}{G}
 type=Enchantment
@@ -13499,6 +13555,7 @@ toughness=3
 [/card]
 [card]
 name=Motion Sickness
+target=creature
 text=Enchant creature -- When this Aura enters, tap enchanted creature. -- Enchanted creature doesn't untap during its controller's untap step. -- Whenever you visit an Attraction, you may attach this Aura to target tapped creature.
 mana={3}{U}
 type=Enchantment
@@ -13653,6 +13710,7 @@ type=Enchantment
 [/card]
 [card]
 name=Plot Armor
+target=creature
 text=Enchant creature -- Enchanted creature gets +2/+2 and can't be blocked except by creatures with flavor text.
 mana={2}{G}
 type=Enchantment
@@ -14282,6 +14340,7 @@ toughness=10
 [/card]
 [card]
 name=Accelerated Evolution
+target=creature
 text=Flash -- Enchant creature you control -- When this Aura enters, enchanted creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.) -- Enchanted creature gets +2/+2.
 mana={2}{G}
 type=Enchantment
@@ -14368,6 +14427,7 @@ toughness=3
 [/card]
 [card]
 name=Archnemesis
+target=player
 text=Enchant opponent -- Whenever you attack enchanted player, that player loses 2 life. You draw a card and gain 2 life. -- Whenever a player attacks you, you may attach this Aura to that player.
 mana={1}{U}{B}
 type=Enchantment
@@ -15094,6 +15154,7 @@ toughness=6
 [/card]
 [card]
 name=Furious Strength
+target=creature
 text=Enchant creature -- Enchanted creature gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)
 mana={2}{R}
 type=Enchantment
@@ -16154,6 +16215,7 @@ type=Sorcery
 [/card]
 [card]
 name=Quantum Reduction
+target=creature
 text=Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.) -- You may cast this spell as though it had flash if it's cast using teamwork. -- Enchant creature -- Enchanted creature gets -5/-0 and loses all abilities.
 mana={1}{U}
 type=Enchantment
@@ -16230,6 +16292,7 @@ toughness=6
 [/card]
 [card]
 name=Robotics Mastery
+target=creature
 text=Flash -- Enchant creature -- When this Aura enters, create two 1/1 colorless Robot artifact creature tokens with flying. -- Enchanted creature gets +2/+2.
 mana={4}{U}
 type=Enchantment
@@ -16277,6 +16340,7 @@ toughness=3
 [/card]
 [card]
 name=Secure Detention
+target=artifact
 text=Enchant artifact or creature -- When this Aura enters, create a 1/1 white Soldier creature token. -- Enchanted permanent can't attack or block, and its activated abilities can't be activated.
 mana={3}{W}
 type=Enchantment
@@ -16446,6 +16510,7 @@ toughness=3
 [/card]
 [card]
 name=Stark's Ingenuity
+target=creature
 text=Enchant creature you control -- When this Aura enters, you may pay {X}. If you do, draw X cards. -- Whenever you draw a card, put a +1/+1 counter on enchanted creature.
 mana={2}{U}
 type=Enchantment
@@ -17668,6 +17733,7 @@ toughness=5
 [/card]
 [card]
 name=Frozen in Ice
+target=creature
 text=Enchant creature -- When this Aura enters, tap enchanted creature. -- Enchanted creature loses all abilities and can't become untapped.
 mana={2}{U}
 type=Enchantment
@@ -18422,6 +18488,7 @@ toughness=2
 [/card]
 [card]
 name=Secret Invasion
+target=creature
 text=Enchant creature you control -- When this Aura enters, exile up to one target creature other than enchanted creature until this Aura leaves the battlefield. Enchanted creature becomes a copy of that creature until this Aura leaves the battlefield. -- Enchanted creature has ward {2}.
 mana={1}{U}{U}
 type=Enchantment
@@ -18535,6 +18602,7 @@ toughness=4
 [/card]
 [card]
 name=Super Intelligence
+target=creature
 text=Enchant creature -- At the beginning of the upkeep of enchanted creature's controller, that player draws a card.
 mana={U}
 type=Enchantment
@@ -18542,6 +18610,7 @@ subtype=Aura
 [/card]
 [card]
 name=Super Speed
+target=creature
 text=Flash -- Enchant creature -- When this Aura enters, enchanted creature gains first strike until end of turn. -- Enchanted creature gets +1/+0 and has haste.
 mana={R}
 type=Enchantment
@@ -18549,6 +18618,7 @@ subtype=Aura
 [/card]
 [card]
 name=Super Strength
+target=creature
 text=Enchant creature -- Enchanted creature gets +4/+4 and has trample and ward {1}. (Whenever enchanted creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
 mana={4}{G}
 type=Enchantment
@@ -18587,6 +18657,7 @@ toughness=5
 [/card]
 [card]
 name=Super-Soldier Serum
+target=creature
 text=Enchant creature -- Enchanted creature gets +2/+2, has first strike and vigilance, and is a legendary Soldier in addition to its other types. -- Whenever enchanted creature attacks or blocks, attach any number of target Equipment you control to it.
 mana={1}{W}
 type=Enchantment
@@ -19099,6 +19170,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Brilliant Wings
+target=creature
 text=Flash -- Enchant creature you control -- Enchanted creature has flying and hexproof. -- Whenever a creature you control enters, you may pay {1}. If you do, attach this Aura to that creature.
 mana={1}{W}
 type=Enchantment
@@ -19263,6 +19335,7 @@ toughness=3
 [/card]
 [card]
 name=Eye of Nidhogg
+target=creature
 text=Enchant creature -- Enchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- When Eye of Nidhogg is put into a graveyard from the battlefield, return it to its owner's hand.
 mana={2}{B}
 type=Legendary Enchantment
@@ -19502,6 +19575,7 @@ toughness=2
 [/card]
 [card]
 name=Observed Stasis
+target=creature
 text=Flash -- Enchant creature an opponent controls -- When this Aura enters, remove enchanted creature from combat. Then draw a card for each tapped creature its controller controls. -- Enchanted creature loses all abilities and can't attack or block.
 mana={3}{U}
 type=Enchantment
@@ -20676,6 +20750,7 @@ type=Sorcery
 [/card]
 [card]
 name=Changing Loyalty
+target=creature
 text=Flash -- Replicate {2} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies. Copies become tokens.) -- Enchant creature -- When enchanted creature dies, return it to the battlefield under your control.
 mana={1}{B}
 type=Enchantment
@@ -20692,6 +20767,7 @@ toughness=3
 [/card]
 [card]
 name=Coercive Impetus
+target=creature
 text=Enchant creature -- Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, you draw a card and lose 1 life.
 mana={2}{B}
 type=Enchantment
@@ -20944,6 +21020,7 @@ subtype=Forest Island
 [/card]
 [card]
 name=Redemption Arc
+target=creature
 text=Enchant creature -- Enchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- {1}{W}: Exile enchanted creature.
 mana={2}{W}
 type=Enchantment
@@ -21005,6 +21082,7 @@ toughness=4
 [/card]
 [card]
 name=Songbirds' Blessing
+target=creature
 text=Enchant creature -- Whenever enchanted creature attacks, reveal cards from the top of your library until you reveal an Aura card. You may put that card onto the battlefield. If you don't, put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={3}{W}
 type=Enchantment
@@ -21623,6 +21701,7 @@ toughness=3
 [/card]
 [card]
 name=Captain's Tutelage
+target=creature
 text=Flash -- Enchant creature -- When this Aura enters, enchanted creature gains first strike until end of turn. -- Enchanted creature gets +2/+0.
 mana={1}{R}
 type=Enchantment
@@ -21880,6 +21959,7 @@ type=Artifact
 [/card]
 [card]
 name=Marooned
+target=artifact
 text=Enchant artifact or creature -- When this Aura enters, you may pay {3}. If you do, tap enchanted permanent. -- Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
 mana={U}
 type=Enchantment
@@ -23373,6 +23453,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Creeping Crystal Coating
+target=creature
 text=Flash -- Enchant creature -- Enchanted creature gets +0/+3 and has "Whenever this creature attacks, create a Food token." (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
 mana={2}{G}
 type=Enchantment
@@ -23380,6 +23461,7 @@ subtype=Aura
 [/card]
 [card]
 name=Crystalline Armor
+target=creature
 text=Enchant creature -- Enchanted creature gets +1/+1 for each land you control and has trample.
 mana={3}{G}
 type=Enchantment
@@ -23764,6 +23846,7 @@ toughness=3
 [/card]
 [card]
 name=Lost in Memories
+target=creature
 text=Flash -- Enchant creature you control -- Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost." (You may cast that card from your graveyard for its flashback cost. Then exile it.)
 mana={1}{R}
 type=Enchantment
@@ -23871,6 +23954,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Path to Redemption
+target=creature
 text=Enchant creature -- Enchanted creature can't attack or block. -- {5}, Sacrifice this Aura: Exile enchanted creature. Create a 1/1 white Ally creature token. Activate only during your turn.
 mana={1}{W}
 type=Enchantment
@@ -23940,6 +24024,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Seismic Tutelage
+target=creature
 text=Enchant creature -- When this Aura enters, put a +1/+1 counter on enchanted creature. -- Whenever enchanted creature attacks, double the number of +1/+1 counters on it.
 mana={3}{G}
 type=Enchantment
@@ -24329,6 +24414,7 @@ type=Artifact
 [/card]
 [card]
 name=Containment Protocol
+target=creature
 text=Enchant creature -- When this Aura enters, tap enchanted creature. -- Enchanted creature doesn't untap during its controller's untap step.
 mana={2}{U}
 type=Enchantment
@@ -24522,6 +24608,7 @@ toughness=3
 [/card]
 [card]
 name=Level Up
+target=creature
 text=Enchant creature -- When this Aura enters, put a +1/+1 counter on enchanted creature. -- Enchanted creature has "Whenever this creature attacks, double the number of +1/+1 counters on it. Then if it has power 10 or greater, draw a card."
 mana={1}{G}
 type=Enchantment
@@ -24826,6 +24913,7 @@ type=Instant
 [/card]
 [card]
 name=Future Flight
+target=creature
 text=Enchant creature -- When this Aura enters, draw two cards. -- Enchanted creature gets +2/+0 and has flying. (It can't be blocked except by creatures with flying or reach.)
 mana={2}{U}{U}
 type=Enchantment
@@ -25548,6 +25636,7 @@ type=Enchantment Land
 [/card]
 [card]
 name=Enchantmentize
+target=creature
 text=Enchant creature or enchantment -- Enchanted permanent is an enchantment and loses all other card types. (It still has its abilities, but it's no longer a creature.)
 mana={3}{U}
 type=Enchantment
@@ -25766,6 +25855,7 @@ toughness=3
 [/card]
 [card]
 name=Krosan Adaptation
+target=creature
 text=Enchant creature -- Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies. The copies enter as tokens.) -- Enchanted creature gets +1/+0 and has vigilance.
 mana={G}
 type=Enchantment

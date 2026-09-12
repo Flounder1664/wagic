@@ -1,0 +1,24 @@
+#Second card of the same class as John's Lightwheel Enhancements report: Alien Symbiosis said
+#abilities=aura, but "aura" is a card TYPE not a keyword, so it had no target and bounced back
+#to hand on resolution. Grizzly Bears 2/2 -> 3/3 proves it now attaches.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Alien Symbiosis
+manapool:{1}{B}
+inplay:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Alien Symbiosis
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Alien Symbiosis,Grizzly Bears
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

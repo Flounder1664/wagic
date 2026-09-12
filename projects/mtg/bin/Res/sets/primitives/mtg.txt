@@ -2819,7 +2819,9 @@ type=Instant
 [/card]
 [card]
 name=Alien Symbiosis
-abilities=aura
+#"aura" is a card TYPE, not a keyword, so abilities=aura set nothing and the Aura had no
+#target to attach to: it resolved straight back to hand.
+target=creature
 auto=teach(creature) 1/1
 auto=teach(creature) menace
 mana={1}{B}
@@ -76773,6 +76775,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Meltstrider's Resolve
+target=creature
 auto=teach(creature) +0/+2
 text=Enchant creature you control. When this Aura enters, enchanted creature fights up to one target creature an opponent controls. Enchanted creature gets +0/+2 and can't be blocked by more than one creature. (Approximation: only +0/+2 static bonus implemented.)
 mana={G}
@@ -109837,6 +109840,8 @@ subtype=Aura
 [/card]
 [card]
 name=Shimmerwilds Growth
+target=land
+missing=the extra mana when the enchanted land is tapped; only the enchant land part works
 mana={1}{G}
 type=Enchantment
 subtype=Aura
