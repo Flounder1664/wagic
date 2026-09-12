@@ -1,0 +1,25 @@
+#Ral, Storm Conduit's +2: loyalty 4 -> 6. Nothing covered a planeswalker loyalty ability before.
+#A planeswalker with two abilities opens the ability MENU on a click, so the test needs
+#choice 0 after the click - without it the click is swallowed and the loyalty never moves,
+#which looks exactly like a broken card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:461138
+library:129718,129718,129718
+life:20
+[PLAYER2]
+life:20
+[DO]
+ral, storm conduit
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:461138
+library:129718,129718,129718
+counter:461138=loyalty:6
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,22 @@
+#Celebration: two nonland permanents entering this turn turns the bonus on.
+#Grand Ball Guest (2/2) plus Scathe Zombies -> 3/3 and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:629635,129718
+manapool:{3}{R}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+grand ball guest
+scathe zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:629635,129718
+pt:629635=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

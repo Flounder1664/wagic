@@ -2790,7 +2790,12 @@ name=Ral, Storm Conduit
 auto=counter(0/0,4,loyalty)
 aicode=activate transforms((,newability[all(*[zpos<=1]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
 auto=@movedTo(*[instant;sorcery]|myStack):ability$!name(Choose one) choice name(Damage opponent) damage:1 target(opponent) _ choice name(Damage Planeswalker) damage:1 target(planeswalker)!$ controller
-auto={C(0/0,2,Loyalty)}:name(+2: Scry: 1) _SCRY1_
+#Label says "Scry 1", not "Scry: 1", on purpose. parseMagicLine splits the line on the FIRST
+#"scry:" before name(...) is stripped, and with the old label that was the one inside the
+#label. PRECAUTIONARY: the +2 loyalty cost measurably works either way (ral_plus_two_loyalty
+#passes with both labels) and _SCRY1_ resolves silently, so the payload could not be measured.
+#The proven case of this trap is "grant " in a name (Amonkhet Raceway).
+auto={C(0/0,2,Loyalty)}:name(+2: Scry 1) _SCRY1_
 auto={C(0/0,-2,Loyalty)}:name(-2: Whenever cast instant or sorcery copy spell) emblem transforms((,newability[@movedto(*[instant;sorcery]|myStack) turnlimited:all(trigger[to]) activate castcard(copied noevent)])) ueot
 text=Whenever you cast or copy an instant or sorcery spell, Ral, Storm Conduit deals 1 damage to target opponent or planeswalker. -- +2: Scry 1. -- -2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
 mana={2}{U}{R}

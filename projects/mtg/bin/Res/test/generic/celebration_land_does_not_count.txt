@@ -1,0 +1,24 @@
+#Celebration: "two or more NONLAND permanents entered under your control this turn".
+#Negative control for the *[-land;fresh] selector: Grand Ball Guest plus a land is one
+#nonland, so no bonus. If the descriptor's single OR mode applied to fresh as well, a land
+#would count and the Guest would be 3/3 here.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:629635,Mountain
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+grand ball guest
+Mountain
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:629635,Mountain
+pt:629635=2/2
+life:20
+[PLAYER2]
+life:20
+[END]
