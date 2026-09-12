@@ -76741,7 +76741,12 @@ subtype=Equipment
 [card]
 name=Meltstrider's Resolve
 target=creature
+#The fight is dynamicability<!powerstrike eachother!>, the corpus form (Howlpack Alpha,
+#Ferocious Werefox). The Aura's own target is the enchanted creature, so the fight picks the
+#opponent's creature as its target.
 auto=teach(creature) +0/+2
+auto=may name(Fight a creature) target(creature|opponentbattlefield) dynamicability<!powerstrike eachother!>
+missing=cannot be blocked by more than one creature
 text=Enchant creature you control. When this Aura enters, enchanted creature fights up to one target creature an opponent controls. Enchanted creature gets +0/+2 and can't be blocked by more than one creature. (Approximation: only +0/+2 static bonus implemented.)
 mana={G}
 type=Enchantment
@@ -109799,7 +109804,9 @@ subtype=Aura
 [card]
 name=Shimmerwilds Growth
 target=land
-missing=the extra mana when the enchanted land is tapped; only the enchant land part works
+#The extra mana is the attested enchanted-land shape (Wolfwillow Haven, Glittering Frost,
+#Buried in the Garden): teach(land) + @tappedformana on the land itself.
+auto=teach(land) transforms((,newability[@tappedformana(this):chooseacolor add{chosencolor} chooseend]))
 mana={1}{G}
 type=Enchantment
 subtype=Aura
