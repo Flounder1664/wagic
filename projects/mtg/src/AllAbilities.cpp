@@ -55,16 +55,23 @@ GenericRevealAbility::GenericRevealAbility(GameObserver* observer, int id, MTGCa
 
 int GenericRevealAbility::resolve()
 {
-    if(source->lastController->isAI() && source->getAICustomCode().size())
+    //lastController is NULL on a card that has only just entered, so a reveal written as a
+    //plain ETB (auto=... reveal:2 ... revealend) segfaulted here before it drew anything -
+    //measured 2026-09-12 on Codecracker Hound and reproduced on a plain Grizzly Bears.
+    //parseMagicLine can also return NULL for an AI line it cannot parse.
+    if(source && source->lastController && source->lastController->isAI() && source->getAICustomCode().size())
     {
         string abi = source->getAICustomCode();
         std::transform(abi.begin(), abi.end(), abi.begin(), ::tolower);//fix crash
         AbilityFactory af(game);
         MTGAbility * a3 = af.parseMagicLine(abi, this->GetId(), NULL, source);
-        a3->oneShot = 1;
-        a3->canBeInterrupted = false;
-        a3->resolve();
-        SAFE_DELETE(a3);
+        if(a3)
+        {
+            a3->oneShot = 1;
+            a3->canBeInterrupted = false;
+            a3->resolve();
+            SAFE_DELETE(a3);
+        }
         return 1;
     }
     MTGAbility * ability = NEW MTGRevealingCards(game, this->GetId(), source, howMany);

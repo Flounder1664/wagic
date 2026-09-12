@@ -1,0 +1,32 @@
+#John 2026-09-12: Eerie Gravestone milled but never offered the creature back. Its text is
+#"Mill four cards. You may put a creature card from among them into your hand." (The engine cannot
+#say "from among them", so it reaches any creature in the graveyard - recorded on the card.)
+#The library is
+#stacked so the Gravestone's own enters-draw takes Mind Stone off the top FIRST, and Grizzly
+#Bears is then among the four milled. Returning it leaves 2 in hand, 3 milled cards plus the
+#sacrificed Gravestone in the graveyard, and 1 card in the library. Asserted by COUNT: a card
+#seeded by name carries a printing id the same name in an assert does not resolve to.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+library:Mind Stone,Grizzly Bears,Millstone,Howling Mine,Juggernaut,Ornithopter
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 0
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+graveyard:*,*,*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

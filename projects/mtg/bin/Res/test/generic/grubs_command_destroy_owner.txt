@@ -1,0 +1,25 @@
+#John 2026-09-12: Grub's Command's "destroy" mode killed the opponent's creature but put it in
+#HIS graveyard - the line said moveto(mygraveyard). Destroying it must send it to its OWNER's
+#graveyard, so P2's Grizzly Bears ends in P2's graveyard and P1's is empty but for the sorcery.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grub's Command
+manapool:{3}{B}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Grub's Command
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grub's Command
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

@@ -22430,8 +22430,13 @@ abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
+#John 2026-09-12: no choice of which card to keep - draw:1 && deplete:1 draws the top card and
+#buries the second. Faerie Snoop has this card's exact text and its reveal:2 line is the right
+#one, BUT putting that line on a bare auto= (an enters trigger) SEGFAULTS the game before the
+#ability ever resolves - reproduced on a plain Grizzly Bears, and the crash is at load, which is
+#why Faerie Snoop is safe (its copy sits on autofaceup=). Left as the old approximation until
+#that crash is fixed; a card that crashes is worse than one that does not offer a choice.
 auto=draw:1 && deplete:1
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
@@ -36002,10 +36007,17 @@ subtype=Aura
 [card]
 name=Eerie Gravestone
 auto=draw:1
-auto={1}{B}{S(this)}:deplete:4 controller
+#"from among them" cannot be expressed: [fresh] does NOT match a card the same ability just
+#milled (measured 2026-09-12 - with creature[fresh]|mygraveyard nothing was ever returned, without
+#it the return works). So this reaches any creature card in the graveyard. The rider MUST hang off
+#the deplete as and!( ... )!; with && the whole line failed to parse and the ability did not exist.
+#The follow-up MUST be and!( ... )! - the deplete parser reads a stored and!-ability; with && the
+#whole line failed to parse and the ability did not exist at all (measured 2026-09-12).
+auto={1}{B}{S}:deplete:4 controller and!( may name(Return a creature) target(creature|mygraveyard) moveto(hand) )!
+missing=the returned creature may be ANY creature card in your graveyard, not only one of the four just milled
 mana={2}
 type=Artifact
-text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice: Mill four cards.
+text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.
 [/card]
 [card]
 name=Eerie Interlude
@@ -53953,12 +53965,15 @@ toughness=9
 [card]
 name=Grub's Command
 auto=choice name(copy goblin) copy target(creature[goblin]|mybattlefield)
-auto=choice name(destroy) moveto(mygraveyard) target(*[creature;artifact]|opponentbattlefield)
+#moveto(mygraveyard) put the opponent's creature in MY graveyard (John, 2026-09-12). Destroying
+#it sends it to its OWNER's graveyard, which is what the card says.
+auto=choice name(destroy) destroy target(*[creature;artifact]|opponentbattlefield)
 auto=choice name(buff all) all(creature|mybattlefield) effect(+1/+1,haste) ueot
 auto=choice name(mill 5) deplete:5 opponent
 mana={3}{B}{R}
 type=Sorcery
-text=Choose two: copy target Goblin you control; or destroy target artifact or creature; or creatures get +1/+1 and haste until end of turn; or target player mills five cards.
+missing="choose two" - the engine's choice menu takes exactly one mode, so only one of the four happens; and the mill mode does not return the milled Goblins, because "milled this way" cannot be selected ([fresh] does not match them, measured 2026-09-12)
+text=Choose two -- Create a token that's a copy of target Goblin you control. -- Creatures target player controls get +1/+1 and gain haste until end of turn. -- Destroy target artifact or creature. -- Target player mills five cards, then puts each Goblin card milled this way into their hand. (Only one mode may be chosen.)
 [/card]
 [card]
 name=Grub, Storied Matriarch
