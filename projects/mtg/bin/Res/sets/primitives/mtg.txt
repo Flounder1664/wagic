@@ -22430,7 +22430,7 @@ abilities=canplayfromexile
 grade=borderline
 other={2}{U} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
-auto=draw:1 && mill:1
+auto=draw:1 && deplete:1
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
@@ -33701,8 +33701,8 @@ toughness=2
 [/card]
 [card]
 name=Dreams of Laguna
-auto=mill:1 controller && draw:1
-autograveyard={3}{U}:mill:1 controller && draw:1 asSorcery
+auto=deplete:1 controller && draw:1
+autograveyard={3}{U}:deplete:1 controller && draw:1 asSorcery
 text=Surveil 1, then draw a card. -- Flashback {3}{U}.
 mana={1}{U}
 type=Instant
@@ -36002,7 +36002,7 @@ subtype=Aura
 [card]
 name=Eerie Gravestone
 auto=draw:1
-auto={1}{B}{S(this)}:mill:4 controller
+auto={1}{B}{S(this)}:deplete:4 controller
 mana={2}
 type=Artifact
 text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice: Mill four cards.
@@ -41878,7 +41878,7 @@ subtype=Aura
 [/card]
 [card]
 name=Fell Gravship
-auto=mill:3
+auto=deplete:3
 auto=moveto(hand) target(creature|mygraveyard)
 text=When this Spacecraft enters, mill three cards, then return a creature card from your graveyard to your hand.
 mana={2}{B}
@@ -51488,7 +51488,7 @@ toughness=5
 [/card]
 [card]
 name=Golbez, Crystal Collector
-auto=@movedTo(artifact|mybattlefield):mill:1 controller
+auto=@movedTo(artifact|mybattlefield):deplete:1 controller
 auto=@each my endstep:if type(artifact|mybattlefield)~morethan~3 then moveto(hand) target(creature|mygraveyard)
 text=Whenever an artifact you control enters, surveil 1. -- At the beginning of your end step, if you control four or more artifacts, return target creature card from your graveyard to your hand.
 mana={U}{B}
@@ -53955,7 +53955,7 @@ name=Grub's Command
 auto=choice name(copy goblin) copy target(creature[goblin]|mybattlefield)
 auto=choice name(destroy) moveto(mygraveyard) target(*[creature;artifact]|opponentbattlefield)
 auto=choice name(buff all) all(creature|mybattlefield) effect(+1/+1,haste) ueot
-auto=choice name(mill 5) mill:5 opponent
+auto=choice name(mill 5) deplete:5 opponent
 mana={3}{B}{R}
 type=Sorcery
 text=Choose two: copy target Goblin you control; or destroy target artifact or creature; or creatures get +1/+1 and haste until end of turn; or target player mills five cards.
@@ -60370,7 +60370,7 @@ toughness=2
 [card]
 name=Il Mheg Pixie
 abilities=flying
-auto=@combat(attacking) source(this):mill:1 controller
+auto=@combat(attacking) source(this):deplete:1 controller
 text=Flying -- Whenever this creature attacks, surveil 1.
 mana={1}{U}
 type=Creature
@@ -71811,7 +71811,7 @@ toughness=3
 [/card]
 [card]
 name=Lluwen, Imperfect Naturalist
-auto=mill:4 controller
+auto=deplete:4 controller
 auto={2}{BG}{BG}{BG}{T}{D(land|myhand)}:foreach(land|mygraveyard) token(Worm,creature worm,1/1,black green) asSorcery
 mana={BG}{BG}
 type=Legendary Creature
@@ -74915,7 +74915,7 @@ type=Sorcery
 [card]
 name=Maralen, Fae Ascendant
 abilities=flying
-auto=@movedTo(creature|mybattlefield):mill:2 target(player|opponentbattlefield)
+auto=@movedTo(creature|mybattlefield):deplete:2 target(player|opponentbattlefield)
 mana={2}{B}{G}{U}
 type=Creature
 subtype=Elf Faerie Noble
@@ -77824,7 +77824,7 @@ toughness=3
 [/card]
 [card]
 name=Midnight Tilling
-auto=mill:4 && moveto(hand) target(*|mygraveyard)
+auto=deplete:4 && moveto(hand) target(*|mygraveyard)
 mana={1}{G}
 type=Instant
 text=Mill 4 cards. Put target permanent in your graveyard onto its owner's hand.
@@ -82267,7 +82267,7 @@ type=Instant
 [card]
 name=Mysterio's Phantasm
 abilities=flying,vigilance
-auto=@combat(attacking) source(this):mill:1 controller
+auto=@combat(attacking) source(this):deplete:1 controller
 mana={1}{U}
 type=Creature
 subtype=Illusion Villain
@@ -82618,7 +82618,7 @@ type=Enchantment
 [card]
 name=Namazu Trader
 auto=life:-1 && _TREASURE_
-auto=@combat(attacking) source(this):may {S(other creature,artifact|mybattlefield)}:mill:2 controller
+auto=@combat(attacking) source(this):may {S(other creature,artifact|mybattlefield)}:deplete:2 controller
 text=When this creature enters, you lose 1 life and create a Treasure token. -- Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, surveil 2.
 mana={3}{B}
 type=Creature
@@ -105191,7 +105191,7 @@ toughness=2
 [card]
 name=Scarblade Scout
 abilities=lifelink
-auto=mill:2
+auto=deplete:2
 mana={1}{B}
 type=Creature
 text=When Scarblade Scout enters the battlefield, mill 2 cards.
@@ -105947,7 +105947,7 @@ type=Sorcery
 [/card]
 [card]
 name=Scout the City
-auto=mill:3 controller && draw:1
+auto=deplete:3 controller && draw:1
 mana={1}{G}
 type=Sorcery
 text=Mill three cards. You may put a permanent card from among them into your hand.
@@ -107300,7 +107300,7 @@ toughness=3
 [/card]
 [card]
 name=Seedship Broodtender
-auto=mill:3
+auto=deplete:3
 auto={3}{B}{G}{S}:moveto(mybattlefield) target(creature|mygraveyard)
 text=When this creature enters, mill three cards. {3}{B}{G}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield.
 mana={B}{G}
@@ -109804,9 +109804,16 @@ subtype=Aura
 [card]
 name=Shimmerwilds Growth
 target=land
-#The extra mana is the attested enchanted-land shape (Wolfwillow Haven, Glittering Frost,
-#Buried in the Garden): teach(land) + @tappedformana on the land itself.
-auto=teach(land) transforms((,newability[@tappedformana(this):chooseacolor add{chosencolor} chooseend]))
+#Utopia Sprawl's exact shape - the same card with a Forest restriction. The colour is chosen as
+#the Aura enters (one choice per colour) and produceextra adds it whenever the land taps.
+#chooseacolor + @tappedformana was tried first and produced NO extra mana at all (measured);
+#the tap-time prompt John saw came from that shape too.
+auto=choice name(green) transforms((,newability[produceextra:{G}])) forever
+auto=choice name(blue) transforms((,newability[produceextra:{U}])) forever
+auto=choice name(red) transforms((,newability[produceextra:{R}])) forever
+auto=choice name(black) transforms((,newability[produceextra:{B}])) forever
+auto=choice name(white) transforms((,newability[produceextra:{W}])) forever
+missing=the enchanted land is not also made the chosen colour
 mana={1}{G}
 type=Enchantment
 subtype=Aura
@@ -109909,7 +109916,7 @@ type=Legendary Land
 [/card]
 [card]
 name=Shinra Reinforcements
-auto=mill:3 && life:3 controller
+auto=deplete:3 && life:3 controller
 text=When this creature enters, mill three cards and you gain 3 life.
 mana={2}{B}
 type=Creature
@@ -116950,7 +116957,7 @@ text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you
 [card]
 name=Spider-Man Noir
 abilities=menace
-auto=@combat(attacking) source(this) where(alone):counter(1/1) this && mill:1 controller
+auto=@combat(attacking) source(this) where(alone):counter(1/1) this && deplete:1 controller
 mana={4}{B}
 type=Legendary Creature
 subtype=Spider Hero
@@ -129954,7 +129961,7 @@ toughness=1
 [/card]
 [card]
 name=Town Greeter
-auto=mill:4 && may moveto(hand) target(land|mygraveyard)
+auto=deplete:4 && may moveto(hand) target(land|mygraveyard)
 text=When this creature enters, mill four cards. You may put a land card from among them into your hand.
 mana={1}{G}
 type=Creature
@@ -131576,7 +131583,7 @@ text=Choose two: copy target Elf you control; or return a permanent card from yo
 [card]
 name=Trystan, Callous Cultivator
 abilities=deathtouch
-auto=mill:3 controller && if type(creature[elf]|mygraveyard)~morethan~0 then life:2 controller
+auto=deplete:3 controller && if type(creature[elf]|mygraveyard)~morethan~0 then life:2 controller
 auto=@each my mainphase:{B}:name(transform) transform asSorcery
 mana={2}{G}
 type=Legendary Creature
@@ -135118,7 +135125,7 @@ text=Deathtouch -- {2}{B}, Exile this card from your graveyard: Put two +1/+1 co
 [card]
 name=Venomized Cat
 abilities=deathtouch
-auto=mill:2 controller
+auto=deplete:2 controller
 mana={2}{B}
 type=Creature
 subtype=Cat Symbiote

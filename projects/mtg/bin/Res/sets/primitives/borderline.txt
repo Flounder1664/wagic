@@ -8961,7 +8961,7 @@ abilities=deathtouch
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 auto=_PREPARE_
 auto={4}{G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Bind to Life) counter(0/0,-1,Prepared) all(this) && all(*[zpos<=7]|mylibrary) moveto(mygraveyard) asSorcery
-missing=the back face should then put a creature card from among the milled seven onto the battlefield. BLOCKED ON TARGET TIMING, measured 2026-09-08 after John reported it: an inline moveto(myBattlefield) target(creature|mygraveyard) DOES work, but Wagic picks an activated ability's targets when it is ACTIVATED, so the choice happens before the mill and - worse - with an empty graveyard there is no legal target and the ability cannot be activated at all, losing the mill too. <upto:1> does not relax that check. Deferring the return so it chooses after the mill was tried three ways and none fires: ability$!...!$ controller, a [fresh] graveyard target, and a flag counter driving a separate @counteradded trigger. So the mill stands alone until targets can be chosen on resolution. The mill itself is written as an explicit top-7 move: mill:N does nothing inside a chained activated ability (measured 2026-09-06 - the ability fired and spent the Prepared counter, and no card moved) -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+missing=the back face should then put a creature card from among the milled seven onto the battlefield. BLOCKED ON TARGET TIMING, measured 2026-09-08 after John reported it: an inline moveto(myBattlefield) target(creature|mygraveyard) DOES work, but Wagic picks an activated ability's targets when it is ACTIVATED, so the choice happens before the mill and - worse - with an empty graveyard there is no legal target and the ability cannot be activated at all, losing the mill too. <upto:1> does not relax that check. Deferring the return so it chooses after the mill was tried three ways and none fires: ability$!...!$ controller, a [fresh] graveyard target, and a flag counter driving a separate @counteradded trigger. So the mill stands alone until targets can be chosen on resolution. The mill itself is written as an explicit top-7 move. (The 2026-09-06 note here blamed chaining for mill:N doing nothing; the real reason, found 2026-09-12, is that mill: is not an engine keyword at all - deplete: is - so it never worked anywhere.) -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=Deathtouch -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={1}{G}{G}
 type=Creature
@@ -9030,7 +9030,7 @@ grade=borderline
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 auto=@each my upkeep:name(Becomes prepared) _PREPARE_
 auto={2}:name(Card to bottom of library) bottomoflibrary target(*|mygraveyard)
-auto={U/B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Omit Variables) counter(0/0,-1,Prepared) all(this) && mill:3 controller asSorcery
+auto={U/B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Omit Variables) counter(0/0,-1,Prepared) all(this) && deplete:3 controller asSorcery
 missing=the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
 text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. -- {2}: Put target card from your graveyard on the bottom of your library.
 mana={1}{U/B}
@@ -131716,7 +131716,10 @@ toughness=1
 [/card]
 [card]
 name=Wyrm's Crossing Patrol
-missing=myriad is not implemented; the card does nothing at all.
+#Myriad only does anything with THREE or more players: it copies the attacker for each opponent
+#OTHER than the defending player. In a two-player duel it is a no-op by the rules, so this 1/1
+#is playing correctly as a vanilla 1/1 here, not failing.
+missing=myriad is not implemented (it would only matter in a multiplayer game; in a duel the keyword does nothing by the rules)
 text=Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 mana={W}
 type=Creature
@@ -136125,7 +136128,7 @@ toughness=2
 [card]
 name=Stubborn Burrowfiend
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
-auto=@counteradded(0/0.1.saddled) from(this):mill:2 controller
+auto=@counteradded(0/0.1.saddled) from(this):deplete:2 controller
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 missing=the +X/+X where X = creature cards in graveyard (dynamic pump); 'first time each turn' not gated; mill 2 kept
 text=Saddle Mount (see printed card).
@@ -137575,7 +137578,7 @@ name=Terra, Magical Adept
 backside=Esper Terra
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
-auto=mill:5 controller and!( may name(Take an enchantment) target(<upto:1>enchantment|mygraveyard) moveTo(ownerhand) )!
+auto=deplete:5 controller and!( may name(Take an enchantment) target(<upto:1>enchantment|mygraveyard) moveTo(ownerhand) )!
 auto={4}{R}{G}{T}:name(Trance) moveto(exile) and!( flip(backside) forcetype(Enchantment Creature) )! asSorcery
 text=When Terra enters, mill five cards. Put up to one enchantment card milled this way into your hand. (Approximation: any enchantment card in your graveyard.) -- Trance - {4}{R}{G}, {T}: Exile Terra, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery. // Esper Terra
 mana={1}{R}{G}
@@ -138227,7 +138230,7 @@ auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore)
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 missing=Chapter I - "cast an instant or sorcery of mana value 1 or 2 from your hand for --
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) mill:4 target
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) deplete:4 target
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - exile a spell from their graveyard) moveTo(exile) target(*[instant;sorcery]|opponentgraveyard)
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from a graveyard.
@@ -138365,11 +138368,13 @@ type=Instant
 name=Jet's Brainwashing
 grade=borderline
 kicker={3}
-auto=target(creature) cantblock ueot
+#The target belongs at card level so both halves share it - the kicked half then reads as
+#Ray of Command's line, which is the corpus's gain-control-until-end-of-turn form.
+target=creature
+auto=cantblock ueot
+auto=if paid(kicker) then moveto(mybattlefield) and!( transforms((,newability[phaseactionmulti[end once sourceinplay] moveTo(previousbattlefield) && tap],newability[untap],haste)) ueot )!
 auto=_CLUE_
-missing=the kicked mode (gain control, untap, haste); a gain-control rider inside a
-#kicker conditional needs the target the conditional would overwrite.
-text=Kicker {3} -- Target creature can't block this turn. If this spell was kicked, gain control of that creature until end of turn, untap it, and it gains haste until end of turn. (Kicked mode not implemented.) -- Create a Clue token.
+text=Kicker {3} -- Target creature can't block this turn. If this spell was kicked, gain control of that creature until end of turn, untap it, and it gains haste until end of turn. -- Create a Clue token.
 mana={R}
 type=Sorcery
 [/card]
@@ -138439,10 +138444,11 @@ target=creature|myBattlefield
 grade=borderline
 #Fights need the target at CARD level: an inline target(...) + _FIGHT_ resolves into
 #nothing (measured 2026-09-12 on Clash of the Eikons, John's report). Go for Blood's shape.
+#The counter rider goes on its own auto= line BEFORE the fight, testing the card's own target
+#- exactly how Ancient Animus writes "if it is legendary". Both lines share the card target.
+auto=if cantargetcard(*[fresh]) then counter(1/1)
 auto=_FIGHT_
-missing=the "+1/+1 counter if it entered this turn" rider; a fresh-this-turn test on the
-#chosen creature would need the target the _FIGHT_ macro already consumes.
-text=Choose target creature you control and target creature you don't control. If the creature you control entered this turn, put a +1/+1 counter on it. Then those creatures fight each other. (Counter rider not implemented.)
+text=Choose target creature you control and target creature you don't control. If the creature you control entered this turn, put a +1/+1 counter on it. Then those creatures fight each other.
 mana={G}
 type=Sorcery
 [/card]
@@ -138765,7 +138771,7 @@ type=Instant
 name=Wreck and Rebuild
 grade=borderline
 flashback={3}{R}{G}
-auto=choice name(Destroy an artifact or enchantment) destroy target(artifact,enchantment) name(Mill five and reclaim a land) mill:5 controller && may name(Return a land) target(land|mygraveyard) moveTo(myBattlefield) and!( tap(noevent) )!
+auto=choice name(Destroy an artifact or enchantment) destroy target(artifact,enchantment) name(Mill five and reclaim a land) deplete:5 controller && may name(Return a land) target(land|mygraveyard) moveTo(myBattlefield) and!( tap(noevent) )!
 text=Choose one -- Destroy target artifact or enchantment. -- Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped. -- Flashback {3}{R}{G}
 mana={1}{R}{G}
 type=Sorcery
@@ -138787,7 +138793,7 @@ name=Random Encounter
 grade=borderline
 flashback={6}{R}{R}
 auto=shuffle
-auto=mill:4 controller
+auto=deplete:4 controller
 missing=putting the milled creatures onto the battlefield with haste and bouncing them at
 #end of turn - there is no route to act on "each card milled this way".
 text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. (Only the shuffle and mill are implemented.) -- Flashback {6}{R}{R}
@@ -139255,7 +139261,7 @@ type=Artifact
 [card]
 name=Waterlogged Hulk
 grade=borderline
-auto={T}:mill:1 controller
+auto={T}:deplete:1 controller
 missing=craft with Island {3}{U} - craft exiles this plus an Island to return it
 #transformed, and the transformed face is not registered as a card here.
 text={T}: Mill a card. -- Craft with Island {3}{U} (Not implemented.)
@@ -142095,7 +142101,7 @@ toughness=1
 [card]
 name=Inside Information
 target=player
-auto=target(player) mill:castx targetedplayer
+auto=target(player) deplete:castx targetedplayer
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exile-and-play-with-alternate-life-cost not implemented, approximated as a straight mill
 missing=exile (not mill) + "may play those cards this turn, paying life equal to mana value instead of mana cost" not implemented
@@ -143900,7 +143906,7 @@ color=green
 [/card]
 [card]
 name=Moloid
-auto=@combat(attacking) source(this):may mill:1 controller
+auto=@combat(attacking) source(this):may deplete:1 controller
 grade=borderline
 text=Whenever this token attacks, you may mill a card.
 type=Creature

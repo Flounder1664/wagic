@@ -1,0 +1,30 @@
+#John 2026-09-12: Malamet Battle Glyph did not add its +1/+1 counter before the fight. The
+#rider is now its own line, testing the card's own target for "entered this turn".
+#Scathe Zombies is CAST this turn, so it is fresh: 2/2 + counter = 3/3, which survives fighting
+#Grizzly Bears (2/2) while the Bears die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Scathe Zombies,Malamet Battle Glyph
+manapool:{2}{B}{G}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Scathe Zombies
+Malamet Battle Glyph
+Scathe Zombies
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Scathe Zombies
+pt:Scathe Zombies=3/3
+graveyard:Malamet Battle Glyph
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

@@ -1,0 +1,23 @@
+#John 2026-09-12: "Waterlogged Hulk had no abilities". It had one - {T}: mill:1 - but mill: is
+#not an engine keyword at all (deplete: is), so the line was dead. 29 cards had the same dead
+#spelling. Clicking the Hulk must now move the top card of the library to the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterlogged Hulk
+library:Mind Stone,Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterlogged Hulk
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterlogged Hulk
+library:Mind Stone,Juggernaut
+graveyard:Ornithopter
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#John 2026-09-12: Jet's Brainwashing did not take control when kicked (he pointed at Ray of
+#Command as the old example, which is exactly the line now used). Kicked, the opponent's
+#Grizzly Bears must change sides; the Clue token from the unkicked half is the extra permanent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Jet's Brainwashing
+manapool:{3}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Jet's Brainwashing
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Jet's Brainwashing
+life:20
+[PLAYER2]
+life:20
+[END]

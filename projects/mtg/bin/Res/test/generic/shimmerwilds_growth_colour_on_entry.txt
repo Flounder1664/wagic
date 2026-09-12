@@ -1,0 +1,26 @@
+#John 2026-09-12: Shimmerwilds Growth asked for its colour every time the land tapped; the
+#colour belongs to the Aura as it enters. Choosing white on entry, the Forest must then produce
+#{G} plus {W} when tapped, with no further prompt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shimmerwilds Growth
+inplay:Forest
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shimmerwilds Growth
+Forest
+choice 4
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shimmerwilds Growth,Forest
+manapool:{G}{W}
+life:20
+[PLAYER2]
+life:20
+[END]
