@@ -16097,6 +16097,7 @@ toughness=4
 name=Bushwhack
 auto=choice target(land[basic]|mylibrary) moveto(hand)
 auto=choice target(creature|mybattlefield) _FIGHT_ restriction{type(creature|opponentbattlefield)~morethan~0}
+missing=the fight mode does nothing: a fight needs its target declared at card level, which a mode inside a choice menu cannot do
 text=Choose one - -- - Search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- - Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
 mana={G}
 type=Sorcery
@@ -85769,6 +85770,7 @@ type=Instant
 name=Plow Through
 auto=if type(creature|opponentBattlefield)~morethan~0 then choice target(creature|mybattlefield) _FIGHT_
 auto=if type(vehicle|battlefield)~morethan~0 then choice destroy target(vehicle)
+missing=the fight mode does nothing: a fight needs its target declared at card level, which a mode inside a choice menu cannot do
 text=Choose one - -- - Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.) -- - Destroy target Vehicle.
 mana={G}
 type=Sorcery
@@ -117676,6 +117678,7 @@ auto=@counteradded(0/0,1,Lore) from(this) restriction{compare(hascntlore)~equalt
 auto=@counteradded(0/0,1,Lore) from(this) restriction{compare(hascntlore)~equalto~3}:name(Creature gets X/0) target(creature|battlefield) transforms((,trample,newability[3/0])) ueot
 auto=@counteradded(0/0,1,Lore) from(this) restriction{compare(hascntlore)~equalto~4}:name(Your creature fights) target(creature|mybattlefield) _FIGHT_
 auto=@counteradded(0/0,1,Lore) from(this) restriction{compare(hascntlore)~equalto~4}:name(Sacrifice saga) sacrifice
+missing=the chapter IV fight does nothing: a fight needs its target declared at card level, which a Saga chapter trigger cannot do
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) -- I, II, III - Until end of turn, target creature gains trample and gets +X/+0, where X is the number of lore counters on The Triumph of Anax. -- IV - Target creature you control fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 mana={2}{R}
 type=Enchantment
@@ -133979,8 +133982,9 @@ toughness=3
 [/card]
 [card]
 name=Greasewrench Goblin
-auto={2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: loot two) counter(0/0,1,exhaust) && counter(1/1) && may discard:2 && draw:2
-missing="up to two" flexibility (all-or-nothing two-card loot here; draw happens even on empty discard)
+#"may discard:2 && draw:2" made the draw unconditional - declining the discard still drew two
+#(John, 2026-09-12). The three cases are a choice menu instead, which also gives the "up to".
+auto={2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: loot) counter(0/0,1,exhaust) && counter(1/1) && ability$!name(Discard up to two) choice name(Discard 2, draw 2) discard:2 && draw:2 _ choice name(Discard 1, draw 1) discard:1 && draw:1 _ choice name(Discard nothing) donothing!$ controller
 text=Exhaust - {2}{R}: Discard up to two cards, then draw that many cards. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
 mana={R}
 type=Creature
@@ -136383,9 +136387,11 @@ abilities=hasotherkicker
 target=creature,planeswalker
 other={R}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
-auto=ifnot paid(alternative) then damage:2
-auto=alternative damage:3
-missing=Two riders are absent: the scry 1 on the bargained mode, and the replacement effect exiling a permanent this damaged instead of letting it die. The scry is omitted rather than guessed because a scry/surveil macro after an "alternative" prefix is known to break the loader.
+#exiledeath must be applied BEFORE the damage: applied after, the creature is already dead
+#(measured - it went to the graveyard). Whippoorwill marks its target up front for the same reason.
+auto=transforms((,newability[exiledeath])) ueot && ifnot paid(alternative) then damage:2
+auto=transforms((,newability[exiledeath])) ueot && alternative damage:3
+missing=the scry 1 on the bargained mode. It is omitted rather than guessed because a scry macro after an "alternative" prefix is known to break the loader. The exile rider IS implemented now, as exiledeath on the damaged permanent (Whippoorwill's form).
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1. -- If a permanent dealt damage by Torch the Tower would die this turn, exile it instead.
 mana={R}
 type=Instant
@@ -137939,9 +137945,12 @@ type=Land
 [/card]
 [card]
 name=Earth Rumble
+target=creature|myBattlefield
 grade=borderline
 auto=_EARTHBEND2_
-auto=target(creature|mybattlefield) _FIGHT_
+#Fights need the target at CARD level: an inline target(...) + _FIGHT_ resolves into
+#nothing (measured 2026-09-12 on Clash of the Eikons, John's report). Go for Blood's shape.
+auto=_FIGHT_
 text=Earthbend 2. When you do, up to one target creature you control fights target creature an opponent controls.
 mana={3}{G}
 type=Sorcery
@@ -138426,8 +138435,11 @@ toughness=2
 [/card]
 [card]
 name=Malamet Battle Glyph
+target=creature|myBattlefield
 grade=borderline
-auto=target(creature|mybattlefield) _FIGHT_
+#Fights need the target at CARD level: an inline target(...) + _FIGHT_ resolves into
+#nothing (measured 2026-09-12 on Clash of the Eikons, John's report). Go for Blood's shape.
+auto=_FIGHT_
 missing=the "+1/+1 counter if it entered this turn" rider; a fresh-this-turn test on the
 #chosen creature would need the target the _FIGHT_ macro already consumes.
 text=Choose target creature you control and target creature you don't control. If the creature you control entered this turn, put a +1/+1 counter on it. Then those creatures fight each other. (Counter rider not implemented.)
@@ -138436,8 +138448,11 @@ type=Sorcery
 [/card]
 [card]
 name=Tail Swipe
+target=creature|myBattlefield
 grade=borderline
-auto=target(creature|mybattlefield) _FIGHT_
+#Fights need the target at CARD level: an inline target(...) + _FIGHT_ resolves into
+#nothing (measured 2026-09-12 on Clash of the Eikons, John's report). Go for Blood's shape.
+auto=_FIGHT_
 missing=the "+1/+1 until end of turn if cast during your main phase" rider - there is no
 #cast-phase test available to a resolving spell.
 text=Choose target creature you control and target creature you don't control. If you cast this spell during your main phase, the creature you control gets +1/+1 until end of turn. Then those creatures fight each other. (Pump rider not implemented.)
@@ -138446,8 +138461,11 @@ type=Instant
 [/card]
 [card]
 name=The Last Agni Kai
+target=creature|myBattlefield
 grade=borderline
-auto=target(creature|mybattlefield) _FIGHT_
+#Fights need the target at CARD level: an inline target(...) + _FIGHT_ resolves into
+#nothing (measured 2026-09-12 on Clash of the Eikons, John's report). Go for Blood's shape.
+auto=_FIGHT_
 missing=the excess-damage-to-red-mana rider and the "you don't lose unspent red mana"
 #clause; neither excess damage nor mana-burn suppression is exposed to the DSL.
 text=Target creature you control fights target creature an opponent controls. If the creature the opponent controls is dealt excess damage this way, add that much {R}. -- Until end of turn, you don't lose unspent red mana as steps and phases end. (Both riders not implemented.)
@@ -138457,7 +138475,10 @@ type=Instant
 [card]
 name=Clash of the Eikons
 grade=borderline
-auto=choice name(Creatures fight) target(creature|mybattlefield) _FIGHT_ name(Add a lore counter) target(*[saga]|mybattlefield) counter(0/0,1,Lore) name(Remove a lore counter) target(*[saga]|mybattlefield) counter(0/0,-1,Lore)
+target=creature|myBattlefield
+#Modes in a choice menu are separated by " _ ". Without it this was ONE mode carrying three
+#name() labels, so John saw a single choice and the fight resolved into nothing.
+auto=_FIGHT_
 missing="choose one or more" - the engine's choice menu takes exactly one mode.
 text=Choose one or more -- Target creature you control fights target creature an opponent controls. -- Remove a lore counter from target Saga you control. -- Put a lore counter on target Saga you control. (Only one mode may be chosen.)
 mana={G}
@@ -138492,6 +138513,7 @@ grade=borderline
 auto={2}{G}{T}:name(Creatures fight) target(creature|mybattlefield) _FIGHT_
 missing=the {2} discount when both targets are yours, and the "damage-triggered abilities
 #of your permanents trigger an additional time" clause.
+missing=the fight does nothing: a fight needs its target declared at card level, which an activated ability cannot do
 text=Haste -- {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control. (No discount.) -- If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Not implemented.)
 mana={R}{G}{W}
 type=Legendary Creature
@@ -140331,14 +140353,16 @@ type=Instant
 [/card]
 [card]
 name=Stir Up Trouble
-cost=sacrifice|artifact,creature
+#cost= is NOT a primitive field - the engine never reads it, so the sacrifice was free (John,
+#2026-09-12: cast for {B} with no sacrifice). An additional sacrifice cost belongs IN mana= as
+#{S(...)}, and the "or pay {4}" half is an alternative cost, which is what other= is for.
 target=creature
 auto=destroy target(creature)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; additional-cost-or-pay-4 alternative not implemented, sacrifice cost only
-missing="or pay {4} instead" alternative additional-cost clause not implemented
 text=As an additional cost to cast this spell, sacrifice an artifact or creature or pay {4}. -- Destroy target creature.
-mana={B}
+mana={B}{S(artifact,creature|mybattlefield)}
+other={4}{B} name(Pay 4 instead of sacrificing)
 type=Sorcery
 [/card]
 [card]
@@ -143189,7 +143213,8 @@ type=Artifact
 [card]
 name=Assassin Initiate
 grade=borderline
-abilities=deathtouch
+#NO abilities=deathtouch here: it granted deathtouch permanently and for free (John, 2026-09-12).
+#The keyword belongs only to the {1} ability below.
 auto={1}:flying ueot
 auto={1}:deathtouch ueot
 auto={1}:lifelink ueot

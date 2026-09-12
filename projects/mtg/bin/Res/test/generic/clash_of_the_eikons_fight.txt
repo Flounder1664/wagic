@@ -1,0 +1,27 @@
+#John 2026-09-12: Clash of the Eikons offered one choice and the fight did nothing - its modes
+#were not separated by " _ ", so the three labels were one mode. Fighting 2/2 into 2/2 must
+#now kill both.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Clash of the Eikons
+inplay:Grizzly Bears
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Scathe Zombies
+life:20
+[DO]
+Clash of the Eikons
+Grizzly Bears
+choice 0
+Scathe Zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Clash of the Eikons,Grizzly Bears
+life:20
+[PLAYER2]
+graveyard:Scathe Zombies
+life:20
+[END]

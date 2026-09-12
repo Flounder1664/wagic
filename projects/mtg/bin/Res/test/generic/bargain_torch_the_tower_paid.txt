@@ -2,6 +2,8 @@
 #sacrificing an Ornithopter, so the damage becomes 3 and the Giant dies. Both halves
 #of the cost are asserted: the Ornithopter must reach the graveyard (proving the
 #sacrifice was really taken) and the Giant must die (proving the upgraded branch ran).
+#2026-09-12: the Giant is now EXILED, not buried - Torch the Tower's exile rider is
+#implemented (a permanent it damaged that would die is exiled instead).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -23,6 +25,6 @@ FIRSTMAIN
 graveyard:Torch the Tower,Ornithopter
 life:20
 [PLAYER2]
-graveyard:Hill Giant
+exile:Hill Giant
 life:20
 [END]

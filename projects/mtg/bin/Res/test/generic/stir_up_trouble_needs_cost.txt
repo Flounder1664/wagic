@@ -1,0 +1,24 @@
+#John 2026-09-12: Stir Up Trouble cast for {B} with no sacrifice - its cost= line was not a
+#field the engine reads. The sacrifice now lives in mana=. With only {B} and nothing to
+#sacrifice the spell must stay in hand and the creature must survive.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stir Up Trouble
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Stir Up Trouble
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stir Up Trouble
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]

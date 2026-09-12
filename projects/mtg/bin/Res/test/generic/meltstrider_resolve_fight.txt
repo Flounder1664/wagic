@@ -1,0 +1,30 @@
+#John 2026-09-12: Meltstrider's Resolve asked for a fight target but dealt no damage. An Aura's
+#card-level target IS the enchanted creature, so the bare _FIGHT_ macro supplies both sides.
+#Grizzly Bears (2/2, +0/+2 from the Aura = 2/4) fights Scathe Zombies (2/2): the Zombies die,
+#the Bears survive on 4 toughness.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Meltstrider's Resolve
+inplay:Grizzly Bears
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Scathe Zombies
+life:20
+[DO]
+Meltstrider's Resolve
+Grizzly Bears
+choice 0
+choice 0
+Scathe Zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Meltstrider's Resolve,Grizzly Bears
+pt:Grizzly Bears=2/4
+life:20
+[PLAYER2]
+graveyard:Scathe Zombies
+life:20
+[END]

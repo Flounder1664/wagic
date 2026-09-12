@@ -1,0 +1,28 @@
+#Malamet Battle Glyph had the same dead fight as Clash of the Eikons: an inline
+#target(creature|mybattlefield) + _FIGHT_ resolves into nothing. With the target declared at
+#card level, 2/2 fighting 2/2 kills both. (The +1/+1 counter rider for a creature that entered
+#this turn is not implemented; the Bears here did not enter this turn.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Malamet Battle Glyph
+inplay:Grizzly Bears
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Scathe Zombies
+life:20
+[DO]
+Malamet Battle Glyph
+Grizzly Bears
+choice 0
+Scathe Zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Malamet Battle Glyph,Grizzly Bears
+life:20
+[PLAYER2]
+graveyard:Scathe Zombies
+life:20
+[END]

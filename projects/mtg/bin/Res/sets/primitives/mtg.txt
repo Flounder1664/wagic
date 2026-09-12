@@ -76741,11 +76741,11 @@ subtype=Equipment
 [card]
 name=Meltstrider's Resolve
 target=creature
-#The fight is dynamicability<!powerstrike eachother!>, the corpus form (Howlpack Alpha,
-#Ferocious Werefox). The Aura's own target is the enchanted creature, so the fight picks the
-#opponent's creature as its target.
+#The fight is _FIGHT_, the corpus macro. My first attempt named only the opponent's creature and
+#no damage was dealt either way (John, 2026-09-12): a fight needs BOTH sides, and the macro is
+#what supplies the second - it targets your creature, then targets theirs inside.
 auto=teach(creature) +0/+2
-auto=may name(Fight a creature) target(creature|opponentbattlefield) dynamicability<!powerstrike eachother!>
+auto=may name(Fight a creature) _FIGHT_
 missing=cannot be blocked by more than one creature
 text=Enchant creature you control. When this Aura enters, enchanted creature fights up to one target creature an opponent controls. Enchanted creature gets +0/+2 and can't be blocked by more than one creature. (Approximation: only +0/+2 static bonus implemented.)
 mana={G}
@@ -131000,6 +131000,7 @@ toughness=3
 [card]
 name=Triangle of War
 auto={2}{S} restriction{type(creature|opponentbattlefield)~morethan~0}:name(fight) target(creature|mybattlefield) _FIGHT_
+missing=the fight does nothing: a fight needs its target declared at card level, which an activated ability cannot do
 text={2}, Sacrifice Triangle of War: Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
 mana={1}
 type=Artifact

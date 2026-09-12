@@ -1,0 +1,29 @@
+#John 2026-09-12: Assassin Initiate had deathtouch permanently, without paying for it - an
+#abilities=deathtouch line that should never have been there. Proved with a fight: the 1/1
+#Initiate fights 2/2 Grizzly Bears. It dies; the Bears must SURVIVE on 2/1. With the free
+#deathtouch the Bears died too.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Malamet Battle Glyph
+inplay:Assassin Initiate
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Malamet Battle Glyph
+Assassin Initiate
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Malamet Battle Glyph,Assassin Initiate
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+pt:Grizzly Bears=2/2
+life:20
+[END]

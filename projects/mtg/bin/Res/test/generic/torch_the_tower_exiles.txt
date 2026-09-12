@@ -1,0 +1,24 @@
+#John 2026-09-12: Torch the Tower's damage killed the creature but did not exile it. The rider
+#is now exiledeath on the damaged permanent, so Grizzly Bears must end in EXILE, not the
+#graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Torch the Tower
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Torch the Tower
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Torch the Tower
+life:20
+[PLAYER2]
+exile:Grizzly Bears
+life:20
+[END]

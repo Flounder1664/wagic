@@ -1,0 +1,27 @@
+#John 2026-09-12: Greasewrench Goblin drew two cards without discarding any. Choosing
+#"Discard nothing" must now draw nothing: the hand keeps exactly the two cards it started
+#with, and the +1/+1 counter still lands.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Greasewrench Goblin
+hand:Mind Stone,Juggernaut
+manapool:{2}{R}
+library:Ornithopter,Millstone,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[DO]
+Greasewrench Goblin
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Greasewrench Goblin
+hand:Mind Stone,Juggernaut
+library:Ornithopter,Millstone,Howling Mine
+pt:Greasewrench Goblin=3/2
+life:20
+[PLAYER2]
+life:20
+[END]
