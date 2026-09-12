@@ -57415,7 +57415,7 @@ type=Enchantment
 [/card]
 [card]
 name=Inalla, Archmage Ritualist
-auto=@movedto(other wizard[-token]|mybattlefield):all(trigger[to]) pay[[{1}]] clone with(unearth,haste)
+auto=@movedto(other wizard[-token]|mybattlefield):all(trigger[to]) clone with(unearth,haste)
 auto={T(wizard|myBattlefield)}{T(wizard|myBattlefield)}{T(wizard|myBattlefield)}{T(wizard|myBattlefield)}{T(wizard|myBattlefield)}:target(player) life:-7
 text=Eminence - Whenever another nontoken Wizard enters under your control, if Inalla, Archmage Ritualist is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step. -- Tap five untapped Wizards you control: Target player loses 7 life.
 mana={2}{U}{B}{R}
@@ -145759,7 +145759,15 @@ name=Mendicant Core, Guidelight
 auto=_STARTENGINES_
 #*/3: printed power 0 plus one for each artifact, itself included.
 auto=foreach(artifact|mybattlefield) 1/0
-auto=@movedto(artifact|mystack) restriction{compare(pspeed)~equalto~4}:may pay({1}) name(Max speed - copy it) all(trigger[to]) transforms((,newability[clone])) oneshot
+#Copying the spell that triggered you is all(trigger[to]) ... clone (Case of the Shifting
+#Visage, Double Down), with an optional cost as pay[[...]] before it - exactly Bramble
+#Sovereign's line. Wrapping clone in transforms((newability[...])) instead gave John a
+#'becomes' menu that did nothing: transforms IS becomes, and the clone inside it had no card.
+#Probed 2026-09-12 with the gate lowered: all(trigger[to]) clone DOES make the copy, and
+#'may pay({1})' takes the mana without copying, so the cost has to be this pay[[ ]] form. The
+#harness cannot answer the optional-payment prompt (the spell just sits on the stack), so the
+#paid path is John's to confirm.
+auto=@movedto(artifact|mystack) restriction{compare(pspeed)~equalto~4}:name(Max speed - copy it) all(trigger[to]) pay[[{1}]] clone
 text=Mendicant Core's power is equal to the number of artifacts you control. -- Start your engines! -- Max speed - Whenever you cast an artifact spell, you may pay {1}. If you do, copy it.
 mana={W}{U}
 type=Legendary Artifact Creature
