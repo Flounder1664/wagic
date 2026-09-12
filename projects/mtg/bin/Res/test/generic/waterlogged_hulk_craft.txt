@@ -1,0 +1,27 @@
+#John 2026-09-12: "Waterlogged Hulk mills but the craft wasn't offered". The real card is
+#Waterlogged Hulk // Watertight Gondola (LCI 83); the back face existed in the set file with no
+#primitive behind it. Crafting exiles an Island and transforms the Hulk into the 4/4 Vehicle.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterlogged Hulk,Island
+manapool:{3}{U}
+library:Mind Stone,Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterlogged Hulk
+choice 1
+Island
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Watertight Gondola
+pt:636785=4/4
+exile:Island
+library:Mind Stone,Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[END]

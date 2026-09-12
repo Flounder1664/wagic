@@ -139268,10 +139268,15 @@ type=Artifact
 [card]
 name=Waterlogged Hulk
 grade=borderline
+#The real card is Waterlogged Hulk // Watertight Gondola (LCI 83). The back face is now written
+#and registered at its own multiverse id, 636786, and both faces already had art staged.
+#Craft = exile this plus an Island, return transformed: written as an exile COST {E(...)} plus
+#flip(backside), the corpus's transform verb (Aclazotz / Temple of the Dead).
+backside=Watertight Gondola
 auto={T}:deplete:1 controller
-missing=craft with Island {3}{U} - craft exiles this plus an Island to return it
-#transformed, and the transformed face is not registered as a card here.
-text={T}: Mill a card. -- Craft with Island {3}{U} (Not implemented.)
+auto={3}{U}{E(island|mybattlefield)}:name(Craft with Island) flip(backside) asSorcery
+missing=craft can also exile an Island card from your graveyard; only an Island on the battlefield can pay here
+text={T}: Mill a card. -- Craft with Island {3}{U} ({3}{U}, Exile this artifact, Exile an Island you control: Return this card transformed under its owner's control. Craft only as a sorcery.)
 mana={U}
 type=Artifact
 [/card]
@@ -145899,5 +145904,19 @@ mana={1}{U}
 type=Legendary Creature
 subtype=Homunculus
 power=0
+toughness=4
+[/card]
+[card]
+name=Watertight Gondola
+backside=Waterlogged Hulk
+abilities=vigilance
+auto=_CREW1_
+#Descend 8 counts PERMANENT cards in the graveyard, so the descriptor must use & (AND).
+#With ; it would read "not an instant OR not a sorcery", which every card matches.
+auto=aslongas(*[-instant&-sorcery]|mygraveyard) unblockable >7
+text=(Transforms from Waterlogged Hulk.) -- Vigilance -- Descend 8 - This Vehicle can't be blocked as long as there are eight or more permanent cards in your graveyard. -- Crew 1
+type=Artifact
+subtype=Vehicle
+power=4
 toughness=4
 [/card]

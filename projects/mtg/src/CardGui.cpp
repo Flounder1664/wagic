@@ -305,7 +305,16 @@ void CardGui::Render()
     if (!card)
         return;
     GameObserver * game = card->getObserver();
-    WFont * mFont = game?game->getResourceManager()->GetWFont(Fonts::MAIN_FONT):WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+    //The console/TESTSUITE build has no resource manager at all, so this dereferenced NULL and
+    //segfaulted: any card that renders a card display - a reveal window above all - killed the
+    //test run before it could resolve (measured 2026-09-12, stack via gdb). Nothing to draw
+    //without fonts, so leave quietly instead.
+    WResourceManager * resources = game ? game->getResourceManager() : WResourceManager::Instance();
+    if (!resources)
+        return;
+    WFont * mFont = resources->GetWFont(Fonts::MAIN_FONT);
+    if (!mFont)
+        return;
     JRenderer * renderer = JRenderer::GetInstance();
     TargetChooser * tc = NULL;
 
