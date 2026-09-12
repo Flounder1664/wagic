@@ -38643,13 +38643,6 @@ mana={1}{G}
 type=Sorcery
 [/card]
 [card]
-name=Epic Downfall
-auto=moveto(exile) target(creature[manacost>=3])
-text=Exile target creature with mana value 3 or greater.
-mana={1}{B}
-type=Sorcery
-[/card]
-[card]
 name=Epic Proportions
 abilities=flash
 target=creature
@@ -50203,13 +50196,6 @@ mana={1}{B}
 type=Instant
 [/card]
 [card]
-name=Goatnap
-auto=gain control target(creature|opponentbattlefield) ueot && untap target(creature|opponentbattlefield) && target(creature|opponentbattlefield) effect(+0/+0,haste) ueot
-mana={2}{R}
-type=Sorcery
-text=Gain control of target creature until end of turn. Untap it. It gains haste until end of turn.
-[/card]
-[card]
 name=Goatnapper
 auto=choice target(goat) moveto(mybattlefield) && untap && transforms((,haste,newability[phaseaction[end once] moveto(ownerbattlefield)])) ueot
 text=When Goatnapper enters, untap target Goat and gain control of it until end of turn. It gains haste until end of turn.
@@ -52643,17 +52629,6 @@ type=Creature
 subtype=Spider
 power=2
 toughness=4
-[/card]
-[card]
-name=Graveshifter
-abilities=changeling
-auto=moveto(myhand) target(creature|mygraveyard)
-mana={3}{B}
-type=Creature
-subtype=Shapeshifter
-power=2
-toughness=2
-text=Changeling -- When this creature enters, you may return target creature card from your graveyard to your hand.
 [/card]
 [card]
 name=Gravespawn Sovereign
@@ -74200,16 +74175,6 @@ name=Make Obsolete
 auto=all(creature|opponentbattlefield) -1/-1 ueot
 text=Creatures your opponents control get -1/-1 until end of turn.
 mana={2}{B}
-type=Instant
-[/card]
-[card]
-name=Make Your Move
-#Same NULL-target-chooser shape as Airship Crash - see the note there.
-auto=choice name(Destroy target artifact) destroy target(artifact) restriction{type(artifact)~morethan~0}
-auto=choice name(Destroy target enchantment) destroy target(enchantment) restriction{type(enchantment)~morethan~0}
-auto=choice name(Destroy target creature with power 4 or greater) destroy target(creature[power>=4]) restriction{type(creature[power>=4])~morethan~0}
-text=Destroy target artifact, enchantment, or creature with power 4 or greater.
-mana={2}{W}
 type=Instant
 [/card]
 [card]
@@ -102707,13 +102672,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Run Away Together
-auto=moveto(myhand) target(creature|opponentbattlefield) && moveto(opponenthand) target(creature|mybattlefield)
-mana={1}{U}
-type=Instant
-text=Choose two target creatures controlled by different players. Return those creatures to their owners' hands.
-[/card]
-[card]
 name=Run Wild
 target=creature
 auto=trample
@@ -110145,13 +110103,6 @@ toughness=5
 name=Shock
 target=anytarget
 auto=damage:2
-text=Shock deals 2 damage to any target.
-mana={R}
-type=Instant
-[/card]
-[card]
-name=Shock
-auto=damage:2 target(anytarget)
 text=Shock deals 2 damage to any target.
 mana={R}
 type=Instant
@@ -123477,15 +123428,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Sygg, Wanderwine Wisdom
-mana={1}{U}
-type=Creature
-subtype=Merfolk Wizard
-power=2
-toughness=2
-text=Sygg cannot be blocked. -- When this creature enters, target creature you control gains "Whenever this creature deals combat damage to a player, draw a card" until end of turn.
-[/card]
-[card]
 name=Sylvan Advocate
 abilities=vigilance
 auto=aslongas(land|mybattlefield) 2/2 >5
@@ -125588,14 +125530,6 @@ auto=ifnot paid(alternative) then ability$! choice name(shuffle all hand & grave
 text=Choose one - Each player shuffles their hand and graveyard into their library; or each player draws seven cards. -- Entwine {2} (Choose both if you pay the entwine cost.)
 mana={5}{U}{U}
 type=Sorcery
-[/card]
-[card]
-name=Temporal Cleansing
-abilities=convoke
-auto=moveto(mylibrary) target(*[-land]|opponentbattlefield)
-mana={3}{U}
-type=Sorcery
-text=Convoke -- The owner of target nonland permanent puts it on top of their library.
 [/card]
 [card]
 name=Temporal Distortion
@@ -131642,17 +131576,6 @@ text=When Trystan, Callous Cultivator enters the battlefield, mill 3 cards. You 
 subtype=Elf Druid
 power=3
 toughness=4
-[/card]
-[card]
-name=Trystan, Callous Cultivator
-abilities=deathtouch
-auto=mill:3 && life:2 controller
-mana={2}{G}
-type=Creature
-subtype=Elf Druid
-power=3
-toughness=4
-text=Deathtouch -- When this creature enters, mill three cards and gain 2 life.
 [/card]
 [card]
 name=Tsabo Tavoc
@@ -145327,13 +145250,6 @@ power=4
 toughness=2
 [/card]
 [card]
-name=Quick Study
-auto=draw:2 controller
-text=Draw two cards.
-mana={2}{U}
-type=Instant
-[/card]
-[card]
 name=Grapple with Death
 target=creature,artifact
 auto=destroy && life:1 controller
@@ -145508,14 +145424,6 @@ auto=may moveto(mybattlefield) target(land|myhand) and!(tap(noevent))!
 text=Draw three cards. You may put a land card from your hand onto the battlefield tapped.
 mana={3}{G}{U}
 type=Instant
-[/card]
-[card]
-name=Seize the Spoils
-auto=draw:2 controller
-auto=_TREASURE_
-text=As an additional cost to cast this spell, discard a card. -- Draw two cards and create a Treasure token.
-mana={2}{R}{D(*|myhand)}
-type=Sorcery
 [/card]
 #=== Secrets of Strixhaven (SOS) — MEDIUM batch M5 (Flashback) ===
 [card]

@@ -573,16 +573,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Aven Soulgazer
-abilities=flying
-text=Flying -- {2}{W}: Look at target face-down creature.
-mana={3}{W}{W}
-type=Creature
-subtype=Bird Cleric
-power=3
-toughness=3
-[/card]
-[card]
 name=Averna, the Chaos Bloom
 text=As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped. (Do this after the last card is exiled but before deciding whether to cast a nonland card.)
 mana={G}{U}{R}
@@ -2133,12 +2123,6 @@ mana={3}
 type=Artifact
 [/card]
 [card]
-name=Crown of the Ages
-text={4}, {T}: Attach target Aura attached to a creature to another creature.
-mana={2}
-type=Artifact
-[/card]
-[card]
 name=Cruel Entertainment
 text=Choose target player and another target player. The first player controls the second player during the second player's next turn, and the second player controls the first player during the first player's next turn.
 mana={6}{B}
@@ -3511,12 +3495,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Flooded Woodlands
-text=Green creatures can't attack unless their controller sacrifices a land for each green creature he or she controls that's attacking.
-mana={2}{U}{B}
-type=Enchantment
-[/card]
-[card]
 name=Flowering Lumberknot
 text=Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.
 mana={3}{G}
@@ -3524,15 +3502,6 @@ type=Creature
 subtype=Treefolk
 power=5
 toughness=5
-[/card]
-[card]
-name=Flowstone Salamander
-text={R}: Flowstone Salamander deals 1 damage to target creature blocking it.
-mana={3}{R}{R}
-type=Creature
-subtype=Salamander
-power=3
-toughness=4
 [/card]
 [card]
 name=Fog Patch
@@ -3993,18 +3962,6 @@ text=Put two 1/1 green Elf Warrior creature tokens onto the battlefield. Clash w
 mana={2}{G}
 type=Tribal Instant
 subtype=Elf
-[/card]
-[card]
-name=Gimbal, Gremlin Prodigy
-auto=lord(other creature|myBattlefield) trample
-auto=lord(creature|myBattlefield)
-auto=@each my endofturn:create(gremlin artifact:creature gremlin artifact:0/0:red)
-text=Artifact creatures you control have trample. -- At the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.
-mana={2}{G}{U}{R}
-type=Legendary Creature
-subtype=Gremlin Artificer
-power=4
-toughness=4
 [/card]
 [card]
 name=Gimme Five
@@ -6406,15 +6363,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Marisi, Breaker of the Coil
-text=Your opponents can't cast spells during combat. -- Whenever a creature you control deals combat damage to a player, goad each creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
-mana={1}{R}{G}{W}
-type=Legendary Creature
-subtype=Cat Warrior
-power=5
-toughness=4
-[/card]
-[card]
 name=Mark of Eviction
 target=creature
 text=Enchant creature -- At the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
@@ -7247,12 +7195,6 @@ mana={B}{B}{B}
 type=Enchantment
 [/card]
 [card]
-name=Necromancy
-text=You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step. -- When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.
-mana={2}{B}
-type=Enchantment
-[/card]
-[card]
 name=Necrotic Plague
 target=creature
 text=Enchant creature -- Enchanted creature has "At the beginning of your upkeep, sacrifice this creature." -- When enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
@@ -7406,15 +7348,6 @@ mana={3}{B}
 type=Creature
 subtype=Imp
 power=1
-toughness=1
-[/card]
-[card]
-name=Nosy Goblin
-text={T}, Sacrifice Nosy Goblin: Destroy target face-down creature.
-mana={2}{R}
-type=Creature
-subtype=Goblin
-power=2
 toughness=1
 [/card]
 [card]
@@ -7742,15 +7675,6 @@ power=2
 toughness=3
 [/card]
 [card]
-name=Oreskos Explorer
-text=When Oreskos Explorer enters the battlefield, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle your library.
-mana={1}{W}
-type=Creature
-subtype=Cat Scout
-power=2
-toughness=2
-[/card]
-[card]
 name=Orochi Colony
 text=Whenever a creature you control deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library. -- Whenever you roll {K}, target creature can't be blocked this turn.
 type=Plane
@@ -7853,12 +7777,6 @@ type=Creature
 subtype=Wurm
 power=9
 toughness=5
-[/card]
-[card]
-name=Panharmonicon
-text=If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-mana={4}
-type=Artifact
 [/card]
 [card]
 name=Panopticon
@@ -9005,15 +8923,6 @@ power=3
 toughness=1
 [/card]
 [card]
-name=Salt Road Ambushers
-text=Whenever another permanent you control is turned face up, if it's a creature, put two +1/+1 counters on it. -- Megamorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)
-mana={3}{G}
-type=Creature
-subtype=Dog Warrior
-power=3
-toughness=3
-[/card]
-[card]
 name=Samite Ministration
 text=Prevent all damage that would be dealt to you this turn by a source of your choice. Whenever damage from a black or red source is prevented this way this turn, you gain that much life.
 mana={1}{W}
@@ -9102,12 +9011,6 @@ mana={2}
 type=Artifact
 [/card]
 [card]
-name=Scroll of Fate
-text={T}: Manifest a card from your hand. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
-mana={3}
-type=Artifact
-[/card]
-[card]
 name=Scrying Glass
 text={3}, {T}: Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
 mana={2}
@@ -9160,12 +9063,6 @@ type=Creature
 subtype=Human Advisor
 power=1
 toughness=3
-[/card]
-[card]
-name=Secret Plans
-text=Face-down creatures you control get +0/+1. -- Whenever a permanent you control is turned face up, draw a card.
-mana={G}{U}
-type=Enchantment
 [/card]
 [card]
 name=Selective Adaptation
@@ -9630,17 +9527,6 @@ mana={U}
 type=Instant
 [/card]
 [card]
-name=Slippery Bogbonder
-abilities=flash,opponentshroud
-auto=target(creature) counter(0/0,1,Hexproof)
-text=Flash -- Hexproof -- When Slippery Bogbonder enters the battlefield, put a hexproof counter on target creature. Then move any number of counters from among creatures you control onto that creature.
-mana={3}{G}
-type=Creature
-subtype=Human Druid
-power=3
-toughness=3
-[/card]
-[card]
 name=Sly Spy (a)
 text=Whenever Sly Spy deals combat damage to a player, that player reveals their hand. You choose a card from it with the longest name. That player discards that card.
 mana={2}{B}
@@ -9693,15 +9579,6 @@ type=Creature
 subtype=Donkey Wizard
 power=2{1/2}
 toughness=1
-[/card]
-[card]
-name=Smoke Teller
-text={1}{U}: Look at target face-down creature.
-mana={1}{G}
-type=Creature
-subtype=Human Shaman
-power=2
-toughness=2
 [/card]
 [card]
 name=Smuggler Captain
@@ -10762,12 +10639,6 @@ mana={3}{G}
 type=Sorcery
 [/card]
 [card]
-name=Tempt with Glory
-text=Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control.
-mana={5}{W}
-type=Sorcery
-[/card]
-[card]
 name=Tempt with Immortality
 text=Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
 mana={4}{B}
@@ -10777,12 +10648,6 @@ type=Sorcery
 name=Tempt with Reflections
 text=Tempting offer - Choose target creature you control. Put a token onto the battlefield that's a copy of that creature. Each opponent may put a token onto the battlefield that's a copy of that creature. For each opponent who does, put a token onto the battlefield that's a copy of that creature.
 mana={3}{U}
-type=Sorcery
-[/card]
-[card]
-name=Tempt with Vengeance
-text=Tempting offer - Put X 1/1 red Elemental creature tokens with haste onto the battlefield. Each opponent may put X 1/1 red Elemental creature tokens with haste onto the battlefield. For each player who does, put X 1/1 red Elemental creature tokens with haste onto the battlefield.
-mana={X}{R}
 type=Sorcery
 [/card]
 [card]
@@ -11588,15 +11453,6 @@ text=+1: Head to AskUrza.com and click +1. -- -1: Head to AskUrza.com and click 
 mana={W}{U}{B}{R}{G}
 type=Legendary Planeswalker
 subtype=Urza
-[/card]
-[card]
-name=Valeron Wardens
-text=Renown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.) -- Whenever a creature you control becomes renowned, draw a card.
-mana={2}{G}
-type=Creature
-subtype=Human Monk
-power=1
-toughness=3
 [/card]
 [card]
 name=Valiant Changeling
@@ -20217,15 +20073,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Magmablood Archaic
-text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.
-mana={2/R}{2/R}{2/R}
-type=Creature
-subtype=Avatar
-power=2
-toughness=2
-[/card]
-[card]
 name=Mana Sculpt
 text=Counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase.
 mana={1}{U}{U}
@@ -20414,15 +20261,6 @@ name=Vicious Rivalry
 text=As an additional cost to cast this spell, pay X life. -- Destroy all artifacts and creatures with mana value X or less.
 mana={2}{B}{G}
 type=Sorcery
-[/card]
-[card]
-name=Wildgrowth Archaic
-text=Reach, trample -- Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. -- Whenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of colors of mana spent to cast it.
-mana={2/G}{2/G}
-type=Creature
-subtype=Avatar
-power=0
-toughness=0
 [/card]
 [card]
 name=Wisdom of Ages
@@ -24522,12 +24360,6 @@ name=Game Over
 text=This spell costs {2} less to cast if a player's life total is less than or equal to half their starting life total. -- Destroy all creatures.
 mana={3}{B}{B}
 type=Sorcery
-[/card]
-[card]
-name=Hamato Ninpō
-text=Hamato Ninpō deals 4 damage to target attacking or blocking creature.
-mana={1}{W}
-type=Instant
 [/card]
 [card]
 name=Here Comes a New Hero!
