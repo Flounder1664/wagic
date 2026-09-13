@@ -141620,7 +141620,11 @@ toughness=2
 [/card]
 [card]
 name=Rhovanion Rampager
-auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( counter(1/1) this )!
+#The counters go on THIS creature, as many as the sacrificed creature's power. "counter(1/1) this"
+#put none at all (John, 2026-09-13): the and!-ability acts on the card that was sacrificed, so
+#the counter needs all(this), and storedpower is that creature's power.
+auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
+missing=ONE +1/+1 counter rather than the sacrificed creature's power. all(this) is needed to put the counter on this creature at all, and once it has retargeted, otherpower reads THIS creature's power (measured: a sacrificed 2/2 gave 3 counters), so the sacrificed power is not reachable from here
 auto=_DIES_source(this) _AMASSGOBLIN1_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counters-equal-to-sacrificed-power and amass-equal-to-this-power both approximated as flat amounts

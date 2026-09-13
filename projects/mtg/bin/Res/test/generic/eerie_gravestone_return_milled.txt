@@ -1,3 +1,7 @@
+#John 2026-09-13: it offered a creature when none of the four milled cards was one. Restricted to
+#the milled four by graveyard position, which also means it returns EVERY creature among them
+#rather than letting you pick one - a target is chosen when the ability is ACTIVATED, before the
+#mill. Here two of the four milled cards are creatures, so both come back.
 #John 2026-09-12: Eerie Gravestone milled but never offered the creature back. Its text is
 #"Mill four cards. You may put a creature card from among them into your hand." (The engine cannot
 #say "from among them", so it reaches any creature in the graveyard - recorded on the card.)
@@ -23,8 +27,8 @@ Grizzly Bears
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-hand:*,*
-graveyard:*,*,*,*
+hand:*,*,*
+graveyard:*,*,*
 library:*
 life:20
 [PLAYER2]

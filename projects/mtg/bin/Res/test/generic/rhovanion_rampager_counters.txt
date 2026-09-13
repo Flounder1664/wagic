@@ -1,0 +1,29 @@
+#John 2026-09-13: it sacrificed a creature and granted no +1/+1 counters at all - the counter was
+#landing on the sacrificed card, not on the Rampager. all(this) fixes that. The count should be
+#the sacrificed creature's power but that value is not reachable once all(this) has retargeted
+#(measured: otherpower then reads the Rampager's own 3), so it is one counter: 3/2 -> 4/3.
+#Asserted at the blockers step: the attack trigger has resolved by then.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhovanion Rampager,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Rhovanion Rampager
+next
+choice 0
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Rhovanion Rampager
+pt:Rhovanion Rampager=4/3
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

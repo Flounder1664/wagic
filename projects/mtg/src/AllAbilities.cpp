@@ -2240,9 +2240,18 @@ void AADiscover::offerChoice(MTGCardInstance * thisCard)
     //"Cast it without paying its mana cost OR put it into your hand" - a two option menu, not
     //cascade's plain may-cast, or declining would strand the card in exile.
     vector<MTGAbility*> options;
-    MTGAbility * castIt = NEW AACastCard(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, false, false, true, "", "", false, false);
-    MTGAbility * toHand = NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, "myhand", "Put it into your hand");
-    options.push_back(castIt);
+    //Name both options after the card. The player is choosing blind otherwise - the card is
+    //sitting in exile and the menu only shows the option text (John, 2026-09-13).
+    string cardName = thisCard->getName();
+    MTGAbility * castIt = NEW AACastCard(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, false, false, true, "", "Cast " + cardName + " for free", false, false);
+    //MenuAbility resolves a plain ability on the spot, and AACastCard resolved that way leaves
+    //the card in exile uncast (John, 2026-09-13). Cascade instead addToGame()s its cast, and
+    //MenuAbility takes that branch for a MayAbility - forcing must=true, so there is no second
+    //prompt. Wrapping the cast is therefore what makes it actually cast.
+    MTGAbility * mayCast = NEW MayAbility(game, game->mLayers->actionLayer()->getMaxId(), castIt->clone(), thisCard, true);
+    SAFE_DELETE(castIt);
+    MTGAbility * toHand = NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, "myhand", "Put " + cardName + " into your hand");
+    options.push_back(mayCast);
     options.push_back(toHand);
     MTGAbility * menu = NEW MenuAbility(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, true, options);
     MTGAbility * add = NEW GenericAddToGame(game, game->mLayers->actionLayer()->getMaxId(), thisCard, NULL, menu->clone());

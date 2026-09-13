@@ -36019,8 +36019,11 @@ auto=draw:1
 #the deplete as and!( ... )!; with && the whole line failed to parse and the ability did not exist.
 #The follow-up MUST be and!( ... )! - the deplete parser reads a stored and!-ability; with && the
 #whole line failed to parse and the ability did not exist at all (measured 2026-09-12).
-auto={1}{B}{S}:deplete:4 controller and!( may name(Return a creature) target(creature|mygraveyard) moveto(hand) )!
-missing=the returned creature may be ANY creature card in your graveyard, not only one of the four just milled
+#"from among them": the four just milled are the top of the graveyard, so zpos<=4 picks exactly
+#those - the handle Random Encounter uses. John 2026-09-13: it offered a creature when none of
+#the four milled cards was one.
+auto={1}{B}{S}:deplete:4 controller and!( all(creature[zpos<=4]|mygraveyard) moveto(hand) )!
+missing=it returns EVERY creature among the four milled rather than letting you choose one - a target(...) is chosen when the ability is ACTIVATED, before the mill has happened, so the choice cannot be limited to the milled cards
 mana={2}
 type=Artifact
 text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.
