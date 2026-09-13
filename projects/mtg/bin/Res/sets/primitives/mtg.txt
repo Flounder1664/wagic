@@ -36022,8 +36022,11 @@ auto=draw:1
 #"from among them": the four just milled are the top of the graveyard, so zpos<=4 picks exactly
 #those - the handle Random Encounter uses. John 2026-09-13: it offered a creature when none of
 #the four milled cards was one.
-auto={1}{B}{S}:deplete:4 controller and!( all(creature[zpos<=4]|mygraveyard) moveto(hand) )!
-missing=it returns EVERY creature among the four milled rather than letting you choose one - a target(...) is chosen when the ability is ACTIVATED, before the mill has happened, so the choice cannot be limited to the milled cards
+#The mill's and!-ability is added to the game when the mill RESOLVES (AADepleter::resolve), so a
+#target inside it is chosen after the four cards are in the graveyard - a real choice, limited
+#to the milled four by graveyard position. (Rechecked 2026-09-13; the earlier failed test was
+#clicking a name that resolves to another printing, not the engine refusing the target.)
+auto={1}{B}{S}:deplete:4 controller and!( may name(Return a milled creature) target(creature[zpos<=4]|mygraveyard) moveto(hand) )!
 mana={2}
 type=Artifact
 text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.

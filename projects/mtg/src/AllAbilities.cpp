@@ -4660,6 +4660,14 @@ int AASacrificeCard::resolve()
         if(_target->mutation && _target->parentCards.size() > 0) return 0; // Mutated down cards cannot be sacrificed or exploited, they will follow the fate of top-card
         Player * p = _target->controller();
         MTGCardInstance * beforeCard = _target;
+        //Record the sacrificed card for THIS sacrifice's own and!-ability only, so it can read
+        //storedpower/storedtoughness (Rhovanion Rampager, 2026-09-13). A sacrifice COST already does
+        //this (ExtraCost.cpp). It is restored afterwards: Death Cloud, Phyrexian Negator, Lich's Tomb
+        //and others read storedx/storedthatmuch from the same pointer across SEVERAL sacrifices, and
+        //overwriting it for good would change their counts mid-resolution.
+        MTGCardInstance * previousStored = source ? source->storedCard : NULL;
+        if (source && andAbility)
+            source->storedCard = _target->createSnapShot();
         p->game->putInGraveyard(_target);
         while(_target->next)
             _target = _target->next;
@@ -4682,6 +4690,8 @@ int AASacrificeCard::resolve()
             {
                 andAbilityClone->addToGame();
             }
+            if (source)
+                source->storedCard = previousStored;
         }
         return 1;
     }

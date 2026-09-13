@@ -141625,8 +141625,8 @@ name=Rhovanion Rampager
 #Tried 2026-09-13 and FAILED IN GAME: sacrifice as a cost (pay[[{S(...)}]]) so storedpower could
 #read the sacrificed power. John got a "counters: 0 / cancel" prompt and choosing it never asked
 #for a sacrifice - the cost is not taken inside a trigger. Do not retry that shape.
-auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
-missing=ONE +1/+1 counter rather than the sacrificed creature's power. The power is only readable when the creature is paid as a COST, and a cost inside a trigger is not taken (tried in game 2026-09-13); from the effect form, otherpower reads THIS creature's power instead
+#The sacrifice effect now records the sacrificed card (engine, 2026-09-13), so storedpower is its power.
+auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1.storedpower) )!
 auto=_DIES_source(this) _AMASSGOBLIN1_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counters-equal-to-sacrificed-power and amass-equal-to-this-power both approximated as flat amounts
