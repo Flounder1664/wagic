@@ -1,0 +1,26 @@
+#LCI batch 5. Craft Idol of the Deep King with Mind Stone: Mind Stone is exiled and the card becomes
+#Sovereign's Macuahuitl, which puts its attach trigger on the stack (@transformed - a flip is not an
+#enter). The attach itself cannot be asserted here: the harness cannot feed a target to an
+#enters/transform rehook - the shipped Celestial Armor fails the same way (probed 2026-09-13).
+#lci_sovereigns_macuahuitl_equip covers the +2/+0 once equipped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Idol of the Deep King,Mind Stone,Grizzly Bears
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Idol of the Deep King
+Mind Stone
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sovereign's Macuahuitl,Grizzly Bears
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]

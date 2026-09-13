@@ -1,0 +1,23 @@
+#LCI batch 5. Eaten by Piranhas makes Serra Angel a 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Eaten by Piranhas
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:Serra Angel
+life:20
+[DO]
+Eaten by Piranhas
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eaten by Piranhas
+life:20
+[PLAYER2]
+inplay:Serra Angel
+pt:Serra Angel=1/1
+life:20
+[END]

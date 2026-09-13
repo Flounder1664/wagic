@@ -1,0 +1,21 @@
+#Negative control for lci_armored_kincaller_gains: no other Dinosaur anywhere, so no life. The
+#Kincaller itself must not count as "another Dinosaur".
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Armored Kincaller
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Armored Kincaller
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Armored Kincaller
+life:20
+[PLAYER2]
+life:20
+[END]

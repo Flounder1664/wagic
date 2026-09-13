@@ -1,0 +1,22 @@
+#LCI batch 5. Zoetic Glyph makes Mind Stone a 5/4 Golem creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone
+hand:Zoetic Glyph
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Zoetic Glyph
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone,Zoetic Glyph
+pt:Mind Stone=5/4
+life:20
+[PLAYER2]
+life:20
+[END]

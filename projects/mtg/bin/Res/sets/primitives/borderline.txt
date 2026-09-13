@@ -146254,3 +146254,266 @@ text=Choose one -- Destroy target artifact or enchantment. -- Target creature yo
 mana={1}{G}
 type=Sorcery
 [/card]
+[card]
+name=Merfolk Cave-Diver
+#Two lines rather than one chained ability: each is the Shadowed Caravel @explored shape.
+auto=@explored(creature|mybattlefield):all(this) 1/0 ueot
+auto=@explored(creature|mybattlefield):all(this) unblockable ueot
+missing=the Map token and Guidestone Compass write explore out, so they do not trigger this; _EXPLORES_ creatures do
+text=Whenever a creature you control explores, this creature gets +1/+0 until end of turn and can't be blocked this turn.
+mana={2}{U}
+type=Creature
+subtype=Merfolk Scout
+power=2
+toughness=4
+[/card]
+[card]
+name=Chimil, the Inner Sun
+auto=lord(*|mystack) nofizzle
+auto=@each my end:discover:5
+text=Spells you control can't be countered. -- At the beginning of your end step, discover 5. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+mana={6}
+type=Legendary Artifact
+[/card]
+[card]
+name=Buried Treasure
+auto={T}{S}:add{W}
+auto={T}{S}:add{U}
+auto={T}{S}:add{B}
+auto={T}{S}:add{R}
+auto={T}{S}:add{G}
+autograveyard={5}{E}:name(Discover 5) discover:5 asSorcery
+text={T}, Sacrifice this artifact: Add one mana of any color. -- {5}, Exile this card from your graveyard: Discover 5. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+mana={2}
+type=Artifact
+subtype=Treasure
+[/card]
+[card]
+name=Digsite Conservator
+auto={S}:name(Exile cards from a graveyard) target(<upto:4>*|graveyard) moveto(exile) asSorcery
+auto=_DIES_pay({4}) name(Pay 4 and discover 4) discover:4
+missing=the up-to-four cards are not limited to a single graveyard
+text=Sacrifice this creature: Exile up to four target cards from a single graveyard. Activate only as a sorcery. -- When this creature dies, you may pay {4}. If you do, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+mana={2}
+type=Artifact Creature
+subtype=Gnome
+power=2
+toughness=1
+[/card]
+[card]
+name=Calamitous Cave-In
+auto=damage:type:cave:mybattlefieldplustype:cave:mygraveyardplusend all(creature,planeswalker)
+text=Calamitous Cave-In deals X damage to each creature and each planeswalker, where X is the number of Caves you control plus the number of Cave cards in your graveyard.
+mana={3}{R}
+type=Sorcery
+[/card]
+[card]
+name=Cavernous Maw
+auto={t}:add{c}
+#"Other Caves you control plus Cave cards in your graveyard is three or greater" - the count
+#includes this land, so the threshold is more than 3.
+auto=this(variable{type:cave:mybattlefieldplustype:cave:mygraveyardplusend}>3) {2}:name(Become a 3/3 Elemental) becomes(Elemental Creature,3/3) ueot
+text={T}: Add {C}. -- {2}: This land becomes a 3/3 Elemental creature until end of turn. It's still a Cave land. Activate only if the number of other Caves you control plus the number of Cave cards in your graveyard is three or greater.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Swashbuckler's Whip
+auto={1}:equip
+auto=teach(creature) reach
+auto=teach(creature) transforms((,newability[{2}{T}:name(Tap artifact or creature) tap target(artifact,creature)],newability[{8}{T}:name(Discover 10) discover:10]))
+text=Equipped creature has reach, "{2}, {T}: Tap target artifact or creature," and "{8}, {T}: Discover 10." (Exile cards from the top of your library until you exile a nonland card with mana value 10 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.) -- Equip {1}
+mana={1}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Hurl into History
+target=artifact,creature|stack
+auto=fizzle
+#mytarg reads the countered spell, so X is its mana value.
+auto=discover:mytargmanacost
+text=Counter target artifact or creature spell. Discover X, where X is that spell's mana value. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+mana={3}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Molten Collapse
+auto=choice name(Destroy creature or planeswalker) target(creature,planeswalker) destroy
+auto=choice name(Destroy a cheap noncreature permanent) target(*[-creature&-land&manacost<=1]) destroy
+missing=descend - choosing both modes if you descended this turn
+text=Choose one. If you descended this turn, you may choose both instead. (You descended if a permanent card was put into your graveyard from anywhere.) -- * Destroy target creature or planeswalker. -- * Destroy target noncreature, nonland permanent with mana value 1 or less.
+mana={B}{R}
+type=Sorcery
+[/card]
+[card]
+name=Zoetic Glyph
+target=artifact
+auto=teach(artifact) becomes(Golem Creature,5/4)
+auto=@movedTo(this|graveyard) from(battlefield):discover:3
+text=Enchant artifact -- Enchanted artifact is a Golem creature with base power and toughness 5/4 in addition to its other types. -- When this Aura is put into a graveyard from the battlefield, discover 3.
+mana={2}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Eaten by Piranhas
+abilities=flash
+target=creature
+auto=teach(creature) loseabilities
+auto=teach(creature) transforms((,setpower=1,settoughness=1))
+auto=teach(creature) transforms((,black,skeleton))
+text=Flash (You may cast this spell any time you could cast an instant.) -- Enchant creature -- Enchanted creature loses all abilities and is a black Skeleton creature with base power and toughness 1/1. (It loses all other colors, card types, and creature types.)
+mana={1}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Armored Kincaller
+#Count includes this Dinosaur, so "another Dinosaur" is more than 1. Revealing is only asked
+#for when it matters (Dragon's Disciple's shape).
+auto=if type(dinosaur|mybattlefield)~morethan~1 then life:3 controller
+auto=if type(dinosaur|mybattlefield)~equalto~1 then if type(dinosaur|myhand)~morethan~0 then may name(Reveal a Dinosaur) life:3 controller
+text=When this creature enters, you may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life.
+mana={2}{G}
+type=Creature
+subtype=Dinosaur
+power=3
+toughness=3
+[/card]
+[card]
+name=Intrepid Paleontologist
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto={2}:name(Exile card from a graveyard) moveto(exile) target(*|graveyard)
+missing=casting Dinosaur creature spells from among the cards it exiled (entering with a finality counter)
+text={T}: Add one mana of any color. -- {2}: Exile target card from a graveyard. -- You may cast Dinosaur creature spells from among cards you own exiled with this creature. If you cast a spell this way, that creature enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+mana={1}{G}
+type=Creature
+subtype=Human Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Bedrock Tortoise
+auto=this(variable{controllerturn}>0) lord(creature|myBattlefield) hexproof
+#toughness-for-damage lines are copied from Ancient Lumberknot below
+auto=lord(creature[power=0]|mybattlefield) transforms((,newability[this(toughness>=1) combattoughness]))
+auto=lord(creature[power=1]|mybattlefield) transforms((,newability[this(toughness>=2) combattoughness]))
+auto=lord(creature[power=2]|mybattlefield) transforms((,newability[this(toughness>=3) combattoughness]))
+auto=lord(creature[power=3]|mybattlefield) transforms((,newability[this(toughness>=4) combattoughness]))
+auto=lord(creature[power=4]|mybattlefield) transforms((,newability[this(toughness>=5) combattoughness]))
+auto=lord(creature[power=5]|mybattlefield) transforms((,newability[this(toughness>=6) combattoughness]))
+auto=lord(creature[power=6]|mybattlefield) transforms((,newability[this(toughness>=7) combattoughness]))
+auto=lord(creature[power=7]|mybattlefield) transforms((,newability[this(toughness>=8) combattoughness]))
+auto=lord(creature[power=8]|mybattlefield) transforms((,newability[this(toughness>=9) combattoughness]))
+auto=lord(creature[power=9]|mybattlefield) transforms((,newability[this(toughness>=10) combattoughness]))
+auto=lord(creature[power=10]|mybattlefield) transforms((,newability[this(toughness>=11) combattoughness]))
+auto=lord(creature[power=11]|mybattlefield) transforms((,newability[this(toughness>=12) combattoughness]))
+auto=lord(creature[power=12]|mybattlefield) transforms((,newability[this(toughness>=13) combattoughness]))
+auto=lord(creature[power=13]|mybattlefield) transforms((,newability[this(toughness>=14) combattoughness]))
+auto=lord(creature[power=14]|mybattlefield) transforms((,newability[this(toughness>=15) combattoughness]))
+auto=lord(creature[power=15]|mybattlefield) transforms((,newability[this(toughness>=16) combattoughness]))
+auto=lord(creature[power=16]|mybattlefield) transforms((,newability[this(toughness>=17) combattoughness]))
+auto=lord(creature[power=17]|mybattlefield) transforms((,newability[this(toughness>=18) combattoughness]))
+auto=lord(creature[power=18]|mybattlefield) transforms((,newability[this(toughness>=19) combattoughness]))
+auto=lord(creature[power=19]|mybattlefield) transforms((,newability[this(toughness>=20) combattoughness]))
+auto=lord(creature[power>=20]|mybattlefield) transforms((,newability[this(toughness>=21) combattoughness]))
+text=During your turn, creatures you control have hexproof. -- Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
+mana={3}{G}
+type=Creature
+subtype=Turtle
+power=0
+toughness=6
+[/card]
+[card]
+name=Idol of the Deep King
+abilities=flash
+backside=Sovereign's Macuahuitl
+auto=damage:2 target(anytarget)
+auto={2}{R}{E(other artifact|mybattlefield)}:name(Craft with artifact) flip(backside) asSorcery
+missing=craft can also exile an artifact card from your graveyard; only one on the battlefield can pay here
+text=Flash -- When this artifact enters, it deals 2 damage to any target. -- Craft with artifact {2}{R} ({2}{R}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={2}{R}
+type=Artifact
+[/card]
+[card]
+name=Sovereign's Macuahuitl
+backside=Idol of the Deep King
+#Craft flips the card in place, so a bare enters-trigger never fires (measured), and flip's and!()
+#overwrites any target with the flipped card itself (AAFlip::resolve). The flip does send
+#WEventCardTransforms, so the attach hangs off @transformed instead.
+auto=@transformed(this|mybattlefield):name(Attach to creature) rehook target(creature|myBattlefield)
+auto=teach(creature) 2/0
+auto={2}:equip
+text=When this Equipment enters, attach it to target creature you control. -- Equipped creature gets +2/+0. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Oteclan Landmark
+backside=Oteclan Levitator
+auto=_SCRY2_
+auto={2}{W}{E(other artifact|mybattlefield)}:name(Craft with artifact) flip(backside) asSorcery
+missing=craft can also exile an artifact card from your graveyard; only one on the battlefield can pay here
+text=When this artifact enters, scry 2. -- Craft with artifact {2}{W} ({2}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={W}
+type=Artifact
+[/card]
+[card]
+name=Oteclan Levitator
+backside=Oteclan Landmark
+abilities=flying
+auto=_ATTACKING_name(Attacking creature gains flying) target(creature[-flying&attacking]|mybattlefield) flying ueot
+text=Flying -- Whenever this creature attacks, target attacking creature without flying gains flying until end of turn.
+type=Artifact Creature
+subtype=Golem
+power=1
+toughness=4
+[/card]
+[card]
+name=Inverted Iceberg
+backside=Iceberg Titan
+auto=deplete:1 controller && draw:1 controller
+auto={4}{U}{U}{E(other artifact|mybattlefield)}:name(Craft with artifact) flip(backside) asSorcery
+missing=craft can also exile an artifact card from your graveyard; only one on the battlefield can pay here
+text=When this artifact enters, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.) -- Craft with artifact {4}{U}{U} ({4}{U}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={1}{U}
+type=Artifact
+[/card]
+[card]
+name=Iceberg Titan
+backside=Inverted Iceberg
+#Twiddle's shape: tap and untap are two separate may prompts.
+auto=_ATTACKING_may name(Tap artifact or creature) tap target(artifact,creature)
+auto=_ATTACKING_may name(Untap artifact or creature) untap target(artifact,creature)
+missing=tap OR untap is offered as two separate prompts, so both can be taken
+text=Whenever this creature attacks, you may tap or untap target artifact or creature.
+type=Artifact Creature
+subtype=Golem
+power=6
+toughness=6
+[/card]
+[card]
+name=Lodestone Needle
+abilities=flash
+backside=Guidestone Compass
+auto=may name(Tap and stun) target(artifact,creature) transforms((,newability[tap],newability[counter(0/0.2.Stun)])) oneshot
+auto={2}{U}{E(other artifact|mybattlefield)}:name(Craft with artifact) flip(backside) asSorcery
+missing=craft can also exile an artifact card from your graveyard; only one on the battlefield can pay here
+text=Flash -- When this artifact enters, tap up to one target artifact or creature and put two stun counters on it. -- Craft with artifact {2}{U} ({2}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={1}{U}
+type=Artifact
+[/card]
+[card]
+name=Guidestone Compass
+backside=Lodestone Needle
+#The Map token's written-out explore (_EXPLORES_ does not carry a target).
+auto={1}{T}:name(Explore) target(creature|mybattlefield) if type(land[zpos=1]|mylibrary)~morethan~0 then all(*[zpos=1]|mylibrary) moveto(myhand) else counter(1/1) asSorcery
+missing=a nonland card cannot be put into the graveyard, and this explore does not trigger 'whenever a creature explores'
+text={1}, {T}: Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
+type=Artifact
+[/card]

@@ -1,0 +1,22 @@
+#LCI batch 5. Sovereign's Macuahuitl (craft back of Idol of the Deep King) equipped for {2} gives
+#+2/+0: Grizzly Bears 2/2 -> 4/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sovereign's Macuahuitl,Grizzly Bears
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sovereign's Macuahuitl
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sovereign's Macuahuitl,Grizzly Bears
+pt:Grizzly Bears=4/2
+life:20
+[PLAYER2]
+life:20
+[END]

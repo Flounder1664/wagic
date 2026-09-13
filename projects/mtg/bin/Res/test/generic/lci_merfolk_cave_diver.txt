@@ -1,0 +1,25 @@
+#LCI batch 5. Library lists bottom first. Merfolk Branchwalker explores (Swamp on top goes to hand); Merfolk Cave-Diver gets
+#+1/+0: 2/4 -> 3/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Merfolk Cave-Diver
+hand:Merfolk Branchwalker
+manapool:{1}{G}
+library:Mind Stone,Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+Merfolk Branchwalker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Merfolk Cave-Diver,Merfolk Branchwalker
+hand:Swamp
+library:Mind Stone
+pt:Merfolk Cave-Diver=3/4
+life:20
+[PLAYER2]
+life:20
+[END]
