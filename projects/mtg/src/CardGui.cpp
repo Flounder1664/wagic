@@ -309,10 +309,11 @@ void CardGui::Render()
     //segfaulted: any card that renders a card display - a reveal window above all - killed the
     //test run before it could resolve (measured 2026-09-12, stack via gdb). Nothing to draw
     //without fonts, so leave quietly instead.
+    //getResourceManager() never returns NULL now, so this is the plain original line again.
+    //The font itself IS NULL in the console/TESTSUITE build, which has no fonts to draw with:
+    //bail there rather than crash. (John's blank second duel came from bailing too eagerly.)
     WResourceManager * resources = game ? game->getResourceManager() : WResourceManager::Instance();
-    if (!resources)
-        return;
-    WFont * mFont = resources->GetWFont(Fonts::MAIN_FONT);
+    WFont * mFont = resources ? resources->GetWFont(Fonts::MAIN_FONT) : NULL;
     if (!mFont)
         return;
     JRenderer * renderer = JRenderer::GetInstance();

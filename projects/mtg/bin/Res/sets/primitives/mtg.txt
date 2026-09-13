@@ -18056,7 +18056,9 @@ toughness=6
 [card]
 name=Carnage, Crimson Chaos
 abilities=trample
-auto=may moveto(mybattlefield) target(creature[-token]|graveyard) where(converted<=3)
+#where(...) is not engine syntax - it was silently ignored, so this could return ANY creature.
+#The filter belongs in the descriptor, joined with & (AND); ; would mean OR and match everything.
+auto=may moveto(mybattlefield) target(creature[-token&manacost<=3]|graveyard)
 mana={2}{B}{R}
 type=Legendary Creature
 subtype=Symbiote Villain
@@ -116972,13 +116974,16 @@ text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you
 [card]
 name=Spider-Man Noir
 abilities=menace
-auto=@combat(attacking) source(this) where(alone):counter(1/1) this && deplete:1 controller
+#where(alone) is not engine syntax at all - the combat trigger keyword is attackedalone, and
+#the triggering creature is all(trigger[to]). The old line also only watched THIS creature,
+#while the card says any creature you control (John, 2026-09-13: no counter appeared).
+auto=@combat(attackedalone) source(creature|mybattlefield):name(Counter and surveil) all(trigger[to]) counter(1/1) && _SURVEIL1_
 mana={4}{B}
 type=Legendary Creature
 subtype=Spider Hero
 power=3
 toughness=3
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+missing=surveil is a flat 1, not X = the number of counters on the creature
 text=Menace -- Whenever a creature you control attacks alone, put a +1/+1 counter on it. Then surveil X, where X is the number of counters on it. (Look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 [/card]
 [card]
@@ -129231,7 +129236,8 @@ type=World Enchantment
 [/card]
 [card]
 name=Tombstone, Career Criminal
-auto=moveto(hand) target(creature[-token]|mygraveyard) where(subtype:villain)
+#where(...) is not engine syntax - it was silently ignored, so this returned any creature.
+auto=moveto(hand) target(villain[-token]|mygraveyard)
 mana={2}{B}
 type=Legendary Creature
 subtype=Human Villain

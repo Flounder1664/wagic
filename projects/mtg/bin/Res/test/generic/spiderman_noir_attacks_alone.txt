@@ -1,0 +1,30 @@
+#John 2026-09-13: no +1/+1 counter appeared. Two faults: where(alone) is not engine syntax at all
+#(the combat trigger keyword is attackedalone), and the old line watched only Spider-Man Noir
+#itself while the card says ANY creature you control. Grizzly Bears attacks alone and must get
+#the counter: 2/2 -> 3/3.
+#Asserted at the blockers step on purpose - the surveil that follows opens a reveal window, and
+#the harness cannot click inside one, so the run cannot be driven past it. One library card is
+#held in the reveal zone at this point, hence two left rather than three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spider-Man Noir,Grizzly Bears
+library:Mind Stone,Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Grizzly Bears
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Spider-Man Noir,Grizzly Bears
+pt:Grizzly Bears=3/3
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

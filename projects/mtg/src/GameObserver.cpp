@@ -9,6 +9,17 @@
 #include <JLogger.h>
 #include <JRenderer.h>
 #include "MTGGamePhase.h"
+
+//A GameObserver may have no resource manager of its own (the console/TESTSUITE build never
+//builds one). Callers overwhelmingly do not check: CardGui::Render alone has 20 unguarded
+//dereferences, which is how a reveal window segfaulted the test run. Fall back to the global
+//instance so every one of those is safe, rather than guarding them one at a time.
+WResourceManager* GameObserver::getResourceManager()
+{
+    if (this && mResourceManager)
+        return mResourceManager;
+    return WResourceManager::Instance();
+}
 #include "GuiPhaseBar.h"
 #include "AIPlayerBaka.h"
 #include "MTGRules.h"

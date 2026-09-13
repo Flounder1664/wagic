@@ -167,7 +167,9 @@ class GameObserver{
   //seeds from time(0), so a test's fixed seed must be re-applied after
   //construction to make the run deterministic.
   void resetSeed(unsigned int seed) { mSeed = seed; randomGenerator.setSeed(seed); };
-  WResourceManager* getResourceManager() { if(this) return mResourceManager;else return 0;};
+  //Never returns NULL - see GameObserver.cpp. CardGui alone dereferences this 20 times without
+  //checking, and a game whose own manager is NULL used to take the whole render path down.
+  WResourceManager* getResourceManager();
   CardSelectorBase* getCardSelector() { return mLayers->getCardSelector();};
   bool operator==(const GameObserver& aGame);
   JGE* getInput(){return mJGE;};
