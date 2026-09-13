@@ -1,0 +1,23 @@
+#John 2026-09-13 counted 3 cards milled, not 4. Measured here: it mills exactly 4 - a library of 6
+#leaves 2, and the graveyard holds those 4 plus Random Encounter itself = 5. Putting the milled
+#creatures onto the battlefield is still unwritten ("milled this way" cannot be selected).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Random Encounter
+manapool:{4}{R}{R}
+library:Mind Stone,Juggernaut,Ornithopter,Millstone,Howling Mine,Rod of Ruin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Random Encounter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+library:*,*
+graveyard:*,*,*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

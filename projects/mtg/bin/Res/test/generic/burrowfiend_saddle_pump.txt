@@ -1,0 +1,28 @@
+#John 2026-09-13: no +X/+X on the turn it was saddled, only the turn after. Measured here: the
+#pump DOES land the same turn. Two creature cards are seeded in the graveyard and saddling mills
+#two more (Juggernaut and Ornithopter are artifact creatures), so X is 4 and a 2/2 becomes 6/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Stubborn Burrowfiend,Grizzly Bears,Scathe Zombies
+graveyard:Llanowar Elves,Air Elemental
+library:Mind Stone,Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+Stubborn Burrowfiend
+choice 0
+Grizzly Bears
+Scathe Zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Stubborn Burrowfiend,Grizzly Bears,Scathe Zombies
+pt:Stubborn Burrowfiend=6/6
+graveyard:*,*,*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

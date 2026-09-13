@@ -33658,7 +33658,10 @@ backside=Edgar Markov's Coffin
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
 auto=lord(other vampire|mybattlefield) 1/1
-auto=_DIES_name(Return transformed) name(Return transformed) flip(backside) forcetype(Legendary Artifact)
+#The card RETURNS to the battlefield transformed - flip(backside) on its own left it in the
+#graveyard (John, 2026-09-13: it came back on the same side). This is Aclazotz's shape: move it
+#back first, then flip.
+auto=_DIES_all(trigger[to]) transforms((,newability[moveTo(myBattlefield)],newability[flip(backside)])) forever
 text=Other vampires you control get +1/+1. -- When Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control. // Edgar Markov's Coffin
 mana={2}{W}{B}
 type=Legendary Creature
@@ -144708,8 +144711,10 @@ subtype=Mutagen
 [card]
 name=Map
 grade=borderline
-auto={1}{T}{S}:name(Explore) target(creature|mybattlefield) counter(1/1)
-missing=explore proper - reveal the top card, put it in hand if it is a land, otherwise the +1/+1 counter and a keep-or-bin choice. explore appears nowhere in the engine (0 uses), so this is the +1/+1 half only, matching how Subterranean Schooner already approximates it.
+#The old note here claimed explore appears nowhere in the engine. It does: _EXPLORES_, used by 58
+#cards, and it can be pointed at a target (Nissa's Zendikon does exactly this). John, 2026-09-13:
+#the Map from Brackish Blunder just added a +1/+1 counter.
+auto={1}{T}{S}:name(Explore) target(creature|mybattlefield) _EXPLORES_ asSorcery
 text={1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
 type=Artifact
 subtype=Map
@@ -145985,7 +145990,11 @@ toughness=4
 [card]
 name=Gargantuan Leech
 abilities=lifelink
-missing=the {1}-per-Cave cost reduction; it always costs {7}{B}
+#Per-count discounts are affinity(<targetchooser>) reduce({1}) - one line per zone, so Caves on
+#the battlefield and Caves in the graveyard each take a mana off (John asked why it could not be
+#discounted; it can).
+anyzone=affinity(cave|mybattlefield) reduce({1})
+anyzone=affinity(cave|mygraveyard) reduce({1})
 text=This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard. -- Lifelink
 mana={7}{B}
 type=Creature
