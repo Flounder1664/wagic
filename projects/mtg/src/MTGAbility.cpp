@@ -6560,7 +6560,12 @@ int AbilityFactory::getAbilities(vector<MTGAbility *> * v, Spell * spell, MTGCar
         }
         else if(card && card->hasType(Subtypes::TYPE_EQUIPMENT) && card->target)
         {
-            magicText = card->model->data->magicText;
+            //A flipped card (craft, transform) keeps its FRONT face as its model; its current face's text is
+            //magicText. Reading the model made an attached Sovereign's Macuahuitl (crafted from Idol of the
+            //Deep King) re-run Idol's "2 damage to any target" and lose its own +2/+0 (John, 2026-09-13).
+            //isFlipped cannot tell: AAFlip::testDestroy resets it to 0 straight after the flip. nameOrig is
+            //set by the first flip and stays, and magicText always holds the face currently showing.
+            magicText = (!card->nameOrig.empty() && card->magicText.size()) ? card->magicText : card->model->data->magicText;
             string equipText = card->magicTexts["skill"];
             magicText.append("\n");
             magicText.append(equipText);
