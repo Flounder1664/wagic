@@ -141620,11 +141620,15 @@ toughness=2
 [/card]
 [card]
 name=Rhovanion Rampager
-#The counters go on THIS creature, as many as the sacrificed creature's power. "counter(1/1) this"
-#put none at all (John, 2026-09-13): the and!-ability acts on the card that was sacrificed, so
-#the counter needs all(this), and storedpower is that creature's power.
-auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
-missing=ONE +1/+1 counter rather than the sacrificed creature's power. all(this) is needed to put the counter on this creature at all, and once it has retargeted, otherpower reads THIS creature's power (measured: a sacrificed 2/2 gave 3 counters), so the sacrificed power is not reachable from here
+#EXPERIMENT shipped 2026-09-13 at John's request, UNVERIFIED here. The sacrificed creature's
+#power is only readable when the card is paid as a COST - that is what sets storedCard - so the
+#sacrifice is written as pay[[{S(...)}]], Bramble Sovereign's shape, which is also the shape of
+#Mendicant Core's optional payment that John confirmed works in game. The harness cannot answer
+#a cost prompt inside a trigger, so nothing here could prove it either way.
+#IF IT DOES NOTHING IN GAME, revert to this measured-working line, which gives one counter
+#instead of the sacrificed power:
+#auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
+auto=_ATTACKING_name(Sacrifice a creature for counters) all(this) pay[[{S(other creature|mybattlefield)}]] counter(1/1.storedpower)
 auto=_DIES_source(this) _AMASSGOBLIN1_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counters-equal-to-sacrificed-power and amass-equal-to-this-power both approximated as flat amounts
