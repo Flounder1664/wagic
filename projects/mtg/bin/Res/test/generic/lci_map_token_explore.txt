@@ -1,0 +1,32 @@
+#John 2026-09-13: a crash while exploring. The earlier Map tests seed Map as a CARD; in play it is a
+#TOKEN, which ceases to exist when sacrificed. Fanatical Offering makes a real Map token (and draws
+#Juggernaut and Island), then the Map explores with Grizzly Bears: Millstone is nonland, so +1/+1
+#and choice 1 bins it. Library lists bottom first.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone,Grizzly Bears
+hand:Fanatical Offering
+manapool:{1}{B}{1}
+library:Plains,Millstone,Island,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Fanatical Offering
+Mind Stone
+Map
+Grizzly Bears
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Juggernaut,Island
+graveyard:Fanatical Offering,Mind Stone,Millstone
+library:Plains
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

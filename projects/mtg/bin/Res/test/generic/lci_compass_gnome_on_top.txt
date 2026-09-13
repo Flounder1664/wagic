@@ -1,0 +1,28 @@
+#John 2026-09-13: Compass Gnome let him pick a Cave but it was not his next draw. It now reveals the
+#library, shuffles the rest and puts the pick ON TOP. Forest is picked; Jayemdae Tome then draws, and
+#the drawn card must be Forest. Library lists bottom first (Forest is third from the top to start).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jayemdae Tome
+hand:Compass Gnome
+manapool:{2}{4}
+library:Island,Forest,Mind Stone,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Compass Gnome
+choice 0
+Forest
+Jayemdae Tome
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jayemdae Tome,Compass Gnome
+hand:Forest
+library:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,28 @@
+#John 2026-09-13: Eerie Gravestone let him take two creatures; it is ONE creature card from among the
+#milled four. Two of the four milled are creatures (Scathe Zombies, Grizzly Bears); every offer is
+#accepted, and exactly one may come back. Library lists bottom first; the seeded Gravestone's
+#enters-draw takes Forest.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+library:Howling Mine,Grizzly Bears,Mind Stone,Scathe Zombies,Forest
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 0
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest,*
+graveyard:*,*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

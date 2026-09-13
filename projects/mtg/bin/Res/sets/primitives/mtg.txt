@@ -36016,7 +36016,7 @@ auto=draw:1
 #Seed of Hope's shape: each card gets, as it is milled, a one-shot ability that checks ITSELF and moves
 #itself, so only the four milled cards can come back. No target(...) on the line: a target in an activated
 #ability is chosen on activation, and one anywhere on this line made it unactivatable (measured).
-auto={1}{B}{S}:all(*[zpos<=4]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(creature|*) then may name(Return this milled creature to hand) moveto(myhand)])) oneshot )!
+auto={1}{B}{S}:all(*[zpos<=4]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(creature|*) then may name(Return this milled creature to hand) if type(*[gravestonereturned]|myhand)~equalto~0 then moveto(myhand) and!( transforms((gravestonereturned)) ueot )!])) oneshot )!
 missing=each milled creature is offered in turn, so two milled creatures could both be returned
 #History (2026-09-12/13): [fresh], zpos<=4 and zpos>=count-3 were each tried here and each failed -
 #the position filter let older graveyard creatures through. Offering each card as it is milled held.

@@ -2331,8 +2331,22 @@ void AAExplore::offerChoice(MTGCardInstance * explorer, MTGCardInstance * reveal
     //Each option is itself an AAExplore carrying the explores still to come (0 = none).
     string cardName = revealed->getName();
     vector<MTGAbility*> options;
-    options.push_back(NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Keep " + cardName + " on top"));
-    options.push_back(NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Put " + cardName + " into your graveyard", revealed));
+    MTGAbility * keep = NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Keep " + cardName + " on top");
+    MTGAbility * bin = NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Put " + cardName + " into your graveyard", revealed);
+    if (remaining > 0)
+    {
+        //A further explore opens another menu. Resolved straight from this menu's click it would build
+        //that menu inside the click handler (John: crash exploring, 2026-09-13); MenuAbility instead
+        //addToGame()s a MayAbility option, which runs after the click - discover's cast does the same.
+        MTGAbility * mayKeep = NEW MayAbility(game, game->mLayers->actionLayer()->getMaxId(), keep->clone(), explorer, true);
+        MTGAbility * mayBin = NEW MayAbility(game, game->mLayers->actionLayer()->getMaxId(), bin->clone(), explorer, true);
+        SAFE_DELETE(keep);
+        SAFE_DELETE(bin);
+        keep = mayKeep;
+        bin = mayBin;
+    }
+    options.push_back(keep);
+    options.push_back(bin);
     MTGAbility * menu = NEW MenuAbility(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, true, options);
     MTGAbility * add = NEW GenericAddToGame(game, game->mLayers->actionLayer()->getMaxId(), explorer, NULL, menu->clone());
     SAFE_DELETE(menu);

@@ -146211,7 +146211,9 @@ toughness=1
 [card]
 name=Compass Gnome
 #land[basic;cave] is intentionally OR: a basic land OR a Cave. It goes on top of the library.
-auto=may name(Put a basic land or Cave on top) target(land[basic;cave]|mylibrary) moveto(ownerlibrary)
+#Worldly Tutor's shape: reveal the library, pick the card, put the rest back and SHUFFLE, then put the
+#picked card on top. John 2026-09-13: moving it to the library alone never made it the next draw.
+auto=name(Search for a basic land or Cave) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(Put it on top) target(<1>land[basic;cave]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(mylibrary)])) optiononeend optiontwo name(Find nothing) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text=When this creature enters, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.
 mana={2}
 type=Artifact Creature
