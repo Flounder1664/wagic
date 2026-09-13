@@ -1,0 +1,19 @@
+#Negative control for lci_masters_manufactory_after_craft: a Manufactory already on the battlefield, with
+#no artifact entering this turn, cannot make a Golem.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Master's Manufactory
+life:20
+[PLAYER2]
+life:20
+[DO]
+Master's Manufactory
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Master's Manufactory
+life:20
+[PLAYER2]
+life:20
+[END]

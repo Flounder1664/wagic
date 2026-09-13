@@ -1,0 +1,23 @@
+#LCI batch 7. Contested Game Ball: {2}, {T}: draw a card and put a point counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Contested Game Ball
+manapool:{2}
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Contested Game Ball
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Contested Game Ball
+hand:Mind Stone
+library:Swamp
+counter:Contested Game Ball=Point:1
+life:20
+[PLAYER2]
+life:20
+[END]

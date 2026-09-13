@@ -1,0 +1,25 @@
+#LCI batch 7. Spelunking enters: draw (Mind Stone), then put a land from hand onto the battlefield; it is
+#a Cave (Hidden Cataract), so gain 4 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spelunking,Hidden Cataract
+manapool:{2}{G}
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Spelunking
+choice 0
+Hidden Cataract
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spelunking,Hidden Cataract
+hand:Mind Stone
+library:Swamp
+life:24
+[PLAYER2]
+life:20
+[END]

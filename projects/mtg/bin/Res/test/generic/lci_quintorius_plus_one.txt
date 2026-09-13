@@ -1,0 +1,20 @@
+#LCI batch 7. Quintorius Kand +1: create a 3/2 Spirit; loyalty 4 -> 5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quintorius Kand
+life:20
+[PLAYER2]
+life:20
+[DO]
+Quintorius Kand
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quintorius Kand,*
+counter:Quintorius Kand=loyalty:5
+life:20
+[PLAYER2]
+life:20
+[END]

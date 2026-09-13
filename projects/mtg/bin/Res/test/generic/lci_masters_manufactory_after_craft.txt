@@ -1,0 +1,24 @@
+#LCI batch 7. Master's Manufactory can make a Golem only if an artifact entered this turn. Crafted this
+#turn, it counts itself (@transformed sets the gate), so {T} makes a 4/4 Golem. The other Golem is the
+#seeded Guide-Mural's own enters trigger, fired by the harness at setup.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Master's Guide-Mural,Mind Stone
+manapool:{4}{W}{W}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Master's Guide-Mural
+Mind Stone
+Master's Manufactory
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Master's Manufactory,*,*
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]
