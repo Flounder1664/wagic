@@ -1,0 +1,26 @@
+#LCI batch 4. Fanatical Offering: sacrifice an artifact or creature as an additional cost, draw two,
+#create a Map. Grizzly Bears is the sacrifice; two cards are drawn and one Map token is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fanatical Offering
+inplay:Grizzly Bears
+manapool:{1}{B}
+library:Mind Stone,Millstone,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[DO]
+Fanatical Offering
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+inplay:*
+graveyard:*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

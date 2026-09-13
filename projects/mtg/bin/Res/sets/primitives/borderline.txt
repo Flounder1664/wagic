@@ -146173,3 +146173,85 @@ subtype=Human Artificer
 power=3
 toughness=3
 [/card]
+[card]
+name=Fanatical Offering
+#The additional sacrifice cost lives in mana= as {S(...)} (Stir Up Trouble's form).
+auto=draw:2 controller
+auto=token(Map)
+text=As an additional cost to cast this spell, sacrifice an artifact or creature. -- Draw two cards and create a Map token.
+mana={1}{B}{S(artifact,creature|mybattlefield)}
+type=Instant
+[/card]
+[card]
+name=Oaken Siren
+abilities=flying,vigilance
+auto={T}:Add{U}
+missing=the {U} can be spent on anything, not only artifact spells and abilities of artifact sources
+text=Flying, vigilance -- {T}: Add {U}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
+mana={1}{U}
+type=Artifact Creature
+subtype=Siren Pirate
+power=1
+toughness=2
+[/card]
+[card]
+name=Ixalli's Lorekeeper
+#Any-colour mana is a five-way choice (Molt Tender's form).
+auto={T}:ability$!choice Add{W}_choice Add{U}_choice Add{B}_choice Add{R}_choice Add{G}!$ controller
+missing=the mana can be spent on anything, not only Dinosaur spells and abilities of Dinosaur sources
+text={T}: Add one mana of any color. Spend this mana only to cast a Dinosaur spell or activate an ability of a Dinosaur source.
+mana={G}
+type=Creature
+subtype=Human Druid
+power=1
+toughness=1
+[/card]
+[card]
+name=Compass Gnome
+#land[basic;cave] is intentionally OR: a basic land OR a Cave. It goes on top of the library.
+auto=may name(Put a basic land or Cave on top) target(land[basic;cave]|mylibrary) moveto(ownerlibrary)
+text=When this creature enters, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.
+mana={2}
+type=Artifact Creature
+subtype=Gnome
+power=2
+toughness=1
+[/card]
+[card]
+name=Market Gnome
+auto=_DIES_life:1 controller && draw:1 controller
+missing=the same reward when it is exiled from the battlefield while paying a craft cost
+text=When this creature dies, you gain 1 life and draw a card. -- When this creature is exiled from the battlefield while you're activating a craft ability, you gain 1 life and draw a card.
+mana={W}
+type=Artifact Creature
+subtype=Gnome
+power=0
+toughness=3
+[/card]
+[card]
+name=Disturbed Slumber
+target=land|myBattlefield
+#becomes(<types>,<P/T>,<keywords>) ueot is Goddric, Cloaked Reveler's attested form; it is still a land.
+auto=becomes(Creature Dinosaur,4/4,reach,haste) ueot
+missing="it must be blocked this turn if able"
+text=Until end of turn, target land you control becomes a 4/4 Dinosaur creature with reach and haste. It's still a land. It must be blocked this turn if able.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Triumphant Chomp
+target=creature
+auto=damage:2
+missing=the damage should be the greatest power among Dinosaurs you control when that is more than 2; it is always 2
+text=Triumphant Chomp deals damage to target creature equal to 2 or the greatest power among Dinosaurs you control, whichever is greater.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Over the Edge
+auto=choice name(Destroy artifact or enchantment) destroy target(artifact,enchantment)
+missing=the second mode (target creature you control explores, then explores again)
+text=Choose one -- Destroy target artifact or enchantment. -- Target creature you control explores, then it explores again.
+mana={1}{G}
+type=Sorcery
+[/card]

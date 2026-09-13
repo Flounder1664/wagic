@@ -1,0 +1,25 @@
+#LCI batch 4. Disturbed Slumber: target land you control becomes a 4/4 Dinosaur until end of turn.
+#Hidden Nursery (LCI, one printing) is addressed by id - a basic land seeded by name does not answer
+#to its name in an assert.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Disturbed Slumber
+inplay:637001
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Disturbed Slumber
+637001
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:637001
+pt:637001=4/4
+graveyard:Disturbed Slumber
+life:20
+[PLAYER2]
+life:20
+[END]

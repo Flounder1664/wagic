@@ -1,0 +1,24 @@
+#LCI batch 4. Market Gnome: when it dies, gain 1 life and draw a card. Murder kills it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Market Gnome
+hand:Murder
+manapool:{1}{B}{B}
+library:Mind Stone,Millstone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Murder
+Market Gnome
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+graveyard:*,*
+library:*
+life:21
+[PLAYER2]
+life:20
+[END]
