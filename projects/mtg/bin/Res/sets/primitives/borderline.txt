@@ -141620,15 +141620,13 @@ toughness=2
 [/card]
 [card]
 name=Rhovanion Rampager
-#EXPERIMENT shipped 2026-09-13 at John's request, UNVERIFIED here. The sacrificed creature's
-#power is only readable when the card is paid as a COST - that is what sets storedCard - so the
-#sacrifice is written as pay[[{S(...)}]], Bramble Sovereign's shape, which is also the shape of
-#Mendicant Core's optional payment that John confirmed works in game. The harness cannot answer
-#a cost prompt inside a trigger, so nothing here could prove it either way.
-#IF IT DOES NOTHING IN GAME, revert to this measured-working line, which gives one counter
-#instead of the sacrificed power:
-#auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
-auto=_ATTACKING_name(Sacrifice a creature for counters) all(this) pay[[{S(other creature|mybattlefield)}]] counter(1/1.storedpower)
+#The counters go on THIS creature. "counter(1/1) this" put none at all: the and!-ability acts on
+#the sacrificed card, so the counter needs all(this).
+#Tried 2026-09-13 and FAILED IN GAME: sacrifice as a cost (pay[[{S(...)}]]) so storedpower could
+#read the sacrificed power. John got a "counters: 0 / cancel" prompt and choosing it never asked
+#for a sacrifice - the cost is not taken inside a trigger. Do not retry that shape.
+auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1) )!
+missing=ONE +1/+1 counter rather than the sacrificed creature's power. The power is only readable when the creature is paid as a COST, and a cost inside a trigger is not taken (tried in game 2026-09-13); from the effect form, otherpower reads THIS creature's power instead
 auto=_DIES_source(this) _AMASSGOBLIN1_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counters-equal-to-sacrificed-power and amass-equal-to-this-power both approximated as flat amounts

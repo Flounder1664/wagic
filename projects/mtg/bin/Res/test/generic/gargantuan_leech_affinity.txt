@@ -1,0 +1,27 @@
+#John 2026-09-13: with 2 Caves on the battlefield and 2 in the graveyard, Gargantuan Leech ({7}{B})
+#cost just {1}{B}. Its two affinity lines (battlefield, graveyard) shared one running count, so the
+#second line removed 2+2 on top of the first line's 2. Correct discount is 4: {3}{B}.
+#Discriminating on purpose: a pool of {3}{B} must be ENOUGH, and nothing is left over. With the old
+#double count the pool would not be fully spent and the mana assert fails.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gargantuan Leech
+inplay:Hidden Cataract,Hidden Courtyard
+graveyard:Hidden Necropolis,Hidden Nursery
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Gargantuan Leech
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hidden Cataract,Hidden Courtyard,Gargantuan Leech
+graveyard:Hidden Necropolis,Hidden Nursery
+manapool:{0}
+life:20
+[PLAYER2]
+life:20
+[END]

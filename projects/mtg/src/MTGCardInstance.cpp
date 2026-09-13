@@ -1310,6 +1310,11 @@ ManaCost * MTGCardInstance::computeNewCost(MTGCardInstance * card,ManaCost * Cos
         ANewAffinity * newAff = dynamic_cast<ANewAffinity*>(card->cardsAbilities[na]);
         if (newAff)
         {
+            //Each affinity ability counts and removes its OWN matches. reducem used to carry over
+            //from the previous one, so a second affinity line removed the first line's count again:
+            //Gargantuan Leech (Caves on the battlefield + Caves in the graveyard, 2 each) took 2 then
+            //4 off instead of 2 and 2, costing John {1}{B} instead of {3}{B} (2026-09-13).
+            reducem = 0;
             if (!resetCost)
             {
                 resetCost = true;
