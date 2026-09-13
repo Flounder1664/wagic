@@ -1,0 +1,28 @@
+#John 2026-09-13 (via Random Encounter, same filter): Eerie Gravestone must offer only the four cards it
+#mills. Library lists bottom first; the seeded Gravestone's enters-draw takes Forest, then the four milled
+#cards hold one creature, Grizzly Bears, which is offered and returned. lci_eerie_gravestone_ignores_old_creature
+#is the negative half.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+graveyard:Air Elemental
+library:Howling Mine,Mind Stone,Grizzly Bears,Millstone,Forest
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 0
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest,Grizzly Bears
+graveyard:Air Elemental,Eerie Gravestone,Millstone,Mind Stone,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[END]

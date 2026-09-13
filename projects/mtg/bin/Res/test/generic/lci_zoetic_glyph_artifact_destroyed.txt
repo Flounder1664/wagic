@@ -1,0 +1,30 @@
+#John 2026-09-13: Zoetic Glyph went to the graveyard and discover did not trigger. Here the Glyph is
+#cast onto Mind Stone, then Mind Stone is Shattered, so the Glyph falls off into the graveyard (state-
+#based) and discover 3 must follow. Library lists bottom first: Juggernaut (5) is passed over,
+#Millstone (2) is found, choice 1 = hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone
+hand:Zoetic Glyph,Shatter
+manapool:{2}{U}{1}{R}
+library:Forest,Millstone,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Zoetic Glyph
+Mind Stone
+Shatter
+Mind Stone
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Millstone
+graveyard:Mind Stone,Zoetic Glyph,Shatter
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

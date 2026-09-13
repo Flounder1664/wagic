@@ -1,0 +1,30 @@
+#John 2026-09-13: Over the Edge had no explore mode. Mode 2: Grizzly Bears explores twice. First reveal
+#Mind Stone (nonland): +1/+1 counter, choice 1 bins it. Second reveal Swamp (land): to hand.
+#Library lists bottom first. Ends 3/3 with Swamp in hand and Forest left.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Over the Edge
+manapool:{1}{G}
+library:Forest,Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Over the Edge
+choice 1
+Grizzly Bears
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Swamp
+graveyard:Mind Stone,Over the Edge
+library:Forest
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -73291,7 +73291,7 @@ toughness=1
 [card]
 name=Miner's Guidewing
 abilities=flying,vigilance
-auto=_DIES_target(creature|myBattlefield) _EXPLORES_
+auto=_DIES_target(creature|myBattlefield) explore:1
 text=Flying, vigilance -- When Miner's Guidewing dies, target creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
 mana={W}
 type=Creature
@@ -138821,9 +138821,13 @@ auto=shuffle
 #keep clicking creatures, then confirm (<anyamount> - 290 cards use it, several exactly like this from a
 #graveyard). John asked for this over the single pick. The harness cannot finish a multi-select, so the
 #pick itself is his to verify.
-auto=deplete:4 controller and!( may name(Return the milled creatures) target(<anyamount>creature[zpos>=type:*:mygraveyardminus3minusend]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )! )!
-missing=you pick which milled creatures return (pick all of them) rather than every one returning automatically
-text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. (Only the shuffle and mill are implemented.) -- Flashback {6}{R}{R}
+#Milled cards are tagged tobereturn (Sludge Titan's marker) and only tagged creatures can be picked.
+#John 2026-09-13: the old graveyard-position filter offered creatures that were already there - the
+#position count was read before the mill (reproduced in the harness).
+auto=all(*[zpos<=4]|mylibrary) moveto(mygraveyard) and!( transforms((tobereturn)) ueot )!
+auto=may name(Return the milled creatures) target(<anyamount>creature[tobereturn]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )!
+missing=you pick which milled creatures return (pick all of them) rather than every one returning automatically; the four cards are moved, so 'whenever you mill' does not see them
+text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. -- Flashback {6}{R}{R}
 mana={4}{R}{R}
 type=Sorcery
 [/card]
@@ -144735,8 +144739,9 @@ grade=borderline
 #_EXPLORES_ showed the card but never put the counter on the chosen creature (John, 2026-09-13)
 #- inside the macro's reveal window the counter has no target to land on. Written out instead,
 #with no reveal UI: a land on top goes to hand, anything else gives the +1/+1.
-auto={1}{T}{S}:name(Explore) target(creature|mybattlefield) if type(land[zpos=1]|mylibrary)~morethan~0 then all(*[zpos=1]|mylibrary) moveto(myhand) else counter(1/1) asSorcery
-missing=the keep-or-bin choice for a revealed nonland card; it stays on top of the library
+#explore:1 (engine, 2026-09-13): the chosen creature explores - reveal, land to hand, or a
+#+1/+1 counter and keep-or-bin. John: the old written-out form never revealed anything.
+auto={1}{T}{S}:name(Explore) target(creature|mybattlefield) explore:1 asSorcery
 text={1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
 type=Artifact
 subtype=Map
@@ -146247,7 +146252,7 @@ type=Sorcery
 [card]
 name=Over the Edge
 auto=choice name(Destroy artifact or enchantment) destroy target(artifact,enchantment)
-missing=the second mode (target creature you control explores, then explores again)
+auto=choice name(Explore, then explore again) target(creature|mybattlefield) explore:2
 text=Choose one -- Destroy target artifact or enchantment. -- Target creature you control explores, then it explores again.
 mana={1}{G}
 type=Sorcery
@@ -146257,7 +146262,6 @@ name=Merfolk Cave-Diver
 #Two lines rather than one chained ability: each is the Shadowed Caravel @explored shape.
 auto=@explored(creature|mybattlefield):all(this) 1/0 ueot
 auto=@explored(creature|mybattlefield):all(this) unblockable ueot
-missing=the Map token and Guidestone Compass write explore out, so they do not trigger this; _EXPLORES_ creatures do
 text=Whenever a creature you control explores, this creature gets +1/+0 until end of turn and can't be blocked this turn.
 mana={2}{U}
 type=Creature
@@ -146348,7 +146352,9 @@ type=Sorcery
 name=Zoetic Glyph
 target=artifact
 auto=teach(artifact) becomes(Golem Creature,5/4)
-auto=@movedTo(this|graveyard) from(battlefield):discover:3
+#autograveyard=, as Wicked does: when the enchanted artifact dies the Aura falls off through the
+#state-based check, and an auto= trigger never saw that move (John 2026-09-13, reproduced).
+autograveyard=@movedTo(this|graveyard) from(battlefield):discover:3
 text=Enchant artifact -- Enchanted artifact is a Golem creature with base power and toughness 5/4 in addition to its other types. -- When this Aura is put into a graveyard from the battlefield, discover 3.
 mana={2}{U}
 type=Enchantment
@@ -146505,9 +146511,7 @@ type=Artifact
 [card]
 name=Guidestone Compass
 backside=Lodestone Needle
-#The Map token's written-out explore (_EXPLORES_ does not carry a target).
-auto={1}{T}:name(Explore) target(creature|mybattlefield) if type(land[zpos=1]|mylibrary)~morethan~0 then all(*[zpos=1]|mylibrary) moveto(myhand) else counter(1/1) asSorcery
-missing=a nonland card cannot be put into the graveyard, and this explore does not trigger 'whenever a creature explores'
+auto={1}{T}:name(Explore) target(creature|mybattlefield) explore:1 asSorcery
 text={1}, {T}: Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
 type=Artifact
 [/card]
@@ -146655,10 +146659,9 @@ toughness=5
 [card]
 name=Twists and Turns
 backside=Mycoid Maze
-#The Map token's written-out explore, on entering.
-auto=name(Explore) target(creature|mybattlefield) if type(land[zpos=1]|mylibrary)~morethan~0 then all(*[zpos=1]|mylibrary) moveto(myhand) else counter(1/1)
+auto=name(Explore) target(creature|mybattlefield) explore:1
 auto=@movedTo(land|mybattlefield) restriction{type(land|mybattlefield)~morethan~6}:name(Transform) flip(backside)
-missing=the scry 1 before each explore, and the nonland-to-graveyard option of its own explore
+missing=the scry 1 before each explore
 text=If a creature you control would explore, instead you scry 1, then that creature explores. -- When this enchantment enters, target creature you control explores. -- When a land you control enters, if you control seven or more lands, transform this enchantment.
 mana={G}
 type=Enchantment

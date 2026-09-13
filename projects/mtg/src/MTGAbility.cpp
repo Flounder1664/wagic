@@ -4644,6 +4644,16 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //explore:N - target creature (or this card) explores N times. "explores" below is only the event.
+    vector<string> splitExplore = parseBetween(s, "explore:", " ", false);
+    if (splitExplore.size())
+    {
+        WParsedInt exploreTimes(splitExplore[1], spell, card);
+        MTGAbility * a = NEW AAExplore(observer, id, card, target, exploreTimes.getValue());
+        a->oneShot = 1;
+        return a;
+    }
+
     //perform explores
     found = s.find("explores");
     if (found != string::npos)

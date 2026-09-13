@@ -36013,23 +36013,13 @@ subtype=Aura
 [card]
 name=Eerie Gravestone
 auto=draw:1
-#"from among them" cannot be expressed: [fresh] does NOT match a card the same ability just
-#milled (measured 2026-09-12 - with creature[fresh]|mygraveyard nothing was ever returned, without
-#it the return works). So this reaches any creature card in the graveyard. The rider MUST hang off
-#the deplete as and!( ... )!; with && the whole line failed to parse and the ability did not exist.
-#The follow-up MUST be and!( ... )! - the deplete parser reads a stored and!-ability; with && the
-#whole line failed to parse and the ability did not exist at all (measured 2026-09-12).
-#"from among them": the four just milled are the top of the graveyard, so zpos<=4 picks exactly
-#those - the handle Random Encounter uses. John 2026-09-13: it offered a creature when none of
-#the four milled cards was one.
-#The mill's and!-ability is added to the game when the mill RESOLVES (AADepleter::resolve), so a
-#target inside it is chosen after the four cards are in the graveyard - a real choice, limited
-#to the milled four by graveyard position. (Rechecked 2026-09-13; the earlier failed test was
-#clicking a name that resolves to another printing, not the engine refusing the target.)
-#Graveyard zpos counts UP FROM THE BOTTOM - 1 is the oldest card, the top card equals the graveyard
-#count (21 cards use zpos=type:*:mygraveyard for "the top card"). zpos<=4 therefore meant the four
-#OLDEST cards, and John found nothing selectable (2026-09-13). The four just milled are the top four.
-auto={1}{B}{S}:deplete:4 controller and!( may name(Return a milled creature) target(creature[zpos>=type:*:mygraveyardminus3minusend]|mygraveyard) moveto(hand) )!
+#Seed of Hope's shape: each card gets, as it is milled, a one-shot ability that checks ITSELF and moves
+#itself, so only the four milled cards can come back. No target(...) on the line: a target in an activated
+#ability is chosen on activation, and one anywhere on this line made it unactivatable (measured).
+auto={1}{B}{S}:all(*[zpos<=4]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(creature|*) then may name(Return this milled creature to hand) moveto(myhand)])) oneshot )!
+missing=each milled creature is offered in turn, so two milled creatures could both be returned
+#History (2026-09-12/13): [fresh], zpos<=4 and zpos>=count-3 were each tried here and each failed -
+#the position filter let older graveyard creatures through. Offering each card as it is milled held.
 mana={2}
 type=Artifact
 text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.

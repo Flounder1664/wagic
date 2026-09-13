@@ -1,0 +1,26 @@
+#Map explore, nonland on top (Mind Stone): the chosen Grizzly Bears gets the +1/+1 counter (3/3) and
+#the menu names the card; choice 1 puts Mind Stone into the graveyard. Library lists bottom first.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Map,Grizzly Bears
+manapool:{1}
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Map
+Grizzly Bears
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Map,Mind Stone
+library:Swamp
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

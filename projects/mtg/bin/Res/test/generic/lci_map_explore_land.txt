@@ -1,0 +1,26 @@
+#John 2026-09-13: the Map's explore never revealed a card. The chosen creature now explores itself.
+#Swamp is on top (library lists bottom first): it goes to hand, no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Map,Grizzly Bears
+manapool:{1}
+library:Mind Stone,Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+Map
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Swamp
+graveyard:Map
+library:Mind Stone
+pt:Grizzly Bears=2/2
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -2271,6 +2271,87 @@ AADiscover * AADiscover::clone() const
     return NEW AADiscover(*this);
 }
 
+//AAExplore
+AAExplore::AAExplore(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, int times, string menuText, MTGCardInstance * binThis, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0), times(times), menuText(menuText), binThis(binThis)
+{
+    target = _target;
+}
+
+int AAExplore::resolve()
+{
+    MTGCardInstance * explorer = dynamic_cast<MTGCardInstance *>(target);
+    if (!explorer)
+        explorer = source;
+    if (!explorer)
+        return 0;
+    while (explorer->next)
+        explorer = explorer->next;
+    Player * player = explorer->controller();
+    if (!player)
+        return 0;
+    MTGLibrary * library = player->game->library;
+    //This is the "put it into your graveyard" option of the previous explore: bin the card first.
+    if (binThis)
+    {
+        MTGCardInstance * card = binThis;
+        while (card->next)
+            card = card->next;
+        binThis = NULL;
+        if (card->currentZone == library)
+            player->game->putInZone(card, library, player->game->graveyard);
+    }
+    int remaining = times;
+    while (remaining > 0)
+    {
+        remaining--;
+        MTGCardInstance * revealed = library->nb_cards ? library->cards[library->nb_cards - 1] : NULL;
+        if (revealed && revealed->isLand())
+        {
+            player->game->putInZone(revealed, library, player->game->hand);
+            game->receiveEvent(NEW WEventCardExplored(explorer));
+            continue;
+        }
+        if (explorer->isInPlay(game))
+            explorer->counters->addCounter(1, 1);
+        game->receiveEvent(NEW WEventCardExplored(explorer));
+        if (revealed)
+        {
+            //Keep or bin needs the player, so any further explore waits on that answer.
+            offerChoice(explorer, revealed, remaining);
+            return 1;
+        }
+    }
+    return 1;
+}
+
+void AAExplore::offerChoice(MTGCardInstance * explorer, MTGCardInstance * revealed, int remaining)
+{
+    //Both options name the revealed card - the menu is the only place the player sees it.
+    //Each option is itself an AAExplore carrying the explores still to come (0 = none).
+    string cardName = revealed->getName();
+    vector<MTGAbility*> options;
+    options.push_back(NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Keep " + cardName + " on top"));
+    options.push_back(NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Put " + cardName + " into your graveyard", revealed));
+    MTGAbility * menu = NEW MenuAbility(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, true, options);
+    MTGAbility * add = NEW GenericAddToGame(game, game->mLayers->actionLayer()->getMaxId(), explorer, NULL, menu->clone());
+    SAFE_DELETE(menu);
+    add->resolve();
+    SAFE_DELETE(add);
+}
+
+const string AAExplore::getMenuText()
+{
+    if (menuText.size())
+        return menuText.c_str();
+    return "Explore";
+}
+
+AAExplore * AAExplore::clone() const
+{
+    return NEW AAExplore(*this);
+}
+
 //take extra turns or skip turns, values in the negitive will make you skip.
 AAModTurn::AAModTurn(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target,string nbTurnStr, ManaCost * _cost, int who) :
     ActivatedAbilityTP(observer, _id, card, _target, _cost, who),nbTurnStr(nbTurnStr)

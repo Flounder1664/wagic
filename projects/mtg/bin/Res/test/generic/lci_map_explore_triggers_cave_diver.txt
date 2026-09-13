@@ -1,0 +1,26 @@
+#explore:1 sends the explored event for the chosen creature, so Merfolk Cave-Diver sees the Map's
+#explore (the written-out form never did): Grizzly Bears explores (Swamp to hand), Cave-Diver 2/4 -> 3/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Map,Grizzly Bears,Merfolk Cave-Diver
+manapool:{1}
+library:Mind Stone,Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+Map
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Merfolk Cave-Diver
+hand:Swamp
+graveyard:Map
+library:Mind Stone
+pt:Merfolk Cave-Diver=3/4
+life:20
+[PLAYER2]
+life:20
+[END]

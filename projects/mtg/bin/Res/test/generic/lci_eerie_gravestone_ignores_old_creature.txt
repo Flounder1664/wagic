@@ -1,0 +1,27 @@
+#Negative control for lci_eerie_gravestone_returns_milled. Air Elemental was ALREADY in the graveyard and
+#none of the four milled cards is a creature, so nothing may come back - the old graveyard-position
+#filter offered Air Elemental here (probed 2026-09-13). The seeded Gravestone's enters-draw takes Forest.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+graveyard:Air Elemental
+library:Howling Mine,Mind Stone,Swamp,Millstone,Forest
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 0
+choice 0
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest
+graveyard:Air Elemental,Eerie Gravestone,Millstone,Swamp,Mind Stone,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[END]

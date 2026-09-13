@@ -7085,6 +7085,21 @@ public:
 //Discover N (Lost Caverns of Ixalan): exile from the top until a nonland card with mana value
 //N or less, then cast it free or put it in hand; the rest go to the bottom. Cascade's shape,
 //but cascade hardcodes its threshold to the SOURCE's mana value, which discover does not use.
+//explore:N - the TARGET creature (or the source, with no target) explores N times. _EXPLORES_ can
+//only make its own source explore; this is for "target creature you control explores".
+class AAExplore: public ActivatedAbility
+{
+public:
+    int times;
+    string menuText;
+    MTGCardInstance * binThis;
+    AAExplore(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, int times, string menuText = "", MTGCardInstance * binThis = NULL, ManaCost * _cost = NULL);
+    int resolve();
+    void offerChoice(MTGCardInstance * explorer, MTGCardInstance * revealed, int remaining);
+    const string getMenuText();
+    AAExplore * clone() const;
+};
+
 class AADiscover: public ActivatedAbility
 {
 public:

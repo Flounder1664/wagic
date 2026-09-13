@@ -1,0 +1,27 @@
+#The other way Zoetic Glyph reaches the graveyard: the Aura itself is destroyed (Disenchant) while the
+#artifact stays. Discover 3 must follow; Millstone ends in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone,Zoetic Glyph
+hand:Disenchant
+manapool:{1}{W}
+library:Forest,Millstone,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Disenchant
+Zoetic Glyph
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Stone
+hand:Millstone
+graveyard:Zoetic Glyph,Disenchant
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]
