@@ -1,6 +1,9 @@
+#The milled creature is Assassin Initiate: a single-printing vanilla creature no other test uses. Picking
+#Assassin Initiate by NAME failed only in the full suite (it has many printings, and earlier tests warm the
+#name lookup onto a different one), and picking by numeric id does not work for this prompt at all.
 #Random Encounter returns ONE milled creature of your choice (see the card's missing=). Library is seeded
-#BOTTOM FIRST, so the four milled are Millstone, Scathe Zombies, Juggernaut and Ornithopter. Air Elemental
-#starts in the graveyard as an OLD creature and must stay there. Juggernaut is chosen: one permanent on the
+#BOTTOM FIRST, so the four milled are Millstone, Scathe Zombies, Assassin Initiate and Ornithopter. Air Elemental
+#starts in the graveyard as an OLD creature and must stay there. Assassin Initiate is chosen: one permanent on the
 #battlefield; graveyard holds Air Elemental, the three other milled cards and the sorcery.
 [INIT]
 FIRSTMAIN
@@ -8,14 +11,14 @@ FIRSTMAIN
 hand:Random Encounter
 graveyard:Air Elemental
 manapool:{4}{R}{R}
-library:Grizzly Bears,Mind Stone,Millstone,Scathe Zombies,Juggernaut,Ornithopter
+library:Grizzly Bears,Mind Stone,Millstone,Scathe Zombies,Assassin Initiate,Ornithopter
 life:20
 [PLAYER2]
 life:20
 [DO]
 Random Encounter
 choice 0
-Juggernaut
+Assassin Initiate
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

@@ -33662,7 +33662,12 @@ auto=lord(other vampire|mybattlefield) 1/1
 #The transforms((,newability[moveTo],newability[flip])) shape fires the flip at the OLD instance
 #left in the graveyard, which stops existing once the move makes a new one. A moveTo's and!-ability
 #is aimed at the moved card (AAMover::resolve sets target = _target->next), so flip it there.
-auto=_DIES_all(trigger[to]) moveTo(myBattlefield) and!( flip(backside) )!
+#Flip to the NAMED face, not "backside". A flip rewrites the card in place but keeps its underlying
+#face (AAFlip does not touch model), and a card that dies is rebuilt from that underlying face. So a
+#Coffin that transformed into Edgar comes back as the COFFIN, where "backside" means Edgar - John's
+#Edgar returned front-face and stayed a creature (2026-09-13). Naming the Coffin lands correctly from
+#either starting face. (The harness cannot show it: in test mode a flip does not update the card id.)
+auto=_DIES_all(trigger[to]) moveTo(myBattlefield) and!( flip(Edgar Markov's Coffin) )!
 text=Other vampires you control get +1/+1. -- When Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control. // Edgar Markov's Coffin
 mana={2}{W}{B}
 type=Legendary Creature
