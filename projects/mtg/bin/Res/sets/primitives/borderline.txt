@@ -46794,7 +46794,7 @@ type=Artifact
 [card]
 name=Glass-Cast Heart
 auto=@combat(attacking) source(vampire|mybattlefield):name(Create blood) _BLOOD_
-auto={B}{T}{L:1}:name(Create vampire) token(Vampire,Creature Vampire,1/1,black,lifelink)
+auto={B}{T}{L:1}:name(Create vampire) token(Vampire,Creature Vampire,1/1,white,black,lifelink)
 auto={B}{B}{T}{S}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}{S(blood|mybattlefield)}:name(Opponent loses life) lifeleech:-13 opponent
 text=Whenever one or more Vampires you control attack, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.") -- {B}, {T}, Pay 1 life: Create a 1/1 white and black Vampire creature token with lifelink. -- {B}{B, {T}, Sacrifice Glass-Cast Heart and thirteen Blood tokens: Each opponent loses 13 life and you gain 13 life.
 mana={2}{B}
@@ -80718,8 +80718,8 @@ type=Artifact
 [/card]
 [card]
 name=Ominous Roost
-auto=token(Bird,Creature Bird,1/1,white,flying,cloud)
-auto=@movedto(*|mystack) from(mygraveyard):name(Create Bird) token(Bird,Creature Bird,1/1,white,flying,cloud)
+auto=token(Bird,Creature Bird,1/1,blue,flying,cloud)
+auto=@movedto(*|mystack) from(mygraveyard):name(Create Bird) token(Bird,Creature Bird,1/1,blue,flying,cloud)
 text=When Ominous Roost enters or whenever you cast a spell from your graveyard, create a 1/1 blue Bird creature token with flying and "This creature can block only creatures with flying."
 mana={2}{U}
 type=Enchantment
