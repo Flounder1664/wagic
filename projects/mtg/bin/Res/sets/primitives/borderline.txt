@@ -49363,9 +49363,13 @@ toughness=1
 [/card]
 [card]
 name=Grasping Shadows
+backside=Shadows' Lair
 auto=@combat(attackedalone) source(creature|myBattlefield):all(trigger[to]) deathtouch ueot
 auto=@combat(attackedalone) source(creature|myBattlefield):all(trigger[to]) lifelink ueot
 auto=@combat(attackedalone) source(creature|myBattlefield):counter(0/0,1,dread)
+#"Then if there are three or more dread counters on it, transform it" - the counter-added
+#trigger with a =3 guard, the shape Founding the Third Path uses for its chapters.
+auto=@counteradded(0/0,1,dread) from(this):this(counter{0/0.3.dread}) name(Transform) flip(backside)
 text=Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on Grasping Shadows. Then if there are three or more dread counters on it, transform it.
 mana={3}{B}
 type=Enchantment
@@ -139258,9 +139262,12 @@ type=Sorcery
 name=Spring-Loaded Sawblades
 abilities=flash
 grade=borderline
+#Craft = an exile cost plus flip(backside), as Waterlogged Hulk does. The back face
+#(Bladewheel Chariot) was registered in LCI all along and is now written.
+backside=Bladewheel Chariot
 auto=damage:5 target(creature[tapped]|opponentbattlefield)
-missing=craft with artifact {3}{W} - craft exiles this plus another artifact to return it
-#transformed, and the transformed face is not registered as a card here.
+auto={3}{W}{E(other artifact|mybattlefield)}:name(Craft with artifact) flip(backside) asSorcery
+missing=craft can also exile an artifact card from your graveyard; only one on the battlefield can pay here
 text=Flash -- When this artifact enters, it deals 5 damage to target tapped creature an opponent controls. -- Craft with artifact {3}{W} (Not implemented.)
 mana={1}{W}
 type=Artifact
@@ -146005,4 +146012,72 @@ missing=the {4}{U}, {T}, sacrifice: discover 4 ability - discover is not impleme
 text=This land enters tapped. -- {T}: Add {U}. -- {4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
+[/card]
+[card]
+name=Bladewheel Chariot
+backside=Spring-Loaded Sawblades
+auto=_CREW1_
+missing=the alternative crew (tap two other untapped artifacts you control); only Crew 1 is written
+text=(Transforms from Spring-Loaded Sawblades.) -- Tap two other untapped artifacts you control: This Vehicle becomes an artifact creature until end of turn. -- Crew 1
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Shadows' Lair
+backside=Grasping Shadows
+auto={T}:Add{B}
+#Removing a counter as a COST is {C(0/0,-1,dread)}, the same form planeswalker loyalty uses.
+auto={B}{T}{C(0/0,-1,dread)}:name(Draw and lose 1 life) draw:1 controller && life:-1 controller
+text=(Transforms from Grasping Shadows.) -- {T}: Add {B}. -- {B}, {T}, Remove a dread counter from this land: You draw a card and you lose 1 life.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Hidden Courtyard
+auto=tap(noevent)
+auto={T}:Add{W}
+missing=the {4}{W}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+text=This land enters tapped. -- {T}: Add {W}. -- {4}{W}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Hidden Necropolis
+auto=tap(noevent)
+auto={T}:Add{B}
+missing=the {4}{B}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+text=This land enters tapped. -- {T}: Add {B}. -- {4}{B}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Hidden Nursery
+auto=tap(noevent)
+auto={T}:Add{G}
+missing=the {4}{G}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+text=This land enters tapped. -- {T}: Add {G}. -- {4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Hidden Volcano
+auto=tap(noevent)
+auto={T}:Add{R}
+missing=the {4}{R}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+text=This land enters tapped. -- {T}: Add {R}. -- {4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Jadelight Spelunker
+#"Explores X times" - thisforeach(X) repeats the macro once per X paid.
+auto=thisforeach(X) _EXPLORES_
+text=When this creature enters, it explores X times.
+mana={X}{G}
+type=Creature
+subtype=Merfolk Scout
+power=1
+toughness=1
 [/card]

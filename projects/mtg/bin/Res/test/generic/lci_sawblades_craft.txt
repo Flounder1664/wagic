@@ -1,0 +1,24 @@
+#LCI batch 2. Spring-Loaded Sawblades crafts with an artifact into Bladewheel Chariot, a 5/5
+#Vehicle. The back face was registered in LCI all along with no primitive behind it. Mind Stone
+#pays the exile cost; a flipped card keeps its FRONT id, so P/T is asserted as pt:636729.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spring-Loaded Sawblades,Mind Stone
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Spring-Loaded Sawblades
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+pt:636729=5/5
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]
