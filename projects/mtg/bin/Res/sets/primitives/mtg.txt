@@ -22438,9 +22438,11 @@ otherrestriction=type(this|myhand)~morethan~0
 #window draws cards, and the console build has no resource manager, so CardGui::Render
 #dereferenced NULL (stack via gdb 2026-09-12). Guarded in the engine. The harness still cannot
 #click inside a reveal window, so this card's choice is John's to verify.
-#afterrevealed sweeps whatever is left, so the second card goes to the graveyard by itself (John,
-#2026-09-13: it worked but made you pick the loser as well).
-auto=name(look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend afterrevealed all(*|reveal) moveto(mygraveyard) afterrevealedend revealend
+#DO NOT drop optiontwo in favour of an afterrevealed sweep. Tried 2026-09-13 to save John the
+#second click; it SOFT LOCKED his game - the reveal window sat there with the last card in it
+#and only the escape menu responded. A reveal needs an option for every card the player must
+#dispose of. Faerie Snoop's two-option form is what works, at the cost of one extra click.
+auto=name(look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) target(<2>*|reveal) moveto(mygraveyard) optiontwoend revealend
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
