@@ -53976,7 +53976,7 @@ auto=choice name(buff all) all(creature|mybattlefield) effect(+1/+1,haste) ueot
 auto=choice name(mill 5) deplete:5 opponent
 mana={3}{B}{R}
 type=Sorcery
-missing="choose two" - the engine's choice menu takes exactly one mode, so only one of the four happens; and the mill mode does not return the milled Goblins, because "milled this way" cannot be selected ([fresh] does not match them, measured 2026-09-12)
+missing="choose two" - a choice menu takes exactly ONE pick. Measured 2026-09-13: adding a second set of choice lines just makes one bigger menu, it does not offer a second pick. The mill mode also does not return the milled Goblins
 text=Choose two -- Create a token that's a copy of target Goblin you control. -- Creatures target player controls get +1/+1 and gain haste until end of turn. -- Destroy target artifact or creature. -- Target player mills five cards, then puts each Goblin card milled this way into their hand. (Only one mode may be chosen.)
 [/card]
 [card]

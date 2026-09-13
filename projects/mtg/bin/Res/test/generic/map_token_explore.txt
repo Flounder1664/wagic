@@ -1,0 +1,26 @@
+#John 2026-09-13: the Map from Brackish Blunder showed a nonland card and gave no +1/+1 counter.
+#Written out without a reveal window now. Top card is Mind Stone (not a land), so Grizzly Bears
+#must go 2/2 -> 3/3 and the Map is sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Map,Grizzly Bears
+manapool:{1}
+library:Mind Stone,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Map
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/3
+graveyard:*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

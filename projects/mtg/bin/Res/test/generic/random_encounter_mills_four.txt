@@ -1,6 +1,7 @@
-#John 2026-09-13 counted 3 cards milled, not 4. Measured here: it mills exactly 4 - a library of 6
-#leaves 2, and the graveyard holds those 4 plus Random Encounter itself = 5. Putting the milled
-#creatures onto the battlefield is still unwritten ("milled this way" cannot be selected).
+#John 2026-09-13 counted 3 cards milled, not 4. Measured: it mills exactly 4, leaving 2 of a
+#six-card library. Since the return is implemented the creature among those four (Ornithopter -
+#the harness seeds a library BOTTOM FIRST, so the top four are the last four listed) now arrives
+#on the battlefield, leaving 3 milled cards plus Random Encounter itself in the graveyard.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -16,7 +17,8 @@ Random Encounter
 FIRSTMAIN
 [PLAYER1]
 library:*,*
-graveyard:*,*,*,*,*
+inplay:*
+graveyard:*,*,*,*
 life:20
 [PLAYER2]
 life:20
