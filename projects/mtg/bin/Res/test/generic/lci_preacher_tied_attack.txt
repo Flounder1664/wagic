@@ -1,0 +1,27 @@
+#LCI batch 6. Preacher of the Schism attacks with life tied at 20: both halves apply - it attacks the
+#player tied for most life (1/1 lifelink Vampire token) and you are tied for most life (draw a card,
+#lose 1 life). Asserted at combat damage: player 2 taking 2 proves the attack happened.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Preacher of the Schism
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Preacher of the Schism
+next
+next
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Preacher of the Schism,*
+hand:Mind Stone
+library:Swamp
+life:19
+[PLAYER2]
+life:18
+[END]

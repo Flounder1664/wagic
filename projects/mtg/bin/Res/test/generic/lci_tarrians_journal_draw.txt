@@ -1,0 +1,23 @@
+#LCI batch 6. Tarrian's Journal: {T}, sacrifice another artifact or creature: draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tarrian's Journal,Grizzly Bears
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Tarrian's Journal
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tarrian's Journal
+graveyard:Grizzly Bears
+hand:Mind Stone
+library:Swamp
+life:20
+[PLAYER2]
+life:20
+[END]

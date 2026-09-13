@@ -1,0 +1,24 @@
+#LCI batch 6. Wail of the Forgotten, mode 1: return target nonland permanent (Grizzly Bears) to its
+#owner's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Wail of the Forgotten
+manapool:{U}{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Wail of the Forgotten
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Wail of the Forgotten
+life:20
+[PLAYER2]
+hand:Grizzly Bears
+life:20
+[END]

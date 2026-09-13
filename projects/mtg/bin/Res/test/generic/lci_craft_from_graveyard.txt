@@ -1,0 +1,24 @@
+#LCI batch 6. Craft may exile the other artifact from your GRAVEYARD, not only the battlefield
+#(Tithing Blade's {E(...|myBattlefield,myGraveyard)} form). Mind Stone in the graveyard pays for
+#Oteclan Landmark's craft: it is exiled and the Landmark becomes Oteclan Levitator.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Oteclan Landmark
+graveyard:Mind Stone
+manapool:{2}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Oteclan Landmark
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Oteclan Levitator
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]
