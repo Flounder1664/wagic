@@ -1,0 +1,20 @@
+#LCI batch 8. Vito (636964 - comma names need ids): the first sacrifice of another permanent this turn gains
+#2 life. Bottle Gnomes sacrifices itself for 3: 20 + 3 + 2 = 25.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636964,Bottle Gnomes
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636964
+graveyard:Bottle Gnomes
+life:25
+[PLAYER2]
+life:20
+[END]

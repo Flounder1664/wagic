@@ -1,0 +1,22 @@
+#LCI batch 8. Craft Jade Seedstones with Grizzly Bears (mana value 2): Jadeheart Attendant gains life equal
+#to the exiled card's mana value - 20 -> 22.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jade Seedstones,Grizzly Bears
+manapool:{5}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Jade Seedstones
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jadeheart Attendant
+exile:Grizzly Bears
+life:22
+[PLAYER2]
+life:20
+[END]

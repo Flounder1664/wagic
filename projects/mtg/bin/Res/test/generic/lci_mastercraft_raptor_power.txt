@@ -1,0 +1,24 @@
+#LCI batch 8. Craft Saheeli's Lattice with Dromosaur (2/3): Mastercraft Raptor's power is the exiled
+#Dinosaur's power, read from the craft's stored exile - 2/4. Without it the Raptor would be 0/4.
+#pt by id 636877: a flipped card keeps its front face's id, so the back face's name does not resolve.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Saheeli's Lattice,Dromosaur
+manapool:{4}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Saheeli's Lattice
+Dromosaur
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mastercraft Raptor
+exile:Dromosaur
+pt:636877=2/4
+life:20
+[PLAYER2]
+life:20
+[END]

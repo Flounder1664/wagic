@@ -1,0 +1,23 @@
+#LCI batch 8. Ojer Kaslem (636922) dies and returns transformed: Temple of Cultivation on the battlefield
+#(Ojer Taq's shipped shape).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636922
+hand:Murder
+manapool:{1}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Murder
+636922
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Temple of Cultivation
+graveyard:Murder
+life:20
+[PLAYER2]
+life:20
+[END]

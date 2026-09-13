@@ -146845,7 +146845,8 @@ type=Artifact
 [card]
 name=Jadeheart Attendant
 backside=Jade Seedstones
-missing=gaining life equal to the mana value of the exiled card used to craft it
+#The craft's exile cost stores the exiled creature; a flip is not an enter, so @transformed.
+auto=@transformed(this|mybattlefield):name(Gain life) life:storedmanacost controller
 text=When this creature enters, you gain life equal to the mana value of the exiled card used to craft it.
 type=Artifact Creature
 subtype=Golem
@@ -146950,4 +146951,87 @@ type=Legendary Creature
 subtype=Vampire Scout
 power=2
 toughness=2
+[/card]
+[card]
+name=Saheeli's Lattice
+backside=Mastercraft Raptor
+auto=may reject notaTarget(*|myhand) and!( draw:2 controller )!
+auto={4}{R}{E(creature[dinosaur]|mybattlefield,mygraveyard)}:name(Craft with a Dinosaur) flip(backside) asSorcery
+text=When this artifact enters, you may discard a card. If you do, draw two cards. -- Craft with one or more Dinosaurs {4}{R} ({4}{R}, Exile this artifact, Exile one or more Dinosaurs you control and/or Dinosaur cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={1}{R}
+type=Artifact
+[/card]
+[card]
+name=Mastercraft Raptor
+backside=Saheeli's Lattice
+#The craft's exile cost stores the exiled Dinosaur (ExileTargetCost::doPay), so its power is storedpower.
+anyzone=storedpower/4 cdaactive
+missing=craft exiles exactly one Dinosaur here, so the power is that one card's, not a total over several
+text=Mastercraft Raptor's power is equal to the total power of the exiled cards used to craft it.
+type=Artifact Creature
+subtype=Dinosaur
+power=*
+toughness=4
+[/card]
+[card]
+name=Ojer Kaslem, Deepest Growth
+backside=Temple of Cultivation
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+abilities=trample
+auto=@combatdamaged(player) from(this):name(Reveal that many cards) reveal:thatmuch optionone name(Put a creature and/or a land onto the battlefield) target(<upto:2>*[creature;land]|reveal) moveto(mybattlefield) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=_DIES_all(trigger[to]) transforms((,newability[moveTo(myBattlefield)],newability[tap(noevent)],newability[flip(backside)])) forever
+missing=two creatures or two lands can be put onto the battlefield; the card allows one creature and one land
+text=Trample -- Whenever Ojer Kaslem deals combat damage to a player, reveal that many cards from the top of your library. You may put a creature card and/or a land card from among them onto the battlefield. Put the rest on the bottom in a random order. -- When Ojer Kaslem dies, return it to the battlefield tapped and transformed under its owner's control.
+mana={3}{G}{G}
+type=Legendary Creature
+subtype=God
+power=6
+toughness=5
+[/card]
+[card]
+name=Temple of Cultivation
+backside=Ojer Kaslem, Deepest Growth
+auto={T}:Add{G}
+auto={2}{G}{T}:flip(backside) asSorcery restriction{type(*|mybattlefield)~morethan~9}
+text=(Transforms from Ojer Kaslem, Deepest Growth.) -- {T}: Add {G}. -- {2}{G}, {T}: Transform this land. Activate only if you control ten or more permanents and only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Bonehoard Dracosaur
+abilities=flying,first strike
+auto=@each my upkeep:name(Exile the top two cards) all(*[zpos<=2]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile],newability[if cantargetcard(land|*) then token(Dinosaur,Creature Dinosaur,3/1,red)],newability[if cantargetcard(*[-land]|*) then token(Treasure)])) ueot )!
+missing=each exiled card makes its own token, so two lands make two Dinosaurs and two nonlands two Treasures (the card makes one of each at most)
+text=Flying, first strike -- At the beginning of your upkeep, exile the top two cards of your library. You may play them this turn. If you exiled a land card this way, create a 3/1 red Dinosaur creature token. If you exiled a nonland card this way, create a Treasure token.
+mana={3}{R}{R}
+type=Creature
+subtype=Dinosaur Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Vito, Fanatic of Aclazotz
+abilities=flying
+#First, second, third resolution this turn: a counter per resolution, cleared at each end step, gates each payoff.
+auto=@sacrificed(other *|mybattlefield):all(this) counter(0/0,1,VitoResolved)
+auto=@counteradded(0/0,1,VitoResolved) from(this) restriction{compare(hascntvitoresolved)~equalto~1}:name(Gain 2 life) life:2 controller
+auto=@counteradded(0/0,1,VitoResolved) from(this) restriction{compare(hascntvitoresolved)~equalto~2}:name(Each opponent loses 2 life) life:-2 opponent
+auto=@counteradded(0/0,1,VitoResolved) from(this) restriction{compare(hascntvitoresolved)~equalto~3}:name(Create a 4/3 Vampire Demon) token(Vampire Demon,Creature Vampire Demon,4/3,white,black,flying)
+auto=@each end:removeallcounters(0/0,1,VitoResolved)
+text=Flying -- Whenever you sacrifice another permanent, you gain 2 life if this is the first time this ability has resolved this turn. If it's the second time, each opponent loses 2 life. If it's the third time, create a 4/3 white and black Vampire Demon creature token with flying.
+mana={2}{W}{B}
+type=Legendary Creature
+subtype=Vampire Demon
+power=4
+toughness=4
+[/card]
+[card]
+name=Abuelo's Awakening
+target=artifact,enchantment[-aura]|mygraveyard
+auto=moveto(mybattlefield) and!( transforms((Spirit Creature,setpower=1,settoughness=1,flying)) forever )!
+auto=counter(1/1,X)
+missing=the X +1/+1 counters are put on after it returns rather than it entering with them
+text=Return target artifact or non-Aura enchantment card from your graveyard to the battlefield with X additional +1/+1 counters on it. It's a 1/1 Spirit creature with flying in addition to its other types.
+mana={X}{3}{W}
+type=Sorcery
 [/card]
