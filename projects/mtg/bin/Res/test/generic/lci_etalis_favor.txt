@@ -1,0 +1,23 @@
+#LCI batch 1. Etali's Favor: +1/+1 and trample on the enchanted creature. Its discover 3 is not
+#implemented (the engine has no discover at all) and is recorded on the card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Etali's Favor
+inplay:Grizzly Bears
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Etali's Favor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Etali's Favor,Grizzly Bears
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

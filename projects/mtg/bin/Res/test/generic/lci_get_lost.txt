@@ -1,0 +1,25 @@
+#LCI batch 1. Get Lost destroys a creature, enchantment or planeswalker and gives its controller
+#two Map tokens (here: always the opponent - recorded on the card). Grizzly Bears must die and
+#two tokens must appear on P2's side.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Get Lost
+manapool:{1}{W}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Get Lost
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Get Lost
+life:20
+[PLAYER2]
+inplay:*,*
+graveyard:Grizzly Bears
+life:20
+[END]

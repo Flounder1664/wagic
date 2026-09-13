@@ -145920,3 +145920,89 @@ subtype=Vehicle
 power=4
 toughness=4
 [/card]
+[card]
+name=Get Lost
+target=creature,enchantment,planeswalker
+auto=destroy
+#The Maps go to the opponent rather than 'its controller': the engine has no handle on the
+#destroyed permanent's controller once it is gone.
+auto=token(Map) opponent && token(Map) opponent
+missing=the two Map tokens always go to the opponent, even when you destroy your own permanent
+text=Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Brackish Blunder
+target=creature
+#The tapped test must run BEFORE the bounce, so it sits on the earlier auto= line.
+auto=if cantargetcard(*[tapped]) then token(Map)
+auto=moveto(ownerhand)
+text=Return target creature to its owner's hand. If it was tapped, create a Map token.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Out of Air
+target=*|stack
+auto=fizzle
+missing=the {2} discount when it targets a creature spell; it always costs {2}{U}{U}
+text=This spell costs {2} less to cast if it targets a creature spell. -- Counter target spell.
+mana={2}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Scytheclaw Raptor
+#'If it's not their turn' - restriction{myturnonly} covers the opponent casting on your turn,
+#which is the half that matters in a duel.
+auto=@movedto(*|opponentstack) restriction{myturnonly}:name(Damage the caster) damage:4 opponent
+missing=you taking 4 for casting a spell on the opponent's turn is not implemented; only their casting on your turn is
+text=Whenever a player casts a spell, if it's not their turn, this creature deals 4 damage to them.
+mana={2}{R}
+type=Creature
+subtype=Dinosaur
+power=4
+toughness=3
+[/card]
+[card]
+name=Bloodletter of Aclazotz
+abilities=flying
+missing=the life-loss doubling (if an opponent would lose life during your turn, they lose twice that much instead)
+text=Flying -- If an opponent would lose life during your turn, they lose twice that much life instead.
+mana={1}{B}{B}{B}
+type=Creature
+subtype=Vampire Demon
+power=2
+toughness=4
+[/card]
+[card]
+name=Gargantuan Leech
+abilities=lifelink
+missing=the {1}-per-Cave cost reduction; it always costs {7}{B}
+text=This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard. -- Lifelink
+mana={7}{B}
+type=Creature
+subtype=Leech
+power=5
+toughness=5
+[/card]
+[card]
+name=Etali's Favor
+target=creature|myBattlefield
+auto=teach(creature) 1/1
+auto=teach(creature) trample
+missing=discover 3 when this Aura enters - discover is not implemented in this engine at all
+text=Enchant creature you control -- When this Aura enters, discover 3. -- Enchanted creature gets +1/+1 and has trample.
+mana={2}{R}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Hidden Cataract
+auto=tap(noevent)
+auto={T}:Add{U}
+missing=the {4}{U}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+text=This land enters tapped. -- {T}: Add {U}. -- {4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
+type=Land
+subtype=Cave
+[/card]
