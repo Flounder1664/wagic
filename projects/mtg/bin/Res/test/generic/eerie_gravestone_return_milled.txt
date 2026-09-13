@@ -5,10 +5,13 @@
 #four by graveyard position. Library is seeded BOTTOM FIRST: the four milled are Millstone, Scathe
 #Zombies, Juggernaut and Ornithopter (three creatures). One is chosen; hand holds it plus the
 #Gravestone's own enters-draw, the other milled cards and the sacrificed Gravestone are in the graveyard.
+#Air Elemental starts in the graveyard as an OLD creature: graveyard zpos counts up from the bottom,
+#so the earlier zpos<=4 selector picked the oldest cards. It must stay put - hence 5 in the graveyard.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 inplay:Eerie Gravestone
+graveyard:Air Elemental
 library:Grizzly Bears,Mind Stone,Millstone,Scathe Zombies,Juggernaut,Ornithopter,Howling Mine
 manapool:{1}{B}
 life:20
@@ -23,7 +26,7 @@ Juggernaut
 FIRSTMAIN
 [PLAYER1]
 hand:*,*
-graveyard:*,*,*,*
+graveyard:*,*,*,*,*
 library:*,*
 life:20
 [PLAYER2]

@@ -33658,10 +33658,11 @@ backside=Edgar Markov's Coffin
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
 auto=lord(other vampire|mybattlefield) 1/1
-#The card RETURNS to the battlefield transformed - flip(backside) on its own left it in the
-#graveyard (John, 2026-09-13: it came back on the same side). This is Aclazotz's shape: move it
-#back first, then flip.
-auto=_DIES_all(trigger[to]) transforms((,newability[moveTo(myBattlefield)],newability[flip(backside)])) forever
+#Returns to the battlefield TRANSFORMED. John reported it coming back front-face twice (2026-09-13).
+#The transforms((,newability[moveTo],newability[flip])) shape fires the flip at the OLD instance
+#left in the graveyard, which stops existing once the move makes a new one. A moveTo's and!-ability
+#is aimed at the moved card (AAMover::resolve sets target = _target->next), so flip it there.
+auto=_DIES_all(trigger[to]) moveTo(myBattlefield) and!( flip(backside) )!
 text=Other vampires you control get +1/+1. -- When Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control. // Edgar Markov's Coffin
 mana={2}{W}{B}
 type=Legendary Creature
@@ -138808,7 +138809,13 @@ auto=shuffle
 #"Each creature card milled this way": mark the cards as they go and act on the marked ones -
 #the trick Chiss-Goria uses for the cards it exiles. [fresh] does NOT match milled cards
 #(measured 2026-09-12), and "every creature in your graveyard" would reanimate the whole yard.
-auto=deplete:4 controller and!( all(creature[zpos<=4]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )! )!
+#"Each creature card milled this way" - every automatic form failed with an OLD creature already in the
+#graveyard (graveyard zpos counts up from the bottom and all() re-checks the live count; a marker lands
+#too late; an if-creature check inside the per-card follow-up never fires - all measured 2026-09-13).
+#The one form proved safe is a single chosen target inside the mill's own and!(), which is built once,
+#after the mill (Eerie Gravestone). So one milled creature returns, and only a milled one.
+auto=deplete:4 controller and!( may name(Return a milled creature) target(creature[zpos>=type:*:mygraveyardminus3minusend]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )! )!
+missing=only ONE creature milled this way returns (your choice) rather than every one - no automatic form of "each" stayed inside the milled four once the graveyard already held creatures
 text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. (Only the shuffle and mill are implemented.) -- Flashback {6}{R}{R}
 mana={4}{R}{R}
 type=Sorcery

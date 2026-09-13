@@ -1,13 +1,12 @@
-#John 2026-09-13: "pretty pointless if it does not return creatures". It now mills four and puts
-#the creature cards among them onto the battlefield with haste.
-#NOTE the harness seeds a library BOTTOM FIRST, so the top four here are Millstone, Scathe
-#Zombies, Juggernaut and Ornithopter - three of them creatures (Juggernaut and Ornithopter are
-#artifact creatures). So three permanents arrive, Millstone stays in the graveyard with Random
-#Encounter itself, and Grizzly Bears and Mind Stone are never touched at the bottom.
+#Random Encounter returns ONE milled creature of your choice (see the card's missing=). Library is seeded
+#BOTTOM FIRST, so the four milled are Millstone, Scathe Zombies, Juggernaut and Ornithopter. Air Elemental
+#starts in the graveyard as an OLD creature and must stay there. Juggernaut is chosen: one permanent on the
+#battlefield; graveyard holds Air Elemental, the three other milled cards and the sorcery.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Random Encounter
+graveyard:Air Elemental
 manapool:{4}{R}{R}
 library:Grizzly Bears,Mind Stone,Millstone,Scathe Zombies,Juggernaut,Ornithopter
 life:20
@@ -15,11 +14,13 @@ life:20
 life:20
 [DO]
 Random Encounter
+choice 0
+Juggernaut
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-inplay:*,*,*
-graveyard:*,*
+inplay:*
+graveyard:*,*,*,*,*
 library:*,*
 life:20
 [PLAYER2]

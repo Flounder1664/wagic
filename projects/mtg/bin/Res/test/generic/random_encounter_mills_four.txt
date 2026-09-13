@@ -1,24 +1,28 @@
-#John 2026-09-13 counted 3 cards milled, not 4. Measured: it mills exactly 4, leaving 2 of a
-#six-card library. Since the return is implemented the creature among those four (Ornithopter -
-#the harness seeds a library BOTTOM FIRST, so the top four are the last four listed) now arrives
-#on the battlefield, leaving 3 milled cards plus Random Encounter itself in the graveyard.
+#John counted 3 milled, not 4: it mills exactly 4. Library seeded BOTTOM FIRST - the four milled are
+#Juggernaut, Millstone, Howling Mine and Rod of Ruin. Air Elemental is an OLD graveyard creature and must
+#stay. Juggernaut (the only milled creature) is chosen: one permanent; graveyard holds Air Elemental, three
+#milled cards and the sorcery = 5; library keeps 2. Clicking "Ornithopter" failed only in the FULL suite -
+#an earlier test warms the name lookup onto another printing - so the chosen creature is Juggernaut.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Random Encounter
+graveyard:Air Elemental
 manapool:{4}{R}{R}
-library:Mind Stone,Juggernaut,Ornithopter,Millstone,Howling Mine,Rod of Ruin
+library:Mind Stone,Ornithopter,Juggernaut,Millstone,Howling Mine,Rod of Ruin
 life:20
 [PLAYER2]
 life:20
 [DO]
 Random Encounter
+choice 0
+Juggernaut
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-library:*,*
 inplay:*
-graveyard:*,*,*,*
+graveyard:*,*,*,*,*
+library:*,*
 life:20
 [PLAYER2]
 life:20
