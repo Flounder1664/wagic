@@ -1,6 +1,6 @@
 #LCI batch 1. Get Lost destroys a creature, enchantment or planeswalker and gives its controller
-#two Map tokens (here: always the opponent - recorded on the card). Grizzly Bears must die and
-#two tokens must appear on P2's side.
+#two Map tokens. Grizzly Bears is P2's, so it must die and both tokens appear on P2's side.
+#lci_get_lost_own_maps is the other half: your own permanent gives YOU the Maps.
 [INIT]
 FIRSTMAIN
 [PLAYER1]

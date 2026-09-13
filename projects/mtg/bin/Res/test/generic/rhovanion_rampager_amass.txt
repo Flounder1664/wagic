@@ -1,0 +1,28 @@
+#John 2026-09-13: the Rampager died and amassed nothing. The line read `_DIES_source(this)
+#_AMASSGOBLIN1_`, which never fired, and amassed a flat 1 anyway. Amass X uses its last-known
+#power: pumped to 6/5 by Giant Growth then Murdered, the new Army must be 6/6. (Probe measured
+#power at death = 6, so the pump is still counted.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhovanion Rampager
+hand:Giant Growth,Murder
+manapool:{G}{1}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Giant Growth
+Rhovanion Rampager
+Murder
+Rhovanion Rampager
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+pt:Goblin Army=6/6
+graveyard:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

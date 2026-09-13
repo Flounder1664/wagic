@@ -1,0 +1,27 @@
+#John 2026-09-13: Bloodletter of Aclazotz did not double. During your turn an opponent loses twice
+#the life: Shock (damage) 2 -> 4 and Sign in Blood (life loss) 2 -> 4, so 20 -> 12.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bloodletter of Aclazotz
+hand:Shock,Sign in Blood
+manapool:{R}{B}{B}
+life:20
+[PLAYER2]
+library:Mind Stone,Millstone
+life:20
+[DO]
+Shock
+p2
+Sign in Blood
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bloodletter of Aclazotz
+graveyard:Shock,Sign in Blood
+life:20
+[PLAYER2]
+hand:Mind Stone,Millstone
+life:12
+[END]

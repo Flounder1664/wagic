@@ -185,6 +185,8 @@ int Player::gainOrLoseLife(int value, MTGCardInstance* source)
     if (value>0 && (opponent()->game->battlefield->hasAbility(Constants::NOLIFEGAINOPPONENT)||game->battlefield->hasAbility(Constants::NOLIFEGAIN)))//nolifegain
         return 0;
 
+    if (value < 0)
+        value *= lifeLossMultiplier();
     thatmuch = abs(value); //the value that much is a variable to be used with triggered abilities.
     //ie:when ever you gain life, draw that many cards. when used in a trigger draw:thatmuch, will return the value
     //that the triggered event stored in the card for "that much".
@@ -206,6 +208,23 @@ int Player::gainOrLoseLife(int value, MTGCardInstance* source)
     observer->receiveEvent(lifed);
 
     return value;
+}
+
+//Bloodletter of Aclazotz: "If an opponent would lose life during your turn, they lose twice that
+//much life instead." A replacement, so it is applied where life is lost (here and for damage in
+//Damage.cpp) rather than by a trigger, which would see its own extra loss and fire again. Each
+//copy doubles again, as two replacement effects would.
+int Player::lifeLossMultiplier()
+{
+    Player * other = opponent();
+    if (!other || !observer || observer->currentPlayer != other)
+        return 1;
+    int multiplier = 1;
+    MTGGameZone * field = other->game->battlefield;
+    for (int i = 0; i < field->nb_cards && multiplier < 1024; i++)
+        if (field->cards[i] && field->cards[i]->has(Constants::DOUBLELIFELOSSOPPONENT))
+            multiplier *= 2;
+    return multiplier;
 }
 
 int Player::gainLife(int value, MTGCardInstance* source)

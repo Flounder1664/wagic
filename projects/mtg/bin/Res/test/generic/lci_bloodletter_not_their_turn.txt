@@ -1,0 +1,26 @@
+#Negative control for lci_bloodletter_doubles: the Bloodletter belongs to player 2, and it is
+#player 1's turn, so player 1 Shocking player 2 is NOT doubled (20 -> 18), and nor is player 1
+#hurting themself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock,Lava Spike
+manapool:{R}{R}
+life:20
+[PLAYER2]
+inplay:Bloodletter of Aclazotz
+life:20
+[DO]
+Shock
+p2
+Lava Spike
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Shock,Lava Spike
+life:17
+[PLAYER2]
+inplay:Bloodletter of Aclazotz
+life:18
+[END]

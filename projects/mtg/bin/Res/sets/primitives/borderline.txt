@@ -141641,10 +141641,11 @@ name=Rhovanion Rampager
 #for a sacrifice - the cost is not taken inside a trigger. Do not retry that shape.
 #The sacrifice effect now records the sacrificed card (engine, 2026-09-13), so storedpower is its power.
 auto=_ATTACKING_may name(Sacrifice creature for counters) notaTarget(other creature|mybattlefield) sacrifice and!( all(this) counter(1/1.storedpower) )!
-auto=_DIES_source(this) _AMASSGOBLIN1_
+auto=_DIES_ if type(army|mybattlefield)~morethan~0 then name(Amass Goblins) all(army|myBattlefield) counter(1/1,power) else name(Amass Goblins) token(Goblin Army^Creature Goblin Army^0/0^black) and!( counter(1/1,power) )!
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; counters-equal-to-sacrificed-power and amass-equal-to-this-power both approximated as flat amounts
-missing=dynamic amounts (counters = sacrificed creature's power; amass X = this creature's power) not implemented, flat 1 used instead
+#Amass X: `power` in a dies-trigger reads the LAST-KNOWN power (measured: a Giant Growth pump still
+#counts), so the counters are not lost first. The old `_DIES_source(this) _AMASSGOBLIN1_` never fired.
 text=Whenever this creature attacks, you may sacrifice another creature. If you do, put a number of +1/+1 counters on this creature equal to the sacrificed creature's power. -- When this creature dies, amass Goblins X, where X is this creature's power.
 mana={2}{B}
 type=Creature
@@ -145958,11 +145959,8 @@ toughness=4
 [card]
 name=Get Lost
 target=creature,enchantment,planeswalker
-auto=destroy
-#The Maps go to the opponent rather than 'its controller': the engine has no handle on the
-#destroyed permanent's controller once it is gone.
-auto=token(Map) opponent && token(Map) opponent
-missing=the two Map tokens always go to the opponent, even when you destroy your own permanent
+#targetcontroller gives the Maps to the destroyed permanent's controller (Pongify's form).
+auto=destroy && token(Map)*2 targetcontroller
 text=Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens.
 mana={1}{W}
 type=Instant
@@ -146001,8 +145999,9 @@ toughness=3
 [/card]
 [card]
 name=Bloodletter of Aclazotz
-abilities=flying
-missing=the life-loss doubling (if an opponent would lose life during your turn, they lose twice that much instead)
+#doublelifelossopponent is a replacement in the engine (Player::lifeLossMultiplier), for damage
+#and for plain life loss alike.
+abilities=flying,doublelifelossopponent
 text=Flying -- If an opponent would lose life during your turn, they lose twice that much life instead.
 mana={1}{B}{B}{B}
 type=Creature

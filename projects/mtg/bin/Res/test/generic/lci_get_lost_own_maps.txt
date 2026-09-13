@@ -1,0 +1,23 @@
+#John 2026-09-13: Get Lost's Maps always went to the opponent. "Its controller creates two Map
+#tokens" - destroying your OWN Grizzly Bears must give YOU both Maps and the opponent none.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Get Lost
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Get Lost
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:Grizzly Bears,Get Lost
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,29 @@
+#Amass onto an Army that already exists. The first Rampager is pumped to 6/5 and dies (Army 6/6);
+#the second dies at 3/2 and puts 3 more on it: 9/9. If the X were read from the Army instead of the
+#dying Rampager the second amass would add 6 (12/12), so this also pins down whose power counts.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhovanion Rampager,Rhovanion Rampager
+hand:Giant Growth,Murder,Murder
+manapool:{G}{1}{B}{B}{1}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Giant Growth
+Rhovanion Rampager
+Murder
+Rhovanion Rampager
+Murder
+Rhovanion Rampager
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+pt:Goblin Army=9/9
+graveyard:*,*,*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

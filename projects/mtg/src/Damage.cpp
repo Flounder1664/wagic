@@ -299,7 +299,15 @@ int Damage::resolve()
                 if(((MTGCardInstance*)source)->isCommander > 0 && typeOfDamage == DAMAGE_COMBAT)
                     ((MTGCardInstance*)source)->damageInflictedAsCommander += damage;
             }
-            target->lifeLostThisTurn += damage;
+            //Damage makes a player lose that much life; Bloodletter of Aclazotz doubles the LOSS,
+            //not the damage, so lifelink and damage counts are untouched.
+            int lifeLost = damage;
+            if (!((Player *)target)->inPlay()->hasAbility(Constants::CANTCHANGELIFE))
+            {
+                lifeLost = damage * ((Player *)target)->lifeLossMultiplier();
+                target->life -= (lifeLost - damage);
+            }
+            target->lifeLostThisTurn += lifeLost;
             if ( typeOfDamage == 1 && target == source->controller()->opponent() )//add vector prowledtypes.
             {
                 source->controller()->dealsdamagebycombat = 1; // for restriction check
@@ -311,7 +319,7 @@ int Damage::resolve()
                         source->controller()->prowledTypes.push_back(values[i]);
                 }
             }
-            WEvent * lifed = NEW WEventLife((Player*)target,-damage, source);
+            WEvent * lifed = NEW WEventLife((Player*)target,-lifeLost, source);
             observer->receiveEvent(lifed);
             if(((MTGCardInstance*)source)->damageInflictedAsCommander > 20) // If a player has been dealt 21 points of combat damage by a particular Commander during the game, that player loses a game.
                 observer->setLoser(((MTGCardInstance*)source)->controller()->opponent());

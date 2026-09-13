@@ -375,7 +375,8 @@ class Constants
       CREWTOUGHNESS = 246,  //crews/saddles using its toughness rather than its power (Giant Ox)
       ALTFLASH = 247,       //this card's ALTERNATIVE cost may be paid at instant speed; the
                             //normal cost keeps the card's own timing (Sneak)
-      NB_BASIC_ABILITIES = 248,
+      DOUBLELIFELOSSOPPONENT = 248, //during your turn, opponents lose twice the life they would (Bloodletter of Aclazotz)
+      NB_BASIC_ABILITIES = 249,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

@@ -278,7 +278,8 @@ const char* Constants::MTGBasicAbilities[] = {
     "crewpower1", //Crews and saddles as though its power were 1 greater
     "crewpower2", //Crews and saddles as though its power were 2 greater
     "crewtoughness", //Crews and saddles using its toughness rather than its power
-    "altflash" //The ALTERNATIVE cost may be paid at instant speed; the normal cost is unaffected
+    "altflash", //The ALTERNATIVE cost may be paid at instant speed; the normal cost is unaffected
+    "doublelifelossopponent" //During your turn, opponents lose twice the life they would
 };
 
 map<string,int> Constants::MTGBasicAbilitiesMap;

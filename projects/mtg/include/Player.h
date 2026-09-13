@@ -116,6 +116,7 @@ public:
     int gainLife(int value, MTGCardInstance* source);
     int loseLife(int value, MTGCardInstance* source);
     int gainOrLoseLife(int value, MTGCardInstance* source);
+    int lifeLossMultiplier();
 
     bool isPoisoned() {return (poisonCount > 0);}
     int poisoned();
