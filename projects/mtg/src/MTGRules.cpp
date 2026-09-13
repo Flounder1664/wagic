@@ -363,7 +363,7 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
         if(card->controller()->epic)
             return 0;
 
-        if (card->controller()->game->playRestrictions->canPutIntoZone(card, game->currentActionPlayer->game->stack) == PlayRestriction::CANT_PLAY)
+        if (card->controller()->game->playRestrictions->canPutIntoZone(card, card->controller()->game->stack) == PlayRestriction::CANT_PLAY)
             return 0;
         ManaCost * playerMana = player->getManaPool();
         ManaCost * cost = card->getManaCost();
@@ -672,7 +672,7 @@ int MTGKickerRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
         if(card->controller()->epic)
             return 0;
 
-        if (card->controller()->game->playRestrictions->canPutIntoZone(card, game->currentActionPlayer->game->stack) == PlayRestriction::CANT_PLAY)
+        if (card->controller()->game->playRestrictions->canPutIntoZone(card, card->controller()->game->stack) == PlayRestriction::CANT_PLAY)
             return 0;
         ManaCost * playerMana = player->getManaPool();
         ManaCost * withKickerCost= NEW ManaCost(card->getManaCost());

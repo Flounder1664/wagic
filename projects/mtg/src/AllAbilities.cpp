@@ -10579,7 +10579,7 @@ void AACastCard::Update(float dt)
         MTGCardInstance * toCheck = (MTGCardInstance*)target;
         if(theNamedCard)
             toCheck = theNamedCard;
-        if (game->currentActionPlayer->game->playRestrictions->canPutIntoZone(toCheck, source->controller()->game->stack) == PlayRestriction::CANT_PLAY)
+        if (source->controller()->game->playRestrictions->canPutIntoZone(toCheck, source->controller()->game->stack) == PlayRestriction::CANT_PLAY)
         {
             processed = true;
             if(andAbility) // Allow to use and!()! even when restriction occurred (e.g. "Gix, Yawgmoth Praetor").
