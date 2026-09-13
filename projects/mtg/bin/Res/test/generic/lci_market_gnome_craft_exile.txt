@@ -1,0 +1,26 @@
+#John 2026-09-13: Market Gnome's second ability never happened. Crafting Jade Seedstones exiles Market Gnome
+#as the craft cost: gain 1 life and draw a card (Mind Stone). Jadeheart Attendant then gains life equal to the
+#Gnome's mana value (1): 20 + 1 + 1 = 22.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jade Seedstones,Market Gnome
+manapool:{5}{G}{G}
+library:Swamp,Mind Stone
+life:20
+[PLAYER2]
+life:20
+[DO]
+Jade Seedstones
+Market Gnome
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jadeheart Attendant
+exile:Market Gnome
+hand:Mind Stone
+library:Swamp
+life:22
+[PLAYER2]
+life:20
+[END]

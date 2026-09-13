@@ -146211,9 +146211,12 @@ toughness=1
 [card]
 name=Compass Gnome
 #land[basic;cave] is intentionally OR: a basic land OR a Cave. It goes on top of the library.
-#Worldly Tutor's shape: reveal the library, pick the card, put the rest back and SHUFFLE, then put the
-#picked card on top. John 2026-09-13: moving it to the library alone never made it the next draw.
-auto=name(Search for a basic land or Cave) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(Put it on top) target(<1>land[basic;cave]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(mylibrary)])) optiononeend optiontwo name(Find nothing) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+#John 2026-09-13: still not his next draw with Worldly Tutor's reveal shape (it passed the harness). Now no
+#reveal window: shuffle first, then placefromthetop(1) moves the chosen card straight to the top
+#(AALibraryPosition). Lines resolve top to bottom (measured). placefromthetop on a card still IN the library
+#segfaulted the harness, so the card steps out to exile first and placefromthetop brings it back on top.
+auto=shuffle
+auto=may name(Put a basic land or Cave on top) target(land[basic;cave]|mylibrary) moveto(myexile) and!( placefromthetop(1) )!
 text=When this creature enters, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.
 mana={2}
 type=Artifact Creature
@@ -146224,7 +146227,10 @@ toughness=1
 [card]
 name=Market Gnome
 auto=_DIES_life:1 controller && draw:1 controller
-missing=the same reward when it is exiled from the battlefield while paying a craft cost
+#John 2026-09-13: the exile reward never happened. Being exiled from the battlefield is, in practice, a craft
+#cost; the trigger cannot see WHY it was exiled.
+auto=@movedTo(this|exile) from(battlefield):name(Gain 1 life and draw a card) life:1 controller && draw:1 controller
+missing=any exile from the battlefield gives the reward, not only paying a craft cost
 text=When this creature dies, you gain 1 life and draw a card. -- When this creature is exiled from the battlefield while you're activating a craft ability, you gain 1 life and draw a card.
 mana={W}
 type=Artifact Creature
@@ -146490,10 +146496,8 @@ type=Artifact
 [card]
 name=Iceberg Titan
 backside=Inverted Iceberg
-#Twiddle's shape: tap and untap are two separate may prompts.
-auto=_ATTACKING_may name(Tap artifact or creature) tap target(artifact,creature)
-auto=_ATTACKING_may name(Untap artifact or creature) untap target(artifact,creature)
-missing=tap OR untap is offered as two separate prompts, so both can be taken
+#John 2026-09-13: two prompts let him tap AND untap. One choice: tap, untap, or neither.
+auto=_ATTACKING_ability$!name(Tap or untap) choice name(Tap target artifact or creature) tap target(artifact,creature) _ choice name(Untap target artifact or creature) untap target(artifact,creature) _ choice name(Do neither) donothing!$ controller
 text=Whenever this creature attacks, you may tap or untap target artifact or creature.
 type=Artifact Creature
 subtype=Golem
