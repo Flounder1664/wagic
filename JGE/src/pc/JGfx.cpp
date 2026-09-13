@@ -1899,7 +1899,8 @@ int JRenderer::LoadPNG(TextureInfo &textureInfo, const char *filename, int mode 
     unsigned int sig_read = 0;
     png_uint_32 width, height, tw, th;
     int bit_depth, color_type, interlace_type, x, y;
-    DWORD* line;
+    DWORD* volatile line = NULL;
+    BYTE* volatile buffer = NULL;
 
     JFileSystem* fileSystem = JFileSystem::GetInstance();
     if (!fileSystem->OpenFile(filename))
@@ -1927,6 +1928,24 @@ int JRenderer::LoadPNG(TextureInfo &textureInfo, const char *filename, int mode 
     png_init_io(png_ptr, NULL);
     png_set_read_fn(png_ptr, (png_voidp)fileSystem, PNGCustomReadDataFn);
 
+    //libpng 1.2 has no error handler of ours (png_set_error_fn NULL), so a bad or short read makes it
+    //abort the whole process: exception 0x40000015 in libpng13.dll (John, twice on 2026-09-13; Wagic's
+    //own crash log never sees it). With a recovery point png_error jumps back here and the load just
+    //fails. Anything freed below is declared before the setjmp and volatile.
+#ifndef png_jmpbuf
+#  define png_jmpbuf(png_ptr) ((png_ptr)->jmpbuf)
+#endif
+    if (setjmp(png_jmpbuf(png_ptr)))
+    {
+        if (line)
+            free(line);
+        if (buffer)
+            delete[] buffer;
+        png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+        fileSystem->CloseFile();
+        textureInfo.mBits = NULL;
+        return JGE_ERR_PNG;
+    }
     png_set_sig_bytes(png_ptr, sig_read);
     png_read_info(png_ptr, info_ptr);
     png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL, NULL);
@@ -1957,7 +1976,7 @@ int JRenderer::LoadPNG(TextureInfo &textureInfo, const char *filename, int mode 
 
     int size = tw * th * 4;			// RGBA
 
-    BYTE* buffer = new BYTE[size];
+    buffer = new BYTE[size];
 
     //JTexture *tex = new JTexture();
 
