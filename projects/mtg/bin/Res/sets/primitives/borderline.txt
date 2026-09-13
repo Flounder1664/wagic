@@ -138814,13 +138814,15 @@ auto=shuffle
 #"Each creature card milled this way": mark the cards as they go and act on the marked ones -
 #the trick Chiss-Goria uses for the cards it exiles. [fresh] does NOT match milled cards
 #(measured 2026-09-12), and "every creature in your graveyard" would reanimate the whole yard.
-#"Each creature card milled this way" - every automatic form failed with an OLD creature already in the
-#graveyard (graveyard zpos counts up from the bottom and all() re-checks the live count; a marker lands
-#too late; an if-creature check inside the per-card follow-up never fires - all measured 2026-09-13).
-#The one form proved safe is a single chosen target inside the mill's own and!(), which is built once,
-#after the mill (Eerie Gravestone). So one milled creature returns, and only a milled one.
-auto=deplete:4 controller and!( may name(Return a milled creature) target(creature[zpos>=type:*:mygraveyardminus3minusend]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )! )!
-missing=only ONE creature milled this way returns (your choice) rather than every one - no automatic form of "each" stayed inside the milled four once the graveyard already held creatures
+#"Each creature card milled this way" - every AUTOMATIC form failed once the graveyard already held a
+#creature: all() re-checks the live graveyard count (zpos counts up from the bottom), a marker lands
+#too late, and an if-creature check in the per-card follow-up never fires (all measured 2026-09-13).
+#A target list is built ONCE, before anything moves, so a multi-select pick stays inside the milled four:
+#keep clicking creatures, then confirm (<anyamount> - 290 cards use it, several exactly like this from a
+#graveyard). John asked for this over the single pick. The harness cannot finish a multi-select, so the
+#pick itself is his to verify.
+auto=deplete:4 controller and!( may name(Return the milled creatures) target(<anyamount>creature[zpos>=type:*:mygraveyardminus3minusend]|mygraveyard) moveto(mybattlefield) and!( transforms((,haste,newability[phaseaction[end once sourceinplay] moveTo(ownerhand)])) ueot )! )!
+missing=you pick which milled creatures return (pick all of them) rather than every one returning automatically
 text=Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand. (Only the shuffle and mill are implemented.) -- Flashback {6}{R}{R}
 mana={4}{R}{R}
 type=Sorcery

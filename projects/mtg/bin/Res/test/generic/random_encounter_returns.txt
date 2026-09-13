@@ -1,10 +1,10 @@
-#The milled creature is Assassin Initiate: a single-printing vanilla creature no other test uses. Picking
-#Assassin Initiate by NAME failed only in the full suite (it has many printings, and earlier tests warm the
-#name lookup onto a different one), and picking by numeric id does not work for this prompt at all.
-#Random Encounter returns ONE milled creature of your choice (see the card's missing=). Library is seeded
-#BOTTOM FIRST, so the four milled are Millstone, Scathe Zombies, Assassin Initiate and Ornithopter. Air Elemental
-#starts in the graveyard as an OLD creature and must stay there. Assassin Initiate is chosen: one permanent on the
-#battlefield; graveyard holds Air Elemental, the three other milled cards and the sorcery.
+#Random Encounter mills four and lets you multi-select the milled creatures to return, then confirm.
+#The harness CANNOT finish a multi-select (clicks never complete the selection), so this test only
+#checks what it can: exactly four cards are milled, nothing crashes or hangs, and an OLD creature
+#already in the graveyard is untouched - graveyard zpos counts up from the bottom, and an earlier
+#selector reanimated the oldest creatures. The pick itself is John's to verify in play.
+#Library is seeded BOTTOM FIRST: the four milled are Millstone, Scathe Zombies, Assassin Initiate and
+#Ornithopter. Graveyard afterwards: Air Elemental + those four + the sorcery = 6; library keeps 2.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -17,13 +17,10 @@ life:20
 life:20
 [DO]
 Random Encounter
-choice 0
-Assassin Initiate
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-inplay:*
-graveyard:*,*,*,*,*
+graveyard:*,*,*,*,*,*
 library:*,*
 life:20
 [PLAYER2]
