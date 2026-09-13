@@ -4889,6 +4889,15 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //discover:N - like cascade, but N is given and the found card may go to hand instead.
+    vector<string> splitDiscover = parseBetween(s, "discover:", " ", false);
+    if (splitDiscover.size())
+    {
+        MTGAbility * a = NEW AADiscover(observer, id, card, target, splitDiscover[1], NULL);
+        a->oneShot = 1;
+        return a;
+    }
+
     //modify turns
     vector<string> splitModTurn = parseBetween(s, "turns:", " ", false);
     if (splitModTurn.size())

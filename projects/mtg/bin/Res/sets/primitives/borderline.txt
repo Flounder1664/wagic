@@ -146007,7 +146007,8 @@ name=Etali's Favor
 target=creature|myBattlefield
 auto=teach(creature) 1/1
 auto=teach(creature) trample
-missing=discover 3 when this Aura enters - discover is not implemented in this engine at all
+#discover:3 on a bare auto= is this Aura's enters-trigger.
+auto=discover:3
 text=Enchant creature you control -- When this Aura enters, discover 3. -- Enchanted creature gets +1/+1 and has trample.
 mana={2}{R}
 type=Enchantment
@@ -146017,7 +146018,7 @@ subtype=Aura
 name=Hidden Cataract
 auto=tap(noevent)
 auto={T}:Add{U}
-missing=the {4}{U}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+auto={4}{U}{T}{S}:name(Discover 4) discover:4 asSorcery
 text=This land enters tapped. -- {T}: Add {U}. -- {4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
@@ -146047,7 +146048,7 @@ subtype=Cave
 name=Hidden Courtyard
 auto=tap(noevent)
 auto={T}:Add{W}
-missing=the {4}{W}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+auto={4}{W}{T}{S}:name(Discover 4) discover:4 asSorcery
 text=This land enters tapped. -- {T}: Add {W}. -- {4}{W}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
@@ -146056,7 +146057,7 @@ subtype=Cave
 name=Hidden Necropolis
 auto=tap(noevent)
 auto={T}:Add{B}
-missing=the {4}{B}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+auto={4}{B}{T}{S}:name(Discover 4) discover:4 asSorcery
 text=This land enters tapped. -- {T}: Add {B}. -- {4}{B}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
@@ -146065,7 +146066,7 @@ subtype=Cave
 name=Hidden Nursery
 auto=tap(noevent)
 auto={T}:Add{G}
-missing=the {4}{G}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+auto={4}{G}{T}{S}:name(Discover 4) discover:4 asSorcery
 text=This land enters tapped. -- {T}: Add {G}. -- {4}{G}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
@@ -146074,7 +146075,7 @@ subtype=Cave
 name=Hidden Volcano
 auto=tap(noevent)
 auto={T}:Add{R}
-missing=the {4}{R}, {T}, sacrifice: discover 4 ability - discover is not implemented in this engine at all
+auto={4}{R}{T}{S}:name(Discover 4) discover:4 asSorcery
 text=This land enters tapped. -- {T}: Add {R}. -- {4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery.
 type=Land
 subtype=Cave
@@ -146089,4 +146090,63 @@ type=Creature
 subtype=Merfolk Scout
 power=1
 toughness=1
+[/card]
+[card]
+name=Geological Appraiser
+#discover:3 - new engine ability (2026-09-13), cascade's shape with the threshold given and
+#a cast-or-hand choice at the end.
+auto=discover:3
+missing=the "if you cast it" condition - it discovers however it entered the battlefield
+text=When this creature enters, if you cast it, discover 3.
+mana={2}{R}{R}
+type=Creature
+subtype=Human Artificer
+power=3
+toughness=2
+[/card]
+[card]
+name=Daring Discovery
+auto=may name(Creatures can't block) target(<upto:3>creature) transforms((,cantblock)) ueot
+auto=discover:4
+text=Up to three target creatures can't block this turn. -- Discover 4.
+mana={4}{R}
+type=Sorcery
+[/card]
+[card]
+name=Walk with the Ancestors
+auto=may name(Return a permanent card) moveto(hand) target(<upto:1>*[-instant&-sorcery]|mygraveyard)
+auto=discover:4
+text=Return up to one target permanent card from your graveyard to your hand. Discover 4.
+mana={4}{G}
+type=Sorcery
+[/card]
+[card]
+name=Trumpeting Carnosaur
+abilities=trample
+auto=discover:5
+missing=the {2}{R}, discard this card: 3 damage ability, which is played from hand rather than the battlefield
+text=Trample -- When this creature enters, discover 5. -- {2}{R}, Discard this card: It deals 3 damage to target creature or planeswalker.
+mana={4}{R}{R}
+type=Creature
+subtype=Dinosaur
+power=7
+toughness=6
+[/card]
+[card]
+name=Hit the Mother Lode
+auto=discover:10
+missing=the tapped Treasure tokens for the difference between 10 and the discovered card's mana value
+text=Discover 10. If the discovered card's mana value is less than 10, create a number of tapped Treasure tokens equal to the difference.
+mana={4}{R}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Curator of Sun's Creation
+missing="whenever you discover, discover again" - there is no trigger for discovering, only the ability itself
+text=Whenever you discover, discover again for the same value. This ability triggers only once each turn.
+mana={3}{R}
+type=Creature
+subtype=Human Artificer
+power=3
+toughness=3
 [/card]

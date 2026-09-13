@@ -7082,6 +7082,23 @@ public:
 };
 
 //Generic skip turn/extra turn
+//Discover N (Lost Caverns of Ixalan): exile from the top until a nonland card with mana value
+//N or less, then cast it free or put it in hand; the rest go to the bottom. Cascade's shape,
+//but cascade hardcodes its threshold to the SOURCE's mana value, which discover does not use.
+class AADiscover: public ActivatedAbility
+{
+public:
+    string amountStr;
+    MTGCardInstance * castingThis;
+    vector<MTGCardInstance *>selectedCards;
+    AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost = NULL);
+    int resolve();
+    void offerChoice(MTGCardInstance * card);
+    const string getMenuText();
+    AADiscover * clone() const;
+};
+
+//Generic skip turn/extra turn
 class AAModTurn: public ActivatedAbilityTP
 {
 public:

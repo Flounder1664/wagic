@@ -2177,6 +2177,91 @@ AACascade * AACascade::clone() const
     return NEW AACascade(*this);
 }
 
+//AADiscover
+AADiscover::AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0),amountStr(amountStr)
+{
+    selectedCards.clear();
+    castingThis = NULL;
+}
+
+int AADiscover::resolve()
+{
+    Player * player = source->controller();
+    if (!player)
+        return 0;
+    WParsedInt maxCost(amountStr, NULL, source);
+    MTGLibrary * library = player->game->library;
+    MTGRemovedFromGame * exile = player->game->exile;
+    bool found = false;
+    selectedCards.clear();
+    castingThis = NULL;
+    //Exile from the top until the first nonland card cheap enough. Everything passed over is
+    //kept to go to the bottom afterwards.
+    while (library->nb_cards && !found)
+    {
+        MTGCardInstance * viable = library->cards[library->nb_cards - 1];
+        if (!viable)
+            break;
+        bool hit = (!viable->isLand() && viable->getManaCost()->getConvertedCost() <= maxCost.getValue());
+        viable = player->game->putInZone(viable, library, exile);
+        if (hit)
+        {
+            castingThis = viable;
+            found = true;
+        }
+        else
+        {
+            selectedCards.push_back(viable);
+        }
+    }
+    while (selectedCards.size())
+    {
+        MTGCardInstance * toMove = selectedCards.back();
+        selectedCards.pop_back();
+        if (!toMove)
+            continue;
+        MTGAbility * a = NEW AALibraryBottom(game, game->mLayers->actionLayer()->getMaxId(), source, toMove);
+        a->oneShot = 1;
+        a->resolve();
+        SAFE_DELETE(a);
+    }
+    if (castingThis)
+    {
+        while (castingThis->next)
+            castingThis = castingThis->next;
+        offerChoice(castingThis);
+    }
+    return 1;
+}
+
+void AADiscover::offerChoice(MTGCardInstance * thisCard)
+{
+    //"Cast it without paying its mana cost OR put it into your hand" - a two option menu, not
+    //cascade's plain may-cast, or declining would strand the card in exile.
+    vector<MTGAbility*> options;
+    MTGAbility * castIt = NEW AACastCard(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, false, false, true, "", "", false, false);
+    MTGAbility * toHand = NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, "myhand", "Put it into your hand");
+    options.push_back(castIt);
+    options.push_back(toHand);
+    MTGAbility * menu = NEW MenuAbility(game, game->mLayers->actionLayer()->getMaxId(), thisCard, thisCard, true, options);
+    MTGAbility * add = NEW GenericAddToGame(game, game->mLayers->actionLayer()->getMaxId(), thisCard, NULL, menu->clone());
+    SAFE_DELETE(menu);
+    add->resolve();
+    SAFE_DELETE(add);
+    return;
+}
+
+const string AADiscover::getMenuText()
+{
+    return "Discover";
+}
+
+AADiscover * AADiscover::clone() const
+{
+    return NEW AADiscover(*this);
+}
+
 //take extra turns or skip turns, values in the negitive will make you skip.
 AAModTurn::AAModTurn(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target,string nbTurnStr, ManaCost * _cost, int who) :
     ActivatedAbilityTP(observer, _id, card, _target, _cost, who),nbTurnStr(nbTurnStr)
@@ -7810,12 +7895,21 @@ MenuAbility * MenuAbility::clone() const
 {
     MenuAbility * a = NEW MenuAbility(*this);
     a->canBeInterrupted = false;
+    //The copy constructor brought the option POINTERS across, and the loop below then appends
+    //clones - so without this the copy holds the originals AND the clones, and deleting the
+    //original menu leaves the copy pointing at freed abilities. Clear before refilling.
+    a->abilities.clear();
+    a->optionalCosts.clear();
     if(abilities.size())
     {
         for(int i = 0;i < int(abilities.size());i++)
         {
             a->abilities.push_back(abilities[i]->clone());
-            a->optionalCosts.push_back(NEW ManaCost(optionalCosts[i]));
+            //A menu built in C++ may have no optional costs at all - the constructor never fills
+            //this list - so index past the end / NULL both have to be tolerated here. Every other
+            //use of optionalCosts already guards; only clone() did not, and it segfaulted the
+            //moment discover built a two option menu (2026-09-13).
+            a->optionalCosts.push_back((i < int(optionalCosts.size()) && optionalCosts[i]) ? NEW ManaCost(optionalCosts[i]) : NULL);
             a->abilities[i]->target = abilities[i]->target;
         }
     }
