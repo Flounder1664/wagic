@@ -7708,6 +7708,10 @@ int IfThenAbility::resolve()
 
 const string IfThenAbility::getMenuText()
 {
+    //A may wrapping an if shows the if's text as its menu line, so "" left Eerie Gravestone's offer with
+    //a blank top line (John, 2026-09-14). Show what the then-branch does.
+    if (delayedAbility)
+        return delayedAbility->getMenuText();
     return "";
 }
 
