@@ -119075,6 +119075,7 @@ name=Tidal Barracuda
 auto=lord(*[-land]|mycastingzone) asflash
 auto=lord(*[-land]|opponentcastingzone) asflash
 auto=this(variable{controllerturn}>0) maxCast(*|opponentzones)0
+missing="Your opponents can't cast spells during your turn" does the OPPOSITE: written as maxCast(*|opponentzones)0 with no 'opponent', so the restriction lands on YOU (setAllZones ignores |opponentzones) and you can't cast during your own turn, while opponents can. Fix is Grand Abolisher's form, maxCast(*)0 opponent (engine made it stop responses in 2b97de365); test it like generic/grand_abolisher_stops_instant.txt.
 text=Any player may cast spells as though they had flash. -- Your opponents can't cast spells during your turn.
 mana={3}{U}
 type=Creature
