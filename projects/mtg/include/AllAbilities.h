@@ -7100,6 +7100,19 @@ public:
     AAExplore * clone() const;
 };
 
+//millchoose(N,filter) - mill N, then you may put ONE milled card matching filter into your hand, chosen
+//from a menu naming the milled cards ("from among them"). Issue #45.
+class AAMillChoose: public ActivatedAbility
+{
+public:
+    string countStr;
+    string filter;
+    AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, ManaCost * _cost = NULL);
+    int resolve();
+    const string getMenuText();
+    AAMillChoose * clone() const;
+};
+
 class AADiscover: public ActivatedAbility
 {
 public:

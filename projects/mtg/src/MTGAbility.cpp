@@ -4654,6 +4654,19 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //millchoose(N,filter) - mill N, then you may put one milled card matching filter into your hand.
+    vector<string> splitMillChoose = parseBetween(s, "millchoose(", ")");
+    if (splitMillChoose.size())
+    {
+        string args = splitMillChoose[1];
+        size_t comma = args.find(",");
+        string countPart = (comma == string::npos) ? args : args.substr(0, comma);
+        string filterPart = (comma == string::npos) ? "*" : args.substr(comma + 1);
+        MTGAbility * a = NEW AAMillChoose(observer, id, card, countPart, filterPart);
+        a->oneShot = 1;
+        return a;
+    }
+
     //perform explores
     found = s.find("explores");
     if (found != string::npos)

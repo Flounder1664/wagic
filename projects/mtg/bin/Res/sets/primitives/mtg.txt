@@ -36018,13 +36018,9 @@ subtype=Aura
 [card]
 name=Eerie Gravestone
 auto=draw:1
-#Seed of Hope's shape: each card gets, as it is milled, a one-shot ability that checks ITSELF and moves
-#itself, so only the four milled cards can come back. No target(...) on the line: a target in an activated
-#ability is chosen on activation, and one anywhere on this line made it unactivatable (measured).
-auto={1}{B}{S}:all(*[zpos<=4]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(creature|*) then may name(Return this milled creature to hand) if type(*[gravestonereturned]|myhand)~equalto~0 then name(Return this milled creature to hand) moveto(myhand) and!( transforms((gravestonereturned)) ueot )!])) oneshot )!
-missing=each milled creature is offered in turn, so two milled creatures could both be returned
-#History (2026-09-12/13): [fresh], zpos<=4 and zpos>=count-3 were each tried here and each failed -
-#the position filter let older graveyard creatures through. Offering each card as it is milled held.
+#millchoose (engine, issue #45): mill four, then one menu naming the milled creatures plus "Take nothing".
+#History: [fresh], graveyard positions, tags and per-card offers were each tried and each failed.
+auto={1}{B}{S}:name(Mill four) millchoose(4,creature)
 mana={2}
 type=Artifact
 text=When Eerie Gravestone enters, draw a card. -- {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.
@@ -129990,8 +129986,10 @@ toughness=1
 [/card]
 [card]
 name=Town Greeter
-auto=deplete:4 && may moveto(hand) target(land|mygraveyard)
-text=When this creature enters, mill four cards. You may put a land card from among them into your hand.
+#millchoose (issue #45): only the milled lands are offered; the old graveyard filter reached any land there.
+auto=millchoose(4,land)
+missing=gaining 2 life if the land put into your hand is a Town
+text=When this creature enters, mill four cards. You may put a land card from among them into your hand. If you put a Town card into your hand this way, you gain 2 life. (To mill four cards, a player puts the top four cards of their library into their graveyard.)
 mana={1}{G}
 type=Creature
 subtype=Human Citizen

@@ -2366,6 +2366,66 @@ AAExplore * AAExplore::clone() const
     return NEW AAExplore(*this);
 }
 
+//AAMillChoose
+AAMillChoose::AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0), countStr(countStr), filter(filter)
+{
+}
+
+int AAMillChoose::resolve()
+{
+    Player * player = source ? source->controller() : NULL;
+    if (!player)
+        return 0;
+    WParsedInt count(countStr, NULL, source);
+    MTGLibrary * library = player->game->library;
+    //Mill, remembering exactly which cards were milled - the whole point of this ability.
+    vector<MTGCardInstance *> milled;
+    for (int i = 0; i < count.getValue() && library->nb_cards; i++)
+    {
+        MTGCardInstance * moved = player->game->putInZone(library->cards[library->nb_cards - 1], library, player->game->graveyard);
+        if (moved)
+            milled.push_back(moved);
+    }
+    if (milled.empty())
+        return 1;
+    TargetChooserFactory tcf(game);
+    TargetChooser * tc = tcf.createTargetChooser(filter, source);
+    if (!tc)
+        return 1;
+    tc->setAllZones();
+    tc->targetter = NULL;
+    vector<MTGAbility*> options;
+    for (size_t i = 0; i < milled.size(); i++)
+    {
+        MTGCardInstance * card = milled[i];
+        if (card && tc->canTarget(card))
+            options.push_back(NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), card, card, "myhand", "Put " + card->getName() + " into your hand"));
+    }
+    SAFE_DELETE(tc);
+    if (options.empty())
+        return 1;
+    //The menu hangs off a milled card: the source may be a sacrificed permanent (Eerie Gravestone).
+    MTGCardInstance * menuSource = milled.back();
+    options.push_back(NEW AAFakeAbility(game, game->mLayers->actionLayer()->getMaxId(), menuSource, menuSource, "Take nothing"));
+    MTGAbility * menu = NEW MenuAbility(game, game->mLayers->actionLayer()->getMaxId(), menuSource, menuSource, true, options);
+    MTGAbility * add = NEW GenericAddToGame(game, game->mLayers->actionLayer()->getMaxId(), menuSource, NULL, menu->clone());
+    SAFE_DELETE(menu);
+    add->resolve();
+    SAFE_DELETE(add);
+    return 1;
+}
+
+const string AAMillChoose::getMenuText()
+{
+    return "Mill and choose";
+}
+
+AAMillChoose * AAMillChoose::clone() const
+{
+    return NEW AAMillChoose(*this);
+}
+
 //take extra turns or skip turns, values in the negitive will make you skip.
 AAModTurn::AAModTurn(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target,string nbTurnStr, ManaCost * _cost, int who) :
     ActivatedAbilityTP(observer, _id, card, _target, _cost, who),nbTurnStr(nbTurnStr)

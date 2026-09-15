@@ -1,0 +1,27 @@
+#Issue #45: Town Greeter mills four and may put a land from AMONG THEM into hand. The old line reached any land in
+#the graveyard. Swamp is already there and must not be offered; the menu is [Island, Take nothing]. Library lists
+#bottom first; the top four (Juggernaut, Millstone, Grizzly Bears, Island) are milled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Town Greeter
+graveyard:Swamp
+manapool:{1}{G}
+library:Mind Stone,Island,Grizzly Bears,Millstone,Juggernaut
+life:20
+[PLAYER2]
+life:20
+[DO]
+Town Greeter
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Town Greeter
+hand:Island
+graveyard:Swamp,Juggernaut,Millstone,Grizzly Bears
+library:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]

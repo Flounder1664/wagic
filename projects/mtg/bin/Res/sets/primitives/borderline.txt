@@ -100350,7 +100350,9 @@ type=Sorcery
 [/card]
 [card]
 name=Seed of Hope
-auto=all(*[zpos=2]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(*[-instant;-sorcery]|*) then counter(0/0.1.SeedDepleted) notrg],newability[all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[life:2 controller],newability[if cantargetcard(*[-instant;-sorcery]|*) then counter(0/0.1.SeedDepleted) notrg],newability[if type(*[-instant;-sorcery;counter{0/0.1.SeedDepleted}]|mygraveyard)~morethan~0 then choice name(Return permanent) name(Return permanent) target(*[-instant;-sorcery;counter{0/0.1.SeedDepleted}]|mygraveyard) moveto(hand) and!( all(*[counter{0/0.1.SeedDepleted}]|mygraveyard) removeallcounters(0/0.1.SeedDepleted) )!],newability[choice name(Don't return permanent) all(*[counter{0/0.1.SeedDepleted}]|mygraveyard) removeallcounters(0/0.1.SeedDepleted)])) oneshot )!])) oneshot )!
+#millchoose (issue #45) replaces a nested tag-and-offer workaround.
+auto=millchoose(2,*[-instant&-sorcery])
+auto=life:2 controller
 text=Mill two cards. You may put a permanent card from among the milled cards into your hand. You gain 2 life. (To mill two cards, put the top two cards of your library into your graveyard.)
 mana={G}
 type=Instant

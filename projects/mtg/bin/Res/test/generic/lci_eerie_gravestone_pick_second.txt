@@ -1,0 +1,26 @@
+#Issue #45: Eerie Gravestone now mills four and offers ONE menu naming the milled creatures, plus "Take nothing".
+#The seeded Gravestone's enters-draw takes Forest; the four milled cards hold two creatures, Grizzly Bears and
+#Scathe Zombies. The harness lists them Grizzly Bears first (observed - library seeding only fixes the top card),
+#so the menu is [Grizzly Bears, Scathe Zombies, Take nothing]. choice 1 must put Scathe Zombies, and only Scathe
+#Zombies, into hand: proof that one specific milled card is picked. In game the options name their cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+library:Howling Mine,Grizzly Bears,Mind Stone,Scathe Zombies,Forest
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest,Scathe Zombies
+graveyard:Eerie Gravestone,Grizzly Bears,Mind Stone,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[END]

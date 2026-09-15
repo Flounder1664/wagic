@@ -1,0 +1,23 @@
+#Issue #45: the last menu option is "Take nothing". Same mill as lci_eerie_gravestone_pick_second; choice 2
+#declines, so both milled creatures stay in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eerie Gravestone
+library:Howling Mine,Grizzly Bears,Mind Stone,Scathe Zombies,Forest
+manapool:{1}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eerie Gravestone
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest
+graveyard:Eerie Gravestone,Scathe Zombies,Mind Stone,Grizzly Bears,Howling Mine
+life:20
+[PLAYER2]
+life:20
+[END]
