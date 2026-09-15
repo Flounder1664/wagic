@@ -1,0 +1,26 @@
+#Hit the Mother Lode (LCI): discover 10 skips the Forest and finds Grizzly Bears (mana value 2), put into hand;
+#10 - 2 = 8 tapped Treasure tokens. (John 2026-09-15: no Treasures were made.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hit the Mother Lode
+library:Island,Grizzly Bears,Forest
+manapool:{4}{R}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hit the Mother Lode
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,*,*,*,*,*
+tappedinplay:8
+hand:Grizzly Bears
+graveyard:Hit the Mother Lode
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

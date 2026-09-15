@@ -146162,7 +146162,8 @@ toughness=6
 [card]
 name=Hit the Mother Lode
 auto=discover:10
-missing=the tapped Treasure tokens for the difference between 10 and the discovered card's mana value
+#discover stores the card it found (storedCard), so the next line reads its mana value.
+auto=token(Treasure)*10minusstoredmanacostminusend and!( tap(noevent) )!
 text=Discover 10. If the discovered card's mana value is less than 10, create a number of tapped Treasure tokens equal to the difference.
 mana={4}{R}{R}{R}
 type=Sorcery

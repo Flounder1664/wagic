@@ -2230,6 +2230,9 @@ int AADiscover::resolve()
     {
         while (castingThis->next)
             castingThis = castingThis->next;
+        //Remember the discovered card for the spell's later lines: Hit the Mother Lode makes Treasures for
+        //10 minus its mana value (storedmanacost).
+        source->storedCard = castingThis->createSnapShot();
         offerChoice(castingThis);
     }
     return 1;

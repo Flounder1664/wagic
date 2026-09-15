@@ -72,7 +72,11 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         //ignore "+" signs....
         s = s.substr(1);
     }
-    if(s.find("stored") != string::npos)
+    //A sum whose SECOND operand is stored (Hit the Mother Lode: 10minusstoredmanacostminusend) must reach the
+    //plus/minus split below; this branch would cut the string at a fixed offset and read garbage. Sums that
+    //start with stored (storedmanacostplus1plusend) and non-sums (twicestoredx) keep the old path.
+    bool storedInsideSum = (s.find("plusend") != string::npos || s.find("minusend") != string::npos) && s.find("stored") != 0;
+    if(s.find("stored") != string::npos && !storedInsideSum)
     {
         return init(s.substr(+6),spell,card->storedCard);
     }
