@@ -19,6 +19,10 @@ REPLACEMENTS = {
         os.path.join(_RES, "sets", "primitives", "borderline.txt"),
     'sets/primitives/_macros.txt':
         os.path.join(_RES, "sets", "primitives", "_macros.txt"),
+    # 2026-09-15: a card promoted out of unsupported.txt (Sunken Citadel) left its stub in the
+    # zip's copy; duplicate primitives resolve first-loaded-wins, so the stub must go too.
+    'sets/primitives/unsupported.txt':
+        os.path.join(_RES, "sets", "primitives", "unsupported.txt"),
 }
 
 # 2026-07-31/08-01: token/emblem registration-gap batches -- new [card] rows
