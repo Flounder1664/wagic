@@ -4912,7 +4912,7 @@ subtype=Aura
 [card]
 name=Aquitect's Defenses
 target=creature
-abilities=flash,enchantcreature
+abilities=flash
 auto=hexproof ueot
 auto=enchanted 1/2
 mana={1}{U}
@@ -7633,7 +7633,7 @@ toughness=2
 [/card]
 [card]
 name=Aurora of Emrakul
-abilities=flying, deathtouch
+abilities=flying,deathtouch
 auto=_ATTACKING_life:-3 opponent
 text=Flying, deathtouch -- Whenever Aurora of Emrakul attacks, each opponent loses 3 life.
 type=Creature
@@ -7681,6 +7681,9 @@ type=Enchantment
 [/card]
 [card]
 name=Auxiliary Boosters
+#Stays on the inline Robot: only the inline token(Name,Type,P/T) form carries the living-weapon attach
+#(MTGAbility.cpp token parser - the by-id and by-name forms create a plain token), so the registered
+#Robot Eoe art is not used here (tested 2026-09-14: the id form left the Boosters unattached).
 auto=livingweapontoken(Robot,Artifact Creature Robot,2/2)
 auto={3}:equip
 auto=teach(creature) +1/+2,flying
@@ -13564,7 +13567,6 @@ text=Blooming Stinger
 [card]
 name=Blossombind
 target=creature
-abilities=enchantcreature
 auto=tap target(creature|opponentbattlefield)
 mana={1}{U}
 type=Enchantment
@@ -18571,7 +18573,8 @@ type=Enchantment
 [card]
 name=Catharsis
 auto=choice name(kithkin) token(Kithkin,creature kithkin,1/1,,green white) && token(Kithkin,creature kithkin,1/1,,green white) name(haste) all(creature|mybattlefield) effect(+1/+1,haste) ueot
-abilities=evoke{R/W}{R/W}
+other={R/W}{R/W} name(Evoke)
+auto=alternative sacrifice
 mana={4}{R/W}{R/W}
 type=Creature
 subtype=Elemental Incarnation
@@ -24233,8 +24236,8 @@ text=Flying, first strike, trample, lifelink, haste
 [/card]
 [card]
 name=Cosmogrand Zenith
-auto=_FLURRY_:_HUMANSOLDIERTOKEN_
-auto=_FLURRY_:_HUMANSOLDIERTOKEN_
+auto=_FLURRY_:token(-1530502)
+auto=_FLURRY_:token(-1530502)
 text=Whenever you cast your second spell each turn, create two 1/1 white Human Soldier creature tokens.
 mana={2}{W}
 type=Creature
@@ -29020,7 +29023,8 @@ type=Enchantment
 [card]
 name=Deceit
 auto=choice name(bounce) moveto(myhand) target(*[-land]|opponentbattlefield) name(discard) discard:1 target(player|opponentbattlefield)
-abilities=evoke{U/B}{U/B}
+other={U/B}{U/B} name(Evoke)
+auto=alternative sacrifice
 mana={4}{U/B}{U/B}
 type=Creature
 subtype=Elemental Incarnation
@@ -29050,7 +29054,7 @@ type=Sorcery
 [/card]
 [card]
 name=Decimator of the Provinces
-abilities=haste, trample
+abilities=haste,trample
 autostack=if casted(this) then all(creature|mybattlefield) transforms((,newability[2/2 ueot],newability[trample ueot])) ueot
 text=Emerge {6}{G}{G}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.) -- When you cast Decimator of the Provinces, creatures you control get +2/+2 and gain trample until end of turn. -- Trample, haste
 mana={10}
@@ -30383,7 +30387,8 @@ toughness=2
 [/card]
 [card]
 name=Desert Nomads
-abilities=desertwalk
+#Desertwalk: no landwalk keyword for Deserts, so the aslongas-unblockable form.
+auto=aslongas(desert|opponentbattlefield) unblockable
 auto=preventAllDamage to(this) from(desert)
 text=Desertwalk -- Prevent all damage that would be dealt to Desert Nomads by Deserts.
 mana={2}{R}
@@ -30865,7 +30870,7 @@ toughness=2
 [/card]
 [card]
 name=Dewdrop Spy
-abilities=flash, flying
+abilities=flash,flying
 aicode=activate name(look) donothing
 auto=target(player) name(target player) reveal:1 optionone name(Look) target(*|reveal) doNothing optiononeend optiontwo all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 text=Flash -- Flying -- When Dewdrop Spy enters, look at the top card of target player's library.
@@ -37692,7 +37697,8 @@ toughness=3
 [card]
 name=Emptiness
 auto=choice name(reanimate) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) name(wither) counter(-1/-1,3) target(creature|opponentbattlefield)
-abilities=evoke{W/B}{W/B}
+other={W/B}{W/B} name(Evoke)
+auto=alternative sacrifice
 mana={4}{W/B}{W/B}
 type=Creature
 subtype=Elemental Incarnation
@@ -39665,7 +39671,6 @@ toughness=1
 [card]
 name=Evershrike's Gift
 target=creature
-abilities=enchantcreature
 auto=enchanted 1/0
 auto=enchanted flying
 autograveyard={1}{W}:moveto(hand) asSorcery
@@ -42546,7 +42551,7 @@ toughness=3
 [/card]
 [card]
 name=Fiendslayer Paladin
-abilities=first strike, lifelink
+abilities=first strike,lifelink
 auto=cantbetargetof(*[black;red]|opponenthand,opponentgraveyard,opponentstack)
 text=First strike (This creature deals combat damage before creatures without first strike.) -- Lifelink (Damage dealt by this creature also causes you to gain that much life.) -- Fiendslayer Paladin can't be the target of black or red spells your opponents control.
 mana={1}{W}{W}
@@ -43068,7 +43073,7 @@ text=When Firebender Ascension enters, create a 2/2 red Soldier creature token w
 [/card]
 [card]
 name=Firebending Lesson
-abilities=kicker={4}
+kicker={4}
 auto=target(anytarget):2 damage
 auto=if paid(kicker) then target(anytarget):3 damage
 mana={R}
@@ -47639,7 +47644,7 @@ toughness=4
 [/card]
 [card]
 name=Geist of the Lonely Vigil
-abilities=defender, flying
+abilities=defender,flying
 auto=while(restriction{delirium}) canattack
 text=Defender, flying -- Delirium -- Geist of the Lonely Vigil can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard.
 mana={1}{W}
@@ -49235,7 +49240,7 @@ toughness=2
 [card]
 name=Gilt-Leaf's Embrace
 target=creature
-abilities=flash,enchantcreature
+abilities=flash
 auto=trample ueot && indestructible ueot
 auto=enchanted 2/0
 mana={2}{G}
@@ -55349,7 +55354,7 @@ toughness=2
 name=Hanweir the Writhing Township
 auto=meldfrom(Hanweir Battlements|Hanweir Garrison)
 auto=_ATTACKING_token(Eldrazi Horror,Creature Eldrazi Horror,3/2,battleready)*2
-abilities=haste, trample
+abilities=haste,trample
 text=Trample, haste -- Whenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
 type=Legendary Creature
 subtype=Eldrazi Ooze
@@ -57411,7 +57416,7 @@ type=Instant
 [/card]
 [card]
 name=Heron's Grace Champion
-abilities=flash, lifelink
+abilities=flash,lifelink
 auto=all(human|mybattlefield) 1/1 ueot && all(human|mybattlefield) lifelink ueot
 text=Flash -- Lifelink -- When Heron's Grace Champion enters, other Humans you control get +1/+1 and gain lifelink until end of turn.
 mana={2}{G}{W}
@@ -57448,7 +57453,6 @@ type=Sorcery
 [/card]
 [card]
 name=Hexing Squelcher
-abilities=ward
 auto=@targeted(this) from(*|opponentzones):choice name(pay 2 life) pay({L:2}) donothing name(fizzle) fizzle target(this|opponentstack) oneshot
 auto=lord(*[-creature]|mycastingzone) maxcanfizzle(0)
 auto=all(creature[-this]|mybattlefield) transforms((,newability[@targeted(trigger[to]) from(*|opponentzones):choice name(pay 2 life) pay({L:2}) donothing name(fizzle) fizzle target(trigger[to]|opponentstack) oneshot]))
@@ -58480,7 +58484,7 @@ toughness=1
 [/card]
 [card]
 name=Honored Knight-Captain
-auto=_HUMANSOLDIERTOKEN_
+auto=token(-1530502)
 text=When this creature enters, create a 1/1 white Human Soldier creature token.
 mana={1}{W}
 type=Creature
@@ -67213,7 +67217,7 @@ abilities=canplayfromexile
 grade=borderline
 other={1}{W} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
-auto=_HUMANSOLDIERTOKEN_
+auto=token(-1530502)
 auto=alternative phaseaction[end once sourceinplay] moveto(exile)
 #MISSING canplayfromexile is intrinsic, so this can also be cast from exile if something OTHER than warp exiled it. Granting it only on the warp exile does not work: the grant is applied to the pre-move instance and lost when the card changes zone.
 missing=warp's "cast it from exile later" is granted with an INTRINSIC abilities=canplayfromexile, so the card can also be cast from any OTHER exile - measured 2026-09-08: seeded straight into exile with no warp involved, it cast for its normal cost. Shared by all 30 warp cards. The scoped form Chandra, Fire Artisan uses for her +1 and -7 - moveto(exile) and!( transforms((,canplayfromexile)) forever )! - was tried and DOES fix that half: the foreign-exile cast is then correctly refused. It was reverted because the other half cannot be verified here - the harness cannot fund a cast after the turn changes (manapool does not survive the turn and lands are not auto-tapped), so there is no way to confirm the intended warp cast still works, and if the grant does not survive the zone change the card becomes uncastable from exile entirely. Squee, the Immortal's intrinsic canplayfromexile is correct for Squee and is what every warp card copied.
@@ -67766,7 +67770,7 @@ toughness=2
 [/card]
 [card]
 name=Kor Castigator
-abilities=cantbeblockedby(Eldrazi Scion)
+auto=cantbeblockedby(creature[scion])
 text=Kor Castigator can't be blocked by Eldrazi Scions.
 mana={1}{W}
 type=Creature
@@ -72022,7 +72026,7 @@ toughness=2
 [card]
 name=Lofty Dreams
 target=creature
-abilities=convoke,enchantcreature
+abilities=convoke
 auto=draw:1 controller
 auto=enchanted 2/2
 auto=enchanted flying
@@ -72043,7 +72047,7 @@ toughness=1
 [/card]
 [card]
 name=Lone Revenant
-abilities=hexproof, hiddenface
+abilities=hexproof,hiddenface
 aicode=activate target(*[zpos<=4]|mylibrary) moveto(hand)
 auto=@combatdamagefoeof(player) from(this) restriction{type(other creature|myBattlefield)~lessthan~1}:name(look) reveal:4 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<4>*|reveal) bottomoflibrary optiontwoend revealend
 text=Hexproof (This creature can't be the target of spells or abilities your opponents control.) -- Whenever Lone Revenant deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
@@ -76451,7 +76455,10 @@ type=Enchantment
 [/card]
 [card]
 name=Mechan Assembler
-auto=@movedTo(other artifact|myBattlefield):_ROBOTTOKEN_
+#"This ability triggers only once each turn" was missing. Harmless while the Robot was an inline token that
+#never set the trigger off; once the Robot became a registered artifact token, each one triggered the next
+#forever (hung the test harness, 2026-09-14).
+auto=@movedTo(other artifact|myBattlefield) turnlimited:_ROBOTTOKEN_
 text=Whenever another artifact you control enters, create a 2/2 colorless Robot artifact creature token. This ability triggers only once each turn.
 mana={4}{U}
 type=Artifact Creature
@@ -83199,7 +83206,7 @@ toughness=1
 [/card]
 [card]
 name=Nebelgast Herald
-abilities=flash, flying
+abilities=flash,flying
 auto=target(creature|opponentBattlefield) tap
 auto=@movedto(spirit|mybattlefield):target(creature|opponentBattlefield) tap
 text=Flash (You may cast this spell any time you could cast an instant.) -- Flying -- Whenever Nebelgast Herald or another Spirit enters under your control, tap target creature an opponent controls.
@@ -85194,7 +85201,7 @@ toughness=3
 [card]
 name=Noggle the Mind
 target=creature
-abilities=flash,enchantcreature
+abilities=flash
 auto=enchanted becomes(,1/1)
 mana={1}{U}
 type=Enchantment
@@ -91872,7 +91879,6 @@ toughness=4
 [card]
 name=Pitiless Fists
 target=creature|mybattlefield
-abilities=enchantcreature
 auto=fight target(creature|opponentbattlefield)
 auto=enchanted 2/2
 mana={3}{G}
@@ -117480,7 +117486,6 @@ toughness=2
 [card]
 name=Spiral into Solitude
 target=creature|opponentbattlefield
-abilities=enchantcreature
 auto=enchanted cantattack
 auto=enchanted cantblock
 auto={1}{W}:moveto(exile) target(creature|opponentbattlefield)
@@ -123156,7 +123161,7 @@ type=Instant
 [/card]
 [card]
 name=Swift Spinner
-abilities=flash, reach
+abilities=flash,reach
 text=Flash (You may cast this spell any time you could cast an instant.) -- Reach (This creature can block creatures with flying.)
 mana={3}{G}
 type=Creature
@@ -124807,7 +124812,7 @@ toughness=2
 [/card]
 [card]
 name=Tattered Haunter
-abilities=flying, cloud
+abilities=flying,cloud
 text=Flying -- Tattered Haunter can block only creatures with flying.
 mana={1}{U}
 type=Creature
@@ -135926,7 +135931,8 @@ toughness=4
 [/card]
 [card]
 name=Vibrance
-abilities=evoke{RG}{RG}
+other={RG}{RG} name(Evoke)
+auto=alternative sacrifice
 auto=damage:3 target(any)
 auto=moveto(hand) target(land[basic]|mylibrary) && life:2 controller
 mana={3}{RG}{RG}
@@ -142372,7 +142378,8 @@ type=Sorcery
 [/card]
 [card]
 name=Wistfulness
-abilities=evoke{GU}{GU}
+other={GU}{GU} name(Evoke)
+auto=alternative sacrifice
 auto=moveto(exile) target(*[artifact;enchantment]|opponentbattlefield)
 auto=draw:2 controller && discard:1 controller
 mana={3}{GU}{GU}

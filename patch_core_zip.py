@@ -37,6 +37,10 @@ for _code in ("2X2", "2XM", "5ED", "6ED", "A25", "AFC", "AKH", "AKR", "ALL", "AP
               "DIS"):
     REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
 
+# 2026-09-14: EOE token registrations (issue #17). sets/EOE/_cards.dat is already in core.zip, so it
+# goes through REPLACEMENTS - the ADD_FILES loop below only injects files that are not there yet.
+REPLACEMENTS['sets/EOE/_cards.dat'] = os.path.join(_RES, "sets", "EOE", "_cards.dat")
+
 # Brand-new entries to inject (files that don't yet exist in core.zip, e.g.
 # a new set's _cards.dat). Directory markers for their parents are emitted
 # automatically below so JGE scanfolder finds the set.

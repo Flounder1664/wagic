@@ -5915,7 +5915,7 @@ toughness=3
 [/card]
 [card]
 name=Lazav, Dimir Mastermind
-abilities=opponentshroud
+abilities=hexproof
 text=Hexproof -- Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it gains hexproof and this ability.
 mana={U}{U}{B}{B}
 type=Legendary Creature
@@ -6198,7 +6198,7 @@ type=Artifact
 [/card]
 [card]
 name=Maddening Imp
-abilities=flying 
+abilities=flying
 text=Flying  -- {T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
 mana={2}{B}
 type=Creature
@@ -9415,7 +9415,7 @@ type=Instant
 [/card]
 [card]
 name=Sigarda, Host of Herons
-abilities=flying,opponentshroud
+abilities=flying,hexproof
 text=Flying, hexproof -- Spells and abilities your opponents control can't cause you to sacrifice permanents.
 mana={2}{G}{W}{W}
 type=Legendary Creature

@@ -825,7 +825,10 @@ void GameStateShop::ButtonPressed(int controllerId, int controlId)
         mBuying = controlId;
         return;
     case -145:
-        if (controlId == -1)
+        //kInfoMenuID is what the menu sends for the gamepad's cancel button (B). Only -1 counted as "No",
+        //so cancelling fell through to the purchase below and bought the card - repeatably, past Sold Out
+        //(issue #26, RP6 tester).
+        if (controlId == -1 || controlId == kInfoMenuID)
         { //Nope, don't buy.
             if (sel < BOOSTER_SLOTS)
                 cancelBooster(sel);

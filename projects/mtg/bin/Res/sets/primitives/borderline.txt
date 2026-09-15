@@ -635,7 +635,7 @@ toughness=4
 [/card]
 [card]
 name=Adeliz, the Cinder Wind
-abilities=flying, haste
+abilities=flying,haste
 auto=@movedTo(instant,sorcery|mystack): all(wizard|myBattlefield) +1/+1 ueot
 text=Flying, haste -- Whenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.
 mana={1}{U}{R}
@@ -1664,7 +1664,7 @@ toughness=3
 [/card]
 [card]
 name=Akiri, Line-Slinger
-abilities=first strike, vigilance,partner
+abilities=first strike,vigilance,partner
 auto=foreach(artifact|myBattlefield) 1/0
 text=First strike, vigilance -- Akiri, Line-Slinger gets +1/+0 for each artifact you control. -- Partner (You can have two commanders if both have partner.)
 mana={R}{W}
@@ -4120,7 +4120,7 @@ type=Sorcery
 [/card]
 [card]
 name=Arcades, the Strategist
-abilities=flying, vigilance
+abilities=flying,vigilance
 auto=@movedTo(creature[defender]|myBattlefield):draw:1
 auto=lord(creature[defender]|mybattlefield) combattoughness
 auto=lord(creature[defender]|mybattlefield) canattack
@@ -4827,7 +4827,7 @@ type=Land
 [/card]
 [card]
 name=Arclight Phoenix
-abilities=flying, haste
+abilities=flying,haste
 autograveyard=@each my combatbegins restriction{thisturn(*[instant;sorcery]|mystack)~morethan~2}:moveTo(mybattlefield)
 text=Flying, haste -- At the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, return Arclight Phoenix from your graveyard to the battlefield.
 mana={3}{R}
@@ -5509,7 +5509,7 @@ type=Instant
 [/card]
 [card]
 name=Arvad the Cursed
-abilities=deathtouch, lifelink
+abilities=deathtouch,lifelink
 auto=lord(other creature[legendary]|myBattlefield) +2/+2
 text=Deathtouch, lifelink -- Other legendary creatures you control get +2/+2.
 mana={3}{W}{B}
@@ -6725,7 +6725,7 @@ toughness=1
 [/card]
 [card]
 name=Aven Reedstalker
-abilities=flash, flying
+abilities=flash,flying
 text=Flash -- Flying
 mana={3}{U}
 type=Creature
@@ -6745,7 +6745,7 @@ toughness=2
 [/card]
 [card]
 name=Aven Wind Guide
-abilities=flying, vigilance
+abilities=flying,vigilance
 auto=lord(*[token]|mybattlefield) flying
 auto=lord(*[token]|mybattlefield) vigilance
 autograveyard={4}{W}{U}{E}:name(Embalm) clone and!( transforms((Zombie,removemc,white)) forever )! asSorcery
@@ -7176,7 +7176,7 @@ type=Artifact
 [/card]
 [card]
 name=Azorius Skyguard
-abilities=flying, first strike
+abilities=flying,first strike
 auto=lord(creature|opponentBattlefield) -1/0
 text=Flying, first strike -- Creatures your opponents control get -1/-0.
 mana={4}{W}{U}
@@ -11084,7 +11084,7 @@ toughness=2
 [/card]
 [card]
 name=Bitterbow Sharpshooters
-abilities=vigilance, reach
+abilities=vigilance,reach
 text=Vigilance, reach
 mana={4}{G}
 type=Creature
@@ -13544,7 +13544,7 @@ toughness=4
 [/card]
 [card]
 name=Bone Picker
-abilities=flying, deathtouch
+abilities=flying,deathtouch
 autohand=@movedto(*|graveyard) from(battlefield):altercost(colorless,-3) ueot
 text=Bone Picker costs {3} less to cast if a creature died this turn. -- Flying, deathtouch
 mana={3}{B}
@@ -17287,7 +17287,7 @@ toughness=3
 [/card]
 [card]
 name=Carnage Tyrant
-abilities=nofizzle, hexproof, trample
+abilities=nofizzle,hexproof,trample
 text=Carnage Tyrant can't be countered. -- Trample, hexproof
 mana={4}{G}{G}
 type=Creature
@@ -19350,7 +19350,7 @@ toughness=3
 [/card]
 [card]
 name=Charging Monstrosaur
-abilities=trample, haste
+abilities=trample,haste
 text=Trample, haste
 mana={4}{R}
 type=Creature
@@ -20044,7 +20044,7 @@ toughness=4
 [/card]
 [card]
 name=Chromium, the Mutable
-abilities=flash, nofizzle, flying
+abilities=flash,nofizzle,flying
 auto={D(*|myhand)}:transforms((Human Creature,setpower=1,settoughness=1,hexproof,unblockable,blue)) ueot
 text=Flash -- This spell can't be countered. -- Flying -- Discard a card: Until end of turn, Chromium, the Mutable becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
 mana={4}{W}{U}{B}
@@ -25936,7 +25936,7 @@ toughness=1
 [/card]
 [card]
 name=Danitha Capashen, Paragon
-abilities=first strike, vigilance, lifelink
+abilities=first strike,vigilance,lifelink
 auto=lord(aura|mycastingzone) altercost(colorless,-1)
 auto=lord(equipment|mycastingzone) altercost(colorless,-1)
 text=First strike, vigilance, lifelink -- Aura and Equipment spells you cast cost {1} less to cast.
@@ -27951,7 +27951,7 @@ type=Instant
 [/card]
 [card]
 name=Demon of Catastrophes
-abilities=flying, trample
+abilities=flying,trample
 text=As an additional cost to cast this spell, sacrifice a creature. -- Flying, trample
 mana={2}{B}{B}{S(creature|myBattlefield)}
 type=Creature
@@ -27973,7 +27973,7 @@ toughness=6
 [/card]
 [card]
 name=Demon of Loathing
-abilities=flying, trample
+abilities=flying,trample
 auto=@combatdamaged(player) from(this):ability$!name(sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent
 text=Flying, trample -- Whenever Demon of Loathing deals combat damage to a player, that player sacrifices a creature.
 mana={5}{B}{B}
@@ -28105,7 +28105,7 @@ subtype=Aura
 [/card]
 [card]
 name=Demonlord Belzenlok
-abilities=flying, trample
+abilities=flying,trample
 auto=Reveal:1 revealzone(mylibrary) revealuntil(*[-land;manacost<=3]|mylibrary) optionone choice name(Get Card) all(*[-land]|reveal) moveto(hand) and!(damage:1 controller)! optiononeend optiontwo choice all(*|reveal) moveTo(exile) optiontwoend revealend
 text=Flying, trample -- When Demonlord Belzenlok enters, exile cards from the top of your library until you exile a nonland card, then put that card into your hand. If the card's mana value is 4 or greater, repeat this process. Demonlord Belzenlok deals 1 damage to you for each card put into your hand this way.
 mana={4}{B}{B}
@@ -29286,7 +29286,7 @@ toughness=2
 [/card]
 [card]
 name=Dire Fleet Poisoner
-abilities=flash, deathtouch
+abilities=flash,deathtouch
 auto=target(pirate[attacking]|myBattlefield) transforms((,newability[1/1],deathtouch)) ueot
 text=Flash -- Deathtouch -- When Dire Fleet Poisoner enters, target attacking Pirate you control gets +1/+1 and gains deathtouch until end of turn.
 mana={1}{B}
@@ -31738,7 +31738,7 @@ type=Instant
 [/card]
 [card]
 name=Dreamcaller Siren
-abilities=flash, flying, cloud
+abilities=flash,flying,cloud
 auto=if type(other pirate|mybattlefield)~morethan~0 then may tap target(<upto:2>*[-land])
 text=Flash -- Flying -- Dreamcaller Siren can block only creatures with flying. -- When Dreamcaller Siren enters, if you control another Pirate, tap up to two target nonland permanents.
 mana={2}{U}{U}
@@ -35232,7 +35232,7 @@ type=Sorcery
 [/card]
 [card]
 name=End-Raze Forerunners
-abilities=vigilance, trample, haste
+abilities=vigilance,trample,haste
 auto=all(other creature|myBattlefield) +2/+2
 auto=all(other creature|myBattlefield) vigilance
 auto=all(other creature|myBattlefield) trample
@@ -38448,7 +38448,7 @@ toughness=1
 [/card]
 [card]
 name=Faerie Duelist
-abilities=flash, flying
+abilities=flash,flying
 auto=target(creature|opponentbattlefield) -2/-0 ueot
 text=Flash -- Flying -- When Faerie Duelist enters, target creature an opponent controls gets -2/-0 until end of turn.
 mana={1}{U}
@@ -47384,7 +47384,7 @@ toughness=1
 [/card]
 [card]
 name=Glorybringer
-abilities=flying, haste
+abilities=flying,haste
 auto=@exerted(this):damage:4 target(creature[-dragon]|opponentbattlefield)
 auto=_ATTACKING_may exert && freeze
 text=Flying, haste -- You may exert Glorybringer as it attacks. When you do, it deals 4 damage to target non-Dragon creature an opponent controls. (An exerted creature won't untap during your next untap step.)
@@ -49305,7 +49305,7 @@ toughness=6
 [/card]
 [card]
 name=Grappling Sundew
-abilities=defender, reach
+abilities=defender,reach
 auto={4}{G}:indestructible ueot
 text=Defender, reach -- {4}{G}: Grappling Sundew gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy this creature.)
 mana={1}{G}
@@ -52740,7 +52740,8 @@ type=Instant
 [/card]
 [card]
 name=Hazezon, Shaper of Sand
-abilities=desertwalk
+#Desertwalk: no landwalk keyword for Deserts, so the aslongas-unblockable form.
+auto=aslongas(desert|opponentbattlefield) unblockable
 auto=lord(desert|mygraveyard) canPlayFromGraveyard
 auto=@movedTo(desert|myBattlefield):create(sand warrior:creature sand warrior:1/1:red:green:white)*2
 text=Desertwalk (This creature can't be blocked as long as defending player controls a Desert.) -- You may play Desert lands from your graveyard. -- Whenever a Desert enters under your control, create two 1/1 red, green, and white Sand Warrior creature tokens.
@@ -52752,7 +52753,7 @@ toughness=3
 [/card]
 [card]
 name=Hazoret the Fervent
-abilities=indestructible, haste
+abilities=indestructible,haste
 auto=aslongas(*|myhand) cantattack >1
 auto=aslongas(*|myhand) cantpwattack >1
 auto=aslongas(*|myhand) cantblock >1
@@ -52870,7 +52871,7 @@ toughness=3
 [/card]
 [card]
 name=Healer's Hawk
-abilities=flying, lifelink
+abilities=flying,lifelink
 text=Flying, lifelink
 mana={W}
 type=Creature
@@ -53072,7 +53073,7 @@ type=Instant
 [/card]
 [card]
 name=Heavenly Blademaster
-abilities=flying, double strike
+abilities=flying,double strike
 auto=may target(<anyamount>*[aura;equipment]|battlefield) newhook
 auto=thisforeach(aura) lord(other creature|myBattlefield) 1/1
 auto=thisforeach(gear) lord(other creature|myBattlefield) 1/1
@@ -69486,7 +69487,7 @@ toughness=4
 [/card]
 [card]
 name=Lyra Dawnbringer
-abilities=flying, first strike, lifelink
+abilities=flying,first strike,lifelink
 auto=lord(other angel|myBattlefield) +1/+1
 auto=lord(other angel|myBattlefield) lifelink
 text=Flying, first strike, lifelink -- Other Angels you control get +1/+1 and have lifelink.
@@ -69763,7 +69764,7 @@ type=Sorcery
 [/card]
 [card]
 name=Magma Hellion
-abilities=trample, haste
+abilities=trample,haste
 text=Assist (Another player can pay up to {6} of this spell's cost.) -- Trample, haste
 mana={6}{R}
 type=Creature
@@ -72972,7 +72973,7 @@ toughness=1
 [/card]
 [card]
 name=Militant Angel
-abilities=flying, lifelink
+abilities=flying,lifelink
 auto=if raid then _KNIGHTTOKEN_
 text=Flying, Lifelink -- When Militant Angel enters, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.
 mana={3}{W}{W}
@@ -75830,7 +75831,7 @@ toughness=6
 [/card]
 [card]
 name=Multani, Yavimaya's Avatar
-abilities=reach, trample
+abilities=reach,trample
 auto=foreach(land|myBattlefield) 1/1
 auto=foreach(land|myGraveyard) 1/1
 autograveyard={1}{G}{H(land|mybattlefield)}{H(land|mybattlefield)}:moveto(hand)
@@ -78348,7 +78349,7 @@ toughness=3
 [/card]
 [card]
 name=Nightveil Predator
-abilities=flying, deathtouch, hexproof
+abilities=flying,deathtouch,hexproof
 text=Flying, deathtouch -- Hexproof (This creature can't be the target of spells or abilities your opponents control.)
 mana={U}{U}{B}{B}
 type=Creature
@@ -78772,7 +78773,7 @@ toughness=6
 [/card]
 [card]
 name=Niv-Mizzet, Parun
-abilities=nofizzle, flying
+abilities=nofizzle,flying
 auto=@drawof(player):damage:1 target(anytarget)
 auto=@movedTo(instant,sorcery|stack):draw:1
 text=This spell can't be countered. -- Flying -- Whenever you draw a card, Niv-Mizzet, Parun deals 1 damage to any target. -- Whenever a player casts an instant or sorcery spell, you draw a card.
@@ -79864,7 +79865,7 @@ toughness=1
 [/card]
 [card]
 name=Ochran Assassin
-abilities=deathtouch, lure
+abilities=deathtouch,lure
 text=Deathtouch -- All creatures able to block Ochran Assassin do so.
 mana={1}{B}{G}
 type=Creature
@@ -83924,7 +83925,6 @@ toughness=3
 [/card]
 [card]
 name=Perch Protection
-abilities=protection from
 other={4}{W}{W} name(Gift an extra turn)
 auto=alternative turns:+1 opponent
 auto=create(bird:creature bird:2/2:blue:flying)*4
@@ -85968,7 +85968,7 @@ type=Instant
 [/card]
 [card]
 name=Poison-Tip Archer
-abilities=deathtouch, reach
+abilities=deathtouch,reach
 auto=@movedTo(other creature|graveyard) from(battlefield):life:-1 opponent
 text=Reach (This creature can block creatures with flying.) -- Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.) -- Whenever another creature dies, each opponent loses 1 life.
 mana={2}{B}{G}
@@ -89312,7 +89312,7 @@ type=Instant
 [/card]
 [card]
 name=Raff Capashen, Ship's Mage
-abilities=flash, flying
+abilities=flash,flying
 auto=lord(*[artifact;legendary;saga]|myhand) asflash
 text=Flash -- Flying -- You may cast historic spells as though they had flash. (Artifacts, legendaries, and Sagas are historic.)
 mana={2}{W}{U}
@@ -89822,7 +89822,7 @@ toughness=6
 [/card]
 [card]
 name=Rakdos, the Showstopper
-abilities=flying, trample
+abilities=flying,trample
 auto=all(other creature[-Demon;-Devil;-Imp]|battlefield) transforms((,newability[flipacoin loseability moveTo(ownergraveyard) loseabilityend oneshot flipend]))
 text=Flying, trample -- When Rakdos, the Showstopper enters, flip a coin for each creature that isn't a Demon, Devil, or Imp. Destroy each creature whose coin comes up tails.
 mana={4}{B}{R}
@@ -90233,7 +90233,7 @@ toughness=3
 [/card]
 [card]
 name=Ramunap Hydra
-abilities=vigilance, reach, trample
+abilities=vigilance,reach,trample
 auto=aslongas(Desert|myBattlefield) 1/1
 auto=aslongas(Desert|myGraveyard) 1/1
 text=Vigilance, reach, trample -- Ramunap Hydra gets +1/+1 as long as you control a Desert. -- Ramunap Hydra gets +1/+1 as long as there is a Desert card in your graveyard.
@@ -90878,7 +90878,7 @@ type=Sorcery
 [/card]
 [card]
 name=Razaketh, the Foulblooded
-abilities=flying, trample
+abilities=flying,trample
 auto={L:2}{S(other creature|mybattlefield)}:moveto(hand) target(*|mylibrary)
 text=Flying, trample -- Pay 2 life, Sacrifice another creature: Search your library for a card and put that card into your hand. Then shuffle.
 mana={5}{B}{B}{B}
@@ -92156,7 +92156,7 @@ type=Sorcery
 [/card]
 [card]
 name=Relentless Raptor
-abilities=vigilance, mustattack, mustblock
+abilities=vigilance,mustattack,mustblock
 text=Vigilance -- Relentless Raptor attacks or blocks each combat if able.
 mana={R}{W}
 type=Creature
@@ -93434,7 +93434,7 @@ toughness=3
 [/card]
 [card]
 name=Rhonas the Indomitable
-abilities=deathtouch, indestructible
+abilities=deathtouch,indestructible
 auto=aslongas(other creature[power>=4]|mybattlefield) cantattack <1
 auto=aslongas(other creature[power>=4]|mybattlefield) cantpwattack <1
 auto=aslongas(other creature[power>=4]|mybattlefield) cantblock <1
@@ -96885,7 +96885,7 @@ name=Sadistic Skymarcher
 otherrestriction=type(*[Vampire]|myhand)~lessthan~2
 other={3}{B}
 restriction=type(*[Vampire]|myhand)~morethan~1
-abilities=flying, lifelink
+abilities=flying,lifelink
 text=As an additional cost to cast this spell, reveal a Vampire card from your hand or pay {1}. -- Flying, lifelink
 mana={2}{B}
 type=Creature
@@ -97388,7 +97388,7 @@ toughness=3
 [/card]
 [card]
 name=Samut, Voice of Dissent
-abilities=flash, double strike, vigilance, haste
+abilities=flash,double strike,vigilance,haste
 auto=lord(other creature|mybattlefield) haste
 auto={W}{T}:untap target(other creature)
 text=Flash -- Double strike, vigilance, haste -- Other creatures you control have haste. -- {W}, {T}: Untap another target creature.
@@ -101011,7 +101011,7 @@ toughness=3
 [/card]
 [card]
 name=Seraph of the Suns
-abilities=flying, indestructible
+abilities=flying,indestructible
 text=Flying -- Indestructible (Damage and effects that say "destroy" don't destroy this creature. If its toughness is 0 or less, it's still put into its owner's graveyard.)
 mana={5}{W}{W}
 type=Creature
@@ -101100,7 +101100,7 @@ type=Sorcery
 [/card]
 [card]
 name=Serra Disciple
-abilities=flying, first strike
+abilities=flying,first strike
 auto=_CASTHISTORIC_+1/+1 ueot
 text=Flying, first strike -- Whenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn. (Artifacts, legendaries, and Sagas are historic.)
 mana={1}{W}
@@ -101150,7 +101150,7 @@ toughness=7
 [/card]
 [card]
 name=Serra's Guardian
-abilities=flying, vigilance
+abilities=flying,vigilance
 auto=lord(other creature|myBattlefield) vigilance
 text=Flying -- Vigilance (Attacking doesn't cause this creature to tap.) -- Other creatures you control have vigilance.
 mana={4}{W}{W}
@@ -104975,7 +104975,7 @@ toughness=1
 [/card]
 [card]
 name=Sky Terror
-abilities=flying, menace
+abilities=flying,menace
 text=Flying, menace
 mana={R}{W}
 type=Creature
@@ -107881,7 +107881,7 @@ type=Enchantment
 [/card]
 [card]
 name=Spawn of Mayhem
-abilities=flying, trample
+abilities=flying,trample
 auto=@each my upkeep:damage:1 controller && damage:1 opponent && if compare(lifetotal)~lessthan~10 then counter(1/1)
 text=Spectacle {1}{B}{B} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.) -- Flying, trample -- At the beginning of your upkeep, Spawn of Mayhem deals 1 damage to each player. Then if you have 10 or less life, put a +1/+1 counter on Spawn of Mayhem.
 other={1}{B}{B} name(Spectacle)
@@ -108835,7 +108835,7 @@ type=Land
 [/card]
 [card]
 name=Spire Mangler
-abilities=flash, flying
+abilities=flash,flying
 auto=target(creature[flying]|mybattlefield) +2/+0 ueot
 text=Flash -- Flying -- When Spire Mangler enters, target creature with flying you control gets +2/+0 until end of turn.
 mana={2}{B}
@@ -111140,7 +111140,7 @@ toughness=2
 [/card]
 [card]
 name=Storm Fleet Sprinter
-abilities=unblockable, haste
+abilities=unblockable,haste
 text=Haste -- Storm Fleet Sprinter can't be blocked.
 mana={1}{U}{R}
 type=Creature
@@ -113462,7 +113462,7 @@ toughness=3
 [/card]
 [card]
 name=Swiftblade Vindicator
-abilities=double strike, vigilance, trample
+abilities=double strike,vigilance,trample
 text=Double strike, vigilance, trample
 mana={R}{W}
 type=Creature
@@ -116353,7 +116353,7 @@ toughness=3
 [/card]
 [card]
 name=Thantis, the Warweaver
-abilities=vigilance, reach
+abilities=vigilance,reach
 auto=lord(creature) mustattack
 auto=@combat(attacking) source(creature|opponentBattlefield):counter(1/1)
 text=Vigilance, reach -- All creatures attack each combat if able. -- Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Thantis, the Warweaver.
@@ -117087,7 +117087,7 @@ type=Legendary Land
 [/card]
 [card]
 name=The Haunt of Hightower
-abilities=flying, lifelink
+abilities=flying,lifelink
 auto=_ATTACKING_ability$!name(discard) target(*|myhand) reject!$ opponent
 auto=@movedTo(*|opponentgraveyard):counter(1/1)
 text=Flying, lifelink -- Whenever The Haunt of Hightower attacks, defending player discards a card. -- Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on The Haunt of Hightower.
@@ -123850,7 +123850,7 @@ type=Legendary Land
 [/card]
 [card]
 name=Untamed Kavu
-abilities=vigilance, trample
+abilities=vigilance,trample
 kicker={3}
 auto=if paid(kicker) then counter(1/1,3)
 text=Kicker {3} (You may pay an additional {3} as you cast this spell.) -- Vigilance, trample -- If Untamed Kavu was kicked, it enters with three +1/+1 counters on it.
@@ -127552,7 +127552,7 @@ type=Instant
 [/card]
 [card]
 name=Vona, Butcher of Magan
-abilities=vigilance, lifelink
+abilities=vigilance,lifelink
 auto={T}{L:7}:destroy target(*[-land]) myTurnOnly
 text=Vigilance, lifelink -- {T}, Pay 7 life: Destroy target nonland permanent. Activate this ability only during your turn.
 mana={3}{W}{B}
@@ -128432,7 +128432,7 @@ toughness=3
 [/card]
 [card]
 name=Warcry Phoenix
-abilities=flying, haste
+abilities=flying,haste
 autograveyard=@each my blockers restriction{type(creature[attacking]|myBattlefield)~morethan~2}:pay({2}{R}) readytofight
 text=Flying, haste -- Whenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.
 mana={3}{R}
@@ -130209,7 +130209,7 @@ toughness=1
 [/card]
 [card]
 name=Wind Strider
-abilities=flash, flying
+abilities=flash,flying
 text=Flash -- Flying
 mana={4}{U}
 type=Creature
@@ -132431,7 +132431,7 @@ toughness=0
 [/card]
 [card]
 name=Zacama, Primal Calamity
-abilities=vigilance, reach, trample
+abilities=vigilance,reach,trample
 auto=if casted(this) then untap all(land|mybattlefield)
 auto={2}{R}:name(Deal 3 damage to target creature) damage:3 target(creature)
 auto={2}{G}:name(Destroy target artifact or enchantment) destroy target(artifact,enchantment)
@@ -134773,7 +134773,7 @@ type=Sorcery
 [card]
 name=Ice Flan
 auto=name(Tap and stun) target(artifact,creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
-abilities=islandcycling
+missing=Islandcycling {2} (discard to search for an Island) - there is no landcycling form; the old token silently gave plain cycling
 text=When this creature enters, tap target artifact or creature an opponent controls. Put a stun counter on it. -- Islandcycling {2}
 mana={4}{U}{U}
 type=Creature
@@ -135418,12 +135418,12 @@ toughness=3
 [/card]
 [card]
 name=Summon: Leviathan
-abilities=ward
+auto=_WARD2_
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=all(creature[-kraken&-leviathan&-merfolk&-octopus&-serpent]|battlefield) moveto(hand)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ward is Ward {2} (generic ward here); ch II/III delayed "when a sea creature attacks, draw" unsupported
+missing=ch II/III delayed "when a sea creature attacks, draw" unsupported
 text=I - Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand. -- II, III - whenever a sea creature attacks, draw a card. -- Ward {2}
 mana={4}{U}{U}
 type=Enchantment Creature
@@ -136086,12 +136086,11 @@ toughness=2
 [/card]
 [card]
 name=Guardian Sunmare
-abilities=ward
+auto=_WARD2_
 auto={crew4(other creature|myBattlefield)}:name(Saddle 4) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~3}
 auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:may target(*[-land;-instant;-sorcery;manacost<=3]|mylibrary) moveto(myBattlefield) and!( shuffle )!
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
-missing=Ward {2} (cost amount not honored) -- ward keyword kept
-text=Saddle Mount (see printed card).
+text=Ward {2} -- Whenever this creature attacks while saddled, search your library for a nonland permanent card with mana value 3 or less, put it onto the battlefield, then shuffle. -- Saddle 4
 mana={3}{W}{W}
 type=Creature
 subtype=Horse Mount
@@ -147039,4 +147038,21 @@ missing=the X +1/+1 counters are put on after it returns rather than it entering
 text=Return target artifact or non-Aura enchantment card from your graveyard to the battlefield with X additional +1/+1 counters on it. It's a 1/1 Spirit creature with flying in addition to its other types.
 mana={X}{3}{W}
 type=Sorcery
+[/card]
+[card]
+name=Robot Eoe
+#EOE's 2/2 colourless Robot token (TEOE #10). 'Robot' is taken by a 3/3 from another set.
+type=Artifact Creature
+subtype=Robot
+power=2
+toughness=2
+[/card]
+[card]
+name=Drone Eoe
+#EOE's 1/1 flying Drone token (TEOE #3): cloud = can block only creatures with flying. 'Drone' is taken by another set's 2/2 deathtouch Drone.
+abilities=flying,cloud
+type=Artifact Creature
+subtype=Drone
+power=1
+toughness=1
 [/card]

@@ -60,7 +60,9 @@ public class ImgDownloader {
                 database = null;
                 return false;
             }
-            httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
+            //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+            httpcon.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+            httpcon.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
             httpcon.setConnectTimeout(30000);
             httpcon.setReadTimeout(30000);
             httpcon.setAllowUserInteraction(false);
@@ -153,6 +155,9 @@ public class ImgDownloader {
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
+            //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+            connection.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+            connection.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder response = new StringBuilder();
@@ -304,7 +309,9 @@ public class ImgDownloader {
                 System.out.println("Warning: Problem fetching card: " + name + " (" + id + ".jpg) from " + imageurl + ", i will try with slow method...");
                 return false;
             }
-            httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
+            //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+            httpcon.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+            httpcon.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
             httpcon.setConnectTimeout(5000);
             httpcon.setReadTimeout(5000);
             httpcon.setAllowUserInteraction(false);
@@ -415,7 +422,9 @@ public class ImgDownloader {
                     System.out.println("Warning: Problem fetching token: " + id + "t.jpg from " + imageurl + ", i will try with slow method...");
                     return false;
                 }
-                httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
+                //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+                httpcon.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+                httpcon.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
                 httpcon.setConnectTimeout(5000);
                 httpcon.setReadTimeout(5000);
                 httpcon.setAllowUserInteraction(false);
@@ -3994,7 +4003,9 @@ public class ImgDownloader {
                     res = mappa.get(id) + " - " + set + File.separator + id + ".jpg\n" + res;
                     continue;
                 }
-                httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
+                //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+                httpcon.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+                httpcon.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
                 httpcon.setConnectTimeout(5000);
                 httpcon.setReadTimeout(5000);
                 httpcon.setAllowUserInteraction(false);
@@ -4105,7 +4116,9 @@ public class ImgDownloader {
                                 res = nametoken + " - " + set + File.separator + id + "t.jpg\n" + res;
                                 continue;
                             }
-                            httpcontoken.addRequestProperty("User-Agent", "Mozilla/4.76");
+                            //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+                            httpcontoken.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+                            httpcontoken.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
                             httpcontoken.setConnectTimeout(5000);
                             httpcontoken.setReadTimeout(5000);
                             httpcontoken.setAllowUserInteraction(false);
@@ -4579,7 +4592,9 @@ public class ImgDownloader {
                         res = mappa.get(id) + " - " + set + File.separator + id + ".jpg\n" + res;
                         break;
                     }
-                    httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
+                    //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+                    httpcon.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+                    httpcon.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
                     httpcon.setConnectTimeout(5000);
                     httpcon.setReadTimeout(5000);
                     httpcon.setAllowUserInteraction(false);
@@ -4978,7 +4993,9 @@ public class ImgDownloader {
                                     res = nametoken + " - " + set + File.separator + id + "t.jpg\n" + res;
                                     break;
                                 }
-                                httpcontoken.addRequestProperty("User-Agent", "Mozilla/4.76");
+                                //Scryfall rejects requests without a descriptive User-Agent AND an Accept header (HTTP 400, issue #33).
+                                httpcontoken.addRequestProperty("User-Agent", "Wagic/1.0 (+https://github.com/Flounder1664/wagic)");
+                                httpcontoken.addRequestProperty("Accept", "application/json;q=0.9,*/*;q=0.8");
                                 httpcontoken.setConnectTimeout(5000);
                                 httpcontoken.setReadTimeout(5000);
                                 httpcontoken.setAllowUserInteraction(false);

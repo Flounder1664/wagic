@@ -446,10 +446,10 @@
 #AUTO_DEFINE _FIREBEND5_ @combat(attacking) source(this):Add{R}{R}{R}{R}{R}
 
 # Robot Token — 2/2 colorless Robot artifact creature token (EOE)
-#AUTO_DEFINE _ROBOTTOKEN_ create(Robot:Artifact Creature Robot:2/2)
+#AUTO_DEFINE _ROBOTTOKEN_ token(-1530510)
 
 # Lander Token (EOE) — artifact with "{2},{T}, Sacrifice: Search library for basic land, put it onto battlefield tapped, then shuffle."
 #AUTO_DEFINE _LANDERTOKEN_ token(Lander)
 
 # Drone Token (EOE) — 1/1 colorless Drone artifact creature token with flying
-#AUTO_DEFINE _DRONETOKEN_ create(Drone:Artifact Creature Drone:1/1:flying)
+#AUTO_DEFINE _DRONETOKEN_ token(-1530503)
