@@ -1,0 +1,23 @@
+#Cryoshatter (EOE): when enchanted creature becomes tapped, destroy it. Llanowar Elves taps for mana.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:Cryoshatter
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cryoshatter
+Llanowar Elves
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Llanowar Elves,Cryoshatter
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[END]

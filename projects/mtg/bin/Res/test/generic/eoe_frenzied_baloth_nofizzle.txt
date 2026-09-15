@@ -1,0 +1,23 @@
+#Frenzied Baloth (EOE): creature spells you control can't be countered.
+#Erayo's Essence (P2) counters the first spell an opponent casts each turn; Grizzly Bears must resolve anyway.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Frenzied Baloth
+hand:Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Frenzied Baloth,Grizzly Bears
+life:20
+[PLAYER2]
+inplay:Erayo's Essence
+life:20
+[END]

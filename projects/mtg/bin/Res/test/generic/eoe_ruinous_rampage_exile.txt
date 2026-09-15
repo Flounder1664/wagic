@@ -1,0 +1,23 @@
+#Ruinous Rampage (EOE) mode 1: exile all artifacts with mana value 3 or less (Ornithopter), not bigger ones (Juggernaut).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ruinous Rampage
+manapool:{1}{R}{R}
+life:20
+[PLAYER2]
+inplay:Ornithopter,Juggernaut
+life:20
+[DO]
+Ruinous Rampage
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Ruinous Rampage
+life:20
+[PLAYER2]
+inplay:Juggernaut
+exile:Ornithopter
+life:20
+[END]

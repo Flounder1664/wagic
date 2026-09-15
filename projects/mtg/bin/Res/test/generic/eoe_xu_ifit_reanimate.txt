@@ -1,0 +1,20 @@
+#Xu-Ifit, Osteoharmonist (EOE, id 1530294 - its name has a comma, which splits harness card lists): {T}: return target creature card from your graveyard to the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530294
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+1530294
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530294,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

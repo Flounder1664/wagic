@@ -7134,7 +7134,8 @@ toughness=5
 name=Atomic Microsizer
 auto={2}:equip
 auto=teach(creature) +1/+0
-text=Equipped creature gets +1/+0. Equip {2}
+auto=@combat(attacking) source(mytgt):name(Up to one creature: unblockable and base 1/1) target(<upto:1>creature) transforms((,setpower=1,settoughness=1,unblockable)) ueot
+text=Equipped creature gets +1/+0. -- Whenever equipped creature attacks, choose up to one target creature. That creature can't be blocked this turn and has base power and toughness 1/1 until end of turn. -- Equip {2}
 mana={U}
 type=Artifact
 subtype=Equipment
@@ -11370,7 +11371,9 @@ subtype=Aura
 [card]
 name=Bioengineered Future
 auto=_LANDERTOKEN_
-text=When this enchantment enters, create a Lander token.
+auto=@movedTo(creature|myBattlefield):all(trigger[to]) counter(1/1,type:land[fresh]:mybattlefield)
+missing=the +1/+1 counters are a trigger on entering rather than "enters with", and only lands still on the battlefield are counted
+text=When this enchantment enters, create a Lander token. -- Each creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.
 mana={1}{G}{G}
 type=Enchantment
 [/card]
@@ -11778,8 +11781,10 @@ toughness=1
 [/card]
 [card]
 name=Blade of the Swarm
-auto=counter(1/1,2) all(this)
-text=When this creature enters, put two +1/+1 counters on it.
+auto=choice name(Two +1/+1 counters) counter(1/1,2)
+auto=choice name(Put a warp card from exile on the bottom) bottomoflibrary target(*[canplayfromexile]|exile)
+missing=the second mode matches any exiled card with canplayfromexile, which is how every warp card is written, so a non-warp card castable from exile (Squee) is also a legal target
+text=When this creature enters, choose one -- Put two +1/+1 counters on this creature. -- Put target exiled card with warp on the bottom of its owner's library.
 mana={3}{B}
 type=Creature
 subtype=Insect Assassin
@@ -25760,9 +25765,11 @@ type=Artifact
 [/card]
 [card]
 name=Cryoshatter
-target=creature|opponentbattlefield
+target=creature
 auto=teach(creature) -5/-0
-text=Enchant creature. Enchanted creature gets -5/-0. When enchanted creature becomes tapped or is dealt damage, destroy it. (Destroy trigger not supported)
+auto=@tapped(mytgt):destroy
+auto=@damaged(mytgt):destroy
+text=Enchant creature -- Enchanted creature gets -5/-0. -- When enchanted creature becomes tapped or is dealt damage, destroy it.
 mana={U}
 type=Enchantment
 subtype=Aura
@@ -33906,8 +33913,9 @@ toughness=1
 [/card]
 [card]
 name=Drill Too Deep
-auto=bury target(artifact|opponentbattlefield)
-text=Destroy target artifact.
+auto=choice name(Five charge counters on Spacecraft or Planet) counter(0/0,5,Charge) target(*[spacecraft;planet]|mybattlefield)
+auto=choice name(Destroy target artifact) destroy target(artifact)
+text=Choose one -- Put five charge counters on target Spacecraft or Planet you control. -- Destroy target artifact.
 mana={1}{R}
 type=Instant
 [/card]
@@ -45945,9 +45953,10 @@ toughness=2
 [/card]
 [card]
 name=Frenzied Baloth
-abilities=trample,haste
-auto=cantbecountered
-text=This spell can't be countered. -- Trample, haste -- Creature spells you control can't be countered.
+abilities=trample,haste,nofizzle
+auto=lord(creature|mystack) nofizzle
+missing=Combat damage can't be prevented - the engine has no "damage can't be prevented" effect
+text=This spell can't be countered. -- Trample, haste -- Creature spells you control can't be countered. -- Combat damage can't be prevented.
 mana={G}{G}
 type=Creature
 subtype=Beast
@@ -65474,8 +65483,8 @@ toughness=3
 [/card]
 [card]
 name=Kavaron Harrier
-auto=@attacking(this):_ROBOTTOKEN_
-text=Whenever this creature attacks, create a 2/2 colorless Robot artifact creature token.
+auto=_ATTACKING_pay({2}) token(Robot,Artifact Creature Robot,2/2,battleready) and!( transforms((,newability[phaseaction[combatends once] sacrifice])) forever )!
+text=Whenever this creature attacks, you may pay {2}. If you do, create a 2/2 colorless Robot artifact creature token that's tapped and attacking. Sacrifice that token at end of combat.
 mana={R}
 type=Artifact Creature
 subtype=Robot Soldier
@@ -99322,8 +99331,9 @@ text=Choose one —
 [/card]
 [card]
 name=Reroute Systems
-auto=indestructible target(*[artifact;creature]|mybattlefield) ueot
-text=Target artifact or creature you control gains indestructible until end of turn.
+auto=choice name(Gains indestructible) indestructible target(*[artifact;creature]|battlefield) ueot
+auto=choice name(2 damage to tapped creature) damage:2 target(creature[tapped]|battlefield)
+text=Choose one -- Target artifact or creature gains indestructible until end of turn. -- Reroute Systems deals 2 damage to target tapped creature.
 mana={W}
 type=Instant
 [/card]
@@ -102611,8 +102621,9 @@ type=Sorcery
 [/card]
 [card]
 name=Ruinous Rampage
-auto=damage:3 all(opponent)
-text=Ruinous Rampage deals 3 damage to each opponent.
+auto=choice name(3 damage to each opponent) damage:3 all(opponent)
+auto=choice name(Exile artifacts with mana value 3 or less) moveto(exile) all(artifact[manacost<=3]|battlefield)
+text=Choose one -- Ruinous Rampage deals 3 damage to each opponent. -- Exile all artifacts with mana value 3 or less.
 mana={1}{R}{R}
 type=Sorcery
 [/card]
@@ -105781,8 +105792,10 @@ type=Instant
 [/card]
 [card]
 name=Scour for Scrap
-auto=moveto(hand) target(artifact|mygraveyard)
-text=Return target artifact card from your graveyard to your hand.
+auto=choice name(Search for an artifact) target(artifact|mylibrary) moveto(hand) and!( shuffle )!
+auto=choice name(Return artifact from graveyard) target(artifact|mygraveyard) moveto(hand)
+auto=choice name(Both) target(artifact|mylibrary) moveto(hand) and!( shuffle )! && ability$!name(Return artifact from graveyard) target(artifact|mygraveyard) moveto(hand)!$ controller
+text=Choose one or both -- Search your library for an artifact card, reveal it, put it into your hand, then shuffle. -- Return target artifact card from your graveyard to your hand.
 mana={3}{U}
 type=Instant
 [/card]
@@ -143867,8 +143880,8 @@ toughness=2
 [/card]
 [card]
 name=Xu-Ifit, Osteoharmonist
-auto={T}:moveto(mybattlefield) target(creature|mygraveyard)
-text={T}: Return target creature card from your graveyard to the battlefield. It's a Skeleton with no abilities. (Type-change not supported.) Activate only as a sorcery.
+auto={T}:target(creature|mygraveyard) moveto(mybattlefield) and!( transforms((Skeleton,newability[loseabilities])) forever )! asSorcery
+text={T}: Return target creature card from your graveyard to the battlefield. It's a Skeleton in addition to its other types and has no abilities. Activate only as a sorcery.
 mana={1}{B}{B}
 type=Legendary Creature
 subtype=Human Wizard

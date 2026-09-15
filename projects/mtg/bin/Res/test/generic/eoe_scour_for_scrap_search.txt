@@ -1,0 +1,24 @@
+#Scour for Scrap (EOE) mode 0: search the library for an artifact card and put it into hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Scour for Scrap
+library:Forest,Ornithopter,Island
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Scour for Scrap
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter
+graveyard:Scour for Scrap
+library:Forest,Island
+life:20
+[PLAYER2]
+life:20
+[END]

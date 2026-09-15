@@ -1,0 +1,27 @@
+#Scour for Scrap (EOE) "Both": search the library for an artifact AND return an artifact from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Scour for Scrap
+library:Forest,Ornithopter,Island
+graveyard:Memnite
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Scour for Scrap
+choice 2
+Ornithopter
+choice 0
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter,Memnite
+graveyard:Scour for Scrap
+library:Forest,Island
+life:20
+[PLAYER2]
+life:20
+[END]

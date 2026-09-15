@@ -1,0 +1,21 @@
+#Blade of the Swarm (EOE) ETB mode 0: two +1/+1 counters on itself (3/1 -> 5/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Blade of the Swarm
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Blade of the Swarm
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blade of the Swarm
+pt:Blade of the Swarm=5/3
+life:20
+[PLAYER2]
+life:20
+[END]
