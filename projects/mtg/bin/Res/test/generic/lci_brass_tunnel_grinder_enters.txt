@@ -1,0 +1,21 @@
+#LCI batch 9. Brass's Tunnel-Grinder (636843) enters with an empty hand: nothing to discard, still draws one.
+#Seeded in play (a card with backside= cannot be cast from hand in the harness); seeding fires its enters trigger.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636843
+library:Forest,Island,Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636843
+hand:*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,23 @@
+#LCI batch 9. Ojer Axonil (636870) dies and returns transformed: Temple of Power on the battlefield
+#(Ojer Kaslem's shipped shape).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636870
+hand:Murder
+manapool:{1}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Murder
+636870
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Temple of Power
+graveyard:Murder
+life:20
+[PLAYER2]
+life:20
+[END]

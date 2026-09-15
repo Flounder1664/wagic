@@ -1326,6 +1326,16 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
         }
         intValue = pc+tc+sc+lc+ic+ec+cc+ac;
     }
+    else if (s == "mygravepermanents" || s == "oppgravepermanents")//Fathomless descent: number of permanent cards in a graveyard
+    {
+        //A bracket-free count, so it can sit inside a filter: *[manacost<=mygravepermanents] (Squirming Emergence).
+        //type:*[-instant;-sorcery]:mygraveyard cannot, because the filter's attribute list ends at its first ']'.
+        Player * p = (s == "mygravepermanents") ? card->controller() : card->controller()->opponent();
+        intValue = 0;
+        for (int j = 0; j < p->game->graveyard->nb_cards; j++)
+            if (p->game->graveyard->cards[j]->isPermanent())
+                intValue++;
+    }
     else if (s == "mygravecardtypes" || s == "oppgravecardtypes" || s == "allgravecardtypes")//Count number of card types in graveyards
     {
         intValue = 0;

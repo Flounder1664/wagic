@@ -1,0 +1,24 @@
+#LCI batch 9. Journey On (Kellan's adventure): the opponent controls an artifact, so two Map tokens;
+#the card goes to exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:636951
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Ornithopter
+life:20
+[DO]
+636951
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+exile:636951
+life:20
+[PLAYER2]
+inplay:Ornithopter
+life:20
+[END]

@@ -1,0 +1,25 @@
+#LCI batch 9. Squirming Emergence: three permanent cards in the graveyard, so Serra Angel (mana value 5)
+#is not a legal target - the click on it is ignored and Grizzly Bears (2) is chosen instead.
+#Without the mana value limit the Angel would come back and the Bears click would do nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Squirming Emergence
+graveyard:Serra Angel,Forest,Grizzly Bears
+manapool:{1}{B}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Squirming Emergence
+Serra Angel
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Serra Angel,Forest,Squirming Emergence
+life:20
+[PLAYER2]
+life:20
+[END]

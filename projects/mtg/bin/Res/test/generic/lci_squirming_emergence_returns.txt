@@ -1,0 +1,23 @@
+#LCI batch 9. Squirming Emergence: two permanent cards in the graveyard (Grizzly Bears, Forest),
+#so the mana value 2 Bears can come back.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Squirming Emergence
+graveyard:Grizzly Bears,Forest
+manapool:{1}{B}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Squirming Emergence
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Forest,Squirming Emergence
+life:20
+[PLAYER2]
+life:20
+[END]

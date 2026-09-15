@@ -147058,3 +147058,101 @@ subtype=Drone
 power=1
 toughness=1
 [/card]
+[card]
+name=Ojer Axonil, Deepest Might
+backside=Temple of Power
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+abilities=trample
+auto=_DIES_all(trigger[to]) transforms((,newability[moveTo(myBattlefield)],newability[tap(noevent)],newability[flip(backside)])) forever
+missing=the noncombat damage replacement (a red source you control deals damage equal to Ojer Axonil's power instead) - the engine has no damage-amount replacement for other sources
+text=Trample -- If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead. -- When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=God
+power=4
+toughness=4
+[/card]
+[card]
+name=Temple of Power
+backside=Ojer Axonil, Deepest Might
+auto={T}:Add{R}
+missing=the transform ability ({2}{R}, {T}: activate only if red sources you controlled dealt 4 or more noncombat damage this turn) - the engine does not track noncombat damage dealt this turn
+text=(Transforms from Ojer Axonil, Deepest Might.) -- {T}: Add {R}. -- {2}{R}, {T}: Transform this land. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Brass's Tunnel-Grinder
+backside=Tecutlan, the Searing Rift
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=may name(Discard any number of cards) target(<anyamount>*|myhand) reject && draw:1 controller
+auto=draw:1 controller
+auto=@each my end:if type(*[-instant;-sorcery;fresh]|mygraveyard)~morethan~0 then counter(0/0,1,Bore) && if compare(counter{0%0.1.Bore})~morethan~2 then flip(backside)
+missing=descended is read from permanent cards that entered your graveyard this turn and are still there; the bore counters are not removed on transforming
+text=When Brass's Tunnel-Grinder enters, discard any number of cards, then draw that many cards plus one. -- At the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it.
+mana={2}{R}
+type=Legendary Artifact
+[/card]
+[card]
+name=Tecutlan, the Searing Rift
+backside=Brass's Tunnel-Grinder
+auto={T}:Add{R}
+missing=the discover trigger (whenever you cast a permanent spell using mana produced by Tecutlan, discover X) - the engine does not track which source produced the mana spent
+text=(Transforms from Brass's Tunnel-Grinder.) -- {T}: Add {R}. -- Whenever you cast a permanent spell using mana produced by Tecutlan, discover X, where X is that spell's mana value.
+type=Legendary Land
+subtype=Cave
+[/card]
+[card]
+name=Sunken Citadel
+auto=tap(noevent)
+auto=chooseacolor {T}:add{chosencolor} chooseend
+missing=the second ability ({T}: Add two mana of the chosen color, spend only on abilities of land sources) - spend restrictions are not supported, and unrestricted it would be stronger than the card
+text=This land enters tapped. As it enters, choose a color. -- {T}: Add one mana of the chosen color. -- {T}: Add two mana of the chosen color. Spend this mana only to activate abilities of land sources.
+type=Land
+subtype=Cave
+[/card]
+[card]
+name=Bat Colony
+auto=@movedTo(cave|myBattlefield):counter(1/1) target(creature|mybattlefield)
+missing=the enters trigger (a 1/1 flying Bat for each mana from a Cave spent to cast it) - the engine does not track which source produced the mana spent
+text=When this enchantment enters, create a 1/1 black Bat creature token with flying for each mana from a Cave spent to cast it. -- Whenever a Cave you control enters, put a +1/+1 counter on target creature you control.
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Zoyowa Lava-Tongue
+abilities=deathtouch
+auto=@each my end:if type(*[-instant;-sorcery;fresh]|mygraveyard)~morethan~0 then ability$!if type(*|myhand)~morethan~0 then choice name(Discard a card) reject notaTarget(*|myhand) _ if type(*|mybattlefield)~morethan~0 then choice name(Sacrifice a permanent) sacrifice notaTarget(*|mybattlefield) _ choice name(Take 3 damage) damage:3 controller!$ opponent
+missing=descended is read from permanent cards that entered your graveyard this turn and are still there
+text=Deathtouch -- At the beginning of your end step, if you descended this turn, each opponent may discard a card or sacrifice a permanent of their choice. Zoyowa deals 3 damage to each opponent who didn't. (You descended if a permanent card was put into your graveyard from anywhere.)
+mana={B}{R}
+type=Legendary Creature
+subtype=Goblin Warlock
+power=2
+toughness=2
+[/card]
+[card]
+name=Kellan, Daring Traveler // Journey On
+abilities=adventure
+other={G} name(Adventure)
+auto=alternative name(Create Map tokens) token(Map)
+auto=alternative if type(artifact|opponentbattlefield)~morethan~0 then token(Map)
+auto=alternative _ADVENTURE_
+auto=_ATTACKING_if type(creature[manacost<=3&zpos=1]|mylibrary)~morethan~0 then all(creature[zpos=1]|mylibrary) moveto(myhand) else may name(Put the top card into your graveyard) all(*[zpos=1]|mylibrary) moveto(mygraveyard)
+missing=the top card is not shown to the other player when it stays on top
+text=Whenever Kellan attacks, reveal the top card of your library. If it's a creature card with mana value 3 or less, put it into your hand. Otherwise, you may put it into your graveyard. // Journey On: Create X Map tokens, where X is one plus the number of opponents who control an artifact. (Then exile this card. You may cast the creature later from exile.)
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Faerie Scout
+power=2
+toughness=3
+[/card]
+[card]
+name=Squirming Emergence
+target=*[-land&-instant&-sorcery&manacost<=mygravepermanents]|mygraveyard
+auto=moveto(mybattlefield)
+text=Fathomless descent -- Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.
+mana={1}{B}{G}
+type=Sorcery
+[/card]
