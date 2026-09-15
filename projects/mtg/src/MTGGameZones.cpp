@@ -942,6 +942,7 @@ MTGCardInstance * MTGGameZone::removeCard(MTGCardInstance * card, int createCopy
                 copy->X = card->X;
                 copy->castX = card->castX;
                 copy->kicked = card->kicked;
+                copy->caveManaSpent = card->caveManaSpent;
                 copy->storedCard = card->storedCard;
                 copy->storedSourceCard = card->storedSourceCard;
                 copy->lastController = card->controller();

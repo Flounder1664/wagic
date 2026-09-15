@@ -277,6 +277,7 @@ void MTGCardInstance::initMTGCI()
     mPropertiesChangedSinceLastUpdate = false;
     stillNeeded = true;
     kicked = 0;
+    caveManaSpent = 0;
     dredge = 0;
     zpos = 0;
     chooseacolor = -1;

@@ -98,6 +98,7 @@ public:
     int snowManaU;
     int snowManaW;
     int snowManaC;
+    int caveMana; //mana produced by Caves that is still in the pool (Bat Colony)
     string lastChosenName;
     vector<string> prowledTypes;
     Player(GameObserver *observer, string deckFile, string deckFileSmall, MTGDeck * deck = NULL);

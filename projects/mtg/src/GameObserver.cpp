@@ -695,6 +695,16 @@ void GameObserver::gameStateBasedEffects()
             players[d]->snowManaW = players[d]->getManaPool()->getCost(5);
         if (players[d]->snowManaW < 0)
             players[d]->snowManaW = 0;
+        //Cave mana (Bat Colony) cannot outlast the pool it sits in.
+        {
+            int poolTotal = 0;
+            for (int c = 0; c <= 6; c++)
+                poolTotal += players[d]->getManaPool()->getCost(c);
+            if (players[d]->caveMana > poolTotal)
+                players[d]->caveMana = poolTotal;
+            if (players[d]->caveMana < 0)
+                players[d]->caveMana = 0;
+        }
 
         MTGGameZone * dzones[] = { players[d]->game->inPlay, players[d]->game->graveyard, players[d]->game->hand, players[d]->game->library, players[d]->game->exile, players[d]->game->stack, players[d]->game->commandzone, players[d]->game->sideboard, players[d]->game->reveal };
         for (int k = 0; k < 9; k++)

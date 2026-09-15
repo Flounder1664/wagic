@@ -1,0 +1,23 @@
+#Bat Colony (LCI): Captivating Cave taps for {C} (it has several mana abilities, so the click opens a menu: choice 0), and that Cave mana pays part of the cost -> one 1/1 Bat.
+#(John 2026-09-15: no Bats with one Cave mana spent; the engine did not track mana from Caves.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Captivating Cave
+hand:Bat Colony
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Captivating Cave
+choice 0
+Bat Colony
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Captivating Cave,Bat Colony,*
+life:20
+[PLAYER2]
+life:20
+[END]

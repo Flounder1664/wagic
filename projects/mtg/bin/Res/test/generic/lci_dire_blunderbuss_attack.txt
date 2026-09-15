@@ -1,0 +1,32 @@
+#John 2026-09-15: Dire Blunderbuss did not offer its attack ability. Equip it to Grizzly Bears,
+#attack, accept the may and pick Mind Stone to sacrifice. Mind Stone reaching the graveyard proves the offer.
+#(The damage target cannot be fed to a trigger in the harness, so only the sacrifice is asserted.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dire Blunderbuss,Grizzly Bears,Mind Stone
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dire Blunderbuss
+Grizzly Bears
+next
+next
+Grizzly Bears
+next
+choice 0
+Mind Stone
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Dire Blunderbuss,Grizzly Bears
+graveyard:Mind Stone
+life:20
+[PLAYER2]
+life:15
+[END]

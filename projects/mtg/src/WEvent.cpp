@@ -175,6 +175,14 @@ WEventCreatureBlockerRank::WEventCreatureBlockerRank(MTGCardInstance * card, MTG
 WEventEngageManaExtra::WEventEngageManaExtra(int color, MTGCardInstance* card, ManaPool * destination) :
     WEvent(), color(color), card(card), destination(destination)
 {//controller snow
+    //Cave mana (Bat Colony): counted like snow mana, clamped to the pool in gameStateBasedEffects.
+    if(card && card->hasType("cave"))
+    {
+        if(card->controller()->getManaPool() == destination)
+            card->controller()->caveMana += 1;
+        else if(card->controller()->opponent()->getManaPool() == destination)
+            card->controller()->opponent()->caveMana += 1;
+    }
     if(color == 1 && card->controller()->getManaPool() == destination && card->hasType("snow"))
         card->controller()->snowManaG += 1;
     if(color == 2 && card->controller()->getManaPool() == destination && card->hasType("snow"))
@@ -204,6 +212,14 @@ WEventEngageManaExtra::WEventEngageManaExtra(int color, MTGCardInstance* card, M
 WEventEngageMana::WEventEngageMana(int color, MTGCardInstance* card, ManaPool * destination) :
     WEvent(), color(color), card(card), destination(destination)
 {//controller snow
+    //Cave mana (Bat Colony): counted like snow mana, clamped to the pool in gameStateBasedEffects.
+    if(card && card->hasType("cave"))
+    {
+        if(card->controller()->getManaPool() == destination)
+            card->controller()->caveMana += 1;
+        else if(card->controller()->opponent()->getManaPool() == destination)
+            card->controller()->opponent()->caveMana += 1;
+    }
     if(color == 1 && card->controller()->getManaPool() == destination && card->hasType("snow"))
         card->controller()->snowManaG += 1;
     if(color == 2 && card->controller()->getManaPool() == destination && card->hasType("snow"))

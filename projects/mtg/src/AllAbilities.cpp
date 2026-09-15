@@ -7804,6 +7804,7 @@ MayAbility::MayAbility(GameObserver* observer, int _id, MTGAbility * _ability, M
 {
     triggered = 0;
     mClone = NULL;
+    autoResolve = false;
 }
 
 void MayAbility::Update(float dt)
@@ -7825,6 +7826,15 @@ void MayAbility::Update(float dt)
         {
             if (!ta->getActionTc()->validTargetsExist() || ta->getActionTc()->maxtargets == 0)
                 return;
+        }
+        //An option the player already picked from a MenuAbility (discover's "Cast it for free", explore's
+        //keep/bin) is wrapped in a MayAbility only so it runs AFTER the click. Asking again showed a
+        //one-option popup that did nothing, and dismissing it left the discovered card in exile
+        //(John, 2026-09-15). A plain must (a modal "choice" line) still opens its menu.
+        if (must && autoResolve)
+        {
+            reactToTargetClick(source);
+            return;
         }
         game->mLayers->actionLayer()->setMenuObject(source, must);
         previousInterrupter = game->isInterrupting;
@@ -8014,6 +8024,7 @@ int MenuAbility::processAbility()
     if(MayAbility * toCheck = dynamic_cast<MayAbility*>(mClone))
     {
         toCheck->must = true;
+        toCheck->autoResolve = true;
         mClone->addToGame();
     }
     else
@@ -10573,6 +10584,10 @@ int AEquip::equip(MTGCardInstance * equipped)
         MTGAbility * a = currentAbilities[i];
         if (dynamic_cast<AEquip *> (a)) continue;
         if (dynamic_cast<ATeach *> (a)) continue;
+        //The equipment's own activated abilities were added when it entered the battlefield. Adding
+        //them again here put a second "Craft with artifact" in Dire Flail's menu once it was equipped
+        //(John, 2026-09-15).
+        if (dynamic_cast<ActivatedAbility *> (a)) continue;
         if (dynamic_cast<AAConnect *> (a)) continue;
         if (dynamic_cast<AANewTarget *> (af.getCoreAbility(a))) continue;
         if (a->aType == MTGAbility::STANDARD_TOKENCREATOR && a->oneShot)

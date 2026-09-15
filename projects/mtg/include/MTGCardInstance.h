@@ -137,6 +137,7 @@ public:
     int CountedObjects;
     int CountedObjectsB;
     int kicked;
+    int caveManaSpent; //mana from Caves spent to cast this card (Bat Colony)
     int dredge;
     int zpos;
     bool isDualWielding;

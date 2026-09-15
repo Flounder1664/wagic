@@ -1,0 +1,27 @@
+#REPRO (John 2026-09-15): Digsite Conservator died, the {4} was paid, but discover never resolved.
+#Murder it; answer the pay prompt; Grizzly Bears (MV 2) is the top nonland card, so discover 4 must find it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Digsite Conservator
+hand:Murder
+library:Forest,Grizzly Bears,Island
+manapool:{1}{B}{B}{4}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Murder
+Digsite Conservator
+choice 0
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Digsite Conservator,Murder
+hand:Grizzly Bears
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,35 @@
+#John 2026-09-15: the real flow - craft Dire Flail (exiling Mind Stone) into Dire Blunderbuss,
+#equip it to Grizzly Bears, attack, accept the may and sacrifice Ornithopter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dire Flail,Mind Stone,Ornithopter,Grizzly Bears
+manapool:{3}{R}{R}{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dire Flail
+choice 1
+Mind Stone
+Dire Flail
+Grizzly Bears
+next
+next
+Grizzly Bears
+next
+choice 0
+Ornithopter
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Dire Flail,Grizzly Bears
+graveyard:Ornithopter
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:15
+[END]

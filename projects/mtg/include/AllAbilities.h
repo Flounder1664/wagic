@@ -1931,6 +1931,7 @@ class MayAbility: public MTGAbility, public NestedAbility
 public:
     int triggered;
     bool must;
+    bool autoResolve; //already picked from a MenuAbility: activate without a second prompt
     string Cond;
     Player * previousInterrupter;
     MTGAbility * mClone;

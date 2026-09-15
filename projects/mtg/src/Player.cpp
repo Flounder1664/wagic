@@ -59,6 +59,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     cycledCount = 0;
     handmodifier = 0;
     snowManaG = 0;
+    caveMana = 0;
     snowManaR = 0;
     snowManaB = 0;
     snowManaU = 0;

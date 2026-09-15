@@ -537,6 +537,8 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
     }
     
     ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
+    int caveManaBefore = player->caveMana;
+    int poolBeforeCast = previousManaPool->getConvertedCost();
     int payResult = player->getManaPool()->pay(card->getManaCost());
     if (card->getManaCost()->getKicker() && (card->kicked || OptionKicker::KICKER_ALWAYS == options[Options::KICKERPAYMENT].number || card->controller()->isAI()))
     {
@@ -596,6 +598,15 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
         if (spellCost && !card->getManaCost()->getManaUsedToCast()){
             card->getManaCost()->setManaUsedToCast(NEW ManaCost());
             card->getManaCost()->getManaUsedToCast()->copy(spellCost);
+        }
+        //Mana from a Cave spent on this spell (Bat Colony): what left the pool, capped by the Cave mana in it.
+        {
+            int spentNow = poolBeforeCast - player->getManaPool()->getConvertedCost();
+            //Plain comparisons: std::min/std::max collide with the Windows min/max macros in this file.
+            if (spentNow < 0)
+                spentNow = 0;
+            card->caveManaSpent = (spentNow < caveManaBefore) ? spentNow : caveManaBefore;
+            player->caveMana -= card->caveManaSpent;
         }
         MTGCardInstance * copy = player->game->putInZone(card, card->currentZone, player->game->stack);
         if (game->targetChooser)
@@ -715,6 +726,8 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
     }
 
     ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
+    int caveManaBefore = player->caveMana;
+    int poolBeforeCast = previousManaPool->getConvertedCost();
     int payResult = player->getManaPool()->pay(card->getManaCost());
     if (card->getManaCost()->getKicker())
     {  
@@ -773,6 +786,15 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
         if (spellCost && !card->getManaCost()->getManaUsedToCast()){
             card->getManaCost()->setManaUsedToCast(NEW ManaCost());
             card->getManaCost()->getManaUsedToCast()->copy(spellCost);
+        }
+        //Mana from a Cave spent on this spell (Bat Colony): what left the pool, capped by the Cave mana in it.
+        {
+            int spentNow = poolBeforeCast - player->getManaPool()->getConvertedCost();
+            //Plain comparisons: std::min/std::max collide with the Windows min/max macros in this file.
+            if (spentNow < 0)
+                spentNow = 0;
+            card->caveManaSpent = (spentNow < caveManaBefore) ? spentNow : caveManaBefore;
+            player->caveMana -= card->caveManaSpent;
         }
         MTGCardInstance * copy = player->game->putInZone(card, card->currentZone, player->game->stack);
         if (game->targetChooser)

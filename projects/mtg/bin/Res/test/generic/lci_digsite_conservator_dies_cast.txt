@@ -1,0 +1,27 @@
+#John 2026-09-15: Digsite Conservator dies, {4} paid, choose CAST for free. Grizzly Bears should be
+#cast and end on the battlefield; the extra one-option popup used to strand it in exile (MayAbility autoResolve fixes it).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Digsite Conservator
+hand:Murder
+library:Forest,Grizzly Bears,Island
+manapool:{1}{B}{B}{4}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Murder
+Digsite Conservator
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Digsite Conservator,Murder
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

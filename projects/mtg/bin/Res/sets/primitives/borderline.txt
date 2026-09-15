@@ -147114,8 +147114,8 @@ subtype=Cave
 [/card]
 [card]
 name=Bat Colony
+auto=token(Bat,Creature Bat,1/1,black,flying)*cavemanaspent
 auto=@movedTo(cave|myBattlefield):counter(1/1) target(creature|mybattlefield)
-missing=the enters trigger (a 1/1 flying Bat for each mana from a Cave spent to cast it) - the engine does not track which source produced the mana spent
 text=When this enchantment enters, create a 1/1 black Bat creature token with flying for each mana from a Cave spent to cast it. -- Whenever a Cave you control enters, put a +1/+1 counter on target creature you control.
 mana={2}{W}
 type=Enchantment

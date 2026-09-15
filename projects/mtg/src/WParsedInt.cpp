@@ -1326,6 +1326,10 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
         }
         intValue = pc+tc+sc+lc+ic+ec+cc+ac;
     }
+    else if (s == "cavemanaspent")//mana from Caves spent to cast this card (Bat Colony)
+    {
+        intValue = card->caveManaSpent;
+    }
     else if (s == "mygravepermanents" || s == "oppgravepermanents")//Fathomless descent: number of permanent cards in a graveyard
     {
         //A bracket-free count, so it can sit inside a filter: *[manacost<=mygravepermanents] (Squirming Emergence).
