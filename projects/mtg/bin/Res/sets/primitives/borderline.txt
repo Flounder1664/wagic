@@ -134774,7 +134774,7 @@ type=Sorcery
 [/card]
 [card]
 name=Ice Flan
-auto=name(Tap and stun) target(artifact,creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
+auto=name(Tap and stun) target(*[artifact;creature]|opponentbattlefield) tap(noevent) and!( counter(0/0,1,stun) )!
 missing=Islandcycling {2} (discard to search for an Island) - there is no landcycling form; the old token silently gave plain cycling
 text=When this creature enters, tap target artifact or creature an opponent controls. Put a stun counter on it. -- Islandcycling {2}
 mana={4}{U}{U}
@@ -135373,8 +135373,8 @@ toughness=3
 name=Summon: Shiva
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) && counter(0/0,1,stun) all(mytgt)
+auto=name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) and!( counter(0/0,1,stun) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) and!( counter(0/0,1,stun) )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may draw:1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 missing=ch III draws one card per tapped creature opponents control (approximated as draw 1)
@@ -147155,4 +147155,13 @@ auto=moveto(mybattlefield)
 text=Fathomless descent -- Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.
 mana={1}{B}{G}
 type=Sorcery
+[/card]
+[card]
+name=Kithkin Ecl
+#ECL's 1/1 green and white Kithkin token (TECL #7), id -697107 (ECL block 696600 + 500 + TECL #7, the documented token convention). Made by Catharsis.
+color=green,white
+type=Creature
+subtype=Kithkin
+power=1
+toughness=1
 [/card]

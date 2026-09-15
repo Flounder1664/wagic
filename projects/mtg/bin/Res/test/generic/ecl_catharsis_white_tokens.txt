@@ -1,0 +1,22 @@
+#Catharsis (ECL): {W}{W} spent -> two 1/1 Kithkin tokens (John got one), and NO +1/+1 pump.
+#choice 0 = the normal cost (a card with an evoke other= opens a cost menu).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Catharsis
+manapool:{4}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Catharsis
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Catharsis,*,*
+pt:Catharsis=3/4
+life:20
+[PLAYER2]
+life:20
+[END]

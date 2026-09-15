@@ -18584,7 +18584,9 @@ type=Enchantment
 [/card]
 [card]
 name=Catharsis
-auto=choice name(kithkin) token(Kithkin,creature kithkin,1/1,,green white) && token(Kithkin,creature kithkin,1/1,,green white) name(haste) all(creature|mybattlefield) effect(+1/+1,haste) ueot
+auto=if spent({W}{W}) then token(-697107)*2
+auto=if spent({R}{R}) then all(creature|mybattlefield) 1/1 ueot
+auto=if spent({R}{R}) then all(creature|mybattlefield) haste ueot
 other={R/W}{R/W} name(Evoke)
 auto=alternative sacrifice
 mana={4}{R/W}{R/W}
@@ -18592,7 +18594,7 @@ type=Creature
 subtype=Elemental Incarnation
 power=3
 toughness=4
-text=When this creature enters, choose: create two 1/1 Kithkin tokens; or creatures you control get +1/+1 and haste until end of turn. Evoke {R/W}{R/W}.
+text=When this creature enters, if {W}{W} was spent to cast it, create two 1/1 green and white Kithkin creature tokens. -- When this creature enters, if {R}{R} was spent to cast it, creatures you control get +1/+1 and gain haste until end of turn. -- Evoke {R/W}{R/W}
 [/card]
 [card]
 name=Cathartic Adept
@@ -37712,7 +37714,8 @@ toughness=3
 [/card]
 [card]
 name=Emptiness
-auto=choice name(reanimate) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) name(wither) counter(-1/-1,3) target(creature|opponentbattlefield)
+auto=if spent({W}{W}) then moveTo(mybattlefield) target(creature[manacost<=3]|mygraveyard)
+auto=if spent({B}{B}) then counter(-1/-1,3) target(<upto:1>creature)
 other={W/B}{W/B} name(Evoke)
 auto=alternative sacrifice
 mana={4}{W/B}{W/B}
@@ -37720,7 +37723,7 @@ type=Creature
 subtype=Elemental Incarnation
 power=3
 toughness=5
-text=When this creature enters, choose: return target creature mana value 3 or less from graveyard to battlefield; or put three -1/-1 counters on a creature. Evoke {W/B}{W/B}.
+text=When this creature enters, if {W}{W} was spent to cast it, return target creature card with mana value 3 or less from your graveyard to the battlefield. -- When this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature. -- Evoke {W/B}{W/B}
 [/card]
 [card]
 name=Empty City Ruse

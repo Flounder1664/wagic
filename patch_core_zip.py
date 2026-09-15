@@ -11,6 +11,9 @@ CORE_ZIP = os.path.join(_RES, "core.zip")
 CORE_TMP = os.path.join(_RES, "core_tmp.zip")
 
 REPLACEMENTS = {
+    # 2026-09-15: ECL's Kithkin token registration (Catharsis).
+    'sets/ECL/_cards.dat':
+        os.path.join(_RES, "sets", "ECL", "_cards.dat"),
     'sets/primitives/mtg.txt':
         os.path.join(_RES, "sets", "primitives", "mtg.txt"),
     'sets/primitives/planeswalkers.txt':
