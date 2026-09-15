@@ -1,0 +1,23 @@
+#Elegy Acolyte (EOE, 1530097) Void: nothing left the battlefield and nothing was warped -> NO Robot.
+#(It made a Robot every end step before voidactive existed.)
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:1530097
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+goto end
+goto cleanup
+goto cleanup
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:1530097
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]

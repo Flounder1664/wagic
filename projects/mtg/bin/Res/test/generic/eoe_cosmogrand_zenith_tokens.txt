@@ -1,0 +1,22 @@
+#Cosmogrand Zenith (EOE): second spell each turn -> choose one. Mode 0: two 1/1 Human Soldier tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cosmogrand Zenith
+hand:Ornithopter,Memnite
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ornithopter
+Memnite
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cosmogrand Zenith,Ornithopter,Memnite,*,*
+pt:Cosmogrand Zenith=2/4
+life:20
+[PLAYER2]
+life:20
+[END]

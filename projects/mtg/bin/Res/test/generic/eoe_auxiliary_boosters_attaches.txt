@@ -1,0 +1,23 @@
+#Auxiliary Boosters (EOE): the Robot it makes gets the Boosters attached (+1/+2 -> 3/4), so a Shock
+#does not kill it. Unattached, the 2/2 Robot dies. John saw it unattached (2026-09-15).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Auxiliary Boosters,Shock
+manapool:{4}{W}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Auxiliary Boosters
+Shock
+Robot
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Auxiliary Boosters,*
+graveyard:Shock
+life:20
+[PLAYER2]
+life:20
+[END]

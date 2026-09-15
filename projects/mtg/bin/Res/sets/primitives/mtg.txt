@@ -7685,8 +7685,11 @@ name=Auxiliary Boosters
 #Stays on the inline Robot: only the inline token(Name,Type,P/T) form carries the living-weapon attach
 #(MTGAbility.cpp token parser - the by-id and by-name forms create a plain token), so the registered
 #Robot Eoe art is not used here (tested 2026-09-14: the id form left the Boosters unattached).
-auto=livingweapontoken(Robot,Artifact Creature Robot,2/2)
+#The equip line MUST come before livingweapontoken: the attach (ATokenCreator::livingWeaponToken) looks
+#for this card's equip ability when the token is made, and one listed later does not exist yet (every
+#working living weapon - Batterbone, Barbed Batterfist - lists equip first). John saw it unattached 2026-09-15.
 auto={3}:equip
+auto=livingweapontoken(Robot,Artifact Creature Robot,2/2)
 auto=teach(creature) +1/+2,flying
 text=When this Equipment enters, create a 2/2 colorless Robot artifact creature token and attach this Equipment to it. -- Equipped creature gets +1/+2 and has flying. Equip {3}
 mana={4}{W}
@@ -24241,9 +24244,8 @@ text=Flying, first strike, trample, lifelink, haste
 [/card]
 [card]
 name=Cosmogrand Zenith
-auto=_FLURRY_:token(-1530502)
-auto=_FLURRY_:token(-1530502)
-text=Whenever you cast your second spell each turn, create two 1/1 white Human Soldier creature tokens.
+auto=_FLURRY_ability$!choice name(Create two 1/1 Human Soldiers) token(-1530502)*2 _ choice name(Put a +1/+1 counter on each creature you control) all(creature|mybattlefield) counter(1/1)!$ controller
+text=Whenever you cast your second spell each turn, choose one -- Create two 1/1 white Human Soldier creature tokens. -- Put a +1/+1 counter on each creature you control.
 mana={2}{W}
 type=Creature
 subtype=Human Soldier
@@ -36574,7 +36576,7 @@ toughness=4
 name=Elegy Acolyte
 abilities=lifelink
 auto=@combatdamaged(player) from(this):draw:1 && life:-1 controller
-auto=@endOfTurn(_):_ROBOTTOKEN_
+auto=@each my end restriction{voidactive}:_ROBOTTOKEN_
 text=Lifelink. Whenever one or more creatures you control deal combat damage to a player, you draw a card and lose 1 life. Void -- At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, create a 2/2 colorless Robot artifact creature token.
 mana={2}{B}{B}
 type=Creature
@@ -140234,9 +140236,11 @@ toughness=4
 [card]
 name=Wedgelight Rammer
 auto=_ROBOTTOKEN_
-text=When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,9,Charge}) transforms((Artifact Creature,flying,first strike))
+text=When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.) -- 9+ | Flying, first strike
 mana={3}{W}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=3
 toughness=4

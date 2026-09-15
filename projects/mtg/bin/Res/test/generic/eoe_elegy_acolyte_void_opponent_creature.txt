@@ -1,0 +1,28 @@
+#Elegy Acolyte (EOE, 1530097) Void: an OPPONENT's nonland permanent leaving counts too (the card says
+#"a nonland permanent left the battlefield"). Murder the opponent's Grizzly Bears -> Robot at your end step.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:1530097
+hand:Murder
+manapool:{1}{B}{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Murder
+Grizzly Bears
+goto end
+goto cleanup
+goto cleanup
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:1530097,*
+graveyard:Murder
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

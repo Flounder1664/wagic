@@ -1,0 +1,24 @@
+#Wedgelight Rammer (EOE, 1530043): Station - tap another creature, put charge counters equal to its power.
+#Craw Wurm (6) then Hill Giant (3) -> 9 charge counters. Seeding the Rammer makes its Robot token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530043,Craw Wurm,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+1530043
+Craw Wurm
+1530043
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530043,Craw Wurm,Hill Giant,*
+counter:1530043=charge:9
+tappedinplay:2
+life:20
+[PLAYER2]
+life:20
+[END]

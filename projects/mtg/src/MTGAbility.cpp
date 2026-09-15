@@ -439,6 +439,43 @@ int AbilityFactory::parseCastRestrictions(MTGCardInstance * card, Player * playe
                 if(!count)
                     return 0;
         }
+        check = restriction[i].find("voidactive");
+        if(check != string::npos)
+        {
+                //Void (EOE): a NONLAND permanent - anyone's, unlike revolt - left the battlefield this turn,
+                //or a spell was warped this turn. Named "voidactive" because a plain "void" would also match
+                //the existing compare(hascntvoid) restrictions. Elegy Acolyte fired every end step without it.
+                int count = 0;
+                for (int pi = 0; pi < 2 && !count; pi++)
+                {
+                    Player * zp = observer->players[pi];
+                    MTGGameZone * zones[] = { zp->game->hand, zp->game->exile, zp->game->library, zp->game->graveyard };
+                    for (int z = 0; z < 4 && !count; z++)
+                    {
+                        for (unsigned int k = 0; k < zones[z]->cardsSeenThisTurn.size(); k++)
+                        {
+                            MTGCardInstance * tCard = zones[z]->cardsSeenThisTurn[k];
+                            if (tCard && !tCard->hasType(Subtypes::TYPE_LAND)
+                                && (tCard->previousZone == observer->players[0]->game->battlefield
+                                    || tCard->previousZone == observer->players[1]->game->battlefield))
+                            {
+                                count++;
+                                break;
+                            }
+                        }
+                    }
+                    //Warped: cast for its alternative cost by a card castable from exile - every warp card is.
+                    for (unsigned int k = 0; k < zp->game->stack->cardsSeenThisTurn.size() && !count; k++)
+                    {
+                        MTGCardInstance * sCard = zp->game->stack->cardsSeenThisTurn[k];
+                        if (sCard && sCard->alternateCostPaid[ManaCost::MANA_PAID_WITH_ALTERNATIVE] > 0
+                            && sCard->basicAbilities[(int)Constants::CANPLAYFROMEXILE])
+                            count++;
+                    }
+                }
+                if(!count)
+                    return 0;
+        }
         check = restriction[i].find("morbid");
         if(check != string::npos)
         {
