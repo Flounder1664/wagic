@@ -1,0 +1,26 @@
+#Temporal Intervention (EOE) Void: after the opponent's Grizzly Bears is murdered it costs {2} less, so the
+#single {B} left in the pool casts it (choice 1 = the Void cost). The opponent's hand is empty, so it resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Murder,Temporal Intervention
+manapool:{1}{B}{B}{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Murder
+Grizzly Bears
+Temporal Intervention
+choice 1
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Murder,Temporal Intervention
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

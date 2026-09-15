@@ -3068,12 +3068,14 @@ toughness=3
 [/card]
 [card]
 name=Alpharael, Stonechosen
+auto=@combat(attacking) source(this) restriction{voidactive}:life:-halfupopponentlifetotal opponent
+missing=Ward (discard a card at random) - the ward macros only take a mana payment
+text=Ward—Discard a card at random. -- Void — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
 mana={3}{B}{B}
 type=Legendary Creature
 subtype=Human Cleric
 power=3
 toughness=3
-text=Ward—Discard a card at random. Void — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
 [/card]
 [card]
 name=Alpine Grizzly
@@ -7103,7 +7105,9 @@ toughness=4
 [card]
 name=Atmospheric Greenhouse
 auto=counter(1/1) all(creature|mybattlefield)
-text=When this Spacecraft enters, put a +1/+1 counter on each creature you control.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying,trample))
+text=When this Spacecraft enters, put a +1/+1 counter on each creature you control. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying, trample
 mana={4}{G}
 type=Artifact
 subtype=Spacecraft
@@ -28089,10 +28093,13 @@ toughness=1
 [/card]
 [card]
 name=Dawnsire, Sunstar Dreadnought
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(hascntcharge)~morethan~9}:name(100 damage to up to one creature or planeswalker) damage:100 target(<upto:1>*[creature;planeswalker])
+auto=this(counter{0/0,20,Charge}) transforms((Artifact Creature,flying))
+missing="whenever you attack" is a once-per-turn trigger on the first attacking creature
 text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.) -- 10+ | Whenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker. -- 20+ | Flying
 mana={5}
-type=Legendary Artifact Creature
+type=Legendary Artifact
 subtype=Spacecraft
 power=20
 toughness=20
@@ -28991,9 +28998,12 @@ subtype=Aura
 name=Debris Field Crusher
 target=anytarget
 auto=damage:3
-text=When this Spacecraft enters, it deals 3 damage to any target.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying))
+auto=this(counter{0/0,8,Charge}) {1}{R}:2/0 ueot
+text=When this Spacecraft enters, it deals 3 damage to any target. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying -- {1}{R}: This Spacecraft gets +2/+0 until end of turn.
 mana={4}{R}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=1
 toughness=5
@@ -41906,11 +41916,13 @@ subtype=Aura
 [/card]
 [card]
 name=Fell Gravship
-auto=deplete:3
-auto=moveto(hand) target(creature|mygraveyard)
-text=When this Spacecraft enters, mill three cards, then return a creature card from your graveyard to your hand.
+auto=deplete:3 controller
+auto=moveto(hand) target(*[creature;spacecraft]|mygraveyard)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying,lifelink))
+text=When this Spacecraft enters, mill three cards, then return a creature or Spacecraft card from your graveyard to your hand. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying, lifelink
 mana={2}{B}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=3
 toughness=2
@@ -47135,11 +47147,11 @@ type=Artifact
 [/card]
 [card]
 name=Galvanizing Sawship
-abilities=flying,haste
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,3,Charge}) transforms((Artifact Creature,flying,haste))
 text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 3+.) -- 3+ | Flying, haste
 mana={5}{R}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=6
 toughness=5
@@ -62121,8 +62133,8 @@ type=Enchantment
 name=Interceptor Mechan
 abilities=flying
 auto=moveto(hand) target(*[creature;artifact]|mygraveyard)
-auto=@endOfTurn(_):counter(1/1) all(this)
-text=Flying. When this creature enters, return target artifact or creature card from your graveyard to your hand. Void — At the beginning of your end step, put a +1/+1 counter on this creature.
+auto=@each my end restriction{voidactive}:counter(1/1) all(this)
+text=Flying -- When this creature enters, return target artifact or creature card from your graveyard to your hand. -- Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, put a +1/+1 counter on this creature.
 mana={2}{B}{R}
 type=Artifact Creature
 subtype=Robot
@@ -69405,11 +69417,13 @@ type=Sorcery
 [/card]
 [card]
 name=Larval Scoutlander
-auto=_LANDERTOKEN_
-auto=_LANDERTOKEN_
-text=When this Spacecraft enters, you may sacrifice a land or Lander. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. (Approximation: creates two Lander tokens.)
+auto=may name(Sacrifice a land or Lander) sacrifice notaTarget(*[land;lander]|myBattlefield) and!( name(Search up to two basic lands) target(<upto:2>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )! )!
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,7,Charge}) transforms((Artifact Creature,flying))
+missing=the library is not shuffled after the search
+text=When this Spacecraft enters, you may sacrifice a land or Lander. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.) -- 7+ | Flying
 mana={2}{G}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=3
 toughness=3
@@ -72952,9 +72966,12 @@ toughness=1
 [/card]
 [card]
 name=Lumen-Class Frigate
-text=2+ | Other creatures you control get +1/+1. 12+ | Flying, lifelink. (Station not supported)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,2,Charge}) lord(other creature|mybattlefield) 1/1
+auto=this(counter{0/0,12,Charge}) transforms((Artifact Creature,flying,lifelink))
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.) -- 2+ | Other creatures you control get +1/+1. -- 12+ | Flying, lifelink
 mana={1}{W}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=3
 toughness=5
@@ -91673,11 +91690,12 @@ type=Instant
 [/card]
 [card]
 name=Pinnacle Kill-Ship
-target=creature
-auto=damage:10
-text=When this Spacecraft enters, it deals 10 damage to up to one target creature.
+auto=damage:10 target(<upto:1>creature)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,7,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, it deals 10 damage to up to one target creature. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.) -- 7+ | Flying
 mana={7}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=7
 toughness=7
@@ -99359,10 +99377,12 @@ type=Instant
 [/card]
 [card]
 name=Rescue Skiff
-auto=moveto(mybattlefield) target(creature|mygraveyard)
-text=When this Spacecraft enters, return target creature card from your graveyard to the battlefield.
+auto=moveto(mybattlefield) target(*[creature;enchantment]|mygraveyard)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,10,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, return target creature or enchantment card from your graveyard to the battlefield. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.) -- 10+ | Flying
 mana={5}{W}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=5
 toughness=6
@@ -116382,10 +116402,13 @@ toughness=6
 [/card]
 [card]
 name=Specimen Freighter
-auto=bounce target(creature|opponentbattlefield)
-text=When this Spacecraft enters, return up to one target creature to its owner's hand.
+auto=moveto(ownerhand) target(<upto:2>creature[-spacecraft])
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,9,Charge}) transforms((Artifact Creature,flying))
+auto=@combat(attacking) source(this):deplete:4 opponent
+text=When this Spacecraft enters, return up to two target non-Spacecraft creatures to their owners' hands. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.) -- 9+ | Flying -- Whenever this Spacecraft attacks, defending player mills four cards.
 mana={5}{U}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=4
 toughness=7
@@ -122861,10 +122884,12 @@ subtype=Planet
 [/card]
 [card]
 name=Susurian Dirgecraft
-auto=sacrifice target(creature[-token]|opponentbattlefield)
-text=When this Spacecraft enters, each opponent sacrifices a nontoken creature of their choice.
+auto=ability$!name(Sacrifice a nontoken creature) notaTarget(creature[-token]|mybattlefield) sacrifice !$ opponent
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,7,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, each opponent sacrifices a nontoken creature of their choice. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.) -- 7+ | Flying
 mana={4}{B}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=4
 toughness=3
@@ -125613,9 +125638,11 @@ type=Sorcery
 [/card]
 [card]
 name=Temporal Intervention
-target=player
-auto=discard:1
-text=Void -- This spell costs {2} less to cast if a nonland permanent left the battlefield this turn or a spell was warped this turn. Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+target=opponent
+other={B} name(Void)
+otherrestriction=voidactive
+auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+text=Void — This spell costs {2} less to cast if a nonland permanent left the battlefield this turn or a spell was warped this turn. -- Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 mana={2}{B}
 type=Sorcery
 [/card]
@@ -126620,7 +126647,8 @@ type=Legendary Artifact
 [card]
 name=The Eternity Elevator
 auto={T}:Add{C}{C}{C}
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+missing=the 20+ ability ({T}: Add X mana of any one color, X = its charge counters) - no dynamic single-colour mana ability
 text={T}: Add {C}{C}{C}. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.) -- 20+ | {T}: Add X mana of any one color, where X is the number of charge counters on The Eternity Elevator.
 mana={5}
 type=Legendary Artifact
@@ -126688,9 +126716,12 @@ toughness=4
 [card]
 name=The Seriema
 auto=moveto(myhand) target(creature[legendary]|mylibrary) && shuffle
-text=When The Seriema enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle. Station. 7+ | Flying. Other tapped legendary creatures you control have indestructible.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,7,Charge}) transforms((Artifact Creature,flying))
+auto=this(counter{0/0,7,Charge}) lord(other creature[legendary&tapped]|mybattlefield) indestructible
+text=When The Seriema enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.) -- 7+ | Flying -- Other tapped legendary creatures you control have indestructible.
 mana={1}{W}{W}
-type=Legendary Artifact Creature
+type=Legendary Artifact
 subtype=Spacecraft
 power=5
 toughness=5
@@ -133944,9 +133975,11 @@ toughness=2
 name=Uthros Scanship
 auto=draw:2
 auto=discard:1
-text=When this Spacecraft enters, draw two cards, then discard a card.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, draw two cards, then discard a card. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying
 mana={3}{U}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=4
 toughness=4
@@ -143739,9 +143772,11 @@ toughness=2
 [card]
 name=Wurmwall Sweeper
 auto=_SURVEIL2_
-text=When this Spacecraft enters, surveil 2.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,4,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, surveil 2. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.) -- 4+ | Flying
 mana={2}
-type=Artifact Creature
+type=Artifact
 subtype=Spacecraft
 power=2
 toughness=2

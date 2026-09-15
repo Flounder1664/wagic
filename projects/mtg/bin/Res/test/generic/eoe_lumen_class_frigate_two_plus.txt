@@ -1,0 +1,24 @@
+#Lumen-Class Frigate (EOE, 1530025): 2+ | other creatures you control get +1/+1. Station with Grizzly Bears
+#(power 2) -> 2 counters; Hill Giant becomes 4/4 and the Bears 3/3. Before stationing both are unbuffed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530025,Grizzly Bears,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+1530025
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530025,Grizzly Bears,Hill Giant
+counter:1530025=charge:2
+pt:Hill Giant=4/4
+pt:Grizzly Bears=3/3
+tappedinplay:1
+life:20
+[PLAYER2]
+life:20
+[END]

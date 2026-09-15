@@ -1,0 +1,29 @@
+#Interceptor Mechan (EOE, 1530220) Void: the opponent's Grizzly Bears is murdered, so at your end step the
+#Mechan gets a +1/+1 counter (2/2 -> 3/3). It used to get one at every end of turn.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:1530220
+hand:Murder
+manapool:{1}{B}{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Murder
+Grizzly Bears
+goto end
+goto cleanup
+goto cleanup
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:1530220
+pt:1530220=3/3
+graveyard:Murder
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

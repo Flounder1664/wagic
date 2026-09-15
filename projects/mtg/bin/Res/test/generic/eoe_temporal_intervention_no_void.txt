@@ -1,0 +1,25 @@
+#Temporal Intervention (EOE): with nothing gone from the battlefield the Void cost is not allowed, so {B}
+#cannot cast it and it stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Temporal Intervention
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Temporal Intervention
+choice 1
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Temporal Intervention
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]

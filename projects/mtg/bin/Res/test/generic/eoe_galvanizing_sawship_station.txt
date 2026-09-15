@@ -1,0 +1,21 @@
+#Galvanizing Sawship (EOE, 1530136): Station with Hill Giant (power 3) -> 3 charge counters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530136,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+1530136
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1530136,Hill Giant
+counter:1530136=charge:3
+tappedinplay:1
+life:20
+[PLAYER2]
+life:20
+[END]
