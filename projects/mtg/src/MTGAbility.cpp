@@ -3734,6 +3734,10 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
 
             ATokenCreator * tok = NEW ATokenCreator(observer, id, creator, target, NULL, tokenId, starfound, multiplier, who);
             tok->oneShot = 1;
+            //Only the inline form read battleready before, so a registered token could not enter
+            //tapped and attacking - Fire Navy Trebuchet needed both that and its art (John, 2026-09-23).
+            if (s.find("battleready") != string::npos)
+                tok->battleReady = true;
             //andability
             if(storedAndAbility.size())
             {
@@ -3760,6 +3764,8 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             {
                 ATokenCreator * tok = NEW ATokenCreator(observer, id, creator, target, NULL, cardName, starfound, multiplier, who);
                 tok->oneShot = 1;
+                if (s.find("battleready") != string::npos)
+                    tok->battleReady = true;
                 if(!sabilities.empty())
                     tok->sabilities = sabilities;
                 //andability

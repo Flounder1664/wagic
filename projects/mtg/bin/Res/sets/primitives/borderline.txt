@@ -148210,7 +148210,8 @@ toughness=4
 name=Messenger Hawk
 abilities=flying
 auto=_CLUE_
-missing=the +2/+0 while you have drawn two or more cards this turn - cards drawn this turn cannot be counted
+auto=@each my combatbegins:if compare(pdrewcount)~morethan~1 then 2/0 ueot
+missing=the +2/+0 is applied as combat begins rather than continuously
 text=Flying -- When this creature enters, create a Clue token. -- This creature gets +2/+0 as long as you've drawn two or more cards this turn.
 mana={2}{U/B}
 type=Creature
@@ -148342,8 +148343,8 @@ toughness=3
 [card]
 name=Knowledge Seeker
 abilities=vigilance
+auto=@each my end restriction{compare(pdrewcount)~morethan~1}:counter(1/1) all(this)
 auto=_DIES_ _CLUE_
-missing=the +1/+1 counter when you draw your second card each turn - cards drawn this turn cannot be counted
 text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature. -- When this creature dies, create a Clue token.
 mana={1}{U}
 type=Creature
@@ -148423,9 +148424,10 @@ subtype=Lesson
 [/card]
 [card]
 name=Hei Bai, Spirit of Balance
-auto=may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( counter(1/1,2) all(mysource) )!
-auto=_ATTACKING_may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( counter(1/1,2) all(mysource) )!
-missing=its counters are not moved to another creature when it leaves the battlefield
+auto=ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield)!$ controller
+auto=_ATTACKING_ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield)!$ controller
+auto=@sacrificed(other *|mybattlefield):counter(1/1,2) all(this)
+missing=its counters are not moved to another creature when it leaves the battlefield, and they are added whenever you sacrifice another permanent rather than only for its own offer
 text=Whenever Hei Bai enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on Hei Bai. -- When Hei Bai leaves the battlefield, put its counters on target creature you control.
 mana={2}{W/B}{W/B}
 type=Legendary Creature
@@ -148460,7 +148462,7 @@ toughness=3
 [card]
 name=Fire Navy Trebuchet
 abilities=defender,reach
-auto=@combat(attacking) source(creature|mybattlefield) turnlimited:token(Ballistic Boulder,Artifact Creature Construct,2/1,flying,battleready) and!( transforms((,newability[phaseaction[combatends once] sacrifice])) forever )!
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:token(-1510513,battleready) and!( transforms((,newability[phaseaction[end once] sacrifice])) forever )!
 text=Defender, reach -- Whenever you attack, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at the beginning of the next end step.
 mana={2}{B}
 type=Artifact Creature
@@ -148502,7 +148504,8 @@ toughness=3
 [card]
 name=June, Bounty Hunter
 auto={1}{S(other creature|mybattlefield)}:_CLUE_ asSorcery
-missing=being unblockable once you have drawn two or more cards in a turn - cards drawn this turn cannot be counted
+auto=@each my combatbegins:if compare(pdrewcount)~morethan~1 then unblockable ueot
+missing=the unblockable check happens as combat begins rather than continuously
 text=June can't be blocked as long as you've drawn two or more cards this turn. -- {1}, Sacrifice another creature: Create a Clue token. Activate only during your turn.
 mana={1}{B}
 type=Legendary Creature
@@ -148513,7 +148516,8 @@ toughness=2
 [card]
 name=Momo, Playful Pet
 abilities=flying,vigilance
-auto=@movedTo(this|nonbattlezone) from(mybattlefield):ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield)!$ controller
+auto=_DIES_ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield)!$ controller
+missing=the choice happens when it dies, not when it leaves the battlefield in another way
 text=Flying, vigilance -- When Momo leaves the battlefield, choose one -- Create a Food token. -- Put a +1/+1 counter on target creature you control.
 mana={W}
 type=Legendary Creature
@@ -148523,7 +148527,7 @@ toughness=1
 [/card]
 [card]
 name=Joo Dee, One of Many
-auto={B}{T}:name(Surveil, copy, then sacrifice) _SURVEIL1_ && token(Joo Dee, One of Many) && sacrifice notaTarget(*[artifact;creature]|mybattlefield) asSorcery
+auto={B}{T}:name(Surveil, copy, then sacrifice) _SURVEIL1_ && token(Joo Dee, One of Many) && ability$!name(Sacrifice an artifact or creature) sacrifice notaTarget(*[artifact;creature]|mybattlefield)!$ controller asSorcery
 text={B}, {T}: Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Activate only as a sorcery.
 mana={1}{B}
 type=Creature
@@ -148542,4 +148546,15 @@ text=Counter target spell. -- Draw a card, then mill three cards. -- Untap targe
 mana={3}{U}{U}
 type=Instant
 subtype=Lesson
+[/card]
+[card]
+name=Foggy Swamp Hunters
+auto=@each my combatbegins:if compare(pdrewcount)~morethan~1 then transforms((,lifelink,menace)) ueot
+missing=lifelink and menace are granted as combat begins rather than continuously
+text=As long as you've drawn two or more cards this turn, this creature has lifelink and menace.
+mana={3}{B}
+type=Creature
+subtype=Human Ranger Ally
+power=3
+toughness=4
 [/card]
