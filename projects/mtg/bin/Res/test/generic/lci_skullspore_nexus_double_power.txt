@@ -1,0 +1,21 @@
+#LCI batch 10. The Skullspore Nexus: {2}, {T}: double target creature's power (Grizzly Bears 2/2 -> 4/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Skullspore Nexus,Grizzly Bears
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Skullspore Nexus
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Skullspore Nexus,Grizzly Bears
+pt:Grizzly Bears=4/2
+life:20
+[PLAYER2]
+life:20
+[END]

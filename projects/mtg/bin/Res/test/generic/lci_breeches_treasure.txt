@@ -1,0 +1,25 @@
+#LCI batch 10. Breeches, Eager Pillager (636846 - its name has a comma, which splits harness card lists)
+#attacks; it is itself a Pirate, so its trigger fires. Mode 0 makes a Treasure: the extra permanent below.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636846
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+636846
+next
+choice 0
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:636846,*
+life:20
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,20 @@
+#LCI batch 10. Unstable Glyphbridge destroys every creature with power 3 or more. Seeded in play (a card
+#with a back face cannot be cast from hand here) and seeded LAST, because seeding fires its enters trigger
+#immediately - anything seeded after it, including the other player's board, would not be there yet.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Ornithopter,Unstable Glyphbridge
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Unstable Glyphbridge
+graveyard:Craw Wurm
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,23 @@
+#LCI batch 10. Sunbird Standard crafts with Mind Stone and becomes Sunbird Effigy.
+#(Two activated abilities, so the click opens a menu: choice 1 is craft.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sunbird Standard,Mind Stone
+manapool:{5}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sunbird Standard
+choice 1
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sunbird Effigy
+exile:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]

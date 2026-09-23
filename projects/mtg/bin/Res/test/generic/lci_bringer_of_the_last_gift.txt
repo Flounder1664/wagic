@@ -1,0 +1,25 @@
+#LCI batch 10. Bringer of the Last Gift: every other creature is sacrificed, then creatures that were
+#already in a graveyard come back under their owner's control. Serra Angel was in the graveyard before.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Serra Angel
+hand:Bringer of the Last Gift
+manapool:{6}{B}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Bringer of the Last Gift
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bringer of the Last Gift,Serra Angel
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

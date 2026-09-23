@@ -1,0 +1,18 @@
+#LCI batch 10. Thousand Moons Smithy makes a Gnome Soldier when it enters (seeding a permanent fires its
+#enters trigger), so the battlefield holds the Smithy, Ornithopter and the token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thousand Moons Smithy,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thousand Moons Smithy,Ornithopter,*
+life:20
+[PLAYER2]
+life:20
+[END]

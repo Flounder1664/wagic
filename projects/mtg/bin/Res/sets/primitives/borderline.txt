@@ -147166,3 +147166,130 @@ subtype=Kithkin
 power=1
 toughness=1
 [/card]
+[card]
+name=Breeches, Eager Pillager
+abilities=first strike
+auto=@combat(attacking) source(creature[pirate]|mybattlefield):ability$!name(Choose one) choice name(Create a Treasure) _TREASURE_ _ choice name(Target creature cannot block this turn) target(creature) transforms((,cantblock)) ueot _ choice name(Exile the top card and play it this turn) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!!$ controller
+missing=a mode may be chosen again on a later attack in the same turn; the card allows each mode only once per turn
+text=First strike -- Whenever a Pirate you control attacks, choose one that hasn't been chosen this turn -- Create a Treasure token. -- Target creature can't block this turn. -- Exile the top card of your library. You may play it this turn.
+mana={2}{R}
+type=Legendary Creature
+subtype=Goblin Pirate
+power=3
+toughness=3
+[/card]
+[card]
+name=Bringer of the Last Gift
+abilities=flying
+auto=all(other creature|mybattlefield) sacrifice
+auto=all(creature|opponentbattlefield) sacrifice
+auto=all(creature[-fresh]|mygraveyard) moveto(mybattlefield)
+auto=all(creature[-fresh]|opponentgraveyard) moveto(ownerbattlefield)
+missing=the "if you cast it" condition; "weren't put there this way" is read as "did not reach the graveyard this turn", so a creature that died earlier in the turn stays in the graveyard
+text=Flying -- When this creature enters, if you cast it, each player sacrifices all other creatures they control. Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield.
+mana={6}{B}{B}
+type=Creature
+subtype=Vampire Demon
+power=6
+toughness=6
+[/card]
+[card]
+name=Kitesail Larcenist
+abilities=flying
+auto=_WARD1_
+auto=target(<upto:1>other *[artifact;creature]|mybattlefield) transforms((Artifact Treasure,newability[loseabilities],newability[{T}{S}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller])) forever
+auto=target(<upto:1>*[artifact;creature]|opponentbattlefield) transforms((Artifact Treasure,newability[loseabilities],newability[{T}{S}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller])) forever
+missing=the change is permanent instead of lasting only while this creature stays on the battlefield
+text=Flying, ward {1} -- When this creature enters, for each player, choose up to one other target artifact or creature that player controls. For as long as this creature remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.
+mana={2}{U}
+type=Creature
+subtype=Human Pirate
+power=2
+toughness=3
+[/card]
+[card]
+name=Roaming Throne
+auto=_WARD2_
+auto=chooseatype transforms((,newability[becomes(chosentype)],newability[doubletrigger(other creature[chosentype]|mybattlefield)])) chooseend
+text=Ward {2} -- As this creature enters, choose a creature type. -- This creature is the chosen type in addition to its other types. -- If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.
+mana={4}
+type=Artifact Creature
+subtype=Golem
+power=4
+toughness=4
+[/card]
+[card]
+name=Sunbird Standard
+backside=Sunbird Effigy
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+auto={5}{E(other *|mybattlefield,mygraveyard)}:name(Craft with one or more) flip(backside) asSorcery
+missing=craft exiles exactly one other permanent or graveyard card rather than one or more
+text={T}: Add one mana of any color. -- Craft with one or more {5} ({5}, Exile this artifact, Exile one or more other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Sunbird Effigy
+backside=Sunbird Standard
+abilities=flying,vigilance,haste
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+missing=its power and toughness should equal the number of colors among the cards exiled to craft it (fixed at 2/2 here), and its mana ability should add one mana of each of those colors
+text=(Transforms from Sunbird Standard.) -- Flying, vigilance, haste -- Sunbird Effigy's power and toughness are each equal to the number of colors among the exiled cards used to craft it. -- {T}: For each color among the exiled cards used to craft this creature, add one mana of that color.
+type=Artifact Creature
+subtype=Bird Construct
+power=2
+toughness=2
+[/card]
+[card]
+name=The Skullspore Nexus
+auto={2}{T}:name(Double target creature's power) target(creature) transforms((,newability[power/0])) ueot
+missing=the cost reduction ({X} less, X = the greatest power among creatures you control) and the dies trigger (a Fungus Dinosaur whose power and toughness equal the total power of the creatures that died)
+text=This spell costs {X} less to cast, where X is the greatest power among creatures you control. -- Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures. -- {2}, {T}: Double target creature's power until end of turn.
+mana={6}{G}{G}
+type=Legendary Artifact
+[/card]
+[card]
+name=Thousand Moons Smithy
+backside=Barracks of the Thousand
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=token(Gnome Soldier,Artifact Creature Gnome Soldier,type:*[artifact;creature]:mybattlefield/type:*[artifact;creature]:mybattlefield,white)
+auto=@each my firstmain:may name(Tap five artifacts or creatures to transform) tap target(<5>*[artifact;creature;-tapped]|mybattlefield) && flip(backside)
+missing=the token's power and toughness are fixed when it is created instead of counting your artifacts and creatures continuously
+text=When Thousand Moons Smithy enters, create a white Gnome Soldier artifact creature token with "This token's power and toughness are each equal to the number of artifacts and/or creatures you control." -- At the beginning of your first main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
+mana={2}{W}{W}
+type=Legendary Artifact
+[/card]
+[card]
+name=Barracks of the Thousand
+backside=Thousand Moons Smithy
+auto={T}:Add{W}
+missing=the trigger that makes a Gnome Soldier when you cast an artifact or creature spell with its mana - the engine does not track which source produced the mana spent
+text=(Transforms from Thousand Moons Smithy.) -- {T}: Add {W}. -- Whenever you cast an artifact or creature spell using mana produced by Barracks of the Thousand, create a white Gnome Soldier artifact creature token with "This token's power and toughness are each equal to the number of artifacts and/or creatures you control."
+type=Legendary Artifact Land
+[/card]
+[card]
+name=Unstable Glyphbridge
+backside=Sandswirl Wanderglyph
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=all(creature[power>=3]|battlefield) destroy
+auto={3}{W}{W}{E(other artifact|mybattlefield,mygraveyard)}:name(Craft with artifact) flip(backside) asSorcery
+missing=the "if you cast it" condition; every creature with power 2 or less survives instead of one chosen for each player
+text=When this artifact enters, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way. -- Craft with artifact {3}{W}{W} ({3}{W}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+mana={3}{W}{W}
+type=Artifact
+[/card]
+[card]
+name=Sandswirl Wanderglyph
+backside=Unstable Glyphbridge
+abilities=flying
+missing=both attack-denial triggers (an opponent who casts a spell on their own turn cannot attack you that turn; an opponent who attacked you cannot cast spells)
+text=(Transforms from Unstable Glyphbridge.) -- Flying -- Whenever an opponent casts a spell during their turn, they can't attack you or planeswalkers you control this turn. -- Each opponent who attacked you or a planeswalker you control this turn can't cast spells.
+type=Artifact Creature
+subtype=Golem
+power=5
+toughness=3
+[/card]
