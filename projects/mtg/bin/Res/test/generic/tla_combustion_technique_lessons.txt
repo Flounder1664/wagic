@@ -1,0 +1,24 @@
+#TLA batch 15. Combustion Technique deals 2 plus the Lesson cards in your graveyard: with two Lessons
+#there (Azula Always Lies, Yip Yip!) that is 4 damage, enough for a Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Azula Always Lies,Yip Yip!
+hand:Combustion Technique
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Combustion Technique
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Azula Always Lies,Yip Yip!,Combustion Technique
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

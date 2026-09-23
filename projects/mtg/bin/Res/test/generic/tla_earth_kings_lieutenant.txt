@@ -1,0 +1,23 @@
+#TLA batch 15. Earth King's Lieutenant enters and puts a +1/+1 counter on each other Ally: Walltop
+#Sentries (2/3) becomes 3/4. The Lieutenant itself stays 1/1 until another Ally enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Walltop Sentries
+hand:Earth King's Lieutenant
+manapool:{G}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Earth King's Lieutenant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Walltop Sentries,Earth King's Lieutenant
+pt:Walltop Sentries=3/4
+pt:Earth King's Lieutenant=1/1
+life:20
+[PLAYER2]
+life:20
+[END]

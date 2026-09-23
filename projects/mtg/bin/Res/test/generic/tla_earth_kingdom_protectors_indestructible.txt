@@ -1,0 +1,25 @@
+#TLA batch 15. Earth Kingdom Protectors sacrifices itself to make another Ally indestructible, so a
+#Shock does not kill Walltop Sentries.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Earth Kingdom Protectors,Walltop Sentries
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Earth Kingdom Protectors
+Walltop Sentries
+Shock
+Walltop Sentries
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Walltop Sentries
+graveyard:Earth Kingdom Protectors,Shock
+life:20
+[PLAYER2]
+life:20
+[END]

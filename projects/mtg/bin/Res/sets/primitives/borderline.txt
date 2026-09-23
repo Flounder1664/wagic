@@ -147778,7 +147778,8 @@ subtype=Lesson
 [/card]
 [card]
 name=Razor Rings
-auto=damage:4 target(creature[attacking;blocking])
+target=creature[attacking;blocking]
+auto=damage:4
 missing=the life gain for damage over the creature's toughness
 text=Razor Rings deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way.
 mana={1}{W}
@@ -147919,4 +147920,168 @@ type=Creature
 subtype=Human Warrior Performer
 power=3
 toughness=4
+[/card]
+[card]
+name=Hermitic Herbalist
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+missing=the second ability (two mana in any combination, spendable only on Lesson spells) - mana spend restrictions are not supported
+text={T}: Add one mana of any color. -- {T}: Add two mana in any combination of colors. Spend this mana only to cast Lesson spells.
+mana={G}{U}
+type=Creature
+subtype=Human Druid Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=White Lotus Hideout
+auto={T}:Add{C}
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+auto={1}{T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+missing=the second ability's spend restriction (Lesson or Shrine spells only)
+text={T}: Add {C}. -- {T}: Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell. -- {1}, {T}: Add one mana of any color.
+type=Land
+[/card]
+[card]
+name=Suki, Kyoshi Warrior
+anyzone=type:creature:mybattlefield/4 cdaactive
+auto=_ATTACKING_token(Ally,Creature Ally,1/1,white,battleready)
+text=Suki's power is equal to the number of creatures you control. -- Whenever Suki attacks, create a 1/1 white Ally creature token that's tapped and attacking.
+mana={2}{G/W}{G/W}
+type=Legendary Creature
+subtype=Human Warrior Ally
+power=*
+toughness=4
+[/card]
+[card]
+name=Earth Kingdom Protectors
+abilities=vigilance
+auto={S}:indestructible target(other creature[ally]|mybattlefield) ueot
+text=Vigilance -- Sacrifice this creature: Another target Ally you control gains indestructible until end of turn.
+mana={W}
+type=Creature
+subtype=Human Soldier Ally
+power=1
+toughness=1
+[/card]
+[card]
+name=Flopsie, Bumi's Buddy
+auto=counter(1/1) all(creature|mybattlefield)
+missing=the static that stops two or more creatures blocking your creatures with power 4 or greater
+text=When Flopsie enters, put a +1/+1 counter on each creature you control. -- Each creature you control with power 4 or greater can't be blocked by more than one creature.
+mana={4}{G}{G}
+type=Legendary Creature
+subtype=Ape Goat
+power=4
+toughness=4
+[/card]
+[card]
+name=Meteor Sword
+auto={3}:equip
+auto=teach(creature) 3/3
+auto=destroy target(*)
+text=When this Equipment enters, destroy target permanent. -- Equipped creature gets +3/+3. -- Equip {3}
+mana={7}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Combustion Technique
+target=creature
+auto=damage:type:lesson:mygraveyardplus2plusend
+missing=a creature that would die this turn is not exiled instead
+text=Combustion Technique deals damage equal to 2 plus the number of Lesson cards in your graveyard to target creature. If that creature would die this turn, exile it instead.
+mana={1}{R}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Professor Zei, Anthropologist
+auto={T}{D(*|myhand)}:draw:1
+auto={1}{T}{S}:moveto(hand) target(*[instant;sorcery]|mygraveyard) asSorcery
+text={T}, Discard a card: Draw a card. -- {1}, {T}, Sacrifice Professor Zei: Return target instant or sorcery card from your graveyard to your hand. Activate only during your turn.
+mana={U/R}{U/R}
+type=Legendary Creature
+subtype=Human Advisor Ally
+power=0
+toughness=3
+[/card]
+[card]
+name=Earth King's Lieutenant
+abilities=trample
+auto=counter(1/1) all(other creature[ally]|mybattlefield)
+auto=@movedTo(other creature[ally]|myBattlefield):counter(1/1) all(this)
+text=Trample -- When this creature enters, put a +1/+1 counter on each other Ally creature you control. -- Whenever another Ally you control enters, put a +1/+1 counter on this creature.
+mana={G}{W}
+type=Creature
+subtype=Human Soldier Ally
+power=1
+toughness=1
+[/card]
+[card]
+name=Earth Kingdom Jailer
+auto=(blink)forsrc target(<upto:1>*[artifact;creature;enchantment][manacost>=3]|opponentbattlefield)
+text=When this creature enters, exile up to one target artifact, creature, or enchantment an opponent controls with mana value 3 or greater until this creature leaves the battlefield.
+mana={2}{W}
+type=Creature
+subtype=Human Soldier Ally
+power=3
+toughness=3
+[/card]
+[card]
+name=Price of Freedom
+target=*[artifact;land]|opponentbattlefield
+auto=destroy
+auto=draw:1 controller
+missing=its controller is not offered the basic land search
+text=Destroy target artifact or land an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Draw a card.
+mana={1}{R}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Trusty Boomerang
+auto={1}:equip
+auto=teach(creature) transforms((,newability[{1}{T}:tap target(creature)]))
+missing=the Equipment does not return to its owner's hand when the granted ability is used
+text=Equipped creature has "{1}, {T}: Tap target creature. Return Trusty Boomerang to its owner's hand." -- Equip {1}
+mana={1}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Path to Redemption
+target=creature
+auto=teach(creature) cantattack
+auto=teach(creature) cantblock
+auto={5}{S}:moveto(exile) all(mytgt) && token(Ally,Creature Ally,1/1,white) asSorcery
+text=Enchant creature -- Enchanted creature can't attack or block. -- {5}, Sacrifice this Aura: Exile enchanted creature. Create a 1/1 white Ally creature token. Activate only during your turn.
+mana={1}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Airbender's Reversal
+auto=choice name(Destroy target attacking creature) destroy target(creature[attacking])
+auto=choice name(Airbend your own creature) moveto(exile) target(creature|mybattlefield)
+missing=an airbent creature cannot be cast from exile for {2}
+text=Choose one -- Destroy target attacking creature. -- Airbend target creature you control. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+mana={1}{W}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Rumble Arena
+auto=_SCRY1_
+auto={T}:Add{C}
+auto={1}{T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+text=When this land enters, scry 1. -- {T}: Add {C}. -- {1}, {T}: Add one mana of any color.
+type=Land
+[/card]
+[card]
+name=Air Nomad Legacy
+auto=_CLUE_
+auto=lord(creature[flying]|mybattlefield) 1/1
+text=When this enchantment enters, create a Clue token. -- Creatures you control with flying get +1/+1.
+mana={W}{U}
+type=Enchantment
 [/card]

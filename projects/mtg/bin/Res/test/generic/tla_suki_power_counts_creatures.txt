@@ -1,0 +1,19 @@
+#TLA batch 15. Suki, Kyoshi Warrior (1510243 - comma in the name): her power equals the creatures you
+#control, so with Grizzly Bears and Hill Giant beside her she is 3/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510243,Grizzly Bears,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510243,Grizzly Bears,Hill Giant
+pt:1510243=3/4
+life:20
+[PLAYER2]
+life:20
+[END]
