@@ -1,0 +1,19 @@
+#TLA batch 16. The Lion-Turtle gains you 3 life as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Lion-Turtle
+manapool:{1}{G}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Lion-Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Lion-Turtle
+life:23
+[PLAYER2]
+life:20
+[END]

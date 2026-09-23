@@ -148085,3 +148085,176 @@ text=When this enchantment enters, create a Clue token. -- Creatures you control
 mana={W}{U}
 type=Enchantment
 [/card]
+[card]
+name=Invasion Tactics
+auto=all(creature|mybattlefield) 2/2 ueot
+auto=@combatdamaged(player) from(creature[ally]|mybattlefield):draw:1 controller
+text=When this enchantment enters, creatures you control get +2/+2 until end of turn. -- Whenever one or more Allies you control deal combat damage to a player, draw a card.
+mana={4}{G}
+type=Enchantment
+[/card]
+[card]
+name=Jasmine Dragon Tea Shop
+auto={T}:Add{C}
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+auto={5}{T}:token(Ally,Creature Ally,1/1,white)
+missing=the any-colour mana has no spend restriction (Ally spells and Ally abilities only)
+text={T}: Add {C}. -- {T}: Add one mana of any color. Spend this mana only to cast an Ally spell or activate an ability of an Ally source. -- {5}, {T}: Create a 1/1 white Ally creature token.
+type=Land
+[/card]
+[card]
+name=Gran-Gran
+auto=@tapped(this):_LOOT_
+auto=lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+missing=the discount applies even with fewer than three Lesson cards in your graveyard
+text=Whenever Gran-Gran becomes tapped, draw a card, then discard a card. -- Noncreature spells you cast cost {1} less to cast as long as there are three or more Lesson cards in your graveyard.
+mana={U}
+type=Legendary Creature
+subtype=Human Peasant Ally
+power=1
+toughness=2
+[/card]
+[card]
+name=Ty Lee, Artful Acrobat
+abilities=prowess
+auto=_ATTACKING_pay({1}) name(Target creature cannot block this turn) target(creature) transforms((,cantblock)) ueot
+text=Prowess -- Whenever Ty Lee attacks, you may pay {1}. When you do, target creature can't block this turn.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Performer
+power=3
+toughness=2
+[/card]
+[card]
+name=Zhao, Ruthless Admiral
+auto=_ATTACKING_Add{R}{R}
+auto=@sacrificed(other *|mybattlefield):all(creature|mybattlefield) 1/0 ueot
+missing=the firebending mana lasts as long as the pool does rather than until end of combat
+text=Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.) -- Whenever you sacrifice another permanent, creatures you control get +1/+0 until end of turn.
+mana={2}{B/R}{B/R}
+type=Legendary Creature
+subtype=Human Soldier
+power=3
+toughness=4
+[/card]
+[card]
+name=Lo and Li, Twin Tutors
+auto=name(Search for a Lesson or Noble card) target(*[lesson;noble]|mylibrary) moveto(hand) and!( shuffle )!
+auto=lord(creature[noble]|mybattlefield) lifelink
+missing=lifelink for Lesson spells you control
+text=When Lo and Li enter, search your library for a Lesson or Noble card, reveal it, put it into your hand, then shuffle. -- Noble creatures you control and Lesson spells you control have lifelink.
+mana={4}{B}
+type=Legendary Creature
+subtype=Human Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=Jet, Freedom Fighter
+auto=damage:type:creature:mybattlefield target(creature|opponentbattlefield)
+auto=_DIES_counter(1/1) target(<upto:2>creature)
+text=When Jet enters, he deals damage equal to the number of creatures you control to target creature an opponent controls. -- When Jet dies, put a +1/+1 counter on each of up to two target creatures.
+mana={2}{R/W}{R/W}{R/W}
+type=Legendary Creature
+subtype=Human Rebel Ally
+power=3
+toughness=1
+[/card]
+[card]
+name=Serpent of the Pass
+anyzone=affinity(variable{type:*[-creature;-land]:mygraveyard}) reduce({1})
+missing=casting it as though it had flash with three or more Lessons in your graveyard
+text=If there are three or more Lesson cards in your graveyard, you may cast this spell as though it had flash. -- This spell costs {1} less to cast for each noncreature, nonland card in your graveyard.
+mana={5}{U}{U}
+type=Creature
+subtype=Serpent
+power=6
+toughness=5
+[/card]
+[card]
+name=The Lion-Turtle
+abilities=reach,vigilance
+auto=life:3 controller
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+auto=@each my combatbegins:if type(*[lesson]|mygraveyard)~lessthan~3 then cantattack ueot
+auto=@each combatbegins:if type(*[lesson]|mygraveyard)~lessthan~3 then cantblock ueot
+text=Reach, vigilance -- When The Lion-Turtle enters, you gain 3 life. -- The Lion-Turtle can't attack or block unless there are three or more Lesson cards in your graveyard. -- {T}: Add one mana of any color.
+mana={1}{G}{U}
+type=Legendary Creature
+subtype=Elder Cat Turtle
+power=3
+toughness=6
+[/card]
+[card]
+name=Realm of Koh
+auto=if type(land[basic]|mybattlefield)~equalto~0 then tap(noevent)
+auto={T}:Add{B}
+auto={3}{B}{T}:token(Spirit,Creature Spirit,1/1)
+missing=the token should not block or be blocked by non-Spirit creatures
+text=This land enters tapped unless you control a basic land. -- {T}: Add {B}. -- {3}{B}, {T}: Create a 1/1 colorless Spirit creature token.
+type=Land
+[/card]
+[card]
+name=Teo, Spirited Glider
+abilities=flying
+auto=@combat(attacking) source(creature[flying]|mybattlefield) turnlimited:_LOOT_
+missing=the +1/+1 counter for discarding a nonland card this way
+text=Flying -- Whenever one or more creatures you control with flying attack, draw a card, then discard a card. When you discard a nonland card this way, put a +1/+1 counter on target creature you control.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Pilot Ally
+power=1
+toughness=4
+[/card]
+[card]
+name=Messenger Hawk
+abilities=flying
+auto=_CLUE_
+missing=the +2/+0 while you have drawn two or more cards this turn - cards drawn this turn cannot be counted
+text=Flying -- When this creature enters, create a Clue token. -- This creature gets +2/+0 as long as you've drawn two or more cards this turn.
+mana={2}{U/B}
+type=Creature
+subtype=Bird Scout
+power=1
+toughness=2
+[/card]
+[card]
+name=Lost Days
+target=*[creature;enchantment]
+auto=moveto(ownerlibrary)
+auto=_CLUE_
+missing=its owner does not choose between second from the top and the bottom
+text=The owner of target creature or enchantment puts it into their library second from the top or on the bottom. You create a Clue token.
+mana={4}{U}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=How to Start a Riot
+target=creature
+auto=transforms((,menace)) ueot
+auto=all(creature|mybattlefield) 2/0 ueot
+missing=the +2/+0 always goes to your own creatures rather than a chosen player's
+text=Target creature gains menace until end of turn. -- Creatures target player controls get +2/+0 until end of turn.
+mana={2}{R}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Gather the White Lotus
+auto=token(Ally,Creature Ally,1/1,white)*type:plains:mybattlefield
+auto=_SCRY2_
+text=Create a 1/1 white Ally creature token for each Plains you control. Scry 2.
+mana={4}{W}
+type=Sorcery
+[/card]
+[card]
+name=Rowdy Snowballers
+auto=name(Tap and stun) target(creature|opponentbattlefield) tap(noevent) and!( counter(0/0,1,stun) )!
+text=When this creature enters, tap target creature an opponent controls and put a stun counter on it.
+mana={2}{U}
+type=Creature
+subtype=Human Peasant Ally
+power=2
+toughness=2
+[/card]

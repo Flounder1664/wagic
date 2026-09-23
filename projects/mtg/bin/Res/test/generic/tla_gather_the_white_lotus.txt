@@ -1,0 +1,23 @@
+#TLA batch 16. Gather the White Lotus makes a 1/1 Ally for each Plains you control (three here).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Plains,Plains
+hand:Gather the White Lotus
+library:Forest,Island,Swamp
+manapool:{4}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Gather the White Lotus
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,*,*,*
+graveyard:Gather the White Lotus
+library:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

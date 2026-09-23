@@ -1,0 +1,25 @@
+#TLA batch 16. Zhao, Ruthless Admiral (1510252) pumps your team when you sacrifice another permanent:
+#Curious Farm Animals sacrifices itself, so Grizzly Bears is 3/2 this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510252,Grizzly Bears,Curious Farm Animals
+manapool:{2}
+life:20
+[PLAYER2]
+inplay:Mind Stone
+life:20
+[DO]
+Curious Farm Animals
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510252,Grizzly Bears
+graveyard:Curious Farm Animals
+pt:Grizzly Bears=3/2
+life:23
+[PLAYER2]
+graveyard:Mind Stone
+life:20
+[END]
