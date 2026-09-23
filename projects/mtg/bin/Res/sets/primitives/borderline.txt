@@ -148516,9 +148516,9 @@ toughness=2
 [card]
 name=Momo, Playful Pet
 abilities=flying,vigilance
-auto=_DIES_ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield)!$ controller
+auto=_DIES_ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield) _ choice name(Scry 2) _SCRY2_!$ controller
 missing=the choice happens when it dies, not when it leaves the battlefield in another way
-text=Flying, vigilance -- When Momo leaves the battlefield, choose one -- Create a Food token. -- Put a +1/+1 counter on target creature you control.
+text=Flying, vigilance -- When Momo leaves the battlefield, choose one -- Create a Food token. -- Put a +1/+1 counter on target creature you control. -- Scry 2.
 mana={W}
 type=Legendary Creature
 subtype=Lemur Bat Ally
