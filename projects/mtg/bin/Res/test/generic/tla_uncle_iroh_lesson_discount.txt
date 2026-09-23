@@ -1,0 +1,25 @@
+#TLA batch 14. Uncle Iroh makes Lesson spells cost {1} less: Azula Always Lies ({1}{B}) is cast from a
+#pool of just {B}, which would not pay for it otherwise.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Uncle Iroh,Grizzly Bears
+hand:Azula Always Lies
+manapool:{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Azula Always Lies
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Uncle Iroh,Grizzly Bears
+graveyard:Azula Always Lies
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

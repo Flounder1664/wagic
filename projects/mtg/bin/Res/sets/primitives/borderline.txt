@@ -147766,3 +147766,157 @@ text=This land can't be blocked. -- {T}: Add {C}. -- {4}, {T}: Two target creatu
 type=Land
 subtype=Cave
 [/card]
+[card]
+name=Cycle of Renewal
+auto=sacrifice notaTarget(land|mybattlefield)
+auto=target(<upto:2>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=shuffle
+text=Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+mana={2}{G}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Razor Rings
+auto=damage:4 target(creature[attacking;blocking])
+missing=the life gain for damage over the creature's toughness
+text=Razor Rings deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Barrels of Blasting Jelly
+auto={1}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller limit:1
+auto={5}{T}{S}:damage:5 target(creature)
+text={1}: Add one mana of any color. Activate only once each turn. -- {5}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.
+mana={1}
+type=Artifact
+[/card]
+[card]
+name=Fire Nation Engineer
+auto=@each my end restriction{didattack}:counter(1/1) target(other *[creature;vehicle]|mybattlefield)
+text=Raid -- At the beginning of your end step, if you attacked this turn, put a +1/+1 counter on another target creature or Vehicle you control.
+mana={2}{B}
+type=Creature
+subtype=Human Artificer
+power=2
+toughness=3
+[/card]
+[card]
+name=Uncle Iroh
+auto=_ATTACKING_Add{R}
+auto=lord(*[lesson]|mycastingzone) altercost(colorless,-1)
+missing=the firebending mana lasts as long as the pool does rather than until end of combat
+text=Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.) -- Lesson spells you cast cost {1} less to cast.
+mana={1}{R/G}{R/G}
+type=Legendary Creature
+subtype=Human Noble
+power=4
+toughness=2
+[/card]
+[card]
+name=Beetle-Headed Merchants
+auto=_ATTACKING_may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( draw:1 controller && counter(1/1) all(mysource) )!
+text=Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card and put a +1/+1 counter on this creature.
+mana={4}{B}
+type=Creature
+subtype=Human Citizen
+power=5
+toughness=4
+[/card]
+[card]
+name=Bumi Bash
+auto=choice name(Damage equal to your lands) damage:type:land:mybattlefield target(creature)
+auto=choice name(Destroy target land creature or nonbasic land) destroy target(*[land])
+text=Choose one -- Bumi Bash deals damage equal to the number of lands you control to target creature. -- Destroy target land creature or nonbasic land.
+mana={3}{R}
+type=Sorcery
+[/card]
+[card]
+name=Fire Nation Raider
+auto=_CLUE_
+missing=the raid condition - the Clue is created whether or not you attacked this turn
+text=Raid -- When this creature enters, if you attacked this turn, create a Clue token.
+mana={3}{R}
+type=Creature
+subtype=Human Soldier
+power=4
+toughness=2
+[/card]
+[card]
+name=Sokka, Bold Boomeranger
+auto=may name(Discard up to two cards, then draw that many) target(<upto:2>*|myhand) reject && draw:1
+auto=@movedto(*[artifact;lesson]|mystack):counter(1/1) all(this)
+text=When Sokka enters, discard up to two cards, then draw that many cards. -- Whenever you cast an artifact or Lesson spell, put a +1/+1 counter on Sokka.
+mana={U}{R}
+type=Legendary Creature
+subtype=Human Warrior
+power=1
+toughness=1
+[/card]
+[card]
+name=Iroh's Demonstration
+auto=choice name(1 damage to each creature your opponents control) damage:1 all(creature|opponentbattlefield)
+auto=choice name(4 damage to target creature) damage:4 target(creature)
+text=Choose one -- Iroh's Demonstration deals 1 damage to each creature your opponents control. -- Iroh's Demonstration deals 4 damage to target creature.
+mana={1}{R}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Zuko's Exile
+target=*[artifact;creature;enchantment]|battlefield
+auto=_CLUE_
+auto=moveto(exile)
+missing=the Clue is created by you, not by the exiled permanent's controller - a token ability on a spell does not read targetcontroller
+text=Exile target artifact, creature, or enchantment. Its controller creates a Clue token.
+mana={5}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Octopus Form
+target=creature|mybattlefield
+auto=1/1 ueot
+auto=transforms((,hexproof)) ueot
+auto=untap
+text=Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it.
+mana={U}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=True Ancestry
+target=*[-instant;-sorcery]|mygraveyard
+auto=moveto(hand)
+auto=_CLUE_
+missing=the return is not optional
+text=Return up to one target permanent card from your graveyard to your hand. -- Create a Clue token.
+mana={1}{G}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=South Pole Voyager
+auto=@movedTo(creature[ally]|myBattlefield):life:1 controller
+auto=@movedTo(creature[ally]|myBattlefield) restriction{thisturn(creature[ally][fresh]|myBattlefield)~equalto~2} turnlimited:draw:1 controller
+text=Whenever this creature or another Ally you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, draw a card.
+mana={1}{W}
+type=Creature
+subtype=Human Scout Ally
+power=2
+toughness=2
+[/card]
+[card]
+name=Earth Rumble Wrestlers
+abilities=reach
+auto=aslongas(land[fresh]|mybattlefield) 1/0
+auto=aslongas(land[fresh]|mybattlefield) trample
+missing=only a land that entered this turn counts; controlling a land creature does not
+text=Reach -- This creature gets +1/+0 and has trample as long as you control a land creature or a land entered the battlefield under your control this turn.
+mana={3}{R/G}
+type=Creature
+subtype=Human Warrior Performer
+power=3
+toughness=4
+[/card]

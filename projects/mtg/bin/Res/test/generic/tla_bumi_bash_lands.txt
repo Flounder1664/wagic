@@ -1,0 +1,25 @@
+#TLA batch 14. Bumi Bash mode 0: damage equal to the lands you control (three) kills a Hill Giant (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mountain,Mountain,Mountain
+hand:Bumi Bash
+manapool:{3}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Bumi Bash
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+graveyard:Bumi Bash
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

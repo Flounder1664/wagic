@@ -1,0 +1,23 @@
+#TLA batch 14. True Ancestry returns a permanent card from your graveyard to hand and makes a Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears
+hand:True Ancestry
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+True Ancestry
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+hand:*
+graveyard:True Ancestry
+life:20
+[PLAYER2]
+life:20
+[END]

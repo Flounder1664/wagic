@@ -1,0 +1,24 @@
+#TLA batch 14. Zuko's Exile exiles a permanent. The Clue should go to that permanent's controller; the
+#engine gives it to the caster instead (noted on the card), which is what this asserts.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Zuko's Exile
+manapool:{5}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Zuko's Exile
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Zuko's Exile
+life:20
+[PLAYER2]
+exile:Grizzly Bears
+life:20
+[END]
