@@ -1,0 +1,19 @@
+#TLA batch 17. Suki, Courageous Rescuer (1510037 - comma in the name) gives your OTHER creatures +1/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510037,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510037,Grizzly Bears
+pt:Grizzly Bears=3/2
+pt:1510037=2/4
+life:20
+[PLAYER2]
+life:20
+[END]

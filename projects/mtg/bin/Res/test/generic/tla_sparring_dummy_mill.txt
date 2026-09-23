@@ -1,0 +1,23 @@
+#TLA batch 17. Sparring Dummy mills a card and offers a milled LAND to your hand (millchoose): the
+#Forest on top is offered and taken with choice 0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sparring Dummy
+library:Island,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sparring Dummy
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sparring Dummy
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

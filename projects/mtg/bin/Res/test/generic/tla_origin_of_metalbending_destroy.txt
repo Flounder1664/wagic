@@ -1,0 +1,23 @@
+#TLA batch 17. Origin of Metalbending mode 0 destroys an artifact.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Origin of Metalbending
+manapool:{1}{G}
+life:20
+[PLAYER2]
+inplay:Mind Stone
+life:20
+[DO]
+Origin of Metalbending
+choice 0
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Origin of Metalbending
+life:20
+[PLAYER2]
+graveyard:Mind Stone
+life:20
+[END]

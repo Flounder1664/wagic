@@ -148258,3 +148258,166 @@ subtype=Human Peasant Ally
 power=2
 toughness=2
 [/card]
+[card]
+name=Suki, Courageous Rescuer
+auto=lord(other creature|mybattlefield) 1/0
+auto=@movedTo(other *|nonbattlezone) from(mybattlefield) turnlimited:token(Ally,Creature Ally,1/1,white)
+missing=the trigger does not check that it is your turn
+text=Other creatures you control get +1/+0. -- Whenever another permanent you control leaves the battlefield during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.
+mana={1}{W}{W}
+type=Legendary Creature
+subtype=Human Warrior Ally
+power=2
+toughness=4
+[/card]
+[card]
+name=Buzzard-Wasp Colony
+abilities=flying
+auto=may name(Sacrifice an artifact or creature to draw) sacrifice notaTarget(*[artifact;creature]|mybattlefield) and!( draw:1 controller )!
+missing=moving the counters from another creature you control that dies
+text=Flying -- When this creature enters, you may sacrifice an artifact or creature. If you do, draw a card. -- Whenever another creature you control dies, if it had counters on it, put its counters on this creature.
+mana={3}{B}
+type=Creature
+subtype=Bird Insect
+power=2
+toughness=2
+[/card]
+[card]
+name=Glider Staff
+auto={2}:equip
+auto=teach(creature) 1/1
+auto=teach(creature) flying
+auto=moveto(exile) target(<upto:1>creature)
+missing=an airbent creature cannot be cast from exile for {2}
+text=When this Equipment enters, airbend up to one target creature. -- Equipped creature gets +1/+1 and has flying. -- Equip {2}
+mana={2}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Momo, Friendly Flier
+abilities=flying
+auto=@movedTo(other creature[flying]|myBattlefield):all(this) 1/1 ueot
+missing=the discount on your first non-Lemur flying creature spell each turn
+text=Flying -- The first non-Lemur creature spell with flying you cast during each of your turns costs {1} less to cast. -- Whenever another creature you control with flying enters, Momo gets +1/+1 until end of turn.
+mana={W}
+type=Legendary Creature
+subtype=Lemur Bat Ally
+power=1
+toughness=1
+[/card]
+[card]
+name=Hakoda, Selfless Commander
+abilities=vigilance
+auto={S}:all(creature|mybattlefield) 0/5 ueot && all(creature|mybattlefield) transforms((,indestructible)) ueot
+missing=looking at and casting Ally spells from the top of your library
+text=Vigilance -- You may look at the top card of your library any time. -- You may cast Ally spells from the top of your library. -- Sacrifice Hakoda: Creatures you control get +0/+5 and gain indestructible until end of turn.
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Warrior Ally
+power=3
+toughness=5
+[/card]
+[card]
+name=Allies at Last
+target=creature|mybattlefield
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+missing=affinity for Allies, and only one of your creatures deals damage rather than up to two
+text=Affinity for Allies -- Up to two target creatures you control each deal damage equal to their power to target creature an opponent controls.
+mana={2}{G}
+type=Instant
+[/card]
+[card]
+name=Sparring Dummy
+abilities=defender
+auto={T}:millchoose(1,land)
+missing=the 2 life when a Lesson card is milled
+text=Defender -- {T}: Mill a card. You may put a land card milled this way into your hand. You gain 2 life if a Lesson card is milled this way.
+mana={1}{G}
+type=Artifact Creature
+subtype=Scarecrow
+power=1
+toughness=3
+[/card]
+[card]
+name=Knowledge Seeker
+abilities=vigilance
+auto=_DIES_ _CLUE_
+missing=the +1/+1 counter when you draw your second card each turn - cards drawn this turn cannot be counted
+text=Vigilance -- Whenever you draw your second card each turn, put a +1/+1 counter on this creature. -- When this creature dies, create a Clue token.
+mana={1}{U}
+type=Creature
+subtype=Fox Spirit
+power=2
+toughness=1
+[/card]
+[card]
+name=Kyoshi Battle Fan
+auto={2}:equip
+auto=livingweapontoken(Ally,Creature Ally,1/1,white)
+auto=teach(creature) 1/0
+text=When this Equipment enters, create a 1/1 white Ally creature token, then attach this Equipment to it. -- Equipped creature gets +1/+0. -- Equip {2}
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Planetarium of Wan Shi Tong
+auto={1}{T}:_SCRY2_
+missing=the free cast after you scry or surveil
+text={1}, {T}: Scry 2. -- Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn.
+mana={6}
+type=Legendary Artifact
+[/card]
+[card]
+name=Origin of Metalbending
+auto=choice name(Destroy target artifact or enchantment) destroy target(*[artifact;enchantment])
+auto=choice name(Counter and indestructible) counter(1/1) target(creature|mybattlefield) && transforms((,indestructible)) ueot
+text=Choose one -- Destroy target artifact or enchantment. -- Put a +1/+1 counter on target creature you control. It gains indestructible until end of turn.
+mana={1}{G}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=Callous Inspector
+abilities=menace
+auto=_DIES_damage:1 controller
+auto=_DIES_ _CLUE_
+text=Menace -- When this creature dies, it deals 1 damage to you. Create a Clue token.
+mana={B}
+type=Creature
+subtype=Human Soldier
+power=1
+toughness=1
+[/card]
+[card]
+name=Waterbending Lesson
+auto=draw:3 controller
+auto=discard:1
+missing=the discard is not optional - waterbend {2} is not supported
+text=Draw three cards. Then discard a card unless you waterbend {2}.
+mana={3}{U}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Flexible Waterbender
+abilities=vigilance
+auto={3}:transforms((,setpower=5,settoughness=2)) ueot
+missing=waterbend - artifacts and creatures cannot be tapped to help pay the cost
+text=Vigilance -- Waterbend {3}: This creature has base power and toughness 5/2 until end of turn.
+mana={3}{U}
+type=Creature
+subtype=Human Warrior Ally
+power=2
+toughness=5
+[/card]
+[card]
+name=Energybending
+auto=lord(land|mybattlefield) transforms((Forest Island Swamp Mountain Plains)) ueot
+auto=draw:1 controller
+text=Lands you control gain all basic land types until end of turn. -- Draw a card.
+mana={2}
+type=Instant
+subtype=Lesson
+[/card]

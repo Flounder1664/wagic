@@ -1,0 +1,22 @@
+#TLA batch 17. Momo, Friendly Flier (1510029) gets +1/+1 until end of turn when another flier you
+#control enters: casting Serra Angel makes Momo 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510029
+hand:Serra Angel
+manapool:{3}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510029,Serra Angel
+pt:1510029=2/2
+life:20
+[PLAYER2]
+life:20
+[END]

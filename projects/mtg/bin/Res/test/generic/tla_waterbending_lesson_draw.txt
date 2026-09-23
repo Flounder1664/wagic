@@ -1,0 +1,23 @@
+#TLA batch 17. Waterbending Lesson draws three and then discards one (the waterbend alternative is not
+#supported), so the hand ends two cards bigger.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Waterbending Lesson
+library:Forest,Island,Swamp,Mountain
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterbending Lesson
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+graveyard:Waterbending Lesson,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]
