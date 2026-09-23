@@ -1,0 +1,19 @@
+#TLA batch 18. Northern Air Temple drains for each Shrine you control, itself included: alone that is 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Northern Air Temple
+manapool:{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Northern Air Temple
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Northern Air Temple
+life:21
+[PLAYER2]
+life:19
+[END]

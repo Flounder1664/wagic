@@ -1,0 +1,21 @@
+#TLA batch 18. June, Bounty Hunter (1510106 - comma in the name) sacrifices another creature for a Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510106,Grizzly Bears
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+1510106
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510106,*
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

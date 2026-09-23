@@ -1,0 +1,22 @@
+#TLA batch 18. Southern Air Temple puts X +1/+1 counters on each of your creatures, X being the Shrines
+#you control - itself included, so alone it is one counter each.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Southern Air Temple
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Southern Air Temple
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Southern Air Temple
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

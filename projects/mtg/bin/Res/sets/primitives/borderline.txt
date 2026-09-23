@@ -148421,3 +148421,125 @@ mana={2}
 type=Instant
 subtype=Lesson
 [/card]
+[card]
+name=Hei Bai, Spirit of Balance
+auto=may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( counter(1/1,2) all(mysource) )!
+auto=_ATTACKING_may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( counter(1/1,2) all(mysource) )!
+missing=its counters are not moved to another creature when it leaves the battlefield
+text=Whenever Hei Bai enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on Hei Bai. -- When Hei Bai leaves the battlefield, put its counters on target creature you control.
+mana={2}{W/B}{W/B}
+type=Legendary Creature
+subtype=Bear Spirit
+power=3
+toughness=3
+[/card]
+[card]
+name=North Pole Patrol
+auto={T}:untap target(other *|mybattlefield)
+auto={3}{T}:tap target(creature|opponentbattlefield)
+missing=waterbend - artifacts and creatures cannot be tapped to help pay the {3}
+text={T}: Untap another target permanent you control. -- Waterbend {3}, {T}: Tap target creature an opponent controls.
+mana={2}{U}
+type=Creature
+subtype=Human Soldier Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=Katara, Bending Prodigy
+auto=@each my end restriction{type(this[tapped]|mybattlefield)~morethan~0}:counter(1/1)
+auto={6}:draw:1
+missing=waterbend - artifacts and creatures cannot be tapped to help pay the {6}; the end-step counter is untested (the harness cannot leave her tapped)
+text=At the beginning of your end step, if Katara is tapped, put a +1/+1 counter on her. -- Waterbend {6}: Draw a card.
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Warrior Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=Fire Navy Trebuchet
+abilities=defender,reach
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:token(Ballistic Boulder,Artifact Creature Construct,2/1,flying,battleready) and!( transforms((,newability[phaseaction[combatends once] sacrifice])) forever )!
+text=Defender, reach -- Whenever you attack, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at the beginning of the next end step.
+mana={2}{B}
+type=Artifact Creature
+subtype=Wall
+power=0
+toughness=4
+[/card]
+[card]
+name=Northern Air Temple
+auto=life:-type:*[shrine]:mybattlefield opponent
+auto=life:type:*[shrine]:mybattlefield controller
+auto=@movedTo(other *[shrine]|myBattlefield):life:-1 opponent && life:1 controller
+text=When Northern Air Temple enters, each opponent loses X life and you gain X life, where X is the number of Shrines you control. -- Whenever another Shrine you control enters, each opponent loses 1 life and you gain 1 life.
+mana={B}
+type=Legendary Enchantment
+subtype=Shrine
+[/card]
+[card]
+name=Southern Air Temple
+auto=counter(1/1,type:*[shrine]:mybattlefield) all(creature|mybattlefield)
+auto=@movedTo(other *[shrine]|myBattlefield):counter(1/1) all(creature|mybattlefield)
+text=When Southern Air Temple enters, put X +1/+1 counters on each creature you control, where X is the number of Shrines you control. -- Whenever another Shrine you control enters, put a +1/+1 counter on each creature you control.
+mana={3}{W}
+type=Legendary Enchantment
+subtype=Shrine
+[/card]
+[card]
+name=Platypus-Bear
+abilities=defender
+auto=deplete:2 controller
+auto=aslongas(*[lesson]|mygraveyard) canattack >0
+text=Defender -- When this creature enters, mill two cards. -- As long as there is a Lesson card in your graveyard, this creature can attack as though it didn't have defender.
+mana={1}{G/U}
+type=Creature
+subtype=Platypus Bear
+power=2
+toughness=3
+[/card]
+[card]
+name=June, Bounty Hunter
+auto={1}{S(other creature|mybattlefield)}:_CLUE_ asSorcery
+missing=being unblockable once you have drawn two or more cards in a turn - cards drawn this turn cannot be counted
+text=June can't be blocked as long as you've drawn two or more cards this turn. -- {1}, Sacrifice another creature: Create a Clue token. Activate only during your turn.
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Rogue Ally
+power=2
+toughness=2
+[/card]
+[card]
+name=Momo, Playful Pet
+abilities=flying,vigilance
+auto=@movedTo(this|nonbattlezone) from(mybattlefield):ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield)!$ controller
+text=Flying, vigilance -- When Momo leaves the battlefield, choose one -- Create a Food token. -- Put a +1/+1 counter on target creature you control.
+mana={W}
+type=Legendary Creature
+subtype=Lemur Bat Ally
+power=1
+toughness=1
+[/card]
+[card]
+name=Joo Dee, One of Many
+auto={B}{T}:name(Surveil, copy, then sacrifice) _SURVEIL1_ && token(Joo Dee, One of Many) && sacrifice notaTarget(*[artifact;creature]|mybattlefield) asSorcery
+text={B}, {T}: Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Activate only as a sorcery.
+mana={1}{B}
+type=Creature
+subtype=Human Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=Sokka's Haiku
+target=*|stack
+auto=fizzle
+auto=draw:1 controller
+auto=deplete:3 controller
+missing=untapping a land
+text=Counter target spell. -- Draw a card, then mill three cards. -- Untap target land.
+mana={3}{U}{U}
+type=Instant
+subtype=Lesson
+[/card]
