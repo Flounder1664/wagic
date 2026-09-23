@@ -1,0 +1,28 @@
+#John 2026-09-23: Hei Bai's counters must come only from its OWN offer. Decline the offer (choice 1), then
+#sacrifice Curious Farm Animals through its own ability: Hei Bai stays 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Curious Farm Animals
+hand:1510225
+manapool:{4}{W}{W}
+life:20
+[PLAYER2]
+inplay:Mind Stone
+life:20
+[DO]
+1510225
+choice 1
+Curious Farm Animals
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510225
+graveyard:Curious Farm Animals
+pt:1510225=3/3
+life:23
+[PLAYER2]
+graveyard:Mind Stone
+life:20
+[END]

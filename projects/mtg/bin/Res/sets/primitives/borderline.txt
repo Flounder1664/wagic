@@ -147817,7 +147817,7 @@ toughness=2
 [/card]
 [card]
 name=Beetle-Headed Merchants
-auto=_ATTACKING_may name(Sacrifice another creature or artifact) sacrifice notaTarget(other *[creature;artifact]|mybattlefield) and!( draw:1 controller && counter(1/1) all(mysource) )!
+auto=_ATTACKING_ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield) && draw:1 controller && counter(1/1) all(mysource)!$ controller
 text=Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card and put a +1/+1 counter on this creature.
 mana={4}{B}
 type=Creature
@@ -148424,10 +148424,9 @@ subtype=Lesson
 [/card]
 [card]
 name=Hei Bai, Spirit of Balance
-auto=ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield)!$ controller
-auto=_ATTACKING_ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield)!$ controller
-auto=@sacrificed(other *|mybattlefield):counter(1/1,2) all(this)
-missing=its counters are not moved to another creature when it leaves the battlefield, and they are added whenever you sacrifice another permanent rather than only for its own offer
+auto=ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield) && counter(1/1,2) all(mysource)!$ controller
+auto=_ATTACKING_ability$!name(Sacrifice another creature or artifact) may sacrifice notaTarget(other *[creature;artifact]|mybattlefield) && counter(1/1,2) all(mysource)!$ controller
+missing=its counters are not moved to another creature when it leaves the battlefield
 text=Whenever Hei Bai enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on Hei Bai. -- When Hei Bai leaves the battlefield, put its counters on target creature you control.
 mana={2}{W/B}{W/B}
 type=Legendary Creature
@@ -148516,8 +148515,7 @@ toughness=2
 [card]
 name=Momo, Playful Pet
 abilities=flying,vigilance
-auto=_DIES_ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield) _ choice name(Scry 2) _SCRY2_!$ controller
-missing=the choice happens when it dies, not when it leaves the battlefield in another way
+auto=@movedTo(this|nonbattlezone) from(mybattlefield):ability$!name(Choose one) choice name(Create a Food) _FOOD_ _ choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature|mybattlefield) _ choice name(Scry 2) _SCRY2_!$ controller
 text=Flying, vigilance -- When Momo leaves the battlefield, choose one -- Create a Food token. -- Put a +1/+1 counter on target creature you control. -- Scry 2.
 mana={W}
 type=Legendary Creature
