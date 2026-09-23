@@ -147374,3 +147374,239 @@ missing=it should have each activated ability of the cards exiled to craft it, e
 text=(Transforms from The Enigma Jewel.) -- Locus of Enlightenment has each activated ability of the exiled cards used to craft it. You may activate each of those abilities only once each turn. -- Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.
 type=Legendary Artifact
 [/card]
+[card]
+name=Airship Engine Room
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{R}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {U} or {R}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Boiling Rock Prison
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {B} or {R}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Foggy Bottom Swamp
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{G}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {B} or {G}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Kyoshi Village
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{W}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {G} or {W}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Meditation Pools
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{U}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {G} or {U}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Misty Palms Oasis
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{B}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {W} or {B}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=North Pole Gates
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {W} or {U}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Omashu City
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {R} or {G}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Serpent's Pass
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {U} or {B}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Sun-Blessed Peak
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{W}
+auto={4}{T}{S}:draw:1
+text=This land enters tapped. -- {T}: Add {R} or {W}. -- {4}, {T}, Sacrifice this land: Draw a card.
+type=Land
+[/card]
+[card]
+name=Great Divide Guide
+auto=lord(*[land;ally]|mybattlefield) transforms((,newability[{T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller]))
+text=Each land and Ally you control has "{T}: Add one mana of any color."
+mana={1}{G}
+type=Creature
+subtype=Human Scout Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=Yuyan Archers
+abilities=reach
+auto=may name(Discard a card, then draw a card) target(<1>*|myhand) reject && draw:1
+text=Reach -- When this creature enters, you may discard a card. If you do, draw a card.
+mana={1}{R}
+type=Creature
+subtype=Human Archer
+power=3
+toughness=1
+[/card]
+[card]
+name=Wandering Musicians
+auto=_ATTACKING_all(creature|mybattlefield) 1/0 ueot
+text=Whenever this creature attacks, creatures you control get +1/+0 until end of turn.
+mana={3}{R/W}
+type=Creature
+subtype=Human Bard Ally
+power=2
+toughness=5
+[/card]
+[card]
+name=First-Time Flyer
+abilities=flying
+auto=aslongas(*[lesson]|mygraveyard) 1/1
+text=Flying -- This creature gets +1/+1 as long as there's a Lesson card in your graveyard.
+mana={1}{U}
+type=Creature
+subtype=Human Pilot Ally
+power=1
+toughness=2
+[/card]
+[card]
+name=Raucous Audience
+auto={T}:Add{G}
+auto={T}:Add{G}{G} restriction{type(creature[power>=4]|mybattlefield)~morethan~0}
+text={T}: Add {G}. If you control a creature with power 4 or greater, add {G}{G} instead.
+mana={1}{G}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=1
+[/card]
+[card]
+name=Deserter's Disciple
+auto={T}:name(Cannot be blocked this turn) target(other creature[power<=2]|mybattlefield) transforms((,unblockable)) ueot
+text={T}: Another target creature you control with power 2 or less can't be blocked this turn.
+mana={1}{R}
+type=Creature
+subtype=Human Rebel Ally
+power=2
+toughness=2
+[/card]
+[card]
+name=Walltop Sentries
+abilities=reach,deathtouch
+auto=_DIES_if type(*[lesson]|mygraveyard)~morethan~0 then life:2 controller
+text=Reach, deathtouch -- When this creature dies, if there's a Lesson card in your graveyard, you gain 2 life.
+mana={2}{G}
+type=Creature
+subtype=Human Soldier Ally
+power=2
+toughness=3
+[/card]
+[card]
+name=Earth Kingdom Soldier
+abilities=vigilance
+auto=counter(1/1) target(<upto:2>creature|mybattlefield)
+text=Vigilance -- When this creature enters, put a +1/+1 counter on each of up to two target creatures you control.
+mana={4}{G/W}
+type=Creature
+subtype=Human Soldier
+power=3
+toughness=4
+[/card]
+[card]
+name=Cat-Gator
+abilities=lifelink
+auto=damage:type:swamp:mybattlefield target(anytarget)
+text=Lifelink -- When this creature enters, it deals damage equal to the number of Swamps you control to any target.
+mana={6}{B}
+type=Creature
+subtype=Fish Crocodile
+power=3
+toughness=2
+[/card]
+[card]
+name=United Front
+auto=token(Ally,Creature Ally,1/1,white)*x
+auto=all(creature|mybattlefield) counter(1/1)
+text=Create X 1/1 white Ally creature tokens, then put a +1/+1 counter on each creature you control.
+mana={X}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Sokka, Lateral Strategist
+abilities=vigilance
+auto=@combat(attacking) source(this) restriction{type(creature[attacking]|mybattlefield)~morethan~1}:draw:1 controller
+text=Vigilance -- Whenever Sokka and at least one other creature attack, draw a card.
+mana={1}{W/U}{W/U}
+type=Legendary Creature
+subtype=Human Warrior
+power=2
+toughness=4
+[/card]
+[card]
+name=Katara, the Fearless
+auto=doubletrigger(creature[ally]|mybattlefield)
+text=If a triggered ability of an Ally you control triggers, that ability triggers an additional time.
+mana={G}{W}{U}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Tiger-Dillo
+auto=@each my combatbegins:if type(other creature[power>=4]|mybattlefield)~lessthan~1 then cantattack ueot
+auto=@each combatbegins:if type(other creature[power>=4]|mybattlefield)~lessthan~1 then cantblock ueot
+text=This creature can't attack or block unless you control another creature with power 4 or greater.
+mana={1}{R}
+type=Creature
+subtype=Cat Armadillo
+power=4
+toughness=3
+[/card]
+[card]
+name=Azula Always Lies
+auto=choice name(Target creature gets -1/-1) target(creature) -1/-1 ueot
+auto=choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature)
+auto=choice name(Both) target(creature) -1/-1 ueot && ability$!name(Put a +1/+1 counter on target creature) counter(1/1) target(creature)!$ controller
+text=Choose one or both -- Target creature gets -1/-1 until end of turn. -- Put a +1/+1 counter on target creature.
+mana={1}{B}
+type=Instant
+subtype=Lesson
+[/card]

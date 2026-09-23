@@ -1,0 +1,21 @@
+#TLA batch 12. First-Time Flyer is 2/3 while a Lesson card is in your graveyard (Azula Always Lies),
+#and 1/2 without one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:First-Time Flyer
+graveyard:Azula Always Lies
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:First-Time Flyer
+graveyard:Azula Always Lies
+pt:First-Time Flyer=2/3
+life:20
+[PLAYER2]
+life:20
+[END]

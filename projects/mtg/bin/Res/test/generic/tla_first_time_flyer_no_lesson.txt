@@ -1,0 +1,20 @@
+#TLA batch 12. No Lesson in the graveyard, so First-Time Flyer stays 1/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:First-Time Flyer
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:First-Time Flyer
+graveyard:Grizzly Bears
+pt:First-Time Flyer=1/2
+life:20
+[PLAYER2]
+life:20
+[END]
