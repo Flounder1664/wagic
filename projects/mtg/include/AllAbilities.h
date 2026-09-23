@@ -905,8 +905,9 @@ class TrCardExplored: public Trigger
 public:
     bool limitOnceATurn;
     int triggeredTurn;
-    TrCardExplored(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool limitOnceATurn = false) :
-        Trigger(observer, id, source, once, tc), limitOnceATurn(limitOnceATurn)
+    int landMode; //0 = any explore, 1 = a land was revealed, 2 = a nonland was (Nicanzil, Current Conductor)
+    TrCardExplored(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool limitOnceATurn = false, int landMode = 0) :
+        Trigger(observer, id, source, once, tc), limitOnceATurn(limitOnceATurn), landMode(landMode)
     {
         triggeredTurn = -1;
     }
@@ -917,6 +918,8 @@ public:
         if (!e) return 0;
         if (limitOnceATurn && triggeredTurn == game->turn)
             return 0;
+        if (landMode == 1 && !e->exploredLand) return 0;
+        if (landMode == 2 && e->exploredLand) return 0;
         if (!tc->canTarget(e->card)) return 0;
         triggeredTurn = game->turn;
         return 1;
@@ -7120,7 +7123,8 @@ public:
     string amountStr;
     MTGCardInstance * castingThis;
     vector<MTGCardInstance *>selectedCards;
-    AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost = NULL);
+    int who; //who discovers: the source's controller unless told otherwise (Zoyowa's Justice)
+    AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost = NULL, int who = TargetChooser::UNSET);
     int resolve();
     void offerChoice(MTGCardInstance * card);
     const string getMenuText();

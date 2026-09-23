@@ -1653,7 +1653,11 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
     if (TargetChooser * tc = parseSimpleTC(s, "ninjutsued", card))
         return NEW TrCardNinja(observer, id, card, tc, once, limitOnceATurn);
 
-    //Explores has been performed from a card
+    //Explores has been performed from a card. The land variants read the revealed card (Nicanzil).
+    if (TargetChooser * tc = parseSimpleTC(s, "exploredland", card))
+        return NEW TrCardExplored(observer, id, card, tc, once, limitOnceATurn, 1);
+    if (TargetChooser * tc = parseSimpleTC(s, "explorednonland", card))
+        return NEW TrCardExplored(observer, id, card, tc, once, limitOnceATurn, 2);
     if (TargetChooser * tc = parseSimpleTC(s, "explored", card))
         return NEW TrCardExplored(observer, id, card, tc, once, limitOnceATurn);
 
@@ -4953,7 +4957,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     vector<string> splitDiscover = parseBetween(s, "discover:", " ", false);
     if (splitDiscover.size())
     {
-        MTGAbility * a = NEW AADiscover(observer, id, card, target, splitDiscover[1], NULL);
+        MTGAbility * a = NEW AADiscover(observer, id, card, target, splitDiscover[1], NULL, who);
         a->oneShot = 1;
         return a;
     }

@@ -1,0 +1,27 @@
+#LCI batch 11. Zoyowa's Justice shuffles your own Grizzly Bears (mana value 2) into your library, then you
+#discover 2: Ornithopter (mana value 0) is found and choice 1 puts it into hand - asserted as a count,
+#because a seeded printing does not always answer to its name in an assert.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Zoyowa's Justice
+manapool:{1}{R}
+library:Island,Ornithopter
+life:20
+[PLAYER2]
+life:20
+[DO]
+Zoyowa's Justice
+Grizzly Bears
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+graveyard:Zoyowa's Justice
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

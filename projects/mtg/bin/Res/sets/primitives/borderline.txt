@@ -147293,3 +147293,84 @@ subtype=Golem
 power=5
 toughness=3
 [/card]
+[card]
+name=Nicanzil, Current Conductor
+auto=@exploredland(creature|mybattlefield):may name(Put a land from your hand onto the battlefield tapped) moveto(mybattlefield) notaTarget(land|myhand) and!( tap(noevent) )!
+auto=@explorednonland(creature|mybattlefield):counter(1/1) all(this)
+text=Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped. -- Whenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil.
+mana={G}{U}
+type=Legendary Creature
+subtype=Merfolk Scout
+power=2
+toughness=3
+[/card]
+[card]
+name=Zoyowa's Justice
+target=*[artifact;creature;manacost>=1]
+auto=moveto(ownerlibrary) and!( shuffle )!
+auto=discover:mytargmanacost targetcontroller
+text=The owner of target artifact or creature with mana value 1 or greater shuffles it into their library. Then that player discovers X, where X is its mana value.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Caparocti Sunborn
+auto=_ATTACKING_may name(Tap two artifacts or creatures: discover 3) tap target(<2>other *[artifact;creature;-tapped]|mybattlefield) && discover:3
+missing=the tapping is not a cost, so declining after tapping is possible; the harness cannot drive a targeted attack trigger, so this line is unverified
+text=Whenever Caparocti Sunborn attacks, you may tap two untapped artifacts and/or creatures you control. If you do, discover 3.
+mana={2}{R}{W}
+type=Legendary Creature
+subtype=Human Soldier
+power=4
+toughness=4
+[/card]
+[card]
+name=Sovereign Okinec Ahau
+auto=_WARD2_
+missing=the attack trigger - each creature you control whose power is above its base power gets that many +1/+1 counters; a per-creature difference cannot be expressed
+text=Ward {2} -- Whenever Sovereign Okinec Ahau attacks, for each creature you control with power greater than that creature's base power, put a number of +1/+1 counters on that creature equal to the difference.
+mana={2}{G}{W}
+type=Legendary Creature
+subtype=Cat Noble
+power=3
+toughness=4
+[/card]
+[card]
+name=Tishana's Tidebinder
+abilities=flash
+missing=the enters trigger (counter up to one target activated or triggered ability, and that permanent loses all abilities) - the engine can only counter spells, not abilities
+text=Flash -- When this creature enters, counter up to one target activated or triggered ability. If an ability of an artifact, creature, or planeswalker is countered this way, that permanent loses all abilities for as long as this creature remains on the battlefield.
+mana={2}{U}
+type=Creature
+subtype=Merfolk Wizard
+power=3
+toughness=2
+[/card]
+[card]
+name=Fabrication Foundry
+auto={T}:Add{W}
+missing=the mana's spend restriction (artifact spells and artifact abilities only), and the second ability ({2}{W},{T}, exile artifacts with total mana value X: return an artifact card with mana value X or less from your graveyard to the battlefield) - a cost of "exile any number, X is their total" cannot be expressed
+text={T}: Add {W}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source. -- {2}{W}, {T}, Exile one or more other artifacts you control with total mana value X: Return target artifact card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
+mana={1}{W}
+type=Artifact
+[/card]
+[card]
+name=The Enigma Jewel
+backside=Locus of Enlightenment
+restriction=compare(isflipped)~equalto~0
+anyzone={0}:doubleside(backside)
+auto=tap(noevent)
+auto={T}:Add{C}{C}
+auto={8}{U}{E(other *|mybattlefield,mygraveyard)}{E(other *|mybattlefield,mygraveyard)}{E(other *|mybattlefield,mygraveyard)}{E(other *|mybattlefield,mygraveyard)}:name(Craft with four nonlands) flip(backside) asSorcery
+missing=the mana's spend restriction (activated abilities only), and craft does not check that the four exiled cards are nonlands with activated abilities
+text=The Enigma Jewel enters tapped. -- {T}: Add {C}{C}. Spend this mana only to activate abilities. -- Craft with four or more nonlands with activated abilities {8}{U}
+mana={U}
+type=Legendary Artifact
+[/card]
+[card]
+name=Locus of Enlightenment
+backside=The Enigma Jewel
+missing=it should have each activated ability of the cards exiled to craft it, each usable once per turn, and should copy every non-mana ability you activate
+text=(Transforms from The Enigma Jewel.) -- Locus of Enlightenment has each activated ability of the exiled cards used to craft it. You may activate each of those abilities only once each turn. -- Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.
+type=Legendary Artifact
+[/card]

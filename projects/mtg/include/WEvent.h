@@ -482,7 +482,8 @@ struct WEventCardNinja : public WEventCardUpdate {
 
 //explores event
 struct WEventCardExplored : public WEventCardUpdate {
-    WEventCardExplored(MTGCardInstance * card);
+    bool exploredLand; //the revealed card was a land (Nicanzil, Current Conductor)
+    WEventCardExplored(MTGCardInstance * card, bool exploredLand = false);
     virtual Targetable * getTarget(int target);
 };
 

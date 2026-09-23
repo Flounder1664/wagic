@@ -2178,16 +2178,25 @@ AACascade * AACascade::clone() const
 }
 
 //AADiscover
-AADiscover::AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost) :
-    ActivatedAbility(observer, _id, _source, _cost, 0),amountStr(amountStr)
+AADiscover::AADiscover(GameObserver* observer, int _id, MTGCardInstance * _source, MTGCardInstance * _target, string amountStr, ManaCost * _cost, int who) :
+    ActivatedAbility(observer, _id, _source, _cost, 0),amountStr(amountStr),who(who)
 {
     selectedCards.clear();
     castingThis = NULL;
+    target = _target;
 }
 
 int AADiscover::resolve()
 {
     Player * player = source->controller();
+    //Zoyowa's Justice: the OWNER of the shuffled permanent discovers, not this spell's controller.
+    if (who == TargetChooser::OPPONENT)
+        player = source->controller()->opponent();
+    else if (who == TargetChooser::TARGET_CONTROLLER)
+    {
+        if (MTGCardInstance * tc = dynamic_cast<MTGCardInstance *>(target))
+            player = tc->controller();
+    }
     if (!player)
         return 0;
     WParsedInt maxCost(amountStr, NULL, source);
@@ -2312,12 +2321,12 @@ int AAExplore::resolve()
         if (revealed && revealed->isLand())
         {
             player->game->putInZone(revealed, library, player->game->hand);
-            game->receiveEvent(NEW WEventCardExplored(explorer));
+            game->receiveEvent(NEW WEventCardExplored(explorer, true));
             continue;
         }
         if (explorer->isInPlay(game))
             explorer->counters->addCounter(1, 1);
-        game->receiveEvent(NEW WEventCardExplored(explorer));
+        game->receiveEvent(NEW WEventCardExplored(explorer, false));
         if (revealed)
         {
             //Keep or bin needs the player, so any further explore waits on that answer.

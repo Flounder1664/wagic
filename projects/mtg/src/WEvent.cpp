@@ -388,7 +388,8 @@ WEventCardNinja::WEventCardNinja(MTGCardInstance * card) :
 {
 }
 
-WEventCardExplored::WEventCardExplored(MTGCardInstance * card) :
+WEventCardExplored::WEventCardExplored(MTGCardInstance * card, bool exploredLand) :
+    exploredLand(exploredLand),
     WEventCardUpdate(card)
 {
 }

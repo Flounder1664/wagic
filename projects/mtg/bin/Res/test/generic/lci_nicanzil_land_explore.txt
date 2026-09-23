@@ -1,0 +1,31 @@
+#LCI batch 11. Exploring a LAND instead: the land goes to hand, the explorer gets no counter and neither
+#does Nicanzil (still 2/3); its own trigger offers to put a land from hand onto the battlefield tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636957,Map,Grizzly Bears
+hand:Island
+manapool:{1}
+library:Swamp,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Map
+Grizzly Bears
+choice 0
+Island
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636957,Grizzly Bears,*
+hand:Forest
+graveyard:Map
+library:Swamp
+tappedinplay:1
+pt:636957=2/3
+pt:Grizzly Bears=2/2
+life:20
+[PLAYER2]
+life:20
+[END]
