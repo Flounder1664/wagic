@@ -1,0 +1,25 @@
+#TLA batch 13. Boomerang Basics returns a nonland permanent to its owner's hand and draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Boomerang Basics
+library:Forest,Island
+manapool:{U}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Boomerang Basics
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+graveyard:Boomerang Basics
+library:*
+life:20
+[PLAYER2]
+hand:*
+life:20
+[END]

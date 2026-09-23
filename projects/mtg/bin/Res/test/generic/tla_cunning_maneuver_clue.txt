@@ -1,0 +1,23 @@
+#TLA batch 13. Cunning Maneuver gives +3/+1 and makes a Clue token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Cunning Maneuver
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cunning Maneuver
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Cunning Maneuver
+pt:Grizzly Bears=5/3
+life:20
+[PLAYER2]
+life:20
+[END]

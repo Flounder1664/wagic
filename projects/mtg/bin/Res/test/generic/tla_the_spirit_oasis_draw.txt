@@ -1,0 +1,24 @@
+#TLA batch 13. The Spirit Oasis draws a card for each Shrine you control as it enters - itself included,
+#so with Honden of Life's Web already out it draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Honden of Life's Web
+hand:The Spirit Oasis
+library:Forest,Island,Swamp,Mountain
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Spirit Oasis
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Honden of Life's Web,The Spirit Oasis
+hand:*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

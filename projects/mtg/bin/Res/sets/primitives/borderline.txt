@@ -147610,3 +147610,159 @@ mana={1}{B}
 type=Instant
 subtype=Lesson
 [/card]
+[card]
+name=Bender's Waterskin
+auto=@each opponent untap:untap all(this)
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+text=Untap this artifact during each other player's untap step. -- {T}: Add one mana of any color.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Pirate Peddlers
+abilities=deathtouch
+auto=@sacrificed(other *|mybattlefield):counter(1/1) all(this)
+text=Deathtouch -- Whenever you sacrifice another permanent, put a +1/+1 counter on this creature.
+mana={2}{B}
+type=Creature
+subtype=Human Pirate
+power=2
+toughness=2
+[/card]
+[card]
+name=Waterbending Scroll
+auto={6}{T}:draw:1
+missing=the ability does not cost {1} less for each Island you control
+text={6}, {T}: Draw a card. This ability costs {1} less to activate for each Island you control.
+mana={1}{U}
+type=Artifact
+[/card]
+[card]
+name=Boomerang Basics
+target=*[-land]
+auto=moveto(ownerhand)
+auto=draw:1 controller
+missing=the card is drawn even when the bounced permanent was not yours
+text=Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
+mana={U}
+type=Sorcery
+subtype=Lesson
+[/card]
+[card]
+name=Rocky Rebuke
+target=creature|mybattlefield
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+text=Target creature you control deals damage equal to its power to target creature an opponent controls.
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Day of Black Sun
+auto=all(creature[manacost<=x]|battlefield) loseabilities
+auto=destroy all(creature[manacost<=x]|battlefield)
+text=Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
+mana={X}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Deadly Precision
+auto=destroy target(creature)
+missing=the additional cost is fixed at {4}; sacrificing an artifact or creature instead is not offered
+text=As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature. -- Destroy target creature.
+mana={4}{B}
+type=Sorcery
+[/card]
+[card]
+name=Agna Qel'a
+auto=if type(land[basic]|mybattlefield)~equalto~0 then tap(noevent)
+auto={T}:Add{U}
+auto={2}{U}{T}:_LOOT_
+text=This land enters tapped unless you control a basic land. -- {T}: Add {U}. -- {2}{U}, {T}: Draw a card, then discard a card.
+type=Land
+[/card]
+[card]
+name=Abandoned Air Temple
+auto=if type(land[basic]|mybattlefield)~equalto~0 then tap(noevent)
+auto={T}:Add{W}
+auto={3}{W}{T}:counter(1/1) all(creature|mybattlefield)
+text=This land enters tapped unless you control a basic land. -- {T}: Add {W}. -- {3}{W}, {T}: Put a +1/+1 counter on each creature you control.
+type=Land
+[/card]
+[card]
+name=Curious Farm Animals
+auto=_DIES_life:3 controller
+auto={2}{S}:destroy target(<upto:1>*[artifact;enchantment])
+text=When this creature dies, you gain 3 life. -- {2}, Sacrifice this creature: Destroy up to one target artifact or enchantment.
+mana={W}
+type=Creature
+subtype=Boar Elk Bird Ox
+power=1
+toughness=1
+[/card]
+[card]
+name=Wartime Protestors
+abilities=haste
+auto=@movedTo(other creature[ally]|myBattlefield):counter(1/1) all(trigger[to]) && all(trigger[to]) transforms((,haste)) ueot
+text=Haste -- Whenever another Ally you control enters, put a +1/+1 counter on that creature and it gains haste until end of turn.
+mana={3}{R}
+type=Creature
+subtype=Human Rebel Ally
+power=4
+toughness=4
+[/card]
+[card]
+name=Yip Yip!
+target=creature|mybattlefield
+auto=2/2 ueot
+auto=transforms((,flying)) ueot
+missing=flying is granted whether or not the creature is an Ally
+text=Target creature you control gets +2/+2 until end of turn. If that creature is an Ally, it also gains flying until end of turn.
+mana={W}
+type=Instant
+subtype=Lesson
+[/card]
+[card]
+name=The Spirit Oasis
+auto=draw:type:*[shrine]:mybattlefield controller
+auto=@movedTo(other *[shrine]|myBattlefield):draw:1 controller
+text=When The Spirit Oasis enters, draw a card for each Shrine you control. -- Whenever another Shrine you control enters, draw a card.
+mana={2}{U}
+type=Legendary Enchantment
+subtype=Shrine
+[/card]
+[card]
+name=Cunning Maneuver
+target=creature
+auto=3/1 ueot
+auto=_CLUE_
+text=Target creature gets +3/+1 until end of turn. -- Create a Clue token.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Sold Out
+auto=moveto(exile) target(creature)
+missing=the Clue token for a creature that was dealt damage this turn
+text=Exile target creature. If it was dealt damage this turn, create a Clue token.
+mana={3}{B}
+type=Instant
+[/card]
+[card]
+name=Swampsnare Trap
+target=creature
+auto=teach(creature) -5/-3
+missing=the spell does not cost {1} less when it targets a creature with flying
+text=This spell costs {1} less to cast if it targets a creature with flying. -- Enchant creature -- Enchanted creature gets -5/-3.
+mana={2}{B}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Secret Tunnel
+auto={T}:Add{C}
+auto={4}{T}:name(Two creatures cannot be blocked) target(<2>creature|mybattlefield) transforms((,unblockable)) ueot
+missing=the two creatures do not have to share a creature type
+text=This land can't be blocked. -- {T}: Add {C}. -- {4}, {T}: Two target creatures you control that share a creature type can't be blocked this turn.
+type=Land
+subtype=Cave
+[/card]

@@ -1,0 +1,24 @@
+#TLA batch 13. Day of Black Sun with X=2 destroys every creature of mana value 2 or less: Grizzly Bears
+#(2) dies, Hill Giant (3) lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Day of Black Sun
+manapool:{2}{B}{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+life:20
+[DO]
+Day of Black Sun
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Day of Black Sun
+life:20
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+life:20
+[END]

@@ -1,0 +1,21 @@
+#TLA batch 13. Curious Farm Animals dies to a Shock and its controller gains 3 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Curious Farm Animals
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Curious Farm Animals
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Curious Farm Animals,Shock
+life:23
+[PLAYER2]
+life:20
+[END]
