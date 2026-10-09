@@ -48,6 +48,11 @@ for _code in ("2X2", "2XM", "5ED", "6ED", "A25", "AFC", "AKH", "AKR", "ALL", "AP
 # goes through REPLACEMENTS - the ADD_FILES loop below only injects files that are not there yet.
 REPLACEMENTS['sets/EOE/_cards.dat'] = os.path.join(_RES, "sets", "EOE", "_cards.dat")
 
+# 2026-10-09: Reality Fracture released; FRA/FRC were in core.zip as spoiler-season stubs
+# (24 and 1 cards), so they go through REPLACEMENTS or a redeploy ships the old files.
+for _code in ("FRA", "FRC"):
+    REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
+
 # Brand-new entries to inject (files that don't yet exist in core.zip, e.g.
 # a new set's _cards.dat). Directory markers for their parents are emitted
 # automatically below so JGE scanfolder finds the set.
