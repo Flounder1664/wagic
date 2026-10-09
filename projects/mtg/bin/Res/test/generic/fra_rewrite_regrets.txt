@@ -1,0 +1,23 @@
+#FRA batch 5. Rewrite Regrets returns a creature card with mana value 6 or less and empowers Jace 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Serra Angel
+hand:Rewrite Regrets
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Rewrite Regrets
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Serra Angel,*
+graveyard:Rewrite Regrets
+counter:Jace Fra=loyalty:2
+life:20
+[PLAYER2]
+life:20
+[END]

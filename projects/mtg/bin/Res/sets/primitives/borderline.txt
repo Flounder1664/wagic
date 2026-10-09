@@ -149578,3 +149578,296 @@ text=Create X 2/2 colorless Wizard Soldier creature tokens named Cadet, where X 
 mana={2}{W}
 type=Instant
 [/card]
+[card]
+name=Dragon Fra
+#TFRA #7, the 5/5 red flying Dragon (Kiora of Fire and Ashes). id -735507.
+abilities=flying
+text=Flying
+color=red
+type=Creature
+subtype=Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Traxos, Academy Guardian
+abilities=flying,vigilance,prowess
+missing=the {2} discount after you have cast a noncreature spell this turn
+text=This spell costs {2} less to cast if you've cast a noncreature spell this turn. -- Flying, vigilance -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
+mana={3}{U}
+type=Legendary Artifact Creature
+subtype=Dragon Construct
+power=1
+toughness=5
+[/card]
+[card]
+name=Tether Technician
+abilities=reach
+auto=ability$!name(Discard a card: 2 damage to any target) may reject notaTarget(*|myhand) && damage:2 target(anytarget)!$ controller
+text=Reach -- When this creature enters, you may discard a card. When you do, this creature deals 2 damage to any target.
+mana={4}{R}
+type=Creature
+subtype=Minotaur Artificer
+power=4
+toughness=5
+[/card]
+[card]
+name=Mabel, Valley Hero
+auto=@movedTo(creature|myBattlefield):counter(1/1) target(creature[fresh]|mybattlefield)
+text=Whenever Mabel or another creature you control enters, put a +1/+1 counter on target creature that entered this turn.
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Mouse Soldier
+power=1
+toughness=2
+[/card]
+[card]
+name=Theorist's Sanctum
+auto=if type(planeswalker[jace]|mybattlefield)~equalto~0 then tap(noevent)
+auto={T}:Add{U}
+auto={2}{U}{T}:_EMPOWERJACE2_
+missing=beholding a Jace only counts a Jace you control - revealing one from your hand is not offered
+text=({T}: Add {U}.) -- As this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) -- {2}{U}, {T}: Empower Jace 2.
+type=Land
+subtype=Island
+[/card]
+[card]
+name=Master of Barbs
+abilities=menace
+missing=the +1/+0 for your creatures when opponents are dealt noncombat damage
+text=Menace -- Whenever one or more opponents are dealt noncombat damage, creatures you control get +1/+0 until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Lizard Bard
+power=2
+toughness=1
+[/card]
+[card]
+name=Traxos, Scourge Eternal
+abilities=trample
+auto=doesnotuntap
+auto=@movedTo(*[artifact;creature]|mystack):untap all(this)
+text=Trample -- Traxos doesn't untap during your untap step. -- Whenever you cast an artifact or creature spell, untap Traxos.
+mana={4}
+type=Legendary Artifact Creature
+subtype=Dragon Construct
+power=5
+toughness=4
+[/card]
+[card]
+name=Archive Arbiter
+abilities=flying
+auto=choice name(Destroy target noncreature nonland permanent) destroy target(*[-creature;-land])
+auto=choice name(Gain 4 life) life:4 controller
+text=Flying -- When this creature enters, choose one -- -- • Destroy target noncreature, nonland permanent. -- • You gain 4 life.
+mana={6}
+type=Artifact Creature
+subtype=Sphinx
+power=4
+toughness=4
+[/card]
+[card]
+name=Twinned Vision
+auto=draw:1 controller
+flashback={1}{U/R}{U/R}
+missing=the flashback cost does not include discarding a card, and it draws one card rather than two when flashed back
+text=Draw a card. If this spell wasn't cast from your hand, draw two cards instead. -- Flashback--{1}{U/R}{U/R}, Discard a card. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+mana={1}{U/R}
+type=Instant
+[/card]
+[card]
+name=Surgical Precision
+auto=choice name(Destroy target creature with toughness 4 or greater) destroy target(creature[toughness>=4]) && life:1 controller
+auto=choice name(Draw a card and gain 2 life) draw:1 controller && life:2 controller
+text=Choose one -- -- • Destroy target creature with toughness 4 or greater. You gain 1 life. -- • You draw a card and gain 2 life.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Ruric Thar, Biomagus
+abilities=flying,prowess
+auto=@targeted(this) from(*|opponentzones):draw:1 controller
+missing=the second instance of prowess
+text=Flying -- Prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.) -- Whenever Ruric Thar becomes the target of a spell or ability an opponent controls, draw a card.
+mana={4}{U}{U}
+type=Legendary Creature
+subtype=Ogre Crab Wizard
+power=4
+toughness=6
+[/card]
+[card]
+name=Inspired Tethermage
+auto=@counteradded(0/0,1,Loyalty) from(planeswalker|mybattlefield):counter(1/1) all(this)
+auto={6}:_EMPOWERJACE2_
+text=Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature. -- {6}: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={2}{G}
+type=Creature
+subtype=Elf Warrior
+power=3
+toughness=2
+[/card]
+[card]
+name=Memory Trap
+auto=(blink)forsrc target(*[-land]|opponentbattlefield)
+text=When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.
+mana={2}{W}
+type=Enchantment
+[/card]
+[card]
+name=Rewrite Regrets
+target=*[creature;planeswalker][manacost<=6]|mygraveyard
+auto=moveto(mybattlefield)
+auto=_EMPOWERJACE2_
+text=Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield. -- Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Kiora of Fire and Ashes
+auto=token(-735507)
+auto={8}:token(-735507)
+text=When Kiora enters, create a 5/5 red Dragon creature token with flying. -- {8}: Create a 5/5 red Dragon creature token with flying.
+mana={4}{R}{R}
+type=Legendary Creature
+subtype=Merfolk Noble
+power=2
+toughness=2
+[/card]
+[card]
+name=Koth, the Geomancer
+abilities=reach
+auto=_LANDFALL_damage:1 opponent
+auto=@movedTo(mountain|myBattlefield):Add{R}
+text=Reach -- Landfall -- Whenever a land you control enters, Koth deals 1 damage to each opponent. If that land is a Mountain, add {R}.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=2
+[/card]
+[card]
+name=Way of the Mentor
+auto=_EMPOWERJACE5_
+auto=@lifeof(player) from(*[-lifefaker]|*):all(planeswalker|mybattlefield) counter(0/0,1,Loyalty)
+text=When Way of the Mentor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you gain life, put a loyalty counter on each planeswalker you control.
+mana={2}{W}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Afterthought Sentry
+auto={2}:transforms((,flying)) ueot
+auto=_ATTACKING_moveto(exile) target(<upto:1>*|graveyard)
+text={2}: This creature gains flying until end of turn. -- Whenever this creature attacks, exile up to one target card from a graveyard.
+mana={2}
+type=Artifact Creature
+subtype=Gargoyle
+power=2
+toughness=2
+[/card]
+[card]
+name=Solve for Disappointment
+target=opponent
+auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land;-instant;-sorcery]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=_EMPOWERJACE1_
+text=Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. -- Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Living Library
+auto={6}{S}:moveto(ownerlibrary) target(*[creature;planeswalker]|opponentbattlefield)
+missing=its owner's library is not shuffled afterwards
+text={6}, Sacrifice this creature: Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library.
+mana={2}
+type=Artifact Creature
+subtype=Book Illusion
+power=0
+toughness=4
+[/card]
+[card]
+name=Danitha, Spear of Agony
+abilities=first strike
+missing=the +1/+1 counter when you cast a spell that targets an opponent or their creature
+text=First strike -- Whenever you cast a spell that targets an opponent or a creature an opponent controls, put a +1/+1 counter on Danitha.
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Knight
+power=2
+toughness=2
+[/card]
+[card]
+name=Silence the Echo
+target=*[creature;planeswalker]
+auto=destroy
+missing=the additional cost is always {3}; sacrificing a creature or planeswalker instead is not offered
+text=As an additional cost to cast this spell, sacrifice a creature or planeswalker or pay {3}. -- Destroy target creature or planeswalker.
+mana={4}{B}
+type=Sorcery
+[/card]
+[card]
+name=Cryotheory Adept
+abilities=prowess
+autograveyard={3}{U}{E}:target(creature) tap(noevent) and!( counter(0/0,1,stun) )! asSorcery
+text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {3}{U}, Exile this card from your graveyard: Tap target creature and put a stun counter on it. Activate only as a sorcery. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+mana={1}{U}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Graft Surgeon
+auto=counter(1/1)
+missing=moving its counters to another creature when it dies
+text=This creature enters with a +1/+1 counter on it. -- When this creature dies, put its counters on up to one target creature you control.
+mana={2}{W}
+type=Creature
+subtype=Human Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Ruric Thar, Magecrusher
+abilities=nofizzle,reach,vigilance,trample,hexproof
+missing=hexproof is permanent rather than lasting only until it has dealt combat damage
+text=This spell can't be countered. -- Reach, vigilance, trample -- Ruric Thar has hexproof as long as they haven't dealt combat damage yet. (They can't be the target of spells or abilities your opponents control.)
+mana={5}{G}{G}
+type=Legendary Creature
+subtype=Ogre Warrior
+power=7
+toughness=7
+[/card]
+[card]
+name=Essence Burn
+target=*[creature;planeswalker][black;green]
+auto=damage:5
+missing=a permanent that would die this turn is not exiled instead
+text=Essence Burn deals 5 damage to target black or green creature or planeswalker. If that permanent would die this turn, exile it instead.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Divining Duelist
+abilities=flash
+auto=choice name(Tap target creature) tap target(creature)
+auto=choice name(Untap target creature) untap target(creature)
+auto=choice name(Draw a card, then discard a card) _LOOT_
+text=Flash -- When this creature enters, choose one -- -- • Tap target creature. -- • Untap target creature. -- • Draw a card, then discard a card.
+mana={2}{U}
+type=Creature
+subtype=Merfolk Wizard
+power=3
+toughness=2
+[/card]
+[card]
+name=Theorist's Proxy
+abilities=flash
+auto=_EMPOWERJACE3_
+missing={U}, sacrifice: the next spell you cast this turn cannot be countered
+text=Flash -- When this creature enters, empower Jace 3. (Put three loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- {U}, Sacrifice this creature: The next spell you cast this turn can't be countered.
+mana={1}{U}
+type=Creature
+subtype=Illusion
+power=0
+toughness=3
+[/card]

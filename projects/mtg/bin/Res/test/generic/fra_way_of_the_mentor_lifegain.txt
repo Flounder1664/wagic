@@ -1,0 +1,27 @@
+#FRA batch 5. Way of the Mentor empowers Jace 5, then each life gain puts a loyalty counter on your
+#planeswalkers: Surgical Precision's second mode gains 2 life (one event) -> Jace 6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Way of the Mentor,Surgical Precision
+library:Forest,Island
+manapool:{2}{W}{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Way of the Mentor
+Surgical Precision
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Mentor,*
+hand:*
+graveyard:Surgical Precision
+library:*
+counter:Jace Fra=loyalty:6
+life:22
+[PLAYER2]
+life:20
+[END]
