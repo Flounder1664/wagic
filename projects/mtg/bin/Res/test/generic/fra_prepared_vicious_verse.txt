@@ -1,0 +1,20 @@
+#FRA batch 2. Whiplash Wordsmith // Vicious Verse (735164): the copy deals 1 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735164
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735164
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735164
+counter:735164=Prepared:0
+life:20
+[PLAYER2]
+life:19
+[END]

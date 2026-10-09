@@ -1,0 +1,20 @@
+#FRA batch 2. Fatehold Chronologist // Peer Review (735133): the copy makes a Cadet token (registered TFRA #1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735133
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735133
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735133,*
+counter:735133=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

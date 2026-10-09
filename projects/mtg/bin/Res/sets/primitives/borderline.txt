@@ -148826,3 +148826,215 @@ text=Return all nonland permanent cards from your graveyard to the battlefield.
 mana={7}{W}{W}
 type=Sorcery
 [/card]
+[card]
+name=Cadet Fra
+#TFRA #1, the 2/2 Wizard Soldier named Cadet (Peer Review, Hexhaven Battalion). id -735501.
+text=
+type=Creature
+subtype=Wizard Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Heartwood Fra
+#TFRA #11, the Heartwood artifact token (Soul Tether). id -735511.
+auto={T}:Add{R}
+auto={T}:Add{G}
+text={T}: Add {R} or {G}.
+type=Artifact
+subtype=Heartwood
+[/card]
+[card]
+name=Blossom-Blessed Angel // Seed Suture
+abilities=flying,vigilance
+auto=_PREPARE_
+auto={G/W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Seed Suture) counter(0/0,-1,Prepared) all(this) && counter(1/1) target(creature) && life:1 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=Flying, vigilance -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Seed Suture {G/W}: Put a +1/+1 counter on target creature. You gain 1 life.
+mana={3}{W}
+type=Creature
+subtype=Angel Cleric
+power=2
+toughness=4
+[/card]
+[card]
+name=Diviner of Victory // Unwind History
+auto=_PREPARE_
+auto=@scryed(*|myzones):all(this) 1/1 ueot
+auto=@surveiled(*|mybattlefield,mystack):all(this) 1/1 ueot
+auto={1}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Unwind History) counter(0/0,-1,Prepared) all(this) && moveto(ownerhand) target(creature[manacost<=3]|opponentbattlefield) asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Unwind History does not surveil 1
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Whenever you scry or surveil, this creature gets +1/+1 until end of turn. // Unwind History {1}{U}: Return target creature an opponent controls with mana value 3 or less to its owner's hand. Surveil 1.
+mana={U}
+type=Creature
+subtype=Dwarf Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Semester Foreseer // Peer Review
+auto=_PREPARE_
+auto=_SURVEIL1_
+auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Peer Review does not surveil 1
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When this creature enters, surveil 1. // Peer Review {2}{W/U}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.
+mana={3}{U}
+type=Creature
+subtype=Human Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Variable Chaser // Arc of Fortune
+abilities=flying,prowess
+auto=_PREPARE_
+auto={2}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Arc of Fortune) counter(0/0,-1,Prepared) all(this) && all(*|myhand) reject && draw:7 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Arc of Fortune only wheels your own hand - other players are not offered it
+text=Flying, prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Arc of Fortune {2}{U}: Each player may discard their hand and draw seven cards.
+mana={2}{U}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=3
+[/card]
+[card]
+name=Void Extrapolator // Omit Variables
+auto=_PREPARE_
+auto=aslongas(*|mygraveyard) 1/1 >6
+auto={U/B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Omit Variables) counter(0/0,-1,Prepared) all(this) && deplete:3 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Threshold -- This creature gets +1/+1 as long as there are seven or more cards in your graveyard. // Omit Variables {U/B}: Mill three cards. (Put the top three cards of your library into your graveyard.)
+mana={1}{B}
+type=Creature
+subtype=Aetherborn Warlock
+power=2
+toughness=2
+[/card]
+[card]
+name=Hallway Heckler // Vicious Verse
+auto=_PREPARE_
+auto={B/R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Vicious Verse) counter(0/0,-1,Prepared) all(this) && damage:1 opponent asSorcery
+auto={T}{D(*|myhand)}:draw:1
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- {T}, Discard a card: Draw a card. // Vicious Verse {B/R}: Vicious Verse deals 1 damage to target opponent.
+mana={2}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=2
+toughness=3
+[/card]
+[card]
+name=Pompous Battlemage // Improvised Act
+abilities=prowess
+auto=_PREPARE_
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Improvised Act) counter(0/0,-1,Prepared) all(this) && target(<1>*|myhand) reject && draw:1 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Improvised Act requires the discard rather than offering it
+text=Prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Improvised Act {R}: You may discard a card. If you do, draw a card.
+mana={R}
+type=Creature
+subtype=Goblin Sorcerer
+power=1
+toughness=1
+[/card]
+[card]
+name=Pyre Rhymer // Molten Tide
+abilities=prowess
+auto=_PREPARE_
+missing=Molten Tide (each Mountain tapped for mana adds an additional {R} this turn) is not implemented - there is no way to cast the prepared spell
+text=Prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Molten Tide {R}: Until end of turn, whenever you tap a Mountain for mana, add an additional {R}.
+mana={1}{R}{R}
+type=Creature
+subtype=Elemental Sorcerer
+power=3
+toughness=3
+[/card]
+[card]
+name=Carnivorous Cultivator // Enroot
+abilities=deathtouch
+auto=_PREPARE_
+auto=@combatdamaged(player) from(this):moveto(hand) target(land|mygraveyard)
+auto={G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Enroot) counter(0/0,-1,Prepared) all(this) && target(land|mylibrary) moveto(mygraveyard) and!( shuffle )! asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=Deathtouch -- This creature enters prepared. -- Whenever this creature deals combat damage to a player, return target land card from your graveyard to your hand. // Enroot {G}: Search your library for a land card, put it into your graveyard, then shuffle.
+mana={1}{G}
+type=Creature
+subtype=Elf Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Heartwood Crafter // Soul Tether
+auto=_PREPARE_
+auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && token(-735511) asSorcery
+auto={T}:Add{C}
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; its {C} can also be spent on spells from your hand
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- {T}: Add {C}. This mana can't be spent to cast spells from your hand. // Soul Tether {2}{R/G}: Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+mana={G}
+type=Creature
+subtype=Elf Artificer
+power=1
+toughness=1
+[/card]
+[card]
+name=Emergency Phytomedic // Seed Suture
+auto=_PREPARE_
+auto={G/W} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Seed Suture) counter(0/0,-1,Prepared) all(this) && counter(1/1) target(creature) && life:1 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Seed Suture {G/W}: Put a +1/+1 counter on target creature. You gain 1 life.
+mana={G/W}
+type=Creature
+subtype=Dryad Cleric
+power=1
+toughness=1
+[/card]
+[card]
+name=Fatehold Chronologist // Peer Review
+abilities=flying
+auto=_PREPARE_
+auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Peer Review does not surveil 1
+text=Flying -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Peer Review {2}{W/U}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.
+mana={1}{W/U}
+type=Creature
+subtype=Bird Wizard
+power=1
+toughness=2
+[/card]
+[card]
+name=Konstrari Improviser // Soul Tether
+auto=_PREPARE_
+auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && token(-735511) asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Soul Tether {2}{R/G}: Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
+mana={1}{R/G}
+type=Creature
+subtype=Human Artificer
+power=2
+toughness=2
+[/card]
+[card]
+name=Theorix Metamage // Omit Variables
+auto=_PREPARE_
+auto=aslongas(*|mygraveyard) 1/0 >6
+auto=aslongas(*|mygraveyard) flying >6
+auto={U/B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Omit Variables) counter(0/0,-1,Prepared) all(this) && deplete:3 controller asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Threshold -- This creature gets +1/+0 and has flying as long as there are seven or more cards in your graveyard. // Omit Variables {U/B}: Mill three cards. (Put the top three cards of your library into your graveyard.)
+mana={2}{U/B}
+type=Creature
+subtype=Shade Wizard
+power=2
+toughness=3
+[/card]
+[card]
+name=Whiplash Wordsmith // Vicious Verse
+auto=_PREPARE_
+auto={B/R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Vicious Verse) counter(0/0,-1,Prepared) all(this) && damage:1 opponent asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; the flying and haste while an opponent was dealt noncombat damage this turn are missing
+text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- As long as an opponent was dealt noncombat damage this turn, this creature has flying and haste. // Vicious Verse {B/R}: Vicious Verse deals 1 damage to target opponent.
+mana={3}{B/R}
+type=Creature
+subtype=Vampire Sorcerer
+power=3
+toughness=3
+[/card]

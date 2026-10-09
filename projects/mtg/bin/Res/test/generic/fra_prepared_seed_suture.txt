@@ -1,0 +1,23 @@
+#FRA batch 2. Blossom-Blessed Angel // Seed Suture (735998) enters prepared (seeding fires it). Casting the
+#copy of Seed Suture puts a +1/+1 counter on Grizzly Bears, gains 1 life and unprepares the Angel.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735998,Grizzly Bears
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735998
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735998,Grizzly Bears
+pt:Grizzly Bears=3/3
+counter:735998=Prepared:0
+life:21
+[PLAYER2]
+life:20
+[END]
