@@ -1,0 +1,20 @@
+#FRA batch 6. Bestial Incursion now makes the registered Beast token (TFRA #8, with art).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bestial Incursion
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bestial Incursion
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Bestial Incursion
+life:20
+[PLAYER2]
+life:20
+[END]

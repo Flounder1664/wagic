@@ -1,0 +1,19 @@
+#FRA batch 6. Jiang Yanggu (735261) creates Mowu (registered TFRA #10) as he enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:735261
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735261
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735261,*
+life:20
+[PLAYER2]
+life:20
+[END]

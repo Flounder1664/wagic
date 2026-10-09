@@ -148763,7 +148763,7 @@ type=Sorcery
 [/card]
 [card]
 name=Bestial Incursion
-auto=token(Beast,Creature Beast,4/4,green,trample)
+auto=token(-735508)
 flashback={5}{G}
 text=Create a 4/4 green Beast creature token with trample. -- Flashback {5}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={3}{G}
@@ -149870,4 +149870,293 @@ type=Creature
 subtype=Illusion
 power=0
 toughness=3
+[/card]
+[card]
+name=Thopter Fra
+#TFRA #14, 1/1 colorless flying Thopter artifact creature. id -735514.
+abilities=flying
+text=Flying
+type=Artifact Creature
+subtype=Thopter
+power=1
+toughness=1
+[/card]
+[card]
+name=Mowu Fra
+#TFRA #10, Mowu, the legendary 3/3 green Dog made by Jiang Yanggu. id -735510.
+text=
+color=green
+type=Legendary Creature
+subtype=Dog
+power=3
+toughness=3
+[/card]
+[card]
+name=Beast Fra
+#TFRA #8, 4/4 green Beast with trample. id -735508.
+abilities=trample
+text=Trample
+color=green
+type=Creature
+subtype=Beast
+power=4
+toughness=4
+[/card]
+[card]
+name=Entrust the Spark
+auto=ability$!name(Sacrifice a planeswalker to search for one) may sacrifice notaTarget(planeswalker|mybattlefield) && target(planeswalker|mylibrary) moveto(mybattlefield) and!( shuffle )!!$ controller
+text=You may sacrifice a planeswalker. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle.
+mana={3}{G}{U}
+type=Sorcery
+[/card]
+[card]
+name=Primal Witchstalker
+abilities=menace
+auto=deplete:4 controller
+auto=target(land|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+text=Menace (This creature can't be blocked except by two or more creatures.) -- When this creature enters, mill four cards. When you do, return target land card from your graveyard to the battlefield tapped. (To mill four cards, put the top four cards of your library into your graveyard.)
+mana={1}{B}{G}
+type=Creature
+subtype=Wolf
+power=2
+toughness=1
+[/card]
+[card]
+name=Curse-Marred Demon
+abilities=flying,trample
+auto=target(*|mylibrary) moveto(hand) and!( shuffle )!
+auto=discard:1 controller
+missing=the discard is chosen rather than at random
+text=Flying, trample -- When this creature enters, search your library for a card, put it into your hand, shuffle, then discard a card at random.
+mana={2}{R}{R}
+type=Creature
+subtype=Demon
+power=4
+toughness=4
+[/card]
+[card]
+name=Icy Reception
+auto=choice name(Counter target creature or legendary spell unless its controller pays {3}) target(*[creature;legendary]|stack) transforms((,newability[pay[[{3}]] name(pay 3 mana) donothing?fizzle])) oneshot
+auto=choice name(Target creature gets -5/-0) target(creature) -5/0 ueot
+text=Choose one -- -- • Counter target creature or legendary spell unless its controller pays {3}. -- • Target creature gets -5/-0 until end of turn.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Saheeli, Jewel of Avishkar
+auto=lord(thopter|mybattlefield) haste
+auto=@movedTo(*[-creature]|mystack):token(-735514)
+text=Thopters you control have haste. -- Whenever you cast a noncreature spell, create a 1/1 colorless Thopter artifact creature token with flying.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Human Artificer
+power=2
+toughness=4
+[/card]
+[card]
+name=Stinging Vitriol
+target=opponent
+auto=damage:2
+auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+text=Stinging Vitriol deals 2 damage to target opponent. That player reveals their hand. You choose a nonland card from it. They discard that card.
+mana={B}{R}
+type=Sorcery
+[/card]
+[card]
+name=Koth of the Homestead
+auto=_LANDFALL_life:1 controller
+auto=@movedTo(plains|myBattlefield):counter(1/1) target(creature)
+text=Landfall -- Whenever a land you control enters, you gain 1 life. -- Whenever a Plains you control enters, put a +1/+1 counter on target creature.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Citizen
+power=2
+toughness=3
+[/card]
+[card]
+name=Pia, Aether Ascetic
+auto=ability$!name(Discard a card to search for an enchantment) may reject notaTarget(*|myhand) && target(enchantment|mylibrary) moveto(hand) and!( shuffle )!!$ controller
+text=When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Tinybones, Pocket Nuisance
+auto=discard:1 opponent
+auto=@discarded(*|hand):damage:1 opponent
+missing=1 damage per card discarded rather than per discard event
+text=When Tinybones enters, each opponent discards a card. -- Whenever a player discards one or more cards, Tinybones deals 1 damage to each opponent.
+mana={2}{B}
+type=Legendary Creature
+subtype=Skeleton Rogue
+power=2
+toughness=1
+[/card]
+[card]
+name=Vraska, the Cutting Glare
+abilities=deathtouch
+auto=if type(land|mybattlefield)~morethan~5 then destroy target(*|opponentbattlefield)
+auto=if type(land|mybattlefield)~morethan~5 then _TREASURE_ opponent
+text=Deathtouch -- When Vraska enters, if you control six or more lands, destroy target permanent an opponent controls. They create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={B}{B}{G}
+type=Legendary Creature
+subtype=Gorgon Assassin
+power=4
+toughness=4
+[/card]
+[card]
+name=Wrath of the Bloodmane
+target=*[creature;planeswalker]
+auto=damage:4
+missing=the {1} discount when you control a legendary creature
+text=This spell costs {1} less to cast if you control a legendary creature. -- Wrath of the Bloodmane deals 4 damage to target creature or planeswalker.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Break Under Pressure
+auto=ability$!name(Sacrifice a creature or planeswalker) notaTarget(*[creature;planeswalker]|mybattlefield) sacrifice!$ opponent
+auto=life:2 controller
+missing=the opponent chooses which creature or planeswalker rather than the one with the greatest mana value
+text=Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Ghalta the Unstoppable
+abilities=trample
+auto=lord(other creature|mybattlefield) trample
+missing=the discount equal to the greatest power among creatures you control
+text=This spell costs {X} less to cast, where X is the greatest power among creatures you control. -- Trample -- Other creatures you control have trample.
+mana={8}{G}
+type=Legendary Creature
+subtype=Elder Dinosaur
+power=8
+toughness=8
+[/card]
+[card]
+name=Jiang Yanggu, Never Alone
+auto=token(-735510)
+auto=@each my end:untap all(*[token]|mybattlefield)
+text=When Jiang Yanggu enters, create Mowu, a legendary 3/3 green Dog creature token. -- At the beginning of your end step, untap all tokens you control.
+mana={3}{G}
+type=Legendary Creature
+subtype=Human Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Way of the Wildspeaker
+auto=_EMPOWERJACE7_
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,-4,Loyalty)}:token(-735508)]))
+missing=the granted "-4: Beast" for planeswalkers is unverified - the harness does not offer granted loyalty abilities (see Way of the Pyromancer)
+text=When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-4]: Create a 4/4 green Beast creature token with trample."
+mana={4}{G}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Hunter's Axe
+auto={2}:equip
+auto=teach(creature) 2/0
+auto=teach(creature) transforms((,newability[_ATTACKING_ability$!choice name(Trample) transforms((,trample)) ueot _ choice name(Deathtouch) transforms((,deathtouch)) ueot!$ controller]))
+text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+mana={G}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Way of the Necromancer
+auto=_EMPOWERJACE2_
+auto=@movedTo(creature|graveyard) from(mybattlefield):all(planeswalker|mybattlefield) counter(0/0,1,Loyalty)
+text=When Way of the Necromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever a creature you control dies, put a loyalty counter on each planeswalker you control.
+mana={1}{B}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Frostbite Pyromental
+abilities=trample,haste
+auto=@combatdamaged(player) from(this):draw:2 controller
+auto=@each my end:all(this) sacrifice
+text=Trample, haste -- Whenever this creature deals combat damage to a player, draw two cards. -- At the beginning of the end step, sacrifice this creature.
+mana={U}{R}{R}
+type=Creature
+subtype=Elemental
+power=4
+toughness=4
+[/card]
+[card]
+name=Saheeli, Consul of Oversight
+abilities=flying
+auto=@scryed(*|myzones) turnlimited:token(-735514)
+auto=@surveiled(*|mybattlefield,mystack) turnlimited:token(-735514)
+missing=a scry and a surveil in the same turn can make two Thopters
+text=Flying -- Whenever you scry or surveil, create a 1/1 colorless Thopter artifact creature token with flying. This ability triggers only once each turn.
+mana={3}{W}{W}
+type=Legendary Creature
+subtype=Human Advisor
+power=4
+toughness=4
+[/card]
+[card]
+name=Way of the Paradox
+auto=_EMPOWERJACE5_
+missing=gaining 1 life and an extra land drop whenever you activate a loyalty ability
+text=When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you activate a loyalty ability, you gain 1 life. You may play an additional land this turn.
+mana={2}{G}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Generous Revival
+target=creature[manacost<=3]|mygraveyard
+auto=moveto(mybattlefield) and!( counter(1/1) )!
+flashback={4}{W}
+text=Return target creature card with mana value 3 or less from your graveyard to the battlefield with an additional +1/+1 counter on it. -- Flashback {4}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+mana={2}{W}
+type=Sorcery
+[/card]
+[card]
+name=Bloombrute
+auto=@lifeof(player) from(*[-lifefaker]|*) turnlimited:draw:1 controller
+auto={4}{G}{W}:target(creature) transforms((,trample,lifelink)) ueot
+text=Whenever you gain life, draw a card. This ability triggers only once each turn. -- {4}{G}{W}: Target creature gains trample and lifelink until end of turn.
+mana={2}{G}{W}
+type=Creature
+subtype=Plant Elemental
+power=4
+toughness=4
+[/card]
+[card]
+name=Darklight Phoenix
+abilities=flying,haste
+autograveyard=@each my combatbegins restriction{type(creature[fresh]|graveyard)~morethan~1}:moveto(mybattlefield)
+text=Flying, haste -- At the beginning of combat on your turn, if two or more creatures died this turn, return this card from your graveyard to the battlefield.
+mana={3}{B}
+type=Creature
+subtype=Phoenix
+power=3
+toughness=2
+[/card]
+[card]
+name=Flickering Hound
+auto=@movedTo(creature|mystack):target(<upto:1>other creature|mybattlefield) moveto(exile) and!( moveto(ownerbattlefield) )!
+text=Whenever you cast a creature spell, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.
+mana={3}{W}
+type=Creature
+subtype=Dog
+power=2
+toughness=2
+[/card]
+[card]
+name=Danitha, Sword of Hope
+abilities=first strike
+missing=drawing a card when you cast an Equipment spell or a spell that targets your creature
+text=First strike -- Whenever you cast an Equipment spell or a spell that targets a creature you control, draw a card. This ability triggers only once each turn.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Knight
+power=2
+toughness=2
 [/card]

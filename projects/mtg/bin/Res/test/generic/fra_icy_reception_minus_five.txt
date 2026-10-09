@@ -1,0 +1,24 @@
+#FRA batch 6. Icy Reception mode 1: target creature gets -5/-0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Icy Reception
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:Craw Wurm
+life:20
+[DO]
+Icy Reception
+choice 1
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Icy Reception
+life:20
+[PLAYER2]
+inplay:Craw Wurm
+pt:Craw Wurm=1/4
+life:20
+[END]
