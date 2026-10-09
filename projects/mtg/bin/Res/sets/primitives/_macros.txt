@@ -453,3 +453,12 @@
 
 # Drone Token (EOE) — 1/1 colorless Drone artifact creature token with flying
 #AUTO_DEFINE _DRONETOKEN_ token(-1530503)
+#Empower Jace N (Reality Fracture): N loyalty counters on your Jace token, creating it first if you have none.
+#AUTO_DEFINE _EMPOWERJACE1_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,1,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,1,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE2_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,2,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,2,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE3_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,3,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,3,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE4_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,4,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,4,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE5_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,5,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,5,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE6_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,6,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,6,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE7_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,7,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,7,Loyalty)
+#AUTO_DEFINE _EMPOWERJACE8_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,8,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,8,Loyalty)

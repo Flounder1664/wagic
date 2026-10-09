@@ -148556,3 +148556,273 @@ subtype=Human Ranger Ally
 power=3
 toughness=4
 [/card]
+[card]
+name=Jace Fra
+#TFRA #5, the planeswalker token made by "empower Jace". id -735505 = -(FRA 735000 + 500 + 5).
+#It starts with no loyalty: the empower macros create it and add the counters in one step.
+auto={C(0/0,-1,Loyalty)}:name(-1: Surveil 1) _SURVEIL1_
+auto={C(0/0,-3,Loyalty)}:name(-3: Draw a card) draw:1 controller
+text=-1: Surveil 1. -- -3: Draw a card.
+color=blue
+type=Planeswalker
+subtype=Jace
+[/card]
+[card]
+name=Yargle, Goliath of Otaria
+text=
+mana={4}{U}
+type=Legendary Creature
+subtype=Frog Spirit
+power=3
+toughness=9
+[/card]
+[card]
+name=Protege's Awakening
+auto=_EMPOWERJACE6_
+auto=draw:1 controller
+text=Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Draw a card.
+mana={3}{U}
+type=Sorcery
+[/card]
+[card]
+name=Samut, Hazoret's Champion
+auto=lord(creature|mybattlefield) haste
+text=Creatures you control have haste.
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Warrior Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Precise Redaction
+target=*[white;black]|stack
+auto=fizzle
+text=Counter target white or black spell.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Keeper of the Quiet Hour
+auto=_EMPOWERJACE2_
+text=When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={3}
+type=Artifact Creature
+subtype=Chimera
+power=3
+toughness=2
+[/card]
+[card]
+name=Mindseeker Oculus
+auto=_EMPOWERJACE4_
+text=When this creature enters, empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={2}{U}
+type=Creature
+subtype=Homunculus
+power=2
+toughness=1
+[/card]
+[card]
+name=Marwyn, the Clearcutter
+auto={2}{T}{S(*[artifact;land]|mybattlefield)}:draw:1
+text={2}, {T}, Sacrifice an artifact or land: Draw a card.
+mana={R}
+type=Legendary Creature
+subtype=Elf Warrior
+power=2
+toughness=1
+[/card]
+[card]
+name=Arcane Amphisbaena
+abilities=deathtouch
+auto=_EMPOWERJACE2_
+text=Deathtouch -- When this creature enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{G}
+type=Creature
+subtype=Snake
+power=1
+toughness=1
+[/card]
+[card]
+name=Geist of Saint Thalia
+abilities=flying
+auto=lord(*[-creature]|mycastingzone) altercost(colorless,-1)
+text=Flying -- Noncreature spells you cast cost {1} less to cast.
+mana={1}{U}
+type=Legendary Creature
+subtype=Spirit Cleric
+power=1
+toughness=2
+[/card]
+[card]
+name=Rank Rat
+auto=discard:1 opponent
+text=When this creature enters, each opponent discards a card.
+mana={1}{B}
+type=Creature
+subtype=Zombie Rat
+power=1
+toughness=1
+[/card]
+[card]
+name=Campus Crier
+autograveyard={1}{E}:_EMPOWERJACE2_
+text={1}, Exile this card from your graveyard: Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{W}
+type=Creature
+subtype=Human Advisor
+power=3
+toughness=1
+[/card]
+[card]
+name=No Admittance
+target=anytarget
+auto=damage:3
+auto=_EMPOWERJACE1_
+text=No Admittance deals 3 damage to any target. -- Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Cast Away Doubt
+auto=draw:2 controller
+auto=damage:2 controller
+auto=damage:2 opponent
+text=Draw two cards. Cast Away Doubt deals 2 damage to each player.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Shatterwing Pegasus
+abilities=flying
+auto={4}{W}:all(creature|mybattlefield) 1/1 ueot
+text=Flying -- {4}{W}: Creatures you control get +1/+1 until end of turn.
+mana={2}{W}
+type=Creature
+subtype=Pegasus
+power=2
+toughness=3
+[/card]
+[card]
+name=Multiply by Zero
+target=creature
+auto=transforms((,setpower=0,settoughness=0)) ueot
+text=Target creature has base power and toughness 0/0 until end of turn.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Blessed Ghoul
+abilities=lifelink
+autograveyard={2}{W/B}:moveto(myhand)
+text=Lifelink -- {2}{W/B}: Return this card from your graveyard to your hand.
+mana={W/B}
+type=Creature
+subtype=Zombie Cleric
+power=1
+toughness=1
+[/card]
+[card]
+name=Sureshot Sower
+abilities=reach
+autohand={3}{G}{discard}:destroy target(creature[flying])
+text=Reach -- {3}{G}, Discard this card: Destroy target creature with flying.
+mana={1}{G}
+type=Creature
+subtype=Human Archer
+power=3
+toughness=1
+[/card]
+[card]
+name=Murmuring Volume
+auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
+auto={2}{T}{D(*|myhand)}:draw:1
+text={T}: Add one mana of any color. -- {2}, {T}, Discard a card: Draw a card.
+mana={3}
+type=Artifact
+subtype=Book
+[/card]
+[card]
+name=Thalia, the Survivor
+abilities=lifelink
+auto=lord(*[-creature]|opponentcastingzone) altercost(colorless,+1)
+text=Lifelink -- Noncreature spells your opponents cast cost {1} more to cast.
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Soldier
+power=3
+toughness=4
+[/card]
+[card]
+name=Artifist Acumen
+auto=all(creature|mybattlefield) transforms((,first strike)) ueot
+auto=draw:1 controller
+text=Creatures you control gain first strike until end of turn. -- Draw a card.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Bestial Incursion
+auto=token(Beast,Creature Beast,4/4,green,trample)
+flashback={5}{G}
+text=Create a 4/4 green Beast creature token with trample. -- Flashback {5}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+mana={3}{G}
+type=Sorcery
+[/card]
+[card]
+name=Refute Destiny
+target=*[creature;planeswalker][green;blue]
+auto=moveto(exile)
+auto=_SURVEIL1_
+text=Exile target creature or planeswalker that's green or blue. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Tethermage's Advantage
+target=creature
+auto=2/2 ueot
+auto=transforms((,reach)) ueot
+auto=untap
+text=Target creature gets +2/+2 and gains reach until end of turn. Untap it.
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Unflinching Hortimancer
+auto=_WARD1_
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1)
+text=Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.) -- Whenever you gain life, put a +1/+1 counter on this creature.
+mana={1}{W}
+type=Creature
+subtype=Human Cleric
+power=2
+toughness=1
+[/card]
+[card]
+name=Terminal Criticism
+target=*[creature;planeswalker][blue;red]
+auto=destroy
+auto=life:1 controller
+text=Destroy target creature or planeswalker that's blue or red. You gain 1 life.
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Greenhouse Propagator
+auto=@movedTo(other creature|myBattlefield):life:1 controller
+auto={T}:Add{G}
+text=Whenever another creature you control enters, you gain 1 life. -- {T}: Add {G}.
+mana={2}{G}
+type=Creature
+subtype=Cat Druid
+power=2
+toughness=3
+[/card]
+[card]
+name=Return to the Light Realms
+auto=all(*[-land;-instant;-sorcery]|mygraveyard) moveto(mybattlefield)
+text=Return all nonland permanent cards from your graveyard to the battlefield.
+mana={7}{W}{W}
+type=Sorcery
+[/card]

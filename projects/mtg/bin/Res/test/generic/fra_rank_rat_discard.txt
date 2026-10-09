@@ -1,0 +1,22 @@
+#FRA batch 1. Rank Rat makes each opponent discard a card as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rank Rat
+manapool:{1}{B}
+life:20
+[PLAYER2]
+hand:Grizzly Bears,Hill Giant
+life:20
+[DO]
+Rank Rat
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rank Rat
+life:20
+[PLAYER2]
+hand:*
+graveyard:*
+life:20
+[END]

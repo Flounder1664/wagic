@@ -1,0 +1,24 @@
+#FRA batch 1. Empower Jace with a Jace token already out adds to it: the seeded Keeper makes the token
+#with 2, then No Admittance (3 damage, empower 1) brings it to 3 - and still only one token exists.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Keeper of the Quiet Hour
+hand:No Admittance
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+No Admittance
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Keeper of the Quiet Hour,*
+graveyard:No Admittance
+counter:Jace Fra=loyalty:3
+life:20
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,26 @@
+#FRA batch 1. Geist of Saint Thalia (735214) makes noncreature spells cost {1} less: Protege's Awakening
+#({3}{U}) is cast from {2}{U}, draws a card and empowers Jace 6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735214
+hand:Protege's Awakening
+library:Forest,Island,Swamp
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Protege's Awakening
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735214,*
+hand:*
+graveyard:Protege's Awakening
+library:*,*
+counter:Jace Fra=loyalty:6
+life:20
+[PLAYER2]
+life:20
+[END]

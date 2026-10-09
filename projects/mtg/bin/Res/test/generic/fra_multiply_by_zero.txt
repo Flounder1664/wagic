@@ -1,0 +1,22 @@
+#FRA batch 1. Multiply by Zero makes a creature 0/0, so it dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Multiply by Zero
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Multiply by Zero
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Multiply by Zero
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

@@ -1,0 +1,21 @@
+#FRA batch 1. Empower Jace with no Jace token: Keeper of the Quiet Hour creates the token with two
+#loyalty counters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Keeper of the Quiet Hour
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Keeper of the Quiet Hour
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Keeper of the Quiet Hour,*
+counter:Jace Fra=loyalty:2
+life:20
+[PLAYER2]
+life:20
+[END]
