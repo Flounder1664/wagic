@@ -52,6 +52,10 @@ REPLACEMENTS['sets/EOE/_cards.dat'] = os.path.join(_RES, "sets", "EOE", "_cards.
 # (24 and 1 cards), so they go through REPLACEMENTS or a redeploy ships the old files.
 for _code in ("FRA", "FRC"):
     REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
+# Sets still being spoiled (Star Trek, its Commander set, Stardates: 2026-11-13; Mystery Booster
+# Commander: 2026-11-09). Already in core.zip, so newly registered cards need REPLACEMENTS too.
+for _code in ("TRK", "TRC", "SDS", "MBC"):
+    REPLACEMENTS['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
 
 # Brand-new entries to inject (files that don't yet exist in core.zip, e.g.
 # a new set's _cards.dat). Directory markers for their parents are emitted
