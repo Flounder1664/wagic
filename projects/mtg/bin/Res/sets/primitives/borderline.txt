@@ -149297,3 +149297,284 @@ subtype=Elder Sphinx
 power=3
 toughness=4
 [/card]
+[card]
+name=Forest Tentacle Fra
+#TFRA #9, the 3/3 land creature Verdant Kraken makes. id -735509.
+auto={T}:Add{G}
+text={T}: Add {G}.
+type=Land Creature
+subtype=Forest Tentacle
+power=3
+toughness=3
+[/card]
+[card]
+name=Repurposed Enforcer
+auto=_ATTACKING_if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,type:creature:mybattlefield,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,type:creature:mybattlefield,Loyalty)
+text=Whenever this creature attacks, empower Jace X, where X is the number of creatures you control. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{W}
+type=Creature
+subtype=Human Soldier
+power=3
+toughness=2
+[/card]
+[card]
+name=Screeching Soulbreaker
+abilities=flying
+auto=_ATTACKING_damage:1 opponent && life:1 controller
+text=Flying -- Whenever this creature attacks, it deals 1 damage to each opponent and you gain 1 life.
+mana={2}{B}
+type=Creature
+subtype=Siren Bard
+power=1
+toughness=4
+[/card]
+[card]
+name=Marwyn, the Preserver
+auto=lord(land|mybattlefield) hexproof
+auto={2}:moveto(hand) target(land|mygraveyard)
+text=Lands you control have hexproof. (They can't be the targets of spells or abilities your opponents control.) -- {2}: Return target land card from your graveyard to your hand.
+mana={1}{G}
+type=Legendary Creature
+subtype=Elf Druid
+power=3
+toughness=2
+[/card]
+[card]
+name=Ajani's Anguish
+auto=damage:X target(anytarget)
+auto=lord(creature|mybattlefield) trample
+text=When this enchantment enters, it deals X damage to any target. -- Creatures you control have trample.
+mana={X}{R}
+type=Enchantment
+[/card]
+[card]
+name=Karn, Gilded Guardian
+abilities=vigilance,trample
+missing=the card draw for each color among your other artifacts
+text=Vigilance, trample -- When Karn enters, draw a card for each color among other artifacts you control.
+mana={2/W}{2/U}{2/B}{2/R}{2/G}
+type=Legendary Artifact Creature
+subtype=Golem
+power=5
+toughness=5
+[/card]
+[card]
+name=Winter, Team Player
+other={convoke} name(Convoke)
+auto=@movedTo(*[-creature]|mystack):all(creature|mybattlefield) 1/0 ueot
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Whenever you cast a noncreature spell, creatures you control get +1/+0 until end of turn.
+mana={4}{R}
+type=Legendary Creature
+subtype=Human Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Way of the Pyromancer
+auto=_EMPOWERJACE2_
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,1,Loyalty)}:Add{R}]))
+missing=the granted "+1: Add {R}" for planeswalkers is unverified - the test harness never offered it as a choice
+text=When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[+1]: Add {R}."
+mana={1}{R}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Heartstring Puller
+abilities=trample
+auto=token(-735501)
+text=Trample -- When this creature enters, create a 2/2 colorless Wizard Soldier creature token named Cadet.
+mana={3}{R}
+type=Creature
+subtype=Elf Sorcerer
+power=3
+toughness=1
+[/card]
+[card]
+name=Verdant Kraken
+auto=@each upkeep:token(-735509)
+text=At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has "{T}: Add {G}." It's affected by summoning sickness until your next turn.)
+mana={4}{G}{G}{G}
+type=Creature
+subtype=Plant Kraken
+power=6
+toughness=6
+[/card]
+[card]
+name=Skilled Battlecarver
+auto=this(variable{controllerturn}) first strike
+auto={1}{R}:1/0 ueot
+text=During your turn, this creature has first strike. -- {1}{R}: This creature gets +1/+0 until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Human Warrior
+power=2
+toughness=1
+[/card]
+[card]
+name=Proft, Consulting Detective
+auto=@scryed(*|myzones):pay({2}) counter(1/1) all(this) && draw:1 controller
+auto=@surveiled(*|mybattlefield,mystack):pay({2}) counter(1/1) all(this) && draw:1 controller
+text=Whenever you scry or surveil, you may pay {2}. If you do, put a +1/+1 counter on Proft and draw a card. (Draw after you scry or surveil.)
+mana={1}{U}
+type=Legendary Creature
+subtype=Human Detective
+power=2
+toughness=2
+[/card]
+[card]
+name=Vinelasher Adept
+abilities=reach
+auto=counter(1/1,3) target(creature)
+autohand=__BASIC_LANDCYCLING__({2})
+text=Reach -- When this creature enters, put three +1/+1 counters on target creature. -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+mana={4}{G}{G}
+type=Creature
+subtype=Rhino Soldier
+power=2
+toughness=4
+[/card]
+[card]
+name=Mabel, Bitter Recluse
+abilities=deathtouch
+missing=removing up to three counters from another creature or planeswalker as it enters
+text=Deathtouch -- When Mabel enters, remove up to three counters from another target creature or planeswalker.
+mana={B}
+type=Legendary Creature
+subtype=Mouse Warlock
+power=1
+toughness=1
+[/card]
+[card]
+name=Rampart Hunter
+abilities=deathtouch
+auto=target(creature) 2/2 ueot && transforms((,deathtouch)) ueot
+text=Deathtouch -- When this creature enters, target creature gets +2/+2 and gains deathtouch until end of turn.
+mana={3}{B}
+type=Creature
+subtype=Horror
+power=3
+toughness=3
+[/card]
+[card]
+name=Tam's Resistance
+target=creature
+auto=counter(1/1)
+auto=transforms((,vigilance)) ueot
+auto=_EMPOWERJACE4_
+missing=the target is not optional ("up to one")
+text=Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn. -- Empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={1}{G/U}
+type=Sorcery
+[/card]
+[card]
+name=Arni, Humble Scribe
+auto=@movedTo(other creature[-token]|myBattlefield):untap all(this)
+auto={T}:_LOOT_
+text=Whenever another nontoken creature you control enters, untap Arni. -- {T}: Draw a card, then discard a card.
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=3
+toughness=2
+[/card]
+[card]
+name=Extended Absence
+target=*[creature;planeswalker]
+auto=moveto(exile)
+auto=damage:1 opponent
+auto=life:1 controller
+text=Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life.
+mana={3}{B}
+type=Instant
+[/card]
+[card]
+name=Countersculpt
+target=*|stack
+auto=fizzle
+auto=_EMPOWERJACE1_
+missing=the additional cost is always {1}; beholding a Jace instead is not offered
+text=As an additional cost to cast this spell, behold a Jace or pay {1}. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) -- Counter target spell. Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={U}{U}
+type=Instant
+[/card]
+[card]
+name=Rescue Girl, First Responder
+abilities=flying
+auto={T}:moveto(ownerhand) target(other *|mybattlefield) asSorcery
+missing=it can be activated only at sorcery speed rather than any time during your turn
+text=Flying -- {T}: Return another target permanent you control to its owner's hand. Activate only during your turn.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Cleric
+power=1
+toughness=3
+[/card]
+[card]
+name=Medic's Kitesail
+auto={2}:equip
+auto=teach(creature) 1/0
+auto=teach(creature) flying
+auto=teach(creature) transforms((,newability[_ATTACKING_life:1 controller]))
+text=Equipped creature gets +1/+0 and has flying and "Whenever this creature attacks, you gain 1 life." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Dark Matter Manipulator
+auto=deplete:3 controller
+auto=aslongas(*|mygraveyard) 2/0 >6
+missing=the +2/+0 does not stack for fourteen or more cards in your graveyard
+text=When this creature enters, mill three cards. -- This creature gets +2/+0 for every seven cards in your graveyard.
+mana={B}
+type=Creature
+subtype=Human Warlock
+power=1
+toughness=2
+[/card]
+[card]
+name=Hexhaven Battalion
+auto=token(-735501)*3
+auto=_EMPOWERJACE2_
+autohand=__BASIC_LANDCYCLING__({2})
+text=Create three 2/2 colorless Wizard Soldier creature tokens named Cadet. Empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+mana={4}{W}{W}
+type=Sorcery
+[/card]
+[card]
+name=Vraska's Final Mercy
+auto=choice name(Lose 2 life, destroy target creature or planeswalker) life:-2 controller && destroy target(*[creature;planeswalker])
+auto=choice name(Lose 2 life, empower Jace 6) life:-2 controller && ability$!_EMPOWERJACE6_!$ controller
+text=Choose one -- -- • You lose 2 life. Destroy target creature or planeswalker. -- • You lose 2 life. Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Theoretical Necromancer
+autograveyard={3}{B}{E}:moveto(hand) target(other creature|mygraveyard)
+text={3}{B}, Exile this card from your graveyard: Return another target creature card from your graveyard to your hand.
+mana={2}{B}
+type=Creature
+subtype=Vampire Warlock
+power=4
+toughness=1
+[/card]
+[card]
+name=Titanbones, Towering Heart
+abilities=reach
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1,2)
+missing=the 3 life when you discard this card
+text=Reach -- Whenever you gain life, put two +1/+1 counters on Titanbones. -- When you discard this card, you gain 3 life.
+mana={3}{G}
+type=Legendary Creature
+subtype=Skeleton Druid
+power=4
+toughness=3
+[/card]
+[card]
+name=Germinate Recruits
+auto=token(-735501)*lifegain
+text=Create X 2/2 colorless Wizard Soldier creature tokens named Cadet, where X is the amount of life you gained this turn.
+mana={2}{W}
+type=Instant
+[/card]

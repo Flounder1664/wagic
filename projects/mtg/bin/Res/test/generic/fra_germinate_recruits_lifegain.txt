@@ -1,0 +1,25 @@
+#FRA batch 4. Germinate Recruits makes a Cadet per life gained this turn: Extended Absence gains 1 first,
+#so one Cadet.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Extended Absence,Germinate Recruits
+manapool:{3}{B}{2}{W}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Extended Absence
+Grizzly Bears
+Germinate Recruits
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Extended Absence,Germinate Recruits
+life:21
+[PLAYER2]
+exile:Grizzly Bears
+life:19
+[END]

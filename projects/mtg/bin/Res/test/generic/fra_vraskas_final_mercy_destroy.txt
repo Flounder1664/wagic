@@ -1,0 +1,23 @@
+#FRA batch 4. Vraska's Final Mercy mode 0: lose 2 life and destroy target creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vraska's Final Mercy
+manapool:{B}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Vraska's Final Mercy
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Vraska's Final Mercy
+life:18
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

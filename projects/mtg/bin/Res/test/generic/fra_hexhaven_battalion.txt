@@ -1,0 +1,22 @@
+#FRA batch 4. Hexhaven Battalion makes three Cadet tokens and empowers Jace 2 - four new permanents.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hexhaven Battalion
+manapool:{4}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hexhaven Battalion
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,*
+graveyard:Hexhaven Battalion
+counter:Jace Fra=loyalty:2
+life:20
+[PLAYER2]
+life:20
+[END]
