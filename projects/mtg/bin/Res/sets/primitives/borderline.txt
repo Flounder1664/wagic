@@ -150160,3 +150160,291 @@ subtype=Human Knight
 power=2
 toughness=2
 [/card]
+[card]
+name=Gallia, the Merrymaker
+abilities=haste
+auto=lord(other creature[counter{1%1.1}]|mybattlefield) haste
+auto={1}{R}{T}:counter(1/1) target(creature[fresh])
+text=Haste -- Each other creature you control with a +1/+1 counter on it has haste. -- {1}{R}, {T}: Put a +1/+1 counter on target creature that entered this turn.
+mana={1}{R}
+type=Legendary Creature
+subtype=Satyr
+power=2
+toughness=1
+[/card]
+[card]
+name=Perfected Theory
+auto=choice name(Base power and toughness 1/1) target(creature) transforms((,setpower=1,settoughness=1)) ueot
+auto=choice name(Base power and toughness 4/5) target(creature) transforms((,setpower=4,settoughness=5)) ueot
+text=Choose one -- -- • Target creature has base power and toughness 1/1 until end of turn. -- • Target creature has base power and toughness 4/5 until end of turn.
+mana={U}
+type=Instant
+[/card]
+[card]
+name=Tomik, Izzet Sparkmage
+abilities=prowess
+missing=the +1 to noncombat damage your sources deal to opponents and their permanents
+text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Wizard
+power=1
+toughness=2
+[/card]
+[card]
+name=Yuriko, Hope from the Shadows
+abilities=flash
+auto=choice name(Target creature gets -X/-0) target(creature) -type:*:mygraveyard/0 ueot
+auto=choice name(Surveil 2) _SURVEIL2_
+text=Flash -- When Yuriko enters, choose one -- -- • Target creature gets -X/-0 until end of turn, where X is the number of cards in your graveyard. -- • Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+mana={U}
+type=Legendary Creature
+subtype=Human Ninja
+power=1
+toughness=1
+[/card]
+[card]
+name=Fatehold Charm
+auto=choice name(Draw a card, empower Jace 2) draw:1 controller && ability$!_EMPOWERJACE2_!$ controller
+auto=choice name(Return target creature to its owner's hand) moveto(ownerhand) target(creature)
+auto=choice name(Creatures you control get +1/+2) all(creature|mybattlefield) 1/2 ueot
+missing=the bounce mode cannot target a spell
+text=Choose one -- -- • Draw a card. Empower Jace 2. -- • Return target spell or creature to its owner's hand. -- • Creatures you control get +1/+2 until end of turn.
+mana={W}{U}
+type=Instant
+[/card]
+[card]
+name=Gallia, Tragic Host
+abilities=menace
+autograveyard={4}{B}{E(other creature|mygraveyard)}:moveto(mybattlefield) and!( counter(1/1) )!
+missing=she returns untapped
+text=Menace (This creature can't be blocked except by two or more creatures.) -- {4}{B}, Exile another creature card from your graveyard: Return this card from your graveyard to the battlefield tapped with a +1/+1 counter on her.
+mana={1}{B}
+type=Legendary Creature
+subtype=Zombie Satyr
+power=2
+toughness=1
+[/card]
+[card]
+name=Hexhaven Dueling Arena
+auto={T}:Add{C}
+auto={2}{T}:name(Target creature becomes prepared) counter(0/0,1,Prepared) target(creature) asSorcery
+auto={4}{T}:name(Target creature becomes prepared) counter(0/0,1,Prepared) target(creature)
+missing=the {2} ability does not check that the creature attacked this turn
+text={T}: Add {C}. -- {2}, {T}: Target creature that attacked this turn becomes prepared. Activate only as a sorcery. (Only creatures with prepare spells can become prepared.) -- {4}, {T}: Target creature becomes prepared.
+type=Land
+[/card]
+[card]
+name=The Echoverse Fulcrum
+auto=_LOOT_
+auto={5}{T}{E}:destroy all(creature) asSorcery
+text=When The Echoverse Fulcrum enters, draw a card, then discard a card. -- {5}, {T}, Exile The Echoverse Fulcrum: Destroy all creatures. Activate only as a sorcery.
+mana={2}
+type=Legendary Artifact
+[/card]
+[card]
+name=Surveillance Phantasm
+abilities=defender,flying,vigilance
+auto={3}{U}:_SURVEIL1_
+missing=attacking despite defender once you have scried or surveilled this turn
+text=Defender, flying, vigilance -- As long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender. -- {3}{U}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={1}{U}
+type=Creature
+subtype=Bird Illusion
+power=2
+toughness=3
+[/card]
+[card]
+name=Hexhaven Invigorator
+abilities=vigilance
+missing=fetching lands equal to the damage it is dealt
+text=Vigilance -- Whenever this creature is dealt damage, you may search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.
+mana={G}{G}{G}{G}
+type=Creature
+subtype=Chimera Horror
+power=6
+toughness=6
+[/card]
+[card]
+name=Jace's Machinations
+auto=_EMPOWERJACE8_
+missing=activating Jace loyalty abilities at instant speed this turn
+text=Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant. -- Empower Jace 8. (Put eight loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={2}{U}
+type=Instant
+[/card]
+[card]
+name=Budding Insurgent
+abilities=vigilance
+auto={S}:destroy target(*[artifact;enchantment]) asSorcery
+missing=the card draw when the destroyed permanent was a legendary enchantment
+text=Vigilance -- Sacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.
+mana={2}{G}
+type=Creature
+subtype=Dryad Scout
+power=3
+toughness=3
+[/card]
+[card]
+name=Hall of Echoes
+auto={T}:Add{C}
+missing=becoming a copy of target creature you control
+text={T}: Add {C}. -- {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
+type=Land
+[/card]
+[card]
+name=Stingcaster Mage
+abilities=haste
+missing=granting flashback to an instant or sorcery card in your graveyard
+text=Haste -- When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+mana={1}{R}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Way of the Healer
+auto=_EMPOWERJACE5_
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,-2,Loyalty)}:token(-735501)]))
+missing=the granted -2 does not surveil 1, and granted loyalty abilities are unverified (see Way of the Pyromancer)
+text=When Way of the Healer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."
+mana={3}{W}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Sphinx of False Conclusions
+abilities=flash,flying
+auto=_ATTACKING__LOOT_
+missing=the token copy of itself when it dies
+text=Flash -- Flying -- Whenever this creature attacks, draw a card, then discard a card. -- When this creature dies, if it isn't a token, create a token that's a copy of it.
+mana={2}{U}{U}
+type=Creature
+subtype=Sphinx Illusion
+power=4
+toughness=2
+[/card]
+[card]
+name=Charge the Sanctum
+auto=choice name(Creatures you control get +2/+0) all(creature|mybattlefield) 2/0 ueot
+auto=choice name(+2/+0, first strike and a +1/+1 counter) target(creature) 2/0 ueot && transforms((,first strike)) ueot && counter(1/1)
+text=Choose one -- -- • Creatures you control get +2/+0 until end of turn. -- • Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.
+mana={2}{R/W}
+type=Instant
+[/card]
+[card]
+name=Mind Meanderer
+abilities=flying
+auto=aslongas(planeswalker[jace]|mybattlefield) vigilance
+auto=fight target(<upto:1>creature|opponentbattlefield)
+text=Flying -- This creature has vigilance as long as you control a Jace planeswalker. -- When this creature enters, it fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+mana={3}{G}{U}{U}
+type=Creature
+subtype=Bird Fish Illusion
+power=4
+toughness=4
+[/card]
+[card]
+name=Violent Echoes
+target=*[creature;planeswalker]
+auto=damage:6
+missing=empowering Jace by the excess damage
+text=Violent Echoes deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent this way, empower Jace X, where X is that excess damage. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+mana={2}{R}{R}
+type=Instant
+[/card]
+[card]
+name=Way of the Mind Sculptor
+auto=_EMPOWERJACE5_
+missing=drawing a card when you remove two or more loyalty counters to activate an ability
+text=When Way of the Mind Sculptor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card.
+mana={4}{U}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Avatar of Burgeoning Echoes
+auto=_LANDFALL__EMPOWERJACE2_
+missing=the granted -10 for planeswalkers
+text=Landfall -- Whenever a land you control enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-10]: Put a +1/+1 counter on target creature for each land you control."
+mana={G}{U}
+type=Creature
+subtype=Avatar
+power=2
+toughness=3
+[/card]
+[card]
+name=Tetsuko Umezawa, Pursuer
+abilities=double strike,prowess
+missing=the 1 damage when a small creature an opponent controls blocks
+text=Double strike -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller.
+mana={3}{R}
+type=Legendary Creature
+subtype=Human Mercenary
+power=2
+toughness=4
+[/card]
+[card]
+name=Hapatra, the Desert Frost
+auto=target(<upto:1>creature|opponentbattlefield) tap(noevent) and!( counter(0/0,1,stun) )!
+auto={2}{U}:untap target(creature)
+text=When Hapatra enters, for each opponent, tap up to one target creature that player controls. Put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- {2}{U}: Untap target creature.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=4
+toughness=3
+[/card]
+[card]
+name=Theorix Charm
+auto=choice name(Counter target noncreature spell unless its controller pays {2}) target(*[-creature]|stack) transforms((,newability[pay[[{2}]] name(pay 2 mana) donothing?fizzle])) oneshot
+auto=choice name(Target creature gets -2/-2) target(creature) -2/-2 ueot
+auto=choice name(Mill three, then draw a card) deplete:3 controller && draw:1 controller
+text=Choose one -- -- • Counter target noncreature spell unless its controller pays {2}. -- • Target creature gets -2/-2 until end of turn. -- • Mill three cards, then draw a card. (To mill three cards, put the top three cards of your library into your graveyard.)
+mana={U}{B}
+type=Instant
+[/card]
+[card]
+name=Proft, Sinister Mastermind
+abilities=menace
+restriction=type(*|mygraveyard)~morethan~6
+autohand={B}{discard}:target(creature) -3/-1 ueot
+text=Threshold -- You can't cast this spell unless there are seven or more cards in your graveyard. -- Menace -- {B}, Discard this card: Target creature gets -3/-1 until end of turn.
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Rogue
+power=5
+toughness=5
+[/card]
+[card]
+name=Simulacrum Shaper
+auto=may name(Search for a basic land) target(land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=_DIES_draw:1 controller
+text=When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. -- When this creature dies, draw a card.
+mana={1}{G}{G}
+type=Creature
+subtype=Elf Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Tam, the Possibility
+auto=lord(planeswalker|mycastingzone) altercost(colorless,-1)
+missing=the five-colour proliferate ability
+text=Planeswalker spells you cast cost {1} less to cast. -- {W}{U}{B}{R}{G}, {T}: Proliferate X times, where X is the number of planeswalker types among planeswalkers you control. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
+mana={1}{G}{U}
+type=Legendary Creature
+subtype=Gorgon Wizard
+power=2
+toughness=4
+[/card]
+[card]
+name=Yoshimaru, Scrappy Stray
+auto=target(other creature|mybattlefield) fight target(<upto:1>creature|opponentbattlefield)
+auto={6}:counter(1/1) target(creature[-legendary])
+text=When Yoshimaru enters, another target creature you control fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.) -- {6}: Put a +1/+1 counter on target nonlegendary creature.
+mana={1}{G}
+type=Legendary Creature
+subtype=Dog
+power=1
+toughness=1
+[/card]

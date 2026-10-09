@@ -1,0 +1,23 @@
+#FRA batch 7. Theorix Charm mode 2: mill three, then draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Theorix Charm
+library:Forest,Island,Swamp,Mountain,Plains
+manapool:{U}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Theorix Charm
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+graveyard:Theorix Charm,*,*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

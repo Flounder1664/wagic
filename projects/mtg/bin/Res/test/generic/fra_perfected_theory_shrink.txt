@@ -1,0 +1,24 @@
+#FRA batch 7. Perfected Theory mode 0: target creature has base power and toughness 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Perfected Theory
+manapool:{U}
+life:20
+[PLAYER2]
+inplay:Craw Wurm
+life:20
+[DO]
+Perfected Theory
+choice 0
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Perfected Theory
+life:20
+[PLAYER2]
+inplay:Craw Wurm
+pt:Craw Wurm=1/1
+life:20
+[END]
