@@ -1,0 +1,25 @@
+#FRA batch 3. Overwrite the Multiverse exiles all creatures (three here) and empowers Jace by that many.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Overwrite the Multiverse
+manapool:{4}{B}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant,Raging Goblin
+life:20
+[DO]
+Overwrite the Multiverse
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+exile:Grizzly Bears
+graveyard:Overwrite the Multiverse
+counter:Jace Fra=loyalty:3
+life:20
+[PLAYER2]
+exile:Hill Giant,Raging Goblin
+life:20
+[END]

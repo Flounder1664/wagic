@@ -1,0 +1,25 @@
+#FRA batch 3. Apex Witchstalker's basic landcycling {2}: discard it and fetch a basic land (choice 1 is
+#cycling rather than casting).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Apex Witchstalker
+library:Island,Swamp
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Apex Witchstalker
+choice 1
+Swamp
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+graveyard:Apex Witchstalker
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

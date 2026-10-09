@@ -1,0 +1,27 @@
+#FRA batch 3. Lyra, Archangel of Dawn (735201) puts a +1/+1 counter on each Angel when you gain life:
+#Restore with Empathy returns Grizzly Bears and gains 4, so Lyra and Serra Angel both grow.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735201,Serra Angel
+graveyard:Grizzly Bears
+hand:Restore with Empathy
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Restore with Empathy
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735201,Serra Angel
+hand:Grizzly Bears
+graveyard:Restore with Empathy
+pt:735201=4/4
+pt:Serra Angel=5/5
+life:24
+[PLAYER2]
+life:20
+[END]

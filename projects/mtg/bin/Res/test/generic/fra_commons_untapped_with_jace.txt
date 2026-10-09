@@ -1,0 +1,21 @@
+#FRA batch 3. With a planeswalker out (the Jace token from the seeded Keeper of the Quiet Hour) the
+#same land enters untapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Keeper of the Quiet Hour
+hand:Dedicated Commons
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dedicated Commons
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Keeper of the Quiet Hour,Dedicated Commons,*
+tappedinplay:0
+life:20
+[PLAYER2]
+life:20
+[END]
