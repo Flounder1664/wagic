@@ -1,0 +1,26 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Kapow!: a +1/+1 counter makes Grizzly Bears 3/3; it fights Hill Giant (3/3) and both die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Kapow!
+manapool:{2}{G}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Kapow!
+Grizzly Bears
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Kapow!
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

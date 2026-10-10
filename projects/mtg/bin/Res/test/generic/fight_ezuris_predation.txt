@@ -1,0 +1,23 @@
+#2026-10-10 fight audit: Ezuri's Predation made the Beasts but never fought. Now each opponent creature gets a
+#Beast (4/4) that fights it: Raging Goblin and Hill Giant die, both Beasts survive.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ezuri's Predation
+manapool:{5}{G}{G}{G}
+life:20
+[PLAYER2]
+inplay:Raging Goblin,Hill Giant
+life:20
+[DO]
+Ezuri's Predation
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:Ezuri's Predation
+life:20
+[PLAYER2]
+graveyard:Raging Goblin,Hill Giant
+life:20
+[END]

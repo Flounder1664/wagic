@@ -1,0 +1,26 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Rhino's Rampage (+1/+0 was the dead "pump(1/0)" too): Grizzly Bears 3/2 fights Hill Giant 3/3; both die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Rhino's Rampage
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Rhino's Rampage
+Grizzly Bears
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Rhino's Rampage
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

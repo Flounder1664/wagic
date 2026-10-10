@@ -38185,7 +38185,7 @@ toughness=5
 [/card]
 [card]
 name=Ezuri's Predation
-auto=foreach(creature|opponentBattlefield) token(Beast,Creature Beast,4/4,green)
+auto=all(creature|opponentbattlefield) transforms((,newability[token(-482807) opponent and!( dynamicability<!powerstrike eachother!> )!])) oneshot
 text=For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures.
 mana={5}{G}{G}{G}
 type=Sorcery
@@ -77992,6 +77992,7 @@ toughness=3
 [card]
 name=Neyith of the Dire Hunt
 auto=@combat(blocked) source(creature|mybattlefield) turnlimited:name(Draw a card) draw:1 controller
+missing=drawing when your creatures fight - the engine has no fight event
 auto=@damaged(creature) from(creature[-attacking;-blocking]|mybattlefield) turnlimited:may name(Draw a card) draw:1 controller
 auto=@each my combatbegins:name(Pay and double creature's power) pay({2}{RG}) name(Pay and double creature's power) target(creature) transforms((,newability[p/0],_MUST_BE_BLOCKD_)) ueot
 text=Whenever one or more creatures you control fight or become blocked, draw a card. -- At the beginning of combat on your turn, you may pay {2}{R} or {G}. If you do, double target creature's power until end of turn. That creature must be blocked this combat if able. ( {R} or {G} can be paid with either {R} or {G}.)
@@ -137549,7 +137550,7 @@ name=Ifrit, Warden of Inferno
 backside=Clive, Ifrit's Dominant
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=name(Lunge) fight target(<upto:1>other creature)
+auto=name(Lunge) transforms((,newability[target(other creature) dynamicability<!powerstrike eachother!>])) oneshot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) name(Brimstone) Add{R}{R}{R}{R}
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Brimstone) Add{R}{R}{R}{R}
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
@@ -141202,7 +141203,9 @@ toughness=7
 [/card]
 [card]
 name=Troll Negotiations
-auto=counter(1/1.2) target(creature|mybattlefield) && fight target(creature|opponentbattlefield)
+target=creature|mybattlefield
+auto=counter(1/1,2)
+auto=_FIGHT_
 text=Put two +1/+1 counters on target creature you control. Then it fights target creature an opponent controls.
 mana={2}{G}{G}
 type=Sorcery

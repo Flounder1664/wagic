@@ -15810,9 +15810,10 @@ type=Instant
 [card]
 name=Brigid's Command
 auto=choice name(copy kithkin) copy target(creature[kithkin]|mybattlefield)
-auto=choice name(buff creature) target(creature|mybattlefield) effect(+3/+3) ueot
+auto=choice name(buff creature) target(creature) 3/3 ueot
 auto=choice name(kithkin token) token(Kithkin,creature kithkin,1/1,,green white)
-auto=choice name(fight) target(creature|mybattlefield) fight target(creature|opponentbattlefield)
+auto=choice name(fight) target(creature|mybattlefield) _FIGHT_
+missing=only one mode is chosen rather than two
 mana={1}{G}{W}
 type=Sorcery
 text=Choose two: copy target Kithkin you control; or target creature gets +3/+3 until end of turn; or create a 1/1 Kithkin token; or target creature you control fights target creature an opponent controls.
@@ -48962,12 +48963,11 @@ type=Sorcery
 [/card]
 [card]
 name=Giantfall
-auto=choice name(fight) fight target(creature|opponentbattlefield) name(destroy artifact) destroy target(artifact|opponentbattlefield)
+auto=choice name(Your creature deals damage equal to its power) target(creature|mybattlefield) _PUNCH_
+auto=choice name(Destroy target artifact) destroy target(artifact)
 mana={1}{R}
 type=Instant
-text=Choose one —
-• Fight
-• Destroy artifact.
+text=Choose one -- Target creature you control deals damage equal to its power to target creature an opponent controls. -- Destroy target artifact.
 [/card]
 [card]
 name=Gibbering Descent
@@ -65128,7 +65128,9 @@ toughness=2
 [/card]
 [card]
 name=Kapow!
-auto=counter(1/1) target(creature|mybattlefield) && fight target(creature|opponentbattlefield)
+target=creature|mybattlefield
+auto=counter(1/1)
+auto=_FIGHT_
 text=Put a +1/+1 counter on target creature you control. It fights target creature an opponent controls.
 mana={2}{G}
 type=Sorcery
@@ -91907,11 +91909,11 @@ toughness=4
 [card]
 name=Pitiless Fists
 target=creature|mybattlefield
-auto=fight target(creature|opponentbattlefield)
-auto=enchanted 2/2
+auto=_FIGHT_
+auto=teach(creature) 2/2
 mana={3}{G}
 type=Enchantment
-text=When Pitiless Fists enters the battlefield, pitiless Fists fights target creature an opponent controls.
+text=Enchant creature you control -- When Pitiless Fists enters, enchanted creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.) -- Enchanted creature gets +2/+2.
 subtype=Aura
 [/card]
 [card]
@@ -100171,8 +100173,8 @@ toughness=6
 [card]
 name=Rhino's Rampage
 target=creature|mybattlefield
-auto=pump(1/0) ueot
-auto=fight target(creature|opponentbattlefield)
+auto=1/0 ueot
+auto=_FIGHT_
 text=Target creature you control gets +1/+0 until end of turn. It fights target creature an opponent controls.
 mana={R/G}
 type=Sorcery

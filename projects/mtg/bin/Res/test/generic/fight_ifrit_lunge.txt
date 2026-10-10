@@ -1,0 +1,21 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Ifrit, Warden of Inferno (702985, a 9/9 Saga back face) chapter I as it is seeded: it fights Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,702985
+life:20
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702985
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

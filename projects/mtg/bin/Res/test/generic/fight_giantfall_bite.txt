@@ -1,0 +1,28 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Giantfall mode 0 is a bite: Hill Giant deals 3 to Grizzly Bears, which dies; the Giant takes nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:696762
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+696762
+choice 0
+Hill Giant
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:696762
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

@@ -1,0 +1,28 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Brigid's Command fight mode (choice 3): Grizzly Bears fights Raging Goblin, which dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Brigid's Command
+manapool:{1}{G}{W}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Brigid's Command
+choice 3
+Grizzly Bears
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Brigid's Command
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

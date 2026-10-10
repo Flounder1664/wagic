@@ -1,0 +1,28 @@
+#2026-10-10 fight audit: the old line used "fight target(...)", which is not an engine keyword and did nothing.
+#Pitiless Fists (+2/+2 was the dead "enchanted 2/2" too): Grizzly Bears becomes 4/4 and fights Hill Giant,
+#which dies; the Bears survive.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:696755
+manapool:{3}{G}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+696755
+Grizzly Bears
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,696755
+pt:Grizzly Bears=4/4
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]
