@@ -1,0 +1,24 @@
+#FRA. Mind Meanderer fights as it enters (the old "fight target(...)" line was not a keyword and did nothing).
+#4/4 against Hill Giant 3/3: the Giant dies, Mind Meanderer survives with 3 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mind Meanderer
+manapool:{3}{G}{U}{U}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Mind Meanderer
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mind Meanderer
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

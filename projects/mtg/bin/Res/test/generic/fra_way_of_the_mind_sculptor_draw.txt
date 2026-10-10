@@ -1,0 +1,26 @@
+#FRA. Way of the Mind Sculptor: removing two or more loyalty counters to activate draws a card. Jace -3 draws one
+#and the trigger draws another.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Way of the Mind Sculptor
+library:Forest,Island,Swamp
+manapool:{4}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Way of the Mind Sculptor
+Jace Fra
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Mind Sculptor,Jace Fra
+hand:*,*
+library:*
+counter:Jace Fra=loyalty:2
+life:20
+[PLAYER2]
+life:20
+[END]

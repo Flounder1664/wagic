@@ -1,0 +1,27 @@
+#FRA. Way of the Paradox triggers only on activating a loyalty ability (counters paid as a cost - the onlycost
+#trigger option), not on other loyalty counters: two Vraska's Final Mercy empowers (6 + 6) gain nothing. Life 20-2-2.
+#Jace 17 = 5 (seeding Paradox fires its own empower) + 6 + 6. Without onlycost this gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Paradox
+hand:Vraska's Final Mercy,Vraska's Final Mercy
+manapool:{B}{B}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Vraska's Final Mercy
+choice 1
+Vraska's Final Mercy
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Paradox,Jace Fra
+graveyard:Vraska's Final Mercy,Vraska's Final Mercy
+counter:Jace Fra=loyalty:17
+life:16
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,30 @@
+#FRA. Avatar of Burgeoning Echoes gives planeswalkers "-10: a +1/+1 counter on target creature for each land you
+#control" (seeded after the Forests so its landfall does not fire at setup). Two Vraska's Final Mercy empower Jace 6 each (12); -10 on Grizzly Bears with two Forests: 4/4, Jace at 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Grizzly Bears,Avatar of Burgeoning Echoes
+hand:Vraska's Final Mercy,Vraska's Final Mercy
+manapool:{B}{B}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Vraska's Final Mercy
+choice 1
+Vraska's Final Mercy
+choice 1
+Jace Fra
+choice 2
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Avatar of Burgeoning Echoes,Grizzly Bears,Forest,Forest,Jace Fra
+graveyard:Vraska's Final Mercy,Vraska's Final Mercy
+counter:Jace Fra=loyalty:2
+pt:Grizzly Bears=4/4
+life:16
+[PLAYER2]
+life:20
+[END]

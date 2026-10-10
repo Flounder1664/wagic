@@ -1,0 +1,24 @@
+#FRA. Way of the Healer empowers Jace 5; the granted -2 makes a Cadet and surveils 1 (prompt left open): Jace at 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Way of the Healer
+library:Forest,Island
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Way of the Healer
+Jace Fra
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Healer,Jace Fra,Cadet Fra
+counter:Jace Fra=loyalty:3
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

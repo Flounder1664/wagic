@@ -1,0 +1,24 @@
+#FRA. Way of the Mind Sculptor does not draw for a -1 (one counter): Jace -1 surveils (prompt left open), hand stays empty.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Way of the Mind Sculptor
+library:Forest,Island,Swamp
+manapool:{4}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Way of the Mind Sculptor
+Jace Fra
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Way of the Mind Sculptor,Jace Fra
+library:*,*
+counter:Jace Fra=loyalty:4
+life:20
+[PLAYER2]
+life:20
+[END]

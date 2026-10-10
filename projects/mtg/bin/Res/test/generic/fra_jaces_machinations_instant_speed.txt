@@ -1,0 +1,28 @@
+#FRA. Jace's Machinations: Jace loyalty abilities at instant speed this turn. Empower 8 in the main phase, then
+#Jace's -3 (draw) at the beginning of combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Jace's Machinations
+library:Forest,Island
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Jace's Machinations
+next
+Jace Fra
+choice 1
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Jace Fra
+hand:*
+graveyard:Jace's Machinations
+library:*
+counter:Jace Fra=loyalty:5
+life:20
+[PLAYER2]
+life:20
+[END]

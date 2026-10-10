@@ -1,5 +1,5 @@
-#FRA batch 4. Way of the Pyromancer empowers Jace 2 as it enters. (Its "+1: Add {R}" grant for planeswalkers
-#is noted as unverified on the card: the harness never offered it as a choice.)
+#FRA. Way of the Pyromancer empowers Jace 2 as it enters. Its "+1: Add {R}" grant is left out (missing= on the
+#card): a granted mana loyalty ability jammed Jace's whole menu.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -13,7 +13,7 @@ Way of the Pyromancer
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-inplay:Way of the Pyromancer,*
+inplay:Way of the Pyromancer,Jace Fra
 counter:Jace Fra=loyalty:2
 life:20
 [PLAYER2]

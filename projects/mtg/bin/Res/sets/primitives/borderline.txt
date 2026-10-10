@@ -149371,8 +149371,7 @@ toughness=3
 [card]
 name=Way of the Pyromancer
 auto=_EMPOWERJACE2_
-auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,1,Loyalty)}:Add{R}]))
-missing=the granted "+1: Add {R}" for planeswalkers is unverified - the test harness never offered it as a choice
+missing=the granted "+1: Add {R}" for planeswalkers - a granted loyalty ability that adds mana jams the planeswalker's whole ability menu, so it is left out
 text=When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[+1]: Add {R}."
 mana={1}{R}
 type=Legendary Enchantment
@@ -150049,8 +150048,7 @@ toughness=2
 [card]
 name=Way of the Wildspeaker
 auto=_EMPOWERJACE7_
-auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,-4,Loyalty)}:token(-735508)]))
-missing=the granted "-4: Beast" for planeswalkers is unverified - the harness does not offer granted loyalty abilities (see Way of the Pyromancer)
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0.-4.Loyalty)}:name(-4: Beast) token(-735508)]))
 text=When Way of the Wildspeaker enters, empower Jace 7. (Put seven loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-4]: Create a 4/4 green Beast creature token with trample."
 mana={4}{G}
 type=Legendary Enchantment
@@ -150101,7 +150099,9 @@ toughness=4
 [card]
 name=Way of the Paradox
 auto=_EMPOWERJACE5_
-missing=gaining 1 life and an extra land drop whenever you activate a loyalty ability
+auto=@totalcounteradded(0/0,1,Loyalty) from(planeswalker|mybattlefield) onlycost:life:1 controller && maxPlay(land)+1 ueot
+auto=@totalcounterremoved(0/0,1,Loyalty) from(planeswalker|mybattlefield) onlycost:life:1 controller && maxPlay(land)+1 ueot
+missing=a loyalty ability costing [0] moves no counters, so it does not trigger this
 text=When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you activate a loyalty ability, you gain 1 life. You may play an additional land this turn.
 mana={2}{G}
 type=Legendary Enchantment
@@ -150266,7 +150266,7 @@ toughness=6
 [card]
 name=Jace's Machinations
 auto=_EMPOWERJACE8_
-missing=activating Jace loyalty abilities at instant speed this turn
+auto=emblem transforms((,newability[lord(planeswalker[jace]|mybattlefield) canloyaltyasinst])) ueot
 text=Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant. -- Empower Jace 8. (Put eight loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 mana={2}{U}
 type=Instant
@@ -150304,8 +150304,7 @@ toughness=1
 [card]
 name=Way of the Healer
 auto=_EMPOWERJACE5_
-auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0,-2,Loyalty)}:token(-735501)]))
-missing=the granted -2 does not surveil 1, and granted loyalty abilities are unverified (see Way of the Pyromancer)
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0.-2.Loyalty)}:name(-2: Cadet and surveil 1) token(-735501) && _SURVEIL1_]))
 text=When Way of the Healer enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."
 mana={3}{W}
 type=Legendary Enchantment
@@ -150334,7 +150333,7 @@ type=Instant
 name=Mind Meanderer
 abilities=flying
 auto=aslongas(planeswalker[jace]|mybattlefield) vigilance
-auto=fight target(<upto:1>creature|opponentbattlefield)
+auto=_FIGHT_
 text=Flying -- This creature has vigilance as long as you control a Jace planeswalker. -- When this creature enters, it fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
 mana={3}{G}{U}{U}
 type=Creature
@@ -150354,7 +150353,7 @@ type=Instant
 [card]
 name=Way of the Mind Sculptor
 auto=_EMPOWERJACE5_
-missing=drawing a card when you remove two or more loyalty counters to activate an ability
+auto=@totalcounterremoved(0/0,1,Loyalty) from(planeswalker|mybattlefield) onlycost:if compare(thatmuch)~morethan~1 then draw:1 controller
 text=When Way of the Mind Sculptor enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it, draw a card.
 mana={4}{U}
 type=Legendary Enchantment
@@ -150362,7 +150361,7 @@ type=Legendary Enchantment
 [card]
 name=Avatar of Burgeoning Echoes
 auto=_LANDFALL__EMPOWERJACE2_
-missing=the granted -10 for planeswalkers
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0.-10.Loyalty)}:name(-10: +1/+1 counter per land) counter(1/1.type:land:mybattlefield) target(creature)]))
 text=Landfall -- Whenever a land you control enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[-10]: Put a +1/+1 counter on target creature for each land you control."
 mana={G}{U}
 type=Creature
@@ -150437,7 +150436,7 @@ toughness=4
 [/card]
 [card]
 name=Yoshimaru, Scrappy Stray
-auto=target(other creature|mybattlefield) fight target(<upto:1>creature|opponentbattlefield)
+missing=the enters fight - Wagic cannot make another creature you control fight (the fight macro only works for this card or a card-level target)
 auto={6}:counter(1/1) target(creature[-legendary])
 text=When Yoshimaru enters, another target creature you control fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.) -- {6}: Put a +1/+1 counter on target nonlegendary creature.
 mana={1}{G}
