@@ -225,6 +225,8 @@ void GameObserver::nextGamePhase()
         cleanupPhase();
         currentPlayer->damageCount = 0;
         currentPlayer->nonCombatDamage = 0;
+        currentPlayer->scrySurveilThisTurn = 0;
+        currentPlayer->opponent()->scrySurveilThisTurn = 0;
         currentPlayer->drawCounter = 0;
         currentPlayer->raidcount = 0;
         currentPlayer->cycledCount = 0;

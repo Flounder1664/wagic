@@ -38,6 +38,13 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         intValue = card->controller()->enduringStory ? 1 : 0;
         return;
     }
+    //Times this player scried or surveilled this turn (Surveillance Phantasm). Early return: see above.
+    if (s == "pscrysurveil" || s == "oscrysurveil")
+    {
+        Player * p = (s == "pscrysurveil") ? card->controller() : card->controller()->opponent();
+        intValue = p->scrySurveilThisTurn;
+        return;
+    }
     bool halfup = false;
     bool halfdown = false;
     bool thirdup = false;

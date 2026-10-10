@@ -933,6 +933,8 @@ int GenericScryAbility::resolve()
         number = amount[1];
     WParsedInt nbCardP(number, NULL, source);
     source->scryedCards = nbCardP.getValue();
+    if (source->lastController)
+        source->lastController->scrySurveilThisTurn++;
     WEvent * e = NEW WEventCardScryed(source);
     game->receiveEvent(e);
     return 1;
@@ -1242,6 +1244,11 @@ AASurveilEvent::AASurveilEvent(GameObserver* observer, int _id, MTGCardInstance 
 int AASurveilEvent::resolve()
 {
     Damageable * _target = (Damageable *) getTarget();
+    //Count the surveil even if no target player came through (the surveil macros pass none) - the
+    //"you've scried or surveilled this turn" tracker must not depend on it.
+    Player * surveiler = _target ? (Player*)_target : (card ? card->controller() : NULL);
+    if (surveiler)
+        surveiler->scrySurveilThisTurn++;
     if (_target)
     {
         Player * pTarget = (Player*)_target;

@@ -62,6 +62,7 @@ public:
     int monarch;
     int initiative;
     int surveilOffset;
+    int scrySurveilThisTurn; //times this player scried or surveilled this turn ("as long as you've scried or surveilled this turn")
     int devotionOffset;
     int lastShuffleTurn;
     //Number of cards this player exiled via Serum Powder's redraw. The
