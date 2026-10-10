@@ -1,0 +1,24 @@
+#FRA missing= sweep 2026-10-10. Gallia, Tragic Host (735228) returns from the graveyard TAPPED with a +1/+1 counter,
+#exiling Grizzly Bears from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:735228,Grizzly Bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735228
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735228
+exile:Grizzly Bears
+tappedinplay:1
+pt:735228=3/2
+life:20
+[PLAYER2]
+life:20
+[END]

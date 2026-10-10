@@ -9089,9 +9089,9 @@ grade=borderline
 #thisturn(creature|graveyard) counts creatures that died this turn (three other cards
 #already use thisturn against a graveyard), and lifegain is a WParsedInt reading
 #Player::lifeGainedThisTurn. "Each end step", not just mine, so @each end.
-auto=@each end restriction{thisturn(creature|graveyard)~morethan~2}:name(Becomes prepared) _PREPARE_
+auto=@each end restriction{compare(bothalldeadcreature)~morethan~2}:name(Becomes prepared) _PREPARE_
 auto={B} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Craving) counter(0/0,-1,Prepared) all(this) && draw:3 target(player) targetedPlayer && life:-3 targetedPlayer asSorcery
-missing=the end-step re-prepare (three or more creatures died this turn) is not written - nothing counts creature deaths per turn - so this creature never becomes prepared on its own -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 text=At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={1}{B}
 type=Creature
@@ -150240,8 +150240,7 @@ type=Instant
 [card]
 name=Gallia, Tragic Host
 abilities=menace
-autograveyard={4}{B}{E(other creature|mygraveyard)}:moveto(mybattlefield) and!( counter(1/1) )!
-missing=she returns untapped
+autograveyard={4}{B}{E(other creature|mygraveyard)}:moveto(mybattlefield) and!( tap(noevent) && counter(1/1) )!
 text=Menace (This creature can't be blocked except by two or more creatures.) -- {4}{B}, Exile another creature card from your graveyard: Return this card from your graveyard to the battlefield tapped with a +1/+1 counter on her.
 mana={1}{B}
 type=Legendary Creature

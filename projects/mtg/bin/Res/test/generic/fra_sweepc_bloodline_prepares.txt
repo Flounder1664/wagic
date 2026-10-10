@@ -1,0 +1,31 @@
+#FRA missing= sweep 2026-10-10. Bloodline Recollector becomes prepared at the end step after three creatures died
+#this turn (three Shocks on three Raging Goblins).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bloodline Recollector // Ancestral Craving
+hand:Shock,Shock,Shock
+manapool:{R}{R}{R}
+life:20
+[PLAYER2]
+inplay:Raging Goblin,Raging Goblin,Raging Goblin
+life:20
+[DO]
+Shock
+Raging Goblin
+Shock
+Raging Goblin
+Shock
+Raging Goblin
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:Bloodline Recollector // Ancestral Craving
+graveyard:Shock,Shock,Shock
+counter:Bloodline Recollector // Ancestral Craving=prepared:1
+life:20
+[PLAYER2]
+graveyard:Raging Goblin,Raging Goblin,Raging Goblin
+life:20
+[END]
