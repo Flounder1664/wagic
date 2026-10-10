@@ -1,0 +1,22 @@
+#FRA missing= sweep 2026-10-10. Essence Burn: a creature it kills is exiled instead of dying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Essence Burn
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Scathe Zombies
+life:20
+[DO]
+Essence Burn
+Scathe Zombies
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Essence Burn
+life:20
+[PLAYER2]
+exile:Scathe Zombies
+life:20
+[END]

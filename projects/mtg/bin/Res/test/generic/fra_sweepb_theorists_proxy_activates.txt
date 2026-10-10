@@ -1,0 +1,23 @@
+#FRA missing= sweep 2026-10-10. Theorist's Proxy (735044): {U}, sacrifice - then Shock still resolves normally (the next spell is uncounterable).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735044
+hand:Shock
+manapool:{U}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735044
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jace Fra
+graveyard:735044,Shock
+life:20
+[PLAYER2]
+life:18
+[END]

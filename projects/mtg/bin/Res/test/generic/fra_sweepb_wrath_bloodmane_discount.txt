@@ -1,0 +1,24 @@
+#FRA missing= sweep 2026-10-10. Wrath of the Bloodmane costs {1} less with a legendary creature (Isamaru, 79217): cast for {1}{R}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:79217
+hand:Wrath of the Bloodmane
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Wrath of the Bloodmane
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:79217
+graveyard:Wrath of the Bloodmane
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

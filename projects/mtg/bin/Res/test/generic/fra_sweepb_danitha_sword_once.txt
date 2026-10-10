@@ -1,0 +1,28 @@
+#FRA missing= sweep 2026-10-10. Danitha, Sword of Hope (735196) draws when you cast a spell targeting your creature - once each turn: two
+#Shocks on Colossal Dreadmaw draw one card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735196,Colossal Dreadmaw
+hand:Shock,Shock
+library:Forest,Island
+manapool:{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Colossal Dreadmaw
+Shock
+Colossal Dreadmaw
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735196,Colossal Dreadmaw
+hand:*
+graveyard:Shock,Shock
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

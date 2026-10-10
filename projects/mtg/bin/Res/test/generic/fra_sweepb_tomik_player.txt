@@ -1,0 +1,22 @@
+#FRA missing= sweep 2026-10-10. Tomik, Izzet Sparkmage (735253): noncombat damage to an opponent is 1 more - Shock deals 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735253
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735253
+graveyard:Shock
+life:20
+[PLAYER2]
+life:17
+[END]

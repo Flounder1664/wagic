@@ -149787,8 +149787,7 @@ type=Sorcery
 [/card]
 [card]
 name=Living Library
-auto={6}{S}:moveto(ownerlibrary) target(*[creature;planeswalker]|opponentbattlefield)
-missing=its owner's library is not shuffled afterwards
+auto={6}{S}:moveto(ownerlibrary) target(*[creature;planeswalker]|opponentbattlefield) && shuffle opponent
 text={6}, Sacrifice this creature: Choose target creature or planeswalker an opponent controls. Its owner shuffles it into their library.
 mana={2}
 type=Artifact Creature
@@ -149798,8 +149797,9 @@ toughness=4
 [/card]
 [card]
 name=Danitha, Spear of Agony
+auto=@targeted(creature|opponentbattlefield) from(*|myhand):counter(1/1) all(this)
+missing=a spell that targets an opponent (the player) does not count - only spells targeting their creatures do
 abilities=first strike
-missing=the +1/+1 counter when you cast a spell that targets an opponent or their creature
 text=First strike -- Whenever you cast a spell that targets an opponent or a creature an opponent controls, put a +1/+1 counter on Danitha.
 mana={2}{B}
 type=Legendary Creature
@@ -149809,9 +149809,9 @@ toughness=2
 [/card]
 [card]
 name=Silence the Echo
+other={1}{B}{S(*[creature;planeswalker]|mybattlefield)} name(Sacrifice a creature or planeswalker instead)
 target=*[creature;planeswalker]
 auto=destroy
-missing=the additional cost is always {3}; sacrificing a creature or planeswalker instead is not offered
 text=As an additional cost to cast this spell, sacrifice a creature or planeswalker or pay {3}. -- Destroy target creature or planeswalker.
 mana={4}{B}
 type=Sorcery
@@ -149829,8 +149829,9 @@ toughness=1
 [/card]
 [card]
 name=Graft Surgeon
+auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
+missing=only its +1/+1 counters move, not counters of other kinds
 auto=counter(1/1)
-missing=moving its counters to another creature when it dies
 text=This creature enters with a +1/+1 counter on it. -- When this creature dies, put its counters on up to one target creature you control.
 mana={2}{W}
 type=Creature
@@ -149840,8 +149841,10 @@ toughness=2
 [/card]
 [card]
 name=Ruric Thar, Magecrusher
-abilities=nofizzle,reach,vigilance,trample,hexproof
-missing=hexproof is permanent rather than lasting only until it has dealt combat damage
+auto=aslongas(*[counter{0/0.1.DealtCombatDamage}]|mybattlefield) hexproof <1
+auto=@combatdamaged(player) from(this):all(this) counter(0/0,1,DealtCombatDamage)
+auto=@combatdamaged(creature) from(this):all(this) counter(0/0,1,DealtCombatDamage)
+abilities=nofizzle,reach,vigilance,trample
 text=This spell can't be countered. -- Reach, vigilance, trample -- Ruric Thar has hexproof as long as they haven't dealt combat damage yet. (They can't be the target of spells or abilities your opponents control.)
 mana={5}{G}{G}
 type=Legendary Creature
@@ -149852,8 +149855,9 @@ toughness=7
 [card]
 name=Essence Burn
 target=*[creature;planeswalker][black;green]
+#exiledeath first: once the damage kills it, it is already in the graveyard.
+auto=exiledeath
 auto=damage:5
-missing=a permanent that would die this turn is not exiled instead
 text=Essence Burn deals 5 damage to target black or green creature or planeswalker. If that permanent would die this turn, exile it instead.
 mana={1}{R}
 type=Instant
@@ -149873,9 +149877,9 @@ toughness=2
 [/card]
 [card]
 name=Theorist's Proxy
+auto={U}{S}:name(The next spell you cast this turn cannot be countered) emblem transforms((,newability[@movedTo(*|mystack) turnlimited:all(trigger[to]) transforms((,nofizzle)) forever])) ueot
 abilities=flash
 auto=_EMPOWERJACE3_
-missing={U}, sacrifice: the next spell you cast this turn cannot be countered
 text=Flash -- When this creature enters, empower Jace 3. (Put three loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- {U}, Sacrifice this creature: The next spell you cast this turn can't be countered.
 mana={1}{U}
 type=Creature
@@ -149935,10 +149939,10 @@ toughness=1
 [/card]
 [card]
 name=Curse-Marred Demon
+#discard:1 is a random discard (AARandomDiscarder), as printed.
 abilities=flying,trample
 auto=target(*|mylibrary) moveto(hand) and!( shuffle )!
 auto=discard:1 controller
-missing=the discard is chosen rather than at random
 text=Flying, trample -- When this creature enters, search your library for a card, put it into your hand, shuffle, then discard a card at random.
 mana={2}{R}{R}
 type=Creature
@@ -150021,27 +150025,27 @@ toughness=4
 [/card]
 [card]
 name=Wrath of the Bloodmane
+anyzone=this(variable{type:creature[legendary]:mybattlefield}>0)while changecost(colorless:-1) forcedalive
 target=*[creature;planeswalker]
 auto=damage:4
-missing=the {1} discount when you control a legendary creature
 text=This spell costs {1} less to cast if you control a legendary creature. -- Wrath of the Bloodmane deals 4 damage to target creature or planeswalker.
 mana={2}{R}
 type=Instant
 [/card]
 [card]
 name=Break Under Pressure
-auto=ability$!name(Sacrifice a creature or planeswalker) notaTarget(*[creature;planeswalker]|mybattlefield) sacrifice!$ opponent
+missing=only creatures are considered - a planeswalker is never the one sacrificed
+auto=ability$!name(Sacrifice a creature or planeswalker) notaTarget(creature[manacost=convertedcost:highest:creature:myBattlefield]|mybattlefield) sacrifice!$ opponent
 auto=life:2 controller
-missing=the opponent chooses which creature or planeswalker rather than the one with the greatest mana value
 text=Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.
 mana={2}{B}
 type=Instant
 [/card]
 [card]
 name=Ghalta the Unstoppable
+anyzone=affinity(variable{pwr:highest:creature:mybattlefield}) reduce({1})
 abilities=trample
 auto=lord(other creature|mybattlefield) trample
-missing=the discount equal to the greatest power among creatures you control
 text=This spell costs {X} less to cast, where X is the greatest power among creatures you control. -- Trample -- Other creatures you control have trample.
 mana={8}{G}
 type=Legendary Creature
@@ -150100,10 +150104,11 @@ toughness=4
 [/card]
 [card]
 name=Saheeli, Consul of Oversight
+auto=@counteradded(0/0,1,ScriedOrSurveiled) from(this) turnlimited:token(-735514)
+auto=@each end:all(this) removeallcounters(0/0.1.ScriedOrSurveiled)
 abilities=flying
-auto=@scryed(*|myzones) turnlimited:token(-735514)
-auto=@surveiled(*|mybattlefield,mystack) turnlimited:token(-735514)
-missing=a scry and a surveil in the same turn can make two Thopters
+auto=@scryed(*|myzones):all(this) counter(0/0,1,ScriedOrSurveiled)
+auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScriedOrSurveiled)
 text=Flying -- Whenever you scry or surveil, create a 1/1 colorless Thopter artifact creature token with flying. This ability triggers only once each turn.
 mana={3}{W}{W}
 type=Legendary Creature
@@ -150164,8 +150169,11 @@ toughness=2
 [/card]
 [card]
 name=Danitha, Sword of Hope
+auto=@movedTo(equipment|mystack):all(this) counter(0/0,1,DanithaDraw)
+auto=@targeted(creature|mybattlefield) from(*|myhand):all(this) counter(0/0,1,DanithaDraw)
+auto=@counteradded(0/0,1,DanithaDraw) from(this) turnlimited:draw:1 controller
+auto=@each end:all(this) removeallcounters(0/0.1.DanithaDraw)
 abilities=first strike
-missing=drawing a card when you cast an Equipment spell or a spell that targets your creature
 text=First strike -- Whenever you cast an Equipment spell or a spell that targets a creature you control, draw a card. This ability triggers only once each turn.
 mana={2}{W}
 type=Legendary Creature
@@ -150195,8 +150203,11 @@ type=Instant
 [/card]
 [card]
 name=Tomik, Izzet Sparkmage
+#Tomik adds 1 more damage as its own source, so it is excluded with "other" - otherwise its +1 would retrigger.
+auto=@noncombatdamaged(*|opponentbattlefield) from(other *|myzones):all(trigger[to]) damage:1
+auto=@noncombatdamagefoeof(player) from(other *|myzones):damage:1 opponent
+missing=the extra 1 damage comes from Tomik rather than from the original source (matters for lifelink and deathtouch)
 abilities=prowess
-missing=the +1 to noncombat damage your sources deal to opponents and their permanents
 text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
 mana={1}{R}
 type=Legendary Creature
@@ -150218,10 +150229,10 @@ toughness=1
 [/card]
 [card]
 name=Fatehold Charm
+auto=choice name(Return target spell to its owner's hand) target(*|stack) spellmover(hand)
 auto=choice name(Draw a card, empower Jace 2) draw:1 controller && ability$!_EMPOWERJACE2_!$ controller
 auto=choice name(Return target creature to its owner's hand) moveto(ownerhand) target(creature)
 auto=choice name(Creatures you control get +1/+2) all(creature|mybattlefield) 1/2 ueot
-missing=the bounce mode cannot target a spell
 text=Choose one -- -- • Draw a card. Empower Jace 2. -- • Return target spell or creature to its owner's hand. -- • Creatures you control get +1/+2 until end of turn.
 mana={W}{U}
 type=Instant
@@ -150257,9 +150268,10 @@ type=Legendary Artifact
 [/card]
 [card]
 name=Surveillance Phantasm
+auto=@scryed(*|myzones):all(this) transforms((,canattack)) ueot
+auto=@surveiled(*|mybattlefield,mystack):all(this) transforms((,canattack)) ueot
 abilities=defender,flying,vigilance
 auto={3}{U}:_SURVEIL1_
-missing=attacking despite defender once you have scried or surveilled this turn
 text=Defender, flying, vigilance -- As long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender. -- {3}{U}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 mana={1}{U}
 type=Creature
@@ -150289,8 +150301,9 @@ type=Instant
 [card]
 name=Budding Insurgent
 abilities=vigilance
-auto={S}:destroy target(*[artifact;enchantment]) asSorcery
-missing=the card draw when the destroyed permanent was a legendary enchantment
+auto={S}:name(Destroy a legendary enchantment and draw) destroy target(enchantment[legendary]) && draw:1 controller asSorcery
+auto={S}:name(Destroy an artifact) destroy target(artifact) asSorcery
+auto={S}:name(Destroy a nonlegendary enchantment) destroy target(enchantment[-legendary]) asSorcery
 text=Vigilance -- Sacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.
 mana={2}{G}
 type=Creature
@@ -150327,9 +150340,9 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Sphinx of False Conclusions
+auto=@movedTo(this|graveyard) from(mybattlefield):all(trigger[to]) clone
 abilities=flash,flying
 auto=_ATTACKING__LOOT_
-missing=the token copy of itself when it dies
 text=Flash -- Flying -- Whenever this creature attacks, draw a card, then discard a card. -- When this creature dies, if it isn't a token, create a token that's a copy of it.
 mana={2}{U}{U}
 type=Creature
@@ -150358,10 +150371,12 @@ power=4
 toughness=4
 [/card]
 [card]
+missing=the excess ignores damage already marked on the creature, and is wrong for a planeswalker target (its loyalty is not read)
 name=Violent Echoes
 target=*[creature;planeswalker]
+#Excess is computed before the damage, from the target's toughness (6 - toughness); afterwards it is gone.
+auto=if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,6minustoughnessminusend,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,6minustoughnessminusend,Loyalty)
 auto=damage:6
-missing=empowering Jace by the excess damage
 text=Violent Echoes deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent this way, empower Jace X, where X is that excess damage. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 mana={2}{R}{R}
 type=Instant
@@ -150387,8 +150402,8 @@ toughness=3
 [/card]
 [card]
 name=Tetsuko Umezawa, Pursuer
+auto=@combat(blocking) source(creature[power<=1;toughness<=1]|opponentbattlefield):damage:1 opponent
 abilities=double strike,prowess
-missing=the 1 damage when a small creature an opponent controls blocks
 text=Double strike -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller.
 mana={3}{R}
 type=Legendary Creature
@@ -150441,8 +150456,9 @@ toughness=2
 [/card]
 [card]
 name=Tam, the Possibility
+auto={W}{U}{B}{R}{G}{T}:thisforeach(variable{type:planeswalker:mybattlefield}>0) _PROLIFERATE_
+missing=it proliferates once per planeswalker you control rather than once per planeswalker type
 auto=lord(planeswalker|mycastingzone) altercost(colorless,-1)
-missing=the five-colour proliferate ability
 text=Planeswalker spells you cast cost {1} less to cast. -- {W}{U}{B}{R}{G}, {T}: Proliferate X times, where X is the number of planeswalker types among planeswalkers you control. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
 mana={1}{G}{U}
 type=Legendary Creature

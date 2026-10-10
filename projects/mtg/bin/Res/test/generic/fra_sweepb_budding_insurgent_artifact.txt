@@ -1,0 +1,24 @@
+#FRA missing= sweep 2026-10-10. Budding Insurgent: destroying an artifact (choice 1) does not draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Budding Insurgent
+library:Forest
+life:20
+[PLAYER2]
+inplay:Ornithopter
+life:20
+[DO]
+Budding Insurgent
+choice 1
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Budding Insurgent
+library:Forest
+life:20
+[PLAYER2]
+graveyard:Ornithopter
+life:20
+[END]

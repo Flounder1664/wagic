@@ -1,0 +1,22 @@
+#FRA missing= sweep 2026-10-10. Sphinx of False Conclusions (735040) dies and leaves a token copy of itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735040
+hand:Lightning Bolt
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lightning Bolt
+735040
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Lightning Bolt,*
+life:20
+[PLAYER2]
+life:20
+[END]

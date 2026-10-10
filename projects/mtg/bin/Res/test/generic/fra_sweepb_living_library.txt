@@ -1,0 +1,23 @@
+#FRA missing= sweep 2026-10-10. Living Library puts an opponent's creature into its owner's library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Living Library
+manapool:{6}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+library:Plains
+life:20
+[DO]
+Living Library
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Living Library
+life:20
+[PLAYER2]
+library:*,*
+life:20
+[END]

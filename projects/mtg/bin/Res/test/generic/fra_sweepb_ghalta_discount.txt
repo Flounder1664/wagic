@@ -1,0 +1,20 @@
+#FRA missing= sweep 2026-10-10. Ghalta the Unstoppable costs {X} less, X = greatest power you control: Craw Wurm (6) -> cast for {2}{G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:Ghalta the Unstoppable
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ghalta the Unstoppable
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Ghalta the Unstoppable
+life:20
+[PLAYER2]
+life:20
+[END]
