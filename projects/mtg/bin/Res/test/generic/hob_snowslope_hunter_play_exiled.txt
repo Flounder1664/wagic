@@ -1,0 +1,24 @@
+#Snowslope Hunter: sacrifice another creature or artifact to exile the top card of your library; you may
+#play it. Sacrifice Grizzly Bears, exile Hill Giant, then cast Hill Giant from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Grizzly Bears
+library:Hill Giant
+manapool:{3}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Snowslope Hunter
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Hill Giant
+graveyard:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

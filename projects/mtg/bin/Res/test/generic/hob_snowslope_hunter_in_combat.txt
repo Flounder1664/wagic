@@ -1,0 +1,24 @@
+#Snowslope Hunter is "activate only during your turn", not sorcery speed: it works at the beginning of combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Grizzly Bears
+library:Forest,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+Snowslope Hunter
+Grizzly Bears
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Snowslope Hunter
+graveyard:Grizzly Bears
+exile:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

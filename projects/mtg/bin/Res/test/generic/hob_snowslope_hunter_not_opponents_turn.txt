@@ -1,0 +1,28 @@
+#Snowslope Hunter cannot be activated during an opponent's turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Grizzly Bears
+library:Forest,Island
+life:20
+[PLAYER2]
+library:Plains,Plains
+life:20
+[DO]
+eot
+next
+next
+next
+Snowslope Hunter
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Grizzly Bears
+library:Forest,Island
+life:20
+[PLAYER2]
+hand:*
+library:*
+life:20
+[END]

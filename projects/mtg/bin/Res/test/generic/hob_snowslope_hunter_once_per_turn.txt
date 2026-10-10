@@ -1,0 +1,25 @@
+#Snowslope Hunter: only once each turn - the second activation is refused and Hill Giant survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Grizzly Bears,Hill Giant
+library:Forest,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+Snowslope Hunter
+Grizzly Bears
+Snowslope Hunter
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snowslope Hunter,Hill Giant
+graveyard:Grizzly Bears
+exile:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

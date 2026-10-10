@@ -141138,9 +141138,8 @@ toughness=4
 [/card]
 [card]
 name=Snowslope Hunter
-auto=limit:1 asSorcery name(Sac for card) notaTarget(*[artifact,creature;-Snowslope Hunter]|mybattlefield) sacrifice and!( name(Exile top card) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )! )!
+auto={S(other creature,artifact|mybattlefield)}:name(Exile top card) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) uent )! limit:1 myturnonly
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; sac-cost activated ability approximated
 text=Sacrifice another creature or artifact: Exile the top card of your library. You may play it until the end of your next turn. Activate only during your turn and only once each turn.
 mana={2}{R}
 type=Creature
