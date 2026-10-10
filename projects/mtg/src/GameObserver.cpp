@@ -442,6 +442,7 @@ void GameObserver::startGame(GameType gtype, Rules * rules)
 {
     mGameType = gtype;
     turn = 0;
+    resolveCount = 0;
     mRules = rules;
     if (rules) 
         rules->initPlayers(this);
@@ -609,6 +610,9 @@ void GameObserver::dumpAssert(bool val)
 
 void GameObserver::Update(float dt)
 {
+    //One frame = one batch for "@discarded ... oneormore": every card an effect discards goes in the same
+    //update, even when a trigger (Tinybones' damage) resolves in the middle of the discard loop.
+    resolveCount++;
     Player * player = currentPlayer;
     if (MTG_PHASE_COMBATBLOCKERS == mCurrentGamePhase && BLOCKERS == combatStep)
     {

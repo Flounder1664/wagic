@@ -867,7 +867,7 @@ Interruptible * ActionStack::getAt(int id)
 }
 
 ActionStack::ActionStack(GameObserver* game)
-    : GuiLayer(game), currentTutorial(0)
+    : GuiLayer(game), currentTutorial(0), resolveDepth(0)
 {
     for (int i = 0; i < 2; i++)
         interruptDecision[i] = NOT_DECIDED;
@@ -912,7 +912,19 @@ int ActionStack::has(Interruptible * action)
     return 0;
 }
 
+//Wrapper: a top-level resolution starts a new discard batch for "@discarded ... oneormore"; anything that
+//resolves inside it (Tinybones' damage trigger, mid-way through a discard loop) stays in the same batch.
 int ActionStack::resolve()
+{
+    if (resolveDepth == 0 && observer)
+        observer->resolveCount++;
+    resolveDepth++;
+    int result = resolveInner();
+    resolveDepth--;
+    return result;
+}
+
+int ActionStack::resolveInner()
 {
     Interruptible * action = getLatest(NOT_RESOLVED);
 

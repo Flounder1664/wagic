@@ -246,6 +246,8 @@ public:
     virtual void Render();
     ActionStack(GameObserver* game);
     int resolve();
+    int resolveInner();
+    int resolveDepth; //resolve() can re-enter (a trigger resolving immediately inside another resolution)
     int has(Interruptible * action);
     int has(MTGAbility * ability);
     int receiveEventPlus(WEvent * event);

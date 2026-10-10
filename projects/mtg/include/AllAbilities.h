@@ -1418,10 +1418,20 @@ public:
     bool limitOnceATurn;
     int triggeredTurn;
     bool cycledTrigger;
+    //"Whenever a player discards one or more cards" (Tinybones): one trigger per player per resolving effect,
+    //not one per card. Discards made in the same game update share observer->resolveCount.
+    bool oneOrMore;
+    int lastBatch;
+    int lastBatchTurn;
+    Player * lastBatchPlayer;
     TrCardDiscarded(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool limitOnceATurn = false, bool cycledTrigger = false) :
     Trigger(observer, id, source, once, tc), limitOnceATurn(limitOnceATurn), cycledTrigger(cycledTrigger)
     {
         triggeredTurn = -1;
+        oneOrMore = false;
+        lastBatch = -1;
+        lastBatchTurn = -1;
+        lastBatchPlayer = NULL;
     }
 
     int triggerOnEventImpl(WEvent * event)
@@ -1442,6 +1452,14 @@ public:
             targetCard = e->card;
         }
         if (!targetCard || !tc->canTarget(targetCard)) return 0;
+        if (oneOrMore)
+        {
+            if (lastBatch == game->resolveCount && lastBatchTurn == game->turn && lastBatchPlayer == targetCard->owner)
+                return 0;
+            lastBatch = game->resolveCount;
+            lastBatchTurn = game->turn;
+            lastBatchPlayer = targetCard->owner;
+        }
         triggeredTurn = game->turn;
         return 1;
     }

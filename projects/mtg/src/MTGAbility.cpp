@@ -1756,7 +1756,11 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
 
     //Card is Discarded
     if (TargetChooser * tc = parseSimpleTC(s, "discarded", card))
-        return NEW TrCardDiscarded(observer, id, card, tc, once, limitOnceATurn);
+    {
+        TrCardDiscarded * trigger = NEW TrCardDiscarded(observer, id, card, tc, once, limitOnceATurn);
+        trigger->oneOrMore = (s.find("oneormore") != string::npos);
+        return trigger;
+    }
 
     //Card is cycled
     if (TargetChooser * tc = parseSimpleTC(s, "cycled", card))
@@ -5655,6 +5659,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         Targetable * t = spell ? spell->getNextTarget() : NULL;
         MTGAbility * a = NEW AManaProducer(observer, id, card, t, output, NULL, who,s.substr(found),doesntEmptyTilueot);
         a->oneShot = 1;
+        ((AManaProducer*)a)->notHandSpells = (s.find("nothandspells") != string::npos);
         if(newName.size())
             ((AManaProducer*)a)->menutext = newName;
         if(storedAndAbility.size())
@@ -8699,6 +8704,7 @@ AManaProducer::AManaProducer(GameObserver* observer, int id, MTGCardInstance * c
     setCost(_cost);
     output = _output;
     tap = 0;
+    notHandSpells = false;
     Producing = producing;
     menutext = "";
     DoesntEmpty = doesntEmpty;
@@ -8749,7 +8755,10 @@ int AManaProducer::resolve()
     if (!player)
         return 0;
     
+    int colorlessMade = output->getCost(Constants::MTG_COLOR_ARTIFACT) + output->getCost(Constants::MTG_COLOR_WASTE);
     player->getManaPool()->add(output, source);
+    if (notHandSpells)
+        player->getManaPool()->handRestricted += colorlessMade;
     if(DoesntEmpty)
         player->doesntEmpty->add(output);
 

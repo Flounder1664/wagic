@@ -1368,23 +1368,37 @@ void ManaPool::Empty()
     SAFE_DELETE(Bestow);
     SAFE_DELETE(manaUsedToCast);
     init();
+    handRestricted = 0;
     WEvent * e = NEW WEventEmptyManaPool(this);
     player->getObserver()->receiveEvent(e);
 }
 
 ManaPool::ManaPool(Player * player) :
-    ManaCost(), player(player)
+    ManaCost(), player(player), handRestricted(0)
 {
 }
 
 ManaPool::ManaPool(ManaCost * _manaCost, Player * player) :
-    ManaCost(_manaCost), player(player)
+    ManaCost(_manaCost), player(player), handRestricted(0)
 {
+}
+
+int ManaPool::handRestrictedLeft()
+{
+    //Mana is fungible: once colorless has been spent, assume the restricted part went first only as far as
+    //the colorless left allows, so the count never exceeds what is really in the pool.
+    int colorless = getCost(Constants::MTG_COLOR_WASTE) + getCost(Constants::MTG_COLOR_ARTIFACT);
+    if (handRestricted > colorless)
+        handRestricted = colorless;
+    if (handRestricted < 0)
+        handRestricted = 0;
+    return handRestricted;
 }
 
 int ManaPool::remove(int color, int value)
 {
     int result = ManaCost::remove(color, value);
+    handRestrictedLeft();
     for (int i = 0; i < value; ++i)
     {
         WEvent * e = NEW WEventConsumeMana(color, this);
@@ -1446,6 +1460,7 @@ int ManaPool::pay(ManaCost * _cost)
     }
 
     int result = ManaCost::pay(_cost);
+    handRestrictedLeft();
     for (int i = 0; i < Constants::NB_Colors; i++)
     {
         int value = current[i] - cost[i];

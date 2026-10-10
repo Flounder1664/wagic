@@ -559,6 +559,7 @@ public:
     int tap;
     string Producing;
     bool DoesntEmpty;
+    bool notHandSpells; //its colorless can't be spent to cast spells from hand (Heartwood Crafter)
     AManaProducer(GameObserver* observer, int id, MTGCardInstance * card, Targetable * t, ManaCost * _output, ManaCost * _cost = NULL, int who = TargetChooser::UNSET,string producing = "",bool doesntEmpty = false);
     int isReactingToClick(MTGCardInstance *  _card, ManaCost * mana = NULL);
     int resolve();

@@ -72,6 +72,7 @@ class GameObserver{
   int currentPlayerId;
   CombatStep combatStep;
   int turn;
+  int resolveCount; //bumped once per Update (frame) - lets "@discarded ... oneormore" group the cards one effect discards
   int forceShuffleLibraries();
   int targetListIsSet(MTGCardInstance * card);
   PhaseRing * phaseRing;

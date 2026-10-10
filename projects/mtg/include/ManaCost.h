@@ -152,6 +152,10 @@ class ManaPool:public ManaCost{
 protected:
     Player * player;
 public:
+    //Colorless in this pool that can't be spent to cast spells from hand (Heartwood Crafter's "nothandspells").
+    //Capped to the colorless actually left after every payment, and cleared when the pool empties.
+    int handRestricted;
+    int handRestrictedLeft();
     void Empty();
     ManaPool(Player * player);
     ManaPool(ManaCost * _manaCost, Player * player);
