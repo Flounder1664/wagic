@@ -149429,8 +149429,8 @@ toughness=4
 [/card]
 [card]
 name=Mabel, Bitter Recluse
-auto=removesinglecountertype(3) target(<upto:1>other *[creature;planeswalker])
-missing=the three counters removed are all of one kind (Wagic removes counters of a single chosen type)
+#Three single removals, each choosing the kind - "up to three counters" of any mix.
+auto=target(<upto:1>other *[creature;planeswalker]) transforms((,newability[removesinglecountertype(1)],newability[removesinglecountertype(1)],newability[removesinglecountertype(1)])) oneshot
 abilities=deathtouch
 text=Deathtouch -- When Mabel enters, remove up to three counters from another target creature or planeswalker.
 mana={B}
@@ -149453,7 +149453,6 @@ toughness=3
 [card]
 name=Tam's Resistance
 target=<upto:1>creature
-missing=it cannot be cast without a creature to target (to empower Jace on its own)
 auto=counter(1/1)
 auto=transforms((,vigilance)) ueot
 auto=_EMPOWERJACE4_
@@ -149782,7 +149781,8 @@ toughness=4
 [card]
 name=Danitha, Spear of Agony
 auto=@targeted(creature|opponentbattlefield) from(*|myhand):counter(1/1) all(this)
-missing=a spell that targets an opponent (the player) does not count - only spells targeting their creatures do
+auto=@targeted(opponent) from(*|myhand):counter(1/1) all(this)
+missing=a spell that targets both an opponent and a creature they control gives two counters rather than one
 abilities=first strike
 text=First strike -- Whenever you cast a spell that targets an opponent or a creature an opponent controls, put a +1/+1 counter on Danitha.
 mana={2}{B}
@@ -149813,8 +149813,7 @@ toughness=1
 [/card]
 [card]
 name=Graft Surgeon
-auto=_DIES_may thisforeach(counter{1/1.1}) counter(1/1) target(creature|mybattlefield)
-missing=only its +1/+1 counters move, not counters of other kinds
+auto=_DIES_may movecounters target(creature|mybattlefield)
 auto=counter(1/1)
 text=This creature enters with a +1/+1 counter on it. -- When this creature dies, put its counters on up to one target creature you control.
 mana={2}{W}
@@ -150017,8 +150016,7 @@ type=Instant
 [/card]
 [card]
 name=Break Under Pressure
-missing=only creatures are considered - a planeswalker is never the one sacrificed
-auto=ability$!name(Sacrifice a creature or planeswalker) notaTarget(creature[manacost=convertedcost:highest:creature:myBattlefield]|mybattlefield) sacrifice!$ opponent
+auto=ability$!name(Sacrifice a creature or planeswalker) notaTarget(*[creature;planeswalker][manacost=convertedcost:highest:creature+planeswalker:myBattlefield]|mybattlefield) sacrifice!$ opponent
 auto=life:2 controller
 text=Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.
 mana={2}{B}
