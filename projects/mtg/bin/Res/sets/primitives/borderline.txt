@@ -150289,7 +150289,8 @@ toughness=3
 [card]
 name=Hall of Echoes
 auto={T}:Add{C}
-missing=becoming a copy of target creature you control
+auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy options(nolegend) and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy])) forever )!
+missing=the legend rule is not switched off for your other permanents this turn - instead the copy itself is not legendary, so copying a legendary creature keeps both
 text={T}: Add {C}. -- {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
 type=Land
 [/card]
