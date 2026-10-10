@@ -150246,8 +150246,8 @@ type=Legendary Artifact
 [/card]
 [card]
 name=Surveillance Phantasm
-auto=@scryed(*|myzones):all(this) transforms((,canattack)) ueot
-auto=@surveiled(*|mybattlefield,mystack):all(this) transforms((,canattack)) ueot
+#A condition on the per-turn tracker, not a trigger: pscrysurveil counts your scries and surveils this turn.
+auto=this(variable{pscrysurveil}>0) canattack
 abilities=defender,flying,vigilance
 auto={3}{U}:_SURVEIL1_
 text=Defender, flying, vigilance -- As long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender. -- {3}{U}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

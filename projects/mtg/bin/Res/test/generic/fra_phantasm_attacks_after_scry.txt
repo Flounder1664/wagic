@@ -1,0 +1,29 @@
+#2026-10-11: Surveillance Phantasm can attack despite defender once you've scried or surveilled this turn - a condition on
+#the engine's per-turn tracker (pscrysurveil), not a trigger. Opt scries, then the Phantasm (2/3 flier) attacks for 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Surveillance Phantasm
+hand:Opt
+library:Forest,Island,Swamp
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Opt
+choice 0
+goto attackers
+Surveillance Phantasm
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Surveillance Phantasm
+hand:*
+graveyard:Opt
+library:*,*
+life:20
+[PLAYER2]
+life:18
+[END]
