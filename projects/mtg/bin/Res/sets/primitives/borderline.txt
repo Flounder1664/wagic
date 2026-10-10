@@ -150258,7 +150258,7 @@ toughness=3
 [card]
 name=Hexhaven Invigorator
 abilities=vigilance
-missing=fetching lands equal to the damage it is dealt
+auto=_ENRAGE_transforms((,newability[name(Search for that many lands) target(<upto:thatmuch>land|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!],newability[shuffle])) oneshot
 text=Vigilance -- Whenever this creature is dealt damage, you may search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.
 mana={G}{G}{G}{G}
 type=Creature
