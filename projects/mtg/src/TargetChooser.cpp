@@ -649,6 +649,12 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                         cd->attacker = 1;
                     }
                 }
+                //Attacked this turn (Hexhaven Dueling Arena) - uses the engine's own didattacked flag.
+                //Safe anywhere in this chain: "attackedthisturn" contains none of the other keywords.
+                else if (attribute.find("attackedthisturn") != string::npos)
+                {
+                    cd->didattacked = minus ? -1 : 1;
+                }
                 //Blocker
                 else if (attribute.find("blocking") != string::npos)
                 {

@@ -61,6 +61,7 @@ int CardDescriptor::init()
 {
     int result = MTGCardInstance::init();
     attacker = 0;
+    didattacked = 0;
     defenser = NULL;
     banding = NULL;
     anyCounter = 0;
@@ -431,6 +432,11 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
     }
 
     if ((tapped == -1 && card->isTapped()) || (tapped == 1 && !card->isTapped()))
+    {
+        match = NULL;
+    }
+
+    if ((didattacked == -1 && card->didattacked) || (didattacked == 1 && !card->didattacked))
     {
         match = NULL;
     }
