@@ -73680,7 +73680,8 @@ type=Instant
 [/card]
 [card]
 name=Mirror Box
-abilities=legendruleremove
+#"The legend rule doesn't apply to permanents you control" - per player, not the global legendruleremove.
+auto=lord(*|mybattlefield) nolegend
 auto=lord(creature[legendary]|myBattlefield) 1/1
 auto=lord(creature[-token]|myBattlefield) transforms((,newability[foreach(other creature[share!name!]|mybattlefield) 1/1]))
 text=The "legend rule" doesn't apply to permanents you control. -- Each legendary creature you control gets +1/+1. -- Each nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature.
@@ -148958,8 +148959,7 @@ toughness=3
 name=Heartwood Crafter // Soul Tether
 auto=_PREPARE_
 auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:Soul Tether:!) asSorcery
-auto={T}:Add{C}
-missing=its {C} can also be spent on spells from your hand
+auto={T}:Add{C} nothandspells
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- {T}: Add {C}. This mana can't be spent to cast spells from your hand. // Soul Tether {2}{R/G}: Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
 mana={G}
 type=Creature
@@ -149363,8 +149363,8 @@ toughness=3
 [/card]
 [card]
 name=Way of the Pyromancer
+auto=lord(planeswalker|mybattlefield) transforms((,newability[{C(0/0.1.Loyalty)}:name(+1: Add {R}) Add{R}]))
 auto=_EMPOWERJACE2_
-missing=the granted "+1: Add {R}" for planeswalkers - a granted loyalty ability that adds mana jams the planeswalker's whole ability menu, so it is left out
 text=When Way of the Pyromancer enters, empower Jace 2. (Put two loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Planeswalkers you control have "[+1]: Add {R}."
 mana={1}{R}
 type=Legendary Enchantment
@@ -149983,8 +149983,7 @@ toughness=2
 [card]
 name=Tinybones, Pocket Nuisance
 auto=discard:1 opponent
-auto=@discarded(*|hand):damage:1 opponent
-missing=1 damage per card discarded rather than per discard event
+auto=@discarded(*|hand) oneormore:damage:1 opponent
 text=When Tinybones enters, each opponent discards a card. -- Whenever a player discards one or more cards, Tinybones deals 1 damage to each opponent.
 mana={2}{B}
 type=Legendary Creature
@@ -150102,7 +150101,6 @@ name=Way of the Paradox
 auto=_EMPOWERJACE5_
 auto=@totalcounteradded(0/0,1,Loyalty) from(planeswalker|mybattlefield) onlycost:life:1 controller && maxPlay(land)+1 ueot
 auto=@totalcounterremoved(0/0,1,Loyalty) from(planeswalker|mybattlefield) onlycost:life:1 controller && maxPlay(land)+1 ueot
-missing=a loyalty ability costing [0] moves no counters, so it does not trigger this
 text=When Way of the Paradox enters, empower Jace 5. (Put five loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.") -- Whenever you activate a loyalty ability, you gain 1 life. You may play an additional land this turn.
 mana={2}{G}
 type=Legendary Enchantment
@@ -150293,8 +150291,9 @@ toughness=3
 [card]
 name=Hall of Echoes
 auto={T}:Add{C}
-auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy options(nolegend) and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy])) forever )!
-missing=the legend rule is not switched off for your other permanents this turn - instead the copy itself is not legendary, so copying a legendary creature keeps both
+#While it is a copy it also gives your permanents nolegend; that ends when it flips back at the end step.
+auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy],newability[lord(*|mybattlefield) nolegend])) forever )!
+missing=the legend-rule exemption ends early if Hall of Echoes leaves the battlefield before the end of turn
 text={T}: Add {C}. -- {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
 type=Land
 [/card]

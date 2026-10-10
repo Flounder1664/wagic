@@ -1,0 +1,26 @@
+#Engine 2026-10-10 (@discarded ... oneormore). Tinybones, Pocket Nuisance (735016): two separate discard events (two Hymns, two cards each) deal 1 each.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735016
+hand:Hymn to Tourach,Hymn to Tourach
+manapool:{B}{B}{B}{B}
+life:20
+[PLAYER2]
+hand:Plains,Island,Swamp,Mountain
+life:20
+[DO]
+Hymn to Tourach
+p2
+Hymn to Tourach
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735016
+graveyard:Hymn to Tourach,Hymn to Tourach
+life:20
+[PLAYER2]
+graveyard:*,*,*,*
+life:18
+[END]

@@ -1,5 +1,6 @@
-#FRA. Way of the Pyromancer empowers Jace 2 as it enters. Its "+1: Add {R}" grant is left out (missing= on the
-#card): a granted mana loyalty ability jammed Jace's whole menu.
+#FRA. Way of the Pyromancer empowers Jace 2 and gives planeswalkers "+1: Add {R}": the Jace token uses it (choice 1
+#in its menu) - loyalty 3, {R} in the pool. (2026-10-10: an earlier note said the granted mana ability jammed the
+#menu; re-tested, it works.)
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -10,11 +11,14 @@ life:20
 life:20
 [DO]
 Way of the Pyromancer
+Jace Fra
+choice 1
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
 inplay:Way of the Pyromancer,Jace Fra
-counter:Jace Fra=loyalty:2
+counter:Jace Fra=loyalty:3
+manapool:{R}
 life:20
 [PLAYER2]
 life:20

@@ -1,0 +1,25 @@
+#Engine 2026-10-10 (nothandspells). Heartwood Crafter's {C} can't be spent to cast a spell from hand: with {G} plus
+#its {C}, Grizzly Bears stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Heartwood Crafter // Soul Tether
+hand:Grizzly Bears
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Heartwood Crafter // Soul Tether
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Heartwood Crafter // Soul Tether
+hand:Grizzly Bears
+manapool:{G}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

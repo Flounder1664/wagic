@@ -1,0 +1,23 @@
+#Engine 2026-10-10 (nothandspells). Heartwood Crafter's {C} still pays for abilities: {1}{R} plus its {C} casts the
+#prepared copy of Soul Tether - a Heartwood token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Heartwood Crafter // Soul Tether
+manapool:{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Heartwood Crafter // Soul Tether
+choice 0
+Heartwood Crafter // Soul Tether
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Heartwood Crafter // Soul Tether,Heartwood Fra
+life:20
+[PLAYER2]
+life:20
+[END]
