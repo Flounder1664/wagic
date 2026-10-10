@@ -1,0 +1,24 @@
+#Engine 2026-10-10: every [..] group of a filter counts (only the first used to be read). Essence Burn only targets a black or green
+#creature or planeswalker; white Savannah Lions is not a legal target.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Essence Burn
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Savannah Lions
+life:20
+[DO]
+Essence Burn
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Essence Burn
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Savannah Lions
+life:20
+[END]

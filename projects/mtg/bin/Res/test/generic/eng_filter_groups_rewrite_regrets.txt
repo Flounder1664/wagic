@@ -1,0 +1,24 @@
+#Engine 2026-10-10: every [..] group of a filter counts (only the first used to be read). Rewrite Regrets wants mana value 6 or
+#less ([creature;planeswalker][manacost<=6]); Avatar of Might (8) is not a legal target, so it can't be cast.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rewrite Regrets
+graveyard:Avatar of Might
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Rewrite Regrets
+Avatar of Might
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rewrite Regrets
+graveyard:Avatar of Might
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[END]
