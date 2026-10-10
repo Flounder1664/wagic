@@ -150232,9 +150232,8 @@ toughness=1
 [card]
 name=Hexhaven Dueling Arena
 auto={T}:Add{C}
-auto={2}{T}:name(Target creature becomes prepared) counter(0/0,1,Prepared) target(creature) asSorcery
+auto={2}{T}:name(Target creature that attacked this turn becomes prepared) counter(0/0,1,Prepared) target(creature[attackedthisturn]) asSorcery
 auto={4}{T}:name(Target creature becomes prepared) counter(0/0,1,Prepared) target(creature)
-missing=the {2} ability does not check that the creature attacked this turn
 text={T}: Add {C}. -- {2}, {T}: Target creature that attacked this turn becomes prepared. Activate only as a sorcery. (Only creatures with prepare spells can become prepared.) -- {4}, {T}: Target creature becomes prepared.
 type=Land
 [/card]
