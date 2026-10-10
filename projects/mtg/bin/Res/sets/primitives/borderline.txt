@@ -149016,8 +149016,10 @@ toughness=3
 [/card]
 [card]
 name=Whiplash Wordsmith // Vicious Verse
-auto=@noncombatdamagefoeof(player):all(this) transforms((,flying,haste)) ueot
-missing=if this creature enters after the noncombat damage was dealt, it does not get flying and haste that turn
+#A condition, not a trigger: odnoncount is the noncombat damage your opponent has taken this turn (engine-tracked,
+#reset each turn), so it also works when this creature enters after the damage.
+auto=this(variable{odnoncount}>0) flying
+auto=this(variable{odnoncount}>0) haste
 auto=_PREPARE_
 auto={B/R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Vicious Verse) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:Vicious Verse:!) asSorcery
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- As long as an opponent was dealt noncombat damage this turn, this creature has flying and haste. // Vicious Verse {B/R}: Vicious Verse deals 1 damage to target opponent.
