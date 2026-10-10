@@ -133353,8 +133353,9 @@ toughness=3
 name=Oakhollow Village
 grade=supported
 auto={T}:add{C}
-auto={T}:add{G}
-auto={G}{T}:counter(1/1) all(frog[fresh]|mybattlefield) && counter(1/1) all(rabbit[fresh]|mybattlefield) && counter(1/1) all(raccoon[fresh]|mybattlefield) && counter(1/1) all(squirrel[fresh]|mybattlefield)
+auto={T}:Add{G} spendspells(creature)
+#One counter per creature even if it has two of these types (the old && chain gave a Frog Rabbit two).
+auto={G}{T}:name(+1/+1 counters) all(creature[frog;rabbit;raccoon;squirrel][fresh]|mybattlefield) counter(1/1)
 text={T}: Add {C}. -- {T}: Add {G}. Spend this mana only to cast a creature spell. -- {G}, {T}: Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn.
 type=Land
 [/card]
@@ -148959,7 +148960,7 @@ toughness=3
 name=Heartwood Crafter // Soul Tether
 auto=_PREPARE_
 auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:Soul Tether:!) asSorcery
-auto={T}:Add{C} nothandspells
+auto={T}:Add{C} spendspells(*) spendabilities(*) spendnothand
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- {T}: Add {C}. This mana can't be spent to cast spells from your hand. // Soul Tether {2}{R/G}: Create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.")
 mana={G}
 type=Creature
@@ -150564,4 +150565,36 @@ auto=target(land|mylibrary) moveto(mygraveyard) and!( shuffle )!
 text=Search your library for a land card, put it into your graveyard, then shuffle.
 mana={G}
 type=Sorcery
+[/card]
+[card]
+name=Lilypad Village
+auto={T}:Add{C}
+auto={T}:Add{U} spendspells(creature)
+auto={U}{T} restriction{thisturn(*[bird;frog;otter;rat]|mybattlefield)~morethan~0}:name(Surveil 2) _SURVEIL2_
+text={T}: Add {C}. -- {T}: Add {U}. Spend this mana only to cast a creature spell. -- {U}, {T}: Surveil 2. Activate only if a Bird, Frog, Otter, or Rat entered the battlefield under your control this turn.
+type=Land
+[/card]
+[card]
+name=Lupinflower Village
+auto={T}:Add{C}
+auto={T}:Add{W} spendspells(creature)
+auto={1}{W}{T}{S}:name(Look at the top six) reveal:6 optionone name(Put a Bat, Bird, Mouse or Rabbit card into your hand) target(<1>*[bat;bird;mouse;rabbit]|reveal) moveto(hand) and!( all(*|reveal) bottomoflibrary )! optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+text={T}: Add {C}. -- {T}: Add {W}. Spend this mana only to cast a creature spell. -- {1}{W}, {T}, Sacrifice this land: Look at the top six cards of your library. You may reveal a Bat, Bird, Mouse, or Rabbit card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+type=Land
+[/card]
+[card]
+name=Mudflat Village
+auto={T}:Add{C}
+auto={T}:Add{B} spendspells(creature)
+auto={1}{B}{T}{S}:name(Return a Bat, Lizard, Rat or Squirrel card) moveto(hand) target(*[bat;lizard;rat;squirrel]|mygraveyard)
+text={T}: Add {C}. -- {T}: Add {B}. Spend this mana only to cast a creature spell. -- {1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand.
+type=Land
+[/card]
+[card]
+name=Rockface Village
+auto={T}:Add{C}
+auto={T}:Add{R} spendspells(creature)
+auto={R}{T}:name(+1/+0 and haste) target(creature[lizard;mouse;otter;raccoon]|mybattlefield) transforms((,haste,newability[1/0 ueot])) ueot asSorcery
+text={T}: Add {C}. -- {T}: Add {R}. Spend this mana only to cast a creature spell. -- {R}, {T}: Target Lizard, Mouse, Otter, or Raccoon you control gets +1/+0 and gains haste until end of turn. Activate only as a sorcery.
+type=Land
 [/card]

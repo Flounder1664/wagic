@@ -1,0 +1,26 @@
+#Engine 2026-10-10: tagged mana. Lilypad Village's {U} (menu choice 1) - "Spend this mana only to cast a creature spell".
+#It can't cast Opt: Opt stays in hand, the {U} stays in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lilypad Village
+hand:Opt
+library:Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lilypad Village
+choice 1
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lilypad Village
+hand:Opt
+library:Forest
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[END]

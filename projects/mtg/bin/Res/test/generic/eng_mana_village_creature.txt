@@ -1,0 +1,23 @@
+#Engine 2026-10-10: tagged mana. Lilypad Village's {U} (menu choice 1) - "Spend this mana only to cast a creature spell".
+#It casts Merfolk Looter (with {1} floating).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lilypad Village
+hand:Merfolk Looter
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lilypad Village
+choice 1
+Merfolk Looter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lilypad Village,Merfolk Looter
+life:20
+[PLAYER2]
+life:20
+[END]
