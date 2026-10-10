@@ -1,0 +1,27 @@
+#FRA. Yoshimaru, Scrappy Stray (735269): as it enters, another creature you control fights a creature an opponent
+#controls. The enters prompt (choice 0), Grizzly Bears, the fight prompt (choice 0), Raging Goblin - which dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:735269
+manapool:{1}{G}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+735269
+choice 0
+Grizzly Bears
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735269,Grizzly Bears
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

@@ -150436,7 +150436,7 @@ toughness=4
 [/card]
 [card]
 name=Yoshimaru, Scrappy Stray
-missing=the enters fight - Wagic cannot make another creature you control fight (the fight macro only works for this card or a card-level target)
+auto=target(other creature|mybattlefield) _FIGHT_
 auto={6}:counter(1/1) target(creature[-legendary])
 text=When Yoshimaru enters, another target creature you control fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.) -- {6}: Put a +1/+1 counter on target nonlegendary creature.
 mana={1}{G}
