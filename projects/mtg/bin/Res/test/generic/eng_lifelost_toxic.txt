@@ -1,0 +1,29 @@
+#Engine 2026-10-10: life-lost-this-turn audit. Skewer the Critics' spectacle cost ({R}) needs an opponent to have LOST life.
+#Pit Scorpion (toxic) hits: damage + poison, and the opponent loses 1 life - so spectacle works in main phase 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pit Scorpion
+hand:Skewer the Critics,Mountain
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto attackers
+Pit Scorpion
+goto secondmain
+Mountain
+Mountain
+Skewer the Critics
+choice 1
+p2
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Pit Scorpion,Mountain
+graveyard:Skewer the Critics
+life:20
+[PLAYER2]
+poisoncount:1
+life:16
+[END]
