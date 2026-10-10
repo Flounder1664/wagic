@@ -1368,37 +1368,135 @@ void ManaPool::Empty()
     SAFE_DELETE(Bestow);
     SAFE_DELETE(manaUsedToCast);
     init();
-    handRestricted = 0;
+    tags.clear();
+    spender = NULL;
     WEvent * e = NEW WEventEmptyManaPool(this);
     player->getObserver()->receiveEvent(e);
 }
 
 ManaPool::ManaPool(Player * player) :
-    ManaCost(), player(player), handRestricted(0)
+    ManaCost(), player(player), spender(NULL), spenderIsSpell(false)
 {
 }
 
 ManaPool::ManaPool(ManaCost * _manaCost, Player * player) :
-    ManaCost(_manaCost), player(player), handRestricted(0)
+    ManaCost(_manaCost), player(player), spender(NULL), spenderIsSpell(false)
 {
 }
 
-int ManaPool::handRestrictedLeft()
+void ManaPool::setSpender(MTGCardInstance * card, bool spell)
 {
-    //Mana is fungible: once colorless has been spent, assume the restricted part went first only as far as
-    //the colorless left allows, so the count never exceeds what is really in the pool.
-    int colorless = getCost(Constants::MTG_COLOR_WASTE) + getCost(Constants::MTG_COLOR_ARTIFACT);
-    if (handRestricted > colorless)
-        handRestricted = colorless;
-    if (handRestricted < 0)
-        handRestricted = 0;
-    return handRestricted;
+    spender = card;
+    spenderIsSpell = spell;
+}
+
+void ManaPool::addTagged(int color, int amount, string spells, string abilities, bool notFromHand)
+{
+    if (amount <= 0)
+        return;
+    if (color == Constants::MTG_COLOR_ARTIFACT)
+        color = Constants::MTG_COLOR_WASTE;
+    for (size_t i = 0; i < tags.size(); i++)
+        if (tags[i].color == color && tags[i].spells == spells && tags[i].abilities == abilities && tags[i].notFromHand == notFromHand)
+        {
+            tags[i].amount += amount;
+            return;
+        }
+    ManaTag t;
+    t.color = color;
+    t.amount = amount;
+    t.spells = spells;
+    t.abilities = abilities;
+    t.notFromHand = notFromHand;
+    tags.push_back(t);
+}
+
+bool ManaPool::accepts(const ManaTag & tag, MTGCardInstance * card, bool spell)
+{
+    if (!card)
+        return false;
+    string filter = spell ? tag.spells : tag.abilities;
+    if (!filter.size())
+        return false;
+    if (spell && tag.notFromHand && card->currentZone == card->controller()->game->hand)
+        return false;
+    if (filter.find("|") == string::npos)
+        filter += "|*"; //the spell is in hand or on the stack, the ability's source anywhere
+    TargetChooserFactory tcf(player->getObserver());
+    TargetChooser * tc = tcf.createTargetChooser(filter, card);
+    bool ok = tc && tc->canTarget(card, true);
+    SAFE_DELETE(tc);
+    return ok;
+}
+
+ManaCost * ManaPool::spendableFor(ManaCost * pool, MTGCardInstance * card, bool spell)
+{
+    ManaCost * result = NEW ManaCost(pool);
+    for (size_t i = 0; i < tags.size(); i++)
+    {
+        if (tags[i].amount <= 0 || accepts(tags[i], card, spell))
+            continue;
+        int have = result->getCost(tags[i].color);
+        int drop = tags[i].amount < have ? tags[i].amount : have;
+        if (drop > 0)
+            result->remove(tags[i].color, drop);
+    }
+    return result;
+}
+
+//After mana leaves the pool, work out which of it was tagged. Mana is fungible, so assume the payer spent
+//it the best way: tagged mana this spender may use goes first, then free mana, and only then tagged mana
+//it may not use (which can only happen when nothing set a spender - e.g. the AI paying directly).
+void ManaPool::reconcileTags(int * before)
+{
+    for (int c = 0; c < Constants::NB_Colors; c++)
+    {
+        int consumed = before[c] - cost[c];
+        if (consumed <= 0)
+            continue;
+        int tagged = 0;
+        for (size_t i = 0; i < tags.size(); i++)
+            if (tags[i].color == c)
+                tagged += tags[i].amount;
+        int freeMana = before[c] - tagged;
+        if (freeMana < 0)
+            freeMana = 0;
+        for (int pass = 0; pass < 3 && consumed > 0; pass++)
+        {
+            if (pass == 1)
+            {
+                int use = consumed < freeMana ? consumed : freeMana;
+                consumed -= use;
+                continue;
+            }
+            for (size_t i = 0; i < tags.size() && consumed > 0; i++)
+            {
+                if (tags[i].color != c || tags[i].amount <= 0)
+                    continue;
+                bool ok = spender && accepts(tags[i], spender, spenderIsSpell);
+                if ((pass == 0) != ok)
+                    continue;
+                int use = consumed < tags[i].amount ? consumed : tags[i].amount;
+                tags[i].amount -= use;
+                consumed -= use;
+            }
+        }
+    }
+    for (size_t i = tags.size(); i > 0; i--)
+        if (tags[i - 1].amount <= 0)
+            tags.erase(tags.begin() + (i - 1));
 }
 
 int ManaPool::remove(int color, int value)
 {
+    int before[Constants::NB_Colors];
+    for (int i = 0; i < Constants::NB_Colors; i++)
+        before[i] = cost[i];
     int result = ManaCost::remove(color, value);
-    handRestrictedLeft();
+    MTGCardInstance * keep = spender;
+    spender = NULL;
+    reconcileTags(before);
+    spender = keep;
     for (int i = 0; i < value; ++i)
     {
         WEvent * e = NEW WEventConsumeMana(color, this);
@@ -1459,8 +1557,12 @@ int ManaPool::pay(ManaCost * _cost)
         current.push_back(cost[i]);
     }
 
+    int before[Constants::NB_Colors];
+    for (int i = 0; i < Constants::NB_Colors; i++)
+        before[i] = current[i];
     int result = ManaCost::pay(_cost);
-    handRestrictedLeft();
+    reconcileTags(before);
+    spender = NULL;
     for (int i = 0; i < Constants::NB_Colors; i++)
     {
         int value = current[i] - cost[i];

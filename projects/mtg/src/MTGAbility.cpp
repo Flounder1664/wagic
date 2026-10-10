@@ -5659,7 +5659,13 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         Targetable * t = spell ? spell->getNextTarget() : NULL;
         MTGAbility * a = NEW AManaProducer(observer, id, card, t, output, NULL, who,s.substr(found),doesntEmptyTilueot);
         a->oneShot = 1;
-        ((AManaProducer*)a)->notHandSpells = (s.find("nothandspells") != string::npos);
+        AManaProducer * mp = (AManaProducer*)a;
+        vector<string> sp = parseBetween(s, "spendspells(", ")");
+        vector<string> sa = parseBetween(s, "spendabilities(", ")");
+        mp->spendSpells = sp.size() ? sp[1] : "";
+        mp->spendAbilities = sa.size() ? sa[1] : "";
+        mp->spendNotHand = (s.find("spendnothand") != string::npos);
+        mp->tagged = sp.size() || sa.size() || mp->spendNotHand;
         if(newName.size())
             ((AManaProducer*)a)->menutext = newName;
         if(storedAndAbility.size())
@@ -7747,7 +7753,16 @@ int ActivatedAbility::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
         }
         if (!mana)
             mana = player->getManaPool();
-        if (!mana->canAfford(cost,card->has(Constants::ANYTYPEOFMANAABILITY)))
+        //Tagged mana the sources ability may not spend doesnt count (Lilypad Villages creature-only {U}).
+        if (mana == player->getManaPool() && player->getManaPool()->tags.size())
+        {
+            ManaCost * spendable = player->getManaPool()->spendableFor(mana, source, false);
+            bool ok = spendable->canAfford(cost,card->has(Constants::ANYTYPEOFMANAABILITY));
+            delete spendable;
+            if (!ok)
+                return 0;
+        }
+        else if (!mana->canAfford(cost,card->has(Constants::ANYTYPEOFMANAABILITY)))
             return 0;
         if (!cost->canPayExtra())
             return 0;
@@ -7783,6 +7798,7 @@ int ActivatedAbility::reactToClick(MTGCardInstance * card)
         }
         ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
+        game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
         SAFE_DELETE(abilityCost);
         abilityCost = previousManaPool->Diff(player->getManaPool());
@@ -7820,6 +7836,7 @@ int ActivatedAbility::reactToTargetClick(Targetable * object)
         }
         ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
+        game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
         SAFE_DELETE(abilityCost);
         abilityCost = previousManaPool->Diff(player->getManaPool());
@@ -8704,7 +8721,8 @@ AManaProducer::AManaProducer(GameObserver* observer, int id, MTGCardInstance * c
     setCost(_cost);
     output = _output;
     tap = 0;
-    notHandSpells = false;
+    tagged = false;
+    spendNotHand = false;
     Producing = producing;
     menutext = "";
     DoesntEmpty = doesntEmpty;
@@ -8755,10 +8773,13 @@ int AManaProducer::resolve()
     if (!player)
         return 0;
     
-    int colorlessMade = output->getCost(Constants::MTG_COLOR_ARTIFACT) + output->getCost(Constants::MTG_COLOR_WASTE);
+    int made[Constants::NB_Colors];
+    for (int i = 0; i < Constants::NB_Colors; i++)
+        made[i] = output->getCost(i);
     player->getManaPool()->add(output, source);
-    if (notHandSpells)
-        player->getManaPool()->handRestricted += colorlessMade;
+    if (tagged)
+        for (int i = 0; i < Constants::NB_Colors; i++)
+            player->getManaPool()->addTagged(i, made[i], spendSpells, spendAbilities, spendNotHand);
     if(DoesntEmpty)
         player->doesntEmpty->add(output);
 
@@ -8820,6 +8841,7 @@ int AManaProducer::reactToClick(MTGCardInstance * _card)
             }
         }
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
+        game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
     }
 

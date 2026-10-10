@@ -7,22 +7,19 @@
 #include "Credits.h"
 #include "AllAbilities.h"
 
-//Casting a spell from hand can't use colorless marked "nothandspells" (Heartwood Crafter). Every spell-cast
-//affordability check below goes through here; attack and block costs are not spells and keep canAfford.
+//Spell-cast affordability ignores tagged mana this spell may not spend (ManaPool::spendableFor). Attack and
+//block costs are not spells and keep plain canAfford.
 static bool canAffordCast(MTGCardInstance * card, ManaCost * pool, ManaCost * cost, bool anyType)
 {
     if (!card || !pool || !cost)
         return pool && pool->canAfford(cost, anyType);
-    int restricted = card->controller()->getManaPool()->handRestrictedLeft();
-    if (!restricted || card->currentZone != card->controller()->game->hand)
+    ManaPool * real = card->controller()->getManaPool();
+    if (!real->tags.size())
         return pool->canAfford(cost, anyType);
-    ManaCost spendable(pool);
-    int waste = spendable.getCost(Constants::MTG_COLOR_WASTE);
-    int fromWaste = restricted < waste ? restricted : waste;
-    spendable.remove(Constants::MTG_COLOR_WASTE, fromWaste);
-    if (restricted > fromWaste)
-        spendable.remove(Constants::MTG_COLOR_ARTIFACT, restricted - fromWaste);
-    return spendable.canAfford(cost, anyType);
+    ManaCost * spendable = real->spendableFor(pool, card, true);
+    bool ok = spendable->canAfford(cost, anyType);
+    delete spendable;
+    return ok;
 }
 
 
@@ -558,6 +555,7 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
     ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
     int caveManaBefore = player->caveMana;
     int poolBeforeCast = previousManaPool->getConvertedCost();
+    player->getManaPool()->setSpender(card, true);
     int payResult = player->getManaPool()->pay(card->getManaCost());
     if (card->getManaCost()->getKicker() && (card->kicked || OptionKicker::KICKER_ALWAYS == options[Options::KICKERPAYMENT].number || card->controller()->isAI()))
     {
@@ -572,12 +570,14 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
             for(int i = 0;i < card->kicked;i++)
+                player->getManaPool()->setSpender(card, true);
                 player->getManaPool()->pay(card->getManaCost()->getKicker());
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             card->alternateCostPaid[ManaCost::MANA_PAID_WITH_KICKER] = 1;
         }
         else if (canAffordCast(card, previousManaPool, withKickerCost,card->has(Constants::ANYTYPEOFMANA)))
         {
+            player->getManaPool()->setSpender(card, true);
             player->getManaPool()->pay(card->getManaCost()->getKicker());
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked = 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
@@ -593,6 +593,7 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
         DebugTrace("AltCost BESTOW " << withBestowCost);
         if (canAffordCast(card, previousManaPool, withBestowCost,card->has(Constants::ANYTYPEOFMANA)))
         {
+            player->getManaPool()->setSpender(card, true);
             player->getManaPool()->pay(card->getManaCost()->getBestow());
             payResult = ManaCost::MANA_PAID_WITH_BESTOW;
         }
@@ -747,6 +748,7 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
     ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
     int caveManaBefore = player->caveMana;
     int poolBeforeCast = previousManaPool->getConvertedCost();
+    player->getManaPool()->setSpender(card, true);
     int payResult = player->getManaPool()->pay(card->getManaCost());
     if (card->getManaCost()->getKicker())
     {  
@@ -761,12 +763,14 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
             for(int i = 0;i < card->kicked;i++)
+                player->getManaPool()->setSpender(card, true);
                 player->getManaPool()->pay(card->getManaCost()->getKicker());
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             card->alternateCostPaid[ManaCost::MANA_PAID_WITH_KICKER] = 1;
         }
         else if (canAffordCast(card, previousManaPool, withKickerCost,card->has(Constants::ANYTYPEOFMANA)))
         {
+            player->getManaPool()->setSpender(card, true);
             player->getManaPool()->pay(card->getManaCost()->getKicker());
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked = 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
@@ -782,6 +786,7 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
         
         if (canAffordCast(card, previousManaPool, withBestowCost,card->has(Constants::ANYTYPEOFMANA)))
         {
+            player->getManaPool()->setSpender(card, true);
             player->getManaPool()->pay(card->getManaCost()->getBestow());
             payResult = ManaCost::MANA_PAID_WITH_BESTOW;
         }
@@ -1108,6 +1113,7 @@ int MTGAlternativeCostRule::reactToClick(MTGCardInstance * card, ManaCost *alter
         }
     }
     if(!hasOffering)
+        player->getManaPool()->setSpender(card, true);
         playerMana->pay(alternateCost);
     alternateCost->doPayExtra();
     ManaCost *spellCost = previousManaPool->Diff(player->getManaPool());
@@ -1498,6 +1504,7 @@ int MTGSuspendRule::reactToClick(MTGCardInstance * card)
         SAFE_DELETE(pMana);
         SAFE_DELETE(suspendCheckMana);
     }
+    player->getManaPool()->setSpender(card, true);
     player->getManaPool()->pay(card->getManaCost()->getSuspend());
     card->getManaCost()->getSuspend()->doPayExtra();
     //---------------------------------------------------------------------------
@@ -1612,6 +1619,7 @@ int MTGMorphCostRule::reactToClick(MTGCardInstance * card)
     }
     //------------------------------------------------------------------------
     ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
+    player->getManaPool()->setSpender(card, true);
     player->getManaPool()->pay(morph);
     card->getManaCost()->getMorph()->doPayExtra();
     int payResult = ManaCost::MANA_PAID_WITH_MORPH;

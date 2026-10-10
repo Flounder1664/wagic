@@ -148,14 +148,32 @@ public:
 
 };
 
+//Mana in a pool that may only be spent on some things ("Spend this mana only to cast a creature spell",
+//"...only to activate abilities", "can't be spent to cast spells from your hand"). A tag holds how much of one
+//colour is restricted and what it accepts; untagged mana in the pool is free. See ManaPool::accepts().
+struct ManaTag
+{
+    int color;            //pool colour (colorless is MTG_COLOR_WASTE)
+    int amount;
+    string spells;        //target filter a SPELL must match to use it ("" = no spells)
+    string abilities;     //target filter an ability's SOURCE must match ("" = no abilities)
+    bool notFromHand;     //spells cast from hand can't use it (Heartwood Crafter)
+};
+
 class ManaPool:public ManaCost{
 protected:
     Player * player;
 public:
-    //Colorless in this pool that can't be spent to cast spells from hand (Heartwood Crafter's "nothandspells").
-    //Capped to the colorless actually left after every payment, and cleared when the pool empties.
-    int handRestricted;
-    int handRestrictedLeft();
+    vector<ManaTag> tags;
+    MTGCardInstance * spender;   //who the next pay() is for - set just before paying, cleared by pay()
+    bool spenderIsSpell;
+    void addTagged(int color, int amount, string spells, string abilities, bool notFromHand);
+    bool accepts(const ManaTag & tag, MTGCardInstance * card, bool spell);
+    //Copy of `pool` without the tagged mana that `card` (a spell, or an ability's source) may not spend.
+    //`pool` is usually this pool or a snapshot of it; the caller deletes the result.
+    ManaCost * spendableFor(ManaCost * pool, MTGCardInstance * card, bool spell);
+    void setSpender(MTGCardInstance * card, bool spell);
+    void reconcileTags(int * before);
     void Empty();
     ManaPool(Player * player);
     ManaPool(ManaCost * _manaCost, Player * player);
