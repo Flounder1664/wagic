@@ -150297,7 +150297,7 @@ type=Land
 [card]
 name=Stingcaster Mage
 abilities=haste
-missing=granting flashback to an instant or sorcery card in your graveyard
+auto=target(instant,sorcery|mygraveyard) tempflashback ueot
 text=Haste -- When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
 mana={1}{R}
 type=Creature

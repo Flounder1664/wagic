@@ -1,0 +1,26 @@
+#FRA. Stingcaster Mage: as it enters, target instant or sorcery card in your graveyard gains flashback this
+#turn at its mana cost. Shock is cast from the graveyard for {R} and exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stingcaster Mage
+graveyard:Shock
+manapool:{1}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Stingcaster Mage
+choice 0
+Shock
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Stingcaster Mage
+exile:Shock
+life:20
+[PLAYER2]
+life:18
+[END]
