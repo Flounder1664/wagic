@@ -3544,6 +3544,37 @@ int AARemoveSingleCounter::resolve()
 
 }
 
+AAMoveCounters::AAMoveCounters(GameObserver* observer, int id, MTGCardInstance * source, Targetable * target) :
+ActivatedAbility(observer, id, source, NULL, 0)
+{
+    this->target = target;
+}
+
+int AAMoveCounters::resolve()
+{
+    MTGCardInstance * to = dynamic_cast<MTGCardInstance *>(target);
+    MTGCardInstance * from = source;
+    if (from && (!from->counters || !from->counters->counters.size()) && from->previous)
+        from = from->previous;
+    if (!to || !from || !from->counters || !to->counters || to == from)
+        return 0;
+    vector<Counter *> copy = from->counters->counters; //adding may touch the source's list if it is the same card
+    for (size_t i = 0; i < copy.size(); ++i)
+        for (int k = 0; k < copy[i]->nb; ++k)
+            to->counters->addCounter(copy[i]->name.c_str(), copy[i]->power, copy[i]->toughness);
+    return 1;
+}
+
+const string AAMoveCounters::getMenuText()
+{
+    return "Move counters";
+}
+
+AAMoveCounters * AAMoveCounters::clone() const
+{
+    return NEW AAMoveCounters(*this);
+}
+
 const string AARemoveSingleCounter::getMenuText()
 {
     return "Remove single specific counter";

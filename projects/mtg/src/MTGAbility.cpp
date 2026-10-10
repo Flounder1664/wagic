@@ -5274,6 +5274,13 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
     //remove single counter of any type
+    if (s.find("movecounters") != string::npos)
+    {
+        MTGAbility * a = NEW AAMoveCounters(observer, id, card, target);
+        a->oneShot = 1;
+        a->canBeInterrupted = false;
+        return a;
+    }
     vector<string> splitRemoveSpecificCounters = parseBetween(s, "removesinglecountertype(", ")");
     if (splitRemoveSpecificCounters.size())
     {

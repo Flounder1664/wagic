@@ -138,6 +138,13 @@ struct WEventTarget : public WEventCardUpdate {
   virtual Targetable * getTarget(int target);
 };
 
+//A player was chosen as a target (WEventTarget only covers cards).
+struct WEventPlayerTargeted : public WEvent {
+  Player * player;
+  MTGCardInstance * source;
+  WEventPlayerTargeted(Player * player, MTGCardInstance * source) : WEvent(), player(player), source(source) {}
+};
+
 //Event when a card gains/looses types
 struct WEventCardChangeType : public WEventCardUpdate {
   int type;

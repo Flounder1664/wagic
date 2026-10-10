@@ -1647,7 +1647,16 @@ public:
     int triggerOnEventImpl(WEvent * event)
     {
         WEventTarget * e = dynamic_cast<WEventTarget *> (event);
-        if (!e) return 0;
+        if (!e)
+        {
+            WEventPlayerTargeted * pe = dynamic_cast<WEventPlayerTargeted *> (event);
+            if (!pe) return 0;
+            if (limitOnceATurn && triggeredTurn == game->turn) return 0;
+            if (!tc->canTarget(pe->player)) return 0;
+            if (fromTc && (!pe->source || !fromTc->canTarget(pe->source))) return 0;
+            triggeredTurn = game->turn;
+            return 1;
+        }
         if (limitOnceATurn && triggeredTurn == game->turn)
             return 0;
         if (!tc->canTarget(e->card)) return 0;
@@ -2038,6 +2047,17 @@ public:
     const string getMenuText();
     AARemoveSingleCounter * clone() const;
     ~AARemoveSingleCounter();
+};
+
+//movecounters: put every counter on the source onto the target - "put its counters on target creature"
+//(Graft Surgeon). From a dies trigger the source still carries the counters it died with.
+class AAMoveCounters: public ActivatedAbility
+{
+public:
+    AAMoveCounters(GameObserver* observer, int id, MTGCardInstance * source, Targetable * target);
+    int resolve();
+    const string getMenuText();
+    AAMoveCounters * clone() const;
 };
 
 //MultiAbility : triggers several actions for a cost

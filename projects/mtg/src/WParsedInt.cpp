@@ -387,6 +387,9 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
             high = true;
 
         string theType = convertedType[2];
+        //"creature+planeswalker": several types without a comma, so the variable can sit inside a filter
+        //list (Break Under Pressure: greatest mana value among creatures AND planeswalkers).
+        replace(theType.begin(), theType.end(), '+', ',');
         size_t zoned = theType.find(":");
         if(zoned == string::npos)
         {

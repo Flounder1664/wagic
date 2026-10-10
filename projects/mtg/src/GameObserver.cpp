@@ -1738,6 +1738,11 @@ int GameObserver::cardClick(MTGCardInstance * card, Targetable * object, bool lo
                     card->playerTarget = clickedPlayer;
                 else
                     targetChooser->source->playerTarget = clickedPlayer;
+                if (clickedPlayer)
+                {
+                    WEvent * pe = NEW WEventPlayerTargeted(clickedPlayer, cardWaitingForTargets);
+                    receiveEvent(pe);
+                }
             }
             if (result == TARGET_OK_FULL)
                 card = cardWaitingForTargets;
@@ -1994,8 +1999,13 @@ int GameObserver::targetListIsSet(MTGCardInstance * card)
         cardWaitingForTargets = card;
         return (targetChooser->targetListSet());
     }
-    else
+    //"Up to N target ..." with nothing to target: the spell is still cast, with no targets (Tam's Resistance).
+    if (targetChooser && card && card->spellTargetType.find("upto:") != string::npos)
+    {
         SAFE_DELETE(targetChooser);
+        return 1;
+    }
+    SAFE_DELETE(targetChooser);
     return 0;
     
 }

@@ -5,6 +5,7 @@
 #ifndef _CARDDESCRIPTOR_H_
 #define _CARDDESCRIPTOR_H_
 
+#include <memory>
 #include "MTGCardInstance.h"
 #include "MTGGameZones.h"
 #include "Counters.h"
@@ -22,6 +23,10 @@ enum ENUM_COMPARISON_MODES
 
 class CardDescriptor: public MTGCardInstance
 {
+ public:
+    //Further [..] groups that must ALSO match: "*[creature;planeswalker][manacost<=6]". Shared because
+    //DescriptorTargetChooser::clone copies the descriptor.
+    std::vector< std::shared_ptr<CardDescriptor> > andAlso;
  protected:
     MTGCardInstance * match_or(MTGCardInstance * card);
     MTGCardInstance * match_and(MTGCardInstance * card);

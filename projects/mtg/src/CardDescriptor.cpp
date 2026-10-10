@@ -685,6 +685,9 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
         }
     }
 
+    for (size_t i = 0; match && i < andAlso.size(); ++i)
+        if (!andAlso[i]->match(card))
+            match = NULL;
     return match;
 }
 

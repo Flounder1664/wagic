@@ -1386,6 +1386,25 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
             }
             if (nbminuses)
                 cd->mode = CardDescriptor::CD_AND;
+            //Only the first [..] group was ever read, so "*[creature;planeswalker][manacost<=6]" silently
+            //dropped the mana value. Each further group becomes a descriptor that must also match.
+            string rest = (end != (int) string::npos) ? typeName.substr(end + 1) : "";
+            while (rest.size() > 1 && rest[0] == '[')
+            {
+                size_t close = rest.find("]");
+                if (close == string::npos)
+                    break;
+                TargetChooserFactory sub(observer);
+                TargetChooser * extra = sub.createTargetChooser("*" + rest.substr(0, close + 1) + "|*", card);
+                DescriptorTargetChooser * dextra = dynamic_cast<DescriptorTargetChooser *>(extra);
+                if (dextra && dextra->cd)
+                {
+                    cd->andAlso.push_back(std::shared_ptr<CardDescriptor>(dextra->cd));
+                    dextra->cd = NULL;
+                }
+                SAFE_DELETE(extra);
+                rest = rest.substr(close + 1);
+            }
             typeName = typeName.substr(0, found);
         }
         if (cd)
