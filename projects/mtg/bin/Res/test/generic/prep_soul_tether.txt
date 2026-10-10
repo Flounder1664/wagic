@@ -1,0 +1,21 @@
+#Prepare engine work 2026-10-10. Konstrari Improviser casts a copy of Soul Tether: a Heartwood token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Konstrari Improviser // Soul Tether
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Konstrari Improviser // Soul Tether
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Konstrari Improviser // Soul Tether,Heartwood Fra
+counter:Konstrari Improviser // Soul Tether=prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

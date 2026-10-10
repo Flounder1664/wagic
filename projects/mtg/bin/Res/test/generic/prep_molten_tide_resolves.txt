@@ -1,0 +1,22 @@
+#Prepare engine work 2026-10-10. Pyre Rhymer casts a copy of Molten Tide (an instant): it resolves and the Prepared counter is spent.
+#(Its extra mana cannot be checked - the harness never fires tapped-for-mana events.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pyre Rhymer // Molten Tide
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Pyre Rhymer // Molten Tide
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pyre Rhymer // Molten Tide
+counter:Pyre Rhymer // Molten Tide=prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

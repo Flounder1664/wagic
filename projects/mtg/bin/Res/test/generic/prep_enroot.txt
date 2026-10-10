@@ -1,0 +1,24 @@
+#Prepare engine work 2026-10-10. Carnivorous Cultivator casts a copy of Enroot: a land from the library to the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Carnivorous Cultivator // Enroot
+library:Forest,Island
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Carnivorous Cultivator // Enroot
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Carnivorous Cultivator // Enroot
+graveyard:Forest
+library:Island
+life:20
+[PLAYER2]
+life:20
+[END]

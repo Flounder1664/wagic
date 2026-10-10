@@ -1,0 +1,23 @@
+#Prepare engine work 2026-10-10. Hallway Heckler (enters prepared) casts a real copy of Vicious Verse: 1 damage to
+#the opponent, the Prepared counter is gone, and the copy is not left anywhere.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hallway Heckler // Vicious Verse
+manapool:{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hallway Heckler // Vicious Verse
+choice 0
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hallway Heckler // Vicious Verse
+counter:Hallway Heckler // Vicious Verse=prepared:0
+life:20
+[PLAYER2]
+life:19
+[END]

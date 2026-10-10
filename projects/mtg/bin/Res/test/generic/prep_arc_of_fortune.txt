@@ -1,0 +1,26 @@
+#Prepare engine work 2026-10-10. Variable Chaser casts a copy of Arc of Fortune; you take the wheel: Forest discarded, seven drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Variable Chaser // Arc of Fortune
+hand:Forest
+library:Island,Island,Island,Island,Island,Island,Island,Island
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Variable Chaser // Arc of Fortune
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Variable Chaser // Arc of Fortune
+hand:*,*,*,*,*,*,*
+graveyard:Forest
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,23 @@
+#Prepare engine work 2026-10-10. Void Extrapolator casts a copy of Omit Variables: mill three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Void Extrapolator // Omit Variables
+library:Forest,Island,Swamp,Mountain
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Void Extrapolator // Omit Variables
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Void Extrapolator // Omit Variables
+graveyard:*,*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

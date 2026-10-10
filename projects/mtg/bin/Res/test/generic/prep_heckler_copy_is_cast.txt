@@ -1,0 +1,23 @@
+#Prepare engine work 2026-10-10. Hallway Heckler (enters prepared) casts a real copy of Vicious Verse - it is CAST:
+#Chandra's Emberling grows on a noncreature spell cast.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hallway Heckler // Vicious Verse,Chandra's Emberling
+manapool:{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hallway Heckler // Vicious Verse
+choice 0
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hallway Heckler // Vicious Verse,Chandra's Emberling
+pt:Chandra's Emberling=3/3
+life:20
+[PLAYER2]
+life:19
+[END]

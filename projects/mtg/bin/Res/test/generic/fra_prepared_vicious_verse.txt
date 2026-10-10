@@ -1,4 +1,5 @@
 #FRA batch 2. Whiplash Wordsmith // Vicious Verse (735164): the copy deals 1 damage to the opponent.
+#2026-10-10: the copy is now really cast, so it asks for its target (p2).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -9,6 +10,7 @@ life:20
 life:20
 [DO]
 735164
+p2
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
