@@ -191,13 +191,14 @@ int Player::gainOrLoseLife(int value, MTGCardInstance* source)
     thatmuch = abs(value); //the value that much is a variable to be used with triggered abilities.
     //ie:when ever you gain life, draw that many cards. when used in a trigger draw:thatmuch, will return the value
     //that the triggered event stored in the card for "that much".
+    //Life that doesn't actually change (Platinum Emperion) is neither lost nor gained this turn.
     if (!inPlay()->hasAbility(Constants::CANTCHANGELIFE))
-        life+=value;
-    if (value<0)
-        lifeLostThisTurn += abs(value);
-    else if (value > 0)
     {
-        lifeGainedThisTurn += abs(value);
+        life+=value;
+        if (value<0)
+            lifeLostThisTurn += abs(value);
+        else if (value > 0)
+            lifeGainedThisTurn += abs(value);
     }
 
     //Send life event to listeners

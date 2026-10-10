@@ -249,7 +249,10 @@ int Damage::resolve()
         //Damage + poison counters on player
         Player * _target = (Player *) target;
         if(!_target->inPlay()->hasAbility(Constants::CANTCHANGELIFE))
+        {
             a = target->dealDamage(damage);
+            target->lifeLostThisTurn += damage; //toxic damage is still ordinary damage: the player loses that life
+        }
         target->damageCount += damage;
         if(typeOfDamage == 2)
             target->nonCombatDamage += damage;
@@ -306,8 +309,10 @@ int Damage::resolve()
             {
                 lifeLost = damage * ((Player *)target)->lifeLossMultiplier();
                 target->life -= (lifeLost - damage);
+                //Only life actually lost counts (spectacle, oplifelost): a player whose life total can't
+                //change (Platinum Emperion) is dealt the damage but loses no life.
+                target->lifeLostThisTurn += lifeLost;
             }
-            target->lifeLostThisTurn += lifeLost;
             if ( typeOfDamage == 1 && target == source->controller()->opponent() )//add vector prowledtypes.
             {
                 source->controller()->dealsdamagebycombat = 1; // for restriction check
