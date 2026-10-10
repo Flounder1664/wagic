@@ -1933,10 +1933,11 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             nocost = true;
         TargetChooser * tc = parseSimpleTC(s, "from", card);
         TargetChooser *exception = parseSimpleTC(s, "except", card); // Added a new keyword except to specify a counter add/remove exception in order to avoid counter loop.
-        if(exception)
-            return NEW TrTotalCounter(observer, id, card, counter, tc, 1, once, duplicate, half, plus, nocost, limitOnceATurn, exception);
-        else
-            return NEW TrTotalCounter(observer, id, card, counter, tc, 1, once, duplicate, half, plus, nocost, limitOnceATurn);
+        TrTotalCounter * trigger = exception
+            ? NEW TrTotalCounter(observer, id, card, counter, tc, 1, once, duplicate, half, plus, nocost, limitOnceATurn, exception)
+            : NEW TrTotalCounter(observer, id, card, counter, tc, 1, once, duplicate, half, plus, nocost, limitOnceATurn);
+        trigger->onlycost = (s.find("onlycost") != string::npos);
+        return trigger;
     }
 
     if (s.find("totalcounterremoved(") != string::npos)
@@ -1967,10 +1968,11 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
             nocost = true;
         TargetChooser * tc = parseSimpleTC(s, "from", card);
         TargetChooser *exception = parseSimpleTC(s, "except", card); // Added a new keyword except to specify a counter add/remove exception in order to avoid counter loop.
-        if(exception)
-            return NEW TrTotalCounter(observer, id, card, counter, tc, 0, once, duplicate, half, plus, nocost, limitOnceATurn, exception);
-        else
-            return NEW TrTotalCounter(observer, id, card, counter, tc, 0, once, duplicate, half, plus, nocost, limitOnceATurn);
+        TrTotalCounter * trigger = exception
+            ? NEW TrTotalCounter(observer, id, card, counter, tc, 0, once, duplicate, half, plus, nocost, limitOnceATurn, exception)
+            : NEW TrTotalCounter(observer, id, card, counter, tc, 0, once, duplicate, half, plus, nocost, limitOnceATurn);
+        trigger->onlycost = (s.find("onlycost") != string::npos);
+        return trigger;
     }
 
     if (s.find("counteradded(") != string::npos)

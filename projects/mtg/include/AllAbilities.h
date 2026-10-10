@@ -1709,12 +1709,14 @@ public:
     bool half;
     int plus;
     bool nocost; //added to avoid trigger on counter cost payment (eg. Doubling Season)
+    bool onlycost; //the reverse: only counters moved as a cost, ie activating a loyalty ability (Way of the Paradox)
     bool limitOnceATurn;
     int triggeredTurn;
     TargetChooser * counterException; //added exception to avid a counter loop.
     TrTotalCounter(GameObserver* observer, int id, MTGCardInstance * source, Counter * counter, TargetChooser * tc, int type = 0, bool once = false, bool duplicate = false, bool half = false, int plus = 0, bool nocost = false, bool limitOnceATurn = false, TargetChooser * counterException = NULL) :
     Trigger(observer, id, source, once, tc), counter(counter), type(type), duplicate(duplicate), half(half), plus(plus), nocost(nocost), limitOnceATurn(limitOnceATurn), counterException(counterException)
     {
+        onlycost = false;
         triggeredTurn = -1;
     }
 
@@ -1727,6 +1729,7 @@ public:
         if (type == 0 && !e->removed) return 0;
         if (type == 1 && !e->added) return 0;
         if (nocost && e->iscost) return 0;
+        if (onlycost && !e->iscost) return 0;
         if (counterException && counterException->canTarget(e->source)) return 0; //If the source of counter gain/loss belongs to exception it doesn't have effect (loop avoidance);        
         if (counter && !(e->power == counter->power && e->toughness == counter->toughness && e->name == counter->name)) return 0;
         if (tc && !tc->canTarget(e->targetCard)) return 0;
