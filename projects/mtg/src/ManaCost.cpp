@@ -1489,13 +1489,13 @@ void ManaPool::reconcileTags(int * before)
 
 int ManaPool::remove(int color, int value)
 {
-    int before[Constants::NB_Colors];
+    vector<int> before(Constants::NB_Colors);
     for (int i = 0; i < Constants::NB_Colors; i++)
         before[i] = cost[i];
     int result = ManaCost::remove(color, value);
     MTGCardInstance * keep = spender;
     spender = NULL;
-    reconcileTags(before);
+    reconcileTags(&before[0]);
     spender = keep;
     for (int i = 0; i < value; ++i)
     {
@@ -1557,11 +1557,11 @@ int ManaPool::pay(ManaCost * _cost)
         current.push_back(cost[i]);
     }
 
-    int before[Constants::NB_Colors];
+    vector<int> before(Constants::NB_Colors);
     for (int i = 0; i < Constants::NB_Colors; i++)
         before[i] = current[i];
     int result = ManaCost::pay(_cost);
-    reconcileTags(before);
+    reconcileTags(&before[0]);
     spender = NULL;
     for (int i = 0; i < Constants::NB_Colors; i++)
     {

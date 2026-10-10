@@ -8773,7 +8773,7 @@ int AManaProducer::resolve()
     if (!player)
         return 0;
     
-    int made[Constants::NB_Colors];
+    vector<int> made(Constants::NB_Colors);
     for (int i = 0; i < Constants::NB_Colors; i++)
         made[i] = output->getCost(i);
     player->getManaPool()->add(output, source);
