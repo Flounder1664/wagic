@@ -1,0 +1,24 @@
+#Rescue Girl, First Responder (735202) cannot be activated on the opponent's turn: the click does nothing and
+#Grizzly Bears stays on the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735202,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+eot
+next
+next
+next
+735202
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735202,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,22 @@
+#Rescue Girl, First Responder (735202): "Activate only during your turn" - so it works mid-combat on your own
+#turn, which the earlier sorcery-speed version refused. Grizzly Bears goes back to hand during combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735202,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+735202
+Grizzly Bears
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:735202
+hand:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]
