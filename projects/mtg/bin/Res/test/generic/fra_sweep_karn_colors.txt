@@ -1,0 +1,24 @@
+#FRA missing= sweep 2026-10-10. Karn, Gilded Guardian (735272) draws one card per colour among your other artifacts: white Sanctum Gargoyle
+#and blue Master of Etherium -> two cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sanctum Gargoyle,Master of Etherium
+hand:735272
+library:Forest,Island,Swamp
+manapool:{W}{U}{B}{R}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735272
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sanctum Gargoyle,Master of Etherium,735272
+hand:*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

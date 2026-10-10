@@ -1,0 +1,24 @@
+#FRA missing= sweep 2026-10-10. Diviner of Victory's Unwind History now also surveils 1 (prompt left open: one card leaves the library).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Diviner of Victory // Unwind History
+library:Forest,Island
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Diviner of Victory // Unwind History
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Diviner of Victory // Unwind History
+library:*
+life:20
+[PLAYER2]
+hand:Grizzly Bears
+life:20
+[END]

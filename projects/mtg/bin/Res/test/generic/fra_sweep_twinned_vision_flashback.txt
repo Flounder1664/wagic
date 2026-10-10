@@ -1,0 +1,25 @@
+#FRA missing= sweep 2026-10-10. Twinned Vision flashback: costs a discard too, and draws two when not cast from hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forest
+graveyard:Twinned Vision
+library:Island,Swamp,Mountain
+manapool:{1}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Twinned Vision
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+graveyard:Forest
+exile:Twinned Vision
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

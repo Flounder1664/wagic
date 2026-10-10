@@ -1,0 +1,20 @@
+#FRA missing= sweep 2026-10-10. Titanbones, Towering Heart (735017): when you discard it, you gain 3 life. Hymn to Tourach (random discard) on yourself, with only Titanbones in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hymn to Tourach,735017
+manapool:{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Hymn to Tourach
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hymn to Tourach,735017
+life:23
+[PLAYER2]
+life:20
+[END]

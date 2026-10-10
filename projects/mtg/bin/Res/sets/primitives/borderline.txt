@@ -9006,14 +9006,14 @@ toughness=2
 [/card]
 [card]
 name=Woodwork Prodigy // Soul Tether
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 grade=borderline
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 auto=@each my upkeep:name(Becomes prepared) _PREPARE_
-auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && token(Heartwood,Artifact,0/0,red green,newability[{T}:Add{R}],newability[{T}:Add{G}]) asSorcery
-missing=the Heartwood token is given both mana abilities as separate options rather than one "add {R} or {G}" choice -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+auto={2}{R/G} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Soul Tether) counter(0/0,-1,Prepared) all(this) && token(-735511) asSorcery
 text=At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 mana={2}{R/G}
 type=Creature
@@ -9059,14 +9059,18 @@ toughness=2
 [/card]
 [card]
 name=Prudent Fateseer // Peer Review
+auto=@scryed(*|myzones):all(this) counter(0/0,1,ScriedOrSurveiled)
+auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScriedOrSurveiled)
+auto=@each end:all(this) removeallcounters(0/0.1.ScriedOrSurveiled)
+auto=@counteradded(0/0,1,ScriedOrSurveiled) from(this) turnlimited:all(creature|mybattlefield) 1/0 ueot
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 grade=borderline
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
 auto=_PREPARE_
-auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(Cadet,Creature Wizard Soldier,2/2) && _SURVEIL1_ asSorcery
-missing=the front face's "whenever you scry or surveil, creatures you control get +1/+0 until end of turn, once each turn" is not written - there is no scry-or-surveil trigger -- the copy is performed rather than cast, so it does not use the stack and cannot be countered or responded to, and the prepared state shows as a counter rather than a face-up back side.
+auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) && _SURVEIL1_ asSorcery
 text=This creature enters prepared. -- Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
 mana={1}{W/U}{W/U}
 type=Creature
@@ -148861,11 +148865,11 @@ toughness=4
 [/card]
 [card]
 name=Diviner of Victory // Unwind History
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 auto=_PREPARE_
 auto=@scryed(*|myzones):all(this) 1/1 ueot
 auto=@surveiled(*|mybattlefield,mystack):all(this) 1/1 ueot
-auto={1}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Unwind History) counter(0/0,-1,Prepared) all(this) && moveto(ownerhand) target(creature[manacost<=3]|opponentbattlefield) asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Unwind History does not surveil 1
+auto={1}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Unwind History) counter(0/0,-1,Prepared) all(this) && moveto(ownerhand) target(creature[manacost<=3]|opponentbattlefield) && _SURVEIL1_ asSorcery
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- Whenever you scry or surveil, this creature gets +1/+1 until end of turn. // Unwind History {1}{U}: Return target creature an opponent controls with mana value 3 or less to its owner's hand. Surveil 1.
 mana={U}
 type=Creature
@@ -148875,10 +148879,10 @@ toughness=1
 [/card]
 [card]
 name=Semester Foreseer // Peer Review
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 auto=_PREPARE_
 auto=_SURVEIL1_
-auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Peer Review does not surveil 1
+auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) && _SURVEIL1_ asSorcery
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- When this creature enters, surveil 1. // Peer Review {2}{W/U}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.
 mana={3}{U}
 type=Creature
@@ -148888,10 +148892,10 @@ toughness=4
 [/card]
 [card]
 name=Variable Chaser // Arc of Fortune
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 abilities=flying,prowess
 auto=_PREPARE_
-auto={2}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Arc of Fortune) counter(0/0,-1,Prepared) all(this) && all(*|myhand) reject && draw:7 controller asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Arc of Fortune only wheels your own hand - other players are not offered it
+auto={2}{U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Arc of Fortune) counter(0/0,-1,Prepared) all(this) && ability$!may name(Discard your hand and draw seven) all(*|myhand) reject && draw:7 controller!$ controller && ability$!may name(Discard your hand and draw seven) all(*|myhand) reject && draw:7 controller!$ opponent asSorcery
 text=Flying, prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Arc of Fortune {2}{U}: Each player may discard their hand and draw seven cards.
 mana={2}{U}
 type=Creature
@@ -148927,10 +148931,10 @@ toughness=3
 [/card]
 [card]
 name=Pompous Battlemage // Improvised Act
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 abilities=prowess
 auto=_PREPARE_
-auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Improvised Act) counter(0/0,-1,Prepared) all(this) && target(<1>*|myhand) reject && draw:1 controller asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Improvised Act requires the discard rather than offering it
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Improvised Act) counter(0/0,-1,Prepared) all(this) && ability$!name(Discard a card to draw a card) may reject notaTarget(*|myhand) && draw:1 controller!$ controller asSorcery
 text=Prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Improvised Act {R}: You may discard a card. If you do, draw a card.
 mana={R}
 type=Creature
@@ -148940,9 +148944,10 @@ toughness=1
 [/card]
 [card]
 name=Pyre Rhymer // Molten Tide
+auto={R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Molten Tide) counter(0/0,-1,Prepared) all(this) && all(mountain|mybattlefield) transforms((,newability[@tappedformana(this):Add{R}])) ueot asSorcery
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 abilities=prowess
 auto=_PREPARE_
-missing=Molten Tide (each Mountain tapped for mana adds an additional {R} this turn) is not implemented - there is no way to cast the prepared spell
 text=Prowess -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Molten Tide {R}: Until end of turn, whenever you tap a Mountain for mana, add an additional {R}.
 mana={1}{R}{R}
 type=Creature
@@ -148991,10 +148996,10 @@ toughness=1
 [/card]
 [card]
 name=Fatehold Chronologist // Peer Review
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack
 abilities=flying
 auto=_PREPARE_
-auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; Peer Review does not surveil 1
+auto={2}{W/U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Peer Review) counter(0/0,-1,Prepared) all(this) && token(-735501) && _SURVEIL1_ asSorcery
 text=Flying -- This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) // Peer Review {2}{W/U}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.
 mana={1}{W/U}
 type=Creature
@@ -149030,9 +149035,10 @@ toughness=3
 [/card]
 [card]
 name=Whiplash Wordsmith // Vicious Verse
+auto=@noncombatdamagefoeof(player):all(this) transforms((,flying,haste)) ueot
+missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; if this creature enters after the noncombat damage was dealt, it does not get flying and haste that turn
 auto=_PREPARE_
 auto={B/R} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Vicious Verse) counter(0/0,-1,Prepared) all(this) && damage:1 opponent asSorcery
-missing=the prepared spell is performed by an ability rather than cast as a copy, so it does not use the stack; the flying and haste while an opponent was dealt noncombat damage this turn are missing
 text=This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) -- As long as an opponent was dealt noncombat damage this turn, this creature has flying and haste. // Vicious Verse {B/R}: Vicious Verse deals 1 damage to target opponent.
 mana={3}{B/R}
 type=Creature
@@ -149129,10 +149135,10 @@ type=Sorcery
 [/card]
 [card]
 name=Prophesied End
+#The draw check runs before the destroy: once it is in the graveyard it is no longer attacking.
+auto=if cantargetcard(creature[-attacking]|*) then draw:1 targetcontroller
 target=creature
 auto=destroy
-auto=draw:1 targetcontroller
-missing=its controller draws even when the creature was attacking
 text=Destroy target creature. If it wasn't attacking, its controller draws a card.
 mana={1}{W}
 type=Instant
@@ -149273,8 +149279,7 @@ type=Instant
 name=Twisted Fates
 target=*[-land]
 auto=destroy
-auto=all(creature|mybattlefield) counter(1/1)
-missing=the +1/+1 counters always go on your creatures rather than a chosen player's
+auto=ability$!choice name(Counters on your creatures) all(creature|mybattlefield) counter(1/1) _ choice name(Counters on an opponent's creatures) all(creature|opponentbattlefield) counter(1/1)!$ controller
 text=Destroy target nonland permanent. Put a +1/+1 counter on each creature target player controls.
 mana={2}{W}{W}{B}
 type=Sorcery
@@ -149351,8 +149356,12 @@ type=Enchantment
 [/card]
 [card]
 name=Karn, Gilded Guardian
+auto=if type(other artifact[white]|mybattlefield)~morethan~0 then draw:1 controller
+auto=if type(other artifact[blue]|mybattlefield)~morethan~0 then draw:1 controller
+auto=if type(other artifact[black]|mybattlefield)~morethan~0 then draw:1 controller
+auto=if type(other artifact[red]|mybattlefield)~morethan~0 then draw:1 controller
+auto=if type(other artifact[green]|mybattlefield)~morethan~0 then draw:1 controller
 abilities=vigilance,trample
-missing=the card draw for each color among your other artifacts
 text=Vigilance, trample -- When Karn enters, draw a card for each color among other artifacts you control.
 mana={2/W}{2/U}{2/B}{2/R}{2/G}
 type=Legendary Artifact Creature
@@ -149436,8 +149445,9 @@ toughness=4
 [/card]
 [card]
 name=Mabel, Bitter Recluse
+auto=removesinglecountertype(3) target(<upto:1>other *[creature;planeswalker])
+missing=the three counters removed are all of one kind (Wagic removes counters of a single chosen type)
 abilities=deathtouch
-missing=removing up to three counters from another creature or planeswalker as it enters
 text=Deathtouch -- When Mabel enters, remove up to three counters from another target creature or planeswalker.
 mana={B}
 type=Legendary Creature
@@ -149458,11 +149468,11 @@ toughness=3
 [/card]
 [card]
 name=Tam's Resistance
-target=creature
+target=<upto:1>creature
+missing=it cannot be cast without a creature to target (to empower Jace on its own)
 auto=counter(1/1)
 auto=transforms((,vigilance)) ueot
 auto=_EMPOWERJACE4_
-missing=the target is not optional ("up to one")
 text=Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn. -- Empower Jace 4. (Put four loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
 mana={1}{G/U}
 type=Sorcery
@@ -149490,12 +149500,13 @@ type=Instant
 [/card]
 [card]
 name=Countersculpt
+other={U}{U} name(Behold a Jace)
+otherrestriction=type(*[jace]|mybattlefield,myhand)~morethan~0
 target=*|stack
 auto=fizzle
 auto=_EMPOWERJACE1_
-missing=the additional cost is always {1}; beholding a Jace instead is not offered
 text=As an additional cost to cast this spell, behold a Jace or pay {1}. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) -- Counter target spell. Empower Jace 1. (Put a loyalty counter on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
-mana={U}{U}
+mana={1}{U}{U}
 type=Instant
 [/card]
 [card]
@@ -149522,9 +149533,12 @@ subtype=Equipment
 [/card]
 [card]
 name=Dark Matter Manipulator
+auto=aslongas(*|mygraveyard) 2/0 >13
+auto=aslongas(*|mygraveyard) 2/0 >20
+auto=aslongas(*|mygraveyard) 2/0 >27
+auto=aslongas(*|mygraveyard) 2/0 >34
 auto=deplete:3 controller
 auto=aslongas(*|mygraveyard) 2/0 >6
-missing=the +2/+0 does not stack for fourteen or more cards in your graveyard
 text=When this creature enters, mill three cards. -- This creature gets +2/+0 for every seven cards in your graveyard.
 mana={B}
 type=Creature
@@ -149561,9 +149575,9 @@ toughness=1
 [/card]
 [card]
 name=Titanbones, Towering Heart
+autohand=@movedTo(this|mygraveyard) from(myhand):life:3 controller
 abilities=reach
 auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1,2)
-missing=the 3 life when you discard this card
 text=Reach -- Whenever you gain life, put two +1/+1 counters on Titanbones. -- When you discard this card, you gain 3 life.
 mana={3}{G}
 type=Legendary Creature
@@ -149591,8 +149605,8 @@ toughness=5
 [/card]
 [card]
 name=Traxos, Academy Guardian
+anyzone=this(variable{countmynoncrespell}>0)while changecost(colorless:-2) forcedalive
 abilities=flying,vigilance,prowess
-missing=the {2} discount after you have cast a noncreature spell this turn
 text=This spell costs {2} less to cast if you've cast a noncreature spell this turn. -- Flying, vigilance -- Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
 mana={3}{U}
 type=Legendary Artifact Creature
@@ -149623,18 +149637,17 @@ toughness=2
 [/card]
 [card]
 name=Theorist's Sanctum
-auto=if type(planeswalker[jace]|mybattlefield)~equalto~0 then tap(noevent)
+auto=if type(*[jace]|mybattlefield,myhand)~equalto~0 then tap(noevent)
 auto={T}:Add{U}
 auto={2}{U}{T}:_EMPOWERJACE2_
-missing=beholding a Jace only counts a Jace you control - revealing one from your hand is not offered
 text=({T}: Add {U}.) -- As this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) -- {2}{U}, {T}: Empower Jace 2.
 type=Land
 subtype=Island
 [/card]
 [card]
 name=Master of Barbs
+auto=@noncombatdamagefoeof(player):all(creature|mybattlefield) 1/0 ueot
 abilities=menace
-missing=the +1/+0 for your creatures when opponents are dealt noncombat damage
 text=Menace -- Whenever one or more opponents are dealt noncombat damage, creatures you control get +1/+0 until end of turn.
 mana={1}{R}
 type=Creature
@@ -149668,9 +149681,8 @@ toughness=4
 [/card]
 [card]
 name=Twinned Vision
-auto=draw:1 controller
-flashback={1}{U/R}{U/R}
-missing=the flashback cost does not include discarding a card, and it draws one card rather than two when flashed back
+auto=if paid(flashback) then draw:2 controller else draw:1 controller
+flashback={1}{U/R}{U/R}{D(*|myhand)}
 text=Draw a card. If this spell wasn't cast from your hand, draw two cards instead. -- Flashback--{1}{U/R}{U/R}, Discard a card. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={1}{U/R}
 type=Instant
@@ -149685,9 +149697,9 @@ type=Sorcery
 [/card]
 [card]
 name=Ruric Thar, Biomagus
+auto=@movedTo(*[-creature]|mystack):1/1 ueot
 abilities=flying,prowess
 auto=@targeted(this) from(*|opponentzones):draw:1 controller
-missing=the second instance of prowess
 text=Flying -- Prowess, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn twice.) -- Whenever Ruric Thar becomes the target of a spell or ability an opponent controls, draw a card.
 mana={4}{U}{U}
 type=Legendary Creature

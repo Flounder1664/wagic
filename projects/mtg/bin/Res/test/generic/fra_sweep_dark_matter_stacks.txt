@@ -1,0 +1,21 @@
+#FRA missing= sweep 2026-10-10. Dark Matter Manipulator gets +2/+0 for EVERY seven cards: 11 in the graveyard + 3 milled = 14 -> 5/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dark Matter Manipulator
+graveyard:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
+library:Forest,Island,Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dark Matter Manipulator
+graveyard:*,*,*,*,*,*,*,*,*,*,*,*,*,*
+pt:Dark Matter Manipulator=5/2
+life:20
+[PLAYER2]
+life:20
+[END]

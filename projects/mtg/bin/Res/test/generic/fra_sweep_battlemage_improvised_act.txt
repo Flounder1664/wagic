@@ -1,0 +1,25 @@
+#FRA missing= sweep 2026-10-10. Pompous Battlemage's Improvised Act: you MAY discard a card to draw one. Discard Forest, draw Island.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pompous Battlemage // Improvised Act
+hand:Forest
+library:Island
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Pompous Battlemage // Improvised Act
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pompous Battlemage // Improvised Act
+hand:Island
+graveyard:Forest
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,29 @@
+#FRA missing= sweep 2026-10-10. Whiplash Wordsmith gets flying and haste once an opponent is dealt noncombat damage: Shock, then it attacks the
+#turn it was cast (3 more damage).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Whiplash Wordsmith // Vicious Verse,Shock
+manapool:{3}{B}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Whiplash Wordsmith // Vicious Verse
+Shock
+p2
+next
+next
+Whiplash Wordsmith // Vicious Verse
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Whiplash Wordsmith // Vicious Verse
+graveyard:Shock
+life:20
+[PLAYER2]
+life:15
+[END]

@@ -1,0 +1,20 @@
+#FRA missing= sweep 2026-10-10. Theorist's Sanctum enters untapped when you can behold a Jace - here a Jace card in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Theorist's Sanctum,Jace Beleren
+life:20
+[PLAYER2]
+life:20
+[DO]
+Theorist's Sanctum
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Theorist's Sanctum
+hand:Jace Beleren
+tappedinplay:0
+life:20
+[PLAYER2]
+life:20
+[END]

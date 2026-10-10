@@ -1,0 +1,28 @@
+#FRA missing= sweep 2026-10-10. Twisted Fates: destroy Raging Goblin, then choose whose creatures get +1/+1 counters (choice 1: the opponent's).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Twisted Fates
+manapool:{2}{W}{W}{B}
+life:20
+[PLAYER2]
+inplay:Raging Goblin,Hill Giant
+life:20
+[DO]
+Twisted Fates
+Raging Goblin
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Twisted Fates
+pt:Grizzly Bears=2/2
+life:20
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Raging Goblin
+pt:Hill Giant=4/4
+life:20
+[END]
