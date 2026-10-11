@@ -803,6 +803,7 @@ int MTGCardInstance::cleanup()
         while (counters->hasCounter("crewed", 0, 0))
             counters->removeCounter("crewed", 0, 0, true);
     }
+    crewedBy.clear();
     return 1;
 }
 

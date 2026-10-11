@@ -46,6 +46,7 @@ CardDescriptor::CardDescriptor()
     CDdamager = 0;
     CDgeared = 0;
     CDdiscarded = 0;
+    CDcrewedSource = 0;
     CDattached = 0;
     CDblocked = 0;
     CDcanProduceC = 0;

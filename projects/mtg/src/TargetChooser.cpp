@@ -638,7 +638,15 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                 }
 
                 //Attacker
-                if (attribute.find("attacking") != string::npos)
+                //Crewed or saddled the SOURCE this turn ("target creature that crewed it").
+                //counter{0/0.1.crewed} cannot say this: with two Vehicles crewed, each one's
+                //trigger could pick the other's crewer. Checked in
+                //DescriptorTargetChooser::canTarget, which is where the source is known.
+                if (attribute.find("crewedsource") != string::npos)
+                {
+                    cd->CDcrewedSource = 1;
+                }
+                else if (attribute.find("attacking") != string::npos)
                 {
                     if (minus)
                     {
@@ -1940,6 +1948,14 @@ bool DescriptorTargetChooser::canTarget(Targetable * target,bool withoutProtecti
     if (!TargetZoneChooser::canTarget(target,withoutProtections)) return false;
     if (MTGCardInstance * _target = dynamic_cast<MTGCardInstance *>(target))
     {
+        if (cd->CDcrewedSource)
+        {
+            if (!source) return false;
+            bool crewedIt = false;
+            for (size_t i = 0; i < source->crewedBy.size(); i++)
+                if (source->crewedBy[i] == _target) crewedIt = true;
+            if (!crewedIt) return false;
+        }
         if (cd->match(_target)) 
         return true;
     }

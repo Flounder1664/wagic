@@ -905,6 +905,7 @@ int TapTargetCost::doPay()
         //crew ability
         if(crew)
         {
+            source->crewedBy.push_back(_target);
             //Mark the creature as having crewed this turn. storedCard only keeps the LAST
             //creature tapped, so it cannot answer "each creature that crewed this Vehicle" -
             //cards like Golden Argosy and Getaway Car need the whole set. A named counter on

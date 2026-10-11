@@ -1,31 +1,37 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #Excluded from the unattended suite automatically (filename contains "scenario").
 #
-#Three crew Vehicles on one board, so one run isolates the suspect. Test them in THIS
-#ORDER, and stop at whichever one crashes - that alone tells us which line is at fault.
+#CREW VEHICLES - "target creature that crewed IT this turn".
 #
-#  1. TURTLE VAN            crew 1, attack.  Expect: a +1/+1 counter on the crewer only.
-#  2. SUBTERRANEAN SCHOONER crew 1, attack.  Expect: a +1/+1 counter on the crewer only.
-#         Both of these use a plain single-target counter(1/1) target(...) with the Crewed
-#         filter. If either crashes, the crew MARKER itself is the problem.
+#Round 1 (John, 2026-10-11): with Turtle Van and Subterranean Schooner each crewed by a
+#different creature, both attack triggers offered BOTH crewers as targets, and the Schooner
+#gave a +1/+1 counter instead of exploring. Both are changed; this board checks them.
 #
-#  3. GOLDEN ARGOSY         crew with TWO creatures, attack.
-#         Expect: both crewers exiled, the third creature untouched, both back TAPPED at
-#         end of turn.
-#         This is the suspect. It is the only one that applies "and!( counter(...) )!" to
-#         an all() sweep rather than a single target, and that extrapolation is mine and
-#         untested. If 1 and 2 pass and this crashes, it is that line.
+#  1. Crew TURTLE VAN with Grizzly Bears, crew SUBTERRANEAN SCHOONER with Hill Giant.
+#     Attack with both.
 #
-#Five creatures so every Vehicle can be crewed without running out of bodies.
+#  2. TURTLE VAN's trigger.
+#     EXPECT: only Grizzly Bears can be targeted. It gets a +1/+1 counter (3/3).
+#             Hill Giant must NOT be a legal target.
+#
+#  3. SUBTERRANEAN SCHOONER's trigger.
+#     EXPECT: only Hill Giant can be targeted, and it EXPLORES: the top card of your
+#             library (Shock) is revealed. It is not a land, so Hill Giant gets a +1/+1
+#             counter and you choose to keep Shock on top or put it in the graveyard.
+#             Use "Restart scenario" (ESC menu) and it will be Shock again each time.
+#
+#  4. GOLDEN ARGOSY - crew it and attack if you like. Its attack trigger (exile each
+#     creature that crewed it) is still NOT implemented, so nothing should happen.
+#
+#Ornithopter, Llanowar Elves and Bog Imp are spare crew, and never-crewed bystanders: none
+#of them should ever be offered as a target by either trigger.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 inplay:Golden Argosy,Turtle Van,Subterranean Schooner,Grizzly Bears,Hill Giant,Ornithopter,Llanowar Elves,Bog Imp
-hand:Shock
-manapool:{5}{R}
+library:Forest,Shock
 life:20
 [PLAYER2]
-inplay:Grizzly Bears
 life:20
 [DO]
 human

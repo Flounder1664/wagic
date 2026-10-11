@@ -206,6 +206,9 @@ public:
     int isAttacker();
     Targetable * isAttacking;
     MTGCardInstance * storedCard;
+    //On a Vehicle or Mount: the creatures tapped to crew/saddle it this turn. The "crewed"
+    //counter says a creature crewed SOMETHING; this says which. Compared by pointer only.
+    vector<MTGCardInstance *> crewedBy;
     MTGCardInstance * myPair;
     MTGCardInstance * createSnapShot();
     MTGCardInstance * storedSourceCard;

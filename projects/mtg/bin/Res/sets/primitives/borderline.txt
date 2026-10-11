@@ -138805,7 +138805,7 @@ subtype=Lesson
 name=Getaway Car
 abilities=haste
 grade=borderline
-auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>creature[counter{0/0.1.crewed}]|mybattlefield) moveTo(ownerhand)
+auto=@combat(attacking,blocking) source(this):may name(Bounce a creature that crewed) target(<upto:1>creature[crewedsource]|mybattlefield) moveTo(ownerhand)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #The crew list now exists: TapTargetCost::doPay stamps a Crewed counter on each creature
 #tapped to crew, so the bounce can be restricted to one of them.
@@ -138819,11 +138819,12 @@ toughness=3
 [card]
 name=Turtle Van
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.crewed}]|mybattlefield)
+auto=@combat(attacking) source(this):counter(1/1) target(creature[crewedsource]|mybattlefield)
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#The crewed-by filter is measured good: an all() sweep with this exact filter selects the
-#crewer and nothing else. The targeting half cannot be checked here - the harness has no way
-#to feed a target to a combat trigger - so this one needs an in-game look (deck60).
+#crewedsource = crewed THIS Vehicle this turn. The old counter{0/0.1.crewed} filter matched
+#anything that crewed any Vehicle, so with two crewed Vehicles each could target the other's
+#crewer (John, crew scenario, 2026-10-11). The harness cannot feed a target to a combat
+#trigger, so the targeting itself is checked in scenario_crew_argosy.
 missing=the Mutant/Ninja/Turtle counter-doubling rider.
 text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (No doubling.) -- Crew 1
 mana={3}
@@ -138853,12 +138854,10 @@ toughness=6
 [card]
 name=Subterranean Schooner
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature[counter{0/0.1.crewed}]|mybattlefield)
+auto=@combat(attacking) source(this):name(Explore) target(creature[crewedsource]|mybattlefield) explore:1
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-#The crewed-by restriction now works via the Crewed counter.
-missing=explore proper (reveal, land to hand, else counter and choose); this is the
-#+1/+1 counter half only.
-text=Whenever this Vehicle attacks, target creature that crewed it this turn explores. (Approximated as the +1/+1 counter half of explore.) -- Crew 1
+#Real explore (explore:1) for a creature that crewed THIS Vehicle (crewedsource).
+text=Whenever this Vehicle attacks, target creature that crewed it this turn explores. -- Crew 1
 mana={1}{U}
 type=Artifact
 subtype=Vehicle
