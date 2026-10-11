@@ -1,0 +1,17 @@
+#Fatehold Annex: "This land enters tapped unless you control a planeswalker."
+#No planeswalker here, so it must be tapped once played. (Moved here from the hand-played
+#queue: nothing about it needs a person.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fatehold Annex
+[PLAYER2]
+[DO]
+Fatehold Annex
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fatehold Annex
+tappedinplay:1
+[PLAYER2]
+[END]

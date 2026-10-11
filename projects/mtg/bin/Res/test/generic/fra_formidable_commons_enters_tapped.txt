@@ -1,0 +1,17 @@
+#Formidable Commons: "This land enters tapped unless you control a planeswalker."
+#No planeswalker here, so it must be tapped once played. (Moved here from the hand-played
+#queue: nothing about it needs a person.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Formidable Commons
+[PLAYER2]
+[DO]
+Formidable Commons
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Formidable Commons
+tappedinplay:1
+[PLAYER2]
+[END]
