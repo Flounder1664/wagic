@@ -149875,6 +149875,11 @@ toughness=4
 [/card]
 [card]
 name=Stinging Vitriol
+#REVIEW-V BROKEN IN GAME (John, scenario, 2026-10-11; reproduced by driving the real game): the reveal
+#shows the whole hand, and the FIRST click on any revealed card - even the legal nonland one - goes
+#straight to "put back". Nothing is discarded. Option one (notaTarget ... transforms) never gets its
+#turn. Duress, Inquisition of Kozilek, Despise and ~60 other cards share this exact line, so the fix
+#belongs to the form, not to this card. Not fixed yet.
 target=opponent
 auto=damage:2
 auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend

@@ -1137,7 +1137,11 @@ void GameStateDuel::Update(float dt)
                     }
                     menu->Add(MENUITEM_MAIN_MENU, "Back to main menu");
 #ifdef TESTSUITE
-                    menu->Add(MENUITEM_UNDO, "Undo");
+                    //Undo rebuilds the duel from its action log with ordinary players. In a testsuite
+                    //duel that ends the game (John: "undo from the menu closed the game"), and
+                    //Restart scenario does the job there.
+                    if (mParent->players[1] != PLAYER_TYPE_TESTSUITE)
+                        menu->Add(MENUITEM_UNDO, "Undo");
                     if (mParent->players[1] == PLAYER_TYPE_TESTSUITE)
                     {
                         menu->Add(MENUITEM_LOAD, "Restart scenario");
