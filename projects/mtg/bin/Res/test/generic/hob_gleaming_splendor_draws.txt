@@ -1,0 +1,25 @@
+#The Hobbit sweep 2026-10-11. Gleaming Splendor: {2}{W} - each player draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gleaming Splendor
+library:Forest,Island
+manapool:{2}{W}
+life:20
+[PLAYER2]
+library:Swamp,Plains
+life:20
+[DO]
+Gleaming Splendor
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gleaming Splendor
+hand:*
+library:*
+life:20
+[PLAYER2]
+hand:*
+library:*
+life:20
+[END]

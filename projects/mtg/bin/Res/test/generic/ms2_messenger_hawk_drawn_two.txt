@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Messenger Hawk (1/2) is 3/2 once you have drawn two cards this turn (Divination).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Messenger Hawk
+hand:Divination
+library:Island,Forest,Swamp
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Messenger Hawk,*
+pt:Messenger Hawk=3/2
+graveyard:Divination
+hand:*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

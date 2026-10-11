@@ -1,0 +1,24 @@
+#missing= sweep 2026-10-11. Delete with X=2: 2 damage to each nonartifact creature and each player; Ornithopter (artifact, 0/2) survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:725081
+manapool:{2}{R}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Delete
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:725081
+life:18
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]

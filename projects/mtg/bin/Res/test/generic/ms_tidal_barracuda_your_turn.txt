@@ -1,0 +1,29 @@
+#missing= sweep 2026-10-11. Tidal Barracuda: the opponent can't cast Shock during your turn (it used to stop YOU instead).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tidal Barracuda
+hand:Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+hand:Shock
+manapool:{R}
+life:20
+[DO]
+Grizzly Bears
+no
+yes
+Shock
+p1
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tidal Barracuda,Grizzly Bears
+life:20
+[PLAYER2]
+hand:Shock
+manapool:{R}
+life:20
+[END]

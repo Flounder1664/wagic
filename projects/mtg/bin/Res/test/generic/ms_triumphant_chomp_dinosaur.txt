@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Triumphant Chomp with Frenzied Raptor (power 4) deals 4: Hill Giant dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Frenzied Raptor
+hand:Triumphant Chomp
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Triumphant Chomp
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Frenzied Raptor
+graveyard:Triumphant Chomp
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

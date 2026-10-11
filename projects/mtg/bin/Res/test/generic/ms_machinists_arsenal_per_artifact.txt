@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Machinist's Arsenal: +2/+2 for each artifact (itself and Ornithopter) - Grizzly Bears is 6/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Machinist's Arsenal,Ornithopter,Grizzly Bears
+manapool:{4}
+life:20
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Hero Fin
+choice 0
+choice 0
+Machinist's Arsenal
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Machinist's Arsenal,Ornithopter,Grizzly Bears,*
+pt:Grizzly Bears=6/6
+life:20
+[PLAYER2]
+life:20
+[END]

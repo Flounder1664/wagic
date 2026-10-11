@@ -1,0 +1,20 @@
+#The Hobbit sweep 2026-10-11. Guardian of the Halls (2/2): {5}{G}{G} - three +1/+1 counters (5/5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Guardian of the Halls
+manapool:{5}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Guardian of the Halls
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Guardian of the Halls
+pt:Guardian of the Halls=5/5
+life:20
+[PLAYER2]
+life:20
+[END]

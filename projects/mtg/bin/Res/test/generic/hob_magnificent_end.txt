@@ -1,0 +1,22 @@
+#The Hobbit sweep 2026-10-11. Magnificent End: one target prompt, 5 damage - Hill Giant dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Magnificent End
+manapool:{4}{W}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Magnificent End
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Magnificent End
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

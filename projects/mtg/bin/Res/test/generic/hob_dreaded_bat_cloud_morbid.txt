@@ -1,0 +1,24 @@
+#The Hobbit sweep 2026-10-11. Dreaded Bat-Cloud costs {3} less after a creature died this turn: cast for {1}{B}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dreaded Bat-Cloud,Shock
+manapool:{R}{1}{B}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Shock
+Raging Goblin
+Dreaded Bat-Cloud
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dreaded Bat-Cloud
+graveyard:Shock
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

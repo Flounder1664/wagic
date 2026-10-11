@@ -1,0 +1,20 @@
+#missing= sweep 2026-10-11. True Ancestry with an empty graveyard is still castable ("up to one") and makes the Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:True Ancestry
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+True Ancestry
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:True Ancestry
+life:20
+[PLAYER2]
+life:20
+[END]

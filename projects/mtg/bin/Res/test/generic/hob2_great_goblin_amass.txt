@@ -1,0 +1,19 @@
+#The Hobbit sweep 2026-10-11. Great Goblin, Foul-Hearted (701105) enters and amasses Goblins 3: a 3/3 Army with trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:701105
+manapool:{3}{B}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Great Goblin, Foul-Hearted
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:701105,*
+life:20
+[PLAYER2]
+life:20
+[END]

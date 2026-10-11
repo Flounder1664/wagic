@@ -1,0 +1,25 @@
+#The Hobbit sweep 2026-10-11. Bard's Company recruits as it enters: draw, discard Opt (nonland) - a Human Soldier.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bard's Company,Opt
+library:Forest,Island
+manapool:{2}{W}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bard's Company
+choice 0
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bard's Company,*
+hand:*
+graveyard:Opt
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

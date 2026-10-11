@@ -1,0 +1,22 @@
+#The Hobbit sweep 2026-10-11. Dreaded Bat-Cloud with no death this turn: {1}{B} isn't enough.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dreaded Bat-Cloud
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Dreaded Bat-Cloud
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dreaded Bat-Cloud
+manapool:{1}{B}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[END]

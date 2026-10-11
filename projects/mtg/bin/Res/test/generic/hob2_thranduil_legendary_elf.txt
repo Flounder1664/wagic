@@ -1,0 +1,27 @@
+#The Hobbit sweep 2026-10-11. Thranduil, the Elvenking (700167): another legendary Elf enters - draw two, discard one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700167
+hand:Abomination of Llanowar,Opt
+library:Forest,Island,Swamp
+manapool:{1}{B}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Abomination of Llanowar
+choice 0
+choice 0
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700167,Abomination of Llanowar
+hand:*,*
+graveyard:Opt
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

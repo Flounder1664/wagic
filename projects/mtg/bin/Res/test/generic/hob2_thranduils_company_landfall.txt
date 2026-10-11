@@ -1,0 +1,22 @@
+#The Hobbit sweep 2026-10-11. Thranduil's Company (3/4): a land enters - two +1/+1 counters on target creature (5/6).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thranduil's Company
+hand:Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Forest
+choice 0
+Thranduil's Company
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thranduil's Company,Forest
+pt:Thranduil's Company=5/6
+life:20
+[PLAYER2]
+life:20
+[END]

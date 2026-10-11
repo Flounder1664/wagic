@@ -10,11 +10,14 @@
 #NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
+#2026-10-11: Bard's Company (700146) now recruits as it enters (a bare ETB line), so it is put into play last and
+#draws the Forest; the discard prompt is left open.
 #Covers: Balin, Loremaster, Banishing Light, Bard the Bowman, Bard's Company, Bard, Heir of Girion, Bard, King of Dale
 [INIT]
 firstmain
 [PLAYER1]
-inplay:700087,701161,700146,701101
+inplay:700087,701161,701101,700146
+library:Forest
 [PLAYER2]
 life:20
 [DO]
@@ -23,6 +26,7 @@ next
 COMBATBEGIN
 [PLAYER1]
 inplay:*,*,*,*
+hand:*
 [PLAYER2]
 life:20
 [END]

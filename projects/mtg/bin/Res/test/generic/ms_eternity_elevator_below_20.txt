@@ -1,0 +1,20 @@
+#missing= sweep 2026-10-11. The Eternity Elevator with no charge counters only offers {C}{C}{C}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Eternity Elevator
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Eternity Elevator
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Eternity Elevator
+manapool:{C}{C}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

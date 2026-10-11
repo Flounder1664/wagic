@@ -1,0 +1,20 @@
+#missing= sweep 2026-10-11. The Skullspore Nexus costs {6} less with Craw Wurm (power 6): cast for {G}{G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:The Skullspore Nexus
+manapool:{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Skullspore Nexus
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,The Skullspore Nexus
+life:20
+[PLAYER2]
+life:20
+[END]

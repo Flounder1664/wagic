@@ -1,0 +1,23 @@
+#The Hobbit sweep 2026-10-11. Uneasy Partings: one target prompt, then top of the owner's library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Uneasy Partings
+manapool:{3}{U}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Uneasy Partings
+Grizzly Bears
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Uneasy Partings
+life:20
+[PLAYER2]
+library:Grizzly Bears
+life:20
+[END]

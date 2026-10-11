@@ -1,0 +1,24 @@
+#missing= sweep 2026-10-11. Quest for the Necropolis: one land entered, so the reanimation costs {4}{B}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quest for the Necropolis
+hand:Forest
+graveyard:Grizzly Bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Forest
+Quest for the Necropolis
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Grizzly Bears
+graveyard:Quest for the Necropolis
+life:20
+[PLAYER2]
+life:20
+[END]

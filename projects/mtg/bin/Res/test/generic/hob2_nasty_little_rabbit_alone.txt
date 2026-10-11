@@ -1,0 +1,21 @@
+#The Hobbit sweep 2026-10-11. Nasty Little Rabbit with no creature of power 4 or greater stays 1/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Nasty Little Rabbit
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto combatbegins
+goto combatbegins
+goto attackers
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Nasty Little Rabbit
+pt:Nasty Little Rabbit=1/2
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,21 @@
+#The Hobbit sweep 2026-10-11. Orcrist, Goblin-cleaver (700177): equip {3} - Grizzly Bears is 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700177,Grizzly Bears
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Orcrist, Goblin-cleaver
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700177,Grizzly Bears
+pt:Grizzly Bears=4/4
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,20 @@
+#missing= sweep 2026-10-11. Avatar Kyoshi (power 5, the greatest): {T} adds five of one colour (green = choice 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Avatar Kyoshi,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Avatar Kyoshi
+choice 4
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Avatar Kyoshi,Grizzly Bears
+manapool:{G}{G}{G}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

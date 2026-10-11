@@ -110,6 +110,30 @@ ThisDescriptor * ThisDescriptorFactory::createThisDescriptor(GameObserver* obser
     }
     if (found2 != string::npos) s.erase(found2 - opLength);
 
+    //this(variable{NAME}...) is explicit, so it is read before the bare keywords below. They are substring
+    //matches - "power", "tapped", "counters", even "x" - and used to hijack any variable whose name contains
+    //one: variable{power:highest:creature:mybattlefield} became a test of this card's own power, and
+    //variable{type:*:myexile} a test of X. A variable named exactly like a keyword keeps the old meaning.
+    {
+        vector<string> earlyVariable = parseBetween(s, "variable{", "}", false);
+        if (earlyVariable.size())
+        {
+            const char * legacy[] = { "counters", "mutations", "gear", "auras", "opponentdamagecount", "untapped", "tapped",
+                "attacking", "blocking", "notblocked", "damaged", "dualwielding", "opponentlife", "controllerlife",
+                "creaturespells", "power", "toughness", "x" };
+            bool isLegacy = false;
+            for (size_t k = 0; k < sizeof(legacy) / sizeof(legacy[0]); k++)
+                if (earlyVariable[1] == legacy[k])
+                    isLegacy = true;
+            if (!isLegacy)
+            {
+                ThisVariable * td = NEW ThisVariable(criterion, earlyVariable[1]);
+                td->comparisonMode = mode;
+                return td;
+            }
+        }
+    }
+
     //counters
     found = s.find("counter{");
     if (found != string::npos)

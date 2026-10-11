@@ -1,0 +1,28 @@
+#The Hobbit sweep 2026-10-11. Tom, Bert, and William (700169): {1}, sacrifice Hill Giant (power 3) - draw three, then discard one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700169,Hill Giant
+hand:Opt
+library:Forest,Island,Swamp,Plains
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Tom, Bert, and William
+Hill Giant
+choice 0
+choice 0
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700169
+graveyard:Hill Giant,Opt
+hand:*,*,*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

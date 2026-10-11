@@ -1,0 +1,24 @@
+#The Hobbit sweep 2026-10-11. Mirkwood Nurturer (3/2) returns Grizzly Bears to hand and gets a +1/+1 counter (4/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Mirkwood Nurturer
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mirkwood Nurturer
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mirkwood Nurturer
+hand:Grizzly Bears
+pt:Mirkwood Nurturer=4/3
+life:20
+[PLAYER2]
+life:20
+[END]

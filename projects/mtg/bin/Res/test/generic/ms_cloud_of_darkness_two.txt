@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Cloud of Darkness with two permanent cards in the graveyard gives only -2/-2: Hill Giant survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Cloud of Darkness
+graveyard:Grizzly Bears,Forest,Shock,Opt
+manapool:{2}{B}{G}{G}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Cloud of Darkness
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cloud of Darkness
+graveyard:Grizzly Bears,Forest,Shock,Opt
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

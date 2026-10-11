@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. The Eternity Elevator: Station with Craw Wurm gives 6 charge counters, under 20, so the X-mana ability (choice 2) is refused.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Eternity Elevator,Craw Wurm
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Eternity Elevator
+choice 1
+Craw Wurm
+The Eternity Elevator
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Eternity Elevator,Craw Wurm
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. Waterbending Scroll with two Islands: the draw costs {4}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterbending Scroll,Island,Island
+library:Forest,Swamp
+manapool:{4}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterbending Scroll
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterbending Scroll,Island,Island
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

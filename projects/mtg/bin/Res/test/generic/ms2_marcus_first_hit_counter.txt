@@ -1,0 +1,27 @@
+#missing= sweep 2026-10-11. Marcus, Mutant Mayor (720109): Grizzly Bears connects with no +1/+1 counter, so it gets one (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:720109,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto attackers
+Grizzly Bears
+goto secondmain
+goto secondmain
+goto secondmain
+goto secondmain
+goto secondmain
+goto secondmain
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:720109,Grizzly Bears
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:18
+[END]

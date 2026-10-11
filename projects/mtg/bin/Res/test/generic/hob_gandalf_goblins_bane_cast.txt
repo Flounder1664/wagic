@@ -1,0 +1,23 @@
+#The Hobbit sweep 2026-10-11. Gandalf, Goblins' Bane (700096, 2/3): casting Shock makes him 3/4 and deals 1 to the opponent as well.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700096
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700096
+pt:700096=3/4
+graveyard:Shock
+life:20
+[PLAYER2]
+life:17
+[END]

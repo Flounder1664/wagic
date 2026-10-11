@@ -1,0 +1,23 @@
+#missing= sweep 2026-10-11. Quest for the Necropolis with no counters still costs {5}{B}: {4}{B} is not enough.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quest for the Necropolis
+graveyard:Grizzly Bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Quest for the Necropolis
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quest for the Necropolis
+graveyard:Grizzly Bears
+manapool:{4}{B}
+life:20
+[PLAYER2]
+life:20
+[END]

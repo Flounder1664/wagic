@@ -1,0 +1,21 @@
+#The Hobbit sweep 2026-10-11. Master's Councillors (700047, 1/3) with seven cards in your graveyard is 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700047
+graveyard:Forest,Island,Swamp,Mountain,Plains,Opt,Giant Growth
+life:20
+[PLAYER2]
+life:20
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700047
+pt:700047=3/3
+graveyard:Forest,Island,Swamp,Mountain,Plains,Opt,Giant Growth
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Triangle of War: {2}, sacrifice - Grizzly Bears fights Raging Goblin.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Triangle of War,Grizzly Bears
+manapool:{2}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Triangle of War
+Grizzly Bears
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Triangle of War
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

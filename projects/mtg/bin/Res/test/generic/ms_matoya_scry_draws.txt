@@ -1,0 +1,25 @@
+#missing= sweep 2026-10-11. Matoya, Archon Elder (702062): Opt scries, so she draws - two cards in hand after Opt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702062
+hand:Opt
+library:Island,Forest,Swamp,Plains
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:702062
+graveyard:Opt
+hand:*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

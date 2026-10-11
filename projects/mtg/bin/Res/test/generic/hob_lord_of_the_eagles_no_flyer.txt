@@ -1,0 +1,22 @@
+#The Hobbit sweep 2026-10-11. The Lord of the Eagles with only Craw Wurm (no flying): {3}{U}{U} isn't enough.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:The Lord of the Eagles
+manapool:{3}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Lord of the Eagles
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:The Lord of the Eagles
+manapool:{3}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[END]

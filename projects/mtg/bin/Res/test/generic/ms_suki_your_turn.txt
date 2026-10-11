@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. Suki, Courageous Rescuer (1510037): your Grizzly Bears dies on your turn - one Ally token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510037,Grizzly Bears
+hand:Lightning Bolt
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510037,*
+graveyard:Lightning Bolt,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

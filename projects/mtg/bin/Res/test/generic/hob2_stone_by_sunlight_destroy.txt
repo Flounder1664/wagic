@@ -1,0 +1,23 @@
+#The Hobbit sweep 2026-10-11. Stone by Sunlight mode one destroys Craw Wurm (power 6).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stone by Sunlight
+manapool:{1}{W}
+life:20
+[PLAYER2]
+inplay:Craw Wurm
+life:20
+[DO]
+Stone by Sunlight
+choice 0
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Stone by Sunlight
+life:20
+[PLAYER2]
+graveyard:Craw Wurm
+life:20
+[END]

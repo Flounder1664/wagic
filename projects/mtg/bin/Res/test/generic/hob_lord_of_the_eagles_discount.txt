@@ -1,0 +1,20 @@
+#The Hobbit sweep 2026-10-11. The Lord of the Eagles costs {4} less with Air Elemental (4 power, flying): cast for {3}{U}{U}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Air Elemental
+hand:The Lord of the Eagles
+manapool:{3}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Lord of the Eagles
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Air Elemental,The Lord of the Eagles
+life:20
+[PLAYER2]
+life:20
+[END]
