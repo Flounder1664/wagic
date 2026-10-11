@@ -1,0 +1,19 @@
+#missing= sweep 2026-10-11. Intrepid Ace (2/1) is 4/1 while it is not attacking or blocking.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Intrepid Ace
+life:20
+[PLAYER2]
+life:20
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Intrepid Ace
+pt:Intrepid Ace=4/1
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,26 @@
+#missing= sweep 2026-10-11. Allies at Last costs {1} less for each Ally: with two Expedition Envoys it costs {G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Expedition Envoy,Expedition Envoy
+hand:Allies at Last
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Allies at Last
+Expedition Envoy
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Expedition Envoy,Expedition Envoy
+graveyard:Allies at Last
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

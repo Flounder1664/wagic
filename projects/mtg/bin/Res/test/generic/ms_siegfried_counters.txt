@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. Siegfried, Famed Swordsman (713051): mills three creature cards, then gets twice that many +1/+1 counters (2/2 -> 8/8).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:713051
+library:Grizzly Bears,Hill Giant,Raging Goblin
+manapool:{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Siegfried, Famed Swordsman
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713051
+graveyard:Grizzly Bears,Hill Giant,Raging Goblin
+pt:713051=8/8
+life:20
+[PLAYER2]
+life:20
+[END]

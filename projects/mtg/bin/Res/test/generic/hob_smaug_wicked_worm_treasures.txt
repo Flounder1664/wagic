@@ -1,0 +1,21 @@
+#The Hobbit sweep 2026-10-11. Smaug, Wicked Worm (700164) enters: a Treasure for each artifact the opponent controls (two).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:700164
+manapool:{3}{B}{R}
+life:20
+[PLAYER2]
+inplay:Ornithopter,Wooden Sphere
+life:20
+[DO]
+Smaug, Wicked Worm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700164,*,*
+life:20
+[PLAYER2]
+inplay:Ornithopter,Wooden Sphere
+life:20
+[END]

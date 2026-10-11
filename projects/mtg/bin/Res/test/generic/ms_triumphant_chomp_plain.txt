@@ -1,0 +1,23 @@
+#missing= sweep 2026-10-11. Triumphant Chomp with no Dinosaur deals 2: Hill Giant survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Triumphant Chomp
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Triumphant Chomp
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Triumphant Chomp
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

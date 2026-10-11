@@ -1,0 +1,19 @@
+#missing= sweep 2026-10-11. Black Tom Cassidy with another Mutant (Unstable Hulk): {G} and 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Black Tom Cassidy,Unstable Hulk
+life:20
+[PLAYER2]
+life:20
+[DO]
+Black Tom Cassidy
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Black Tom Cassidy,Unstable Hulk
+manapool:{G}
+life:21
+[PLAYER2]
+life:20
+[END]

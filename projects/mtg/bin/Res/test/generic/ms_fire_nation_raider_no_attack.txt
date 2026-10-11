@@ -1,0 +1,19 @@
+#missing= sweep 2026-10-11. Fire Nation Raider cast before attacking: no Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fire Nation Raider
+manapool:{3}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Fire Nation Raider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation Raider
+life:20
+[PLAYER2]
+life:20
+[END]

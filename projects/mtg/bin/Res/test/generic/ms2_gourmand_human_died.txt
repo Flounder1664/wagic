@@ -1,0 +1,31 @@
+#missing= sweep 2026-10-11. White Glove Gourmand: one of its Human Soldier tokens dies on your turn - a Food at your end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:White Glove Gourmand,Shock
+manapool:{2}{W}{B}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+White Glove Gourmand
+Shock
+Human Soldier
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:White Glove Gourmand,*,*
+graveyard:Shock
+life:20
+[PLAYER2]
+life:20
+[END]

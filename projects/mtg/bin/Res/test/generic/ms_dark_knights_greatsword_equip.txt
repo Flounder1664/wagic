@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. Dark Knight's Greatsword: equip costs 3 life; Grizzly Bears gets +3/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dark Knight's Greatsword,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Hero Fin
+Dark Knight's Greatsword
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dark Knight's Greatsword,Grizzly Bears,*
+pt:Grizzly Bears=5/2
+life:17
+[PLAYER2]
+life:20
+[END]

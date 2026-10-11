@@ -1,0 +1,27 @@
+#missing= sweep 2026-10-11. Plow Through fight mode: Grizzly Bears fights Raging Goblin.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Plow Through
+manapool:{G}
+life:20
+[PLAYER2]
+inplay:Raging Goblin
+life:20
+[DO]
+Plow Through
+choice 0
+Grizzly Bears
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Plow Through
+life:20
+[PLAYER2]
+graveyard:Raging Goblin
+life:20
+[END]

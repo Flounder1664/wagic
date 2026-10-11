@@ -1,0 +1,20 @@
+#The Hobbit sweep 2026-10-11. Beorn's Hospitality: {5}{G}{G} makes it a Bear as big as your land count (three).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Beorn's Hospitality,Forest,Mountain,Plains
+manapool:{5}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Beorn's Hospitality
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Beorn's Hospitality,Forest,Mountain,Plains
+pt:Beorn's Hospitality=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

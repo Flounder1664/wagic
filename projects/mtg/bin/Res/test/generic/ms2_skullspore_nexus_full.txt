@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. The Skullspore Nexus with Grizzly Bears (power 2) still costs {4}{G}{G}: {G}{G} is not enough.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:The Skullspore Nexus
+manapool:{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Skullspore Nexus
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:The Skullspore Nexus
+manapool:{G}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

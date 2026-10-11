@@ -1,0 +1,23 @@
+#The Hobbit sweep 2026-10-11. Inside Information with X=2: the opponent mills two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Inside Information
+manapool:{2}{B}{B}
+life:20
+[PLAYER2]
+library:Forest,Island,Swamp
+life:20
+[DO]
+Inside Information
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Inside Information
+life:20
+[PLAYER2]
+graveyard:*,*
+library:*
+life:20
+[END]

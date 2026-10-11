@@ -1,0 +1,21 @@
+#missing= sweep 2026-10-11. Mardu Outrider: the additional cost discards a card (Forest).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mardu Outrider,Forest
+manapool:{1}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mardu Outrider
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mardu Outrider
+graveyard:Forest
+life:20
+[PLAYER2]
+life:20
+[END]

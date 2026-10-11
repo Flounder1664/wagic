@@ -1,0 +1,28 @@
+#missing= sweep 2026-10-11. White Glove Gourmand: no Human died - no Food.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:White Glove Gourmand
+manapool:{2}{W}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+White Glove Gourmand
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:White Glove Gourmand,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

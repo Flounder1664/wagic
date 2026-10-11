@@ -1,0 +1,23 @@
+#The Hobbit sweep 2026-10-11. Kili the Resourceful (700017): another Dwarf enters - draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700017
+hand:Dwarven Grunt
+library:Forest,Island
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dwarven Grunt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700017,Dwarven Grunt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

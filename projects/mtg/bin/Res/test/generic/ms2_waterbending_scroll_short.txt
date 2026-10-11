@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-11. Waterbending Scroll with two Islands: {3} isn't enough.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterbending Scroll,Island,Island
+library:Forest,Swamp
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterbending Scroll
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Waterbending Scroll,Island,Island
+library:*,*
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[END]
