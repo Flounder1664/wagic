@@ -150576,7 +150576,8 @@ type=Land
 name=Lupinflower Village
 auto={T}:Add{C}
 auto={T}:Add{W} spendspells(creature)
-auto={1}{W}{T}{S}:name(Look at the top six) reveal:6 optionone name(Put a Bat, Bird, Mouse or Rabbit card into your hand) target(<1>*[bat;bird;mouse;rabbit]|reveal) moveto(hand) and!( all(*|reveal) bottomoflibrary )! optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+#Acclaimed Contender's reveal shape: <1> in option one and an option two with no card to pick stopped the reveal opening.
+auto={1}{W}{T}{S}:name(Look at the top six) reveal:6 optionone name(Put a Bat, Bird, Mouse or Rabbit card into your hand) target(<upto:1>*[bat;bird;mouse;rabbit]|reveal) moveto(hand) and!( all(*|reveal) bottomoflibrary )! optiononeend optiontwo name(Put them all on the bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 text={T}: Add {C}. -- {T}: Add {W}. Spend this mana only to cast a creature spell. -- {1}{W}, {T}, Sacrifice this land: Look at the top six cards of your library. You may reveal a Bat, Bird, Mouse, or Rabbit card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 type=Land
 [/card]
