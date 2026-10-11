@@ -1411,7 +1411,20 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
         {
             if (!tc)
             {
-                if (typeName.compare("*") != 0) cd->setSubtype(typeName);
+                //In an OR group the base type used to become one more alternative, so creature[frog;rabbit]
+                //matched ANY creature (Oakhollow Village countered a plain Mouse). The base type is required:
+                //it goes in as a descriptor that must also match.
+                if (typeName.compare("*") != 0)
+                {
+                    if (cd->mode == CardDescriptor::CD_OR)
+                    {
+                        std::shared_ptr<CardDescriptor> base(NEW CardDescriptor());
+                        base->setSubtype(typeName);
+                        cd->andAlso.push_back(base);
+                    }
+                    else
+                        cd->setSubtype(typeName);
+                }
 
                 tc = NEW DescriptorTargetChooser(observer, cd, zones, nbzones, card, maxtargets, other, targetMin);
             }
