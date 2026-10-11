@@ -138829,14 +138829,10 @@ toughness=4
 name=Golden Argosy
 grade=borderline
 auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
-missing=the attack trigger entirely. The crew list itself works - a crewed counter is
-#stamped in TapTargetCost::doPay and all(creature[counter{0/0.1.crewed}]|mybattlefield)
-#is measured to select the crewer and nothing else. What does not work is moving those
-#cards: all(...) moveto(exile) inside the attack trigger spins the engine forever once the
-#filter actually matches (harness hangs at 99% CPU; it only appeared to "work" before
-#because the filter was dead). A hang is worse for a player than a missing ability, so the
-#trigger stays out until the exile-from-battlefield form is understood.
-text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. (The attack trigger is not implemented.) -- Crew 1
+auto=@combat(attacking) source(this):all(creature[crewedsource]|mybattlefield) (blink)ueot return(tap)
+#crewedsource = crewed THIS Vehicle this turn; (blink)ueot return(tap) is the attested exile-until-
+#end-step form (Ghostway sweeps with it). The earlier all(...) moveto(exile) attempt hung the engine.
+text=Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step. -- Crew 1
 mana={4}
 type=Legendary Artifact
 subtype=Vehicle

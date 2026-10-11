@@ -1,0 +1,35 @@
+#Golden Argosy: "Whenever it attacks, exile each creature that crewed it this turn."
+#Grizzly Bears crews it, Llanowar Elves does not. This is the second half: by the cleanup step
+#the Bears are back on the battlefield (returned at the end step). Player 2 on 17 proves the attack.
+#The Elves tap for mana first: an untapped creature could crew the Argosy, and the attack
+#click on it would then open crew instead of attacking.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Golden Argosy,Grizzly Bears,Llanowar Elves
+life:20
+[PLAYER2]
+life:20
+[DO]
+Llanowar Elves
+Golden Argosy
+Grizzly Bears
+next
+next
+Golden Argosy
+next
+next
+next
+next
+next
+next
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:Golden Argosy,Llanowar Elves,Grizzly Bears
+#All three tapped: the Argosy attacked, the Elves made mana, and the Bears must return TAPPED.
+tappedinplay:3
+life:20
+[PLAYER2]
+life:17
+[END]

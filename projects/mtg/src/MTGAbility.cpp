@@ -7452,6 +7452,7 @@ MTGAbility::MTGAbility(const MTGAbility& a): ActionElement(a)
     oneShot = a.oneShot;
     forceDestroy = a.forceDestroy;
     forcedAlive = a.forcedAlive;
+    menuPreviewCard = a.menuPreviewCard;
     canBeInterrupted = a.canBeInterrupted;
 
     //costs get copied, and will be deleted in the destructor
@@ -7486,6 +7487,7 @@ MTGAbility::MTGAbility(GameObserver* observer, int id, MTGCardInstance * card) :
     mCost = NULL;
     forceDestroy = 0;
     forcedAlive = 0;
+    menuPreviewCard = NULL;
     oneShot = 0;
     canBeInterrupted = true;
 }
@@ -7500,6 +7502,7 @@ MTGAbility::MTGAbility(GameObserver* observer, int id, MTGCardInstance * _source
     mCost = NULL;
     forceDestroy = 0;
     forcedAlive = 0;
+    menuPreviewCard = NULL;
     oneShot = 0;
     canBeInterrupted = true;
 }

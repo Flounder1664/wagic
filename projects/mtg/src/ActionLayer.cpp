@@ -6,6 +6,8 @@
 #include "WEvent.h"
 #include "AllAbilities.h"
 #include "MTGRules.h"
+#include "CardGui.h"
+#include "CardSelector.h"
 
 MTGAbility* ActionLayer::getAbility(int type)
 {
@@ -217,6 +219,16 @@ void ActionLayer::Render()
     if (menuObject)
     {
         abilitiesMenu->Render();
+        //Drawn last: where the two overlap it is the menu's empty margin that is covered, and
+        //the card's rules text - the reason for showing it - stays whole.
+        int entry = abilitiesMenu->getmCurr();
+        if (entry >= 0 && entry < (int) menuPreviewCards.size() && menuPreviewCards[entry] && observer->getCardSelector())
+        {
+            const float scale = 0.80f;
+            Pos pos = Pos(SCREEN_WIDTH_F - CardGui::BigWidth * scale / 2 - 4, 142, scale, 0.0, 255);
+            pos.actY = 142;
+            CardGui::DrawCard(menuPreviewCards[entry], pos, observer->getCardSelector()->GetDrawMode());
+        }
         return;
     }
 
@@ -397,6 +409,7 @@ void ActionLayer::setMenuObject(Targetable * object, bool must)
         return;
     }
     menuObject = object;
+    menuPreviewCards.clear();
 
     SAFE_DELETE(abilitiesMenu);
     abilitiesTriggered = NULL;
@@ -453,6 +466,7 @@ void ActionLayer::setCustomMenuObject(Targetable * object, bool must,vector<MTGA
     SAFE_DELETE(abilitiesMenu);
     abilitiesMenu = NEW SimpleMenu(observer->getInput(), observer->getResourceManager(), 10, this, Fonts::MAIN_FONT, 100, 100, customName.size()?customName.c_str():object->getDisplayName().c_str());
     currentActionCard = NULL;
+    menuPreviewCards.clear();
     abilitiesMenu->isMultipleChoice = false;
     if(abilities.size())
     {
@@ -460,6 +474,19 @@ void ActionLayer::setCustomMenuObject(Targetable * object, bool must,vector<MTGA
         for(int w = 0; w < int(abilities.size());w++)
         {
             ActionElement* currentAction = (ActionElement*)abilities[w];
+            //A menu that names cards ("Keep Shock on top", "Put Hill Giant into your hand") says
+            //nothing about what the card does (John, explore, 2026-10-11). Remember a card per
+            //entry so Render can show it. An entry may name one outright (menuPreviewCard);
+            //otherwise an entry that acts on some card other than the one the menu belongs to
+            //is taken to be about that card.
+            MTGCardInstance * preview = abilities[w]->menuPreviewCard;
+            if (!preview)
+            {
+                MTGCardInstance * acted = dynamic_cast<MTGCardInstance *>(abilities[w]->target);
+                if (acted && (Targetable *) acted != object)
+                    preview = acted;
+            }
+            menuPreviewCards.push_back(preview);
             currentActionCard = (MTGCardInstance*)abilities[0]->target;
             abilitiesMenu->Add(mObjects.size()-1, currentAction->getMenuText(),"",false);
         }

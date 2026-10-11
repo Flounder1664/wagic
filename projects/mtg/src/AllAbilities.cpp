@@ -2352,6 +2352,8 @@ void AAExplore::offerChoice(MTGCardInstance * explorer, MTGCardInstance * reveal
     vector<MTGAbility*> options;
     MTGAbility * keep = NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Keep " + cardName + " on top");
     MTGAbility * bin = NEW AAExplore(game, game->mLayers->actionLayer()->getMaxId(), explorer, explorer, remaining, "Put " + cardName + " into your graveyard", revealed);
+    keep->menuPreviewCard = revealed;
+    bin->menuPreviewCard = revealed;
     if (remaining > 0)
     {
         //A further explore opens another menu. Resolved straight from this menu's click it would build
@@ -2363,6 +2365,8 @@ void AAExplore::offerChoice(MTGCardInstance * explorer, MTGCardInstance * reveal
         SAFE_DELETE(bin);
         keep = mayKeep;
         bin = mayBin;
+        keep->menuPreviewCard = revealed;
+        bin->menuPreviewCard = revealed;
     }
     options.push_back(keep);
     options.push_back(bin);

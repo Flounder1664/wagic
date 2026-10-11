@@ -18,13 +18,17 @@
 #     EXPECT: only Hill Giant can be targeted, and it EXPLORES: the top card of your
 #             library (Shock) is revealed. It is not a land, so Hill Giant gets a +1/+1
 #             counter and you choose to keep Shock on top or put it in the graveyard.
-#             Use "Restart scenario" (ESC menu) and it will be Shock again each time.
+#     NEW: while that menu is open the SHOCK CARD ITSELF is shown beside it, so you can
+#          read what you are keeping or binning.
 #
-#  4. GOLDEN ARGOSY - crew it and attack if you like. Its attack trigger (exile each
-#     creature that crewed it) is still NOT implemented, so nothing should happen.
+#  4. GOLDEN ARGOSY - restart, crew it with Llanowar Elves AND Bog Imp (crew 1 twice is
+#     fine), attack with it.
+#     EXPECT: both crewers are EXILED when it attacks; Ornithopter and anything that
+#             crewed a different Vehicle stay. At the beginning of the end step both
+#             come back TAPPED.
 #
-#Ornithopter, Llanowar Elves and Bog Imp are spare crew, and never-crewed bystanders: none
-#of them should ever be offered as a target by either trigger.
+#The opponent now plays as an ordinary AI, so combat runs to the end and the turn passes.
+#Ornithopter is the never-crewed bystander: no trigger should ever touch it.
 [INIT]
 FIRSTMAIN
 [PLAYER1]

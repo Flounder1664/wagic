@@ -121,6 +121,9 @@ public:
     bool oneShot;
     int forceDestroy;
     int forcedAlive;
+    //When this ability is an entry in a choice menu: the card to show beside the menu while
+    //the entry is highlighted. NULL = let the menu work it out (see ActionLayer).
+    MTGCardInstance * menuPreviewCard;
     bool canBeInterrupted;
     ManaCost* alternative;
     ManaCost* BuyBack;
