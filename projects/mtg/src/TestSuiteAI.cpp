@@ -160,6 +160,16 @@ int TestSuiteAI::Act(float)
         return 1;
     }
 
+    //A scenario has handed seat 1 to a person. The OTHER seat is still this scripted
+    //player, and the first time it had to act (declare blockers, take its turn) it found
+    //the script empty, ended the "test" and the game exited - which looked like a crash at
+    //the end of combat (John, crew scenario). It plays as an ordinary AI from here on.
+    if (suite->humanControl)
+    {
+        float static humanOpponentCounter = 1.0f;
+        return AIPlayerBaka::Act(humanOpponentCounter++);
+    }
+
     timer += 1;
     if (timer < suite->timerLimit) return 1;
     timer = 0;
@@ -196,6 +206,7 @@ int TestSuiteAI::Act(float)
     {
         DebugTrace("TESTSUITE You have control");
         playMode = MODE_HUMAN;
+        suite->humanControl = true;
         return 1;
     }
     else if (action.compare("ai") == 0)
@@ -1089,6 +1100,7 @@ void TestSuiteGame::ResetManapools()
 void TestSuiteGame::initGame()
 {
     DebugTrace("TESTSUITE Init Game");
+    humanControl = false;
     observer->phaseRing->goToPhase(initState.phase, observer->players[0], false);
     observer->setCurrentGamePhase(initState.phase);
 

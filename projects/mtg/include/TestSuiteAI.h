@@ -53,6 +53,8 @@ protected:
     float timerLimit;
     bool isOK;
     int currentAction;
+    //Set by the [DO] verb "human": the script is over and a person is playing seat 1.
+    bool humanControl;
     GameObserver* observer;
 
     static boost::mutex mMutex;
