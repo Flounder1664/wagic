@@ -1,0 +1,20 @@
+#Multikicker must take the kicker's mana once PER kick. The payment loop had no braces, so
+#only one kicker was ever paid: Apex Hawks kicked twice from eight mana cost 5, not 7.
+#Eight white: {2}{W} + two kicks of {1}{W} = 7 (a third would need 9). One must be left.
+#Before the fix three were left.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Apex Hawks
+manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+[PLAYER2]
+[DO]
+Apex Hawks
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Apex Hawks
+pt:Apex Hawks=4/4
+manapool:{W}
+[PLAYER2]
+[END]

@@ -23,6 +23,11 @@
 #     EXPECT: BOTH Grizzly Bears AND Hill Giant return from the graveyard.
 #     The target prompt should let you pick two this time, not one.
 #
+#ROUND 3 (John, 2026-10-11): both cards kicked twice but only ONE kicker's mana was taken.
+#The payment loop had no braces. Fixed - so now also check the MANA:
+#   Apex Hawks: 7 of your 8 mana spent, ONE left floating (was three left).
+#   Marshal's Anthem: all 8 spent.
+#
 #If either lands on two, kicked is scaling correctly and the ONLY thing left to fix is
 #that the engine never asks how many times you want to kick.
 [INIT]

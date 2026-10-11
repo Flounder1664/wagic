@@ -569,9 +569,13 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
                 withKickerCost->add(withKickerCost->getKicker());
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
+            //Braces were missing: only setSpender looped and the kicker was paid ONCE, so a
+            //spell kicked N times took one kicker's mana (John, Marshal's Anthem scenario).
             for(int i = 0;i < card->kicked;i++)
+            {
                 player->getManaPool()->setSpender(card, true);
                 player->getManaPool()->pay(card->getManaCost()->getKicker());
+            }
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             card->alternateCostPaid[ManaCost::MANA_PAID_WITH_KICKER] = 1;
         }
@@ -762,9 +766,13 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
                 withKickerCost->add(withKickerCost->getKicker());
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
+            //Braces were missing: only setSpender looped and the kicker was paid ONCE, so a
+            //spell kicked N times took one kicker's mana (John, Marshal's Anthem scenario).
             for(int i = 0;i < card->kicked;i++)
+            {
                 player->getManaPool()->setSpender(card, true);
                 player->getManaPool()->pay(card->getManaCost()->getKicker());
+            }
             payResult = ManaCost::MANA_PAID_WITH_KICKER;
             card->alternateCostPaid[ManaCost::MANA_PAID_WITH_KICKER] = 1;
         }
