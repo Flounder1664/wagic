@@ -1420,13 +1420,28 @@ bool ManaPool::accepts(const ManaTag & tag, MTGCardInstance * card, bool spell)
         return false;
     if (spell && tag.notFromHand && card->currentZone == card->controller()->game->hand)
         return false;
-    if (filter.find("|") == string::npos)
-        filter += "|*"; //the spell is in hand or on the stack, the ability's source anywhere
+    //"a or b": alternatives a single filter can't express (Helga: "mana value 4 or greater, or {X} in its cost")
     TargetChooserFactory tcf(player->getObserver());
-    TargetChooser * tc = tcf.createTargetChooser(filter, card);
-    bool ok = tc && tc->canTarget(card, true);
-    SAFE_DELETE(tc);
-    return ok;
+    while (filter.size())
+    {
+        string one = filter;
+        size_t sep = filter.find(" or ");
+        if (sep != string::npos)
+        {
+            one = filter.substr(0, sep);
+            filter = filter.substr(sep + 4);
+        }
+        else
+            filter = "";
+        if (one.find("|") == string::npos)
+            one += "|*"; //the spell is in hand or on the stack, the ability's source anywhere
+        TargetChooser * tc = tcf.createTargetChooser(one, card);
+        bool ok = tc && tc->canTarget(card, true);
+        SAFE_DELETE(tc);
+        if (ok)
+            return true;
+    }
+    return false;
 }
 
 ManaCost * ManaPool::spendableFor(ManaCost * pool, MTGCardInstance * card, bool spell)
@@ -1560,7 +1575,59 @@ int ManaPool::pay(ManaCost * _cost)
     vector<int> before(Constants::NB_Colors);
     for (int i = 0; i < Constants::NB_Colors; i++)
         before[i] = current[i];
+    //With tagged mana in the pool, say which colours pay the generic part instead of leaving it to Diff():
+    //restricted mana this spender may use goes first, then free mana, never restricted mana it may not use
+    //(a Powerstone's {C} pays an artifact's {1} and keeps the Forest's {G}; it never pays a creature's {1}).
+    ManaCost * steered = NULL;
+    if (tags.size() && spender && _cost && _cost->getCost(Constants::MTG_COLOR_ARTIFACT) > 0)
+    {
+        vector<int> usable(Constants::NB_Colors), freeLeft(Constants::NB_Colors);
+        for (int c = 0; c < Constants::NB_Colors; c++)
+        {
+            int tagged = 0, ok = 0;
+            for (size_t i = 0; i < tags.size(); i++)
+                if (tags[i].color == c && tags[i].amount > 0)
+                {
+                    tagged += tags[i].amount;
+                    if (accepts(tags[i], spender, spenderIsSpell))
+                        ok += tags[i].amount;
+                }
+            int freeMana = current[c] - tagged;
+            if (freeMana < 0)
+                freeMana = 0;
+            int need = (c == Constants::MTG_COLOR_ARTIFACT) ? 0 : _cost->getCost(c); //coloured symbols use restricted first
+            int fromOk = need < ok ? need : ok;
+            ok -= fromOk;
+            need -= fromOk;
+            freeMana -= need < freeMana ? need : freeMana;
+            usable[c] = ok;
+            freeLeft[c] = freeMana;
+        }
+        steered = NEW ManaCost();
+        steered->copy(_cost);
+        int generic = steered->getCost(Constants::MTG_COLOR_ARTIFACT);
+        for (int pass = 0; pass < 2 && generic > 0; pass++)
+            for (int k = 0; k < 7 && generic > 0; k++)
+            {
+                //generic mana in the pool (Diff spends it first anyway), then colorless, then the colours
+                int c2 = (k == 0) ? (int)Constants::MTG_COLOR_ARTIFACT : (k == 1) ? (int)Constants::MTG_COLOR_WASTE : k - 1;
+                int have = pass == 0 ? usable[c2] : freeLeft[c2];
+                int use = have < generic ? have : generic;
+                if (use <= 0)
+                    continue;
+                if (c2 == Constants::MTG_COLOR_ARTIFACT)
+                {
+                    generic -= use; //stays generic
+                    continue;
+                }
+                steered->add(c2, use);
+                steered->remove(Constants::MTG_COLOR_ARTIFACT, use);
+                generic -= use;
+            }
+        _cost = steered;
+    }
     int result = ManaCost::pay(_cost);
+    SAFE_DELETE(steered);
     reconcileTags(&before[0]);
     spender = NULL;
     for (int i = 0; i < Constants::NB_Colors; i++)

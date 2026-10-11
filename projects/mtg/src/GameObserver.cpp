@@ -1740,7 +1740,8 @@ int GameObserver::cardClick(MTGCardInstance * card, Targetable * object, bool lo
                     card->playerTarget = clickedPlayer;
                 else
                     targetChooser->source->playerTarget = clickedPlayer;
-                if (clickedPlayer)
+                //only when the click selected the player - a second click deselects, and is not a new targeting
+                if (clickedPlayer && targetChooser->alreadyHasTarget(clickedPlayer))
                 {
                     WEvent * pe = NEW WEventPlayerTargeted(clickedPlayer, cardWaitingForTargets);
                     receiveEvent(pe);

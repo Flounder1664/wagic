@@ -4687,8 +4687,13 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
-    //perform surveil
+    //perform surveil - the bare keyword only. "surveil" inside another word is not it: a counter named
+    //"ScriedOrSurveiled" turned Saheeli, Consul of Oversight's counter lines into surveil events that
+    //re-triggered her own @surveiled forever (soft lock at the end step).
     found = s.find("surveil");
+    while (found != string::npos
+        && ((found > 0 && isalpha((unsigned char) s[found - 1])) || (found + 7 < s.size() && isalpha((unsigned char) s[found + 7]))))
+        found = s.find("surveil", found + 7);
     if (found != string::npos)
     {
         Targetable * t = spell ? spell->getNextTarget() : NULL;
@@ -8111,10 +8116,12 @@ int TriggeredAbility::receiveEvent(WEvent * e)
 {
     if (triggerOnEvent(e))
     {
-    if(dynamic_cast<WEventTarget*>(e))
+    if(dynamic_cast<WEventTarget*>(e) || dynamic_cast<WEventPlayerTargeted*>(e))
     {
         //@targetted trigger as per mtg rules is a state based trigger
         //that resolves instantly before the event that targetted it.
+        //(A player target too: left on the stack, Danitha, Spear of Agony's trigger sat there before the
+        //spell was cast, so a sorcery aimed at the opponent could never be cast - Solve for Disappointment.)
         resolve();
         return 1;
     }
@@ -8785,8 +8792,20 @@ int AManaProducer::resolve()
         made[i] = output->getCost(i);
     player->getManaPool()->add(output, source);
     if (tagged)
+    {
+        //"chosentype" in the filter means the type chosen for this source (Cavern of Souls), not for the spell
+        //that later tries to spend the mana, so it is fixed now.
+        MTGCardInstance * chooser = (source->name.empty() && source->storedSourceCard) ? source->storedSourceCard : source;
+        string spells = spendSpells;
+        string abilities = spendAbilities;
+        if (chooser->chooseasubtype.size())
+        {
+            spells = cReplaceString(spells, "chosentype", chooser->chooseasubtype);
+            abilities = cReplaceString(abilities, "chosentype", chooser->chooseasubtype);
+        }
         for (int i = 0; i < Constants::NB_Colors; i++)
-            player->getManaPool()->addTagged(i, made[i], spendSpells, spendAbilities, spendNotHand);
+            player->getManaPool()->addTagged(i, made[i], spells, abilities, spendNotHand);
+    }
     if(DoesntEmpty)
         player->doesntEmpty->add(output);
 
