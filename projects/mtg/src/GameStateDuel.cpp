@@ -152,6 +152,7 @@ GameState(parent, "duel")
 
 #ifdef TESTSUITE
     testSuite = NULL;
+    restartScenarioRequested = false;
 #endif
 
 #ifdef AI_CHANGE_TESTING
@@ -1068,7 +1069,8 @@ void GameStateDuel::Update(float dt)
                     menu->Add(MENUITEM_MAIN_MENU, "Back to main menu");
 #ifdef TESTSUITE
                     menu->Add(MENUITEM_UNDO, "Undo");
-                    menu->Add(MENUITEM_LOAD, "Load");
+                    if (mParent->players[1] == PLAYER_TYPE_TESTSUITE)
+                        menu->Add(MENUITEM_LOAD, "Restart scenario");
 #endif
                     if (mParent->players[1] == PLAYER_TYPE_CPU && (mParent->gameType == GAME_TYPE_COMMANDER || mParent->gameType == GAME_TYPE_CLASSIC || mParent->gameType == GAME_TYPE_DEMO))
                     {
@@ -1131,6 +1133,18 @@ void GameStateDuel::Update(float dt)
         {
             setGamePhase(DUEL_STATE_PLAY);
             SAFE_DELETE(menu);
+#ifdef TESTSUITE
+            if (restartScenarioRequested)
+            {
+                restartScenarioRequested = false;
+                testSuite->rewindCurrent();
+                if (testSuite->loadNext())
+                {
+                    loadTestSuitePlayers();
+                    testSuite->initGame(game);
+                }
+            }
+#endif
         }
         break;
     case DUEL_STATE_BACK_TO_MAIN_MENU:
@@ -1966,11 +1980,11 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
 #ifdef TESTSUITE
         case MENUITEM_LOAD:
             {
-                std::string theGame;
-                if (JFileSystem::GetInstance()->readIntoString("test/game/timetwister.txt", theGame))
-                {
-                    game->load(theGame);
-                }
+                //Was a dead developer shortcut that loaded test/game/timetwister.txt, a file
+                //that no longer exists. Now reloads the test file the duel was booted from.
+                //The game object is replaced once the menu has closed (DUEL_STATE_CANCEL),
+                //not here, because this handler is still running inside the old one.
+                restartScenarioRequested = true;
                 menu->Close();
                 setGamePhase(DUEL_STATE_CANCEL);
                 break;

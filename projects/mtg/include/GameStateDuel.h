@@ -179,6 +179,7 @@ class GameStateDuel: public GameState, public JGuiListener
 private:
 #ifdef TESTSUITE
     TestSuite * testSuite;
+    bool restartScenarioRequested;
 #endif
 
     Credits * credits;

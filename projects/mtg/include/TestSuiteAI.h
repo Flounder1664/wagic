@@ -119,6 +119,12 @@ public:
     ~TestSuite();
     void initGame(GameObserver* g);
     int loadNext();
+    //Step back one file so the next loadNext() loads the current one again: the
+    //"Restart scenario" menu entry, for retrying a hand-played board without relaunching.
+    void rewindCurrent() {
+        boost::mutex::scoped_lock lock(mMutex);
+        if (currentfile > 0) currentfile--;
+    };
     void setRules(Rules* rules) {
       mRules = rules;
     };
