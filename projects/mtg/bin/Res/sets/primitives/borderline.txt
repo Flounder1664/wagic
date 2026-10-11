@@ -133364,7 +133364,8 @@ name=Proft's Eidetic Memory
 abilities=nomaxhand
 auto=draw:1
 auto=@each my combatbegins restriction{compare(pdrewcount)~morethan~1}:name(Put +1/+1 counters) counter(1/1,pdrewcountminus1minusend) target(creature|mybattlefield)
-#REVIEW-V pdrewcount is real (WParsedInt.cpp:719 = controller()->drawCounter) and so is the
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): the combat trigger asks for a target and puts the right number of counters on it.
+#Earlier note: pdrewcount is real (WParsedInt.cpp:719 = controller()->drawCounter) and so is the
 #minus arithmetic (WParsedInt.cpp:183, <A>minus<B>minusend), so "cards-drawn-this-turn
 #tracking unsupported" was wrong. Not harness-verifiable: measured 2026-09-05, a trigger
 #that has to choose a target never opens a targeting step - the click is never consumed and
