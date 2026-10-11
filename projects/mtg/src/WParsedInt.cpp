@@ -392,6 +392,9 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         int lowest = 5000;
         if(convertedType[1].find("highest") != string::npos)
             high = true;
+        //power:total:creature[flying]:mybattlefield - the sum instead of the greatest (The Lord of the Eagles)
+        bool sumAll = convertedType[1].find("total") != string::npos;
+        int total = 0;
 
         string theType = convertedType[2];
         //"creature+planeswalker": several types without a comma, so the variable can sit inside a filter
@@ -435,6 +438,8 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
                                 highest = check;
                             if(check <= lowest)
                                 lowest = check;
+                            if(check > 0)
+                                total += check;
                         }
                     }
                 }
@@ -443,7 +448,7 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         if(lowest == 5000)
             lowest = 0;
         SAFE_DELETE(tc);
-        intValue = high?highest:lowest;
+        intValue = sumAll ? total : (high?highest:lowest);
     }
     else if (s == "sunburst")
     {
