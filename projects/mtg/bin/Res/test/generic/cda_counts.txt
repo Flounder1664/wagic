@@ -2,10 +2,8 @@
 #It had been written against 'controlledlands', which does not exist in the engine.
 #Three Forests = 3/3, and the four-land case was checked by hand too.
 #
-#NOTE for whoever extends this: type:<filter>:<zone> EXCLUDES the source card. Esgaroth
-#Garrison ("power = creatures you control") therefore reads one too low, and two cdaactive
-#creatures on the SAME battlefield make the Pathmaker mis-read as well. Both are recorded
-#in the cards' missing= notes; neither is caused by this change.
+#The note that used to be here (type: excludes the source; two cdaactive creatures
+#interfere) was wrong - see cda_two_on_one_battlefield for what was really happening.
 [INIT]
 FIRSTMAIN
 [PLAYER1]

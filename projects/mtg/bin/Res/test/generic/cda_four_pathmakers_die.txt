@@ -1,0 +1,20 @@
+#Twin of cda_four_pathmakers. Flamebreak deals 3 to each creature without flying and to
+#each player: four Pathmakers on three Forests are 3/3, so all four die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Forest,Forest,Forest
+hand:Flamebreak
+manapool:{R}{R}{R}
+[PLAYER2]
+[DO]
+Flamebreak
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+graveyard:Flamebreak,Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker
+life:17
+[PLAYER2]
+life:17
+[END]

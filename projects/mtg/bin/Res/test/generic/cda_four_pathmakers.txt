@@ -1,0 +1,20 @@
+#Four Mirkwood Pathmakers on three Forests must ALL be 3/3 (John: a deck can field four).
+#pt: only reads the first of several same-named cards, so toughness is bracketed with
+#damage instead. This half: Pyroclasm deals 2 - all four survive. Its twin,
+#cda_four_pathmakers_die, deals 3 and all four die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Forest,Forest,Forest
+hand:Pyroclasm
+manapool:{R}{R}
+[PLAYER2]
+[DO]
+Pyroclasm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,Mirkwood Pathmaker,*,*,*
+graveyard:Pyroclasm
+[PLAYER2]
+[END]

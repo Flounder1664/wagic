@@ -1,0 +1,25 @@
+#Two "P/T = number of X you control" creatures side by side, and a creature-counting one.
+#An old note said two cdaactive creatures on one battlefield make Mirkwood Pathmaker
+#mis-read, and that Esgaroth Garrison reads one too low because type:creature excludes the
+#source. Both were wrong. The Garrison's enters-trigger DRAWS, and during seeding that
+#draw took the next card listed, so a land or creature went to hand and the count was
+#honestly one lower. Seed the Garrison LAST and everything reads right.
+#The library card is there for that draw; with an empty library the game just ends.
+#Three Forests: Pathmaker 3/3, Dungrove Elder 3/3. Four creatures: Garrison 4/5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Forest,Mirkwood Pathmaker,Dungrove Elder,Grizzly Bears,Esgaroth Garrison
+library:Swamp
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,Mirkwood Pathmaker,Dungrove Elder,Grizzly Bears,Esgaroth Garrison
+pt:Mirkwood Pathmaker=3/3
+pt:Dungrove Elder=3/3
+pt:Esgaroth Garrison=4/5
+hand:Swamp
+[PLAYER2]
+[END]
