@@ -1,0 +1,21 @@
+#Playtest 2026-10-11. Forest Dryad showed two "tap for green" options: an explicit {T}: Add {G} line on top
+#of the one its Forest subtype already gives. With a single mana ability one click taps it, and Llanowar Elves is cast.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest Dryad
+hand:Llanowar Elves
+life:20
+[PLAYER2]
+life:20
+[DO]
+Forest Dryad
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest Dryad,Llanowar Elves
+life:20
+[PLAYER2]
+life:20
+[END]

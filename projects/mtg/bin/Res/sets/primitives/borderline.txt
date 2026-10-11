@@ -144508,7 +144508,6 @@ color=green
 [/card]
 [card]
 name=Forest Dryad
-auto={T}:add{G}
 grade=borderline
 text=(This creature is affected by summoning sickness, and it has "{T}: Add {G}.")
 type=Land Creature
@@ -149224,7 +149223,8 @@ toughness=4
 [card]
 name=Forest Tentacle Fra
 #TFRA #9, the 3/3 land creature Verdant Kraken makes. id -735509.
-auto={T}:Add{G}
+#No explicit {T}: Add {G} line - the Forest subtype already gives it (a second line showed two tap options).
+color=green
 text={T}: Add {G}.
 type=Land Creature
 subtype=Forest Tentacle
@@ -149554,7 +149554,6 @@ toughness=2
 [card]
 name=Theorist's Sanctum
 auto=if type(*[jace]|mybattlefield,myhand)~equalto~0 then tap(noevent)
-auto={T}:Add{U}
 auto={2}{U}{T}:_EMPOWERJACE2_
 text=({T}: Add {U}.) -- As this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.) -- {2}{U}, {T}: Empower Jace 2.
 type=Land
