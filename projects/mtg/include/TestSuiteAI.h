@@ -86,6 +86,9 @@ private:
     //the end of the array, corrupting the object and segfaulting in the constructor - a
     //silent cap on how many tests the suite could ever hold.
     vector<string> files;
+    //A queue with a hand-played scenario in it must run on the main thread only: a worker
+    //would take the next scenario and sit in it headless for ever.
+    bool hasScenario;
 
     void cleanup();
     vector<boost::thread*> mWorkerThread;
@@ -121,6 +124,7 @@ public:
     ~TestSuite();
     void initGame(GameObserver* g);
     int loadNext();
+    string getCurrentFile() { return filename; }
     //Step back one file so the next loadNext() loads the current one again: the
     //"Restart scenario" menu entry, for retrying a hand-played board without relaunching.
     void rewindCurrent() {

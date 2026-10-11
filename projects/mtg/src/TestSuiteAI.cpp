@@ -677,6 +677,7 @@ TestSuite::TestSuite(const char * filename)
     std::string s;
     nbfiles = 0;
     currentfile = 0;
+    hasScenario = false;
     nbFailed = 0;
     nbTests = 0;
     nbAIFailed = 0;
@@ -715,6 +716,7 @@ TestSuite::TestSuite(const char * filename)
                     //in WAGIC_TESTSUITE_ONLY to play it.
                     continue;
                 }
+                if (s.find("scenario") != string::npos) hasScenario = true;
                 files.push_back(s);
                 nbfiles++;
             }
@@ -779,6 +781,8 @@ int TestSuite::loadNext()
 #else
         thread_count = 4;
 #endif
+        if (hasScenario)
+            thread_count = 1;
         for(size_t i = 0; i < (thread_count-1); i++)
             mWorkerThread.push_back(new boost::thread(ThreadProc, this));
     }

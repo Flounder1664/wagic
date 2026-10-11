@@ -153,6 +153,7 @@ GameState(parent, "duel")
 #ifdef TESTSUITE
     testSuite = NULL;
     restartScenarioRequested = false;
+    scenarioVerdict = 0;
 #endif
 
 #ifdef AI_CHANGE_TESTING
@@ -404,6 +405,74 @@ void GameStateDuel::loadTestSuitePlayers()
     mParent->gameType = testSuite->getGameType();
 
     game->startGame(mParent->gameType, mParent->rules);
+}
+#endif
+
+#ifdef TESTSUITE
+//A hand-played scenario's verdict, appended to User/test/scenario_verdicts.tsv:
+//  <date time> TAB <scenario file> TAB works|wrong
+//"wrong" also appends the board to User/test/scenario_snapshots.txt - every permanent with
+//its P/T, tapped state and counters, the other zones by name, and the log of what was
+//clicked - so it can be read back without John having to describe it.
+static void snapshotZone(ostream & out, const char * label, MTGGameZone * zone, bool detail)
+{
+    out << "  " << label << " (" << zone->nb_cards << "):";
+    for (int i = 0; i < zone->nb_cards; i++)
+    {
+        MTGCardInstance * c = zone->cards[i];
+        if (!c) continue;
+        if (detail)
+        {
+            out << "\n    " << c->getName();
+            if (c->isCreature()) out << " " << c->power << "/" << c->toughness;
+            if (c->isTapped()) out << " TAPPED";
+            if (c->counters)
+                for (size_t k = 0; k < c->counters->counters.size(); k++)
+                {
+                    Counter * ct = c->counters->counters[k];
+                    if (!ct || ct->nb < 1) continue;
+                    out << " [" << ct->nb << "x ";
+                    if (ct->name.size()) out << ct->name; else out << ct->power << "/" << ct->toughness;
+                    out << "]";
+                }
+        }
+        else
+            out << (i ? ", " : " ") << c->getName();
+    }
+    out << "\n";
+}
+
+void GameStateDuel::recordScenarioVerdict(bool works)
+{
+    if (!testSuite) return;
+    char when[32];
+    time_t now = time(0);
+    strftime(when, sizeof(when), "%Y-%m-%d %H:%M:%S", localtime(&now));
+    string scenario = testSuite->getCurrentFile();
+    ofstream file;
+    if (JFileSystem::GetInstance()->openForWrite(file, "test/scenario_verdicts.tsv", ios_base::app))
+    {
+        file << when << "\t" << scenario << "\t" << (works ? "works" : "wrong") << "\n";
+        file.close();
+    }
+    if (works || !game) return;
+    ofstream snap;
+    if (!JFileSystem::GetInstance()->openForWrite(snap, "test/scenario_snapshots.txt", ios_base::app))
+        return;
+    snap << "=== " << when << "  " << scenario << "  turn " << game->turn
+         << ", " << game->getCurrentGamePhaseName() << "\n";
+    for (int p = 0; p < 2; p++)
+    {
+        Player * pl = game->players[p];
+        snap << " player " << (p + 1) << (p == 0 ? " (you)" : " (opponent)") << "  life " << pl->life << "\n";
+        snapshotZone(snap, "battlefield", pl->game->inPlay, true);
+        snapshotZone(snap, "hand", pl->game->hand, false);
+        snapshotZone(snap, "graveyard", pl->game->graveyard, false);
+        snapshotZone(snap, "exile", pl->game->exile, false);
+        snap << "  library (" << pl->game->library->nb_cards << ")\n";
+    }
+    snap << " actions:\n" << *game << "\n";
+    snap.close();
 }
 #endif
 
@@ -1070,7 +1139,11 @@ void GameStateDuel::Update(float dt)
 #ifdef TESTSUITE
                     menu->Add(MENUITEM_UNDO, "Undo");
                     if (mParent->players[1] == PLAYER_TYPE_TESTSUITE)
+                    {
                         menu->Add(MENUITEM_LOAD, "Restart scenario");
+                        menu->Add(MENUITEM_SCENARIO_WORKS, "Works: next scenario");
+                        menu->Add(MENUITEM_SCENARIO_WRONG, "Wrong: next scenario");
+                    }
 #endif
                     if (mParent->players[1] == PLAYER_TYPE_CPU && (mParent->gameType == GAME_TYPE_COMMANDER || mParent->gameType == GAME_TYPE_CLASSIC || mParent->gameType == GAME_TYPE_DEMO))
                     {
@@ -1142,6 +1215,23 @@ void GameStateDuel::Update(float dt)
                 {
                     loadTestSuitePlayers();
                     testSuite->initGame(game);
+                }
+            }
+            else if (scenarioVerdict)
+            {
+                recordScenarioVerdict(scenarioVerdict == 1);
+                scenarioVerdict = 0;
+                if (testSuite->loadNext())
+                {
+                    loadTestSuitePlayers();
+                    testSuite->initGame(game);
+                }
+                else
+                {
+                    //Queue finished. Leave quietly: the verdicts are on disk, and falling
+                    //through to the suite's results screen would report them as failed tests.
+                    testSuite->joinWorkers();
+                    exit(0);
                 }
             }
 #endif
@@ -1985,6 +2075,14 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
                 //The game object is replaced once the menu has closed (DUEL_STATE_CANCEL),
                 //not here, because this handler is still running inside the old one.
                 restartScenarioRequested = true;
+                menu->Close();
+                setGamePhase(DUEL_STATE_CANCEL);
+                break;
+            }
+        case MENUITEM_SCENARIO_WORKS:
+        case MENUITEM_SCENARIO_WRONG:
+            {
+                scenarioVerdict = (controlId == MENUITEM_SCENARIO_WORKS) ? 1 : 2;
                 menu->Close();
                 setGamePhase(DUEL_STATE_CANCEL);
                 break;
