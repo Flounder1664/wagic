@@ -465,6 +465,11 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
 {
     if (!isReactingToClick(card))
         return 0;
+    //After a target is chosen the cast resumes through the rule named by paymenttype
+    //(GameObserver::cardClick). Every alternative way of casting sets it, and nothing set it
+    //back: start a Bargain, back out, cast normally, and the cast resumed as a Bargain and
+    //asked for the sacrifice (John, Torch the Tower, 2026-10-11).
+    card->paymenttype = MTGAbility::PUT_INTO_PLAY;
     Player * player = game->currentlyActing();
     ManaCost * cost = card->getManaCost();
     ManaCost * playerMana = player->getManaPool();
