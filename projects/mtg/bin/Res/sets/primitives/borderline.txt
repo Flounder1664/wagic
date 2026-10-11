@@ -16102,7 +16102,7 @@ type=Sorcery
 [/card]
 [card]
 name=Bushy Bodyguard
-kicker={1}{G}{2} name(Offspring)
+kicker={2} name(Offspring)
 auto=if paid(kicker) then clone and!( becomes(,1/1) forever )!
 auto=may ability$! name(exile three cards) moveto(myexile) notaTarget(<3>*|mygraveyard) !$ controller && counter(1/1,2) restriction{type(*|mygraveyard)~morethan~2}
 auto=may sacrifice notaTarget(*[Food]|mybattlefield) and!( all(this) counter(1/1,2) )! restriction{type(*[Food]|mybattlefield)~morethan~0}

@@ -1,0 +1,21 @@
+#2026-10-11: Bushy Bodyguard's offspring cost was written {1}{G}{2} (mana cost + offspring) instead of {2}, so offspring
+#was only offered with 7 mana. Cast with offspring for {1}{G}+{2} (choice 1): the creature and its 1/1 token copy.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bushy Bodyguard
+manapool:{3}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bushy Bodyguard
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bushy Bodyguard,*
+life:20
+[PLAYER2]
+life:20
+[END]
