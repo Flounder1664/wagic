@@ -9333,7 +9333,7 @@ abilities=exiledeath
 #spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
-#VERIFIED IN GAME 2026-10-11 (John, scenario queue): exiles exactly the right cards and offers them to cast from exile. Casting them still costs mana - that gap is NOT fixed.
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): exiles exactly the right cards and offers them to cast from exile. The free cast was fixed afterwards (zerocast) and needs its own look.
 #Earlier note: The self-exile half is verified on Germination Practicum
 #(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
 #not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
@@ -9356,9 +9356,13 @@ abilities=exiledeath
 #  - if cantargetcard(*[instant;sorcery]|*) then ... else ... to split the two cases crashes.
 #So canplayfromexile stands: the cards are playable from exile at their printed cost. That is
 #wrong about "without paying their mana costs" but right about everything else.
-auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) forever )!
+#FREE CAST FIXED 2026-10-11: zerocast is the engine's cast-for-nothing permission (MTGPayZeroRule,
+#"Zero Cast From Exile"), and 80-odd cards pair it with canplayfromexile exactly like this. The four
+#attempts recorded above all tried to BUILD a free cast and missed that it already existed.
+#ueot, not forever: the real card only lets you cast them as it resolves.
+auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile],newability[zerocast])) ueot )!
 autoexile=@each my firstmain:may name(Paradigm - cast a free copy) activate castcard(copied)
-missing=exile-until-total-mana-value has no form, so a flat TWO cards are exiled - the usual result of the real count. The exiled cards are playable from exile at their PRINTED COST rather than free; see the note above for the four forms tried and why each was rejected
+missing=exile-until-total-mana-value has no form, so a flat TWO cards are exiled - the usual result of the real count. The free cast lasts until end of turn rather than only while the spell resolves.
 text=Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs. -- Paradigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
 mana={5}{R}{R}
 type=Sorcery

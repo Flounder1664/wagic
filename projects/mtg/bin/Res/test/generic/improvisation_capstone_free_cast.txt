@@ -1,0 +1,29 @@
+#Improvisation Capstone: "You may cast any number of spells from among them without paying
+#their mana costs." The pool is exactly the Capstone's seven, so nothing is left to pay
+#with: Grizzly Bears entering and Lava Axe hitting for 5 can only have been free.
+#Before zerocast was added to the card both stayed in exile.
+[INIT]
+firstmain
+[PLAYER1]
+hand:707032
+library:Hill Giant,Juggernaut,Lava Axe,Grizzly Bears
+manapool:{5}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+707032
+Grizzly Bears
+Lava Axe
+p2
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Lava Axe
+exile:*
+library:Hill Giant,Juggernaut
+life:20
+[PLAYER2]
+life:15
+[END]
