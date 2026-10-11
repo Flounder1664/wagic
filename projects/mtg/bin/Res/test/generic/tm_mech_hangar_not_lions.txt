@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Mech Hangar's {W} can't cast Savannah Lions.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mech Hangar
+hand:Savannah Lions
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mech Hangar
+choice 1
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mech Hangar
+hand:Savannah Lions
+manapool:{W}
+life:20
+[PLAYER2]
+life:20
+[END]

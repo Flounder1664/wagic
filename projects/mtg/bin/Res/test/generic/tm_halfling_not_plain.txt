@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Delighted Halfling's {R} can't cast Raging Goblin (not legendary).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Delighted Halfling
+hand:Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Delighted Halfling
+choice 5
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Delighted Halfling
+hand:Raging Goblin
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[END]

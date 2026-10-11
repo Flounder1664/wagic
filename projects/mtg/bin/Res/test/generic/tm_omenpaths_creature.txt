@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Open the Omenpaths: two white and two green (choice 3) cast Watchwolf, leaving {W}{G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Open the Omenpaths,Watchwolf
+manapool:{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Open the Omenpaths
+choice 3
+Watchwolf
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Watchwolf
+graveyard:Open the Omenpaths
+manapool:{W}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

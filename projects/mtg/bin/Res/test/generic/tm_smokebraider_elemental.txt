@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Smokebraider makes {R}{R} (two choices) that cast Ashmouth Hound, an Elemental.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Smokebraider
+hand:Ashmouth Hound
+life:20
+[PLAYER2]
+life:20
+[DO]
+Smokebraider
+choice 2
+choice 2
+Ashmouth Hound
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Smokebraider,Ashmouth Hound
+life:20
+[PLAYER2]
+life:20
+[END]

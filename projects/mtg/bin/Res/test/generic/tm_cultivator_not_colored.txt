@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Cultivator Drone's {C} can't help cast Grizzly Bears (a green spell).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cultivator Drone,Forest
+hand:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cultivator Drone
+Forest
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cultivator Drone,Forest
+hand:Grizzly Bears
+manapool:{G}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

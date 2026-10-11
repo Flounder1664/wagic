@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Ancient Ziggurat's {G} (menu: B R G W U) and a Forest cast Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ancient Ziggurat,Forest
+hand:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ancient Ziggurat
+choice 2
+Forest
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ancient Ziggurat,Forest,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

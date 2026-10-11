@@ -1,0 +1,20 @@
+#Tagged-mana migration 2026-10-11. Powerstone's {C} pays Carrion Ants' {1}: +1/+1 (a nonartifact source).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone,Carrion Ants
+life:20
+[PLAYER2]
+life:20
+[DO]
+Powerstone
+Carrion Ants
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone,Carrion Ants
+pt:Carrion Ants=1/2
+life:20
+[PLAYER2]
+life:20
+[END]

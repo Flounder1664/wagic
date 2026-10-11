@@ -1,0 +1,20 @@
+#Tagged-mana migration 2026-10-11. Cultivator Drone's {C} casts Wooden Sphere (colorless spell).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cultivator Drone
+hand:Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cultivator Drone
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cultivator Drone,Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[END]

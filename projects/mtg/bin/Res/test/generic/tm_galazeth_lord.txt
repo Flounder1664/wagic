@@ -1,0 +1,26 @@
+#Tagged-mana migration 2026-10-11. Galazeth Prismari gives Wooden Sphere '{T}: Add any colour' for instants and sorceries: {U} casts Opt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Galazeth Prismari,Wooden Sphere
+hand:Opt
+library:Island,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Wooden Sphere
+choice 3
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Galazeth Prismari,Wooden Sphere,*
+hand:*
+graveyard:Opt
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

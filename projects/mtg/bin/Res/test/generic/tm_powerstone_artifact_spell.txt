@@ -1,0 +1,20 @@
+#Tagged-mana migration 2026-10-11. Powerstone's {C} casts Wooden Sphere (an artifact spell).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone
+hand:Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[DO]
+Powerstone
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone,Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Soldevi Machinist's {C}{C} pay Soldevi Simulacrum's {1}: +1/+0 twice (4/4), but not Carrion Ants' ability.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soldevi Machinist,Soldevi Simulacrum,Carrion Ants
+life:20
+[PLAYER2]
+life:20
+[DO]
+Soldevi Machinist
+Carrion Ants
+Soldevi Simulacrum
+Soldevi Simulacrum
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soldevi Machinist,Soldevi Simulacrum,Carrion Ants
+pt:Soldevi Simulacrum=4/4
+pt:Carrion Ants=0/1
+life:20
+[PLAYER2]
+life:20
+[END]

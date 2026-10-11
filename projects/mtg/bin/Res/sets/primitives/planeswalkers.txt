@@ -752,7 +752,7 @@ subtype=Chandra
 name=Commodore Guff
 abilities=canbecommander
 auto=counter(0/0,5,loyalty)
-auto={C(0/0,+1,Loyalty)}:name(+1: Create wizard) token(Wizard,Creature Wizard,1/1,red) and!( transforms((,newability[this(variable{type:planeswalker:myrestrictedcastingzone}>0) {T}:add{R}])) forever )!
+auto={C(0/0,+1,Loyalty)}:name(+1: Create wizard) token(Wizard,Creature Wizard,1/1,red) and!( transforms((,newability[{T}:add{R} spendspells(planeswalker)])) forever )!
 auto={C(0/0,-3,Loyalty)}:name(-3: Draw and damage) draw:type:planeswalker:mybattlefield controller && damage:type:planeswalker:mybattlefield opponent
 auto=@each my end:name(Put loyalty counter) target(other planeswalker|myBattlefield) counter(0/0,1,Loyalty)
 text=At the beginning of your end step, put a loyalty counter on another target planeswalker you control. -- [+1]: Create a 1/1 red Wizard creature token with "{T}: Add {R}. Spend this mana only to cast a planeswalker spell." -- [-3]: You draw X cards and Commodore Guff deals X damage to each opponent, where X is the number of planeswalkers you control. -- Commodore Guff can be your commander.
@@ -1638,7 +1638,7 @@ subtype=Jared
 [card]
 name=Jaya Ballard
 auto=counter(0/0,5,Loyalty)
-auto={C(0/0,1,Loyalty)}:name(+1: Add 3 red mana) if type(*[instant;sorcery]|myhand)~morethan~0 then add{R}{R}{R}
+auto={C(0/0,1,Loyalty)}:name(+1: Add 3 red mana) add{R}{R}{R} spendspells(*[instant;sorcery])
 auto={C(0/0,1,Loyalty)}:name(+1: Discard up to three and draw that many) reject notatarget(<upto:3>*|myhand) and!( draw:1 controller )!
 auto={C(0/0,-8,Loyalty)}:name(-8: Emblem: "Yoy may cast instants or sorceries from graveyard") emblem("You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.") transforms((,newability[lord(*[instant;sorcery]|mygraveyard) canplayfromgraveyard],newability[lord(*[instant;sorcery]|mygraveyard) gainedexiledeath])) forever dontremove
 text=+1: Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells. -- +1: Discard up to three cards, then draw that many cards. -- -8: You get an emblem with "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead."
@@ -2192,7 +2192,7 @@ subtype=Windgrace
 name=Lukka, Bound to Ruin
 auto=ifnot paid(alternative) then counter(0/0,5,loyalty)
 auto=alternative counter(0/0,3,loyalty)
-auto=aslongas(creature|mybattlefield,myrestrictedcastingzone) {C(0/0,+1,Loyalty)}:name(+1: Add mana) name(+1: Add mana) add{R}{G}
+auto={C(0/0,+1,Loyalty)}:name(+1: Add mana) add{R}{G} spendspells(creature) spendabilities(creature)
 auto={C(0/0,-1,Loyalty)}:name(-1: Create beast) token(Phyrexian Beast,Creature Phyrexian Beast,3/3,green,poisontoxic)
 auto=aslongas(creature[power=1]|mybattlefield) {C(0/0,-4,Loyalty)}:name(-4: Deal 1 damage) name(-4: Deal 1 damage) thisforeach(variable{1}) ability$!name(Deal 1 damage) damage:1 target(*[creature;planeswalker]|battlefield)!$ controller
 auto=aslongas(creature[power=2]|mybattlefield) {C(0/0,-4,Loyalty)}:name(-4: Deal 2 damage) name(-4: Deal 2 damage) thisforeach(variable{2}) ability$!name(Deal 1 damage) damage:1 target(*[creature;planeswalker]|battlefield)!$ controller
@@ -2432,7 +2432,7 @@ subtype=Narset
 [card]
 name=Narset of the Ancient Way
 auto=counter(0/0,4,Loyalty)
-auto={C(0/0,1,Loyalty)}:name(+1: Gain 2 life and produce mana) life:2 controller && if type(*[-creature]|myhand)~morethan~0 then ability$!choice add{U} _ choice add{R} _ choice add{W}!$ controller
+auto={C(0/0,1,Loyalty)}:name(+1: Gain 2 life and produce mana) life:2 controller && ability$!choice add{U} spendspells(*[-creature]) _ choice add{R} spendspells(*[-creature]) _ choice add{W} spendspells(*[-creature])!$ controller
 auto={C(0/0,-2,Loyalty)}:name(-2: Draw and may discard land) draw:1 controller && ability$!name(May discard a land) may target(*[land]|myhand) reject!$ controller
 auto={C(0/0,-2,Loyalty)}{D(*[-land]|myhand)}:name(-2: Draw, discard nonland and damage) draw:1 controller && damage:storedmanacost target(creature;planeswalker)
 auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: Cast a noncreature spell and deals 2 damage) emblem("Whenever you cast a noncreature spell, this emblem deals 2 damage to any target.") transforms((,newability[@movedTo(*[-creature]|mystack):damage:2 target(anytarget)])) forever dontremove
@@ -2958,7 +2958,7 @@ subtype=Sarkhan
 name=Sarkhan, Fireblood
 auto=counter(0/0,3,loyalty)
 auto={C(0/0,1,Loyalty)}:name(+1: Discard and draw) ability$!may _DISCARD&DRAW_ !$ controller
-auto={C(0/0,1,Loyalty)}:name(+1: Add two mana in any combination of colors) if type(dragon|mycastingzone)~morethan~0 then thisforeach(variable{2}) ability$!name(add mana) choice add{G} _ choice add{R} _ choice add{U} _ choice add{B} _ choice add{W}!$ controller
+auto={C(0/0,1,Loyalty)}:name(+1: Add two mana in any combination of colors) thisforeach(variable{2}) ability$!name(add mana) choice add{G} spendspells(dragon) _ choice add{R} spendspells(dragon) _ choice add{U} spendspells(dragon) _ choice add{B} spendspells(dragon) _ choice add{W} spendspells(dragon)!$ controller
 auto={C(0/0,-7,Loyalty)}:name(-7: Create four 5/5 Dragons) _DRAGONTOKEN_*4
 text=+1: You may discard a card. If you do, draw a card. -- +1: Add two mana in any combination of colors. Spend this mana only to cast Dragon spells. -- -7: Create four 5/5 red Dragon creature tokens with flying.
 mana={1}{R}{R}

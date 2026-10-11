@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Rosheen's {C}{C}{C}{C} can't cast Wooden Sphere (no {X} in its cost).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rosheen Meanderer
+hand:Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[DO]
+Rosheen Meanderer
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rosheen Meanderer
+hand:Wooden Sphere
+manapool:{C}{C}{C}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#Tagged-mana migration 2026-10-11. Lord of the Forsaken's {C} (pay 1 life) plus {1}{U} flash back Think Twice from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of the Forsaken
+graveyard:Think Twice
+library:Island
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lord of the Forsaken
+choice 1
+Think Twice
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of the Forsaken
+hand:Island
+exile:Think Twice
+life:19
+[PLAYER2]
+life:20
+[END]

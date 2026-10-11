@@ -1,0 +1,25 @@
+#Tagged-mana migration 2026-10-11. Woodland Weavemaster (power 1, +1/+1 from Giant Growth = 4) adds four {G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Woodland Weavemaster
+hand:Giant Growth
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Giant Growth
+Woodland Weavemaster
+Woodland Weavemaster
+choice 4
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Woodland Weavemaster
+graveyard:Giant Growth
+manapool:{G}{G}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

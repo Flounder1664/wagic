@@ -1,0 +1,25 @@
+#Tagged-mana migration 2026-10-11. Titans' Nest's {C} can't cast Wooden Sphere (colorless).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Titans' Nest
+hand:Wooden Sphere
+graveyard:Swamp
+life:20
+[PLAYER2]
+life:20
+[DO]
+Titans' Nest
+Swamp
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Titans' Nest
+hand:Wooden Sphere
+exile:Swamp
+manapool:{C}
+life:20
+[PLAYER2]
+life:20
+[END]

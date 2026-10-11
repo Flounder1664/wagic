@@ -1,0 +1,24 @@
+#Tagged-mana migration 2026-10-11. Cormela's {U}{B}{R} can't cast Grizzly Bears even with a Forest.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555378,Forest
+hand:Grizzly Bears
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Cormela, Glamour Thief
+Forest
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555378,Forest
+hand:Grizzly Bears
+manapool:{U}{B}{R}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

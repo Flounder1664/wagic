@@ -1,0 +1,24 @@
+#Tagged-mana migration 2026-10-11. Lukka's +1 {R}{G} can't cast Giant Growth.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:602737,Grizzly Bears
+hand:Giant Growth
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lukka, Bound to Ruin
+choice 0
+Giant Growth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:602737,Grizzly Bears
+hand:Giant Growth
+manapool:{R}{G}
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#Tagged-mana migration 2026-10-11. Helga (power 1) adds one {G} (menu: W U B R G); with {3} it casts Giant Spider (mana value 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669131
+hand:Giant Spider
+library:Forest,Island
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Helga, Skittish Seer
+choice 4
+Giant Spider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669131,Giant Spider
+hand:*
+library:*
+life:21
+[PLAYER2]
+life:20
+[END]

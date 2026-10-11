@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Delighted Halfling's {R} (menu: C W U G B R) casts Zurgo Bellstriker, a legendary spell.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Delighted Halfling
+hand:Zurgo Bellstriker
+life:20
+[PLAYER2]
+life:20
+[DO]
+Delighted Halfling
+choice 5
+Zurgo Bellstriker
+Zurgo Bellstriker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Delighted Halfling,Zurgo Bellstriker
+life:20
+[PLAYER2]
+life:20
+[END]

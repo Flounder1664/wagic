@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Rosheen's four {C} plus {G} cast Hurricane with X=4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rosheen Meanderer
+hand:Hurricane
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Rosheen Meanderer
+Hurricane
+choice 4
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rosheen Meanderer
+graveyard:Hurricane
+life:16
+[PLAYER2]
+life:16
+[END]

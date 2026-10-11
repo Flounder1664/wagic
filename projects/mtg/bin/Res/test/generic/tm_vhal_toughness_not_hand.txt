@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Vhal adds {C} equal to its toughness (3); that mana can't cast Wooden Sphere from hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:562985
+hand:Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[DO]
+Vhal, Candlekeep Researcher
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:562985
+hand:Wooden Sphere
+manapool:{C}{C}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

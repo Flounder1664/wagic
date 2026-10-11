@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Jaya Ballard's +1 {R}{R}{R} can't cast Raging Goblin.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jaya Ballard
+hand:Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+Jaya Ballard
+choice 0
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jaya Ballard
+hand:Raging Goblin
+manapool:{R}{R}{R}
+life:20
+[PLAYER2]
+life:20
+[END]

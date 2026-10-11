@@ -1,0 +1,21 @@
+#Tagged-mana migration 2026-10-11. Eldrazi Temple's {C}{C} (menu choice 1) casts It That Heralds the End, a colorless Eldrazi.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eldrazi Temple
+hand:It That Heralds the End
+life:20
+[PLAYER2]
+life:20
+[DO]
+Eldrazi Temple
+choice 1
+It That Heralds the End
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eldrazi Temple,It That Heralds the End
+life:20
+[PLAYER2]
+life:20
+[END]

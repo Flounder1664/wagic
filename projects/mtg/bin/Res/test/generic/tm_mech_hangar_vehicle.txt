@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Mech Hangar's {W} (menu choice 1) plus {1} cast Sky Skiff, a Vehicle.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mech Hangar
+hand:Sky Skiff
+manapool:{1}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Mech Hangar
+choice 1
+Sky Skiff
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mech Hangar,Sky Skiff
+life:20
+[PLAYER2]
+life:20
+[END]

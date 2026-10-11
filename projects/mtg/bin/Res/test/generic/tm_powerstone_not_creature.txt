@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Powerstone's {C} can't help cast Grizzly Bears: it stays in hand, {C}{G} stay in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone,Forest
+hand:Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[DO]
+Powerstone
+Forest
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Powerstone,Forest
+hand:Grizzly Bears
+manapool:{G}{C}
+life:20
+[PLAYER2]
+life:20
+[END]

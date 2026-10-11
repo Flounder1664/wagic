@@ -1,0 +1,23 @@
+#Tagged-mana migration 2026-10-11. Lord of the Forsaken's {C} (pay 1 life) can't cast Wooden Sphere from hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of the Forsaken
+hand:Wooden Sphere
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lord of the Forsaken
+choice 1
+Wooden Sphere
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of the Forsaken
+hand:Wooden Sphere
+manapool:{C}
+life:19
+[PLAYER2]
+life:20
+[END]

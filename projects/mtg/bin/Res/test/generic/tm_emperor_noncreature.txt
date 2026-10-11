@@ -1,0 +1,26 @@
+#Tagged-mana migration 2026-10-11. The Emperor of Palamecia's {U} casts Opt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Emperor of Palamecia
+hand:Opt
+library:Island,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Emperor of Palamecia
+choice 0
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Emperor of Palamecia
+graveyard:Opt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

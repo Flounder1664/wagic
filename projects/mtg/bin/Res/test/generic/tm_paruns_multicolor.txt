@@ -1,0 +1,22 @@
+#Tagged-mana migration 2026-10-11. Pillar of the Paruns' {G} (menu: W R G U B) and a Plains cast Watchwolf.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pillar of the Paruns,Plains
+hand:Watchwolf
+life:20
+[PLAYER2]
+life:20
+[DO]
+Pillar of the Paruns
+choice 2
+Plains
+Watchwolf
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pillar of the Paruns,Plains,Watchwolf
+life:20
+[PLAYER2]
+life:20
+[END]
