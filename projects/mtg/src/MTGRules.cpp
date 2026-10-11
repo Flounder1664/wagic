@@ -22,6 +22,44 @@ static bool canAffordCast(MTGCardInstance * card, ManaCost * pool, ManaCost * co
     return ok;
 }
 
+//Multikicker (and the other pay-it-N-times costs that ride on it: replicate, strive): ask how
+//many times, the way an X spell asks for X. Without this the payment loop simply bought as
+//many as the pool could afford. Returns true when a menu was opened - the caller returns and
+//the chosen entry calls reactToClick again with card->setKicks filled in.
+//Real AIs are not asked, and keep paying for as many as they can.
+static bool askKickCount(GameObserver * game, MTGAbility * rule, MTGCardInstance * card, Player * player)
+{
+    if (player->playMode == Player::MODE_AI || card->setKicks > -1)
+        return false;
+    ManaCost * kicker = card->getManaCost()->getKicker();
+    if (!kicker || !kicker->isMulti)
+        return false;
+    ManaCost * withKickerCost = NEW ManaCost(card->getManaCost());
+    withKickerCost->add(withKickerCost->getKicker());
+    int maxKicks = 0;
+    while (maxKicks < 20 && canAffordCast(card, player->getManaPool(), withKickerCost, card->has(Constants::ANYTYPEOFMANA)))
+    {
+        withKickerCost->add(withKickerCost->getKicker());
+        maxKicks++;
+    }
+    delete withKickerCost;
+    if (maxKicks < 2)
+        return false; //nothing to choose
+    vector<MTGAbility*> selection;
+    for (int i = 1; i <= maxKicks; ++i)
+    {
+        MTGAbility * setKicks = NEW AAWhatsX(game, game->mLayers->actionLayer()->getMaxId(), card, card, i, rule, true);
+        MTGAbility * setCardKicks = setKicks->clone();
+        setCardKicks->oneShot = true;
+        selection.push_back(setCardKicks);
+        SAFE_DELETE(setKicks);
+    }
+    MTGAbility * a1 = NEW MenuAbility(game, rule->GetId(), card, card, false, selection);
+    game->mLayers->actionLayer()->currentActionCard = card;
+    a1->resolve();
+    return true;
+}
+
 
 PermanentAbility::PermanentAbility(GameObserver* observer, int _id) : MTGAbility(observer, _id,NULL)
 {
@@ -537,6 +575,9 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
     //////////////////////////////////////////
     ////cards without X contenue from here////
     //////////////////////////////////////////
+    //"Always pay kicker" casts kicked from the plain cast entry, so the count is asked here too.
+    if (OptionKicker::KICKER_ALWAYS == options[Options::KICKERPAYMENT].number && askKickCount(game, this, card, player))
+        return 0;
     //this handles extra cost payments at the moment a card is played.
     if (cost->isExtraPaymentSet())
     {
@@ -557,7 +598,7 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
     int poolBeforeCast = previousManaPool->getConvertedCost();
     player->getManaPool()->setSpender(card, true);
     int payResult = player->getManaPool()->pay(card->getManaCost());
-    if (card->getManaCost()->getKicker() && (card->kicked || OptionKicker::KICKER_ALWAYS == options[Options::KICKERPAYMENT].number || card->controller()->isAI()))
+    if (card->getManaCost()->getKicker() && (card->kicked || OptionKicker::KICKER_ALWAYS == options[Options::KICKERPAYMENT].number || (card->controller()->isAI() && card->controller()->playMode != Player::MODE_HUMAN))) //a scenario hands a TestSuiteAI seat to a human: do not auto-kick for them
     {
         ManaCost * withKickerCost= NEW ManaCost(card->getManaCost());
         withKickerCost->add(withKickerCost->getKicker());
@@ -569,6 +610,9 @@ int MTGPutInPlayRule::reactToClick(MTGCardInstance * card)
                 withKickerCost->add(withKickerCost->getKicker());
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
+            if (card->setKicks > -1 && card->setKicks < card->kicked)
+                card->kicked = card->setKicks; //the player asked for fewer than the pool affords
+            card->setKicks = -1;
             //Braces were missing: only setSpender looped and the kicker was paid ONCE, so a
             //spell kicked N times took one kicker's mana (John, Marshal's Anthem scenario).
             for(int i = 0;i < card->kicked;i++)
@@ -731,6 +775,8 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
         return 0;
     Player * player = game->currentlyActing();
     ManaCost * cost = card->getManaCost();
+    if (askKickCount(game, this, card, player))
+        return 0;
 
     //this handles extra cost payments at the moment a card is played.
 
@@ -766,6 +812,9 @@ int MTGKickerRule::reactToClick(MTGCardInstance * card)
                 withKickerCost->add(withKickerCost->getKicker());
                 if(!card->basicAbilities[Constants::HASNOKICKER] || card->basicAbilities[Constants::HASREPLICATE] || card->basicAbilities[Constants::HASSTRIVE]) card->kicked += 1; //Some kicker costs are not a real kicker (e.g. Fuse cost, Replicate cost, Strive cost).
             }
+            if (card->setKicks > -1 && card->setKicks < card->kicked)
+                card->kicked = card->setKicks; //the player asked for fewer than the pool affords
+            card->setKicks = -1;
             //Braces were missing: only setSpender looped and the kicker was paid ONCE, so a
             //spell kicked N times took one kicker's mana (John, Marshal's Anthem scenario).
             for(int i = 0;i < card->kicked;i++)

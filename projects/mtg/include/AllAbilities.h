@@ -5177,10 +5177,14 @@ class AAWhatsX : public ActivatedAbility
 public:
     int value;
     MTGAbility * costRule;
-    AAWhatsX(GameObserver* observer, int id, MTGCardInstance * card, MTGCardInstance * source, int value = 0, MTGAbility * costRule = NULL);
+    bool kicks; //the number is a multikicker count (setKicks), not X
+    AAWhatsX(GameObserver* observer, int id, MTGCardInstance * card, MTGCardInstance * source, int value = 0, MTGAbility * costRule = NULL, bool kicks = false);
     int resolve();
     const string getMenuText()
     {
+        if (kicks)
+            sprintf(menuText, value == 1 ? "Pay it once" : "Pay it %i times", value);
+        else
         sprintf(menuText, "%i", value);
         return menuText;
     };

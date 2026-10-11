@@ -7606,8 +7606,8 @@ AAWhatsMax * AAWhatsMax::clone() const
     return NEW AAWhatsMax(*this);
 }
 //set X value
-AAWhatsX::AAWhatsX(GameObserver* observer, int id, MTGCardInstance * card, MTGCardInstance *, int value, MTGAbility * _costRule) :
-    ActivatedAbility(observer, id, card, NULL, 0), value(value),costRule(_costRule)
+AAWhatsX::AAWhatsX(GameObserver* observer, int id, MTGCardInstance * card, MTGCardInstance *, int value, MTGAbility * _costRule, bool _kicks) :
+    ActivatedAbility(observer, id, card, NULL, 0), value(value),costRule(_costRule),kicks(_kicks)
 {
 }
 
@@ -7615,8 +7615,10 @@ int AAWhatsX::resolve()
 {
     if (source)
     {
-        source->setX = value;
-        
+        if (kicks)
+            source->setKicks = value;
+        else
+            source->setX = value;
     }
     costRule->reactToClick(source);
     return 1;

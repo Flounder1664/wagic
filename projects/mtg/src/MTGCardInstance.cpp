@@ -214,6 +214,7 @@ int MTGCardInstance::init()
     X = 0;
     castX = 0;
     setX = -1;
+    setKicks = -1;
     return 1;
 }
 
@@ -221,6 +222,7 @@ void MTGCardInstance::initMTGCI()
 {
     X = 0;
     setX = -1;
+    setKicks = -1;
     sample = "";
     model = NULL;
     isToken = false;
@@ -804,6 +806,7 @@ int MTGCardInstance::cleanup()
             counters->removeCounter("crewed", 0, 0, true);
     }
     crewedBy.clear();
+    setKicks = -1;
     return 1;
 }
 

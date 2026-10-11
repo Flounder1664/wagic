@@ -2,6 +2,7 @@
 #only one kicker was ever paid: Apex Hawks kicked twice from eight mana cost 5, not 7.
 #Eight white: {2}{W} + two kicks of {1}{W} = 7 (a third would need 9). One must be left.
 #Before the fix three were left.
+#The engine now asks how many times to kick: choice 1 is the second entry, "Pay it 2 times".
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -10,6 +11,7 @@ manapool:{W}{W}{W}{W}{W}{W}{W}{W}
 [PLAYER2]
 [DO]
 Apex Hawks
+choice 1
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

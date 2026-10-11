@@ -56,6 +56,7 @@ public:
     int X;
     int castX;
     int setX;
+    int setKicks; //multikicker: how many kicks the player asked for; -1 = not asked, pay for as many as possible
     int alternateCostPaid[ManaCost::MANA_PAID_WITH_BESTOW + 1]; 
     int paymenttype;
     int castMethod; /* Tells if the card reached its current zone by being cast or not (brought into the zone by an effect). non 0 == cast, 0 == not cast */

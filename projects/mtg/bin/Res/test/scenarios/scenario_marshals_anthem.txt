@@ -1,41 +1,41 @@
 #SCENARIO, not a test: hands control to you and asserts nothing.
 #
-#ROUND 2 - both cards behaved correctly on six Plains (Apex Hawks 3/3, one creature back),
-#which settles it: Marshal's Anthem was never broken, and the greedy multikicker payment
-#was the whole story. This board proves the count SCALES, by forcing exactly TWO kicks.
+#MULTIKICKER - how many times, and what it costs.
 #
-#The manapool: line does NOT survive into the handover, so the EIGHT PLAINS are your only
-#mana. Multikicker is greedy (MTGRules.cpp:544) - it kicks as many times as the pool can
-#afford - so eight is chosen to make greedy land on exactly two for both cards:
+#Round 3 (John, 2026-10-11) found two things, both changed:
+#   - Kicked twice, but only ONE kicker's mana was taken. The payment loop had no braces.
+#   - The game never asked how many times to kick; it bought as many as the pool afforded.
+#     It now asks, the way an X spell asks for X.
 #
-#   APEX HAWKS       {2}{W}   + 2 kicks = 7.  A THIRD kick needs 9. Eight is not 9.
-#   MARSHAL'S ANTHEM {2}{W}{W} + 2 kicks = 8.  A THIRD kick needs 10.
+#The manapool: line does NOT survive into the handover, so the TEN PLAINS are your mana.
+#Kicker is {1}{W} for both cards.
 #
-#HOW TO RUN:
-#   1. TAP ALL EIGHT PLAINS FIRST so the pool holds eight - auto-tap may only cover base.
-#   2. Cast the card and accept the kicker.
-#   3. Eight mana funds ONE card. Relaunch before trying the other.
+#   APEX HAWKS       {2}{W}     1 kick = 5,  2 = 7,  3 = 9
+#   MARSHAL'S ANTHEM {2}{W}{W}  1 kick = 6,  2 = 8,  3 = 10
 #
-#  A. APEX HAWKS (printed 2/2)
-#     EXPECT: 4/4 - the 2/2 body with exactly TWO +1/+1 counters.
+#HOW TO RUN - tap ALL TEN Plains first; the menu only offers what the pool can pay for.
+#Ten mana funds one card: use "Restart scenario" (ESC menu) between tries.
 #
-#  B. MARSHAL'S ANTHEM
-#     EXPECT: BOTH Grizzly Bears AND Hill Giant return from the graveyard.
-#     The target prompt should let you pick two this time, not one.
+#  A. APEX HAWKS -> Pay Kicker.
+#     EXPECT: a menu offering "Pay it once", "Pay it 2 times", "Pay it 3 times".
+#     Pick ONCE:    a 3/3, and FIVE mana left floating.
+#     Restart, pick 3 TIMES: a 5/5, and ONE mana left.
 #
-#ROUND 3 (John, 2026-10-11): both cards kicked twice but only ONE kicker's mana was taken.
-#The payment loop had no braces. Fixed - so now also check the MANA:
-#   Apex Hawks: 7 of your 8 mana spent, ONE left floating (was three left).
-#   Marshal's Anthem: all 8 spent.
+#  B. MARSHAL'S ANTHEM -> Pay Kicker.
+#     EXPECT: the same menu, up to 3 times.
+#     Pick 2 TIMES: you may return up to TWO creatures (three are in the graveyard, so
+#                   one must stay behind), and TWO mana are left.
+#     Restart, pick 3 TIMES: all three return and no mana is left.
 #
-#If either lands on two, kicked is scaling correctly and the ONLY thing left to fix is
-#that the engine never asks how many times you want to kick.
+#  C. "Cast Card Normally" on either card.
+#     EXPECT: no kick at all - a plain 2/2 Hawks, or an Anthem that returns nothing.
+#     (Unless the "always pay kicker" option is on: then it asks how many, as above.)
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Apex Hawks,Marshal's Anthem
-graveyard:Grizzly Bears,Hill Giant
-inplay:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
+graveyard:Grizzly Bears,Hill Giant,Bog Imp
+inplay:Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains,Plains
 life:20
 [PLAYER2]
 life:20

@@ -1,0 +1,20 @@
+#Multikicker asks how many times to kick instead of buying as many as the pool affords.
+#Eight white mana could pay for two kicks of Apex Hawks; choice 0 is "Pay it once".
+#Right: a 3/3 with three mana left. Greedy payment made it a 4/4 with one left.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Apex Hawks
+manapool:{W}{W}{W}{W}{W}{W}{W}{W}
+[PLAYER2]
+[DO]
+Apex Hawks
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Apex Hawks
+pt:Apex Hawks=3/3
+manapool:{W}{W}{W}
+[PLAYER2]
+[END]
