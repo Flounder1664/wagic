@@ -1,0 +1,26 @@
+#Playtest 2026-10-11. With Danitha, Spear of Agony (735227) out, a SORCERY aimed at the opponent could not be cast:
+#her trigger went on the stack at the targeting click, before the spell (Solve for Disappointment stuck in
+#targeting, one more trigger per click). Player-target triggers now resolve at once like card-target ones:
+#Lava Spike is cast, the opponent takes 3 and Danitha gets exactly one counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735227
+hand:Lava Spike
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lava Spike
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735227
+graveyard:Lava Spike
+pt:735227=3/3
+life:20
+[PLAYER2]
+life:17
+[END]

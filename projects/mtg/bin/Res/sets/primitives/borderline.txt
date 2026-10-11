@@ -9055,10 +9055,10 @@ toughness=2
 [/card]
 [card]
 name=Prudent Fateseer // Peer Review
-auto=@scryed(*|myzones):all(this) counter(0/0,1,ScriedOrSurveiled)
-auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScriedOrSurveiled)
-auto=@each end:all(this) removeallcounters(0/0.1.ScriedOrSurveiled)
-auto=@counteradded(0/0,1,ScriedOrSurveiled) from(this) turnlimited:all(creature|mybattlefield) 1/0 ueot
+auto=@scryed(*|myzones):all(this) counter(0/0,1,ScryMark)
+auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScryMark)
+auto=@each end:all(this) removeallcounters(0/0,1,ScryMark)
+auto=@counteradded(0/0,1,ScryMark) from(this) turnlimited:all(creature|mybattlefield) 1/0 ueot
 grade=borderline
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
@@ -149918,6 +149918,7 @@ mana={1}{B}{G}
 type=Creature
 subtype=Wolf
 power=2
+auto=discard:1 opponent
 toughness=1
 [/card]
 [card]
@@ -149984,7 +149985,6 @@ toughness=2
 [/card]
 [card]
 name=Tinybones, Pocket Nuisance
-auto=discard:1 opponent
 auto=@discarded(*|hand) oneormore:damage:1 opponent
 text=When Tinybones enters, each opponent discards a card. -- Whenever a player discards one or more cards, Tinybones deals 1 damage to each opponent.
 mana={2}{B}
@@ -150085,11 +150085,11 @@ toughness=4
 [/card]
 [card]
 name=Saheeli, Consul of Oversight
-auto=@counteradded(0/0,1,ScriedOrSurveiled) from(this) turnlimited:token(-735514)
-auto=@each end:all(this) removeallcounters(0/0.1.ScriedOrSurveiled)
+auto=@counteradded(0/0,1,ScryMark) from(this) turnlimited:token(-735514)
+auto=@each end:all(this) removeallcounters(0/0,1,ScryMark)
 abilities=flying
-auto=@scryed(*|myzones):all(this) counter(0/0,1,ScriedOrSurveiled)
-auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScriedOrSurveiled)
+auto=@scryed(*|myzones):all(this) counter(0/0,1,ScryMark)
+auto=@surveiled(*|mybattlefield,mystack):all(this) counter(0/0,1,ScryMark)
 text=Flying -- Whenever you scry or surveil, create a 1/1 colorless Thopter artifact creature token with flying. This ability triggers only once each turn.
 mana={3}{W}{W}
 type=Legendary Creature

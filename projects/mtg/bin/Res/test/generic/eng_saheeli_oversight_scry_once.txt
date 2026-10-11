@@ -1,0 +1,29 @@
+#Playtest 2026-10-11. Saheeli, Consul of Oversight (735203) soft-locked the end step: her counter was named
+#"ScriedOrSurveiled" and the engine read any line containing "surveil" as a surveil event. Two Opts (two scries)
+#in one turn now make exactly ONE Thopter, and the turn goes on.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735203
+hand:Opt,Opt
+library:Island,Forest,Swamp,Plains
+manapool:{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Opt
+choice 0
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735203,*
+graveyard:Opt,Opt
+hand:*,*
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

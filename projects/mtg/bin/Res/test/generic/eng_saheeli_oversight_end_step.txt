@@ -1,0 +1,27 @@
+#Playtest 2026-10-11. Saheeli, Consul of Oversight (735203): reaching the end step after a scry no longer locks
+#the game.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735203
+hand:Opt
+library:Island,Forest,Swamp,Plains
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Opt
+choice 0
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:735203,*
+graveyard:Opt
+hand:*
+library:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]
