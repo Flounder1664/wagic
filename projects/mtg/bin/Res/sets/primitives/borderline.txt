@@ -9333,7 +9333,7 @@ abilities=exiledeath
 #spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
-#VERIFIED IN GAME 2026-10-11 (John, scenario queue): exiles exactly the right cards and offers them to cast from exile. The free cast was fixed afterwards (zerocast) and needs its own look.
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): exiles exactly the right cards and offers them to cast from exile. The free cast (zerocast) and the top two being the ones exiled were both confirmed by John in a second scenario the same day.
 #Earlier note: The self-exile half is verified on Germination Practicum
 #(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
 #not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
