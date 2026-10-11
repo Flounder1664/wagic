@@ -1,0 +1,19 @@
+#The Hobbit sweep 2026-10-11. Desolation Prowler (2/2): pay 2 life - 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desolation Prowler
+life:20
+[PLAYER2]
+life:20
+[DO]
+Desolation Prowler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desolation Prowler
+pt:Desolation Prowler=4/4
+life:18
+[PLAYER2]
+life:20
+[END]

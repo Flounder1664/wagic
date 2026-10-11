@@ -462,3 +462,7 @@
 #AUTO_DEFINE _EMPOWERJACE6_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,6,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,6,Loyalty)
 #AUTO_DEFINE _EMPOWERJACE7_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,7,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,7,Loyalty)
 #AUTO_DEFINE _EMPOWERJACE8_ if type(planeswalker[jace][token]|mybattlefield)~equalto~0 then token(-735505) and!( counter(0/0,8,Loyalty) )! else all(planeswalker[jace][token]|mybattlefield) counter(0/0,8,Loyalty)
+
+# Recruit (The Hobbit): draw a card, then discard a card; if a nonland card was discarded, create a 1/1 white Human Soldier.
+# Two choices because the token depends on WHICH card is discarded. Shaped like _LOOT_, so the discard sees the drawn card.
+#AUTO_DEFINE _RECRUIT_ draw:1 controller && transforms((,newability[choice name(Discard a nonland card and create a Human Soldier) notatarget(*[-land]|myhand) reject && create(Human Soldier:creature human soldier:1/1:white)],newability[choice name(Discard a land card) notatarget(land|myhand) reject])) forever

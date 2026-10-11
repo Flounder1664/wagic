@@ -1,0 +1,22 @@
+#The Hobbit sweep 2026-10-11. Thranduil, the Elvenking: a nonlegendary Elf (Llanowar Elves) does not trigger him.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700167
+hand:Llanowar Elves
+library:Forest,Island,Swamp
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700167,Llanowar Elves
+library:*,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

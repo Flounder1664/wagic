@@ -1,0 +1,20 @@
+#The Hobbit sweep 2026-10-11. My Precious: equip costs {2} and 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:My Precious,Grizzly Bears
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+My Precious
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:My Precious,Grizzly Bears
+life:18
+[PLAYER2]
+life:20
+[END]

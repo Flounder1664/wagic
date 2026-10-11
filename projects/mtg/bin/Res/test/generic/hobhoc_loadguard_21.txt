@@ -7,6 +7,7 @@
 #NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
+#2026-10-11: Great Goblin, Foul-Hearted now amasses as it enters (one Army token).
 #Covers: Great Fierce Bee, Great Gilded Boat, Great Goblin, Foul-Hearted, Great Ugly-Looking Goblin, Grey Havens Navigator, Grima, Saruman's Footman
 [INIT]
 firstmain
@@ -19,7 +20,7 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*,*,*
+inplay:*,*,*,*,*,*,*
 [PLAYER2]
 life:20
 [END]

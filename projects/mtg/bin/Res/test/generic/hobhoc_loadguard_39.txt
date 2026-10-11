@@ -10,6 +10,7 @@
 #NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
+#2026-10-11: The Notary Hobbits now make their two token copies as they enter.
 #Covers: The Lord of the Eagles, The Master of Lake-town, The Misty Mountains Cold, The Mountain-king's Return, The Notary Hobbits, The One Ring
 #UPDATED 2026-08-15: these numbers moved because Saga chapter I now actually fires.
 #It was written as an @counteradded trigger listening for the Lore counter the Saga
@@ -26,7 +27,7 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*
+inplay:*,*,*,*,*,*
 hand:*
 [PLAYER2]
 life:20

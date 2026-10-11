@@ -139743,7 +139743,7 @@ name=Anduril, Narsil Reforged
 abilities=ascend
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build, ahead of 2026-08-14 release
-auto=@combat(attacking) source(mytgt):if compare(cityblessing)~equalto~1 then counter(1/1.2) all(creature|mybattlefield) else counter(1/1) all(creature|mybattlefield)
+auto=@combat(attacking) source(mytgt):if compare(cityblessing)~equalto~1 then all(creature|mybattlefield) counter(1/1,2) else all(creature|mybattlefield) counter(1/1)
 auto={3}:equip
 text=Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever equipped creature attacks, put a +1/+1 counter on each creature you control. If you have the city's blessing, put two +1/+1 counters on each creature you control instead. -- Equip {3}
 mana={2}
@@ -139865,8 +139865,8 @@ name=Gandalf, Shadow's Foe
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build
 abilities=vigilance
-auto=target(<upto:3>land|mybattlefield) moveto(myexile) and!( moveto(mybattlefield) all(this) and!( tap(noevent) )! )!
-auto=@movedTo(land|myBattlefield):all(trigger[to]) draw:1 controller && counter(1/1) this
+auto=name(Blink up to three lands) target(<upto:3>land|mybattlefield) moveto(myexile) and!( moveto(ownerbattlefield) and!( tap(noevent) )! )!
+auto=_LANDFALL_name(Draw and grow) draw:1 controller && counter(1/1) all(this)
 text=Vigilance -- When Gandalf enters, exile up to three target lands you control, then return them to the battlefield tapped under their owner's control. -- Landfall -- Whenever a land you control enters, draw a card and put a +1/+1 counter on Gandalf.
 mana={5}{U}{U}
 type=Legendary Creature
@@ -139941,8 +139941,8 @@ toughness=5
 name=Great Goblin, Foul-Hearted
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build
-auto=@movedTo(this|myBattlefield):if type(army|mybattlefield)~morethan~0 then all(trigger[to]) counter(1/1.3) notatarget(army|myBattlefield) else all(trigger[to]) token(Goblin Army,Creature Goblin Army,0/0,red) and!( counter(1/1.3) notatarget(army|myBattlefield) )!
-auto=_ATTACKING_if type(army|mybattlefield)~morethan~0 then counter(1/1.3) notatarget(army|myBattlefield) else token(Goblin Army,Creature Goblin Army,0/0,red) and!( counter(1/1.3) notatarget(army|myBattlefield) )!
+auto=_AMASSGOBLIN3_
+auto=_ATTACKING__AMASSGOBLIN3_
 auto=lord(army|mybattlefield) trample
 text=Whenever Great Goblin enters or attacks, amass Goblins 3. -- Armies you control have trample.
 mana={3}{B}{R}
@@ -139976,7 +139976,7 @@ toughness=5
 [card]
 name=Long-Bodied Grey Dog
 abilities=flash,reach
-auto=_TREASURE_ tapped
+auto=token(Treasure) and!( tap(noevent) )!
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; tapped-token modifier on macro unverified
 text=Flash -- Reach -- When this creature enters, create a tapped Treasure token.
@@ -140022,7 +140022,7 @@ subtype=Equipment
 [card]
 name=Esgaroth Garrison
 anyzone=type:creature:mybattlefield/5 cdaactive
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline, CDA power formula unverified
 text=Esgaroth Garrison's power is equal to the number of creatures you control. -- When this creature enters, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
@@ -140034,7 +140034,7 @@ toughness=5
 [/card]
 [card]
 name=Lake-town Lookout
-auto=_DIES_draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_DIES__RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=When this creature dies, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
@@ -140099,8 +140099,9 @@ toughness=2
 [card]
 name=Vow to Erebor
 auto=target(creature|mybattlefield) untap && transforms((,newability[2/2])) ueot
+auto=if type(dwarf|mybattlefield)~morethan~0 then may name(Attach an Equipment to a Dwarf) target(equipment|mybattlefield) transforms((,newability[rehook target(dwarf|mybattlefield)])) oneshot
+missing=the Equipment may be attached to any Dwarf you control, not only the creature this untapped
 text=Untap target creature you control. It gets +2/+2 until end of turn. If it's a Dwarf, you may attach an Equipment you control to it.
-missing=attach-equipment-if-Dwarf clause not implemented
 mana={1}{W}
 type=Instant
 [/card]
@@ -140139,11 +140140,12 @@ toughness=2
 [card]
 name=Enchanted River's Grasp
 target=creature
-auto=tap target(mytgt) && removeallcounters(0/0,1,any)
-auto=this(target|enchanted) loseabilities
-auto=this(target|enchanted) restriction{} phaseaction[my untap once] donothing
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; loses-all-abilities/doesn't-untap approximated
+auto=tap
+auto=removeallcounters(all)
+auto=loseabilities
+auto=doesnotuntap
 text=Enchant creature -- When this Aura enters, tap enchanted creature and remove all counters from it. -- Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
 mana={2}{U}
 type=Enchantment
@@ -140189,7 +140191,7 @@ toughness=2
 [card]
 name=Long Lake Nuisance
 abilities=flying
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=Flying -- When this creature enters, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
@@ -140293,7 +140295,7 @@ type=Sorcery
 [card]
 name=Ravening Warg
 abilities=deathtouch
-auto=_ATTACKING_restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:life:2 controller
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) life:2 controller
 text=Deathtouch -- Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, you gain 2 life.
 mana={1}{B}
 type=Creature
@@ -140370,9 +140372,8 @@ toughness=2
 [card]
 name=Iron Hills Stalwart
 abilities=reach,trample
-grade=unsupported
 # REVIEW 2026-08-02 [P:low] HOB preview build; dual-target attach-equipment-to-creature approximated
-missing=the Equipment is not attached to the chosen creature: 'mytgt2' (a second-target reference) does not exist in the engine, so that line was dead and has been removed.
+auto=may name(Attach an Equipment to a creature) target(equipment|mybattlefield) transforms((,newability[rehook target(creature|mybattlefield)])) oneshot
 text=Reach, trample -- When this creature enters, attach target Equipment you control to up to one target creature you control.
 mana={4}{R}
 type=Creature
@@ -140483,7 +140484,7 @@ toughness=4
 [card]
 name=Guardian of the Halls
 abilities=trample
-auto={5}{G}{G}:counter(1/1.3) this
+auto={5}{G}{G}:name(Three +1/+1 counters) counter(1/1,3)
 text=Trample -- {5}{G}{G}: Put three +1/+1 counters on this creature.
 mana={1}{G}
 type=Creature
@@ -140541,7 +140542,8 @@ type=Instant
 [/card]
 [card]
 name=Wargling
-auto=_ATTACKING_restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:transforms((,newability[1/0])) ueot && all(creature|mybattlefield) transforms((,trample)) ueot
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) 1/0 ueot
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) all(creature|mybattlefield) trample ueot
 text=Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, until end of turn, this creature gets +1/+0 and creatures you control gain trample.
 mana={1}{G}
 type=Creature
@@ -140573,7 +140575,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Mirkwood Nurturer
-auto=target(<upto:1>other permanent|mybattlefield) moveto(hand) and!( counter(1/1) this )!
+auto=may name(Return a permanent to hand) target(other *|mybattlefield) moveto(ownerhand) and!( counter(1/1) all(this) )!
 text=When this creature enters, return up to one other target permanent you control to its owner's hand. If you do, put a +1/+1 counter on this creature.
 mana={2}{G/U}
 type=Creature
@@ -140594,7 +140596,7 @@ toughness=2
 [card]
 name=Patient Instructor
 abilities=vigilance
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=Vigilance -- When this creature enters, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
@@ -140627,7 +140629,7 @@ name=Elvenking's Halls
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{U}
-auto={2}{G}{U}{T}:name(Sac for counters) target(elf|mybattlefield) counter(1/1.2) and!( sacrifice(this) )!
+auto={2}{G}{U}{T}{S}:name(Two +1/+1 counters) counter(1/1,2) target(elf|mybattlefield)
 text=This land enters tapped. -- {T}: Add {G} or {U}. -- {2}{G}{U}, {T}, Sacrifice this land: Put two +1/+1 counters on target Elf you control.
 type=Land
 [/card]
@@ -140636,7 +140638,7 @@ name=Goblin-town
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{R}
-auto={2}{B}{R}{T}:name(Sac for counters) target(*[goblin;orc]|mybattlefield) counter(1/1.2) and!( sacrifice(this) )!
+auto={2}{B}{R}{T}{S}:name(Two +1/+1 counters) counter(1/1,2) target(*[goblin;orc]|mybattlefield)
 text=This land enters tapped. -- {T}: Add {B} or {R}. -- {2}{B}{R}, {T}, Sacrifice this land: Put two +1/+1 counters on target Goblin or Orc you control.
 type=Land
 [/card]
@@ -140653,7 +140655,7 @@ name=Iron Hills
 auto=tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{W}
-auto={2}{R}{W}{T}:name(Sac for counters) target(dwarf|mybattlefield) counter(1/1.2) and!( sacrifice(this) )!
+auto={2}{R}{W}{T}{S}:name(Two +1/+1 counters) counter(1/1,2) target(dwarf|mybattlefield)
 text=This land enters tapped. -- {T}: Add {R} or {W}. -- {2}{R}{W}, {T}, Sacrifice this land: Put two +1/+1 counters on target Dwarf you control.
 type=Land
 [/card]
@@ -140662,7 +140664,7 @@ name=Lake-town
 auto=tap(noevent)
 auto={T}:Add{W}
 auto={T}:Add{U}
-auto={2}{W}{U}{T}:name(Sac for counters) target(human|mybattlefield) counter(1/1.2) and!( sacrifice(this) )!
+auto={2}{W}{U}{T}{S}:name(Two +1/+1 counters) counter(1/1,2) target(human|mybattlefield)
 text=This land enters tapped. -- {T}: Add {W} or {U}. -- {2}{W}{U}, {T}, Sacrifice this land: Put two +1/+1 counters on target Human you control.
 type=Land
 [/card]
@@ -140671,7 +140673,7 @@ name=Mirkwood
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{G}
-auto={2}{B}{G}{T}:name(Sac for counters) target(*[bear;spider;wolf]|mybattlefield) counter(1/1.2) and!( sacrifice(this) )!
+auto={2}{B}{G}{T}{S}:name(Two +1/+1 counters) counter(1/1,2) target(*[bear;spider;wolf]|mybattlefield)
 text=This land enters tapped. -- {T}: Add {B} or {G}. -- {2}{B}{G}, {T}, Sacrifice this land: Put two +1/+1 counters on target Bear, Spider, or Wolf you control.
 type=Land
 [/card]
@@ -140706,7 +140708,7 @@ toughness=1
 [card]
 name=Celebrate the Mountain-king
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exile-until-this-leaves approximated, recruit approximated inline
 auto=(blink)forsrc target(*[-land]|opponentbattlefield)
@@ -140756,9 +140758,10 @@ toughness=4
 name=The Mountain-king's Return
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) name(Return creature mv3) target(creature[manacost<=3]|mygraveyard) moveto(mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(+1/+1 counter) target(<upto:1>creature) counter(1/1) and!( sacrifice(this) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(+1/+1 counter) target(creature) counter(1/1)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I -- Recruit. -- II -- Return target creature card with mana value 3 or less from your graveyard to the battlefield. -- III -- Put a +1/+1 counter on up to one target creature.
@@ -140769,7 +140772,7 @@ subtype=Saga
 [card]
 name=Stone by Sunlight
 auto=choice name(Destroy power 4+) target(creature[power>=4]) destroy
-auto=choice name(Becomes artifact indestructible) target(creature) transforms((,newability[artifact],indestructible)) ueot
+auto=choice name(Becomes an indestructible artifact) target(creature) transforms((artifact,indestructible)) ueot
 text=Choose one -- Destroy target creature with power 4 or greater. -- Until end of turn, target creature becomes an artifact in addition to its other types and gains indestructible.
 mana={1}{W}
 type=Instant
@@ -140778,13 +140781,12 @@ type=Instant
 name=Bilbo, Luckwearer
 abilities=adventure
 other={4}{U} name(Adventure)
-auto=cantbeblockedby(creature[power>=0])
-auto=@combatdamaged(player) source(this):draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
-auto=alternative target(<2>*[-land]) transforms((,newability[gaincontrol]))
+auto=@combatdamaged(player) from(this):_LOOT_
 auto=alternative _ADVENTURE_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; exchange-control-of-two-shared-type approximated as unconditional two-target exchange, unverified
-missing="share a card type" restriction on the exchange-control targets not implemented
+abilities=unblockable
+missing=the adventure half (Burglar's Plot: exchange control of two nonland permanents that share a card type) does nothing
 text=Bilbo can't be blocked. Whenever Bilbo deals combat damage to a player, draw a card, then discard a card. // Exchange control of two target nonland permanents that share a card type.
 mana={1}{U}
 type=Legendary Creature
@@ -140853,11 +140855,12 @@ subtype=Saga
 [/card]
 [card]
 name=Sound the Trumpets
-target=*|mystack
-auto=target(*|mystack) transforms((,newability[pay[[{0}]] name(counter) donothing?fizzle]))
-auto=this(target|manacost<=2) draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+target=*|stack
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; hard-counter approximated (mv<=2 condition unverified), recruit inline
+#The recruit half could not be driven in the harness (it needs a spell on the opponent's side of the stack).
+auto=if cantargetcard(*[manacost<=2]|*) then ability$!name(Recruit) _RECRUIT_!$ controller
+auto=fizzle
 text=Counter target spell. If that spell's mana value was 2 or less, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.
 mana={1}{U}{U}
 type=Instant
@@ -140874,7 +140877,7 @@ type=Instant
 [/card]
 [card]
 name=Desolation Prowler
-auto=name(Pump) limit:1 pay[[life:2]] name(pay 2 life) transforms((,newability[2/2])) ueot
+auto={L:2}:name(Pay 2 life - +2/+2) 2/2 ueot limit:1
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; pay-life-activated-once-per-turn approximated
 text=Pay 2 life: This creature gets +2/+2 until end of turn. Activate only once each turn.
@@ -141009,7 +141012,7 @@ toughness=1
 [card]
 name=Gandalf, Spark Starter
 abilities=reach
-auto=name(Divide 3 damage) target(<3>anytarget) damagedivide:3
+auto=thisforeach(variable{3}) ability$!name(Deal 1 damage) damage:1 target(anytarget)!$ controller
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; divided-damage-among-up-to-3-targets approximated
 text=Reach -- When Gandalf enters, he deals 3 damage divided as you choose among one, two, or three targets.
@@ -141087,7 +141090,7 @@ toughness=*
 [/card]
 [card]
 name=Nasty Little Rabbit
-auto=@combat(begin) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:counter(1/1) this
+auto=@each my combatbegins restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) counter(1/1)
 text=Ferocious -- At the beginning of combat on your turn, if you control a creature with power 4 or greater, put a +1/+1 counter on this creature.
 mana={G}
 type=Creature
@@ -141118,7 +141121,7 @@ type=Sorcery
 [/card]
 [card]
 name=Wilderland Scrounger
-auto=_ATTACKING_restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:counter(1/1) all(creature|mybattlefield)
+auto=@combat(attacking) source(this) restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) all(creature|mybattlefield) counter(1/1)
 text=Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, put a +1/+1 counter on each creature you control.
 mana={4}{G}
 type=Creature
@@ -141245,7 +141248,7 @@ name=Thorin Oakenshield
 abilities=trample,storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
-auto=this(variable{enduringstory} >= 1) lord(*[artifact;creature]|mybattlefield) transforms((,newability[ward1]))
+auto=this(variable{enduringstory}>0) lord(*[artifact;creature]|mybattlefield) transforms((,newability[_WARD1_]))
 text=Trample -- Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.) -- As long as you have an enduring story, artifacts and creatures you control have ward {1}.
 mana={R}{W}
 type=Legendary Creature
@@ -141284,7 +141287,9 @@ subtype=Equipment
 [/card]
 [card]
 name=Dwarven Mattock
-auto=target(dwarf|mybattlefield) rehook mytgt
+auto=rehook target(dwarf|mybattlefield)
+auto=teach(creature) 2/2
+auto=teach(creature) transforms((,newability[_WARD1_]))
 auto={3}:equip
 text=When this Equipment enters, attach it to target Dwarf you control. -- Equipped creature gets +2/+2 and has ward {1}. -- Equip {3}
 mana={2}
@@ -141405,8 +141410,8 @@ type=Enchantment
 [/card]
 [card]
 name=Great Gilded Boat
-auto=crew2
-auto=_ATTACKING_draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_CREW2_
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Recruit) _RECRUIT_
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=Whenever you attack, draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token. -- Crew 2.
@@ -141676,9 +141681,9 @@ subtype=Saga
 [/card]
 [card]
 name=Stone-Giant of High Pass
-auto=@movedTo(this|myBattlefield):all(trigger[to]) token(Stone Boulder,Artifact Creature Wall,3/1,colorless,defender)
+auto=token(Stone Boulder,Artifact Creature Wall,3/1,colorless,defender)
 auto=_ATTACKING_token(Stone Boulder,Artifact Creature Wall,3/1,colorless,defender)
-auto={2}{R}:name(Sac artifact for damage) notaTarget(artifact|mybattlefield) sacrifice and!( damage:4 target(anytarget) )!
+auto={2}{R}{S(artifact|mybattlefield)}:name(Sacrifice an artifact - 4 damage) damage:4 target(anytarget)
 text=Whenever this creature enters or attacks, create a 3/1 colorless Wall artifact creature token with defender named Stone Boulder. -- {2}{R}, Sacrifice an artifact: This creature deals 4 damage to any target.
 mana={5}{R}{R}
 type=Creature
@@ -141716,7 +141721,7 @@ toughness=3
 [card]
 name=Down in the Valley
 auto=counter(0/0,1,Lore)
-auto=@each my firstmain:restriction{} turnlimited:counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
 # Chapter I is a plain ETB action, NOT an @counteradded trigger: the Saga enters
 # WITH its first lore counter, so that trigger fires before it is registered and
 # never resolves. This mirrors The Legend of Kuruk, the one Saga with a passing test.
@@ -141733,8 +141738,7 @@ subtype=Saga
 [/card]
 [card]
 name=Gigantic Big Bear
-abilities=hexproof,haste
-restriction=cantbecountered
+abilities=hexproof,haste,nofizzle
 text=This spell can't be countered. -- Hexproof, haste
 mana={5}{G}{G}
 type=Creature
@@ -141744,11 +141748,10 @@ toughness=7
 [/card]
 [card]
 name=The Notary Hobbits
-auto=this(nottoken) token(The Notary Hobbits Copy^Legendary Creature Halfling Advisor^1/1^green,newability[teach(creature) {T}:Add{C} foreach(halfling|mybattlefield)])*2
+auto=if cantargetcard(*[-token]) then thisforeach(variable{2}) clone options(nolegend)
 auto={T}:name(Add {C} for each Halfling) foreach(halfling|mybattlefield) add{C}
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; token-copy-except-not-legendary approximated as an inline creature with matching stats rather than a true copy
-missing=true "copy of this, except not legendary" not implemented; token is a distinct creature with matching stats
 text=When The Notary Hobbits enter, if they're not a token, create two tokens that are copies of them, except the tokens aren't legendary. -- {T}: Add {C} for each Halfling you control.
 mana={3}{G}{G}
 type=Legendary Creature
@@ -141798,8 +141801,8 @@ name=Bard's Company
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; conditional-flash-if-you-control-a-Human not implemented, recruit approximated inline
 auto=lord(other creature|mybattlefield) 1/1
-auto=draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
-auto=_ATTACKING_draw:1 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller
+auto=_RECRUIT_
+auto=_ATTACKING__RECRUIT_
 missing=conditional flash (only while you control a Human) not implemented
 text=You may cast this spell as though it had flash if you control a Human. -- Other creatures you control get +1/+1. -- Whenever this creature enters or attacks, recruit.
 mana={2}{W}{U}
@@ -141884,7 +141887,7 @@ grade=borderline
 #zone its TargetChooser admits - so "all Elf cards in your graveyard" needs no special
 #casing beyond elf|mygraveyard.
 auto=allactivatedabilities(elf|mygraveyard)
-auto=@movedTo(*[elf;legendary;-token]|myBattlefield) restriction{} notatarget(this):all(trigger[to]) draw:2 controller && ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject!$ controller
+auto=@movedTo(other *[elf][legendary]|myBattlefield):name(Draw two, discard one) draw:2 controller && transforms((,newability[notatarget(*|myhand) reject])) forever
 text=Thranduil has all activated abilities of all Elf cards in your graveyard. -- Whenever another legendary Elf you control enters, draw two cards, then discard a card.
 mana={2}{B}{G}{U}
 type=Legendary Creature
@@ -141894,8 +141897,8 @@ toughness=6
 [/card]
 [card]
 name=Thranduil's Company
-auto=this(type(elf|mybattlefield)~morethan~1) maxPlay(land)+1
-auto=_LANDFALL_target(creature|mybattlefield) counter(1/1.2) && transforms((,vigilance)) ueot
+auto=aslongas(other elf|mybattlefield) maxPlay(land)+1
+auto=_LANDFALL_target(creature|mybattlefield) transforms((,vigilance,newability[counter(1/1.2)])) ueot
 text=As long as you control another Elf, you may play an additional land on each of your turns. -- Landfall -- Whenever a land you control enters, put two +1/+1 counters on target creature you control. It gains vigilance until end of turn.
 mana={2}{G}{U}
 type=Creature
@@ -141906,9 +141909,9 @@ toughness=4
 [card]
 name=Tom, Bert, and William
 auto={1}{S(other creature|mybattlefield)}:name(Sacrifice for cards) draw:storedpower controller && transforms((,newability[notatarget(*|myhand) reject])) forever
-auto=_DIES_source(this) if type(this|graveyard)~morethan~0 then transforms((,newability[moveto(mybattlefield)],newability[artifact],newability[removetypes(creature)]))
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; draw-equal-to-sacrificed-power approximated via sourcepower keyword, dies-return-as-artifact approximated
+missing=the dies trigger (if they were a creature, they return to the battlefield as an artifact)
 text={1}, Sacrifice another creature: Draw cards equal to the sacrificed creature's power, then discard a card. -- When Tom, Bert, and William die, if they were a creature, return them to the battlefield. They're an artifact.
 mana={3}{B}{G}
 type=Legendary Creature
@@ -141934,10 +141937,11 @@ subtype=Equipment
 [card]
 name=My Precious
 abilities=adventure
-other={1}{B} name(Adventure)
-auto=lord(this) transforms((,newability[hexproof],newability[unblockable]))
-auto={2}:pay[[life:2]] name(pay 2 life) equip
-auto=alternative sacrifice(controller|creature) && draw:2 controller
+other={1}{B}{S(creature|mybattlefield)} name(Adventure)
+auto=teach(creature) hexproof
+auto=teach(creature) unblockable
+auto={2}{L:2}:equip
+auto=alternative draw:2 controller
 auto=alternative _ADVENTURE_
 text=Equipped creature has hexproof and can't be blocked. -- Equip -- {2}, Pay 2 life. // As an additional cost to cast this spell, sacrifice a creature. Draw two cards.
 mana={3}
@@ -141996,7 +142000,7 @@ type=Enchantment
 name=The Queen of Dale
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "opponent's first noncreature spell each turn" trigger approximated
-auto=@each opponent cast noncreature:restriction{} turnlimited:ability$!name(Recruit) draw:1 controller and!( ability$!name(Discard a card) name(Discard a card) target(*|myhand) reject?token(Human Soldier,Creature Human Soldier,1/1,white):donothing!$ controller )!$ controller
+auto=@movedTo(*[-creature]|opponentstack) turnlimited:name(Recruit) _RECRUIT_
 text=Whenever an opponent casts their first noncreature spell each turn, you recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)
 mana={1}{W}
 type=Legendary Creature
@@ -142008,8 +142012,8 @@ toughness=1
 name=Bilbo, Thief in the Night
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; cost reduction for spells cast from non-hand zones not implemented, attack-trigger cast-from-graveyard implemented
-missing="spells you cast from anywhere other than your hand cost {1} less" not implemented (no verified zone-agnostic cost-reduction primitive)
-auto=_ATTACKING_may name(Cast from graveyard) target(<upto:1>*[artifact;instant;sorcery]|mygraveyard) cast and!( this(castfromgy) transforms((,newability[_DIES_moveto(exile)])) forever )!
+auto=_ATTACKING_may name(Cast a spell from your graveyard this turn) target(*[artifact;instant;sorcery]|mygraveyard) transforms((,canplayfromgraveyard)) ueot
+missing=spells cast from outside your hand do not cost {1} less; the graveyard card is castable for the rest of the turn rather than only as the trigger resolves, and an instant or sorcery cast this way is not exiled
 text=Spells you cast from anywhere other than your hand cost {1} less to cast. -- Whenever Bilbo attacks, you may cast an artifact, instant, or sorcery spell from your graveyard. If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead.
 mana={1}{U}
 type=Legendary Creature

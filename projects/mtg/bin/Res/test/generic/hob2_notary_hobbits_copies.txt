@@ -1,0 +1,19 @@
+#The Hobbit sweep 2026-10-11. The Notary Hobbits enter and make two nonlegendary copies of themselves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Notary Hobbits
+manapool:{3}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Notary Hobbits
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Notary Hobbits,*,*
+life:20
+[PLAYER2]
+life:20
+[END]

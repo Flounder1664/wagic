@@ -7,6 +7,7 @@
 #NOTE: the asserted counts are RECORDED CURRENT BEHAVIOUR, not verified-correct
 #rules behaviour. This guards against crashes and silent card-load failure, not
 #against a card doing the wrong thing.
+#2026-10-11: Stone-Giant of High Pass now makes its Stone Boulder as it enters.
 #Covers: Soldier of the Grey Host, Sting, Bilbo's Sword, Stone-Giant of High Pass, Stony-Voiced Goblins, Swamp, The Arkenstone
 [INIT]
 firstmain
@@ -19,7 +20,7 @@ next
 [ASSERT]
 COMBATBEGIN
 [PLAYER1]
-inplay:*,*,*,*,*,*
+inplay:*,*,*,*,*,*,*
 [PLAYER2]
 life:20
 [END]
