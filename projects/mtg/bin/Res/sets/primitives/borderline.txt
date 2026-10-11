@@ -78810,7 +78810,7 @@ toughness=5
 [card]
 name=Nivix, Aerie of the Firemind
 auto={T}:add{1}
-auto={2}{U}{R}{T}:moveto(myexile) all(*[zpos=1]|mylibrary) && may activate castcard(normal) target(fresh[instant;sorcery]|myexile)
+auto={2}{U}{R}{T}:moveto(myexile) all(*[zpos=1]|mylibrary) && may activate castcard(normal) target(*[instant;sorcery][fresh]|myexile)
 text={T}: Add {1}. -- {2}{U}{R}, {T}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
 type=Land
 [/card]

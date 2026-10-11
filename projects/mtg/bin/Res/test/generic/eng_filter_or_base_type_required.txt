@@ -1,0 +1,25 @@
+#Engine 2026-10-11: in an OR group the base type is REQUIRED. Ugluk of the White Hand (617065) watches creature[orc;goblin]
+#dying - which used to match ANY creature. Grizzly Bears (a Bear) dies: Ugluk gets ONE counter
+#(any creature), not the extra two for a Goblin or Orc - 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:617065,Grizzly Bears
+hand:Shock
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:617065
+graveyard:Grizzly Bears,Shock
+pt:617065=4/4
+life:20
+[PLAYER2]
+life:20
+[END]
