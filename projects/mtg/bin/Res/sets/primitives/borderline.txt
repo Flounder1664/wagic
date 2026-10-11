@@ -9333,7 +9333,8 @@ abilities=exiledeath
 #spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
-#REVIEW-V The self-exile half is verified on Germination Practicum
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): exiles exactly the right cards and offers them to cast from exile. Casting them still costs mana - that gap is NOT fixed.
+#Earlier note: The self-exile half is verified on Germination Practicum
 #(generic/paradigm_exile.txt). The autoexile= free cast could not be driven in the harness:
 #not one of the 1005 tests exercises an autoexile= trigger despite 176 uses of it, every
 #suspend card included. That is a harness gap, not evidence the line is wrong. Verify in game.
@@ -9376,7 +9377,8 @@ abilities=exiledeath
 #spell had just acted on. John saw Echocasting Symposium make its copy and take the original.
 #castcard(copied) is used rather than suspend's castcard(normal) because Paradigm casts a
 #COPY - the card has to stay in exile and be offered again next turn.
-#REVIEW-V The self-exile half IS verified (generic/paradigm_exile.txt): the body resolves and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): the Paradigm free copy is offered in the next turn's first main phase and resolves for no mana.
+#Earlier note: The self-exile half IS verified (generic/paradigm_exile.txt): the body resolves and
 #the card lands in exile, not the graveyard. The autoexile= free cast could not be driven
 #here - measured 2026-09-05 with and without "may", on firstmain and on upkeep, and with
 #exiledeath present. NOT ONE of the 1005 tests exercises an autoexile= trigger despite 176
@@ -134259,7 +134261,8 @@ type=Sorcery
 [card]
 name=Jennika's Technique
 other={R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; 2 damage to each creature.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
@@ -134282,7 +134285,8 @@ note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note b
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
 
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; both modes can be chosen.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
@@ -134307,7 +134311,8 @@ name=Leonardo's Technique
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
 
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; returns two creatures from the graveyard.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
@@ -134330,7 +134335,8 @@ name=New Generation's Technique
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
 
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; fetches two basic lands tapped.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
@@ -134345,7 +134351,8 @@ type=Sorcery
 [card]
 name=Raphael's Technique
 other={2}{R}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; each player discards and draws seven.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
@@ -134366,7 +134373,8 @@ name=Shredder's Technique
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
 
-#REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; destroys the target creature.
+#Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
