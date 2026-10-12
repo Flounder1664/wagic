@@ -149071,6 +149071,7 @@ toughness=3
 [/card]
 [card]
 name=Predictive Preparations
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): two targets can be chosen and both get a counter.
 auto=counter(1/1) target(<upto:2>creature)
 flashback={3}{W}
 text=Put a +1/+1 counter on each of one or two target creatures. -- Flashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
@@ -149671,6 +149672,7 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Afterthought Sentry
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): the attack trigger offers a graveyard card to exile.
 auto={2}:transforms((,flying)) ueot
 auto=_ATTACKING_moveto(exile) target(<upto:1>*|graveyard)
 text={2}: This creature gains flying until end of turn. -- Whenever this creature attacks, exile up to one target card from a graveyard.
@@ -149768,6 +149770,7 @@ type=Instant
 [/card]
 [card]
 name=Divining Duelist
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): all three enters-the-battlefield modes are offered.
 abilities=flash
 auto=choice name(Tap target creature) tap target(creature)
 auto=choice name(Untap target creature) untap target(creature)
@@ -149875,12 +149878,10 @@ toughness=4
 [/card]
 [card]
 name=Stinging Vitriol
-#REVIEW-V BROKEN IN GAME (John, scenario, 2026-10-11; reproduced by driving the real game): the reveal
-#shows the whole hand, and the FIRST click on any revealed card - even the legal nonland one - goes
-#straight to "put back". Nothing is discarded. Option one (notaTarget ... transforms) never gets its
-#turn. Duress, Inquisition of Kozilek, Despise and ~60 other cards share this exact line, so the fix
-#belongs to the form, not to this card. Not fixed yet.
-target=opponent
+#NOT A CARD BUG (2026-10-11). It failed to discard in a scenario because the scenario seat was
+#being treated as an AI and the reveal window answered for John. Duress only appeared to work
+#there because its aicode= line took a different path. Fixed in TestSuiteAI::isAI(); with that
+#fix this card, unchanged, discards the chosen card in the real game window.
 auto=damage:2
 auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Stinging Vitriol deals 2 damage to target opponent. That player reveals their hand. You choose a nonland card from it. They discard that card.
@@ -150054,6 +150055,7 @@ toughness=4
 [/card]
 [card]
 name=Darklight Phoenix
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): returns at the beginning of combat after two creatures died.
 abilities=flying,haste
 autograveyard=@each my combatbegins restriction{type(creature[fresh]|graveyard)~morethan~1}:moveto(mybattlefield)
 text=Flying, haste -- At the beginning of combat on your turn, if two or more creatures died this turn, return this card from your graveyard to the battlefield.
@@ -150135,6 +150137,7 @@ toughness=1
 [/card]
 [card]
 name=Fatehold Charm
+#VERIFIED IN GAME 2026-10-11 (John, scenario queue): the pump mode and the bounce mode. The draw/empower-Jace and return-a-spell modes are NOT checked.
 auto=choice name(Return target spell to its owner's hand) target(*|stack) spellmover(hand)
 auto=choice name(Draw a card, empower Jace 2) draw:1 controller && ability$!_EMPOWERJACE2_!$ controller
 auto=choice name(Return target creature to its owner's hand) moveto(ownerhand) target(creature)

@@ -163,6 +163,12 @@ public:
 
     TestSuiteAI(TestSuiteGame *tsGame, int playerId);
     virtual int Act(float dt);
+    //Once a scenario has handed this seat to a person ([DO] human) it must stop answering
+    //"yes" here. Everything that asks isAI() then treated John as a computer: the reveal
+    //window answered for him and always chose "put back" (Stinging Vitriol never discarded),
+    //cards with an aicode= line ran that instead of their real ability, and a plain cast
+    //auto-kicked. One answer here instead of a special case at each of those places.
+    virtual int isAI() { return playMode == MODE_HUMAN ? 0 : 1; }
     virtual int displayStack();
     bool parseLine(const string& s);
     bool summoningSickness() {return (suite->summoningSickness == 1); }
