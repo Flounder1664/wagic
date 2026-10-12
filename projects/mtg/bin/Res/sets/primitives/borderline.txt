@@ -149992,7 +149992,9 @@ auto=teach(creature) 2/0
 #No menu appeared in game (John, scenario, 2026-10-12): the choices each wrapped their keyword in a
 #transforms((...)) INSIDE the outer transforms((...)), and the inner "))" closes the outer one.
 #Plain "trample ueot" needs no brackets.
-auto=teach(creature) transforms((,newability[@combat(attacking) source(this):ability$!choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
+#name(Trample or deathtouch): unnamed, the trigger announced itself by its FIRST choice, so a "Trample"
+#popup appeared before the menu (John, retest).
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Trample or deathtouch) ability$!choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
 text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={G}
 type=Artifact
