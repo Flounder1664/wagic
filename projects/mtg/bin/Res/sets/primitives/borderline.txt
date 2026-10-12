@@ -149878,6 +149878,7 @@ toughness=4
 [/card]
 [card]
 name=Stinging Vitriol
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): 2 damage, hand revealed, the chosen nonland card is discarded.
 #NOT A CARD BUG (2026-10-11). It failed to discard in a scenario because the scenario seat was
 #being treated as an AI and the reveal window answered for John. Duress only appeared to work
 #there because its aicode= line took a different path. Fixed in TestSuiteAI::isAI(); with that
@@ -150067,6 +150068,7 @@ toughness=2
 [/card]
 [card]
 name=Flickering Hound
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): the cast trigger flickers the chosen creature (its enters trigger fired again) and does not offer the Hound itself.
 auto=@movedTo(creature|mystack):target(<upto:1>other creature|mybattlefield) moveto(exile) and!( moveto(ownerbattlefield) )!
 text=Whenever you cast a creature spell, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.
 mana={3}{W}
