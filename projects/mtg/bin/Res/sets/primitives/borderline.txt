@@ -148658,6 +148658,7 @@ toughness=1
 [/card]
 [card]
 name=Murmuring Volume
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): tapping for mana offers all five colours.
 auto={T}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller
 auto={2}{T}{D(*|myhand)}:draw:1
 text={T}: Add one mana of any color. -- {2}, {T}, Discard a card: Draw a card.
@@ -149297,6 +149298,7 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Heartstring Puller
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): the Cadet token appears with its art.
 abilities=trample
 auto=token(-735501)
 text=Trample -- When this creature enters, create a 2/2 colorless Wizard Soldier creature token named Cadet.
@@ -149308,6 +149310,7 @@ toughness=1
 [/card]
 [card]
 name=Verdant Kraken
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): the Forest Tentacle token appears at upkeep with its art.
 auto=@each upkeep:token(-735509)
 text=At the beginning of each player's upkeep, you create a 3/3 green Forest Tentacle land creature token. (It has "{T}: Add {G}." It's affected by summoning sickness until your next turn.)
 mana={4}{G}{G}{G}
@@ -149406,6 +149409,7 @@ type=Instant
 [/card]
 [card]
 name=Countersculpt
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): counters a spell when cast for its normal cost. The behold-a-Jace cost is NOT checked.
 other={U}{U} name(Behold a Jace)
 otherrestriction=type(*[jace]|mybattlefield,myhand)~morethan~0
 target=*|stack
@@ -149985,7 +149989,10 @@ type=Legendary Enchantment
 name=Hunter's Axe
 auto={2}:equip
 auto=teach(creature) 2/0
-auto=teach(creature) transforms((,newability[_ATTACKING_ability$!choice name(Trample) transforms((,trample)) ueot _ choice name(Deathtouch) transforms((,deathtouch)) ueot!$ controller]))
+#No menu appeared in game (John, scenario, 2026-10-12): the choices each wrapped their keyword in a
+#transforms((...)) INSIDE the outer transforms((...)), and the inner "))" closes the outer one.
+#Plain "trample ueot" needs no brackets.
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):ability$!choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
 text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={G}
 type=Artifact
@@ -150161,6 +150168,7 @@ toughness=1
 [/card]
 [card]
 name=Hexhaven Dueling Arena
+#VERIFIED IN GAME 2026-10-12 (John, scenario queue): the {2},{T} ability can target only a creature that attacked this turn.
 auto={T}:Add{C}
 auto={2}{T}:name(Target creature that attacked this turn becomes prepared) counter(0/0,1,Prepared) target(creature[attackedthisturn]) asSorcery
 auto={4}{T}:name(Target creature becomes prepared) counter(0/0,1,Prepared) target(creature)
@@ -150222,9 +150230,12 @@ toughness=3
 [/card]
 [card]
 name=Hall of Echoes
+#options(nolegend): the Hall becomes a NON-legendary copy. Without it the Hall turned into a second
+#legendary creature and the legend rule killed it before the and!() could grant the exemption (John,
+#scenario, 2026-10-12).
 auto={T}:Add{C}
 #While it is a copy it also gives your permanents nolegend; that ends when it flips back at the end step.
-auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy],newability[lord(*|mybattlefield) nolegend])) forever )!
+auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy options(nolegend) and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy],newability[lord(*|mybattlefield) nolegend])) forever )!
 missing=the legend-rule exemption ends early if Hall of Echoes leaves the battlefield before the end of turn
 text={T}: Add {C}. -- {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
 type=Land
