@@ -150236,7 +150236,7 @@ name=Hall of Echoes
 auto={T}:Add{C}
 #While it is a copy it also gives your permanents nolegend; that ends when it flips back at the end step.
 auto={5}:name(Become a copy of your creature) target(creature|mybattlefield) copy options(nolegend) and!( all(this) transforms((,newability[phaseaction[end once] flip(Hall of Echoes) undocpy],newability[lord(*|mybattlefield) nolegend])) forever )!
-missing=the legend-rule exemption ends early if Hall of Echoes leaves the battlefield before the end of turn
+missing=the legend-rule exemption ends early if Hall of Echoes leaves the battlefield before the end of turn The copy is made NON-legendary (John accepted this 2026-10-12 as OK but not an exact match): on the real card the Hall is a legendary copy and the legend rule is simply switched off for your permanents this turn.
 text={T}: Add {C}. -- {5}: This land becomes a copy of target creature you control until end of turn. The "legend rule" doesn't apply to permanents you control this turn.
 type=Land
 [/card]
