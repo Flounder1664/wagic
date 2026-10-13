@@ -7708,27 +7708,27 @@ toughness=2
 [card]
 name=Bane, Lord of Darkness
 auto=this(variable{phalfinitlife}) indestructible
-auto=@movedTo(other creature[-token;toughness=0]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=0]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=1]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=1]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=2]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=2]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=3]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=3]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=4]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=4]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=5]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=5]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=6]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=6]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=7]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=7]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=8]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=8]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=9]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=9]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=10]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=10]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=11]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=11]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=12]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=12]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=13]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=13]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=14]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=14]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=15]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=15]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=16]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=16]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=17]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=17]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=18]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=18]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness=19]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=19]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
-auto=@movedTo(other creature[-token;toughness>=20]|graveyard) from(myBattlefield):name(Draw or play) ability$!choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=29]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=0]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=0]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=1]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=1]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=2]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=2]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=3]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=3]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=4]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=4]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=5]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=5]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=6]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=6]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=7]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=7]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=8]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=8]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=9]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=9]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=10]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=10]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=11]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=11]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=12]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=12]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=13]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=13]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=14]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=14]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=15]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=15]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=16]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=16]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=17]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=17]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=18]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=18]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness=19]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=19]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
+auto=@movedTo(other creature[-token;toughness>=20]|graveyard) from(myBattlefield):name(Draw or play) ability$!name(Choose one) choice name(Opponent draws 1 card) draw:1 opponent _ choice name(Opponent plays a creature) all(*[zpos=1]|opponenthand) transforms((,newability[name(Put creature in play) target(creature[toughness<=29]|myhand) moveto(mybattlefield)]))oneshot !$ opponent
 text=As long as your life total is less than or equal to half your starting life total, Bane, Lord of Darkness has indestructible. -- Whenever another nontoken creature you control dies, target opponent may have you draw a card. If they don't, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
 mana={1}{W}{U}{B}
 type=Legendary Creature
@@ -25479,7 +25479,7 @@ type=Artifact
 [/card]
 [card]
 name=Cursed Scroll
-auto={3}{T}:name(Choose a card name) ability$!name(Name a card from your hand) name(Name a card from your hand) target(*|myhand) transforms((,newability[if compare(cursedscrollresult)~equalto~1 then name(Deals 2 damage) name(Deals 2 damage) damage:2 target(anytarget) else ability$!choice name(Revealed card was different) name(Revealed card was different) all(mysource) donothing!$ controller])) oneshot!$ controller
+auto={3}{T}:name(Choose a card name) ability$!name(Name a card from your hand) name(Name a card from your hand) target(*|myhand) transforms((,newability[if compare(cursedscrollresult)~equalto~1 then name(Deals 2 damage) name(Deals 2 damage) damage:2 target(anytarget) else ability$!name(Choose one) choice name(Revealed card was different) name(Revealed card was different) all(mysource) donothing!$ controller])) oneshot!$ controller
 text={3}, {T}: Choose a card name, then reveal a card at random from your hand. If that card has the chosen name, Cursed Scroll deals 2 damage to any target.
 mana={1}
 type=Artifact
@@ -39785,7 +39785,7 @@ toughness=2
 [/card]
 [card]
 name=Felidar Retreat
-auto=_LANDFALL_name(Choose one) name(Choose one) ability$! choice name(Create a 2/2 Cat) token(Cat Beast) _ choice name(Put a +1/+1 counter and vigilance) all(creature|myBattlefield) counter(1/1) && all(creature|myBattlefield) vigilance ueot !$ controller
+auto=_LANDFALL_name(Choose one) name(Choose one) ability$! name(Choose one) choice name(Create a 2/2 Cat) token(Cat Beast) _ choice name(Put a +1/+1 counter and vigilance) all(creature|myBattlefield) counter(1/1) && all(creature|myBattlefield) vigilance ueot !$ controller
 text=Landfall - Whenever a land enters under your control, Choose one -- Create a 2/2 white Cat Beast creature token. -- Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
 mana={3}{W}
 type=Enchantment
@@ -57669,7 +57669,7 @@ type=Instant
 [card]
 name=Indulgent Tormentor
 abilities=flying
-auto=@each my upkeep:ability$!choice name(draw 1 opponent) draw:1 opponent _ choice sacrifice notaTarget(creature|mybattlefield) _ choice name(pay 3 life) life:-3!$ opponent
+auto=@each my upkeep:ability$!name(Choose one) choice name(draw 1 opponent) draw:1 opponent _ choice sacrifice notaTarget(creature|mybattlefield) _ choice name(pay 3 life) life:-3!$ opponent
 text=Flying -- At the beginning of your upkeep, draw a card unless target opponent sacrifices a creature or pays 3 life.
 mana={3}{B}{B}
 type=Creature
@@ -68215,7 +68215,7 @@ type=Instant
 [/card]
 [card]
 name=Longhorn Firebeast
-auto=ability$!choice name(Do nothing) donothing _ choice name(Damage and sacrifice) damage:5 controller && sacrifice notaTarget(Longhorn Firebeast|opponentbattlefield)!$ opponent
+auto=ability$!name(Choose one) choice name(Do nothing) donothing _ choice name(Damage and sacrifice) damage:5 controller && sacrifice notaTarget(Longhorn Firebeast|opponentbattlefield)!$ opponent
 text=When Longhorn Firebeast enters, any opponent may have it deal 5 damage to him or her. If a player does, sacrifice Longhorn Firebeast.
 mana={2}{R}
 type=Creature
@@ -69944,7 +69944,7 @@ toughness=3
 [/card]
 [card]
 name=Magus of the Scroll
-auto={3}{T}:name(Name a card) ability$!name(Name a card from your hand) name(Name a card from your hand) target(*|myhand) transforms((,newability[if compare(magusofscrollresult)~equalto~1 then name(Deals 2 damage) name(Deals 2 damage) damage:2 target(anytarget) else ability$!choice name(Revealed card was different) name(Revealed card was different) all(mysource) donothing!$ controller])) oneshot!$ controller
+auto={3}{T}:name(Name a card) ability$!name(Name a card from your hand) name(Name a card from your hand) target(*|myhand) transforms((,newability[if compare(magusofscrollresult)~equalto~1 then name(Deals 2 damage) name(Deals 2 damage) damage:2 target(anytarget) else ability$!name(Choose one) choice name(Revealed card was different) name(Revealed card was different) all(mysource) donothing!$ controller])) oneshot!$ controller
 text={3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to target creature or player.
 mana={R}
 type=Creature
@@ -70674,8 +70674,8 @@ toughness=1
 name=Maralen of the Mornsong
 auto=replacedraw ability$!name(skip draw) donothing!$ controller
 auto=opponentreplacedraw ability$!name(skip draw) donothing!$ opponent
-auto=@each my draw:life:-3 && ability$!choice name(search a card) notaTarget(*|mylibrary) moveto(hand) && shuffle!$ controller
-auto=@each opponent draw:life:-3 opponent && ability$!choice name(search a card) notaTarget(*|mylibrary) moveto(hand) && shuffle!$ opponent
+auto=@each my draw:life:-3 && ability$!name(Choose one) choice name(search a card) notaTarget(*|mylibrary) moveto(hand) && shuffle!$ controller
+auto=@each opponent draw:life:-3 opponent && ability$!name(Choose one) choice name(search a card) notaTarget(*|mylibrary) moveto(hand) && shuffle!$ opponent
 text=Players can't draw cards. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library.
 mana={1}{B}{B}
 type=Legendary Creature
@@ -77626,7 +77626,7 @@ toughness=3
 [card]
 name=Nessian Wilds Ravager
 abilities=flying
-auto=ability$!choice name(Tribute 6) all(mysource) counter(1/1,6) _ choice name(May fight another target creature) may transforms((,newability[target(creature) dynamicability<!powerstrike eachother!>])) ueot opponent !$ opponent
+auto=ability$!name(Choose one) choice name(Tribute 6) all(mysource) counter(1/1,6) _ choice name(May fight another target creature) may transforms((,newability[target(creature) dynamicability<!powerstrike eachother!>])) ueot opponent !$ opponent
 text=Tribute 6 (As this creature enters, an opponent of your choice may put six +1/+1 counters on it.) -- When Nessian Wilds Ravager enters, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature. (Each deals damage equal to its power to the other.)
 mana={4}{G}{G}
 type=Creature
@@ -79278,7 +79278,7 @@ toughness=6
 [/card]
 [card]
 name=Nyx Herald
-auto=@each my combatbegins:ability$!choice name(target enchanted creature) name(target enchanted creature) restriction{type(creature[enchanted]|mybattlefield)~morethan~0} target(creature[enchanted]|myBattlefield) transforms((,newability[1/1],trample)) ueot _ choice name(target enchantment creature) restriction{type(creature[enchantment]|mybattlefield)~morethan~0} target(creature[enchantment]|myBattlefield) transforms((,newability[1/1],trample)) ueot!$ controller
+auto=@each my combatbegins:ability$!name(Choose one) choice name(target enchanted creature) name(target enchanted creature) restriction{type(creature[enchanted]|mybattlefield)~morethan~0} target(creature[enchanted]|myBattlefield) transforms((,newability[1/1],trample)) ueot _ choice name(target enchantment creature) restriction{type(creature[enchantment]|mybattlefield)~morethan~0} target(creature[enchantment]|myBattlefield) transforms((,newability[1/1],trample)) ueot!$ controller
 text=At the beginning of combat on your turn, target enchanted creature or enchantment creature you control gets +1/+1 and gains trample until end of turn.
 mana={2}{G}
 type=Enchantment Creature
@@ -95385,7 +95385,7 @@ toughness=4
 [/card]
 [card]
 name=Rootless Yew
-auto=_DIES_ability$!choice name() name(power 6 or greater) target(creature[power>=6]|mylibrary) moveto(hand) _ choice name(toughness 6 or greater) target(creature[toughness>=6]|mylibrary) moveto(hand)!$ controller
+auto=_DIES_ability$!name(Choose one) choice name() name(power 6 or greater) target(creature[power>=6]|mylibrary) moveto(hand) _ choice name(toughness 6 or greater) target(creature[toughness>=6]|mylibrary) moveto(hand)!$ controller
 text=When Rootless Yew dies, search your library for a creature card with power or toughness 6 or greater, reveal it, put it into your hand, then shuffle.
 mana={3}{G}{G}
 type=Creature
@@ -98984,8 +98984,8 @@ toughness=3
 [/card]
 [card]
 name=Scheming Symmetry
-auto=ability$!choice name(search a card) notaTarget(*|mylibrary) moveto(mylibrary)!$ controller
-auto=ability$!choice name(search a card) notaTarget(*|mylibrary) moveto(mylibrary)!$ opponent
+auto=ability$!name(Choose one) choice name(search a card) notaTarget(*|mylibrary) moveto(mylibrary)!$ controller
+auto=ability$!name(Choose one) choice name(search a card) notaTarget(*|mylibrary) moveto(mylibrary)!$ opponent
 text=Choose two target players. Each of them searches their library for a card, then shuffles their library and puts that card on top of it.
 mana={B}
 type=Sorcery
@@ -119416,7 +119416,7 @@ toughness=5
 [/card]
 [card]
 name=Tireless Provisioner
-auto=_LANDFALL_ability$!choice name(Create food) _FOOD_ _ choice name(Create Treasure) _TREASURE_ !$ controller
+auto=_LANDFALL_ability$!name(Choose one) choice name(Create food) _FOOD_ _ choice name(Create Treasure) _TREASURE_ !$ controller
 text=Landfall - Whenever a land enters under your control, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life." Treasure is an artifact with " {T}, Sacrifice this artifact: Add one mana of any color.")
 mana={2}{G}
 type=Creature
@@ -125944,7 +125944,7 @@ type=Artifact
 [/card]
 [card]
 name=Vexing Devil
-auto=ability$!choice name(Do nothing) donothing _ choice name(Damage and sacrifice) damage:4 controller && sacrifice notaTarget(Vexing Devil|opponentbattlefield)!$ opponent
+auto=ability$!name(Choose one) choice name(Do nothing) donothing _ choice name(Damage and sacrifice) damage:4 controller && sacrifice notaTarget(Vexing Devil|opponentbattlefield)!$ opponent
 text=When Vexing Devil enters, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil.
 mana={R}
 type=Creature
@@ -128070,7 +128070,7 @@ subtype=Equipment
 [card]
 name=Wand of Vertebrae
 auto={T}:deplete:1
-auto={2}{T}{E}:ability$!choice name(shuffle back) target(<upto:5>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$
+auto={2}{T}{E}:ability$!name(Choose one) choice name(shuffle back) target(<upto:5>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$
 text={T}: Put the top card of your library into your graveyard. -- {2}, {T}, Exile Wand of Vertebrae: Shuffle up to five target cards from your graveyard into your library.
 mana={1}
 type=Artifact
@@ -135529,7 +135529,7 @@ name=Quiet Disrepair
 grade=borderline
 # REVIEW 2026-07-24 [P:med] FIXED: was two independent upkeep triggers; now one ability$!choice A _ choice B!$ modal.
 target=artifact,enchantment|battlefield
-auto=@each my upkeep:ability$!choice name(Destroy enchanted permanent) destroy all(mytgt) _ choice name(Gain 2 life) life:2 controller!$ controller
+auto=@each my upkeep:ability$!name(Choose one) choice name(Destroy enchanted permanent) destroy all(mytgt) _ choice name(Gain 2 life) life:2 controller!$ controller
 text=Enchant artifact or enchantment -- At the beginning of your upkeep, choose one - -- - Destroy enchanted permanent. -- - You gain 2 life.
 mana={1}{G}
 type=Enchantment
@@ -149195,7 +149195,7 @@ type=Instant
 name=Twisted Fates
 target=*[-land]
 auto=destroy
-auto=ability$!choice name(Counters on your creatures) all(creature|mybattlefield) counter(1/1) _ choice name(Counters on an opponent's creatures) all(creature|opponentbattlefield) counter(1/1)!$ controller
+auto=ability$!name(Choose one) choice name(Counters on your creatures) all(creature|mybattlefield) counter(1/1) _ choice name(Counters on an opponent's creatures) all(creature|opponentbattlefield) counter(1/1)!$ controller
 text=Destroy target nonland permanent. Put a +1/+1 counter on each creature target player controls.
 mana={2}{W}{W}{B}
 type=Sorcery
@@ -150003,9 +150003,10 @@ auto=teach(creature) 2/0
 #No menu appeared in game (John, scenario, 2026-10-12): the choices each wrapped their keyword in a
 #transforms((...)) INSIDE the outer transforms((...)), and the inner "))" closes the outer one.
 #Plain "trample ueot" needs no brackets.
-#name(Trample or deathtouch): unnamed, the trigger announced itself by its FIRST choice, so a "Trample"
-#popup appeared before the menu (John, retest).
-auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Trample or deathtouch) ability$!choice name(Trample) name(Gains trample) trample ueot _ choice name(Deathtouch) name(Gains deathtouch) deathtouch ueot!$ controller]))
+#The name goes INSIDE ability$!...!$, first. The engine takes the first name( it finds in there as the
+#announcement and deletes it, so without a leading one it stole the first choice's: a "trample" popup
+#before the menu (John, screenshot, 2026-10-13). A name( outside the ability$! is ignored.
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):ability$!name(Trample or deathtouch) choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
 text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={G}
 type=Artifact

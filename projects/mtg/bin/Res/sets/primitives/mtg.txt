@@ -24251,7 +24251,7 @@ text=Flying, first strike, trample, lifelink, haste
 [/card]
 [card]
 name=Cosmogrand Zenith
-auto=_FLURRY_ability$!choice name(Create two 1/1 Human Soldiers) token(-1530502)*2 _ choice name(Put a +1/+1 counter on each creature you control) all(creature|mybattlefield) counter(1/1)!$ controller
+auto=_FLURRY_ability$!name(Choose one) choice name(Create two 1/1 Human Soldiers) token(-1530502)*2 _ choice name(Put a +1/+1 counter on each creature you control) all(creature|mybattlefield) counter(1/1)!$ controller
 text=Whenever you cast your second spell each turn, choose one -- Create two 1/1 white Human Soldier creature tokens. -- Put a +1/+1 counter on each creature you control.
 mana={2}{W}
 type=Creature
@@ -35356,7 +35356,7 @@ toughness=1
 [card]
 name=Dwell on the Past
 target=player
-auto=ability$!choice name(shuffle back) target(<upto:4>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
+auto=ability$!name(Choose one) choice name(shuffle back) target(<upto:4>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
 text=Target player shuffles up to four target cards from their graveyard into their library.
 mana={G}
 type=Sorcery
@@ -41142,7 +41142,7 @@ toughness=2
 [card]
 name=Fanatic of Xenagos
 abilities=trample
-auto=ability$!choice name(Tribute 1) all(mysource) counter(1/1) _ choice name(+1/+1 and Haste) all(mysource) haste ueot && all(mysource) 1/1 ueot!$ opponent
+auto=ability$!name(Choose one) choice name(Tribute 1) all(mysource) counter(1/1) _ choice name(+1/+1 and Haste) all(mysource) haste ueot && all(mysource) 1/1 ueot!$ opponent
 text=Trample -- Tribute 1 (As this creature enters, an opponent of your choice may place a +1/+1 counter on it.) -- When Fanatic of Xenagos enters, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
 mana={1}{R}{G}
 type=Creature
@@ -52687,7 +52687,7 @@ toughness=3
 [/card]
 [card]
 name=Gravestorm
-auto=@each my upkeep restriction{type(*|opponentgraveyard)~morethan~0}:ability$!choice name(exile card) target(*|mygraveyard) moveTo(exile) _ choice name(opponent draw) draw:1 opponent!$ opponent
+auto=@each my upkeep restriction{type(*|opponentgraveyard)~morethan~0}:ability$!name(Choose one) choice name(exile card) target(*|mygraveyard) moveTo(exile) _ choice name(opponent draw) draw:1 opponent!$ opponent
 auto=@each my upkeep restriction{type(*|opponentgraveyard)~lessthan~1}:may draw:1 controller
 text=At the beginning of your upkeep, target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.
 mana={B}{B}{B}
@@ -61204,7 +61204,7 @@ toughness=3
 [card]
 name=Indentured Djinn
 abilities=flying
-auto=ability$!choice name(draw 1) draw:1 _ choice name(draw 2) draw:2 _ choice name(draw 3) draw:3!$ opponent
+auto=ability$!name(Choose one) choice name(draw 1) draw:1 _ choice name(draw 2) draw:2 _ choice name(draw 3) draw:3!$ opponent
 text=Flying -- When Indentured Djinn enters, each other player may draw up to three cards.
 mana={1}{U}{U}
 type=Creature
@@ -68467,7 +68467,7 @@ toughness=6
 [card]
 name=Krosan Reclamation
 target=player
-auto=ability$!choice name(shuffle back) target(<upto:2>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
+auto=ability$!name(Choose one) choice name(shuffle back) target(<upto:2>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
 flashback={1}{G}
 text=Target player shuffles up to two target cards from their graveyard into their library. -- Flashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={1}{G}
@@ -71925,7 +71925,7 @@ toughness=6
 [/card]
 [card]
 name=Loaming Shaman
-auto=target(player) ability$!choice name(shuffle back) target(<anyamount>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
+auto=target(player) ability$!name(Choose one) choice name(shuffle back) target(<anyamount>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
 text=When Loaming Shaman enters, target player shuffles any number of target cards from their graveyard into their library.
 mana={2}{G}
 type=Creature
@@ -79155,7 +79155,7 @@ type=Instant
 [/card]
 [card]
 name=Misfortune
-auto=ability$!choice name(opponent's creatures) all(creature|opponentbattlefield) counter(1/1) && life:4 opponent _ choice name(your creatures) all(creature|mybattlefield) counter(-1/-1) && damage:4 controller !$ opponent
+auto=ability$!name(Choose one) choice name(opponent's creatures) all(creature|opponentbattlefield) counter(1/1) && life:4 opponent _ choice name(your creatures) all(creature|mybattlefield) counter(-1/-1) && damage:4 controller !$ opponent
 text=An opponent chooses one - -- - You put a +1/+1 counter on each creature you control and gain 4 life. -- - You put a -1/-1 counter on each creature that player controls and Misfortune deals 4 damage to that player.
 mana={1}{B}{R}{G}
 type=Sorcery
@@ -83113,14 +83113,14 @@ type=Enchantment
 [card]
 name=Nature's Wrath
 auto=upcost[{G}] sacrifice
-auto=@movedTo(island|mybattlefield):ability$!choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ controller
-auto=@movedTo(*[blue]|mybattlefield):ability$!choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ controller
-auto=@movedTo(swamp|mybattlefield):ability$!choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ controller
-auto=@movedTo(*[black]|mybattlefield):ability$!choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ controller
-auto=@movedTo(island|opponentbattlefield):ability$!choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ opponent
-auto=@movedTo(*[blue]|opponentbattlefield):ability$!choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ opponent
-auto=@movedTo(swamp|opponentbattlefield):ability$!choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ opponent
-auto=@movedTo(*[black]|opponentbattlefield):ability$!choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ opponent
+auto=@movedTo(island|mybattlefield):ability$!name(Choose one) choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ controller
+auto=@movedTo(*[blue]|mybattlefield):ability$!name(Choose one) choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ controller
+auto=@movedTo(swamp|mybattlefield):ability$!name(Choose one) choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ controller
+auto=@movedTo(*[black]|mybattlefield):ability$!name(Choose one) choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ controller
+auto=@movedTo(island|opponentbattlefield):ability$!name(Choose one) choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ opponent
+auto=@movedTo(*[blue]|opponentbattlefield):ability$!name(Choose one) choice name(sacrifice island) notaTarget(island|mybattlefield) sacrifice _ choice name(sacrifice blue permanent) notaTarget(*[blue]|mybattlefield) sacrifice!$ opponent
+auto=@movedTo(swamp|opponentbattlefield):ability$!name(Choose one) choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ opponent
+auto=@movedTo(*[black]|opponentbattlefield):ability$!name(Choose one) choice name(sacrifice swamp) notaTarget(swamp|mybattlefield) sacrifice _ choice name(sacrifice black permanent) notaTarget(*[black]|mybattlefield) sacrifice!$ opponent
 text=At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}. -- Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent. -- Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent.
 mana={4}{G}{G}
 type=Enchantment
@@ -88006,7 +88006,7 @@ type=Instant
 [card]
 name=Ornitharch
 abilities=flying
-auto=ability$!choice name(Tribute 2) all(mysource) counter(1/1,2) _ choice name(Two 1/1 birds) _BIRDTOKEN_*2 opponent !$ opponent
+auto=ability$!name(Choose one) choice name(Tribute 2) all(mysource) counter(1/1,2) _ choice name(Two 1/1 birds) _BIRDTOKEN_*2 opponent !$ opponent
 text=Tribute 2 (As this creature enters, an opponent of your choice may place two +1/+1 counters on it.) -- When Ornitharch enters, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
 mana={3}{W}{W}
 type=Creature
@@ -88758,7 +88758,7 @@ type=Sorcery
 [/card]
 [card]
 name=Painful Quandary
-auto=@movedTo(*|opponentstack):ability$!choice name(Lose 5 life) life:-5 _ if type(*|myhand)~morethan~0 then choice name(discard) target(*|myhand) reject!$ opponent
+auto=@movedTo(*|opponentstack):ability$!name(Choose one) choice name(Lose 5 life) life:-5 _ if type(*|myhand)~morethan~0 then choice name(discard) target(*|myhand) reject!$ opponent
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.
 mana={3}{B}{B}
@@ -91610,7 +91610,7 @@ toughness=3
 name=Pillar Tombs of Aku
 auto=@movedTo(other enchantment[world]|battlefield):sacrifice all(this)
 auto=@each my upkeep restriction{type(creature|mybattlefield)~lessthan~2}:sacrifice && life:-5 controller
-auto=@each opponent upkeep restriction{type(creature|opponentbattlefield)~morethan~0}:ability$!choice name(sacrifice creature) notaTarget(creature|mybattlefield) sacrifice _ choice name(life loss and sacrifice Tombs) sacrifice all(mysource) && life:-5!$ opponent
+auto=@each opponent upkeep restriction{type(creature|opponentbattlefield)~morethan~0}:ability$!name(Choose one) choice name(sacrifice creature) notaTarget(creature|mybattlefield) sacrifice _ choice name(life loss and sacrifice Tombs) sacrifice all(mysource) && life:-5!$ opponent
 auto=@each opponent upkeep restriction{type(creature|opponentbattlefield)~lessthan~1}:sacrifice && life:-5 opponent
 text=At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they loses 5 life and you sacrifice Pillar Tombs of Aku.
 mana={2}{B}{B}
@@ -94032,7 +94032,7 @@ type=Enchantment
 name=Promise of Power
 other={6}{B}{B}{B} name(Entwine)
 auto=alternative draw:5 controller && life:-5 controller && token(Demon,Creature Demon,phandcount/phandcount,flying,black)
-auto=ifnot paid(alternative) then ability$! choice name(draw five) draw:5 controller && life:-5 controller _ choice token(Demon,Creature Demon,phandcount/phandcount,flying,black) !$ controller
+auto=ifnot paid(alternative) then ability$! name(Choose one) choice name(draw five) draw:5 controller && life:-5 controller _ choice token(Demon,Creature Demon,phandcount/phandcount,flying,black) !$ controller
 text=Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters. -- Entwine {4} (Choose both if you pay the entwine cost.)
 mana={2}{B}{B}{B}
 type=Sorcery
@@ -102505,7 +102505,7 @@ type=Artifact
 name=Rude Awakening
 other={6}{G}{G} name(Entwine)
 auto=alternative all(land|mybattlefield) untap && all(land|mybattlefield) becomes(Creature,2/2) ueot
-auto=ifnot paid(alternative) then ability$! choice name(untap lands) all(land|mybattlefield) untap _ choice name(animate lands) all(land|mybattlefield) becomes(Creature,2/2) ueot !$ controller
+auto=ifnot paid(alternative) then ability$! name(Choose one) choice name(untap lands) all(land|mybattlefield) untap _ choice name(animate lands) all(land|mybattlefield) becomes(Creature,2/2) ueot !$ controller
 text=Choose one - Untap all lands you control; or until end of turn, lands you control become 2/2 creatures that are still lands. -- Entwine {2}{G} (Choose both if you pay the entwine cost.)
 mana={4}{G}
 type=Sorcery
@@ -114500,7 +114500,7 @@ subtype=Aura
 [/card]
 [card]
 name=Snake of the Golden Grove
-auto=ability$!choice name(Tribute 3) all(mysource) counter(1/1,3) _ choice name(4 life opponent) life:4 opponent !$ opponent
+auto=ability$!name(Choose one) choice name(Tribute 3) all(mysource) counter(1/1,3) _ choice name(4 life opponent) life:4 opponent !$ opponent
 text=Tribute 3 (As this creature enters, an opponent of your choice may place three +1/+1 counters on it.) -- When Snake of the Golden Grove enters, if tribute wasn't paid, you gain 4 life.
 mana={4}{G}
 type=Creature
@@ -119936,7 +119936,7 @@ type=Sorcery
 name=Stir the Pride
 other={5}{W}{W} name(Entwine)
 auto=alternative all(creature|mybattlefield) 2/2 ueot && all(creature|mybattlefield) transforms((,newability[spiritlink])) ueot
-auto=ifnot paid(alternative) then ability$! choice name(+2/+2) all(creature|mybattlefield) 2/2 ueot _ choice name(spiritlink) all(creature|mybattlefield) spiritlink ueot !$ controller
+auto=ifnot paid(alternative) then ability$! name(Choose one) choice name(+2/+2) all(creature|mybattlefield) 2/2 ueot _ choice name(spiritlink) all(creature|mybattlefield) spiritlink ueot !$ controller
 text=Choose one - Creatures you control get +2/+2 until end of turn; or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life." -- Entwine {1}{W} (Choose both if you pay the entwine cost.)
 mana={4}{W}
 type=Instant
@@ -120934,7 +120934,7 @@ type=Sorcery
 [card]
 name=Stream of Consciousness
 target=player
-auto=ability$!choice name(shuffle back) target(<upto:4>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
+auto=ability$!name(Choose one) choice name(shuffle back) target(<upto:4>*|mygraveyard) moveTo(ownerlibrary) && shuffle!$ targetedplayer
 text=Target player shuffles up to four target cards from their graveyard into their library.
 mana={1}{U}
 type=Instant
@@ -124003,7 +124003,7 @@ type=Artifact
 [card]
 name=Tainted Specter
 abilities=flying
-auto={1}{B}{B}{T}:name(offer choice) ability$!choice name(discard) target(*|myhand) reject && damage:1 all(creature) && damage:1 all(player) _ choice name(put on library) target(*|myhand) moveto(library)!$ targetedplayer
+auto={1}{B}{B}{T}:name(offer choice) ability$!name(Choose one) choice name(discard) target(*|myhand) reject && damage:1 all(creature) && damage:1 all(player) _ choice name(put on library) target(*|myhand) moveto(library)!$ targetedplayer
 text=Flying -- {1}{B}{B}, {T}: Target player discards a card unless they puts a card from their hand on top of their library. If that player discards a card this way, Tainted Specter deals 1 damage to each creature and each player. Activate this ability only any time you could cast a sorcery.
 mana={3}{B}
 type=Creature
@@ -125163,8 +125163,8 @@ type=Artifact
 [/card]
 [card]
 name=Teferi's Realm
-auto=@each my upkeep:ability$!choice name(artifact) phaseout all(artifact) _ choice name(creature) phaseout all(creature) _ choice name(land) phaseout all(land) _ choice name(non-aura enchantment) phaseout all(enchantment[-aura]) !$ controller
-auto=@each opponent upkeep:ability$!choice name(artifact) phaseout all(artifact) _ choice name(creature) phaseout all(creature) _ choice name(land) phaseout all(land) _ choice name(non-aura enchantment) phaseout all(enchantment[-aura]) !$ opponent
+auto=@each my upkeep:ability$!name(Choose one) choice name(artifact) phaseout all(artifact) _ choice name(creature) phaseout all(creature) _ choice name(land) phaseout all(land) _ choice name(non-aura enchantment) phaseout all(enchantment[-aura]) !$ controller
+auto=@each opponent upkeep:ability$!name(Choose one) choice name(artifact) phaseout all(artifact) _ choice name(creature) phaseout all(creature) _ choice name(land) phaseout all(land) _ choice name(non-aura enchantment) phaseout all(enchantment[-aura]) !$ opponent
 auto=@movedTo(other enchantment[world]|battlefield):sacrifice all(this)
 text=At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)
 mana={1}{U}{U}
@@ -125611,7 +125611,7 @@ type=Artifact
 name=Temporal Cascade
 other={7}{U}{U} name(Entwine)
 auto=alternative moveto(ownerlibrary) and!(shuffle)! all(*|hand,graveyard) && draw:7 all(player)
-auto=ifnot paid(alternative) then ability$! choice name(shuffle all hand & graveyard) moveto(ownerlibrary) and!(shuffle)! all(*|hand,graveyard) _ choice name(draw seven all players) draw:7 all(player) !$ controller
+auto=ifnot paid(alternative) then ability$! name(Choose one) choice name(shuffle all hand & graveyard) moveto(ownerlibrary) and!(shuffle)! all(*|hand,graveyard) _ choice name(draw seven all players) draw:7 all(player) !$ controller
 text=Choose one - Each player shuffles their hand and graveyard into their library; or each player draws seven cards. -- Entwine {2} (Choose both if you pay the entwine cost.)
 mana={5}{U}{U}
 type=Sorcery
@@ -126793,8 +126793,8 @@ toughness=2
 [card]
 name=Thelon's Chant
 auto=upcost[{G}] sacrifice
-auto=@movedTo(swamp|mybattlefield):ability$!choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ controller
-auto=@movedTo(swamp|opponentbattlefield):ability$!choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ opponent
+auto=@movedTo(swamp|mybattlefield):ability$!name(Choose one) choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ controller
+auto=@movedTo(swamp|opponentbattlefield):ability$!name(Choose one) choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ opponent
 text=At the beginning of your upkeep, sacrifice Thelon's Chant unless you pay {G}. -- Whenever a player puts a Swamp onto the battlefield, Thelon's Chant deals 3 damage to that player unless they puts a -1/-1 counter on a creature they control.
 mana={1}{G}{G}
 type=Enchantment
@@ -128057,7 +128057,7 @@ type=Artifact
 [card]
 name=Thunder Brute
 abilities=trample
-auto=ability$!choice name(Tribute 3) all(mysource) counter(1/1,3) _ choice name(Haste) all(mysource) haste ueot!$ opponent
+auto=ability$!name(Choose one) choice name(Tribute 3) all(mysource) counter(1/1,3) _ choice name(Haste) all(mysource) haste ueot!$ opponent
 text=Trample -- Tribute 3 (As this creature enters, an opponent of your choice may place three +1/+1 counters on it.) -- When Thunder Brute enters, if tribute wasn't paid, it gains haste until end of turn.
 mana={4}{R}{R}
 type=Creature
@@ -129875,8 +129875,8 @@ type=Artifact
 [card]
 name=Tourach's Chant
 auto=upcost[{B}] sacrifice
-auto=@movedTo(forest|mybattlefield):ability$!choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ controller
-auto=@movedTo(forest|opponentbattlefield):ability$!choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ opponent
+auto=@movedTo(forest|mybattlefield):ability$!name(Choose one) choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ controller
+auto=@movedTo(forest|opponentbattlefield):ability$!name(Choose one) choice name(3 damage) damage:3 controller _ choice name(counter) target(creature|mybattlefield) counter(-1/-1) !$ opponent
 text=At the beginning of your upkeep, sacrifice Tourach's Chant unless you pay {B}. -- Whenever a player puts a Forest onto the battlefield, Tourach's Chant deals 3 damage to that player unless they puts a -1/-1 counter on a creature they control.
 mana={1}{B}{B}
 type=Enchantment
@@ -132200,7 +132200,7 @@ type=Sorcery
 [card]
 name=Tyrannize
 target=player
-auto=ability$!choice name(discard your hand) all(*|myhand) reject _ choice name(pay 7 life) life:-7 controller!$ targetedplayer
+auto=ability$!name(Choose one) choice name(discard your hand) all(*|myhand) reject _ choice name(pay 7 life) life:-7 controller!$ targetedplayer
 text=Target player discards their hand unless they pay 7 life.
 mana={3}{BR}{BR}
 type=Sorcery
@@ -132563,8 +132563,8 @@ toughness=1
 [/card]
 [card]
 name=Umbilicus
-auto=@each my upkeep:ability$!choice name(bounce) notaTarget(*|mybattlefield) moveTo(hand) _ choice name(pay 2 life) life:-2 controller!$ controller
-auto=@each opponent upkeep:ability$!choice name(bounce) notaTarget(*|mybattlefield) moveTo(hand) _ choice name(pay 2 life) life:-2 controller!$ opponent
+auto=@each my upkeep:ability$!name(Choose one) choice name(bounce) notaTarget(*|mybattlefield) moveTo(hand) _ choice name(pay 2 life) life:-2 controller!$ controller
+auto=@each opponent upkeep:ability$!name(Choose one) choice name(bounce) notaTarget(*|mybattlefield) moveTo(hand) _ choice name(pay 2 life) life:-2 controller!$ opponent
 text=At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
 mana={4}
 type=Artifact
@@ -133932,7 +133932,7 @@ type=Artifact
 [/card]
 [card]
 name=Urza's Guilt
-auto=draw:2 all(player) && transforms((,newability[ability$! choice name(lose 4 life) all(player) life:-4!$ controller],newability[ability$!notaTarget(<3>*|myhand) reject!$ controller],newability[ability$!notaTarget(<3>*|myhand) reject!$ opponent])) all(this)
+auto=draw:2 all(player) && transforms((,newability[ability$! name(Choose one) choice name(lose 4 life) all(player) life:-4!$ controller],newability[ability$!notaTarget(<3>*|myhand) reject!$ controller],newability[ability$!notaTarget(<3>*|myhand) reject!$ opponent])) all(this)
 text=Each player draws two cards, then discards three cards, then loses 4 life.
 mana={2}{U}{B}
 type=Sorcery
