@@ -134079,6 +134079,7 @@ toughness=1
 [/card]
 [card]
 name=Dark Leo & Shredder
+#VERIFIED IN GAME 2026-10-13, second pass (John, scenario queue): the Ninja token appears with its art.
 #VERIFIED IN GAME 2026-10-13 (John, scenario queue): Sneak in combat puts it in attacking and it makes a Ninja token on damage (the token has no art - see below).
 #The Ninja is the registered TMT token (Ninja Tmt, id -1520505), so it has art. It was an inline
 #token with no id and rendered blank (John, scenario, 2026-10-13).
@@ -150006,6 +150007,7 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Hunter's Axe
+#VERIFIED IN GAME 2026-10-13, second pass (John, scenario queue): the prompt is announced as "Trample or deathtouch".
 #VERIFIED IN GAME 2026-10-13 (John, scenario queue): attacking offers the trample-or-deathtouch menu and the chosen keyword is granted.
 auto={2}:equip
 auto=teach(creature) 2/0
