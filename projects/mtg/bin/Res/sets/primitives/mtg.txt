@@ -107160,6 +107160,7 @@ type=Enchantment
 [/card]
 [card]
 name=Secure the Wastes
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): the X prompt sets the number of Warrior tokens.
 auto=token(Warrior Pip)*X
 text=Put X 1/1 white Warrior creature tokens onto the battlefield.
 mana={X}{W}

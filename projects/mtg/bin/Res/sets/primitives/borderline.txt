@@ -38292,6 +38292,7 @@ toughness=2
 [/card]
 [card]
 name=Fact or Fiction
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): the pick from the five revealed cards stops at two; the rest go to the graveyard (still the approximation, not real piles).
 missing=The real card has an OPPONENT split the five revealed cards into two piles
 #and you take one pile; there is no way to make the AI split meaningfully. Approximated
 #as "take some of the five". Taking 3 of 5 was too generous (John, 2026-07-30) - a fair
@@ -109672,6 +109673,7 @@ type=Artifact
 [/card]
 [card]
 name=Staff of the Storyteller
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): creating a token adds a story counter and the counter pays for the draw.
 auto=choice token(Spirit Soc Flying)
 auto=@tokencreated(*|myBattlefield):name(Add story counter) counter(0/0,1,Story)
 auto={W}{T}{C(0/0,-1,Story)}:name(Draw a card) draw:1 controller
@@ -134067,6 +134069,7 @@ toughness=5
 [/card]
 [card]
 name=Dark Leo & Shredder
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): Sneak in combat puts it in attacking and it makes a Ninja token on damage (the token has no art - see below).
 #TOKEN HAS NO ART (John, scenario, 2026-10-13): token(Ninja,creature ninja,1/1,black) is an inline token,
 #which has no id and so no image. TMT registers only Ninja Turtle Spirit and Mutagen as tokens. Needs a
 #registered black 1/1 Ninja token with art; not done yet.
@@ -134396,6 +134399,7 @@ type=Sorcery
 [/card]
 [card]
 name=Splinter's Technique
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): Sneak in combat, then the library search.
 #Sneak has to be castable DURING COMBAT - you pay it by returning an unblocked
 #attacker, which only exists then. A Sorcery cannot be cast in combat at all, so
 #sneak did nothing on these six (the three Instant Techniques were unaffected).
@@ -138311,6 +138315,7 @@ type=Instant
 [/card]
 [card]
 name=Stomped by the Foot
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): kicking by sacrifice gives -5/-5.
 grade=borderline
 abilities=hasotherkicker
 other={1}{B}{S(artifact,creature|myBattlefield)} name(Kicker - sacrifice)
@@ -139659,6 +139664,7 @@ toughness=4
 [/card]
 [card]
 name=Crustacean Commando
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): the Mutagen token's sacrifice targets a creature and adds the counter.
 grade=borderline
 auto=token(Mutagen)
 text=When this creature enters, create a Mutagen token. 
@@ -149898,6 +149904,7 @@ type=Sorcery
 [/card]
 [card]
 name=Koth of the Homestead
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): a Plains entering asks for a target creature and puts a +1/+1 counter on it.
 auto=_LANDFALL_life:1 controller
 auto=@movedTo(plains|myBattlefield):counter(1/1) target(creature)
 text=Landfall -- Whenever a land you control enters, you gain 1 life. -- Whenever a Plains you control enters, put a +1/+1 counter on target creature.
@@ -149990,6 +149997,7 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Hunter's Axe
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): attacking offers the trample-or-deathtouch menu and the chosen keyword is granted.
 auto={2}:equip
 auto=teach(creature) 2/0
 #No menu appeared in game (John, scenario, 2026-10-12): the choices each wrapped their keyword in a
