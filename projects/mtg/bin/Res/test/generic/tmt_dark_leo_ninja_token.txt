@@ -1,0 +1,27 @@
+#Dark Leo & Shredder: "Whenever it deals combat damage to a player, create a 1/1 black
+#Ninja creature token." The Ninja is the registered TMT token (-1520505); a token created
+#by id that is not registered never appears, so two permanents here proves the id resolves.
+#Player 2's life drop proves the damage happened.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dark Leo & Shredder
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Dark Leo & Shredder
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Dark Leo & Shredder,*
+life:20
+[PLAYER2]
+life:19
+[END]

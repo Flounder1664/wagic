@@ -134068,14 +134068,23 @@ power=3
 toughness=5
 [/card]
 [card]
+name=Ninja Tmt
+#TMT's 1/1 black Ninja token (TTMT #5), id -1520505 (TMT block 1520000 + 500 + collector 5). Made by
+#Dark Leo & Shredder. "Ninja" alone is already a different card (UST), hence the suffix.
+color=black
+type=Creature
+subtype=Ninja
+power=1
+toughness=1
+[/card]
+[card]
 name=Dark Leo & Shredder
 #VERIFIED IN GAME 2026-10-13 (John, scenario queue): Sneak in combat puts it in attacking and it makes a Ninja token on damage (the token has no art - see below).
-#TOKEN HAS NO ART (John, scenario, 2026-10-13): token(Ninja,creature ninja,1/1,black) is an inline token,
-#which has no id and so no image. TMT registers only Ninja Turtle Spirit and Mutagen as tokens. Needs a
-#registered black 1/1 Ninja token with art; not done yet.
+#The Ninja is the registered TMT token (Ninja Tmt, id -1520505), so it has art. It was an inline
+#token with no id and rendered blank (John, scenario, 2026-10-13).
 autohand={W}{B}{N}:ninjutsu
 auto=lord(ninja[attacking]|mybattlefield) deathtouch
-auto=@combatdamaged(player) from(this):token(Ninja,creature ninja,1/1,black)
+auto=@combatdamaged(player) from(this):token(-1520505)
 missing=then if you control five or more Ninjas, that player loses half their life, rounded up
 text=Sneak {W}{B} -- Attacking Ninjas you control have deathtouch. -- Whenever Dark Leo & Shredder deal combat damage to a player, create a 1/1 black Ninja creature token. Then if you control five or more Ninjas, that player loses half their life, rounded up.
 mana={W}{B}
