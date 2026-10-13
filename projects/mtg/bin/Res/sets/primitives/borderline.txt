@@ -134067,6 +134067,9 @@ toughness=5
 [/card]
 [card]
 name=Dark Leo & Shredder
+#TOKEN HAS NO ART (John, scenario, 2026-10-13): token(Ninja,creature ninja,1/1,black) is an inline token,
+#which has no id and so no image. TMT registers only Ninja Turtle Spirit and Mutagen as tokens. Needs a
+#registered black 1/1 Ninja token with art; not done yet.
 autohand={W}{B}{N}:ninjutsu
 auto=lord(ninja[attacking]|mybattlefield) deathtouch
 auto=@combatdamaged(player) from(this):token(Ninja,creature ninja,1/1,black)
@@ -149994,7 +149997,7 @@ auto=teach(creature) 2/0
 #Plain "trample ueot" needs no brackets.
 #name(Trample or deathtouch): unnamed, the trigger announced itself by its FIRST choice, so a "Trample"
 #popup appeared before the menu (John, retest).
-auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Trample or deathtouch) ability$!choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Trample or deathtouch) ability$!choice name(Trample) name(Gains trample) trample ueot _ choice name(Deathtouch) name(Gains deathtouch) deathtouch ueot!$ controller]))
 text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={G}
 type=Artifact
