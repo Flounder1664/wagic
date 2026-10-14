@@ -1,0 +1,19 @@
+#missing= sweep 2026-10-14. Ba Sing Se with no basic land enters tapped: no mana.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ba Sing Se
+life:20
+[PLAYER2]
+life:20
+[DO]
+Ba Sing Se
+Ba Sing Se
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ba Sing Se
+life:20
+[PLAYER2]
+life:20
+[END]

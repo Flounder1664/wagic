@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-14. Strength Bobblehead: {3},{T} - one +1/+1 counter per Bobblehead (one) on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strength Bobblehead,Grizzly Bears
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Strength Bobblehead
+choice 5
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strength Bobblehead,Grizzly Bears
+pt:Grizzly Bears=3/3
+life:20
+[PLAYER2]
+life:20
+[END]

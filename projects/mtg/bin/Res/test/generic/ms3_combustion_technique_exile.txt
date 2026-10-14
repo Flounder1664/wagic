@@ -1,0 +1,22 @@
+#missing= sweep 2026-10-14. Combustion Technique (2 damage) kills Grizzly Bears, which is exiled instead of dying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Combustion Technique
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Combustion Technique
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Combustion Technique
+life:20
+[PLAYER2]
+exile:Grizzly Bears
+life:20
+[END]

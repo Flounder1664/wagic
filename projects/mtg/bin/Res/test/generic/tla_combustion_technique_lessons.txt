@@ -1,3 +1,4 @@
+#2026-10-14: a creature killed by it is now exiled instead of dying, as printed.
 #TLA batch 15. Combustion Technique deals 2 plus the Lesson cards in your graveyard: with two Lessons
 #there (Azula Always Lies, Yip Yip!) that is 4 damage, enough for a Hill Giant.
 [INIT]
@@ -19,6 +20,6 @@ FIRSTMAIN
 graveyard:Azula Always Lies,Yip Yip!,Combustion Technique
 life:20
 [PLAYER2]
-graveyard:Hill Giant
+exile:Hill Giant
 life:20
 [END]

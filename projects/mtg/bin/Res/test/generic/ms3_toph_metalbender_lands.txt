@@ -1,0 +1,20 @@
+#missing= sweep 2026-10-14. Toph, the First Metalbender makes Ornithopter a land: Beorn's Hospitality's Bear counts Forest and Ornithopter (2/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510247,Ornithopter,Forest,Beorn's Hospitality
+manapool:{5}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Beorn's Hospitality
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510247,Ornithopter,Forest,Beorn's Hospitality
+pt:Beorn's Hospitality=2/2
+life:20
+[PLAYER2]
+life:20
+[END]

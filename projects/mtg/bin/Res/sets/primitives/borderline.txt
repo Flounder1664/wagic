@@ -134580,10 +134580,10 @@ restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
-auto=draw:3 controller
+auto=draw:power:highest:creature:mybattlefield controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _EARTHBEND2_
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) moveto(exile) and!( flip(backside) forcetype(Legendary Creature) )!
-missing=ch I draws = greatest power among your creatures (approximated draw 3); ch II Earthbend X = cards in hand and land also becomes an Island (approximated Earthbend 2)
+missing=chapter II earthbends 2 rather than X (cards in hand), and the land does not also become an Island
 text=(As this Saga enters and after your draw step, add a lore counter.) -- I - Draw cards equal to the greatest power among creatures you control. -- II - Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types. -- III - Exile this Saga, then return it to the battlefield transformed under your control.
 mana={4}{G}{G}
 type=Enchantment
@@ -137906,11 +137906,9 @@ type=Enchantment
 [card]
 name=Ba Sing Se
 grade=borderline
-auto=tap(noevent)
-missing="unless you control a basic land" - a conditional enters-tapped needs a
-#restriction on tap(noevent), which is unattested, so it always enters tapped.
 auto={T}:Add{G}
 auto={2}{G}{T}:name(Earthbend 2) _EARTHBEND2_ asSorcery
+auto=if type(land[basic]|mybattlefield)~equalto~0 then tap(noevent)
 text=This land enters tapped unless you control a basic land. -- {T}: Add {G}. -- {2}{G}, {T}: Earthbend 2. Activate only as a sorcery.
 type=Land
 [/card]
@@ -137929,23 +137927,21 @@ type=Sorcery
 [card]
 name=Toph, the Blind Bandit
 grade=borderline
-missing=power should equal the number of LAND CREATURES you control; a creature[land]
-#style filter is unattested in a cda, so power is fixed at 3.
 auto=_EARTHBEND2_
+anyzone=type:creature[land]:mybattlefield/3 cdaactive
 text=When Toph enters, earthbend 2. -- Toph's power is equal to the number of land creatures you control.
 mana={2}{G}
 type=Legendary Creature
 subtype=Human Warrior
-power=3
+power=*
 toughness=3
 [/card]
 [card]
 name=Toph, the First Metalbender
 grade=borderline
 auto=@each my end:_EARTHBEND2_
-missing="Nontoken artifacts you control are lands in addition to their other types" -
-#adding a type to a whole class of permanents has no route in the DSL.
-text=Nontoken artifacts you control are lands in addition to their other types. (Not implemented.) -- At the beginning of your end step, earthbend 2.
+auto=lord(artifact[-token]|mybattlefield) transforms((Land))
+text=Nontoken artifacts you control are lands in addition to their other types. -- At the beginning of your end step, earthbend 2.
 mana={1}{R}{G}{W}
 type=Legendary Creature
 subtype=Human Warrior
@@ -138941,14 +138937,13 @@ name=Dodgy Jalopy
 abilities=trample
 grade=borderline
 auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-autograveyard={2}{G}:name(Scavenge) moveTo(exile) and!( counter(1/1,5) target(creature|mybattlefield) )! asSorcery
-missing=power should equal the greatest mana value among creatures you control (fixed at
-#5), and scavenge should add counters equal to that power.
-text=Trample -- Dodgy Jalopy's power is equal to the greatest mana value among creatures you control. (Fixed at 5.) -- Crew 3 -- Scavenge {2}{G}
+autograveyard={2}{G}:name(Scavenge) moveTo(exile) and!( counter(1/1,convertedcost:highest:creature:mybattlefield) target(creature|mybattlefield) )! asSorcery
+anyzone=convertedcost:highest:creature:mybattlefield/5 cdaactive
+text=Trample -- Dodgy Jalopy's power is equal to the greatest mana value among creatures you control. -- Crew 3 -- Scavenge {2}{G}
 mana={2}{G}
 type=Artifact
 subtype=Vehicle
-power=5
+power=*
 toughness=5
 [/card]
 [card]
@@ -139592,7 +139587,8 @@ toughness=3
 name=Valeron Wardens
 grade=borderline
 auto=@counteradded(1/1) from(*[creature]|mybattlefield):draw:1 controller
-missing=renown 2 on this creature itself.
+auto=_RENOWN_(2)
+missing="whenever a creature you control becomes renowned" fires whenever one gets a +1/+1 counter
 text=Renown 2 (Not implemented.) -- Whenever a creature you control becomes renowned, draw a card. (Approximated: whenever a creature you control gets a +1/+1 counter.)
 mana={2}{G}
 type=Creature
@@ -142275,7 +142271,7 @@ auto={T}:Add{U}
 auto={T}:Add{B}
 auto={T}:Add{R}
 auto={T}:Add{G}
-missing={3}, {T}: X +1/+1 counters on target creature, X = Bobbleheads you control. Measured 2026-08-17: the *type: multiplier does NOT combine with target() in an activated ability - both orderings leave the ability unparsed, so it does nothing and costs nothing. Charisma's token()*type: works because it has no target.
+auto={3}{T}:name(+1/+1 counters) counter(1/1,type:bobblehead:mybattlefield) target(creature) asSorcery
 text={T}: Add one mana of any color. -- {3}, {T}: Put X +1/+1 counters on target creature, where X is the number of Bobbleheads you control. Activate only as a sorcery.
 mana={3}
 type=Artifact
@@ -143157,12 +143153,11 @@ toughness=5
 [card]
 name=Mox Poison
 grade=borderline
-auto={T}:Add{W}
-auto={T}:Add{U}
-auto={T}:Add{B}
-auto={T}:Add{R}
-auto={T}:Add{G}
-missing=you get two poison counters when the mana ability is used
+auto={T}:Add{W} && alterpoison:2 controller
+auto={T}:Add{U} && alterpoison:2 controller
+auto={T}:Add{B} && alterpoison:2 controller
+auto={T}:Add{R} && alterpoison:2 controller
+auto={T}:Add{G} && alterpoison:2 controller
 text={T}: Add one mana of any color. You get two poison counters.
 mana={0}
 type=Artifact
@@ -144796,7 +144791,7 @@ toughness=2
 name=Toucan-Puffin
 grade=borderline
 abilities=flying
-missing=the ETB "target creature you control gets +2/+0 until end of turn". Measured 2026-09-04: auto=target(creature|mybattlefield) 2/0 ueot as an ETB does not apply the pump - to the target or to itself - even given a phase step to resolve. The flying is implemented.
+auto=target(creature|mybattlefield) 2/0 ueot
 text=Flying -- When this creature enters, target creature you control gets +2/+0 until end of turn.
 mana={2}{W}
 type=Creature
@@ -145998,7 +145993,7 @@ subtype=Cave
 name=Bladewheel Chariot
 backside=Spring-Loaded Sawblades
 auto=_CREW1_
-missing=the alternative crew (tap two other untapped artifacts you control); only Crew 1 is written
+auto={T(other artifact|mybattlefield)}{T(other artifact|mybattlefield)}:name(Tap two artifacts) becomes(Artifact Creature) ueot
 text=(Transforms from Spring-Loaded Sawblades.) -- Tap two other untapped artifacts you control: This Vehicle becomes an artifact creature until end of turn. -- Crew 1
 type=Artifact
 subtype=Vehicle
@@ -147629,8 +147624,9 @@ type=Sorcery
 [/card]
 [card]
 name=Deadly Precision
-auto=destroy target(creature)
-missing=the additional cost is fixed at {4}; sacrificing an artifact or creature instead is not offered
+target=creature
+auto=destroy
+other={B}{S(*[artifact;creature]|mybattlefield)} name(Sacrifice an artifact or creature instead of paying 4)
 text=As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature. -- Destroy target creature.
 mana={4}{B}
 type=Sorcery
@@ -147870,9 +147866,8 @@ toughness=2
 [card]
 name=Earth Rumble Wrestlers
 abilities=reach
-auto=aslongas(land[fresh]|mybattlefield) 1/0
-auto=aslongas(land[fresh]|mybattlefield) trample
-missing=only a land that entered this turn counts; controlling a land creature does not
+auto=this(variable{type:land[fresh]:mybattlefieldplustype:creature[land]:mybattlefieldplusend}>0) 1/0
+auto=this(variable{type:land[fresh]:mybattlefieldplustype:creature[land]:mybattlefieldplusend}>0) trample
 text=Reach -- This creature gets +1/+0 and has trample as long as you control a land creature or a land entered the battlefield under your control this turn.
 mana={3}{R/G}
 type=Creature
@@ -147949,8 +147944,8 @@ subtype=Equipment
 [card]
 name=Combustion Technique
 target=creature
+auto=exiledeath
 auto=damage:type:lesson:mygraveyardplus2plusend
-missing=a creature that would die this turn is not exiled instead
 text=Combustion Technique deals damage equal to 2 plus the number of Lesson cards in your graveyard to target creature. If that creature would die this turn, exile it instead.
 mana={1}{R}
 type=Instant
@@ -148509,7 +148504,7 @@ target=*|stack
 auto=fizzle
 auto=draw:1 controller
 auto=deplete:3 controller
-missing=untapping a land
+auto=name(Untap a land) untap target(land)
 text=Counter target spell. -- Draw a card, then mill three cards. -- Untap target land.
 mana={3}{U}{U}
 type=Instant
