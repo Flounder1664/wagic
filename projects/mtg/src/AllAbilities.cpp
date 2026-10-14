@@ -6963,6 +6963,10 @@ int AAMover::resolve()
                     {
                         MTGAbility * andAbilityClone = andAbility->clone();
                         andAbilityClone->target = newTarget;
+                        //A card that moved itself: what follows belongs to the new instance. Left on the old one, a
+                        //"forever" grant was dropped with it (warp's "cast it from exile later" never stuck).
+                        if (andAbilityClone->source == _target)
+                            andAbilityClone->source = newTarget;
                         if(andAbility->oneShot)
                         {
                             andAbilityClone->resolve();

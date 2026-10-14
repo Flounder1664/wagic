@@ -3538,6 +3538,28 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     found = s.find("phaseaction");
     if (found != string::npos)
     {
+        //The and!( )! part was lifted out above, but it belongs to the DELAYED effect: put it back so the
+        //phase action parses it when it fires (warp: "moveto(exile) and!( grant cast-from-exile )!").
+        size_t emptyAnd = s.find("and!()!");
+        if (storedAndAbility.size() && emptyAnd != string::npos && emptyAnd > found)
+        {
+            s.replace(emptyAnd, 7, "and!(" + storedAndAbility + ")!");
+            storedAndAbility.clear();
+        }
+        //Same for a transforms((...)) or ability$!...!$ body lifted out at the top: without it the delayed
+        //effect fired as an empty transforms(()) (warp's exile kept the card uncastable).
+        size_t emptyTr = s.find("transforms(())", found);
+        if (storedString.size() && emptyTr != string::npos)
+        {
+            s.insert(emptyTr + 12, storedString);
+            storedString.clear();
+        }
+        size_t emptyAb = s.find("ability$!!$", found);
+        if (storedAbilityString.size() && emptyAb != string::npos)
+        {
+            s.insert(emptyAb + 9, storedAbilityString);
+            storedAbilityString.clear();
+        }
         return parsePhaseActionAbility(s,card,spell,target,restrictions,id);
     }
 
