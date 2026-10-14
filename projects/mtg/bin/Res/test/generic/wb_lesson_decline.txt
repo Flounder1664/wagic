@@ -1,0 +1,24 @@
+#Waterbend 2026-10-14. Waterbending Lesson: don't pay - discard one of the three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Waterbending Lesson,Opt
+library:Island,Forest,Swamp,Plains
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Waterbending Lesson
+choice 1
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*,*
+graveyard:Waterbending Lesson,Opt
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

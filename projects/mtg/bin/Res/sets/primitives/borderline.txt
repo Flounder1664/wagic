@@ -134668,8 +134668,12 @@ auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefiel
 #(measured 2026-09-05 - the click lands, no action reaches the stack, with or without these
 #lines and with mana to spare), so the ETB never fires. The airbend body copies Airbending
 #Lesson, which ships _AIRBEND_; the ETB target is inline like Flametongue Kavu. Verify in game.
-auto={8}:name(Waterbend - Transform Aang) flip(backside)
-missing=airbend can only take a creature here, not a spell on the stack. Waterbend's cost is a flat {8}: waterbend is convoke-shaped (other={convoke} elsewhere in this file), but convoke has no form on an activated ability, so the creature-tapping discount is not offered.
+auto={8}:name(Waterbend {8}) flip(backside)
+auto={7}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 1) flip(backside)
+auto={6}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 2) flip(backside)
+auto={5}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 3) flip(backside)
+auto={4}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 4) flip(backside)
+missing=airbend can only take a creature here, not a spell on the stack; waterbend can tap at most four artifacts and creatures to help pay
 text=Flash -- Flying -- When Aang enters, airbend up to one other target creature or spell. -- Waterbend {8}: Transform Aang.
 mana={1}{W}{U}
 type=Legendary Creature
@@ -144924,8 +144928,11 @@ subtype=Lesson
 name=Geyser Leaper
 grade=borderline
 abilities=flying
-auto={4}:draw:1 controller && discard:1 controller
-missing=waterbend {4} lets you tap artifacts and creatures to help pay ({1} each) - that half is not modelled, so the cost is plain {4}.
+auto={4}:name(Waterbend {4}) _LOOT_
+auto={3}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {4} - tap 1) _LOOT_
+auto={2}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {4} - tap 2) _LOOT_
+auto={1}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {4} - tap 3) _LOOT_
+auto={T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {4} - tap 4) _LOOT_
 text=Flying -- Waterbend {4}: Draw a card, then discard a card. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
 mana={4}{U}
 type=Creature
@@ -148350,8 +148357,8 @@ toughness=1
 [card]
 name=Waterbending Lesson
 auto=draw:3 controller
-auto=discard:1
-missing=the discard is not optional - waterbend {2} is not supported
+auto=transforms((,newability[pay[[{2}]] name(Waterbend 2 - keep all three) donothing?reject notatarget(*|myhand)])) oneshot
+missing=the waterbend {2} can only be paid with mana, not by tapping artifacts and creatures
 text=Draw three cards. Then discard a card unless you waterbend {2}.
 mana={3}{U}
 type=Sorcery
@@ -148360,8 +148367,10 @@ subtype=Lesson
 [card]
 name=Flexible Waterbender
 abilities=vigilance
-auto={3}:transforms((,setpower=5,settoughness=2)) ueot
-missing=waterbend - artifacts and creatures cannot be tapped to help pay the cost
+auto={3}:name(Waterbend {3}) transforms((,setpower=5,settoughness=2)) ueot
+auto={2}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {3} - tap 1) transforms((,setpower=5,settoughness=2)) ueot
+auto={1}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {3} - tap 2) transforms((,setpower=5,settoughness=2)) ueot
+auto={T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {3} - tap 3) transforms((,setpower=5,settoughness=2)) ueot
 text=Vigilance -- Waterbend {3}: This creature has base power and toughness 5/2 until end of turn.
 mana={3}{U}
 type=Creature
@@ -148393,8 +148402,10 @@ toughness=3
 [card]
 name=North Pole Patrol
 auto={T}:untap target(other *|mybattlefield)
-auto={3}{T}:tap target(creature|opponentbattlefield)
-missing=waterbend - artifacts and creatures cannot be tapped to help pay the {3}
+auto={3}{T}:name(Waterbend {3}) tap target(creature|opponentbattlefield)
+auto={2}{T(*[artifact;creature]|mybattlefield)}{T}:name(Waterbend {3} - tap 1) tap target(creature|opponentbattlefield)
+auto={1}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T}:name(Waterbend {3} - tap 2) tap target(creature|opponentbattlefield)
+auto={T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T}:name(Waterbend {3} - tap 3) tap target(creature|opponentbattlefield)
 text={T}: Untap another target permanent you control. -- Waterbend {3}, {T}: Tap target creature an opponent controls.
 mana={2}{U}
 type=Creature
@@ -148405,8 +148416,12 @@ toughness=3
 [card]
 name=Katara, Bending Prodigy
 auto=@each my end restriction{type(this[tapped]|mybattlefield)~morethan~0}:counter(1/1)
-auto={6}:draw:1
-missing=waterbend - artifacts and creatures cannot be tapped to help pay the {6}; the end-step counter is untested (the harness cannot leave her tapped)
+auto={6}:name(Waterbend {6}) draw:1 controller
+auto={5}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {6} - tap 1) draw:1 controller
+auto={4}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {6} - tap 2) draw:1 controller
+auto={3}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {6} - tap 3) draw:1 controller
+auto={2}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {6} - tap 4) draw:1 controller
+missing=waterbend can tap at most four artifacts and creatures to help pay (the {6} needs at least {2} in mana); the end-step counter is untested (the harness cannot leave her tapped)
 text=At the beginning of your end step, if Katara is tapped, put a +1/+1 counter on her. -- Waterbend {6}: Draw a card.
 mana={2}{U}
 type=Legendary Creature

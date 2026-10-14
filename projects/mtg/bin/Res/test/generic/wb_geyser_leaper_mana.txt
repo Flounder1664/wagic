@@ -1,0 +1,27 @@
+#Waterbend 2026-10-14. Geyser Leaper: waterbend {4} paid all in mana (menu choice 0), then loot. (Tapping artifacts and creatures to help is menu choices 1-4; the harness cannot pick a cost target after a menu, so that path was checked on a one-ability copy.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Geyser Leaper
+hand:Opt
+library:Island,Forest
+manapool:{4}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Geyser Leaper
+choice 0
+choice 0
+Opt
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Geyser Leaper
+graveyard:Opt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]
