@@ -1,0 +1,23 @@
+#Ashling's Command is "choose two". It did only one thing in John's scenario (2026-10-14); every
+#pair of modes is now one choice. With no Elemental the copy pairs are not offered, so the menu
+#is: 0 draw+damage, 1 draw+Treasures, 2 damage+Treasures. choice 1 must give BOTH: two cards
+#drawn and two Treasures. The old card did one or the other.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ashling's Command
+library:Forest,Island,Mountain
+manapool:{3}{U}{R}
+[PLAYER2]
+[DO]
+Ashling's Command
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+inplay:*,*
+library:*
+graveyard:Ashling's Command
+[PLAYER2]
+[END]

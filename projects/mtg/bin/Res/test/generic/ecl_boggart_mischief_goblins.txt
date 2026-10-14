@@ -1,0 +1,21 @@
+#Boggart Mischief: blight 1 (a -1/-1 counter on your creature) makes two 1/1 Goblins. The Goblins
+#are now the registered ECL token (-697106); a token made by an id that is not registered never
+#appears, so two extra permanents prove the id resolves. Bears 1/1 proves the blight.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Boggart Mischief
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+Boggart Mischief
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Boggart Mischief,*,*
+pt:Grizzly Bears=1/1
+[PLAYER2]
+[END]

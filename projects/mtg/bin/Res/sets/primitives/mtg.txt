@@ -6720,14 +6720,17 @@ toughness=1
 [/card]
 [card]
 name=Ashling's Command
-auto=choice name(copy elemental) copy target(creature[elemental]|mybattlefield)
-auto=choice name(draw two) draw:2
-auto=choice name(damage creatures) all(creature|opponentbattlefield) damage:2
-auto=choice name(two treasures) _TREASURE_ && _TREASURE_
+#Choose two (2026-10-14, John: it only did one thing). Every pair of modes is one choice, as on
+#Cryptic Command. "Target player" is you for draw and Treasures, your opponent for the damage.
+auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + Draw two) name(Copy an Elemental + Draw two) copy target(creature[elemental]|mybattlefield) && draw:2 controller
+auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + 2 damage to their creatures) name(Copy an Elemental + 2 damage to their creatures) copy target(creature[elemental]|mybattlefield) && all(creature|opponentbattlefield) damage:2
+auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + Two Treasures) name(Copy an Elemental + Two Treasures) copy target(creature[elemental]|mybattlefield) && token(Treasure)*2
+auto=choice name(Draw two + 2 damage to their creatures) name(Draw two + 2 damage to their creatures) draw:2 controller && all(creature|opponentbattlefield) damage:2
+auto=choice name(Draw two + Two Treasures) name(Draw two + Two Treasures) draw:2 controller && token(Treasure)*2
+auto=choice name(2 damage to their creatures + Two Treasures) name(2 damage to their creatures + Two Treasures) all(creature|opponentbattlefield) damage:2 && token(Treasure)*2
 mana={3}{U}{R}
 type=Instant
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Choose two — -- • Create a token that's a copy of target Elemental you control. -- • Target player draws two cards. -- • Ashling's Command deals 2 damage to each creature target player controls. -- • Target player creates two Treasure tokens.
+text=Choose two - -- * Create a token that's a copy of target Elemental you control. -- * Target player draws two cards. -- * Ashling's Command deals 2 damage to each creature target player controls. -- * Target player creates two Treasure tokens.
 [/card]
 [card]
 name=Ashling, Rekindled
@@ -14074,7 +14077,9 @@ toughness=1
 [/card]
 [card]
 name=Boggart Mischief
-auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(Goblin,creature goblin,1/1,black red)*2
+#The Goblins are the registered ECL token (Goblin Ecl, -697106) so they have art; they were inline
+#tokens with no id and rendered blank (John, scenario, 2026-10-14).
+auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(-697106)*2
 auto=@movedTo(creature[goblin]|graveyard) from(mybattlefield):life:-1 opponent && life:1 controller
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
@@ -29044,7 +29049,10 @@ type=Enchantment
 [/card]
 [card]
 name=Deceit
-auto=choice name(bounce) moveto(myhand) target(*[-land]|opponentbattlefield) name(discard) discard:1 target(player|opponentbattlefield)
+#Fixed 2026-10-14 (John, scenario: both modes happened with only one {B} spent). Each mode now
+#depends on the mana that paid for it, as Firespout and Brigid's Command do with if spent(...).
+auto=if spent({U}{U}) then target(<upto:1>other *[-land]|battlefield) moveto(ownerhand)
+auto=if spent({B}{B}) then ability$!name(Reveal their hand) reveal:type:*:opponenthand revealzone(opponenthand) optionone name(choose discards) target(<1>*[-land]|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend !$ controller
 other={U/B}{U/B} name(Evoke)
 auto=alternative sacrifice
 mana={4}{U/B}{U/B}
@@ -29052,7 +29060,7 @@ type=Creature
 subtype=Elemental Incarnation
 power=5
 toughness=5
-text=When this creature enters, choose: return target nonland permanent to hand; or target opponent discards a card. Evoke {U/B}{U/B}.
+text=When this creature enters, if {U}{U} was spent to cast it, return up to one other target nonland permanent to its owner's hand. -- When this creature enters, if {B}{B} was spent to cast it, target opponent reveals their hand. You choose a nonland card from it. That player discards that card. -- Evoke {U/B}{U/B}
 [/card]
 [card]
 name=Deceiver Exarch
@@ -80994,10 +81002,14 @@ text=Exile any number of target creatures. At the beginning of the next end step
 [/card]
 [card]
 name=Mornsong Aria
-auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary) && and!(shuffle)!
+#Fixed 2026-10-14 (John, scenario: did nothing to either player). The old line only fired on YOUR
+#draw step and ended in a malformed "&& and!(shuffle)!". Now each player's draw step, for that player.
+abilities=nolifegain,nolifegainopponent
+auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary)
+auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary)!$ opponent
+missing=players cannot draw cards (the draw-step search still happens)
 mana={1}{B}{B}
 type=Legendary Enchantment
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 [/card]
 [card]
@@ -123467,14 +123479,17 @@ toughness=2
 [/card]
 [card]
 name=Sygg's Command
-auto=choice name(copy merfolk) copy target(creature[merfolk]|mybattlefield)
-auto=choice name(lifelink all) all(creature|mybattlefield) ability(lifelink) ueot
-auto=choice name(draw) draw:1
-auto=choice name(tap creature) tap target(creature|opponentbattlefield)
+#Choose two (2026-10-14, John: it only did one thing). Every pair of modes is one choice, as on
+#Cryptic Command. Lifelink goes to your creatures and the draw to you.
+auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Tap and stun a creature) name(Copy a Merfolk + Tap and stun a creature) copy target(creature[merfolk]|mybattlefield) && ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller
+auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Lifelink) name(Copy a Merfolk + Lifelink) copy target(creature[merfolk]|mybattlefield) && all(creature|mybattlefield) lifelink ueot
+auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Draw a card) name(Copy a Merfolk + Draw a card) copy target(creature[merfolk]|mybattlefield) && draw:1 controller
+auto=choice name(Tap and stun a creature + Lifelink) name(Tap and stun a creature + Lifelink) ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller && all(creature|mybattlefield) lifelink ueot
+auto=choice name(Tap and stun a creature + Draw a card) name(Tap and stun a creature + Draw a card) ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller && draw:1 controller
+auto=choice name(Lifelink + Draw a card) name(Lifelink + Draw a card) all(creature|mybattlefield) lifelink ueot && draw:1 controller
 mana={1}{W}{U}
 type=Sorcery
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Choose two — -- • Create a token that's a copy of target Merfolk you control. -- • Creatures target player controls gain lifelink until end of turn. -- • Target player draws a card. -- • Tap target creature. Put a stun counter on it.
+text=Choose two - -- * Create a token that's a copy of target Merfolk you control. -- * Creatures target player controls gain lifelink until end of turn. -- * Target player draws a card. -- * Tap target creature. Put a stun counter on it.
 [/card]
 [card]
 name=Sygg, River Cutthroat
@@ -135987,13 +136002,15 @@ toughness=4
 [/card]
 [card]
 name=Vibrance
+#Fixed 2026-10-14 (John, scenario: nothing happened). target(any) is not a filter - anytarget is - and
+#both halves now depend on the mana spent, as on the real card.
+auto=if spent({R}{R}) then damage:3 target(anytarget)
+auto=if spent({G}{G}) then moveto(hand) target(land|mylibrary) && life:2 controller
 other={RG}{RG} name(Evoke)
 auto=alternative sacrifice
-auto=damage:3 target(any)
-auto=moveto(hand) target(land[basic]|mylibrary) && life:2 controller
 mana={3}{RG}{RG}
 type=Creature
-text=When Vibrance enters the battlefield, deal 3 damage to target any target.
+text=When this creature enters, if {R}{R} was spent to cast it, this creature deals 3 damage to any target. -- When this creature enters, if {G}{G} was spent to cast it, search your library for a land card, reveal it, put it into your hand, then shuffle. You gain 2 life. -- Evoke {R/G}{R/G}
 subtype=Elemental Incarnation
 power=4
 toughness=4
@@ -142436,13 +142453,14 @@ type=Sorcery
 [/card]
 [card]
 name=Wistfulness
+#Each half depends on the mana spent (2026-10-14), as on the real card.
+auto=if spent({G}{G}) then moveto(exile) target(*[artifact;enchantment]|opponentbattlefield)
+auto=if spent({U}{U}) then draw:2 controller && discard:1 controller
 other={GU}{GU} name(Evoke)
 auto=alternative sacrifice
-auto=moveto(exile) target(*[artifact;enchantment]|opponentbattlefield)
-auto=draw:2 controller && discard:1 controller
 mana={3}{GU}{GU}
 type=Creature
-text=When Wistfulness enters the battlefield, exile target permanent an opponent controls.
+text=When this creature enters, if {G}{G} was spent to cast it, exile target artifact or enchantment an opponent controls. -- When this creature enters, if {U}{U} was spent to cast it, draw two cards, then discard a card. -- Evoke {G/U}{G/U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)
 subtype=Elemental Incarnation
 power=6
 toughness=5

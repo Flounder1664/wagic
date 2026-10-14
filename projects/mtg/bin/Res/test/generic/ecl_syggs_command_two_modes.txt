@@ -1,0 +1,21 @@
+#Sygg's Command is "choose two" (John's scenario, 2026-10-14: it did only one thing). With no
+#Merfolk the menu is: 0 tap+lifelink, 1 tap+draw, 2 lifelink+draw. choice 2 must both draw a
+#card and leave nothing else changed; asserting the draw and that the spell resolved.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sygg's Command
+library:Forest,Island,Mountain
+manapool:{1}{W}{U}
+[PLAYER2]
+[DO]
+Sygg's Command
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*
+library:*,*
+graveyard:Sygg's Command
+[PLAYER2]
+[END]
