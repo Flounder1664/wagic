@@ -1,0 +1,25 @@
+#Lost Caverns sweep 2026-10-14. Kutzil's Flanker (3/1): one of your creatures died this turn - one +1/+1 counter (4/2) (menu choice 1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Kutzil's Flanker,Shock
+manapool:{R}{2}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Grizzly Bears
+Kutzil's Flanker
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kutzil's Flanker
+pt:Kutzil's Flanker=4/2
+graveyard:Shock,Grizzly Bears
+life:20
+[PLAYER2]
+life:20
+[END]

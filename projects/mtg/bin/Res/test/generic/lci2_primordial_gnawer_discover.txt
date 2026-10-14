@@ -1,0 +1,25 @@
+#Lost Caverns sweep 2026-10-14. Primordial Gnawer dies: discover 3 (Grizzly Bears to hand).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Primordial Gnawer
+hand:Lightning Bolt
+library:Forest,Grizzly Bears,Island
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lightning Bolt
+Primordial Gnawer
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Primordial Gnawer,Lightning Bolt
+hand:Grizzly Bears
+library:*,*
+life:20
+[PLAYER2]
+life:20
+[END]

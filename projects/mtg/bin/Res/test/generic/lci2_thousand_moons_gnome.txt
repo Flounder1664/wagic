@@ -1,0 +1,24 @@
+#Lost Caverns sweep 2026-10-14. Thousand Moons Smithy: its Gnome Soldier keeps counting artifacts and creatures. Once Ornithopter dies it is 2/2 (the Smithy and itself), so a Shock kills it; the old fixed-size token stayed 3/3. (A card with a back face cannot be cast in the harness, so it is put into play.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Thousand Moons Smithy
+hand:Shock,Burst Lightning
+manapool:{R}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Shock
+Ornithopter
+Burst Lightning
+Gnome Soldier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thousand Moons Smithy
+graveyard:Ornithopter,Shock,Burst Lightning
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -137670,9 +137670,8 @@ name=Magmatic Galleon
 grade=borderline
 auto=damage:5 target(creature|opponentbattlefield)
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-missing="Whenever one or more creatures your opponents control are dealt excess noncombat
-#damage, create a Treasure" - the engine does not expose excess damage as an event.
-text=When this Vehicle enters, it deals 5 damage to target creature an opponent controls. -- Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token. (Second ability not implemented.) -- Crew 2
+auto=@noncombatdamaged(creature|opponentbattlefield) restriction{compare(excessdamage)~morethan~0}:name(Excess damage - Treasure) token(Treasure)
+text=When this Vehicle enters, it deals 5 damage to target creature an opponent controls. -- Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token. -- Crew 2
 mana={3}{R}{R}
 type=Artifact
 subtype=Vehicle
@@ -137701,8 +137700,7 @@ abilities=trample
 grade=borderline
 auto=@combatdamaged(player) from(creature|mybattlefield):draw:1 controller
 auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-missing="cast from your graveyard while you control three or more tapped Pirates and/or
-#Vehicles" - the combined subtype+tapped filter form is unattested.
+autograveyard=aslongas(*[pirate;vehicle][tapped]|mybattlefield) canplayfromgraveyard >2
 text=Trample -- Whenever a creature you control deals combat damage to a player, draw a card. -- Crew 3 -- You may cast this card from your graveyard as long as you control three or more tapped Pirates and/or Vehicles.
 mana={2}{U}{U}
 type=Legendary Artifact
@@ -138488,9 +138486,7 @@ name=Wayta, Trainer Prodigy
 abilities=haste
 grade=borderline
 auto={2}{G}{T}:name(Creatures fight) target(creature|mybattlefield) _FIGHT_
-missing=the {2} discount when both targets are yours, and the "damage-triggered abilities
-#of your permanents trigger an additional time" clause.
-missing=the fight does nothing: a fight needs its target declared at card level, which an activated ability cannot do
+missing=the {2} discount when both targets are yours, and the "damage-triggered abilities of your permanents trigger an additional time" clause
 text=Haste -- {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control. (No discount.) -- If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Not implemented.)
 mana={R}{G}{W}
 type=Legendary Creature
@@ -138587,9 +138583,8 @@ toughness=3
 name=Lethal Scheme
 abilities=convoke
 grade=borderline
-auto=destroy target(creature)
-missing="each creature that convoked this spell connives" - the engine does not record
-#which creatures were tapped for convoke.
+auto=destroy target(creature,planeswalker)
+missing="each creature that convoked this spell connives" - the engine does not record which creatures were tapped for convoke
 text=Convoke -- Destroy target creature or planeswalker. Each creature that convoked this spell connives. (Connive not implemented.)
 mana={2}{B}{B}
 type=Instant
@@ -138906,10 +138901,9 @@ toughness=3
 name=The Belligerent
 grade=borderline
 auto=@combat(attacking) source(this):_TREASURE_
+auto=@combat(attacking) source(this):name(Play from the top of your library) transforms((,showfromtoplibrary,canplayfromlibrarytop)) ueot
 auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-missing="you may play lands and cast spells from the top of your library until end of
-#turn" - there is no temporary play-from-library grant.
-text=Whenever The Belligerent attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library. (Play-from-top not implemented.) -- Crew 3
+text=Whenever The Belligerent attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library. -- Crew 3
 mana={2}{U}{R}
 type=Legendary Artifact
 subtype=Vehicle
@@ -139432,10 +139426,8 @@ toughness=2
 [card]
 name=Primordial Gnawer
 grade=borderline
-auto=@movedTo(this|graveyard) from(battlefield):draw:1 controller
-missing=discover 3 - the mechanic exiles until a nonland of mana value 3 or less and casts
-#it free; approximated as drawing a card.
-text=When this creature dies, discover 3. (Approximated as drawing a card.)
+auto=_DIES_discover:3
+text=When this creature dies, discover 3.
 mana={4}{B}
 type=Creature
 subtype=Rat
@@ -145930,10 +145922,8 @@ type=Instant
 [/card]
 [card]
 name=Scytheclaw Raptor
-#'If it's not their turn' - restriction{myturnonly} covers the opponent casting on your turn,
-#which is the half that matters in a duel.
 auto=@movedto(*|opponentstack) restriction{myturnonly}:name(Damage the caster) damage:4 opponent
-missing=you taking 4 for casting a spell on the opponent's turn is not implemented; only their casting on your turn is
+auto=@movedto(*|mystack) restriction{opponentturnonly}:name(Damage the caster) damage:4 controller
 text=Whenever a player casts a spell, if it's not their turn, this creature deals 4 damage to them.
 mana={2}{R}
 type=Creature
@@ -146061,8 +146051,7 @@ toughness=1
 name=Geological Appraiser
 #discover:3 - new engine ability (2026-09-13), cascade's shape with the threshold given and
 #a cast-or-hand choice at the end.
-auto=discover:3
-missing=the "if you cast it" condition - it discovers however it entered the battlefield
+auto=if casted(this) then discover:3
 text=When this creature enters, if you cast it, discover 3.
 mana={2}{R}{R}
 type=Creature
@@ -146090,7 +146079,7 @@ type=Sorcery
 name=Trumpeting Carnosaur
 abilities=trample
 auto=discover:5
-missing=the {2}{R}, discard this card: 3 damage ability, which is played from hand rather than the battlefield
+autohand={2}{R}{discard}:name(Discard - 3 damage) damage:3 target(creature,planeswalker)
 text=Trample -- When this creature enters, discover 5. -- {2}{R}, Discard this card: It deals 3 damage to target creature or planeswalker.
 mana={4}{R}{R}
 type=Creature
@@ -146242,9 +146231,9 @@ subtype=Treasure
 [/card]
 [card]
 name=Digsite Conservator
-auto={S}:name(Exile cards from a graveyard) target(<upto:4>*|graveyard) moveto(exile) asSorcery
+auto={S}:name(Exile up to four cards from your graveyard) target(<upto:4>*|mygraveyard) moveto(exile) asSorcery
+auto={S}:name(Exile up to four cards from the opponent's graveyard) target(<upto:4>*|opponentgraveyard) moveto(exile) asSorcery
 auto=_DIES_pay({4}) name(Pay 4 and discover 4) discover:4
-missing=the up-to-four cards are not limited to a single graveyard
 text=Sacrifice this creature: Exile up to four target cards from a single graveyard. Activate only as a sorcery. -- When this creature dies, you may pay {4}. If you do, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
 mana={2}
 type=Artifact Creature
@@ -146342,8 +146331,9 @@ auto={T}:Add{U}
 auto={T}:Add{B}
 auto={T}:Add{R}
 auto={T}:Add{G}
-auto={2}:name(Exile card from a graveyard) moveto(exile) target(*|graveyard)
-missing=casting Dinosaur creature spells from among the cards it exiled (entering with a finality counter)
+auto={2}:name(Exile a card from your graveyard) moveto(exile) and!( if cantargetcard(creature[dinosaur]|*) then transforms((,canplayfromexile)) forever )! target(*|mygraveyard)
+auto={2}:name(Exile a card from the opponent's graveyard) moveto(exile) target(*|opponentgraveyard)
+missing=a Dinosaur cast this way does not enter with a finality counter
 text={T}: Add one mana of any color. -- {2}: Exile target card from a graveyard. -- You may cast Dinosaur creature spells from among cards you own exiled with this creature. If you cast a spell this way, that creature enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
 mana={1}{G}
 type=Creature
@@ -146607,9 +146597,10 @@ toughness=5
 [card]
 name=Twists and Turns
 backside=Mycoid Maze
+auto=_SCRY1_
 auto=name(Explore) target(creature|mybattlefield) explore:1
 auto=@movedTo(land|mybattlefield) restriction{type(land|mybattlefield)~morethan~6}:name(Transform) flip(backside)
-missing=the scry 1 before each explore
+missing=only its own enter explore is preceded by a scry 1, not other explores
 text=If a creature you control would explore, instead you scry 1, then that creature explores. -- When this enchantment enters, target creature you control explores. -- When a land you control enters, if you control seven or more lands, transform this enchantment.
 mana={G}
 type=Enchantment
@@ -146702,8 +146693,9 @@ toughness=4
 name=Kutzil's Flanker
 abilities=flash
 auto=choice name(Gain 2 life and scry 2) life:2 controller && _SCRY2_
-auto=choice name(Exile opponent's graveyard) all(*|opponentgraveyard) moveto(exile)
-missing=the +1/+1 counter mode (creatures that left the battlefield under your control this turn), and exiling YOUR graveyard
+auto=choice name(+1/+1 counter for each creature of yours that died this turn) counter(1/1,palldeadcreature)
+auto=choice name(Exile the opponent's graveyard) all(*|opponentgraveyard) moveto(exile)
+auto=choice name(Exile your graveyard) all(*|mygraveyard) moveto(exile)
 text=Flash -- When this creature enters, choose one - -- * Put a +1/+1 counter on this creature for each creature that left the battlefield under your control this turn. -- * You gain 2 life and scry 2. -- * Exile target player's graveyard.
 mana={2}{W}
 type=Creature
@@ -147129,11 +147121,11 @@ toughness=3
 [card]
 name=Bringer of the Last Gift
 abilities=flying
-auto=all(other creature|mybattlefield) sacrifice
-auto=all(creature|opponentbattlefield) sacrifice
-auto=all(creature[-fresh]|mygraveyard) moveto(mybattlefield)
-auto=all(creature[-fresh]|opponentgraveyard) moveto(ownerbattlefield)
-missing=the "if you cast it" condition; "weren't put there this way" is read as "did not reach the graveyard this turn", so a creature that died earlier in the turn stays in the graveyard
+auto=if casted(this) then all(other creature|mybattlefield) sacrifice
+auto=if casted(this) then all(creature|opponentbattlefield) sacrifice
+auto=if casted(this) then all(creature[-fresh]|mygraveyard) moveto(mybattlefield)
+auto=if casted(this) then all(creature[-fresh]|opponentgraveyard) moveto(ownerbattlefield)
+missing="weren't put there this way" is read as "did not reach the graveyard this turn", so a creature that died earlier in the turn stays in the graveyard
 text=Flying -- When this creature enters, if you cast it, each player sacrifices all other creatures they control. Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield.
 mana={6}{B}{B}
 type=Creature
@@ -147209,9 +147201,8 @@ name=Thousand Moons Smithy
 backside=Barracks of the Thousand
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
-auto=token(Gnome Soldier,Artifact Creature Gnome Soldier,type:*[artifact;creature]:mybattlefield/type:*[artifact;creature]:mybattlefield,white)
+auto=token(Gnome Soldier,Artifact Creature Gnome Soldier,0/0,white) and!( transforms((,newability[foreach(*[artifact;creature]|mybattlefield) 1/1])) forever )!
 auto=@each my firstmain:may name(Tap five artifacts or creatures to transform) tap target(<5>*[artifact;creature;-tapped]|mybattlefield) && flip(backside)
-missing=the token's power and toughness are fixed when it is created instead of counting your artifacts and creatures continuously
 text=When Thousand Moons Smithy enters, create a white Gnome Soldier artifact creature token with "This token's power and toughness are each equal to the number of artifacts and/or creatures you control." -- At the beginning of your first main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
 mana={2}{W}{W}
 type=Legendary Artifact
@@ -147229,9 +147220,9 @@ name=Unstable Glyphbridge
 backside=Sandswirl Wanderglyph
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
-auto=all(creature[power>=3]|battlefield) destroy
+auto=if casted(this) then all(creature[power>=3]|battlefield) destroy
 auto={3}{W}{W}{E(other artifact|mybattlefield,mygraveyard)}:name(Craft with artifact) flip(backside) asSorcery
-missing=the "if you cast it" condition; every creature with power 2 or less survives instead of one chosen for each player
+missing=every creature with power 2 or less survives instead of one chosen for each player
 text=When this artifact enters, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way. -- Craft with artifact {3}{W}{W} ({3}{W}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 mana={3}{W}{W}
 type=Artifact

@@ -1,0 +1,23 @@
+#Lost Caverns sweep 2026-10-14. Intrepid Paleontologist exiles Frenzied Raptor from your graveyard; it can then be cast from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Intrepid Paleontologist
+graveyard:Frenzied Raptor
+manapool:{2}{2}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Intrepid Paleontologist
+choice 5
+Frenzied Raptor
+Frenzied Raptor
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Intrepid Paleontologist,Frenzied Raptor
+life:20
+[PLAYER2]
+life:20
+[END]

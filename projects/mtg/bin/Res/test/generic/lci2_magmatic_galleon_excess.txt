@@ -1,0 +1,24 @@
+#Lost Caverns sweep 2026-10-14. Magmatic Galleon: Lightning Bolt deals 3 to Grizzly Bears (excess 1) - a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Magmatic Galleon
+hand:Lightning Bolt
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Magmatic Galleon,*
+graveyard:Lightning Bolt
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

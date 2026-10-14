@@ -1,0 +1,22 @@
+#Lost Caverns sweep 2026-10-14. Trumpeting Carnosaur: {2}{R}, discard it - 3 damage to Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Trumpeting Carnosaur
+manapool:{2}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Trumpeting Carnosaur
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Trumpeting Carnosaur
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]
