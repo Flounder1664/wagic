@@ -87031,9 +87031,11 @@ type=Artifact
 [/card]
 [card]
 name=Primal Beyond
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): enters untapped with an Elemental in hand (approximation, see missing=).
 auto=if type(*[elemental]|myhand)~equalto~0 then tap(noevent)
 auto={T}:add{1}
 auto={T}:ability$!choice add{W} spendspells(elemental) spendabilities(elemental) _ choice add{G} spendspells(elemental) spendabilities(elemental) _ choice add{R} spendspells(elemental) spendabilities(elemental) _choice add{U} spendspells(elemental) spendabilities(elemental) _choice add{B} spendspells(elemental) spendabilities(elemental)!$ controller
+missing=no reveal prompt: it enters untapped automatically when you hold an Elemental (John accepted this approximation 2026-10-14)
 text=As Primal Beyond enters, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters tapped. -- {T}: Add {1}. -- {T}: Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
 type=Land
 [/card]

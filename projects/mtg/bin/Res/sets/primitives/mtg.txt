@@ -6720,14 +6720,13 @@ toughness=1
 [/card]
 [card]
 name=Ashling's Command
-#Choose two (2026-10-14, John: it only did one thing). Every pair of modes is one choice, as on
-#Cryptic Command. "Target player" is you for draw and Treasures, your opponent for the damage.
-auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + Draw two) name(Copy an Elemental + Draw two) copy target(creature[elemental]|mybattlefield) && draw:2 controller
-auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + 2 damage to their creatures) name(Copy an Elemental + 2 damage to their creatures) copy target(creature[elemental]|mybattlefield) && all(creature|opponentbattlefield) damage:2
-auto=if type(creature[elemental]|mybattlefield)~morethan~0 then choice name(Copy an Elemental + Two Treasures) name(Copy an Elemental + Two Treasures) copy target(creature[elemental]|mybattlefield) && token(Treasure)*2
-auto=choice name(Draw two + 2 damage to their creatures) name(Draw two + 2 damage to their creatures) draw:2 controller && all(creature|opponentbattlefield) damage:2
-auto=choice name(Draw two + Two Treasures) name(Draw two + Two Treasures) draw:2 controller && token(Treasure)*2
-auto=choice name(2 damage to their creatures + Two Treasures) name(2 damage to their creatures + Two Treasures) all(creature|opponentbattlefield) damage:2 && token(Treasure)*2
+#Choose two as two menus (2026-10-14): pick a mode, then a second from the other three. John found
+#one menu of all six pairs unwieldy. "Target player" is you for draw and Treasures, your opponent
+#for the damage - the card does not ask.
+auto=choice name(Copy an Elemental) copy target(creature[elemental]|mybattlefield) && ability$!name(Choose the second mode) choice name(Draw two) draw:2 controller _ choice name(2 damage to their creatures) all(creature|opponentbattlefield) damage:2 _ choice name(Two Treasures) token(Treasure)*2!$ controller
+auto=choice name(Draw two) draw:2 controller && ability$!name(Choose the second mode) choice name(Copy an Elemental) copy target(creature[elemental]|mybattlefield) _ choice name(2 damage to their creatures) all(creature|opponentbattlefield) damage:2 _ choice name(Two Treasures) token(Treasure)*2!$ controller
+auto=choice name(2 damage to their creatures) all(creature|opponentbattlefield) damage:2 && ability$!name(Choose the second mode) choice name(Copy an Elemental) copy target(creature[elemental]|mybattlefield) _ choice name(Draw two) draw:2 controller _ choice name(Two Treasures) token(Treasure)*2!$ controller
+auto=choice name(Two Treasures) token(Treasure)*2 && ability$!name(Choose the second mode) choice name(Copy an Elemental) copy target(creature[elemental]|mybattlefield) _ choice name(Draw two) draw:2 controller _ choice name(2 damage to their creatures) all(creature|opponentbattlefield) damage:2!$ controller
 mana={3}{U}{R}
 type=Instant
 text=Choose two - -- * Create a token that's a copy of target Elemental you control. -- * Target player draws two cards. -- * Ashling's Command deals 2 damage to each creature target player controls. -- * Target player creates two Treasure tokens.
@@ -14077,6 +14076,7 @@ toughness=1
 [/card]
 [card]
 name=Boggart Mischief
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): blight makes two Goblin tokens with art.
 #The Goblins are the registered ECL token (Goblin Ecl, -697106) so they have art; they were inline
 #tokens with no id and rendered blank (John, scenario, 2026-10-14).
 auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(-697106)*2
@@ -29049,6 +29049,7 @@ type=Enchantment
 [/card]
 [card]
 name=Deceit
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): each mode follows the mana spent: Islands bounce, Swamps reveal and discard.
 #Fixed 2026-10-14 (John, scenario: both modes happened with only one {B} spent). Each mode now
 #depends on the mana that paid for it, as Firespout and Brigid's Command do with if spent(...).
 auto=if spent({U}{U}) then target(<upto:1>other *[-land]|battlefield) moveto(ownerhand)
@@ -81006,7 +81007,7 @@ name=Mornsong Aria
 #Fixed 2026-10-14 (John, scenario: did nothing to either player). The old line only fired on YOUR
 #draw step and ended in a malformed "&& and!(shuffle)!". Now each player's draw step, for that player.
 abilities=nolifegain,nolifegainopponent
-auto=@each my draw:life:-3 controller && moveto(hand) target(*|mylibrary)
+auto=@each my draw:life:-3 controller && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary)!$ controller
 auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary)!$ opponent
 missing=players cannot draw cards (the draw-step search still happens)
 mana={1}{B}{B}
@@ -123482,14 +123483,12 @@ toughness=2
 [/card]
 [card]
 name=Sygg's Command
-#Choose two (2026-10-14, John: it only did one thing). Every pair of modes is one choice, as on
-#Cryptic Command. Lifelink goes to your creatures and the draw to you.
-auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Tap and stun a creature) name(Copy a Merfolk + Tap and stun a creature) copy target(creature[merfolk]|mybattlefield) && ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller
-auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Lifelink) name(Copy a Merfolk + Lifelink) copy target(creature[merfolk]|mybattlefield) && all(creature|mybattlefield) lifelink ueot
-auto=if type(creature[merfolk]|mybattlefield)~morethan~0 then choice name(Copy a Merfolk + Draw a card) name(Copy a Merfolk + Draw a card) copy target(creature[merfolk]|mybattlefield) && draw:1 controller
-auto=choice name(Tap and stun a creature + Lifelink) name(Tap and stun a creature + Lifelink) ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller && all(creature|mybattlefield) lifelink ueot
-auto=choice name(Tap and stun a creature + Draw a card) name(Tap and stun a creature + Draw a card) ability$!name(Tap and stun) target(creature) tap && counter(0/0,1,stun)!$ controller && draw:1 controller
-auto=choice name(Lifelink + Draw a card) name(Lifelink + Draw a card) all(creature|mybattlefield) lifelink ueot && draw:1 controller
+#Choose two as two menus (2026-10-14): pick a mode, then a second from the other three. Lifelink
+#goes to your creatures and the draw to you - the card does not ask for a player.
+auto=choice name(Copy a Merfolk) copy target(creature[merfolk]|mybattlefield) && ability$!name(Choose the second mode) choice name(Tap and stun a creature) target(creature) tap && counter(0/0,1,stun) _ choice name(Lifelink) all(creature|mybattlefield) lifelink ueot _ choice name(Draw a card) draw:1 controller!$ controller
+auto=choice name(Tap and stun a creature) target(creature) tap && counter(0/0,1,stun) && ability$!name(Choose the second mode) choice name(Copy a Merfolk) copy target(creature[merfolk]|mybattlefield) _ choice name(Lifelink) all(creature|mybattlefield) lifelink ueot _ choice name(Draw a card) draw:1 controller!$ controller
+auto=choice name(Lifelink) all(creature|mybattlefield) lifelink ueot && ability$!name(Choose the second mode) choice name(Copy a Merfolk) copy target(creature[merfolk]|mybattlefield) _ choice name(Tap and stun a creature) target(creature) tap && counter(0/0,1,stun) _ choice name(Draw a card) draw:1 controller!$ controller
+auto=choice name(Draw a card) draw:1 controller && ability$!name(Choose the second mode) choice name(Copy a Merfolk) copy target(creature[merfolk]|mybattlefield) _ choice name(Tap and stun a creature) target(creature) tap && counter(0/0,1,stun) _ choice name(Lifelink) all(creature|mybattlefield) lifelink ueot!$ controller
 mana={1}{W}{U}
 type=Sorcery
 text=Choose two - -- * Create a token that's a copy of target Merfolk you control. -- * Creatures target player controls gain lifelink until end of turn. -- * Target player draws a card. -- * Tap target creature. Put a stun counter on it.
@@ -136008,7 +136007,9 @@ name=Vibrance
 #Fixed 2026-10-14 (John, scenario: nothing happened). target(any) is not a filter - anytarget is - and
 #both halves now depend on the mana spent, as on the real card.
 auto=if spent({R}{R}) then damage:3 target(anytarget)
-auto=if spent({G}{G}) then moveto(hand) target(land|mylibrary) && life:2 controller
+#GG half: a targeted moveto from the library gained the life but never moved the land (John,
+#retest). The search is now the untargeted chooser that worked for Mornsong Aria's opponent.
+auto=if spent({G}{G}) then life:2 controller && ability$!name(Search your library) moveto(hand) notatarget(land|mylibrary)!$ controller
 other={RG}{RG} name(Evoke)
 auto=alternative sacrifice
 mana={3}{RG}{RG}
@@ -142458,7 +142459,8 @@ type=Sorcery
 name=Wistfulness
 #Each half depends on the mana spent (2026-10-14), as on the real card.
 auto=if spent({G}{G}) then moveto(exile) target(*[artifact;enchantment]|opponentbattlefield)
-auto=if spent({U}{U}) then draw:2 controller && discard:1 controller
+#UU half: discard:1 chose the card for John (retest); now he picks it.
+auto=if spent({U}{U}) then draw:2 controller && ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
 other={GU}{GU} name(Evoke)
 auto=alternative sacrifice
 mana={3}{GU}{GU}

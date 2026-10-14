@@ -1,7 +1,8 @@
 #Ashling's Command is "choose two". It did only one thing in John's scenario (2026-10-14); every
-#pair of modes is now one choice. With no Elemental the copy pairs are not offered, so the menu
-#is: 0 draw+damage, 1 draw+Treasures, 2 damage+Treasures. choice 1 must give BOTH: two cards
-#drawn and two Treasures. The old card did one or the other.
+#mode now opens a second menu of the other three. The first menu
+#is now two menus: first 0 copy, 1 draw two, 2 damage, 3 Treasures; then the other three, so
+#choice 1 then choice 2 is draw two + Two Treasures. Both must happen: two cards AND two
+#Treasures. The original card did one or the other.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -12,6 +13,7 @@ manapool:{3}{U}{R}
 [DO]
 Ashling's Command
 choice 1
+choice 2
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

@@ -1,6 +1,6 @@
 #Sygg's Command is "choose two" (John's scenario, 2026-10-14: it did only one thing). With no
-#Merfolk the menu is: 0 tap+lifelink, 1 tap+draw, 2 lifelink+draw. choice 2 must both draw a
-#card and leave nothing else changed; asserting the draw and that the spell resolved.
+#Merfolk: first menu 0 copy, 1 tap, 2 lifelink, 3 draw; second menu the other three. Draw a card
+#then Lifelink (choice 3, choice 1): asserting the draw and that the spell resolved.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -10,7 +10,8 @@ manapool:{1}{W}{U}
 [PLAYER2]
 [DO]
 Sygg's Command
-choice 2
+choice 3
+choice 1
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
