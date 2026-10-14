@@ -227,6 +227,8 @@ void GameObserver::nextGamePhase()
         currentPlayer->nonCombatDamage = 0;
         currentPlayer->scrySurveilThisTurn = 0;
         currentPlayer->opponent()->scrySurveilThisTurn = 0;
+        currentPlayer->sacrificedThisTurn = 0;
+        currentPlayer->opponent()->sacrificedThisTurn = 0;
         currentPlayer->drawCounter = 0;
         currentPlayer->raidcount = 0;
         currentPlayer->cycledCount = 0;
@@ -1966,6 +1968,11 @@ int GameObserver::receiveEvent(WEvent * e)
     while (eventsQueue.size())
     {
         WEvent * ev = eventsQueue.front();
+        if (WEventCardSacrifice * sac = dynamic_cast<WEventCardSacrifice *>(ev))
+        {
+            if (sac->card && sac->card->controller())
+                sac->card->controller()->sacrificedThisTurn++;
+        }
         result += mLayers->receiveEvent(ev);
         for (int i = 0; i < 2; ++i)
         {

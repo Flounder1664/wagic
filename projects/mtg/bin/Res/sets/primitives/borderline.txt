@@ -47829,7 +47829,8 @@ toughness=1
 [/card]
 [card]
 name=Goblin Blast-Runner
-auto=@sacrificed(*|mybattlefield):name(Gets 2/0 and menace) transforms((,newability[2/0],menace)) ueot
+auto=this(variable{psacrificedcount}>0) 2/0
+auto=this(variable{psacrificedcount}>0) menace
 text=Goblin Blast-Runner gets +2/+0 and has menace as long as you sacrificed a permanent this turn.
 mana={R}
 type=Creature
@@ -133305,7 +133306,7 @@ grade=borderline
 # REVIEW 2026-07-24 [P:med] 
 abilities=menace
 auto={2}{S(other creature,enchantment|mybattlefield)}:counter(1/1)
-missing=At the beginning of your end step, if you sacrificed one or more permanents this turn, this creature deals that much damage to any target (per-turn sacrifice tracking unsupported)
+auto=@each my end restriction{compare(psacrificedcount)~morethan~0}:name(Damage for each sacrifice) damage:psacrificedcount target(anytarget)
 text=Menace -- {2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on this creature. -- At the beginning of your end step, if you sacrificed one or more permanents this turn, this creature deals that much damage to any target.
 mana={1}{B}{R}
 type=Creature
@@ -139020,11 +139021,11 @@ name=Phoenix Fleet Airship
 abilities=flying
 grade=borderline
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-missing="as long as you control eight or more permanents named Phoenix Fleet Airship, -- the end-step self-copy gated on having sacrificed a permanent this turn.
-#this is an artifact creature". The " >N" count threshold on aslongas IS real - it feeds
 #AAsLongAs(mini,maxi) and ships on cards like "aslongas(*|mygraveyard) shroud >6" - but
 #MEASURED here it does not combine with becomes(): at 8 and at 9 copies the Vehicle
 #still could not be destroyed as a creature. Reverted rather than shipped on a guess.
+auto=@each my end restriction{compare(psacrificedcount)~morethan~0}:name(Copy this Vehicle) clone
+missing="as long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature"
 text=Flying -- At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle. (Not implemented.) -- As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature. -- Crew 2
 mana={2}{B}{B}
 type=Artifact
@@ -142962,9 +142963,8 @@ toughness=1
 [/card]
 [card]
 name=Count Nefaria
-grade=unsupported
 abilities=flying
-missing=costs {3} less if you have sacrificed a permanent this turn
+anyzone=this(variable{psacrificedcount}>0)while changecost(colorless:-3) forcedalive
 text=This spell costs {3} less to cast if you've sacrificed a permanent this turn. -- Flying
 mana={6}{B}
 type=Legendary Creature

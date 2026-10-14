@@ -45,6 +45,13 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         intValue = p->scrySurveilThisTurn;
         return;
     }
+    //Permanents this player sacrificed this turn. Early return: see above.
+    if (s == "psacrificedcount" || s == "osacrificedcount")
+    {
+        Player * p = (s == "psacrificedcount") ? card->controller() : card->controller()->opponent();
+        intValue = p->sacrificedThisTurn;
+        return;
+    }
     bool halfup = false;
     bool halfdown = false;
     bool thirdup = false;

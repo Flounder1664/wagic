@@ -30,6 +30,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     damageCount = 0;
     nonCombatDamage = 0;
     scrySurveilThisTurn = 0;
+    sacrificedThisTurn = 0;
     preventable = 0;
     mAvatarTex = NULL;
     type_as_damageable = DAMAGEABLE_PLAYER;

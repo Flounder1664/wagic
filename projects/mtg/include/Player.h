@@ -62,6 +62,7 @@ public:
     int monarch;
     int initiative;
     int surveilOffset;
+    int sacrificedThisTurn; //permanents this player sacrificed this turn (Count Nefaria, Sawblade Skinripper)
     int scrySurveilThisTurn; //times this player scried or surveilled this turn ("as long as you've scried or surveilled this turn")
     int devotionOffset;
     int lastShuffleTurn;

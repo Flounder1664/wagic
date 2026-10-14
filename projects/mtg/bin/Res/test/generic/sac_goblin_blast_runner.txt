@@ -1,0 +1,20 @@
+#Sacrificed-this-turn tracker 2026-10-14. Goblin Blast-Runner (1/2) is 3/2 after you sacrifice Bottle Gnomes.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Goblin Blast-Runner,Bottle Gnomes
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Goblin Blast-Runner
+pt:Goblin Blast-Runner=3/2
+graveyard:Bottle Gnomes
+life:23
+[PLAYER2]
+life:20
+[END]
