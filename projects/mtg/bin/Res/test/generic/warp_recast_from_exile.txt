@@ -1,7 +1,7 @@
-#WARP, the RECAST half - the part no test covered and that John found broken in game
-#("could not play cards exiled with warp"). Fixed by making canplayfromexile
-#intrinsic: granting it on the warp exile does not stick, because the grant lands on
-#the pre-move instance and is lost when the card changes zone.
+#WARP, the RECAST half. 2026-10-14: the warp exile now GRANTS "may cast from exile" to the exiled card
+#(moveto(exile) and!( transforms((,canplayfromexile)) forever )!) instead of every warp card having it
+#intrinsically. That grant used to be lost: the parser lifted the and!( )! and transforms bodies out of the
+#delayed phaseaction line. See warp_foreign_exile_refused for the other half.
 #
 #Red Tiger Mechan costs {3}{R} with Warp {1}{R}. The warp cast uses a preset mana
 #pool (the known-good pattern); the RECAST taps four real lands on a later turn,
