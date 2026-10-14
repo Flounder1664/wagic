@@ -137875,10 +137875,11 @@ type=Instant
 [card]
 name=Dai Li Indoctrination
 grade=borderline
-auto=choice name(Opponent discards a card) ability$!name(discard) target(<1>*[-land]|myhand) reject!$ opponent name(Earthbend 2) _EARTHBEND2_
-missing=mode one should let YOU pick the card out of the revealed hand; the engine has no
-#"reveal hand, caster chooses" form, so the opponent chooses which nonland card to discard.
-text=Choose one -- Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. (Approximation: the opponent chooses.) -- Earthbend 2.
+#Two modes were run together on one auto= line, and mode one let the OPPONENT pick. Now two
+#choices, and mode one uses the reveal-their-hand form verified on Deceit (2026-10-14).
+auto=choice name(Opponent reveals, you pick a discard) ability$!name(Reveal their hand) reveal:type:*:opponenthand revealzone(opponenthand) optionone name(choose discards) target(<1>*[-land;-instant;-sorcery]|reveal) moveto(hand) and!( reject )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend !$ controller
+auto=choice _EARTHBEND2_
+text=Choose one -- Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. -- Earthbend 2.
 mana={1}{B}
 type=Sorcery
 subtype=Lesson

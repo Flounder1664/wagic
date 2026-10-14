@@ -32190,7 +32190,9 @@ toughness=4
 [card]
 name=Doc Ock's Henchmen
 abilities=flash
-auto=@combat(attacking) source(this):draw:1 && discard:1
+#Connive is the _CONNIVES_ macro: the old draw:1 && discard:1 chose the discard for you and never
+#put the +1/+1 counter on (2026-10-14).
+auto=@combat(attacking) source(this):_CONNIVES_
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Flash -- Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 mana={2}{U}
