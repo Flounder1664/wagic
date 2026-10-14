@@ -133945,6 +133945,7 @@ toughness=1
 [/card]
 [card]
 name=Hog-Monkey
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): exhaust counters, then menace in combat.
 auto=@each my combatbegins:target(creature[counter{1/1.1}]|mybattlefield) transforms((,menace)) ueot
 auto={5} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust: two +1/+1 counters) counter(0/0,1,exhaust) && counter(1/1,2)
 text=At the beginning of combat on your turn, target creature you control with a +1/+1 counter on it gains menace until end of turn. -- Exhaust - {5}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
@@ -137766,6 +137767,7 @@ toughness=3
 [/card]
 [card]
 name=Subway Train
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): pay G, then pick a basic land.
 grade=borderline
 auto=may name(Pay G to search for a basic land) pay[[{G}]] target(land[basic]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
@@ -137874,6 +137876,7 @@ type=Instant
 [/card]
 [card]
 name=Dai Li Indoctrination
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): both modes: reveal and you pick the discard; earthbend 2.
 grade=borderline
 #Two modes were run together on one auto= line, and mode one let the OPPONENT pick. Now two
 #choices, and mode one uses the reveal-their-hand form verified on Deceit (2026-10-14).
@@ -138601,6 +138604,7 @@ type=Instant
 [/card]
 [card]
 name=Web of Life and Destiny
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): picking a creature from the top five at combat.
 abilities=convoke
 grade=borderline
 auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
@@ -138610,6 +138614,7 @@ type=Enchantment
 [/card]
 [card]
 name=Saber-Tooth Moose-Lion
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): forestcycling.
 abilities=reach
 grade=borderline
 aicode=activate target(*[forest]|mylibrary) moveto(hand)
@@ -138623,6 +138628,7 @@ toughness=7
 [/card]
 [card]
 name=Canyon Crawler
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): swampcycling.
 abilities=deathtouch
 grade=borderline
 auto=_FOOD_
@@ -138664,6 +138670,7 @@ toughness=3
 [/card]
 [card]
 name=Rabaroo Troop
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): plainscycling.
 grade=borderline
 auto=@movedTo(land|myBattlefield):all(this) transforms((,flying)) ueot
 auto=@movedTo(land|myBattlefield):life:1 controller
@@ -138678,6 +138685,7 @@ toughness=5
 [/card]
 [card]
 name=Mongoose Lizard
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): enters-trigger target prompt.
 abilities=menace
 grade=borderline
 auto=damage:1 target(anytarget)
@@ -139740,6 +139748,7 @@ toughness=3
 [/card]
 [card]
 name=Cat-Owl
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): attack trigger untaps a target.
 abilities=flying
 grade=borderline
 auto=@combat(attacking) source(this):untap target(*[artifact;creature]|mybattlefield)

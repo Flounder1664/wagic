@@ -6720,6 +6720,7 @@ toughness=1
 [/card]
 [card]
 name=Ashling's Command
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): two menus, and the copy mode makes a token copy (clone).
 #"Create a token that's a copy" is clone, not copy: on an instant, copy turns the SPELL into the copy
 #and no token appears (John, Ashling's Command retest, 2026-10-14).
 #Choose two as two menus (2026-10-14): pick a mode, then a second from the other three. John found
@@ -26928,6 +26929,7 @@ toughness=4
 [/card]
 [card]
 name=Damage Control Crew
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): both modes: Repair (mana value 4+ only) and Impound (artifact/enchantment only).
 auto=choice name(Repair) moveTo(hand) target(*[manacost>=4]|mygraveyard)
 auto=choice name(Impound) moveTo(exile) target(*[artifact;enchantment])
 mana={3}{G}
@@ -32189,6 +32191,7 @@ toughness=4
 [/card]
 [card]
 name=Doc Ock's Henchmen
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): connives on attack and gets the +1/+1 counter.
 abilities=flash
 #Connive is the _CONNIVES_ macro: the old draw:1 && discard:1 chose the discard for you and never
 #put the +1/+1 counter on (2026-10-14).
@@ -35535,6 +35538,7 @@ type=Enchantment
 [/card]
 [card]
 name=Earthbender Ascension
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): earthbend 2 on a chosen land.
 auto=_EARTHBEND2_
 auto=name(search card) reveal:plibrarycount optionone name(choose card) target(land[basic]|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myBattlefield) and!(tap(noevent))!)! afterrevealedend revealend
 auto=_LANDFALL_counter(0/0,1,Quest)
@@ -117126,6 +117130,7 @@ text=Equipped creature gets +2/+2. Equip {2}.
 [/card]
 [card]
 name=Spider-UK
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): web-slinging alternative cost.
 grade=supported
 other={2}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
