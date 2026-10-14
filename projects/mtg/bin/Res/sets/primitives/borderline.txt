@@ -35266,6 +35266,7 @@ toughness=3
 [/card]
 [card]
 name=Endurance
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): the up-to-one-target-player choice.
 abilities=flash,reach
 other={E(other *[green]|myhand)} name(Evoke)
 auto=alternative sacrifice
@@ -44001,6 +44002,7 @@ toughness=2
 [/card]
 [card]
 name=Fury
+#VERIFIED IN GAME 2026-10-14 (John, scenario queue): 4 damage as four 1-damage targets (our approximation of 'divided').
 other={E(other *[red]|myhand)} name(Evoke)
 auto=alternative sacrifice
 abilities=double strike
