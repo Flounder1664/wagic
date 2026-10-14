@@ -1,0 +1,26 @@
+#Ashling's Command, copy mode: "Create a token that's a copy of target Elemental you control."
+#It was written with copy, which on an instant turns the spell itself into the copy, so no token
+#appeared (John's retest, 2026-10-14). Now clone. First menu 0 = Copy an Elemental (target
+#Vibrance), second menu 0 = Draw two. Expect Vibrance plus a token, and two cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vibrance
+hand:Ashling's Command
+library:Forest,Island,Mountain
+manapool:{3}{U}{R}
+[PLAYER2]
+[DO]
+Ashling's Command
+choice 0
+Vibrance
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vibrance,*
+hand:*,*
+library:*
+graveyard:Ashling's Command
+[PLAYER2]
+[END]
