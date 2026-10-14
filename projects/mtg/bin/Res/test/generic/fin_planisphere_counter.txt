@@ -1,0 +1,32 @@
+#Final Fantasy job-select equipment 2026-10-14. Astrologian's Planisphere on Grizzly Bears: casting Opt puts a +1/+1 counter on it (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Astrologian's Planisphere,Grizzly Bears
+hand:Opt
+library:Island,Forest
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Hero Fin
+choice 0
+choice 0
+Astrologian's Planisphere
+Grizzly Bears
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Astrologian's Planisphere,Grizzly Bears,*
+pt:Grizzly Bears=3/3
+graveyard:Opt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

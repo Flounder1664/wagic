@@ -1,0 +1,32 @@
+#Final Fantasy job-select equipment 2026-10-14. Red Mage's Rapier on Grizzly Bears: casting Opt makes it 4/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Red Mage's Rapier,Grizzly Bears
+hand:Opt
+library:Island,Forest
+manapool:{3}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Hero Fin
+choice 0
+choice 0
+Red Mage's Rapier
+Grizzly Bears
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Red Mage's Rapier,Grizzly Bears,*
+pt:Grizzly Bears=4/2
+graveyard:Opt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]
