@@ -1,0 +1,32 @@
+#Tarkir Dragonstorm sweep 2026-10-15. Lethal Scheme convoked by Grizzly Bears: Hill Giant dies, the Bears connive (draw Island, discard Shock - a nonland, so a +1/+1 counter).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Llanowar Elves
+hand:Lethal Scheme,Shock
+library:Island
+manapool:{B}{B}{1}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Lethal Scheme
+choice 1
+Grizzly Bears
+Hill Giant
+choice 0
+Shock
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Llanowar Elves
+hand:Island
+graveyard:Lethal Scheme,Shock
+pt:Grizzly Bears=3/3
+pt:Llanowar Elves=1/1
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

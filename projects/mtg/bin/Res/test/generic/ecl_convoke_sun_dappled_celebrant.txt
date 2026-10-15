@@ -1,0 +1,22 @@
+#Tarkir Dragonstorm sweep 2026-10-15. Sun-Dappled Celebrant said abilities=convoke, which the engine ignores; with other={convoke} Grizzly Bears pays {1} of its {4}{W}{W}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Sun-Dappled Celebrant
+manapool:{3}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Sun-Dappled Celebrant
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Sun-Dappled Celebrant
+life:20
+[PLAYER2]
+life:20
+[END]

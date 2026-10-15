@@ -1,0 +1,26 @@
+#Tarkir Dragonstorm sweep 2026-10-15. Welcome the Dead: Thought Scour mills two, then it discards one - three cards reached the graveyard from library or hand, so three Zombie Druids.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thought Scour,Welcome the Dead,Plains
+library:Island,Forest,Swamp,Mountain,Wastes
+manapool:{U}{3}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Thought Scour
+p1
+Welcome the Dead
+choice 0
+Plains
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+hand:*,*,*
+graveyard:Thought Scour,Welcome the Dead,Plains,*,*
+life:18
+[PLAYER2]
+life:20
+[END]

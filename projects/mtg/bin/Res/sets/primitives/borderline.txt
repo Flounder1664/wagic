@@ -2851,7 +2851,7 @@ name=Ancient Imperiosaur
 abilities=trample
 auto=_WARD2_
 other={convoke} name(Convoke)
-auto=alternative foreach(creature[tapped;-attacking]|myBattlefield) counter(1/1,2)
+auto=alternative foreach(creature[convoked]|myBattlefield) counter(1/1,2)
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Trample, ward {2} -- Ancient Imperiosaur enters with two +1/+1 counters on it for each creature that convoked it.
 mana={5}{G}{G}
 type=Creature
@@ -64250,10 +64250,10 @@ subtype=Aura
 name=Knight-Errant of Eos
 aicode=activate target(*[zpos=1]|mylibrary) transforms((,newability[if type(*[creature&zpos<=6&manacost=0]|mylibrary)~equalto~0 then all(*[zpos<=6]|mylibrary) moveto(myreveal) and!( moveto(mylibrary) and!(shuffle)! )!],newability[if type(*[creature&zpos<=6&mancost=0]|mylibrary)~morethan~0 then target(<upto:2>*[creature&zpos<=6&mancost=0]|mylibrary) moveto(hand) and!( transforms((,newability[all(*[zpos<=6]|mylibrary) moveto(myreveal) and!( moveto(mylibrary) and!(shuffle)! )!])) oneshot )! ])) oneshot
 other={convoke} name(Convoke)
-auto=alternative if type(creature[tapped;-attacking]|myBattlefield)~equalto~1 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=1]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
-auto=alternative if type(creature[tapped;-attacking]|myBattlefield)~equalto~2 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=2]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
-auto=alternative if type(creature[tapped;-attacking]|myBattlefield)~equalto~3 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=3]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
-auto=alternative if type(creature[tapped;-attacking]|myBattlefield)~morethan~3 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=4]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
+auto=alternative if type(creature[convoked]|myBattlefield)~equalto~1 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=1]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
+auto=alternative if type(creature[convoked]|myBattlefield)~equalto~2 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=2]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
+auto=alternative if type(creature[convoked]|myBattlefield)~equalto~3 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=3]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
+auto=alternative if type(creature[convoked]|myBattlefield)~morethan~3 then name(Look top 6 cards) name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost<=4]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
 auto=ifnot paid(alternative) then name(Look top 6 cards) name(Look top 6 cards) reveal:6 optionone name(Put in hand) target(<upto:2>creature[manacost=0]|myreveal) moveto(hand) optiononeend optiontwo name(Put on bottom) target(<6>*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
 text=Convoke -- When Knight-Errant of Eos enters, look at the top six cards of your library. You may reveal up to two creature cards with mana value X or less from among them, where X is the number of creatures that convoked Knight-Errant of Eos. Put the revealed cards into your hand, then shuffle.
 mana={4}{W}
@@ -66344,7 +66344,7 @@ toughness=2
 [/card]
 [card]
 name=Legion Loyalty
-missing=grants myriad, which is not implemented; the card does nothing at all.
+#Myriad only copies attackers toward opponents other than the defending player; in a two-player game it does nothing, so the card is correct as a vanilla enchantment.
 text=Creatures you control have myriad. (Whenever a creature with myriad attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 mana={6}{W}{W}
 type=Enchantment
@@ -125341,7 +125341,7 @@ toughness=3
 [card]
 name=Venerated Loxodon
 other={convoke} name(Convoke)
-auto=alternative name(Put 1/1 counter) name(Put 1/1 counter) all(creature[tapped;-attacking]|myBattlefield) counter(1/1)
+auto=alternative name(Put 1/1 counter) name(Put 1/1 counter) all(creature[convoked]|myBattlefield) counter(1/1)
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for 1 or one mana of that creature's color.) -- When Venerated Loxodon enters, put a +1/+1 counter on each creature that convoked it.
 mana={4}{W}
 type=Creature
@@ -132641,7 +132641,7 @@ toughness=1
 name=Zephyr Singer
 abilities=flying,vigilance
 other={convoke} name(Convoke)
-auto=alternative name(Put flying counter) name(Put flying counter) all(creature[tapped;-attacking]|myBattlefield) transforms((,newability[counter(0/0.1.Flying)],newability[this(counter{0/0.1.Flying}>=1) flying])) forever
+auto=alternative name(Put flying counter) name(Put flying counter) all(creature[convoked]|myBattlefield) transforms((,newability[counter(0/0.1.Flying)],newability[this(counter{0/0.1.Flying}>=1) flying])) forever
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Flying, vigilance -- When Zephyr Singer enters, put a flying counter on each creature that convoked it.
 mana={2}{U}{U}
 type=Creature
@@ -138592,18 +138592,19 @@ toughness=3
 [/card]
 [card]
 name=Lethal Scheme
-abilities=convoke
+other={convoke} name(Convoke)
 grade=borderline
-auto=destroy target(creature,planeswalker)
-missing="each creature that convoked this spell connives" - the engine does not record which creatures were tapped for convoke
-text=Convoke -- Destroy target creature or planeswalker. Each creature that convoked this spell connives. (Connive not implemented.)
+target=creature,planeswalker
+auto=destroy
+auto=all(creature[convoked]|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot
+text=Convoke -- Destroy target creature or planeswalker. Each creature that convoked this spell connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
 mana={2}{B}{B}
 type=Instant
 [/card]
 [card]
 name=Web of Life and Destiny
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): picking a creature from the top five at combat.
-abilities=convoke
+other={convoke} name(Convoke)
 grade=borderline
 auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
 text=Convoke -- At the beginning of combat on your turn, look at the top five cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
@@ -138761,11 +138762,10 @@ type=Sorcery
 name=Welcome the Dead
 grade=borderline
 flashback={5}{B}
-auto=draw:2 controller && name(Discard a card) target(<1>*|myhand) reject && life:-2 controller
-auto=create(Zombie Druid:creature zombie druid:2/2:black:tapped)*2
-missing=X should be the number of cards put into your graveyard from hand or library this
-#turn; there is no such counter, so it makes two tokens.
-text=Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn. (Fixed at two.) -- Flashback {5}{B}
+auto=draw:2 controller
+auto=name(Discard a card) reject notaTarget(<1>*|myhand) and!( create(Zombie Druid:creature zombie druid:2/2:black:tapped)*phlgycount )!
+auto=life:-2 controller
+text=Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn. -- Flashback {5}{B}
 mana={3}{B}
 type=Sorcery
 [/card]

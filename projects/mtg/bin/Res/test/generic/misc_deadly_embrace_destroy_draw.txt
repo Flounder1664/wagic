@@ -1,0 +1,24 @@
+#Tarkir Dragonstorm sweep 2026-10-15. Deadly Embrace's target sat inside an && chain and never fired; with card-level target= it destroys Hill Giant and draws one (one creature died this turn).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Deadly Embrace
+library:Island
+manapool:{3}{B}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Deadly Embrace
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Deadly Embrace
+hand:Island
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

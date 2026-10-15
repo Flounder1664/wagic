@@ -4793,7 +4793,7 @@ toughness=1
 [/card]
 [card]
 name=Appeal to Eirdu
-abilities=convoke
+other={convoke} name(Convoke)
 auto=pump(2/1) target(creature|mybattlefield) ueot
 auto=pump(2/1) target(creature[-<1>]|mybattlefield) ueot
 mana={3}{W}
@@ -13316,7 +13316,7 @@ type=Artifact
 [/card]
 [card]
 name=Bloodline Bidding
-abilities=convoke
+other={convoke} name(Convoke)
 auto=moveto(mybattlefield) target(creature|mygraveyard) && moveto(mybattlefield) target(creature|mygraveyard)
 mana={6}{B}{B}
 type=Sorcery
@@ -22669,7 +22669,7 @@ type=Enchantment
 [/card]
 [card]
 name=Collective Inferno
-abilities=convoke
+other={convoke} name(Convoke)
 mana={3}{R}{R}
 type=Enchantment
 text=Convoke -- As this enchantment enters, choose a creature type. Double all damage that sources you control of the chosen type would deal.
@@ -28344,7 +28344,8 @@ type=Artifact
 [/card]
 [card]
 name=Deadly Embrace
-auto=destroy target(creature|opponentbattlefield) && foreach(creature[fresh]|graveyard) draw:1
+target=creature|opponentbattlefield
+auto=destroy && draw:bothalldeadcreature controller
 text=Destroy target creature an opponent controls. Then draw a card for each creature that died this turn.
 mana={3}{B}{B}
 type=Sorcery
@@ -36194,7 +36195,8 @@ type=Instant
 [/card]
 [card]
 name=Eirdu, Carrier of Dawn
-abilities=flying,lifelink,convoke
+abilities=flying,lifelink
+other={convoke} name(Convoke)
 mana={3}{W}{W}
 type=Creature
 subtype=Elemental God
@@ -55551,7 +55553,7 @@ type=Sorcery
 [/card]
 [card]
 name=Harmonized Crescendo
-abilities=convoke
+other={convoke} name(Convoke)
 auto=draw:3
 mana={4}{U}{U}
 type=Instant
@@ -72051,7 +72053,7 @@ toughness=2
 [card]
 name=Lofty Dreams
 target=creature
-abilities=convoke
+other={convoke} name(Convoke)
 auto=draw:1 controller
 auto=enchanted 2/2
 auto=enchanted flying
@@ -86867,7 +86869,8 @@ toughness=5
 [/card]
 [card]
 name=Omni-Changeling
-abilities=changeling,convoke
+abilities=changeling
+other={convoke} name(Convoke)
 mana={3}{U}{U}
 type=Creature
 subtype=Shapeshifter
@@ -94198,7 +94201,7 @@ subtype=Aura
 [/card]
 [card]
 name=Protective Response
-abilities=convoke
+other={convoke} name(Convoke)
 auto=destroy target(creature|combat)
 mana={2}{W}
 type=Instant
@@ -107820,7 +107823,8 @@ toughness=1
 [/card]
 [card]
 name=Selfless Safewright
-abilities=flash,convoke
+abilities=flash
+other={convoke} name(Convoke)
 auto=all(creature[-this]|mybattlefield) hexproof ueot && all(creature[-this]|mybattlefield) indestructible ueot
 mana={3}{G}{G}
 type=Creature
@@ -121981,7 +121985,8 @@ type=Instant
 [/card]
 [card]
 name=Sun-Dappled Celebrant
-abilities=vigilance,convoke
+abilities=vigilance
+other={convoke} name(Convoke)
 mana={4}{W}{W}
 type=Creature
 text=Vigilance. Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
@@ -133035,7 +133040,7 @@ type=Artifact
 [/card]
 [card]
 name=Unexpected Assistance
-abilities=convoke
+other={convoke} name(Convoke)
 auto=draw:3 controller && discard:1 controller
 mana={3}{U}{U}
 type=Instant
@@ -137803,7 +137808,7 @@ toughness=1
 [/card]
 [card]
 name=Vote Out
-abilities=convoke
+other={convoke} name(Convoke)
 auto=bury target(creature|opponentbattlefield)
 text=Convoke. Destroy target creature.
 mana={3}{B}
@@ -139035,7 +139040,7 @@ toughness=3
 [/card]
 [card]
 name=Wanderwine Farewell
-abilities=convoke
+other={convoke} name(Convoke)
 auto=moveto(myhand) target(*[-land]|opponentbattlefield) && moveto(myhand) target(*[-land]|opponentbattlefield) && token(Merfolk,creature merfolk,1/1,white blue) && token(Merfolk,creature merfolk,1/1,white blue)
 mana={5}{U}{U}
 type=Sorcery
@@ -142200,7 +142205,7 @@ toughness=2
 [/card]
 [card]
 name=Winnowing
-abilities=convoke
+other={convoke} name(Convoke)
 auto=all(creature|opponentbattlefield) moveto(mygraveyard)
 mana={4}{W}{W}
 type=Sorcery

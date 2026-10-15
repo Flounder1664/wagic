@@ -1,0 +1,28 @@
+#Tarkir Dragonstorm sweep 2026-10-15. Lethal Scheme cast normally: Hill Giant dies and nobody connives - the library is untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Lethal Scheme
+library:Island
+manapool:{B}{B}{2}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Lethal Scheme
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+library:Island
+graveyard:Lethal Scheme
+pt:Grizzly Bears=2/2
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]
