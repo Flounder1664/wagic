@@ -1,0 +1,23 @@
+#In-line spell target audit 2026-10-15. Of One Mind costs {U} with a Human and a non-Human creature: draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elite Vanguard,Grizzly Bears
+hand:Of One Mind
+library:Island,Forest
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Of One Mind
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elite Vanguard,Grizzly Bears
+hand:Island,Forest
+graveyard:Of One Mind
+life:20
+[PLAYER2]
+life:20
+[END]

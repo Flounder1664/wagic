@@ -51016,7 +51016,7 @@ toughness=2
 [/card]
 [card]
 name=Gust of Wind
-anyzone=if type(creature[flying]|myBattlefield)~morethan~0 then changecost(colorless:-2) forcedalive
+anyzone=this(variable{type:creature[flying]:mybattlefield}>0)while changecost(colorless:-2) forcedalive
 target=*[-land]|opponentBattlefield
 auto=moveTo(hand)
 auto=draw:1 controller
@@ -69095,7 +69095,7 @@ toughness=2
 [/card]
 [card]
 name=Lullmage's Domination
-anyzone=if type(*|opponentGraveyard)~morethan~7 then changecost(colorless:-3) forcedalive
+anyzone=this(variable{type:*:opponentgraveyard}>7)while changecost(colorless:-3) forcedalive
 target=creature[manacost=X]
 auto=moveTo(myBattlefield)
 text=This spell costs {3} less to cast if it targets a creature whose controller has eight or more cards in their graveyard. -- Gain control of target creature with mana value X.
@@ -80015,9 +80015,9 @@ subtype=Saga
 [/card]
 [card]
 name=Of One Mind
-anyzone=if type(human|myBattlefield)~morethan~0 then changecost(colorless:-1) forcedalive
-anyzone=if type(creature[-human]|myBattlefield)~morethan~0 then changecost(colorless:-1) forcedalive
 auto=draw:2 controller
+anyzone=this(variable{type:human:mybattlefield}>0)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{type:creature[-human]:mybattlefield}>0)while changecost(colorless:-1) forcedalive
 text=This spell costs {2} less to cast if you control a Human creature and a non-Human creature. -- Draw two cards.
 mana={2}{U}
 type=Sorcery
@@ -115792,7 +115792,7 @@ color=blue
 [/card]
 [card]
 name=Tentative Connection
-anyzone=if type(creature[menace]|myBattlefield)~morethan~0 then changecost(colorless:-3) forcedalive
+anyzone=this(variable{type:creature[menace]:mybattlefield}>0)while changecost(colorless:-3) forcedalive
 target=creature
 auto=moveto(mybattlefield) and!(transforms((,newability[@next end:moveTo(previousbattlefield)],newability[untap],haste)) ueot)!
 text=This spell costs {3} less to cast if you control a creature with menace. -- Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
@@ -122488,8 +122488,8 @@ toughness=5
 [/card]
 [card]
 name=Tyrant's Scorn
-auto=destroy target(creature[manacost<=3])
-auto=moveTo(hand) target(creature)
+auto=choice name(Destroy creature with mana value 3 or less) destroy target(creature[manacost<=3])
+auto=choice name(Return creature to hand) moveto(ownerhand) target(creature)
 text=Choose one -- Destroy target creature with mana value 3 or less. -- Return target creature to its owner's hand.
 mana={U}{B}
 type=Instant

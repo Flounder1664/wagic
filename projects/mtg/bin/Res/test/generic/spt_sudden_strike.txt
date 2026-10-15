@@ -1,0 +1,23 @@
+#In-line spell target audit 2026-10-15. Sudden Strike destroys an attacking creature (my own attacking Grizzly Bears).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Sudden Strike
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto attackers
+Grizzly Bears
+Sudden Strike
+Grizzly Bears
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+graveyard:Grizzly Bears,Sudden Strike
+life:20
+[PLAYER2]
+life:20
+[END]

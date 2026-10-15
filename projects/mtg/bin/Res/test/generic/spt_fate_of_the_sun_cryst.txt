@@ -1,0 +1,23 @@
+#In-line spell target audit 2026-10-15. Fate of the Sun-Cryst destroys Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fate of the Sun-Cryst
+manapool:{4}{W}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Fate of the Sun-Cryst
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Fate of the Sun-Cryst
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

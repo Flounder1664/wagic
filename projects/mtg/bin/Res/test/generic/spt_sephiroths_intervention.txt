@@ -1,0 +1,22 @@
+#In-line spell target audit 2026-10-15. Sephiroth's Intervention destroys Hill Giant and gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sephiroth's Intervention
+manapool:{3}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Sephiroth's Intervention
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Sephiroth's Intervention
+life:22
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

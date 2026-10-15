@@ -1,0 +1,22 @@
+#In-line spell target audit 2026-10-15. Venom's Hunger destroys Hill Giant and gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Venom's Hunger
+manapool:{4}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Venom's Hunger
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Venom's Hunger
+life:22
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

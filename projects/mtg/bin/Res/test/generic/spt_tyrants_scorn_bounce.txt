@@ -1,0 +1,23 @@
+#In-line spell target audit 2026-10-15. Tyrant's Scorn, second mode: Hill Giant returns to its owner's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Tyrant's Scorn
+manapool:{U}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Tyrant's Scorn
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Tyrant's Scorn
+life:20
+[PLAYER2]
+hand:Hill Giant
+life:20
+[END]

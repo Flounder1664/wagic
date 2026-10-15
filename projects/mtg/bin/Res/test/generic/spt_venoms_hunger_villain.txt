@@ -1,0 +1,24 @@
+#In-line spell target audit 2026-10-15. Venom's Hunger costs {2}{B} while I control a Villain (Common Crook).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook
+hand:Venom's Hunger
+manapool:{2}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Venom's Hunger
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook
+graveyard:Venom's Hunger
+life:22
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

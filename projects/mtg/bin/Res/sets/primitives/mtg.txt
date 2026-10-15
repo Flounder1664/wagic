@@ -28460,8 +28460,8 @@ toughness=2
 [/card]
 [card]
 name=Death Bomb
-auto=destroy target(creature[-black])
-auto=life:-2 opponent
+target=creature[-black]
+auto=bury && life:-2 targetcontroller
 text=As an additional cost to cast Death Bomb, sacrifice a creature. -- Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
 mana={3}{B}{S(creature|mybattlefield)}
 type=Instant
@@ -31601,7 +31601,7 @@ toughness=1
 [/card]
 [card]
 name=Disembowel
-auto=destroy target(creature[manacost=prex])
+auto=destroy target(creature[manacost=x])
 text=Destroy target creature with mana value X.
 mana={X}{B}
 type=Instant
@@ -41426,8 +41426,11 @@ type=Instant
 [/card]
 [card]
 name=Fate of the Sun-Cryst
-auto=destroy target(*[-land])
-text=Destroy target nonland permanent.
+other={2}{W} name(Target tapped creature)
+otherrestriction=type(creature[tapped]|battlefield)~morethan~0
+auto=alternative name(Destroy tapped creature) name(Destroy tapped creature) target(creature[tapped]) destroy
+auto=ifnot paid(alternative) then name(Destroy nonland permanent) name(Destroy nonland permanent) target(*[-land]) destroy
+text=This spell costs {2} less to cast if it targets a tapped creature. -- Destroy target nonland permanent.
 mana={4}{W}
 type=Instant
 [/card]
@@ -79993,7 +79996,7 @@ toughness=3
 [/card]
 [card]
 name=Molder
-auto=destroy target(*[artifact;enchantment;manacost<=prex])
+auto=bury target(*[artifact;enchantment;manacost=x])
 auto=life:X
 text=Destroy target artifact or enchantment with mana value X. It can't be regenerated. You gain X life.
 mana={X}{G}
@@ -97543,7 +97546,8 @@ toughness=2
 [/card]
 [card]
 name=Raze
-auto=destroy target(land)
+target=land
+auto=destroy
 text=As an additional cost to cast Raze, sacrifice a land. -- Destroy target land.
 mana={R}{S(land|mybattlefield)}
 type=Sorcery
@@ -108083,7 +108087,9 @@ toughness=2
 [/card]
 [card]
 name=Sephiroth's Intervention
-auto=destroy target(creature|opponentbattlefield) && life:2 controller
+target=creature
+auto=destroy
+auto=life:2 controller
 text=Destroy target creature. You gain 2 life.
 mana={3}{B}
 type=Instant
@@ -121660,7 +121666,8 @@ type=Instant
 [/card]
 [card]
 name=Sudden Strike
-auto=destroy target(creature[attacking;blocking])
+target=creature[attacking;blocking]
+auto=destroy
 text=Destroy target attacking or blocking creature.
 mana={1}{W}
 type=Instant
@@ -135180,10 +135187,13 @@ toughness=1
 [/card]
 [card]
 name=Venom's Hunger
-auto=destroy target(creature) && life:2
 mana={4}{B}
 type=Sorcery
-text=Destroy target creature. You gain 2 life.
+anyzone=this(variable{type:villain:mybattlefield}>0)while changecost(colorless:-2) forcedalive
+target=creature
+auto=destroy
+auto=life:2 controller
+text=This spell costs {2} less to cast if you control a Villain. -- Destroy target creature. You gain 2 life.
 [/card]
 [card]
 name=Venom, Evil Unleashed
@@ -137441,7 +137451,8 @@ toughness=4
 [card]
 name=Volcanic Awakening
 abilities=storm
-auto=destroy target(land)
+target=land
+auto=destroy
 text=Destroy target land. -- Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 mana={4}{R}{R}
 type=Sorcery

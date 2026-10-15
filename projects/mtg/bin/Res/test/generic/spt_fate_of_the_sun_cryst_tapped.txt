@@ -1,0 +1,25 @@
+#In-line spell target audit 2026-10-15. Fate of the Sun-Cryst for {2}{W} destroys a tapped creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:Fate of the Sun-Cryst
+manapool:{2}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Llanowar Elves
+Fate of the Sun-Cryst
+choice 1
+choice 0
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Llanowar Elves,Fate of the Sun-Cryst
+manapool:{G}
+life:20
+[PLAYER2]
+life:20
+[END]

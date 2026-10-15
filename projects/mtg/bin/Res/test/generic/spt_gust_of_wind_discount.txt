@@ -1,0 +1,26 @@
+#In-line spell target audit 2026-10-15. Gust of Wind costs {1}{U} with a flyer (its if-type-then-changecost form never reduced): bounce Hill Giant, draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Air Elemental
+hand:Gust of Wind
+library:Island
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Gust of Wind
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Air Elemental
+hand:Island
+graveyard:Gust of Wind
+life:20
+[PLAYER2]
+hand:Hill Giant
+life:20
+[END]

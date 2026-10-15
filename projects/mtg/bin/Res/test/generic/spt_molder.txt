@@ -1,0 +1,24 @@
+#In-line spell target audit 2026-10-15. Molder with X=2 destroys Bad Moon and gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Molder
+manapool:{2}{G}
+life:20
+[PLAYER2]
+inplay:Bad Moon
+life:20
+[DO]
+Molder
+choice 2
+choice 0
+Bad Moon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Molder
+life:22
+[PLAYER2]
+graveyard:Bad Moon
+life:20
+[END]

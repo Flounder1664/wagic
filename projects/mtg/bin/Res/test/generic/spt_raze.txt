@@ -1,0 +1,24 @@
+#In-line spell target audit 2026-10-15. Raze: sacrifice a Mountain, destroy Forest.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mountain
+hand:Raze
+manapool:{R}
+life:20
+[PLAYER2]
+inplay:Forest
+life:20
+[DO]
+Raze
+Mountain
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Mountain,Raze
+life:20
+[PLAYER2]
+graveyard:Forest
+life:20
+[END]
