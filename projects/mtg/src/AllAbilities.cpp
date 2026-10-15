@@ -2758,6 +2758,21 @@ int AACopier::resolve()
             }
             if(keepname != "")
                 source->name = keepname; // Keep the original name after the copy. (e.g. "Olag, Ludevic's Hubris")
+            if(options.find("changeling") != string::npos)
+            {
+                //"except it has changeling" (Omni-Changeling). Changeling is applied as every
+                //creature type when a card is created, and copy() just replaced the types.
+                source->basicAbilities[(int)Constants::CHANGELING] = 1;
+                vector<string> values = MTGAllCards::getCreatureValuesById();
+                for (size_t i = 0; i < values.size(); ++i)
+                {
+                    const string& subtype = values[i];
+                    if (subtype == "Clue" || subtype == "Equipment" || subtype == "Food" || subtype == "Treasure")
+                        continue;
+                    if (!source->hasSubtype(subtype))
+                        source->setSubtype(subtype);
+                }
+            }
         }
         currentAbilities.clear();
         return 1;

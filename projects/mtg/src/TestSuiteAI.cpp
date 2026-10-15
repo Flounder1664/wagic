@@ -4,6 +4,9 @@
 #include "MTGAbility.h"
 #include "MTGRules.h"
 #include "ActionLayer.h"
+#include "SimpleMenu.h"
+#include "SimpleButton.h"
+#include <algorithm>
 #include "GuiCombat.h"
 #include "Rules.h"
 #include "GameObserver.h"
@@ -268,6 +271,39 @@ int TestSuiteAI::Act(float)
         DebugTrace("TESTSUITE choice !!!");
         int choice = atoi(action.substr(action.find("choice ") + 7).c_str());
         observer->mLayers->actionLayer()->doReactTo(choice);
+    }
+    else if (action.compare(0, 5, "menu ") == 0)
+    {
+        //"menu Bear": pick the open menu's entry by its label rather than its index - the
+        //creature-type menu lists every type the card database knows, so indexes shift.
+        string wanted = action.substr(5);
+        std::transform(wanted.begin(), wanted.end(), wanted.begin(), ::tolower);
+        ActionLayer * al = observer->mLayers->actionLayer();
+        int found = -1;
+        for (size_t i = 0; al->abilitiesMenu && i < al->abilitiesMenu->mObjects.size() && found < 0; i++)
+        {
+            SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
+            if (!item)
+                continue;
+            string label = item->getText();
+            std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+            if (label == wanted)
+                found = (int)i;
+        }
+        DebugTrace("TESTSUITE menu " << wanted << " -> " << found);
+        if (found < 0)
+        {
+            //Say what WAS offered, so a test author can see the real labels.
+            stringstream offered;
+            for (size_t i = 0; al->abilitiesMenu && i < al->abilitiesMenu->mObjects.size() && i < 40; i++)
+            {
+                SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
+                offered << "[" << (item ? item->getText() : string("?")) << "]";
+            }
+            DebugTrace("TESTSUITE menu offered " << (al->abilitiesMenu ? "" : "(no menu) ") << offered.str());
+        }
+        if (found >= 0)
+            al->doReactTo(found);
     }
     else if (action.compare("mulligan") == 0)
     {
