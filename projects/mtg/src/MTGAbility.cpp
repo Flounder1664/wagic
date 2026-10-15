@@ -4318,7 +4318,15 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
-    if (s.find("sacrifice") != string::npos || s.find("exploits") != string::npos)
+    //"sacrifice" must be the keyword, not part of "sacrificed": the counters psacrificedcount and
+    //osacrificedcount contain it, so Sawblade Skinripper's damage:psacrificedcount became a SACRIFICE
+    //of its target - itself with no target, a Player read as a card (crash) when aimed at one
+    //(John, scenario, 2026-10-15).
+    bool sacrificeKeyword = false;
+    for (size_t at = s.find("sacrifice"); at != string::npos; at = s.find("sacrifice", at + 1))
+        if (at + 9 >= s.size() || s[at + 9] != 'd')
+            sacrificeKeyword = true;
+    if (sacrificeKeyword || s.find("exploits") != string::npos)
     {
         MTGAbility *a = NEW AASacrificeCard(observer, id, card, target);
         a->oneShot = 1;
