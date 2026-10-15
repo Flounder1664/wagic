@@ -1,3 +1,4 @@
+#2026-10-15: Lost Days now offers second-from-top (choice 0) or bottom.
 #TLA batch 16. Lost Days puts a creature into its owner's library and makes you a Clue.
 [INIT]
 FIRSTMAIN
@@ -12,6 +13,7 @@ life:20
 [DO]
 Lost Days
 Grizzly Bears
+choice 0
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

@@ -1,0 +1,26 @@
+#Avatar sweep 2026-10-15. The Fire Nation Drill: {1} - the opponent's Gladecover Scout loses hexproof, and Shock kills it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Fire Nation Drill
+hand:Shock
+manapool:{1}{R}
+life:20
+[PLAYER2]
+inplay:Gladecover Scout
+life:20
+[DO]
+The Fire Nation Drill
+choice 1
+Shock
+Gladecover Scout
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Fire Nation Drill
+graveyard:Shock
+life:20
+[PLAYER2]
+graveyard:Gladecover Scout
+life:20
+[END]

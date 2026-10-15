@@ -1,0 +1,19 @@
+#Avatar sweep 2026-10-15. Avatar Roku: {8} makes a 4/4 flying Dragon token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510301
+manapool:{8}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Avatar Roku
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510301,*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,25 @@
+#Avatar sweep 2026-10-15. Trusty Boomerang: the equipped creature taps Hill Giant and the Boomerang returns to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Trusty Boomerang,Grizzly Bears
+manapool:{1}{1}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Trusty Boomerang
+Grizzly Bears
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Trusty Boomerang
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

@@ -1,0 +1,25 @@
+#Avatar sweep 2026-10-15. Aang, Master of Elements: at the opponent's upkeep you may transform him - gain 4, draw 4, and 4 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510305
+library:Forest,Island,Swamp,Plains,Mountain
+life:20
+[PLAYER2]
+library:Forest,Island
+life:20
+[DO]
+eot
+next
+choice 0
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:*
+hand:*,*,*,*
+library:*
+life:24
+[PLAYER2]
+library:*,*
+life:16
+[END]

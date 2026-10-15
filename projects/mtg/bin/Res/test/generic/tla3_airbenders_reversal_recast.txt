@@ -1,0 +1,24 @@
+#Avatar sweep 2026-10-15. Airbender's Reversal airbends Grizzly Bears, which can then be cast from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Airbender's Reversal
+manapool:{1}{W}{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Airbender's Reversal
+choice 1
+Grizzly Bears
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Airbender's Reversal
+life:20
+[PLAYER2]
+life:20
+[END]

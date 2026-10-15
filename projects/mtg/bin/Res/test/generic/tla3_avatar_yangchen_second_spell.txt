@@ -1,0 +1,31 @@
+#Avatar sweep 2026-10-15. Avatar Yangchen: the second spell of the turn lets you airbend the opponent's Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510302
+hand:Opt,Shock
+library:Island,Forest
+manapool:{U}{R}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Opt
+choice 0
+Shock
+p2
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510302
+graveyard:Opt,Shock
+hand:*
+library:*
+life:20
+[PLAYER2]
+exile:Grizzly Bears
+life:18
+[END]

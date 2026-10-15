@@ -1,0 +1,25 @@
+#Avatar sweep 2026-10-15. Avatar Kuruk: casting Opt makes a Spirit token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510300
+hand:Opt
+library:Island,Forest
+manapool:{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Opt
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510300,*
+graveyard:Opt
+hand:*
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]
