@@ -9170,11 +9170,37 @@ int ALoseAbilities::addToGame()
         }
     }
 
+    //"Loses all abilities" must take keywords too. Above only removes ability OBJECTS (activated,
+    //triggered, statics); printed keywords are bits in basicAbilities and stayed, so a Frogified or
+    //Deep Frozen Serra Angel still flew and still attacked without tapping (John, scenarios,
+    //2026-10-15). Only real keyword abilities are cleared - the same bitset also holds engine flags
+    //(kicker markers, canplayfrom*, cantattack...) that must not be touched. Keywords granted
+    //AFTER this (Deep Freeze's defender, Darksteel Mutation's indestructible) are added later and stay.
+    static const char * const kKeywords[] = { "trample", "forestwalk", "islandwalk", "mountainwalk", "swampwalk", "plainswalk", "flying", "firststrike", "doublestrike", "fear", "haste", "lifelink", "reach", "shroud", "vigilance", "defender", "banding", "protectionfromgreen", "protectionfromblue", "protectionfromred", "protectionfromblack", "protectionfromwhite", "unblockable", "wither", "persist", "exalted", "shadow", "reachshadow", "horsemanship", "hexproof", "indestructible", "intimidate", "deathtouch", "infect", "changeling", "menace", "prowess", "skulk", "undying", "snowlandwalk", "nonbasiclandwalk" };
+    clearedKeywords.clear();
+    if (_target)
+    {
+        for (size_t k = 0; k < sizeof(kKeywords) / sizeof(kKeywords[0]); k++)
+        {
+            int id = Constants::GetBasicAbilityIndex(kKeywords[k]);
+            if (id < 0 || !_target->basicAbilities.test(id))
+                continue;
+            _target->basicAbilities.set(id, false);
+            clearedKeywords.push_back(id);
+        }
+    }
+
     return MTGAbility::addToGame();
 }
 
 int ALoseAbilities::destroy()
 {
+    MTGCardInstance * _target = (MTGCardInstance *)target;
+    if (_target)
+        for (size_t k = 0; k < clearedKeywords.size(); k++)
+            _target->basicAbilities.set(clearedKeywords[k], true);
+    clearedKeywords.clear();
+
     for (size_t i = 0; i < storedAbilities.size(); ++i)
     {
         MTGAbility * a = storedAbilities[i];

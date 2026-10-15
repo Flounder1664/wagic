@@ -5855,6 +5855,8 @@ class ALoseAbilities: public MTGAbility
 {
 public:
     vector <MTGAbility *> storedAbilities;
+    //Keyword abilities (flying, vigilance...) this effect switched off, put back on destroy.
+    vector <int> clearedKeywords;
     ALoseAbilities(GameObserver* observer, int id, MTGCardInstance * source, MTGCardInstance * target);
     int addToGame();
     int destroy();
