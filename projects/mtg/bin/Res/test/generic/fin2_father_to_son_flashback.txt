@@ -1,0 +1,24 @@
+#Final Fantasy sweep 2026-10-15. From Father to Son flashed back: the Vehicle goes onto the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:From Father to Son
+library:Sky Skiff,Forest
+manapool:{4}{W}{W}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+From Father to Son
+choice 0
+Sky Skiff
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sky Skiff
+exile:From Father to Son
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,21 @@
+#Final Fantasy sweep 2026-10-15. The Final Days flashed back with three creature cards in your graveyard: three tapped Horrors.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:The Final Days,Grizzly Bears,Hill Giant,Raging Goblin
+manapool:{4}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Final Days
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+graveyard:Grizzly Bears,Hill Giant,Raging Goblin
+exile:The Final Days
+life:20
+[PLAYER2]
+life:20
+[END]

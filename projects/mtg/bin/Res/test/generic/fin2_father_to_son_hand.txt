@@ -1,0 +1,24 @@
+#Final Fantasy sweep 2026-10-15. From Father to Son cast from hand: the Vehicle goes to your hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:From Father to Son
+library:Sky Skiff,Forest
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+From Father to Son
+choice 0
+Sky Skiff
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sky Skiff
+graveyard:From Father to Son
+library:*
+life:20
+[PLAYER2]
+life:20
+[END]

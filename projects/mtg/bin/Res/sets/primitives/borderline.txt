@@ -134747,8 +134747,8 @@ type=Sorcery
 [card]
 name=From Father to Son
 flashback={4}{W}{W}{W}
-auto=name(Search a Vehicle) target(vehicle|mylibrary) moveto(hand)
-missing=if cast from a graveyard, put the Vehicle onto the battlefield instead (no cast-from-graveyard predicate)
+auto=ifnot paid(flashback) then name(Search a Vehicle) target(vehicle|mylibrary) moveto(hand) and!( shuffle )!
+auto=if paid(flashback) then name(Search a Vehicle onto the battlefield) target(vehicle|mylibrary) moveto(mybattlefield) and!( shuffle )!
 text=Search your library for a Vehicle card, reveal it, and put it into your hand. If this spell was cast from a graveyard, put that card onto the battlefield instead. Then shuffle. -- Flashback {4}{W}{W}{W}
 mana={1}{W}
 type=Sorcery
@@ -134769,7 +134769,7 @@ name=Nibelheim Aflame
 flashback={5}{R}{R}
 target=creature|mybattlefield
 auto=transforms((,newability[all(other creature) dynamicability<!powerstrike!>])) forever
-missing=if cast from a graveyard, discard your hand and draw four cards (no cast-from-graveyard predicate)
+auto=if paid(flashback) then name(Discard your hand and draw four) all(*|myhand) reject && draw:4 controller
 text=Choose target creature you control. It deals damage equal to its power to each other creature. If this spell was cast from a graveyard, discard your hand and draw four cards. -- Flashback {5}{R}{R}
 mana={2}{R}{R}
 type=Sorcery
@@ -134777,8 +134777,8 @@ type=Sorcery
 [card]
 name=Retrieve the Esper
 flashback={5}{U}
-auto=token(Robot Warrior,artifact creature robot warrior,3/3,blue)
-missing=if cast from a graveyard, put two +1/+1 counters on the token (no cast-from-graveyard predicate)
+auto=ifnot paid(flashback) then token(Robot Warrior,artifact creature robot warrior,3/3,blue)
+auto=if paid(flashback) then token(Robot Warrior,artifact creature robot warrior,3/3,blue) and!( counter(1/1,2) )!
 text=Create a 3/3 blue Robot Warrior artifact creature token. Then if this spell was cast from a graveyard, put two +1/+1 counters on that token. -- Flashback {5}{U}
 mana={3}{U}
 type=Sorcery
@@ -134816,8 +134816,8 @@ name=The Final Days
 grade=borderline
 # REVIEW 2026-07-19 [P:med] FIXED: tokens now enter tapped; missing image is a later pass
 flashback={4}{B}{B}
-auto=token(Horror,creature horror,2/2,black) and!( tap(noevent) )!*2
-missing=if cast from a graveyard, instead create X tapped tokens where X = creature cards in your graveyard (no cast-from-graveyard predicate)
+auto=ifnot paid(flashback) then token(Horror,creature horror,2/2,black) and!( tap(noevent) )!*2
+auto=if paid(flashback) then token(Horror,creature horror,2/2,black)*type:creature:mygraveyard and!( tap(noevent) )!
 text=Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard. -- Flashback {4}{B}{B}
 mana={2}{B}{B}
 type=Sorcery
@@ -134869,9 +134869,9 @@ toughness=4
 [/card]
 [card]
 name=The Lunar Whale
-abilities=flying,showfromtoplibrary,canplayfromlibrarytop
+abilities=flying,showfromtoplibrary
 auto=_CREW1_
-missing=play-top-of-library should be gated on having attacked this turn (granted unconditionally here)
+auto=@combat(attacking) source(this):name(Play the top card this turn) transforms((,canplayfromlibrarytop)) ueot
 text=Flying -- You may look at the top card of your library any time. -- As long as The Lunar Whale attacked this turn, you may play the top card of your library. -- Crew 1
 mana={3}{U}
 type=Legendary Artifact
@@ -134927,9 +134927,8 @@ toughness=1
 [/card]
 [card]
 name=Prishe's Wanderings
-auto=may target(land[basic]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
+auto=may target(land[basic;town]|mylibrary) moveTo(myBattlefield) and!( tap(noevent) )!
 auto=counter(1/1) target(creature|mybattlefield)
-missing=can also fetch a Town card (only basic lands here)
 text=Search your library for a basic land card or Town card, put it onto the battlefield tapped, then shuffle. When you search your library this way, put a +1/+1 counter on target creature you control.
 mana={2}{G}
 type=Instant
@@ -135211,9 +135210,8 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=draw:1 controller && life:-1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) draw:1 controller && life:-1 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) draw:1 controller && life:-1 controller
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) destroy target(creature|opponentbattlefield) && life:-3 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) ability$!name(Sacrifice a creature) sacrifice notaTarget(creature|mybattlefield)!$ opponent && life:-3 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) sacrifice(this)
-missing=ch IV is each-opponent-sacrifices (approximated as destroy one opponent creature + lose 3)
 text=I, II, III - Pain - You draw a card and lose 1 life. -- IV - Oblivion - Each opponent sacrifices a creature and loses 3 life. -- Menace
 mana={4}{B}{B}
 type=Enchantment Creature
@@ -135311,9 +135309,9 @@ auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) token(Knig
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=3) token(Knight,creature knight,2/2,white)*3
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}=4) token(Knight,creature knight,2/2,white)*3
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) all(other creature|mybattlefield) 2/2 ueot
+#The indestructible counter is modelled as a permanent grant of indestructible.
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) all(other creature|mybattlefield) transforms((,indestructible)) forever
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.5.Lore}) sacrifice(this)
-missing=ch V should also put an indestructible counter on each other creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after V.) -- I, II, III, IV — Create three 2/2 white Knight creature tokens. -- V — Ultimate End — Other creatures you control get +2/+2 until end of turn. Put an indestructible counter on each of them. -- Indestructible
 mana={6}{W}{W}
 type=Enchantment Creature
@@ -135345,8 +135343,8 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy target(creature|opponentbattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 controller && life:-2 controller && life:-2 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch II grants "combat damage to a player -> that player loses the game" (loses-the-game unsupported)
-text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken. -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) ueot
+text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - Until end of turn, creatures you control gain "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
 mana={4}{B}{B}
 type=Enchantment Creature
 subtype=Saga Knight
@@ -135407,7 +135405,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=all(creature[-kraken&-leviathan&-merfolk&-octopus&-serpent]|battlefield) moveto(hand)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-missing=ch II/III delayed "when a sea creature attacks, draw" unsupported
+auto=@combat(attacking) source(creature[kraken;leviathan;merfolk;octopus;serpent]|mybattlefield) restriction{compare(hascntlore)~morethan~1}:name(Draw a card) draw:1 controller
 text=I - Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand. -- II, III - whenever a sea creature attacks, draw a card. -- Ward {2}
 mana={4}{U}{U}
 type=Enchantment Creature
@@ -135464,7 +135462,7 @@ toughness=5
 name=PuPu UFO
 abilities=flying
 auto={T}:may target(land|myhand) moveto(mybattlefield)
-missing={3}: base power becomes the number of Towns you control (dynamic power unsupported)
+auto={3}:name(Base power = Towns) transforms((,setpower=type:town:mybattlefield)) ueot
 text=Flying -- {T}: You may put a land card from your hand onto the battlefield. -- {3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control.
 mana={2}
 type=Artifact Creature
@@ -135501,8 +135499,7 @@ toughness=1
 [card]
 name=Cactuar
 abilities=trample
-auto=@each my end:may moveto(hand)
-missing=should return to hand mandatorily unless it entered this turn (made optional here)
+auto=@each my end restriction{type(this[-fresh]|mybattlefield)~morethan~0}:name(Return to hand) moveto(ownerhand)
 text=Trample -- At the beginning of your end step, if this creature didn't enter the battlefield this turn, return it to its owner's hand.
 mana={G}
 type=Creature
@@ -135512,9 +135509,8 @@ toughness=3
 [/card]
 [card]
 name=Qutrub Forayer
-auto=choice name(Destroy a damaged creature) destroy target(creature|battlefield)
+auto=choice name(Destroy a creature dealt damage this turn) destroy target(creature[damaged]|battlefield)
 auto=choice name(Exile from a graveyard) moveto(exile) target(<upto:2>*|graveyard)
-missing=mode 1 should be limited to a creature dealt damage this turn
 text=When this creature enters, choose one - -- - Destroy target creature that was dealt damage this turn. -- - Exile up to two target cards from a single graveyard.
 mana={2}{B}
 type=Creature

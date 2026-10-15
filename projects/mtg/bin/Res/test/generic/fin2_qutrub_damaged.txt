@@ -1,0 +1,26 @@
+#Final Fantasy sweep 2026-10-15. Qutrub Forayer destroys Hill Giant, which Shock damaged this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Qutrub Forayer,Shock
+manapool:{R}{2}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Shock
+Hill Giant
+Qutrub Forayer
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Qutrub Forayer
+graveyard:Shock
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

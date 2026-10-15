@@ -1,0 +1,21 @@
+#Final Fantasy sweep 2026-10-15. The Final Days cast from hand: two tapped Horrors.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Final Days
+graveyard:Grizzly Bears,Hill Giant,Raging Goblin
+manapool:{2}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+The Final Days
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:The Final Days,Grizzly Bears,Hill Giant,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[END]
