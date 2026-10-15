@@ -1269,6 +1269,7 @@ int Convoke::doPay()
         {
             MTGCardInstance * targetCard = dynamic_cast<MTGCardInstance*>(*it);
             source->storedCard = targetCard->createSnapShot();
+            targetCard->convokedSpell = source;
             targetCard->tap();
         }
         if (tc)

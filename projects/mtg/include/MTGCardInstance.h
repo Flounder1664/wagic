@@ -210,6 +210,9 @@ public:
     //On a Vehicle or Mount: the creatures tapped to crew/saddle it this turn. The "crewed"
     //counter says a creature crewed SOMETHING; this says which. Compared by pointer only.
     vector<MTGCardInstance *> crewedBy;
+    //On a creature: the spell (as it was in hand) this creature was tapped to convoke.
+    //Matched by the [convoked] filter against the resolving spell's previous chain. Pointer only.
+    MTGCardInstance * convokedSpell;
     MTGCardInstance * myPair;
     MTGCardInstance * createSnapShot();
     MTGCardInstance * storedSourceCard;

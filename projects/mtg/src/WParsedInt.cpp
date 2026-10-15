@@ -1604,6 +1604,19 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
     {
         intValue = (s == "pinstsorcount")?card->controller()->game->stack->seenThisTurn("*[instant;sorcery]", Constants::CAST_ALL):card->controller()->opponent()->game->stack->seenThisTurn("*[instant;sorcery]", Constants::CAST_ALL);
     }
+    else if (s == "phlgycount" || s == "ohlgycount") //Cards put into controller's or opponent's graveyard from their hand or library this turn (Welcome the Dead).
+    {
+        Player * checkCurrent = (s == "ohlgycount")?card->controller()->opponent():card->controller();
+        MTGGameZone * grave = checkCurrent->game->graveyard;
+        int fromHandLib = 0;
+        for(unsigned int gy = 0; gy < grave->cardsSeenThisTurn.size(); gy++)
+        {
+            MTGCardInstance * checkCard = grave->cardsSeenThisTurn[gy];
+            if(checkCard->previousZone == checkCurrent->game->hand || checkCard->previousZone == checkCurrent->game->library)
+                fromHandLib++;
+        }
+        intValue = fromHandLib;
+    }
     else if ((s.find("palldead") != string::npos) || (s.find("oalldead") != string::npos)) //Return the number of cards of a specific type that died this turn for controller or opponent.
     {
         int hasdeadtype = 0;

@@ -25,6 +25,8 @@ CardDescriptor::CardDescriptor()
     convertedManacost = -1;
     dynamicManacostExpression = "";
     dynamicManacostSource = NULL;
+    isConvoker = 0;
+    convokeSource = NULL;
     numofColorsComparisonMode = COMPARISON_NONE;
     numofColors = -1;
     zposComparisonMode = COMPARISON_NONE;
@@ -587,6 +589,23 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
     if ((isToken == -1 && card->isToken) || (isToken == 1 && !card->isToken))
     {
         match = NULL;
+    }
+
+    if (isConvoker)
+    {
+        //The convoke payment is made by the card in hand; the spell that resolves is a later
+        //instance of it, so walk back through previous.
+        bool convoked = false;
+        int depth = 0;
+        for (MTGCardInstance * s = convokeSource; s && card->convokedSpell && !convoked && depth < 16; s = s->previous, depth++)
+        {
+            if (s == card->convokedSpell)
+                convoked = true;
+            if (s->previous == s)
+                break;
+        }
+        if ((isConvoker == 1 && !convoked) || (isConvoker == -1 && convoked))
+            match = NULL;
     }
 
     //"ortoken" is an alternative, not a requirement: a token satisfies the filter on its

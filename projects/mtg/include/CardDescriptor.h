@@ -57,6 +57,9 @@ class CardDescriptor: public MTGCardInstance
   //is kept and re-evaluated against the source at match time.
   string dynamicManacostExpression;
   MTGCardInstance * dynamicManacostSource;
+  //"convoked": the creature was tapped to convoke convokeSource (Lethal Scheme).
+  int isConvoker;
+  MTGCardInstance * convokeSource;
   int currentManacostCriterion();
   int zposComparisonMode;
   int zposition;

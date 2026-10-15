@@ -293,6 +293,7 @@ void MTGCardInstance::initMTGCI()
     scryedCards = 0;
     isAttacking = NULL;
     storedCard = NULL;
+    convokedSpell = NULL;
     storedSourceCard = NULL;
     myPair = NULL;
     shackled = NULL;

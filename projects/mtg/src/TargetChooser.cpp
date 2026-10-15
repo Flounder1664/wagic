@@ -807,6 +807,12 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                         cd->unsecureSetIsPermanent(1);
                     }
                 }
+                //Tapped to convoke this spell (Lethal Scheme)
+                else if (attribute.find("convoked") != string::npos)
+                {
+                    cd->isConvoker = minus ? -1 : 1;
+                    cd->convokeSource = card;
+                }
                 //Token as an OR alternative - must be tested BEFORE "token", which it contains
                 else if (attribute.find("ortoken") != string::npos)
                 {
