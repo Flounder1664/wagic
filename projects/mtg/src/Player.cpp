@@ -71,6 +71,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     prowledTypes.clear();
     doesntEmpty = NEW ManaCost();
     poolDoesntEmpty = NEW ManaCost();
+    combatMana = NEW ManaCost();
     AuraIncreased = NEW ManaCost();
     AuraReduced = NEW ManaCost();
     if (deck != NULL)
@@ -106,6 +107,7 @@ Player::~Player()
     SAFE_DELETE(manaPool);
     SAFE_DELETE(doesntEmpty);
     SAFE_DELETE(poolDoesntEmpty);
+    SAFE_DELETE(combatMana);
     SAFE_DELETE(AuraIncreased);
     SAFE_DELETE(AuraReduced);
     SAFE_DELETE(game);

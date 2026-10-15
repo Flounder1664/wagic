@@ -135,6 +135,7 @@ public:
     bool DeadLifeState(bool check = false);
     ManaCost * doesntEmpty;
     ManaCost * poolDoesntEmpty;
+    ManaCost * combatMana; //mana that lasts until end of combat (firebending) - kept while the phase is still combat
     ManaCost * AuraIncreased;
     ManaCost * AuraReduced;
     void cleanupPhase();

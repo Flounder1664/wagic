@@ -274,6 +274,8 @@ void GameObserver::nextGamePhase()
         currentPlayer->lifeGainedThisTurn = 0;
         currentPlayer->opponent()->lifeGainedThisTurn = 0;
         currentPlayer->doesntEmpty->remove(currentPlayer->doesntEmpty);
+        currentPlayer->combatMana->remove(currentPlayer->combatMana);
+        currentPlayer->opponent()->combatMana->remove(currentPlayer->opponent()->combatMana);
         currentPlayer->opponent()->doesntEmpty->remove(currentPlayer->opponent()->doesntEmpty);
         nextPlayer();
         return nextGamePhase();

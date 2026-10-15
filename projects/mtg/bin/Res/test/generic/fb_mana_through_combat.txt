@@ -1,0 +1,23 @@
+#Firebending 2026-10-15. Fire Sages attacks: firebending 1 adds {R}, still in the pool at the blockers step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Sages
+life:20
+[PLAYER2]
+life:20
+[DO]
+goto attackers
+Fire Sages
+goto blockers
+goto blockers
+goto blockers
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Fire Sages
+manapool:{R}
+life:20
+[PLAYER2]
+life:20
+[END]

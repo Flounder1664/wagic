@@ -439,11 +439,11 @@
 
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
 #AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile])) forever )!
-#AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R}
-#AUTO_DEFINE _FIREBEND2_ @combat(attacking) source(this):Add{R}{R}
-#AUTO_DEFINE _FIREBEND3_ @combat(attacking) source(this):Add{R}{R}{R}
-#AUTO_DEFINE _FIREBEND4_ @combat(attacking) source(this):Add{R}{R}{R}{R}
-#AUTO_DEFINE _FIREBEND5_ @combat(attacking) source(this):Add{R}{R}{R}{R}{R}
+#AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R} untilendofcombat
+#AUTO_DEFINE _FIREBEND2_ @combat(attacking) source(this):Add{R}{R} untilendofcombat
+#AUTO_DEFINE _FIREBEND3_ @combat(attacking) source(this):Add{R}{R}{R} untilendofcombat
+#AUTO_DEFINE _FIREBEND4_ @combat(attacking) source(this):Add{R}{R}{R}{R} untilendofcombat
+#AUTO_DEFINE _FIREBEND5_ @combat(attacking) source(this):Add{R}{R}{R}{R}{R} untilendofcombat
 
 # Robot Token — 2/2 colorless Robot artifact creature token (EOE)
 #AUTO_DEFINE _ROBOTTOKEN_ token(-1530510)

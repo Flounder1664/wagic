@@ -562,6 +562,7 @@ public:
     int tap;
     string Producing;
     bool DoesntEmpty;
+    bool untilEndOfCombat; //"untilendofcombat": the mana stays in the pool until combat ends (firebending)
     //Restricted mana: spendspells(<filter>) spendabilities(<filter>) spendnothand on the Add line.
     bool tagged;
     string spendSpells;

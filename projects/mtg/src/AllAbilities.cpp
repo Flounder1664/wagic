@@ -7362,6 +7362,30 @@ int AARemoveMana::resolve()
             }
             else //Remove all mana
             {
+                //Mana that lasts until end of combat (firebending): kept while the game is still in combat,
+                //forgotten as soon as it is not. Ordinary mana in the pool empties as usual.
+                if (player->combatMana->getConvertedCost())
+                {
+                    int ph = game->getCurrentGamePhase();
+                    if (!forceclean && ph > MTG_PHASE_COMBATBEGIN && ph <= MTG_PHASE_COMBATEND)
+                    {
+                        ManaCost * toSave = NEW ManaCost();
+                        for (int k = 0; k < Constants::NB_Colors; k++)
+                        {
+                            int keep = player->combatMana->getCost(k) + player->doesntEmpty->getCost(k);
+                            if (player->poolDoesntEmpty->getCost(k) || keep > manaPool->getCost(k))
+                                keep = manaPool->getCost(k);
+                            if (keep > 0)
+                                toSave->add(k, keep);
+                        }
+                        ManaCost * diff = manaPool->Diff(toSave);
+                        player->getManaPool()->pay(diff);
+                        delete diff;
+                        delete toSave;
+                        return 1;
+                    }
+                    player->combatMana->remove(player->combatMana);
+                }
                 if(game->getCurrentGamePhase() != MTG_PHASE_ENDOFTURN && !forceclean)
                 {
                     if (player->doesntEmpty->getConvertedCost() && !player->poolDoesntEmpty->getConvertedCost())

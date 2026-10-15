@@ -5700,6 +5700,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         mp->spendAbilities = sa.size() ? sa[1] : "";
         mp->spendNotHand = (s.find("spendnothand") != string::npos);
         mp->tagged = sp.size() || sa.size() || mp->spendNotHand;
+        mp->untilEndOfCombat = (s.find("untilendofcombat") != string::npos);
         if(newName.size())
             ((AManaProducer*)a)->menutext = newName;
         if(storedAndAbility.size())
@@ -8762,6 +8763,7 @@ AManaProducer::AManaProducer(GameObserver* observer, int id, MTGCardInstance * c
     tap = 0;
     tagged = false;
     spendNotHand = false;
+    untilEndOfCombat = false;
     Producing = producing;
     menutext = "";
     DoesntEmpty = doesntEmpty;
@@ -8833,6 +8835,8 @@ int AManaProducer::resolve()
     }
     if(DoesntEmpty)
         player->doesntEmpty->add(output);
+    if (untilEndOfCombat)
+        player->combatMana->add(output);
 
     if(source->name.empty() && source->storedSourceCard){ // Fix for mana produced inside ability$!!$ keyword.
         source->storedSourceCard->getProducedMana()->copy(output);
