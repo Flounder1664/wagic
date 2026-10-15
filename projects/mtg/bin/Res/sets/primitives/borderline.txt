@@ -18150,6 +18150,7 @@ toughness=4
 [/card]
 [card]
 name=Cavern of Souls
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): mana only for the chosen type.
 auto={T}:add{C}
 auto=chooseatype transforms((,newability[@targeted(creature[chosentype]|mystack) from(instant|opponentzones):choice name(Creaure can't be countered) name(Creaure can't be countered) all(instant|opponentzones) fizzle],newability[{T}:add{W} spendspells(creature[chosentype])],newability[{T}:add{U} spendspells(creature[chosentype])],newability[{T}:add{R} spendspells(creature[chosentype])],newability[{T}:add{G} spendspells(creature[chosentype])],newability[{T}:add{B} spendspells(creature[chosentype])])) chooseend
 text=As Cavern of Souls enters, choose a creature type. -- {T}: Add {1}. -- {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
@@ -62439,6 +62440,7 @@ type=Legendary Sorcery
 [/card]
 [card]
 name=Karn, Legacy Reforged
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): upkeep mana only for artifacts.
 anyzone=convertedcost:highest:artifact:myBattlefield/convertedcost:highest:artifact:myBattlefield cdaactive
 auto=@each my upkeep:name(Add mana) foreach(artifact|myBattlefield) add{C} spendspells(artifact) spendabilities(*) doesntempty
 text=Karn, Legacy Reforged's power and toughness are each equal to the greatest mana value among artifacts you control. -- At the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end.
@@ -64011,6 +64013,7 @@ type=Instant
 [/card]
 [card]
 name=Klauth, Unrivaled Ancient
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): attack mana lasts the turn and pays only for spells.
 abilities=flying,haste
 auto=@combat(attacking) source(this):name(Add mana) thisforeach(variable{pwrtotatt}>0) ability$!name(Choose one) choice name(Add white) add{W} spendspells(*) doesntempty _ choice name(Add blue) add{U} spendspells(*) doesntempty _ choice name(Add red) add{R} spendspells(*) doesntempty _ choice name(Add green) add{G} spendspells(*) doesntempty _ choice name(Add black) add{B} spendspells(*) doesntempty!$ controller
 text=Flying, haste -- Whenever Klauth, Unrivaled Ancient attacks, add X mana in any combination of colors, where X is the total power of attacking creatures. Spend this mana only to cast spells. Until end of turn, you don't lose this mana as steps and phases end.
@@ -134670,6 +134673,7 @@ toughness=4
 [/card]
 [card]
 name=Aang, Swift Savior
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap 4 transforms (airbend recast costs its own mana cost, not {2}).
 abilities=flash,flying
 grade=borderline
 auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
@@ -135036,6 +135040,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Black Mage's Rod
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): equipped trigger on a noncreature spell.
 auto=token(-702633) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto=teach(creature) 1/0
 auto={3}:equip
@@ -135047,6 +135052,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Red Mage's Rapier
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): equipped trigger on a noncreature spell.
 auto=token(-702633) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto={3}:equip
 auto=teach(creature) transforms((Wizard,newability[@movedTo(*[-creature]|mystack):name(+2/+0) 2/0 ueot]))
@@ -135057,6 +135063,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Astrologian's Planisphere
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): equipped trigger on a noncreature spell.
 auto=token(-702633) and!( rehook target(hero[token;fresh]|mybattlefield) )!
 auto={2}:equip
 auto=teach(creature) transforms((Wizard,newability[@movedTo(*[-creature]|mystack):name(+1/+1 counter) counter(1/1)],newability[@drawof(player) restriction{compare(pdrewcount)~equalto~3}:name(+1/+1 counter) counter(1/1)]))
@@ -136201,6 +136208,7 @@ toughness=1
 [/card]
 [card]
 name=The Chief Warg
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): ferocious attack draws and costs 1 life.
 grade=borderline
 abilities=menace
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{type(creature[power>=4]|mybattlefield)~morethan~0}:name(Ferocious) draw:1 controller && life:-1 controller
@@ -136213,6 +136221,7 @@ toughness=3
 [/card]
 [card]
 name=Chief Warg's Company
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): needs two other Wolves to attack; Wolf token has art.
 grade=borderline
 abilities=trample
 auto=@each my upkeep:token(-700509)
@@ -137941,6 +137950,7 @@ toughness=3
 [/card]
 [card]
 name=Toph, the First Metalbender
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): artifacts are lands.
 grade=borderline
 auto=@each my end:_EARTHBEND2_
 auto=lord(artifact[-token]|mybattlefield) transforms((Land))
@@ -139890,6 +139900,7 @@ toughness=2
 [/card]
 [card]
 name=Gandalf, Shadow's Foe
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): lands exiled and returned tapped.
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build
 abilities=vigilance
@@ -140126,6 +140137,7 @@ toughness=2
 [/card]
 [card]
 name=Vow to Erebor
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): untap and +2/+2 (after the target= fix), and the Dwarf equipment attach.
 #Untap and pump did nothing (John, scenario, 2026-10-15): an auto=target(...) line inside a spell
 #never got its target. The spell now targets on the card (target=), as instants normally do, and
 #the pump is a plain 2/2 ueot rather than a granted ability.
@@ -140406,6 +140418,7 @@ toughness=2
 [/card]
 [card]
 name=Iron Hills Stalwart
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): attaches an Equipment on entering.
 abilities=reach,trample
 # REVIEW 2026-08-02 [P:low] HOB preview build; dual-target attach-equipment-to-creature approximated
 auto=may name(Attach an Equipment to a creature) target(equipment|mybattlefield) transforms((,newability[rehook target(creature|mybattlefield)])) oneshot
@@ -140661,6 +140674,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Elvenking's Halls
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two counters on an Elf.
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{U}
@@ -140670,6 +140684,7 @@ type=Land
 [/card]
 [card]
 name=Goblin-town
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two counters on a Goblin.
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{R}
@@ -140679,6 +140694,7 @@ type=Land
 [/card]
 [card]
 name=Hobbit Hole
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): sacrifice for a tapped basic.
 auto={T}{S}:name(Fetch basic) target(land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )! && shuffle
 grade=borderline
 autohand={4}{cycle}:name(Halflingcycling) moveTo(myhand) target(halfling|mylibrary)
@@ -140687,6 +140703,7 @@ type=Land
 [/card]
 [card]
 name=Iron Hills
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two counters on a Dwarf.
 auto=tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{W}
@@ -140696,6 +140713,7 @@ type=Land
 [/card]
 [card]
 name=Lake-town
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two counters on a Human.
 auto=tap(noevent)
 auto={T}:Add{W}
 auto={T}:Add{U}
@@ -140705,6 +140723,7 @@ type=Land
 [/card]
 [card]
 name=Mirkwood
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two counters on a Bear/Spider/Wolf.
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{G}
@@ -140791,6 +140810,7 @@ toughness=4
 [/card]
 [card]
 name=The Mountain-king's Return
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): chapter III counter, not sacrificed.
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=_RECRUIT_
@@ -140890,6 +140910,7 @@ subtype=Saga
 [/card]
 [card]
 name=Sound the Trumpets
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): counters a small spell and recruits.
 target=*|stack
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; hard-counter approximated (mv<=2 condition unverified), recruit inline
@@ -140996,6 +141017,7 @@ toughness=4
 [/card]
 [card]
 name=Bombur, Gentle Dreamer
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): stays tapped without an enduring story.
 abilities=storied
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
@@ -141019,6 +141041,7 @@ toughness=2
 [/card]
 [card]
 name=Burn, Burn, Tree and Fern
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): chapters III and IV add R; sacrificed after IV.
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=damage:6 target(creature|opponentbattlefield)
@@ -141322,6 +141345,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Dwarven Mattock
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): attaches to a Dwarf on entering.
 auto=rehook target(dwarf|mybattlefield)
 auto=teach(creature) 2/2
 auto=teach(creature) transforms((,newability[_WARD1_]))
@@ -141445,6 +141469,7 @@ type=Enchantment
 [/card]
 [card]
 name=Great Gilded Boat
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): recruit on attack; Human Soldier token has art.
 auto=_CREW2_
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Recruit) _RECRUIT_
 grade=borderline
@@ -141492,6 +141517,7 @@ toughness=1
 [/card]
 [card]
 name=Riddles in the Dark
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two to hand, rest to graveyard (approximation of piles).
 auto=reveal:4 optionone name(Put two into your hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Put the rest into your graveyard) target(*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; opponent-chooses-pile approximated as controller-choice via generic reveal menu (no split-piles/opponent-choice primitive verified)
@@ -141502,6 +141528,7 @@ type=Instant
 [/card]
 [card]
 name=Roll-Roll-Roll-Roll
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): chapters blink and return at end step.
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=name(Blink) target(<upto:1>*[creature;land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
@@ -141663,6 +141690,7 @@ toughness=4
 [/card]
 [card]
 name=Desert Were-Worm
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): 12+ power attack untaps and gives an extra combat.
 auto=foreach(mountain|mybattlefield) 2/0
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(pwrtotatt)~morethan~11}:name(Untap and attack again) nextphasealter(add,combatphases,controller,after<combatends>) && all(creature[attacking]|mybattlefield) untap
 grade=borderline
@@ -142045,6 +142073,7 @@ toughness=1
 [/card]
 [card]
 name=Bilbo, Thief in the Night
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): graveyard instant castable after attacking.
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; cost reduction for spells cast from non-hand zones not implemented, attack-trigger cast-from-graveyard implemented
 auto=_ATTACKING_may name(Cast a spell from your graveyard this turn) target(*[artifact;instant;sorcery]|mygraveyard) transforms((,canplayfromgraveyard)) ueot
@@ -142134,6 +142163,7 @@ toughness=4
 [/card]
 [card]
 name=Beorn the Fierce
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): combat trigger makes a trampling Bear.
 abilities=trample
 auto=lord(other creature[bear]|mybattlefield) 2/2
 #The trample counter is written as a permanent grant of trample.
@@ -144924,6 +144954,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Geyser Leaper
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap option pays.
 grade=borderline
 abilities=flying
 auto={4}:name(Waterbend {4}) _LOOT_
@@ -145125,6 +145156,7 @@ toughness=2
 [/card]
 [card]
 name=Leonin Surveyor
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): first strike on your turn.
 #Speed gates are written the way Endrider Catalyzer's are, whose gate is proved by test; the
 #climb to max speed needs four turns of an opponent losing life, which the harness cannot
 #drive.
@@ -145992,6 +146024,7 @@ subtype=Cave
 [/card]
 [card]
 name=Bladewheel Chariot
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): tapping two artifacts animates it.
 backside=Spring-Loaded Sawblades
 auto=_CREW1_
 auto={T(other artifact|mybattlefield)}{T(other artifact|mybattlefield)}:name(Tap two artifacts) becomes(Artifact Creature) ueot
@@ -147048,6 +147081,7 @@ subtype=Cave
 [/card]
 [card]
 name=Sunken Citadel
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): two-mana ability only for land abilities.
 auto=tap(noevent)
 auto=chooseacolor transforms((,newability[{T}:add{chosencolor}],newability[{T}:add{chosencolor}{chosencolor} spendabilities(land)])) forever chooseend
 text=This land enters tapped. As it enters, choose a color. -- {T}: Add one mana of the chosen color. -- {T}: Add two mana of the chosen color. Spend this mana only to activate abilities of land sources.
@@ -148353,6 +148387,7 @@ toughness=1
 [/card]
 [card]
 name=Waterbending Lesson
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): paying {2} keeps all three; declining discards one.
 auto=draw:3 controller
 auto=transforms((,newability[pay[[{2}]] name(Waterbend 2 - keep all three) donothing?reject notatarget(*|myhand)])) oneshot
 missing=the waterbend {2} can only be paid with mana, not by tapping artifacts and creatures
@@ -148363,6 +148398,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Flexible Waterbender
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap option pays.
 abilities=vigilance
 auto={3}:name(Waterbend {3}) transforms((,setpower=5,settoughness=2)) ueot
 auto={2}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {3} - tap 1) transforms((,setpower=5,settoughness=2)) ueot
@@ -148398,6 +148434,7 @@ toughness=3
 [/card]
 [card]
 name=North Pole Patrol
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap option pays.
 auto={T}:untap target(other *|mybattlefield)
 auto={3}{T}:name(Waterbend {3}) tap target(creature|opponentbattlefield)
 auto={2}{T(*[artifact;creature]|mybattlefield)}{T}:name(Waterbend {3} - tap 1) tap target(creature|opponentbattlefield)
@@ -148412,6 +148449,7 @@ toughness=3
 [/card]
 [card]
 name=Katara, Bending Prodigy
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap option pays.
 auto=@each my end restriction{type(this[tapped]|mybattlefield)~morethan~0}:counter(1/1)
 auto={6}:name(Waterbend {6}) draw:1 controller
 auto={5}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {6} - tap 1) draw:1 controller
@@ -148470,6 +148508,7 @@ toughness=3
 [/card]
 [card]
 name=June, Bounty Hunter
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): unblockable after drawing two.
 auto={1}{S(other creature|mybattlefield)}:_CLUE_ myturnonly
 auto=this(variable{pdrewcount}>1) unblockable
 text=June can't be blocked as long as you've drawn two or more cards this turn. -- {1}, Sacrifice another creature: Create a Clue token. Activate only during your turn.
@@ -148502,6 +148541,7 @@ toughness=2
 [/card]
 [card]
 name=Sokka's Haiku
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): counters, draws, mills three, untaps a land.
 target=*|stack
 auto=fizzle
 auto=draw:1 controller
@@ -148514,6 +148554,7 @@ subtype=Lesson
 [/card]
 [card]
 name=Foggy Swamp Hunters
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): lifelink and menace after drawing two.
 auto=this(variable{pdrewcount}>1) lifelink
 auto=this(variable{pdrewcount}>1) menace
 text=As long as you've drawn two or more cards this turn, this creature has lifelink and menace.
@@ -149751,6 +149792,7 @@ toughness=4
 [/card]
 [card]
 name=Danitha, Spear of Agony
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): Solve for Disappointment casts and gives exactly one counter.
 auto=@targeted(creature|opponentbattlefield) from(*|myhand):counter(1/1) all(this)
 auto=@targeted(opponent) from(*|myhand):counter(1/1) all(this)
 missing=a spell that targets both an opponent and a creature they control gives two counters rather than one
@@ -149961,6 +150003,7 @@ toughness=2
 [/card]
 [card]
 name=Tinybones, Pocket Nuisance
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): its own discard deals 1.
 auto=@discarded(*|hand) oneormore:damage:1 opponent
 auto=discard:1 opponent
 text=When Tinybones enters, each opponent discards a card. -- Whenever a player discards one or more cards, Tinybones deals 1 damage to each opponent.
@@ -150070,6 +150113,7 @@ toughness=4
 [/card]
 [card]
 name=Saheeli, Consul of Oversight
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): one Thopter per turn, no end-step lock.
 auto=@counteradded(0/0,1,ScryMark) from(this) turnlimited:token(-735514)
 auto=@each end:all(this) removeallcounters(0/0,1,ScryMark)
 abilities=flying

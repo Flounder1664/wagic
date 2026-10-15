@@ -98432,6 +98432,7 @@ type=Sorcery
 [/card]
 [card]
 name=Red Tiger Mechan
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): cast for warp, exiled at end step, cast from exile next turn; removal-exiled is not castable.
 grade=borderline
 other={1}{R} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
