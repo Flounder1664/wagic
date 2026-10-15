@@ -1,0 +1,20 @@
+#Vow to Erebor: "Untap target creature you control. It gets +2/+2 until end of turn."
+#John (scenario, 2026-10-15): it did nothing. Grizzly Bears must be 4/4 afterwards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Vow to Erebor
+manapool:{W}{W}
+[PLAYER2]
+[DO]
+Vow to Erebor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Vow to Erebor
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

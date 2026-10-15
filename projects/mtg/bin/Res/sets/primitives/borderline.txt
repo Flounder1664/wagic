@@ -136215,7 +136215,7 @@ toughness=3
 name=Chief Warg's Company
 grade=borderline
 abilities=trample
-auto=@each my upkeep:token(Wolf,creature wolf,2/2,green)
+auto=@each my upkeep:token(-700509)
 auto=aslongas(other wolf|mybattlefield) cantattack <2
 text=Trample -- This creature can't attack unless you control two or more other Wolves. -- At the beginning of your upkeep, create a 2/2 green Wolf creature token.
 mana={1}{B}{G}
@@ -140126,7 +140126,12 @@ toughness=2
 [/card]
 [card]
 name=Vow to Erebor
-auto=target(creature|mybattlefield) untap && transforms((,newability[2/2])) ueot
+#Untap and pump did nothing (John, scenario, 2026-10-15): an auto=target(...) line inside a spell
+#never got its target. The spell now targets on the card (target=), as instants normally do, and
+#the pump is a plain 2/2 ueot rather than a granted ability.
+target=creature|mybattlefield
+auto=untap
+auto=2/2 ueot
 auto=if type(dwarf|mybattlefield)~morethan~0 then may name(Attach an Equipment to a Dwarf) target(equipment|mybattlefield) transforms((,newability[rehook target(dwarf|mybattlefield)])) oneshot
 missing=the Equipment may be attached to any Dwarf you control, not only the creature this untapped
 text=Untap target creature you control. It gets +2/+2 until end of turn. If it's a Dwarf, you may attach an Equipment you control to it.
