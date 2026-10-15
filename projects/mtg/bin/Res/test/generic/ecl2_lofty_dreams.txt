@@ -1,0 +1,25 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Lofty Dreams: Grizzly Bears becomes 4/4, and I draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Lofty Dreams
+library:Island
+manapool:{3}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Lofty Dreams
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Lofty Dreams
+hand:Island
+pt:Grizzly Bears=4/4
+life:20
+[PLAYER2]
+life:20
+[END]

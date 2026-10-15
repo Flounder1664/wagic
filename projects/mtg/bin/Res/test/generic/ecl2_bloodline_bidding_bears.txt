@@ -1,0 +1,24 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Bloodline Bidding naming Bear returns both Bears, not the Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bloodline Bidding
+graveyard:Grizzly Bears,Runeclaw Bear,Hill Giant
+manapool:{6}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bloodline Bidding
+choice 0
+menu Choose a type
+menu Bear
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Runeclaw Bear
+graveyard:Hill Giant,Bloodline Bidding
+life:20
+[PLAYER2]
+life:20
+[END]

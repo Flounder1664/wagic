@@ -4793,12 +4793,12 @@ toughness=1
 [/card]
 [card]
 name=Appeal to Eirdu
-other={convoke} name(Convoke)
-auto=pump(2/1) target(creature|mybattlefield) ueot
-auto=pump(2/1) target(creature[-<1>]|mybattlefield) ueot
 mana={3}{W}
 type=Instant
-text=Target creature you control gets +2/+1 until end of turn.
+other={convoke} name(Convoke)
+target=<upto:2>creature
+auto=2/1 ueot
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- One or two target creatures each get +2/+1 until end of turn.
 [/card]
 [card]
 name=Appetite for Brains
@@ -13316,11 +13316,11 @@ type=Artifact
 [/card]
 [card]
 name=Bloodline Bidding
-other={convoke} name(Convoke)
-auto=moveto(mybattlefield) target(creature|mygraveyard) && moveto(mybattlefield) target(creature|mygraveyard)
 mana={6}{B}{B}
 type=Sorcery
-text=Convoke -- Return up to two creature cards from your graveyard to the battlefield.
+other={convoke} name(Convoke)
+auto=chooseatype moveto(mybattlefield) all(creature[chosentype]|mygraveyard) chooseend
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Choose a creature type. Return all creature cards of the chosen type from your graveyard to the battlefield.
 [/card]
 [card]
 name=Bloodline Keeper
@@ -22669,10 +22669,11 @@ type=Enchantment
 [/card]
 [card]
 name=Collective Inferno
-other={convoke} name(Convoke)
 mana={3}{R}{R}
 type=Enchantment
-text=Convoke -- As this enchantment enters, choose a creature type. Double all damage that sources you control of the chosen type would deal.
+other={convoke} name(Convoke)
+auto=chooseatype transforms((,newability[@damaged(creature|battlefield) from(*[chosentype]|mybattlefield):damage:thatmuch all(trigger[to])],newability[@damaged(planeswalker|battlefield) from(*[chosentype]|mybattlefield):damage:thatmuch all(trigger[to])],newability[@damageof(player) from(*[chosentype]|mybattlefield):damage:thatmuch controller],newability[@damagefoeof(player) from(*[chosentype]|mybattlefield):damage:thatmuch opponent])) forever chooseend
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- As this enchantment enters, choose a creature type. -- Double all damage that sources you control of the chosen type would deal.
 [/card]
 [card]
 name=Collective Restraint
@@ -36195,14 +36196,17 @@ type=Instant
 [/card]
 [card]
 name=Eirdu, Carrier of Dawn
-abilities=flying,lifelink
-other={convoke} name(Convoke)
 mana={3}{W}{W}
-type=Creature
+type=Legendary Creature
 subtype=Elemental God
 power=5
 toughness=5
-text=Flying, lifelink -- Creature spells you cast have convoke.
+backside=Isilu, Carrier of Twilight
+anyzone={0}:doubleside(backside)
+abilities=flying,lifelink
+auto=@each my firstmain:pay({B}):name(Transform) flip(backside)
+missing=Creature spells you cast have convoke - the engine cannot give convoke to other spells.
+text=Flying, lifelink -- Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.) -- At the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
 [/card]
 [card]
 name=Eject
@@ -55556,11 +55560,11 @@ type=Sorcery
 [/card]
 [card]
 name=Harmonized Crescendo
-other={convoke} name(Convoke)
-auto=draw:3
 mana={4}{U}{U}
 type=Instant
-text=Convoke -- Draw cards equal to the number of permanents you control of the chosen type.
+other={convoke} name(Convoke)
+auto=chooseatype foreach(*[chosentype]|mybattlefield) draw:1 controller chooseend
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Choose a creature type. Draw a card for each permanent you control of that type.
 [/card]
 [card]
 name=Harmony of Nature
@@ -72055,14 +72059,14 @@ toughness=2
 [/card]
 [card]
 name=Lofty Dreams
-target=creature
-other={convoke} name(Convoke)
-auto=draw:1 controller
-auto=enchanted 2/2
-auto=enchanted flying
 mana={3}{U}{U}
 type=Enchantment
-text=When Lofty Dreams enters the battlefield, draw 1 card.
+other={convoke} name(Convoke)
+target=creature
+auto=draw:1 controller
+auto=teach(creature) 2/2
+auto=teach(creature) flying
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Enchant creature -- When this Aura enters, draw a card. -- Enchanted creature gets +2/+2 and has flying.
 subtype=Aura
 [/card]
 [card]
@@ -86872,14 +86876,15 @@ toughness=5
 [/card]
 [card]
 name=Omni-Changeling
-abilities=changeling
-other={convoke} name(Convoke)
 mana={3}{U}{U}
 type=Creature
 subtype=Shapeshifter
 power=0
 toughness=0
-text=Changeling -- Convoke.
+abilities=changeling
+other={convoke} name(Convoke)
+auto=may copy notaTarget(creature) options(changeling)
+text=Changeling (This card is every creature type.) -- Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- You may have this creature enter as a copy of any creature on the battlefield, except it has changeling.
 [/card]
 [card]
 name=Omnibian
@@ -94204,11 +94209,12 @@ subtype=Aura
 [/card]
 [card]
 name=Protective Response
-other={convoke} name(Convoke)
-auto=destroy target(creature|combat)
 mana={2}{W}
 type=Instant
-text=Destroy target creature in combat.
+other={convoke} name(Convoke)
+target=creature[attacking;blocking]
+auto=destroy
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Destroy target attacking or blocking creature.
 [/card]
 [card]
 name=Proteus Machine
@@ -107827,12 +107833,12 @@ toughness=1
 [/card]
 [card]
 name=Selfless Safewright
-abilities=flash
-other={convoke} name(Convoke)
-auto=all(creature[-this]|mybattlefield) hexproof ueot && all(creature[-this]|mybattlefield) indestructible ueot
 mana={3}{G}{G}
 type=Creature
-text=When Selfless Safewright enters the battlefield, all creatures you control gain hexproof until end of turn. All creatures you control gain indestructible until end of turn.
+abilities=flash
+other={convoke} name(Convoke)
+auto=chooseatype all(other *[chosentype]|mybattlefield) transforms((,hexproof,indestructible)) ueot chooseend
+text=Flash -- Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
 subtype=Elf Warrior
 power=4
 toughness=2
@@ -121992,11 +121998,11 @@ type=Instant
 [/card]
 [card]
 name=Sun-Dappled Celebrant
-abilities=vigilance
-other={convoke} name(Convoke)
 mana={4}{W}{W}
 type=Creature
-text=Vigilance. Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+other={convoke} name(Convoke)
+abilities=vigilance
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Vigilance
 subtype=Treefolk Cleric
 power=5
 toughness=6
@@ -133047,11 +133053,12 @@ type=Artifact
 [/card]
 [card]
 name=Unexpected Assistance
-other={convoke} name(Convoke)
-auto=draw:3 controller && discard:1 controller
 mana={3}{U}{U}
 type=Instant
-text=Draw 3 cards. Discard 1 card.
+other={convoke} name(Convoke)
+auto=draw:3 controller
+auto=name(Discard a card) reject notaTarget(<1>*|myhand)
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Draw three cards, then discard a card.
 [/card]
 [card]
 name=Unexpected Request
@@ -137820,8 +137827,9 @@ toughness=1
 [card]
 name=Vote Out
 other={convoke} name(Convoke)
-auto=bury target(creature|opponentbattlefield)
-text=Convoke. Destroy target creature.
+target=creature
+auto=destroy
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Destroy target creature.
 mana={3}{B}
 type=Sorcery
 [/card]
@@ -139051,11 +139059,14 @@ toughness=3
 [/card]
 [card]
 name=Wanderwine Farewell
-other={convoke} name(Convoke)
-auto=moveto(myhand) target(*[-land]|opponentbattlefield) && moveto(myhand) target(*[-land]|opponentbattlefield) && token(Merfolk,creature merfolk,1/1,white blue) && token(Merfolk,creature merfolk,1/1,white blue)
 mana={5}{U}{U}
-type=Sorcery
-text=Convoke -- Return up to two target nonland permanents to their owners' hands. Then create a 1/1 white and blue Merfolk creature token for each permanent returned.
+type=Kindred Sorcery
+subtype=Merfolk
+other={convoke} name(Convoke)
+target=<upto:2>*[-land]
+auto=moveto(ownerhand)
+auto=if type(merfolk|mybattlefield)~morethan~0 then create(Merfolk:creature merfolk:1/1:white,blue)
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Return one or two target nonland permanents to their owners' hands. Then if you control a Merfolk, create a 1/1 white and blue Merfolk creature token for each permanent returned to its owner's hand this way.
 [/card]
 [card]
 name=Wanderwine Hub
@@ -142216,11 +142227,13 @@ toughness=2
 [/card]
 [card]
 name=Winnowing
-other={convoke} name(Convoke)
-auto=all(creature|opponentbattlefield) moveto(mygraveyard)
 mana={4}{W}{W}
 type=Sorcery
-text=Convoke -- Each opponent sacrifices all but one creature they control.
+other={convoke} name(Convoke)
+auto=chooseatype all(creature[-chosentype]|mybattlefield) sacrifice chooseend
+auto=ability$!chooseatype all(creature[-chosentype]|opponentbattlefield) sacrifice chooseend!$ controller
+missing=You choose a creature for each player and they keep everything sharing a type with it; this asks for a creature TYPE per player instead (the engine has no shares-a-creature-type filter), so a chosen multi-type creature keeps less than it should.
+text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
 [/card]
 [card]
 name=Winter Blast

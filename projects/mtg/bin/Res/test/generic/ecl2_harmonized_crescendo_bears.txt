@@ -1,0 +1,27 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Harmonized Crescendo naming Bear draws one card per Bear (two).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Runeclaw Bear,Hill Giant
+hand:Harmonized Crescendo
+library:Island,Forest,Swamp
+manapool:{4}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Harmonized Crescendo
+choice 0
+menu Choose a type
+menu Bear
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Runeclaw Bear,Hill Giant
+hand:*,*
+library:*
+graveyard:Harmonized Crescendo
+life:20
+[PLAYER2]
+life:20
+[END]

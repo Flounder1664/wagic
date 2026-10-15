@@ -1,0 +1,26 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Wanderwine Farewell returns two permanents and, with a Merfolk out, makes two Merfolk tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of Atlantis
+hand:Wanderwine Farewell
+manapool:{5}{U}{U}
+life:20
+[PLAYER2]
+inplay:Hill Giant,Grizzly Bears
+life:20
+[DO]
+Wanderwine Farewell
+choice 0
+Hill Giant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lord of Atlantis,*,*
+graveyard:Wanderwine Farewell
+life:20
+[PLAYER2]
+hand:Hill Giant,Grizzly Bears
+life:20
+[END]

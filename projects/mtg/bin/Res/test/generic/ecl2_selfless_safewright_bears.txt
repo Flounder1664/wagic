@@ -1,0 +1,25 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Selfless Safewright naming Bear: Pyroclasm kills the Elves and the Safewright, the Bears are indestructible.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Llanowar Elves
+hand:Selfless Safewright,Pyroclasm
+manapool:{3}{G}{G}{1}{R}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Selfless Safewright
+choice 0
+menu Choose a type
+menu Bear
+Pyroclasm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Llanowar Elves,Selfless Safewright,Pyroclasm
+life:20
+[PLAYER2]
+life:20
+[END]

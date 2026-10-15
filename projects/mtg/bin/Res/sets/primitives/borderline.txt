@@ -150634,3 +150634,15 @@ auto={R}{T}:name(+1/+0 and haste) target(creature[lizard;mouse;otter;raccoon]|my
 text={T}: Add {C}. -- {T}: Add {R}. Spend this mana only to cast a creature spell. -- {R}, {T}: Target Lizard, Mouse, Otter, or Raccoon you control gets +1/+0 and gains haste until end of turn. Activate only as a sorcery.
 type=Land
 [/card]
+[card]
+name=Isilu, Carrier of Twilight
+backside=Eirdu, Carrier of Dawn
+abilities=flying,lifelink
+auto=lord(other creature[-token]|mybattlefield) persist
+auto=@each my firstmain:pay({W}):name(Transform) flip(backside)
+text=Flying, lifelink -- Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.) -- At the beginning of your first main phase, you may pay {W}. If you do, transform Isilu.
+type=Legendary Creature
+subtype=Elemental God
+power=5
+toughness=5
+[/card]

@@ -1,0 +1,23 @@
+#Lorwyn Eclipsed convoke rewrite 2026-10-15. Vote Out destroys any target creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vote Out
+manapool:{3}{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Vote Out
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Vote Out
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]
