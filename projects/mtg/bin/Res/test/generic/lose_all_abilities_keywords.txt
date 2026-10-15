@@ -1,0 +1,32 @@
+#"Loses all abilities" must take keyword abilities too. Frogify on our own Serra Angel: it is a
+#1/1 Frog with no vigilance, so attacking TAPS it (tappedinplay:1) and deals 1 (opponent 19).
+#Before the fix the Angel kept vigilance and flying (John, scenarios 2026-10-15): it stayed
+#untapped after attacking.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Serra Angel
+hand:Frogify
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Frogify
+Serra Angel
+next
+next
+Serra Angel
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Serra Angel,Frogify
+tappedinplay:1
+pt:Serra Angel=1/1
+life:20
+[PLAYER2]
+life:19
+[END]
