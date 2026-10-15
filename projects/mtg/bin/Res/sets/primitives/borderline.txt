@@ -140177,7 +140177,9 @@ grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; loses-all-abilities/doesn't-untap approximated
 auto=tap
 auto=removeallcounters(all)
-auto=loseabilities
+#loseabilities on an Aura must be taught to the creature (Frogify, Deep Freeze): bare, the enchanted
+#Serra Angel kept flying and vigilance - the keyword icons showed it (John, scenario, 2026-10-15).
+auto=teach(creature) loseabilities
 auto=doesnotuntap
 text=Enchant creature -- When this Aura enters, tap enchanted creature and remove all counters from it. -- Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
 mana={2}{U}
