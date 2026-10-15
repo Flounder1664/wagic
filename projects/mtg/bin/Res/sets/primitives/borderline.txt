@@ -26175,6 +26175,7 @@ type=Artifact
 [/card]
 [card]
 name=Darksteel Mutation
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): loses keywords, keeps its own indestructible.
 target=creature
 auto=indestructible
 auto=loseabilities
@@ -27416,6 +27417,7 @@ toughness=1
 [/card]
 [card]
 name=Deep Freeze
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): loses keywords, keeps its own defender.
 target=creature
 auto=teach(creature) loseabilities
 auto=teach(creature) becomes(,0/4)
@@ -43449,6 +43451,7 @@ toughness=4
 [/card]
 [card]
 name=Frogify
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): the creature loses its keywords too (no flying/vigilance; can be blocked, taps to attack).
 target=creature
 auto=teach(creature) loseabilities
 auto=teach(creature) transforms((,setpower=1,settoughness=1))
@@ -140180,6 +140183,7 @@ toughness=2
 [/card]
 [card]
 name=Enchanted River's Grasp
+#VERIFIED IN GAME 2026-10-15 (John, scenario queue): tapped, loses counters and all abilities including keywords, doesn't untap.
 target=creature
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; loses-all-abilities/doesn't-untap approximated
