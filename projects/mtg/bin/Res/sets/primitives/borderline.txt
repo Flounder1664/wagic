@@ -147203,7 +147203,7 @@ backside=Barracks of the Thousand
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
 auto=token(Gnome Soldier,Artifact Creature Gnome Soldier,0/0,white) and!( transforms((,newability[foreach(*[artifact;creature]|mybattlefield) 1/1])) forever )!
-auto=@each my firstmain:may name(Tap five artifacts or creatures to transform) tap target(<5>*[artifact;creature;-tapped]|mybattlefield) && flip(backside)
+auto=@each my firstmain:may name(Tap five artifacts or creatures to transform) tap target(<5>*[artifact;creature][-tapped]|mybattlefield) && flip(backside)
 text=When Thousand Moons Smithy enters, create a white Gnome Soldier artifact creature token with "This token's power and toughness are each equal to the number of artifacts and/or creatures you control." -- At the beginning of your first main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
 mana={2}{W}{W}
 type=Legendary Artifact
@@ -147261,8 +147261,8 @@ type=Instant
 [/card]
 [card]
 name=Caparocti Sunborn
-auto=_ATTACKING_may name(Tap two artifacts or creatures: discover 3) tap target(<2>other *[artifact;creature;-tapped]|mybattlefield) && discover:3
-missing=the tapping is not a cost, so declining after tapping is possible; the harness cannot drive a targeted attack trigger, so this line is unverified
+auto=_ATTACKING_may name(Tap two artifacts or creatures: discover 3) tap target(<2>other *[artifact;creature][-tapped]|mybattlefield) && discover:3
+missing=the tapping is not a cost, so declining after tapping is possible
 text=Whenever Caparocti Sunborn attacks, you may tap two untapped artifacts and/or creatures you control. If you do, discover 3.
 mana={2}{R}{W}
 type=Legendary Creature

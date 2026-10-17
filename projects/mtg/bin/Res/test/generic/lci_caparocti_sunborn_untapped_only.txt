@@ -1,0 +1,39 @@
+#Caparocti Sunborn (636510) may only tap UNTAPPED artifacts and/or creatures. Llanowar Elves is tapped
+#for mana in the first main phase, so the click on it in the trigger is refused; Mind Stone and
+#Ornithopter are the two targets. If the tapped Elves had been accepted, Ornithopter would stay
+#untapped and tappedinplay would be 3 instead of 4 (Caparocti, Elves, Mind Stone, Ornithopter).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636510,Llanowar Elves,Mind Stone,Ornithopter
+library:Forest,Mountain,729059,Juggernaut
+[PLAYER2]
+life:20
+[DO]
+Llanowar Elves
+next
+#begin
+next
+#attackers
+636510
+next
+#trigger: take the may, pick the targets, discover takes the hand option
+choice 0
+Llanowar Elves
+Mind Stone
+Ornithopter
+choice 1
+next
+#blockers
+next
+#damage, then end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:636510,Llanowar Elves,Mind Stone,Ornithopter
+tappedinplay:4
+hand:729059
+library:*,*,*
+[PLAYER2]
+life:16
+[END]

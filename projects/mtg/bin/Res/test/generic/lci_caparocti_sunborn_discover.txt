@@ -1,0 +1,39 @@
+#Caparocti Sunborn (636510): "Whenever Caparocti Sunborn attacks, you may tap two untapped artifacts
+#and/or creatures you control. If you do, discover 3." The filter is *[artifact;creature][-tapped]:
+#the old *[artifact;creature;-tapped] put the list in AND mode, so only artifact creatures qualified.
+#Grizzly Bears (creature only) and Mind Stone (artifact only) are both clicked, so both kinds count.
+#choice 0 takes the may; Caparocti plus the two targets are tapped. Discover 3 then passes over
+#Juggernaut ({5}) on top, hits Sol Ring ({1}), and choice 1 puts it in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636510,Grizzly Bears,Mind Stone
+library:Forest,Mountain,729059,Juggernaut
+[PLAYER2]
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+636510
+next
+#trigger: take the may, pick the targets, discover takes the hand option
+choice 0
+Grizzly Bears
+Mind Stone
+choice 1
+next
+#blockers
+next
+#damage, then end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:636510,Grizzly Bears,Mind Stone
+tappedinplay:3
+hand:729059
+library:*,*,*
+[PLAYER2]
+life:16
+[END]
