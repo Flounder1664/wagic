@@ -1,0 +1,36 @@
+#wagic#47 row 1: Skullsnatcher - "Whenever Skullsnatcher deals combat damage to a player, exile up
+#to two target cards from that player's graveyard." It is a may, so choice 0 comes first, then the
+#two clicks. Shock stays in the graveyard (only two may go), and player 1's own Lightning Bolt is
+#untouched. Player 2 on 18 proves the hit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Skullsnatcher
+graveyard:Lightning Bolt
+[PLAYER2]
+graveyard:Grizzly Bears,Ornithopter,Shock
+[DO]
+next
+#begin
+next
+#attackers
+Skullsnatcher
+next
+#blockers
+next
+#damage
+choice 0
+Grizzly Bears
+Ornithopter
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Skullsnatcher
+graveyard:Lightning Bolt
+[PLAYER2]
+graveyard:Shock
+exile:Grizzly Bears,Ornithopter
+life:18
+[END]
