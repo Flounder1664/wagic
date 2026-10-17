@@ -435,7 +435,10 @@ bool MTGRevealingCards::CheckUserInput(JButton key)
     //DO NOT REFACTOR BELOW, IT KEPT SPLIT UP TO MAINTAIN READABILITY.
     //we override check inputs, we MUST complete reveal and its effects before being allowed to do anything else.
     TargetChooser * tc = this->observer->mLayers->actionLayer()->getCurrentTargetChooser();
-    if (this->source->controller()->isAI())
+    //The test suite's player answers isAI() too, but it picks its own targets with [DO] clicks.
+    //Auto-pressing NEXT for it declined option one before the click landed, so option two ran and
+    //an activated tutor (Johnny, Combo Player; Hour of Victory) put the card back in the library.
+    if (this->source->controller()->isAI() && this->source->controller()->playMode != Player::MODE_TEST_SUITE)
     {
         if (this->source->controller() != game->isInterrupting)
             game->mLayers->stackLayer()->cancelInterruptOffer(ActionStack::DONT_INTERRUPT, false);

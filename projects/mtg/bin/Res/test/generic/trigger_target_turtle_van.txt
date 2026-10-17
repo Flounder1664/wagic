@@ -1,0 +1,34 @@
+#wagic#47 row 1: Turtle Van (1520181) - "Whenever this Vehicle attacks, put a +1/+1 counter on
+#target creature that crewed it this turn." Grizzly Bears crews it; the attack trigger's click
+#names the Bears, 2/2 -> 3/3. Llanowar Elves taps for mana first so it cannot crew, and stays
+#1/1. Player 2 on 16 proves the attack.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520181,Grizzly Bears,Llanowar Elves
+[PLAYER2]
+[DO]
+Llanowar Elves
+1520181
+Grizzly Bears
+next
+#begin
+next
+#attackers
+1520181
+next
+#trigger
+Grizzly Bears
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:1520181,Grizzly Bears,Llanowar Elves
+pt:Grizzly Bears=3/3
+pt:Llanowar Elves=1/1
+[PLAYER2]
+life:16
+[END]

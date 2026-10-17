@@ -1,0 +1,23 @@
+#wagic#47 row 1: Arahbo, Roar of the World (433276) - "At the beginning of combat on your turn,
+#another target Cat you control gets +3/+3 until end of turn." Stepping into combat fires it and
+#the click names Savannah Lions (2/1 -> 5/4). Arahbo itself stays 5/5, and Grizzly Bears (not a
+#Cat) stays 2/2: a trigger that hit the wrong permanent fails one of the pt: lines.
+#Id, not name: a comma in a name never resolves in a zone line.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:433276,Savannah Lions,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+#begin
+Savannah Lions
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:433276,Savannah Lions,Grizzly Bears
+pt:Savannah Lions=5/4
+pt:433276=5/5
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]
