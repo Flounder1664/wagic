@@ -1,0 +1,23 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Walking Sarcophagus gets +1/+2 at max speed (4) only: the
+#speed 4 and speed 3 tests together show the gate is real. Seeded speed is above 0, so Start
+#your engines! does nothing and no speed tracker token appears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Walking Sarcophagus
+speed:3
+life:20
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Walking Sarcophagus
+pt:Walking Sarcophagus=2/1
+speed:3
+life:20
+[PLAYER2]
+life:20
+[END]

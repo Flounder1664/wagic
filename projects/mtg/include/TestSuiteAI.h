@@ -150,6 +150,8 @@ private:
 public:
     //[ASSERT]-only: expected number of tapped battlefield cards (-1 = don't check)
     int expectedTappedInPlay;
+    //[ASSERT]-only: expected speed (-1 = don't check). In [INIT], speed: seeds speedCount.
+    int expectedSpeed;
 
     //[ASSERT]-only: per-card expectations on the battlefield.
     //  pt:<name-or-id>=<P>/<T>       power/toughness of a card in play

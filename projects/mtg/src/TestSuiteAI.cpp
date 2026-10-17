@@ -38,6 +38,7 @@ TestSuiteAI::TestSuiteAI(TestSuiteGame *tsGame, int playerId) :
     suite = tsGame;
     timer = 0;
     expectedTappedInPlay = -1;
+    expectedSpeed = -1;
     playMode = MODE_TEST_SUITE;
     this->deckName = "Test Suite AI";
     this->comboHint = NULL;
@@ -62,6 +63,15 @@ bool TestSuiteAI::parseLine(const string& s)
     if (s.compare(0, kCounter.size(), kCounter) == 0)
     {
         expectedCounters.push_back(s.substr(kCounter.size()));
+        return true;
+    }
+    //speed:<0-4> - in [PLAYER] of [INIT] it seeds the speed track, in [ASSERT] it is checked.
+    //Max speed takes four turns of an opponent losing life, which no test can drive, so
+    //without this every "Max speed -" ability was untestable.
+    static const string kSpeed = "speed:";
+    if (s.compare(0, kSpeed.size(), kSpeed) == 0)
+    {
+        speedCount = expectedSpeed = atoi(s.c_str() + kSpeed.size());
         return true;
     }
     return AIPlayerBaka::parseLine(s);
@@ -495,6 +505,13 @@ void TestSuiteGame::assertGame()
         {
             sprintf(result, "<span class=\"error\">==poison counter problem for player %i. Expected %i, got %i==</span><br />", i,
                             endState.players[i]->poisonCount, p->poisonCount);
+            Log(result);
+            error++;
+        }
+        if (endState.players[i]->expectedSpeed >= 0 && p->speedCount != endState.players[i]->expectedSpeed)
+        {
+            sprintf(result, "<span class=\"error\">==speed problem for player %i. Expected %i, got %i==</span><br />", i,
+                            endState.players[i]->expectedSpeed, p->speedCount);
             Log(result);
             error++;
         }
@@ -1152,6 +1169,7 @@ void TestSuiteGame::initGame()
         p->forceBestAbilityUse = forceAbility;
         p->life = initState.players[i]->life;
         p->poisonCount = initState.players[i]->poisonCount;
+        p->speedCount = initState.players[i]->speedCount;
         stringstream stream;
         initState.players[i]->getRandomGenerator()->saveLoadedRandValues(stream);
         p->getRandomGenerator()->loadRandValues(stream.str());
