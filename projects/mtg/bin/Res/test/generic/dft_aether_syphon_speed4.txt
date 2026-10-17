@@ -1,0 +1,30 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Aether Syphon at max speed: whenever you draw, each opponent mills two. {2},{T}: draw
+#draws Juggernaut, and two of the opponent's three cards are milled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aether Syphon
+library:Juggernaut
+manapool:{2}
+life:20
+speed:4
+[PLAYER2]
+library:Island,Island,Island
+life:20
+[DO]
+Aether Syphon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aether Syphon
+hand:Juggernaut
+life:20
+speed:4
+[PLAYER2]
+library:*
+graveyard:*,*
+life:20
+[END]

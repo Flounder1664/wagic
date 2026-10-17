@@ -1,0 +1,36 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Kickoff Celebrations below max speed cannot be sacrificed for haste: the summoning-sick
+#Grizzly Bears cannot attack.
+summoningsickness
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kickoff Celebrations,Grizzly Bears
+life:20
+speed:3
+[PLAYER2]
+life:20
+[DO]
+Kickoff Celebrations
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Kickoff Celebrations,Grizzly Bears
+life:20
+speed:3
+[PLAYER2]
+life:20
+[END]

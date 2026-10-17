@@ -1,0 +1,33 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Burnout Bashtronaut below max speed deals its 1 damage once.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Burnout Bashtronaut
+life:20
+speed:3
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+Burnout Bashtronaut
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Burnout Bashtronaut
+life:20
+speed:3
+[PLAYER2]
+life:19
+[END]

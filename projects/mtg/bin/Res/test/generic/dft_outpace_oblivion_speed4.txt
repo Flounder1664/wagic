@@ -1,0 +1,25 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Outpace Oblivion: {2}, sacrifice: 2 damage to each player WITHOUT max speed. Player 1
+#has it and is spared; the opponent takes 2. (The enters-trigger damage is declined.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690576
+manapool:{2}
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+690576
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:690576
+life:20
+speed:4
+[PLAYER2]
+life:18
+[END]

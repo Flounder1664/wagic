@@ -1,0 +1,24 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Risen Necroregent at max speed makes a 2/2 Zombie at the beginning of your end step.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Risen Necroregent
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+next
+next
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:Risen Necroregent,*
+life:20
+speed:4
+[PLAYER2]
+life:20
+[END]

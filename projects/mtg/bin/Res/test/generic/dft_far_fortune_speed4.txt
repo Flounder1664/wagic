@@ -1,0 +1,28 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Far Fortune, End Boss at max speed adds 1 to damage your other sources deal an opponent:
+#Shock deals 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690640
+hand:Shock
+manapool:{R}
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690640
+graveyard:Shock
+life:20
+speed:4
+[PLAYER2]
+life:17
+[END]
