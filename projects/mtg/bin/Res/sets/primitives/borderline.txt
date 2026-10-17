@@ -145214,8 +145214,7 @@ type=Enchantment
 [/card]
 [card]
 name=Pride of the Road
-#Max speed half NOT harness-testable: the beginning-of-combat trigger must choose a target, and
-#the harness cannot feed a target to a trigger (wagic#47). Needs John's eyes.
+#Max speed half tested with seeded speed (speed:4): dft_pride_of_the_road_speed4 and dft_pride_of_the_road_speed3.
 abilities=vigilance
 auto=_STARTENGINES_
 auto=@each my combatbegins restriction{compare(pspeed)~equalto~4}:name(Max speed - double strike) target(*[creature;vehicle]|mybattlefield) double strike ueot
