@@ -1,0 +1,35 @@
+#wagic#47 row 1: Sword of Fire and Ice - two combat-damage triggers, one of them targeted
+#("deals 2 damage to any target"). The [DO] click on Raging Goblin names that target.
+#hand:* is the draw from the other trigger.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sword of Fire and Ice,Grizzly Bears
+library:Swamp
+manapool:{2}
+[PLAYER2]
+inplay:Raging Goblin
+[DO]
+Sword of Fire and Ice
+Grizzly Bears
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+Raging Goblin
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Sword of Fire and Ice,Grizzly Bears
+hand:*
+[PLAYER2]
+graveyard:Raging Goblin
+life:16
+[END]

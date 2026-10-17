@@ -2,6 +2,7 @@
 
 #include "TestSuiteAI.h"
 #include "MTGAbility.h"
+#include "AllAbilities.h"
 #include "MTGRules.h"
 #include "ActionLayer.h"
 #include "SimpleMenu.h"
@@ -125,6 +126,41 @@ MTGCardInstance * TestSuiteAI::getCard(string action)
                     DebugTrace("TESTUISTEAI: p" << i << " " << zoneNames[j] << "[" << k << "] '" << zones[j]->cards[k]->getLCName() << "' mtgid=" << zones[j]->cards[k]->getMTGId());
     }
     return NULL;
+}
+
+//What a [DO] click line names, read the same way the click branches below read it.
+Targetable * TestSuiteAI::clickTarget(const string& action)
+{
+    if (action.find("p1") != string::npos)
+        return observer->players[0];
+    if (action.find("p2") != string::npos)
+        return observer->players[1];
+    return getCard(action);
+}
+
+//True while a forced, single-entry trigger menu is open: a must MayAbility asking the player
+//to start its targeting step. There is nothing to decide in it - the GUI shows it with no
+//Cancel - so a test's target click may open it implicitly. A "may" (it has a Cancel entry), a
+//modal "choice" menu or a menu of several abilities still needs an explicit "choice N".
+//Only when the click names a legal target of that trigger: a seeded card's enters-trigger can
+//leave such a menu open at setup (Magmatic Galleon), and a click meant to cast a spell from hand
+//must not be taken as the menu pick. Nor while some targeting step is already live (a spell
+//choosing its target, a proliferate pick): the click belongs to that.
+bool TestSuiteAI::openForcedTriggerMenu(Targetable * clicked)
+{
+    if (!clicked || observer->getCurrentTargetChooser())
+        return false;
+    ActionLayer * al = observer->mLayers->actionLayer();
+    if (!al->menuObject || !al->abilitiesMenu || al->abilitiesMenu->isMultipleChoice || !al->checkCantCancel())
+        return false;
+    if (al->abilitiesMenu->mObjects.size() != 1)
+        return false;
+    int controlid = al->abilitiesMenu->mObjects[0]->GetId();
+    if (controlid < 0 || controlid >= (int) al->mObjects.size())
+        return false;
+    MayAbility * may = dynamic_cast<MayAbility *>(al->mObjects[controlid]);
+    TargetAbility * ta = may ? dynamic_cast<TargetAbility *>(may->ability) : NULL;
+    return ta && ta->getActionTc() && ta->getActionTc()->canTarget(clicked);
 }
 
 Interruptible * TestSuiteGame::getActionByMTGId(int mtgid)
@@ -335,6 +371,17 @@ int TestSuiteAI::Act(float)
         MTGMomirRule * a = ((MTGMomirRule *) observer->mLayers->actionLayer()->getAbility(MTGAbility::MOMIR));
         a->reactToClick(Rules::getCardByMTGId(observer, cardIdHand), cardId);
         observer->mLayers->actionLayer()->stuffHappened = 1;
+    }
+    else if (openForcedTriggerMenu(clickTarget(action)))
+    {
+        //A trigger that targets ("@combatdamaged...:destroy target(...)") is built as a must
+        //MayAbility around the target ability (AbilityFactory, "!activated && tc"), so it first
+        //opens a one-entry menu whose only job is to arm the targeting step. A target click made
+        //while that menu was up was swallowed and the payload resolved with nothing - wagic#47
+        //row 1. Pick the entry, then replay this same command as the target click.
+        DebugTrace("TESTSUITE opening the forced trigger menu before: " << action);
+        observer->mLayers->actionLayer()->doReactTo(0);
+        suite->currentAction--;
     }
     else if (action.find("p1") != string::npos || action.find("p2") != string::npos)
     {

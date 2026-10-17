@@ -144,6 +144,8 @@ class TestSuiteAI:public AIPlayerBaka
 {
 private:
     MTGCardInstance * getCard(string action);
+    bool openForcedTriggerMenu(Targetable * clicked);
+    Targetable * clickTarget(const string& action);
     float timer;
     TestSuiteGame * suite;
 
