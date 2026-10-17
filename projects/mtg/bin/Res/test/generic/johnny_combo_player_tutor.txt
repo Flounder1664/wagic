@@ -1,0 +1,21 @@
+#Johnny, Combo Player: {4}, search your library for a card and put it into your hand (an activated
+#Reveal: tutor). Before 2026-10-17 the reveal window auto-declined for the test-suite player and
+#the card went back to the library.
+[INIT]
+firstmain
+[PLAYER1]
+inplay:479419
+library:Juggernaut
+manapool:{4}
+[PLAYER2]
+[DO]
+479419
+choice 0
+Juggernaut
+[ASSERT]
+firstmain
+[PLAYER1]
+inplay:479419
+hand:Juggernaut
+[PLAYER2]
+[END]

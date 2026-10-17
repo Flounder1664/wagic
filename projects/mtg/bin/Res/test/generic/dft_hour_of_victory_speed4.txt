@@ -1,0 +1,27 @@
+#Hour of Victory at max speed: {1}{B}, sacrifice it, search your library for a card and put it
+#into your hand. The pick is the BOTTOM card (library: lists bottom first), so a test that took
+#the top card or left the pick in the library fails. The enters trigger made the Zombie token (*).
+#Before 2026-10-17 the reveal window auto-declined for the test-suite player, so this put the
+#card back in the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hour of Victory
+library:Grizzly Bears,Juggernaut
+manapool:{1}{B}
+speed:4
+[PLAYER2]
+[DO]
+Hour of Victory
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+hand:Grizzly Bears
+library:Juggernaut
+graveyard:Hour of Victory
+speed:4
+[PLAYER2]
+[END]

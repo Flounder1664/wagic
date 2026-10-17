@@ -1,0 +1,23 @@
+#Hour of Victory below max speed: the search cannot be activated, so it stays on the battlefield
+#and the library is untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hour of Victory
+library:Grizzly Bears,Juggernaut
+manapool:{1}{B}
+speed:3
+[PLAYER2]
+[DO]
+Hour of Victory
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hour of Victory,*
+library:Grizzly Bears,Juggernaut
+manapool:{1}{B}
+speed:3
+[PLAYER2]
+[END]

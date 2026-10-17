@@ -145191,10 +145191,9 @@ toughness=3
 [/card]
 [card]
 name=Hour of Victory
-#Max speed half NOT harness-testable (2026-10-17): the {1}{B}, sacrifice search is an activated
-#Reveal: tutor, and in the harness the picked card goes back to the library instead of to hand.
-#Johnny, Combo Player's identical activated tutor does the same, while the spell form (Gamble)
-#works - so it is that shape, not this card. Needs John's eyes.
+#Max speed half tested with seeded speed (speed:4): dft_hour_of_victory_speed4 and _speed3.
+#It used to look untestable: the reveal window auto-declined for the test-suite player (fixed in
+#MTGRevealingCards::CheckUserInput 2026-10-17). The card itself was never wrong.
 auto=_STARTENGINES_
 auto=token(-692085)
 auto={1}{B}{S} restriction{compare(pspeed)~equalto~4}:name(Max speed - search your library) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend asSorcery
