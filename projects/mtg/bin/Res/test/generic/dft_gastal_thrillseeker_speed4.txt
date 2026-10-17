@@ -1,0 +1,39 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Gastal Thrillseeker has haste at max speed: seeded this turn with summoning sickness on, it
+#still attacks for 2. Its enters-trigger targets an opponent, and the harness cannot feed a
+#target to a trigger (wagic#47) - left open it swallows every later click. Leyline of
+#Sanctity gives the opponent hexproof, so the trigger has no legal target and goes away.
+summoningsickness
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690642
+life:20
+speed:4
+[PLAYER2]
+inplay:Leyline of Sanctity
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+690642
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:690642
+life:20
+speed:4
+[PLAYER2]
+inplay:Leyline of Sanctity
+life:18
+[END]

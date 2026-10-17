@@ -1,0 +1,34 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Hazoret, Godseeker cannot attack below max speed: the opponent stays at 20. With no
+#attacker the combat steps are skipped, so the same nexts end in the end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690570
+life:20
+speed:3
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+690570
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:690570
+life:20
+speed:3
+[PLAYER2]
+life:20
+[END]

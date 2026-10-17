@@ -1,0 +1,33 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Streaking Oilgorger has lifelink at max speed: its 3 combat damage gains 3 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Streaking Oilgorger
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+Streaking Oilgorger
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Streaking Oilgorger
+life:23
+speed:4
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,35 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Burnout Bashtronaut has double strike at max speed: a 1/1 deals 2. The first-strike
+#damage step costs one more next.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Burnout Bashtronaut
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+Burnout Bashtronaut
+next
+#blockers
+next
+#damage
+next
+#combat end
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Burnout Bashtronaut
+life:20
+speed:4
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,23 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Gastal Raider below max speed stays a 2/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:692065
+life:20
+speed:3
+[PLAYER2]
+life:20
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:692065
+pt:692065=2/1
+life:20
+speed:3
+[PLAYER2]
+life:20
+[END]

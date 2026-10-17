@@ -1,0 +1,28 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Embalmed Ascendant at max speed: whenever a creature you control dies, drain 1.
+#Shock kills our Grizzly Bears. The Zombie is its enters-trigger token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690638,Grizzly Bears
+hand:Shock
+manapool:{R}
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690638,*
+graveyard:Grizzly Bears,Shock
+life:21
+speed:4
+[PLAYER2]
+life:19
+[END]

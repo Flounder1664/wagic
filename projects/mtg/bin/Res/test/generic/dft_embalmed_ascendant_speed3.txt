@@ -1,0 +1,27 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Embalmed Ascendant below max speed: the death drains nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690638,Grizzly Bears
+hand:Shock
+manapool:{R}
+life:20
+speed:3
+[PLAYER2]
+life:20
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690638,*
+graveyard:Grizzly Bears,Shock
+life:20
+speed:3
+[PLAYER2]
+life:20
+[END]

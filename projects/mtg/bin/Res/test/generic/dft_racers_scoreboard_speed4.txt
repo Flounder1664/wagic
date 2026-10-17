@@ -1,0 +1,31 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Racers' Scoreboard at max speed: spells cost {1} less. Its enters loot (draw two, discard
+#one) is answered first (choice 0, then the card); then Mind Stone costs {1}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690676
+hand:Mind Stone
+library:Juggernaut,Grizzly Bears
+manapool:{1}
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Juggernaut
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690676,Mind Stone
+hand:Grizzly Bears
+graveyard:Juggernaut
+life:20
+speed:4
+[PLAYER2]
+life:20
+[END]

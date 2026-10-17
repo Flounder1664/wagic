@@ -1,0 +1,30 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Endrider Spikespitter at max speed exiles your top card at upkeep and lets you play it this
+#turn. Rugged Highlands (top) is exiled, Juggernaut is drawn, then the Highlands is played
+#from exile and gains 1 life.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:690562
+library:Juggernaut,Rugged Highlands
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+next
+next
+next
+Rugged Highlands
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690562,Rugged Highlands
+hand:Juggernaut
+life:21
+speed:4
+[PLAYER2]
+life:20
+[END]

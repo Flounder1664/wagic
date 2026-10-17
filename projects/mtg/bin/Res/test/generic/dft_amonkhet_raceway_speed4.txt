@@ -1,0 +1,38 @@
+#speed:<n> in [INIT] seeds the speed track, so a Max speed ability can be tested without four
+#turns of an opponent losing life. Seeded speed is above 0, so Start your engines! does nothing
+#and no speed tracker token appears.
+#Amonkhet Raceway at max speed: {T}: target creature gains haste. With summoning sickness
+#on, the seeded Grizzly Bears can attack only because of it.
+summoningsickness
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690685,Grizzly Bears
+life:20
+speed:4
+[PLAYER2]
+life:20
+[DO]
+690685
+choice 1
+Grizzly Bears
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:690685,Grizzly Bears
+life:20
+speed:4
+[PLAYER2]
+life:18
+[END]
