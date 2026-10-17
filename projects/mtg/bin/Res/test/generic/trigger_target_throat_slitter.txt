@@ -1,0 +1,31 @@
+#wagic#47 row 1: a combat-damage trigger that must choose a TARGET.
+#Throat Slitter: "Whenever Throat Slitter deals combat damage to a player, destroy target
+#nonblack creature that player controls." The [DO] click on Grizzly Bears names the target;
+#if the trigger never opens its targeting step, the bears survive and this fails.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Throat Slitter
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+next
+#begin
+next
+#attackers
+Throat Slitter
+next
+#blockers
+next
+#damage
+Grizzly Bears
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Throat Slitter
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]

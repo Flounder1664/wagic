@@ -1,0 +1,18 @@
+#wagic#47 row 1: an @each my combatbegins trigger that targets. Aethershield Artificer gives
+#target artifact creature you control +2/+2 and indestructible; clicking Ornithopter names it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aethershield Artificer,Ornithopter
+[PLAYER2]
+[DO]
+next
+#begin
+Ornithopter
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Aethershield Artificer,Ornithopter
+pt:Ornithopter=2/4
+[PLAYER2]
+[END]

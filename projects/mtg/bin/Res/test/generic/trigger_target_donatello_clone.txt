@@ -1,0 +1,30 @@
+#wagic#47 row 1: Donatello, Gadget Master (1520035) - "Whenever Donatello deals combat damage to a
+#player, create a token that's a copy of target artifact you control." This is the card whose
+##REVIEW-V first recorded the gap (clone payload, 2026-09-05). Clicking Ornithopter names the
+#target; the extra * is the token copy, absent if the trigger resolved with no target.
+#Id, not name: a comma in a name never resolves in a zone line.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520035,Ornithopter
+[PLAYER2]
+[DO]
+next
+#begin
+next
+#attackers
+1520035
+next
+#blockers
+next
+#damage
+Ornithopter
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:1520035,Ornithopter,*
+[PLAYER2]
+life:17
+[END]

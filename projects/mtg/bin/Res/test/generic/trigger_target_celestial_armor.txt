@@ -1,0 +1,19 @@
+#wagic#47 row 1: an enters trigger that targets - Celestial Armor attaches itself with
+#rehook target(creature|myBattlefield). Clicking Grizzly Bears names the creature; +2/+0 proves it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Celestial Armor
+inplay:Grizzly Bears
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Celestial Armor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Celestial Armor,Grizzly Bears
+pt:Grizzly Bears=4/2
+[PLAYER2]
+[END]
