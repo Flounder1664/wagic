@@ -22673,6 +22673,7 @@ mana={3}{R}{R}
 type=Enchantment
 other={convoke} name(Convoke)
 auto=chooseatype transforms((,newability[@damaged(creature|battlefield) from(*[chosentype]|mybattlefield):damage:thatmuch all(trigger[to])],newability[@damaged(planeswalker|battlefield) from(*[chosentype]|mybattlefield):damage:thatmuch all(trigger[to])],newability[@damageof(player) from(*[chosentype]|mybattlefield):damage:thatmuch controller],newability[@damagefoeof(player) from(*[chosentype]|mybattlefield):damage:thatmuch opponent])) forever chooseend
+missing=the doubled damage is dealt by Collective Inferno, not by the creature (John accepted this approximation 2026-10-16)
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- As this enchantment enters, choose a creature type. -- Double all damage that sources you control of the chosen type would deal.
 [/card]
 [card]
@@ -28463,6 +28464,7 @@ toughness=2
 name=Death Bomb
 target=creature[-black]
 auto=bury && life:-2 targetcontroller
+missing=the creature you sacrifice to pay for it can still be chosen as the target (John, 2026-10-16: unlikely to matter)
 text=As an additional cost to cast Death Bomb, sacrifice a creature. -- Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
 mana={3}{B}{S(creature|mybattlefield)}
 type=Instant
@@ -139065,7 +139067,7 @@ subtype=Merfolk
 other={convoke} name(Convoke)
 target=<upto:2>*[-land]
 auto=moveto(ownerhand)
-auto=if type(merfolk|mybattlefield)~morethan~0 then create(Merfolk:creature merfolk:1/1:white,blue)
+auto=if type(merfolk|mybattlefield)~morethan~0 then token(-697108)
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- Return one or two target nonland permanents to their owners' hands. Then if you control a Merfolk, create a 1/1 white and blue Merfolk creature token for each permanent returned to its owner's hand this way.
 [/card]
 [card]

@@ -1,0 +1,21 @@
+#Of One Mind: "costs {2} less to cast if you control a Human creature AND a non-Human creature".
+#Human (Common Crook) and non-Human (Grizzly Bears): it costs {U} and draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook,Grizzly Bears
+hand:Of One Mind
+library:Island,Island,Island
+manapool:{U}
+[PLAYER2]
+[DO]
+Of One Mind
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook,Grizzly Bears
+hand:*,*
+library:*
+graveyard:Of One Mind
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#Of One Mind: "costs {2} less to cast if you control a Human creature AND a non-Human creature".
+#Human only: no discount, so {1}{U} cannot pay and it stays in hand. (The old card took {1} off for each type separately and cast it.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook
+hand:Of One Mind
+library:Island,Island,Island
+manapool:{1}{U}
+[PLAYER2]
+[DO]
+Of One Mind
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Common Crook
+hand:Of One Mind
+library:*,*,*
+manapool:{1}{U}
+[PLAYER2]
+[END]

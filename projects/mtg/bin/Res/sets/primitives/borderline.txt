@@ -69096,8 +69096,10 @@ toughness=2
 [card]
 name=Lullmage's Domination
 anyzone=this(variable{type:*:opponentgraveyard}>7)while changecost(colorless:-3) forcedalive
-target=creature[manacost=X]
-auto=moveTo(myBattlefield)
+#The target was on the card (target=creature[manacost=X]), chosen before X was known, so no
+#creature qualified and the spell never cast - John chose X and the mana stayed in the pool
+#(2026-10-16). Now chosen in the effect, as Disembowel and Molder do.
+auto=moveTo(myBattlefield) target(creature[manacost=x])
 text=This spell costs {3} less to cast if it targets a creature whose controller has eight or more cards in their graveyard. -- Gain control of target creature with mana value X.
 mana={X}{U}{U}{U}
 type=Sorcery
@@ -80016,8 +80018,9 @@ subtype=Saga
 [card]
 name=Of One Mind
 auto=draw:2 controller
-anyzone=this(variable{type:human:mybattlefield}>0)while changecost(colorless:-1) forcedalive
-anyzone=this(variable{type:creature[-human]:mybattlefield}>0)while changecost(colorless:-1) forcedalive
+#Real text: {2} less if you control a Human AND a non-Human creature (2026-10-16, John). It was {1}
+#off for each separately, so a lone Human made it {1}{U}. The two conditions are nested.
+anyzone=this(variable{type:human:mybattlefield}>0)while this(variable{type:creature[-human]:mybattlefield}>0)while changecost(colorless:-2) forcedalive
 text=This spell costs {2} less to cast if you control a Human creature and a non-Human creature. -- Draw two cards.
 mana={2}{U}
 type=Sorcery
@@ -147131,6 +147134,16 @@ auto=moveto(mybattlefield)
 text=Fathomless descent -- Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.
 mana={1}{B}{G}
 type=Sorcery
+[/card]
+[card]
+name=Merfolk Ecl
+#ECL's 1/1 white and blue Merfolk token (TECL #8), id -697108 (ECL block 696600 + 500 + 8). Made by
+#Wanderwine Farewell. Plain 'Merfolk' is mono-blue, hence its own body.
+color=white,blue
+type=Creature
+subtype=Merfolk
+power=1
+toughness=1
 [/card]
 [card]
 name=Goblin Ecl

@@ -1,0 +1,26 @@
+#Lullmage's Domination {X}{U}{U}{U}: "costs {3} less if it targets a creature whose controller has
+#eight or more cards in their graveyard. Gain control of target creature with mana value X."
+#X=2 on Grizzly Bears with eight cards in the opponent's graveyard: {2}{U}{U}{U} minus {3} leaves
+#{U}{U}{U}, so three blue is exactly enough. John (scenario, 2026-10-16): after choosing X nothing
+#happened and the mana stayed in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lullmage's Domination
+manapool:{U}{U}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+graveyard:Shock,Shock,Shock,Shock,Shock,Shock,Shock,Shock
+[DO]
+Lullmage's Domination
+choice 2
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Lullmage's Domination
+[PLAYER2]
+graveyard:Shock,Shock,Shock,Shock,Shock,Shock,Shock,Shock
+[END]
