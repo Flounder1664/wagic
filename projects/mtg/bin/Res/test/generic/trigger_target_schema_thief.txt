@@ -1,0 +1,31 @@
+#wagic#47 row 1: Schema Thief - "Whenever Schema Thief deals combat damage to a player, create a
+#token that's a copy of target artifact that player controls." Clicking the opponent's Ornithopter
+#names the target; the second Ornithopter on player 1's side is the copy, absent if the trigger
+#never got its target. Player 2 on 17 proves the hit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Schema Thief
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+next
+#begin
+next
+#attackers
+Schema Thief
+next
+#blockers
+next
+#damage
+Ornithopter
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Schema Thief,Ornithopter
+[PLAYER2]
+inplay:*
+life:17
+[END]
