@@ -12185,9 +12185,8 @@ subtype=Aura Role
 name=Young Hero
 grade=borderline
 target=creature
-#REVIEW-V 2026-10-18: untested - a Role has no cost and is attached by the card that makes it; the
-#harness can neither cast it nor answer the attach prompt (wagic#47 row 3). Check the +1/+1 counter
-#when the enchanted creature (toughness 3 or less) attacks, and none at toughness 4.
+#Tests: woe_young_hero_attack_counter / _toughness_four (cast from hand for no cost - no card in the
+#database makes this Role).
 auto=teach(creature) transforms((,newability[@combat(attacking) source(this) restriction{compare(toughness)~lessthan~4}:counter(1/1)]))
 text=Enchant creature -- Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
 type=Enchantment

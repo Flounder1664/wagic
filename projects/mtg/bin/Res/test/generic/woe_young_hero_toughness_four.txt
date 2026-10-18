@@ -1,0 +1,24 @@
+#Young Hero on Craw Wurm (6/4): toughness 4 is too high, so no counter and 6 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:Young Hero
+[PLAYER2]
+[DO]
+Young Hero
+Craw Wurm
+next
+next
+Craw Wurm
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Craw Wurm,Young Hero
+pt:Craw Wurm=6/4
+[PLAYER2]
+life:14
+[END]
