@@ -1,0 +1,31 @@
+#Tonberry (2/1) has first strike and deathtouch during its controller's turn. It enters tapped with a
+#stun counter, so two Vitalizes free it (the first only removes the stun counter). It attacks and is
+#blocked by Raging Goblin: the 1/1 dies first and deals no damage (without first strike both die).
+#The old line was "@each my beginofturn:firststrike ueot" - not a keyword, so it granted nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tonberry
+hand:Vitalize,Vitalize
+manapool:{G}{G}
+[PLAYER2]
+inplay:Raging Goblin
+[DO]
+Vitalize
+Vitalize
+next
+next
+Tonberry
+next
+Raging Goblin
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Tonberry
+graveyard:Vitalize,Vitalize
+[PLAYER2]
+graveyard:Raging Goblin
+[END]

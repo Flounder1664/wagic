@@ -1,0 +1,30 @@
+#Riverguard's Reflexes makes Raging Goblin a 3/3 with first strike until end of turn. It attacks and is
+#blocked by Hill Giant: the 3/3 Giant dies first and deals no damage (without first strike both die).
+#The old line was "firststrike ueot" - not a keyword, so it granted nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin
+hand:Riverguard's Reflexes
+manapool:{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Riverguard's Reflexes
+Raging Goblin
+next
+next
+Raging Goblin
+next
+Hill Giant
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Raging Goblin
+graveyard:Riverguard's Reflexes
+[PLAYER2]
+graveyard:Hill Giant
+[END]
