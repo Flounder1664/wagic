@@ -1,0 +1,29 @@
+#Aerial Surveyor: "Whenever it attacks, if defending player controls more lands than you, search your
+#library for a basic Plains card, put it onto the battlefield tapped, then shuffle." Crewed by Grizzly
+#Bears; player 2 has two lands, player 1 none; the Plains in the library is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aerial Surveyor,Grizzly Bears
+library:Plains,Hill Giant
+[PLAYER2]
+inplay:Mountain,Mountain
+[DO]
+Aerial Surveyor
+Grizzly Bears
+next
+next
+Aerial Surveyor
+next
+Plains
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Aerial Surveyor,Grizzly Bears,*
+library:Hill Giant
+[PLAYER2]
+inplay:*,*
+life:17
+[END]

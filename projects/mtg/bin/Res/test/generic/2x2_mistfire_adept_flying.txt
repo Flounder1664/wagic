@@ -1,0 +1,31 @@
+#Mistfire Adept: "Whenever you cast a noncreature spell, target creature gains flying until end of turn."
+#Giant Growth on the Adept (prowess too: 7/7), the trigger names the Adept. Hill Giant (no reach) is
+#then clicked as a blocker and cannot block a flier, so all 7 lands.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:571392
+hand:Giant Growth
+manapool:{G}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Giant Growth
+571392
+571392
+next
+next
+571392
+next
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:571392
+graveyard:Giant Growth
+[PLAYER2]
+inplay:Hill Giant
+life:13
+[END]

@@ -1,0 +1,21 @@
+#Blue Horror: "Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any
+#target." Shock at player 2, and the trigger names player 2 too: 3 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blue Horror
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blue Horror
+graveyard:Shock
+[PLAYER2]
+life:17
+[END]

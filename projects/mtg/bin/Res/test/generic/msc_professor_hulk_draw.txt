@@ -1,0 +1,23 @@
+#Professor Hulk: "Whenever it deals combat damage to a player, draw that many cards." Six.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Hulk
+library:Grizzly Bears,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Professor Hulk
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Professor Hulk
+hand:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+library:Grizzly Bears
+[PLAYER2]
+life:14
+[END]

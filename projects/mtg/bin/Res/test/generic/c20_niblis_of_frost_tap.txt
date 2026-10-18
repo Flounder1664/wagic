@@ -1,0 +1,24 @@
+#Niblis of Frost: "Whenever you cast an instant or sorcery spell, tap target creature an opponent
+#controls. It doesn't untap during its controller's next untap step." Shock at player 2, Hill Giant tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Niblis of Frost
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shock
+p2
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Niblis of Frost
+graveyard:Shock
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+life:18
+[END]

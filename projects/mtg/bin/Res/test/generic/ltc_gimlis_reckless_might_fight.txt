@@ -1,0 +1,28 @@
+#Gimli's Reckless Might: "Whenever you attack, if creatures you control have total power 8 or greater,
+#target attacking creature you control fights up to one target creature you don't control." Craw Wurm
+#and Grizzly Bears attack (8 power); Craw Wurm is named, then Hill Giant: the Giant dies, the Wurm
+#(6/4, 3 damage) lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gimli's Reckless Might,Craw Wurm,Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+next
+next
+Craw Wurm
+Grizzly Bears
+next
+Craw Wurm
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Gimli's Reckless Might,Craw Wurm,Grizzly Bears
+[PLAYER2]
+graveyard:Hill Giant
+life:12
+[END]

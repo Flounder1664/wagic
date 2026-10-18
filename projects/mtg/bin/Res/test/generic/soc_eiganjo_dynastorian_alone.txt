@@ -1,0 +1,21 @@
+#Eiganjo Dynastorian attacking alone does not become prepared.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:708088
+[PLAYER2]
+[DO]
+next
+next
+708088
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:708088
+counter:708088=prepared:0
+[PLAYER2]
+life:18
+[END]

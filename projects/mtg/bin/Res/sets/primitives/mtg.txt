@@ -60433,6 +60433,8 @@ toughness=2
 name=Il Mheg Pixie
 abilities=flying
 #2026-10-18: was deplete:1 (mill), but the card says surveil 1. Test: fin_il_mheg_pixie_surveil.
+#REVIEW-V the surveil choice is untested: the test only takes "put in graveyard", which a mill would
+#match too. Check that the top card can be KEPT on top.
 auto=@combat(attacking) source(this):_SURVEIL1_
 text=Flying -- Whenever this creature attacks, surveil 1.
 mana={1}{U}

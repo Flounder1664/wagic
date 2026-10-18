@@ -1,0 +1,32 @@
+#Niko Defies Destiny chapter III: "Return target card with foretell from your graveyard to your hand."
+#Two rounds pass; at lore 3 Saw It Coming is named and comes back; the saga is sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Niko Defies Destiny
+graveyard:503684
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[DO]
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+503684
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:503684,*,*
+graveyard:Niko Defies Destiny
+library:*,*
+[PLAYER2]
+hand:*,*
+library:*,*
+[END]

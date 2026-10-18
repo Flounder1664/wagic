@@ -1,0 +1,22 @@
+#Vanguard Suppressor: "Whenever it deals combat damage to a player, draw a card."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vanguard Suppressor
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Vanguard Suppressor
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Vanguard Suppressor
+hand:Hill Giant
+[PLAYER2]
+life:17
+[END]
