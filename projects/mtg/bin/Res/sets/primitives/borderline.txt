@@ -14912,13 +14912,10 @@ toughness=3
 [card]
 name=Briar Hydra
 abilities=trample
-#John: the chapter III bonus persisted past end of turn. Checked against Scryfall 2026-09-08 -
-#the printed line is "target creature YOU CONTROL gets +X/+X and gains trample UNTIL END OF
-#TURN, where X is the number of basic land types". It is not +1/+1 counters at all, so the
-#counter form was permanent when it should expire, and was missing trample and the you-control
-#restriction. transforms((,trample,newability[X/X])) ueot is the attested shape for a keyword
-#plus a dynamic pump.
-auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield):name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
+#2026-10-18: a 2026-09-08 fix for The Weatherseed Treaty's chapter III was pasted onto this
+#line by mistake, leaving two abilities joined by a colon. Briar Hydra really does put
+#counters (Scryfall), so this is the pre-09-08 line again. Test: dmu_briar_hydra_domain.
+auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield)
 text=Trample -- Domain - Whenever Briar Hydra deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.
 mana={5}{G}
 type=Creature
@@ -136150,7 +136147,9 @@ toughness=5
 [card]
 name=Trained Arynx
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
-auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,firststrike)) ueot && _SCRY1_
+#2026-10-18: was transforms((,firststrike)) - not a keyword (it is "first strike"), so the saddled
+#Arynx never gained it. Test: otj_trained_arynx_first_strike.
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,first strike)) ueot && _SCRY1_
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
 mana={1}{W}

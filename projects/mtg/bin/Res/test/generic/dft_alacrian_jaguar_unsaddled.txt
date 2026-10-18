@@ -1,0 +1,21 @@
+#Alacrian Jaguar attacking WITHOUT being saddled gets nothing: 4 damage, still 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Alacrian Jaguar
+[PLAYER2]
+[DO]
+next
+next
+Alacrian Jaguar
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Alacrian Jaguar
+pt:Alacrian Jaguar=4/4
+[PLAYER2]
+life:16
+[END]

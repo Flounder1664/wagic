@@ -1,0 +1,33 @@
+#Summon: Leviathan: chapter I returns Grizzly Bears (not a sea creature) to hand. At lore 2, "whenever
+#a Kraken, Leviathan, Merfolk, Octopus or Serpent you control attacks, draw a card": the Leviathan
+#itself attacks and draws. Bears are seeded first so they are on the battlefield when chapter I resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Summon: Leviathan
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+eot
+eot
+next
+next
+next
+next
+next
+Summon: Leviathan
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Summon: Leviathan
+hand:Grizzly Bears,*,*
+library:*
+[PLAYER2]
+hand:*
+library:*,*
+life:14
+[END]

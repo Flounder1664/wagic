@@ -1,0 +1,26 @@
+#The Indomitable, crewed by Hill Giant: "Whenever a creature you control deals combat damage to a
+#player, draw a card." It and Grizzly Bears connect: two cards drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Indomitable,Hill Giant,Grizzly Bears
+library:Ornithopter,Ornithopter
+[PLAYER2]
+[DO]
+The Indomitable
+Hill Giant
+next
+next
+The Indomitable
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:The Indomitable,Hill Giant,Grizzly Bears
+hand:Ornithopter,Ornithopter
+[PLAYER2]
+life:12
+[END]

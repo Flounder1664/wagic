@@ -1,0 +1,25 @@
+#Congregation Gryff, saddled by Hill Giant: "gets +1/+1 until end of turn for each Mount you control."
+#Two Mounts (itself and Alacrian Jaguar): 1/4 -> 3/6, lifelink.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Congregation Gryff,Alacrian Jaguar,Hill Giant
+[PLAYER2]
+[DO]
+Congregation Gryff
+Hill Giant
+next
+next
+Congregation Gryff
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Congregation Gryff,Alacrian Jaguar,Hill Giant
+pt:Congregation Gryff=3/6
+life:23
+[PLAYER2]
+life:17
+[END]

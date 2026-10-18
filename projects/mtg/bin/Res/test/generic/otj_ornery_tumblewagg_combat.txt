@@ -1,0 +1,17 @@
+#Ornery Tumblewagg: "At the beginning of combat on your turn, put a +1/+1 counter on target creature
+#you control." Grizzly Bears is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornery Tumblewagg,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+Grizzly Bears
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Ornery Tumblewagg,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

@@ -1,0 +1,26 @@
+#Bulwark Ox, saddled by Llanowar Elves: "Whenever it attacks while saddled, put a +1/+1 counter on
+#target creature." The Elves are named as the target.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bulwark Ox,Llanowar Elves
+[PLAYER2]
+[DO]
+Bulwark Ox
+Llanowar Elves
+next
+next
+Bulwark Ox
+next
+Llanowar Elves
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bulwark Ox,Llanowar Elves
+pt:Llanowar Elves=2/2
+pt:Bulwark Ox=2/2
+[PLAYER2]
+life:18
+[END]

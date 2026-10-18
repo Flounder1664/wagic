@@ -1,0 +1,27 @@
+#The Belligerent, crewed by Hill Giant: "Whenever it attacks, create a Treasure token. Until end of turn
+#you may play lands and cast spells from the top of your library." The top land is played in main 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Belligerent,Hill Giant
+library:Grizzly Bears,Evolving Wilds
+[PLAYER2]
+[DO]
+The Belligerent
+Hill Giant
+next
+next
+The Belligerent
+next
+next
+next
+next
+Evolving Wilds
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:The Belligerent,Hill Giant,Evolving Wilds,*
+library:Grizzly Bears
+[PLAYER2]
+life:15
+[END]

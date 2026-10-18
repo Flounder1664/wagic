@@ -1,0 +1,24 @@
+#Mysterio's Phantasm: "Whenever it attacks, mill a card." library: lists bottom first, so Hill
+#Giant is on top and is the card milled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mysterio's Phantasm
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Mysterio's Phantasm
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Mysterio's Phantasm
+library:Grizzly Bears
+graveyard:Hill Giant
+[PLAYER2]
+life:18
+[END]

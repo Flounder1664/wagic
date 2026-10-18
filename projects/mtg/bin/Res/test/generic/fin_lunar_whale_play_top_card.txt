@@ -1,0 +1,28 @@
+#The Lunar Whale: "As long as it attacked this turn, you may play the top card of your library."
+#Crewed by Grizzly Bears, it attacks; in the second main phase the top card (Evolving Wilds) is
+#played straight from the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Lunar Whale,Grizzly Bears
+library:Island,Evolving Wilds
+[PLAYER2]
+[DO]
+The Lunar Whale
+Grizzly Bears
+next
+next
+The Lunar Whale
+next
+next
+next
+next
+Evolving Wilds
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:The Lunar Whale,Grizzly Bears,Evolving Wilds
+library:*
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,38 @@
+#Cast, not seeded: a seeded saga resolves chapter I before the library is seeded.
+#Summon: Titan chapter III: "Another target creature gains trample and gets +X/+X where X is the number
+#of lands you control." Two rounds pass (chapter I mills five Hill Giants, chapter II returns no lands);
+#at lore 3 Grizzly Bears is named and gets +2/+2 from two Forests, and the saga is sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Forest,Forest
+hand:Summon: Titan
+manapool:{3}{G}{G}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[DO]
+Summon: Titan
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*,*
+pt:Grizzly Bears=4/4
+hand:*,*
+library:*
+graveyard:*,*,*,*,*,*
+[PLAYER2]
+hand:*,*
+library:*,*
+[END]

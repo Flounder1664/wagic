@@ -1,0 +1,23 @@
+#Quilled Charger, saddled by Grizzly Bears: attacks and gets +1/+2 and menace (4/3 -> 5/5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Quilled Charger,Grizzly Bears
+[PLAYER2]
+[DO]
+Quilled Charger
+Grizzly Bears
+next
+next
+Quilled Charger
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Quilled Charger,Grizzly Bears
+pt:Quilled Charger=5/5
+[PLAYER2]
+life:15
+[END]

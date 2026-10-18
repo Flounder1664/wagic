@@ -1,0 +1,22 @@
+#Ajani's Chosen: "Whenever an enchantment enters under your control, create a 2/2 Cat. If that
+#enchantment is an Aura, you may attach it to the token." Holy Strength goes on Grizzly Bears, then
+#choice 0 moves it to the Cat: the Bears are back to 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani's Chosen,Grizzly Bears
+hand:Holy Strength
+manapool:{W}
+[PLAYER2]
+[DO]
+Holy Strength
+Grizzly Bears
+choice 0
+Cat Soc
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani's Chosen,Grizzly Bears,Holy Strength,*
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]

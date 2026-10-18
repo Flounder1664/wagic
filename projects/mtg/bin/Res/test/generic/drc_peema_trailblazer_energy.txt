@@ -1,0 +1,22 @@
+#Peema Trailblazer: "Whenever this creature deals combat damage to a player, you get that many {E}."
+#It hits for 3 and the energy: assert reads 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Peema Trailblazer
+[PLAYER2]
+[DO]
+next
+next
+Peema Trailblazer
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Peema Trailblazer
+energy:3
+[PLAYER2]
+life:17
+[END]

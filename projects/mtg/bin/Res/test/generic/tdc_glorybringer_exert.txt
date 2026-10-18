@@ -1,0 +1,25 @@
+#Glorybringer: "You may exert Glorybringer as it attacks. When you do, it deals 4 damage to target
+#non-Dragon creature an opponent controls." choice 0 takes the exert, then Hill Giant is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glorybringer
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+next
+next
+Glorybringer
+next
+choice 0
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Glorybringer
+[PLAYER2]
+graveyard:Hill Giant
+life:16
+[END]

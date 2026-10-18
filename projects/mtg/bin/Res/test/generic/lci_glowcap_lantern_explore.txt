@@ -1,0 +1,27 @@
+#Glowcap Lantern: equipped creature has "Whenever this creature attacks, it explores." Equipped to
+#Grizzly Bears, which attacks; the top card is a land, so it goes to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glowcap Lantern,Grizzly Bears
+library:Hill Giant,Evolving Wilds
+manapool:{2}
+[PLAYER2]
+[DO]
+Glowcap Lantern
+Grizzly Bears
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Glowcap Lantern,Grizzly Bears
+hand:Evolving Wilds
+library:Hill Giant
+[PLAYER2]
+life:18
+[END]

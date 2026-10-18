@@ -1,0 +1,23 @@
+#Nebelgast Herald: "Whenever Nebelgast Herald or another Spirit enters under your control, tap target
+#creature an opponent controls." Cast it (Hill Giant tapped), then cast Spectral Sailor, a Spirit
+#(Grizzly Bears tapped).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Nebelgast Herald,Spectral Sailor
+manapool:{2}{U}{U}
+[PLAYER2]
+inplay:Hill Giant,Grizzly Bears
+[DO]
+Nebelgast Herald
+Hill Giant
+Spectral Sailor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Nebelgast Herald,Spectral Sailor
+[PLAYER2]
+inplay:Hill Giant,Grizzly Bears
+tappedinplay:2
+[END]

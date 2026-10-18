@@ -59793,8 +59793,9 @@ toughness=7
 [/card]
 [card]
 name=Hydra Omnivore
-auto=@combatdamaged(player) from(this):damage:thatmuch opponent
-#MISSING multiplayer only - hits 'each other opponent'; in a 1v1 game this is a no-op
+#2026-10-18: there is no OTHER opponent in a two-player game, so the trigger does nothing. The
+#old line (damage:thatmuch opponent) hit the one opponent a second time - 16 from an 8/8.
+#Test: dsc_hydra_omnivore_no_extra_damage.
 text=Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.
 mana={4}{G}{G}
 type=Creature
@@ -60431,7 +60432,8 @@ toughness=2
 [card]
 name=Il Mheg Pixie
 abilities=flying
-auto=@combat(attacking) source(this):deplete:1 controller
+#2026-10-18: was deplete:1 (mill), but the card says surveil 1. Test: fin_il_mheg_pixie_surveil.
+auto=@combat(attacking) source(this):_SURVEIL1_
 text=Flying -- Whenever this creature attacks, surveil 1.
 mana={1}{U}
 type=Creature

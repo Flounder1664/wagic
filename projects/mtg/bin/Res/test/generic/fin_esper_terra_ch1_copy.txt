@@ -1,0 +1,16 @@
+#Esper Terra chapter I: "Create a token that's a copy of target nonlegendary enchantment you control.
+#It gains haste." Glorious Anthem is named; with two Anthems Grizzly Bears is 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Esper Terra,Glorious Anthem,Grizzly Bears
+[PLAYER2]
+[DO]
+Glorious Anthem
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Esper Terra,Glorious Anthem,Grizzly Bears,*
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

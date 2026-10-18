@@ -1,0 +1,22 @@
+#Sidequest: Play Blitzball: "At the beginning of combat on your turn, target creature you control
+#gets +2/+0 until end of turn." Grizzly Bears is named, then attacks for 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sidequest: Play Blitzball,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+Grizzly Bears
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:*,Grizzly Bears
+[PLAYER2]
+life:16
+[END]

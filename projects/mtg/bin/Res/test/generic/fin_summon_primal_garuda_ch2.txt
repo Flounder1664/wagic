@@ -1,0 +1,29 @@
+#Summon: Primal Garuda chapter II: "Another target creature you control gets +1/+0 and gains flying."
+#Chapter I (4 damage to a TAPPED opposing creature) has no legal target here and does nothing. One
+#round later (zones are counts: cards drawn on a turn pass do not answer to their name) lore 2 fires chapter II, and Grizzly Bears is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Summon: Primal Garuda,Grizzly Bears
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Summon: Primal Garuda,Grizzly Bears
+counter:Summon: Primal Garuda=Lore:2
+pt:Grizzly Bears=3/2
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

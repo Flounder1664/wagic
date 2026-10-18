@@ -1,0 +1,25 @@
+#Redwing: "Whenever Redwing attacks, surveil 1." choice 0 = put in graveyard, then the top card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Redwing
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Redwing
+next
+choice 0
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Redwing
+library:Grizzly Bears
+graveyard:Hill Giant
+[PLAYER2]
+life:19
+[END]

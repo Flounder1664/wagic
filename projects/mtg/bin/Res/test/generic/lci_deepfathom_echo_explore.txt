@@ -1,0 +1,18 @@
+#Deepfathom Echo: "At the beginning of combat on your turn, this creature explores." Top card is not a
+#land (Hill Giant), so it gets a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deepfathom Echo
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Deepfathom Echo
+pt:Deepfathom Echo=5/5
+library:Hill Giant
+[PLAYER2]
+[END]

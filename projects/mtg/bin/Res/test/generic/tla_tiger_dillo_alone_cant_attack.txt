@@ -1,0 +1,21 @@
+#Tiger-Dillo: "can't attack or block unless you control another creature with power 4 or greater."
+#Alone, its attack click does nothing; with no attacker the combat steps are skipped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tiger-Dillo
+[PLAYER2]
+[DO]
+next
+next
+Tiger-Dillo
+next
+next
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Tiger-Dillo
+[PLAYER2]
+life:20
+[END]

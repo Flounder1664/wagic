@@ -1,0 +1,26 @@
+#Fire Nation Engineer: "Raid - At the beginning of your end step, if you attacked this turn, put a
+#+1/+1 counter on another target creature or Vehicle you control." It attacks, then the end-step
+#trigger takes Grizzly Bears as its target.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation Engineer,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+Fire Nation Engineer
+next
+next
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Fire Nation Engineer,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+life:18
+[END]

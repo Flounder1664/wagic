@@ -1,0 +1,23 @@
+#Rambling Possum, saddled by Llanowar Elves: attacks and gets +1/+2 (3/3 -> 4/5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rambling Possum,Llanowar Elves
+[PLAYER2]
+[DO]
+Rambling Possum
+Llanowar Elves
+next
+next
+Rambling Possum
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Rambling Possum,Llanowar Elves
+pt:Rambling Possum=4/5
+[PLAYER2]
+life:16
+[END]

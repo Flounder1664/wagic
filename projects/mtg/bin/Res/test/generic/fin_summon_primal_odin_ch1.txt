@@ -1,0 +1,17 @@
+#Summon: Primal Odin chapter I: "Destroy target creature an opponent controls." The seeded saga's
+#first lore counter fires it; Hill Giant is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Summon: Primal Odin
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Summon: Primal Odin
+[PLAYER2]
+graveyard:Hill Giant
+[END]

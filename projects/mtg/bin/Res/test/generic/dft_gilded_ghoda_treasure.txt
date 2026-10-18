@@ -1,0 +1,22 @@
+#Gilded Ghoda, saddled by Llanowar Elves: "Whenever it attacks while saddled, create a Treasure."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gilded Ghoda,Llanowar Elves
+[PLAYER2]
+[DO]
+Gilded Ghoda
+Llanowar Elves
+next
+next
+Gilded Ghoda
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Gilded Ghoda,Llanowar Elves,*
+[PLAYER2]
+life:18
+[END]

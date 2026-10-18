@@ -1,0 +1,25 @@
+#Brightfield Mustang, saddled by Llanowar Elves: attacks while saddled, untaps and gets a +1/+1
+#counter. Only the Elves stay tapped, and the 4/4 hits for 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brightfield Mustang,Llanowar Elves
+[PLAYER2]
+[DO]
+Brightfield Mustang
+Llanowar Elves
+next
+next
+Brightfield Mustang
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Brightfield Mustang,Llanowar Elves
+pt:Brightfield Mustang=4/4
+tappedinplay:1
+[PLAYER2]
+life:16
+[END]

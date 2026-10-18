@@ -1,0 +1,24 @@
+#Unswerving Sloth, saddled by Craw Wurm (Saddle 4): attacks while saddled, gains indestructible and
+#untaps all creatures you control. The Wurm and the Sloth itself end combat untapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unswerving Sloth,Craw Wurm
+[PLAYER2]
+[DO]
+Unswerving Sloth
+Craw Wurm
+next
+next
+Unswerving Sloth
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Unswerving Sloth,Craw Wurm
+tappedinplay:0
+[PLAYER2]
+life:15
+[END]

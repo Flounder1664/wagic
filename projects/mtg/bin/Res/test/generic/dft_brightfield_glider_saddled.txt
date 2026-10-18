@@ -1,0 +1,23 @@
+#Brightfield Glider, saddled by Hill Giant (Saddle 3): attacks and gets +1/+2 and flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brightfield Glider,Hill Giant
+[PLAYER2]
+[DO]
+Brightfield Glider
+Hill Giant
+next
+next
+Brightfield Glider
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Brightfield Glider,Hill Giant
+pt:Brightfield Glider=2/3
+[PLAYER2]
+life:18
+[END]

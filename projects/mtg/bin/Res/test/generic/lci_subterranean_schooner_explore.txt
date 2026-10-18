@@ -1,0 +1,27 @@
+#Subterranean Schooner: crewed by Grizzly Bears, "whenever this Vehicle attacks, target creature that
+#crewed it this turn explores." The Bears are named; the top card is a land, so it goes to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Subterranean Schooner,Grizzly Bears
+library:Hill Giant,Evolving Wilds
+[PLAYER2]
+[DO]
+Subterranean Schooner
+Grizzly Bears
+next
+next
+Subterranean Schooner
+next
+Grizzly Bears
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Subterranean Schooner,Grizzly Bears
+hand:Evolving Wilds
+library:Hill Giant
+[PLAYER2]
+life:17
+[END]
