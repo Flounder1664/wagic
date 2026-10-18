@@ -69095,6 +69095,7 @@ toughness=2
 [/card]
 [card]
 name=Lullmage's Domination
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): costs {3} less with 8 cards in the opponent's graveyard; three Islands paid X=2, took Grizzly Bears.
 anyzone=this(variable{type:*:opponentgraveyard}>7)while changecost(colorless:-3) forcedalive
 #The target was on the card (target=creature[manacost=X]), chosen before X was known, so no
 #creature qualified and the spell never cast - John chose X and the mana stayed in the pool
@@ -80017,6 +80018,7 @@ subtype=Saga
 [/card]
 [card]
 name=Of One Mind
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): with a Human and a non-Human it cast for just {U} and drew two; with only a Human it could not be cast from two Islands.
 auto=draw:2 controller
 #Real text: {2} less if you control a Human AND a non-Human creature (2026-10-16, John). It was {1}
 #off for each separately, so a lone Human made it {1}{U}. The two conditions are nested.
@@ -150588,6 +150590,7 @@ type=Land
 [/card]
 [card]
 name=Isilu, Carrier of Twilight
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): transformed from Eirdu with {B}; shows its own art.
 backside=Eirdu, Carrier of Dawn
 abilities=flying,lifelink
 auto=lord(other creature[-token]|mybattlefield) persist

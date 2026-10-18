@@ -36198,6 +36198,7 @@ type=Instant
 [/card]
 [card]
 name=Eirdu, Carrier of Dawn
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): pays {B} at first main to transform; Isilu's back face shows its art.
 mana={3}{W}{W}
 type=Legendary Creature
 subtype=Elemental God
@@ -80002,6 +80003,7 @@ toughness=3
 [/card]
 [card]
 name=Molder
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): X=2 offered only the mana value 2 target (Mind Stone, not Juggernaut); destroyed it and gained 2 life.
 auto=bury target(*[artifact;enchantment;manacost=x])
 auto=life:X
 text=Destroy target artifact or enchantment with mana value X. It can't be regenerated. You gain X life.
@@ -107835,6 +107837,7 @@ toughness=1
 [/card]
 [card]
 name=Selfless Safewright
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): flashed in, chose Giant; Lightning Bolt on own Hill Giant did not kill it (indestructible).
 mana={3}{G}{G}
 type=Creature
 abilities=flash
@@ -139061,6 +139064,7 @@ toughness=3
 [/card]
 [card]
 name=Wanderwine Farewell
+#VERIFIED IN GAME 2026-10-18 (John, scenario queue): bouncing two permanents made two Merfolk tokens, with art.
 mana={5}{U}{U}
 type=Kindred Sorcery
 subtype=Merfolk
