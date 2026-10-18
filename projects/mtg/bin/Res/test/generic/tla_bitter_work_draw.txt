@@ -1,0 +1,23 @@
+#Bitter Work: "Whenever you attack a player with one or more creatures with power 4 or greater,
+#draw a card." Craw Wurm (6/4) attacks; the library's one card is drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bitter Work,Craw Wurm
+library:Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+Craw Wurm
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bitter Work,Craw Wurm
+hand:Grizzly Bears
+[PLAYER2]
+life:14
+[END]

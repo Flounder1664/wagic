@@ -1,0 +1,18 @@
+#Scythecat Cub: "Landfall - put a +1/+1 counter on target creature you control." A Forest is played and
+#the Cub names itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Scythecat Cub
+hand:Forest
+[PLAYER2]
+[DO]
+Forest
+Scythecat Cub
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Scythecat Cub,*
+pt:Scythecat Cub=3/3
+[PLAYER2]
+[END]

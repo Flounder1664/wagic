@@ -1,0 +1,25 @@
+#Giant Beaver, saddled by Hill Giant: "put a +1/+1 counter on target creature you control" (that
+#saddled it - approximated as any). Hill Giant is named.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Giant Beaver,Hill Giant
+[PLAYER2]
+[DO]
+Giant Beaver
+Hill Giant
+next
+next
+Giant Beaver
+next
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Giant Beaver,Hill Giant
+pt:Hill Giant=4/4
+[PLAYER2]
+life:16
+[END]

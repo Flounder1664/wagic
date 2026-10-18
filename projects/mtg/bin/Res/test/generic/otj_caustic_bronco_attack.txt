@@ -1,0 +1,24 @@
+#Caustic Bronco: "Whenever it attacks, reveal the top card of your library and put it into your hand"
+#(the life swing is a known missing=).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Caustic Bronco
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Caustic Bronco
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Caustic Bronco
+hand:Hill Giant
+library:Grizzly Bears
+[PLAYER2]
+life:18
+[END]

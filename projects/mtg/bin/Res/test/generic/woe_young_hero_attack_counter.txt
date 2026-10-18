@@ -1,0 +1,26 @@
+#Young Hero (Role): enchanted creature has "Whenever this creature attacks, if its toughness is 3 or
+#less, put a +1/+1 counter on it." No card here makes the Role, so it is cast from hand (no cost) onto
+#Grizzly Bears, which attacks and becomes 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Young Hero
+[PLAYER2]
+[DO]
+Young Hero
+Grizzly Bears
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,Young Hero
+pt:Grizzly Bears=3/3
+[PLAYER2]
+life:17
+[END]

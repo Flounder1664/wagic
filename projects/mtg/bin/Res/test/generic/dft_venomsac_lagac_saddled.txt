@@ -1,0 +1,23 @@
+#Venomsac Lagac, saddled by Grizzly Bears: "Whenever it attacks while saddled, it gets +0/+3."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Venomsac Lagac,Grizzly Bears
+[PLAYER2]
+[DO]
+Venomsac Lagac
+Grizzly Bears
+next
+next
+Venomsac Lagac
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Venomsac Lagac,Grizzly Bears
+pt:Venomsac Lagac=2/4
+[PLAYER2]
+life:18
+[END]

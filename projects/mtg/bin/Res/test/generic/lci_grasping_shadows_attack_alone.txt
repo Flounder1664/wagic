@@ -1,0 +1,23 @@
+#Grasping Shadows: "Whenever a creature you control attacks alone, it gains deathtouch and lifelink until
+#end of turn. Put a dread counter on Grasping Shadows."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grasping Shadows,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grasping Shadows,Grizzly Bears
+counter:Grasping Shadows=dread:1
+life:22
+[PLAYER2]
+life:18
+[END]

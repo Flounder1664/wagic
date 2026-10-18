@@ -1,0 +1,21 @@
+#Arclight Phoenix: only two instants cast, so it stays in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Arclight Phoenix
+hand:Shock,Shock
+manapool:{R}{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Shock
+p2
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+graveyard:Arclight Phoenix,Shock,Shock
+[PLAYER2]
+life:16
+[END]

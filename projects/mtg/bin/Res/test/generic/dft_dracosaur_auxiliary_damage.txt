@@ -1,0 +1,24 @@
+#Dracosaur Auxiliary, saddled by Hill Giant: "Whenever it attacks while saddled, it deals 2 damage to
+#any target." The opponent is named: 2 plus 4 combat damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dracosaur Auxiliary,Hill Giant
+[PLAYER2]
+[DO]
+Dracosaur Auxiliary
+Hill Giant
+next
+next
+Dracosaur Auxiliary
+next
+p2
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Dracosaur Auxiliary,Hill Giant
+[PLAYER2]
+life:14
+[END]

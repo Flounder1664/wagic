@@ -8851,7 +8851,10 @@ abilities=vigilance
 #on that counter, costing the BACK FACE's mana, running the back face's own body, and taking
 #the counter back off with all(this) - a bare negative counter lands on the ability's target.
 #Pattern proved on Emeritus of Abundance // Regrowth (generic/prepared_*.txt).
-auto=@each my combatattackers restriction{type(creature[attacking]|mybattlefield)~morethan~1}:name(Becomes prepared) _PREPARE_
+#2026-10-18: was @each my combatattackers, which fires as the declare-attackers step BEGINS, before
+#any attacker is declared, so the two-attacker count was always 0. An attack trigger sees them.
+#Tests: soc_eiganjo_dynastorian_prepared / _alone.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{type(creature[attacking]|mybattlefield)~morethan~1}:name(Becomes prepared) _PREPARE_
 #The back face IS a real Magic card that this build already implements, so cast a copy of
 #IT rather than re-inlining an approximation of its text. That fixes three things at once:
 #the copy goes on the stack and can be responded to, its own sequencing is correct (John hit
@@ -12182,6 +12185,8 @@ subtype=Aura Role
 name=Young Hero
 grade=borderline
 target=creature
+#Tests: woe_young_hero_attack_counter / _toughness_four (cast from hand for no cost - no card in the
+#database makes this Role).
 auto=teach(creature) transforms((,newability[@combat(attacking) source(this) restriction{compare(toughness)~lessthan~4}:counter(1/1)]))
 text=Enchant creature -- Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
 type=Enchantment
@@ -14912,13 +14917,10 @@ toughness=3
 [card]
 name=Briar Hydra
 abilities=trample
-#John: the chapter III bonus persisted past end of turn. Checked against Scryfall 2026-09-08 -
-#the printed line is "target creature YOU CONTROL gets +X/+X and gains trample UNTIL END OF
-#TURN, where X is the number of basic land types". It is not +1/+1 counters at all, so the
-#counter form was permanent when it should expire, and was missing trample and the you-control
-#restriction. transforms((,trample,newability[X/X])) ueot is the attested shape for a keyword
-#plus a dynamic pump.
-auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield):name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
+#2026-10-18: a 2026-09-08 fix for The Weatherseed Treaty's chapter III was pasted onto this
+#line by mistake, leaving two abilities joined by a colon. Briar Hydra really does put
+#counters (Scryfall), so this is the pre-09-08 line again. Test: dmu_briar_hydra_domain.
+auto=@combatdamaged(player) from(this):counter(1/1,pbasiclandtypes) target(creature|myBattlefield)
 text=Trample -- Domain - Whenever Briar Hydra deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.
 mana={5}{G}
 type=Creature
@@ -26754,6 +26756,9 @@ name=Deadeye Brawler
 abilities=deathtouch,ascend
 auto=_ASCEND_
 auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
+#REVIEW-V 2026-10-18: the draw never happens in the harness, even with the city's blessing in the
+#command zone for a whole round. Not a harness gap: no restriction{type(City's Blessing|mycommandzone)}
+#or aslongas(...) sees the marker card, so every blessing-gated card is affected. Untested: the draw.
 auto=_CITY'S_BLESSING_ transforms((,newability[@combatdamaged(player) from(this):draw:1]))
 text=Deathtouch -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
 mana={2}{U}{B}
@@ -27951,6 +27956,8 @@ toughness=6
 [card]
 name=Demon of Loathing
 abilities=flying,trample
+#REVIEW-V 2026-10-18: untested - the sacrifice choice goes to the OPPONENT (wagic#47 row 11), which the
+#harness cannot answer; with one creature opposite, nothing was sacrificed. Check the opponent loses one.
 auto=@combatdamaged(player) from(this):ability$!name(sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent
 text=Flying, trample -- Whenever Demon of Loathing deals combat damage to a player, that player sacrifices a creature.
 mana={5}{B}{B}
@@ -50708,6 +50715,8 @@ toughness=4
 [card]
 name=Guardian of the Gateless
 abilities=flying
+#REVIEW-V 2026-10-18: untested - the trigger fires when it BLOCKS, and the harness cannot make the
+#opponent attack. Check it gets +1/+1 when it blocks.
 auto=@combat(blocking) source(this):1/1 ueot
 missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Flying -- Guardian of the Gateless can block any number of creatures. -- Whenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.
@@ -135348,6 +135357,8 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy target(creature|opponentbattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 controller && life:-2 controller && life:-2 opponent
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+#REVIEW-V 2026-10-18: chapter II untested - a creature dealing combat damage must make that player
+#LOSE THE GAME, and a harness run cannot assert a game loss. Chapter I is fin_summon_primal_odin_ch1.
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) ueot
 text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - Until end of turn, creatures you control gain "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
 mana={4}{B}{B}
@@ -136150,7 +136161,9 @@ toughness=5
 [card]
 name=Trained Arynx
 auto={crew2(other creature|myBattlefield)}:name(Saddle 2) counter(0/0,1,saddled) asSorcery restriction{compare(crewtotalpower)~morethan~1}
-auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,firststrike)) ueot && _SCRY1_
+#2026-10-18: was transforms((,firststrike)) - not a keyword (it is "first strike"), so the saddled
+#Arynx never gained it. Test: otj_trained_arynx_first_strike.
+auto=@combat(attacking) source(this) restriction{compare(hascntsaddled)~morethan~0}:transforms((,first strike)) ueot && _SCRY1_
 auto=@each my end:removeallcounters(0/0,1,saddled) all(this)
 text=Saddle Mount (see printed card).
 mana={1}{W}
@@ -138065,6 +138078,10 @@ grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=create(Beast:creature beast:3/3:green)
+#2026-10-18 measured in the harness: chapter II sacrifices the creature but the library search
+#never happens. The search alone (no sacrifice) works, and putting it FIRST in the && chain fails
+#too, so it is the && chain itself. Same shape on two other cards ("Sacrifice a planeswalker to
+#search", "Discard a card to search"). Not fixed yet; chapter I and III are unaffected.
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) may name(Sacrifice a creature to search) sacrifice notaTarget(creature|mybattlefield) && target(creature|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) all(creature|mybattlefield) 2/2 ueot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)

@@ -1,0 +1,23 @@
+#Eiganjo Dynastorian: "Whenever you attack with two or more creatures, it becomes prepared" (a Prepared
+#counter). It attacks with Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:708088,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+708088
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:708088,Grizzly Bears
+counter:708088=prepared:1
+[PLAYER2]
+life:16
+[END]

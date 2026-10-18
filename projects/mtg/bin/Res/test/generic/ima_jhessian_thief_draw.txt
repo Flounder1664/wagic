@@ -1,0 +1,22 @@
+#Jhessian Thief: "Whenever it deals combat damage to a player, draw a card."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jhessian Thief
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Jhessian Thief
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Jhessian Thief
+hand:Hill Giant
+[PLAYER2]
+life:19
+[END]

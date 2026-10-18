@@ -1,0 +1,24 @@
+#The Lord Master of Hell: "Whenever it attacks, it deals X damage to each opponent, where X is the
+#number of noncreature, nonland cards in your graveyard." Shock and Giant Growth count, Grizzly Bears
+#does not: 2 from Starfall plus 3 combat damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Lord Master of Hell
+graveyard:Shock,Giant Growth,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+The Lord Master of Hell
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:The Lord Master of Hell
+graveyard:Shock,Giant Growth,Grizzly Bears
+[PLAYER2]
+life:15
+[END]

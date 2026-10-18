@@ -1,0 +1,21 @@
+#Technodrome: "This creature can't attack or block unless its power is 6 or greater." At 3/3 the
+#attack click declares nothing (the game stays in the attackers step) and the opponent stays at 20. Remove the cantattack line and it hits for 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Technodrome
+[PLAYER2]
+[DO]
+next
+next
+Technodrome
+next
+next
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Technodrome
+[PLAYER2]
+life:20
+[END]

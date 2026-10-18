@@ -1,0 +1,22 @@
+#Bitter Work: the power 4 gate. Grizzly Bears (2/2) attacks alone, so nothing is drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bitter Work,Grizzly Bears
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bitter Work,Grizzly Bears
+library:Hill Giant
+[PLAYER2]
+life:18
+[END]

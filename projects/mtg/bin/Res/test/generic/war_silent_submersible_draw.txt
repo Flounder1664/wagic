@@ -1,0 +1,25 @@
+#Silent Submersible, crewed by Grizzly Bears: "Whenever it deals combat damage to a player or
+#planeswalker, draw a card."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Silent Submersible,Grizzly Bears
+library:Hill Giant
+[PLAYER2]
+[DO]
+Silent Submersible
+Grizzly Bears
+next
+next
+Silent Submersible
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Silent Submersible,Grizzly Bears
+hand:Hill Giant
+[PLAYER2]
+life:18
+[END]

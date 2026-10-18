@@ -1,0 +1,25 @@
+#Bounding Felidar, saddled by Grizzly Bears: "put a +1/+1 counter on each other creature you control.
+#You gain 1 life for each of those creatures."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bounding Felidar,Grizzly Bears
+[PLAYER2]
+[DO]
+Bounding Felidar
+Grizzly Bears
+next
+next
+Bounding Felidar
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bounding Felidar,Grizzly Bears
+pt:Grizzly Bears=3/3
+life:21
+[PLAYER2]
+life:16
+[END]

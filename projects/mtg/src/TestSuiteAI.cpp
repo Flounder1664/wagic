@@ -40,6 +40,7 @@ TestSuiteAI::TestSuiteAI(TestSuiteGame *tsGame, int playerId) :
     timer = 0;
     expectedTappedInPlay = -1;
     expectedSpeed = -1;
+    expectedEnergy = -1;
     playMode = MODE_TEST_SUITE;
     this->deckName = "Test Suite AI";
     this->comboHint = NULL;
@@ -73,6 +74,13 @@ bool TestSuiteAI::parseLine(const string& s)
     if (s.compare(0, kSpeed.size(), kSpeed) == 0)
     {
         speedCount = expectedSpeed = atoi(s.c_str() + kSpeed.size());
+        return true;
+    }
+    //energy:<n> - like speed: seeds energyCount in [INIT], checks it in [ASSERT].
+    static const string kEnergy = "energy:";
+    if (s.compare(0, kEnergy.size(), kEnergy) == 0)
+    {
+        energyCount = expectedEnergy = atoi(s.c_str() + kEnergy.size());
         return true;
     }
     return AIPlayerBaka::parseLine(s);
@@ -562,6 +570,13 @@ void TestSuiteGame::assertGame()
             Log(result);
             error++;
         }
+        if (endState.players[i]->expectedEnergy >= 0 && p->energyCount != endState.players[i]->expectedEnergy)
+        {
+            sprintf(result, "<span class=\"error\">==energy problem for player %i. Expected %i, got %i==</span><br />", i,
+                            endState.players[i]->expectedEnergy, p->energyCount);
+            Log(result);
+            error++;
+        }
         if (endState.players[i]->expectedTappedInPlay >= 0)
         {
             int tapped = 0;
@@ -807,7 +822,19 @@ TestSuite::TestSuite(const char * filename)
                 const char * onlyFilter = getenv("WAGIC_TESTSUITE_ONLY");
                 if (onlyFilter && *onlyFilter)
                 {
-                    if (s.find(onlyFilter) == string::npos) continue;
+                    //Several substrings may be given, separated by '|'.
+                    string filters(onlyFilter);
+                    bool match = false;
+                    size_t from = 0;
+                    while (!match && from <= filters.size())
+                    {
+                        size_t bar = filters.find('|', from);
+                        string one = filters.substr(from, bar == string::npos ? string::npos : bar - from);
+                        if (!one.empty() && s.find(one) != string::npos) match = true;
+                        if (bar == string::npos) break;
+                        from = bar + 1;
+                    }
+                    if (!match) continue;
                 }
                 else if (s.find("scenario") != string::npos)
                 {
@@ -1217,6 +1244,7 @@ void TestSuiteGame::initGame()
         p->life = initState.players[i]->life;
         p->poisonCount = initState.players[i]->poisonCount;
         p->speedCount = initState.players[i]->speedCount;
+        p->energyCount = initState.players[i]->energyCount;
         stringstream stream;
         initState.players[i]->getRandomGenerator()->saveLoadedRandValues(stream);
         p->getRandomGenerator()->loadRandValues(stream.str());

@@ -1,0 +1,21 @@
+#Hydra Omnivore: "deals that much damage to each OTHER opponent." In a two-player game there is none,
+#so the 8/8 deals exactly 8. The old line dealt it again to the same opponent (16).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hydra Omnivore
+[PLAYER2]
+[DO]
+next
+next
+Hydra Omnivore
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Hydra Omnivore
+[PLAYER2]
+life:12
+[END]

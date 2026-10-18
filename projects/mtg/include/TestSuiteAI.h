@@ -154,6 +154,8 @@ public:
     int expectedTappedInPlay;
     //[ASSERT]-only: expected speed (-1 = don't check). In [INIT], speed: seeds speedCount.
     int expectedSpeed;
+    //[ASSERT]-only: expected energy (-1 = don't check). In [INIT], energy: seeds energyCount.
+    int expectedEnergy;
 
     //[ASSERT]-only: per-card expectations on the battlefield.
     //  pt:<name-or-id>=<P>/<T>       power/toughness of a card in play

@@ -1,0 +1,23 @@
+#Alacrian Jaguar, saddled by Llanowar Elves: attacks while saddled and gets +2/+2 (4/4 hits for 6).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Alacrian Jaguar,Llanowar Elves
+[PLAYER2]
+[DO]
+Alacrian Jaguar
+Llanowar Elves
+next
+next
+Alacrian Jaguar
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Alacrian Jaguar,Llanowar Elves
+pt:Alacrian Jaguar=6/6
+[PLAYER2]
+life:14
+[END]

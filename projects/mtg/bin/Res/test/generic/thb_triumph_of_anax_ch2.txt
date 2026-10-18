@@ -1,0 +1,28 @@
+#The Triumph of Anax: chapter I gives Grizzly Bears +1/+0 (named at setup). A round later chapter II
+#"target creature gains trample and gets +X/+0, X = lore counters (2)": the Bears are named, 4/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,The Triumph of Anax
+library:Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant
+[DO]
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,The Triumph of Anax
+pt:Grizzly Bears=4/2
+hand:*
+library:*
+[PLAYER2]
+hand:*
+library:*
+[END]

@@ -1,0 +1,21 @@
+#Bearer of Overwhelming Truths: "Whenever it deals combat damage to a player, investigate." Exactly one
+#Clue (the card carries two trigger lines, combatdamagefoeof and combatdamageof).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bearer of Overwhelming Truths
+[PLAYER2]
+[DO]
+next
+next
+Bearer of Overwhelming Truths
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bearer of Overwhelming Truths,*
+[PLAYER2]
+life:17
+[END]

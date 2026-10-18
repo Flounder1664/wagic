@@ -146,7 +146,9 @@
 # cards is what the engine now gates on.
 
 # Effect with the City's blessing, Set XLN
-#AUTO_DEFINE _CITY'S_BLESSING_ aslongas(City's Blessing|mybattlefield)>0
+# 2026-10-18: the blessing is a command-zone marker now (GameObserver dropStateMarker), so this
+# looked at the battlefield and never matched. Test: rix_deadeye_brawler_blessing_draw.
+#AUTO_DEFINE _CITY'S_BLESSING_ aslongas(City's Blessing|mycommandzone)>0
 
 # Monarch
 #AUTO_DEFINE _MONARCH_CONTROLLER_ if type(The Monarch|battlefield)~lessthan~1 then token(The Monarch^notrigger) else all(The Monarch|battlefield) moveto(mybattlefield) and!( transforms((,newability[becomesmonarch controller])) forever )!

@@ -1,0 +1,19 @@
+#Summon: Titan chapter I: "Mill five cards." (John 2026-07-19: "lore 1 mill didn't trigger".) Cast
+#from hand; five of the six library cards go to the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Summon: Titan
+manapool:{3}{G}{G}
+library:Grizzly Bears,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+Summon: Titan
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Summon: Titan
+library:Grizzly Bears
+graveyard:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[END]

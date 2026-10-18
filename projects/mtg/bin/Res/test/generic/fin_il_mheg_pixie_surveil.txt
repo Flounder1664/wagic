@@ -1,0 +1,27 @@
+#Il Mheg Pixie: "Whenever this creature attacks, surveil 1." The surveil reveal takes choice 0
+#(put in graveyard) and a click on the top card (Hill Giant; library: lists bottom first).
+#The put-back branch is not driven here: choice 0 / choice 1 / click moved the wrong card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Il Mheg Pixie
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Il Mheg Pixie
+next
+choice 0
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Il Mheg Pixie
+library:Grizzly Bears
+graveyard:Hill Giant
+[PLAYER2]
+life:18
+[END]

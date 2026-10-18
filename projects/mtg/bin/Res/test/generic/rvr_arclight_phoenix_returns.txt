@@ -1,0 +1,25 @@
+#Arclight Phoenix: "At the beginning of combat on your turn, if you've cast three or more instant and
+#sorcery spells this turn, return it from your graveyard to the battlefield." Three Shocks, then combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Arclight Phoenix
+hand:Shock,Shock,Shock
+manapool:{R}{R}{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Shock
+p2
+Shock
+p2
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Arclight Phoenix
+graveyard:Shock,Shock,Shock
+[PLAYER2]
+life:14
+[END]

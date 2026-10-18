@@ -1,0 +1,26 @@
+#Gila Courser, saddled by Llanowar Elves: "exile the top card of your library. Until the end of your
+#next turn, you may play that card."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gila Courser,Llanowar Elves
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[DO]
+Gila Courser
+Llanowar Elves
+next
+next
+Gila Courser
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Gila Courser,Llanowar Elves
+library:Grizzly Bears
+exile:Hill Giant
+[PLAYER2]
+life:16
+[END]

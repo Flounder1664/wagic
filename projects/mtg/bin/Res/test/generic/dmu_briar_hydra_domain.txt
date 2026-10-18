@@ -1,0 +1,24 @@
+#Briar Hydra: "Whenever it deals combat damage to a player, put X +1/+1 counters on target creature
+#you control, where X is the number of basic land types among lands you control." Forest, Island and
+#Plains make X=3; Grizzly Bears is named and becomes 5/5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Briar Hydra,Grizzly Bears,Forest,Island,Plains
+[PLAYER2]
+[DO]
+next
+next
+Briar Hydra
+next
+next
+Grizzly Bears
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Briar Hydra,Grizzly Bears,*,*,*
+pt:Grizzly Bears=5/5
+[PLAYER2]
+life:14
+[END]

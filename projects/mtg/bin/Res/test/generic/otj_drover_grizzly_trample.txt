@@ -1,0 +1,27 @@
+#Drover Grizzly, saddled by Llanowar Elves: "creatures you control gain trample." It is blocked by
+#Ornithopter (0/2) and tramples 2 over.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Drover Grizzly,Llanowar Elves
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Drover Grizzly
+Llanowar Elves
+next
+next
+Drover Grizzly
+next
+Ornithopter
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Drover Grizzly,Llanowar Elves
+[PLAYER2]
+graveyard:Ornithopter
+life:18
+[END]

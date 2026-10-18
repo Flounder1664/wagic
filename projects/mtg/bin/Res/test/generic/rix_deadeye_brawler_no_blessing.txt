@@ -1,0 +1,22 @@
+#Deadeye Brawler without the city's blessing (two permanents): no card drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Deadeye Brawler
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Deadeye Brawler
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Deadeye Brawler,*
+library:Hill Giant
+[PLAYER2]
+life:18
+[END]

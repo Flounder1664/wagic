@@ -1,0 +1,20 @@
+#Belligerent Guest: "Whenever it deals combat damage to a player, create a Blood token."
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Belligerent Guest
+[PLAYER2]
+[DO]
+next
+next
+Belligerent Guest
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Belligerent Guest,*
+[PLAYER2]
+life:17
+[END]

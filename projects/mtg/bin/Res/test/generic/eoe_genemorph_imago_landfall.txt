@@ -1,0 +1,18 @@
+#Genemorph Imago: "Landfall - target creature has base power and toughness 3/3 until end of turn."
+#Playing a Forest fires it; Craw Wurm (6/4) is named as the target and becomes 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Genemorph Imago,Craw Wurm
+hand:Forest
+[PLAYER2]
+[DO]
+Forest
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Genemorph Imago,Craw Wurm,*
+pt:Craw Wurm=3/3
+[PLAYER2]
+[END]
