@@ -23913,7 +23913,8 @@ type=Enchantment
 [card]
 name=Coral Sword
 abilities=flash
-auto=ability(firststrike) target(creature|mybattlefield) ueot
+#2026-10-18: was ability(firststrike) - not a keyword (it is "first strike"). Test: fin_coral_sword_first_strike.
+auto=target(creature|mybattlefield) first strike ueot
 auto={1}:equip
 auto=teach(creature) 1/0
 text=Flash -- When this Equipment enters, target creature you control gains first strike until end of turn. -- Equipped creature gets +1/+0. -- Equip {1}.
@@ -101361,7 +101362,8 @@ toughness=1
 name=Riverguard's Reflexes
 target=creature|mybattlefield
 auto=2/2 ueot
-auto=firststrike ueot
+#2026-10-18: was firststrike - not a keyword. Test: ecl_riverguards_reflexes_first_strike.
+auto=first strike ueot
 auto=untap
 mana={1}{W}
 type=Instant
@@ -141480,8 +141482,9 @@ toughness=3
 [/card]
 [card]
 name=Wild Pack Squad
-auto=@each my combatbegins:ability(firststrike) target(creature|mybattlefield) ueot
-auto=@each my combatbegins:ability(vigilance) target(creature|mybattlefield) ueot
+#2026-10-18: was two triggers, ability(firststrike) and ability(vigilance), each with its own target - firststrike
+#is not a keyword, and the card has ONE "up to one target creature". Test: spm_wild_pack_squad_first_strike.
+auto=@each my combatbegins:target(<upto:1>creature) transforms((,first strike,vigilance)) ueot
 text=At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.
 mana={2}{W}
 type=Creature

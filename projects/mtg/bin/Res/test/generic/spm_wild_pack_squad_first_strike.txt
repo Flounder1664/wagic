@@ -1,0 +1,27 @@
+#Wild Pack Squad's beginning-of-combat trigger gives Raging Goblin first strike (and vigilance) until end
+#of turn. The Goblin attacks and is blocked by Eager Cadet: the Cadet dies first and deals no damage
+#(without first strike both 1/1s die).
+#The old lines were "ability(firststrike) target(...) ueot" and "ability(vigilance) ..." - granted nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Pack Squad,Raging Goblin
+[PLAYER2]
+inplay:Eager Cadet
+[DO]
+next
+Raging Goblin
+next
+Raging Goblin
+next
+Eager Cadet
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Wild Pack Squad,Raging Goblin
+[PLAYER2]
+graveyard:Eager Cadet
+[END]

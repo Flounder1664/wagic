@@ -1,0 +1,30 @@
+#Coral Sword's enters trigger gives Raging Goblin first strike until end of turn (the Sword is not
+#equipped, so no +1/+0). The Goblin attacks and is blocked by Eager Cadet: the Cadet dies first and
+#deal no damage (without first strike both 1/1s die).
+#The old line was "ability(firststrike) target(creature|mybattlefield) ueot" - granted nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin
+hand:Coral Sword
+manapool:{R}
+[PLAYER2]
+inplay:Eager Cadet
+[DO]
+Coral Sword
+Raging Goblin
+next
+next
+Raging Goblin
+next
+Eager Cadet
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Raging Goblin,Coral Sword
+[PLAYER2]
+graveyard:Eager Cadet
+[END]

@@ -133568,7 +133568,9 @@ toughness=1
 name=Ratcatcher Trainee // Pest Problem
 abilities=adventure
 other={2}{R} name(Pest Problem)
-auto=@each my beginofturn:firststrike ueot
+#2026-10-18: was "@each my beginofturn:firststrike ueot" - not a keyword (it is "first strike") and a
+#beginofturn grant misses a creature arriving mid-turn. Now the static your-turn form.
+auto=this(variable{controllerturn}>0) first strike
 auto=alternative token(Rat,creature rat,1/1,black cantblock)*2
 auto=alternative _ADVENTURE_
 text=During your turn, this creature has first strike. // Create two 1/1 black Rat creature tokens with "This token can't block."
@@ -135500,11 +135502,12 @@ toughness=3
 [card]
 name=Tonberry
 grade=borderline
-# REVIEW 2026-07-19 [P:med] stun works; first strike your-turn-only unsupported (granted note)
 auto=tap(noevent)
 auto=counter(0/0,1,stun) all(this)
-auto=@each my beginofturn:firststrike ueot
-auto=@each my beginofturn:deathtouch ueot
+#2026-10-18: was "@each my beginofturn:firststrike ueot" (deathtouch the same way) - not a keyword (it is "first strike") and a
+#beginofturn grant misses a creature arriving mid-turn. Now the static your-turn form.
+auto=this(variable{controllerturn}>0) first strike
+auto=this(variable{controllerturn}>0) deathtouch
 text=This creature enters tapped with a stun counter on it. -- Chef's Knife - During your turn, this creature has first strike and deathtouch.
 mana={B}
 type=Creature
