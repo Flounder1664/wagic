@@ -2,8 +2,9 @@ APP_PROJECT_PATH := $(call my-dir)/..
 APP_CPPFLAGS += -frtti -fexceptions
 APP_ABI := arm64-v8a
 APP_PLATFORM := android-21
-APP_CFLAGS += -march=armv8.1-a
-APP_CPPFLAGS += -D__ARM_FEATURE_LSE=1
+# Baseline ARMv8.0: armv8.1-a + forced LSE emitted LDADD/CAS atomics that SIGILL
+# on pre-v8.1 cores (Galaxy Tab S4 / Snapdragon 835 crashed at startup).
+APP_CFLAGS += -march=armv8-a
 #APP_ABI := x86 # mainly for emulators
 APP_STL := c++_static
 APP_MODULES := libpng libjpeg main SDL
