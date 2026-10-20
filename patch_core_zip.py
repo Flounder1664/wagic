@@ -69,6 +69,9 @@ ADD_FILES = {
 # 2026-07-19 intake: 6 previously-missing sets, register-only reprints.
 for _code in ("FIC", "UNF", "EOC", "EOS", "GN3", "FCA", "HOB", "HOC"):
     ADD_FILES['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
+# 2026-10-20 intake: Pioneer Masters, Foundations Commander, Through the Omenpaths (reprints).
+for _code in ("PIO", "FDC", "OM1"):
+    ADD_FILES['sets/%s/_cards.dat' % _code] = os.path.join(_RES, "sets", _code, "_cards.dat")
 
 print(f'Rebuilding {CORE_ZIP} with updated primitives...')
 replaced = set()
@@ -91,7 +94,7 @@ for arcname in ADD_FILES:
         parents.add('/'.join(parts[:i]) + '/')
 
 with zipfile.ZipFile(CORE_ZIP, 'r') as zin, \
-     zipfile.ZipFile(CORE_TMP, 'w', zipfile.ZIP_DEFLATED) as zout:
+     zipfile.ZipFile(CORE_TMP, 'w', zipfile.ZIP_STORED) as zout:  # Wagic's own zips are all STORED
     written = set()
     # Emit directory markers first
     for parent in sorted(parents):
