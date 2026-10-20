@@ -1,0 +1,24 @@
+#TLA playtest 2026-10-18 (John): Flexible Waterbender exiled by Glider Staff's airbend needed its
+#full {3}{U} to cast. It costs {2}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Flexible Waterbender
+hand:Glider Staff
+manapool:{2}{W}{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Glider Staff
+choice 0
+Flexible Waterbender
+Flexible Waterbender
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glider Staff,Flexible Waterbender
+life:20
+[PLAYER2]
+life:20
+[END]

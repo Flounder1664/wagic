@@ -2055,6 +2055,7 @@ class AAMoveCounters: public ActivatedAbility
 {
 public:
     AAMoveCounters(GameObserver* observer, int id, MTGCardInstance * source, Targetable * target);
+    bool toSource; //movecounterstosource: from the target (or its last battlefield self) onto the source
     int resolve();
     const string getMenuText();
     AAMoveCounters * clone() const;

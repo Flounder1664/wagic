@@ -22,6 +22,30 @@ static bool canAffordCast(MTGCardInstance * card, ManaCost * pool, ManaCost * co
     return ok;
 }
 
+//Airbend (TLA): "exile it. While it remains exiled, its owner may cast it for {2} rather than its
+//mana cost." The _AIRBEND_ macro gives the exiled card canplayfromexile + airbent. The {2} is an
+//alternative cost, so the normal, kicker, buyback, morph and overload casts are closed while it
+//sits in exile; only MTGAlternativeCostRule (and a free cast) may take it. Flexible Waterbender
+//asked for its full {3}{U} after Glider Staff airbent it (John, 2026-10-18).
+static bool airbentInExile(MTGCardInstance * card)
+{
+    return card && card->has(Constants::AIRBENT) && card->getObserver()->isInExile(card);
+}
+
+//The exiled instance carries its own ManaCost copy, so the {2} is set on it lazily and only there:
+//the card gets its printed cost back as soon as it moves to the stack.
+static void setAirbendCost(MTGCardInstance * card)
+{
+    if (!airbentInExile(card))
+        return;
+    ManaCost * alt = card->getManaCost()->getAlternative();
+    if (alt && alt->alternativeName == "Airbend")
+        return;
+    ManaCost * airbend = ManaCost::parseManaCost("{2}", NULL, card);
+    airbend->alternativeName = "Airbend";
+    card->getManaCost()->setAlternative(airbend);
+}
+
 //Multikicker (and the other pay-it-N-times costs that ride on it: replicate, strive): ask how
 //many times, the way an X spell asks for X. Without this the payment loop simply bought as
 //many as the pool could afford. Returns true when a menu was opened - the caller returns and
@@ -375,6 +399,8 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
          return 0;
     if ((player->game->library->hasCard(card) && !card->canPlayFromLibrary()) || (player->game->graveyard->hasCard(card) && !card->has(Constants::CANPLAYFROMGRAVEYARD)) || (player->game->exile->hasCard(card) && !card->has(Constants::CANPLAYFROMEXILE)))
          return 0;
+    if (airbentInExile(card))
+        return 0; //airbend: only the {2} alternative cost
     //Leylines may start on the battlefield while the opening-hand window is
     //open. "Nothing has happened yet" is detected through empty zones, but
     //cards exiled by Serum Powder redraws (player->exiledBySerum) are part
@@ -741,6 +767,8 @@ int MTGKickerRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
          return 0;
     if ((player->game->library->hasCard(card) && !card->canPlayFromLibrary()) || (player->game->graveyard->hasCard(card) && !card->has(Constants::CANPLAYFROMGRAVEYARD)) || (player->game->exile->hasCard(card) && !card->has(Constants::CANPLAYFROMEXILE)))
          return 0;
+    if (airbentInExile(card))
+        return 0; //airbend: only the {2} alternative cost
     if(!allowedToCast(card,player))
         return 0;
     if(!card->getManaCost()->getKicker())
@@ -944,6 +972,7 @@ int MTGAlternativeCostRule::isReactingToClick(MTGCardInstance * card, ManaCost *
 {
     if (card->has(Constants::OVERLOAD))
         return 0;//overload has its own rule
+    setAirbendCost(card);
     if(!card->getManaCost()->getAlternative())
         return 0;
     ManaCost * alternateCost = card->getManaCost()->getAlternative();
@@ -965,7 +994,8 @@ int MTGAlternativeCostRule::isReactingToClick(MTGCardInstance * card, ManaCost *
 
     if (!alternateManaCost)
         return 0;
-    if(!allowedToAltCast(card,player))
+    //the card's own otherrestriction= belongs to its own other= cost, which airbend replaced
+    if(!airbentInExile(card) && !allowedToAltCast(card,player))
         return 0;
 
     if(card->has(Constants::ADVENTURE) && game->isInExile(card))
@@ -973,7 +1003,9 @@ int MTGAlternativeCostRule::isReactingToClick(MTGCardInstance * card, ManaCost *
 
     alternativeName = "Pay Alternative Cost";
 
-    if(card->has(Constants::CANPLAYFROMGRAVEYARD) && game->isInGrave(card))
+    if(airbentInExile(card))
+        alternativeName = "Airbend - Cast For {2}";
+    else if(card->has(Constants::CANPLAYFROMGRAVEYARD) && game->isInGrave(card))
         alternativeName = "Alternate Cast From Graveyard";
     else if(card->has(Constants::CANPLAYFROMEXILE) && game->isInExile(card) && !card->has(Constants::ADVENTURE))
         alternativeName = "Alternate Cast From Exile";
@@ -1055,6 +1087,10 @@ int MTGAlternativeCostRule::reactToClick(MTGCardInstance * card)
         {
             alternateCost->extraCosts->costs[i]->setSource(card);
         }
+    //Airbend's {2} replaces the card's own cost but is not the card's own other= cost: recorded as
+    //MANA_PAID_WITH_ALTERNATIVE, an evoke creature's "auto=alternative sacrifice" would fire.
+    if (airbentInExile(card))
+        return reactToClick(card, alternateCost, ManaCost::MANA_PAID);
     return reactToClick(card, alternateCost, ManaCost::MANA_PAID_WITH_ALTERNATIVE);
 }
 
@@ -1182,7 +1218,7 @@ int MTGAlternativeCostRule::reactToClick(MTGCardInstance * card, ManaCost *alter
     SAFE_DELETE(previousManaPool);
 
     card->alternateCostPaid[alternateCostType] = 1;
-    if(card->has(Constants::HASOTHERKICKER)) //Fix for cards which have kicker cost implemented with other cost.
+    if(card->has(Constants::HASOTHERKICKER) && !airbentInExile(card)) //Fix for cards which have kicker cost implemented with other cost.
         card->kicked = 1;
    
     if (card->isLand())
@@ -1257,6 +1293,8 @@ int MTGBuyBackRule::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
          return 0;
     if ((player->game->graveyard->hasCard(card) && !card->has(Constants::CANPLAYFROMGRAVEYARD)) || (player->game->exile->hasCard(card) && !card->has(Constants::CANPLAYFROMEXILE)))
          return 0;
+    if (airbentInExile(card))
+        return 0; //airbend: only the {2} alternative cost
     if(!allowedToCast(card,player))
         return 0;
     if(!card->getManaCost()->getBuyback())
@@ -1613,6 +1651,8 @@ int MTGMorphCostRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
         return 0;
     if ((!card->canPlayFromLibrary() && player->game->library->hasCard(card))||(!card->has(Constants::CANPLAYFROMGRAVEYARD) && player->game->graveyard->hasCard(card))||(!card->has(Constants::CANPLAYFROMEXILE) && player->game->exile->hasCard(card)))
         return 0;
+    if (airbentInExile(card))
+        return 0; //airbend: only the {2} alternative cost
     if (!card->getManaCost()->getMorph())
         return 0;
     if(!allowedToAltCast(card,player))
@@ -1838,6 +1878,8 @@ int MTGOverloadRule::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
     {
         return 0;
     }
+    if (airbentInExile(card))
+        return 0; //airbend: only the {2} alternative cost
     ManaCost * newCost = card->getManaCost()->getAlternative();
     if(!newCost) return 0;
     if(newCost->extraCosts)

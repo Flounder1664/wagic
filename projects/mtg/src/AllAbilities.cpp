@@ -3577,13 +3577,28 @@ AAMoveCounters::AAMoveCounters(GameObserver* observer, int id, MTGCardInstance *
 ActivatedAbility(observer, id, source, NULL, 0)
 {
     this->target = target;
+    toSource = false;
 }
 
 int AAMoveCounters::resolve()
 {
     MTGCardInstance * to = dynamic_cast<MTGCardInstance *>(target);
     MTGCardInstance * from = source;
-    if (from && (!from->counters || !from->counters->counters.size()) && from->previous)
+    //"Whenever another creature you control dies, ... put its counters on this creature"
+    //(Buzzard-Wasp Colony): the dead card is the target, and its counters are on its previous
+    //(battlefield) instance, which the fallback below reads.
+    if (toSource)
+    {
+        from = to;
+        to = source;
+    }
+    //A card that just changed zones keeps its Counter entries but with nb 0 (MTGGameZones erases
+    //them once the move event has fired), so count, rather than test the list for emptiness.
+    int held = 0;
+    if (from && from->counters)
+        for (size_t i = 0; i < from->counters->counters.size(); ++i)
+            held += from->counters->counters[i]->nb;
+    if (from && !held && from->previous)
         from = from->previous;
     if (!to || !from || !from->counters || !to->counters || to == from)
         return 0;
@@ -10724,6 +10739,14 @@ int AEquip::equip(MTGCardInstance * equipped)
             continue;
         }
         if (dynamic_cast<AACopier *> (af.getCoreAbility(a)))
+        {
+            a->forceDestroy = 1;
+            continue;
+        }
+        //A bare "may" (or modal "choice") line is the equipment's own enters effect. Re-adding it
+        //asked again on every equip: Glider Staff offered its airbend each time it was moved
+        //(John, 2026-10-18). A "may" inside a trigger is a TriggeredAbility, not caught here.
+        if (dynamic_cast<MayAbility *> (a))
         {
             a->forceDestroy = 1;
             continue;

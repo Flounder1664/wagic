@@ -440,7 +440,7 @@
 #AUTO_DEFINE _STARTENGINES_ if compare(pspeed)~equalto~0 then alterspeed:1 controller && token(-692082)
 
 # Firebend N (TLA) - whenever this creature attacks, add N red mana (lost at end of combat)
-#AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile])) forever )!
+#AUTO_DEFINE _AIRBEND_ moveto(exile) and!( transforms((,newability[canplayfromexile],newability[airbent])) forever )!
 #AUTO_DEFINE _FIREBEND1_ @combat(attacking) source(this):Add{R} untilendofcombat
 #AUTO_DEFINE _FIREBEND2_ @combat(attacking) source(this):Add{R}{R} untilendofcombat
 #AUTO_DEFINE _FIREBEND3_ @combat(attacking) source(this):Add{R}{R}{R} untilendofcombat

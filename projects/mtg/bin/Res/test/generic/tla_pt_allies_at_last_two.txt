@@ -1,0 +1,28 @@
+#TLA playtest 2026-10-18 (John): Allies at Last only let one creature deal damage. Up to two:
+#Expedition Envoy (2) and Grizzly Bears (2) both hit Hill Giant (3/3), which dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Expedition Envoy,Grizzly Bears
+hand:Allies at Last
+manapool:{1}{G}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+Allies at Last
+Expedition Envoy
+Grizzly Bears
+Hill Giant
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Expedition Envoy,Grizzly Bears
+graveyard:Allies at Last
+life:20
+[PLAYER2]
+graveyard:Hill Giant
+life:20
+[END]

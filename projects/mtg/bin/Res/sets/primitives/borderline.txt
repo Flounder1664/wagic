@@ -134562,7 +134562,6 @@ subtype=Saga
 name=Avatar Yangchen
 abilities=flying
 auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:may name(Airbend) target(other *[-land]|battlefield) _AIRBEND_
-missing=an airbent card is cast from exile for its mana cost, not for {2}
 text=Flying -- Whenever you cast your second spell each turn, airbend up to one other target nonland permanent.
 type=Legendary Creature
 subtype=Avatar
@@ -144968,7 +144967,6 @@ grade=borderline
 target=*[-land]
 auto=_AIRBEND_
 auto=draw:1 controller
-missing=the airbended card should be castable for {2} rather than its mana cost; here it is exiled and simply playable from exile.
 text=Airbend target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.) -- Draw a card.
 mana={2}{W}
 type=Instant
@@ -148031,7 +148029,6 @@ subtype=Aura
 name=Airbender's Reversal
 auto=choice name(Destroy target attacking creature) destroy target(creature[attacking])
 auto=choice name(Airbend your own creature) target(creature|mybattlefield) _AIRBEND_
-missing=an airbent card is cast from exile for its mana cost, not for {2}
 text=Choose one -- Destroy target attacking creature. -- Airbend target creature you control. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
 mana={1}{W}
 type=Instant
@@ -148242,7 +148239,7 @@ toughness=4
 name=Buzzard-Wasp Colony
 abilities=flying
 auto=may name(Sacrifice an artifact or creature to draw) sacrifice notaTarget(*[artifact;creature]|mybattlefield) and!( draw:1 controller )!
-missing=moving the counters from another creature you control that dies
+auto=@movedTo(other creature|graveyard) from(mybattlefield):all(trigger[to]) movecounterstosource
 text=Flying -- When this creature enters, you may sacrifice an artifact or creature. If you do, draw a card. -- Whenever another creature you control dies, if it had counters on it, put its counters on this creature.
 mana={3}{B}
 type=Creature
@@ -148256,7 +148253,6 @@ auto={2}:equip
 auto=teach(creature) 1/1
 auto=teach(creature) flying
 auto=may name(Airbend a creature) target(creature) _AIRBEND_
-missing=an airbent card is cast from exile for its mana cost, not for {2}
 text=When this Equipment enters, airbend up to one target creature. -- Equipped creature gets +1/+1 and has flying. -- Equip {2}
 mana={2}{W}
 type=Artifact
@@ -148276,9 +148272,9 @@ toughness=1
 [/card]
 [card]
 name=Hakoda, Selfless Commander
-abilities=vigilance
+abilities=vigilance,showfromtoplibrary
+auto=aslongas(ally[zpos=1]|mylibrary) canplayfromlibrarytop >0
 auto={S}:all(creature|mybattlefield) 0/5 ueot && all(creature|mybattlefield) transforms((,indestructible)) ueot
-missing=looking at and casting Ally spells from the top of your library
 text=Vigilance -- You may look at the top card of your library any time. -- You may cast Ally spells from the top of your library. -- Sacrifice Hakoda: Creatures you control get +0/+5 and gain indestructible until end of turn.
 mana={3}{W}
 type=Legendary Creature
@@ -148288,10 +148284,10 @@ toughness=5
 [/card]
 [card]
 name=Allies at Last
-target=creature|mybattlefield
-auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+target=<upto:2>creature|mybattlefield
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) oneshot
 anyzone=affinity(ally|mybattlefield) reduce({1})
-missing=only one of your creatures deals damage rather than up to two
+#Each chosen creature asks for its own target, so pick the same opposing creature twice.
 text=Affinity for Allies -- Up to two target creatures you control each deal damage equal to their power to target creature an opponent controls.
 mana={2}{G}
 type=Instant
@@ -148333,7 +148329,9 @@ subtype=Equipment
 [card]
 name=Planetarium of Wan Shi Tong
 auto={1}{T}:_SCRY2_
-missing=the free cast after you scry or surveil
+auto=@scryed(*|myzones) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
+auto=@surveiled(*|mybattlefield,mystack) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
+missing=once each turn is counted separately for scry and surveil, so a turn with both can cast twice
 text={1}, {T}: Scry 2. -- Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn.
 mana={6}
 type=Legendary Artifact
@@ -148362,9 +148360,15 @@ toughness=1
 [card]
 name=Waterbending Lesson
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): paying {2} keeps all three; declining discards one.
+#That was the old one-cost menu; the 2026-10-18 waterbend menu below needs a fresh look (queue scenario 08).
 auto=draw:3 controller
-auto=transforms((,newability[pay[[{2}]] name(Waterbend 2 - keep all three) donothing?reject notatarget(*|myhand)])) oneshot
-missing=the waterbend {2} can only be paid with mana, not by tapping artifacts and creatures
+#Waterbend {2}: each artifact or creature tapped pays for {1}. The menu comes after the draw, and
+#entries you cannot use are hidden. The taps are made as an effect: {T(...)} costs inside
+#pay[[...]] never complete their payment, and one chooser cannot say "untapped artifact or
+#creature" (a descriptor is all-; or all-&; a comma list crashed), so creatures and
+#noncreature artifacts get separate entries.
+auto=ability$!choice name(Waterbend {2} - pay {2}) pay[[{2}]] name(Waterbend {2}) donothing?reject notatarget(*|myhand) _ choice restriction{type(creature[-tapped]|mybattlefield)~morethan~0} name(Waterbend {2} - pay {1} and tap a creature) pay[[{1}]] name(Waterbend {2} - pay {1}, then tap a creature) tap notatarget(creature[-tapped]|mybattlefield)?reject notatarget(*|myhand) _ choice restriction{type(artifact[-creature&-tapped]|mybattlefield)~morethan~0} name(Waterbend {2} - pay {1} and tap an artifact) pay[[{1}]] name(Waterbend {2} - pay {1}, then tap an artifact) tap notatarget(artifact[-creature&-tapped]|mybattlefield)?reject notatarget(*|myhand) _ choice restriction{type(creature[-tapped]|mybattlefield)~morethan~1} name(Waterbend {2} - tap 2 creatures) tap notatarget(<2>creature[-tapped]|mybattlefield) _ choice restriction{type(artifact[-creature&-tapped]|mybattlefield)~morethan~1} name(Waterbend {2} - tap 2 artifacts) tap notatarget(<2>artifact[-creature&-tapped]|mybattlefield) _ choice name(Discard a card) reject notatarget(*|myhand)!$ controller
+missing=waterbend {2} by tapping one creature and one noncreature artifact together
 text=Draw three cards. Then discard a card unless you waterbend {2}.
 mana={3}{U}
 type=Sorcery

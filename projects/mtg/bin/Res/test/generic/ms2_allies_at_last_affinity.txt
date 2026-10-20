@@ -1,4 +1,5 @@
 #missing= sweep 2026-10-11. Allies at Last costs {1} less for each Ally: with two Expedition Envoys it costs {G}.
+#2026-10-18: up to two targets now - clicking the spell again ends the list at one.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -12,6 +13,7 @@ life:20
 [DO]
 Allies at Last
 Expedition Envoy
+Allies at Last
 choice 0
 Raging Goblin
 [ASSERT]

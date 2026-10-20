@@ -1,0 +1,26 @@
+#TLA playtest 2026-10-18. An airbent card is cast from exile for {2}, not its mana cost:
+#Hill Giant ({3}{R}) comes back with only {2} left in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Airbending Lesson
+library:Island
+manapool:{2}{W}{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Airbending Lesson
+Hill Giant
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:*
+graveyard:Airbending Lesson
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -5312,6 +5312,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     if (s.find("movecounters") != string::npos)
     {
         MTGAbility * a = NEW AAMoveCounters(observer, id, card, target);
+        ((AAMoveCounters*)a)->toSource = s.find("movecounterstosource") != string::npos;
         a->oneShot = 1;
         a->canBeInterrupted = false;
         return a;

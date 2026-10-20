@@ -376,7 +376,8 @@ class Constants
       ALTFLASH = 247,       //this card's ALTERNATIVE cost may be paid at instant speed; the
                             //normal cost keeps the card's own timing (Sneak)
       DOUBLELIFELOSSOPPONENT = 248, //during your turn, opponents lose twice the life they would (Bloodletter of Aclazotz)
-      NB_BASIC_ABILITIES = 249,
+      AIRBENT = 249,        //exiled by airbend: while exiled its owner may cast it for {2} rather than its mana cost (TLA)
+      NB_BASIC_ABILITIES = 250,
 
     RARITY_S = 'S',   //Special Rarity
     RARITY_M = 'M',   //Mythics

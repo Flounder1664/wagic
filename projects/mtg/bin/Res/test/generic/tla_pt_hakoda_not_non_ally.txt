@@ -1,0 +1,23 @@
+#TLA playtest 2026-10-18. Negative control: Hakoda does not let a non-Ally (Grizzly Bears) be cast
+#from the top of the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510023
+library:Expedition Envoy,Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510023
+library:Expedition Envoy,Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+life:20
+[END]
