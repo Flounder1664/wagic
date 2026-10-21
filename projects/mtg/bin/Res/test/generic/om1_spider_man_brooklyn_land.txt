@@ -1,0 +1,19 @@
+#Spider-Man, Brooklyn Visionary (738122): ETB search for a basic land, onto the battlefield tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738122
+manapool:{4}{G}
+library:Grizzly Bears,Forest
+[PLAYER2]
+[DO]
+738122
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738122,*
+tappedinplay:1
+library:Grizzly Bears
+[PLAYER2]
+[END]

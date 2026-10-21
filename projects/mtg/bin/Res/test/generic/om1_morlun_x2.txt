@@ -1,0 +1,21 @@
+#Morlun, Devourer of Spiders (738060) cast with X=2: enters with two +1/+1 counters (2/1 -> 4/3) and
+#deals 2 damage to target opponent. Lifelink: Morlun is the source, so player 1 gains 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738060
+manapool:{2}{B}{B}
+[PLAYER2]
+[DO]
+738060
+choice 2
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738060
+pt:738060=4/3
+life:22
+[PLAYER2]
+life:18
+[END]

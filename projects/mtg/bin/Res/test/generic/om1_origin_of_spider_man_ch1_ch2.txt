@@ -1,0 +1,31 @@
+#Origin of Spider-Man: chapter I makes a 2/1 Spider token; one round later chapter II puts a +1/+1
+#counter on Grizzly Bears (2/2 -> 3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Origin of Spider-Man
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Origin of Spider-Man
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Origin of Spider-Man,Grizzly Bears,*
+counter:Origin of Spider-Man=Lore:2
+pt:Grizzly Bears=3/3
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

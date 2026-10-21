@@ -1,0 +1,25 @@
+#Spider-Sense (player 2) counters player 1's instant (Shock aimed at player 2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock
+manapool:{R}
+[PLAYER2]
+hand:Spider-Sense
+manapool:{1}{U}
+[DO]
+Shock
+p2
+no
+yes
+Spider-Sense
+Shock
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Shock
+[PLAYER2]
+graveyard:Spider-Sense
+life:20
+[END]

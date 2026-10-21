@@ -1,0 +1,18 @@
+#Spider-Girl, Legacy Hero (738139): when she leaves the battlefield, create a 1/1 Human Citizen.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738139
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+[DO]
+Lightning Bolt
+738139
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:738139,Lightning Bolt
+[PLAYER2]
+[END]

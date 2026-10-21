@@ -1471,8 +1471,14 @@ int MTGRetraceRule::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
 
     if(card->model->data->getManaCost()->getRetrace() && card->model->data->getManaCost()->getRetrace()->alternativeName.size())
         alternativeName = card->model->data->getManaCost()->getRetrace()->alternativeName;
-    else 
+    else
         alternativeName = "";
+
+    // Mayhem: "you may cast this card from your graveyard for its mayhem cost if you
+    // discarded it this turn". Written as retrace={cost} name(Mayhem); the discarded flag
+    // is set on hand->graveyard moves and cleared at the next turn (GameObserver).
+    if (alternativeName == "mayhem" && !card->discarded)
+        return 0;
 
     return MTGAlternativeCostRule::isReactingToClick( card, mana, retraceCost);
 }

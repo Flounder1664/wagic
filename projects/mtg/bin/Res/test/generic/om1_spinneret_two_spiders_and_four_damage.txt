@@ -1,0 +1,30 @@
+#Spinneret and Spiderling attacks with Giant Spider: two Spiders, so a +1/+1 counter (1/2 -> 2/3).
+#Giant Growth then makes it 5/6; dealing 5 (4 or more) exiles the top card of the library.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Spinneret and Spiderling,Giant Spider
+hand:Giant Growth
+manapool:{G}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Spinneret and Spiderling
+Giant Spider
+Giant Growth
+Spinneret and Spiderling
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Spinneret and Spiderling,Giant Spider
+graveyard:Giant Growth
+pt:Spinneret and Spiderling=5/6
+library:*,*
+exile:*
+[PLAYER2]
+life:13
+[END]

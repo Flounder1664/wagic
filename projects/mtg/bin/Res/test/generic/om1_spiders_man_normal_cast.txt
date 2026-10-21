@@ -1,0 +1,16 @@
+#Spiders-Man, Heroic Horde cast normally: no life, no tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738101
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+738101
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738101
+life:20
+[PLAYER2]
+[END]

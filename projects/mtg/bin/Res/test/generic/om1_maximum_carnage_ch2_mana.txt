@@ -1,0 +1,28 @@
+#Maximum Carnage chapter II: "Add {R}{R}{R}." Cast, one round passes, lore 2 in the first main phase.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Maximum Carnage
+manapool:{4}{R}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Maximum Carnage
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maximum Carnage
+counter:Maximum Carnage=Lore:2
+manapool:{R}{R}{R}
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

@@ -1,0 +1,20 @@
+#Sun-Spider, Nimble Webber (738130): ETB search for an Aura or Equipment, put it into hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738130
+manapool:{3}{W}
+library:Grizzly Bears,Holy Strength,Hill Giant
+[PLAYER2]
+[DO]
+738130
+choice 0
+Holy Strength
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738130
+hand:Holy Strength
+library:Grizzly Bears,Hill Giant
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Spider-Woman, Stunning Savior (738145): opponents' creatures enter tapped. Grizzly Bears, already
+#there, stays untapped; Pongify on Hill Giant gives player 2 an Ape token, which enters tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738145,Pongify
+manapool:{1}{W}{U}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+738145
+Pongify
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738145
+graveyard:Pongify
+[PLAYER2]
+inplay:Grizzly Bears,*
+graveyard:Hill Giant
+tappedinplay:1
+[END]

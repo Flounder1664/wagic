@@ -1,0 +1,20 @@
+#Wisecrack (OM1): Hill Giant (3/3) deals 3 to itself and, because it is attacking, its
+#controller (player 1) takes 2.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Hill Giant
+hand:Wisecrack
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Hill Giant
+Wisecrack
+Hill Giant
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+graveyard:Wisecrack,Hill Giant
+life:18
+[PLAYER2]
+[END]

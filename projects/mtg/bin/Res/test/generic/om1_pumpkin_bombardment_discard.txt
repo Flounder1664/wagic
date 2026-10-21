@@ -1,0 +1,20 @@
+#Pumpkin Bombardment (OM1): additional cost "discard a card or pay {2}"; 3 damage to target creature.
+#Normal cast: the discard is the cost (Island), then Hill Giant is the target and dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pumpkin Bombardment,Island
+manapool:{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Pumpkin Bombardment
+Island
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Pumpkin Bombardment,Island
+[PLAYER2]
+graveyard:Hill Giant
+[END]

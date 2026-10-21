@@ -1,0 +1,20 @@
+#Pumpkin Bombardment: the "pay {2}" option (choice 1) keeps the Island in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pumpkin Bombardment,Island
+manapool:{2}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Pumpkin Bombardment
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island
+graveyard:Pumpkin Bombardment
+[PLAYER2]
+graveyard:Hill Giant
+[END]

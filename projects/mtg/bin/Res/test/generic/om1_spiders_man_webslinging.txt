@@ -1,0 +1,23 @@
+#Spiders-Man, Heroic Horde (738101) cast with web-slinging {4}{G}{G}, returning the tapped Llanowar
+#Elves: gain 3 life and create two 2/1 Spiders.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:738101
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+Llanowar Elves
+738101
+choice 1
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738101,*,*
+hand:Llanowar Elves
+life:23
+manapool:{G}
+[PLAYER2]
+[END]

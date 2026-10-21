@@ -1,0 +1,26 @@
+#Spinneret and Spiderling attacking alone: one Spider, no counter; 1 damage exiles nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spinneret and Spiderling,Giant Spider
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+next
+#begin
+next
+#attackers
+Spinneret and Spiderling
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Spinneret and Spiderling,Giant Spider
+pt:Spinneret and Spiderling=1/2
+library:Forest,Forest,Forest
+[PLAYER2]
+life:19
+[END]

@@ -1,0 +1,20 @@
+#Spider-Man India (738124): casting a creature spell puts a +1/+1 counter on target creature you
+#control (Grizzly Bears 2/2 -> 3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738124,Grizzly Bears
+hand:Eager Cadet
+manapool:{W}
+[PLAYER2]
+[DO]
+Eager Cadet
+Grizzly Bears
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738124,Grizzly Bears,Eager Cadet
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

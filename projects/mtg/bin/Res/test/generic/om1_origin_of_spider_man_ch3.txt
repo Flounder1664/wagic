@@ -1,0 +1,51 @@
+#Origin of Spider-Man chapter III: Grizzly Bears gains double strike, then attacks unblocked.
+#Chapter II (round 1) puts the counter on Bears too, so it is a 3/3 double striker: 20 - 6 = 14.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Origin of Spider-Man
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Origin of Spider-Man
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+Grizzly Bears
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#first strike damage
+next
+#damage
+next
+#end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Origin of Spider-Man
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+life:14
+[END]

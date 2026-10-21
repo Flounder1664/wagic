@@ -1,0 +1,22 @@
+#Wisecrack on a creature that is not attacking: it deals its power to itself, no player damage.
+#Grizzly Bears (2/2) dies; Hill Giant's controller stays on 20.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Wisecrack
+manapool:{2}{R}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+Wisecrack
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Wisecrack
+life:20
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+life:20
+[END]
