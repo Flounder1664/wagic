@@ -145757,171 +145757,6 @@ mana={1}{U}{U}{R}{R}
 type=Sorcery
 [/card]
 [card]
-name=Pumpkin Bombardment
-target=creature
-other={2}{B/R} name(Pay two instead)
-auto=damage:3
-text=As an additional cost to cast this spell, discard a card or pay {2}. -- Pumpkin Bombardment deals 3 damage to target creature.
-mana={B/R}{D(*|myhand)}
-type=Sorcery
-[/card]
-[card]
-name=Wisecrack
-target=creature
-auto=if cantargetcard(creature[attacking]) then damage:2 targetcontroller
-auto=damage:power
-note=the damage to itself is dealt by Wisecrack, not by the creature (matters only for deathtouch, lifelink and similar)
-text=Target creature deals damage equal to its power to itself. If that creature is attacking, Wisecrack deals 2 damage to that creature's controller.
-mana={2}{R}
-type=Instant
-[/card]
-[card]
-name=Arana, Heart of the Spider
-auto=@combat(attacking) source(creature|mybattlefield) turnlimited:counter(1/1) target(creature[attacking]|mybattlefield)
-auto=@combatdamaged(player) from(creature[modified]|mybattlefield):all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!
-text=Whenever you attack, put a +1/+1 counter on target attacking creature. -- Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)
-mana={1}{R}{W}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=3
-toughness=3
-[/card]
-[card]
-name=Maximum Carnage
-auto=counter(0/0,1,Lore)
-auto=@each my firstmain:counter(0/0,1,Lore)
-auto=all(creature) transforms((,mustattack)) uynt
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) Add{R}{R}{R}
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) damage:5 opponent
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-note=chapter I affects the creatures on the battlefield when it resolves; creatures entering later are not forced to attack
-text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Until your next turn, each creature attacks each combat if able and attacks a player other than you if able. -- II — Add {R}{R}{R}. -- III — This Saga deals 5 damage to each opponent.
-mana={4}{R}
-type=Enchantment
-subtype=Saga
-[/card]
-[card]
-name=Morlun, Devourer of Spiders
-abilities=lifelink
-auto=counter(1/1,X)
-auto=damage:X target(opponent)
-text=Lifelink -- Morlun enters with X +1/+1 counters on him. -- When Morlun enters, he deals X damage to target opponent.
-mana={X}{B}{B}
-type=Legendary Creature
-subtype=Vampire Villain
-power=2
-toughness=1
-[/card]
-[card]
-name=Origin of Spider-Man
-auto=counter(0/0,1,Lore)
-auto=@each my firstmain:counter(0/0,1,Lore)
-auto=token(Spider,Creature Spider,2/1,green,reach)
-#REVIEW-V chapter II: the +1/+1 counter is tested; becoming a legendary Spider Hero is not observable in the harness
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) counter(1/1) target(creature|mybattlefield) and!( becomes(Legendary Spider Hero) forever )!
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,double strike)) ueot
-text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Create a 2/1 green Spider creature token with reach. -- II — Put a +1/+1 counter on target creature you control. It becomes a legendary Spider Hero in addition to its other types. -- III — Target creature you control gains double strike until end of turn.
-mana={1}{W}
-type=Enchantment
-subtype=Saga
-[/card]
-[card]
-name=Spider-Girl, Legacy Hero
-auto=this(variable{controllerturn}>0) flying
-auto=@movedTo(this|nonbattlezone) from(battlefield):token(Human Citizen,Creature Human Citizen,1/1,green,white)
-text=During your turn, Spider-Girl has flying. -- When Spider-Girl leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
-mana={G}{W}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=2
-toughness=2
-[/card]
-[card]
-name=Spinneret and Spiderling
-auto=@each my blockers restriction{type(spider[attacking]|mybattlefield)~morethan~1}:counter(1/1) all(this)
-auto=@damaged(anytarget) from(this):if compare(thatmuch)~morethan~3 then all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
-note=the attack trigger is checked at the declare blockers step rather than as attackers are declared
-text=Whenever you attack with two or more Spiders, put a +1/+1 counter on Spinneret and Spiderling. -- Whenever Spinneret and Spiderling deals 4 or more damage, exile the top card of your library. Until the end of your next turn, you may play that card.
-mana={R}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=1
-toughness=2
-[/card]
-[card]
-name=Sun-Spider, Nimble Webber
-auto=this(variable{controllerturn}>0) flying
-auto=ability$!name(Search for an Aura or Equipment) moveto(myhand) notatarget(<upto:1>*[aura;equipment]|mylibrary)!$ controller
-auto=shuffle
-text=During your turn, Sun-Spider has flying. -- When Sun-Spider enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
-mana={3}{W/U}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=3
-toughness=2
-[/card]
-[card]
-name=Spider-Woman, Stunning Savior
-abilities=flying
-auto=lord(*[recent;artifact;creature]|opponentbattlefield) transforms((,newability[tap(noevent)]))
-text=Flying -- Venom Blast — Artifacts and creatures your opponents control enter tapped.
-mana={1}{W/U}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=2
-toughness=2
-[/card]
-[card]
-name=Spider-Sense
-target=*[instant;sorcery]|stack
-other={U}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
-otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=fizzle
-missing=cannot counter a triggered ability, only instant and sorcery spells
-text=Web-slinging {U} (You may cast this spell for {U} if you also return a tapped creature you control to its owner's hand.) -- Counter target instant spell, sorcery spell, or triggered ability.
-mana={1}{U}
-type=Instant
-[/card]
-[card]
-name=Spiders-Man, Heroic Horde
-other={4}{G}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
-otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=if paid(alternative) then life:3 controller
-auto=if paid(alternative) then token(Spider,Creature Spider,2/1,green,reach)*2
-text=Web-slinging {4}{G}{G} (You may cast this spell for {4}{G}{G} if you also return a tapped creature you control to its owner's hand.) -- When Spiders-Man enters, if they were cast using web-slinging, you gain 3 life and create two 2/1 green Spider creature tokens with reach.
-mana={1}{G}
-type=Legendary Creature
-subtype=Spider Hero
-power=2
-toughness=3
-[/card]
-[card]
-name=Spider-Man, Brooklyn Visionary
-other={2}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
-otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=name(Search for a basic land) notaTarget(<upto:1>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
-auto=shuffle
-text=Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to its owner's hand.) -- When Spider-Man enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-mana={4}{G}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=4
-toughness=3
-[/card]
-[card]
-name=Spider-Man India
-other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
-otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=@movedTo(creature|mystack):counter(1/1) target(creature|mybattlefield) and!( transforms((,flying)) ueot )!
-text=Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Pavitr's Sevā — Whenever you cast a creature spell, put a +1/+1 counter on target creature you control. It gains flying until end of turn.
-mana={3}{G}{W}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=4
-toughness=4
-[/card]
-[card]
 name=Costume Closet
 auto=counter(1/1,2)
 auto={T}{C(1/1,-1)}:counter(1/1) target(creature|mybattlefield) asSorcery
@@ -146741,6 +146576,172 @@ type=Legendary Artifact Creature
 subtype=Wizard
 power=8
 toughness=9
+[/card]
+[card]
+name=Pumpkin Bombardment
+target=creature
+other={2}{B/R} name(Pay two instead)
+auto=damage:3
+text=As an additional cost to cast this spell, discard a card or pay {2}. -- Pumpkin Bombardment deals 3 damage to target creature.
+mana={B/R}{D(*|myhand)}
+type=Sorcery
+[/card]
+[card]
+name=Wisecrack
+target=creature
+auto=if cantargetcard(creature[attacking]) then damage:2 targetcontroller
+auto=damage:power
+note=the damage to itself is dealt by Wisecrack, not by the creature (matters only for deathtouch, lifelink and similar)
+text=Target creature deals damage equal to its power to itself. If that creature is attacking, Wisecrack deals 2 damage to that creature's controller.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Arana, Heart of the Spider
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:counter(1/1) target(creature[attacking]|mybattlefield)
+auto=@combatdamaged(player) from(creature[modified]|mybattlefield):all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!
+text=Whenever you attack, put a +1/+1 counter on target attacking creature. -- Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Maximum Carnage
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+#REVIEW-V chapter I (each creature attacks each combat until your next turn) is untested: the harness cannot make player 2's AI attack
+auto=all(creature) transforms((,mustattack)) uynt
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) Add{R}{R}{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) damage:5 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+note=chapter I affects the creatures on the battlefield when it resolves; creatures entering later are not forced to attack
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Until your next turn, each creature attacks each combat if able and attacks a player other than you if able. -- II — Add {R}{R}{R}. -- III — This Saga deals 5 damage to each opponent.
+mana={4}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Morlun, Devourer of Spiders
+abilities=lifelink
+auto=counter(1/1,X)
+auto=damage:X target(opponent)
+text=Lifelink -- Morlun enters with X +1/+1 counters on him. -- When Morlun enters, he deals X damage to target opponent.
+mana={X}{B}{B}
+type=Legendary Creature
+subtype=Vampire Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Origin of Spider-Man
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=token(Spider,Creature Spider,2/1,green,reach)
+#REVIEW-V chapter II: the +1/+1 counter is tested; becoming a legendary Spider Hero is not observable in the harness
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) counter(1/1) target(creature|mybattlefield) and!( becomes(Legendary Spider Hero) forever )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,double strike)) ueot
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Create a 2/1 green Spider creature token with reach. -- II — Put a +1/+1 counter on target creature you control. It becomes a legendary Spider Hero in addition to its other types. -- III — Target creature you control gains double strike until end of turn.
+mana={1}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Spider-Girl, Legacy Hero
+auto=this(variable{controllerturn}>0) flying
+auto=@movedTo(this|nonbattlezone) from(battlefield):token(Human Citizen,Creature Human Citizen,1/1,green,white)
+text=During your turn, Spider-Girl has flying. -- When Spider-Girl leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
+mana={G}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Spinneret and Spiderling
+auto=@each my blockers restriction{type(spider[attacking]|mybattlefield)~morethan~1}:counter(1/1) all(this)
+auto=@damaged(anytarget) from(this):if compare(thatmuch)~morethan~3 then all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
+note=the attack trigger is checked at the declare blockers step rather than as attackers are declared
+text=Whenever you attack with two or more Spiders, put a +1/+1 counter on Spinneret and Spiderling. -- Whenever Spinneret and Spiderling deals 4 or more damage, exile the top card of your library. Until the end of your next turn, you may play that card.
+mana={R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=1
+toughness=2
+[/card]
+[card]
+name=Sun-Spider, Nimble Webber
+auto=this(variable{controllerturn}>0) flying
+auto=ability$!name(Search for an Aura or Equipment) moveto(myhand) notatarget(<upto:1>*[aura;equipment]|mylibrary)!$ controller
+auto=shuffle
+text=During your turn, Sun-Spider has flying. -- When Sun-Spider enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
+mana={3}{W/U}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=Spider-Woman, Stunning Savior
+abilities=flying
+auto=lord(*[recent;artifact;creature]|opponentbattlefield) transforms((,newability[tap(noevent)]))
+text=Flying -- Venom Blast — Artifacts and creatures your opponents control enter tapped.
+mana={1}{W/U}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Spider-Sense
+target=*[instant;sorcery]|stack
+other={U}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=fizzle
+missing=cannot counter a triggered ability, only instant and sorcery spells
+text=Web-slinging {U} (You may cast this spell for {U} if you also return a tapped creature you control to its owner's hand.) -- Counter target instant spell, sorcery spell, or triggered ability.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Spiders-Man, Heroic Horde
+other={4}{G}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=if paid(alternative) then life:3 controller
+auto=if paid(alternative) then token(Spider,Creature Spider,2/1,green,reach)*2
+text=Web-slinging {4}{G}{G} (You may cast this spell for {4}{G}{G} if you also return a tapped creature you control to its owner's hand.) -- When Spiders-Man enters, if they were cast using web-slinging, you gain 3 life and create two 2/1 green Spider creature tokens with reach.
+mana={1}{G}
+type=Legendary Creature
+subtype=Spider Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Spider-Man, Brooklyn Visionary
+other={2}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=name(Search for a basic land) notaTarget(<upto:1>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=shuffle
+text=Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to its owner's hand.) -- When Spider-Man enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+mana={4}{G}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=3
+[/card]
+[card]
+name=Spider-Man India
+other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=@movedTo(creature|mystack):counter(1/1) target(creature|mybattlefield) and!( transforms((,flying)) ueot )!
+text=Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Pavitr's Sevā — Whenever you cast a creature spell, put a +1/+1 counter on target creature you control. It gains flying until end of turn.
+mana={3}{G}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=4
 [/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]
