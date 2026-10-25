@@ -1,0 +1,38 @@
+#Casting a spell from hand in the blocker ORDER step is a normal play, not a
+#blocker reorder. GameObserver::cardClick used to call card->defenser->
+#raiseBlockerRankOrder for ANY click in that step, so a hand card (defenser
+#NULL) crashed - the AI hit it on the Galaxy Tab S9 casting in the ORDER
+#interrupt window (2026-10-25). The pool empties at the phase change, so the
+#Forest is tapped in the ORDER step itself. Two blockers hold the ORDER step open.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Grizzly Bears,Forest
+hand:Giant Growth
+[PLAYER2]
+inplay:Hill Giant,Raging Goblin
+[DO]
+Grizzly Bears
+next
+#blockers
+Hill Giant
+Raging Goblin
+next
+#blockers order: tap a land and cast from hand
+Forest
+Giant Growth
+Grizzly Bears
+next
+#combat damage ->Gui
+next
+#combat damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Giant Growth
+[PLAYER2]
+graveyard:Hill Giant,Raging Goblin
+[END]

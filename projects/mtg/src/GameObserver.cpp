@@ -1770,9 +1770,14 @@ int GameObserver::cardClick(MTGCardInstance * card, Targetable * object, bool lo
 
         int reaction = 0;
 
-        if (ORDER == combatStep)
+        //A click in the ORDER step reorders blockers only when it lands on a
+        //creature that is in its attacker's blocker list. The ORDER step also
+        //opens an interrupt window (see userRequestNextGamePhase), so a click on
+        //a hand card or a non-blocker is a normal play: the AI casting there used
+        //to dereference a NULL defenser and crash.
+        if (ORDER == combatStep && card && card->defenser
+            && find(card->defenser->blockers.begin(), card->defenser->blockers.end(), card) != card->defenser->blockers.end())
         {
-            //TODO it is possible at this point that card is NULL. if so, what do we return since card->defenser would result in a crash?
             card->defenser->raiseBlockerRankOrder(card);
             toReturn = 1;
             break;
