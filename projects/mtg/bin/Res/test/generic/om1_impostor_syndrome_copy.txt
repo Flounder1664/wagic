@@ -1,0 +1,23 @@
+#Impostor Syndrome: Grizzly Bears deals combat damage to a player, so a token copy is created.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Impostor Syndrome,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Impostor Syndrome,Grizzly Bears,*
+[PLAYER2]
+life:18
+[END]

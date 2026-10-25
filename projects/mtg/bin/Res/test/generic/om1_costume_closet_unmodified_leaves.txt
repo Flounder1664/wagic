@@ -1,0 +1,27 @@
+#Control: an UNMODIFIED creature (Eager Cadet) dying adds nothing, so the Closet stays at one counter
+#after moving one to the Bears: Living Brain makes it 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Costume Closet,738165,Grizzly Bears,Eager Cadet
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+[DO]
+Costume Closet
+Grizzly Bears
+Lightning Bolt
+Eager Cadet
+next
+#combat begins: Living Brain
+Costume Closet
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Costume Closet,738165,Grizzly Bears
+graveyard:Eager Cadet,Lightning Bolt
+pt:Costume Closet=4/4
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

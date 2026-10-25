@@ -1,0 +1,19 @@
+#Mayhem gate: a Glider that was NOT discarded this turn (seeded in the graveyard) cannot be cast from it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Rocket-Powered Goblin Glider
+manapool:{2}
+[PLAYER2]
+[DO]
+Rocket-Powered Goblin Glider
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Rocket-Powered Goblin Glider
+manapool:{2}
+[PLAYER2]
+[END]

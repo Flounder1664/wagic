@@ -1,0 +1,20 @@
+#Control: choosing Sorcery (choice 3) leaves Shock at {R}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738023,Shock
+manapool:{2}{W}{R}
+[PLAYER2]
+[DO]
+738023
+choice 3
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738023
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

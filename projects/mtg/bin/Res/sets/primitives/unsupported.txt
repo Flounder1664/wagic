@@ -14617,12 +14617,6 @@ mana={4}{G}{U}
 type=Enchantment
 [/card]
 [card]
-name=Costume Closet
-text=This artifact enters with two +1/+1 counters on it. -- {T}: Move a +1/+1 counter from this artifact onto target creature you control. Activate only as a sorcery. -- Whenever a modified creature you control leaves the battlefield, put a +1/+1 counter on this artifact. (Equipment, Auras you control, and counters are modifications.)
-mana={1}{W}
-type=Artifact
-[/card]
-[card]
 name=Criminal Enterprise
 text=When this enchantment enters, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.) -- Whenever a Villain you control dies, this enchantment deals 1 damage to each opponent and you gain 1 life.
 mana={2}{B}
@@ -16034,15 +16028,6 @@ mana={3}
 type=Artifact
 [/card]
 [card]
-name=Prowler, Clawed Thief
-text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
-mana={1}{U}{B}
-type=Legendary Creature
-subtype=Human Rogue Villain
-power=2
-toughness=3
-[/card]
-[card]
 name=Puppet Master, String Puller
 text=Whenever you attack, goad target creature an opponent controls. It can't block this turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever one or more goaded creatures deal combat damage to one of your opponents, create a Treasure token.
 mana={2}{R}
@@ -16139,21 +16124,6 @@ type=Legendary Creature
 subtype=Human Villain
 power=7
 toughness=6
-[/card]
-[card]
-name=Robotics Mastery
-target=creature
-text=Flash -- Enchant creature -- When this Aura enters, create two 1/1 colorless Robot artifact creature tokens with flying. -- Enchanted creature gets +2/+2.
-mana={4}{U}
-type=Enchantment
-subtype=Aura
-[/card]
-[card]
-name=Rocket-Powered Goblin Glider
-text=When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control. -- Equipped creature gets +2/+0 and has flying and haste. -- Equip {2} -- Mayhem {2}
-mana={3}
-type=Artifact
-subtype=Equipment
 [/card]
 [card]
 name=Royal Talon Fighter Jet
@@ -16422,15 +16392,6 @@ name=Stunning Shot
 text=Put two +1/+1 counters on up to one target creature you control. Tap up to one target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 mana={1}{W}
 type=Sorcery
-[/card]
-[card]
-name=Superior Foes of Spider-Man
-text=Trample -- Whenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature.
-mana={2}{R}
-type=Creature
-subtype=Human Rogue Villain
-power=3
-toughness=3
 [/card]
 [card]
 name=Swordsman's Steel
@@ -24503,11 +24464,6 @@ type=Artifact Creature
 subtype=Utrom Scientist
 power=3
 toughness=3
-[/card]
-[card]
-name=Vibrant Cityscape
-text={T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-type=Land
 [/card]
 [card]
 name=Wooden Cane

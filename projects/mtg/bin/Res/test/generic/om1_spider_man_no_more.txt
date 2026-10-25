@@ -1,0 +1,19 @@
+#Spider-Man No More on Serra Angel (4/4): base 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spider-Man No More
+manapool:{1}{U}
+[PLAYER2]
+inplay:Serra Angel
+[DO]
+Spider-Man No More
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spider-Man No More
+[PLAYER2]
+inplay:Serra Angel
+pt:Serra Angel=1/1
+[END]

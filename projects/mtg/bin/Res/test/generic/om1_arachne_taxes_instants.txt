@@ -1,0 +1,22 @@
+#Arachne, Psionic Weaver (738023): choosing Instant (choice 2) makes Shock cost {1}{R}; with only {R}
+#left, Shock stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738023,Shock
+manapool:{2}{W}{R}
+[PLAYER2]
+[DO]
+738023
+choice 2
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738023
+hand:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[END]

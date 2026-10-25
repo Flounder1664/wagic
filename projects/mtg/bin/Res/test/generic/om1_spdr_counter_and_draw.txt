@@ -1,0 +1,32 @@
+#SP//dr (738143): ETB +1/+1 counter on Eager Cadet (1/1 -> 2/2); the modified Cadet connects and
+#player 1 draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eager Cadet
+hand:738143
+manapool:{3}{W}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+738143
+Eager Cadet
+next
+#begin
+next
+#attackers
+Eager Cadet
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:738143,Eager Cadet
+pt:Eager Cadet=2/2
+hand:*
+library:*
+[PLAYER2]
+life:18
+[END]

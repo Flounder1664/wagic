@@ -1,0 +1,19 @@
+#Lizard, Connors's Curse (738108): Hill Giant (3/3) becomes a 4/4 Lizard with no abilities.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738108
+manapool:{2}{G}{G}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+738108
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738108
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=4/4
+[END]

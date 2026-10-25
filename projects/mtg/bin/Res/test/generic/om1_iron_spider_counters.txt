@@ -1,0 +1,19 @@
+#Iron Spider, Stark Upgrade (738166): {T}: +1/+1 counter on each artifact creature you control - itself
+#(2/3 -> 3/4) and Ornithopter (0/2 -> 1/3), not Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738166,Ornithopter,Grizzly Bears
+[PLAYER2]
+[DO]
+738166
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738166,Ornithopter,Grizzly Bears
+pt:738166=3/4
+pt:Ornithopter=1/3
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]

@@ -1,0 +1,22 @@
+#Kraven's Last Hunt chapter I: mill five (Hill Giant is the biggest creature, power 3), then 3 damage to
+#target creature - player 2's Hill Giant dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kraven's Last Hunt
+manapool:{3}{G}
+library:Forest,Grizzly Bears,Centaur Courser,Forest,Forest,Forest
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Kraven's Last Hunt
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kraven's Last Hunt
+graveyard:*,*,*,*,*
+library:*
+[PLAYER2]
+graveyard:Hill Giant
+[END]

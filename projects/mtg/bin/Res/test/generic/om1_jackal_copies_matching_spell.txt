@@ -1,0 +1,18 @@
+#Jackal, Genius Geneticist (738136), power 1: casting Eager Cadet (mana value 1) copies it (a token) and
+#puts a +1/+1 counter on Jackal (2/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738136
+hand:Eager Cadet
+manapool:{W}
+[PLAYER2]
+[DO]
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738136,Eager Cadet,*
+pt:738136=2/2
+[PLAYER2]
+[END]

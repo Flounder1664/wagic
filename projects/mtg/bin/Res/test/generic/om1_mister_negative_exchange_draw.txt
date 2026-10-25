@@ -1,0 +1,23 @@
+#Mister Negative: exchange life (player 1 on 20, player 2 on 17). Player 1 lost 3, so draws 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mister Negative
+manapool:{5}{W}{B}
+library:Forest,Forest,Forest,Forest
+life:20
+[PLAYER2]
+life:17
+[DO]
+Mister Negative
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mister Negative
+hand:*,*,*
+library:*
+life:17
+[PLAYER2]
+life:20
+[END]

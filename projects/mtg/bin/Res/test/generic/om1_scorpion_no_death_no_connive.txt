@@ -1,0 +1,22 @@
+#Control: nothing died this turn, so Scorpion's end step trigger does not fire.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738068,Grizzly Bears
+hand:Eager Cadet
+library:Forest,Forest
+[PLAYER2]
+[DO]
+goto end
+Grizzly Bears
+choice 0
+Eager Cadet
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:738068,Grizzly Bears
+pt:Grizzly Bears=2/2
+hand:Eager Cadet
+library:Forest,Forest
+[PLAYER2]
+[END]

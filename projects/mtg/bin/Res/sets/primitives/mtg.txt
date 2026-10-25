@@ -145921,5 +145921,356 @@ subtype=Spider Human Hero
 power=4
 toughness=4
 [/card]
+[card]
+name=Costume Closet
+auto=counter(1/1,2)
+auto={T}{C(1/1,-1)}:counter(1/1) target(creature|mybattlefield) asSorcery
+auto=@movedTo(creature[modified]|nonbattlezone) from(mybattlefield):counter(1/1) all(this)
+text=This artifact enters with two +1/+1 counters on it. -- {T}: Move a +1/+1 counter from this artifact onto target creature you control. Activate only as a sorcery. -- Whenever a modified creature you control leaves the battlefield, put a +1/+1 counter on this artifact. (Equipment, Auras you control, and counters are modifications.)
+mana={1}{W}
+type=Artifact
+[/card]
+[card]
+name=Prowler, Clawed Thief
+abilities=menace
+auto=@movedTo(other villain|mybattlefield):_CONNIVES_
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever another Villain you control enters, Prowler connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={1}{U}{B}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Robotics Mastery
+abilities=flash
+target=creature
+auto=token(Robot,Artifact Creature Robot,1/1,flying)*2
+auto=teach(creature) 2/2
+text=Flash -- Enchant creature -- When this Aura enters, create two 1/1 colorless Robot artifact creature tokens with flying. -- Enchanted creature gets +2/+2.
+mana={4}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Rocket-Powered Goblin Glider
+retrace={2} name(Mayhem)
+auto=if paid(retrace) then rehook target(creature|mybattlefield)
+auto={2}:equip
+auto=teach(creature) 2/0
+auto=teach(creature) flying
+auto=teach(creature) haste
+text=When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control. -- Equipped creature gets +2/+0 and has flying and haste. -- Equip {2} -- Mayhem {2}
+mana={3}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=SP//dr, Piloted by Peni
+abilities=vigilance
+auto=counter(1/1) target(creature)
+auto=@combatdamaged(player) from(creature[modified]|mybattlefield):draw:1 controller
+text=Vigilance -- When SP//dr enters, put a +1/+1 counter on target creature. -- Whenever a modified creature you control deals combat damage to a player, draw a card. (Equipment, Auras you control, and counters are modifications.)
+mana={3}{W}{U}
+type=Legendary Artifact Creature
+subtype=Spider Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=Sandman's Quicksand
+retrace={3}{B} name(Mayhem)
+auto=if paid(retrace) then all(creature|opponentbattlefield) -2/-2 ueot
+auto=ifnot paid(retrace) then all(creature) -2/-2 ueot
+text=Mayhem {3}{B} (You may cast this card from your graveyard for {3}{B} if you discarded it this turn. Timing rules still apply.) -- All creatures get -2/-2 until end of turn. If this spell's mayhem cost was paid, creatures your opponents control get -2/-2 until end of turn instead.
+mana={1}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Shocker, Unshakable
+auto=this(variable{controllerturn}>0) first strike
+auto=target(creature) transforms((,newability[damage:2 controller],newability[damage:2 all(this)])) oneshot
+note=both 2-damage hits are dealt as if by the targeted creature, not by Shocker (matters only for protection, deathtouch and lifelink)
+text=During your turn, Shocker has first strike. -- Vibro-Shock Gauntlets — When Shocker enters, he deals 2 damage to target creature and 2 damage to that creature's controller.
+mana={4}{R}{R}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=5
+toughness=5
+[/card]
+[card]
+name=Ultimate Green Goblin
+retrace={2}{B/R} name(Mayhem)
+auto=@each my upkeep:ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
+auto=@each my upkeep:_TREASURE_
+text=At the beginning of your upkeep, discard a card, then create a Treasure token. -- Mayhem {2}{B/R} (You may cast this card from your graveyard for {2}{B/R} if you discarded it this turn. Timing rules still apply.)
+mana={1}{B/R}{B/R}
+type=Legendary Creature
+subtype=Goblin Villain
+power=5
+toughness=4
+[/card]
+[card]
+name=Urban Retreat
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{W}
+auto={T}:Add{U}
+#REVIEW-V the hand ability (pay {2} and return a tapped creature to put this land onto the battlefield) cannot be driven by the harness
+autohand={2}{h(creature[tapped]|myBattlefield)}:moveto(mybattlefield) asSorcery
+text=This land enters tapped. -- {T}: Add {G}, {W}, or {U}. -- {2}, Return a tapped creature you control to its owner's hand: Put this card from your hand onto the battlefield. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Ominous Asylum
+auto=tap(noevent)
+auto={T}:Add{B}
+auto={T}:Add{R}
+#REVIEW-V the {4},{T} surveil ability of a land cannot be clicked in the harness (a land click taps it for mana)
+auto={4}{T}:_SURVEIL1_
+text=This land enters tapped. -- {T}: Add {B} or {R}. -- {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+type=Land
+[/card]
+[card]
+name=Savage Mansion
+auto=tap(noevent)
+auto={T}:Add{R}
+auto={T}:Add{G}
+#REVIEW-V the {4},{T} surveil ability of a land cannot be clicked in the harness (a land click taps it for mana)
+auto={4}{T}:_SURVEIL1_
+text=This land enters tapped. -- {T}: Add {R} or {G}. -- {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+type=Land
+[/card]
+[card]
+name=Sinister Hideout
+auto=tap(noevent)
+auto={T}:Add{U}
+auto={T}:Add{B}
+#REVIEW-V the {4},{T} surveil ability of a land cannot be clicked in the harness (a land click taps it for mana)
+auto={4}{T}:_SURVEIL1_
+text=This land enters tapped. -- {T}: Add {U} or {B}. -- {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+type=Land
+[/card]
+[card]
+name=Suburban Sanctuary
+auto=tap(noevent)
+auto={T}:Add{G}
+auto={T}:Add{W}
+#REVIEW-V the {4},{T} surveil ability of a land cannot be clicked in the harness (a land click taps it for mana)
+auto={4}{T}:_SURVEIL1_
+text=This land enters tapped. -- {T}: Add {G} or {W}. -- {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+type=Land
+[/card]
+[card]
+name=University Campus
+auto=tap(noevent)
+auto={T}:Add{W}
+auto={T}:Add{U}
+#REVIEW-V the {4},{T} surveil ability of a land cannot be clicked in the harness (a land click taps it for mana)
+auto={4}{T}:_SURVEIL1_
+text=This land enters tapped. -- {T}: Add {W} or {U}. -- {4}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+type=Land
+[/card]
+[card]
+name=Vibrant Cityscape
+#REVIEW-V the {T}, sacrifice search of a land cannot be clicked in the harness (copied from Evolving Wilds)
+auto={T}{S}:moveTo(myBattlefield) and!(tap(noevent))! target(land[basic]|myLibrary)
+text={T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+type=Land
+[/card]
+[card]
+name=Scorpion, Seething Striker
+abilities=deathtouch
+auto=@each my end restriction{compare(bothalldeadcreature)~morethan~0}:target(creature|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot
+text=Deathtouch -- At the beginning of your end step, if a creature died this turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={3}{B}
+type=Legendary Creature
+subtype=Scorpion Human Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Shriek, Treblemaker
+auto=@each my firstmain:may name(Discard a card) reject notaTarget(*|myhand) and!( target(creature) cantblock ueot )!
+auto=@movedTo(creature|graveyard) from(opponentbattlefield):damage:1 opponent
+text=At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn. -- Sonic Blast — Whenever a creature an opponent controls dies, Shriek deals 1 damage to that player.
+mana={2}{B/R}
+type=Legendary Creature
+subtype=Mutant Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Spider-Slayer, Hatred Honed
+auto=@damaged(spider) from(this):all(trigger[to]) destroy
+autograveyard={6}{E}:token(Robot,Artifact Creature Robot,1/1,flying)*2 and!( tap(noevent) )!
+text=Whenever Spider-Slayer deals damage to a Spider, destroy that creature. -- {6}, Exile this card from your graveyard: Create two tapped 1/1 colorless Robot artifact creature tokens with flying.
+mana={2}
+type=Legendary Artifact Creature
+subtype=Human Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Iron Spider, Stark Upgrade
+abilities=vigilance
+auto={T}:all(creature[artifact]|mybattlefield) counter(1/1) && all(vehicle[-creature]|mybattlefield) counter(1/1)
+auto={2}{C(1/1,-2)}:draw:1 controller
+missing=the two +1/+1 counters for the draw ability can only be removed from Iron Spider itself, not from among your other artifacts
+text=Vigilance -- {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. -- {2}, Remove two +1/+1 counters from among artifacts you control: Draw a card.
+mana={3}
+type=Legendary Artifact Creature
+subtype=Spider Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Living Brain, Mechanical Marvel
+auto=@each my combatbegins:target(artifact[-equipment]|mybattlefield) transforms((Creature,setpower=3,settoughness=3,newability[untap])) ueot
+text=At the beginning of combat on your turn, target non-Equipment artifact you control becomes an artifact creature with base power and toughness 3/3 until end of turn. Untap it.
+mana={4}
+type=Legendary Artifact Creature
+subtype=Robot Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Lizard, Connors's Curse
+abilities=trample
+auto=target(<upto:1>other creature) transforms((Lizard,green,setpower=4,settoughness=4,newability[loseabilities],-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
+text=Trample -- Lizard Formula — When Lizard, Connors's Curse enters, up to one other target creature loses all abilities and becomes a green Lizard creature with base power and toughness 4/4.
+mana={2}{G}{G}
+type=Legendary Creature
+subtype=Lizard Villain
+power=5
+toughness=5
+[/card]
+[card]
+name=Spider-Man No More
+target=creature
+auto=teach(creature) loseabilities
+auto=teach(creature) transforms((,setpower=1,settoughness=1))
+auto=teach(creature) transforms((Citizen,defender,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible))
+text=Enchant creature -- Enchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities. (It also loses all other creature types.)
+mana={1}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Kraven, Proud Predator
+abilities=vigilance
+anyzone=convertedcost:highest:*:mybattlefield/4 cdaactive
+text=Vigilance -- Top of the Food Chain — Kraven's power is equal to the greatest mana value among permanents you control.
+mana={1}{R}{G}
+type=Legendary Creature
+subtype=Human Warrior Villain
+power=*
+toughness=4
+[/card]
+[card]
+name=Giada, Font of Hope
+abilities=flying,vigilance
+auto=@movedTo(other angel|mybattlefield):all(trigger[to]) counter(1/1,type:angel:mybattlefieldminus1minusend)
+auto={T}:Add{W} spendspells(angel)
+text=Flying, vigilance -- Each other Angel you control enters with an additional +1/+1 counter on it for each Angel you already control. -- {T}: Add {W}. Spend this mana only to cast an Angel spell.
+mana={1}{W}
+type=Legendary Creature
+subtype=Angel
+power=2
+toughness=2
+[/card]
+[card]
+name=The Death of Gwen Stacy
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=destroy target(creature)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) ability$!name(Discard a card or lose 3 life) choice restriction{type(*|myhand)~morethan~0} name(Discard a card) notaTarget(*|myhand) reject _ choice name(Lose 3 life) life:-3 controller!$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) ability$!name(Discard a card or lose 3 life) choice restriction{type(*|myhand)~morethan~0} name(Discard a card) notaTarget(*|myhand) reject _ choice name(Lose 3 life) life:-3 controller!$ controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$!name(Exile graveyards) choice name(Exile opponent's graveyard) all(*|opponentgraveyard) moveto(exile) _ choice name(Exile both graveyards) all(*|graveyard) moveto(exile) _ choice name(Exile your graveyard) all(*|mygraveyard) moveto(exile) _ choice name(Exile neither) donothing!$ controller
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Destroy target creature. -- II — Each player may discard a card. Each player who doesn't loses 3 life. -- III — Exile any number of target players' graveyards.
+mana={2}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Kraven's Last Hunt
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=deplete:5 controller and!( damage:power:highest:creature:mygraveyard target(creature) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(myhand) target(creature|mygraveyard)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Mill five cards. When you do, this Saga deals damage equal to the greatest power among creature cards in your graveyard to target creature. -- II — Target creature you control gets +2/+2 until end of turn. -- III — Return target creature card from your graveyard to your hand.
+mana={3}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Arachne, Psionic Weaver
+other={W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=choice name(Artifact) transforms((,newability[lord(*[artifact]|mycastingzone) changecost(colorless:+1)],newability[lord(*[artifact]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Enchantment) transforms((,newability[lord(*[enchantment]|mycastingzone) changecost(colorless:+1)],newability[lord(*[enchantment]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Instant) transforms((,newability[lord(*[instant]|mycastingzone) changecost(colorless:+1)],newability[lord(*[instant]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Sorcery) transforms((,newability[lord(*[sorcery]|mycastingzone) changecost(colorless:+1)],newability[lord(*[sorcery]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Planeswalker) transforms((,newability[lord(*[planeswalker]|mycastingzone) changecost(colorless:+1)],newability[lord(*[planeswalker]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Battle) transforms((,newability[lord(*[battle]|mycastingzone) changecost(colorless:+1)],newability[lord(*[battle]|opponentcastingzone) changecost(colorless:+1)])) forever
+note=looking at the opponent's hand before choosing is not shown
+text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.) -- As Arachne enters, look at an opponent's hand, then choose a card type other than creature. -- Spells of the chosen type cost {1} more to cast.
+mana={2}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Superior Foes of Spider-Man
+abilities=trample
+auto=@movedTo(*[manacost>=4]|mystack):may all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) forever )!
+missing=a card exiled earlier stays playable after the next one is exiled (the real card only lets you play the most recent one)
+text=Trample -- Whenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature.
+mana={2}{R}
+type=Creature
+subtype=Human Rogue Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Jackal, Genius Geneticist
+abilities=trample
+auto=@movedto(*[creature;manacost=1]|mystack) restriction{compare(power)~equalto~1}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=2]|mystack) restriction{compare(power)~equalto~2}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=3]|mystack) restriction{compare(power)~equalto~3}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=4]|mystack) restriction{compare(power)~equalto~4}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=5]|mystack) restriction{compare(power)~equalto~5}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=6]|mystack) restriction{compare(power)~equalto~6}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=7]|mystack) restriction{compare(power)~equalto~7}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=8]|mystack) restriction{compare(power)~equalto~8}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+text=Trample -- Whenever you cast a creature spell with mana value equal to Jackal's power, copy that spell, except the copy isn't legendary. Then put a +1/+1 counter on Jackal. (The copy becomes a token.)
+mana={G}{U}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=1
+toughness=1
+[/card]
+[card]
+name=Impostor Syndrome
+auto=@combatdamaged(player) from(creature[-token]|mybattlefield):all(trigger[from]) clone options(nolegend)
+text=Whenever a nontoken creature you control deals combat damage to a player, create a token that's a copy of it, except it isn't legendary.
+mana={4}{U}{U}
+type=Enchantment
+[/card]
+[card]
+name=Mister Negative
+abilities=vigilance,lifelink
+auto=ability$!name(Darkforce Inversion) choice name(Exchange life totals) exchangelife opponent && if compare(opponentlifetotal)~morethan~compare(lifetotal) then draw:opponentlifetotalminuslifetotalminusend controller _ choice name(Don't exchange) donothing!$ controller
+text=Vigilance, lifelink -- Darkforce Inversion — When Mister Negative enters, you may exchange life totals with target opponent. If you lost life this way, draw that many cards.
+mana={5}{W}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=5
+toughness=5
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]

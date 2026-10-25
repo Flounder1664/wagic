@@ -1,0 +1,17 @@
+#Spider-Slayer's graveyard ability: {6}, exile it, two tapped 1/1 flying Robots.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:738168
+manapool:{6}
+[PLAYER2]
+[DO]
+738168
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+tappedinplay:2
+exile:738168
+[PLAYER2]
+[END]

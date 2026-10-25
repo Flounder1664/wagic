@@ -1,0 +1,23 @@
+#Prowler, Clawed Thief (738128): another Villain (Raging Goblinoids) enters, so Prowler connives: draw
+#the Forest, discard the nonland Grizzly Bears, +1/+1 counter (2/3 -> 3/4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738128
+hand:Raging Goblinoids,Grizzly Bears
+manapool:{4}{R}
+library:Forest
+[PLAYER2]
+[DO]
+Raging Goblinoids
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738128,Raging Goblinoids
+pt:738128=3/4
+hand:Forest
+graveyard:Grizzly Bears
+[PLAYER2]
+[END]

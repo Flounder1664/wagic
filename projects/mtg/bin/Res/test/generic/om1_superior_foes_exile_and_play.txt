@@ -1,0 +1,21 @@
+#Superior Foes of Spider-Man: casting Hill Giant (mana value 4) exiles the top card (Ornithopter), which
+#can then be cast from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Superior Foes of Spider-Man
+hand:Hill Giant
+manapool:{3}{R}
+library:Forest,Ornithopter
+[PLAYER2]
+[DO]
+Hill Giant
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Superior Foes of Spider-Man,Hill Giant,Ornithopter
+library:Forest
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Shocker, Unshakable (738083): ETB 2 damage to Grizzly Bears and 2 to its controller.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738083
+manapool:{4}{R}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+738083
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738083
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]

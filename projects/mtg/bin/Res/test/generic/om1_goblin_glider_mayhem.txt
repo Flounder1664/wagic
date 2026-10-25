@@ -1,0 +1,22 @@
+#Rocket-Powered Goblin Glider: discarded to Wild Mongrel, then cast from the graveyard for its mayhem cost
+#{2}; because it was cast from the graveyard it attaches to Grizzly Bears (2/2 -> 4/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,Grizzly Bears
+hand:Rocket-Powered Goblin Glider
+manapool:{2}
+[PLAYER2]
+[DO]
+Wild Mongrel
+choice 0
+Rocket-Powered Goblin Glider
+Rocket-Powered Goblin Glider
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,Grizzly Bears,Rocket-Powered Goblin Glider
+pt:Grizzly Bears=4/2
+[PLAYER2]
+[END]

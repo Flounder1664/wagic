@@ -1,0 +1,18 @@
+#Robotics Mastery: two 1/1 flying Robot tokens on entering; enchanted Grizzly Bears gets +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Robotics Mastery
+manapool:{4}{U}
+[PLAYER2]
+[DO]
+Robotics Mastery
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Robotics Mastery,Grizzly Bears,*,*
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

@@ -1,0 +1,29 @@
+#Scorpion, Seething Striker (738068): a creature died this turn (Bolted Hill Giant), so at the end step
+#Grizzly Bears connives: draw the Forest, discard the nonland Eager Cadet, Bears gets a counter (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738068,Grizzly Bears
+hand:Lightning Bolt,Eager Cadet
+manapool:{R}
+library:Forest,Forest
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Lightning Bolt
+Hill Giant
+goto end
+Grizzly Bears
+choice 0
+Eager Cadet
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:738068,Grizzly Bears
+pt:Grizzly Bears=3/3
+hand:*
+graveyard:Lightning Bolt,Eager Cadet
+library:*
+[PLAYER2]
+graveyard:Hill Giant
+[END]

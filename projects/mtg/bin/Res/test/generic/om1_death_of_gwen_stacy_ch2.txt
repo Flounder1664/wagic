@@ -1,0 +1,31 @@
+#The Death of Gwen Stacy chapter II: player 1 takes "lose 3 life" (choice 1) instead of discarding.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:The Death of Gwen Stacy
+manapool:{2}{B}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Death of Gwen Stacy
+Ornithopter
+eot
+eot
+next
+next
+next
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Death of Gwen Stacy
+graveyard:Ornithopter
+hand:*
+library:*,*
+life:17
+[PLAYER2]
+hand:*
+library:*,*
+[END]

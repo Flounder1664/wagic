@@ -1,0 +1,24 @@
+#Sandman's Quicksand discarded to Wild Mongrel, then cast for mayhem {3}{B}: only the opponent's
+#creatures get -2/-2. Player 1's Hill Giant survives; player 2's Grizzly Bears dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,Hill Giant
+hand:Sandman's Quicksand
+manapool:{3}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Wild Mongrel
+choice 0
+Sandman's Quicksand
+Sandman's Quicksand
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,Hill Giant
+graveyard:Sandman's Quicksand
+pt:Hill Giant=3/3
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

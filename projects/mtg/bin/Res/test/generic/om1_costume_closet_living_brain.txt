@@ -1,0 +1,27 @@
+#Costume Closet (enters with two +1/+1 counters) moves one onto Grizzly Bears (2/2 -> 3/3). Bolting the
+#now-modified Bears puts a counter back on the Closet (1 -> 2). Living Brain then makes the Closet a 3/3
+#artifact creature at the beginning of combat, so its P/T reads its counters: 5/5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Costume Closet,738165,Grizzly Bears
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+[DO]
+Costume Closet
+Grizzly Bears
+Lightning Bolt
+Grizzly Bears
+next
+#combat begins: Living Brain
+Costume Closet
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Costume Closet,738165
+graveyard:Grizzly Bears,Lightning Bolt
+pt:Costume Closet=5/5
+[PLAYER2]
+[END]

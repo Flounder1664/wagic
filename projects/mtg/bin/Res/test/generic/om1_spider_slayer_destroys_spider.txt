@@ -1,0 +1,20 @@
+#Spider-Slayer, Hatred Honed (738168) fights Giant Spider (2/4): 2 damage to a Spider destroys it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738168
+hand:Prey Upon
+manapool:{G}
+[PLAYER2]
+inplay:Giant Spider
+[DO]
+Prey Upon
+738168
+Giant Spider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:738168,Prey Upon
+[PLAYER2]
+graveyard:Giant Spider
+[END]

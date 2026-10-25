@@ -1,0 +1,19 @@
+#Shocker aimed at player 1's own Hill Giant: 2 damage to it (survives) and 2 to its controller, player 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:738083
+manapool:{4}{R}{R}
+[PLAYER2]
+[DO]
+738083
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738083,Hill Giant
+life:18
+[PLAYER2]
+life:20
+[END]

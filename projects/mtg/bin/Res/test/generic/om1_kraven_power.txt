@@ -1,0 +1,14 @@
+#Kraven, Proud Predator (738135): power = greatest mana value among your permanents (Hill Giant, 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738135,Hill Giant,Ornithopter
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738135,Hill Giant,Ornithopter
+pt:738135=4/4
+[PLAYER2]
+[END]

@@ -1,0 +1,17 @@
+#Control: Grizzly Bears (mana value 2) does not match Jackal's power 1 - no copy, no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738136
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738136,Grizzly Bears
+pt:738136=1/1
+[PLAYER2]
+[END]

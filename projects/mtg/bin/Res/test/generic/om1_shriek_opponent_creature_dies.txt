@@ -1,0 +1,21 @@
+#Shriek, Treblemaker (738131): a creature an opponent controls dies, Shriek deals 1 damage to them.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738131
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738131
+graveyard:Lightning Bolt
+[PLAYER2]
+graveyard:Grizzly Bears
+life:19
+[END]

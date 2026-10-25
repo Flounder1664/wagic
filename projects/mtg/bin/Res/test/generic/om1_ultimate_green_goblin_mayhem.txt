@@ -1,0 +1,19 @@
+#Ultimate Green Goblin discarded to Wild Mongrel, then cast from the graveyard for mayhem {2}{B/R}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel
+hand:Ultimate Green Goblin
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+Wild Mongrel
+choice 0
+Ultimate Green Goblin
+Ultimate Green Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,Ultimate Green Goblin
+[PLAYER2]
+[END]

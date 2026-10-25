@@ -1,0 +1,18 @@
+#The Death of Gwen Stacy chapter I: destroy target creature (Grizzly Bears).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Death of Gwen Stacy
+manapool:{2}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+The Death of Gwen Stacy
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:The Death of Gwen Stacy
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

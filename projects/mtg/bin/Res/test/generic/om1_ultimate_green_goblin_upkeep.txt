@@ -1,0 +1,28 @@
+#Ultimate Green Goblin's upkeep: discard a card (Forest), then create a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ultimate Green Goblin
+hand:Forest
+library:Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant
+[DO]
+eot
+eot
+next
+next
+choice 0
+Forest
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ultimate Green Goblin,*
+graveyard:Forest
+hand:*
+library:*
+[PLAYER2]
+hand:*
+library:*
+[END]

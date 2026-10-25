@@ -1,0 +1,18 @@
+#Sandman's Quicksand cast normally: all creatures get -2/-2, both Grizzly Bears die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Sandman's Quicksand
+manapool:{1}{B}{B}
+[PLAYER2]
+inplay:Runeclaw Bear
+[DO]
+Sandman's Quicksand
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Sandman's Quicksand
+[PLAYER2]
+graveyard:Runeclaw Bear
+[END]

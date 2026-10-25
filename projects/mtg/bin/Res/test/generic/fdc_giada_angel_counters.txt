@@ -1,0 +1,17 @@
+#Giada, Font of Hope (737004): Serra Angel enters with a +1/+1 counter for the one Angel already there.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:737004
+hand:Serra Angel
+manapool:{3}{W}{W}
+[PLAYER2]
+[DO]
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:737004,Serra Angel
+pt:Serra Angel=5/5
+[PLAYER2]
+[END]
