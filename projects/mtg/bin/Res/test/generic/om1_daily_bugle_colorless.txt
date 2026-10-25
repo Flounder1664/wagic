@@ -1,0 +1,16 @@
+#Daily Bugle Building: {T}: Add {C} (choice 0 of its mana menu).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Daily Bugle Building
+[PLAYER2]
+[DO]
+Daily Bugle Building
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Daily Bugle Building
+manapool:{C}
+[PLAYER2]
+[END]

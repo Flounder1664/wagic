@@ -1,0 +1,21 @@
+#Chameleon discarded to Wild Mongrel, then cast for mayhem {2}{U}; declines to copy (2/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel
+hand:738046
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Wild Mongrel
+choice 0
+738046
+738046
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wild Mongrel,738046
+pt:738046=2/3
+[PLAYER2]
+[END]

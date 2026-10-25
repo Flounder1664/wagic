@@ -1,0 +1,16 @@
+#Whisperwood Elemental: at the end step, manifest the top card (a face-down 2/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Whisperwood Elemental
+library:Forest,Forest
+[PLAYER2]
+[DO]
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Whisperwood Elemental,*
+library:Forest
+[PLAYER2]
+[END]

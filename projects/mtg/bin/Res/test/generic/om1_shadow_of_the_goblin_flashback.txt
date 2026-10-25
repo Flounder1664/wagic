@@ -1,0 +1,22 @@
+#Shadow of the Goblin: casting a spell from the graveyard (Think Twice's flashback) deals 1 damage
+#to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shadow of the Goblin
+graveyard:Think Twice
+manapool:{2}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Think Twice
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shadow of the Goblin
+hand:*
+library:*
+exile:Think Twice
+[PLAYER2]
+life:19
+[END]

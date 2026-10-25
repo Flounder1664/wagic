@@ -1,0 +1,20 @@
+#Flash Thompson, Spider-Fan (738003): mode Heckle (choice 0) taps player 2's Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:738003
+manapool:{1}{W}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+738003
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738003
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+[END]

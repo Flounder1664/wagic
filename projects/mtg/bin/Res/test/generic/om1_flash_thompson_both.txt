@@ -1,0 +1,26 @@
+#Flash Thompson: both modes (choice 2) - tap Hill Giant, then untap player 1's tapped Llanowar Elves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:738003
+manapool:{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Llanowar Elves
+738003
+choice 2
+Hill Giant
+choice 0
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738003,Llanowar Elves
+tappedinplay:0
+manapool:{G}
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]

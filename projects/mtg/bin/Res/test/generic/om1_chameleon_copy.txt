@@ -1,0 +1,19 @@
+#Chameleon (738046) enters as a copy of Hill Giant (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:738046
+manapool:{3}{U}
+[PLAYER2]
+[DO]
+738046
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,*
+pt:738046=3/3
+[PLAYER2]
+[END]

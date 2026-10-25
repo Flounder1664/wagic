@@ -1,0 +1,16 @@
+#Mysterio (738048) with Raging Goblinoids (a nontoken Villain) already there: two Villains, two 3/3s.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblinoids
+hand:738048
+manapool:{3}{U}
+[PLAYER2]
+[DO]
+738048
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblinoids,738048,*,*
+[PLAYER2]
+[END]

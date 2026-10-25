@@ -1,0 +1,32 @@
+#The Soul Stone (738069): harness it (exile Grizzly Bears), then at the next upkeep return Hill Giant
+#from the graveyard to the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738069,Grizzly Bears
+graveyard:Hill Giant
+manapool:{6}{B}
+library:Forest,Forest
+[PLAYER2]
+library:Forest,Forest
+[DO]
+738069
+choice 1
+Grizzly Bears
+eot
+eot
+next
+next
+Hill Giant
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738069,Hill Giant
+exile:Grizzly Bears
+hand:*
+library:*
+[PLAYER2]
+hand:*
+library:*
+[END]

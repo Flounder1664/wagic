@@ -1,0 +1,21 @@
+#Heroes' Hangout, Patrol Night: Grizzly Bears gets +1/+0 (3/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Heroes' Hangout
+manapool:{R}
+[PLAYER2]
+[DO]
+Heroes' Hangout
+choice 1
+Grizzly Bears
+Heroes' Hangout
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Heroes' Hangout
+pt:Grizzly Bears=3/2
+[PLAYER2]
+[END]

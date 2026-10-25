@@ -1,0 +1,25 @@
+#Unstable Experiment: you draw (choice 0), then Grizzly Bears connives - draws the Forest, discards the
+#nonland Eager Cadet and gets a +1/+1 counter (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Unstable Experiment,Eager Cadet
+manapool:{1}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Unstable Experiment
+choice 0
+Grizzly Bears
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/3
+hand:*,*
+graveyard:Unstable Experiment,Eager Cadet
+[PLAYER2]
+[END]

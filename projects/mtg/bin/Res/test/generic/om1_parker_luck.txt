@@ -1,0 +1,23 @@
+#Parker Luck at the end step: player 1 reveals Grizzly Bears (2), player 2 reveals Hill Giant (4). Player 1
+#loses 4, player 2 loses 2, and both cards go to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Parker Luck
+library:Ornithopter,Grizzly Bears
+[PLAYER2]
+library:Mind Stone,Hill Giant
+[DO]
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Parker Luck
+hand:Grizzly Bears
+library:Ornithopter
+life:16
+[PLAYER2]
+hand:Hill Giant
+library:Mind Stone
+life:18
+[END]

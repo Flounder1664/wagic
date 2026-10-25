@@ -1,0 +1,24 @@
+#Lady Octopus (738034): Divination draws two (first and second card this turn: two ingenuity counters),
+#then {T} casts Mind Stone (mana value 2) from hand for free.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738034
+hand:Divination,Mind Stone
+manapool:{2}{U}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+738034
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:738034,Mind Stone
+counter:738034=ingenuity:2
+graveyard:Divination
+hand:*,*
+library:*
+[PLAYER2]
+[END]

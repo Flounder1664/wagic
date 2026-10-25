@@ -1,0 +1,19 @@
+#School Daze, Do Homework: draw three cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:School Daze
+manapool:{3}{U}{U}
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+[DO]
+School Daze
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:School Daze
+hand:*,*,*
+library:*
+[PLAYER2]
+[END]

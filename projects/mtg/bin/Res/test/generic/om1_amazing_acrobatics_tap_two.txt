@@ -1,0 +1,22 @@
+#Amazing Acrobatics, mode 2 (choice 0 here: the counter modes are hidden with no spell on the stack) taps
+#both of player 2's creatures.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Amazing Acrobatics
+manapool:{1}{U}{U}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+Amazing Acrobatics
+choice 1
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Amazing Acrobatics
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+tappedinplay:2
+[END]

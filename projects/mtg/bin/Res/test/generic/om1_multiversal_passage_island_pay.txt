@@ -1,0 +1,18 @@
+#Multiversal Passage: choose Island (choice 1), pay 2 life (choice 0); it enters untapped and taps for {U}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Multiversal Passage
+[PLAYER2]
+[DO]
+Multiversal Passage
+choice 2
+Multiversal Passage
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Multiversal Passage
+manapool:{U}
+life:18
+[PLAYER2]
+[END]

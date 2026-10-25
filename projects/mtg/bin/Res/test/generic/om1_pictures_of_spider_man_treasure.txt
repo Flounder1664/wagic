@@ -1,0 +1,16 @@
+#Pictures of Spider-Man's {1},{T}, sacrifice: create a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pictures of Spider-Man
+manapool:{1}
+[PLAYER2]
+[DO]
+Pictures of Spider-Man
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Pictures of Spider-Man
+[PLAYER2]
+[END]

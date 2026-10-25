@@ -1,0 +1,20 @@
+#Mysterio leaving (Unsummon) exiles the two Illusion tokens he made (Raging Goblinoids is a Villain).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblinoids
+hand:738048,Unsummon
+manapool:{3}{U}{U}
+[PLAYER2]
+[DO]
+738048
+Unsummon
+738048
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblinoids
+hand:738048
+graveyard:Unsummon
+[PLAYER2]
+[END]

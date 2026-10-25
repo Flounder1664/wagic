@@ -1,0 +1,18 @@
+#Rent Is Due with only one creature: the tap option is hidden, so it is sacrificed (choice 0).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rent Is Due,Grizzly Bears
+library:Forest,Forest
+[PLAYER2]
+[DO]
+goto end
+choice 0
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Rent Is Due
+library:Forest,Forest
+[PLAYER2]
+[END]

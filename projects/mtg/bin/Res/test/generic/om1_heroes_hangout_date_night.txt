@@ -1,0 +1,22 @@
+#Heroes' Hangout, Date Night: exile the top two (Ornithopter, Forest); choose Ornithopter, then cast it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Heroes' Hangout
+manapool:{R}
+library:Hill Giant,Forest,Ornithopter
+[PLAYER2]
+[DO]
+Heroes' Hangout
+choice 0
+Ornithopter
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Heroes' Hangout
+exile:*
+library:Hill Giant
+[PLAYER2]
+[END]

@@ -1,0 +1,22 @@
+#Rent Is Due at the end step: tap Grizzly Bears and Hill Giant, draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rent Is Due,Grizzly Bears,Hill Giant
+library:Forest,Forest
+[PLAYER2]
+[DO]
+goto end
+choice 0
+Grizzly Bears
+Hill Giant
+endinterruption
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Rent Is Due,Grizzly Bears,Hill Giant
+tappedinplay:2
+hand:*
+library:*
+[PLAYER2]
+[END]
