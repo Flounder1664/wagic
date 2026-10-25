@@ -483,9 +483,7 @@ void GameStateDraft::buildSetListMenu()
 MTGPack* GameStateDraft::makePackForSet(const string& setCode)
 {
     MTGPack* p = NEW MTGPack();
-    p->load("packs/draft_booster.txt");
-    if (!p->isValid())
-        p->load("Res/packs/draft_booster.txt"); // some run configs resolve resources one level up
+    p->load("packs/draft_booster.txt"); // resolved by JFileSystem: loose Res/ or core.zip
     if (!p->isValid())
     {
         SAFE_DELETE(p);

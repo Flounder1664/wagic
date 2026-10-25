@@ -141,8 +141,19 @@ void MTGPack::countCards()
 void MTGPack::load(string filename)
 {
     //TODO Placeholder until XML format available.
+    //Read through JFileSystem so packs inside core.zip are found. TiXml's own
+    //LoadFile() is a raw fopen() relative to the cwd, which only worked on
+    //Windows because Res/packs/ also exists loose there; on Android every pack
+    //(shop boosters, the draft template) failed to load.
     TiXmlDocument packfile(filename.c_str());
-    if (!packfile.LoadFile())
+    string xmlBuffer;
+    if (JFileSystem::GetInstance()->readIntoString(filename, xmlBuffer))
+    {
+        packfile.Parse(xmlBuffer.c_str());
+        if (packfile.Error())
+            return;
+    }
+    else if (!packfile.LoadFile())
         return;
     TiXmlHandle hDoc(&packfile);
     TiXmlElement * pPack;

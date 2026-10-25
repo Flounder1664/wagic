@@ -259,7 +259,11 @@ Task* Task::createFromStr(const string params, bool rand)
 /*---------------- TaskList -----------------*/
 
 TaskList::TaskList(string _fileName):
-    fileName(_fileName), vPos(-SCREEN_HEIGHT), vPosInEasing(vPos), vPosOutEasing(vPos)
+    fileName(_fileName), vPos(-SCREEN_HEIGHT), vPosInEasing(vPos), vPosOutEasing(vPos),
+    mState(TASKS_INACTIVE), sH(1), sW(1)
+    //mState used to be left uninitialized. GameStateDuel builds a fresh TaskList
+    //for every duel, and when the leftover heap value read as TASKS_ACTIVE the
+    //duel rendered an invisible board's full-screen dim until "Close task board".
 {
 
     if (fileName == "")

@@ -8,10 +8,12 @@
 #include "SimpleMenu.h"
 #include "SimpleButton.h"
 #include <algorithm>
+#include <new>
 #include "GuiCombat.h"
 #include "Rules.h"
 #include "GameObserver.h"
 #include "GameStateShop.h"
+#include "MTGPack.h"
 #ifdef QT_CONFIG
 #include <QThread>
 #endif
@@ -1192,6 +1194,38 @@ void TestSuite::pregameTests()
         sprintf(result, "<h3>pregame/BoosterTest#%i</h3>", i);
         Log(result);
         if (!sb.unitTest()) nbFailed++;
+    }
+
+    //Pack templates must load through JFileSystem (core.zip on Android), not a
+    //raw fopen relative to the cwd. The harness runs one level above Res/, so a
+    //raw fopen of "packs/..." fails here exactly as it did on the Galaxy Tab S9.
+    nbTests++;
+    Log("<h3>pregame/DraftPackTemplate</h3>");
+    MTGPack draftPack;
+    draftPack.load("packs/draft_booster.txt");
+    if (!draftPack.isValid())
+    {
+        Log("<span class=\"error\">packs/draft_booster.txt did not load through JFileSystem</span><br />");
+        nbFailed++;
+    }
+
+    //A new TaskList must start INACTIVE whatever the heap held before. Build it
+    //over bytes that read as TASKS_ACTIVE: with mState uninitialized the duel
+    //drew the task board's full-screen dim (Galaxy Tab S9, 2026-10-25).
+    nbTests++;
+    Log("<h3>pregame/TaskListStartsInactive</h3>");
+    {
+        void * raw = ::operator new(sizeof(TaskList));
+        memset(raw, TaskList::TASKS_ACTIVE, sizeof(TaskList));
+        TaskList * tl = new (raw) TaskList();
+        int state = tl->getState();
+        tl->~TaskList();
+        ::operator delete(raw);
+        if (state != TaskList::TASKS_INACTIVE)
+        {
+            Log("<span class=\"error\">a new TaskList did not start TASKS_INACTIVE</span><br />");
+            nbFailed++;
+        }
     }
 }
 

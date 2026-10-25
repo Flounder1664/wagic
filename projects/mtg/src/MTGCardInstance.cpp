@@ -1699,6 +1699,9 @@ int MTGCardInstance::nbOpponents()
 int MTGCardInstance::raiseBlockerRankOrder(MTGCardInstance * blocker)
 {
     list<MTGCardInstance *>::iterator it1 = find(blockers.begin(), blockers.end(), blocker);
+    //nothing to reorder: the blocker is gone, or it is the only one (it2 would be end())
+    if (it1 == blockers.end() || blockers.size() < 2)
+        return 0;
     list<MTGCardInstance *>::iterator it2 = it1;
     if (blockers.begin() == it2)
         ++it2;
