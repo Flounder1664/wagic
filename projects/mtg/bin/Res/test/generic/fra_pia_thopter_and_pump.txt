@@ -1,0 +1,20 @@
+#Pia, Determined Rebuilder (735250): ETB Thopter; {5}{R}: Grizzly Bears gets +X/+0, X = artifacts (Thopter
+#and Ornithopter = 2): 4/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Ornithopter
+hand:735250
+manapool:{7}{R}{R}
+[PLAYER2]
+[DO]
+735250
+735250
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735250,Grizzly Bears,Ornithopter,*
+pt:Grizzly Bears=4/2
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Fateshaper Aspirant, mode 2 (choice 1): +1/+1 counter on Grizzly Bears (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Fateshaper Aspirant
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+Fateshaper Aspirant
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fateshaper Aspirant,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

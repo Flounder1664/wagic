@@ -1,0 +1,19 @@
+#Stingerquill Charm mode 1: 3 damage to Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stingerquill Charm
+manapool:{B}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Stingerquill Charm
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Stingerquill Charm
+[PLAYER2]
+graveyard:Hill Giant
+[END]

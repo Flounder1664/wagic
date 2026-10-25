@@ -1,0 +1,21 @@
+#Control: only two draws (Divination) - no Angel.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735217
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:735217
+graveyard:Divination
+hand:*,*
+library:*,*
+[PLAYER2]
+[END]

@@ -1,0 +1,15 @@
+#Turbulent Crater: the opponent controls fewer than eight lands, so it enters tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Turbulent Crater
+[PLAYER2]
+[DO]
+Turbulent Crater
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turbulent Crater
+tappedinplay:1
+[PLAYER2]
+[END]

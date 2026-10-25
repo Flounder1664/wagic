@@ -1,0 +1,19 @@
+#Teyo, Diamondblade Mage (735236): +1/+1 counter on Grizzly Bears (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:735236
+manapool:{3}{B}
+[PLAYER2]
+[DO]
+735236
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735236,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

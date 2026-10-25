@@ -1,0 +1,20 @@
+#Grim Repriser: after Shock hits the opponent (noncombat damage), {B}{R} returns it from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grim Repriser
+hand:Shock
+manapool:{B}{R}{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Grim Repriser
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grim Repriser
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

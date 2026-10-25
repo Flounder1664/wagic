@@ -1,0 +1,15 @@
+#Turbulent Wetlands: enters tapped against an opponent with no lands.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Turbulent Wetlands
+[PLAYER2]
+[DO]
+Turbulent Wetlands
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turbulent Wetlands
+tappedinplay:1
+[PLAYER2]
+[END]

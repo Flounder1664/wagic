@@ -1,0 +1,22 @@
+#Rise of the Deathbringer mode 1: Hill Giant is the biggest (power 3) - draw 3, lose 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Grizzly Bears
+hand:Rise of the Deathbringer
+manapool:{4}{B}
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Rise of the Deathbringer
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Grizzly Bears
+graveyard:Rise of the Deathbringer
+hand:*,*,*
+library:*
+life:17
+[PLAYER2]
+[END]

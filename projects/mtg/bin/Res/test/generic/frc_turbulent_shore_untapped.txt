@@ -1,0 +1,17 @@
+#Turbulent Shore: the opponent controls eight lands, so it enters untapped and taps for {W} or {U}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Turbulent Shore
+[PLAYER2]
+inplay:Plains,Plains,Plains,Plains,Island,Island,Island,Island
+[DO]
+Turbulent Shore
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Turbulent Shore
+tappedinplay:0
+[PLAYER2]
+inplay:*,*,*,*,*,*,*,*
+[END]

@@ -1,0 +1,19 @@
+#Teyo, Lightshield Expert (735204): target creature you control gets a +1/+1 counter (Bears 3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:735204
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+735204
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735204,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

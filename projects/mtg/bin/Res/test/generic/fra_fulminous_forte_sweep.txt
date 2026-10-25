@@ -1,0 +1,22 @@
+#Fulminous Forte mode 1: 1 damage to each creature the opponent controls - Eager Cadet dies, Hill Giant
+#lives, player 1's Llanowar Elves is untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:Fulminous Forte
+manapool:{2}{R}
+[PLAYER2]
+inplay:Eager Cadet,Hill Giant
+[DO]
+Fulminous Forte
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+graveyard:Fulminous Forte
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Eager Cadet
+[END]

@@ -1,0 +1,19 @@
+#Hungering Puppetbeast: ETB Heartwood; {1}, sacrifice it: +1/+1 counter (6/6) and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hungering Puppetbeast
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+Hungering Puppetbeast
+Hungering Puppetbeast
+choice 0
+Heartwood Fra
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hungering Puppetbeast
+pt:Hungering Puppetbeast=6/6
+[PLAYER2]
+[END]

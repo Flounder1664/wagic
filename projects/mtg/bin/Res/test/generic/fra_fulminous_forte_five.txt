@@ -1,0 +1,19 @@
+#Fulminous Forte mode 2: 5 damage to Serra Angel.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fulminous Forte
+manapool:{2}{R}
+[PLAYER2]
+inplay:Serra Angel
+[DO]
+Fulminous Forte
+choice 1
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Fulminous Forte
+[PLAYER2]
+graveyard:Serra Angel
+[END]

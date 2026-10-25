@@ -1,0 +1,23 @@
+#Ingris Stingerquill: Grizzly Bears attacks - 1 damage to the opponent, plus 2 combat = 17.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ingris Stingerquill,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Ingris Stingerquill,Grizzly Bears
+[PLAYER2]
+life:17
+[END]

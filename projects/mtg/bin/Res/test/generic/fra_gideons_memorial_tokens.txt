@@ -1,0 +1,28 @@
+#Gideon's Memorial: creature tokens get +1/+0 - a Cadet (2/2) from Stingerquill Charm attacks for 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gideon's Memorial
+hand:Stingerquill Charm
+manapool:{B}{R}
+[PLAYER2]
+[DO]
+Stingerquill Charm
+choice 2
+next
+#begin
+next
+#attackers
+Cadet Fra
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Gideon's Memorial,*
+graveyard:Stingerquill Charm
+[PLAYER2]
+life:17
+[END]

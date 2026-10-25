@@ -1,0 +1,23 @@
+#Lyra, Tolarian Archangel (735217): three cards drawn this turn (Divination 2 + Think Twice 1) - an Angel
+#token at the end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735217
+hand:Divination,Think Twice
+manapool:{3}{U}{U}
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+Think Twice
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:735217,*
+graveyard:Divination,Think Twice
+hand:*,*,*
+library:*
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Rise of the Deathbringer mode 2: all creatures -3/-3; Hill Giant and Grizzly Bears die, Serra Angel lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Rise of the Deathbringer
+manapool:{4}{B}
+[PLAYER2]
+inplay:Grizzly Bears,Serra Angel
+[DO]
+Rise of the Deathbringer
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hill Giant,Rise of the Deathbringer
+[PLAYER2]
+inplay:Serra Angel
+graveyard:Grizzly Bears
+[END]

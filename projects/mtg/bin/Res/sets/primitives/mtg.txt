@@ -146451,5 +146451,296 @@ subtype=Elemental
 power=4
 toughness=4
 [/card]
+[card]
+name=Fateshaper Aspirant
+auto=choice name(Return target legendary card to hand) moveto(myhand) target(*[legendary]|mygraveyard)
+auto=choice name(+1/+1 counter, vigilance and indestructible) counter(1/1) target(creature) and!( transforms((,vigilance,indestructible)) ueot )!
+text=When this creature enters, choose one — -- • Return target legendary card from your graveyard to your hand. -- • Put a +1/+1 counter on target creature. It gains vigilance and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+mana={4}{W}
+type=Creature
+subtype=Rhino Cleric
+power=3
+toughness=4
+[/card]
+[card]
+name=Guiding Hydra
+auto=counter(1/1,X)
+auto=@each my combatbegins restriction{compare(hascnt11)~morethan~0}:may name(Move a +1/+1 counter to each other creature) all(this) counter(1/1,-1) && all(other creature|mybattlefield) counter(1/1)
+text=This creature enters with X +1/+1 counters on it. -- At the beginning of combat on your turn, you may remove a +1/+1 counter from this creature. If you do, put a +1/+1 counter on each other creature you control.
+mana={X}{W}
+type=Creature
+subtype=Hydra Horror
+power=1
+toughness=0
+[/card]
+[card]
+name=Rise of the Deathbringer
+auto=choice name(Draw cards equal to your greatest power) draw:power:highest:creature:mybattlefield controller && life:-power:highest:creature:mybattlefield controller
+auto=choice name(All creatures get -3/-3) all(creature) -3/-3 ueot
+text=Choose one — -- • Draw cards equal to the greatest power among creatures you control. You lose life equal to the number of cards drawn this way. -- • All creatures get -3/-3 until end of turn.
+mana={4}{B}
+type=Instant
+[/card]
+[card]
+name=Fulminous Forte
+auto=choice name(1 damage to each creature and planeswalker opponents control) damage:1 all(*[creature;planeswalker]|opponentbattlefield)
+auto=choice name(5 damage to target creature or planeswalker) damage:5 target(*[creature;planeswalker])
+text=Choose one — -- • Fulminous Forte deals 1 damage to each creature and planeswalker your opponents control. -- • Fulminous Forte deals 5 damage to target creature or planeswalker.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Gardenize
+auto=@movedTo(creature|graveyard) from(mybattlefield):counter(0/0,1,charge) all(this)
+auto=@each my firstmain:thisforeach(counter{0/0.1.charge}) Add{G}
+text=Whenever a creature you control dies, put a charge counter on this enchantment. -- At the beginning of your first main phase, add {G} for each charge counter on this enchantment.
+mana={1}{G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Aerid Konstrari
+abilities=flying
+auto=token(-735511)
+auto=_DIES_token(-735511)
+auto={6}:token(-735511) && type:artifact:mybattlefield/0 ueot
+text=Flying -- When Aerid Konstrari enters or dies, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.") -- {6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.
+mana={1}{R}{G}{G}
+type=Legendary Creature
+subtype=Elder Sphinx
+power=5
+toughness=4
+[/card]
+[card]
+name=Desperate Futurescribe
+abilities=flying
+auto=@each my combatbegins restriction{compare(pscrysurveil)~morethan~0}:counter(1/1) target(other creature|mybattlefield)
+auto=@each my combatbegins restriction{compare(pscrysurveil)~equalto~0}:target(other creature|mybattlefield) 1/1 ueot
+text=Flying -- At the beginning of combat on your turn, another target creature you control gets +1/+1 until end of turn. If you've scried or surveilled this turn, put a +1/+1 counter on that creature instead.
+mana={2}{W}{U}
+type=Creature
+subtype=Kor Scout
+power=3
+toughness=4
+[/card]
+[card]
+name=Konstrari Charm
+auto=choice name(6 damage to target creature with flying) damage:6 target(creature[flying])
+auto=choice name(Two +1/+1 counters and trample) counter(1/1,2) target(creature) and!( transforms((,trample)) ueot )!
+auto=choice name(Add {C}{C}{C}) Add{C}{C}{C}
+text=Choose one — -- • Konstrari Charm deals 6 damage to target creature with flying. -- • Put two +1/+1 counters on target creature. It gains trample until end of turn. -- • Add {C}{C}{C}.
+mana={R}{G}
+type=Instant
+[/card]
+[card]
+name=Stingerquill Charm
+auto=choice name(3 damage to any target) damage:3 target(anytarget)
+auto=choice name(First strike and deathtouch) target(creature) transforms((,first strike,deathtouch)) ueot
+auto=choice name(Create a Cadet with haste) token(-735501) and!( transforms((,haste)) ueot )!
+text=Choose one — -- • Stingerquill Charm deals 3 damage to any target. -- • Target creature gains first strike and deathtouch until end of turn. -- • Create a 2/2 colorless Wizard Soldier creature token named Cadet. It gains haste until end of turn.
+mana={B}{R}
+type=Instant
+[/card]
+[card]
+name=Eye of Jace
+#Listed first so it resolves after the surveil below.
+auto=@each my upkeep:if type(*|mygraveyard)~morethan~6 then damage:2 opponent && life:2 controller && sacrifice all(this)
+auto=@each my upkeep:_SURVEIL1_
+text=At the beginning of your upkeep, surveil 1. Then if there are seven or more cards in your graveyard, sacrifice this artifact, it deals 2 damage to each opponent, and you gain 2 life. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)
+mana={1}
+type=Artifact
+[/card]
+[card]
+name=Teyo, Lightshield Expert
+abilities=flash
+auto=choice name(Target a creature you control) counter(1/1) target(creature|mybattlefield) and!( transforms((,hexproof)) ueot )!
+auto=choice name(Target a planeswalker you control) counter(0/0,1,Loyalty) target(planeswalker|mybattlefield) and!( transforms((,hexproof)) ueot )!
+auto=choice name(Target another permanent you control) target(*[-creature;-planeswalker]|mybattlefield) transforms((,hexproof)) ueot
+text=Flash -- When Teyo enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker. (It can't be the target of spells or abilities your opponents control.)
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Cleric
+power=1
+toughness=1
+[/card]
+[card]
+name=Teyo, Diamondblade Mage
+abilities=flash
+auto=choice name(Target a creature you control) counter(1/1) target(creature|mybattlefield) and!( transforms((,deathtouch)) ueot )!
+auto=choice name(Target a planeswalker you control) counter(0/0,1,Loyalty) target(planeswalker|mybattlefield) and!( transforms((,deathtouch)) ueot )!
+auto=choice name(Target another permanent you control) target(*[-creature;-planeswalker]|mybattlefield) transforms((,deathtouch)) ueot
+text=Flash -- When Teyo enters, target permanent you control gains deathtouch until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker.
+mana={3}{B}
+type=Legendary Creature
+subtype=Human Warlock
+power=3
+toughness=1
+[/card]
+[card]
+name=Lyra, Tolarian Archangel
+abilities=flying
+auto=@each end restriction{compare(pdrewcount)~morethan~2}:token(Angel,Creature Angel,3/3,blue,flying)
+auto={3}{U}{U}:transforms((,newability[@combatdamaged(player) from(this):draw:2 controller])) ueot
+text=Flying -- At the beginning of each end step, if you've drawn three or more cards this turn, create a 3/3 blue Angel creature token with flying. -- {3}{U}{U}: Until end of turn, whenever Lyra deals combat damage to a player, draw two cards.
+mana={1}{U}{U}
+type=Legendary Creature
+subtype=Angel Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Massacre Girl, Most Wanted
+auto=@movedTo(other *[creature;planeswalker]|graveyard) from(mybattlefield):damage:1 opponent && life:1 controller
+auto=@noncombatdamagefoeof(player):counter(1/1) all(this)
+text=Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life. -- Whenever an opponent is dealt noncombat damage, put a +1/+1 counter on Massacre Girl.
+mana={4}{B}
+type=Legendary Creature
+subtype=Human Assassin
+power=4
+toughness=4
+[/card]
+[card]
+name=Pia, Determined Rebuilder
+auto=token(-735514)
+auto={5}{R}:target(creature) type:artifact:mybattlefield/0 ueot
+text=When Pia enters, create a 1/1 colorless Thopter artifact creature token with flying. -- {5}{R}: Target creature gets +X/+0 until end of turn, where X is the number of artifacts you control.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Artificer
+power=2
+toughness=2
+[/card]
+[card]
+name=Edgar, Moonlit Sovereign
+abilities=flash
+auto=@each my end restriction{compare(countmycrespellpluscountmynoncrespellplusend)~equalto~0}:counter(1/1,2) all(this)
+auto={4}{G}:all(creature[counter{1/1.1}]|mybattlefield) counter(1/1)
+text=Flash -- At the beginning of your end step, if you didn't cast a spell this turn, put two +1/+1 counters on Edgar. -- {4}{G}: Put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
+mana={3}{G}{G}
+type=Legendary Creature
+subtype=Werewolf Noble
+power=4
+toughness=4
+[/card]
+[card]
+name=Edgar, Ancient Bloodlord
+auto=@movedTo(other *[creature;planeswalker]|graveyard) from(mybattlefield):life:1 controller
+auto={2}{S(other *[creature;planeswalker]|mybattlefield)}:transforms((,menace,newability[counter(1/1)])) ueot
+text=Whenever another creature or planeswalker you control dies, you gain 1 life. -- {2}, Sacrifice another creature or planeswalker: Put a +1/+1 counter on Edgar. He gains menace until end of turn. (He can't be blocked except by two or more creatures.)
+mana={W}{B}
+type=Legendary Creature
+subtype=Vampire Noble
+power=2
+toughness=3
+[/card]
+[card]
+name=Proctor of Potential
+auto=@movedTo(creature|mybattlefield):_SURVEIL1_
+autograveyard={W}{U} restriction{compare(pscrysurveil)~morethan~0}:moveTo(mybattlefield) _FINALITY_COUNTER_
+text=Whenever this creature or another creature you control enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) -- {W}{U}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if you've scried or surveilled this turn. (If a creature with a finality counter on it would die, exile it instead.)
+mana={W}{U}
+type=Creature
+subtype=Human Cleric
+power=3
+toughness=1
+[/card]
+[card]
+name=Grim Repriser
+abilities=prowess
+autograveyard={B}{R} restriction{compare(odnoncount)~morethan~0}:moveTo(mybattlefield) _FINALITY_COUNTER_
+text=Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.) -- {B}{R}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if an opponent has been dealt noncombat damage this turn. (If a creature with a finality counter on it would die, exile it instead.)
+mana={B}{R}
+type=Creature
+subtype=Zombie Bard
+power=2
+toughness=2
+[/card]
+[card]
+name=Ingris Stingerquill
+abilities=flying
+auto=@combat(attacking) source(creature|mybattlefield):damage:1 opponent
+auto={4}:token(-735501) && all(creature|mybattlefield) haste ueot
+note=the attack damage is dealt by Ingris, not by the attacking creature
+text=Flying -- Whenever a creature you control attacks, that creature deals 1 damage to each opponent. -- {4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.
+mana={B}{R}{R}
+type=Legendary Creature
+subtype=Elder Sphinx
+power=1
+toughness=4
+[/card]
+[card]
+name=Gideon's Memorial
+auto=lord(creature[token]|mybattlefield) 1/0
+auto=lord(creature[token]|mybattlefield) vigilance
+auto={T}:Add{W} spendspells(planeswalker)
+auto={T}:Add{U} spendspells(planeswalker)
+auto={T}:Add{B} spendspells(planeswalker)
+auto={T}:Add{R} spendspells(planeswalker)
+auto={T}:Add{G} spendspells(planeswalker)
+#REVIEW-V the hand ability ({1}{W}, discard this: 4 damage to target attacking or blocking creature) cannot be driven by the harness
+autohand={1}{W}{discard}:damage:4 target(creature[attacking;blocking])
+text=Creature tokens you control get +1/+0 and have vigilance. -- {T}: Add one mana of any color. Spend this mana only to cast a planeswalker spell. -- {1}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature.
+mana={1}{W}
+type=Legendary Artifact
+[/card]
+[card]
+name=Hungering Puppetbeast
+auto=token(-735511)
+auto={1}{S(other artifact|mybattlefield)}:name(Counter and trample) transforms((,trample,newability[counter(1/1)])) ueot
+auto={1}{S(other artifact|mybattlefield)}:name(Counter and hexproof) transforms((,hexproof,newability[counter(1/1)])) ueot
+auto={1}{S(other artifact|mybattlefield)}:name(Counter and haste) transforms((,haste,newability[counter(1/1)])) ueot
+text=When this creature enters, create a Heartwood token. (It's a red and green artifact with "{T}: Add {R} or {G}.") -- {1}, Sacrifice another artifact: Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.
+mana={3}{G}{G}
+type=Artifact Creature
+subtype=Beast Construct
+power=5
+toughness=5
+[/card]
+[card]
+name=Turbulent Crater
+auto=if type(land|opponentbattlefield)~lessthan~8 then tap(noevent)
+text=({T}: Add {B} or {R}.) -- This land enters tapped unless your opponents control eight or more lands.
+type=Land
+subtype=Swamp Mountain
+[/card]
+[card]
+name=Turbulent Shore
+auto=if type(land|opponentbattlefield)~lessthan~8 then tap(noevent)
+text=({T}: Add {W} or {U}.) -- This land enters tapped unless your opponents control eight or more lands.
+type=Land
+subtype=Plains Island
+[/card]
+[card]
+name=Turbulent Wetlands
+auto=if type(land|opponentbattlefield)~lessthan~8 then tap(noevent)
+text=({T}: Add {U} or {B}.) -- This land enters tapped unless your opponents control eight or more lands.
+type=Land
+subtype=Island Swamp
+[/card]
+[card]
+name=Ob Nixilis, the Ascended
+abilities=flying
+auto=life:type:creature[tapped]:opponentbattlefield controller
+auto=destroy all(creature[tapped]|opponentbattlefield)
+auto=@each end restriction{compare(lifegain)~morethan~0}:token(Angel,Creature Angel,4/4,white,flying)
+note=the life gained counts the tapped creatures before the destroy, including any that survive it
+text=Flying -- When Ob Nixilis enters, destroy all tapped creatures your opponents control. You gain 1 life for each creature destroyed this way. -- At the beginning of each end step, if you gained life this turn, create a 4/4 white Angel creature token with flying.
+mana={5}{W}{W}
+type=Legendary Creature
+subtype=Angel
+power=4
+toughness=4
+[/card]
+[card]
+name=Memnarch, the Warden
+abilities=indestructible
+auto=token(Myr,Artifact Creature Myr,1/1)*2
+auto=_ATTACKING_draw:type:artifact:mybattlefield controller
+text=Indestructible -- When Memnarch enters, create two 1/1 colorless Myr artifact creature tokens. -- Whenever Memnarch attacks, draw a card for each artifact you control.
+mana={10}
+type=Legendary Artifact Creature
+subtype=Wizard
+power=8
+toughness=9
+[/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
 [/card]

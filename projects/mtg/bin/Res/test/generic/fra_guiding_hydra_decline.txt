@@ -1,0 +1,22 @@
+#Guiding Hydra: declining (choice 1) keeps both counters (3/2) and gives Grizzly Bears nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Guiding Hydra
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Guiding Hydra
+choice 2
+next
+choice 1
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Guiding Hydra,Grizzly Bears
+pt:Guiding Hydra=3/2
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]

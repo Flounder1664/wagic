@@ -1,0 +1,19 @@
+#Konstrari Charm mode 1: 6 damage to Serra Angel.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Konstrari Charm
+manapool:{R}{G}
+[PLAYER2]
+inplay:Serra Angel
+[DO]
+Konstrari Charm
+choice 0
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Konstrari Charm
+[PLAYER2]
+graveyard:Serra Angel
+[END]

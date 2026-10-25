@@ -1,0 +1,23 @@
+#Ob Nixilis, the Ascended (703005): destroys the opponent's TAPPED creatures (Hill Giant, tapped by Icy
+#Manipulator) and gains 1 life for each; untapped Grizzly Bears lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Icy Manipulator
+hand:703005
+manapool:{6}{W}{W}
+[PLAYER2]
+inplay:Hill Giant,Grizzly Bears
+[DO]
+Icy Manipulator
+Hill Giant
+703005
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Icy Manipulator,703005
+life:21
+[PLAYER2]
+inplay:Grizzly Bears
+graveyard:Hill Giant
+[END]

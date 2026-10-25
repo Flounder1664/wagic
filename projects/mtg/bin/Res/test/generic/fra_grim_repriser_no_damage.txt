@@ -1,0 +1,16 @@
+#Control: no noncombat damage dealt this turn - Grim Repriser stays in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grim Repriser
+manapool:{B}{R}
+[PLAYER2]
+[DO]
+Grim Repriser
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grim Repriser
+manapool:{B}{R}
+[PLAYER2]
+[END]

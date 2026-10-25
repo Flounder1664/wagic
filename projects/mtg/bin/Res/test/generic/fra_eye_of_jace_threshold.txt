@@ -1,0 +1,29 @@
+#Eye of Jace with seven cards in the graveyard: surveil, then sacrifice it, 2 damage, gain 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eye of Jace
+graveyard:Grizzly Bears,Hill Giant,Shock,Opt,Ornithopter,Mind Stone,Juggernaut
+library:Millstone,Icy Manipulator,Howling Mine
+[PLAYER2]
+library:Forest,Forest
+[DO]
+eot
+eot
+next
+next
+choice 0
+Howling Mine
+next
+[ASSERT]
+DRAW
+[PLAYER1]
+graveyard:Grizzly Bears,Hill Giant,Shock,Opt,Ornithopter,Mind Stone,Juggernaut,Howling Mine,Eye of Jace
+hand:*
+library:*
+life:22
+[PLAYER2]
+hand:*
+library:*
+life:18
+[END]

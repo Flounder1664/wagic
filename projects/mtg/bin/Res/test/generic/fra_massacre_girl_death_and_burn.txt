@@ -1,0 +1,22 @@
+#Massacre Girl, Most Wanted (735234): Grizzly Bears dies (1 damage to the opponent, gain 1); that damage
+#is noncombat, so she also gets a +1/+1 counter (5/5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735234,Grizzly Bears
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735234
+graveyard:Grizzly Bears,Lightning Bolt
+pt:735234=5/5
+life:21
+[PLAYER2]
+life:19
+[END]

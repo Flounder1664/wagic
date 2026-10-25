@@ -1,0 +1,32 @@
+#Desperate Futurescribe after a scry (Opt): a +1/+1 counter instead - Bears stays 3/3 next turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desperate Futurescribe,Grizzly Bears
+hand:Opt
+manapool:{U}
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+library:Forest,Forest
+[DO]
+Opt
+choice 0
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desperate Futurescribe,Grizzly Bears
+pt:Grizzly Bears=3/3
+graveyard:Opt
+hand:*,*
+library:*,*
+[PLAYER2]
+hand:*
+library:*
+[END]

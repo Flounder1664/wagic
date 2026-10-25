@@ -1,0 +1,17 @@
+#Aerid Konstrari: ETB Heartwood token; {6}: another Heartwood, then +X/+0 where X = artifacts (2): 7/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Aerid Konstrari
+manapool:{7}{R}{G}{G}
+[PLAYER2]
+[DO]
+Aerid Konstrari
+Aerid Konstrari
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aerid Konstrari,*,*
+pt:Aerid Konstrari=7/4
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#Proctor of Potential: another creature (Grizzly Bears) enters, surveil 1 - put the top card in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Proctor of Potential
+hand:Grizzly Bears
+manapool:{1}{G}
+library:Forest,Ornithopter
+[PLAYER2]
+[DO]
+Grizzly Bears
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Proctor of Potential,Grizzly Bears
+graveyard:Ornithopter
+library:Forest
+[PLAYER2]
+[END]

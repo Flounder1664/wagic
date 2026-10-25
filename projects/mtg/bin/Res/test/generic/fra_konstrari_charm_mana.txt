@@ -1,0 +1,17 @@
+#Konstrari Charm mode 3: add {C}{C}{C}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Konstrari Charm
+manapool:{R}{G}
+[PLAYER2]
+[DO]
+Konstrari Charm
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Konstrari Charm
+manapool:{C}{C}{C}
+[PLAYER2]
+[END]

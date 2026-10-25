@@ -1,0 +1,17 @@
+#Control: casting a spell (Ornithopter) this turn - no counters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735257
+hand:Ornithopter
+[PLAYER2]
+[DO]
+Ornithopter
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:735257,Ornithopter
+pt:735257=4/4
+[PLAYER2]
+[END]

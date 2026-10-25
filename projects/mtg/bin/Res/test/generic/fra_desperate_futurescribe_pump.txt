@@ -1,0 +1,17 @@
+#Desperate Futurescribe: no scry or surveil this turn, so Grizzly Bears gets +1/+1 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desperate Futurescribe,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+Grizzly Bears
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Desperate Futurescribe,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

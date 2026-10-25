@@ -1,0 +1,23 @@
+#Guiding Hydra cast with X=2 (1/0 + two counters = 3/2). At the beginning of combat it moves one counter
+#out: Hydra 2/1, Grizzly Bears 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Guiding Hydra
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Guiding Hydra
+choice 2
+next
+choice 0
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Guiding Hydra,Grizzly Bears
+pt:Guiding Hydra=2/1
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

@@ -1,0 +1,29 @@
+#Control: with an empty graveyard Eye of Jace only surveils and stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eye of Jace
+library:Millstone,Icy Manipulator,Howling Mine
+[PLAYER2]
+library:Forest,Forest
+[DO]
+eot
+eot
+next
+next
+choice 0
+Howling Mine
+next
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Eye of Jace
+graveyard:Howling Mine
+hand:*
+library:*
+life:20
+[PLAYER2]
+hand:*
+library:*
+life:20
+[END]

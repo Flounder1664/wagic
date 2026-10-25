@@ -1,0 +1,31 @@
+#Gardenize: Grizzly Bears dies (charge counter); next first main phase adds {G} per counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gardenize,Grizzly Bears
+hand:Lightning Bolt
+manapool:{R}
+library:Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant
+[DO]
+Lightning Bolt
+Grizzly Bears
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gardenize
+counter:Gardenize=charge:1
+graveyard:Grizzly Bears,Lightning Bolt
+manapool:{G}
+hand:*
+library:*
+[PLAYER2]
+hand:*
+library:*
+[END]

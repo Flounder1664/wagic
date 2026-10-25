@@ -1,0 +1,20 @@
+#Konstrari Charm mode 2: two +1/+1 counters on Grizzly Bears (4/4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Konstrari Charm
+manapool:{R}{G}
+[PLAYER2]
+[DO]
+Konstrari Charm
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Konstrari Charm
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

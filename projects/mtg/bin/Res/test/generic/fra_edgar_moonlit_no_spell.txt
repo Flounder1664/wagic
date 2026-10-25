@@ -1,0 +1,15 @@
+#Edgar, Moonlit Sovereign (735257): no spell cast this turn, two +1/+1 counters at the end step (6/6).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735257
+[PLAYER2]
+[DO]
+goto end
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:735257
+pt:735257=6/6
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Edgar, Ancient Bloodlord (735270): sacrifice Grizzly Bears - +1/+1 counter (3/4) and, as another creature
+#died, gain 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735270,Grizzly Bears
+manapool:{2}
+[PLAYER2]
+[DO]
+735270
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735270
+graveyard:Grizzly Bears
+pt:735270=3/4
+life:21
+[PLAYER2]
+[END]

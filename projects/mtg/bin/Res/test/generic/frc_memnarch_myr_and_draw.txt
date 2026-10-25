@@ -1,0 +1,23 @@
+#Memnarch, the Warden (703015): two Myr tokens; attacking draws one card per artifact (Memnarch + 2 Myr = 3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:703015
+library:Forest,Forest,Forest,Forest
+[PLAYER2]
+[DO]
+next
+#begin
+next
+#attackers
+703015
+next
+#blockers
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:703015,*,*
+hand:*,*,*
+library:*
+[PLAYER2]
+[END]

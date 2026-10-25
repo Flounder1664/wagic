@@ -1,0 +1,17 @@
+#Stingerquill Charm mode 3: create a Cadet token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Stingerquill Charm
+manapool:{B}{R}
+[PLAYER2]
+[DO]
+Stingerquill Charm
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Stingerquill Charm
+[PLAYER2]
+[END]
