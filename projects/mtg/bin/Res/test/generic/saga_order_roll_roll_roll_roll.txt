@@ -1,0 +1,45 @@
+#Roll-Roll-Roll-Roll chapter IV: exile up to one target creature or land you control, returning
+#it at the next end step. Grizzly Bears is blinked by chapters I-III and comes back each time; at
+#lore 4 it is exiled again and, checked in the same main phase, is still in exile.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Roll-Roll-Roll-Roll
+manapool:{2}{U}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[DO]
+Roll-Roll-Roll-Roll
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:Grizzly Bears
+graveyard:Roll-Roll-Roll-Roll
+hand:*,*,*
+library:*
+[PLAYER2]
+hand:*,*,*
+library:*
+[END]

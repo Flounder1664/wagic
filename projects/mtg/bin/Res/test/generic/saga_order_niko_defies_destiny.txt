@@ -1,0 +1,35 @@
+#Niko Defies Destiny chapter III: return target card with foretell from your graveyard to your hand.
+#Sozin's Comet comes back.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Niko Defies Destiny
+graveyard:Sozin's Comet
+manapool:{1}{W}{U}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Niko Defies Destiny
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Sozin's Comet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Niko Defies Destiny
+hand:Sozin's Comet,*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

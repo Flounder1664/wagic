@@ -1,0 +1,39 @@
+#Summon: Primal Garuda chapter III: "Another target creature you control gets +1/+0 and gains flying
+#until end of turn", then the saga is sacrificed. Chapter I has no tapped opposing creature to hit;
+#chapter II (round 1) pumps Grizzly Bears too, but that wears off. At lore 3 Bears is a 3/2 again.
+#The chapter III line must sit BELOW the sacrifice line, or the sacrifice resolves first and III fizzles.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Summon: Primal Garuda
+manapool:{3}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Summon: Primal Garuda
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/2
+graveyard:Summon: Primal Garuda
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

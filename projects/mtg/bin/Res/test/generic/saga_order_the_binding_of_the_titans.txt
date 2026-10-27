@@ -1,0 +1,40 @@
+#The Binding of the Titans chapter III: return target creature or land card from your graveyard to
+#your hand. Chapter I mills three each, chapter II exiles nothing (choice 0); at lore 3 Grizzly
+#Bears comes back to hand.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. A this()
+#watcher left by an earlier chapter delivers the chapter as the counter lands; with the sacrifice moved
+#above it, the lore-3 trigger opens a second target menu and the saga is never sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Binding of the Titans
+graveyard:Grizzly Bears
+manapool:{1}{G}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Binding of the Titans
+eot
+eot
+next
+next
+next
+choice 0
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:The Binding of the Titans,*,*,*
+hand:Grizzly Bears,*,*
+library:*
+[PLAYER2]
+graveyard:*,*,*
+hand:*,*
+library:*
+[END]

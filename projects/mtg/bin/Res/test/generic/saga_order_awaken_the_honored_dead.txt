@@ -1,0 +1,43 @@
+#Awaken the Honored Dead chapter III: you may discard a card; when you do, return target creature
+#or land card from your graveyard to your hand. Chapter I destroys Craw Wurm, chapter II mills
+#three; at lore 3 Shock is discarded and Grizzly Bears comes back.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. A this()
+#watcher left by an earlier chapter delivers the chapter as the counter lands; with the sacrifice moved
+#above it, the lore-3 trigger opens a second target menu and the saga is never sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Awaken the Honored Dead,Shock
+graveyard:Grizzly Bears
+manapool:{B}{G}{U}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+inplay:Craw Wurm
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Awaken the Honored Dead
+Craw Wurm
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+choice 0
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Awaken the Honored Dead,Shock,*,*,*
+hand:Grizzly Bears,*,*
+library:*
+[PLAYER2]
+graveyard:Craw Wurm
+hand:*,*
+library:*
+[END]

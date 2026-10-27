@@ -1,0 +1,35 @@
+#Forging the Tyrite Sword chapter III: search your library for an Equipment card (or Halvar) and
+#put it into your hand. Chapters I and II make two Treasures; at lore 3 Bonesplitter is fetched.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Forging the Tyrite Sword
+manapool:{1}{R}{W}
+library:Bonesplitter,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Forging the Tyrite Sword
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Bonesplitter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:Forging the Tyrite Sword
+hand:Bonesplitter,*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

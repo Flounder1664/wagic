@@ -1,0 +1,39 @@
+#Welcome to Sweettooth chapter III: put X +1/+1 counters on target creature you control, X = 1 +
+#Foods you control. Chapter I makes a Human, chapter II a Food; at lore 3 Grizzly Bears gets two.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. A this()
+#watcher left by an earlier chapter delivers the chapter as the counter lands; with the sacrifice moved
+#above it, the lore-3 trigger opens a second target menu and the saga is never sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Welcome to Sweettooth
+manapool:{1}{G}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Welcome to Sweettooth
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*,*
+pt:Grizzly Bears=4/4
+graveyard:Welcome to Sweettooth
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

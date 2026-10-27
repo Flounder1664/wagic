@@ -6874,6 +6874,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=destroy target(*[-land])
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) deplete:3
+#Final chapter: keep the sacrifice line BELOW this one. A this() watcher from an earlier chapter already delivers it, so a later sacrifice opens a second target menu (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may reject notatarget(*|myhand) and!(target(*[creature;land]|myGraveyard) moveTo(hand))!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Destroy target nonland permanent. -- II - Mill three cards. -- III - You may discard a card. When you do, return target creature or land card from your graveyard to your hand.
@@ -38772,8 +38773,9 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=name(Scry 2) _SCRY2_
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) name(Put 1/1 counters) name(Put 1/1 counters) target(creature|mybattlefield) counter(1/1,2)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,newability[_DIES_name(Draw 2 cards) draw:2 controller],newability[_DIES_may name(Fights another creature) target(other creature|battlefield) dynamicability<!powerstrike eachother!>])) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,newability[_DIES_name(Draw 2 cards) draw:2 controller],newability[_DIES_may name(Fights another creature) target(other creature|battlefield) dynamicability<!powerstrike eachother!>])) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Scry 2. -- II - Put two +1/+1 counters on target creature you control. -- III - Until end of turn, target creature you control gains "When this creature dies, draw two cards." Then that creature fights up to one other target creature.
 mana={1}{G}
 type=Enchantment
@@ -114382,8 +114384,9 @@ auto=counter(0/0,1,Lore)
 auto=name(Creature gains indestructible) target(creature|mybattlefield) transforms((,newability[aslongas(Tale of Tinuviel|myBattlefield) indestructible])) forever
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}<=2) name(Return creature) name(Return creature) target(creature|mygraveyard) moveto(mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Creatures gain lifelink) target(<upto:2>creature|mybattlefield) transforms((,lifelink)) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Creatures gain lifelink) target(<upto:2>creature|mybattlefield) transforms((,lifelink)) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Target creature you control gains indestructible for as long as you control Tale of Tinuviel. -- II - Return target creature card from your graveyard to the battlefield. -- III - Up to two target creatures you control each gain lifelink until end of turn.
 mana={3}{W}{W}
 type=Enchantment
@@ -116531,8 +116534,9 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=token(Shapeshifter,Creature Shapeshifter,2/2,blue,changeling)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may name(Transform shapeshifters) target(<anyamount>shapeshifter|mybattlefield) transforms((,setpower=4,settoughness=4)) forever
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Choose a creature or planeswalker) target(*[creature;planeswalker]|battlefield) transforms((,newability[counter(0/0.1.BearsEffect)],newability[all(creature[power>=4]|mybattlefield) name(Deals damage) transforms((,newability[damage:power all(*[counter{0/0.1.BearsEffect}]|battlefield)])) oneshot],newability[phaseaction[end once] counter(0/0.-1.BearsEffect)])) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Choose a creature or planeswalker) target(*[creature;planeswalker]|battlefield) transforms((,newability[counter(0/0.1.BearsEffect)],newability[all(creature[power>=4]|mybattlefield) name(Deals damage) transforms((,newability[damage:power all(*[counter{0/0.1.BearsEffect}]|battlefield)])) oneshot],newability[phaseaction[end once] counter(0/0.-1.BearsEffect)])) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create a 2/2 blue Shapeshifter creature token with changeling. -- II - Any number of target Shapeshifter creatures you control have base power and toughness 4/4. -- III - Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent.
 mana={1}{G}{U}
 type=Enchantment
@@ -116564,6 +116568,7 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=deplete:3 opponent
 auto=deplete:3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) ability$!name(Choose one) choice name(Don't exile any card) donothing _ choice name(Exile 1 card) moveto(exile) target(<1>*|graveyard) && life:1 controller _ choice name(Exile 2 cards) moveto(exile) target(<2>*|graveyard) && life:2 controller!$ controller
+#Final chapter: keep the sacrifice line BELOW this one. A this() watcher from an earlier chapter already delivers it, so a later sacrifice opens a second target menu (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(hand) target(*[land;creature]|mygraveyard)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Each player mills three cards. -- II - Exile up to two target cards from graveyards. For each creature card exiled this way, you gain 1 life. -- III - Return target creature or land card from your graveyard to your hand.
@@ -116656,6 +116661,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=name(Create powestone) token(Powerstone)*2 and!( tap(noevent) )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|opponentbattlefield) transforms((,newability[mustattack])) uynt
+#Final chapter: keep the sacrifice line BELOW this one. A this() watcher from an earlier chapter already delivers it, so a later sacrifice opens a second target menu (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(<2>anytarget) damage:type:artifact:mybattlefield
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create two tapped Powerstone tokens. -- II - Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able. -- III - The Brothers' War deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
@@ -117609,9 +117615,10 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=deplete:3 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may name(Return snow permanents) target(<upto:2>snow[-instant;-sorcery]|mygraveyard) moveto(hand)
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Choose 3 cards in your graveyards) target(<3>*|mygraveyard) moveTo(mylibrary) and!( shuffle )!
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$!name(Choose 3 cards in opponent's graveyards) name(Choose 3 cards in opponent's graveyards) target(<3>*|opponentgraveyard) moveTo(opponentlibrary) and!( shuffle opponent )! !$ controller
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Mill three cards. -- II - Return up to two target snow permanent cards from your graveyard to your hand. -- III - Choose three cards in each graveyard. Their owners shuffle those cards into their libraries.
 mana={G}{U}
 type=Enchantment
@@ -121544,8 +121551,9 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(1/1) target(creature[power=power:highest:creature:myBattlefield]|mybattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) counter(1/1) target(creature|mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,flying,first strike,lifelink)) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,flying,first strike,lifelink)) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I, II - Put a +1/+1 counter on target creature you control with the greatest power. -- III - Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.
 mana={1}{W}
 type=Enchantment
@@ -129343,6 +129351,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=create(human:creature human:1/1:white)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _FOOD_
+#Final chapter: keep the sacrifice line BELOW this one. A this() watcher from an earlier chapter already delivers it, so a later sacrifice opens a second target menu (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) counter(1/1,type:food:mybattlefieldplus1plusend) target(creature|myBattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create a 1/1 white Human creature token. -- II - Create a Food token. -- III - Put X +1/+1 counters on target creature you control, where X is one plus the number of Foods you control.
@@ -135341,8 +135350,9 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=damage:4 target(creature[tapped]|opponentbattlefield)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(other creature|mybattlefield) transforms((,newability[1/0],flying)) ueot
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(other creature|mybattlefield) transforms((,newability[1/0],flying)) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(other creature|mybattlefield) transforms((,newability[1/0],flying)) ueot
 text=I - Aerial Blast - Deals 4 damage to target tapped creature an opponent controls. -- II, III - Slipstream - Another target creature you control gets +1/+0 and gains flying. -- Flying
 mana={3}{W}
 type=Enchantment Creature
@@ -135392,6 +135402,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=deplete:5 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) all(land|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+#Final chapter: keep the sacrifice line BELOW this one. A this() watcher from an earlier chapter already delivers it, so a later sacrifice opens a second target menu (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(other creature|mybattlefield) transforms((,trample,newability[type:land:mybattlefield/type:land:mybattlefield])) ueot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=I - Mill five cards. -- II - Return all land cards from your graveyard to the battlefield tapped. -- III - Another target creature gains trample and gets +X/+X where X is the number of lands you control.
@@ -138164,8 +138175,9 @@ auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2
 #form was permanent when it should expire, and was missing both trample and the you-control
 #restriction. pbasiclandtypes is still the right value (it is domain); what changed is that
 #it now feeds transforms((,trample,newability[X/X])) ueot, the attested keyword-plus-pump shape.
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - domain pump and trample) target(creature|mybattlefield) transforms((,trample,newability[pbasiclandtypes/pbasiclandtypes])) ueot
 note=Chapter III counts basic land types via pbasiclandtypes, which is the engine's own domain value.
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- II - Create a 1/1 green Saproling creature token. -- III - Domain - Target creature you control gets +X/+X and gains trample until end of turn, where X is the number of basic land types among lands you control.
 mana={2}{G}
@@ -138185,8 +138197,9 @@ auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) && draw:2 controlle
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) create(Bird:creature bird:1/1:white:flying)
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - a +1/+1 counter on up to two) target(<upto:2>creature) counter(1/1)
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - a +1/+1 counter on up to two) target(<upto:2>creature) counter(1/1)
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - You and target opponent each draw two cards. -- II - Create a 1/1 white Bird creature token with flying. -- III - Put a +1/+1 counter on each of up to two target creatures.
 mana={2}{W}
 type=Enchantment
@@ -138233,8 +138246,9 @@ missing=Chapter I - "cast an instant or sorcery of mana value 1 or 2 from your h
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) deplete:4 target
 #Chapter III exiles from YOUR graveyard, not the opponent's - John saw it do nothing, and with
 #an opponent-only selector it can only ever fire when THEY have an instant or sorcery there.
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - exile a spell from your graveyard) moveTo(exile) target(*[instant;sorcery]|mygraveyard)
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - exile a spell from your graveyard) moveTo(exile) target(*[instant;sorcery]|mygraveyard)
 missing=chapter I (cast a 1- or 2-cost spell for free), and chapter III does not copy the exiled card or let you cast the copy
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - (Not implemented.) You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost. -- II - Target player mills four cards. -- III - Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy. (The copy is not implemented.)
 mana={1}{U}
@@ -138283,8 +138297,9 @@ auto=choice name(Read ahead - chapter I) counter(0/0,1,Lore) all(this) && abilit
 auto=choice name(Read ahead - chapter II) counter(0/0,2,Lore)
 auto=choice name(Read ahead - chapter III) counter(0/0,3,Lore)
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.2.Lore}=2) target(*|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )! && life:-3 controller
-auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - reanimate a creature) target(creature|graveyard) moveTo(mybattlefield)
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - sacrifice this Saga) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this) turnlimited:this(counter{0/0.3.Lore}) name(Chapter III - reanimate a creature) target(creature|graveyard) moveTo(mybattlefield)
 missing=Mode one should let YOU choose the discarded card.
 text=Read ahead (Choose a chapter and start with that many lore counters.) -- I - Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card. (The opponent chooses.) -- II - Search your library for a card, put it into your hand, then lose 3 life. -- III - Put target creature card from a graveyard onto the battlefield under your control.
 mana={3}{B}{B}
@@ -140836,8 +140851,9 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 auto=counter(0/0,1,Lore)
 auto=_RECRUIT_
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) name(Return creature mv3) target(creature[manacost<=3]|mygraveyard) moveto(mybattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(+1/+1 counter) target(creature) counter(1/1)
+#Final chapter: the sacrifice line must stay ABOVE the targeted chapter line. Below it, the sacrifice resolves first and the chapter fizzles (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(+1/+1 counter) target(creature) counter(1/1)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; recruit approximated inline
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I -- Recruit. -- II -- Return target creature card with mana value 3 or less from your graveyard to the battlefield. -- III -- Put a +1/+1 counter on up to one target creature.

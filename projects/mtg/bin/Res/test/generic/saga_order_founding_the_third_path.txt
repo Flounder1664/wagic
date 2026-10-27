@@ -1,0 +1,22 @@
+#Founding the Third Path, read ahead to chapter III: exile target instant or sorcery card from
+#your graveyard. Shock is exiled.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Founding the Third Path
+graveyard:Shock
+manapool:{1}{U}
+[PLAYER2]
+[DO]
+Founding the Third Path
+choice 2
+Shock
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Founding the Third Path
+exile:Shock
+[PLAYER2]
+[END]

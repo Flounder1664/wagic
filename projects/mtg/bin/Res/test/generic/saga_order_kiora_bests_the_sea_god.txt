@@ -1,0 +1,36 @@
+#Kiora Bests the Sea God chapter III: gain control of target permanent an opponent controls.
+#Chapter I makes the Kraken, chapter II taps Craw Wurm; at lore 3 Craw Wurm is taken.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kiora Bests the Sea God
+manapool:{5}{U}{U}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+inplay:Craw Wurm
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Kiora Bests the Sea God
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,*
+graveyard:Kiora Bests the Sea God
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

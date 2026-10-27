@@ -1,0 +1,55 @@
+#Tale of Tinuviel chapter III: up to two target creatures you control gain lifelink until end of
+#turn. Chapter I makes Grizzly Bears indestructible; at lore 3 Bears and Eager Cadet gain lifelink
+#and attack unblocked: 20 - 3 = 17 and 20 + 3 = 23.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Eager Cadet
+hand:Tale of Tinuviel
+manapool:{3}{W}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Tale of Tinuviel
+Grizzly Bears
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+choice 0
+Grizzly Bears
+Eager Cadet
+next
+#begin
+next
+#attackers
+Grizzly Bears
+Eager Cadet
+next
+#blockers
+next
+#damage
+next
+#end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,Eager Cadet
+graveyard:Tale of Tinuviel
+hand:*,*
+library:*
+life:23
+[PLAYER2]
+hand:*,*
+library:*
+life:17
+[END]

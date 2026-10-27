@@ -1,0 +1,53 @@
+#Ajani Fells the Godsire chapter III: target creature you control gains double strike until end
+#of turn. Chapter I has no big opposing creature; chapter II's vigilance counter goes on Grizzly Bears.
+#At lore 3 Bears gains double strike and attacks unblocked: 20 - 2 - 2 = 16.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Ajani Fells the Godsire
+manapool:{3}{W}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Ajani Fells the Godsire
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+Grizzly Bears
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#first strike damage
+next
+#damage
+next
+#end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Ajani Fells the Godsire
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+life:16
+[END]

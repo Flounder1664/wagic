@@ -1,0 +1,33 @@
+#Urza's Saga chapter III: search your library for an artifact with mana cost {0} or {1} and put it
+#onto the battlefield. Played as the land drop; at lore 3 Ornithopter is fetched.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Urza's Saga
+library:Ornithopter,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Urza's Saga
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Urza's Saga
+hand:*,*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

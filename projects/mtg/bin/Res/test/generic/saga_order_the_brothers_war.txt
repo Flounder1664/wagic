@@ -1,0 +1,40 @@
+#The Brothers' War chapter III: X damage to any target and X damage to another, X = artifacts you
+#control. Chapter I made two Powerstones, so each player takes 2.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. A this()
+#watcher left by an earlier chapter delivers the chapter as the counter lands; with the sacrifice moved
+#above it, the lore-3 trigger opens a second target menu and the saga is never sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Brothers' War
+manapool:{3}{R}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Brothers' War
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+p2
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:The Brothers' War
+hand:*,*
+library:*
+life:18
+[PLAYER2]
+hand:*,*
+library:*
+life:18
+[END]

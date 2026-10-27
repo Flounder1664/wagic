@@ -1,0 +1,38 @@
+#The Three Seasons chapter III: choose three cards in each graveyard; they are shuffled into their
+#owners' libraries. Chapter I mills Grizzly Bears, Serra Angel and Craw Wurm (the top three);
+#chapter II has no snow card to return; at lore 3 all three go back into the library.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Three Seasons
+manapool:{G}{U}
+library:Hill Giant,Hill Giant,Hill Giant,Craw Wurm,Serra Angel,Grizzly Bears
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Three Seasons
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Grizzly Bears
+Serra Angel
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:The Three Seasons
+hand:*,*
+library:*,*,*,*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

@@ -1,0 +1,36 @@
+#The Legend of Arena chapter III: search your library for a planeswalker card and put it onto the
+#battlefield with an extra loyalty counter per Wizard. Two Wizard tokens (chapters I and II), so
+#Ajani Goldmane enters with 4 + 2 = 6 loyalty.
+#Saga order audit 2026-10-27: this chapter works with the sacrifice line on either side of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Legend of Arena
+manapool:{1}{U}{R}{W}
+library:Ajani Goldmane,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Legend of Arena
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Ajani Goldmane
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Goldmane,*,*
+counter:Ajani Goldmane=loyalty:6
+graveyard:The Legend of Arena
+hand:*,*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

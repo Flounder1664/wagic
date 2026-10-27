@@ -1,0 +1,48 @@
+#Fall of Gil-galad chapter III: until end of turn, target creature you control gains "When this
+#creature dies, draw two cards." Chapter II's counters go on Craw Wurm; at lore 3 Grizzly Bears
+#gets the draw ability, then Shock kills it and two cards are drawn.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Grizzly Bears,Mountain
+hand:Fall of Gil-galad,Shock
+manapool:{1}{G}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Fall of Gil-galad
+eot
+eot
+next
+next
+next
+Craw Wurm
+eot
+eot
+next
+next
+next
+Grizzly Bears
+Grizzly Bears
+Mountain
+Shock
+Grizzly Bears
+wait
+wait
+choice 1
+wait
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,*
+graveyard:Fall of Gil-galad,Shock,Grizzly Bears
+hand:*,*,*,*
+library:*,*,*,*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

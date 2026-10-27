@@ -1,0 +1,36 @@
+#History of Benalia chapter III: "Knights you control get +2/+1 until end of turn", then the saga is
+#sacrificed. Two Knight tokens come from chapters I and II; White Knight (2/2) is a 4/3 at lore 3.
+#Saga order audit 2026-10-27: an untargeted chapter like this works with the sacrifice line on either side.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:White Knight
+hand:History of Benalia
+manapool:{1}{W}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+History of Benalia
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:White Knight,*,*
+pt:White Knight=4/3
+graveyard:History of Benalia
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

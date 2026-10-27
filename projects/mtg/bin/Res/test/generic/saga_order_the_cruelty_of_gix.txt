@@ -1,0 +1,22 @@
+#The Cruelty of Gix, read ahead to chapter III: put target creature card from a graveyard onto the
+#battlefield under your control. Grizzly Bears comes back from the opponent's graveyard.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Cruelty of Gix
+manapool:{3}{B}{B}
+[PLAYER2]
+graveyard:Grizzly Bears
+[DO]
+The Cruelty of Gix
+choice 2
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:The Cruelty of Gix
+[PLAYER2]
+[END]

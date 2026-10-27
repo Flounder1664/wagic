@@ -1,0 +1,44 @@
+#The Bears of Littjara chapter III: choose up to one target creature or planeswalker; each creature
+#with power 4 or greater you control deals damage equal to its power to it. Chapter II makes the
+#Shapeshifter token 4/4; at lore 3 Craw Wurm (6) and the token (4) hit Serra Angel.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:The Bears of Littjara
+manapool:{1}{G}{U}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+inplay:Serra Angel
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The Bears of Littjara
+eot
+eot
+next
+next
+next
+choice 0
+Shapeshifter
+The Bears of Littjara
+eot
+eot
+next
+next
+next
+choice 0
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,*
+graveyard:The Bears of Littjara
+hand:*,*
+library:*
+[PLAYER2]
+graveyard:Serra Angel
+hand:*,*
+library:*
+[END]

@@ -1,0 +1,55 @@
+#Triumph of Gerrard chapter III: target creature you control with the greatest power gains flying,
+#first strike and lifelink until end of turn. Chapters I and II put two +1/+1 counters on Grizzly
+#Bears; at lore 3 the 4/4 lifelinker attacks unblocked: 20 - 4 = 16 and 20 + 4 = 24.
+#Fixed 2026-10-27 (saga order audit): the sacrifice line must sit ABOVE the chapter line. Below it,
+#the sacrifice resolved first and the targeted chapter fizzled. This test failed with the old order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Triumph of Gerrard
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Triumph of Gerrard
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+Grizzly Bears
+Grizzly Bears
+next
+#begin
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#first strike damage
+next
+#end of combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+graveyard:Triumph of Gerrard
+hand:*,*
+library:*
+life:24
+[PLAYER2]
+hand:*,*
+library:*
+life:16
+[END]
