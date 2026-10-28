@@ -8283,7 +8283,10 @@ int MultiAbility::resolve()
             continue;
         Targetable * backup = abilities[i]->target;
 
-        if (target && target != source && abilities[i]->target == abilities[i]->source)
+        //A fizzle starts with no target of its own (it takes the spell's cast-time target, if any),
+        //so "target(*|stack) fizzle && draw:1" - a modal counterspell - never countered anything.
+        if (target && target != source && (abilities[i]->target == abilities[i]->source
+            || (!abilities[i]->target && dynamic_cast<AAFizzler *> (abilities[i]))))
         {
             abilities[i]->target = target;
             Phaseactiontarget = target;
@@ -8948,9 +8951,43 @@ const string ATransformer::getMenuText()
 {
     if(menutext.size())
         return menutext.c_str();
-    string s = menu;
-    sprintf(menuText, "Becomes %s", s.c_str());
-    return menuText;
+    //A bare "Becomes " told the player nothing - transforms((,double strike)) has no types to
+    //print - so name what the effect adds: "Give double strike", "Becomes Legendary Spider Hero".
+    string becomes;
+    for (list<int>::iterator it = colors.begin(); it != colors.end(); it++)
+        if (*it > 0 && *it < (int) Constants::MTGColorStrings.size())
+            becomes.append(becomes.size() ? " " : "").append(Constants::MTGColorStrings[*it]);
+    vector<string> words = split(menu, ' ');
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        //skip the transforms keywords (removealltypes, chosentype...), which are not types
+        if (words[i].empty() || words[i].find("remove") != string::npos || words[i].find("subtypes") != string::npos
+            || words[i] == "chosentype" || words[i].find("evicttypes") != string::npos)
+            continue;
+        becomes.append(becomes.size() ? " " : "").append(words[i]);
+    }
+    if (newpowerfound && newtoughnessfound && newpower.size() < 4 && newtoughness.size() < 4)
+        becomes.append(becomes.size() ? " " : "").append(newpower + "/" + newtoughness);
+    string gives;
+    int listed = 0;
+    for (list<int>::iterator it = abilities.begin(); it != abilities.end(); it++)
+    {
+        if (*it < 0 || *it >= Constants::NB_BASIC_ABILITIES)
+            continue;
+        if (listed++ == 3)
+        {
+            gives.append(", ...");
+            break;
+        }
+        gives.append(gives.size() ? ", " : "").append(Constants::MTGBasicAbilities[*it]);
+    }
+    if (gives.empty() && newAbilityFound)
+        gives = "an ability";
+    if (becomes.size())
+        return "Becomes " + becomes + (gives.size() ? " with " + gives : "");
+    if (gives.size())
+        return "Give " + gives;
+    return "Becomes";
 }
 
 ATransformer * ATransformer::clone() const
