@@ -1,0 +1,20 @@
+#Dose of Dawnglow in your main phase: Hill Giant returns and nothing is blighted.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Dose of Dawnglow
+graveyard:Hill Giant
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+Dose of Dawnglow
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle,Hill Giant
+pt:Horned Turtle=1/4
+graveyard:Dose of Dawnglow
+[PLAYER2]
+[END]

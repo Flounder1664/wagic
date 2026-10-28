@@ -1,0 +1,19 @@
+#Gutsplitter Gang at your first main phase: choose not to blight - lose 3 life.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Gutsplitter Gang
+library:Ornithopter
+life:20
+[PLAYER2]
+[DO]
+next
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gutsplitter Gang
+hand:Ornithopter
+life:17
+[PLAYER2]
+[END]

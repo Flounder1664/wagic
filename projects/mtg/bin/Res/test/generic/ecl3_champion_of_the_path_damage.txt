@@ -1,0 +1,21 @@
+#Champion of the Path (beholds Fire Elemental from hand): Air Elemental (4/4) entering deals 4 to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Champion of the Path,Fire Elemental,Air Elemental
+manapool:{3}{R}{3}{U}{U}
+[PLAYER2]
+life:20
+[DO]
+Champion of the Path
+choice 0
+Fire Elemental
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champion of the Path,Air Elemental
+exile:Fire Elemental
+[PLAYER2]
+life:16
+[END]

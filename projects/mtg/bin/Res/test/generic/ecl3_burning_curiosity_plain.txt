@@ -1,0 +1,22 @@
+#Burning Curiosity without the blight: exiles only the top TWO cards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Burning Curiosity
+manapool:{2}{R}
+library:Juggernaut,Ornithopter,Millstone,Icy Manipulator
+[PLAYER2]
+[DO]
+Burning Curiosity
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=3/3
+graveyard:Burning Curiosity
+library:Juggernaut,Ornithopter
+exile:Millstone,Icy Manipulator
+[PLAYER2]
+[END]

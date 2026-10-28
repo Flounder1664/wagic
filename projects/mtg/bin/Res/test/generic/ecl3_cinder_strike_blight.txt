@@ -1,0 +1,23 @@
+#Cinder Strike blighted: 4 damage kills Horned Turtle (1/4); the blighted Hill Giant is 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Cinder Strike
+manapool:{R}
+[PLAYER2]
+inplay:Horned Turtle
+[DO]
+Cinder Strike
+choice 1
+Hill Giant
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=2/2
+graveyard:Cinder Strike
+[PLAYER2]
+graveyard:Horned Turtle
+[END]

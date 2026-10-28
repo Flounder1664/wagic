@@ -1,0 +1,20 @@
+#Champion of the Clachan dies (Doom Blade): the beheld Amrou Kithkin returns to its owner's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Champion of the Clachan,Amrou Kithkin,Doom Blade
+manapool:{3}{W}{1}{B}
+[PLAYER2]
+[DO]
+Champion of the Clachan
+choice 0
+Amrou Kithkin
+Doom Blade
+Champion of the Clachan
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Amrou Kithkin
+graveyard:Champion of the Clachan,Doom Blade
+[PLAYER2]
+[END]

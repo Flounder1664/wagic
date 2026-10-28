@@ -1,0 +1,21 @@
+#Gutsplitter Gang at your first main phase: blight 2 on Hill Giant (1/1) - no life lost.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Gutsplitter Gang,Hill Giant
+library:Ornithopter
+life:20
+[PLAYER2]
+[DO]
+next
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gutsplitter Gang,Hill Giant
+pt:Hill Giant=1/1
+hand:Ornithopter
+life:20
+[PLAYER2]
+[END]

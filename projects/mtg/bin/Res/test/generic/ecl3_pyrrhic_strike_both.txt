@@ -1,0 +1,24 @@
+#Pyrrhic Strike with blight 2: both modes - destroys Ornithopter (artifact) AND Hill Giant (mana value 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Pyrrhic Strike
+manapool:{2}{W}
+[PLAYER2]
+inplay:Ornithopter,Hill Giant
+[DO]
+Pyrrhic Strike
+choice 1
+Horned Turtle
+Ornithopter
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+pt:Horned Turtle=-1/2
+graveyard:Pyrrhic Strike
+[PLAYER2]
+graveyard:Ornithopter,Hill Giant
+[END]

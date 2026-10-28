@@ -1,0 +1,23 @@
+#Spiral into Solitude on Hill Giant, then {1}{W}, blight 1 (Horned Turtle), sacrifice it: Hill Giant is exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Spiral into Solitude
+manapool:{1}{W}{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Spiral into Solitude
+Hill Giant
+Spiral into Solitude
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+pt:Horned Turtle=0/3
+graveyard:Spiral into Solitude
+[PLAYER2]
+exile:Hill Giant
+[END]

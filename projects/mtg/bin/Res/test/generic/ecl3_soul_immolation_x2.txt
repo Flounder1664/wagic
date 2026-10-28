@@ -1,0 +1,24 @@
+#Soul Immolation, X=2 (choice 1): Hill Giant takes two -1/-1 counters; 2 damage to the opponent and to Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Soul Immolation
+manapool:{3}{R}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Soul Immolation
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=1/1
+graveyard:Soul Immolation
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]

@@ -1,0 +1,22 @@
+#Bogslither's Embrace paid with blight 1 (no spare {3}): exiles Hill Giant; Horned Turtle takes the counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Bogslither's Embrace
+manapool:{1}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Bogslither's Embrace
+Horned Turtle
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+pt:Horned Turtle=0/3
+graveyard:Bogslither's Embrace
+[PLAYER2]
+exile:Hill Giant
+[END]

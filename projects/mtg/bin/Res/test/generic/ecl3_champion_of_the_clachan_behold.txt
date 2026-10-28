@@ -1,0 +1,18 @@
+#Champion of the Clachan beholds Amrou Kithkin from hand: it is exiled and the Champion stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Champion of the Clachan,Amrou Kithkin
+manapool:{3}{W}
+[PLAYER2]
+[DO]
+Champion of the Clachan
+choice 0
+Amrou Kithkin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champion of the Clachan
+exile:Amrou Kithkin
+[PLAYER2]
+[END]

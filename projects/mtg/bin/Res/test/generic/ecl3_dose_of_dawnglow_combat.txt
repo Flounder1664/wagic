@@ -1,0 +1,21 @@
+#Dose of Dawnglow outside your main phase (declare attackers step): blight 2 on Horned Turtle.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Horned Turtle
+hand:Dose of Dawnglow
+graveyard:Hill Giant
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+Dose of Dawnglow
+Hill Giant
+Horned Turtle
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Horned Turtle,Hill Giant
+pt:Horned Turtle=-1/2
+graveyard:Dose of Dawnglow
+[PLAYER2]
+[END]

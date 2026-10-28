@@ -1,0 +1,21 @@
+#Dream Seizer enters: blight 1 on Hill Giant, the opponent discards their only card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Dream Seizer
+manapool:{3}{B}
+[PLAYER2]
+hand:Juggernaut
+[DO]
+Dream Seizer
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Dream Seizer
+pt:Hill Giant=2/2
+[PLAYER2]
+graveyard:Juggernaut
+[END]

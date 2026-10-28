@@ -1,0 +1,23 @@
+#Burning Curiosity with blight 1 paid: exiles the top THREE cards (Juggernaut stays). Blighted Hill Giant is 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Burning Curiosity
+manapool:{2}{R}
+library:Juggernaut,Ornithopter,Millstone,Icy Manipulator
+[PLAYER2]
+[DO]
+Burning Curiosity
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=2/2
+graveyard:Burning Curiosity
+library:Juggernaut
+exile:Ornithopter,Millstone,Icy Manipulator
+[PLAYER2]
+[END]

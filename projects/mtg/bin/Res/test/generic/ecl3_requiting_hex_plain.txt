@@ -1,0 +1,23 @@
+#Requiting Hex unblighted: destroys Grizzly Bears, no life gained.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Requiting Hex
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Requiting Hex
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Requiting Hex
+life:20
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

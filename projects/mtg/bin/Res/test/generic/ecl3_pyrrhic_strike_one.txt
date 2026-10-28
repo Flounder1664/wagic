@@ -1,0 +1,23 @@
+#Pyrrhic Strike without blight: one mode only (destroy creature with mana value 3+); Ornithopter stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Pyrrhic Strike
+manapool:{2}{W}
+[PLAYER2]
+inplay:Ornithopter,Hill Giant
+[DO]
+Pyrrhic Strike
+choice 0
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+graveyard:Pyrrhic Strike
+[PLAYER2]
+inplay:Ornithopter
+graveyard:Hill Giant
+[END]

@@ -1,0 +1,22 @@
+#Cinder Strike unblighted: 2 damage, Horned Turtle (1/4) survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Cinder Strike
+manapool:{R}
+[PLAYER2]
+inplay:Horned Turtle
+[DO]
+Cinder Strike
+choice 0
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=3/3
+graveyard:Cinder Strike
+[PLAYER2]
+inplay:Horned Turtle
+[END]

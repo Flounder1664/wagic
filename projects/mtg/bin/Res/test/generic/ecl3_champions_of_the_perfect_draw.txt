@@ -1,0 +1,22 @@
+#Champions of the Perfect (beholding Llanowar Elves in play): casting Grizzly Bears draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:Champions of the Perfect,Grizzly Bears
+manapool:{3}{G}{1}{G}
+library:Ornithopter
+[PLAYER2]
+[DO]
+Champions of the Perfect
+choice 0
+Llanowar Elves
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champions of the Perfect,Grizzly Bears
+hand:Ornithopter
+exile:Llanowar Elves
+[PLAYER2]
+[END]

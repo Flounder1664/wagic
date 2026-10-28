@@ -1,0 +1,21 @@
+#Gristle Glutton: tap, blight 1 - discard Juggernaut, draw Ornithopter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gristle Glutton,Hill Giant
+hand:Juggernaut
+library:Ornithopter
+[PLAYER2]
+[DO]
+Gristle Glutton
+Hill Giant
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gristle Glutton,Hill Giant
+pt:Hill Giant=2/2
+hand:Ornithopter
+graveyard:Juggernaut
+[PLAYER2]
+[END]

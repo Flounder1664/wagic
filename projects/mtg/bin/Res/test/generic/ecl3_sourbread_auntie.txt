@@ -1,0 +1,19 @@
+#Sourbread Auntie: may blight 2 (on Hill Giant) - two Goblin tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Sourbread Auntie
+manapool:{2}{R}{R}
+[PLAYER2]
+[DO]
+Sourbread Auntie
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Sourbread Auntie,*,*
+pt:Hill Giant=1/1
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Champion of the Clachan: another Kithkin you control (Amrou Kithkin, 1/1) gets +1/+1. Beholds Amrou Seekers from hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Amrou Kithkin
+hand:Champion of the Clachan,Amrou Seekers
+manapool:{3}{W}
+[PLAYER2]
+[DO]
+Champion of the Clachan
+choice 0
+Amrou Seekers
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Amrou Kithkin,Champion of the Clachan
+pt:Amrou Kithkin=2/2
+exile:Amrou Seekers
+[PLAYER2]
+[END]

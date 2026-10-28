@@ -1,0 +1,19 @@
+#Sting-Slinger: {1}{R}, tap, blight 1 (on Hill Giant) - 2 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sting-Slinger,Hill Giant
+manapool:{1}{R}
+[PLAYER2]
+life:20
+[DO]
+Sting-Slinger
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sting-Slinger,Hill Giant
+pt:Hill Giant=2/2
+[PLAYER2]
+life:18
+[END]

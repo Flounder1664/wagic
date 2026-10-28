@@ -1,0 +1,20 @@
+#Dawnhand Dissident: tap, blight 2 - exile a card from a graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dawnhand Dissident,Hill Giant
+[PLAYER2]
+graveyard:Juggernaut
+[DO]
+Dawnhand Dissident
+choice 1
+Hill Giant
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dawnhand Dissident,Hill Giant
+pt:Hill Giant=1/1
+[PLAYER2]
+exile:Juggernaut
+[END]

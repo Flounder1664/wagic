@@ -1629,9 +1629,9 @@ int CounterCost::setPayment(MTGCardInstance *card)
         int result = tc->addTarget(card);
         if (result)
         {
+            target = card; //set before the add-counters early return, or doPay has no target (blight costs)
             if (counter->nb >= 0)
                 return 1; //add counters always possible
-            target = card;
             Counter * targetCounter = target->counters->hasCounter(counter->name.c_str(), counter->power, counter->toughness);
             if (targetCounter && targetCounter->nb >= -counter->nb)
             {

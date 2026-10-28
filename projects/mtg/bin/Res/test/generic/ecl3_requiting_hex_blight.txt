@@ -1,0 +1,25 @@
+#Requiting Hex blighted: destroys Grizzly Bears (mana value 2) and gains 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Requiting Hex
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Requiting Hex
+choice 1
+Hill Giant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=2/2
+graveyard:Requiting Hex
+life:22
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]
