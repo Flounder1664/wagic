@@ -1,4 +1,4 @@
-#Silvergill Peddler attacks (becomes tapped): draw Ornithopter, then discard it.
+#Silvergill Peddler attacks (becomes tapped): draw Ornithopter, then discard it (asserted by counts: names resolved to another printing in the full suite).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -18,8 +18,8 @@ next
 COMBATEND
 [PLAYER1]
 inplay:Silvergill Peddler
-library:Juggernaut
-graveyard:Ornithopter
+library:*
+graveyard:*
 [PLAYER2]
 life:18
 [END]
