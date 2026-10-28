@@ -8643,8 +8643,11 @@ auto=_PREPARE_
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:ancestral recall:!)
 #"You may exile eight cards from your graveyard. If you do" - eight {E(...)} costs, the shape
 #Time Compression uses. Gated on eight being there so the may is never offered when it can't be paid.
-#REVIEW-V 2026-10-28: the harness cannot pay the eight {E(...)} costs (the pay resolves before any graveyard click lands) - needs John's eyes.
-auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:may name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
+#2026-10-28 (John, scenario 47): two prompts, then the eight picked cards were never exiled. pay[[...]]
+#already offers Cancel, so the may was a second prompt - dropped. The lost payment was the engine:
+#GameObserver::WaitForExtraPayment completed a pay[[...]] menu's extra costs itself on the last click,
+#bypassing MenuAbility's own pay-and-resolve. Test: sos_emeritus_of_ideation_attack_prepares.
+auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
 #Prepared is shown as a Prepared counter rather than a face-up back side - a display difference, not a rules gap.
 mana={3}{U}{U}
 type=Creature
