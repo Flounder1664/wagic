@@ -3643,6 +3643,7 @@ class ALord: public ListMaintainerAbility, public NestedAbility
 public:
     int includeSelf;
     map<Damageable *, MTGAbility *> abilities;
+    bool lastsForever; //one-shot all(...) whose continuous effect has no end of turn
 
     ALord(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _tc, int _includeSelf, MTGAbility * a) :
         ListMaintainerAbility(observer, _id, card), NestedAbility(a)
@@ -3650,6 +3651,7 @@ public:
         tc = _tc;
         tc->targetter = NULL;
         includeSelf = _includeSelf;
+        lastsForever = false;
         if(ability->aType == MTGAbility::STANDARD_PREVENT)
             aType = MTGAbility::STANDARD_PREVENT;
     }
@@ -3707,7 +3709,13 @@ public:
                 //rules inspect (upstream issue #1142).
                 MTGAbility::propagateSource(a, (MTGCardInstance *) d);
             }
-            if (oneShot)
+            if (oneShot && lastsForever)
+            {
+                //all(...) loseabilities forever: stays on the card it was given to (its source is
+                //that card now), instead of the wrapper below ending it at end of turn (Curious Colossus)
+                a->addToGame();
+            }
+            else if (oneShot)
             {
                 MTGAbility * wrapper = NEW GenericInstantAbility(game, 1, source, d, a);
                 wrapper->addToGame();

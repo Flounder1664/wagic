@@ -26375,8 +26375,8 @@ subtype=Aura
 [/card]
 [card]
 name=Curious Colossus
-auto=all(creature|opponentbattlefield) loseabilities
-auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
+auto=all(creature|opponentbattlefield) loseabilities forever
+auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1)) forever
 text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
 mana={5}{W}{W}
 type=Creature

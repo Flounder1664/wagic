@@ -1,0 +1,38 @@
+#Curious Colossus: the Air Elemental STAYS without flying on the next turn, so Hill Giant can block it. "all(...) loseabilities" used to last only until end of turn (scenario 44).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Curious Colossus
+inplay:Hill Giant
+manapool:{5}{W}{W}
+[PLAYER2]
+inplay:Air Elemental
+[DO]
+Curious Colossus
+eot
+next
+#upkeep
+next
+#draw
+next
+#main
+next
+#begin
+next
+#attackers
+Air Elemental
+next
+#blockers
+Hill Giant
+next
+#damage
+next
+#end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Curious Colossus,Hill Giant
+life:20
+[PLAYER2]
+graveyard:Air Elemental
+[END]
