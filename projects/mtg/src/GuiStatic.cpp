@@ -185,21 +185,14 @@ void GuiAvatar::Render()
         }
     }
     //player designations: small labelled tags stacked down the avatar's
-    //inner edge, opposite the counters. City's blessing, enduring story and
-    //speed have no board presence at all; monarch/initiative do have
-    //battlefield emblems but are tagged too so the avatar reads at a glance.
-    //Day/Night needs none: it is an emblem on the battlefield.
+    //inner edge, opposite the counters. City's blessing and enduring story
+    //have no board presence at all; monarch/initiative do have battlefield
+    //emblems but are tagged too so the avatar reads at a glance. Day/Night
+    //and speed need none: both already show as cards on the battlefield.
     {
         struct Badge { const char * label; int red, green, blue; };
-        Badge badges[5];
+        Badge badges[4];
         int nbBadges = 0;
-        char speedLabel[8];
-        if (player->speedCount > 0)
-        {
-            sprintf(speedLabel, "S%i", player->speedCount);
-            Badge b = { speedLabel, 120, 255, 160 };
-            badges[nbBadges++] = b;
-        }
         if (player->cityBlessing)
         {
             Badge b = { "CB", 255, 215, 0 };
