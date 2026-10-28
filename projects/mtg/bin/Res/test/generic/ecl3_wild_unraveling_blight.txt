@@ -1,0 +1,27 @@
+#Wild Unraveling (player 2, blighting Hill Giant) counters Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+inplay:Hill Giant
+hand:Wild Unraveling
+manapool:{U}{U}
+[DO]
+Grizzly Bears
+no
+yes
+Wild Unraveling
+Hill Giant
+Grizzly Bears
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=1/1
+graveyard:Wild Unraveling
+[END]

@@ -1,0 +1,18 @@
+#Evershrike's Gift on Grizzly Bears: 3/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Evershrike's Gift
+manapool:{W}
+[PLAYER2]
+[DO]
+Evershrike's Gift
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Evershrike's Gift
+pt:Grizzly Bears=3/2
+[PLAYER2]
+[END]

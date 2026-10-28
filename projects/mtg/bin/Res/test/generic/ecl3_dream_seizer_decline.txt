@@ -1,0 +1,19 @@
+#Dream Seizer: declining the blight - the opponent keeps their card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Dream Seizer
+manapool:{3}{B}
+[PLAYER2]
+hand:Juggernaut
+[DO]
+Dream Seizer
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Dream Seizer
+[PLAYER2]
+hand:Juggernaut
+[END]

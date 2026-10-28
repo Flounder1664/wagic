@@ -1,0 +1,19 @@
+#Twilight Diviner: Zombify returns Hill Giant from the graveyard, so a token copy of it is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Twilight Diviner
+hand:Zombify
+graveyard:Hill Giant
+manapool:{3}{B}
+[PLAYER2]
+[DO]
+Zombify
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Twilight Diviner,Hill Giant,*
+graveyard:Zombify
+[PLAYER2]
+[END]

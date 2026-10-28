@@ -1,0 +1,18 @@
+#Reaping Willow (3/6 with two -1/-1 counters = 1/4): {1}{W}, remove both counters - Grizzly Bears returns; Willow is 3/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Reaping Willow
+graveyard:Grizzly Bears
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Reaping Willow
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Reaping Willow,Grizzly Bears
+pt:Reaping Willow=3/6
+[PLAYER2]
+[END]

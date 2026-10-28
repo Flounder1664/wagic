@@ -1,0 +1,18 @@
+#Virulent Emissary: another creature entering gains you 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Virulent Emissary
+hand:Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Virulent Emissary,Grizzly Bears
+life:21
+[PLAYER2]
+[END]

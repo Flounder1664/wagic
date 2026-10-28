@@ -1,0 +1,23 @@
+#Shadow Urchin attacks: blight 1 on Hill Giant (2/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shadow Urchin,Hill Giant
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Shadow Urchin
+next
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Shadow Urchin,Hill Giant
+pt:Hill Giant=2/2
+[PLAYER2]
+life:17
+[END]

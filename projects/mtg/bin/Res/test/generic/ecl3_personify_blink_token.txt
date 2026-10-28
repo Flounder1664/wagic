@@ -1,0 +1,18 @@
+#Personify on Grizzly Bears: it is exiled and returns, and a 1/1 Shapeshifter token is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Personify
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Personify
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Personify
+[PLAYER2]
+[END]

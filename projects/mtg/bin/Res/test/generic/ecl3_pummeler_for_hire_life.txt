@@ -1,0 +1,18 @@
+#Pummeler for Hire with Craw Giant (6/4) out: gain 6 life, the greatest Giant power.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Giant
+hand:Pummeler for Hire
+manapool:{4}{G}
+life:20
+[PLAYER2]
+[DO]
+Pummeler for Hire
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Giant,Pummeler for Hire
+life:26
+[PLAYER2]
+[END]

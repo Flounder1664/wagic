@@ -1,0 +1,17 @@
+#Brigid's Command, second mode: a 1/1 Kithkin token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Brigid's Command
+manapool:{1}{G}{W}
+[PLAYER2]
+[DO]
+Brigid's Command
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Brigid's Command
+[PLAYER2]
+[END]

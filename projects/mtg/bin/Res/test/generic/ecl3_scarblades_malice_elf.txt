@@ -1,0 +1,20 @@
+#Scarblade's Malice on Grizzly Bears; when it dies this turn (Doom Blade) a 2/2 Elf token is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Scarblade's Malice,Doom Blade
+manapool:{B}{1}{B}
+[PLAYER2]
+[DO]
+Scarblade's Malice
+Grizzly Bears
+Doom Blade
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Grizzly Bears,Scarblade's Malice,Doom Blade
+[PLAYER2]
+[END]

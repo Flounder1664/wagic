@@ -1,0 +1,22 @@
+#Wary Farmer: Grizzly Bears entered this turn, so at your end step you surveil 1 and bin Ornithopter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wary Farmer
+hand:Grizzly Bears
+manapool:{1}{G}
+library:Juggernaut,Ornithopter
+[PLAYER2]
+[DO]
+Grizzly Bears
+goto end
+choice 0
+Ornithopter
+[ASSERT]
+END
+[PLAYER1]
+inplay:Wary Farmer,Grizzly Bears
+library:Juggernaut
+graveyard:Ornithopter
+[PLAYER2]
+[END]

@@ -1,0 +1,26 @@
+#Flitterwing Nuisance: {2}{U}, remove its -1/-1 counter (back to 2/2); Grizzly Bears then hits the opponent and you draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Flitterwing Nuisance,Grizzly Bears
+manapool:{2}{U}
+library:Ornithopter
+[PLAYER2]
+life:20
+[DO]
+Flitterwing Nuisance
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Flitterwing Nuisance,Grizzly Bears
+pt:Flitterwing Nuisance=2/2
+hand:Ornithopter
+[PLAYER2]
+life:18
+[END]

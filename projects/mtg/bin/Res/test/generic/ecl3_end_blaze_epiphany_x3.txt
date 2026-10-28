@@ -1,0 +1,21 @@
+#End-Blaze Epiphany with X=3 kills Hill Giant (3/3) and draws nothing (the old version drew a card).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:End-Blaze Epiphany
+manapool:{3}{R}
+library:Ornithopter
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+End-Blaze Epiphany
+choice 3
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:End-Blaze Epiphany
+library:Ornithopter
+[PLAYER2]
+graveyard:Hill Giant
+[END]

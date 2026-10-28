@@ -1,0 +1,18 @@
+#696814 enters: the top two cards of the opponent's library are exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:696814
+manapool:{2}{B}{G}{U}
+[PLAYER2]
+library:Juggernaut,Ornithopter,Millstone
+[DO]
+696814
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696814
+[PLAYER2]
+library:Juggernaut
+exile:Ornithopter,Millstone
+[END]

@@ -7159,7 +7159,8 @@ class AAMillChoose: public ActivatedAbility
 public:
     string countStr;
     string filter;
-    AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, ManaCost * _cost = NULL);
+    string destination; //"myhand" (default) or "mylibrary" (top of library)
+    AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, string destination = "myhand", ManaCost * _cost = NULL);
     int resolve();
     const string getMenuText();
     AAMillChoose * clone() const;

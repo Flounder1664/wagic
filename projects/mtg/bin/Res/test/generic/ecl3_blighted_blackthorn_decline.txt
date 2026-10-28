@@ -1,0 +1,21 @@
+#Blighted Blackthorn: declining the blight draws nothing and loses no life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Blighted Blackthorn
+manapool:{4}{B}
+library:Ornithopter
+life:20
+[PLAYER2]
+[DO]
+Blighted Blackthorn
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Blighted Blackthorn
+library:Ornithopter
+life:20
+[PLAYER2]
+[END]

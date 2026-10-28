@@ -1,0 +1,15 @@
+#Lavaleaper: tapping a basic Forest adds an extra {G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lavaleaper,Forest
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lavaleaper,*
+manapool:{G}{G}
+[PLAYER2]
+[END]

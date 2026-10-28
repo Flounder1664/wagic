@@ -25893,3 +25893,20 @@ text=Each noncreature spell you cast has conspire. (As you cast a noncreature sp
 mana={3}{R}{G}
 type=Enchantment
 [/card]
+[card]
+name=Dream Harvest
+missing=Exiling cards from the opponent's library until their total mana value reaches 5, then casting them free this turn, is not expressible. The old implementation (draw 3, opponent discards 3) was a different card. Moved to unsupported 2026-10-28.
+text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
+mana={5}{U/B}{U/B}
+type=Sorcery
+[/card]
+[card]
+name=Sanar, Innovative First-Year
+missing=Vivid (reveal until X nonland cards, exile one of each color among your permanents, cast them this turn) is not expressible. The old implementation (draw a card each main phase) was a different card. Moved to unsupported 2026-10-28.
+text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
+mana={2}{U/R}{U/R}
+type=Legendary Creature
+subtype=Goblin Sorcerer
+power=2
+toughness=4
+[/card]

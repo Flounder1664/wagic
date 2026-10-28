@@ -1,0 +1,17 @@
+#Unforgiving Aim, third mode: a 2/2 Elf token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unforgiving Aim
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Unforgiving Aim
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Unforgiving Aim
+[PLAYER2]
+[END]

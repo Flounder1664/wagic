@@ -1,0 +1,20 @@
+#Moonshadow (7/7 with six -1/-1 counters = 1/1): Grizzly Bears dying puts a permanent card in your graveyard - 2/2. Doom Blade (an instant) does not count.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Moonshadow,Doom Blade
+inplay:Grizzly Bears
+manapool:{B}{1}{B}
+[PLAYER2]
+[DO]
+Moonshadow
+Doom Blade
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Moonshadow
+pt:Moonshadow=2/2
+graveyard:Grizzly Bears,Doom Blade
+[PLAYER2]
+[END]

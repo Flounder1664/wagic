@@ -1,0 +1,19 @@
+#Taster of Wares enters: you pick Juggernaut from the opponent's hand and it is exiled.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Taster of Wares
+manapool:{2}{B}
+[PLAYER2]
+hand:Juggernaut,Ornithopter
+[DO]
+Taster of Wares
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Taster of Wares
+[PLAYER2]
+hand:Ornithopter
+exile:Juggernaut
+[END]

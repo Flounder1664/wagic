@@ -1,0 +1,18 @@
+#Warren Torchmaster at beginning of combat: blight 1 on Hill Giant (then a haste target).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Warren Torchmaster,Hill Giant
+[PLAYER2]
+[DO]
+next
+choice 0
+Hill Giant
+Hill Giant
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Warren Torchmaster,Hill Giant
+pt:Hill Giant=2/2
+[PLAYER2]
+[END]

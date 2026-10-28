@@ -133,15 +133,14 @@ toughness=6
 [card]
 name=Abigale, Eloquent First-Year
 abilities=flying,first strike,lifelink
-auto=target(other creature) transforms((,newability[loseabilities],flying,first strike,lifelink)) forever
-#MISSING the three keywords should arrive as flying/first strike/lifelink COUNTERS (keyword counters on another creature are not expressible)
+auto=may name(Lose abilities, gain keywords) target(other creature) transforms((,newability[loseabilities],flying,first strike,lifelink)) forever
+note=The flying, first strike and lifelink arrive as granted abilities rather than keyword counters (keyword counters are not in the engine), so they cannot be removed or moved as counters.
+text=Flying, first strike, lifelink -- When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
 mana={W/B}{W/B}
-type=Creature
+type=Legendary Creature
 subtype=Bird Bard
 power=1
 toughness=1
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Flying, first strike, lifelink -- When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
 [/card]
 [card]
 name=Abjure
@@ -14071,10 +14070,10 @@ name=Boggart Mischief
 #tokens with no id and rendered blank (John, scenario, 2026-10-14).
 auto=may name(Blight 1: two Goblins) counter(-1/-1,1) target(creature|mybattlefield) && token(-697106)*2
 auto=@movedTo(creature[goblin]|graveyard) from(mybattlefield):life:-1 opponent && life:1 controller
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.) -- Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
 mana={2}{B}
-type=Enchantment
+type=Kindred Enchantment
+subtype=Goblin
 [/card]
 [card]
 name=Boggart Mob
@@ -15808,14 +15807,15 @@ type=Instant
 name=Brigid's Command
 #"Create a token that's a copy" is clone, not copy: on an instant, copy turns the SPELL into the copy
 #and no token appears (John, Ashling's Command retest, 2026-10-14).
-auto=choice name(copy kithkin) clone target(creature[kithkin]|mybattlefield)
-auto=choice name(buff creature) target(creature) 3/3 ueot
-auto=choice name(kithkin token) token(Kithkin,creature kithkin,1/1,,green white)
-auto=choice name(fight) target(creature|mybattlefield) _FIGHT_
-missing=only one mode is chosen rather than two
+auto=choice name(Token copy of target Kithkin) clone target(kithkin|mybattlefield)
+auto=choice name(Create a 1/1 Kithkin) token(-697107)
+auto=choice name(Target creature you control +3/+3) target(creature|mybattlefield) 3/3 ueot
+auto=choice name(Fight) target(creature|mybattlefield) _FIGHT_
+missing=Choose two: only one mode can be chosen (a choice menu takes exactly one pick). The Kithkin token is always yours.
+text=Choose two — -- • Create a token that's a copy of target Kithkin you control. -- • Target player creates a 1/1 green and white Kithkin creature token. -- • Target creature you control gets +3/+3 until end of turn. -- • Target creature you control fights target creature an opponent controls.
 mana={1}{G}{W}
-type=Sorcery
-text=Choose two: copy target Kithkin you control; or target creature gets +3/+3 until end of turn; or create a 1/1 Kithkin token; or target creature you control fights target creature an opponent controls.
+type=Kindred Sorcery
+subtype=Kithkin
 [/card]
 [card]
 name=Brigid, Clachan's Heart
@@ -20902,13 +20902,10 @@ subtype=Aura
 [/card]
 [card]
 name=Chronicle of Victory
+auto=chooseatype transforms((,newability[lord(creature[chosentype]|mybattlefield) 2/2],newability[lord(creature[chosentype]|mybattlefield) first strike],newability[lord(creature[chosentype]|mybattlefield) trample],newability[@movedTo(*[chosentype]|mystack):draw:1 controller])) forever chooseend
+text=As Chronicle of Victory enters, choose a creature type. -- Creatures you control of the chosen type get +2/+2 and have first strike and trample. -- Whenever you cast a spell of the chosen type, draw a card.
 mana={6}
-type=Artifact
-auto=chooseatype lord(creature[chosentype]|mybattlefield) 2/2 chooseend
-auto=chooseatype lord(creature[chosentype]|mybattlefield) first strike chooseend
-auto=chooseatype lord(creature[chosentype]|mybattlefield) trample chooseend
-#MISSING 'whenever you cast a spell of the chosen type, draw a card' (cast trigger filtered by the chosen type is not expressible)
-text=As this enters, choose a creature type. Creatures you control of the chosen type get +2/+2 and have first strike and trample. Whenever you cast a spell of the chosen type, draw a card.
+type=Legendary Artifact
 [/card]
 [card]
 name=Chronicler of Heroes
@@ -33658,14 +33655,6 @@ mana={1}{U}{U}
 type=Instant
 [/card]
 [card]
-name=Dream Harvest
-auto=draw:3 && target(player|opponentbattlefield) discard:3
-mana={5}{U/B}{U/B}
-type=Sorcery
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
-[/card]
-[card]
 name=Dream Leash
 target=*[artifact;battle;creature;enchantment;land;planeswalker;tapped]
 alias=1194
@@ -38023,11 +38012,11 @@ type=Sorcery
 [/card]
 [card]
 name=End-Blaze Epiphany
-auto=damage:* target(creature|any) && draw:1
+auto=damage:X target(creature)
+missing=The death rider is not implemented: when that creature dies this turn you should exile cards equal to its power and may play one of them until the end of your next turn.
+text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
 mana={X}{R}
 type=Instant
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=End-Blaze Epiphany deals X damage to target creature. When that creature dies this turn, exile a number of cards from the top of your library equal to its power, then choose a card exiled this way. Until the end of your next turn, you may play that card.
 [/card]
 [card]
 name=Endangered Armodon
@@ -44462,12 +44451,14 @@ toughness=1
 name=Flitterwing Nuisance
 abilities=flying
 auto=counter(-1/-1,1)
+auto={2}{U}{C(-1/-1,-1)}:name(Draw on combat damage this turn) transforms((,newability[@combatdamaged(player) from(creature|mybattlefield):draw:1 controller])) ueot
+note=The cost removes a -1/-1 counter, the only counter this creature normally has.
+text=Flying -- This creature enters with a -1/-1 counter on it. -- {2}{U}, Remove a counter from this creature: Whenever a creature you control deals combat damage to a player or planeswalker this turn, draw a card.
 mana={U}
 type=Creature
 subtype=Faerie Rogue
 power=2
 toughness=2
-text=Flying -- This creature enters with a -1/-1 counter on it.
 [/card]
 [card]
 name=Floating Shield
@@ -47519,11 +47510,12 @@ toughness=2
 [/card]
 [card]
 name=Gathering Stone
-auto=@each my upkeep:_SCRY1_
+#REVIEW-V upkeep look at the top card (scenario queued 2026-10-28); the discount is tested
+auto=chooseatype lord(*[chosentype]|mycastingzone) altercost(colorless,-1) && transforms((,newability[@each my upkeep:if type(*[chosentype;zpos=1]|mylibrary)~morethan~0 then may moveto(myhand) all(*[zpos=1]|mylibrary) else may moveto(mygraveyard) all(*[zpos=1]|mylibrary)])) forever chooseend
+missing=The look at the top card also happens when this enters in the real card; here it starts at your next upkeep.
+text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 mana={4}
 type=Artifact
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 [/card]
 [card]
 name=Gatstaf Arsonists
@@ -54042,16 +54034,17 @@ toughness=9
 [/card]
 [card]
 name=Grub's Command
-auto=choice name(copy goblin) copy target(creature[goblin]|mybattlefield)
+auto=choice name(Token copy of target Goblin) clone target(goblin|mybattlefield)
 #moveto(mygraveyard) put the opponent's creature in MY graveyard (John, 2026-09-12). Destroying
 #it sends it to its OWNER's graveyard, which is what the card says.
-auto=choice name(destroy) destroy target(*[creature;artifact]|opponentbattlefield)
-auto=choice name(buff all) all(creature|mybattlefield) effect(+1/+1,haste) ueot
-auto=choice name(mill 5) deplete:5 opponent
+auto=choice name(Destroy target artifact or creature) destroy target(*[creature;artifact])
+auto=choice name(Your creatures +1/+1 and haste) all(creature|mybattlefield) 1/1 ueot && all(creature|mybattlefield) haste ueot
+auto=choice name(Opponent mills five) deplete:5 opponent
+missing=Choose two: only one mode can be chosen (a choice menu takes exactly one pick). The +1/+1 mode always affects your creatures, and the mill mode mills the opponent and does not return milled Goblins.
+text=Choose two — -- • Create a token that's a copy of target Goblin you control. -- • Creatures target player controls get +1/+1 and gain haste until end of turn. -- • Destroy target artifact or creature. -- • Target player mills five cards, then puts each Goblin card milled this way into their hand.
 mana={3}{B}{R}
-type=Sorcery
-missing="choose two" - a choice menu takes exactly ONE pick. Measured 2026-09-13: adding a second set of choice lines just makes one bigger menu, it does not offer a second pick. The mill mode also does not return the milled Goblins
-text=Choose two -- Create a token that's a copy of target Goblin you control. -- Creatures target player controls get +1/+1 and gain haste until end of turn. -- Destroy target artifact or creature. -- Target player mills five cards, then puts each Goblin card milled this way into their hand. (Only one mode may be chosen.)
+type=Kindred Sorcery
+subtype=Goblin
 [/card]
 [card]
 name=Grub, Storied Matriarch
@@ -65899,12 +65892,11 @@ type=Artifact
 [/card]
 [card]
 name=Keep Out
-auto=choice name(deal 4 to tapped creature) damage:4 target(creature[tapped]|opponentbattlefield) name(destroy enchantment) destroy target(enchantment|opponentbattlefield)
+auto=choice name(4 damage to target tapped creature) damage:4 target(creature[tapped])
+auto=choice name(Destroy target enchantment) destroy target(enchantment)
+text=Choose one — -- • Keep Out deals 4 damage to target tapped creature. -- • Destroy target enchantment.
 mana={1}{W}
 type=Instant
-text=Choose one —
-• Deal 4 to tapped creature
-• Destroy enchantment.
 [/card]
 [card]
 name=Keep Watch
@@ -69859,9 +69851,8 @@ type=Sorcery
 [/card]
 [card]
 name=Lavaleaper
-auto=lord(creature|battlefield) haste
-auto=@tappedformana(land[basic]|mybattlefield):Add{1}
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+auto=lord(creature) haste
+auto=lord(land[basic]) transforms((,newability[producecolor:land],newability[producecolor:green],newability[producecolor:blue],newability[producecolor:red],newability[producecolor:black],newability[producecolor:white]))
 text=All creatures have haste. -- Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
 mana={3}{R}
 type=Creature
@@ -71897,11 +71888,11 @@ toughness=3
 [/card]
 [card]
 name=Lluwen, Imperfect Naturalist
-auto=deplete:4 controller
-auto={2}{BG}{BG}{BG}{T}{D(land|myhand)}:foreach(land|mygraveyard) token(Worm,creature worm,1/1,black green) asSorcery
+auto=millchoose(4,*[creature;land],mylibrary)
+auto={2}{BG}{BG}{BG}{T}{D(land|myhand)}:token(Worm,creature worm,1/1,black green)*type:land:mygraveyard asSorcery
+text=When Lluwen enters, mill four cards, then you may put a creature or land card from among the milled cards on top of your library. -- {2}{B/G}{B/G}{B/G}, {T}, Discard a land card: Create a 1/1 black and green Worm creature token for each land card in your graveyard.
 mana={BG}{BG}
 type=Legendary Creature
-text=When Lluwen, Imperfect Naturalist enters the battlefield, mill 4 cards.
 subtype=Elf Druid
 power=1
 toughness=3
@@ -75004,14 +74995,15 @@ type=Sorcery
 [card]
 name=Maralen, Fae Ascendant
 abilities=flying
-auto=@movedTo(creature|mybattlefield):deplete:2 target(player|opponentbattlefield)
+auto=all(*[zpos<=2]|opponentlibrary) moveto(exile)
+auto=@movedTo(other *[elf;faerie]|mybattlefield):all(*[zpos<=2]|opponentlibrary) moveto(exile)
+missing=Casting a spell from among the cards exiled with Maralen (once each turn, free, mana value up to your Elves and Faeries) is not implemented, so the exiled cards are only removed.
+text=Flying -- Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library. -- Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
 mana={2}{B}{G}{U}
-type=Creature
+type=Legendary Creature
 subtype=Elf Faerie Noble
 power=4
 toughness=5
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Flying -- Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library. -- Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost.
 [/card]
 [card]
 name=Marang River Prowler
@@ -76501,10 +76493,11 @@ type=Land
 [/card]
 [card]
 name=Meanders Guide
-auto=_ATTACKING_:moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard)
+auto=_ATTACKING_if type(other merfolk[-tapped]|mybattlefield)~morethan~0 then may name(Tap a Merfolk to reanimate) tap notaTarget(other merfolk[-tapped]|mybattlefield) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard)!$ controller
+#REVIEW-V attack trigger with a tap choice then a graveyard target (scenario queued 2026-10-28)
+text=Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
 mana={2}{W}
 type=Creature
-text=Whenever Meanders Guide attacks, put target creature with mana value 3 or less in your graveyard onto the battlefield.
 subtype=Merfolk Scout
 power=3
 toughness=2
@@ -80725,10 +80718,11 @@ toughness=2
 name=Moonshadow
 abilities=menace
 auto=counter(-1/-1,6)
-auto=@movedTo(*|mygraveyard):counter(-1/-1,-1)
+auto=@movedTo(*[permanent]|mygraveyard):counter(-1/-1,-1)
+note=Each permanent card put into your graveyard removes a counter; several arriving at once remove one each, where the real card removes one per event.
+text=Menace -- This creature enters with six -1/-1 counters on it. -- Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
 mana={B}
 type=Creature
-text=Put 6 -1/-1 counters on Moonshadow.
 subtype=Elemental
 power=7
 toughness=7
@@ -81028,16 +81022,14 @@ text=Exile any number of target creatures. At the beginning of the next end step
 [/card]
 [card]
 name=Mornsong Aria
-#VERIFIED IN GAME 2026-10-14 (John, scenario queue): each player's draw step: lose 3 and search (the extra normal draw is the missing 'can't draw').
-#Fixed 2026-10-14 (John, scenario: did nothing to either player). The old line only fired on YOUR
-#draw step and ended in a malformed "&& and!(shuffle)!". Now each player's draw step, for that player.
 abilities=nolifegain,nolifegainopponent
-auto=@each my draw:life:-3 controller && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary)!$ controller
-auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary)!$ opponent
-missing=players cannot draw cards (the draw-step search still happens)
+auto=replacedraw ability$!name(Can't draw) donothing!$ controller
+auto=opponentreplacedraw ability$!name(Can't draw) donothing!$ opponent
+auto=@each my draw:life:-3 controller && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary) && shuffle!$ controller
+auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary) && shuffle!$ opponent
+text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 mana={1}{B}{B}
 type=Legendary Enchantment
-text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 [/card]
 [card]
 name=Moroii
@@ -81951,12 +81943,13 @@ toughness=1
 [card]
 name=Mutable Explorer
 abilities=changeling
+auto=token(Mutavault) and!( tap(noevent) )!
+text=Changeling (This card is every creature type.) -- When this creature enters, create a tapped Mutavault token. (It's a land with "{T}: Add {C}" and "{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.")
 mana={2}{G}
 type=Creature
 subtype=Shapeshifter
 power=1
 toughness=1
-text=Changeling (This card is every creature type.)
 [/card]
 [card]
 name=Mutagenic Growth
@@ -84503,10 +84496,9 @@ name=Nightmare Sower
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): casting on the opponent's turn asks for up to one target.
 abilities=flying,lifelink
 auto=@movedTo(*|mystack) restriction{opponentturnonly}:may counter(-1/-1,1) target(creature)
+text=Flying, lifelink -- Whenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.
 mana={3}{B}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Flying, lifelink -- Whenever you cast a spell during an opponent's turn, put a -1/-1 counter on up to one target creature.
 subtype=Faerie Assassin
 power=2
 toughness=3
@@ -90359,10 +90351,12 @@ type=Sorcery
 [/card]
 [card]
 name=Personify
-auto=token(Shapeshifter,creature shapeshifter,1/1,changeling colorless)
+target=creature|mybattlefield
+auto=moveto(exile) and!(moveto(ownerbattlefield))!
+auto=token(Shapeshifter,creature shapeshifter,1/1,changeling)
+text=Exile target creature you control, then return that card to the battlefield under its owner's control. Create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
 mana={1}{W}
 type=Instant
-text=Create a 1/1 colorless Shapeshifter creature token.
 [/card]
 [card]
 name=Persuasion
@@ -94671,10 +94665,10 @@ type=Sorcery
 name=Pummeler for Hire
 abilities=vigilance,reach
 auto=_WARD2_
-auto=life:3 controller
+auto=life:power:highest:giant:mybattlefield controller
+text=Reach, vigilance -- Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- When this creature enters, you gain X life, where X is the greatest power among Giants you control.
 mana={4}{G}
 type=Creature
-text=Ward {2}.
 subtype=Giant Mercenary
 power=4
 toughness=4
@@ -97990,10 +97984,11 @@ type=Instant
 name=Reaping Willow
 abilities=lifelink
 auto=counter(-1/-1,2)
-auto={1}{WB}{C(-1/-1,-1)}{C(-1/-1,-1)}:moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) asSorcery
+auto={1}{WB}{C(-1/-1,-2)}:moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard) asSorcery
+note=The cost removes two -1/-1 counters, the only counters this creature normally has.
+text=Lifelink -- This creature enters with two -1/-1 counters on it. -- {1}{W/B}, Remove two counters from this creature: Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery.
 mana={1}{WB}{WB}{WB}
 type=Creature
-text=Put 2 -1/-1 counters on Reaping Willow.
 subtype=Treefolk Cleric
 power=3
 toughness=6
@@ -100330,11 +100325,12 @@ toughness=1
 [card]
 name=Rhys, the Evermore
 abilities=flash
-auto=persist ueot target(creature[-this]|mybattlefield)
+auto=target(other creature|mybattlefield) persist ueot
 auto={W}{T}:counter(-1/-1,-10) target(creature|mybattlefield) asSorcery
+note=The activated ability removes -1/-1 counters (all of them), the counters it is normally used on.
+text=Flash -- When Rhys enters, another target creature you control gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.) -- {W}, {T}: Remove any number of counters from target creature you control. Activate only as a sorcery.
 mana={1}{W}
 type=Legendary Creature
-text=When Rhys, the Evermore enters the battlefield, target creature you control gains persist until end of turn.
 subtype=Elf Warrior
 power=2
 toughness=2
@@ -104119,17 +104115,6 @@ type=Artifact
 subtype=Equipment
 [/card]
 [card]
-name=Sanar, Innovative First-Year
-auto=@each my mainphase:draw:1
-mana={2}{U/R}{U/R}
-type=Creature
-subtype=Goblin Sorcerer
-power=2
-toughness=4
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Vivid — At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
-[/card]
-[card]
 name=Sanctified Charge
 auto=all(creature|myBattlefield) 2/1 ueot
 auto=all(creature[white]|myBattlefield) first strike ueot
@@ -104565,10 +104550,11 @@ type=Sorcery
 [card]
 name=Sapling Nursery
 abilities=affinityforests
-auto=_LANDFALL_:token(Treefolk,creature treefolk,3/4,reach green)
+auto=_LANDFALL_token(Treefolk,creature treefolk,3/4,reach green)
+auto={1}{G}{E}:name(Treefolk and Forests gain indestructible) all(*[treefolk;forest]|mybattlefield) indestructible ueot
+text=Affinity for Forests (This spell costs {1} less to cast for each Forest you control.) -- Landfall — Whenever a land you control enters, create a 3/4 green Treefolk creature token with reach. -- {1}{G}, Exile this enchantment: Treefolk and Forests you control gain indestructible until end of turn.
 mana={6}{G}{G}
 type=Enchantment
-text=:token(Treefolk,creature treefolk,3/4,reach green).
 [/card]
 [card]
 name=Sapling of Colfenor
@@ -105296,10 +105282,11 @@ toughness=2
 [/card]
 [card]
 name=Scarblade's Malice
-auto=deathtouch ueot target(creature|mybattlefield) && lifelink ueot target(creature|mybattlefield)
+target=creature|mybattlefield
+auto=transforms((,deathtouch,lifelink,newability[_DIES_token(Elf^creature elf^2/2^black green)])) ueot
+text=Target creature you control gains deathtouch and lifelink until end of turn. When that creature dies this turn, create a 2/2 black and green Elf creature token.
 mana={B}
 type=Instant
-text=Target creature you control gains deathtouch until end of turn. Target creature you control gains lifelink until end of turn.
 [/card]
 [card]
 name=Scare Tactics
@@ -106570,10 +106557,9 @@ toughness=1
 name=Scuzzback Scrounger
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): the first-main blight prompt gives a Treasure.
 auto=@each my firstmain:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && _TREASURE_
+text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={1}{R}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=At the beginning of your first main phase, you may blight 1. If you do, create a Treasure token. (To blight 1, put a -1/-1 counter on a creature you control. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 subtype=Goblin Warrior
 power=3
 toughness=2
@@ -108959,11 +108945,11 @@ toughness=1
 [/card]
 [card]
 name=Shadow Urchin
-auto=_ATTACKING_:counter(-1/-1,1)
+auto=_ATTACKING_counter(-1/-1,1) target(creature|mybattlefield)
+missing=The second ability (a creature you control with counters dies: exile that many cards from the top of your library and play them until your next end step) is not implemented.
+text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.) -- Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
 mana={2}{BR}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.) -- Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
 subtype=Ouphe
 power=3
 toughness=4
@@ -114281,10 +114267,12 @@ type=Artifact
 [card]
 name=Slumbering Walker
 auto=counter(-1/-1,2)
-auto=@each my endstep:counter(-1/-1,-1) && moveto(mybattlefield) target(creature[power<=2]|mygraveyard)
+auto=@each my end:may name(Remove a counter to reanimate) counter(-1/-1,-1) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[power<=2]|mygraveyard)!$ controller
+note=Removes a -1/-1 counter, the only counter this creature normally has; the return is offered even when no counter is left.
+#REVIEW-V end-step may then graveyard target (scenario queued 2026-10-28)
+text=This creature enters with two -1/-1 counters on it. -- At the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
 mana={3}{W}{W}
 type=Creature
-text=Put 2 -1/-1 counters on Slumbering Walker.
 subtype=Giant Warrior
 power=4
 toughness=7
@@ -117550,9 +117538,10 @@ toughness=2
 [card]
 name=Spinerock Tyrant
 abilities=flying,wither
+missing=Copying an instant or sorcery with a single target (and giving both wither) is not implemented: the engine cannot test "a single target", and copying every instant or sorcery would be a strong upgrade.
+text=Flying -- Wither (This deals damage to creatures in the form of -1/-1 counters.) -- Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
 mana={3}{R}{R}
 type=Creature
-text=Flying. Wither (This deals damage to creatures in the form of -1/-1 counters.)
 subtype=Dragon
 power=6
 toughness=6
@@ -124863,14 +124852,14 @@ type=Sorcery
 [/card]
 [card]
 name=Taster of Wares
-auto=target(player|opponentbattlefield) discard:1
+auto=moveto(exile) target(*|opponenthand)
+missing=Approximated: you see the opponent's whole hand rather than X cards (X = your Goblins), and you cannot cast an exiled instant or sorcery.
+text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
 mana={2}{B}
 type=Creature
 subtype=Goblin Warlock
 power=3
 toughness=2
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=When this creature enters, target opponent reveals X cards from their hand, where X is the number of Goblins you control. You choose one of those cards. That player exiles it. If an instant or sorcery card is exiled this way, you may cast it for as long as you control this creature, and mana of any type can be spent to cast that spell.
 [/card]
 [card]
 name=Tatsumasa, the Dragon's Fang
@@ -131695,13 +131684,15 @@ toughness=3
 [/card]
 [card]
 name=Trystan's Command
-auto=choice name(copy elf) copy target(creature[elf]|mybattlefield)
-auto=choice name(reanimate) moveto(mybattlefield) target(*|mygraveyard)
-auto=choice name(destroy) moveto(mygraveyard) target(*[creature;enchantment]|opponentbattlefield)
-auto=choice name(buff all) all(creature|mybattlefield) effect(+3/+3) ueot
+auto=choice name(Token copy of target Elf) clone target(elf|mybattlefield)
+auto=choice name(Return up to two permanent cards to hand) target(<upto:2>*[permanent]|mygraveyard) moveto(myhand)
+auto=choice name(Destroy target creature or enchantment) destroy target(*[creature;enchantment])
+auto=choice name(Your creatures +3/+3 and untap) all(creature|mybattlefield) 3/3 ueot && all(creature|mybattlefield) untap
+missing=Choose two: only one mode can be chosen (a choice menu takes exactly one pick). The +3/+3 mode always affects your creatures.
+text=Choose two — -- • Create a token that's a copy of target Elf you control. -- • Return one or two target permanent cards from your graveyard to your hand. -- • Destroy target creature or enchantment. -- • Creatures target player controls get +3/+3 until end of turn. Untap them.
 mana={4}{B}{G}
-type=Sorcery
-text=Choose two: copy target Elf you control; or return a permanent card from your graveyard to the battlefield; or destroy target creature or enchantment; or creatures you control get +3/+3 until end of turn.
+type=Kindred Sorcery
+subtype=Elf
 [/card]
 [card]
 name=Trystan, Callous Cultivator
@@ -132039,11 +132030,12 @@ toughness=2
 [/card]
 [card]
 name=Twilight Diviner
-auto=_SCRY1_ && _SCRY1_
+auto=_SURVEIL2_
+auto=@movedTo(other creature|mybattlefield) from(mygraveyard,opponentgraveyard) turnlimited:all(trigger[to]) clone
+note=Covers creatures entering from a graveyard; one cast from a graveyard (rare) is not detected.
+text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
 mana={2}{B}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.) -- Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
 subtype=Elf Cleric
 power=3
 toughness=3
@@ -133126,15 +133118,12 @@ type=Instant
 [/card]
 [card]
 name=Unforgiving Aim
-auto=choice name(destroy flier) destroy target(creature[flying]|opponentbattlefield)
-auto=choice name(destroy enchantment) destroy target(enchantment|opponentbattlefield)
-auto=choice name(create elf token) token(Elf,creature elf,2/2,,black green)
+auto=choice name(Destroy target creature with flying) destroy target(creature[flying])
+auto=choice name(Destroy target enchantment) destroy target(enchantment)
+auto=choice name(Create a 2/2 Elf) token(Elf,creature elf,2/2,black green)
+text=Choose one — -- • Destroy target creature with flying. -- • Destroy target enchantment. -- • Create a 2/2 black and green Elf creature token.
 mana={2}{G}
 type=Instant
-text=Choose one —
-• Destroy flier
-• Destroy enchantment
-• Create elf token.
 [/card]
 [card]
 name=Unfulfilled Desires
@@ -133558,12 +133547,12 @@ toughness=4
 [/card]
 [card]
 name=Unwelcome Sprite
+#REVIEW-V cast-on-opponent-turn trigger: the harness cannot cast during the opponent's turn (scenario queued 2026-10-28)
 abilities=flying
-auto=_SCRY1_ && _SCRY1_
+auto=@movedTo(*|mystack) restriction{opponentturnonly}:_SURVEIL2_
+text=Flying -- Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
 mana={1}{U}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Flying -- Whenever you cast a spell during an opponent's turn, surveil 2. (Look at the top two cards of your library. You may put any number of them into your graveyard and the rest on top of your library in any order.)
 subtype=Faerie Rogue
 power=2
 toughness=1
@@ -136752,10 +136741,10 @@ type=Sorcery
 [card]
 name=Virulent Emissary
 abilities=deathtouch
-auto=@movedTo(creature[-this]|mybattlefield):life:1 controller
+auto=@movedTo(other creature|mybattlefield):life:1 controller
+text=Deathtouch -- Whenever another creature you control enters, you gain 1 life.
 mana={G}
 type=Creature
-text=@movedTo(creature[-this]|mybattlefield):life:1 controller.
 subtype=Elf Assassin
 power=1
 toughness=1
@@ -137781,12 +137770,12 @@ toughness=2
 [/card]
 [card]
 name=Voracious Tome-Skimmer
+#REVIEW-V cast-on-opponent-turn trigger with a pay-1-life menu (scenario queued 2026-10-28)
 abilities=flying
-auto=life:-1 controller && draw:1 controller
+auto=@movedTo(*|mystack) restriction{opponentturnonly}:transforms((,newability[choice name(Pay 1 life: draw a card) life:-1 controller && draw:1 controller],newability[choice name(Don't pay) donothing])) oneshot
+text=Flying -- Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
 mana={UB}{UB}{UB}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Flying -- Whenever you cast a spell during an opponent's turn, you may pay 1 life. If you do, draw a card.
 subtype=Faerie Rogue
 power=2
 toughness=3
@@ -139593,6 +139582,7 @@ toughness=3
 [/card]
 [card]
 name=Warren Torchmaster
+#REVIEW-V the haste target after the blight (scenario queued 2026-10-28); the blight is tested
 auto=@each my combatbegins:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && ability$!name(Gains haste) haste ueot target(creature)!$ controller
 text=At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)
 mana={1}{R}
@@ -139688,11 +139678,11 @@ toughness=2
 [/card]
 [card]
 name=Wary Farmer
-auto=@each my endstep restriction{type(other creature[fresh]|mybattlefield)~morethan~0}:_SURVEIL1_
+auto=@each my end restriction{type(other creature[fresh]|mybattlefield)~morethan~0}:_SURVEIL1_
+note=Checks for another creature that entered this turn and is still on the battlefield.
+text=At the beginning of your end step, if another creature entered the battlefield under your control this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 mana={1}{GW}{GW}
 type=Creature
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=At the beginning of your end step, if another creature entered the battlefield under your control this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 subtype=Kithkin Citizen
 power=3
 toughness=3

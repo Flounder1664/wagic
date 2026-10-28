@@ -1,0 +1,19 @@
+#Keep Out, second mode: destroy the opponent's Glorious Anthem.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Keep Out
+manapool:{1}{W}
+[PLAYER2]
+inplay:Glorious Anthem
+[DO]
+Keep Out
+choice 1
+Glorious Anthem
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Keep Out
+[PLAYER2]
+graveyard:Glorious Anthem
+[END]

@@ -1,0 +1,15 @@
+#Sapling Nursery: playing a land makes a 3/4 Treefolk token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sapling Nursery
+hand:Forest
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sapling Nursery,*,*
+[PLAYER2]
+[END]

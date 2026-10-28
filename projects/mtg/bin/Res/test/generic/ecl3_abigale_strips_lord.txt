@@ -1,0 +1,20 @@
+#Abigale makes the opponent's Lord of Atlantis lose its abilities: their Merfolk of the Pearl Trident drops back to 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:696781
+manapool:{W}{B}
+[PLAYER2]
+inplay:Lord of Atlantis,Merfolk of the Pearl Trident
+[DO]
+696781
+choice 0
+Lord of Atlantis
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696781
+[PLAYER2]
+inplay:Lord of Atlantis,Merfolk of the Pearl Trident
+pt:Merfolk of the Pearl Trident=1/1
+[END]

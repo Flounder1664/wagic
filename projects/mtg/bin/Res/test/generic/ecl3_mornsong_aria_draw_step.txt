@@ -1,0 +1,18 @@
+#Mornsong Aria: your draw step - no draw and you lose 3 life. (The library search was verified in game 2026-10-14; the harness cannot click into it.)
+[INIT]
+UPKEEP
+[PLAYER1]
+inplay:Mornsong Aria
+library:Juggernaut,Ornithopter
+life:20
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Mornsong Aria
+library:Juggernaut,Ornithopter
+life:17
+[PLAYER2]
+[END]

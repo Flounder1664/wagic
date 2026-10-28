@@ -1,0 +1,16 @@
+#Mutable Explorer enters with a tapped Mutavault token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mutable Explorer
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Mutable Explorer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mutable Explorer,*
+tappedinplay:1
+[PLAYER2]
+[END]

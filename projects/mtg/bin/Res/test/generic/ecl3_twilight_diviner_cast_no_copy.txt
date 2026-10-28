@@ -1,0 +1,16 @@
+#Twilight Diviner: a creature cast from hand (Grizzly Bears) makes no copy.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Twilight Diviner
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Twilight Diviner,Grizzly Bears
+[PLAYER2]
+[END]

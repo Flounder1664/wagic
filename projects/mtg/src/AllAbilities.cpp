@@ -2393,8 +2393,8 @@ AAExplore * AAExplore::clone() const
 }
 
 //AAMillChoose
-AAMillChoose::AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, ManaCost * _cost) :
-    ActivatedAbility(observer, _id, _source, _cost, 0), countStr(countStr), filter(filter)
+AAMillChoose::AAMillChoose(GameObserver* observer, int _id, MTGCardInstance * _source, string countStr, string filter, string destination, ManaCost * _cost) :
+    ActivatedAbility(observer, _id, _source, _cost, 0), countStr(countStr), filter(filter), destination(destination)
 {
 }
 
@@ -2426,7 +2426,8 @@ int AAMillChoose::resolve()
     {
         MTGCardInstance * card = milled[i];
         if (card && tc->canTarget(card))
-            options.push_back(NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), card, card, "myhand", "Put " + card->getName() + " into your hand"));
+            options.push_back(NEW AAMover(game, game->mLayers->actionLayer()->getMaxId(), card, card, destination,
+                destination == "mylibrary" ? "Put " + card->getName() + " on top of your library" : "Put " + card->getName() + " into your hand"));
     }
     SAFE_DELETE(tc);
     if (options.empty())

@@ -1,0 +1,19 @@
+#Trystan's Command, fourth mode: Grizzly Bears +3/+3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Trystan's Command
+manapool:{4}{B}{G}
+[PLAYER2]
+[DO]
+Trystan's Command
+choice 3
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=5/5
+graveyard:Trystan's Command
+[PLAYER2]
+[END]

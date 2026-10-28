@@ -1,0 +1,19 @@
+#Evershrike's Gift in the graveyard: {1}{W}, blight 2 (Hill Giant) returns it to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Evershrike's Gift
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Evershrike's Gift
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=1/1
+hand:Evershrike's Gift
+[PLAYER2]
+[END]

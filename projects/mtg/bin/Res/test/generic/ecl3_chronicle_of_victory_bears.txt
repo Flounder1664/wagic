@@ -1,0 +1,23 @@
+#Chronicle of Victory naming Bear: Grizzly Bears 4/4, and casting Runeclaw Bear draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Chronicle of Victory,Runeclaw Bear
+manapool:{6}{1}{G}
+library:Ornithopter
+[PLAYER2]
+[DO]
+Chronicle of Victory
+menu Choose a type
+menu Choose a type
+menu Bear
+Runeclaw Bear
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Chronicle of Victory,Runeclaw Bear
+pt:Grizzly Bears=4/4
+hand:Ornithopter
+[PLAYER2]
+[END]

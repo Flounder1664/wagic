@@ -1,0 +1,19 @@
+#Grub's Command, +1/+1 mode: Grizzly Bears 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Grub's Command
+manapool:{3}{B}{R}
+[PLAYER2]
+[DO]
+Grub's Command
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/3
+graveyard:Grub's Command
+[PLAYER2]
+[END]

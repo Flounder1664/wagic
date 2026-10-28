@@ -4742,7 +4742,8 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
-    //millchoose(N,filter) - mill N, then you may put one milled card matching filter into your hand.
+    //millchoose(N,filter[,mylibrary]) - mill N, then you may put one milled card matching filter into
+    //your hand, or on top of your library with the optional third argument (Lluwen, Imperfect Naturalist).
     vector<string> splitMillChoose = parseBetween(s, "millchoose(", ")");
     if (splitMillChoose.size())
     {
@@ -4750,7 +4751,14 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         size_t comma = args.find(",");
         string countPart = (comma == string::npos) ? args : args.substr(0, comma);
         string filterPart = (comma == string::npos) ? "*" : args.substr(comma + 1);
-        MTGAbility * a = NEW AAMillChoose(observer, id, card, countPart, filterPart);
+        string destination = "myhand";
+        size_t lastComma = filterPart.rfind(",");
+        if (lastComma != string::npos && filterPart.substr(lastComma + 1) == "mylibrary")
+        {
+            destination = "mylibrary";
+            filterPart = filterPart.substr(0, lastComma);
+        }
+        MTGAbility * a = NEW AAMillChoose(observer, id, card, countPart, filterPart, destination);
         a->oneShot = 1;
         return a;
     }

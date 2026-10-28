@@ -1,0 +1,19 @@
+#Gathering Stone naming Bear: Grizzly Bears costs {1} less, so {G} casts it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gathering Stone,Grizzly Bears
+manapool:{4}{G}
+[PLAYER2]
+[DO]
+Gathering Stone
+menu Choose a type
+menu Choose a type
+menu Bear
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gathering Stone,Grizzly Bears
+[PLAYER2]
+[END]

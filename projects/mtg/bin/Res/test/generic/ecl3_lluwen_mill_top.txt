@@ -1,0 +1,19 @@
+#Lluwen enters: mills four (Juggernaut stays at the bottom), puts milled Grizzly Bears back on top of the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:696687
+manapool:{B}{G}
+library:Juggernaut,Grizzly Bears,Howling Mine,Millstone,Icy Manipulator
+[PLAYER2]
+[DO]
+696687
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696687
+library:Juggernaut,Grizzly Bears
+graveyard:Howling Mine,Millstone,Icy Manipulator
+[PLAYER2]
+[END]

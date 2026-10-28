@@ -1,0 +1,19 @@
+#Trystan's Command, third mode: destroy Glorious Anthem.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Trystan's Command
+manapool:{4}{B}{G}
+[PLAYER2]
+inplay:Glorious Anthem
+[DO]
+Trystan's Command
+choice 2
+Glorious Anthem
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Trystan's Command
+[PLAYER2]
+graveyard:Glorious Anthem
+[END]
