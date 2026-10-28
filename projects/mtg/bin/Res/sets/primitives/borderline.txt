@@ -26787,10 +26787,10 @@ name=Deadeye Brawler
 abilities=deathtouch,ascend
 auto=_ASCEND_
 auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
-#REVIEW-V 2026-10-18: the draw never happens in the harness, even with the city's blessing in the
-#command zone for a whole round. Not a harness gap: no restriction{type(City's Blessing|mycommandzone)}
-#or aslongas(...) sees the marker card, so every blessing-gated card is affected. Untested: the draw.
-auto=_CITY'S_BLESSING_ transforms((,newability[@combatdamaged(player) from(this):draw:1]))
+#2026-10-28 (John, scenario 39: no draw): RIX/_cards.dat had lost the [card] opener of the City's
+#Blessing marker, so the marker was never dropped and every blessing check saw nothing. Fixed there;
+#this line reads the cityblessing flag directly anyway. Test: rix_deadeye_brawler_blessing_draw.
+auto=@combatdamaged(player) from(this) restriction{compare(cityblessing)~morethan~0}:draw:1
 text=Deathtouch -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
 mana={2}{U}{B}
 type=Creature
