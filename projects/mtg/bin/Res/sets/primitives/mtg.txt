@@ -133,7 +133,7 @@ toughness=6
 [card]
 name=Abigale, Eloquent First-Year
 abilities=flying,first strike,lifelink
-auto=may name(Lose abilities, gain keywords) target(other creature) transforms((,newability[loseabilities],flying,first strike,lifelink)) forever
+auto=may name(Lose abilities, gain keywords) target(other creature) transforms((,newability[loseabilities],-double strike,-deathtouch,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash,flying,first strike,lifelink)) forever
 note=The flying, first strike and lifelink arrive as granted abilities rather than keyword counters (keyword counters are not in the engine), so they cannot be removed or moved as counters.
 text=Flying, first strike, lifelink -- When Abigale enters, up to one other target creature loses all abilities. Put a flying counter, a first strike counter, and a lifelink counter on that creature.
 mana={W/B}{W/B}
@@ -26374,7 +26374,7 @@ subtype=Aura
 [card]
 name=Curious Colossus
 auto=all(creature|opponentbattlefield) loseabilities
-auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1)) forever
+auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
 text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
 mana={5}{W}{W}
 type=Creature
@@ -85281,7 +85281,7 @@ abilities=flash
 auto=loseabilities
 auto=transforms((,setpower=1,settoughness=1))
 auto=losesubtypesof(creature)
-auto=transforms((Noggle,colorless))
+auto=transforms((Noggle,colorless,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash))
 text=Flash -- Enchant creature -- Enchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1. (It loses all colors and all other creature types.)
 mana={1}{U}
 type=Enchantment
