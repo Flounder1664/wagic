@@ -135404,8 +135404,10 @@ auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 contr
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 #REVIEW-V 2026-10-18: chapter II untested - a creature dealing combat damage must make that player
 #LOSE THE GAME, and a harness run cannot assert a game loss. Chapter I is fin_summon_primal_odin_ch1.
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) ueot
-text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - Until end of turn, creatures you control gain "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
+#Chapter II is "THIS creature gains" with no duration (oracle). It was written as every creature you
+#control until end of turn - John caught it on 2026-10-28 (scenario 03).
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) forever
+text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - This creature gains "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
 mana={4}{B}{B}
 type=Enchantment Creature
 subtype=Saga Knight
