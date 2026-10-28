@@ -1,0 +1,25 @@
+#Doran, Besieged by Time: attacking Horned Turtle (1/4) gets +3/+3 and Goblin Piker (2/1) gets +1/+1.
+#Unblocked, they deal 4 + 3 = 7.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696800,Horned Turtle,Goblin Piker
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Horned Turtle
+Goblin Piker
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:696800,Horned Turtle,Goblin Piker
+pt:Horned Turtle=4/7
+pt:Goblin Piker=3/2
+[PLAYER2]
+life:13
+[END]

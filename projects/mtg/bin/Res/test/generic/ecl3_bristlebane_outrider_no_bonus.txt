@@ -1,0 +1,16 @@
+#Bristlebane Outrider: a creature entering under the OPPONENT's control does not count - stays 3/5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bristlebane Outrider
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bristlebane Outrider
+pt:Bristlebane Outrider=3/5
+[PLAYER2]
+inplay:Grizzly Bears
+[END]

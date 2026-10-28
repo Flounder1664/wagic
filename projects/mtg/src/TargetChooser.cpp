@@ -646,6 +646,12 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                 {
                     cd->CDcrewedSource = 1;
                 }
+                //Toughness greater than power (Doran, Besieged by Time). Checked before the
+                //"power"/"toughness" comparisons below, which would otherwise swallow it.
+                else if (attribute.find("toughgtpow") != string::npos)
+                {
+                    cd->CDtoughGtPow = minus ? -1 : 1;
+                }
                 else if (attribute.find("attacking") != string::npos)
                 {
                     if (minus)

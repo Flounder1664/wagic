@@ -25876,3 +25876,20 @@ subtype=Vampire Wizard
 power=3
 toughness=4
 [/card]
+[card]
+name=Kirol, Attentive First-Year
+missing=Copying a triggered ability is not implemented (Strionic Resonator and Lithoform Engine are blocked on the same gap), so Kirol's only ability cannot be written. Moved to unsupported 2026-10-28.
+text=Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
+mana={1}{R/W}{R/W}
+type=Legendary Creature
+subtype=Vampire Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Raiding Schemes
+missing=Granting conspire to other spells is not implemented. Conspire is written per card as an alternative cost, so there is no way to give it to every noncreature spell you cast. Moved to unsupported 2026-10-28.
+text=Each noncreature spell you cast has conspire. (As you cast a noncreature spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy. A copy of a permanent spell becomes a token.)
+mana={3}{R}{G}
+type=Enchantment
+[/card]

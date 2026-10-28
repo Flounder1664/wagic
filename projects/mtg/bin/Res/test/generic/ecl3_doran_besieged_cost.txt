@@ -1,0 +1,16 @@
+#Doran, Besieged by Time: Horned Turtle (1/4, {2}{U}) costs {1} less, so {1}{U} casts it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696800
+hand:Horned Turtle
+manapool:{1}{U}
+[PLAYER2]
+[DO]
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696800,Horned Turtle
+[PLAYER2]
+[END]

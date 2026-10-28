@@ -113,6 +113,7 @@ class CardDescriptor: public MTGCardInstance
   int CDgeared;
   int CDdiscarded;
   int CDcrewedSource;
+  int CDtoughGtPow; //toughgtpow: toughness greater than power (Doran, Besieged by Time)
   int CDattached;
   int CDblocked;
   int CDcanProduceC;

@@ -1,0 +1,18 @@
+#Doran, Besieged by Time: Grizzly Bears (2/2) is not discounted, so {G} alone cannot cast it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696800
+hand:Grizzly Bears
+manapool:{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696800
+hand:Grizzly Bears
+manapool:{G}
+[PLAYER2]
+[END]

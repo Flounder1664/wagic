@@ -16070,12 +16070,15 @@ toughness=6
 [/card]
 [card]
 name=Bristlebane Outrider
+auto=cantbeblockedby(creature[power<=2])
+auto=aslongas(other creature[fresh]|mybattlefield) 2/0
+note=The +2/+0 checks for another creature you control that entered this turn and is still on the battlefield; one that entered and has since left no longer counts.
+text=This creature can't be blocked by creatures with power 2 or less. -- As long as another creature entered the battlefield under your control this turn, this creature gets +2/+0.
 mana={3}{G}
 type=Creature
 subtype=Kithkin Knight
 power=3
 toughness=5
-text=This creature can't be blocked by creatures with power 2 or less.
 [/card]
 [card]
 name=Bristling Hydra
@@ -32486,13 +32489,15 @@ toughness=4
 [/card]
 [card]
 name=Doran, Besieged by Time
+auto=lord(creature[toughgtpow]|mycastingzone) altercost(colorless,-1)
+auto=@combat(attacking,blocking) source(creature[toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[toughnessminuspowerminusend/toughnessminuspowerminusend ueot])) oneshot
+auto=@combat(attacking,blocking) source(creature[-toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[powerminustoughnessminusend/powerminustoughnessminusend ueot])) oneshot
+text=Each creature spell you cast with toughness greater than its power costs {1} less to cast. -- Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
 mana={1}{W}{B}{G}
-type=Creature
+type=Legendary Creature
 subtype=Treefolk Druid
 power=0
 toughness=5
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
-text=Each creature spell you cast with toughness greater than its power costs {1} less to cast. -- Whenever a creature you control attacks or blocks, it gets +X/+X until end of turn, where X is the difference between its power and toughness.
 [/card]
 [card]
 name=Doran, the Siege Tower
@@ -66813,15 +66818,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Kirol, Attentive First-Year
-mana={1}{R/W}{R/W}
-type=Creature
-subtype=Vampire Cleric
-power=3
-toughness=3
-text=Tap two untapped creatures you control: Copy target triggered ability you control. Activate only once each turn.
-[/card]
-[card]
 name=Kirtar's Desire
 target=creature
 auto=cantattack
@@ -96279,12 +96275,6 @@ type=Creature
 subtype=Nightstalker
 power=2
 toughness=2
-[/card]
-[card]
-name=Raiding Schemes
-mana={3}{R}{G}
-type=Enchantment
-text=Each noncreature spell you cast has conspire.
 [/card]
 [card]
 name=Rain of Blades

@@ -49,6 +49,7 @@ CardDescriptor::CardDescriptor()
     CDgeared = 0;
     CDdiscarded = 0;
     CDcrewedSource = 0;
+    CDtoughGtPow = 0;
     CDattached = 0;
     CDblocked = 0;
     CDcanProduceC = 0;
@@ -452,6 +453,13 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
     if ((fresh == -1 && card->fresh) || (fresh == 1 && !card->fresh))
     {
         match = NULL;
+    }
+
+    if (CDtoughGtPow)
+    {
+        bool gt = card->getToughness() > card->getPower();
+        if ((CDtoughGtPow == 1 && !gt) || (CDtoughGtPow == -1 && gt))
+            match = NULL;
     }
 
     if ((entersBattlefield == -1 && card->entersBattlefield) || (entersBattlefield == 1 && !card->entersBattlefield))

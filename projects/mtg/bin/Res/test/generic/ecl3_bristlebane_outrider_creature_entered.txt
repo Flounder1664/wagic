@@ -1,0 +1,17 @@
+#Bristlebane Outrider: after another creature enters under your control this turn it gets +2/+0 (3/5 -> 5/5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bristlebane Outrider
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bristlebane Outrider,Grizzly Bears
+pt:Bristlebane Outrider=5/5
+[PLAYER2]
+[END]
