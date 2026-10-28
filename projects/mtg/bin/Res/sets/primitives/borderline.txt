@@ -134523,7 +134523,10 @@ other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
-auto=token(-1520200)*3
+#John 2026-10-28 (scenario 40): cast for sneak, the tokens entered untapped and not attacking -
+#the line had no sneak branch at all. battleready is what enters a registered token tapped and attacking.
+auto=if paid(alternative) then token(-1520200,battleready)*3
+auto=ifnot paid(alternative) then token(-1520200)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
 type=Instant
