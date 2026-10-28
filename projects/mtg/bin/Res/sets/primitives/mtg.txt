@@ -47524,9 +47524,7 @@ toughness=2
 [/card]
 [card]
 name=Gathering Stone
-#REVIEW-V upkeep look at the top card (scenario queued 2026-10-28); the discount is tested
-auto=chooseatype lord(*[chosentype]|mycastingzone) altercost(colorless,-1) && transforms((,newability[@each my upkeep:if type(*[chosentype;zpos=1]|mylibrary)~morethan~0 then may moveto(myhand) all(*[zpos=1]|mylibrary) else may moveto(mygraveyard) all(*[zpos=1]|mylibrary)])) forever chooseend
-missing=The look at the top card also happens when this enters in the real card; here it starts at your next upkeep.
+auto=chooseatype lord(*[chosentype]|mycastingzone) altercost(colorless,-1) && transforms((,newability[reveal:1 optionone name(Put into your hand) target(<upto:1>*[chosentype]|reveal) moveto(myhand) optiononeend optiontwo name(Keep it on top) target(<1>*|reveal) moveto(mylibrary) and!( may name(Put it into your graveyard) moveto(mygraveyard) all(*[zpos=1]|mylibrary) )! optiontwoend revealend],newability[@each my upkeep:reveal:1 optionone name(Put into your hand) target(<upto:1>*[chosentype]|reveal) moveto(myhand) optiononeend optiontwo name(Keep it on top) target(<1>*|reveal) moveto(mylibrary) and!( may name(Put it into your graveyard) moveto(mygraveyard) all(*[zpos=1]|mylibrary) )! optiontwoend revealend])) forever chooseend
 text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 mana={4}
 type=Artifact
