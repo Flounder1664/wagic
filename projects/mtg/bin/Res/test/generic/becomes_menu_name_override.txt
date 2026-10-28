@@ -1,0 +1,19 @@
+#A name(...) on a transforms ability still labels its menu entry: the descriptive default ("Give ...",
+#"Becomes ...") must not replace it. Autumn Willow has two {G} transforms abilities, so a click opens a
+#menu; "menu <label>" only fires (and spends the {G}) when the entry still reads the card's own name.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Autumn Willow
+manapool:{G}
+[PLAYER2]
+[DO]
+Autumn Willow
+menu can be target of opponent spells
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Autumn Willow
+type:Autumn Willow=-hexproof
+[PLAYER2]
+[END]

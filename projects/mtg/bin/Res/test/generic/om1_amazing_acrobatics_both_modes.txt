@@ -1,0 +1,29 @@
+#Amazing Acrobatics, "Both": counter target spell AND tap a creature. Player 2 answers Ornithopter.
+#"target(*|stack) fizzle && ..." never countered: MultiAbility only handed its target to sub-abilities
+#targeting their own source, and a fizzle's target starts NULL, so only the tap half ran (scenario 17).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter
+inplay:Grizzly Bears
+[PLAYER2]
+hand:Amazing Acrobatics
+manapool:{1}{U}{U}
+[DO]
+Ornithopter
+no
+yes
+Amazing Acrobatics
+choice 2
+Ornithopter
+Grizzly Bears
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Ornithopter
+inplay:Grizzly Bears
+tappedinplay:1
+[PLAYER2]
+graveyard:Amazing Acrobatics
+[END]

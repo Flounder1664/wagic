@@ -1,0 +1,27 @@
+#School Daze, Fight Crime: counter target spell, draw a card. Player 2 answers Ornithopter. Before the
+#MultiAbility fizzle fix the card was drawn but Ornithopter resolved (scenario 18).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter
+[PLAYER2]
+hand:School Daze
+manapool:{3}{U}{U}
+library:Shock,Juggernaut
+[DO]
+Ornithopter
+no
+yes
+School Daze
+choice 1
+Ornithopter
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Ornithopter
+[PLAYER2]
+graveyard:School Daze
+hand:Juggernaut
+library:Shock
+[END]
