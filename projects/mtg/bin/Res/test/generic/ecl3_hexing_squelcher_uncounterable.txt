@@ -1,0 +1,24 @@
+#Hexing Squelcher: player 2's Counterspell cannot counter Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hexing Squelcher
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+hand:Counterspell
+manapool:{U}{U}
+[DO]
+Grizzly Bears
+no
+yes
+Counterspell
+Grizzly Bears
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hexing Squelcher,Grizzly Bears
+[PLAYER2]
+graveyard:Counterspell
+[END]

@@ -1,0 +1,19 @@
+#Noggle the Mind on the opponent's Air Elemental: 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Noggle the Mind
+manapool:{1}{U}
+[PLAYER2]
+inplay:Air Elemental
+[DO]
+Noggle the Mind
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Noggle the Mind
+[PLAYER2]
+inplay:Air Elemental
+pt:Air Elemental=1/1
+[END]

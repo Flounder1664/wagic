@@ -25910,3 +25910,10 @@ subtype=Goblin Sorcerer
 power=2
 toughness=4
 [/card]
+[card]
+name=Spry and Mighty
+missing=Choosing exactly two creatures and using the difference between their powers is not expressible. The old implementation (draw three, all your creatures +3/+3) was a different card. Moved to unsupported 2026-10-28.
+text=Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
+mana={4}{G}
+type=Sorcery
+[/card]

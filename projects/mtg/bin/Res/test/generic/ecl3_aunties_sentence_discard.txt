@@ -1,0 +1,20 @@
+#Auntie's Sentence, first mode: Juggernaut (a nonland permanent card) is discarded from the opponent's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Auntie's Sentence
+manapool:{1}{B}
+[PLAYER2]
+hand:Juggernaut,Shock
+[DO]
+Auntie's Sentence
+choice 0
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Auntie's Sentence
+[PLAYER2]
+hand:Shock
+graveyard:Juggernaut
+[END]

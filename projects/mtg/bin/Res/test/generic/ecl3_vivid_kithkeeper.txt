@@ -1,0 +1,16 @@
+#Kithkeeper (white) + Grizzly Bears (green): two Kithkin tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Kithkeeper
+manapool:{6}{W}
+[PLAYER2]
+[DO]
+Kithkeeper
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Kithkeeper,*,*
+[PLAYER2]
+[END]

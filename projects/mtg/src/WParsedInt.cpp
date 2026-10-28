@@ -272,6 +272,23 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     {
         intValue = (s == "mutations")?target->mutation:target->countColors();
     }
+    else if (s == "pvivid" || s == "ovivid")
+    {
+        //Vivid (Lorwyn Eclipsed): the number of colors among permanents the player controls.
+        Player * p = (s == "pvivid") ? card->controller() : card->controller()->opponent();
+        intValue = 0;
+        for (int color = Constants::MTG_COLOR_GREEN; color <= Constants::MTG_COLOR_WHITE; color++)
+        {
+            for (int i = 0; i < p->game->inPlay->nb_cards; i++)
+            {
+                if (p->game->inPlay->cards[i]->hasColor(color))
+                {
+                    intValue++;
+                    break;
+                }
+            }
+        }
+    }
     else if (s.find("type:") != string::npos)
     {
         size_t begins = s.find("type:");

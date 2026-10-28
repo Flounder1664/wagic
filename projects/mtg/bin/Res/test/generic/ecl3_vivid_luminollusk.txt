@@ -1,0 +1,18 @@
+#Luminollusk with green + red permanents: gain 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin
+hand:Luminollusk
+manapool:{3}{G}
+life:20
+[PLAYER2]
+[DO]
+Luminollusk
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Luminollusk
+life:22
+[PLAYER2]
+[END]

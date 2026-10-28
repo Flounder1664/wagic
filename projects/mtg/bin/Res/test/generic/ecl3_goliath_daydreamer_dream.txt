@@ -1,0 +1,20 @@
+#Goliath Daydreamer: Shock resolves and is exiled instead of going to the graveyard (the dream counter itself cannot be asserted off the battlefield).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Goliath Daydreamer
+hand:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Goliath Daydreamer
+exile:Shock
+[PLAYER2]
+life:18
+[END]

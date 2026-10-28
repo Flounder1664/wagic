@@ -1,0 +1,18 @@
+#Mistmeadow Council costs {1} less while you control a Kithkin: {3}{G} casts it, and it draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Amrou Kithkin
+hand:Mistmeadow Council
+manapool:{3}{G}
+library:Ornithopter
+[PLAYER2]
+[DO]
+Mistmeadow Council
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Amrou Kithkin,Mistmeadow Council
+hand:Ornithopter
+[PLAYER2]
+[END]

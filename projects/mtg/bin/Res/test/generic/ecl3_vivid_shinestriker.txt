@@ -1,0 +1,19 @@
+#Shinestriker with blue + green permanents: draw 2 (Juggernaut stays).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shinestriker
+manapool:{4}{U}{U}
+library:Juggernaut,Ornithopter,Millstone
+[PLAYER2]
+[DO]
+Shinestriker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Shinestriker
+hand:Ornithopter,Millstone
+library:Juggernaut
+[PLAYER2]
+[END]

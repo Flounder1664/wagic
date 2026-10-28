@@ -6985,10 +6985,12 @@ type=Instant
 [/card]
 [card]
 name=Assert Perfection
-auto=target(creature|mybattlefield) effect(+1/+0) ueot
+target=creature|mybattlefield
+auto=1/0 ueot
+auto=transforms((,newability[may target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) forever
+text=Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls.
 mana={1}{G}
 type=Sorcery
-text=Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls.
 [/card]
 [card]
 name=Astral Slide
@@ -7284,10 +7286,12 @@ type=Land
 [/card]
 [card]
 name=Auntie's Sentence
-auto=choice name(discard) target(player|opponentbattlefield) discard:1 name(weaken) target(creature|opponentbattlefield) effect(-2/-2) ueot
+auto=choice name(Discard a nonland permanent card) reject target(*[permanent;-land]|opponenthand)
+auto=choice name(Target creature gets -2/-2) -2/-2 ueot target(creature)
+note=You pick the card by targeting it in the opponent's hand, which shows you their hand.
+text=Choose one — -- • Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card. -- • Target creature gets -2/-2 until end of turn.
 mana={1}{B}
 type=Sorcery
-text=Choose one: target opponent discards a card; or target creature gets -2/-2 until end of turn.
 [/card]
 [card]
 name=Auntie's Snitch
@@ -7597,13 +7601,15 @@ type=Instant
 [card]
 name=Aurora Awakener
 abilities=trample
-auto=moveto(mybattlefield) target(creature[manacost<=4]|mylibrary)
+auto=name(Vivid reveal) reveal:pvivid optionone name(Put permanents onto the battlefield) target(<anyamount>*[permanent]|reveal) moveto(myLibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Put the rest on the bottom) target(<pvivid>*|reveal) bottomoflibrary optiontwoend afterrevealed all(tobecast|myLibrary) moveto(mybattlefield) afterrevealedend revealend
+note=Reveals the top X cards (X = colors among your permanents) rather than revealing until X permanent cards are found.
+#REVIEW-V the reveal window (scenario queued 2026-10-28)
+text=Trample -- Vivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanent cards onto the battlefield, then put the rest of the revealed cards on the bottom of your library in a random order.
 mana={6}{G}
 type=Creature
 subtype=Giant Druid
 power=7
 toughness=7
-text=Trample -- When this creature enters, you may put a creature card with mana value 4 or less from the top of your library onto the battlefield.
 [/card]
 [card]
 name=Aurora Eidolon
@@ -15494,13 +15500,14 @@ toughness=3
 [/card]
 [card]
 name=Bre of Clan Stoutarm
-auto={1}{W}{T}:target(creature[-this]|mybattlefield) effect(+0/+0,flying,lifelink) ueot
+auto={1}{W}{T}:target(other creature|mybattlefield) transforms((,flying,lifelink)) ueot
+missing=The end step ability (if you gained life, exile until a nonland card and cast it free if its mana value is at most the life gained) is not implemented.
+text={1}{W}, {T}: Another target creature you control gains flying and lifelink until end of turn. -- At the beginning of your end step, if you gained life this turn, exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than or equal to the amount of life you gained this turn. Otherwise, put it into your hand.
 mana={2}{R}{W}
-type=Creature
+type=Legendary Creature
 subtype=Giant Warrior
 power=4
 toughness=4
-text={1}{W}, {T}: Another target creature you control gains flying and lifelink until end of turn.
 [/card]
 [card]
 name=Breach
@@ -26366,13 +26373,14 @@ subtype=Aura
 [/card]
 [card]
 name=Curious Colossus
-auto=all(creature|opponentbattlefield) effect(-10/-10) ueot
+auto=all(creature|opponentbattlefield) loseabilities
+auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1)) forever
+text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
 mana={5}{W}{W}
 type=Creature
 subtype=Giant Warrior
 power=7
 toughness=7
-text=When this creature enters, each creature target opponent controls becomes a 1/1 creature.
 [/card]
 [card]
 name=Curse Artifact
@@ -27468,10 +27476,10 @@ type=Instant
 [/card]
 [card]
 name=Darkness Descends
-auto=all(*|mybattlefield) counter(-1/-1,2) && all(*|opponentbattlefield) counter(-1/-1,2)
+auto=all(creature) counter(-1/-1,2)
+text=Put two -1/-1 counters on each creature.
 mana={2}{B}{B}
 type=Sorcery
-text=Put two -1/-1 counters on each creature.
 [/card]
 [card]
 name=Darkslick Drake
@@ -40158,13 +40166,13 @@ type=Instant
 [/card]
 [card]
 name=Explosive Prodigy
-auto=damage:3 target(creature|opponentbattlefield)
+auto=damage:pvivid target(creature|opponentbattlefield)
+text=Vivid — When this creature enters, it deals X damage to target creature an opponent controls, where X is the number of colors among permanents you control.
 mana={1}{R}
 type=Creature
 subtype=Elemental Sorcerer
 power=1
 toughness=1
-text=When this creature enters, it deals 3 damage to target creature an opponent controls.
 [/card]
 [card]
 name=Explosive Revelation
@@ -43903,8 +43911,9 @@ type=Instant
 [/card]
 [card]
 name=Flaring Cinder
-auto=may discard:1 controller && draw:1 controller
-auto=@movedTo(*[manacost>=4]|mystack):may discard:1 controller && draw:1 controller
+auto=choice name(Discard a card, then draw) discard:1 && draw:1
+auto=choice name(Don't) donothing
+auto=@movedTo(*[manacost>=4]|mystack):transforms((,newability[choice name(Discard a card then draw) discard:1 && draw:1],newability[choice name(Don't) donothing])) oneshot
 text=When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card.
 mana={1}{UR}{UR}
 type=Creature
@@ -45522,8 +45531,10 @@ type=Enchantment
 [/card]
 [card]
 name=Formidable Speaker
-auto=may discard:1 controller && name(search card) reveal:plibrarycount optionone name(choose card) target(creature|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(ownerlibrary) and!(moveTo(myhand))! afterrevealedend revealend
+auto=choice name(Discard a card to search for a creature) discard:1 && ability$!name(Search for a creature) moveto(myhand) notatarget(creature|mylibrary) && shuffle!$ controller
+auto=choice name(Don't) donothing
 auto={1}{T}:untap target(other *|mybattlefield)
+#REVIEW-V the library search after the discard (scenario queued 2026-10-28)
 text=When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle. -- {1}, {T}: Untap another target permanent.
 mana={2}{G}
 type=Creature
@@ -49958,13 +49969,13 @@ subtype=Aura
 [/card]
 [card]
 name=Glister Bairn
-auto=@each my combat:target(creature[-this]|mybattlefield) effect(+3/+3) ueot
+auto=@each my combatbegins:target(other creature|mybattlefield) pvivid/pvivid ueot
+text=Vivid — At the beginning of combat on your turn, another target creature you control gets +X/+X until end of turn, where X is the number of colors among permanents you control.
 mana={2}{G/U}{G/U}{G/U}
 type=Creature
 subtype=Ouphe
 power=1
 toughness=4
-text=At the beginning of combat on your turn, another target creature you control gets +3/+3 until end of turn.
 [/card]
 [card]
 name=Glitterfang
@@ -49988,13 +49999,14 @@ type=Sorcery
 [/card]
 [card]
 name=Gloom Ripper
-auto=target(creature|mybattlefield) effect(+4/+0) ueot && target(creature|opponentbattlefield) effect(-0/-4) ueot
+auto=target(creature|mybattlefield) type:elf:mybattlefieldplustype:elf:mygraveyardplusend/0 ueot
+auto=ability$!name(Up to one opposing creature gets -0/-X) may target(creature|opponentbattlefield) -0/-type:elf:mybattlefieldplustype:elf:mygraveyardplusend ueot!$ controller
+text=When this creature enters, target creature you control gets +X/+0 until end of turn and up to one target creature an opponent controls gets -0/-X until end of turn, where X is the number of Elves you control plus the number of Elf cards in your graveyard.
 mana={3}{B}{B}
 type=Creature
 subtype=Elf Assassin
 power=4
 toughness=4
-text=When this creature enters, target creature you control gets +4/+0 until end of turn and target creature an opponent controls gets -4/-0 until end of turn.
 [/card]
 [card]
 name=Gloomdrifter
@@ -51912,13 +51924,16 @@ toughness=1
 [/card]
 [card]
 name=Goliath Daydreamer
-auto=@attacking(this):moveto(myCastingzone) target(*|myexile)
+auto=@movedTo(*[instant;sorcery]|mygraveyard) from(mystack):all(trigger[to]) moveto(myexile) and!( counter(0/0,1,dream) )!
+auto=_ATTACKING_may name(Cast a dream card free) target(*[counter{0/0.1.dream}]|myexile) activate castcard(normal)
+note=Any instant or sorcery of yours that resolves is exiled with a dream counter (the engine does not track that it was cast from hand).
+#REVIEW-V casting the dream card when it attacks (scenario queued 2026-10-28)
+text=Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves. -- Whenever this creature attacks, you may cast a spell from among cards you own in exile with dream counters on them without paying its mana cost.
 mana={2}{R}{R}
 type=Creature
 subtype=Giant Wizard
 power=4
 toughness=4
-text=When this creature attacks, you may cast a spell from among cards you own in exile without paying its mana cost.
 [/card]
 [card]
 name=Goliath Sphinx
@@ -57511,10 +57526,11 @@ type=Sorcery
 [/card]
 [card]
 name=Hexing Squelcher
+abilities=nofizzle
 auto=@targeted(this) from(*|opponentzones):choice name(pay 2 life) pay({L:2}) donothing name(fizzle) fizzle target(this|opponentstack) oneshot
-auto=lord(*[-creature]|mycastingzone) maxcanfizzle(0)
+auto=lord(*|mystack) nofizzle
 auto=all(creature[-this]|mybattlefield) transforms((,newability[@targeted(trigger[to]) from(*|opponentzones):choice name(pay 2 life) pay({L:2}) donothing name(fizzle) fizzle target(trigger[to]|opponentstack) oneshot]))
-text=This spell can't be countered. -- Ward--Pay 2 life (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 2 life.) -- Spells you control can't be countered. -- Other creatures you control have "Ward--Pay 2 life."
+text=This spell can't be countered. -- Ward—Pay 2 life. -- Spells you control can't be countered. -- Other creatures you control have "Ward—Pay 2 life."
 mana={1}{R}
 type=Creature
 subtype=Goblin Sorcerer
@@ -60928,10 +60944,11 @@ type=Sorcery
 [/card]
 [card]
 name=Impolite Entrance
-auto=target(creature|mybattlefield) effect(+0/+0,trample,haste) ueot && draw:1
+auto=target(creature) transforms((,trample,haste)) ueot
+auto=draw:1
+text=Target creature gains trample and haste until end of turn. -- Draw a card.
 mana={R}
 type=Sorcery
-text=Target creature gains trample and haste until end of turn. Draw a card.
 [/card]
 [card]
 name=Imposing Sovereign
@@ -66939,16 +66956,14 @@ toughness=1
 [/card]
 [card]
 name=Kithkeeper
-auto=token(Kithkin,creature kithkin,1/1,,green white)
-auto=token(Kithkin,creature kithkin,1/1,,green white)
-auto=token(Kithkin,creature kithkin,1/1,,green white)
-auto={T}{T}{T}:this effect(+3/+0,flying) ueot
+auto=token(-697107)*pvivid
+auto={T(creature|mybattlefield)}{T(creature|mybattlefield)}{T(creature|mybattlefield)}:3/0 ueot && transforms((,flying)) ueot
+text=Vivid — When this creature enters, create X 1/1 green and white Kithkin creature tokens, where X is the number of colors among permanents you control. -- Tap three untapped creatures you control: This creature gets +3/+0 and gains flying until end of turn.
 mana={6}{W}
 type=Creature
 subtype=Elemental
 power=3
 toughness=3
-text=When this creature enters, create three 1/1 green and white Kithkin creature tokens. -- Tap three creatures: This creature gets +3/+0 and gains flying until end of turn.
 [/card]
 [card]
 name=Kithkin Daggerdare
@@ -73094,13 +73109,13 @@ type=Instant
 [card]
 name=Luminollusk
 abilities=deathtouch
-auto=life:3 controller
+auto=life:pvivid controller
+text=Deathtouch -- Vivid — When this creature enters, you gain life equal to the number of colors among permanents you control.
 mana={3}{G}
 type=Creature
 subtype=Elemental
 power=2
 toughness=4
-text=Deathtouch -- When this creature enters, you gain 3 life.
 [/card]
 [card]
 name=Luminous Angel
@@ -79554,7 +79569,7 @@ toughness=1
 [/card]
 [card]
 name=Mistmeadow Council
-auto=lord(kithkin|mycastingzone) altercost(colorless,-1)
+anyzone=this(variable{type:kithkin:mybattlefield}>0) changecost(colorless:-1) forcedalive
 auto=draw:1 controller
 text=This spell costs {1} less to cast if you control a Kithkin. -- When this creature enters, draw a card.
 mana={4}{G}
@@ -85263,10 +85278,13 @@ toughness=3
 name=Noggle the Mind
 target=creature
 abilities=flash
-auto=enchanted becomes(,1/1)
+auto=loseabilities
+auto=transforms((,setpower=1,settoughness=1))
+auto=losesubtypesof(creature)
+auto=transforms((Noggle,colorless))
+text=Flash -- Enchant creature -- Enchanted creature loses all abilities and is a colorless Noggle with base power and toughness 1/1. (It loses all colors and all other creature types.)
 mana={1}{U}
 type=Enchantment
-text=Enchanted creature becomes a 1/1.
 subtype=Aura
 [/card]
 [card]
@@ -90155,10 +90173,13 @@ subtype=Equipment
 [/card]
 [card]
 name=Perfect Intimidation
-auto=choice name(exile) moveto(exile) target(*[-land]|opponenthand) && moveto(exile) target(*[-land]|opponenthand) name(counters) target(creature|opponentbattlefield) effect(-10/-0) ueot
+auto=choice name(Opponent exiles two cards from hand) ability$!name(Exile two cards) moveto(exile) notaTarget(<2>*|myhand)!$ opponent
+auto=choice name(Remove all counters from target creature) removeallcounters(all) target(creature)
+auto=choice name(Both) removeallcounters(all) target(creature) && ability$!name(Exile two cards) moveto(exile) notaTarget(<2>*|myhand)!$ opponent
+#REVIEW-V the opponent's exile choice (scenario queued 2026-10-28)
+text=Choose one or both — -- • Target opponent exiles two cards from their hand. -- • Remove all counters from target creature.
 mana={3}{B}
 type=Sorcery
-text=Choose one: target opponent exiles two cards from their hand; or remove all counters from target creature.
 [/card]
 [card]
 name=Perfected Form
@@ -93667,13 +93688,13 @@ type=Artifact
 [card]
 name=Prismabasher
 abilities=trample
-auto=all(creature|mybattlefield) effect(+3/+3) ueot
+auto=target(<upto:pvivid>creature|mybattlefield) pvivid/pvivid ueot
+text=Trample -- Vivid — When this creature enters, up to X target creatures you control get +X/+X until end of turn, where X is the number of colors among permanents you control.
 mana={4}{G}{G}
 type=Creature
 subtype=Elemental
 power=6
 toughness=6
-text=Trample -- When this creature enters, creatures you control get +3/+3 until end of turn.
 [/card]
 [card]
 name=Prismatic Boon
@@ -93780,10 +93801,12 @@ type=Instant
 [/card]
 [card]
 name=Prismatic Undercurrents
-auto=moveto(myhand) target(land[basic]|mylibrary) && moveto(myhand) target(land[basic]|mylibrary) && moveto(myhand) target(land[basic]|mylibrary)
+auto=target(<upto:pvivid>land[basic]|mylibrary) moveto(myhand)
+auto=shuffle
+auto=maxPlay(land)+1
+text=Vivid — When this enchantment enters, search your library for up to X basic land cards, where X is the number of colors among permanents you control. Reveal those cards, put them into your hand, then shuffle. -- You may play an additional land on each of your turns.
 mana={3}{G}
 type=Enchantment
-text=When this enchantment enters, search your library for up to three basic land cards and put them into your hand, then shuffle. You may play an additional land on each of your turns.
 [/card]
 [card]
 name=Prismatic Ward
@@ -100628,10 +100651,16 @@ text=Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you d
 [/card]
 [card]
 name=Rime Chill
-auto=tap target(creature|opponentbattlefield) && tap target(creature|opponentbattlefield) && draw:1
+anyzone=this(variable{pvivid}>0) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>1) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>2) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>3) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>4) changecost(colorless:-1) forcedalive
+auto=tap target(<upto:2>creature) && counter(0/0,1,stun)
+auto=draw:1
+text=Vivid — This spell costs {1} less to cast for each color among permanents you control. -- Tap up to two target creatures. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- Draw a card.
 mana={6}{U}
 type=Instant
-text=Tap up to two target creatures. Draw a card.
 [/card]
 [card]
 name=Rime Dryad
@@ -109837,13 +109866,13 @@ toughness=2
 [card]
 name=Shimmercreep
 abilities=menace
-auto=life:-3 target(player|opponentbattlefield) && life:3 controller
+auto=life:-pvivid opponent && life:pvivid controller
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Vivid — When this creature enters, each opponent loses X life and you gain X life, where X is the number of colors among permanents you control.
 mana={4}{B}
 type=Creature
 subtype=Elemental
 power=3
 toughness=5
-text=Menace -- When this creature enters, each opponent loses 3 life and you gain 3 life.
 [/card]
 [card]
 name=Shimmering Barrier
@@ -109966,13 +109995,13 @@ toughness=1
 [card]
 name=Shinestriker
 abilities=flying
-auto=draw:3
+auto=draw:pvivid
+text=Flying -- Vivid — When this creature enters, draw cards equal to the number of colors among permanents you control.
 mana={4}{U}{U}
 type=Creature
 subtype=Elemental
 power=3
 toughness=3
-text=Flying -- When this creature enters, draw three cards.
 [/card]
 [card]
 name=Shinewend
@@ -111669,10 +111698,10 @@ toughness=1
 [/card]
 [card]
 name=Silvergill Peddler
-auto={T}:draw:1 controller && discard:1 controller
+auto=@tapped(this):draw:1 && discard:1
+text=Whenever this creature becomes tapped, draw a card, then discard a card.
 mana={2}{U}
 type=Creature
-text={T}: Draw 1 card. Discard 1 card.
 subtype=Merfolk Citizen
 power=2
 toughness=3
@@ -118471,13 +118500,6 @@ mana={2}{G}
 type=Instant
 [/card]
 [card]
-name=Spry and Mighty
-auto=draw:3 && all(creature|mybattlefield) effect(+3/+3,trample) ueot
-mana={4}{G}
-type=Sorcery
-text=Draw three cards. Creatures you control get +3/+3 and gain trample until end of turn.
-[/card]
-[card]
 name=Spur Grappler
 auto=aslongas(land[-tapped]|myBattlefield) 2/1 <1
 text=Spur Grappler gets +2/+1 as long as you control no untapped lands.
@@ -118559,12 +118581,13 @@ toughness=4
 [card]
 name=Squawkroaster
 abilities=double strike
+anyzone=pvivid/4 cdaactive
+text=Double strike -- Vivid — Squawkroaster's power is equal to the number of colors among permanents you control.
 mana={3}{R}
 type=Creature
 subtype=Elemental
-power=4
+power=0
 toughness=4
-text=Double strike.
 [/card]
 [card]
 name=Squeaking Pie Grubfellows
@@ -127057,10 +127080,12 @@ subtype=Aura
 [/card]
 [card]
 name=Thirst for Identity
-auto=draw:3 controller && discard:2 controller
+auto=draw:3
+auto=if type(creature|myhand)~morethan~0 then choice name(Discard a creature card) reject notaTarget(creature|myhand)
+auto=choice name(Discard two cards) discard:2
+text=Draw three cards. Then discard two cards unless you discard a creature card.
 mana={2}{U}
 type=Instant
-text=Draw 3 cards. Discard 2 cards.
 [/card]
 [card]
 name=Thirst for Knowledge
@@ -132005,10 +132030,13 @@ toughness=3
 [/card]
 [card]
 name=Tweeze
-auto=damage:3 target(any) && choice name(draw) discard:1 controller && draw:1 controller name(skip)
+target=anytarget
+auto=damage:3
+auto=choice name(Discard a card, then draw) discard:1 && draw:1
+auto=choice name(Don't) donothing
+text=Tweeze deals 3 damage to any target. You may discard a card. If you do, draw a card.
 mana={2}{R}
 type=Instant
-text=Deal 3 damage to target any target. choice name(draw) discard:1 controller. draw:1 controller name(skip).
 [/card]
 [card]
 name=Twiddle
@@ -141680,9 +141708,14 @@ toughness=3
 [card]
 name=Wildvine Pummeler
 abilities=reach,trample
+anyzone=this(variable{pvivid}>0) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>1) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>2) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>3) changecost(colorless:-1) forcedalive
+anyzone=this(variable{pvivid}>4) changecost(colorless:-1) forcedalive
+text=Vivid — This spell costs {1} less to cast for each color among permanents you control. -- Reach, trample
 mana={6}{G}
 type=Creature
-text=Reach. Trample.
 subtype=Giant Berserker
 power=6
 toughness=5

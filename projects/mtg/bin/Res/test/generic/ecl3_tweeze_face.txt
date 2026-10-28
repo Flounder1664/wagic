@@ -1,0 +1,19 @@
+#Tweeze: 3 damage to the opponent, no loot.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Tweeze
+manapool:{2}{R}
+[PLAYER2]
+life:20
+[DO]
+Tweeze
+p2
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Tweeze
+[PLAYER2]
+life:17
+[END]

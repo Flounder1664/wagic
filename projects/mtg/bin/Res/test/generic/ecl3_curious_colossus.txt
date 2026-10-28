@@ -1,0 +1,18 @@
+#Curious Colossus: the opponent's Air Elemental becomes a 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Curious Colossus
+manapool:{5}{W}{W}
+[PLAYER2]
+inplay:Air Elemental
+[DO]
+Curious Colossus
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Curious Colossus
+[PLAYER2]
+inplay:Air Elemental
+pt:Air Elemental=1/1
+[END]

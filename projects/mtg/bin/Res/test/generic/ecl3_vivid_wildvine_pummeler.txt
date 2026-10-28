@@ -1,0 +1,16 @@
+#Wildvine Pummeler with green, red and blue permanents costs {3} less: {3}{G} casts it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Raging Goblin,Merfolk of the Pearl Trident
+hand:Wildvine Pummeler
+manapool:{3}{G}
+[PLAYER2]
+[DO]
+Wildvine Pummeler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Raging Goblin,Merfolk of the Pearl Trident,Wildvine Pummeler
+[PLAYER2]
+[END]

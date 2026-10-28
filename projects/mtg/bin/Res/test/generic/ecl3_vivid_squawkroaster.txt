@@ -1,0 +1,14 @@
+#Squawkroaster with red, green and blue permanents: 3/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Squawkroaster,Grizzly Bears,Merfolk of the Pearl Trident
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Squawkroaster,Grizzly Bears,Merfolk of the Pearl Trident
+pt:Squawkroaster=3/4
+[PLAYER2]
+[END]

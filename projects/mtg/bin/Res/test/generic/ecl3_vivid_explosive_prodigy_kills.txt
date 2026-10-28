@@ -1,0 +1,19 @@
+#Explosive Prodigy with red, green and blue permanents (X=3): Hill Giant dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Merfolk of the Pearl Trident
+hand:Explosive Prodigy
+manapool:{1}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Explosive Prodigy
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Merfolk of the Pearl Trident,Explosive Prodigy
+[PLAYER2]
+graveyard:Hill Giant
+[END]

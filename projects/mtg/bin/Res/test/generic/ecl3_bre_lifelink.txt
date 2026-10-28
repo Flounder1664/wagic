@@ -1,0 +1,26 @@
+#Bre of Clan Stoutarm gives Grizzly Bears flying and lifelink; it hits for 2 and you gain 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bre of Clan Stoutarm,Grizzly Bears
+manapool:{1}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Bre of Clan Stoutarm
+Grizzly Bears
+next
+next
+Grizzly Bears
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bre of Clan Stoutarm,Grizzly Bears
+life:22
+[PLAYER2]
+life:18
+[END]

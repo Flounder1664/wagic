@@ -1,0 +1,20 @@
+#Flaring Cinder enters: discard Juggernaut, draw Ornithopter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Flaring Cinder,Juggernaut
+manapool:{1}{U}{R}
+library:Ornithopter
+[PLAYER2]
+[DO]
+Flaring Cinder
+choice 0
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Flaring Cinder
+hand:Ornithopter
+graveyard:Juggernaut
+[PLAYER2]
+[END]

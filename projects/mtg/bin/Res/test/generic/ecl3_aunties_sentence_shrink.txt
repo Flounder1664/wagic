@@ -1,0 +1,19 @@
+#Auntie's Sentence, second mode: Grizzly Bears -2/-2 dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Auntie's Sentence
+manapool:{1}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Auntie's Sentence
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Auntie's Sentence
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

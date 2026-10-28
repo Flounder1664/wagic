@@ -1,0 +1,19 @@
+#Explosive Prodigy with red + green permanents (X=2): Hill Giant (3/3) survives 2 damage (the old fixed 3 killed it).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Explosive Prodigy
+manapool:{1}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Explosive Prodigy
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Explosive Prodigy
+[PLAYER2]
+inplay:Hill Giant
+[END]

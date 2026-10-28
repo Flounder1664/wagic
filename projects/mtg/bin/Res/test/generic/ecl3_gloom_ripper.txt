@@ -1,0 +1,24 @@
+#Gloom Ripper: X = 2 Elves in play + 1 in the graveyard = 3. Llanowar Elves 4/1; Hill Giant -0/-3 dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+hand:Gloom Ripper
+graveyard:Elvish Warrior
+manapool:{3}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Gloom Ripper
+Llanowar Elves
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves,Gloom Ripper
+pt:Llanowar Elves=4/1
+graveyard:Elvish Warrior
+[PLAYER2]
+graveyard:Hill Giant
+[END]

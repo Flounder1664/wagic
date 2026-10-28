@@ -1,0 +1,20 @@
+#Prismabasher (green) + Raging Goblin (red): X=2, two targets get +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Grizzly Bears
+hand:Prismabasher
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+Prismabasher
+Grizzly Bears
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Grizzly Bears,Prismabasher
+pt:Grizzly Bears=4/4
+pt:Raging Goblin=3/3
+[PLAYER2]
+[END]

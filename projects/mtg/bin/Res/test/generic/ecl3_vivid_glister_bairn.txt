@@ -1,0 +1,16 @@
+#Glister Bairn (green and blue) + Grizzly Bears: X=2 at the beginning of combat, Grizzly Bears 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glister Bairn,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+Grizzly Bears
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Glister Bairn,Grizzly Bears
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

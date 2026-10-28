@@ -1,0 +1,23 @@
+#Assert Perfection: Grizzly Bears 3/2, then it deals 3 to Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Assert Perfection
+manapool:{1}{G}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Assert Perfection
+Grizzly Bears
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/2
+graveyard:Assert Perfection
+[PLAYER2]
+graveyard:Hill Giant
+[END]

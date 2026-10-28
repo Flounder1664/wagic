@@ -1,0 +1,20 @@
+#Impolite Entrance: targets Grizzly Bears and draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Impolite Entrance
+manapool:{R}
+library:Ornithopter
+[PLAYER2]
+[DO]
+Impolite Entrance
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Ornithopter
+graveyard:Impolite Entrance
+[PLAYER2]
+[END]

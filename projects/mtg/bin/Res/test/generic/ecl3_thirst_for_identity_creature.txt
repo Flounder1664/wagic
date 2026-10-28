@@ -1,0 +1,20 @@
+#Thirst for Identity: draw three, then discard only the creature card (Grizzly Bears).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thirst for Identity
+manapool:{2}{U}
+library:Juggernaut,Grizzly Bears,Ornithopter,Millstone
+[PLAYER2]
+[DO]
+Thirst for Identity
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter,Millstone
+library:Juggernaut
+graveyard:Thirst for Identity,Grizzly Bears
+[PLAYER2]
+[END]
