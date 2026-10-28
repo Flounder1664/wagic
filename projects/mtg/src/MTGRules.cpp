@@ -33,8 +33,9 @@ static bool airbentInExile(MTGCardInstance * card)
 }
 
 //The exiled instance carries its own ManaCost copy, so the {2} is set on it lazily and only there:
-//the card gets its printed cost back as soon as it moves to the stack.
-static void setAirbendCost(MTGCardInstance * card)
+//the card gets its printed cost back as soon as it moves to the stack. Also used by the AI, which
+//must judge an airbent card on the {2} (AIPlayerBaka::FindCardToPlay).
+void setAirbendCost(MTGCardInstance * card)
 {
     if (!airbentInExile(card))
         return;

@@ -134740,11 +134740,8 @@ name=Aang, Swift Savior
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap 4 transforms (airbend recast costs its own mana cost, not {2}).
 abilities=flash,flying
 grade=borderline
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB airbend exiles the target to its owner's exile.
 auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
-#REVIEW-V Unverifiable in the harness: a card with backside= cannot be cast from hand there
-#(measured 2026-09-05 - the click lands, no action reaches the stack, with or without these
-#lines and with mana to spare), so the ETB never fires. The airbend body copies Airbending
-#Lesson, which ships _AIRBEND_; the ETB target is inline like Flametongue Kavu. Verify in game.
 auto={8}:name(Waterbend {8}) flip(backside)
 auto={7}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 1) flip(backside)
 auto={6}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 2) flip(backside)
