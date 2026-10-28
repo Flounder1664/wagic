@@ -1,0 +1,40 @@
+#Origin of Spider-Man chapter III: the forced trigger menu now says what it does. transforms((,double strike))
+#has no types, so its label used to be a bare "Becomes " (John, scenario 11). "menu!" fails the test unless
+#an open menu offers that exact label; Eager Cadet proves the grant went to the chosen target only.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Eager Cadet
+hand:Origin of Spider-Man
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Origin of Spider-Man
+eot
+eot
+next
+next
+next
+Grizzly Bears
+eot
+eot
+next
+next
+next
+menu! give double strike
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Eager Cadet,*
+type:Grizzly Bears=double strike,legendary
+type:Eager Cadet=-double strike
+graveyard:Origin of Spider-Man
+hand:*,*
+library:*
+[PLAYER2]
+hand:*,*
+library:*
+[END]

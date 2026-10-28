@@ -146200,7 +146200,7 @@ toughness=2
 [/card]
 [card]
 name=Amazing Acrobatics
-#REVIEW-V the counter modes: the harness cannot click a stack target chosen at resolution
+#REVIEW-V counter and Both modes are tested with player 2 countering (om1_amazing_acrobatics_*)
 auto=choice name(Counter target spell) fizzle target(*|stack)
 auto=choice name(Tap one or two target creatures) tap target(<upto:2>creature)
 auto=choice name(Both) fizzle target(*|stack) && ability$!name(Tap creatures) choice name(Tap one or two target creatures) tap target(<upto:2>creature)!$ controller
@@ -146210,7 +146210,7 @@ type=Instant
 [/card]
 [card]
 name=School Daze
-#REVIEW-V Fight Crime (counter target spell): the harness cannot click a stack target chosen at resolution
+#REVIEW-V Fight Crime is tested with player 2 countering (om1_school_daze_fight_crime)
 auto=choice name(Do Homework - draw three cards) draw:3 controller
 auto=choice name(Fight Crime - counter target spell, draw a card) fizzle target(*|stack) && draw:1 controller
 text=Choose one — -- • Do Homework — Draw three cards. -- • Fight Crime — Counter target spell. Draw a card.
@@ -146722,8 +146722,8 @@ name=Origin of Spider-Man
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=token(Spider,Creature Spider,2/1,green,reach)
-#REVIEW-V chapter II: the +1/+1 counter is tested; becoming a legendary Spider Hero is not observable in the harness
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) counter(1/1) target(creature|mybattlefield) and!( becomes(Legendary Spider Hero) forever )!
+#REVIEW-V chapter II counter + legendary Spider Hero and chapter III label are tested (om1_origin_of_spider_man_ch*); token art and type line need John's eyes
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mybattlefield) transforms((Legendary Spider Hero,newability[counter(1/1)])) forever
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,double strike)) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Create a 2/1 green Spider creature token with reach. -- II — Put a +1/+1 counter on target creature you control. It becomes a legendary Spider Hero in addition to its other types. -- III — Target creature you control gains double strike until end of turn.
