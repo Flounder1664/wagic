@@ -1,0 +1,23 @@
+#Joined Researchers: equal hand sizes at the end step - it does NOT become prepared.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Joined Researchers // Secret Rendezvous
+hand:Juggernaut
+life:20
+[PLAYER2]
+hand:Grizzly Bears
+life:20
+[DO]
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Joined Researchers // Secret Rendezvous
+hand:Juggernaut
+counter:707035=Prepared:0
+life:20
+[PLAYER2]
+hand:Grizzly Bears
+life:20
+[END]

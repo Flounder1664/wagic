@@ -1,0 +1,24 @@
+#Defacing Duskmage: YOUR second draw does not prepare it - only an opponent's.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Defacing Duskmage // Vandal's Edit
+hand:Divination
+library:Forest,Island
+manapool:{2}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Defacing Duskmage // Vandal's Edit
+hand:*,*
+graveyard:Divination
+counter:708075=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]

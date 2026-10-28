@@ -1,0 +1,27 @@
+#Defacing Duskmage: whenever an opponent draws their second card each turn, it becomes prepared.
+#Vision Skeins makes each player draw two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Defacing Duskmage // Vandal's Edit
+hand:Vision Skeins
+library:Forest,Island
+manapool:{1}{U}
+life:20
+[PLAYER2]
+library:Mountain,Swamp
+life:20
+[DO]
+Vision Skeins
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Defacing Duskmage // Vandal's Edit
+hand:*,*
+graveyard:Vision Skeins
+counter:708075=Prepared:1
+life:20
+[PLAYER2]
+hand:*,*
+life:20
+[END]

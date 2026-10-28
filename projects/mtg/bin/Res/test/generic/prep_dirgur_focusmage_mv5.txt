@@ -1,0 +1,24 @@
+#Dirgur Focusmage: casting an instant or sorcery with mana value 5 or more from hand prepares it.
+#Overrun (MV 5) costs {1}{G}{G}{G} with the Focusmage's reduction.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dirgur Focusmage // Braingeyser
+hand:Overrun
+manapool:{1}{G}{G}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Overrun
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dirgur Focusmage // Braingeyser
+graveyard:Overrun
+counter:708082=Prepared:1
+pt:708082=4/7
+life:20
+[PLAYER2]
+life:20
+[END]

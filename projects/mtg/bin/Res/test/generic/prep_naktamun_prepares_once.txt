@@ -1,0 +1,26 @@
+#Naktamun Lorespinner: "if a player has one or fewer cards in hand" is two upkeep triggers, one
+#per player. With BOTH hands empty both fire; the capped _PREPARE_ must still leave ONE counter.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Naktamun Lorespinner // Wheel of Fortune
+library:Forest,Island
+life:20
+[PLAYER2]
+library:Mountain,Swamp
+life:20
+[DO]
+next
+next
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Naktamun Lorespinner // Wheel of Fortune
+hand:*
+library:*
+counter:708195=Prepared:1
+life:20
+[PLAYER2]
+library:*,*
+life:20
+[END]

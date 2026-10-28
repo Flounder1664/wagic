@@ -1,0 +1,22 @@
+#Joined Researchers: at the beginning of each end step, if an opponent has more cards in
+#hand than you, it becomes prepared. Opponent holds two cards, you hold none.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Joined Researchers // Secret Rendezvous
+life:20
+[PLAYER2]
+hand:Grizzly Bears,Hill Giant
+life:20
+[DO]
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Joined Researchers // Secret Rendezvous
+counter:707035=Prepared:1
+life:20
+[PLAYER2]
+hand:Grizzly Bears,Hill Giant
+life:20
+[END]

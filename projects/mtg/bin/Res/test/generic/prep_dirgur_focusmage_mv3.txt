@@ -1,0 +1,24 @@
+#Dirgur Focusmage: a mana value 3 sorcery (Divination, {1}{U} after reduction) does NOT prepare it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dirgur Focusmage // Braingeyser
+hand:Divination
+library:Forest,Island
+manapool:{1}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dirgur Focusmage // Braingeyser
+hand:*,*
+graveyard:Divination
+counter:708082=Prepared:0
+life:20
+[PLAYER2]
+life:20
+[END]
