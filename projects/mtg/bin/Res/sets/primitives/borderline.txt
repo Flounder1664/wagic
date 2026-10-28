@@ -9173,6 +9173,7 @@ toughness=1
 [/card]
 [card]
 name=Inspired Skypainter // Maestro's Gift
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): combat damage from a creature token re-prepares it.
 grade=borderline
 abilities=flying
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
@@ -27985,6 +27986,7 @@ toughness=6
 [/card]
 [card]
 name=Demon of Loathing
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the OPPONENT chooses the creature to sacrifice.
 abilities=flying,trample
 #REVIEW-V 2026-10-18: untested - the sacrifice choice goes to the OPPONENT (wagic#47 row 11), which the
 #harness cannot answer; with one creature opposite, nothing was sacrificed. Check the opponent loses one.
@@ -50745,6 +50747,7 @@ toughness=4
 [/card]
 [card]
 name=Guardian of the Gateless
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): gets +1/+1 when it blocks.
 abilities=flying
 #REVIEW-V 2026-10-18: untested - the trigger fires when it BLOCKS, and the harness cannot make the
 #opponent attack. Check it gets +1/+1 when it blocks.
@@ -75569,6 +75572,7 @@ toughness=4
 [/card]
 [card]
 name=Most Wanted
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): enchanted creature dies, two Treasures.
 abilities=flash
 target=creature
 auto=teach(creature) 2/1
@@ -148295,6 +148299,7 @@ toughness=2
 [/card]
 [card]
 name=Glider Staff
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): equip does not airbend again; airbent creature castable for {2}.
 auto={2}:equip
 auto=teach(creature) 1/1
 auto=teach(creature) flying
@@ -148318,6 +148323,7 @@ toughness=1
 [/card]
 [card]
 name=Hakoda, Selfless Commander
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): top card visible face up, and an Ally cast from the top.
 abilities=vigilance,showfromtoplibrary
 auto=aslongas(ally[zpos=1]|mylibrary) canplayfromlibrarytop >0
 auto={S}:all(creature|mybattlefield) 0/5 ueot && all(creature|mybattlefield) transforms((,indestructible)) ueot
@@ -148364,6 +148370,7 @@ toughness=1
 [/card]
 [card]
 name=Kyoshi Battle Fan
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the Ally token it creates shows real token art.
 auto={2}:equip
 auto=livingweapontoken(Ally,Creature Ally,1/1,white)
 auto=teach(creature) 1/0
@@ -148374,6 +148381,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Planetarium of Wan Shi Tong
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): scry 2 reveal window offers a free cast.
 auto={1}{T}:_SCRY2_
 auto=@scryed(*|myzones) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
 auto=@surveiled(*|mybattlefield,mystack) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
@@ -148405,6 +148413,7 @@ toughness=1
 [/card]
 [card]
 name=Waterbending Lesson
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the "tap 2 creatures" waterbend option.
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): paying {2} keeps all three; declining discards one.
 #That was the old one-cost menu; the 2026-10-18 waterbend menu below needs a fresh look (queue scenario 08).
 auto=draw:3 controller

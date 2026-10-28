@@ -20002,6 +20002,8 @@ toughness=5
 [/card]
 [card]
 name=Chaos Spewer
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): pay {2} on the prompt, so no blight.
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): decline the pay {2} prompt, so it blights 2.
 auto=ability$!name(Pay {2} or blight 2) pay[[{2}]] name(Pay {2}) donothing?counter(-1/-1,2) target(creature|mybattlefield)!$ controller
 #REVIEW-V pay-or-blight prompt: the harness cannot answer pay[[ ]] (scenario queued 2026-10-28)
 text=When this creature enters, you may pay {2}. If you don't, blight 2. (To blight 2, put two -1/-1 counters on a creature you control.)
@@ -32524,6 +32526,7 @@ toughness=4
 [/card]
 [card]
 name=Doran, Besieged by Time
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): a creature you control BLOCKS gets +X/+X.
 auto=lord(creature[toughgtpow]|mycastingzone) altercost(colorless,-1)
 auto=@combat(attacking,blocking) source(creature[toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[toughnessminuspowerminusend/toughnessminuspowerminusend ueot])) oneshot
 auto=@combat(attacking,blocking) source(creature[-toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[powerminustoughnessminusend/powerminustoughnessminusend ueot])) oneshot
@@ -57703,6 +57706,7 @@ type=Land
 [/card]
 [card]
 name=High Perfect Morcant
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB makes the OPPONENT blight 1.
 auto=ability$!name(Blight 1) counter(-1/-1,1) notaTarget(creature|mybattlefield)!$ opponent
 auto=@movedTo(other elf|mybattlefield):ability$!name(Blight 1) counter(-1/-1,1) notaTarget(creature|mybattlefield)!$ opponent
 auto={T(elf|mybattlefield)}{T(elf|mybattlefield)}{T(elf|mybattlefield)}:_PROLIFERATE_ asSorcery
@@ -60470,6 +60474,7 @@ toughness=2
 [/card]
 [card]
 name=Il Mheg Pixie
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): surveil 1 on attack: you can KEEP the card on top (not only mill it).
 abilities=flying
 #2026-10-18: was deplete:1 (mill), but the card says surveil 1. Test: fin_il_mheg_pixie_surveil.
 #REVIEW-V the surveil choice is untested: the test only takes "put in graveyard", which a mill would
@@ -76508,6 +76513,7 @@ type=Land
 [/card]
 [card]
 name=Meanders Guide
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): attack trigger: tap another Merfolk, return a creature with mana value 3 or less.
 auto=_ATTACKING_if type(other merfolk[-tapped]|mybattlefield)~morethan~0 then may name(Tap a Merfolk to reanimate) tap notaTarget(other merfolk[-tapped]|mybattlefield) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard)!$ controller
 #REVIEW-V attack trigger with a tap choice then a graveyard target (scenario queued 2026-10-28)
 text=Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
@@ -93687,6 +93693,7 @@ type=Artifact
 [/card]
 [card]
 name=Prismabasher
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): Vivid targets are "up to X", so you can choose just one creature.
 abilities=trample
 auto=target(<upto:pvivid>creature|mybattlefield) pvivid/pvivid ueot
 text=Trample -- Vivid — When this creature enters, up to X target creatures you control get +X/+X until end of turn, where X is the number of colors among permanents you control.
@@ -114295,6 +114302,7 @@ type=Artifact
 [/card]
 [card]
 name=Slumbering Walker
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): your end step: remove a counter to return a power 2 or less creature.
 auto=counter(-1/-1,2)
 auto=@each my end:may name(Remove a counter to reanimate) counter(-1/-1,-1) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[power<=2]|mygraveyard)!$ controller
 note=Removes a -1/-1 counter, the only counter this creature normally has; the return is offered even when no counter is left.
@@ -133575,6 +133583,7 @@ toughness=4
 [/card]
 [card]
 name=Unwelcome Sprite
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): casting a spell on the opponent's turn surveils 2.
 #REVIEW-V cast-on-opponent-turn trigger: the harness cannot cast during the opponent's turn (scenario queued 2026-10-28)
 abilities=flying
 auto=@movedTo(*|mystack) restriction{opponentturnonly}:_SURVEIL2_
@@ -137798,6 +137807,7 @@ toughness=2
 [/card]
 [card]
 name=Voracious Tome-Skimmer
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): casting a spell on the opponent's turn: may pay 1 life to draw.
 #REVIEW-V cast-on-opponent-turn trigger with a pay-1-life menu (scenario queued 2026-10-28)
 abilities=flying
 auto=@movedTo(*|mystack) restriction{opponentturnonly}:transforms((,newability[choice name(Pay 1 life: draw a card) life:-1 controller && draw:1 controller],newability[choice name(Don't pay) donothing])) oneshot
@@ -139610,6 +139620,7 @@ toughness=3
 [/card]
 [card]
 name=Warren Torchmaster
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): beginning of combat: blight 1, then a target creature gains haste.
 #REVIEW-V the haste target after the blight (scenario queued 2026-10-28); the blight is tested
 auto=@each my combatbegins:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && ability$!name(Gains haste) haste ueot target(creature)!$ controller
 text=At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)
@@ -145907,6 +145918,7 @@ toughness=4
 [/card]
 [card]
 name=Urban Retreat
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): hand ability: pay {2} and return a tapped creature to put this land onto the battlefield.
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{W}
@@ -145918,6 +145930,7 @@ type=Land
 [/card]
 [card]
 name=Ominous Asylum
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{R}
@@ -145928,6 +145941,7 @@ type=Land
 [/card]
 [card]
 name=Savage Mansion
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{G}
@@ -145938,6 +145952,7 @@ type=Land
 [/card]
 [card]
 name=Sinister Hideout
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4},{T}: surveil 1, putting the card into the graveyard.
 auto=tap(noevent)
 auto={T}:Add{U}
 auto={T}:Add{B}
@@ -145948,6 +145963,7 @@ type=Land
 [/card]
 [card]
 name=Suburban Sanctuary
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{W}
@@ -145958,6 +145974,7 @@ type=Land
 [/card]
 [card]
 name=University Campus
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{W}
 auto={T}:Add{U}
@@ -145968,6 +145985,7 @@ type=Land
 [/card]
 [card]
 name=Vibrant Cityscape
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {T}, sacrifice: search for a basic land, put it onto the battlefield tapped.
 #REVIEW-V the {T}, sacrifice search of a land cannot be clicked in the harness (copied from Evolving Wilds)
 auto={T}{S}:moveTo(myBattlefield) and!(tap(noevent))! target(land[basic]|myLibrary)
 text={T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
@@ -146250,6 +146268,7 @@ type=Enchantment
 [/card]
 [card]
 name=Pictures of Spider-Man
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): reveal top five: the rest go on the bottom of the library.
 #REVIEW-V the reveal (take up to two creatures, rest on the bottom): the harness cannot press OK in a reveal window to start the second option
 auto=reveal:5 optionone name(Take up to two creatures) target(<upto:2>creature|reveal) moveto(myhand) optiononeend optiontwo name(Put the rest on the bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto={1}{T}{S}:_TREASURE_
@@ -146307,6 +146326,7 @@ toughness=3
 [/card]
 [card]
 name=Daily Bugle Building
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): Smear Campaign: target legendary creature gains menace.
 auto={T}:Add{C}
 auto={1}{T}:Add{W}
 auto={1}{T}:Add{U}
@@ -146484,6 +146504,7 @@ toughness=3
 [/card]
 [card]
 name=Massacre Girl, Most Wanted
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): her own death does not trigger her ping.
 auto=@movedTo(other *[creature;planeswalker]|graveyard) from(mybattlefield):damage:1 opponent && life:1 controller
 auto=@noncombatdamagefoeof(player):counter(1/1) all(this)
 text=Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life. -- Whenever an opponent is dealt noncombat damage, put a +1/+1 counter on Massacre Girl.
@@ -146564,6 +146585,7 @@ toughness=4
 [/card]
 [card]
 name=Gideon's Memorial
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): hand ability: 4 damage to target attacking or blocking creature.
 auto=lord(creature[token]|mybattlefield) 1/0
 auto=lord(creature[token]|mybattlefield) vigilance
 auto={T}:Add{W} spendspells(planeswalker)
@@ -146669,6 +146691,7 @@ toughness=3
 [/card]
 [card]
 name=Maximum Carnage
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): chapter I: your creatures must attack.
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 #REVIEW-V chapter I (each creature attacks each combat until your next turn) is untested: the harness cannot make player 2's AI attack
