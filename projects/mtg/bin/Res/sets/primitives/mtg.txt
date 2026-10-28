@@ -146247,6 +146247,7 @@ toughness=3
 [/card]
 [card]
 name=The Soul Stone
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): harnessing asks which creature to exile and exiles it. Untested: the upkeep return.
 abilities=indestructible
 auto={T}:Add{B}
 auto={6}{B}{T}{E(creature|mybattlefield)}:name(Harness The Soul Stone) counter(0/0,1,stoneharnessed)
