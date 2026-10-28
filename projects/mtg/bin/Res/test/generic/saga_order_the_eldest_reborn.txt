@@ -1,0 +1,31 @@
+#The Eldest Reborn chapter III: put target creature card from a graveyard onto the battlefield under your control.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Eldest Reborn
+manapool:{4}{B}
+[PLAYER2]
+graveyard:Grizzly Bears
+[DO]
+The Eldest Reborn
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:The Eldest Reborn
+[END]

@@ -1,0 +1,32 @@
+#Harald Unites the Elves chapter III: whenever an Elf you control attacks this turn, target creature an
+#opponent controls gets -1/-1. Chapter I mills three and puts Llanowar Elves back onto the battlefield.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Harald Unites the Elves
+manapool:{2}{B}{G}
+library:Hill Giant,Hill Giant,Llanowar Elves
+[PLAYER2]
+[DO]
+Harald Unites the Elves
+Llanowar Elves
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves
+graveyard:Harald Unites the Elves,*,*
+[PLAYER2]
+[END]

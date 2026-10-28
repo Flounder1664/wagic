@@ -1,0 +1,38 @@
+#Invasion of the Giants chapter III: the next Giant spell you cast this turn costs 2 less. Chapter II deals 2
+#to the opponent (a Giant is in hand). Hill Giant ({3}{R}) is then cast off just a Mountain and a Swamp.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. With it moved
+#above, the target click no longer reaches chapter III and Hill Giant cannot be cast for {1}{R}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Invasion of the Giants,Hill Giant
+inplay:Mountain,Swamp
+manapool:{U}{R}
+[PLAYER2]
+[DO]
+Invasion of the Giants
+eot
+eot
+next
+next
+next
+p2
+eot
+eot
+next
+next
+next
+Hill Giant
+Mountain
+Swamp
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,*,*
+graveyard:Invasion of the Giants
+[PLAYER2]
+life:18
+[END]

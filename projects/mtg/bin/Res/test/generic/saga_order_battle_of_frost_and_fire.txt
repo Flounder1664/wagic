@@ -1,0 +1,35 @@
+#Battle of Frost and Fire chapter III: whenever you cast a spell with mana value 5 or more this turn,
+#draw two then discard one. Chapter I kills the Grizzly Bears, not the Hill Giant (a Giant).
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Battle of Frost and Fire
+inplay:Hill Giant
+manapool:{3}{U}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Battle of Frost and Fire
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Battle of Frost and Fire
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

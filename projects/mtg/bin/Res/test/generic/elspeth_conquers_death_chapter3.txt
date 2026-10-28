@@ -1,0 +1,39 @@
+#Elspeth Conquers Death chapter III: return target creature card from your graveyard to the battlefield with a
+#+1/+1 counter. Chapter I exiles the opponent's Hill Giant (mana value 4).
+#Fixed 2026-10-27: the Planeswalker and Creature lines each opened a forced menu entry (both labelled
+#"Becomes"), so with no planeswalker in the graveyard picking the wrong one froze the game with no Cancel.
+#Each line is now restricted to a graveyard that holds its card type, leaving one entry here; the plain
+#target click only reaches it when the menu has a single entry, so this failed before the fix.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Elspeth Conquers Death
+graveyard:Grizzly Bears
+manapool:{3}{W}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Elspeth Conquers Death
+Hill Giant
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+Grizzly Bears
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Elspeth Conquers Death
+pt:Grizzly Bears=3/3
+[PLAYER2]
+exile:Hill Giant
+[END]

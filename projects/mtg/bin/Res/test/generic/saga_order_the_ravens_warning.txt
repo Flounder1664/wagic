@@ -1,0 +1,31 @@
+#The Raven's Warning chapter III: you may put a card you own from outside the game on top of your library
+#(the harness cannot seed a sideboard, so there is nothing to choose). Chapter I: Bird token, gain 2.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Raven's Warning
+manapool:{1}{W}{U}
+[PLAYER2]
+[DO]
+The Raven's Warning
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:The Raven's Warning
+life:22
+[PLAYER2]
+[END]

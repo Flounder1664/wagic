@@ -1,0 +1,32 @@
+#Kardur's Vicious Return chapter III: return target creature card from your graveyard to the battlefield.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kardur's Vicious Return
+graveyard:Grizzly Bears
+manapool:{2}{B}{R}
+[PLAYER2]
+[DO]
+Kardur's Vicious Return
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Kardur's Vicious Return
+[PLAYER2]
+[END]

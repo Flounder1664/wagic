@@ -1,0 +1,39 @@
+#Medomai's Prophecy chapter IV: look at the top card of each player's library (both are empty here).
+#Chapter II's name menu: choice 1 opens the name list, choice 0 names Medomai's Prophecy.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Medomai's Prophecy
+manapool:{1}{U}
+[PLAYER2]
+[DO]
+Medomai's Prophecy
+eot
+eot
+next
+next
+next
+wait
+choice 1
+choice 0
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Medomai's Prophecy
+[PLAYER2]
+[END]

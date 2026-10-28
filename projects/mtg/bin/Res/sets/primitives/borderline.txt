@@ -9429,6 +9429,7 @@ auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=token(Warrior,Creature Human Warrior,1/1,white)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) token(Warrior,Creature Elf Warrior,1/1,green)
+#Final chapter: keep the sacrifice line BELOW this one. Tested both ways: with the sacrifice moved above, the saga is never sacrificed (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$! target(<anyamount>*[token]|myBattlefield) clone !$ controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Create a 1/1 white Human Warrior creature token. -- II - Create a 1/1 green Elf Warrior creature token. -- III - Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token that's a copy of it.
@@ -34495,8 +34496,8 @@ auto=moveTo(Exile) target(*[manacost>=3]|opponentbattlefield)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}) all(*[-creature]|opponentcastingzone) altercost(colorless,+2) uynt
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) choice name(Planeswalker) target(planeswalker|mygraveyard) transforms((,newability[moveTo(mybattlefield)],newability[counter(0/0.1.loyalty)]))
-auto=@counteradded(0/0,1,Lore) from(this): this(counter{0/0.3.Lore}) choice name(Creature) target(creature|mygraveyard) transforms((,newability[moveTo(mybattlefield)],newability[counter(1/1)]))
+auto=@counteradded(0/0,1,Lore) from(this) restriction{type(planeswalker|mygraveyard)~morethan~0}:this(counter{0/0.3.Lore}) choice name(Planeswalker) target(planeswalker|mygraveyard) transforms((,newability[moveTo(mybattlefield)],newability[counter(0/0.1.loyalty)]))
+auto=@counteradded(0/0,1,Lore) from(this) restriction{type(creature|mygraveyard)~morethan~0}:this(counter{0/0.3.Lore}) choice name(Creature) target(creature|mygraveyard) transforms((,newability[moveTo(mybattlefield)],newability[counter(1/1)]))
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Exile target permanent an opponent controls with mana value 3 or greater. -- II - Noncreature spells your opponents cast cost {2} more to cast until your next turn. -- III - Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter or a loyalty counter on it.
 mana={3}{W}{W}
@@ -59635,6 +59636,7 @@ auto=@each my firstmain:counter(0/0,1,Lore)
 aicode=activate transforms((,newability[all(*[zpos<=2]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
 auto=_SCRY2_
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) transforms((,newability[draw:1 controller],newability[if type(giant|myhand)~morethan~0 then damage:2 target(player^planeswalker)])) oneshot
+#Final chapter: keep the sacrifice line BELOW this one. Tested both ways: with the sacrifice moved above, the cost reduction never reaches the Giant (saga order audit 2026-10-27).
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) name(Next giant costs 2 less) target(giant|mycastingzone) transforms((,newability[changecost(colorless:-2)])) ueot
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Scry 2. -- II - Draw a card. Then you may reveal a Giant card from your hand. When you do, Invasion of the Giants deals 2 damage to target opponent or planeswalker. -- III - The next Giant spell you cast this turn costs 2 less to cast.

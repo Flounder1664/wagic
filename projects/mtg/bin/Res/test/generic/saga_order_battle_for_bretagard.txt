@@ -1,0 +1,30 @@
+#Battle for Bretagard chapter III: copy any number of your tokens with different names (two Warrior tokens
+#from chapters I and II). The harness cannot click a token by name, so only the sacrifice is asserted.
+#Saga order audit 2026-10-27: this saga must KEEP its sacrifice line below the chapter line. With it moved
+#above, the saga is never sacrificed (it stays on the battlefield with the chapter menu open).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Battle for Bretagard
+manapool:{1}{G}{W}
+[PLAYER2]
+[DO]
+Battle for Bretagard
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:Battle for Bretagard
+[PLAYER2]
+[END]

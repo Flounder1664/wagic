@@ -1,0 +1,36 @@
+#The Bath Song chapter III: shuffle any number of target cards from your graveyard into your library, add {U}{U}.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: the harness cannot finish the <anyamount> pick inside ability$! (it waits for a
+#click on an internal card), so this test declines the shuffle. Passes in both orders, order left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The Bath Song
+graveyard:Grizzly Bears,Craw Wurm
+manapool:{3}{U}
+[PLAYER2]
+[DO]
+The Bath Song
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+wait
+choice 1
+wait
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:The Bath Song,Grizzly Bears,Craw Wurm
+manapool:{U}{U}
+[PLAYER2]
+[END]

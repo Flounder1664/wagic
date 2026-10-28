@@ -1,0 +1,32 @@
+#The World Spell chapter III: put a permanent card from your hand onto the battlefield.
+#Libraries are empty on purpose: the harness suppresses the empty-library loss, and with no cards in hand or
+#library the earlier chapters open no discard/scry/reveal prompt the harness cannot answer.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:The World Spell,Hill Giant
+manapool:{5}{G}{G}
+[PLAYER2]
+[DO]
+The World Spell
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:The World Spell
+[PLAYER2]
+[END]

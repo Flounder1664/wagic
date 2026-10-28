@@ -1,0 +1,31 @@
+#Showdown of the Skalds chapter III: whenever you cast a spell this turn, put a +1/+1 counter on target
+#creature you control. Chapter I exiles the top four cards of the library.
+#Saga order audit 2026-10-27: passes with the sacrifice line both below and above the chapter line, so the
+#order was left as it was.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Showdown of the Skalds
+manapool:{2}{R}{W}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+Showdown of the Skalds
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+wait
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Showdown of the Skalds
+exile:*,*,*,*
+[PLAYER2]
+[END]
