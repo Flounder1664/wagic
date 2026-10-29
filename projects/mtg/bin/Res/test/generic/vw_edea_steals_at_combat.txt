@@ -1,0 +1,16 @@
+#Edea: at the beginning of combat on your turn, gain control of an opponent's creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713972
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+next
+Hill Giant
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:713972,Hill Giant
+[PLAYER2]
+[END]

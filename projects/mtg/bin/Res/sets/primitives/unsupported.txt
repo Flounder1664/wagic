@@ -34,17 +34,6 @@ mana={2}{W}
 type=Instant
 [/card]
 [card]
-name=Aboleth Spawn
-abilities=flash
-auto=_WARD_(2)
-text=Flash -- Ward {2} -- Probing Telepathy - Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.
-mana={2}{U}
-type=Creature
-subtype=Fish Horror
-power=2
-toughness=3
-[/card]
-[card]
 name=Abstract Iguanart
 text=Whenever you cast a spell, note the first letter of its artist's name. If that letter wasn't already noted, put a +1/+1 counter on Abstract Iguanart.
 mana={1}{R}
@@ -2840,16 +2829,6 @@ text=Enchant permanent -- At the beginning of your precombat main phase, add man
 mana={2}{G}{G}
 type=Enchantment
 subtype=Aura
-[/card]
-[card]
-name=Elenda and Azor
-abilities=flying
-text=Flying, ward {2} -- Whenever Elenda and Azor attacks, you may pay {X}{W}{U}{B}. If you do, draw X cards. -- At the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.
-mana={3}{W}{U}{B}
-type=Legendary Creature
-subtype=Vampire Knight Sphinx
-power=6
-toughness=6
 [/card]
 [card]
 name=Elesh Norn, Mother of Machines
@@ -14319,15 +14298,6 @@ mana={4}{W}{W}
 type=Sorcery
 [/card]
 [card]
-name=Avengers Quinjet
-text=Flying -- Whenever this Vehicle enters or attacks, choose one — -- • You may put a Hero creature card from your hand onto the battlefield. -- • Return target Hero creature card from your graveyard to your hand. -- Crew 3
-mana={5}
-type=Artifact
-subtype=Vehicle
-power=4
-toughness=4
-[/card]
-[card]
 name=Bast, Panther Goddess
 text=Reach, trample, indestructible -- Bast can't attack or block unless you control three or more creatures. -- Whenever you attack, target attacking creature gets +X/+X until end of turn, where X is the number of creatures you control.
 mana={2}{G}{W}
@@ -15734,15 +15704,6 @@ mana={2}{U}
 type=Enchantment
 [/card]
 [card]
-name=N'Yami-Class Mother Ship
-text=Flying, vigilance, haste -- Whenever this Vehicle deals combat damage to a player, look at the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you don't put it onto the battlefield, put it into your hand. -- Crew 3
-mana={6}
-type=Artifact
-subtype=Vehicle
-power=5
-toughness=7
-[/card]
-[card]
 name=Nakia, Wakandan Operative
 text=Reach -- Whenever your commander enters, you become the monarch. -- {2}, {T}: Put two +1/+1 counters on target creature or Vehicle. Activate only as a sorcery.
 mana={2}{G}
@@ -15894,15 +15855,6 @@ type=Legendary Creature
 subtype=Human Spy Hero
 power=2
 toughness=1
-[/card]
-[card]
-name=Pharaoh Rama-Tut
-text=Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Whenever you cast a noncreature spell, Pharaoh Rama-Tut connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
-mana={4}{U}
-type=Legendary Creature
-subtype=Human Noble Villain
-power=4
-toughness=4
 [/card]
 [card]
 name=Photon, Lady of Light
@@ -16624,15 +16576,6 @@ type=Artifact Creature
 subtype=Human Advisor
 power=3
 toughness=4
-[/card]
-[card]
-name=Vibranium Mining Mech
-text=Trample -- Whenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.") -- {2}: This Vehicle gets +1/+0 until end of turn. -- Crew 2
-mana={4}
-type=Artifact
-subtype=Vehicle
-power=6
-toughness=6
 [/card]
 [card]
 name=Vibranium Strike Gauntlets
@@ -18427,15 +18370,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=The Serpent Society
-text=Deathtouch -- Ward—Get five poison counters. (A player with ten or more poison counters loses the game.) -- Whenever another creature you control with deathtouch dies, each opponent sacrifices a nontoken creature of their choice.
-mana={1}{B}{G}
-type=Legendary Creature
-subtype=Human Snake Villain
-power=3
-toughness=4
-[/card]
-[card]
 name=The Super Hero Civil War
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Gain control of up to two target creatures with total mana value 6 or less for as long as this Saga remains on the battlefield. -- II — Creatures you control get +1/+1 and gain vigilance until end of turn. -- III — Target creature you control fights up to one other target creature.
 mana={3}{R}{W}
@@ -18914,15 +18848,6 @@ name=Duelist's Flame
 text=Until end of turn, target blocked creature you control gets +X/+0 and gains trample and "Whenever this creature deals combat damage to a player, look at that many cards from the top of your library. Exile up to one nonland card from among them and put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost."
 mana={X}{R}{R}
 type=Instant
-[/card]
-[card]
-name=Edea, Possessed Sorceress
-text=Ward {2} -- At the beginning of combat on your turn, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. -- Whenever a creature you control but don't own dies, return it to the battlefield under its owner's control and you draw a card.
-mana={2}{U}{B}{R}
-type=Legendary Creature
-subtype=Human Warlock
-power=2
-toughness=5
 [/card]
 [card]
 name=Edgar, Master Machinist
@@ -19526,15 +19451,6 @@ power=2
 toughness=3
 [/card]
 [card]
-name=The Falcon, Airship Restored
-text=Flying -- Whenever The Falcon deals combat damage to a player, you may sacrifice it. When you do, return target creature card from your graveyard to the battlefield. -- {4}{B}: Return this card from your graveyard to the battlefield tapped. -- Crew 2
-mana={2}{B}
-type=Legendary Artifact
-subtype=Vehicle
-power=4
-toughness=3
-[/card]
-[card]
 name=The Warring Triad
 text=Flying, trample, haste -- As long as there are fewer than eight cards in your graveyard, The Warring Triad isn't a creature. -- {T}, Mill a card: Target player adds one mana of any color. (Activate only as an instant.)
 mana={3}
@@ -19928,15 +19844,6 @@ name=Practiced Offense
 text=Put a +1/+1 counter on each creature target player controls. Target creature gains your choice of double strike or lifelink until end of turn. -- Flashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 mana={2}{W}
 type=Sorcery
-[/card]
-[card]
-name=Prismari, the Inspiration
-text=Flying -- Ward—Pay 5 life. -- Instant and sorcery spells you cast have storm. (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-mana={5}{U}{R}
-type=Legendary Creature
-subtype=Elder Dragon
-power=7
-toughness=7
 [/card]
 [card]
 name=Professor Dellian Fel
@@ -21143,15 +21050,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Trelane, Squire of Gothos
-text=Vigilance (Attacking doesn't cause this creature to tap.) -- Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Trelane can't be blocked.
-mana={5}{U}
-type=Legendary Creature
-subtype=Q
-power=4
-toughness=5
-[/card]
-[card]
 name=Warship Flight Crew
 mana={1}{R}
 type=Creature
@@ -21471,15 +21369,6 @@ type=Legendary Creature
 subtype=Human Scientist
 power=3
 toughness=3
-[/card]
-[card]
-name=Humpback Whales
-text=Vigilance, ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
-mana={4}{U}{U}
-type=Creature
-subtype=Whale
-power=5
-toughness=6
 [/card]
 [card]
 name=I'm a Doctor, Not a . . .
@@ -24054,15 +23943,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Mole Module
-text=Menace -- Whenever this Vehicle deals combat damage to a player, mill four cards. You may put a permanent card from among them onto the battlefield. -- Crew 2
-mana={5}
-type=Artifact
-subtype=Vehicle
-power=6
-toughness=6
-[/card]
-[card]
 name=Mona Lisa, Ever Adaptable
 text=Whenever a player casts a creature spell, you create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
 mana={3}{G}
@@ -24557,15 +24437,6 @@ type=Legendary Creature
 subtype=Human Warrior
 power=3
 toughness=3
-[/card]
-[card]
-name=Evin, Waterdeep Opportunist
-text=Menace -- Ward—Sacrifice a creature. -- Evin gets +2/+0 for each Treasure you control. -- Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
-mana={3}{B}
-type=Legendary Creature
-subtype=Human Rogue
-power=2
-toughness=4
 [/card]
 [card]
 name=Gisa's Favorite Shovel
@@ -25623,15 +25494,6 @@ type=Creature
 subtype=Beholder
 power=6
 toughness=6
-[/card]
-[card]
-name=Unicycle
-text=First strike, haste -- Equipped creature has first strike and haste. -- Equip {1} -- Crew 1
-mana={2}
-type=Artifact
-subtype=Equipment Vehicle
-power=3
-toughness=1
 [/card]
 [card]
 name=Vazal, the Compleat

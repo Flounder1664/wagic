@@ -1,0 +1,17 @@
+#Vibranium Mining Mech makes a tapped Vibranium token as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vibranium Mining Mech
+manapool:{4}
+[PLAYER2]
+[DO]
+Vibranium Mining Mech
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vibranium Mining Mech,*
+tappedinplay:1
+manapool:{0}
+[PLAYER2]
+[END]

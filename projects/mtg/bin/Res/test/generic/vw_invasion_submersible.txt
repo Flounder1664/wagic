@@ -1,0 +1,23 @@
+#Invasion Submersible bounces Hill Giant as it enters, then waterbends {3} (exhaust): it becomes
+#an artifact creature with three +1/+1 counters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Invasion Submersible
+manapool:{2}{U}{3}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Invasion Submersible
+Hill Giant
+Invasion Submersible
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Invasion Submersible
+pt:Invasion Submersible=3/3
+manapool:{0}
+[PLAYER2]
+hand:Hill Giant
+[END]

@@ -1,0 +1,21 @@
+#Spinewoods Armadillo: {1}{G}, discard it - fetch a Desert to hand and gain 3 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spinewoods Armadillo
+library:Desert
+manapool:{1}{G}
+life:20
+[PLAYER2]
+[DO]
+Spinewoods Armadillo
+Desert
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Desert
+graveyard:Spinewoods Armadillo
+manapool:{0}
+life:23
+[PLAYER2]
+[END]

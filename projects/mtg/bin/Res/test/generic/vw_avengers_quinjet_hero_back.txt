@@ -1,0 +1,20 @@
+#Avengers Quinjet entering, second mode: return a Hero card (Blue Marvel) from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Avengers Quinjet
+graveyard:711051
+manapool:{5}
+[PLAYER2]
+[DO]
+Avengers Quinjet
+choice 1
+711051
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Avengers Quinjet
+hand:711051
+manapool:{0}
+[PLAYER2]
+[END]

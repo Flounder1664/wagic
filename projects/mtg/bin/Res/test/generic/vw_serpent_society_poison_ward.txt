@@ -1,0 +1,23 @@
+#The Serpent Society's Ward-Get five poison counters: player 1 takes the poison, Unsummon resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}
+[PLAYER2]
+inplay:712234
+[DO]
+134
+712234
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+poisoncount:5
+[PLAYER2]
+hand:712234
+[END]

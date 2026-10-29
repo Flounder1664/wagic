@@ -151196,3 +151196,313 @@ subtype=Vehicle
 power=4
 toughness=4
 [/card]
+[card]
+name=Punk Frogs
+auto=_WARD3_
+text=Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)
+mana={3}{G/U}{G/U}
+type=Creature
+subtype=Frog Mutant Rebel
+power=4
+toughness=5
+[/card]
+[card]
+name=Trelane, Squire of Gothos
+#REVIEW-V 2026-10-29: check it can't be blocked.
+abilities=vigilance,unblockable
+auto=_WARD2_
+text=Vigilance (Attacking doesn't cause this creature to tap.) -- Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Trelane can't be blocked.
+mana={5}{U}
+type=Legendary Creature
+subtype=Q
+power=4
+toughness=5
+[/card]
+[card]
+name=Humpback Whales
+abilities=vigilance
+auto=_WARD2_
+auto=__BASIC_LANDCYCLING__({2})
+text=Vigilance, ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+mana={4}{U}{U}
+type=Creature
+subtype=Whale
+power=5
+toughness=6
+[/card]
+[card]
+name=Harmonious Grovestrider
+auto=_WARD2_
+anyzone=type:land:mybattlefield/type:land:mybattlefield cdaactive
+text=Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Harmonious Grovestrider's power and toughness are each equal to the number of lands you control.
+mana={3}{G}{G}
+type=Creature
+subtype=Beast
+power=*
+toughness=*
+[/card]
+[card]
+name=Spinewoods Armadillo
+abilities=reach
+auto=_WARD3_
+autohand={1}{G}{discard}:name(Search for a basic land or Desert) moveTo(myhand) and!( life:3 controller )! target(land[basic;desert]|mylibrary)
+text=Reach -- Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.) -- {1}{G}, Discard this card: Search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle. You gain 3 life.
+mana={4}{G}{G}
+type=Creature
+subtype=Armadillo
+power=7
+toughness=7
+[/card]
+[card]
+name=Evin, Waterdeep Opportunist
+#REVIEW-V 2026-10-29: check +2/+0 per Treasure and that the sacrifice Treasure comes only once a turn (the sacrifice ward is tested).
+abilities=menace
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - sacrifice a creature) name(Ward - sacrifice a creature) target(*|opponentzones) transforms((,newability[pay[[{S(creature|myBattlefield)}]] name(sacrifice a creature) donothing?fizzle])) oneshot
+auto=foreach(treasure|mybattlefield) 2/0
+auto=@sacrificed(creature|battlefield) turnlimited:name(Create a tapped Treasure) _TREASURE_ and!( tap(noevent) )! controller
+text=Menace -- Ward-Sacrifice a creature. -- Evin gets +2/+0 for each Treasure you control. -- Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
+mana={3}{B}
+type=Legendary Creature
+subtype=Human Rogue
+power=2
+toughness=4
+[/card]
+[card]
+name=Pharaoh Rama-Tut
+#REVIEW-V 2026-10-29: cast a noncreature spell and check it connives.
+auto=_WARD2_
+auto=@movedTo(*[-creature]|mystack):name(Connive) _CONNIVES_
+text=Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Whenever you cast a noncreature spell, Pharaoh Rama-Tut connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={4}{U}
+type=Legendary Creature
+subtype=Human Noble Villain
+power=4
+toughness=4
+[/card]
+[card]
+name=Elenda and Azor
+#REVIEW-V 2026-10-29: attack and pick an X from the menu (draw X); at an end step pay 4 life for lifelink Vampire Knights equal to cards drawn.
+abilities=flying
+auto=_WARD2_
+#X for the attack trigger is offered from 1 to 5.
+auto=_ATTACKING_ability$!choice name(Decline) donothing _ choice name(Pay {1}{W}{U}{B}: draw 1) pay[[{1}{W}{U}{B}]] name(pay) draw:1 controller _ choice name(Pay {2}{W}{U}{B}: draw 2) pay[[{2}{W}{U}{B}]] name(pay) draw:2 controller _ choice name(Pay {3}{W}{U}{B}: draw 3) pay[[{3}{W}{U}{B}]] name(pay) draw:3 controller _ choice name(Pay {4}{W}{U}{B}: draw 4) pay[[{4}{W}{U}{B}]] name(pay) draw:4 controller _ choice name(Pay {5}{W}{U}{B}: draw 5) pay[[{5}{W}{U}{B}]] name(pay) draw:5 controller!$ controller
+auto=@each end:may name(Pay 4 life for Vampire Knights) life:-4 controller && create(Vampire Knight:creature vampire knight:1/1:black:lifelink)*pdrewcount controller
+text=Flying, ward {2} -- Whenever Elenda and Azor attacks, you may pay {X}{W}{U}{B}. If you do, draw X cards. -- At the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.
+mana={3}{W}{U}{B}
+type=Legendary Creature
+subtype=Vampire Knight Sphinx
+power=6
+toughness=6
+[/card]
+[card]
+name=Horned Loch-Whale // Lagoon Breach
+#REVIEW-V 2026-10-29: flash it in on the opponent's turn (enters tapped); cast Lagoon Breach on an attacker.
+abilities=adventure,asflash,flash
+restriction=can play creature
+other={1}{U} name(Adventure)
+auto=_WARD2_
+auto=if compare(controllerturn)~equalto~0 then tap(noevent)
+#The owner chooses top or bottom of their library; this puts it on top.
+auto=alternative name(Put attacker into library) target(creature[attacking]|opponentbattlefield) moveto(ownerlibrary)
+auto=alternative _ADVENTURE_
+text=Flash -- Ward {2} -- This creature enters tapped unless it's your turn. // Lagoon Breach {1}{U} -- Instant - Adventure -- The owner of target attacking creature you don't control puts it on their choice of the top or bottom of their library.
+mana={4}{U}{U}
+type=Creature
+subtype=Whale
+power=6
+toughness=6
+[/card]
+[card]
+name=N'Yami-Class Mother Ship
+#REVIEW-V 2026-10-29: connect and check a permanent on top can go onto the battlefield, anything else to hand.
+abilities=flying,vigilance,haste
+auto=@combatdamaged(player) from(this):name(Look at the top card) reveal:1 optionone name(Put a permanent card onto the battlefield) target(<upto:1>*[-instant;-sorcery]|reveal) moveto(mybattlefield) optiononeend optiontwo all(*|reveal) moveto(myhand) optiontwoend revealend
+auto=_CREW3_
+text=Flying, vigilance, haste -- Whenever this Vehicle deals combat damage to a player, look at the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you don't put it onto the battlefield, put it into your hand. -- Crew 3
+mana={6}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=7
+[/card]
+[card]
+name=Vibranium Mining Mech
+abilities=trample
+auto=token(-711915) and!( tap(noevent) )!
+auto=_ATTACKING_token(-711915) and!( tap(noevent) )!
+auto={2}:1/0 ueot
+auto=_CREW2_
+text=Trample -- Whenever this Vehicle enters or attacks, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.") -- {2}: This Vehicle gets +1/+0 until end of turn. -- Crew 2
+mana={4}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Avengers Quinjet
+#REVIEW-V 2026-10-29: check the first mode puts a Hero from hand onto the battlefield, and the attack trigger (mode two is tested).
+abilities=flying
+auto=ability$!choice name(Put a Hero onto the battlefield) notaTarget(<upto:1>creature[hero]|myhand) moveto(mybattlefield) _ choice name(Return a Hero to your hand) target(creature[hero]|mygraveyard) moveto(myhand)!$ controller
+auto=_ATTACKING_ability$!choice name(Put a Hero onto the battlefield) notaTarget(<upto:1>creature[hero]|myhand) moveto(mybattlefield) _ choice name(Return a Hero to your hand) target(creature[hero]|mygraveyard) moveto(myhand)!$ controller
+auto=_CREW3_
+text=Flying -- Whenever this Vehicle enters or attacks, choose one - -- * You may put a Hero creature card from your hand onto the battlefield. -- * Return target Hero creature card from your graveyard to your hand. -- Crew 3
+mana={5}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=The Falcon, Airship Restored
+#REVIEW-V 2026-10-29: connect, sacrifice it, and return a creature card (the {4}{B} return is tested).
+abilities=flying
+auto=@combatdamaged(player) from(this):may name(Sacrifice to return a creature) sacrifice all(this) && moveto(mybattlefield) target(creature|mygraveyard)
+autograveyard={4}{B}:name(Return to the battlefield tapped) moveto(mybattlefield) and!( tap(noevent) )!
+auto=_CREW2_
+text=Flying -- Whenever The Falcon deals combat damage to a player, you may sacrifice it. When you do, return target creature card from your graveyard to the battlefield. -- {4}{B}: Return this card from your graveyard to the battlefield tapped. -- Crew 2
+mana={2}{B}
+type=Legendary Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
+name=Mole Module
+#REVIEW-V 2026-10-29: connect: the top four are revealed, one permanent may go onto the battlefield, the rest to the graveyard.
+abilities=menace
+#Milling is done as a reveal of the top four: the chosen permanent card goes onto the
+#battlefield and the rest to the graveyard (no "milled" event).
+auto=@combatdamaged(player) from(this):name(Mill four) reveal:4 optionone name(Put a permanent card onto the battlefield) target(<upto:1>*[-instant;-sorcery]|reveal) moveto(mybattlefield) optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=_CREW2_
+text=Menace -- Whenever this Vehicle deals combat damage to a player, mill four cards. You may put a permanent card from among them onto the battlefield. -- Crew 2
+mana={5}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Lifecraft Engine
+auto=chooseatype lord(other creature[chosentype]|mybattlefield) 1/1 && lord(vehicle|mybattlefield) transforms((chosentype)) chooseend
+auto=_CREW3_
+text=As this Vehicle enters, choose a creature type. -- Vehicle creatures you control are the chosen creature type in addition to their other types. -- Each creature you control of the chosen type other than this Vehicle gets +1/+1. -- Crew 3
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Valor's Flagship
+abilities=flying,first strike,lifelink
+auto=_CREW3_
+#Cycling X offered from 1 to 4; the Pilots crew as though their power were 2 greater.
+autohand={2}{W}{cycle}:name(Cycle - X=0) draw:1 controller
+autohand={1}{2}{W}{cycle}:name(Cycle - X=1) draw:1 controller && token(-690463) controller
+autohand={2}{2}{W}{cycle}:name(Cycle - X=2) draw:1 controller && token(-690463)*2 controller
+autohand={3}{2}{W}{cycle}:name(Cycle - X=3) draw:1 controller && token(-690463)*3 controller
+autohand={4}{2}{W}{cycle}:name(Cycle - X=4) draw:1 controller && token(-690463)*4 controller
+text=Flying, first strike, lifelink -- Crew 3 -- Cycling {X}{2}{W} ({X}{2}{W}, Discard this card: Draw a card.) -- When you cycle this card, create X 1/1 colorless Pilot creature tokens with "This token saddles Mounts and crews Vehicles as though its power were 2 greater."
+mana={4}{W}{W}{W}
+type=Legendary Artifact
+subtype=Vehicle
+power=7
+toughness=7
+[/card]
+[card]
+name=Invasion Submersible
+auto=name(Return a nonland permanent) moveto(ownerhand) target(<upto:1>other *[-land])
+#Exhaust - Waterbend {3}: {3}, or tap your artifacts and creatures to help.
+auto={3} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - waterbend {3}) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,3)
+auto={2}{T(*[artifact;creature]|mybattlefield)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - waterbend {3}, tap 1) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,3)
+auto={1}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - waterbend {3}, tap 2) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,3)
+auto={T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust - waterbend {3}, tap 3) counter(0/0,1,exhaust) && becomes(Artifact Creature) forever && counter(1/1,3)
+text=When this Vehicle enters, return up to one other target nonland permanent to its owner's hand. -- Exhaust - Waterbend {3}: This Vehicle becomes an artifact creature. Put three +1/+1 counters on it. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}. Activate each exhaust ability only once.)
+mana={2}{U}
+type=Artifact
+subtype=Vehicle
+power=0
+toughness=0
+[/card]
+[card]
+name=Captain Howler, Sea Scourge
+#REVIEW-V 2026-10-29: discard a card and check +2/+0 on the target and a draw when it connects.
+auto=_WARDMANALIFE_(2,2)
+#One trigger per card discarded (+2/+0 each), rather than one trigger for the whole batch.
+auto=@discarded(*|myhand):name(+2/+0) target(creature) transforms((,newability[2/0],newability[@combatdamaged(player) from(this):draw:1 opponent])) ueot
+text=Ward-{2}, Pay 2 life. -- Whenever you discard one or more cards, target creature gets +2/+0 until end of turn for each card discarded this way. Whenever that creature deals combat damage to a player this turn, you draw a card.
+mana={2}{U}{R}
+type=Legendary Creature
+subtype=Shark Pirate
+power=5
+toughness=4
+[/card]
+[card]
+name=The Serpent Society
+#REVIEW-V 2026-10-29: check the opponent sacrifices when another of your deathtouch creatures dies (the poison ward is tested).
+abilities=deathtouch
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - get five poison counters) name(Ward - get five poison counters) target(*|opponentzones) transforms((,newability[choice name(Get five poison counters) alterpoison:5 controller],newability[choice name(Let it be countered) fizzle])) oneshot
+auto=@movedTo(other creature[deathtouch]|graveyard) from(mybattlefield):name(Each opponent sacrifices) ability$!name(Sacrifice a nontoken creature) notaTarget(creature[-token]|mybattlefield) sacrifice!$ opponent
+text=Deathtouch -- Ward-Get five poison counters. (A player with ten or more poison counters loses the game.) -- Whenever another creature you control with deathtouch dies, each opponent sacrifices a nontoken creature of their choice.
+mana={1}{B}{G}
+type=Legendary Creature
+subtype=Human Snake Villain
+power=3
+toughness=4
+[/card]
+[card]
+name=Edea, Possessed Sorceress
+#REVIEW-V 2026-10-29: check the stolen creature goes back at end of turn, and a stolen creature dying returns to its owner and draws you a card (the steal is tested).
+auto=_WARD2_
+auto=@each my combatbegins:name(Gain control until end of turn) target(creature|opponentbattlefield) moveto(mybattlefield) and!(transforms((,newability[@next end:moveTo(previousbattlefield)],newability[untap],haste)) ueot)!
+#"A creature you control but don't own": an opponent's card dying under your control lands in its
+#owner's graveyard, so the trigger watches the opponent's graveyard coming from your battlefield.
+auto=@movedTo(creature|opponentgraveyard) from(mybattlefield):name(Return it and draw) all(trigger[to]) moveto(ownerbattlefield) && draw:1 controller
+text=Ward {2} -- At the beginning of combat on your turn, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. -- Whenever a creature you control but don't own dies, return it to the battlefield under its owner's control and you draw a card.
+mana={2}{U}{B}{R}
+type=Legendary Creature
+subtype=Human Warlock
+power=2
+toughness=5
+[/card]
+[card]
+name=Aboleth Spawn
+#REVIEW-V 2026-10-29: Probing Telepathy is not implemented (missing=).
+abilities=flash
+auto=_WARD2_
+missing=Probing Telepathy - copying an opponent's creature's enters trigger has no route.
+text=Flash -- Ward {2} -- Probing Telepathy - Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.
+mana={2}{U}
+type=Creature
+subtype=Fish Horror
+power=2
+toughness=3
+[/card]
+[card]
+name=Prismari, the Inspiration
+abilities=flying
+auto=_WARDLIFE_(5)
+auto=lord(*[instant;sorcery]|myhand,mystack,mygraveyard,myexile,mylibrary) storm
+text=Flying -- Ward-Pay 5 life. -- Instant and sorcery spells you cast have storm. (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+mana={5}{U}{R}
+type=Legendary Creature
+subtype=Elder Dragon
+power=7
+toughness=7
+[/card]
+[card]
+name=Unicycle
+#REVIEW-V 2026-10-29: equip it and check first strike and haste on the creature; crew it.
+abilities=first strike,haste
+auto={1}:equip
+auto=teach(creature) first strike
+auto=teach(creature) haste
+auto=_CREW1_
+text=First strike, haste -- Equipped creature has first strike and haste. -- Equip {1} -- Crew 1
+mana={2}
+type=Artifact
+subtype=Equipment Vehicle
+power=3
+toughness=1
+[/card]

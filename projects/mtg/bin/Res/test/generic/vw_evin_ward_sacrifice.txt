@@ -1,0 +1,26 @@
+#Evin's Ward-Sacrifice a creature: player 1 sacrifices Grizzly Bears and Unsummon resolves. The
+#sacrifice also triggers Evin, so player 2 gets a tapped Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+inplay:Grizzly Bears
+manapool:{U}
+[PLAYER2]
+inplay:731026
+[DO]
+134
+731026
+choice 0
+134
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134,Grizzly Bears
+manapool:{0}
+[PLAYER2]
+hand:731026
+inplay:*
+[END]

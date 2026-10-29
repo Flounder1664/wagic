@@ -1,0 +1,17 @@
+#The Falcon: {4}{B} returns it from the graveyard to the battlefield tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:713893
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+713893
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713893
+tappedinplay:1
+manapool:{0}
+[PLAYER2]
+[END]

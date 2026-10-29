@@ -1,0 +1,22 @@
+#Punk Frogs' ward {3}: Unsummon resolves only once player 1 pays {3}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}{3}
+[PLAYER2]
+inplay:Punk Frogs
+[DO]
+134
+Punk Frogs
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+[PLAYER2]
+hand:Punk Frogs
+[END]

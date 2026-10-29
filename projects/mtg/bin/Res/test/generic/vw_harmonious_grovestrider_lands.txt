@@ -1,0 +1,14 @@
+#Harmonious Grovestrider's power and toughness equal the lands you control (three).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonious Grovestrider,Mountain,Island,Swamp
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Harmonious Grovestrider,*,*,*
+pt:Harmonious Grovestrider=3/3
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Valor's Flagship cycled for X=2: draw a card and make two Pilot tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Valor's Flagship
+library:Opt
+manapool:{2}{2}{W}
+[PLAYER2]
+[DO]
+Valor's Flagship
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Opt
+inplay:*,*
+graveyard:Valor's Flagship
+manapool:{0}
+[PLAYER2]
+[END]

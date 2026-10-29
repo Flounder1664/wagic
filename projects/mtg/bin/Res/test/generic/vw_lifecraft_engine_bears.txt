@@ -1,0 +1,20 @@
+#Lifecraft Engine naming Bear: other Bears you control get +1/+1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lifecraft Engine
+inplay:Grizzly Bears
+manapool:{3}
+[PLAYER2]
+[DO]
+Lifecraft Engine
+choice 0
+menu Bear
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lifecraft Engine,Grizzly Bears
+pt:Grizzly Bears=3/3
+manapool:{0}
+[PLAYER2]
+[END]

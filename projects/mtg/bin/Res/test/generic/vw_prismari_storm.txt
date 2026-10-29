@@ -1,0 +1,24 @@
+#Prismari: instants and sorceries you cast have storm. Shock, then Rite of Flame (storm 1): the
+#copy adds {R}{R}, and the Rite itself {R}{R} plus {R} for the Rite already in the graveyard -
+#five red mana. Without storm the pool ends at three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:707052
+hand:Shock,Rite of Flame
+manapool:{R}{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+Rite of Flame
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:707052
+graveyard:Shock,Rite of Flame
+manapool:{R}{R}{R}{R}{R}
+[PLAYER2]
+life:18
+[END]
