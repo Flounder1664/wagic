@@ -1,0 +1,24 @@
+#Eriette's Whisper: the opponent discards two, then a Wicked Role token is attached to a creature you
+#choose. The Role's "Attach Role" step is a forced one-entry trigger menu (wagic#47 row 3), so the
+#click on Grizzly Bears answers it. Wicked gives +1/+1, so 3/3 proves the Role attached; with the
+#harness's forced-menu auto-pick (TestSuiteAI::openForcedTriggerMenu) removed the Bears stay 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Eriette's Whisper
+manapool:{3}{B}
+[PLAYER2]
+hand:Ornithopter,Juggernaut
+[DO]
+Eriette's Whisper
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Wicked
+graveyard:Eriette's Whisper
+pt:Grizzly Bears=3/3
+[PLAYER2]
+graveyard:Ornithopter,Juggernaut
+[END]

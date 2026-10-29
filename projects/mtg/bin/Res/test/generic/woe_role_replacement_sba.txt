@@ -1,0 +1,30 @@
+#CR 704.5s: when a second Role token you control is attached to the same creature, the older one goes
+#to the graveyard. This is a state-based action (GameObserver::enchantmentStatus) and only applies to
+#Role TOKENS. wagic#37 recorded it as untestable because SBAs seemed not to run during [DO].
+#Eriette's Whisper, then Shatter the Oath, each attach a Wicked Role to Grizzly Bears. One Wicked
+#should remain, so the Bears are 3/3, and the binned Wicked makes player 2 lose 1 life. With the sweep
+#skipped they are 4/4 and carry two Wickeds.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Eriette's Whisper,Shatter the Oath
+manapool:{6}{B}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Eriette's Whisper
+Grizzly Bears
+Shatter the Oath
+Hill Giant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Wicked
+graveyard:Eriette's Whisper,Shatter the Oath
+pt:Grizzly Bears=3/3
+[PLAYER2]
+graveyard:Hill Giant
+life:19
+[END]

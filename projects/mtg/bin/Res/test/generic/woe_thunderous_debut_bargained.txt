@@ -1,0 +1,26 @@
+#Thunderous Debut bargained (sacrifice Ornithopter): the two creatures go onto the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Thunderous Debut
+library:Mind Stone,Hill Giant,Air Elemental,Juggernaut
+manapool:{6}{G}{G}
+[PLAYER2]
+[DO]
+Thunderous Debut
+choice 1
+Ornithopter
+choice 0
+Hill Giant
+Air Elemental
+revealdone
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Air Elemental
+library:Mind Stone,Juggernaut
+graveyard:Thunderous Debut,Ornithopter
+[PLAYER2]
+[END]
