@@ -1,0 +1,20 @@
+#Thwip! gives +2/+2 and flying; no life for a non-Spider.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thwip!
+inplay:Grizzly Bears
+manapool:{W}
+[PLAYER2]
+[DO]
+Thwip!
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Thwip!
+pt:Grizzly Bears=4/4
+life:20
+[PLAYER2]
+[END]

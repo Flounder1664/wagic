@@ -1,0 +1,22 @@
+#Haste Magic gives +3/+1 and exiles the top card of the library (Mountain, listed last = top).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Haste Magic
+inplay:Grizzly Bears
+library:Island,Mountain
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Haste Magic
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Haste Magic
+library:Island
+exile:Mountain
+pt:Grizzly Bears=5/3
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Thwip! on a Spider gains its caster 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thwip!
+inplay:Giant Spider
+manapool:{W}
+[PLAYER2]
+[DO]
+Thwip!
+Giant Spider
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Giant Spider
+graveyard:Thwip!
+pt:Giant Spider=4/6
+life:22
+[PLAYER2]
+[END]

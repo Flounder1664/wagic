@@ -12242,8 +12242,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_monster_pump.
 auto=1/1
 auto=teach(creature) trample
 text=Enchant creature -- Enchanted creature gets +1/+1 and has trample.
@@ -12257,8 +12256,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_sorcerer_pump.
 auto=1/1
 auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Scry 1) _SCRY1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."
@@ -12272,8 +12270,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_royal_pump.
 auto=1/1
 auto=teach(creature) transforms((,newability[_WARD1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has ward {1}.
@@ -12298,8 +12295,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_attach_eriettes_whisper (made by the card, attached by the prompt).
 auto=1/1
 autograveyard=_DIES_life:-1 opponent
 text=Enchant creature -- Enchanted creature gets +1/+1. -- When this Aura is put into a graveyard from the battlefield, each opponent loses 1 life.
@@ -133561,11 +133557,9 @@ abilities=lifelink
 #retargetfromplay needs an interactive target( - all 18 attested uses have one - and notaTarget
 #there silently attaches to nothing, so it cannot be made automatic. John's suggestion instead:
 #restrict the choice. The Courtier is a Human Noble, and [human&noble] is the attested AND form,
-#so the only legal target is normally the Courtier itself. Still not verifiable - the attach
-#prompt is not drivable in the harness, proved with a control that fails even when the target
-#is named in [DO].
+#so the only legal target is normally the Courtier itself. Test: woe_role_attach_cursed_courtier.
 auto=token(-632906) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature[human&noble]|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 missing=the Cursed Role attaches to a creature of your choice; the card attaches it to this creature itself. retargetfromplay needs an interactive target( and notaTarget there attaches to nothing, so the wrong-but-working form stands - see the comment above for what was measured. See https://github.com/Flounder1664/wagic/issues/38
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
@@ -133725,7 +133719,7 @@ name=Shatter the Oath
 target=creature,enchantment|battlefield
 auto=destroy
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}{B}
 type=Sorcery
@@ -133734,7 +133728,7 @@ type=Sorcery
 name=Eriette's Whisper
 auto=discard:2 opponent
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}
 type=Sorcery
@@ -133746,7 +133740,7 @@ name=Witch's Mark
 #attested chosen-discard-then-draw shape, used by ~100 lines in this file.
 auto=may name(Discard a card, then draw two) target(*|myhand) reject and!( draw:2 controller )!
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={1}{R}
 type=Sorcery
@@ -134808,6 +134802,7 @@ abilities=flash,flying
 grade=borderline
 #VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB airbend exiles the target to its owner's exile.
 auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
+#Test: tla_aang_swift_savior_cast (cast from hand in the harness, the ETB airbends a creature).
 auto={8}:name(Waterbend {8}) flip(backside)
 auto={7}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 1) flip(backside)
 auto={6}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 2) flip(backside)
@@ -136608,7 +136603,7 @@ abilities=hasotherkicker
 other={2}{U}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=if paid(alternative) then token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|opponentbattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
 mana={2}{U}
 type=Creature
@@ -136867,7 +136862,7 @@ otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 #shape. An explicit count there makes the player click every leftover card one at a time.
 auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Tests: woe_farsight_ritual_take_two, woe_farsight_ritual_bargained (top eight).
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
 mana={2}{U}{U}
 type=Instant
@@ -136880,7 +136875,7 @@ other={6}{G}{G}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
 auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Tests: woe_thunderous_debut_hand, woe_thunderous_debut_bargained (onto the battlefield).
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
 mana={6}{G}{G}
 type=Sorcery
@@ -136890,7 +136885,7 @@ name=Beseech the Mirror
 grade=borderline
 auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 missing=Bargain is not offered, and the exile step is collapsed. Bargained, the real card lets you CAST the tutored card for free when its mana value is 4 or less; casting from a face-down exile for free is not expressible, and the UNBARGAINED outcome is exactly "tutor to hand", which is what this is. A Bargain option would cost a permanent and change nothing.
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Test: woe_beseech_the_mirror_tutor.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Search your library for a card, exile it face down, then shuffle. If this spell was bargained, you may cast the exiled card without paying its mana cost if that spell's mana value is 4 or less. Put the exiled card into your hand if it wasn't cast this way.
 mana={1}{B}{B}{B}
 type=Sorcery

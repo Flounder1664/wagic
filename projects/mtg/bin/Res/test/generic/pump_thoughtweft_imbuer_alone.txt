@@ -1,0 +1,22 @@
+#Thoughtweft Imbuer: a creature attacking alone gets +X/+X, X = Kithkin you control (1, the Imbuer).
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Thoughtweft Imbuer,Grizzly Bears
+[PLAYER2]
+[DO]
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Thoughtweft Imbuer,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+life:17
+[END]

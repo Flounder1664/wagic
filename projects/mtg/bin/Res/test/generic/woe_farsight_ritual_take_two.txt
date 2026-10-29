@@ -1,0 +1,25 @@
+#Farsight Ritual unbargained: look at the top four (library is listed BOTTOM first, so the top four
+#are Grizzly Bears, Hill Giant, Air Elemental, Juggernaut), take two, the rest go to the bottom.
+#Ornithopter is fifth from the top and must stay out of reach.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Farsight Ritual
+library:Ornithopter,Grizzly Bears,Hill Giant,Air Elemental,Juggernaut
+manapool:{2}{U}{U}
+[PLAYER2]
+[DO]
+Farsight Ritual
+choice 0
+Juggernaut
+Hill Giant
+revealdone
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Juggernaut,Hill Giant
+library:Ornithopter,Grizzly Bears,Air Elemental
+graveyard:Farsight Ritual
+[PLAYER2]
+[END]

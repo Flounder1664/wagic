@@ -1,0 +1,20 @@
+#Battle Menu's Ability mode gives ANY target creature +0/+4 (the old line was limited to your own creatures).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Battle Menu
+manapool:{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Battle Menu
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Battle Menu
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=3/7
+[END]

@@ -1,0 +1,19 @@
+#Magic Damper gives target creature you control +1/+1 and hexproof.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Magic Damper
+inplay:Grizzly Bears
+manapool:{U}
+[PLAYER2]
+[DO]
+Magic Damper
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Magic Damper
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

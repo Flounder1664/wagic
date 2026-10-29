@@ -1,0 +1,19 @@
+#Grow Extra Arms gives target creature +4/+4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grow Extra Arms
+inplay:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grow Extra Arms
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Grow Extra Arms
+pt:Grizzly Bears=6/6
+[PLAYER2]
+[END]

@@ -10224,7 +10224,7 @@ subtype=Aura
 [card]
 name=Battle Menu
 auto=choice name(Attack) token(Knight,Creature Knight,2/2,,white) controller
-auto=choice name(Ability) pump(0/4) target(creature|mybattlefield) ueot
+auto=choice name(Ability) target(creature|battlefield) 0/4 ueot
 auto=choice name(Item) life:4 controller
 auto=choice name(Magic) destroy target(creature[power>=4]|battlefield)
 text=Choose one -- Create a 2/2 white Knight creature token. -- Target creature gets +0/+4 until end of turn. -- Destroy target creature with power 4 or greater. -- You gain 4 life.
@@ -12646,7 +12646,7 @@ toughness=7
 [card]
 name=Blitzball Shot
 target=creature|battlefield
-auto=pump(3/3) ueot
+auto=3/3 ueot
 auto=ability(trample) ueot
 text=Target creature gets +3/+3 and gains trample until end of turn.
 mana={1}{G}
@@ -41228,8 +41228,9 @@ type=Instant
 [card]
 name=Fancy Footwork
 grade=borderline
-auto=pump(2/2) target(<upto:2>creature|mybattlefield) ueot
-auto=untap target(<upto:2>creature|mybattlefield)
+target=<upto:2>creature|battlefield
+auto=2/2 ueot
+auto=untap
 text=Untap one or two target creatures. They each get +2/+2 until end of turn.
 mana={2}{W}
 type=Instant
@@ -54034,10 +54035,12 @@ toughness=3
 [/card]
 [card]
 name=Grow Extra Arms
-auto=pump(4/4) target(creature|battlefield) ueot
-text=Target creature gets +4/+4 until end of turn.
+target=creature|battlefield
+auto=4/4 ueot
+text=This spell costs {1} less to cast if it targets a Spider. -- Target creature gets +4/+4 until end of turn.
 mana={1}{G}
 type=Instant
+missing=This spell costs {1} less to cast if it targets a Spider.
 [/card]
 [card]
 name=Growing Ranks
@@ -55844,9 +55847,10 @@ toughness=2
 [card]
 name=Haste Magic
 target=creature|battlefield
-auto=pump(3/1) ueot
+auto=3/1 ueot
 auto=ability(haste) ueot
-text=Target creature gets +3/+1 and gains haste until end of turn.
+auto=moveto(exile) and!( transforms((,canplayfromexile)) ueot )! all(*[zpos=1]|mylibrary)
+text=Target creature gets +3/+1 and gains haste until end of turn. Exile the top card of your library. You may play it until your next end step.
 mana={1}{R}
 type=Instant
 [/card]
@@ -73801,7 +73805,7 @@ subtype=Aura
 [card]
 name=Magic Damper
 target=creature|mybattlefield
-auto=pump(1/1) ueot
+auto=1/1 ueot
 auto=ability(hexproof) ueot
 auto=untap
 text=Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it.
@@ -88474,7 +88478,8 @@ subtype=Aura
 [/card]
 [card]
 name=Overkill
-auto=pump(0/-9999) target(creature|battlefield) ueot
+target=creature|battlefield
+auto=0/-9999 ueot
 text=Target creature gets -0/-9999 until end of turn.
 mana={2}{B}
 type=Instant
@@ -90237,7 +90242,7 @@ name=Perigee Beckoner
 grade=borderline
 other={1}{B} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
-auto=pump(2/0) target(creature|mybattlefield) ueot
+auto=target(creature[-this]|mybattlefield) transforms((,newability[2/0],newability[inplaytapdeath])) ueot
 auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,canplayfromexile)) forever )!
 text=When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." -- Warp {1}{B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={4}{B}
@@ -91663,7 +91668,7 @@ toughness=5
 [card]
 name=Pillar Launch
 target=creature|battlefield
-auto=pump(2/2) ueot
+auto=2/2 ueot
 auto=ability(reach) ueot
 auto=untap
 text=Target creature gets +2/+2 and gains reach until end of turn. Untap it.
@@ -105898,7 +105903,8 @@ toughness=4
 [/card]
 [card]
 name=Scorpion's Sting
-auto=pump(-3/-3) target(creature|battlefield) ueot
+target=creature|battlefield
+auto=-3/-3 ueot
 text=Target creature gets -3/-3 until end of turn.
 mana={1}{B}
 type=Instant
@@ -112077,7 +112083,7 @@ name=Sinister Cryologist
 grade=borderline
 other={U} name(Warp)
 otherrestriction=type(this|myhand)~morethan~0
-auto=pump(-3/0) target(creature|opponentbattlefield) ueot
+auto=target(creature|opponentbattlefield) -3/0 ueot
 auto=alternative phaseaction[end once sourceinplay] moveto(exile) and!( transforms((,canplayfromexile)) forever )!
 text=When this creature enters, target creature an opponent controls gets -3/-0 until end of turn. -- Warp {U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
 mana={2}{U}
@@ -127641,14 +127647,13 @@ type=Instant
 [/card]
 [card]
 name=Thoughtweft Imbuer
-auto=@combat(attacking) source(creature[-this]|mybattlefield):pump(1/1) ueot
+auto=@combat(attackedalone) source(creature|mybattlefield):all(trigger[to]) type:kithkin:mybattlefield/type:kithkin:mybattlefield ueot
 mana={3}{W}
 type=Creature
 text=Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of Kithkin you control.
 subtype=Kithkin Advisor
 power=0
 toughness=5
-missing=Not implemented: the trigger line uses pump(), which is not Wagic syntax and does nothing. Should be: a creature you control attacking alone gets +X/+X, X = the number of Kithkin you control.
 [/card]
 [card]
 name=Thoughtweft Lieutenant
@@ -128454,9 +128459,10 @@ type=Instant
 [card]
 name=Thwip!
 target=creature|battlefield
-auto=pump(2/2) ueot
+auto=2/2 ueot
 auto=ability(flying) ueot
-text=Target creature gets +2/+2 and gains flying until end of turn.
+auto=if cantargetcard(creature[spider]|*) then life:2 controller
+text=Target creature gets +2/+2 and gains flying until end of turn. If it's a Spider, you gain 2 life.
 mana={W}
 type=Instant
 [/card]

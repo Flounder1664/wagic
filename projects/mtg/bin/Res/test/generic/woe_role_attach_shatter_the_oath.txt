@@ -1,0 +1,24 @@
+#Shatter the Oath: destroy target creature or enchantment (the opponent's Hill Giant), then attach a
+#Wicked Role to a creature you control. Two clicks: the spell's target, then the Role's attach
+#prompt. Grizzly Bears at 3/3 proves the Role landed on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shatter the Oath
+manapool:{3}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shatter the Oath
+Hill Giant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Wicked
+graveyard:Shatter the Oath
+pt:Grizzly Bears=3/3
+[PLAYER2]
+graveyard:Hill Giant
+[END]
