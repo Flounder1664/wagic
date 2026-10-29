@@ -57312,7 +57312,8 @@ type=Instant
 [/card]
 [card]
 name=Imposter Mech
-missing=the enter-as-a-copy replacement is not written, so it enters as a plain 0/0 artifact and dies.
+auto=_CREW3_
+missing=the enter-as-a-copy of an opponent's creature (as a crew 3 Vehicle) is not written; it is a plain 3/1 crew 3 Vehicle.
 text=You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types. -- Crew 3
 mana={1}{U}
 type=Artifact
@@ -133375,10 +133376,13 @@ toughness=2
 [/card]
 [card]
 name=Unidentified Hovership
+#REVIEW-V 2026-10-29: remove it after it exiled something and check the exiled card's owner manifests dread.
 abilities=flying
 auto=_CREW1_
-auto=may moveTo(exile) target(creature[toughness<=5])
-missing=When this Vehicle leaves the battlefield, the exiled card's owner manifests dread (manifest dread unsupported; the exile is permanent here)
+auto=may name(Exile a creature) moveTo(exile) target(creature[toughness<=5]) and!( counter(0/0,1,HoverExiled) )!
+#Leaving: the owner of the card it exiled manifests dread (the card itself stays in exile).
+auto=@movedto(this|nonbattlezone) from(mybattlefield):if type(*[counter{0/0.1.HoverExiled}]|opponentexile)~morethan~0 then ability$!_MANIFEST_DREAD_!$ opponent
+auto=@movedto(this|nonbattlezone) from(mybattlefield):if type(*[counter{0/0.1.HoverExiled}]|myexile)~morethan~0 then ability$!_MANIFEST_DREAD_!$ controller
 text=Flying -- When this Vehicle enters, exile up to one target creature with toughness 5 or less. -- When this Vehicle leaves the battlefield, the exiled card's owner manifests dread. -- Crew 1
 mana={1}{W}{W}
 type=Artifact
@@ -133962,7 +133966,9 @@ toughness=3
 [/card]
 [card]
 name=Boommobile
+#REVIEW-V 2026-10-29: check the enters mana can only be spent on abilities, and the exhaust X menu.
 auto=ability$!choice add{W}{W}{W}{W} spendabilities(*) _ choice add{U}{U}{U}{U} spendabilities(*) _ choice add{B}{B}{B}{B} spendabilities(*) _ choice add{R}{R}{R}{R} spendabilities(*) _ choice add{G}{G}{G}{G} spendabilities(*)!$ controller
+#X is offered from 1 to 10.
 auto={10}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=10) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:10 target(anytarget) !$ controller
 auto={9}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=9) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:9 target(anytarget) !$ controller
 auto={8}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=8) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:8 target(anytarget) !$ controller
@@ -133974,7 +133980,6 @@ auto={3}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=3) counter(0
 auto={2}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=2) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:2 target(anytarget) !$ controller
 auto={1}{2}{R} restriction{compare(hascntexhaust)~equalto~0}:name(x=1) counter(0/0,1,exhaust) && counter(1/1) && ability$! damage:1 target(anytarget) !$ controller
 auto=_CREW2_
-missing=X capped at 10
 text=When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities. -- Exhaust - {X}{2}{R}: This Vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle. (Activate each exhaust ability only once.) -- Crew 2
 mana={2}{R}{R}
 type=Artifact
@@ -134947,10 +134952,10 @@ toughness=3
 [/card]
 [card]
 name=The Regalia
+#REVIEW-V 2026-10-29: attack and check the reveal-until-land puts the land onto the battlefield tapped and the rest on the bottom.
 abilities=haste
-auto=_ATTACKING_may target(<1>land|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=_ATTACKING_name(Reveal until a land) reveal:1 revealzone(mylibrary) revealuntil(*[land]|mylibrary) optionone choice name(Put the land onto the battlefield) target(land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo choice name(Rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 auto=_CREW1_
-missing=should reveal until a land (implemented as: search a land onto the battlefield tapped)
 text=Haste -- Whenever The Regalia attacks, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order. -- Crew 1
 mana={4}
 type=Legendary Artifact
@@ -136555,17 +136560,10 @@ toughness=3
 [/card]
 [card]
 name=Axebane Ferox
-grade=unsupported
 abilities=deathtouch,haste
-missing=Ward-Collect evidence 4 is NOT implemented, and must not be re-added in the
-#obvious way. A ward built on the _WARD4_ macro with the mana swapped for
-#pay[[{evidence4(*|mygraveyard)}]] SOFT-LOCKED the game (John, 2026-07-30): the ward
-#is meant to be paid by the player who TARGETED this creature, but the graveyard
-#chooser inside pay[[...]] resolves "my" against this card's controller instead, so it
-#prompted the wrong player and then hung with no way to complete or cancel.
-#_WARDn_ only survives this because {N} is pure mana with no target chooser at all.
-#A ward with a TARGETED extra cost needs the chooser bound to the spell's controller,
-#which is an engine fix, not a DSL one. Card ships as a vanilla deathtouch/haste beater.
+#Ward-Collect evidence 4. The chooser cost inside pay[[...]] could not be completed before the
+#2026-10-29 WaitForExtraPayment fix (the menu came straight back - John's 2026-07-30 soft-lock).
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - collect evidence 4) name(Ward - collect evidence 4) target(*|opponentzones) transforms((,newability[pay[[{evidence4(*|mygraveyard)}]] name(collect evidence 4) donothing?fizzle])) oneshot
 text=Deathtouch, haste -- Ward-Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)
 mana={2}{G}{G}
 type=Creature
@@ -137728,10 +137726,8 @@ toughness=4
 name=Spider-Mobile
 abilities=trample
 grade=borderline
-auto=@combat(attacking,blocking) source(this):1/1 ueot
-missing=scaling by Spider count: the )*type: multiplier is only attested on token
-#creation, not on a pump, so this is a flat +1/+1 rather than one per Spider.
-auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+auto=@combat(attacking,blocking) source(this):type:spider:mybattlefield/type:spider:mybattlefield ueot
+auto=_CREW2_
 text=Trample -- Whenever this Vehicle attacks or blocks, it gets +1/+1 until end of turn for each Spider you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
 mana={3}
 type=Artifact
@@ -138923,14 +138919,15 @@ toughness=3
 [card]
 name=Turtle Van
 grade=borderline
-auto=@combat(attacking) source(this):counter(1/1) target(creature[crewedsource]|mybattlefield)
-auto={crew1(other creature|myBattlefield)}:name(Crew 1) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~0}
 #crewedsource = crewed THIS Vehicle this turn. The old counter{0/0.1.crewed} filter matched
 #anything that crewed any Vehicle, so with two crewed Vehicles each could target the other's
 #crewer (John, crew scenario, 2026-10-11). The attack trigger's targeting is tested in
 #generic/trigger_target_turtle_van.txt.
-missing=the Mutant/Ninja/Turtle counter-doubling rider.
-text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. (No doubling.) -- Crew 1
+#A Mutant, Ninja or Turtle crewer gets its counter, then one more per +1/+1 counter it has (doubling).
+auto=@combat(attacking) source(this):counter(1/1) target(creature[crewedsource;-mutant;-ninja;-turtle]|mybattlefield)
+auto=@combat(attacking) source(this):target(creature[crewedsource;mutant;ninja;turtle]|mybattlefield) transforms((,newability[counter(1/1)],newability[thisforeach(counter{1/1.1}) counter(1/1)])) oneshot
+auto=_CREW1_
+text=Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it. -- Crew 1
 mana={3}
 type=Artifact
 subtype=Vehicle
@@ -138994,17 +138991,16 @@ toughness=5
 name=Unlicensed Hearse
 grade=borderline
 auto={T}:name(Exile cards from a graveyard) moveTo(exile) target(<upto:2>*|graveyard) and!( counter(0/0,1,HearseExiled) )!
-auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-#The exile now stamps a HearseExiled counter, so the cards exiled with this permanent are
-#identifiable (the Bomat Courier shape).
-missing=power and toughness should EQUAL that count; a cda whose filter is a counter in
-#exile is not attested, so the body stays 4/4 rather than inventing the syntax.
-text={T}: Exile up to two target cards from a single graveyard. -- Unlicensed Hearse's power and toughness are each equal to the number of cards exiled with it. (Fixed at 4/4.) -- Crew 2
+#Not an anyzone= cda: that line splits power/toughness at the first "/", which is inside counter{0/0...}.
+auto=foreach(*[counter{0/0.1.HearseExiled}]|exile) 1/1
+auto=_CREW2_
+#"From a single graveyard" is not enforced - the two targets may come from different graveyards.
+text={T}: Exile up to two target cards from a single graveyard. -- Unlicensed Hearse's power and toughness are each equal to the number of cards exiled with it. -- Crew 2
 mana={2}
 type=Artifact
 subtype=Vehicle
-power=4
-toughness=4
+power=0
+toughness=0
 [/card]
 [card]
 name=Dodgy Jalopy
@@ -139022,18 +139018,14 @@ toughness=5
 [/card]
 [card]
 name=Mysterious Limousine
+#REVIEW-V 2026-10-29: attack it after an enter-exile and check the new exile sends the earlier card back (the enter exile is tested).
 grade=borderline
-auto=may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( counter(0/0,1,LimoExiled) )!
-auto=@combat(attacking) source(this):may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( counter(0/0,1,LimoExiled) )!
-auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.LimoExiled}]|exile) moveto(battlefield)
-auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-#The exile now lasts only while this Vehicle is on the battlefield: the exiling ability
-#stamps a LimoExiled counter (the Bomat Courier / Intet shape) and a leave trigger hands
-#every card carrying it back. No engine change needed - I had this filed as an engine
-#gap and it is not one.
-missing=the earlier exiled cards should return when a NEW one is exiled; here they all
-#return together when the Vehicle leaves.
-text=Whenever this Vehicle enters or attacks, exile up to one other target creature until this Vehicle leaves the battlefield. (The exile is permanent.) -- Crew 3
+#Each new exile first sends back the cards this Vehicle exiled earlier (LimoExiled counter).
+auto=may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( all(*[counter{0/0.1.LimoExiled}]|exile) moveto(ownerbattlefield) && counter(0/0,1,LimoExiled) )!
+auto=@combat(attacking) source(this):may name(Exile a creature) moveTo(exile) target(<upto:1>other creature) and!( all(*[counter{0/0.1.LimoExiled}]|exile) moveto(ownerbattlefield) && counter(0/0,1,LimoExiled) )!
+auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.LimoExiled}]|exile) moveto(ownerbattlefield)
+auto=_CREW2_
+text=Whenever this Vehicle enters or attacks, exile up to one other target creature until this Vehicle leaves the battlefield. If a creature is put into exile this way, return each other card exiled with this Vehicle to the battlefield under its owner's control. -- Crew 2
 mana={3}{W}{W}
 type=Artifact
 subtype=Vehicle
@@ -139042,16 +139034,16 @@ toughness=4
 [/card]
 [card]
 name=Foreboding Steamboat
+#REVIEW-V 2026-10-29: each player picks two of their own creatures (the opponent's pick cannot be driven here); check the attack trigger graveyards one and investigates, and they return when it leaves.
 grade=borderline
-auto=may name(Exile two creatures) moveTo(exile) target(<upto:2>creature[-token]|opponentbattlefield) and!( counter(0/0,1,SteamboatExiled) )!
-auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.SteamboatExiled}]|exile) moveto(battlefield)
-auto={crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
-#The exiled creatures now come back when this Vehicle leaves, via a stamped
-#SteamboatExiled counter and a leave trigger.
-missing=each player should exile two of their OWN creatures; here only the opponent's
-#are taken. The attack trigger that converts an exiled card into a graveyard card plus a
-#Treasure is also not implemented.
-text=When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield. -- Whenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, create a Treasure token. (Approximated: exiles two of the opponent's creatures permanently.) -- Crew 3
+#Each player exiles two of their own nontoken, non-Vehicle creatures; a SteamboatExiled counter
+#marks them so the leave trigger can return them.
+auto=name(Exile two of your creatures) notaTarget(<2>creature[-token;-vehicle]|mybattlefield) moveTo(exile) and!( counter(0/0,1,SteamboatExiled) )!
+auto=ability$!name(Exile two of your creatures) notaTarget(<2>creature[-token;-vehicle]|mybattlefield) moveTo(exile) and!( counter(0/0,1,SteamboatExiled) )!!$ opponent
+auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.SteamboatExiled}]|exile) moveto(ownerbattlefield)
+auto=_ATTACKING_name(Graveyard an exiled card and investigate) notaTarget(<1>*[counter{0/0.1.SteamboatExiled}]|exile) moveto(ownergraveyard) && _CLUE_ controller
+auto=_CREW2_
+text=When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield. -- Whenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, investigate. -- Crew 2
 mana={3}{B}{B}
 type=Artifact
 subtype=Vehicle
@@ -139062,10 +139054,10 @@ toughness=7
 name=Filigree Racer
 grade=borderline
 auto=alterenergy:4 controller
-auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+auto=_CREW1_
 missing=the attack trigger that pays {E}{E} to grant jump-start to a graveyard spell;
 #granting jump-start has no route.
-text=When this Vehicle enters, you get {E}{E}{E}{E} (four energy counters). -- Whenever this Vehicle attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (Not implemented.) -- Crew 2
+text=When this Vehicle enters, you get {E}{E}{E}{E} (four energy counters). -- Whenever this Vehicle attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (Not implemented.) -- Crew 1
 mana={3}{R}
 type=Artifact
 subtype=Vehicle
@@ -139087,15 +139079,13 @@ toughness=5
 [/card]
 [card]
 name=Phoenix Fleet Airship
+#REVIEW-V 2026-10-29: with eight copies check it is a creature without crewing; check the end-step copy after a sacrifice.
 abilities=flying
 grade=borderline
-auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-#AAsLongAs(mini,maxi) and ships on cards like "aslongas(*|mygraveyard) shroud >6" - but
-#MEASURED here it does not combine with becomes(): at 8 and at 9 copies the Vehicle
-#still could not be destroyed as a creature. Reverted rather than shipped on a guess.
+auto=_CREW1_
 auto=@each my end restriction{compare(psacrificedcount)~morethan~0}:name(Copy this Vehicle) clone
-missing="as long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature"
-text=Flying -- At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle. (Not implemented.) -- As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature. -- Crew 2
+auto=this(variable{type:phoenix fleet airship:mybattlefield}>7) transforms((Creature))
+text=Flying -- At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle. -- As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature. -- Crew 1
 mana={2}{B}{B}
 type=Artifact
 subtype=Vehicle

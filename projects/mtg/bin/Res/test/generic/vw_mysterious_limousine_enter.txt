@@ -1,0 +1,21 @@
+#Mysterious Limousine exiles an opponent's creature as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mysterious Limousine
+manapool:{3}{W}{W}
+[PLAYER2]
+inplay:Hill Giant,Gray Ogre
+[DO]
+Mysterious Limousine
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mysterious Limousine
+manapool:{0}
+[PLAYER2]
+inplay:Gray Ogre
+exile:Hill Giant
+[END]

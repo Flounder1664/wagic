@@ -1,0 +1,26 @@
+#Axebane Ferox's Ward-Collect evidence 4: player 1 exiles Hill Giant (mana value 4) from their
+#graveyard and Unsummon resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+graveyard:Hill Giant
+manapool:{U}
+[PLAYER2]
+inplay:Axebane Ferox
+[DO]
+134
+Axebane Ferox
+choice 0
+134
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+exile:Hill Giant
+manapool:{0}
+[PLAYER2]
+hand:Axebane Ferox
+[END]

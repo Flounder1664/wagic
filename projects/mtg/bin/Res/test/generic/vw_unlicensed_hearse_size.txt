@@ -1,0 +1,20 @@
+#Unlicensed Hearse exiles two cards from a graveyard and becomes 2/2 (cards exiled with it).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unlicensed Hearse
+[PLAYER2]
+graveyard:Hill Giant,Gray Ogre
+[DO]
+Unlicensed Hearse
+choice 0
+Hill Giant
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unlicensed Hearse
+pt:Unlicensed Hearse=2/2
+[PLAYER2]
+exile:Hill Giant,Gray Ogre
+[END]

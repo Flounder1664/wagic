@@ -1,13 +1,13 @@
-#Spider-Mobile: crewed by Grizzly Bears, it attacks and "gets +1/+1 until end of turn" (flat +1/+1;
-#the per-Spider scaling is a known missing= on the card). 3/3 hits for 4.
+#Spider-Mobile: crewed by Giant Spider (the only Spider), it attacks and gets +1/+1 for each
+#Spider you control. 3/3 hits for 4.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
-inplay:Spider-Mobile,Grizzly Bears
+inplay:Spider-Mobile,Giant Spider
 [PLAYER2]
 [DO]
 Spider-Mobile
-Grizzly Bears
+Giant Spider
 next
 next
 Spider-Mobile
@@ -17,7 +17,7 @@ next
 [ASSERT]
 COMBATEND
 [PLAYER1]
-inplay:Spider-Mobile,Grizzly Bears
+inplay:Spider-Mobile,Giant Spider
 pt:Spider-Mobile=4/4
 [PLAYER2]
 life:16

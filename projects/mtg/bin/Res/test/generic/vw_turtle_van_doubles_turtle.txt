@@ -1,0 +1,30 @@
+#Turtle Van crewed by Horned Turtle (a Turtle, 1/4): the counter lands, then the Turtle's +1/+1
+#counters double - one becomes two, 1/4 -> 3/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520181,Horned Turtle
+[PLAYER2]
+[DO]
+1520181
+Horned Turtle
+next
+#begin
+next
+#attackers
+1520181
+next
+#trigger
+Horned Turtle
+next
+#blockers
+next
+#damage
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:1520181,Horned Turtle
+pt:Horned Turtle=3/6
+[PLAYER2]
+life:16
+[END]
