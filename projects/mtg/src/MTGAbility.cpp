@@ -3265,6 +3265,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
                 break;
             case 4:
                 result = NEW ALord(observer, id, card, lordTargets, lordIncludeSelf, a);
+                ((ALord *) result)->lastsForever = (s.find("forever") != string::npos);
                 break;
             default:
                 result = NULL;

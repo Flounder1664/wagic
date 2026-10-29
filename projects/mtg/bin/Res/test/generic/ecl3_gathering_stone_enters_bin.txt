@@ -1,0 +1,23 @@
+#Gathering Stone naming Goblin: the top card is Hill Giant (not a Goblin), so it can only stay or go; choosing graveyard bins the Giant, not the Stone.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gathering Stone
+library:Raging Goblin,Hill Giant
+manapool:{4}
+[PLAYER2]
+[DO]
+Gathering Stone
+menu Choose a type
+menu Choose a type
+menu Goblin
+Hill Giant
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gathering Stone
+library:Raging Goblin
+graveyard:Hill Giant
+[PLAYER2]
+[END]

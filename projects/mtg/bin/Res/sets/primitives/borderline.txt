@@ -8643,8 +8643,11 @@ auto=_PREPARE_
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:ancestral recall:!)
 #"You may exile eight cards from your graveyard. If you do" - eight {E(...)} costs, the shape
 #Time Compression uses. Gated on eight being there so the may is never offered when it can't be paid.
-#REVIEW-V 2026-10-28: the harness cannot pay the eight {E(...)} costs (the pay resolves before any graveyard click lands) - needs John's eyes.
-auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:may name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
+#2026-10-28 (John, scenario 47): two prompts, then the eight picked cards were never exiled. pay[[...]]
+#already offers Cancel, so the may was a second prompt - dropped. The lost payment was the engine:
+#GameObserver::WaitForExtraPayment completed a pay[[...]] menu's extra costs itself on the last click,
+#bypassing MenuAbility's own pay-and-resolve. Test: sos_emeritus_of_ideation_attack_prepares.
+auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
 #Prepared is shown as a Prepared counter rather than a face-up back side - a display difference, not a rules gap.
 mana={3}{U}{U}
 type=Creature
@@ -9173,6 +9176,7 @@ toughness=1
 [/card]
 [card]
 name=Inspired Skypainter // Maestro's Gift
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): combat damage from a creature token re-prepares it.
 grade=borderline
 abilities=flying
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
@@ -20401,6 +20405,7 @@ type=Enchantment
 [card]
 name=City's Blessing
 abilities=shroud,indestructible,doublefacedeath,nofizzle
+text=You have the city's blessing. (Ascend -- once you control ten or more permanents, you get the city's blessing for the rest of the game.)
 type=Emblem
 [/card]
 [card]
@@ -26786,10 +26791,10 @@ name=Deadeye Brawler
 abilities=deathtouch,ascend
 auto=_ASCEND_
 auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
-#REVIEW-V 2026-10-18: the draw never happens in the harness, even with the city's blessing in the
-#command zone for a whole round. Not a harness gap: no restriction{type(City's Blessing|mycommandzone)}
-#or aslongas(...) sees the marker card, so every blessing-gated card is affected. Untested: the draw.
-auto=_CITY'S_BLESSING_ transforms((,newability[@combatdamaged(player) from(this):draw:1]))
+#2026-10-28 (John, scenario 39: no draw): RIX/_cards.dat had lost the [card] opener of the City's
+#Blessing marker, so the marker was never dropped and every blessing check saw nothing. Fixed there;
+#this line reads the cityblessing flag directly anyway. Test: rix_deadeye_brawler_blessing_draw.
+auto=@combatdamaged(player) from(this) restriction{compare(cityblessing)~morethan~0}:draw:1
 text=Deathtouch -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
 mana={2}{U}{B}
 type=Creature
@@ -27985,6 +27990,7 @@ toughness=6
 [/card]
 [card]
 name=Demon of Loathing
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the OPPONENT chooses the creature to sacrifice.
 abilities=flying,trample
 #REVIEW-V 2026-10-18: untested - the sacrifice choice goes to the OPPONENT (wagic#47 row 11), which the
 #harness cannot answer; with one creature opposite, nothing was sacrificed. Check the opponent loses one.
@@ -50745,6 +50751,7 @@ toughness=4
 [/card]
 [card]
 name=Guardian of the Gateless
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): gets +1/+1 when it blocks.
 abilities=flying
 #REVIEW-V 2026-10-18: untested - the trigger fires when it BLOCKS, and the harness cannot make the
 #opponent attack. Check it gets +1/+1 when it blocks.
@@ -75569,6 +75576,7 @@ toughness=4
 [/card]
 [card]
 name=Most Wanted
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): enchanted creature dies, two Treasures.
 abilities=flash
 target=creature
 auto=teach(creature) 2/1
@@ -134519,7 +134527,10 @@ other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
-auto=token(-1520200)*3
+#John 2026-10-28 (scenario 40): cast for sneak, the tokens entered untapped and not attacking -
+#the line had no sneak branch at all. battleready is what enters a registered token tapped and attacking.
+auto=if paid(alternative) then token(-1520200,battleready)*3
+auto=ifnot paid(alternative) then token(-1520200)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
 type=Instant
@@ -134730,11 +134741,8 @@ name=Aang, Swift Savior
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap 4 transforms (airbend recast costs its own mana cost, not {2}).
 abilities=flash,flying
 grade=borderline
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB airbend exiles the target to its owner's exile.
 auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
-#REVIEW-V Unverifiable in the harness: a card with backside= cannot be cast from hand there
-#(measured 2026-09-05 - the click lands, no action reaches the stack, with or without these
-#lines and with mana to spare), so the ETB never fires. The airbend body copies Airbending
-#Lesson, which ships _AIRBEND_; the ETB target is inline like Flametongue Kavu. Verify in game.
 auto={8}:name(Waterbend {8}) flip(backside)
 auto={7}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 1) flip(backside)
 auto={6}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 2) flip(backside)
@@ -135400,8 +135408,10 @@ auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 contr
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 #REVIEW-V 2026-10-18: chapter II untested - a creature dealing combat damage must make that player
 #LOSE THE GAME, and a harness run cannot assert a game loss. Chapter I is fin_summon_primal_odin_ch1.
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) ueot
-text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - Until end of turn, creatures you control gain "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
+#Chapter II is "THIS creature gains" with no duration (oracle). It was written as every creature you
+#control until end of turn - John caught it on 2026-10-28 (scenario 03).
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) forever
+text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - This creature gains "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
 mana={4}{B}{B}
 type=Enchantment Creature
 subtype=Saga Knight
@@ -148295,6 +148305,7 @@ toughness=2
 [/card]
 [card]
 name=Glider Staff
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): equip does not airbend again; airbent creature castable for {2}.
 auto={2}:equip
 auto=teach(creature) 1/1
 auto=teach(creature) flying
@@ -148318,6 +148329,7 @@ toughness=1
 [/card]
 [card]
 name=Hakoda, Selfless Commander
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): top card visible face up, and an Ally cast from the top.
 abilities=vigilance,showfromtoplibrary
 auto=aslongas(ally[zpos=1]|mylibrary) canplayfromlibrarytop >0
 auto={S}:all(creature|mybattlefield) 0/5 ueot && all(creature|mybattlefield) transforms((,indestructible)) ueot
@@ -148364,6 +148376,7 @@ toughness=1
 [/card]
 [card]
 name=Kyoshi Battle Fan
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the Ally token it creates shows real token art.
 auto={2}:equip
 auto=livingweapontoken(Ally,Creature Ally,1/1,white)
 auto=teach(creature) 1/0
@@ -148374,6 +148387,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Planetarium of Wan Shi Tong
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): scry 2 reveal window offers a free cast.
 auto={1}{T}:_SCRY2_
 auto=@scryed(*|myzones) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
 auto=@surveiled(*|mybattlefield,mystack) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
@@ -148405,6 +148419,7 @@ toughness=1
 [/card]
 [card]
 name=Waterbending Lesson
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the "tap 2 creatures" waterbend option.
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): paying {2} keeps all three; declining discards one.
 #That was the old one-cost menu; the 2026-10-18 waterbend menu below needs a fresh look (queue scenario 08).
 auto=draw:3 controller

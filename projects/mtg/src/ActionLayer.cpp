@@ -409,6 +409,7 @@ void ActionLayer::setMenuObject(Targetable * object, bool must)
         return;
     }
     menuObject = object;
+    menuMust = must;
     menuPreviewCards.clear();
 
     SAFE_DELETE(abilitiesMenu);
@@ -463,6 +464,7 @@ void ActionLayer::setCustomMenuObject(Targetable * object, bool must,vector<MTGA
         return;
     }
     menuObject = object;
+    menuMust = must;
     SAFE_DELETE(abilitiesMenu);
     abilitiesMenu = NEW SimpleMenu(observer->getInput(), observer->getResourceManager(), 10, this, Fonts::MAIN_FONT, 100, 100, customName.size()?customName.c_str():object->getDisplayName().c_str());
     currentActionCard = NULL;
@@ -591,6 +593,7 @@ ActionLayer::ActionLayer(GameObserver *observer)
     : GuiLayer(observer)
 {
     menuObject = NULL;
+    menuMust = false;
     abilitiesMenu = NULL;
     abilitiesTriggered = NULL;
     stuffHappened = 0;

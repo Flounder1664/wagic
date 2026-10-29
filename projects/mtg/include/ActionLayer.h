@@ -23,6 +23,7 @@ class ActionLayer: public GuiLayer, public JGuiListener
 public:
     vector<ActionElement *> garbage;
     Targetable * menuObject;
+    bool menuMust; //the open menu is a must group ("choice" modes), not a "may"
     SimpleMenu * abilitiesMenu;
     SimpleMenu * abilitiesTriggered;
     MTGCardInstance * currentActionCard;

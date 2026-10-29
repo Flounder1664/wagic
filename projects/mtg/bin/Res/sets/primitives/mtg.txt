@@ -19720,9 +19720,9 @@ toughness=1
 name=Champion of the Clachan
 abilities=flash
 auto=aslongas(other kithkin|mybattlefield,myhand) choice name(Behold a Kithkin) notaTarget(other kithkin|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other kithkin|mybattlefield,myhand) sacrifice <1 oneshot
 auto=lord(other kithkin|mybattlefield) 1/1
-note=Behold is done as this creature enters rather than as a cost: you exile a Kithkin you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Kithkin you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=Flash -- As an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.) -- Other Kithkin you control get +1/+1. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{W}
 type=Creature
@@ -19743,9 +19743,9 @@ toughness=1
 [card]
 name=Champion of the Path
 auto=aslongas(other elemental|mybattlefield,myhand) choice name(Behold an Elemental) notaTarget(other elemental|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other elemental|mybattlefield,myhand) sacrifice <1 oneshot
 auto=@movedTo(other elemental|mybattlefield):all(trigger[to]) transforms((,newability[damage:power opponent])) oneshot
-note=Behold is done as this creature enters rather than as a cost: you exile an Elemental you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile an Elemental you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold an Elemental and exile it. (Exile an Elemental you control or an Elemental card from your hand.) -- Whenever another Elemental you control enters, it deals damage equal to its power to each opponent. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{R}
 type=Creature
@@ -19756,9 +19756,9 @@ toughness=3
 [card]
 name=Champion of the Weird
 auto=aslongas(other goblin|mybattlefield,myhand) choice name(Behold a Goblin) notaTarget(other goblin|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other goblin|mybattlefield,myhand) sacrifice <1 oneshot
 auto={L:1}{C(-1/-1,2),creature|mybattlefield}:name(Target opponent blights 2) ability$!name(Blight 2) counter(-1/-1,2) notaTarget(creature|mybattlefield)!$ opponent asSorcery
-note=Behold is done as this creature enters rather than as a cost: you exile a Goblin you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Goblin you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 #REVIEW-V the opponent's blight choice cannot be driven in the harness (scenario queued 2026-10-28)
 text=As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.) -- Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{B}
@@ -19800,9 +19800,9 @@ type=Instant
 [card]
 name=Champions of the Perfect
 auto=aslongas(other elf|mybattlefield,myhand) choice name(Behold an Elf) notaTarget(other elf|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other elf|mybattlefield,myhand) sacrifice <1 oneshot
 auto=@movedTo(creature|mystack):draw:1 controller
-note=Behold is done as this creature enters rather than as a cost: you exile an Elf you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile an Elf you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.) -- Whenever you cast a creature spell, draw a card. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{G}
 type=Creature
@@ -19813,11 +19813,11 @@ toughness=6
 [card]
 name=Champions of the Shoal
 auto=aslongas(other merfolk|mybattlefield,myhand) choice name(Behold a Merfolk) notaTarget(other merfolk|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other merfolk|mybattlefield,myhand) sacrifice <1 oneshot
 auto=may name(Tap and stun) tap target(creature) && counter(0/0,1,stun)
-#REVIEW-V the enters-trigger tap shares the enters prompt with behold; the harness cannot drive both (scenario queued 2026-10-28)
+#REVIEW-V behold then the separate tap-and-stun prompt, in game (scenario queued 2026-10-29); the becomes-tapped trigger is untested
 auto=@tapped(this):may name(Tap and stun) tap target(creature) && counter(0/0,1,stun)
-note=Behold is done as this creature enters rather than as a cost: you exile a Merfolk you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Merfolk you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.) -- Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{U}
 type=Creature
@@ -20009,6 +20009,8 @@ toughness=5
 [/card]
 [card]
 name=Chaos Spewer
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): pay {2} on the prompt, so no blight.
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): decline the pay {2} prompt, so it blights 2.
 auto=ability$!name(Pay {2} or blight 2) pay[[{2}]] name(Pay {2}) donothing?counter(-1/-1,2) target(creature|mybattlefield)!$ controller
 #REVIEW-V pay-or-blight prompt: the harness cannot answer pay[[ ]] (scenario queued 2026-10-28)
 text=When this creature enters, you may pay {2}. If you don't, blight 2. (To blight 2, put two -1/-1 counters on a creature you control.)
@@ -26380,8 +26382,8 @@ subtype=Aura
 [/card]
 [card]
 name=Curious Colossus
-auto=all(creature|opponentbattlefield) loseabilities
-auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
+auto=all(creature|opponentbattlefield) loseabilities forever
+auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1)) forever
 text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
 mana={5}{W}{W}
 type=Creature
@@ -32533,6 +32535,7 @@ toughness=4
 [/card]
 [card]
 name=Doran, Besieged by Time
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): a creature you control BLOCKS gets +X/+X.
 auto=lord(creature[toughgtpow]|mycastingzone) altercost(colorless,-1)
 auto=@combat(attacking,blocking) source(creature[toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[toughnessminuspowerminusend/toughnessminuspowerminusend ueot])) oneshot
 auto=@combat(attacking,blocking) source(creature[-toughgtpow]|mybattlefield):all(trigger[to]) transforms((,newability[powerminustoughnessminusend/powerminustoughnessminusend ueot])) oneshot
@@ -47536,9 +47539,7 @@ toughness=2
 [/card]
 [card]
 name=Gathering Stone
-#REVIEW-V upkeep look at the top card (scenario queued 2026-10-28); the discount is tested
-auto=chooseatype lord(*[chosentype]|mycastingzone) altercost(colorless,-1) && transforms((,newability[@each my upkeep:if type(*[chosentype;zpos=1]|mylibrary)~morethan~0 then may moveto(myhand) all(*[zpos=1]|mylibrary) else may moveto(mygraveyard) all(*[zpos=1]|mylibrary)])) forever chooseend
-missing=The look at the top card also happens when this enters in the real card; here it starts at your next upkeep.
+auto=chooseatype lord(*[chosentype]|mycastingzone) altercost(colorless,-1) && transforms((,newability[reveal:1 optionone name(Put into your hand) target(<upto:1>*[chosentype]|reveal) moveto(myhand) optiononeend optiontwo name(Keep it on top) target(<1>*|reveal) moveto(mylibrary) and!( may name(Put it into your graveyard) moveto(mygraveyard) all(*[zpos=1]|mylibrary) )! optiontwoend revealend],newability[@each my upkeep:reveal:1 optionone name(Put into your hand) target(<upto:1>*[chosentype]|reveal) moveto(myhand) optiononeend optiontwo name(Keep it on top) target(<1>*|reveal) moveto(mylibrary) and!( may name(Put it into your graveyard) moveto(mygraveyard) all(*[zpos=1]|mylibrary) )! optiontwoend revealend])) forever chooseend
 text=As this artifact enters, choose a creature type. -- Spells you cast of the chosen type cost {1} less to cast. -- When this artifact enters and at the beginning of your upkeep, look at the top card of your library. If it's a card of the chosen type, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 mana={4}
 type=Artifact
@@ -57721,6 +57722,7 @@ type=Land
 [/card]
 [card]
 name=High Perfect Morcant
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB makes the OPPONENT blight 1.
 auto=ability$!name(Blight 1) counter(-1/-1,1) notaTarget(creature|mybattlefield)!$ opponent
 auto=@movedTo(other elf|mybattlefield):ability$!name(Blight 1) counter(-1/-1,1) notaTarget(creature|mybattlefield)!$ opponent
 auto={T(elf|mybattlefield)}{T(elf|mybattlefield)}{T(elf|mybattlefield)}:_PROLIFERATE_ asSorcery
@@ -60488,6 +60490,7 @@ toughness=2
 [/card]
 [card]
 name=Il Mheg Pixie
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): surveil 1 on attack: you can KEEP the card on top (not only mill it).
 abilities=flying
 #2026-10-18: was deplete:1 (mill), but the card says surveil 1. Test: fin_il_mheg_pixie_surveil.
 #REVIEW-V the surveil choice is untested: the test only takes "put in graveyard", which a mill would
@@ -76531,6 +76534,7 @@ type=Land
 [/card]
 [card]
 name=Meanders Guide
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): attack trigger: tap another Merfolk, return a creature with mana value 3 or less.
 auto=_ATTACKING_if type(other merfolk[-tapped]|mybattlefield)~morethan~0 then may name(Tap a Merfolk to reanimate) tap notaTarget(other merfolk[-tapped]|mybattlefield) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[manacost<=3]|mygraveyard)!$ controller
 #REVIEW-V attack trigger with a tap choice then a graveyard target (scenario queued 2026-10-28)
 text=Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
@@ -81069,8 +81073,8 @@ name=Mornsong Aria
 abilities=nolifegain,nolifegainopponent
 auto=replacedraw ability$!name(Can't draw) donothing!$ controller
 auto=opponentreplacedraw ability$!name(Can't draw) donothing!$ opponent
-auto=@each my draw:life:-3 controller && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary) && shuffle!$ controller
-auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) notatarget(*|mylibrary) && shuffle!$ opponent
+auto=@each my draw:life:-3 controller && ability$!name(Search your library) moveto(hand) and!(shuffle)! notatarget(*|mylibrary)!$ controller
+auto=@each opponent draw:life:-3 opponent && ability$!name(Search your library) moveto(hand) and!(shuffle)! notatarget(*|mylibrary)!$ opponent
 text=Players can't draw cards or gain life. -- At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles.
 mana={1}{B}{B}
 type=Legendary Enchantment
@@ -93717,6 +93721,7 @@ type=Artifact
 [/card]
 [card]
 name=Prismabasher
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): Vivid targets are "up to X", so you can choose just one creature.
 abilities=trample
 auto=target(<upto:pvivid>creature|mybattlefield) pvivid/pvivid ueot
 text=Trample -- Vivid — When this creature enters, up to X target creatures you control get +X/+X until end of turn, where X is the number of colors among permanents you control.
@@ -114331,6 +114336,7 @@ type=Artifact
 [/card]
 [card]
 name=Slumbering Walker
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): your end step: remove a counter to return a power 2 or less creature.
 auto=counter(-1/-1,2)
 auto=@each my end:may name(Remove a counter to reanimate) counter(-1/-1,-1) && ability$!name(Return a creature) moveto(mybattlefield) target(creature[power<=2]|mygraveyard)!$ controller
 note=Removes a -1/-1 counter, the only counter this creature normally has; the return is offered even when no counter is left.
@@ -133623,6 +133629,7 @@ toughness=4
 [/card]
 [card]
 name=Unwelcome Sprite
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): casting a spell on the opponent's turn surveils 2.
 #REVIEW-V cast-on-opponent-turn trigger: the harness cannot cast during the opponent's turn (scenario queued 2026-10-28)
 abilities=flying
 auto=@movedTo(*|mystack) restriction{opponentturnonly}:_SURVEIL2_
@@ -137846,6 +137853,7 @@ toughness=2
 [/card]
 [card]
 name=Voracious Tome-Skimmer
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): casting a spell on the opponent's turn: may pay 1 life to draw.
 #REVIEW-V cast-on-opponent-turn trigger with a pay-1-life menu (scenario queued 2026-10-28)
 abilities=flying
 auto=@movedTo(*|mystack) restriction{opponentturnonly}:transforms((,newability[choice name(Pay 1 life: draw a card) life:-1 controller && draw:1 controller],newability[choice name(Don't pay) donothing])) oneshot
@@ -139658,6 +139666,7 @@ toughness=3
 [/card]
 [card]
 name=Warren Torchmaster
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): beginning of combat: blight 1, then a target creature gains haste.
 #REVIEW-V the haste target after the blight (scenario queued 2026-10-28); the blight is tested
 auto=@each my combatbegins:may name(Blight 1) counter(-1/-1,1) target(creature|mybattlefield) && ability$!name(Gains haste) haste ueot target(creature)!$ controller
 text=At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)
@@ -145955,6 +145964,7 @@ toughness=4
 [/card]
 [card]
 name=Urban Retreat
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): hand ability: pay {2} and return a tapped creature to put this land onto the battlefield.
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{W}
@@ -145966,6 +145976,7 @@ type=Land
 [/card]
 [card]
 name=Ominous Asylum
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{B}
 auto={T}:Add{R}
@@ -145976,6 +145987,7 @@ type=Land
 [/card]
 [card]
 name=Savage Mansion
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{R}
 auto={T}:Add{G}
@@ -145986,6 +145998,7 @@ type=Land
 [/card]
 [card]
 name=Sinister Hideout
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4},{T}: surveil 1, putting the card into the graveyard.
 auto=tap(noevent)
 auto={T}:Add{U}
 auto={T}:Add{B}
@@ -145996,6 +146009,7 @@ type=Land
 [/card]
 [card]
 name=Suburban Sanctuary
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{G}
 auto={T}:Add{W}
@@ -146006,6 +146020,7 @@ type=Land
 [/card]
 [card]
 name=University Campus
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {4}, {T}: Surveil 1.
 auto=tap(noevent)
 auto={T}:Add{W}
 auto={T}:Add{U}
@@ -146016,6 +146031,7 @@ type=Land
 [/card]
 [card]
 name=Vibrant Cityscape
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): {T}, sacrifice: search for a basic land, put it onto the battlefield tapped.
 #REVIEW-V the {T}, sacrifice search of a land cannot be clicked in the harness (copied from Evolving Wilds)
 auto={T}{S}:moveTo(myBattlefield) and!(tap(noevent))! target(land[basic]|myLibrary)
 text={T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
@@ -146230,7 +146246,7 @@ toughness=2
 [/card]
 [card]
 name=Amazing Acrobatics
-#REVIEW-V the counter modes: the harness cannot click a stack target chosen at resolution
+#REVIEW-V counter and Both modes are tested with player 2 countering (om1_amazing_acrobatics_*)
 auto=choice name(Counter target spell) fizzle target(*|stack)
 auto=choice name(Tap one or two target creatures) tap target(<upto:2>creature)
 auto=choice name(Both) fizzle target(*|stack) && ability$!name(Tap creatures) choice name(Tap one or two target creatures) tap target(<upto:2>creature)!$ controller
@@ -146240,7 +146256,7 @@ type=Instant
 [/card]
 [card]
 name=School Daze
-#REVIEW-V Fight Crime (counter target spell): the harness cannot click a stack target chosen at resolution
+#REVIEW-V Fight Crime is tested with player 2 countering (om1_school_daze_fight_crime)
 auto=choice name(Do Homework - draw three cards) draw:3 controller
 auto=choice name(Fight Crime - counter target spell, draw a card) fizzle target(*|stack) && draw:1 controller
 text=Choose one — -- • Do Homework — Draw three cards. -- • Fight Crime — Counter target spell. Draw a card.
@@ -146277,6 +146293,7 @@ toughness=3
 [/card]
 [card]
 name=The Soul Stone
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): harnessing asks which creature to exile and exiles it. Untested: the upkeep return.
 abilities=indestructible
 auto={T}:Add{B}
 auto={6}{B}{T}{E(creature|mybattlefield)}:name(Harness The Soul Stone) counter(0/0,1,stoneharnessed)
@@ -146298,6 +146315,7 @@ type=Enchantment
 [/card]
 [card]
 name=Pictures of Spider-Man
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): reveal top five: the rest go on the bottom of the library.
 #REVIEW-V the reveal (take up to two creatures, rest on the bottom): the harness cannot press OK in a reveal window to start the second option
 auto=reveal:5 optionone name(Take up to two creatures) target(<upto:2>creature|reveal) moveto(myhand) optiononeend optiontwo name(Put the rest on the bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto={1}{T}{S}:_TREASURE_
@@ -146355,6 +146373,7 @@ toughness=3
 [/card]
 [card]
 name=Daily Bugle Building
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): Smear Campaign: target legendary creature gains menace.
 auto={T}:Add{C}
 auto={1}{T}:Add{W}
 auto={1}{T}:Add{U}
@@ -146532,6 +146551,7 @@ toughness=3
 [/card]
 [card]
 name=Massacre Girl, Most Wanted
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): her own death does not trigger her ping.
 auto=@movedTo(other *[creature;planeswalker]|graveyard) from(mybattlefield):damage:1 opponent && life:1 controller
 auto=@noncombatdamagefoeof(player):counter(1/1) all(this)
 text=Whenever another creature or planeswalker you control dies, Massacre Girl deals 1 damage to target opponent and you gain 1 life. -- Whenever an opponent is dealt noncombat damage, put a +1/+1 counter on Massacre Girl.
@@ -146612,6 +146632,7 @@ toughness=4
 [/card]
 [card]
 name=Gideon's Memorial
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): hand ability: 4 damage to target attacking or blocking creature.
 auto=lord(creature[token]|mybattlefield) 1/0
 auto=lord(creature[token]|mybattlefield) vigilance
 auto={T}:Add{W} spendspells(planeswalker)
@@ -146717,6 +146738,7 @@ toughness=3
 [/card]
 [card]
 name=Maximum Carnage
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): chapter I: your creatures must attack.
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 #REVIEW-V chapter I (each creature attacks each combat until your next turn) is untested: the harness cannot make player 2's AI attack
@@ -146747,8 +146769,8 @@ name=Origin of Spider-Man
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=token(Spider,Creature Spider,2/1,green,reach)
-#REVIEW-V chapter II: the +1/+1 counter is tested; becoming a legendary Spider Hero is not observable in the harness
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) counter(1/1) target(creature|mybattlefield) and!( becomes(Legendary Spider Hero) forever )!
+#REVIEW-V chapter II counter + legendary Spider Hero and chapter III label are tested (om1_origin_of_spider_man_ch*); token art and type line need John's eyes
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mybattlefield) transforms((Legendary Spider Hero,newability[counter(1/1)])) forever
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,double strike)) ueot
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Create a 2/1 green Spider creature token with reach. -- II — Put a +1/+1 counter on target creature you control. It becomes a legendary Spider Hero in addition to its other types. -- III — Target creature you control gains double strike until end of turn.

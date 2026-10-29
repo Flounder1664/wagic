@@ -1,4 +1,4 @@
-#Champions of the Shoal beholds Merfolk of the Pearl Trident from hand (exiled). The tap-and-stun prompt is checked in game (scenario).
+#Champions of the Shoal beholds Merfolk of the Pearl Trident from hand (exiled), then its own tap-and-stun prompt opens and is declined (menu cancel).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -10,6 +10,7 @@ inplay:Hill Giant
 Champions of the Shoal
 choice 0
 Merfolk of the Pearl Trident
+menu cancel
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

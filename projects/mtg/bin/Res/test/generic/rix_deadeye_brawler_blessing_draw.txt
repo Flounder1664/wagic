@@ -1,0 +1,25 @@
+#Deadeye Brawler WITH the city's blessing (Brawler + 9 Forests = 10 permanents): its
+#combat damage to a player draws a card. John's scenario 39 (2026-10-28) drew nothing:
+#the condition looked for the command-zone marker card, which no chooser sees.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Forest,Forest,Forest,Forest,Forest,Forest,Forest,Deadeye Brawler
+library:Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Deadeye Brawler
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:*,*,*,*,*,*,*,*,*,Deadeye Brawler
+hand:Hill Giant
+commandzone:City's Blessing
+[PLAYER2]
+life:18
+[END]

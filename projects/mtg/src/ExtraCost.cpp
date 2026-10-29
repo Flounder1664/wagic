@@ -1826,6 +1826,14 @@ int ExtraCosts::tryToSetPayment(MTGCardInstance * card)
                             }
                         }
                     }
+                    else if (!costs[k]->tc && (dynamic_cast<LifeCost*>(costs[k]) || dynamic_cast<SpecificLifeCost*>(costs[k])
+                        || dynamic_cast<EnergyCost*>(costs[k]) || dynamic_cast<ExtraManaCost*>(costs[k])))
+                    {
+                        //a player-level cost with no target chooser defaults its target to the source;
+                        //that must not stop the source paying another cost ({L:1}{C(-1/-1,2),creature}:
+                        //Champion of the Weird blighting itself)
+                        continue;
+                    }
                     else
                     return 0;
                 }
