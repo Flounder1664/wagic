@@ -1,0 +1,18 @@
+#Titania's additional cost: discard a card (Grizzly Bears) to cast her for {2}{B/G}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:712246,Grizzly Bears
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+712246
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712246
+graveyard:Grizzly Bears
+manapool:{0}
+[PLAYER2]
+[END]

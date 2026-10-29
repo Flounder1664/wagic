@@ -1,0 +1,15 @@
+#Mikey & Don: play a land from the top of your library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520157
+library:Plains
+[PLAYER2]
+[DO]
+Plains
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520157,*
+[PLAYER2]
+[END]

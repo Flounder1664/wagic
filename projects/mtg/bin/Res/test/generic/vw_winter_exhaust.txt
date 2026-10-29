@@ -1,0 +1,24 @@
+#Winter's exhaust for X=1 (exile one artifact card): each other nonartifact creature gets -1/-1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690665
+graveyard:Ornithopter
+manapool:{2}{U}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+690665
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:690665
+exile:Ornithopter
+counter:690665=exhaust:1
+manapool:{0}
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=2/2
+[END]

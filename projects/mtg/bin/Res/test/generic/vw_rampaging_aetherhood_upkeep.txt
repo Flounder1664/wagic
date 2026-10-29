@@ -1,0 +1,17 @@
+#Rampaging Aetherhood: upkeep energy equal to its power (4), paid back as four +1/+1 counters.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Rampaging Aetherhood
+[PLAYER2]
+[DO]
+next
+choice 1
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Rampaging Aetherhood
+pt:Rampaging Aetherhood=8/8
+energy:0
+[PLAYER2]
+[END]

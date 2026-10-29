@@ -151003,3 +151003,206 @@ subtype=Faerie Wizard
 power=4
 toughness=4
 [/card]
+[card]
+name=Winter, Cursed Rider
+auto=_WARDLIFE_(2)
+auto=lord(artifact|mybattlefield) transforms((,newability[@targeted(this) from(*|opponentzones):choice name(Ward - pay 2 life) name(Ward - pay 2 life) target(*|opponentzones) transforms((,newability[pay[[{L:2}]] name(pay 2 life) donothing?fizzle])) oneshot]))
+#Exhaust with X chosen from a menu (1-6 artifact cards exiled from your graveyard).
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=1) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -1/-1 ueot
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=2) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -2/-2 ueot
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=3) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -3/-3 ueot
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=4) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -4/-4 ueot
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=5) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -5/-5 ueot
+auto={2}{U}{B}{T}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)}{E(artifact|mygraveyard)} restriction{compare(hascntexhaust)~equalto~0}:name(Exhaust X=6) counter(0/0,1,exhaust) && all(other creature[-artifact]|battlefield) -6/-6 ueot
+text=Ward-Pay 2 life. -- Artifacts you control have "Ward-Pay 2 life." -- Exhaust - {2}{U}{B}, {T}, Exile X artifact cards from your graveyard: Each other nonartifact creature gets -X/-X until end of turn. (Activate each exhaust ability only once.)
+mana={U}{B}
+type=Legendary Creature
+subtype=Human Warlock
+power=3
+toughness=2
+[/card]
+[card]
+name=Rith, Liberated Primeval
+#REVIEW-V 2026-10-29: the excess-damage Dragon token is not implemented (missing=).
+abilities=flying
+auto=_WARD2_
+auto=lord(other dragon|mybattlefield) transforms((,newability[_WARD2_]))
+missing=the end-step Dragon token when a creature or planeswalker an opponent controlled was dealt excess damage this turn - nothing records excess damage over a turn.
+text=Flying, ward {2} -- Other Dragons you control have ward {2}. -- At the beginning of your end step, if a creature or planeswalker an opponent controlled was dealt excess damage this turn, create a 4/4 red Dragon creature token with flying.
+mana={2}{R}{G}{W}
+type=Legendary Creature
+subtype=Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Rampaging Aetherhood
+#REVIEW-V 2026-10-29: partial energy payments are not offered - all or nothing.
+abilities=trample
+auto=_WARD2_
+#"Pay one or more {E}": offered as all of your energy or none.
+auto=@each my upkeep:name(Get energy equal to power) alterenergy:power controller && ability$!choice name(Keep the energy) donothing _ choice name(Pay all energy for +1/+1 counters) counter(1/1,penergy) all(mysource) && alterenergy:-penergy controller!$ controller
+text=Trample, ward {2} -- At the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.
+mana={4}{G}
+type=Creature
+subtype=Snake Hydra
+power=4
+toughness=4
+[/card]
+[card]
+name=Famished Worldsire
+#REVIEW-V 2026-10-29: devour some lands, then check the top-X land drop uses the new power.
+auto=_WARD3_
+auto=may name(Devour land 3) notaTarget(<anyamount>land|mybattlefield) sacrifice && counter(1/1,3) all(this)
+auto=name(Look at the top X cards) reveal:power optionone name(Put lands onto the battlefield) target(<anyamount>land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo all(*|reveal) moveto(mylibrary) and!( shuffle )! optiontwoend revealend
+text=Ward {3} -- Devour land 3 (As this creature enters, you may sacrifice any number of lands. It enters with three times that many +1/+1 counters on it.) -- When this creature enters, look at the top X cards of your library, where X is this creature's power. Put any number of land cards from among them onto the battlefield tapped, then shuffle.
+mana={5}{G}{G}{G}
+type=Creature
+subtype=Leviathan
+power=0
+toughness=0
+[/card]
+[card]
+name=Ulamog, the Defiler
+#REVIEW-V 2026-10-29: check the cast trigger exiles half the opponent's library, the +1/+1 counters from the biggest exiled mana value, and annihilator X (the ward is tested).
+autostack=if casted(this) then name(Opponent exiles half their library) ingest:halfupolibrarycount opponent
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - sacrifice two permanents) name(Ward - sacrifice two permanents) target(*|opponentzones) transforms((,newability[pay[[{S(*|myBattlefield)}{S(*|myBattlefield)}]] name(sacrifice two permanents) donothing?fizzle])) oneshot
+auto=counter(1/1,convertedcost:highest:*:exile)
+auto=_ATTACKING_name(Annihilator X) ability$!name(sacrifice permanents) notaTarget(<hascnt11>*|mybattlefield) sacrifice!$ opponent
+text=When you cast this spell, target opponent exiles the top half of their library, rounded up. -- Ward-Sacrifice two permanents. -- Ulamog enters with a number of +1/+1 counters on it equal to the greatest mana value among cards in exile. -- Ulamog has annihilator X, where X is the number of +1/+1 counters on it.
+mana={10}
+type=Legendary Creature
+subtype=Eldrazi
+power=7
+toughness=7
+[/card]
+[card]
+name=Watcher of Hours
+#REVIEW-V 2026-10-29: suspend it and check surveil 1 fires each upkeep as a time counter comes off.
+abilities=flying
+auto=_WARD3_
+autoexile=@counterremoved(0/0,1,Time) from(sourcecard) suspended:_SURVEIL1_
+suspend(6)={1}{U}
+text=Flying, ward {3} -- Whenever you remove a time counter from this card while it's exiled, surveil 1. -- Suspend 6-{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)
+mana={5}{U}
+type=Creature
+subtype=Sphinx
+power=6
+toughness=6
+[/card]
+[card]
+name=Titania, Rugged Rumbler
+#Additional cost: discard a card, or pay {2} instead (the alternative cost below).
+mana={2}{B/G}{D(*|myhand)}
+other={4}{B/G} name(Pay {2} instead of discarding)
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - discard a card or pay 2) name(Ward - discard a card or pay 2) target(*|opponentzones) transforms((,newability[choice name(Ward - pay 2) pay[[{2}]] name(pay 2 mana) donothing?fizzle],newability[choice name(Ward - discard a card) pay[[{D(*|myhand)}]] name(discard a card) donothing?fizzle])) oneshot
+text=As an additional cost to cast this spell, discard a card or pay {2}. -- Ward-Discard a card or pay {2}. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player discards a card or pays {2}.)
+type=Legendary Creature
+subtype=Human Villain
+power=5
+toughness=5
+[/card]
+[card]
+name=Reservoir Kraken
+#REVIEW-V 2026-10-29: the combat-begins offer goes to the opponent (harness cannot answer it) - check the tap, the Kraken tapping and the Fish going to the opponent.
+abilities=trample
+auto=_WARD2_
+auto=@each combatbegins restriction{compare(istapped)~equalto~0}:ability$!choice name(Tap a creature: tap the Kraken and get a Fish) notaTarget(creature[-tapped]|mybattlefield) tap && all(mysource) tap && create(Fish:creature fish:1/1:blue:unblockable) controller _ choice name(Decline) donothing!$ opponent
+text=Trample, ward {2} -- At the beginning of each combat, if this creature is untapped, any opponent may tap an untapped creature they control. If they do, tap this creature and create a 1/1 blue Fish creature token with "This token can't be blocked."
+mana={2}{U}{U}
+type=Creature
+subtype=Kraken
+power=6
+toughness=6
+[/card]
+[card]
+name=Colorstorm Stallion
+#REVIEW-V 2026-10-29: cast a five-mana instant or sorcery and check a token copy appears (the +1/+1 half is tested).
+abilities=haste
+auto=_WARD1_
+auto=@movedTo(*[instant;sorcery]|mystack):name(Opus) 1/1 ueot
+#Opus' copy: the spell checks its own mana spent; the copy is made of a Colorstorm Stallion you
+#choose (every copy is identical).
+auto=@movedTo(*[instant;sorcery]|mystack):name(Opus - five or more mana) all(trigger[to]) transforms((,newability[if compare(totmanaspent)~morethan~4 then name(Copy Colorstorm Stallion) notaTarget(<1>Colorstorm Stallion|mybattlefield) clone])) oneshot
+text=Ward {1}, haste -- Opus - Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature.
+mana={1}{U}{R}
+type=Creature
+subtype=Elemental Horse
+power=3
+toughness=3
+[/card]
+[card]
+name=Scavenger Regent // Exude Toxin
+abilities=flying
+restriction=can play creature
+auto=_WARDDISCARD_
+other={X}{B}{B} name(Omen:Exude Toxin)
+auto=alternative name(Exude Toxin) all(creature[-dragon]) -X/-X ueot
+auto=alternative moveTo(library) && shuffle
+text=Flying -- Ward-Discard a card. // Exude Toxin {X}{B}{B} -- Sorcery - Omen -- Each non-Dragon creature gets -X/-X until end of turn. (Then shuffle this card into its owner's library.)
+mana={3}{B}
+type=Creature
+subtype=Dragon
+power=4
+toughness=4
+[/card]
+[card]
+name=Scavenger Regent
+abilities=flying
+restriction=can play creature
+auto=_WARDDISCARD_
+other={X}{B}{B} name(Omen:Exude Toxin)
+auto=alternative name(Exude Toxin) all(creature[-dragon]) -X/-X ueot
+auto=alternative moveTo(library) && shuffle
+text=Flying -- Ward-Discard a card. // Exude Toxin {X}{B}{B} -- Sorcery - Omen -- Each non-Dragon creature gets -X/-X until end of turn. (Then shuffle this card into its owner's library.)
+mana={3}{B}
+type=Creature
+subtype=Dragon
+power=4
+toughness=4
+[/card]
+[card]
+name=Benevolent River Spirit
+#REVIEW-V 2026-10-29: cast it tapping creatures to help (convoke stands in for waterbend) and check the scry 2.
+abilities=flying,convoke
+#Waterbend {5} as an additional cost is folded into the mana cost, and convoke stands in for
+#tapping artifacts and creatures to help (creatures only). Its mana value reads 7, not 2.
+auto=_WARD2_
+auto=_SCRY2_
+text=As an additional cost to cast this spell, waterbend {5}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.) -- Flying, ward {2} -- When this creature enters, scry 2.
+mana={5}{U}{U}
+type=Creature
+subtype=Spirit
+power=4
+toughness=5
+[/card]
+[card]
+name=Mikey & Don, Party Planners
+#REVIEW-V 2026-10-29: check a Mutant/Ninja/Turtle can be cast from the top of the library (playing a land from the top is tested).
+abilities=showfromtoplibrary,canplaylandlibrarytop
+auto=_WARD2_
+auto=aslongas(*[mutant;ninja;turtle;zpos=1]|mylibrary) canplayfromlibrarytop >0
+#The extra +1/+1 counter for a creature cast from the top of the library is not given.
+text=Ward {2} -- You may look at the top card of your library any time. -- You may play lands and cast Mutant, Ninja, or Turtle spells from the top of your library. If you cast a creature spell this way, that creature enters with an additional +1/+1 counter on it.
+mana={2}{G/U}{G/U}
+type=Legendary Creature
+subtype=Mutant Ninja Turtle
+power=3
+toughness=3
+[/card]
+[card]
+name=The Fantasticar
+#REVIEW-V 2026-10-29: check the may-animate on each noncreature spell and the sacrifice for four Constructs on the fourth.
+abilities=flying
+auto=@movedTo(*[-creature]|mystack):may name(Become an artifact creature) all(this) becomes(Artifact Creature) ueot
+#Noncreature spells are counted on the Vehicle itself; the count is cleared at each end of turn.
+auto=@movedTo(*[-creature]|mystack):counter(0/0,1,FantasticarSpell)
+auto=@each end:removeallcounters(0/0,1,FantasticarSpell) all(this)
+auto=@counteradded(0/0,1,FantasticarSpell) from(this) restriction{compare(hascntfantasticarspell)~equalto~4}:may name(Sacrifice for four Constructs) sacrifice all(this) && create(Construct:artifact creature construct:4/4:flying,haste)*4 controller
+text=Flying -- Whenever you cast a noncreature spell, you may have The Fantasticar become an artifact creature until end of turn. -- Whenever you cast your fourth noncreature spell each turn, you may sacrifice The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste.
+mana={3}
+type=Legendary Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]

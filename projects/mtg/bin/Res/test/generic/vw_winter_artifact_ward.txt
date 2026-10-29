@@ -1,0 +1,26 @@
+#Winter, Cursed Rider: artifacts you control have Ward-Pay 2 life. Disperse on Ornithopter costs
+#player 1 two life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:447186
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:690665,Ornithopter
+[DO]
+447186
+Ornithopter
+choice 0
+447186
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:447186
+manapool:{0}
+life:18
+[PLAYER2]
+inplay:690665
+hand:Ornithopter
+[END]

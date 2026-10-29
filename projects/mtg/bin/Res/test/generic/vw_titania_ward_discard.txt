@@ -1,0 +1,24 @@
+#Titania's Ward-Discard a card or pay {2}: player 1 picks the discard and pays with Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134,Grizzly Bears
+manapool:{U}
+[PLAYER2]
+inplay:712246
+[DO]
+134
+712246
+choice 0
+134
+choice 1
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134,Grizzly Bears
+manapool:{0}
+[PLAYER2]
+hand:712246
+[END]

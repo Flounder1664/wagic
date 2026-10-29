@@ -1,0 +1,24 @@
+#Exude Toxin (Scavenger Regent's Omen) for X=2: each non-Dragon creature gets -2/-2. Grizzly Bears
+#dies, Shivan Dragon is untouched, and the card shuffles back into the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:693570
+inplay:Shivan Dragon
+manapool:{2}{B}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+693570
+choice 1
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shivan Dragon
+library:693570
+pt:Shivan Dragon=5/5
+manapool:{0}
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

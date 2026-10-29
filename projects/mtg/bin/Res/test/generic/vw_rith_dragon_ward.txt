@@ -1,0 +1,23 @@
+#Rith gives other Dragons ward {2}: Unsummon on Shivan Dragon makes player 1 pay {2}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}{2}
+[PLAYER2]
+inplay:574694,Shivan Dragon
+[DO]
+134
+Shivan Dragon
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+[PLAYER2]
+inplay:574694
+hand:Shivan Dragon
+[END]

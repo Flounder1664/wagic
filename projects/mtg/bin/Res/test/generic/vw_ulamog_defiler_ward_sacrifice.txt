@@ -1,0 +1,26 @@
+#Ulamog, the Defiler's Ward-Sacrifice two permanents: player 1 sacrifices Ornithopter and Memnite
+#and Unsummon resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+inplay:Ornithopter,Memnite
+manapool:{U}
+[PLAYER2]
+inplay:662167
+[DO]
+134
+662167
+choice 0
+134
+choice 0
+Ornithopter
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134,Ornithopter,Memnite
+manapool:{0}
+[PLAYER2]
+hand:662167
+[END]

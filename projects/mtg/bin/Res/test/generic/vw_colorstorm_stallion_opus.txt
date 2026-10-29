@@ -1,0 +1,22 @@
+#Colorstorm Stallion: casting an instant (Shock) gives it +1/+1 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Colorstorm Stallion
+hand:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Colorstorm Stallion
+graveyard:Shock
+pt:Colorstorm Stallion=4/4
+manapool:{0}
+[PLAYER2]
+life:18
+[END]
