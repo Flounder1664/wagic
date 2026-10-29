@@ -151506,3 +151506,213 @@ subtype=Equipment Vehicle
 power=3
 toughness=1
 [/card]
+[card]
+name=Vren, the Relentless
+#REVIEW-V 2026-10-29: check the end-step Rats match the exiles counted (exile-instead is tested).
+auto=_WARD2_
+auto=lord(creature|opponentbattlefield) exiledeath
+#Opponents' creatures exiled from the battlefield are counted on Vren and paid out as Rats at the
+#next end step.
+auto=@movedTo(creature|opponentexile) from(opponentbattlefield):counter(0/0,1,VrenExiled)
+auto=@each end restriction{compare(hascntvrenexiled)~morethan~0}:name(Create Rats) create(Rat:creature rat:1/1:black)*hascntvrenexiled controller && removeallcounters(0/0,1,VrenExiled) all(this)
+missing=the Rat tokens' "This token gets +1/+1 for each other Rat you control"; and only exiles that happen while Vren is on the battlefield are counted.
+text=Ward {2} -- If a creature an opponent controls would die, exile it instead. -- At the beginning of each end step, create X 1/1 black Rat creature tokens with "This token gets +1/+1 for each other Rat you control," where X is the number of creatures that were exiled under your opponents' control this turn.
+mana={2}{U}{B}
+type=Legendary Creature
+subtype=Rat Rogue
+power=3
+toughness=4
+[/card]
+[card]
+name=Sphinx of Clear Skies
+abilities=flying
+auto=_WARD2_
+missing=the domain combat-damage trigger (reveal X, the opponent separates two piles, one to hand and one to the graveyard) - pile separation by an opponent has no route.
+text=Flying, ward {2} -- Domain - Whenever this creature deals combat damage to a player, reveal the top X cards of your library, where X is the number of basic land types among lands you control. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard. (Piles can be empty.)
+mana={3}{U}{U}
+type=Creature
+subtype=Sphinx
+power=5
+toughness=5
+[/card]
+[card]
+name=Valgavoth, Terror Eater
+abilities=flying,lifelink
+auto=@targeted(this) from(*|opponentzones):choice name(Ward - sacrifice three nonland permanents) name(Ward - sacrifice three nonland permanents) target(*|opponentzones) transforms((,newability[pay[[{S(*[-land]|myBattlefield)}{S(*[-land]|myBattlefield)}{S(*[-land]|myBattlefield)}]] name(sacrifice three nonland permanents) donothing?fizzle])) oneshot
+missing=the graveyard replacement (opponents' cards are exiled instead) and playing cards exiled with Valgavoth for life instead of mana.
+text=Flying, lifelink -- Ward-Sacrifice three nonland permanents. -- If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead. -- During your turn, you may play cards exiled with Valgavoth. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+mana={6}{B}{B}{B}
+type=Legendary Creature
+subtype=Elder Demon
+power=9
+toughness=9
+[/card]
+[card]
+name=Arna Kennerüd, Skycaptain
+abilities=flying,lifelink
+auto=_WARDDISCARD_
+missing=the modified-attacker trigger (double each kind of counter, copy each attached nontoken permanent).
+text=Flying, lifelink -- Ward-Discard a card. -- Whenever a modified creature you control attacks, double the number of each kind of counter on it. Then for each nontoken permanent attached to it, create a token that's a copy of that permanent attached to that creature.
+mana={2}{W}{U}{B}
+type=Legendary Creature
+subtype=Human Knight
+power=4
+toughness=4
+[/card]
+[card]
+name=Cosmic Cube
+#REVIEW-V 2026-10-29: attack and check the top six are shown, one spell with mana value <= the biggest attacker's power can be cast free, the rest go to the bottom.
+auto=_WARD2_
+#"Whenever you attack" fires on the first attacker each turn.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Look at the top six) reveal:6 revealzone(mylibrary) optionone name(Cast a spell for free) target(<upto:1>*[-land;manacost<=power:highest:creature[attacking]:mybattlefield]|reveal) becomes(tobecast) ueot optiononeend optiontwo all(*[-tobecast]|reveal) bottomoflibrary optiontwoend afterrevealed all(tobecast|mylibrary) activate castcard(normal) afterrevealedend revealend
+text=Ward {2} -- Whenever you attack, look at the top six cards of your library. You may cast a spell from among them with mana value less than or equal to the greatest power among attacking creatures you control without paying its mana cost. Put the rest on the bottom of your library in a random order.
+mana={5}
+type=Artifact
+[/card]
+[card]
+name=Tivit, Seller of Secrets
+#REVIEW-V 2026-10-29: check the two votes on entering and on combat damage make Clues/Treasures.
+abilities=flying
+auto=_WARD3_
+#Council's dilemma: you cast your vote and your extra vote; the opponent votes too.
+auto=ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
+auto=ability$!choice name(Extra vote evidence - investigate) _CLUE_ _ choice name(Extra vote bribery - Treasure) _TREASURE_ _ choice name(No extra vote) donothing!$ controller
+auto=ability$!choice name(Vote evidence) donothing _ choice name(Vote bribery) donothing!$ opponent
+auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
+missing=the opponent's vote is asked but does not make a Clue or Treasure for you; only your two votes count.
+text=Flying, ward {3} -- Council's dilemma - Whenever Tivit enters or deals combat damage to a player, starting with you, each player votes for evidence or bribery. For each evidence vote, investigate. For each bribery vote, create a Treasure token. -- While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)
+mana={3}{W}{U}{B}
+type=Legendary Creature
+subtype=Sphinx Rogue
+power=6
+toughness=6
+[/card]
+[card]
+name=Felix Five-Boots
+abilities=menace
+auto=_WARD2_
+missing=the trigger doubling (combat damage to a player makes your permanents' triggers fire an additional time) - there is no trigger-doubling route.
+text=Menace, ward {2} -- If a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+mana={2}{B}{G}{U}
+type=Legendary Creature
+subtype=Ooze Rogue
+power=5
+toughness=4
+[/card]
+[card]
+name=Fblthp, Lost on the Range
+abilities=showfromtoplibrary
+auto=_WARD2_
+missing=plot for the top card of your library (plot from the library top at its mana cost).
+text=Ward {2} -- You may look at the top card of your library any time. -- The top card of your library has plot. The plot cost is equal to its mana cost. -- You may plot nonland cards from the top of your library.
+mana={1}{U}{U}
+type=Legendary Creature
+subtype=Homunculus
+power=1
+toughness=1
+[/card]
+[card]
+name=Marauding Sphinx
+abilities=flying,vigilance
+auto=_WARD2_
+missing=the crime trigger (surveil 2 once each turn) - the engine has no "you committed a crime" event.
+text=Flying, vigilance, ward {2} -- Whenever you commit a crime, surveil 2. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+mana={3}{U}{U}
+type=Creature
+subtype=Sphinx Rogue
+power=3
+toughness=5
+[/card]
+[card]
+name=Raffine, Scheming Seer
+#REVIEW-V 2026-10-29: attack and check the target attacker connives.
+abilities=flying
+auto=_WARD1_
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Target attacker connives) target(creature[attacking]|mybattlefield) _CONNIVES_
+missing=connives X (X = attacking creatures) - the target connives once.
+text=Flying, ward {1} -- Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures. (Draw X cards, then discard X cards. Put a +1/+1 counter on that creature for each nonland card discarded this way.)
+mana={W}{U}{B}
+type=Legendary Creature
+subtype=Sphinx Demon
+power=1
+toughness=4
+[/card]
+[card]
+name=Kylox, Visionary Inventor
+abilities=menace,haste
+auto=_WARD2_
+missing=the attack trigger (sacrifice any number of other creatures, exile the top X cards where X is their total power, cast instants and sorceries among them free).
+text=Menace, ward {2}, haste -- Whenever Kylox attacks, sacrifice any number of other creatures, then exile the top X cards of your library, where X is their total power. You may cast any number of instant and/or sorcery spells from among the exiled cards without paying their mana costs.
+mana={5}{U}{R}
+type=Legendary Creature
+subtype=Lizard Artificer
+power=4
+toughness=4
+[/card]
+[card]
+name=Aurelia's Vindicator
+abilities=flying,lifelink
+auto=_WARD2_
+missing=disguise {X}{3}{W} and its turned-face-up exile (no disguise route); it can only be cast face up.
+text=Flying, lifelink, ward {2} -- Disguise {X}{3}{W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.) -- When this creature is turned face up, exile up to X other target creatures from the battlefield and/or creature cards from graveyards. -- When this creature leaves the battlefield, return the exiled cards to their owners' hands.
+mana={2}{W}{W}
+type=Creature
+subtype=Angel
+power=4
+toughness=2
+[/card]
+[card]
+name=Skyseer's Chariot
+abilities=flying
+auto=_CREW2_
+missing=naming a nonland card as it enters and making activated abilities of sources with that name cost {2} more.
+text=Flying -- As this Vehicle enters, choose a nonland card name. -- Activated abilities of sources with the chosen name cost {2} more to activate. -- Crew 2
+mana={1}{W}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=Dragon's Smile
+#REVIEW-V 2026-10-29: connect and check the exiled cards can be played this turn.
+abilities=flying
+auto=@combatdamaged(player) from(this):name(Exile cards to play) all(*[zpos<=thatmuch]|opponentlibrary) moveto(exile) and!( transforms((,canplayfromexile)) ueot )!
+auto=_CREW3_
+missing=paying {0} rather than the mana cost for one spell cast from exile each turn.
+text=Flying -- Once during each of your turns, you may pay {0} rather than pay the mana cost for a spell you cast from exile. -- Whenever Dragon's Smile deals combat damage to a player, that player exiles that many cards from the top of their library. You may play those cards this turn. -- Crew 3
+mana={5}{R}{R}
+type=Legendary Artifact
+subtype=Vehicle
+power=4
+toughness=5
+[/card]
+[card]
+name=Clown Car
+#The X d6 rolls are split evenly: half (rounded down) become Clown Robots and the rest
+#+1/+1 counters, which is the average outcome.
+auto=counter(1/1,halfupX)
+auto=create(Clown Robot:artifact creature clown robot:1/1:white)*halfdownX controller
+auto=_CREW2_
+text=When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle. -- Crew 2
+mana={X}
+type=Artifact
+subtype=Vehicle
+power=1
+toughness=1
+[/card]
+[card]
+name=Ancient Adamantoise
+#REVIEW-V 2026-10-29: check the dies trigger: exiled, ten Treasures.
+abilities=vigilance
+auto=_WARD3_
+#The ten Treasures enter untapped.
+auto=_DIES_name(Exile it and make ten Treasures) moveto(exile) all(trigger[to]) && token(Treasure)*10 controller
+missing=damage stays marked through cleanup, and all damage to you and your other permanents is dealt to it instead (no damage-redirection route).
+text=Vigilance, ward {3} -- Damage isn't removed from this creature during cleanup steps. -- All damage that would be dealt to you and other permanents you control is dealt to this creature instead. -- When this creature dies, exile it and create ten tapped Treasure tokens.
+mana={5}{G}{G}{G}
+type=Creature
+subtype=Turtle
+power=8
+toughness=20
+[/card]

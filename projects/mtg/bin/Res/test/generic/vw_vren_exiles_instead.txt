@@ -1,0 +1,23 @@
+#Vren, the Relentless: an opponent's creature that would die is exiled instead (Shock on Grizzly
+#Bears), and the exile is counted on Vren for the end-step Rats.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669153
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:669153
+graveyard:Shock
+counter:669153=VrenExiled:1
+manapool:{0}
+[PLAYER2]
+exile:Grizzly Bears
+[END]

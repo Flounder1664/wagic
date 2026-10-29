@@ -1,0 +1,18 @@
+#Clown Car for X=3: two +1/+1 counters (half rounded up) and one Clown Robot.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Clown Car
+manapool:{3}
+[PLAYER2]
+[DO]
+Clown Car
+choice 3
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Clown Car,*
+pt:Clown Car=3/3
+manapool:{0}
+[PLAYER2]
+[END]
