@@ -1,0 +1,18 @@
+#Overkill gives -0/-9999: the opponent's Hill Giant dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Overkill
+manapool:{2}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Overkill
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Overkill
+[PLAYER2]
+graveyard:Hill Giant
+[END]

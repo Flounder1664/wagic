@@ -1,0 +1,20 @@
+#Sinister Cryologist's ETB gives the opponent's creature -3/-0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sinister Cryologist
+manapool:{2}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Sinister Cryologist
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sinister Cryologist
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=0/3
+[END]

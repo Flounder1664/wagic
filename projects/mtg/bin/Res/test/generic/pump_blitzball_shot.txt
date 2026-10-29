@@ -1,0 +1,19 @@
+#Blitzball Shot gives +3/+3 and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Blitzball Shot
+inplay:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Blitzball Shot
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Blitzball Shot
+pt:Grizzly Bears=5/5
+[PLAYER2]
+[END]

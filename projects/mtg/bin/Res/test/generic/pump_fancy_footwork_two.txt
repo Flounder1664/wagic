@@ -1,0 +1,21 @@
+#Fancy Footwork gives each of two target creatures +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fancy Footwork
+inplay:Grizzly Bears,Hill Giant
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Fancy Footwork
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+graveyard:Fancy Footwork
+pt:Grizzly Bears=4/4
+pt:Hill Giant=5/5
+[PLAYER2]
+[END]
