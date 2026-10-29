@@ -19713,9 +19713,9 @@ toughness=1
 name=Champion of the Clachan
 abilities=flash
 auto=aslongas(other kithkin|mybattlefield,myhand) choice name(Behold a Kithkin) notaTarget(other kithkin|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other kithkin|mybattlefield,myhand) sacrifice <1 oneshot
 auto=lord(other kithkin|mybattlefield) 1/1
-note=Behold is done as this creature enters rather than as a cost: you exile a Kithkin you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Kithkin you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=Flash -- As an additional cost to cast this spell, behold a Kithkin and exile it. (Exile a Kithkin you control or a Kithkin card from your hand.) -- Other Kithkin you control get +1/+1. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{W}
 type=Creature
@@ -19736,9 +19736,9 @@ toughness=1
 [card]
 name=Champion of the Path
 auto=aslongas(other elemental|mybattlefield,myhand) choice name(Behold an Elemental) notaTarget(other elemental|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other elemental|mybattlefield,myhand) sacrifice <1 oneshot
 auto=@movedTo(other elemental|mybattlefield):all(trigger[to]) transforms((,newability[damage:power opponent])) oneshot
-note=Behold is done as this creature enters rather than as a cost: you exile an Elemental you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile an Elemental you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold an Elemental and exile it. (Exile an Elemental you control or an Elemental card from your hand.) -- Whenever another Elemental you control enters, it deals damage equal to its power to each opponent. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{R}
 type=Creature
@@ -19749,9 +19749,9 @@ toughness=3
 [card]
 name=Champion of the Weird
 auto=aslongas(other goblin|mybattlefield,myhand) choice name(Behold a Goblin) notaTarget(other goblin|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other goblin|mybattlefield,myhand) sacrifice <1 oneshot
 auto={L:1}{C(-1/-1,2),creature|mybattlefield}:name(Target opponent blights 2) ability$!name(Blight 2) counter(-1/-1,2) notaTarget(creature|mybattlefield)!$ opponent asSorcery
-note=Behold is done as this creature enters rather than as a cost: you exile a Goblin you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Goblin you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 #REVIEW-V the opponent's blight choice cannot be driven in the harness (scenario queued 2026-10-28)
 text=As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.) -- Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{B}
@@ -19793,9 +19793,9 @@ type=Instant
 [card]
 name=Champions of the Perfect
 auto=aslongas(other elf|mybattlefield,myhand) choice name(Behold an Elf) notaTarget(other elf|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other elf|mybattlefield,myhand) sacrifice <1 oneshot
 auto=@movedTo(creature|mystack):draw:1 controller
-note=Behold is done as this creature enters rather than as a cost: you exile an Elf you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile an Elf you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.) -- Whenever you cast a creature spell, draw a card. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{G}
 type=Creature
@@ -19806,11 +19806,11 @@ toughness=6
 [card]
 name=Champions of the Shoal
 auto=aslongas(other merfolk|mybattlefield,myhand) choice name(Behold a Merfolk) notaTarget(other merfolk|mybattlefield,myhand) hand(blink)forsrc oneshot
-auto=choice name(Sacrifice) sacrifice
+auto=aslongas(other merfolk|mybattlefield,myhand) sacrifice <1 oneshot
 auto=may name(Tap and stun) tap target(creature) && counter(0/0,1,stun)
-#REVIEW-V the enters-trigger tap shares the enters prompt with behold; the harness cannot drive both (scenario queued 2026-10-28)
+#REVIEW-V behold then the separate tap-and-stun prompt, in game (scenario queued 2026-10-29); the becomes-tapped trigger is untested
 auto=@tapped(this):may name(Tap and stun) tap target(creature) && counter(0/0,1,stun)
-note=Behold is done as this creature enters rather than as a cost: you exile a Merfolk you control or from your hand then (or sacrifice this). It can be cast without one, in which case it is sacrificed. The exiled card returns to its owner's hand when this leaves.
+note=Behold is done as this creature enters rather than as a cost: you must exile a Merfolk you control or from your hand then. It can be cast without one, in which case it is sacrificed as it enters. The exiled card returns to its owner's hand when this leaves.
 text=As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.) -- Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it. -- When this creature leaves the battlefield, return the exiled card to its owner's hand.
 mana={3}{U}
 type=Creature

@@ -1,0 +1,24 @@
+#Champions of the Shoal: behold Arctic Merfolk, THEN the separate tap-and-stun prompt taps Grizzly Bears and stuns it. The may used to be one more mode of the behold menu and was lost (scenario 25).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Champions of the Shoal,Arctic Merfolk
+manapool:{3}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Champions of the Shoal
+choice 0
+Arctic Merfolk
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champions of the Shoal
+exile:Arctic Merfolk
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+counter:Grizzly Bears=stun:1
+[END]

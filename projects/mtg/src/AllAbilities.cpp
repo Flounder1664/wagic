@@ -7928,7 +7928,12 @@ MayAbility::MayAbility(GameObserver* observer, int _id, MTGAbility * _ability, M
 void MayAbility::Update(float dt)
 {
     MTGAbility::Update(dt);
-    if (!triggered && !game->getCurrentTargetChooser() && (!game->mLayers->actionLayer()->menuObject||game->mLayers->actionLayer()->menuObject == source))
+    ActionLayer * al = game->mLayers->actionLayer();
+    //Join a menu already open on this card only if it is the same kind (all "choice" modes, or
+    //"may"s). A "may" enters-trigger beside a modal "choice" block (Champions of the Shoal: behold
+    //or sacrifice, then may tap and stun) used to be listed as one more mode and was lost once a
+    //mode was picked (John, scenario 25). Now it waits for that menu to close and opens its own.
+    if (!triggered && !game->getCurrentTargetChooser() && (!al->menuObject || (al->menuObject == source && al->menuMust == must)))
     {
         triggered = 1;
         if(Cond.size())
@@ -7982,6 +7987,9 @@ int MayAbility::testDestroy()
 
 int MayAbility::isReactingToTargetClick(Targetable * card)
 {
+    //not yet triggered: still waiting for another menu on this card to close (see Update)
+    if (!triggered)
+        return 0;
     if (card == source)
     {
         if(Cond.size())
