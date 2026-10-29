@@ -2,8 +2,7 @@
 #Asserting the token BY NAME (not a wildcard) proves token(Cursed) resolved to the
 #registered Role primitive, and that the aura is not binned by the state-based
 #check that culls untargeted auras (GameObserver::Update).
-#The ATTACH step uses a target prompt, which the console harness cannot drive
-#(known blind spot) - attachment is verified in-game via the V loop.
+#The attach step is left unanswered here; woe_role_attach_cursed_courtier answers it.
 [INIT]
 FIRSTMAIN
 [PLAYER1]

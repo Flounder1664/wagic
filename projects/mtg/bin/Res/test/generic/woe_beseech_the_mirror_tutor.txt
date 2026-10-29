@@ -1,0 +1,20 @@
+#Beseech the Mirror: search the library for any card (Mind Stone, not a creature) and put it into hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Beseech the Mirror
+library:Juggernaut,Mind Stone,Hill Giant
+manapool:{1}{B}{B}{B}
+[PLAYER2]
+[DO]
+Beseech the Mirror
+choice 0
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mind Stone
+library:Juggernaut,Hill Giant
+graveyard:Beseech the Mirror
+[PLAYER2]
+[END]

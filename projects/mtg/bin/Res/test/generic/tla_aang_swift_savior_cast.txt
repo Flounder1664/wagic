@@ -1,0 +1,21 @@
+#Aang, Swift Savior (1510204, backside= card) cast from hand: its enters-trigger airbends the
+#opponent's Grizzly Bears (exiled). A backside= card's click opens "Cast Card Normally / Flip Side"
+#because of its anyzone doubleside line; the harness now picks the cast (wagic#47 row 6). With
+#TestSuiteAI::castPastFlipSideMenu removed, Aang stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:1510204
+manapool:{1}{W}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+1510204
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510204
+[PLAYER2]
+exile:Grizzly Bears
+[END]

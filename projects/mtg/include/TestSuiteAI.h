@@ -145,6 +145,7 @@ class TestSuiteAI:public AIPlayerBaka
 private:
     MTGCardInstance * getCard(string action);
     bool openForcedTriggerMenu(Targetable * clicked);
+    bool castPastFlipSideMenu(MTGCardInstance * clicked);
     Targetable * clickTarget(const string& action);
     float timer;
     TestSuiteGame * suite;
@@ -166,6 +167,9 @@ public:
     //being measured, and silently passes when the effect under test does nothing.
     std::vector<std::string> expectedPT;
     std::vector<std::string> expectedCounters;
+    //inplay:<aura>@<card>: (aura, enchanted card), each a name or an id. Seeded attached in
+    //[INIT], checked in [ASSERT].
+    std::vector<std::pair<std::string, std::string> > attachments;
 
     TestSuiteAI(TestSuiteGame *tsGame, int playerId);
     virtual int Act(float dt);

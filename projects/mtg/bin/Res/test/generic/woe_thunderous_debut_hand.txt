@@ -1,0 +1,23 @@
+#Thunderous Debut unbargained: look at the top twenty, take up to two creature cards into hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thunderous Debut
+library:Mind Stone,Hill Giant,Air Elemental,Juggernaut
+manapool:{6}{G}{G}
+[PLAYER2]
+[DO]
+Thunderous Debut
+choice 0
+Hill Giant
+Air Elemental
+revealdone
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Air Elemental
+library:Mind Stone,Juggernaut
+graveyard:Thunderous Debut
+[PLAYER2]
+[END]

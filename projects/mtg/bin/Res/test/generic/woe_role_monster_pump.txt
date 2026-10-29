@@ -1,0 +1,18 @@
+#Monster Role: enchanted creature gets +1/+1 (John once saw these Roles give +2/+2). No card here makes
+#this Role, so it is cast from hand (no cost) onto Grizzly Bears: exactly 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Monster
+[PLAYER2]
+[DO]
+Monster
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Monster
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]
