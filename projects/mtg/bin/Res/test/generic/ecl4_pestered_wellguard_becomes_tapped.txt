@@ -1,0 +1,20 @@
+#Pestered Wellguard makes a Faerie whenever it BECOMES tapped (it was a {T} ability): Pressure Point taps it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point
+inplay:Pestered Wellguard
+library:Island
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Pressure Point
+Pestered Wellguard
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pestered Wellguard,*
+graveyard:Pressure Point
+hand:Island
+[PLAYER2]
+[END]

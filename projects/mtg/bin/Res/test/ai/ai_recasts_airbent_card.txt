@@ -1,0 +1,25 @@
+#AI: an airbent card in its owner's exile may be cast for {2}. The AI judged it on its printed
+#cost only, so with two mana it never recast its airbent Hill Giant ({3}{R}) - John, scenario 41,
+#2026-10-28. Airbend our own Hill Giant, then hand the remaining {2} to the AI.
+FORCEABILITY
+AICALLS 1
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Airbending Lesson
+library:Shivan Dragon
+manapool:{2}{W}{2}
+[PLAYER2]
+[DO]
+Airbending Lesson
+Hill Giant
+ai
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Shivan Dragon
+graveyard:Airbending Lesson
+[PLAYER2]
+[END]

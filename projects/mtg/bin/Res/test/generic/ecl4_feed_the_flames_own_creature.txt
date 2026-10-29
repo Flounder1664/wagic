@@ -1,0 +1,17 @@
+#Feed the Flames can target your own creature (it was limited to an opponent's).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Feed the Flames
+inplay:Hill Giant
+manapool:{3}{R}
+[PLAYER2]
+[DO]
+Feed the Flames
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Feed the Flames,Hill Giant
+[PLAYER2]
+[END]

@@ -70,6 +70,12 @@ bool TestSuiteAI::parseLine(const string& s)
         expectedCounters.push_back(s.substr(kCounter.size()));
         return true;
     }
+    static const string kType = "type:";
+    if (s.compare(0, kType.size(), kType) == 0)
+    {
+        expectedTypes.push_back(s.substr(kType.size()));
+        return true;
+    }
     //speed:<0-4> - in [PLAYER] of [INIT] it seeds the speed track, in [ASSERT] it is checked.
     //Max speed takes four turns of an opponent losing life, which no test can drive, so
     //without this every "Max speed -" ability was untestable.
@@ -208,7 +214,7 @@ bool TestSuiteAI::castPastFlipSideMenu(MTGCardInstance * clicked)
     if (suite->currentAction < suite->actions.nbitems)
     {
         const string& next = suite->actions.actions[suite->currentAction];
-        if (next.compare(0, 7, "choice ") == 0 || next.compare(0, 5, "menu ") == 0)
+        if (next.compare(0, 7, "choice ") == 0 || next.compare(0, 5, "menu ") == 0 || next.compare(0, 6, "menu! ") == 0)
             return false;
     }
     int castIndex = -1;
@@ -412,15 +418,18 @@ int TestSuiteAI::Act(float)
         int choice = atoi(action.substr(action.find("choice ") + 7).c_str());
         observer->mLayers->actionLayer()->doReactTo(choice);
     }
-    else if (action.compare(0, 5, "menu ") == 0)
+    else if (action.compare(0, 5, "menu ") == 0 || action.compare(0, 6, "menu! ") == 0)
     {
         //"menu Bear": pick the open menu's entry by its label rather than its index - the
         //creature-type menu lists every type the card database knows, so indexes shift.
-        string wanted = action.substr(5);
+        //"menu! <label>" also FAILS the test when no open menu offers that label, for tests
+        //about the wording itself (a forced trigger menu is otherwise opened by the next click).
+        bool strict = action[4] == '!';
+        string wanted = action.substr(strict ? 6 : 5);
         std::transform(wanted.begin(), wanted.end(), wanted.begin(), ::tolower);
         ActionLayer * al = observer->mLayers->actionLayer();
         int found = -1;
-        for (size_t i = 0; al->abilitiesMenu && i < al->abilitiesMenu->mObjects.size() && found < 0; i++)
+        for (size_t i = 0; al->abilitiesMenu && (!strict || al->menuObject) && i < al->abilitiesMenu->mObjects.size() && found < 0; i++)
         {
             SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
             if (!item)
@@ -440,7 +449,11 @@ int TestSuiteAI::Act(float)
                 SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
                 offered << "[" << (item ? item->getText() : string("?")) << "]";
             }
-            DebugTrace("TESTSUITE menu offered " << (al->abilitiesMenu ? "" : "(no menu) ") << offered.str());
+            //abilitiesMenu outlives the menu it showed, so also say whether one is open now.
+            DebugTrace("TESTSUITE menu offered " << (al->abilitiesMenu ? "" : "(no menu) ")
+                       << (al->menuObject ? "(open) " : "(closed) ") << offered.str());
+            if (strict)
+                suite->doErrors.push_back("menu! '" + wanted + "' was not offered: " + offered.str());
         }
         if (found >= 0)
             al->doReactTo(found);
@@ -636,6 +649,14 @@ void TestSuiteGame::assertGame()
     int error = 0;
     bool wasAI = false;
 
+    for (size_t e = 0; e < doErrors.size(); ++e)
+    {
+        sprintf(result, "<span class=\"error\">==%s==</span><br />", doErrors[e].c_str());
+        Log(result);
+        error++;
+    }
+    doErrors.clear();
+
     if (observer->getCurrentGamePhase() != endState.phase)
     {
         //A garbage/uninitialized expected phase means the test file's
@@ -798,7 +819,50 @@ void TestSuiteGame::assertGame()
                                 who.c_str(), i, rest.c_str(), wantN < 0 ? " at least " : " exactly ", wantN < 0 ? 1 : wantN, got);
                 Log(result); error++;
             }
-        }        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
+        }
+        //type:<name-or-id>=<type>[,-<type>...] - types, or keyword abilities, a card in play has
+        for (size_t e = 0; e < endState.players[i]->expectedTypes.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedTypes[e];
+            size_t eq = spec.find('=');
+            if (eq == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed type: assertion '%s' (want type:name=type[,-type])==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==type: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            vector<string> wanted = split(spec.substr(eq + 1), ',');
+            for (size_t w = 0; w < wanted.size(); ++w)
+            {
+                string t = wanted[w];
+                bool absent = t.size() && t[0] == '-';
+                if (absent) t = t.substr(1);
+                int ab = -1;
+                for (int a = 0; a < Constants::NB_BASIC_ABILITIES; a++)
+                    if (t == Constants::MTGBasicAbilities[a]) { ab = a; break; }
+                bool has = ab >= 0 ? (found->basicAbilities[ab] != 0) : (found->hasType(t) != 0);
+                if (has == absent)
+                {
+                    sprintf(result, "<span class=\"error\">==type problem for '%s' (player %i). Expected %s%s==</span><br />",
+                                    who.c_str(), i, absent ? "no " : "", t.c_str());
+                    Log(result); error++;
+                }
+            }
+        }
+        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
         {
             sprintf(result, "<span class=\"error\">==Mana problem. Was expecting %i but got %i for player %i==</span><br />",
                             endState.players[i]->getManaPool()->getConvertedCost(), p->getManaPool()->getConvertedCost(), i);

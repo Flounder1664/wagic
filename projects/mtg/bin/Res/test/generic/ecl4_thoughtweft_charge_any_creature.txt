@@ -1,0 +1,21 @@
+#Thoughtweft Charge: target creature (any) gets +3/+3 and you draw (pump() was a no-op).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thoughtweft Charge
+library:Island
+manapool:{1}{G}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Thoughtweft Charge
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Thoughtweft Charge
+hand:Island
+[PLAYER2]
+inplay:Grizzly Bears
+pt:Grizzly Bears=5/5
+[END]

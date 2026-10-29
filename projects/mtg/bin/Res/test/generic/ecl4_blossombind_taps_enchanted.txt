@@ -1,0 +1,19 @@
+#Blossombind taps the creature it ENCHANTS (it tapped a separate opposing target).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Blossombind
+manapool:{1}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Blossombind
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blossombind
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]

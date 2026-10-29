@@ -1,0 +1,19 @@
+#Summit Sentinel's _DIES_: trigger draws a card (probe for the _DIES_: double-colon shape).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lightning Bolt
+inplay:Summit Sentinel
+library:Island
+manapool:{R}
+[PLAYER2]
+[DO]
+Lightning Bolt
+Summit Sentinel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Lightning Bolt,Summit Sentinel
+hand:Island
+[PLAYER2]
+[END]

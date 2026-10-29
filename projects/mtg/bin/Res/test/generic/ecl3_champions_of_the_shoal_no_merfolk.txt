@@ -1,0 +1,17 @@
+#Champions of the Shoal with no Merfolk to behold is sacrificed as it enters; with one, sacrifice is no longer offered.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Champions of the Shoal
+manapool:{3}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Champions of the Shoal
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Champions of the Shoal
+[PLAYER2]
+inplay:Grizzly Bears
+[END]

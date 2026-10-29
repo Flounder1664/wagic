@@ -1,0 +1,17 @@
+#Firdoch Core: {4}: becomes a 4/4 artifact creature until end of turn (the ability was missing).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Firdoch Core
+manapool:{4}
+[PLAYER2]
+[DO]
+Firdoch Core
+choice 5
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Firdoch Core
+pt:Firdoch Core=4/4
+[PLAYER2]
+[END]

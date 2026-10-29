@@ -1,0 +1,24 @@
+#Amazing Acrobatics, mode 1: counter target spell. Player 2 answers Ornithopter (scenario 16 relied on
+#responding to your own spell, which the "Interrupt my spells" option normally forbids).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter
+[PLAYER2]
+hand:Amazing Acrobatics
+manapool:{1}{U}{U}
+[DO]
+Ornithopter
+no
+yes
+Amazing Acrobatics
+choice 0
+Ornithopter
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Ornithopter
+[PLAYER2]
+graveyard:Amazing Acrobatics
+[END]

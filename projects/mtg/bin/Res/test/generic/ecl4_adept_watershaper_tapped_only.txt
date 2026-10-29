@@ -1,0 +1,21 @@
+#Adept Watershaper protects only TAPPED creatures: after Pressure Point taps the Bears, Pyroclasm kills the untapped Cadet but not the Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point,Pyroclasm
+inplay:Adept Watershaper,Grizzly Bears,Eager Cadet
+library:Island
+manapool:{1}{W}{1}{R}
+[PLAYER2]
+[DO]
+Pressure Point
+Grizzly Bears
+Pyroclasm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Adept Watershaper,Grizzly Bears
+graveyard:Pressure Point,Pyroclasm,Eager Cadet
+hand:Island
+[PLAYER2]
+[END]

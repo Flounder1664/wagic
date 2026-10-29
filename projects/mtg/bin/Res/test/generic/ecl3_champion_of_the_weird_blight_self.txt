@@ -1,0 +1,24 @@
+#Champion of the Weird: Pay 1 life, Blight 2 onto itself (a {L:1} cost used to block the source as a blight target). The opponent's blight cannot be driven here.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champion of the Weird
+hand:Raging Goblin
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+choice 0
+Raging Goblin
+endinterruption
+Champion of the Weird
+Champion of the Weird
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Champion of the Weird
+exile:Raging Goblin
+life:19
+pt:Champion of the Weird=3/3
+[PLAYER2]
+inplay:Grizzly Bears
+[END]

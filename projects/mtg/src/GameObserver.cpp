@@ -5,6 +5,7 @@
 #include "Damage.h"
 #include "Rules.h"
 #include "ExtraCost.h"
+#include "AllAbilities.h"
 #include "Subtypes.h"
 #include <JLogger.h>
 #include <JRenderer.h>
@@ -1616,7 +1617,12 @@ bool GameObserver::WaitForExtraPayment(MTGCardInstance * card)
         {
             mExtraPayment->tryToSetPayment(card);
         }
-        if (mExtraPayment->isPaymentSet())
+        //A pay[[...]] menu (MenuAbility) pays and resolves its own extra costs in its Update.
+        //Completing it here sent reactToClick to the menu, which does nothing, and dropped the
+        //payment - so a pay[[{E(...)}...]] whose last exile target was just clicked never paid
+        //or resolved (Emeritus of Ideation, John's scenario 47). Mana-only costs never came
+        //through here, as they are already set before any click.
+        if (mExtraPayment->isPaymentSet() && !dynamic_cast<MenuAbility *>(mExtraPayment->action))
         {
             mLayers->actionLayer()->reactToClick(mExtraPayment->action, mExtraPayment->source);
             mExtraPayment = NULL;

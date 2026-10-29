@@ -1,0 +1,19 @@
+#Rimekin Recluse may bounce one of your own creatures (it was limited to an opponent's).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rimekin Recluse
+inplay:Grizzly Bears
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Rimekin Recluse
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rimekin Recluse
+hand:Grizzly Bears
+[PLAYER2]
+[END]

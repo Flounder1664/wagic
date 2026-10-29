@@ -1,0 +1,16 @@
+#Stoic Grove-Guide's graveyard ability exiles it as a cost (it could be activated again and again).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Stoic Grove-Guide
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Stoic Grove-Guide
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+exile:Stoic Grove-Guide
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Flamebraider adds two COLOURED mana (it added {2} colourless): with {3} floating it pays for Fire Elemental's {R}{R}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fire Elemental
+inplay:Flamebraider
+manapool:{3}
+[PLAYER2]
+[DO]
+Flamebraider
+choice 4
+choice 4
+Fire Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Flamebraider,Fire Elemental
+[PLAYER2]
+[END]

@@ -1,0 +1,17 @@
+#Vinebred Brawler: whenever it attacks, another target Elf you control gets +2/+1 (pump() was a no-op).
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Vinebred Brawler,Elvish Warrior
+[PLAYER2]
+[DO]
+Vinebred Brawler
+next
+Elvish Warrior
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Vinebred Brawler,Elvish Warrior
+pt:Elvish Warrior=4/4
+[PLAYER2]
+[END]

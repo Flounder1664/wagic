@@ -1,0 +1,17 @@
+#Timid Shieldbearer's {4}{W}: creatures you control get +1/+1 (pump() was a no-op).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Timid Shieldbearer,Grizzly Bears
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+Timid Shieldbearer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Timid Shieldbearer,Grizzly Bears
+pt:Grizzly Bears=3/3
+pt:Timid Shieldbearer=3/3
+[PLAYER2]
+[END]
