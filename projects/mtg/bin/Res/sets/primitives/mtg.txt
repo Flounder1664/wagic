@@ -6722,14 +6722,16 @@ text=Choose two - -- * Create a token that's a copy of target Elemental you cont
 [/card]
 [card]
 name=Ashling, Rekindled
-auto=choice name(loot) discard:1 && draw:1 name(pass)
+backside=Ashling, Rimebound
+anyzone={0}:doubleside(backside)
+auto=may name(Discard and draw) target(*|myhand) reject and!( draw:1 controller )!
+auto=@each my firstmain:pay({U}):name(Transform) flip(backside)
 mana={1}{R}
-type=Creature
+type=Legendary Creature
 subtype=Elemental Sorcerer
 power=1
 toughness=3
 text=Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card. -- At the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
-missing=No back face (Ashling, Rimebound): the pay-{U} transform and the back face are not implemented.
 [/card]
 [card]
 name=Ashling, the Extinguisher
@@ -15831,14 +15833,16 @@ subtype=Kithkin
 [/card]
 [card]
 name=Brigid, Clachan's Heart
-auto=token(Kithkin,creature kithkin,1/1,green white)
+backside=Brigid, Doun's Mind
+anyzone={0}:doubleside(backside)
+auto=token(-697107)
+auto=@each my firstmain:pay({G}):name(Transform) flip(backside)
 mana={2}{W}
-type=Creature
+type=Legendary Creature
 subtype=Kithkin Warrior
 power=3
 toughness=2
 text=Whenever this creature enters or transforms into Brigid, Clachan's Heart, create a 1/1 green and white Kithkin creature token. -- At the beginning of your first main phase, you may pay {G}. If you do, transform Brigid.
-missing=No back face (Brigid, Doun's Mind): the pay-{G} transform and the back face are not implemented.
 [/card]
 [card]
 name=Brigid, Hero of Kinsbaile
@@ -54081,15 +54085,17 @@ subtype=Goblin
 [/card]
 [card]
 name=Grub, Storied Matriarch
+backside=Grub, Notorious Auntie
+anyzone={0}:doubleside(backside)
 abilities=menace
-auto=moveto(myhand) target(creature[goblin]|mygraveyard)
+auto=moveto(myhand) target(<upto:1>*[goblin]|mygraveyard)
+auto=@each my firstmain:pay({R}):name(Transform) flip(backside)
 mana={2}{B}
-type=Creature
+type=Legendary Creature
 subtype=Goblin Warlock
 power=2
 toughness=1
 text=Menace -- Whenever this creature enters or transforms into Grub, Storied Matriarch, return up to one target Goblin card from your graveyard to your hand. -- At the beginning of your first main phase, you may pay {R}. If you do, transform Grub.
-missing=No back face (Grub, Notorious Auntie): the pay-{R} transform and the back face are not implemented.
 [/card]
 [card]
 name=Gruesome Deformity
@@ -123601,15 +123607,17 @@ toughness=2
 [/card]
 [card]
 name=Sygg, Wanderwine Wisdom
+backside=Sygg, Wanderbrine Shield
+anyzone={0}:doubleside(backside)
 abilities=unblockable
-auto=draw:1 controller
+auto=target(creature) transforms((,newability[@combatdamaged(player,planeswalker) from(this):name(Draw a card) draw:1 controller])) ueot
+auto=@each my firstmain:pay({W}):name(Transform) flip(backside)
 mana={1}{U}
 type=Legendary Creature
 text=Sygg can't be blocked. -- Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn. -- At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
 subtype=Merfolk Wizard
 power=2
 toughness=2
-missing=The enters trigger draws a card instead of granting target creature 'deals combat damage to a player: draw a card'; no back face (Sygg, Wanderbrine Shield) and no pay-{W} transform.
 [/card]
 [card]
 name=Sylvan Advocate
@@ -131774,15 +131782,17 @@ subtype=Elf
 [/card]
 [card]
 name=Trystan, Callous Cultivator
+backside=Trystan, Penitent Culler
+anyzone={0}:doubleside(backside)
 abilities=deathtouch
-auto=deplete:3 controller && if type(creature[elf]|mygraveyard)~morethan~0 then life:2 controller
+auto=deplete:3 controller and!( if type(*[elf]|mygraveyard)~morethan~0 then life:2 controller )!
+auto=@each my firstmain:pay({B}):name(Transform) flip(backside)
 mana={2}{G}
 type=Legendary Creature
 text=Deathtouch -- Whenever this creature enters or transforms into Trystan, Callous Cultivator, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life. -- At the beginning of your first main phase, you may pay {B}. If you do, transform Trystan.
 subtype=Elf Druid
 power=3
 toughness=4
-missing=No back face (Trystan, Penitent Culler): the pay-{B} transform and the back face are not implemented.
 [/card]
 [card]
 name=Tsabo Tavoc

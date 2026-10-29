@@ -1,0 +1,25 @@
+#ECL DFC backs 2026-10-29. Penitent Culler (696999) pays {G} and becomes Trystan, Callous
+#Cultivator, whose transform trigger mills 3 (Island,Shock,Llanowar Elves) and gains 2 for the Elf.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Forest,696999
+library:Grizzly Bears,Hill Giant,Ornithopter,Llanowar Elves,Shock,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,696999
+hand:Island
+library:Grizzly Bears,Hill Giant
+graveyard:Ornithopter,Llanowar Elves,Shock
+life:22
+[PLAYER2]
+life:20
+[END]

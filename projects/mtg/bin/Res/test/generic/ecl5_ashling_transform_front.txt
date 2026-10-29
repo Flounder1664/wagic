@@ -1,0 +1,27 @@
+#ECL DFC backs 2026-10-29. Rimebound (696998) pays {R} and becomes Ashling, Rekindled, whose
+#transform trigger may discard a card to draw one (Shock discarded, Grizzly Bears drawn).
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Mountain,696998
+hand:Shock
+library:Grizzly Bears,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Mountain
+choice 0
+Shock
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mountain,696998
+hand:Hill Giant,Grizzly Bears
+graveyard:Shock
+life:20
+[PLAYER2]
+life:20
+[END]

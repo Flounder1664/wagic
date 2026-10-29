@@ -1,0 +1,30 @@
+#ECL DFC backs 2026-10-29. Oko, Lorwyn Liege pays {G} and becomes Shadowmoor Scion; its -1 mills
+#three (Ornithopter, Shock, Hill Giant under the drawn Island) and puts the permanent Hill Giant into hand.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Forest,696872
+library:Grizzly Bears,Hill Giant,Shock,Ornithopter,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Forest
+696872
+choice 0
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,696872
+hand:Island,Hill Giant
+library:Grizzly Bears
+graveyard:Shock,Ornithopter
+counter:696872=loyalty:2
+life:20
+[PLAYER2]
+life:20
+[END]

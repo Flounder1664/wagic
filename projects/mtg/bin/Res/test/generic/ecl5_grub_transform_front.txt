@@ -1,0 +1,25 @@
+#ECL DFC backs 2026-10-29. Notorious Auntie (696996) pays {B} and becomes Grub, Storied
+#Matriarch, whose transform trigger returns Raging Goblin from the graveyard.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Swamp,696996
+graveyard:Raging Goblin
+library:Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Swamp
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swamp,696996
+hand:Hill Giant,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[END]

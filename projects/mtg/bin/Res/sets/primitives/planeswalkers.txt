@@ -2693,6 +2693,18 @@ type=Legendary Planeswalker
 subtype=Nixilis
 [/card]
 [card]
+name=Oko, Shadowmoor Scion
+backside=Oko, Lorwyn Liege
+auto=@each my firstmain:pay({U}):name(Transform) flip(backside)
+auto={C(0/0,-1,Loyalty)}:name(-1: Mill 3, take a permanent) deplete:3 controller and!( may name(Put a permanent card into your hand) target(*[-instant&-sorcery&zpos>=type:*:mygraveyardminus2minusend]|mygraveyard) moveto(myhand) )!
+auto={C(0/0,-3,Loyalty)}:name(-3: Two 3/3 Elks) token(Elk,Creature Elk,3/3,green)*2
+missing=-6 (emblem: creatures of a chosen type get +3/+3, vigilance, hexproof) is not implemented: an emblem's lord cannot read a chosen creature type (chosentype is looked up on the emblem's own source card, which never has one).
+text=At the beginning of your first main phase, you may pay {U}. If you do, transform Oko. -- -1: Mill three cards. You may put a permanent card from among them into your hand. -- -3: Create two 3/3 green Elk creature tokens. -- -6: Choose a creature type. You get an emblem with "Creatures you control of the chosen type get +3/+3 and have vigilance and hexproof."
+type=Legendary Planeswalker
+subtype=Oko
+color=green
+[/card]
+[card]
 name=Oko, Thief of Crowns
 auto=counter(0/0,4,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: Create food) _FOOD_
@@ -4013,13 +4025,15 @@ missing=-8 puts up to three creature cards with mana value 3 or less from the wh
 
 [card]
 name=Oko, Lorwyn Liege
-auto=loyalty:2 name(plus2) target(creature|mybattlefield) effect(+0/+0) ueot
-auto=loyalty:1 name(plus1) target(creature|opponentbattlefield) effect(-2/-0) ueot
+backside=Oko, Shadowmoor Scion
+anyzone={0}:doubleside(backside)
+auto=if compare(hascntloyalty)~equalto~0 then counter(0/0,3,loyalty)
+auto=@each my firstmain:pay({G}):name(Transform) flip(backside)
+auto={C(0/0,2,Loyalty)}:name(+2: Gains all creature types) target(<upto:1>creature) transforms((,changeling)) forever
+auto={C(0/0,1,Loyalty)}:name(+1: Target creature gets -2/-0) target(creature) -2/-0 uynt
 mana={2}{U}
-type=Planeswalker
+type=Legendary Planeswalker
 subtype=Oko
-loyalty=3
-text=At the beginning of your first main phase, you may pay {G}. If you do, transform Oko. -- [+2]: Up to one target creature gains all creature types. (This effect doesn't end.) -- [+1]: Target creature gets -2/-0 until your next turn.
-missing=+2 grants nothing (should give all creature types); +1 lasts until end of turn, not your next turn; no back face (Oko, Shorikai) and no pay-{G} transform.
+text=At the beginning of your first main phase, you may pay {G}. If you do, transform Oko. -- +2: Up to one target creature gains all creature types. (This effect doesn't end.) -- +1: Target creature gets -2/-0 until your next turn.
 [/card]
 

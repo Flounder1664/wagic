@@ -1,0 +1,23 @@
+#ECL DFC backs 2026-10-29. Doun's Mind (696997) pays {W} and becomes Brigid, Clachan's Heart,
+#whose transform trigger makes a 1/1 Kithkin.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Plains,696997
+library:Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Plains
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,696997,Kithkin Ecl
+hand:Hill Giant
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -1,0 +1,29 @@
+#ECL DFC backs 2026-10-29. Trystan pays {B} at first main and becomes Penitent Culler,
+#whose transform trigger mills 3 more and exiles the milled-earlier Llanowar Elves for 2.
+#Setup ETB mills Island,Shock,Llanowar Elves (+2 life); the draw takes Raging Goblin.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Swamp,696729
+library:Grizzly Bears,Hill Giant,Ornithopter,Goblin Piker,Raging Goblin,Llanowar Elves,Shock,Island
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Swamp
+choice 0
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swamp,696729
+hand:Raging Goblin
+library:Grizzly Bears
+graveyard:Hill Giant,Ornithopter,Goblin Piker,Shock,Island
+exile:Llanowar Elves
+life:22
+[PLAYER2]
+life:18
+[END]

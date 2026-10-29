@@ -1,0 +1,27 @@
+#ECL DFC backs 2026-10-29. Ashling, Rekindled pays {U} and becomes Rimebound, whose transform
+#trigger adds two mana of one colour (choice 0 = white).
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Island,696783
+library:Grizzly Bears,Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 1
+choice 0
+Island
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Island,696783
+hand:Hill Giant
+library:Grizzly Bears
+manapool:{W}{W}
+life:20
+[PLAYER2]
+life:20
+[END]

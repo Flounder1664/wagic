@@ -5752,6 +5752,19 @@ power=3
 toughness=5
 [/card]
 [card]
+name=Ashling, Rimebound
+backside=Ashling, Rekindled
+auto=@transformed(this|mybattlefield):ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
+auto=@each my firstmain:ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
+auto=@each my firstmain:pay({R}):name(Transform) flip(backside)
+text=Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater. -- At the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.
+type=Legendary Creature
+subtype=Elemental Wizard
+color=blue
+power=1
+toughness=3
+[/card]
+[card]
 name=Ashmouth Dragon
 abilities=flying
 backside=Smoldering Egg
@@ -8597,6 +8610,19 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=Brigid, Doun's Mind
+backside=Brigid, Clachan's Heart
+auto={T}:name(Add G for each other creature) foreach(other creature|mybattlefield) add{G}
+auto={T}:name(Add W for each other creature) foreach(other creature|mybattlefield) add{W}
+auto=@each my firstmain:pay({W}):name(Transform) flip(backside)
+text={T}: Add X {G} or X {W}, where X is the number of other creatures you control. -- At the beginning of your first main phase, you may pay {W}. If you do, transform Brigid.
+type=Legendary Creature
+subtype=Kithkin Soldier
+color=green
+power=3
+toughness=2
+[/card]
+[card]
 name=Emeritus of Conflict // Lightning Bolt
 grade=borderline
 abilities=first strike
@@ -8732,6 +8758,19 @@ type=Creature
 subtype=Troll Warlock
 power=3
 toughness=3
+[/card]
+[card]
+name=Grub, Notorious Auntie
+backside=Grub, Storied Matriarch
+abilities=menace
+auto=_ATTACKING_may name(Blight 1 and copy) target(creature|mybattlefield) counter(-1/-1) && clone with(battleready) and!( transforms((,newability[phaseaction[end once] sacrifice all(this)])) forever )!
+auto=@each my firstmain:pay({B}):name(Transform) flip(backside)
+text=Menace -- Whenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token." -- At the beginning of your first main phase, you may pay {B}. If you do, transform Grub.
+type=Legendary Creature
+subtype=Goblin Warrior
+color=red
+power=2
+toughness=1
 [/card]
 [card]
 name=Harmonized Trio // Brainstorm
@@ -8924,6 +8963,32 @@ type=Creature
 subtype=Vampire Cleric
 power=2
 toughness=2
+[/card]
+[card]
+name=Sygg, Wanderbrine Shield
+backside=Sygg, Wanderwine Wisdom
+abilities=unblockable
+auto=@transformed(this|mybattlefield):target(creature|mybattlefield) transforms((,protection from white,protection from blue,protection from black,protection from red,protection from green)) uynt
+auto=@each my firstmain:pay({U}):name(Transform) flip(backside)
+text=Sygg can't be blocked. -- Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn. -- At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+type=Legendary Creature
+subtype=Merfolk Rogue
+color=white
+power=2
+toughness=2
+[/card]
+[card]
+name=Trystan, Penitent Culler
+backside=Trystan, Callous Cultivator
+abilities=deathtouch
+auto=@transformed(this|mybattlefield):deplete:3 controller and!( may name(Exile an Elf card) target(*[elf]|mygraveyard) moveto(exile) && life:-2 opponent )!
+auto=@each my firstmain:pay({G}):name(Transform) flip(backside)
+text=Deathtouch -- Whenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life. -- At the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.
+type=Legendary Creature
+subtype=Elf Warlock
+color=black
+power=3
+toughness=4
 [/card]
 [card]
 name=Yavimaya Bloomsage // Channel
