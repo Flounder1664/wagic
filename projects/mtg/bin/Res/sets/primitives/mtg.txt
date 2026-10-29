@@ -934,7 +934,7 @@ toughness=1
 [/card]
 [card]
 name=Adept Watershaper
-auto=all(creature[-this]|mybattlefield):abilities=indestructible
+auto=lord(other creature[tapped]|mybattlefield) indestructible
 mana={2}{W}
 type=Creature
 subtype=Merfolk Cleric
@@ -4909,7 +4909,7 @@ subtype=Aura
 [/card]
 [card]
 name=Aquitect's Defenses
-target=creature
+target=creature|mybattlefield
 abilities=flash
 auto=hexproof ueot
 auto=enchanted 1/2
@@ -6729,6 +6729,7 @@ subtype=Elemental Sorcerer
 power=1
 toughness=3
 text=Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card. -- At the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
+missing=No back face (Ashling, Rimebound): the pay-{U} transform and the back face are not implemented.
 [/card]
 [card]
 name=Ashling, the Extinguisher
@@ -9546,6 +9547,7 @@ mana={1}{B}
 type=Artifact
 subtype=Equipment
 text=Flash -- When this Equipment enters, attach it to target creature you control. That creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.) -- Equipped creature gets +1/+2. -- Equip {2}
+missing=When this Equipment enters, attach it to target creature you control; that creature gains wither until end of turn.
 [/card]
 [card]
 name=Barbed Field
@@ -9661,6 +9663,7 @@ mana={1}{W}
 type=Artifact
 subtype=Equipment
 text=Equipped creature gets +0/+1. -- As long as equipped creature's toughness is greater than its power, it assigns combat damage equal to its toughness rather than its power. -- Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+missing=The toughness-greater-than-power condition: equipped creature always assigns combat damage by toughness.
 [/card]
 [card]
 name=Barkhide Mauler
@@ -12222,7 +12225,7 @@ toughness=1
 [/card]
 [card]
 name=Blight Rot
-auto=counter(-1/-1,4) target(creature|opponentbattlefield)
+auto=counter(-1/-1,4) target(creature)
 mana={2}{B}
 type=Instant
 text=Put four -1/-1 counters on target creature.
@@ -13576,11 +13579,13 @@ text=Blooming Stinger
 [card]
 name=Blossombind
 target=creature
-auto=tap target(creature|opponentbattlefield)
+auto=tap
 mana={1}{U}
 type=Enchantment
 text=Enchant creature -- When this Aura enters, tap enchanted creature. -- Enchanted creature can't become untapped and can't have counters put on it.
 subtype=Aura
+auto=doesnotuntap
+missing=Enchanted creature can still have counters put on it.
 [/card]
 [card]
 name=Blossoming Defense
@@ -15833,6 +15838,7 @@ subtype=Kithkin Warrior
 power=3
 toughness=2
 text=Whenever this creature enters or transforms into Brigid, Clachan's Heart, create a 1/1 green and white Kithkin creature token. -- At the beginning of your first main phase, you may pay {G}. If you do, transform Brigid.
+missing=No back face (Brigid, Doun's Mind): the pay-{G} transform and the back face are not implemented.
 [/card]
 [card]
 name=Brigid, Hero of Kinsbaile
@@ -19018,10 +19024,11 @@ type=Instant
 [/card]
 [card]
 name=Celestial Reunion
-auto=moveto(myhand) target(creature|mylibrary)
+auto=moveto(myhand) target(creature[manacost<=X]|mylibrary)
 mana={X}{G}
 type=Sorcery
 text=As an additional cost to cast this spell, you may choose a creature type and behold two creatures of that type. -- Search your library for a creature card with mana value X or less, reveal it, put it into your hand, then shuffle. If this spell's additional cost was paid and the revealed card is the chosen type, put that card onto the battlefield instead of putting it into your hand.
+missing=The optional behold-two-creatures additional cost (and putting the card onto the battlefield).
 [/card]
 [card]
 name=Celestial Sword
@@ -28010,10 +28017,11 @@ subtype=Aura
 [card]
 name=Dawn-Blessed Pennant
 auto=@movedTo(*|mybattlefield):life:1 controller
-auto={2}{T}:moveto(myhand) target(*|mygraveyard)
+auto={2}{T}{S}:moveto(myhand) target(*|mygraveyard)
 mana={1}
 type=Artifact
 text=As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. -- Whenever a permanent you control of the chosen type enters, you gain 1 life. -- {2}, {T}, Sacrifice this artifact: Return target card of the chosen type from your graveyard to your hand.
+missing=No type is chosen: every permanent you control entering gains 1 life, and the sacrifice ability returns any card, not just one of the chosen type.
 [/card]
 [card]
 name=Dawnbreak Reclaimer
@@ -29439,6 +29447,7 @@ subtype=Merfolk Wizard
 power=2
 toughness=2
 text=Flash -- When this creature enters, untap each other Merfolk you control. -- As long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.
+missing=Merfolk you control get +1/+0 as long as you attacked with three or more Merfolk this turn.
 [/card]
 [card]
 name=Deepwood Drummer
@@ -35993,6 +36002,7 @@ auto={T}:name(add colored mana) ability$! choice add{G} _ choice add{R} _ choice
 mana=
 type=Land
 text=As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk. -- {T}: Add {C}. -- {T}: Add one mana of any color. Spend this mana only to cast a spell of the chosen type or activate an ability of a source of the chosen type.
+missing=The any-colour mana is not restricted to spells/abilities of the chosen type; any creature type can be chosen, and the land itself takes on the chosen type.
 [/card]
 [card]
 name=Eddytrail Hawk
@@ -41811,10 +41821,11 @@ type=Instant
 [/card]
 [card]
 name=Feed the Flames
-auto=damage:5 target(creature|opponentbattlefield)
+auto=damage:5 target(creature)
 mana={3}{R}
 type=Instant
 text=Feed the Flames deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+missing=If that creature would die this turn, exile it instead.
 [/card]
 [card]
 name=Feed the Pack
@@ -42764,6 +42775,7 @@ subtype=Kithkin
 power=1
 toughness=1
 text={G/W}: This creature becomes a Kithkin Scout with base power and toughness 2/3. -- {1}{G/W}{G/W}: If this creature is a Scout, it becomes a Kithkin Soldier with base power and toughness 4/5. -- {3}{G/W}{G/W}{G/W}: If this creature is a Soldier, it becomes a Kithkin Avatar with base power and toughness 7/8 and protection from each of your opponents.
+missing=Protection from each of your opponents on the Avatar step.
 [/card]
 [card]
 name=Filigree Angel
@@ -42928,6 +42940,7 @@ auto={T}:Add{G}
 mana={3}
 type=Artifact
 text=Changeling (This card is every creature type.) -- {T}: Add one mana of any color. -- {4}: This artifact becomes a 4/4 artifact creature until end of turn.
+auto={4}:transforms((Artifact Creature,setpower=4,settoughness=4)) ueot
 [/card]
 [card]
 name=Fire Ambush
@@ -43704,13 +43717,14 @@ toughness=4
 [/card]
 [card]
 name=Flamebraider
-auto={T}:Add{2}
+auto={T}:name(Add 2 mana) thisforeach(variable{2}) ability$!name(Choose one) choice name(Add white) add{W} spendspells(elemental) _ choice name(Add black) add{B} spendspells(elemental) _ choice name(Add green) add{G} spendspells(elemental) _ choice name(Add blue) add{U} spendspells(elemental) _ choice name(Add red) add{R} spendspells(elemental)!$ controller
 text={T}: Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elemental sources.
 mana={1}{R}
 type=Creature
 subtype=Elemental Bard
 power=2
 toughness=2
+missing=The mana can't be spent on abilities of Elemental sources (spendspells covers spells only).
 [/card]
 [card]
 name=Flamebreak
@@ -45159,6 +45173,7 @@ subtype=Scarecrow
 power=1
 toughness=3
 text=When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) -- {1}: Add one mana of any color. This creature becomes that color until end of turn. Activate only once each turn.
+missing=Becomes the chosen colour until end of turn; activate only once each turn.
 [/card]
 [card]
 name=Foratog
@@ -49738,6 +49753,7 @@ auto=fizzle all(*|opponentstack) && token(Faerie,creature faerie rogue,1/1,flyin
 mana={2}{U}{U}
 type=Instant
 text=This spell can't be countered. -- Counter all spells your opponents control and all abilities your opponents control. Create a 1/1 blue and black Faerie creature token with flying for each spell and ability countered this way.
+missing=Can't be countered; counters spells only (not abilities); always creates two Faeries instead of one per spell and ability countered.
 [/card]
 [card]
 name=Glimmer of Genius
@@ -52698,6 +52714,7 @@ subtype=Merfolk Rogue
 power=1
 toughness=3
 text=Vigilance -- Whenever this creature attacks, you may tap another untapped creature you control. If you do, this creature can't be blocked this turn.
+missing=Whenever this creature attacks, you may tap another untapped creature you control; if you do, it can't be blocked this turn.
 [/card]
 [card]
 name=Graven Cairns
@@ -54071,6 +54088,7 @@ subtype=Goblin Warlock
 power=2
 toughness=1
 text=Menace -- Whenever this creature enters or transforms into Grub, Storied Matriarch, return up to one target Goblin card from your graveyard to your hand. -- At the beginning of your first main phase, you may pay {R}. If you do, transform Grub.
+missing=No back face (Grub, Notorious Auntie): the pay-{R} transform and the back face are not implemented.
 [/card]
 [card]
 name=Gruesome Deformity
@@ -66577,6 +66595,7 @@ auto=@each my combatbegins:token(Kithkin,creature kithkin,1/1,,green white)
 mana={3}{W}{W}
 type=Enchantment
 text=Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn. -- At the beginning of combat on your turn, create a 1/1 green and white Kithkin creature token.
+missing=Creatures you control get +X/+X, where X is the number of creatures that entered under your control this turn.
 [/card]
 [card]
 name=Kindercatch
@@ -66596,10 +66615,11 @@ type=Instant
 [/card]
 [card]
 name=Kindle the Inner Flame
-auto=copy target(creature|mybattlefield)
+auto=clone with(treason,haste) target(creature|mybattlefield)
 mana={3}{R}
 type=Sorcery
 text=Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token." -- Flashback—{1}{R}, Behold three Elementals. (You may cast this card from your graveyard for its flashback cost. Then exile it. To behold an Elemental, choose an Elemental you control or reveal an Elemental card from your hand.)
+missing=Flashback {1}{R}, Behold three Elementals.
 [/card]
 [card]
 name=Kindled Fury
@@ -66809,6 +66829,7 @@ text=First strike, lifelink -- Whenever this creature attacks, you may put a cre
 subtype=Kithkin Soldier
 power=2
 toughness=2
+missing=X should be the number of attacking creatures (fixed at 2 here); the card should enter tapped and attacking; the put isn't optional.
 [/card]
 [card]
 name=Kiora's Follower
@@ -69615,6 +69636,7 @@ auto=@each my endstep:damage:2 opponent
 mana={1}{R}
 type=Enchantment
 text=At the beginning of each end step, if you put a counter on a creature this turn, this enchantment deals 2 damage to each opponent.
+missing=Fires only at your end step and unconditionally; should fire at each end step, only if you put a counter on a creature this turn.
 [/card]
 [card]
 name=Lat-Nam's Legacy
@@ -71393,6 +71415,7 @@ auto=moveto(exile) target(*[-land]|opponentbattlefield) && life:2 controller
 mana={3}{W}
 type=Enchantment
 text=When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life.
+missing=The exile is permanent (should last until this enchantment leaves the battlefield) and the target isn't optional.
 [/card]
 [card]
 name=Lin Sivvi, Defiant Hero
@@ -72010,7 +72033,7 @@ toughness=1
 name=Loch Mare
 auto=counter(-1/-1,3)
 auto={1}{U}{C(-1/-1,-1)}:draw:1 controller
-auto={2}{U}{C(-1/-1,-2)}:tap target(creature)
+auto={2}{U}{C(-1/-1,-2)}:target(creature) tap and!( counter(0/0,1,stun) )!
 text=This creature enters with three -1/-1 counters on it. -- {1}{U}, Remove a counter from this creature: Draw a card. -- {2}{U}, Remove two counters from this creature: Tap target creature. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 mana={1}{U}
 type=Creature
@@ -76621,6 +76644,7 @@ auto={1}{R}:moveto(mybattlefield) target(creature[manacost<=4]|myhand) && target
 text={1}{R}: You may put a creature card with total power and toughness 5 or less from your hand onto the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice that creature.
 mana={2}{R}
 type=Enchantment
+missing=Filter is mana value 4 or less; should be total power and toughness 5 or less.
 [/card]
 [card]
 name=Meekstone
@@ -77925,6 +77949,7 @@ auto=deplete:4 && moveto(hand) target(*|mygraveyard)
 mana={1}{G}
 type=Instant
 text=Mill four cards, then you may return a permanent card from among them to your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
+missing=Returns any card from the whole graveyard, and not optionally; should be a permanent card from among the four milled.
 [/card]
 [card]
 name=Midsummer Revel
@@ -79110,6 +79135,7 @@ mana={4}
 type=Artifact
 subtype=Equipment
 text=As long as this Equipment is attached to a creature, the first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of equipped creature. -- Equip {2}
+missing=The token-copy replacement (only equip is implemented).
 [/card]
 [card]
 name=Mirrorpool
@@ -80883,10 +80909,11 @@ text=Flying, vigilance, lifelink
 [card]
 name=Morcant's Eyes
 auto=@each my upkeep:_SCRY1_
-auto={4}{G}{G}:token(Elf,creature elf,2/2,,black green) && token(Elf,creature elf,2/2,,black green) && token(Elf,creature elf,2/2,,black green) asSorcery
+auto={4}{G}{G}{S}:token(Elf,creature elf,2/2,,black green) && token(Elf,creature elf,2/2,,black green) && token(Elf,creature elf,2/2,,black green) asSorcery
 mana={1}{G}
 type=Enchantment
 text=At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) -- {4}{G}{G}, Sacrifice this enchantment: Create X 2/2 black and green Elf creature tokens, where X is the number of Elf cards in your graveyard. Activate only as a sorcery.
+missing=Always creates three Elves; X should be the number of Elf cards in your graveyard.
 [/card]
 [card]
 name=Morcant's Loyalist
@@ -80898,6 +80925,7 @@ text=Other Elves you control get +1/+1. -- When this creature dies, return anoth
 subtype=Elf Warrior
 power=3
 toughness=2
+missing=The dies trigger can return Morcant's Loyalist itself; should be another Elf card.
 [/card]
 [card]
 name=Mordant Dragon
@@ -81034,6 +81062,7 @@ auto=moveto(exile) target(creature|opponentbattlefield) && moveto(opponentbattle
 mana={3}{W}
 type=Sorcery
 text=Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped under their owners' control. -- Until your next turn, prevent all damage that would be dealt to you. -- Exile Morningtide's Light.
+missing=Exiles one opponent creature and moves a creature from your exile to the opponent's battlefield; should exile any number of target creatures and return them tapped at the next end step, prevent all damage to you until your next turn, and exile itself.
 [/card]
 [card]
 name=Mornsong Aria
@@ -81622,6 +81651,7 @@ text=As an additional cost to cast this spell, behold a Goblin or pay {2}. (To b
 subtype=Goblin Warlock
 power=2
 toughness=1
+missing=As an additional cost, behold a Goblin or pay {2}.
 [/card]
 [card]
 name=Mudbutton Torchrunner
@@ -90390,7 +90420,7 @@ subtype=Aura
 [/card]
 [card]
 name=Pestered Wellguard
-auto={T}:token(Faerie,creature faerie rogue,1/1,flying blue black)
+auto=@tapped(this):token(Faerie,creature faerie rogue,1/1,flying blue black)
 mana={3}{U}
 type=Creature
 text=Whenever this creature becomes tapped, create a 1/1 blue and black Faerie creature token with flying.
@@ -94566,6 +94596,7 @@ auto={3}{T}:draw:1
 mana={2}
 type=Artifact
 text=When this artifact enters, draw a card, then choose a color. This artifact becomes the chosen color. -- {3}, {T}: Draw a card. Activate only if there are five colors among permanents you control.
+missing=Choose a colour / becomes that colour; the draw ability should need five colours among permanents you control.
 [/card]
 [card]
 name=Puffer Extract
@@ -98241,7 +98272,9 @@ toughness=3
 [/card]
 [card]
 name=Reckless Ransacking
-auto=pump(3/2) target(creature|mybattlefield) ueot && _TREASURE_
+target=creature
+auto=3/2 ueot
+auto=_TREASURE_
 mana={1}{R}
 type=Instant
 text=Target creature gets +3/+2 until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
@@ -100712,10 +100745,11 @@ auto={T}{C(charge,-3)}:copy target(spell|stack)
 mana={1}{U}
 type=Artifact
 text=As this artifact enters, choose a creature type. -- Whenever a permanent you control of the chosen type enters, put a charge counter on this artifact. -- {T}, Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
+missing=No creature type is chosen (any permanent adds a counter); the ability copies a spell already on the stack instead of the next instant or sorcery you cast this turn.
 [/card]
 [card]
 name=Rimekin Recluse
-auto=moveto(hand) target(creature[-this]|opponentbattlefield)
+auto=may moveto(hand) target(other creature)
 mana={2}{U}
 type=Creature
 text=When this creature enters, return up to one other target creature to its owner's hand.
@@ -101406,7 +101440,7 @@ toughness=1
 [/card]
 [card]
 name=Riverguard's Reflexes
-target=creature|mybattlefield
+target=creature
 auto=2/2 ueot
 #2026-10-18: was firststrike - not a keyword. Test: ecl_riverguards_reflexes_first_strike.
 auto=first strike ueot
@@ -103620,13 +103654,14 @@ toughness=2
 [/card]
 [card]
 name=Safewright Cavalry
-auto={5}:pump(2/2) target(creature[elf]|mybattlefield) ueot
+auto={5}:target(creature[elf]|mybattlefield) 2/2 ueot
 mana={3}{G}
 type=Creature
 text=This creature can't be blocked by more than one creature. -- {5}: Target Elf you control gets +2/+2 until end of turn.
 subtype=Elf Warrior
 power=4
 toughness=4
+abilities=oneblocker
 [/card]
 [card]
 name=Safewright Quest
@@ -106926,7 +106961,7 @@ type=Enchantment
 [/card]
 [card]
 name=Sear
-auto=damage:4 target(creature|opponentbattlefield)
+auto=damage:4 target(creature,planeswalker)
 mana={1}{R}
 type=Instant
 text=Sear deals 4 damage to target creature or planeswalker.
@@ -111695,6 +111730,7 @@ text=As an additional cost to cast this spell, behold a Merfolk or pay {2}. (To 
 subtype=Merfolk Wizard
 power=2
 toughness=1
+missing=As an additional cost, behold a Merfolk or pay {2}.
 [/card]
 [card]
 name=Silvergill Peddler
@@ -115991,6 +116027,7 @@ text=As an additional cost to cast this spell, behold an Elemental or pay {2}. (
 subtype=Elemental Sorcerer
 power=2
 toughness=1
+missing=As an additional cost, behold an Elemental or pay {2}; the third resolution each turn doesn't add {R}{R}{R}{R}.
 [/card]
 [card]
 name=Soulcage Fiend
@@ -118850,13 +118887,14 @@ type=Instant
 [/card]
 [card]
 name=Stalactite Dagger
-auto=token(Shapeshifter,creature shapeshifter,1/1,colorless)
+auto=token(Shapeshifter,creature shapeshifter,1/1,changeling)
 auto=equipped(this):+1/+1
 auto={2}:equip target(creature|mybattlefield)
 mana={2}
 type=Artifact
 subtype=Equipment
 text=When this Equipment enters, create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.) -- Equipped creature gets +1/+1 and is all creature types. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+auto=teach(creature) changeling
 [/card]
 [card]
 name=Stalker Hag
@@ -120090,7 +120128,7 @@ toughness=5
 [/card]
 [card]
 name=Stoic Grove-Guide
-autograveyard={1}{BG}:token(Elf,creature elf,2/2,black green) asSorcery
+autograveyard={1}{BG}{E}:token(Elf,creature elf,2/2,black green) asSorcery
 mana={4}{BG}
 type=Creature
 text={1}{B/G}, Exile this card from your graveyard: Create a 2/2 black and green Elf creature token. Activate only as a sorcery.
@@ -120900,7 +120938,7 @@ type=Sorcery
 [card]
 name=Stratosoarer
 abilities=flying
-auto=flying ueot target(creature|mybattlefield)
+auto=flying ueot target(creature)
 auto=__BASIC_LANDCYCLING__({1}{U})
 mana={4}{U}
 type=Creature
@@ -122152,6 +122190,7 @@ text=This spell costs {X} less to cast, where X is the greatest mana value among
 subtype=Elemental
 power=5
 toughness=5
+missing=Costs {X} less (greatest mana value among your Elementals); the enters trigger isn't limited to when you cast it.
 [/card]
 [card]
 name=Sundering Growth
@@ -122754,7 +122793,7 @@ toughness=1
 [/card]
 [card]
 name=Surly Farrier
-auto={T}:pump(1/1) target(creature|mybattlefield) ueot asSorcery
+auto={T}:target(creature|mybattlefield) transforms((,newability[1/1],vigilance)) ueot asSorcery
 mana={1}{G}
 type=Creature
 text={T}: Target creature you control gets +1/+1 and gains vigilance until end of turn. Activate only as a sorcery.
@@ -123133,10 +123172,11 @@ type=Instant
 [/card]
 [card]
 name=Swat Away
-auto=moveto(mylibrary) target(*[-land]|opponentbattlefield)
+auto=moveto(ownerlibrary) target(creature)
 mana={2}{U}{U}
 type=Instant
 text=This spell costs {2} less to cast if a creature is attacking you. -- The owner of target spell or creature puts it on their choice of the top or bottom of their library.
+missing=Can't target a spell; costs {2} less if a creature is attacking you; the owner can't choose the bottom of the library.
 [/card]
 [card]
 name=Sway of Illusion
@@ -123563,6 +123603,7 @@ text=Sygg can't be blocked. -- Whenever this creature enters or transforms into 
 subtype=Merfolk Wizard
 power=2
 toughness=2
+missing=The enters trigger draws a card instead of granting target creature 'deals combat damage to a player: draw a card'; no back face (Sygg, Wanderbrine Shield) and no pay-{W} transform.
 [/card]
 [card]
 name=Sylvan Advocate
@@ -124477,13 +124518,14 @@ toughness=3
 [/card]
 [card]
 name=Tam, Mindful First-Year
-auto={T}:pump(2/2) target(creature|mybattlefield) ueot
+auto={T}:target(creature|mybattlefield) 2/2 ueot
 mana={1}{GU}
 type=Legendary Creature
 text=Each other creature you control has hexproof from each of its colors. -- {T}: Target creature you control becomes all colors until end of turn.
 subtype=Gorgon Wizard
 power=2
 toughness=2
+missing=Both abilities are stand-ins: no hexproof from its colours for other creatures, and {T} gives +2/+2 instead of making the target all colours.
 [/card]
 [card]
 name=Tamanoa
@@ -125867,6 +125909,7 @@ auto=moveto(mybattlefield) target(land[basic]|mylibrary) && token(Treefolk,creat
 mana={2}{G}
 type=Sorcery
 text=Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control seven or more lands and/or Treefolk, create a 3/4 green Treefolk creature token with reach. (It can block creatures with flying.)
+missing=The land enters untapped, and the Treefolk is created without the seven-or-more lands and/or Treefolk check.
 [/card]
 [card]
 name=Tendo Ice Bridge
@@ -127566,10 +127609,13 @@ type=Sorcery
 [/card]
 [card]
 name=Thoughtweft Charge
-auto=pump(3/3) target(creature|mybattlefield) ueot && draw:1 controller
+target=creature
+auto=3/3 ueot
+auto=draw:1 controller
 mana={1}{G}
 type=Instant
 text=Target creature gets +3/+3 until end of turn. If a creature entered the battlefield under your control this turn, draw a card.
+missing=The draw is unconditional; should need a creature to have entered under your control this turn.
 [/card]
 [card]
 name=Thoughtweft Gambit
@@ -127588,11 +127634,12 @@ text=Whenever a creature you control attacks alone, it gets +X/+X until end of t
 subtype=Kithkin Advisor
 power=0
 toughness=5
+missing=Not implemented: the trigger line uses pump(), which is not Wagic syntax and does nothing. Should be: a creature you control attacking alone gets +X/+X, X = the number of Kithkin you control.
 [/card]
 [card]
 name=Thoughtweft Lieutenant
-auto=pump(1/1) target(creature|mybattlefield) ueot
-auto=@movedTo(creature[kithkin,-this]|mybattlefield):pump(1/1) target(creature|mybattlefield) ueot
+auto=target(creature|mybattlefield) transforms((,newability[1/1],trample)) ueot
+auto=@movedTo(other creature[kithkin]|mybattlefield):target(creature|mybattlefield) transforms((,newability[1/1],trample)) ueot
 mana={G}{W}
 type=Creature
 text=Whenever this creature or another Kithkin you control enters, target creature you control gets +1/+1 and gains trample until end of turn.
@@ -128943,7 +128990,7 @@ toughness=3
 [/card]
 [card]
 name=Timid Shieldbearer
-auto={4}{W}:all(creature|mybattlefield) pump(1/1) ueot
+auto={4}{W}:all(creature|mybattlefield) 1/1 ueot
 mana={1}{W}
 type=Creature
 text={4}{W}: Creatures you control get +1/+1 until end of turn.
@@ -131160,7 +131207,7 @@ type=Artifact
 [card]
 name=Tributary Vaulter
 abilities=flying
-auto={T}:pump(2/0) target(creature[merfolk,-this]|mybattlefield) ueot
+auto=@tapped(this):target(other creature[merfolk]|mybattlefield) 2/0 ueot
 mana={2}{W}
 type=Creature
 text=Flying -- Whenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn.
@@ -131723,13 +131770,13 @@ subtype=Elf
 name=Trystan, Callous Cultivator
 abilities=deathtouch
 auto=deplete:3 controller && if type(creature[elf]|mygraveyard)~morethan~0 then life:2 controller
-auto=@each my mainphase:{B}:name(transform) transform asSorcery
 mana={2}{G}
 type=Legendary Creature
 text=Deathtouch -- Whenever this creature enters or transforms into Trystan, Callous Cultivator, mill three cards. Then if there is an Elf card in your graveyard, you gain 2 life. -- At the beginning of your first main phase, you may pay {B}. If you do, transform Trystan.
 subtype=Elf Druid
 power=3
 toughness=4
+missing=No back face (Trystan, Penitent Culler): the pay-{B} transform and the back face are not implemented.
 [/card]
 [card]
 name=Tsabo Tavoc
@@ -132730,6 +132777,7 @@ auto=moveto(hand) target(creature|mygraveyard)
 mana={1}{B}
 type=Instant
 text=Choose one — -- • Return target creature card from your graveyard to your hand. -- • Return two target creature cards that share a creature type from your graveyard to your hand.
+missing=Second mode: return two target creature cards that share a creature type.
 [/card]
 [card]
 name=Uncaged Fury
@@ -136505,14 +136553,14 @@ toughness=4
 [/card]
 [card]
 name=Vinebred Brawler
-abilities=lure
-auto=_ATTACKING_:pump(2/1) target(creature[elf,-this]|mybattlefield) ueot
+auto=_ATTACKING_target(other creature[elf]|mybattlefield) 2/1 ueot
 mana={2}{G}
 type=Creature
 text=This creature must be blocked if able. -- Whenever this creature attacks, another target Elf you control gets +2/+1 until end of turn.
 subtype=Elf Berserker
 power=4
 toughness=2
+auto=transforms((,_MUST_BE_BLOCKD_))
 [/card]
 [card]
 name=Vinelasher Kudzu
@@ -138981,7 +139029,7 @@ toughness=3
 [/card]
 [card]
 name=Wanderbrine Trapper
-auto={1}{T(creature[-this]|mybattlefield)}:tap target(creature|opponentbattlefield)
+auto={1}{T}{T(other creature|mybattlefield)}:tap target(creature|opponentbattlefield)
 mana={W}
 type=Creature
 text={1}, {T}, Tap another untapped creature you control: Tap target creature an opponent controls.
@@ -139104,7 +139152,7 @@ subtype=Aura
 [/card]
 [card]
 name=Wanderwine Distracter
-auto={T}:pump(-3/0) target(creature|opponentbattlefield) ueot
+auto=@tapped(this):target(creature|opponentbattlefield) -3/0 ueot
 mana={3}{U}
 type=Creature
 text=Whenever this creature becomes tapped, target creature an opponent controls gets -3/-0 until end of turn.

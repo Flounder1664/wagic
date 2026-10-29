@@ -1,0 +1,17 @@
+#Safewright Cavalry's {5}: target Elf you control gets +2/+2 (pump() was a no-op).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Safewright Cavalry,Elvish Warrior
+manapool:{5}
+[PLAYER2]
+[DO]
+Safewright Cavalry
+Elvish Warrior
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Safewright Cavalry,Elvish Warrior
+pt:Elvish Warrior=4/5
+[PLAYER2]
+[END]

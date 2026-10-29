@@ -1,0 +1,18 @@
+#Sear can target a planeswalker (it was limited to an opponent's creature): 4 damage kills Jace Beleren.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sear
+manapool:{1}{R}
+[PLAYER2]
+inplay:Jace Beleren
+[DO]
+Sear
+Jace Beleren
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Sear
+[PLAYER2]
+graveyard:Jace Beleren
+[END]

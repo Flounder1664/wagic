@@ -1,0 +1,20 @@
+#Reckless Ransacking can pump an opponent's creature (it was limited to yours) and still makes a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Reckless Ransacking
+manapool:{1}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Reckless Ransacking
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Reckless Ransacking
+inplay:*
+[PLAYER2]
+inplay:Grizzly Bears
+pt:Grizzly Bears=5/4
+[END]

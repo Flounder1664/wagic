@@ -1,0 +1,17 @@
+#Blight Rot can target your own creature (it was limited to an opponent's): four -1/-1 counters kill your Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Blight Rot
+inplay:Grizzly Bears
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+Blight Rot
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Blight Rot,Grizzly Bears
+[PLAYER2]
+[END]

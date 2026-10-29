@@ -4001,13 +4001,14 @@ subtype=Zariel
 [card]
 name=Ajani, Outland Chaperone
 auto=loyalty:1 name(plus1) token(Kithkin,creature kithkin,1/1,green white)
-auto=loyalty:-2 name(minus2) damage:4 target(creature|opponentbattlefield)
+auto=loyalty:-2 name(minus2) damage:4 target(creature[tapped])
 auto=loyalty:-8 name(minus8) moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary)
 mana={1}{W}{W}
 type=Planeswalker
 subtype=Ajani
 loyalty=3
 text=[+1]: Create a 1/1 green and white Kithkin creature token. -- [-2]: Ajani deals 4 damage to target tapped creature. -- [-8]: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.
+missing=-8 puts up to three creature cards with mana value 3 or less from the whole library; it should look at the top X cards (X = your life) and take any number of nonland permanent cards with mana value 3 or less.
 [/card]
 
 [card]
@@ -4019,5 +4020,6 @@ type=Planeswalker
 subtype=Oko
 loyalty=3
 text=At the beginning of your first main phase, you may pay {G}. If you do, transform Oko. -- [+2]: Up to one target creature gains all creature types. (This effect doesn't end.) -- [+1]: Target creature gets -2/-0 until your next turn.
+missing=+2 grants nothing (should give all creature types); +1 lasts until end of turn, not your next turn; no back face (Oko, Shorikai) and no pay-{G} transform.
 [/card]
 

@@ -1,0 +1,16 @@
+#Surly Farrier's {T}: +1/+1 (and vigilance) until end of turn, rewritten as transforms.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Surly Farrier,Grizzly Bears
+[PLAYER2]
+[DO]
+Surly Farrier
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Surly Farrier,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

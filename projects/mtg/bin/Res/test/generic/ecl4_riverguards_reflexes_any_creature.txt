@@ -1,0 +1,19 @@
+#Riverguard's Reflexes can target an opponent's creature (it was limited to yours).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Riverguard's Reflexes
+manapool:{1}{W}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Riverguard's Reflexes
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Riverguard's Reflexes
+[PLAYER2]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+[END]

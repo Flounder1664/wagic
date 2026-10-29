@@ -1,0 +1,21 @@
+#Wanderbrine Trapper's cost taps the Trapper AND another creature: both end up tapped, plus the target.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wanderbrine Trapper,Grizzly Bears
+manapool:{1}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Wanderbrine Trapper
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wanderbrine Trapper,Grizzly Bears
+tappedinplay:2
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]
