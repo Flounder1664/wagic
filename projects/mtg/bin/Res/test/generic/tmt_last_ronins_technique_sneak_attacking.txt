@@ -1,0 +1,26 @@
+#The Last Ronin's Technique cast for sneak (return the unblocked attacking Bears): the three
+#Ninja Turtle Spirit tokens enter TAPPED (and attacking). John's scenario 40 (2026-10-28) had
+#them enter untapped and not attacking - the line had no sneak branch. This harness cannot cast
+#in the blockers step, so the cast is at declare attackers and only the tapped state is asserted;
+#the damage is left to the scenario queue.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Grizzly Bears
+hand:The Last Ronin's Technique
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Grizzly Bears
+The Last Ronin's Technique
+choice 1
+Grizzly Bears
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:*,*,*
+tappedinplay:3
+hand:Grizzly Bears
+graveyard:The Last Ronin's Technique
+[PLAYER2]
+[END]

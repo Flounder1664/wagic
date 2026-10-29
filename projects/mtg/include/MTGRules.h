@@ -106,6 +106,9 @@ public:
     virtual MTGKickerRule * clone() const;
 };
 
+//Airbend: sets the {2} alternative cost on an airbent card sitting in exile (no-op otherwise).
+void setAirbendCost(MTGCardInstance * card);
+
 class MTGAlternativeCostRule: public PermanentAbility
 {
 protected:
