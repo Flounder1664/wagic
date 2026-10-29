@@ -1,0 +1,16 @@
+#S.H.I.E.L.D. Helicarrier makes two Soldier tokens as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:S.H.I.E.L.D. Helicarrier
+manapool:{4}
+[PLAYER2]
+[DO]
+S.H.I.E.L.D. Helicarrier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:S.H.I.E.L.D. Helicarrier,*,*
+manapool:{0}
+[PLAYER2]
+[END]

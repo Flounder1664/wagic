@@ -1,0 +1,16 @@
+#Dragonfly Swarm's power is the number of noncreature, nonland cards in your graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dragonfly Swarm
+graveyard:Opt,Shock,Grizzly Bears
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dragonfly Swarm
+graveyard:Opt,Shock,Grizzly Bears
+pt:Dragonfly Swarm=2/3
+[PLAYER2]
+[END]

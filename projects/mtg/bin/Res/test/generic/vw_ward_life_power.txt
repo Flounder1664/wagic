@@ -1,0 +1,24 @@
+#Raubahn's ward is pay life equal to its power (2): storedpower must read Raubahn, not the spell.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}
+life:20
+[PLAYER2]
+inplay:702151
+[DO]
+134
+702151
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+life:18
+[PLAYER2]
+hand:702151
+[END]

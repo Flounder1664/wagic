@@ -1,0 +1,19 @@
+#S.H.I.E.L.D. Flying Car exiles a creature you control until the next end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:S.H.I.E.L.D. Flying Car
+inplay:Grizzly Bears
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+S.H.I.E.L.D. Flying Car
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:S.H.I.E.L.D. Flying Car
+exile:Grizzly Bears
+manapool:{0}
+[PLAYER2]
+[END]

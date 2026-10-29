@@ -1,0 +1,19 @@
+#Captain America's Motorcycle gives target creature +2/+0 as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Captain America's Motorcycle
+inplay:Grizzly Bears
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Captain America's Motorcycle
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Captain America's Motorcycle,Grizzly Bears
+pt:Grizzly Bears=4/2
+manapool:{0}
+[PLAYER2]
+[END]

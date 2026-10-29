@@ -1,0 +1,16 @@
+#Dependable Quinjet taps for one mana of any color (menu: five colors, then crew).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dependable Quinjet
+[PLAYER2]
+[DO]
+Dependable Quinjet
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dependable Quinjet
+manapool:{W}
+[PLAYER2]
+[END]

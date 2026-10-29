@@ -6590,16 +6590,6 @@ mana={5}{R}
 type=Enchantment
 [/card]
 [card]
-name=Mighty Servant of Leuk-o
-abilities=trample
-text=Trample -- Ward-Discard a card. -- Whenever Mighty Servant of Leuk-o becomes crewed for the first time each turn, if it was crewed by exactly two creatures, it gains "Whenever this creature deals combat damage to a player, draw two cards" until end of turn. -- Crew 4
-mana={3}
-type=Artifact
-subtype=Vehicle
-power=6
-toughness=6
-[/card]
-[card]
 name=Minamo's Meddling
 text=Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell.
 mana={2}{U}{U}
@@ -14371,15 +14361,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Big Wheel
-text=Trample -- When this Vehicle enters, you may discard a card. If you do, draw a card. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
-mana={2}{R}
-type=Artifact
-subtype=Vehicle
-power=4
-toughness=4
-[/card]
-[card]
 name=Bionic Blow
 text=Target creature you control gets +X/+0 until end of turn. Then it deals damage equal to its power to up to one other target creature.
 mana={X}{R}{R}
@@ -14440,15 +14421,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Blue Marvel, Adam Brashear
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Whenever you draw your second card each turn, put a +1/+1 counter on Blue Marvel.
-mana={3}{U}{U}
-type=Legendary Creature
-subtype=Human Scientist Hero
-power=3
-toughness=5
-[/card]
-[card]
 name=Bob, Reluctant HYDRA Agent
 text=Whenever Bob attacks alone, return him to his owner's hand. If you do, each opponent loses 2 life and you gain 2 life.
 mana={1}{B}
@@ -14474,15 +14446,6 @@ type=Legendary Creature
 subtype=Human Soldier Hero
 power=2
 toughness=2
-[/card]
-[card]
-name=Captain America's Motorcycle
-text=Flash -- When this Vehicle enters, target creature or Vehicle gets +2/+0 until end of turn. -- Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
-mana={1}{R}
-type=Artifact
-subtype=Vehicle
-power=3
-toughness=1
 [/card]
 [card]
 name=Captain America, Liberator
@@ -14648,15 +14611,6 @@ name=Daily Bugle Newspaper
 text={2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={2}
 type=Artifact
-[/card]
-[card]
-name=Damocles Base, Sword of Kang
-text=Flying, deathtouch -- Whenever Damocles Base deals combat damage to a player, that player faces a villainous choice — They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards. -- Crew 3
-mana={4}{B}
-type=Legendary Artifact
-subtype=Vehicle
-power=5
-toughness=5
 [/card]
 [card]
 name=Daredevil's Billy Club
@@ -16093,15 +16047,6 @@ power=7
 toughness=6
 [/card]
 [card]
-name=Royal Talon Fighter Jet
-text=Flying -- This Vehicle enters with X +1/+1 counters on it. -- Whenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it. -- Crew 2
-mana={X}{W}{W}
-type=Artifact
-subtype=Vehicle
-power=1
-toughness=1
-[/card]
-[card]
 name=Sadistic Slash
 text=Target creature gets -5/-5 until end of turn. -- Mayhem {1}{B} (You may cast this card from your graveyard for {1}{B} if you discarded it this turn.)
 mana={3}{B}
@@ -16237,15 +16182,6 @@ type=Legendary Creature
 subtype=Alien Hero
 power=4
 toughness=5
-[/card]
-[card]
-name=Sky Cycle
-text=Flying -- When this Vehicle enters, it deals X damage to up to one target creature, where X is twice the number of Vehicles you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
-mana={4}{R}
-type=Artifact
-subtype=Vehicle
-power=4
-toughness=3
 [/card]
 [card]
 name=Smashing Spree
@@ -16473,15 +16409,6 @@ text=Flying, haste -- Other Villains you control get +2/+2 and have flying and h
 mana={5}{U}{R}
 type=Legendary Creature
 subtype=Human Villain
-power=5
-toughness=5
-[/card]
-[card]
-name=The Thanos-Copter
-text=Flying, haste -- When The Thanos-Copter enters, Vehicles you control become artifact creatures until end of turn. -- Whenever a Vehicle you control deals combat damage to a player, draw a card. -- Crew 2
-mana={6}
-type=Legendary Artifact
-subtype=Vehicle
 power=5
 toughness=5
 [/card]
@@ -17276,15 +17203,6 @@ power=3
 toughness=2
 [/card]
 [card]
-name=Captain America, Wings of Freedom
-text=Flying, first strike, ward {1} -- Whenever Captain America attacks, each other Hero you control gets +X/+X until end of turn, where X is Captain America's toughness.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Soldier Hero
-power=3
-toughness=1
-[/card]
-[card]
 name=Captain Mar-Vell, Space-Born
 text=Flying, vigilance -- Cosmic Awareness — As long as an opponent has cast a spell this turn, you may cast spells as though they had flash.
 mana={4}{W}
@@ -17395,15 +17313,6 @@ name=Decoy Ploy
 text=Choose one or both — -- • Return target Villain card from your graveyard to your hand. -- • Return target Hero card from your graveyard to your hand.
 mana={1}{B}
 type=Instant
-[/card]
-[card]
-name=Dependable Quinjet
-text=Flying -- {T}: Add one mana of any color. -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
-mana={3}
-type=Artifact
-subtype=Vehicle
-power=3
-toughness=3
 [/card]
 [card]
 name=Depower
@@ -18208,24 +18117,6 @@ type=Creature
 subtype=Human Berserker Villain
 power=4
 toughness=4
-[/card]
-[card]
-name=S.H.I.E.L.D. Flying Car
-text=Flash -- Flying -- When this Vehicle enters, exile up to one target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step. -- Crew 1
-mana={2}{U}
-type=Artifact
-subtype=Vehicle
-power=3
-toughness=3
-[/card]
-[card]
-name=S.H.I.E.L.D. Helicarrier
-text=Flying -- When this Vehicle enters, create two 1/1 white Soldier creature tokens. -- Crew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)
-mana={4}
-type=Artifact
-subtype=Vehicle
-power=4
-toughness=5
 [/card]
 [card]
 name=S.H.I.E.L.D. Spy Kit
@@ -19203,15 +19094,6 @@ type=Legendary Creature
 subtype=Human Soldier
 power=3
 toughness=3
-[/card]
-[card]
-name=Hraesvelgr of the First Brood
-text=Flying, vigilance, ward {2} -- Shiva's Aid — When Hraesvelgr enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
-mana={4}{U}
-type=Legendary Creature
-subtype=Elder Dragon
-power=5
-toughness=5
 [/card]
 [card]
 name=Interceptor, Shadow's Hound
@@ -21653,12 +21535,6 @@ type=Legendary Creature
 subtype=Human Soldier
 power=4
 toughness=3
-[/card]
-[card]
-name=Malfunctioning Holodeck
-text=Ward {2} (Whenever this artifact becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield.
-mana={2}{W}
-type=Artifact
 [/card]
 [card]
 name=Marooned

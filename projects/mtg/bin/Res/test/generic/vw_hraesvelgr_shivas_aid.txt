@@ -1,0 +1,19 @@
+#Hraesvelgr of the First Brood: entering gives target creature +1/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hraesvelgr of the First Brood
+inplay:Grizzly Bears
+manapool:{4}{U}
+[PLAYER2]
+[DO]
+Hraesvelgr of the First Brood
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hraesvelgr of the First Brood,Grizzly Bears
+pt:Grizzly Bears=3/2
+manapool:{0}
+[PLAYER2]
+[END]

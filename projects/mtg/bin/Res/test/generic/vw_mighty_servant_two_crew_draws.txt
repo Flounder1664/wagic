@@ -1,0 +1,31 @@
+#Mighty Servant of Leuk-o crewed by exactly two creatures (Hill Giant 3 + Eager Cadet 1 = crew 4)
+#draws two cards when it deals combat damage to a player.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mighty Servant of Leuk-o,Hill Giant,Eager Cadet
+library:Opt,Gray Ogre
+[PLAYER2]
+life:20
+[DO]
+Mighty Servant of Leuk-o
+Hill Giant
+Eager Cadet
+next
+#combat begins
+next
+#attackers
+Mighty Servant of Leuk-o
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Mighty Servant of Leuk-o,Hill Giant,Eager Cadet
+hand:Opt,Gray Ogre
+[PLAYER2]
+life:14
+[END]

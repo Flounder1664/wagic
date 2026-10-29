@@ -213,6 +213,18 @@
 #AUTO_DEFINE _WARD3_ @targeted(this) from(*|opponentzones):choice name(This spell costs 3 more) name(This spell costs 3 more) target(*|opponentzones) transforms((,newability[pay[[{3}]] name(pay 3 mana) donothing?fizzle])) oneshot
 #AUTO_DEFINE _WARD4_ @targeted(this) from(*|opponentzones):choice name(This spell costs 4 more) name(This spell costs 4 more) target(*|opponentzones) transforms((,newability[pay[[{4}]] name(pay 4 mana) donothing?fizzle])) oneshot
 #AUTO_DEFINE _WARD8_ @targeted(this) from(*|opponentzones):choice name(This spell costs 8 more) name(This spell costs 8 more) target(*|opponentzones) transforms((,newability[pay[[{8}]] name(pay 8 mana) donothing?fizzle])) oneshot
+#AUTO_DEFINE _WARD5_ @targeted(this) from(*|opponentzones):choice name(This spell costs 5 more) name(This spell costs 5 more) target(*|opponentzones) transforms((,newability[pay[[{5}]] name(pay 5 mana) donothing?fizzle])) oneshot
+#AUTO_DEFINE _WARD6_ @targeted(this) from(*|opponentzones):choice name(This spell costs 6 more) name(This spell costs 6 more) target(*|opponentzones) transforms((,newability[pay[[{6}]] name(pay 6 mana) donothing?fizzle])) oneshot
+# Ward with a non-mana cost. The cost is paid by the controller of the targeting spell or ability:
+# the pay[[...]] ability is granted TO that spell, so "my" in a cost chooser is its controller.
+# Ward-Pay N life
+#AUTO_DEFINE _WARDLIFE_($c) @targeted(this) from(*|opponentzones):choice name(Ward - pay $c life) name(Ward - pay $c life) target(*|opponentzones) transforms((,newability[pay[[{L:$c}]] name(pay $c life) donothing?fizzle])) oneshot
+# Ward-{M}, Pay N life
+#AUTO_DEFINE _WARDMANALIFE_($m,$c) @targeted(this) from(*|opponentzones):choice name(Ward - pay $m mana and $c life) name(Ward - pay $m mana and $c life) target(*|opponentzones) transforms((,newability[pay[[{$m}{L:$c}]] name(pay $m mana and $c life) donothing?fizzle])) oneshot
+# Ward-Discard a card
+#AUTO_DEFINE _WARDDISCARD_ @targeted(this) from(*|opponentzones):choice name(Ward - discard a card) name(Ward - discard a card) target(*|opponentzones) transforms((,newability[pay[[{D(*|myhand)}]] name(discard a card) donothing?fizzle])) oneshot
+# Ward-Discard a card at random
+#AUTO_DEFINE _WARDDISCARDRANDOM_ @targeted(this) from(*|opponentzones):choice name(Ward - discard at random) name(Ward - discard at random) target(*|opponentzones) transforms((,newability[pay[[{D}]] name(discard a card at random) donothing?fizzle])) oneshot
 
 # Renown
 #AUTO_DEFINE _RENOWN_($c) this(cantargetcard(*[-renown]) transforms((,newability[@combatdamaged(player) from(this):counter(1/1.$c) && becomes(renown) forever]))
@@ -266,6 +278,14 @@
 #AUTO_DEFINE _CREW2_ {crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
 
 #AUTO_DEFINE _CREW2COMPLEMENT_ {crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+
+#AUTO_DEFINE _CREW3_ {crew3(other creature|myBattlefield)}:name(Crew 3) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~2}
+
+#AUTO_DEFINE _CREW4_ {crew4(other creature|myBattlefield)}:name(Crew 4) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~3}
+
+#AUTO_DEFINE _CREW5_ {crew5(other creature|myBattlefield)}:name(Crew 5) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~4}
+
+#AUTO_DEFINE _CREW6_ {crew6(other creature|myBattlefield)}:name(Crew 6) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~5}
 
 # Endure
 #AUTO_DEFINE _ENDURE1_  transforms((,newability[choice counter(1/1)],newability[choice create(Spirit:Creature:1/1:white)])) ueot

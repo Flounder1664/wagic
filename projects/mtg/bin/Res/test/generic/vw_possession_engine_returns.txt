@@ -1,0 +1,22 @@
+#Possession Engine leaving (Unsummon on the crewed... no - Disperse) returns the creature to its owner.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Possession Engine,447186
+manapool:{3}{U}{U}{1}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Possession Engine
+Hill Giant
+447186
+Possession Engine
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Possession Engine
+graveyard:447186
+manapool:{0}
+[PLAYER2]
+inplay:Hill Giant
+[END]

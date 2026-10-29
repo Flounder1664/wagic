@@ -1,0 +1,20 @@
+#Twining Twins' adventure, Swift Spiral, exiles a nontoken creature until the next end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:629741
+manapool:{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+629741
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:629741
+manapool:{0}
+[PLAYER2]
+exile:Hill Giant
+[END]

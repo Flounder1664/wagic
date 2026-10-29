@@ -1,0 +1,18 @@
+#Possession Engine takes control of the opponent's creature as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Possession Engine
+manapool:{3}{U}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Possession Engine
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Possession Engine,Hill Giant
+manapool:{0}
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Alpharael's Ward-Discard a card at random: the targeting player's only card in hand is discarded
+#and Unsummon resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134,Grizzly Bears
+manapool:{U}
+[PLAYER2]
+inplay:1530087
+[DO]
+134
+1530087
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134,Grizzly Bears
+manapool:{0}
+[PLAYER2]
+hand:1530087
+[END]

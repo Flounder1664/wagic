@@ -3064,8 +3064,8 @@ toughness=3
 [/card]
 [card]
 name=Alpharael, Stonechosen
+auto=_WARDDISCARDRANDOM_
 auto=@combat(attacking) source(this) restriction{voidactive}:life:-halfupopponentlifetotal opponent
-missing=Ward (discard a card at random) - the ward macros only take a mana payment
 text=Ward—Discard a card at random. -- Void — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
 mana={3}{B}{B}
 type=Legendary Creature

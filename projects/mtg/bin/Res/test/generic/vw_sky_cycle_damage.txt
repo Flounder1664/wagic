@@ -1,0 +1,20 @@
+#Sky Cycle: X = twice the Vehicles you control (Smuggler's Copter + itself = 4) to a creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sky Cycle
+inplay:Smuggler's Copter
+manapool:{4}{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Sky Cycle
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sky Cycle,Smuggler's Copter
+manapool:{0}
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

@@ -1,0 +1,24 @@
+#Ward-Discard a card (Mighty Servant of Leuk-o, _WARDDISCARD_): player 1 targets it with
+#Disperse, pays by discarding Grizzly Bears, and the bounce resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:447186,Grizzly Bears
+manapool:{1}{U}
+[PLAYER2]
+inplay:Mighty Servant of Leuk-o
+[DO]
+447186
+Mighty Servant of Leuk-o
+choice 0
+447186
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:447186,Grizzly Bears
+manapool:{0}
+[PLAYER2]
+hand:Mighty Servant of Leuk-o
+[END]

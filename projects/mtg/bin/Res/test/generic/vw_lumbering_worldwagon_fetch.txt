@@ -1,0 +1,22 @@
+#Lumbering Worldwagon: entering searches a basic land onto the battlefield tapped, and its power
+#is the number of lands you control (Mountain + the fetched Forest = 2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lumbering Worldwagon
+inplay:Mountain
+library:Forest
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Lumbering Worldwagon
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Lumbering Worldwagon,*,*
+pt:Lumbering Worldwagon=2/4
+manapool:{0}
+[PLAYER2]
+[END]

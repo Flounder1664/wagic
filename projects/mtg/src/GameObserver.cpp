@@ -5,6 +5,7 @@
 #include "Damage.h"
 #include "Rules.h"
 #include "ExtraCost.h"
+#include "AllAbilities.h"
 #include "Subtypes.h"
 #include <JLogger.h>
 #include <JRenderer.h>
@@ -1616,7 +1617,12 @@ bool GameObserver::WaitForExtraPayment(MTGCardInstance * card)
         {
             mExtraPayment->tryToSetPayment(card);
         }
-        if (mExtraPayment->isPaymentSet())
+        //A paid-ability menu (pay[[...]]: ward, "counter unless its controller pays") pays
+        //and resolves its own choice in MenuAbility::Update once the payment is set. Handing
+        //it to reactToClick here, which a menu ignores, and dropping mExtraPayment threw the
+        //chosen card away - so a cost that needs a click (discard a card, sacrifice, exile
+        //from a graveyard) could never be paid, and the menu came straight back.
+        if (mExtraPayment->isPaymentSet() && !dynamic_cast<MenuAbility *>(mExtraPayment->action))
         {
             mLayers->actionLayer()->reactToClick(mExtraPayment->action, mExtraPayment->source);
             mExtraPayment = NULL;

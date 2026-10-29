@@ -1,0 +1,23 @@
+#Ward {2} (Blue Marvel): player 1 declines to pay (Fizzle) - Unsummon is countered, Blue Marvel
+#stays and the {2} is still in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}{2}
+[PLAYER2]
+inplay:711051
+[DO]
+134
+711051
+choice 0
+134
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{2}
+[PLAYER2]
+inplay:711051
+[END]

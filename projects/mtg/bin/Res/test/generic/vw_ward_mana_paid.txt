@@ -1,0 +1,22 @@
+#Ward {2} (Blue Marvel): player 1 targets it with Unsummon and pays {2} - the bounce resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}{2}
+[PLAYER2]
+inplay:711051
+[DO]
+134
+711051
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+[PLAYER2]
+hand:711051
+[END]

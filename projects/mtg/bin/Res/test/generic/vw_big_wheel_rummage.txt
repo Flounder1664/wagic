@@ -1,0 +1,21 @@
+#Big Wheel: entering lets you discard a card to draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Big Wheel,Grizzly Bears
+library:Hill Giant
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Big Wheel
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Big Wheel
+hand:Hill Giant
+graveyard:Grizzly Bears
+manapool:{0}
+[PLAYER2]
+[END]

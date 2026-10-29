@@ -1,0 +1,14 @@
+#Gisa, the Hellraiser: Zombies you control get +1/+1 (Walking Corpse 2/2 -> 3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Walking Corpse
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Walking Corpse
+pt:Walking Corpse=3/3
+[PLAYER2]
+[END]

@@ -150671,3 +150671,335 @@ subtype=Elemental God
 power=5
 toughness=5
 [/card]
+[card]
+name=Mighty Servant of Leuk-o
+abilities=trample
+auto=_WARDDISCARD_
+#"Becomes crewed for the first time each turn, if crewed by exactly two creatures" is read at
+#damage time instead: crewedsource marks the creatures that crewed THIS Vehicle this turn.
+auto=@combatdamaged(player) from(this) restriction{type(creature[crewedsource]|mybattlefield)~equalto~2}:draw:2 controller
+auto=_CREW4_
+text=Trample -- Ward-Discard a card. -- Whenever Mighty Servant of Leuk-o becomes crewed for the first time each turn, if it was crewed by exactly two creatures, it gains "Whenever this creature deals combat damage to a player, draw two cards" until end of turn. -- Crew 4
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=6
+toughness=6
+[/card]
+[card]
+name=Lumbering Worldwagon
+anyzone=type:land:mybattlefield/4 cdaactive
+auto=may name(Search for a basic land) moveTo(myBattlefield) and!( tap(noevent) )! target(land[basic]|myLibrary)
+auto=_ATTACKING_may name(Search for a basic land) moveTo(myBattlefield) and!( tap(noevent) )! target(land[basic]|myLibrary)
+auto=_CREW4_
+text=This Vehicle's power is equal to the number of lands you control. -- Whenever this Vehicle enters or attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Crew 4
+mana={2}{G}
+type=Artifact
+subtype=Vehicle
+power=*
+toughness=4
+[/card]
+[card]
+name=Possession Engine
+#REVIEW-V 2026-10-29: check the stolen creature cannot attack or block while you control the Engine.
+#steal lasts until the source leaves the battlefield; the attack/block lock is a lord on this
+#Vehicle, so it ends at the same moment.
+auto=name(Gain control of creature) target(creature|opponentbattlefield) steal and!( counter(0/0,1,Possessed) )!
+auto=lord(creature[counter{0/0.1.Possessed}]|mybattlefield) cantattack
+auto=lord(creature[counter{0/0.1.Possessed}]|mybattlefield) cantblock
+auto=_CREW3_
+text=When this Vehicle enters, gain control of target creature an opponent controls for as long as you control this Vehicle. That creature can't attack or block for as long as you control this Vehicle. -- Crew 3
+mana={3}{U}{U}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Thunderous Velocipede
+abilities=trample
+#A trigger that adds the counters as the permanent arrives, rather than a replacement.
+auto=@movedto(other *[creature;vehicle;manacost<=4]|mybattlefield):all(trigger[to]) counter(1/1)
+auto=@movedto(other *[creature;vehicle;manacost>=5]|mybattlefield):all(trigger[to]) counter(1/1,3)
+auto=_CREW3_
+text=Trample -- Each other Vehicle and creature you control enters with an additional +1/+1 counter on it if its mana value is 4 or less. Otherwise, it enters with three additional +1/+1 counters on it. -- Crew 3
+mana={1}{G}{G}
+type=Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Big Wheel
+abilities=trample
+auto=may name(Discard a card to draw a card) _DISCARD&DRAW_
+auto=_CREW2_
+text=Trample -- When this Vehicle enters, you may discard a card. If you do, draw a card. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={2}{R}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=4
+[/card]
+[card]
+name=Captain America's Motorcycle
+abilities=flash
+auto=name(+2/+0) target(*[creature;vehicle]) 2/0 ueot
+auto=_CREW1_
+text=Flash -- When this Vehicle enters, target creature or Vehicle gets +2/+0 until end of turn. -- Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={1}{R}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=1
+[/card]
+[card]
+name=Damocles Base, Sword of Kang
+#REVIEW-V 2026-10-29: the villainous choice is handed to the damaged player, which the harness cannot answer - check both options in game.
+abilities=flying,deathtouch
+auto=@combatdamaged(player) from(this):ability$!choice name(Sacrifice a nontoken creature) notaTarget(creature[-token]|mybattlefield) sacrifice _ choice name(Lose 2 life and they draw two) life:-2 controller && draw:2 opponent!$ opponent
+auto=_CREW3_
+text=Flying, deathtouch -- Whenever Damocles Base deals combat damage to a player, that player faces a villainous choice - They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards. -- Crew 3
+mana={4}{B}
+type=Legendary Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Royal Talon Fighter Jet
+abilities=flying
+auto=counter(1/1,X)
+auto=name(Create Soldiers) create(soldier:creature soldier:1/1:white)*hascnt11
+auto=_ATTACKING_name(Create Soldiers) create(soldier:creature soldier:1/1:white)*hascnt11
+auto=_CREW2_
+text=Flying -- This Vehicle enters with X +1/+1 counters on it. -- Whenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it. -- Crew 2
+mana={X}{W}{W}
+type=Artifact
+subtype=Vehicle
+power=1
+toughness=1
+[/card]
+[card]
+name=Sky Cycle
+abilities=flying
+auto=name(Deal damage) damage:twicetype:vehicle:mybattlefield target(<upto:1>creature)
+auto=_CREW2_
+text=Flying -- When this Vehicle enters, it deals X damage to up to one target creature, where X is twice the number of Vehicles you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={4}{R}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
+name=The Thanos-Copter
+#REVIEW-V 2026-10-29: check the enters effect animates your other Vehicles, and the draw when any Vehicle you control connects.
+abilities=flying,haste
+auto=all(vehicle|mybattlefield) becomes(Artifact Creature) ueot
+auto=@combatdamaged(player) from(vehicle|mybattlefield):draw:1 controller
+auto=_CREW2_
+text=Flying, haste -- When The Thanos-Copter enters, Vehicles you control become artifact creatures until end of turn. -- Whenever a Vehicle you control deals combat damage to a player, draw a card. -- Crew 2
+mana={6}
+type=Legendary Artifact
+subtype=Vehicle
+power=5
+toughness=5
+[/card]
+[card]
+name=Dependable Quinjet
+abilities=flying
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto=_CREW4_
+text=Flying -- {T}: Add one mana of any color. -- Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=S.H.I.E.L.D. Flying Car
+abilities=flash,flying
+auto=name(Blink a creature) target(<upto:1>creature|mybattlefield) _BLINK_UEOT_
+auto=_CREW1_
+text=Flash -- Flying -- When this Vehicle enters, exile up to one target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step. -- Crew 1
+mana={2}{U}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
+name=S.H.I.E.L.D. Helicarrier
+abilities=flying
+auto=_SOLDIERTOKEN_*2
+auto=_CREW6_
+text=Flying -- When this Vehicle enters, create two 1/1 white Soldier creature tokens. -- Crew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={4}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=5
+[/card]
+[card]
+name=Blue Marvel, Adam Brashear
+#REVIEW-V 2026-10-29: check the +1/+1 counter on your second draw of a turn.
+abilities=flying
+auto=_WARD2_
+auto=_SECOND_DRAW_counter(1/1)
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- Whenever you draw your second card each turn, put a +1/+1 counter on Blue Marvel.
+mana={3}{U}{U}
+type=Legendary Creature
+subtype=Human Scientist Hero
+power=3
+toughness=5
+[/card]
+[card]
+name=Valgavoth, Harrower of Souls
+#REVIEW-V 2026-10-29: check the counter + draw fires once on the opponent's turn when they first lose life, and not again that turn.
+abilities=flying
+auto=_WARDLIFE_(2)
+#"For the first time during each of their turns": lifelost counts this turn's loss, so the
+#trigger is gated on the opponent's turn and on this being the first point of loss.
+auto=@lifelostof(opponent) restriction{opponentturnonly,compare(oplifelost)~equalto~1}:counter(1/1) && draw:1 controller
+text=Flying -- Ward-Pay 2 life. -- Whenever an opponent loses life for the first time during each of their turns, put a +1/+1 counter on Valgavoth and draw a card.
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Elder Demon
+power=4
+toughness=4
+[/card]
+[card]
+name=Raubahn, Bull of Ala Mhigo
+#REVIEW-V 2026-10-29: check the attack trigger moves an Equipment onto an attacking creature (the ward ladder is tested).
+#Ward cost tracks Raubahn's power: one ward line per power value (1-12), each paying that much life.
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~1}:choice name(Ward - pay 1 life) name(Ward - pay 1 life) target(*|opponentzones) transforms((,newability[pay[[{L:1}]] name(pay 1 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~2}:choice name(Ward - pay 2 life) name(Ward - pay 2 life) target(*|opponentzones) transforms((,newability[pay[[{L:2}]] name(pay 2 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~3}:choice name(Ward - pay 3 life) name(Ward - pay 3 life) target(*|opponentzones) transforms((,newability[pay[[{L:3}]] name(pay 3 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~4}:choice name(Ward - pay 4 life) name(Ward - pay 4 life) target(*|opponentzones) transforms((,newability[pay[[{L:4}]] name(pay 4 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~5}:choice name(Ward - pay 5 life) name(Ward - pay 5 life) target(*|opponentzones) transforms((,newability[pay[[{L:5}]] name(pay 5 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~6}:choice name(Ward - pay 6 life) name(Ward - pay 6 life) target(*|opponentzones) transforms((,newability[pay[[{L:6}]] name(pay 6 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~7}:choice name(Ward - pay 7 life) name(Ward - pay 7 life) target(*|opponentzones) transforms((,newability[pay[[{L:7}]] name(pay 7 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~8}:choice name(Ward - pay 8 life) name(Ward - pay 8 life) target(*|opponentzones) transforms((,newability[pay[[{L:8}]] name(pay 8 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~9}:choice name(Ward - pay 9 life) name(Ward - pay 9 life) target(*|opponentzones) transforms((,newability[pay[[{L:9}]] name(pay 9 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~10}:choice name(Ward - pay 10 life) name(Ward - pay 10 life) target(*|opponentzones) transforms((,newability[pay[[{L:10}]] name(pay 10 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~11}:choice name(Ward - pay 11 life) name(Ward - pay 11 life) target(*|opponentzones) transforms((,newability[pay[[{L:11}]] name(pay 11 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~equalto~12}:choice name(Ward - pay 12 life) name(Ward - pay 12 life) target(*|opponentzones) transforms((,newability[pay[[{L:12}]] name(pay 12 life) donothing?fizzle])) oneshot
+auto=@targeted(this) from(*|opponentzones) restriction{compare(power)~morethan~12}:choice name(Ward - pay 13 life) name(Ward - pay 13 life) target(*|opponentzones) transforms((,newability[pay[[{L:13}]] name(pay 13 life) donothing?fizzle])) oneshot
+auto=_ATTACKING_may name(Attach an Equipment) target(equipment|mybattlefield) transforms((,newability[rehook target(creature[attacking])])) forever
+text=Ward-Pay life equal to Raubahn's power. -- Whenever Raubahn attacks, attach up to one target Equipment you control to target attacking creature.
+mana={1}{R}
+type=Legendary Creature
+subtype=Human Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=Captain America, Wings of Freedom
+abilities=flying,first strike
+auto=_WARD1_
+auto=_ATTACKING_all(other hero|mybattlefield) toughness/toughness ueot
+text=Flying, first strike, ward {1} -- Whenever Captain America attacks, each other Hero you control gets +X/+X until end of turn, where X is Captain America's toughness.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Soldier Hero
+power=3
+toughness=1
+[/card]
+[card]
+name=Gisa, the Hellraiser
+auto=_WARDMANALIFE_(2,2)
+auto=lord(*[skeleton;zombie]|mybattlefield) 1/1
+auto=lord(*[skeleton;zombie]|mybattlefield) menace
+missing=the crime trigger (two tapped 2/2 Zombie Rogues once each turn when you target an opponent or what they have) - the engine has no "you committed a crime" event.
+text=Ward-{2}, Pay 2 life. -- Skeletons and Zombies you control get +1/+1 and have menace. -- Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+mana={3}{B}{B}
+type=Legendary Creature
+subtype=Human Warlock
+power=4
+toughness=4
+[/card]
+[card]
+name=Dragonfly Swarm
+#REVIEW-V 2026-10-29: check the dies-draw with and without a Lesson in the graveyard.
+abilities=flying
+auto=_WARD1_
+anyzone=type:*[-creature;-land]:mygraveyard/3 cdaactive
+auto=_DIES_if type(lesson|mygraveyard)~morethan~0 then draw:1 controller
+text=Flying, ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.) -- This creature's power is equal to the number of noncreature, nonland cards in your graveyard. -- When this creature dies, if there's a Lesson card in your graveyard, draw a card.
+mana={1}{U}{R}
+type=Creature
+subtype=Dragon Insect
+power=*
+toughness=3
+[/card]
+[card]
+name=The Unagi of Kyoshi Island
+#REVIEW-V 2026-10-29: check you draw two when the opponent draws their second card in a turn.
+abilities=flash
+#Ward-Waterbend {4}: the opponent pays {4} in mana; tapping their own artifacts and creatures to
+#help is not offered.
+auto=_WARD4_
+auto=@drawof(opponent) restriction{compare(odrewcount)~equalto~2}:draw:2 controller
+text=Flash -- Ward-Waterbend {4}. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}. They can tap their artifacts and creatures to help. Each one pays for {1}.) -- Whenever an opponent draws their second card each turn, you draw two cards.
+mana={3}{U}{U}
+type=Legendary Creature
+subtype=Serpent
+power=5
+toughness=5
+[/card]
+[card]
+name=Malfunctioning Holodeck
+auto=_WARD2_
+auto=(blink)forsrc target(*[-land]|opponentbattlefield)
+text=Ward {2} (Whenever this artifact becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) -- When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield.
+mana={2}{W}
+type=Artifact
+[/card]
+[card]
+name=Hraesvelgr of the First Brood
+abilities=flying,vigilance
+auto=_WARD2_
+auto=name(Shiva's Aid) target(creature) transforms((,unblockable,newability[1/0])) ueot
+auto=@movedTo(*[-creature]|mystack):name(Shiva's Aid) target(creature) transforms((,unblockable,newability[1/0])) ueot
+text=Flying, vigilance, ward {2} -- Shiva's Aid - When Hraesvelgr enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
+mana={4}{U}
+type=Legendary Creature
+subtype=Elder Dragon
+power=5
+toughness=5
+[/card]
+[card]
+name=Loot, the Key to Everything
+#REVIEW-V 2026-10-29: check the upkeep exile count (card types among your other nonland permanents) and that the cards are playable this turn.
+auto=_WARD1_
+#X counts card types among your permanents less one for your lands, which you will nearly always
+#control; Loot itself still counts as a creature when it is your only one.
+auto=@each my upkeep:name(Exile top cards) moveto(exile) and!( transforms((,canplayfromexile)) ueot )! all(*[zpos<=mybattlefieldcardtypesminus1minusend]|mylibrary)
+text=Ward {1} -- At the beginning of your upkeep, exile the top X cards of your library, where X is the number of card types among other nonland permanents you control. You may play those cards this turn.
+mana={G}{U}{R}
+type=Legendary Creature
+subtype=Beast Noble
+power=1
+toughness=2
+[/card]
+[card]
+name=Twining Twins // Swift Spiral
+abilities=adventure,asflash,flying,vigilance
+restriction=can play creature
+other={1}{W} name(Adventure)
+auto=_WARD1_
+auto=alternative name(Blink creature) target(creature[-token]) _BLINK_UEOT_
+auto=alternative _ADVENTURE_
+text=Flying, vigilance, ward {1} // Swift Spiral {1}{W} -- Instant - Adventure -- Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step. (Then exile this card. You may cast the creature later from exile.)
+mana={2}{U}{U}
+type=Creature
+subtype=Faerie Wizard
+power=4
+toughness=4
+[/card]

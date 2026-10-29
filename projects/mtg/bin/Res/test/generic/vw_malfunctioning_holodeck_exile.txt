@@ -1,0 +1,19 @@
+#Malfunctioning Holodeck exiles an opponent's nonland permanent as it enters.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Malfunctioning Holodeck
+manapool:{2}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Malfunctioning Holodeck
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Malfunctioning Holodeck
+manapool:{0}
+[PLAYER2]
+exile:Hill Giant
+[END]

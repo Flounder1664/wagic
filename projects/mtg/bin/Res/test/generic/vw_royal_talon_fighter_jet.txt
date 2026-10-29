@@ -1,0 +1,18 @@
+#Royal Talon Fighter Jet cast for X=2: enters with two +1/+1 counters and makes two Soldiers.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Royal Talon Fighter Jet
+manapool:{2}{W}{W}
+[PLAYER2]
+[DO]
+Royal Talon Fighter Jet
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Royal Talon Fighter Jet,*,*
+pt:Royal Talon Fighter Jet=3/3
+manapool:{0}
+[PLAYER2]
+[END]

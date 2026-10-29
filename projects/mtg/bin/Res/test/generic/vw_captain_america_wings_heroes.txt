@@ -1,0 +1,24 @@
+#Captain America, Wings of Freedom attacks: each other Hero gets +X/+X, X = its toughness (1).
+#Blue Marvel (a Hero, 3/5) becomes 4/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712046,711051
+[PLAYER2]
+life:20
+[DO]
+next
+#combat begins
+next
+#attackers
+712046
+next
+#blockers
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:712046,711051
+pt:711051=4/6
+[PLAYER2]
+life:20
+[END]

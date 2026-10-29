@@ -1,0 +1,25 @@
+#Ward-Pay 2 life (675463, the new _WARDLIFE_ macro): Unsummon resolves
+#and player 1 pays 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:134
+manapool:{U}
+life:20
+[PLAYER2]
+inplay:675463
+[DO]
+134
+675463
+choice 0
+134
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:134
+manapool:{0}
+life:18
+[PLAYER2]
+hand:675463
+[END]
