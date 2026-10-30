@@ -1,0 +1,22 @@
+#Tributary Vaulter: whenever it becomes tapped, another target Merfolk you control gets +2/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point
+inplay:Tributary Vaulter,Merfolk of the Pearl Trident
+library:Island
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Pressure Point
+Tributary Vaulter
+Merfolk of the Pearl Trident
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tributary Vaulter,Merfolk of the Pearl Trident
+graveyard:Pressure Point
+hand:Island
+pt:Merfolk of the Pearl Trident=3/1
+[PLAYER2]
+[END]

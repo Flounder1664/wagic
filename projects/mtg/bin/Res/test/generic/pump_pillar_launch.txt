@@ -1,0 +1,19 @@
+#Pillar Launch gives +2/+2 and reach.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pillar Launch
+inplay:Grizzly Bears
+manapool:{G}
+[PLAYER2]
+[DO]
+Pillar Launch
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Pillar Launch
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

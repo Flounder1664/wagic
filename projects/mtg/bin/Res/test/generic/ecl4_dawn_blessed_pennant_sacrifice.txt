@@ -1,0 +1,18 @@
+#Dawn-Blessed Pennant's return ability sacrifices it as a cost (it stayed in play).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dawn-Blessed Pennant
+graveyard:Grizzly Bears
+manapool:{2}
+[PLAYER2]
+[DO]
+Dawn-Blessed Pennant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grizzly Bears
+graveyard:Dawn-Blessed Pennant
+[PLAYER2]
+[END]

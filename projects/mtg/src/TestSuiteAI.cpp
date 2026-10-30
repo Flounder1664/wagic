@@ -9,6 +9,7 @@
 #include "SimpleButton.h"
 #include <algorithm>
 #include <new>
+#include <typeinfo>
 #include "GuiCombat.h"
 #include "Rules.h"
 #include "GameObserver.h"
@@ -69,6 +70,12 @@ bool TestSuiteAI::parseLine(const string& s)
         expectedCounters.push_back(s.substr(kCounter.size()));
         return true;
     }
+    static const string kType = "type:";
+    if (s.compare(0, kType.size(), kType) == 0)
+    {
+        expectedTypes.push_back(s.substr(kType.size()));
+        return true;
+    }
     //speed:<0-4> - in [PLAYER] of [INIT] it seeds the speed track, in [ASSERT] it is checked.
     //Max speed takes four turns of an opponent losing life, which no test can drive, so
     //without this every "Max speed -" ability was untestable.
@@ -84,6 +91,27 @@ bool TestSuiteAI::parseLine(const string& s)
     {
         energyCount = expectedEnergy = atoi(s.c_str() + kEnergy.size());
         return true;
+    }
+    //inplay:<aura>@<card> - in [INIT] the Aura is seeded already attached to that card (wagic#37);
+    //in [ASSERT] the attachment is checked. The "@<card>" part is stripped before the zone line
+    //goes to the ordinary parser, which knows nothing of it.
+    static const string kInPlay = "inplay:";
+    if (s.compare(0, kInPlay.size(), kInPlay) == 0 && s.find('@') != string::npos)
+    {
+        string rebuilt = kInPlay;
+        vector<string> items = split(s.substr(kInPlay.size()), ',');
+        for (size_t i = 0; i < items.size(); i++)
+        {
+            string item = items[i];
+            size_t at = item.find('@');
+            if (at != string::npos)
+            {
+                attachments.push_back(make_pair(item.substr(0, at), item.substr(at + 1)));
+                item = item.substr(0, at);
+            }
+            rebuilt += (i ? "," : "") + item;
+        }
+        return AIPlayerBaka::parseLine(rebuilt);
     }
     return AIPlayerBaka::parseLine(s);
 }
@@ -171,6 +199,68 @@ bool TestSuiteAI::openForcedTriggerMenu(Targetable * clicked)
     MayAbility * may = dynamic_cast<MayAbility *>(al->mObjects[controlid]);
     TargetAbility * ta = may ? dynamic_cast<TargetAbility *>(may->ability) : NULL;
     return ta && ta->getActionTc() && ta->getActionTc()->canTarget(clicked);
+}
+
+//After a click on a card with backside= in hand: its anyzone={0}:doubleside(backside) line reacts
+//there too, so the click opens "Cast Card Normally / Flip Side / Cancel" instead of casting, and a
+//test that just named the card saw nothing reach the stack - wagic#47 row 6. Pick the cast entry,
+//unless the next [DO] line answers the menu itself. Only that exact menu: any other entry (kicker,
+//an alternative cost, a second activated ability) means there is a real choice to make.
+bool TestSuiteAI::castPastFlipSideMenu(MTGCardInstance * clicked)
+{
+    ActionLayer * al = observer->mLayers->actionLayer();
+    if (!clicked || al->menuObject != clicked || !al->abilitiesMenu || al->abilitiesMenu->isMultipleChoice)
+        return false;
+    if (suite->currentAction < suite->actions.nbitems)
+    {
+        const string& next = suite->actions.actions[suite->currentAction];
+        if (next.compare(0, 7, "choice ") == 0 || next.compare(0, 5, "menu ") == 0 || next.compare(0, 6, "menu! ") == 0)
+            return false;
+    }
+    int castIndex = -1;
+    bool flipSide = false;
+    for (size_t i = 0; i < al->abilitiesMenu->mObjects.size(); i++)
+    {
+        int controlid = al->abilitiesMenu->mObjects[i]->GetId();
+        if (controlid == kCancelMenuID)
+            continue;
+        if (controlid < 0 || controlid >= (int) al->mObjects.size())
+            return false;
+        MTGAbility * a = dynamic_cast<MTGAbility *>(al->mObjects[controlid]);
+        if (a && typeid(*a) == typeid(MTGPutInPlayRule) && castIndex < 0)
+        {
+            castIndex = (int) i;
+            continue;
+        }
+        GenericActivatedAbility * ga = dynamic_cast<GenericActivatedAbility *>(a);
+        if (ga && dynamic_cast<AATurnSide *>(ga->ability))
+        {
+            flipSide = true;
+            continue;
+        }
+        return false;
+    }
+    if (castIndex < 0 || !flipSide)
+        return false;
+    DebugTrace("TESTSUITE casting past the Flip Side menu: " << clicked->name);
+    al->doReactTo(castIndex);
+    return true;
+}
+
+//A zone-line card spec (a name, lowercased by the loader, or a numeric id) against a live card.
+static bool specMatches(MTGCardInstance * c, const string& spec)
+{
+    int mtgid = Rules::getMTGId(spec);
+    return mtgid ? c->getMTGId() == mtgid : c->getLCName() == spec;
+}
+
+//The inplay:<aura>@<card> entry naming this seeded card, if any.
+static const pair<string, string> * attachSpecFor(TestSuiteAI * state, MTGCardInstance * card)
+{
+    for (size_t a = 0; a < state->attachments.size(); a++)
+        if (specMatches(card, state->attachments[a].first))
+            return &state->attachments[a];
+    return NULL;
 }
 
 Interruptible * TestSuiteGame::getActionByMTGId(int mtgid)
@@ -328,15 +418,18 @@ int TestSuiteAI::Act(float)
         int choice = atoi(action.substr(action.find("choice ") + 7).c_str());
         observer->mLayers->actionLayer()->doReactTo(choice);
     }
-    else if (action.compare(0, 5, "menu ") == 0)
+    else if (action.compare(0, 5, "menu ") == 0 || action.compare(0, 6, "menu! ") == 0)
     {
         //"menu Bear": pick the open menu's entry by its label rather than its index - the
         //creature-type menu lists every type the card database knows, so indexes shift.
-        string wanted = action.substr(5);
+        //"menu! <label>" also FAILS the test when no open menu offers that label, for tests
+        //about the wording itself (a forced trigger menu is otherwise opened by the next click).
+        bool strict = action[4] == '!';
+        string wanted = action.substr(strict ? 6 : 5);
         std::transform(wanted.begin(), wanted.end(), wanted.begin(), ::tolower);
         ActionLayer * al = observer->mLayers->actionLayer();
         int found = -1;
-        for (size_t i = 0; al->abilitiesMenu && i < al->abilitiesMenu->mObjects.size() && found < 0; i++)
+        for (size_t i = 0; al->abilitiesMenu && (!strict || al->menuObject) && i < al->abilitiesMenu->mObjects.size() && found < 0; i++)
         {
             SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
             if (!item)
@@ -356,10 +449,33 @@ int TestSuiteAI::Act(float)
                 SimpleButton * item = dynamic_cast<SimpleButton *>(al->abilitiesMenu->mObjects[i]);
                 offered << "[" << (item ? item->getText() : string("?")) << "]";
             }
-            DebugTrace("TESTSUITE menu offered " << (al->abilitiesMenu ? "" : "(no menu) ") << offered.str());
+            //abilitiesMenu outlives the menu it showed, so also say whether one is open now.
+            DebugTrace("TESTSUITE menu offered " << (al->abilitiesMenu ? "" : "(no menu) ")
+                       << (al->menuObject ? "(open) " : "(closed) ") << offered.str());
+            if (strict)
+                suite->doErrors.push_back("menu! '" + wanted + "' was not offered: " + offered.str());
         }
         if (found >= 0)
             al->doReactTo(found);
+    }
+    else if (action.compare("revealdone") == 0)
+    {
+        //Press the open reveal window's "done" button. MTGRevealingCards only hears it from the
+        //keyboard (and, for the AI, presses it itself - skipped for the test suite so its [DO] clicks
+        //pick the cards), so in the harness an <upto:N> take could not be cut short and option two
+        //("the rest go on the bottom") never started: the untaken cards sat in the reveal zone.
+        //Farsight Ritual, Thunderous Debut. Cards with aicode= never open the window here.
+        ActionLayer * al = observer->mLayers->actionLayer();
+        MTGRevealingCards * open = NULL;
+        for (size_t i = 0; i < al->mObjects.size() && !open; i++)
+        {
+            MTGRevealingCards * r = dynamic_cast<MTGRevealingCards *>(al->mObjects[i]);
+            if (r && r->revealDisplay && r->revealDisplay == observer->OpenedDisplay)
+                open = r;
+        }
+        DebugTrace("TESTSUITE revealdone " << (open ? "pressed" : "- no reveal window open"));
+        if (open)
+            open->CheckUserInput(JGE_BTN_NEXT);
     }
     else if (action.compare("mulligan") == 0)
     {
@@ -422,6 +538,7 @@ int TestSuiteAI::Act(float)
             DebugTrace("TESTSUITE Clicking ON: " << card->name);
             card->currentZone->needShuffle = true; //mimic library shuffle
             observer->cardClick(card, card);
+            castPastFlipSideMenu(card);
             observer->forceShuffleLibraries(); //mimic library shuffle
             return 1;
         }
@@ -532,6 +649,14 @@ void TestSuiteGame::assertGame()
     int error = 0;
     bool wasAI = false;
 
+    for (size_t e = 0; e < doErrors.size(); ++e)
+    {
+        sprintf(result, "<span class=\"error\">==%s==</span><br />", doErrors[e].c_str());
+        Log(result);
+        error++;
+    }
+    doErrors.clear();
+
     if (observer->getCurrentGamePhase() != endState.phase)
     {
         //A garbage/uninitialized expected phase means the test file's
@@ -591,6 +716,23 @@ void TestSuiteGame::assertGame()
                                 endState.players[i]->expectedTappedInPlay, tapped);
                 Log(result);
                 error++;
+            }
+        }
+        //inplay:<aura>@<card> - that Aura is on the battlefield attached to that card
+        for (size_t e = 0; e < endState.players[i]->attachments.size(); ++e)
+        {
+            const pair<string, string>& want = endState.players[i]->attachments[e];
+            MTGCardInstance * aura = NULL;
+            for (int k = 0; k < p->game->inPlay->nb_cards && !aura; k++)
+                if (p->game->inPlay->cards[k] && specMatches(p->game->inPlay->cards[k], want.first))
+                    aura = p->game->inPlay->cards[k];
+            MTGCardInstance * host = aura ? dynamic_cast<MTGCardInstance *>(aura->target) : NULL;
+            if (!host || !specMatches(host, want.second))
+            {
+                sprintf(result, "<span class=\"error\">==attach problem: '%s' (player %i) should be attached to '%s', is %s%s==</span><br />",
+                                want.first.c_str(), i, want.second.c_str(), !aura ? "not on the battlefield" : host ? "attached to " : "attached to nothing",
+                                host ? host->getName().c_str() : "");
+                Log(result); error++;
             }
         }
         //pt:<name-or-id>=<P>/<T>
@@ -677,7 +819,50 @@ void TestSuiteGame::assertGame()
                                 who.c_str(), i, rest.c_str(), wantN < 0 ? " at least " : " exactly ", wantN < 0 ? 1 : wantN, got);
                 Log(result); error++;
             }
-        }        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
+        }
+        //type:<name-or-id>=<type>[,-<type>...] - types, or keyword abilities, a card in play has
+        for (size_t e = 0; e < endState.players[i]->expectedTypes.size(); ++e)
+        {
+            string spec = endState.players[i]->expectedTypes[e];
+            size_t eq = spec.find('=');
+            if (eq == string::npos)
+            {
+                sprintf(result, "<span class=\"error\">==malformed type: assertion '%s' (want type:name=type[,-type])==</span><br />", spec.c_str());
+                Log(result); error++; continue;
+            }
+            string who = spec.substr(0, eq);
+            MTGCardInstance * found = NULL;
+            int mtgid = Rules::getMTGId(who);
+            for (int k = 0; k < p->game->inPlay->nb_cards && !found; k++)
+            {
+                MTGCardInstance * c = p->game->inPlay->cards[k];
+                if (!c) continue;
+                if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
+            }
+            if (!found)
+            {
+                sprintf(result, "<span class=\"error\">==type: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
+                Log(result); error++; continue;
+            }
+            vector<string> wanted = split(spec.substr(eq + 1), ',');
+            for (size_t w = 0; w < wanted.size(); ++w)
+            {
+                string t = wanted[w];
+                bool absent = t.size() && t[0] == '-';
+                if (absent) t = t.substr(1);
+                int ab = -1;
+                for (int a = 0; a < Constants::NB_BASIC_ABILITIES; a++)
+                    if (t == Constants::MTGBasicAbilities[a]) { ab = a; break; }
+                bool has = ab >= 0 ? (found->basicAbilities[ab] != 0) : (found->hasType(t) != 0);
+                if (has == absent)
+                {
+                    sprintf(result, "<span class=\"error\">==type problem for '%s' (player %i). Expected %s%s==</span><br />",
+                                    who.c_str(), i, absent ? "no " : "", t.c_str());
+                    Log(result); error++;
+                }
+            }
+        }
+        if (!p->getManaPool()->canAfford(endState.players[i]->getManaPool(),0))
         {
             sprintf(result, "<span class=\"error\">==Mana problem. Was expecting %i but got %i for player %i==</span><br />",
                             endState.players[i]->getManaPool()->getConvertedCost(), p->getManaPool()->getConvertedCost(), i);
@@ -1271,6 +1456,7 @@ void TestSuiteGame::initGame()
 
     observer->resetStartupGame();
 
+    vector<pair<int, MTGCardInstance *> > deferredAuras;
     for (int i = 0; i < 2; i++)
     {        
         AIPlayerBaka * p = (AIPlayerBaka *) (observer->players[i]);
@@ -1298,6 +1484,12 @@ void TestSuiteGame::initGame()
                 MTGCardInstance * card = Rules::getCardByMTGId(observer, loadedPlayerZones[j]->cards[k]->getId());
                 if (card && zone != p->game->library)
                 {
+                    if (zone == p->game->inPlay && attachSpecFor(initState.players[i], card))
+                    {
+                        //Seeded after everything else, once the card it enchants is in play.
+                        deferredAuras.push_back(make_pair(i, card));
+                        continue;
+                    }
                     if (zone == p->game->inPlay)
                     {
                         //MTGCardInstance * copy = p->game->putInZone(card, p->game->library, p->game->stack);
@@ -1347,6 +1539,41 @@ void TestSuiteGame::initGame()
         }
         p->game->stack->cardsSeenThisTurn.clear(); //don't consider those cards as having moved in this area during this turn
 
+    }
+
+    //inplay:<aura>@<card>: the Aura resolves with its target already set, which is how
+    //AANewTarget attaches a Role (retargetfromplay). Done last so the enchanted card - either
+    //player's, wherever it was listed - is already on the battlefield.
+    for (size_t d = 0; d < deferredAuras.size(); d++)
+    {
+        int i = deferredAuras[d].first;
+        MTGCardInstance * card = deferredAuras[d].second;
+        Player * p = observer->players[i];
+        const string& onto = attachSpecFor(initState.players[i], card)->second;
+        MTGCardInstance * host = NULL;
+        for (int pi = 0; pi < 2 && !host; pi++)
+        {
+            MTGGameZone * inPlay = observer->players[pi]->game->inPlay;
+            for (int k = 0; k < inPlay->nb_cards && !host; k++)
+                if (inPlay->cards[k] && specMatches(inPlay->cards[k], onto))
+                    host = inPlay->cards[k];
+        }
+        if (!host)
+        {
+            std::cerr << "TESTSUITE: inplay: " << card->getName() << "@" << onto << " - nothing called '" << onto << "' is on the battlefield" << std::endl;
+            DebugTrace("TESTSUITE: no battlefield card '" << onto << "' to attach " << card->getName() << " to");
+        }
+        //Straight onto the battlefield, not via the stack: Spell::resolve's stack-to-battlefield
+        //move makes a new instance and the target set here would not survive it.
+        MTGCardInstance * copy = p->game->putInZone(card, p->game->library, p->game->battlefield);
+        if (!copy)
+            continue;
+        Spell * spell = NEW Spell(observer, copy);
+        spell->source->target = host;
+        spell->resolve();
+        delete spell;
+        p->game->inPlay->cardsSeenThisTurn.clear();
+        p->game->stack->cardsSeenThisTurn.clear();
     }
     DebugTrace("TESTUITE Init Game Done !");
 }

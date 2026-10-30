@@ -1,0 +1,18 @@
+#Thoughtweft Lieutenant's enters trigger: target creature you control gets +1/+1 (and trample), rewritten as transforms.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Thoughtweft Lieutenant
+inplay:Grizzly Bears
+manapool:{G}{W}
+[PLAYER2]
+[DO]
+Thoughtweft Lieutenant
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thoughtweft Lieutenant,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

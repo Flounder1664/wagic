@@ -1,0 +1,16 @@
+#wagic#37: inplay:<aura>@<card> seeds an Aura already attached. Holy Strength (+1/+2) on Grizzly Bears
+#makes it 3/4; seeded without the "@" form it would be attached to nothing. The [ASSERT] "@" checks
+#the attachment itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Holy Strength@Grizzly Bears,Grizzly Bears
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Holy Strength@Grizzly Bears
+pt:Grizzly Bears=3/4
+[PLAYER2]
+[END]

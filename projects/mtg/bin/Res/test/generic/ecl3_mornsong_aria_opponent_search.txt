@@ -1,0 +1,21 @@
+#Mornsong Aria: at the OPPONENT's draw step they lose 3 and search for a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mornsong Aria
+[PLAYER2]
+library:Hill Giant,Craw Wurm,Air Elemental
+[DO]
+eot
+next
+next
+Craw Wurm
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Mornsong Aria
+[PLAYER2]
+hand:Craw Wurm
+library:Hill Giant,Air Elemental
+life:17
+[END]

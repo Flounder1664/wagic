@@ -1,0 +1,27 @@
+#Farsight Ritual bargained (sacrifice Ornithopter): look at the top EIGHT. Mind Stone is sixth from
+#the top, out of reach of the unbargained four, so taking it proves the bigger look.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:Farsight Ritual
+library:Mind Stone,Grizzly Bears,Hill Giant,Air Elemental,Juggernaut,Llanowar Elves,Eager Cadet
+manapool:{2}{U}{U}
+[PLAYER2]
+[DO]
+Farsight Ritual
+choice 1
+Ornithopter
+choice 0
+Mind Stone
+Juggernaut
+revealdone
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mind Stone,Juggernaut
+library:Grizzly Bears,Hill Giant,Air Elemental,Llanowar Elves,Eager Cadet
+graveyard:Farsight Ritual,Ornithopter
+[PLAYER2]
+[END]

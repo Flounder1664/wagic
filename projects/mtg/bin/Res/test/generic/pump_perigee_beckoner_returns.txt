@@ -1,0 +1,22 @@
+#Perigee Beckoner's target returns to the battlefield tapped when it dies this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Perigee Beckoner,Shock
+inplay:Grizzly Bears
+manapool:{4}{B}{R}
+[PLAYER2]
+[DO]
+Perigee Beckoner
+choice 0
+Grizzly Bears
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Perigee Beckoner
+graveyard:Shock
+tappedinplay:1
+[PLAYER2]
+[END]

@@ -1617,11 +1617,11 @@ bool GameObserver::WaitForExtraPayment(MTGCardInstance * card)
         {
             mExtraPayment->tryToSetPayment(card);
         }
-        //A paid-ability menu (pay[[...]]: ward, "counter unless its controller pays") pays
-        //and resolves its own choice in MenuAbility::Update once the payment is set. Handing
-        //it to reactToClick here, which a menu ignores, and dropping mExtraPayment threw the
-        //chosen card away - so a cost that needs a click (discard a card, sacrifice, exile
-        //from a graveyard) could never be paid, and the menu came straight back.
+        //A pay[[...]] menu (MenuAbility) pays and resolves its own extra costs in its Update.
+        //Completing it here sent reactToClick to the menu, which does nothing, and dropped the
+        //payment - so a pay[[{E(...)}...]] whose last exile target was just clicked never paid
+        //or resolved (Emeritus of Ideation, John's scenario 47). Mana-only costs never came
+        //through here, as they are already set before any click.
         if (mExtraPayment->isPaymentSet() && !dynamic_cast<MenuAbility *>(mExtraPayment->action))
         {
             mLayers->actionLayer()->reactToClick(mExtraPayment->action, mExtraPayment->source);

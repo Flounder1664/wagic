@@ -1,0 +1,18 @@
+#Cursed Courtier (3/3): its enters-trigger makes a Cursed Role and attaches it to a Human Noble you
+#control - the Courtier itself. Cursed sets base P/T to 1/1, so 1/1 proves the attach.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Cursed Courtier
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Cursed Courtier
+Cursed Courtier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cursed Courtier,Cursed
+pt:Cursed Courtier=1/1
+[PLAYER2]
+[END]

@@ -55,6 +55,9 @@ protected:
     int currentAction;
     //Set by the [DO] verb "human": the script is over and a person is playing seat 1.
     bool humanControl;
+    //Failures found while running [DO] (a "menu! <label>" whose label was not offered),
+    //reported with the [ASSERT] results.
+    vector<string> doErrors;
     GameObserver* observer;
 
     static boost::mutex mMutex;
@@ -145,6 +148,7 @@ class TestSuiteAI:public AIPlayerBaka
 private:
     MTGCardInstance * getCard(string action);
     bool openForcedTriggerMenu(Targetable * clicked);
+    bool castPastFlipSideMenu(MTGCardInstance * clicked);
     Targetable * clickTarget(const string& action);
     float timer;
     TestSuiteGame * suite;
@@ -164,8 +168,14 @@ public:
     //Anything about a card's state had to be inferred from whether it survived a burn
     //spell, which is indirect, needs a damage source chosen to straddle the exact value
     //being measured, and silently passes when the effect under test does nothing.
+    //  type:<name-or-id>=<type>[,-<type>...]  each type (or keyword ability) must be present,
+    //                                    a leading '-' requires it to be ABSENT
     std::vector<std::string> expectedPT;
     std::vector<std::string> expectedCounters;
+    std::vector<std::string> expectedTypes;
+    //inplay:<aura>@<card>: (aura, enchanted card), each a name or an id. Seeded attached in
+    //[INIT], checked in [ASSERT].
+    std::vector<std::pair<std::string, std::string> > attachments;
 
     TestSuiteAI(TestSuiteGame *tsGame, int playerId);
     virtual int Act(float dt);

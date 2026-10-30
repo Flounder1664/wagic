@@ -1,0 +1,18 @@
+#Dusk Charger gets +2/+2 with the city's blessing (Charger + 9 Swamps = 10 permanents). Covers the
+#_CITY'S_BLESSING_ aslongas(...) macro, which saw nothing while RIX/_cards.dat had lost the
+#[card] opener of the City's Blessing marker (fixed 2026-10-28).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swamp,Swamp,Swamp,Swamp,Swamp,Swamp,Swamp,Swamp,Swamp,Dusk Charger
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:*,*,*,*,*,*,*,*,*,Dusk Charger
+commandzone:City's Blessing
+pt:Dusk Charger=5/5
+[PLAYER2]
+[END]

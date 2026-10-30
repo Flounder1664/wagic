@@ -5752,6 +5752,19 @@ power=3
 toughness=5
 [/card]
 [card]
+name=Ashling, Rimebound
+backside=Ashling, Rekindled
+auto=@transformed(this|mybattlefield):ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
+auto=@each my firstmain:ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
+auto=@each my firstmain:pay({R}):name(Transform) flip(backside)
+text=Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater. -- At the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.
+type=Legendary Creature
+subtype=Elemental Wizard
+color=blue
+power=1
+toughness=3
+[/card]
+[card]
 name=Ashmouth Dragon
 abilities=flying
 backside=Smoldering Egg
@@ -8597,6 +8610,19 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=Brigid, Doun's Mind
+backside=Brigid, Clachan's Heart
+auto={T}:name(Add G for each other creature) foreach(other creature|mybattlefield) add{G}
+auto={T}:name(Add W for each other creature) foreach(other creature|mybattlefield) add{W}
+auto=@each my firstmain:pay({W}):name(Transform) flip(backside)
+text={T}: Add X {G} or X {W}, where X is the number of other creatures you control. -- At the beginning of your first main phase, you may pay {W}. If you do, transform Brigid.
+type=Legendary Creature
+subtype=Kithkin Soldier
+color=green
+power=3
+toughness=2
+[/card]
+[card]
 name=Emeritus of Conflict // Lightning Bolt
 grade=borderline
 abilities=first strike
@@ -8643,8 +8669,11 @@ auto=_PREPARE_
 auto={U} restriction{compare(hascntprepared)~morethan~0}:name(Cast a copy - Ancestral Recall) counter(0/0,-1,Prepared) all(this) && activate castcard(copied named!:ancestral recall:!)
 #"You may exile eight cards from your graveyard. If you do" - eight {E(...)} costs, the shape
 #Time Compression uses. Gated on eight being there so the may is never offered when it can't be paid.
-#REVIEW-V 2026-10-28: the harness cannot pay the eight {E(...)} costs (the pay resolves before any graveyard click lands) - needs John's eyes.
-auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:may name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
+#2026-10-28 (John, scenario 47): two prompts, then the eight picked cards were never exiled. pay[[...]]
+#already offers Cancel, so the may was a second prompt - dropped. The lost payment was the engine:
+#GameObserver::WaitForExtraPayment completed a pay[[...]] menu's extra costs itself on the last click,
+#bypassing MenuAbility's own pay-and-resolve. Test: sos_emeritus_of_ideation_attack_prepares.
+auto=@combat(attacking) source(this) restriction{type(*|mygraveyard)~morethan~7}:name(Exile eight cards to prepare) pay[[{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}{E(*|mygraveyard)}]] _PREPARE_
 #Prepared is shown as a Prepared counter rather than a face-up back side - a display difference, not a rules gap.
 mana={3}{U}{U}
 type=Creature
@@ -8729,6 +8758,19 @@ type=Creature
 subtype=Troll Warlock
 power=3
 toughness=3
+[/card]
+[card]
+name=Grub, Notorious Auntie
+backside=Grub, Storied Matriarch
+abilities=menace
+auto=_ATTACKING_may name(Blight 1 and copy) target(creature|mybattlefield) counter(-1/-1) && clone with(battleready) and!( transforms((,newability[phaseaction[end once] sacrifice all(this)])) forever )!
+auto=@each my firstmain:pay({B}):name(Transform) flip(backside)
+text=Menace -- Whenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token." -- At the beginning of your first main phase, you may pay {B}. If you do, transform Grub.
+type=Legendary Creature
+subtype=Goblin Warrior
+color=red
+power=2
+toughness=1
 [/card]
 [card]
 name=Harmonized Trio // Brainstorm
@@ -8921,6 +8963,32 @@ type=Creature
 subtype=Vampire Cleric
 power=2
 toughness=2
+[/card]
+[card]
+name=Sygg, Wanderbrine Shield
+backside=Sygg, Wanderwine Wisdom
+abilities=unblockable
+auto=@transformed(this|mybattlefield):target(creature|mybattlefield) transforms((,protection from white,protection from blue,protection from black,protection from red,protection from green)) uynt
+auto=@each my firstmain:pay({U}):name(Transform) flip(backside)
+text=Sygg can't be blocked. -- Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn. -- At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+type=Legendary Creature
+subtype=Merfolk Rogue
+color=white
+power=2
+toughness=2
+[/card]
+[card]
+name=Trystan, Penitent Culler
+backside=Trystan, Callous Cultivator
+abilities=deathtouch
+auto=@transformed(this|mybattlefield):deplete:3 controller and!( may name(Exile an Elf card) target(*[elf]|mygraveyard) moveto(exile) && life:-2 opponent )!
+auto=@each my firstmain:pay({G}):name(Transform) flip(backside)
+text=Deathtouch -- Whenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life. -- At the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.
+type=Legendary Creature
+subtype=Elf Warlock
+color=black
+power=3
+toughness=4
 [/card]
 [card]
 name=Yavimaya Bloomsage // Channel
@@ -9173,6 +9241,7 @@ toughness=1
 [/card]
 [card]
 name=Inspired Skypainter // Maestro's Gift
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): combat damage from a creature token re-prepares it.
 grade=borderline
 abilities=flying
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
@@ -12173,8 +12242,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_monster_pump.
 auto=1/1
 auto=teach(creature) trample
 text=Enchant creature -- Enchanted creature gets +1/+1 and has trample.
@@ -12188,8 +12256,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_sorcerer_pump.
 auto=1/1
 auto=teach(creature) transforms((,newability[@combat(attacking) source(this):name(Scry 1) _SCRY1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1."
@@ -12203,8 +12270,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_royal_pump.
 auto=1/1
 auto=teach(creature) transforms((,newability[_WARD1_]))
 text=Enchant creature -- Enchanted creature gets +1/+1 and has ward {1}.
@@ -12229,8 +12295,7 @@ target=creature
 #John saw this Role give +2/+2. Every ordinary +1/+1 Aura in mtg.txt (Krovikan Fetish,
 #Scavenged Weaponry) uses a bare auto=1/1 - on an Aura with target=creature the pump already
 #applies to the enchanted creature - and these four Roles were the only ones adding teach() on
-#top of it. NOT verified in the harness: the Role attach prompt cannot be driven there, proved
-#with a control that fails to attach even when the target is named in [DO].
+#top of it. Exactly +1/+1 is tested: woe_role_attach_eriettes_whisper (made by the card, attached by the prompt).
 auto=1/1
 autograveyard=_DIES_life:-1 opponent
 text=Enchant creature -- Enchanted creature gets +1/+1. -- When this Aura is put into a graveyard from the battlefield, each opponent loses 1 life.
@@ -20401,6 +20466,7 @@ type=Enchantment
 [card]
 name=City's Blessing
 abilities=shroud,indestructible,doublefacedeath,nofizzle
+text=You have the city's blessing. (Ascend -- once you control ten or more permanents, you get the city's blessing for the rest of the game.)
 type=Emblem
 [/card]
 [card]
@@ -26786,10 +26852,10 @@ name=Deadeye Brawler
 abilities=deathtouch,ascend
 auto=_ASCEND_
 auto=@movedTo(*|myBattlefield) restriction{type(City's Blessing|mycommandzone)~equalto~0}:_ASCEND_
-#REVIEW-V 2026-10-18: the draw never happens in the harness, even with the city's blessing in the
-#command zone for a whole round. Not a harness gap: no restriction{type(City's Blessing|mycommandzone)}
-#or aslongas(...) sees the marker card, so every blessing-gated card is affected. Untested: the draw.
-auto=_CITY'S_BLESSING_ transforms((,newability[@combatdamaged(player) from(this):draw:1]))
+#2026-10-28 (John, scenario 39: no draw): RIX/_cards.dat had lost the [card] opener of the City's
+#Blessing marker, so the marker was never dropped and every blessing check saw nothing. Fixed there;
+#this line reads the cityblessing flag directly anyway. Test: rix_deadeye_brawler_blessing_draw.
+auto=@combatdamaged(player) from(this) restriction{compare(cityblessing)~morethan~0}:draw:1
 text=Deathtouch -- Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) -- Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
 mana={2}{U}{B}
 type=Creature
@@ -27985,6 +28051,7 @@ toughness=6
 [/card]
 [card]
 name=Demon of Loathing
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the OPPONENT chooses the creature to sacrifice.
 abilities=flying,trample
 #REVIEW-V 2026-10-18: untested - the sacrifice choice goes to the OPPONENT (wagic#47 row 11), which the
 #harness cannot answer; with one creature opposite, nothing was sacrificed. Check the opponent loses one.
@@ -49558,7 +49625,7 @@ type=Snow Instant
 name=Graveshifter
 abilities=changeling
 auto=may target(creature|mygraveyard) moveto(hand)
-text=Changeling (This card is every creature type.) -- When Graveshifter enters, you may return target creature card from your graveyard to your hand.
+text=Changeling (This card is every creature type.) -- When this creature enters, you may return target creature card from your graveyard to your hand.
 mana={3}{B}
 type=Creature
 subtype=Shapeshifter
@@ -50745,6 +50812,7 @@ toughness=4
 [/card]
 [card]
 name=Guardian of the Gateless
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): gets +1/+1 when it blocks.
 abilities=flying
 #REVIEW-V 2026-10-18: untested - the trigger fires when it BLOCKS, and the harness cannot make the
 #opponent attack. Check it gets +1/+1 when it blocks.
@@ -75570,6 +75638,7 @@ toughness=4
 [/card]
 [card]
 name=Most Wanted
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): enchanted creature dies, two Treasures.
 abilities=flash
 target=creature
 auto=teach(creature) 2/1
@@ -133492,11 +133561,9 @@ abilities=lifelink
 #retargetfromplay needs an interactive target( - all 18 attested uses have one - and notaTarget
 #there silently attaches to nothing, so it cannot be made automatic. John's suggestion instead:
 #restrict the choice. The Courtier is a Human Noble, and [human&noble] is the attested AND form,
-#so the only legal target is normally the Courtier itself. Still not verifiable - the attach
-#prompt is not drivable in the harness, proved with a control that fails even when the target
-#is named in [DO].
+#so the only legal target is normally the Courtier itself. Test: woe_role_attach_cursed_courtier.
 auto=token(-632906) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature[human&noble]|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 missing=the Cursed Role attaches to a creature of your choice; the card attaches it to this creature itself. retargetfromplay needs an interactive target( and notaTarget there attaches to nothing, so the wrong-but-working form stands - see the comment above for what was measured. See https://github.com/Flounder1664/wagic/issues/38
 text=Lifelink -- When this creature enters, create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
 mana={2}{W}
@@ -133656,7 +133723,7 @@ name=Shatter the Oath
 target=creature,enchantment|battlefield
 auto=destroy
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}{B}
 type=Sorcery
@@ -133665,7 +133732,7 @@ type=Sorcery
 name=Eriette's Whisper
 auto=discard:2 opponent
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={3}{B}
 type=Sorcery
@@ -133677,7 +133744,7 @@ name=Witch's Mark
 #attested chosen-discard-then-draw shape, used by ~100 lines in this file.
 auto=may name(Discard a card, then draw two) target(*|myhand) reject and!( draw:2 controller )!
 auto=token(Wicked) and!( transforms((,newability[name(Attach Role) retargetfromplay target(creature|mybattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=You may discard a card. If you do, draw two cards. Create a Wicked Role token attached to up to one target creature you control.
 mana={1}{R}
 type=Sorcery
@@ -134524,7 +134591,10 @@ other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
 #harness cannot cast an instant during the blockers step at all, on any cost. Verify in game.
 otherrestriction=during battle,type(creature[attacking&-blocked]|mybattlefield)~morethan~0
-auto=token(-1520200)*3
+#John 2026-10-28 (scenario 40): cast for sneak, the tokens entered untapped and not attacking -
+#the line had no sneak branch at all. battleready is what enters a registered token tapped and attacking.
+auto=if paid(alternative) then token(-1520200,battleready)*3
+auto=ifnot paid(alternative) then token(-1520200)*3
 text=Sneak {1}{W} -- Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
 mana={3}{W}
 type=Instant
@@ -134735,11 +134805,9 @@ name=Aang, Swift Savior
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): waterbend tap 4 transforms (airbend recast costs its own mana cost, not {2}).
 abilities=flash,flying
 grade=borderline
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): ETB airbend exiles the target to its owner's exile.
 auto=name(Airbend a creature) _AIRBEND_ target(<upto:1>other creature|battlefield)
-#REVIEW-V Unverifiable in the harness: a card with backside= cannot be cast from hand there
-#(measured 2026-09-05 - the click lands, no action reaches the stack, with or without these
-#lines and with mana to spare), so the ETB never fires. The airbend body copies Airbending
-#Lesson, which ships _AIRBEND_; the ETB target is inline like Flametongue Kavu. Verify in game.
+#Test: tla_aang_swift_savior_cast (cast from hand in the harness, the ETB airbends a creature).
 auto={8}:name(Waterbend {8}) flip(backside)
 auto={7}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 1) flip(backside)
 auto={6}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:name(Waterbend {8} - tap 2) flip(backside)
@@ -135405,8 +135473,10 @@ auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:2 contr
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
 #REVIEW-V 2026-10-18: chapter II untested - a creature dealing combat damage must make that player
 #LOSE THE GAME, and a harness run cannot assert a game loss. Chapter I is fin_summon_primal_odin_ch1.
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) all(creature|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) ueot
-text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - Until end of turn, creatures you control gain "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
+#Chapter II is "THIS creature gains" with no duration (oracle). It was written as every creature you
+#control until end of turn - John caught it on 2026-10-28 (scenario 03).
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) transforms((,newability[@combatdamaged(player) from(this):wingame controller])) forever
+text=I - Gungnir - Destroy target creature an opponent controls. -- II - Zantetsuken - This creature gains "Whenever this creature deals combat damage to a player, that player loses the game." -- III - Hall of Sorrow - Draw two cards. Each player loses 2 life.
 mana={4}{B}{B}
 type=Enchantment Creature
 subtype=Saga Knight
@@ -136538,7 +136608,7 @@ abilities=hasotherkicker
 other={2}{U}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=if paid(alternative) then token(Cursed) and!( transforms((,newability[name(Attach Cursed Role) retargetfromplay target(creature|opponentbattlefield)])) oneshot )!
-note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Not covered by a test: the harness stops running state-based actions once [DO] begins and no test can start with an Aura already attached. Confirm in game.
+note=Role replacement is a state-based action (GameObserver::enchantmentStatus, CR 704.5s), not anything on this card. Tested with two Wicked Roles: woe_role_replacement_sba.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- When this creature enters, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
 mana={2}{U}
 type=Creature
@@ -136790,7 +136860,7 @@ otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 #shape. An explicit count there makes the player click every leftover card one at a time.
 auto=ifnot paid(alternative) then name(look) reveal:4 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto=alternative name(look) reveal:8 optionone name(Take up to 2) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(put back) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Tests: woe_farsight_ritual_take_two, woe_farsight_ritual_bargained (top eight).
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
 mana={2}{U}{U}
 type=Instant
@@ -136803,7 +136873,7 @@ other={6}{G}{G}{S(*[artifact;enchantment;ortoken]|myBattlefield)} name(Bargain)
 otherrestriction=type(*[artifact;enchantment;ortoken]|mybattlefield)~morethan~0
 auto=ifnot paid(alternative) then name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(hand) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
 auto=alternative name(look) reveal:20 optionone name(Reveal up to 2 creatures) target(<upto:2>creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(shuffle) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Tests: woe_thunderous_debut_hand, woe_thunderous_debut_bargained (onto the battlefield).
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Look at the top twenty cards of your library. You may reveal up to two creature cards from among them. If this spell was bargained, put the revealed cards onto the battlefield. Otherwise, put the revealed cards into your hand. Then shuffle.
 mana={6}{G}{G}
 type=Sorcery
@@ -136813,7 +136883,7 @@ name=Beseech the Mirror
 grade=borderline
 auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
 missing=Bargain is not offered, and the exile step is collapsed. Bargained, the real card lets you CAST the tutored card for free when its mana value is 4 or less; casting from a face-down exile for free is not expressible, and the UNBARGAINED outcome is exactly "tutor to hand", which is what this is. A Bargain option would cost a permanent and change nothing.
-#REVIEW-V Reveal cards cannot be cast in the harness (headless-renderer segfault, task #17). Verify in game.
+#Test: woe_beseech_the_mirror_tutor.
 text=Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.) -- Search your library for a card, exile it face down, then shuffle. If this spell was bargained, you may cast the exiled card without paying its mana cost if that spell's mana value is 4 or less. Put the exiled card into your hand if it wasn't cast this way.
 mana={1}{B}{B}{B}
 type=Sorcery
@@ -148285,6 +148355,7 @@ toughness=2
 [/card]
 [card]
 name=Glider Staff
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): equip does not airbend again; airbent creature castable for {2}.
 auto={2}:equip
 auto=teach(creature) 1/1
 auto=teach(creature) flying
@@ -148308,6 +148379,7 @@ toughness=1
 [/card]
 [card]
 name=Hakoda, Selfless Commander
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): top card visible face up, and an Ally cast from the top.
 abilities=vigilance,showfromtoplibrary
 auto=aslongas(ally[zpos=1]|mylibrary) canplayfromlibrarytop >0
 auto={S}:all(creature|mybattlefield) 0/5 ueot && all(creature|mybattlefield) transforms((,indestructible)) ueot
@@ -148354,6 +148426,7 @@ toughness=1
 [/card]
 [card]
 name=Kyoshi Battle Fan
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the Ally token it creates shows real token art.
 auto={2}:equip
 auto=livingweapontoken(Ally,Creature Ally,1/1,white)
 auto=teach(creature) 1/0
@@ -148364,6 +148437,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Planetarium of Wan Shi Tong
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): scry 2 reveal window offers a free cast.
 auto={1}{T}:_SCRY2_
 auto=@scryed(*|myzones) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
 auto=@surveiled(*|mybattlefield,mystack) turnlimited:reveal:1 optionone name(Cast it without paying its mana cost) target(<upto:1>*[-land]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Leave it on top) target(<upto:1>*|reveal) moveTo(mylibrary) optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
@@ -148395,6 +148469,7 @@ toughness=1
 [/card]
 [card]
 name=Waterbending Lesson
+#VERIFIED IN GAME 2026-10-28 (John, scenario queue): the "tap 2 creatures" waterbend option.
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): paying {2} keeps all three; declining discards one.
 #That was the old one-cost menu; the 2026-10-18 waterbend menu below needs a fresh look (queue scenario 08).
 auto=draw:3 controller

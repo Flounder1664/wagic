@@ -1,0 +1,32 @@
+#Origin of Spider-Man chapter II: the +1/+1 counter AND "becomes a legendary Spider Hero in addition to
+#its other types". The old line hung becomes() off counter(1/1) with and!( )!, which AACounter never
+#runs, so the counter landed and the type change was silently dropped (John, scenario 11, 2026-10-28).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Origin of Spider-Man
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+Origin of Spider-Man
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Origin of Spider-Man,Grizzly Bears,*
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=legendary,spider,hero,bear,creature
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

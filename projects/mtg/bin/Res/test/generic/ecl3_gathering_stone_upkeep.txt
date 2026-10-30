@@ -1,0 +1,32 @@
+#Gathering Stone naming Goblin: bin Hill Giant on entering, then at your next upkeep the top card (Raging Goblin) goes to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gathering Stone
+library:Raging Goblin,Hill Giant
+manapool:{4}
+[PLAYER2]
+library:Grizzly Bears,Grizzly Bears
+[DO]
+Gathering Stone
+menu Choose a type
+menu Choose a type
+menu Goblin
+Hill Giant
+choice 0
+eot
+next
+eot
+next
+choice 0
+Raging Goblin
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Gathering Stone
+hand:Raging Goblin
+graveyard:Hill Giant
+[PLAYER2]
+hand:*
+library:Grizzly Bears
+[END]

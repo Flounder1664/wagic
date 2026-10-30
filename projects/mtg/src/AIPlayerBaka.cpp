@@ -2964,9 +2964,24 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
     }
     //canplayfromexile
     card = NULL; // fixed bug causing AI never play a card there are one or more cards in graveyard or other zones...
-    while ((card = cd.nextmatch(game->exile, card)) && card->has(Constants::CANPLAYFROMEXILE))
+    while ((card = cd.nextmatch(game->exile, card)))
     {
-        if (!CanHandleCost(card->getManaCost(),card))
+        //skip, rather than stop at, an exiled card that may not be cast: the && in the loop
+        //condition used to end the whole scan at the first one
+        if (!card->has(Constants::CANPLAYFROMEXILE))
+            continue;
+        //Airbend: the card is cast for {2}, an alternative cost, not its printed one. Judging it on
+        //the printed cost meant an airbent Hill Giant was never recast off two Forests (John,
+        //scenario 41, 2026-10-28).
+        ManaCost * castCost = card->getManaCost();
+        bool airbent = card->has(Constants::AIRBENT);
+        if (airbent)
+        {
+            setAirbendCost(card);
+            if (card->getManaCost()->getAlternative())
+                castCost = card->getManaCost()->getAlternative();
+        }
+        if (!CanHandleCost(castCost,card))
             continue;
 
         if (card->hasType(Subtypes::TYPE_LAND))
@@ -3016,13 +3031,13 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
                 continue;
             }
         }
-        int currentCost = card->getManaCost()->getConvertedCost();
-        int hasX = card->getManaCost()->hasX();
+        int currentCost = castCost->getConvertedCost();
+        int hasX = castCost->hasX();
         gotPayments.clear();
-        if((!pMana->canAfford(card->getManaCost(),0) || card->getManaCost()->getKicker()))
-            gotPayments = canPayMana(card,card->getManaCost(),card->has(Constants::ANYTYPEOFMANA));
+        if((!pMana->canAfford(castCost,0) || castCost->getKicker()))
+            gotPayments = canPayMana(card,castCost,card->has(Constants::ANYTYPEOFMANA));
         //for preformence reason we only look for specific mana if the payment couldn't be made with pmana.
-        if ((currentCost > maxCost || hasX) && (gotPayments.size() || pMana->canAfford(card->getManaCost(),card->has(Constants::ANYTYPEOFMANA))))
+        if ((currentCost > maxCost || hasX) && (gotPayments.size() || pMana->canAfford(castCost,card->has(Constants::ANYTYPEOFMANA))))
         {
             TargetChooserFactory tcf(observer);
             TargetChooser * tc = tcf.createTargetChooser(card);
@@ -3121,6 +3136,7 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
                 DebugTrace("shouldPlayPercentage was less than 10 this was a lottery roll on RNG");
             }
             nextCardToPlay = card;
+            payAlternative = airbent ? OTHER : NONE;
             maxCost = currentCost;
             if (hasX)
                 maxCost = pMana->getConvertedCost();
@@ -3256,6 +3272,7 @@ MTGCardInstance * AIPlayerBaka::FindCardToPlay(ManaCost * pMana, const char * ty
                 DebugTrace("shouldPlayPercentage was less than 10 this was a lottery roll on RNG");
             }
             nextCardToPlay = card;
+            payAlternative = NONE;
             maxCost = currentCost;
             if (hasX)
                 maxCost = pMana->getConvertedCost();

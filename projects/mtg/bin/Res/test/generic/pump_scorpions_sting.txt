@@ -1,0 +1,19 @@
+#Scorpion's Sting gives -3/-3: Craw Wurm 6/4 becomes 3/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Scorpion's Sting
+manapool:{1}{B}
+[PLAYER2]
+inplay:Craw Wurm
+[DO]
+Scorpion's Sting
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Scorpion's Sting
+[PLAYER2]
+inplay:Craw Wurm
+pt:Craw Wurm=3/1
+[END]

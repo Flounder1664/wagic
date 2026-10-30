@@ -1,0 +1,28 @@
+#wagic#37: an Aura seeded onto the OPPONENT's creature. Player 1's Pacifism on player 2's Hill Giant:
+#player 2 tries to attack with it; nothing can attack, so combat is skipped (ENDOFTURN) and player 1
+#stays at 20. Seeded without the "@" the Giant attacks: COMBATEND, life 17.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pacifism@Hill Giant
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+eot
+next
+next
+next
+next
+next
+Hill Giant
+next
+next
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Pacifism@Hill Giant
+life:20
+[PLAYER2]
+inplay:Hill Giant
+[END]

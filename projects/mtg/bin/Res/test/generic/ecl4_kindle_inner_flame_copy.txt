@@ -1,0 +1,18 @@
+#Kindle the Inner Flame creates a token copy (now with haste and the end-step sacrifice, via clone with(treason,haste)).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kindle the Inner Flame
+inplay:Grizzly Bears
+manapool:{3}{R}
+[PLAYER2]
+[DO]
+Kindle the Inner Flame
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Kindle the Inner Flame
+[PLAYER2]
+[END]

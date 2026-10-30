@@ -1,0 +1,19 @@
+#Mornsong Aria: at your draw step you lose 3 and search for a card (the search never opened while "&& shuffle" sat inside the ability$).
+[INIT]
+UPKEEP
+[PLAYER1]
+inplay:Mornsong Aria
+library:Hill Giant,Juggernaut,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+Juggernaut
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Mornsong Aria
+hand:Juggernaut
+library:Hill Giant,Grizzly Bears
+life:17
+[PLAYER2]
+[END]

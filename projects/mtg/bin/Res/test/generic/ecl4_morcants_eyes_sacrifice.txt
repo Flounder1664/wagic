@@ -1,0 +1,16 @@
+#Morcant's Eyes' token ability sacrifices it as a cost (it stayed in play).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Morcant's Eyes
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+Morcant's Eyes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*
+graveyard:Morcant's Eyes
+[PLAYER2]
+[END]

@@ -1,0 +1,22 @@
+#Gathering Stone naming Goblin: as it ENTERS it looks at the top card (Raging Goblin) and the Goblin goes to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gathering Stone
+library:Hill Giant,Raging Goblin
+manapool:{4}
+[PLAYER2]
+[DO]
+Gathering Stone
+menu Choose a type
+menu Choose a type
+menu Goblin
+Raging Goblin
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gathering Stone
+hand:Raging Goblin
+library:Hill Giant
+[PLAYER2]
+[END]

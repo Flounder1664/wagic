@@ -1,0 +1,22 @@
+#Loch Mare's second ability taps the target AND puts a stun counter on it (the stun was approximated away).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Loch Mare
+manapool:{1}{U}{2}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Loch Mare
+Loch Mare
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Loch Mare
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+counter:Hill Giant=stun:1
+[END]

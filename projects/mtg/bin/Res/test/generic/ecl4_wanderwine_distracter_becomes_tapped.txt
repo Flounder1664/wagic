@@ -1,0 +1,24 @@
+#Wanderwine Distracter: whenever it becomes tapped, target opposing creature gets -3/-0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point
+inplay:Wanderwine Distracter
+library:Island
+manapool:{1}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Pressure Point
+Wanderwine Distracter
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wanderwine Distracter
+graveyard:Pressure Point
+hand:Island
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=0/3
+[END]

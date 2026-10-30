@@ -1,0 +1,18 @@
+#Swat Away can target any creature, yours included (it hit only an opponent's nonland permanent): the Bears go on top of their owner's library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Swat Away
+inplay:Grizzly Bears
+manapool:{2}{U}{U}
+[PLAYER2]
+[DO]
+Swat Away
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Swat Away
+library:Grizzly Bears
+[PLAYER2]
+[END]

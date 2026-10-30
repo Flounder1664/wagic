@@ -1,0 +1,26 @@
+#ECL DFC backs 2026-10-29. Brigid (ETB Kithkin at setup) pays {G}, becomes Doun's Mind, and taps
+#for G per other creature: the Kithkin and Grizzly Bears make {G}{G}.
+[INIT]
+DRAW
+[PLAYER1]
+inplay:Forest,Grizzly Bears,696787
+library:Hill Giant
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+Forest
+696787
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Grizzly Bears,696787,Kithkin Ecl
+hand:Hill Giant
+manapool:{G}{G}
+life:20
+[PLAYER2]
+life:20
+[END]
