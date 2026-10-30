@@ -1,0 +1,16 @@
+#Ajani, Outland Chaperone +1: a 1/1 Kithkin token, loyalty 3 -> 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696871
+[PLAYER2]
+[DO]
+696871
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696871,*
+counter:696871=loyalty:4
+[PLAYER2]
+[END]

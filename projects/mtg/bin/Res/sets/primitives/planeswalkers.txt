@@ -4012,15 +4012,14 @@ subtype=Zariel
 [/card]
 [card]
 name=Ajani, Outland Chaperone
-auto=loyalty:1 name(plus1) token(Kithkin,creature kithkin,1/1,green white)
-auto=loyalty:-2 name(minus2) damage:4 target(creature[tapped])
-auto=loyalty:-8 name(minus8) moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary) && moveto(mybattlefield) target(creature[manacost<=3]|mylibrary)
+auto=counter(0/0,3,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: Create a Kithkin) token(Kithkin,creature kithkin,1/1,green white)
+auto={C(0/0,-2,Loyalty)}:name(-2: 4 damage to tapped creature) damage:4 target(creature[tapped])
+auto={C(0/0,-8,Loyalty)}:name(-8: Look at top X cards) reveal:lifetotal optionone name(Put permanents onto battlefield) target(<anyamount>*[-land&-instant&-sorcery&manacost<=3]|reveal) moveto(mybattlefield) optiononeend optiontwo name(Shuffle the rest) target(<1>*|reveal) moveto(mylibrary) and!( all(*|reveal) moveto(mylibrary) and!(shuffle)! )! optiontwoend revealend
 mana={1}{W}{W}
-type=Planeswalker
+type=Legendary Planeswalker
 subtype=Ajani
-loyalty=3
 text=[+1]: Create a 1/1 green and white Kithkin creature token. -- [-2]: Ajani deals 4 damage to target tapped creature. -- [-8]: Look at the top X cards of your library, where X is your life total. You may put any number of nonland permanent cards with mana value 3 or less from among them onto the battlefield. Then shuffle.
-missing=-8 puts up to three creature cards with mana value 3 or less from the whole library; it should look at the top X cards (X = your life) and take any number of nonland permanent cards with mana value 3 or less.
 [/card]
 
 [card]

@@ -1,0 +1,75 @@
+#Ajani, Outland Chaperone -8 at life 4: +1 on five turns (3 -> 8, five Kithkin), then -8 looks at
+#the top 4 (library is listed BOTTOM first; the five Island-free fillers on top are drawn on the way).
+#Top 4: Juggernaut (MV 4), Shock (instant), Ornithopter, Grizzly Bears -> only the last two enter.
+#Eager Cadet is fifth from the top and must stay out of reach. Loyalty 0 -> Ajani dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696871
+library:Hill Giant,Eager Cadet,Grizzly Bears,Ornithopter,Shock,Juggernaut,Air Elemental,Craw Wurm,Spined Wurm,Gray Ogre,Horned Turtle
+life:4
+[PLAYER2]
+library:Mons's Goblin Raiders,Raging Goblin,Goblin Piker,Goblin Balloon Brigade,Goblin Hero,Goblin King
+life:20
+[DO]
+696871
+choice 0
+eot
+next
+eot
+next
+next
+next
+696871
+choice 0
+eot
+next
+eot
+next
+next
+next
+696871
+choice 0
+eot
+next
+eot
+next
+next
+next
+696871
+choice 0
+eot
+next
+eot
+next
+next
+next
+696871
+choice 0
+eot
+next
+eot
+next
+next
+next
+696871
+menu -8: Look at top X cards
+choice 0
+Grizzly Bears
+Ornithopter
+Juggernaut
+revealdone
+Shock
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Ornithopter,*,*,*,*,*
+hand:*,*,*,*,*
+library:Hill Giant,Eager Cadet,Shock,Juggernaut
+graveyard:696871
+life:4
+[PLAYER2]
+hand:*,*,*,*,*
+library:Mons's Goblin Raiders
+life:20
+[END]
