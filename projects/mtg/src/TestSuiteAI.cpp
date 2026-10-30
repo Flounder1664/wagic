@@ -111,9 +111,39 @@ bool TestSuiteAI::parseLine(const string& s)
             }
             rebuilt += (i ? "," : "") + item;
         }
+        checkZoneLineNames(rebuilt);
         return AIPlayerBaka::parseLine(rebuilt);
     }
+    checkZoneLineNames(s);
     return AIPlayerBaka::parseLine(s);
+}
+
+//MTGGameZone::parseLine drops a name it cannot resolve with only a DebugTrace. In [ASSERT]
+//that leaves the expected zone one card short, and when the card is missing from the game
+//for the same reason (it is not in the collection), both sides agree and the test passes:
+//commandzone:City's Blessing stayed green while RIX/_cards.dat had lost the card's [card]
+//opener, so the marker never existed. Every name in a zone line must resolve.
+void TestSuiteAI::checkZoneLineNames(const string& s)
+{
+    static const char * kZones[] = { "graveyard", "library", "hand", "inplay", "battlefield",
+                                     "removedfromgame", "exile", "command", "commandzone" };
+    size_t limiter = s.find("=");
+    if (limiter == string::npos) limiter = s.find(":");
+    if (limiter == string::npos) return;
+    string area = s.substr(0, limiter);
+    bool isZone = false;
+    for (size_t z = 0; z < sizeof(kZones) / sizeof(kZones[0]); z++)
+        if (area == kZones[z]) isZone = true;
+    if (!isZone) return;
+
+    vector<string> items = split(s.substr(limiter + 1), ',');
+    for (size_t i = 0; i < items.size(); i++)
+    {
+        string name = trim(items[i]);
+        if (name.empty() || Rules::getMTGId(name)) continue; //"*" resolves to -1
+        suite->doErrors.push_back(area + ": no card called '" + name
+                                  + "' (not in the collection, or a comma in its name - use the id)");
+    }
 }
 
 MTGCardInstance * TestSuiteAI::getCard(string action)
@@ -1238,6 +1268,7 @@ void TestSuite::cleanup()
 
 bool TestSuiteGame::load()
 {
+    doErrors.clear();
     summoningSickness = 0;
     forceAbility = false;
     gameType = GAME_TYPE_CLASSIC;

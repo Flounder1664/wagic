@@ -55,8 +55,9 @@ protected:
     int currentAction;
     //Set by the [DO] verb "human": the script is over and a person is playing seat 1.
     bool humanControl;
-    //Failures found while running [DO] (a "menu! <label>" whose label was not offered),
-    //reported with the [ASSERT] results.
+    //Failures found while running [DO] (a "menu! <label>" whose label was not offered) or
+    //while loading (a zone line naming a card that does not exist), reported with the
+    //[ASSERT] results.
     vector<string> doErrors;
     GameObserver* observer;
 
@@ -150,6 +151,7 @@ private:
     bool openForcedTriggerMenu(Targetable * clicked);
     bool castPastFlipSideMenu(MTGCardInstance * clicked);
     Targetable * clickTarget(const string& action);
+    void checkZoneLineNames(const string& s);
     float timer;
     TestSuiteGame * suite;
 
