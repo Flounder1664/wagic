@@ -5753,6 +5753,7 @@ toughness=5
 [/card]
 [card]
 name=Ashling, Rimebound
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): its two mana can only be spent on spells with mana value 4 or greater, and it adds again on a later turn.
 backside=Ashling, Rekindled
 auto=@transformed(this|mybattlefield):ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
 auto=@each my firstmain:ability$!name(Choose a color) choice name(Add two white) add{W}{W} spendspells(*[manacost>=4]) _ choice name(Add two blue) add{U}{U} spendspells(*[manacost>=4]) _ choice name(Add two black) add{B}{B} spendspells(*[manacost>=4]) _ choice name(Add two red) add{R}{R} spendspells(*[manacost>=4]) _ choice name(Add two green) add{G}{G} spendspells(*[manacost>=4])!$ controller
@@ -8649,6 +8650,7 @@ toughness=2
 [/card]
 [card]
 name=Emeritus of Ideation // Ancestral Recall
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): after the Prepared counter is spent, the attack trigger gives exactly one prompt (retest of scenario_47).
 grade=borderline
 abilities=flying
 #Prepared is modelled as a named counter; "cast a copy of its spell" as an ability gated
@@ -8761,6 +8763,7 @@ toughness=3
 [/card]
 [card]
 name=Grub, Notorious Auntie
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): back face - attack blight makes a tapped, attacking token copy of another creature, sacrificed at end step.
 backside=Grub, Storied Matriarch
 abilities=menace
 auto=_ATTACKING_may name(Blight 1 and copy) target(creature|mybattlefield) counter(-1/-1) && clone with(battleready) and!( transforms((,newability[phaseaction[end once] sacrifice all(this)])) forever )!
@@ -20465,6 +20468,7 @@ type=Enchantment
 [/card]
 [card]
 name=City's Blessing
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): avatar badge (CB tag and command-zone marker), not a card ability.
 abilities=shroud,indestructible,doublefacedeath,nofizzle
 text=You have the city's blessing. (Ascend -- once you control ten or more permanents, you get the city's blessing for the rest of the game.)
 type=Emblem
@@ -134583,6 +134587,7 @@ toughness=1
 [/card]
 [card]
 name=The Last Ronin's Technique
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): sneak cost makes the three Spirit tokens enter tapped and attacking (retest of scenario_40).
 grade=borderline
 note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note blamed {n} (Ninja), which really does hard-require MTG_PHASE_COMBATBLOCKERS (ExtraCost.cpp:1115) and made these uncastable; BounceTargetCost overrides only doPay() and inherits the ungated base canPay(), so no engine change was needed.
 other={1}{W}{H(creature[attacking&-blocked]|myBattlefield)} name(Sneak)
@@ -135020,6 +135025,7 @@ toughness=3
 [/card]
 [card]
 name=The Regalia
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): attack reveal: the first land goes onto the battlefield tapped, the rest go to the bottom.
 #REVIEW-V 2026-10-29: attack and check the reveal-until-land puts the land onto the battlefield tapped and the rest on the bottom.
 abilities=haste
 auto=_ATTACKING_name(Reveal until a land) reveal:1 revealzone(mylibrary) revealuntil(*[land]|mylibrary) optionone choice name(Put the land onto the battlefield) target(land|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo choice name(Rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
@@ -135465,6 +135471,8 @@ toughness=3
 [/card]
 [card]
 name=Summon: Primal Odin
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): chapter II lose-the-game trigger works on Odin itself.
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): chapter II lose-the-game trigger is on Odin only (not your other creatures).
 grade=borderline
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
@@ -139088,6 +139096,7 @@ toughness=5
 [/card]
 [card]
 name=Mysterious Limousine
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): the attack exile sends back the creature the enter exile took.
 #REVIEW-V 2026-10-29: attack it after an enter-exile and check the new exile sends the earlier card back (the enter exile is tested).
 grade=borderline
 #Each new exile first sends back the cards this Vehicle exiled earlier (LimoExiled counter).
@@ -151169,6 +151178,7 @@ toughness=5
 [/card]
 [card]
 name=Reservoir Kraken
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): beginning-of-combat offer to the opponent: tap a creature to tap the Kraken and make a Fish.
 #REVIEW-V 2026-10-29: the combat-begins offer goes to the opponent (harness cannot answer it) - check the tap, the Kraken tapping and the Fish going to the opponent.
 abilities=trample
 auto=_WARD2_
@@ -151798,7 +151808,9 @@ backside=Blitzwing, Adaptive Assailant
 anyzone={0}:doubleside(backside)
 #More Than Meets the Eye: cast converted for its alternative cost (it flips as it enters).
 other={3}{B} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@each my end:name(Drain or convert) if compare(oplifelost)~morethan~0 then life:-oplifelost opponent else flip(backside)
 text=More Than Meets the Eye {3}{B} (You may cast this card converted for {3}{B}.) -- At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing. // Blitzwing, Adaptive Assailant
 mana={5}{B}
@@ -151827,7 +151839,9 @@ abilities=first strike
 backside=Arcee, Acrobatic Coupe
 anyzone={0}:doubleside(backside)
 other={R}{W} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 #"Remove one or more +1/+1 counters": offered as one, two or three.
 auto={1}{C(1/1,-1)}:name(Remove 1 counter: 1 damage) damage:1 target(creature) && flip(backside)
 auto={1}{C(1/1,-1)}{C(1/1,-1)}:name(Remove 2 counters: 2 damage) damage:2 target(creature) && flip(backside)
@@ -151858,7 +151872,9 @@ abilities=flying
 backside=Cyclonus, Cybertronian Fighter
 anyzone={0}:doubleside(backside)
 other={5}{U}{B} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@combatdamaged(player) from(this):name(Connive) _CONNIVES_
 auto=@combatdamaged(player) from(this) restriction{compare(power)~morethan~3}:name(Convert if power 5+) if compare(power)~morethan~4 then flip(backside)
 text=More Than Meets the Eye {5}{U}{B} (You may cast this card converted for {5}{U}{B}.) -- Flying -- Whenever Cyclonus deals combat damage to a player, it connives. Then if Cyclonus's power is 5 or greater, convert it. // Cyclonus, Cybertronian Fighter
@@ -151887,7 +151903,9 @@ name=Goldbug, Humanity's Ally // Goldbug, Scrappy Scout
 backside=Goldbug, Scrappy Scout
 anyzone={0}:doubleside(backside)
 other={W}{U} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=preventalldamage to(human[attacking]|mybattlefield) from(creature)
 auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Convert) flip(backside)
 text=More Than Meets the Eye {W}{U} (You may cast this card converted for {W}{U}.) -- Prevent all combat damage that would be dealt to attacking Humans you control. -- Whenever you cast your second spell each turn, convert Goldbug. // Goldbug, Scrappy Scout
@@ -151915,7 +151933,9 @@ name=Prowl, Stoic Strategist // Prowl, Pursuit Vehicle
 backside=Prowl, Pursuit Vehicle
 anyzone={0}:doubleside(backside)
 other={2}{W} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=_ATTACKING_name(Exile a tapped creature or Vehicle) moveto(exile) and!( transforms((,canplayfromexile)) forever )! target(<upto:1>other creature[tapped],vehicle[tapped])
 missing=drawing a card and converting when a player plays a card exiled with Prowl.
 text=More Than Meets the Eye {2}{W} (You may cast this card converted for {2}{W}.) -- Whenever Prowl attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it. -- Whenever a player plays a card exiled with Prowl, you draw a card and convert Prowl. // Prowl, Pursuit Vehicle
@@ -151946,7 +151966,9 @@ abilities=flying
 backside=Starscream, Seeker Leader
 anyzone={0}:doubleside(backside)
 other={2}{B} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@drawof(player) restriction{type(The Monarch|mybattlefield)~morethan~0}:name(Opponent loses 2) life:-2 opponent
 auto=@combatdamageof(player) from(creature|opponentbattlefield) turnlimited:name(Convert) flip(backside)
 text=More Than Meets the Eye {2}{B} (You may cast this card converted for {2}{B}.) -- Flying -- Whenever you draw a card, if you're the monarch, target opponent loses 2 life. -- Whenever one or more creatures deal combat damage to you, convert Starscream. // Starscream, Seeker Leader
@@ -151975,7 +151997,9 @@ name=Ultra Magnus, Tactician // Ultra Magnus, Armored Carrier
 backside=Ultra Magnus, Armored Carrier
 anyzone={0}:doubleside(backside)
 other={2}{R}{G}{W} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=_WARD2_
 auto=_ATTACKING_may name(Put an artifact creature onto the battlefield attacking) target(artifact[creature]|myhand) ninjutsu && all(this) transforms((,newability[phaseaction[combatends once] flip(backside)])) ueot
 text=More Than Meets the Eye {2}{R}{G}{W} (You may cast this card converted for {2}{R}{G}{W}.) -- Ward {2} -- Whenever Ultra Magnus attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert Ultra Magnus at end of combat. // Ultra Magnus, Armored Carrier
@@ -152004,7 +152028,9 @@ name=Flamewar, Brash Veteran // Flamewar, Streetwise Operative
 backside=Flamewar, Streetwise Operative
 anyzone={0}:doubleside(backside)
 other={B}{R} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto={S(other artifact|mybattlefield)}:name(+1/+1 counter and convert) counter(1/1) && flip(backside) asSorcery
 auto={1}:name(Discard your hand, return intel cards) reject all(*|myhand) && all(*[counter{0/0.1.Intel}]|myexile) moveto(myhand)
 text=More Than Meets the Eye {B}{R} (You may cast this card converted for {B}{R}.) -- Sacrifice another artifact: Put a +1/+1 counter on Flamewar and convert it. Activate only as a sorcery. -- {1}, Discard your hand: Put all exiled cards you own with intel counters on them into your hand. // Flamewar, Streetwise Operative
@@ -152034,7 +152060,9 @@ abilities=flying
 backside=Jetfire, Air Guardian
 anyzone={0}:doubleside(backside)
 other={3}{U} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 #The +1/+1 counters come from Jetfire itself (not from among all your artifacts); one to three.
 auto={C(1/1,-1)}:name(Remove 1 counter: add {C}) add{C} spendspells(artifact) spendabilities(*) && flip(backside)
 auto={C(1/1,-1)}{C(1/1,-1)}:name(Remove 2 counters: add {C}{C}) add{C}{C} spendspells(artifact) spendabilities(*) && flip(backside)
@@ -152064,7 +152092,9 @@ name=Megatron, Tyrant // Megatron, Destructive Force
 backside=Megatron, Destructive Force
 anyzone={0}:doubleside(backside)
 other={1}{R}{W}{B} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@each my secondmain:may name(Convert and add {C} per life lost) flip(backside) && thisforeach(variable{oplifelost}>0) add{C}
 missing=your opponents can't cast spells during combat.
 text=More Than Meets the Eye {1}{R}{W}{B} (You may cast this card converted for {1}{R}{W}{B}.) -- Your opponents can't cast spells during combat. -- At the beginning of each of your postcombat main phases, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn. // Megatron, Destructive Force
@@ -152092,7 +152122,9 @@ name=Optimus Prime, Hero // Optimus Prime, Autobot Leader
 backside=Optimus Prime, Autobot Leader
 anyzone={0}:doubleside(backside)
 other={2}{U}{R}{W} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@each end:name(Bolster 1) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) counter(1/1)!$ controller
 auto=_DIES_name(Return converted) moveto(ownerbattlefield) all(trigger[to]) && flip(backside) all(trigger[to])
 text=More Than Meets the Eye {2}{U}{R}{W} (You may cast this card converted for {2}{U}{R}{W}.) -- At the beginning of each end step, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.) -- When Optimus Prime dies, return it to the battlefield converted under its owner's control. // Optimus Prime, Autobot Leader
@@ -152122,7 +152154,9 @@ abilities=lifelink
 backside=Ratchet, Rescue Racer
 anyzone={0}:doubleside(backside)
 other={1}{W} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@lifeof(player) from(*[-lifefaker]|*):may name(Convert and return an artifact) moveto(mybattlefield) and!( tap(noevent) )! target(artifact[manacost<=lifegain]|mygraveyard) && flip(backside)
 text=More Than Meets the Eye {1}{W} (You may cast this card converted for {1}{W}.) -- Lifelink -- Whenever you gain life, you may convert Ratchet. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped. // Ratchet, Rescue Racer
 mana={2}{W}
@@ -152150,7 +152184,9 @@ abilities=double strike,haste
 backside=Slicer, High-Speed Antagonist
 anyzone={0}:doubleside(backside)
 other={2}{R} name(More Than Meets the Eye)
-auto=if paid(alternative) then flip(backside)
+#Only when it is cast converted: the convert back re-parses this face and resolves its one-shot lines,
+#so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
+auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 #The "give it to the opponent" branch is not offered: at each opponent's upkeep Slicer converts.
 auto=@each opponent upkeep:name(Convert) flip(backside)
 missing=letting the opponent gain control of Slicer (untapped, goaded, can't be sacrificed) instead of converting.

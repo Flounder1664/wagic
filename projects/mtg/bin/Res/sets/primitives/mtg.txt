@@ -19816,6 +19816,7 @@ toughness=6
 [/card]
 [card]
 name=Champions of the Shoal
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): the enters tap-and-stun is its own prompt, separate from behold.
 auto=aslongas(other merfolk|mybattlefield,myhand) choice name(Behold a Merfolk) notaTarget(other merfolk|mybattlefield,myhand) hand(blink)forsrc oneshot
 auto=aslongas(other merfolk|mybattlefield,myhand) sacrifice <1 oneshot
 auto=may name(Tap and stun) tap target(creature) && counter(0/0,1,stun)
@@ -26386,6 +26387,7 @@ subtype=Aura
 [/card]
 [card]
 name=Curious Colossus
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): the opponent's Air Elemental keeps losing flying on the opponent's turn.
 auto=all(creature|opponentbattlefield) loseabilities forever
 auto=all(creature|opponentbattlefield) transforms((Coward,setpower=1,settoughness=1)) forever
 text=When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
@@ -81080,6 +81082,7 @@ missing=Exiles one opponent creature and moves a creature from your exile to the
 [/card]
 [card]
 name=Mornsong Aria
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): your draw step is a library search instead of a draw.
 abilities=nolifegain,nolifegainopponent
 auto=replacedraw ability$!name(Can't draw) donothing!$ controller
 auto=opponentreplacedraw ability$!name(Can't draw) donothing!$ opponent
@@ -131788,6 +131791,7 @@ subtype=Elf
 [/card]
 [card]
 name=Trystan, Callous Cultivator
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): transforms to Penitent Culler on one turn and back on the next, each face with its own art.
 backside=Trystan, Penitent Culler
 anyzone={0}:doubleside(backside)
 abilities=deathtouch
@@ -146272,6 +146276,7 @@ type=Instant
 [/card]
 [card]
 name=School Daze
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): "Fight Crime" mode, responding to the COMPUTER's spell.
 #REVIEW-V Fight Crime is tested with player 2 countering (om1_school_daze_fight_crime)
 auto=choice name(Do Homework - draw three cards) draw:3 controller
 auto=choice name(Fight Crime - counter target spell, draw a card) fizzle target(*|stack) && draw:1 controller
@@ -146309,6 +146314,7 @@ toughness=3
 [/card]
 [card]
 name=The Soul Stone
+#VERIFIED IN GAME 2026-10-30 (John, scenario queue): harnessed, its upkeep trigger asks for a creature card in your graveyard and returns it (retest of scenario_43).
 #VERIFIED IN GAME 2026-10-28 (John, scenario queue): harnessing asks which creature to exile and exiles it. Untested: the upkeep return.
 abilities=indestructible
 auto={T}:Add{B}

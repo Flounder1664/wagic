@@ -1,0 +1,45 @@
+#Blitzwing, Cruel Tormentor converts at its end step (no life lost), then on the next turn the
+#Adaptive Assailant attacks and its combat damage converts it back to the 6/5 front.
+#The convert-back path crashed the game in John's scenario queue (2026-10-30, scenario 74).
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:732004
+[PLAYER2]
+life:20
+[DO]
+next
+next
+#opponent's turn
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+#my turn
+next
+next
+next
+next
+#attackers
+732004
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:732004
+pt:732004=6/5
+[PLAYER2]
+life:17
+[END]
