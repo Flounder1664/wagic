@@ -1,0 +1,17 @@
+#Ajani, Outland Chaperone (ECL) cast from hand enters with 3 loyalty. Its old loyalty= field and
+#loyalty:N abilities were not engine syntax, so it entered with none and died.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:696871
+manapool:{1}{W}{W}
+[PLAYER2]
+[DO]
+696871
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:696871
+counter:696871=loyalty:3
+[PLAYER2]
+[END]

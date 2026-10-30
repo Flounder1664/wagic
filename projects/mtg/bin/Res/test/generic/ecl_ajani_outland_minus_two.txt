@@ -1,0 +1,23 @@
+#Ajani, Outland Chaperone -2: 4 damage to target tapped creature. Icy Manipulator taps the 6/4
+#Craw Wurm first (no way to seed tapped state); 4 damage kills it, loyalty 3 -> 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Icy Manipulator,696871
+manapool:{1}
+[PLAYER2]
+inplay:Craw Wurm
+[DO]
+Icy Manipulator
+Craw Wurm
+696871
+menu -2: 4 damage to tapped creature
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Icy Manipulator,696871
+counter:696871=loyalty:1
+[PLAYER2]
+graveyard:Craw Wurm
+[END]
