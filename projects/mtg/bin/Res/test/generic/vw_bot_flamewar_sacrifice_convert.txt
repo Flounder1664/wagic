@@ -1,0 +1,19 @@
+#Flamewar, Brash Veteran: sacrifice another artifact - a +1/+1 counter, then convert to the 2/1
+#back face, which keeps the counter (3/2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732010,Ornithopter
+[PLAYER2]
+[DO]
+732010
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732010
+graveyard:Ornithopter
+pt:732010=3/2
+[PLAYER2]
+[END]

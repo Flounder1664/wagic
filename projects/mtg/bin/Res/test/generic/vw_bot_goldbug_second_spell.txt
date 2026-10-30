@@ -1,0 +1,24 @@
+#Goldbug, Humanity's Ally converts on your second spell of the turn (3/3 -> 1/3 back face).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732011
+hand:Shock,Lightning Bolt
+manapool:{R}{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+Lightning Bolt
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732011
+graveyard:Shock,Lightning Bolt
+pt:732011=1/3
+manapool:{0}
+[PLAYER2]
+life:15
+[END]

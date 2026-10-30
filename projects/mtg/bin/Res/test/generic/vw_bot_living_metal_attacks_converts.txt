@@ -1,0 +1,27 @@
+#Blitzwing, Adaptive Assailant (back face, 3/5 Vehicle): Living metal makes it a creature on your
+#turn, so it attacks uncrewed; its combat damage converts it back to the 6/5 front.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732104
+[PLAYER2]
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+732104
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:732104
+pt:732104=6/5
+[PLAYER2]
+life:17
+[END]

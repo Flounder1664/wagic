@@ -1,0 +1,17 @@
+#Jetfire, Air Guardian: {U}{U}{U} converts it to the front (3/4), then adapt 3 - 6/7.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732103
+manapool:{U}{U}{U}
+[PLAYER2]
+[DO]
+732103
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732103
+pt:732103=6/7
+manapool:{0}
+[PLAYER2]
+[END]

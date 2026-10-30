@@ -151716,3 +151716,385 @@ subtype=Turtle
 power=8
 toughness=20
 [/card]
+[card]
+name=Blitzwing, Cruel Tormentor // Blitzwing, Adaptive Assailant
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also the end-step drain when the opponent lost life (the no-loss convert is tested); back face's random flying/indestructible.
+backside=Blitzwing, Adaptive Assailant
+anyzone={0}:doubleside(backside)
+#More Than Meets the Eye: cast converted for its alternative cost (it flips as it enters).
+other={3}{B} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@each my end:name(Drain or convert) if compare(oplifelost)~morethan~0 then life:-oplifelost opponent else flip(backside)
+text=More Than Meets the Eye {3}{B} (You may cast this card converted for {3}{B}.) -- At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing. // Blitzwing, Adaptive Assailant
+mana={5}{B}
+type=Legendary Artifact Creature
+subtype=Robot
+power=6
+toughness=5
+[/card]
+[card]
+name=Blitzwing, Adaptive Assailant
+#Living metal: a creature during your turn.
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@each my combatbegins:name(Flying or indestructible at random) if compare(genrand2)~equalto~0 then flying ueot else indestructible ueot
+auto=@combatdamaged(player) from(this):name(Convert) flip(Blitzwing^ Cruel Tormentor // Blitzwing^ Adaptive Assailant)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- At the beginning of combat on your turn, choose flying or indestructible at random. Blitzwing gains that ability until end of turn. -- Whenever Blitzwing deals combat damage to a player, convert it.
+type=Legendary Artifact
+subtype=Vehicle
+color=black
+power=3
+toughness=5
+[/card]
+[card]
+name=Arcee, Sharpshooter // Arcee, Acrobatic Coupe
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also remove counters for damage + convert; back face: a spell targeting your creature converts it back with a counter.
+abilities=first strike
+backside=Arcee, Acrobatic Coupe
+anyzone={0}:doubleside(backside)
+other={R}{W} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+#"Remove one or more +1/+1 counters": offered as one, two or three.
+auto={1}{C(1/1,-1)}:name(Remove 1 counter: 1 damage) damage:1 target(creature) && flip(backside)
+auto={1}{C(1/1,-1)}{C(1/1,-1)}:name(Remove 2 counters: 2 damage) damage:2 target(creature) && flip(backside)
+auto={1}{C(1/1,-1)}{C(1/1,-1)}{C(1/1,-1)}:name(Remove 3 counters: 3 damage) damage:3 target(creature) && flip(backside)
+text=More Than Meets the Eye {R}{W} (You may cast this card converted for {R}{W}.) -- First strike -- {1}, Remove one or more +1/+1 counters from Arcee: It deals that much damage to target creature. Convert Arcee. // Arcee, Acrobatic Coupe
+mana={1}{R}{W}
+type=Legendary Artifact Creature
+subtype=Robot
+power=2
+toughness=2
+[/card]
+[card]
+name=Arcee, Acrobatic Coupe
+auto=this(variable{controllerturn}) transforms((Creature))
+#One counter per targeting spell (not per creature or Vehicle it targets), then convert.
+auto=@targeted(*[creature;vehicle]|mybattlefield) from(*|mystack) turnlimited:name(Counter and convert) counter(1/1) all(this) && flip(Arcee^ Sharpshooter // Arcee^ Acrobatic Coupe)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Whenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on Arcee. Convert Arcee.
+type=Legendary Artifact
+subtype=Vehicle
+color=red,white
+power=2
+toughness=2
+[/card]
+[card]
+name=Cyclonus, the Saboteur // Cyclonus, Cybertronian Fighter
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also connive on combat damage, convert at power 5+.
+abilities=flying
+backside=Cyclonus, Cybertronian Fighter
+anyzone={0}:doubleside(backside)
+other={5}{U}{B} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@combatdamaged(player) from(this):name(Connive) _CONNIVES_
+auto=@combatdamaged(player) from(this) restriction{compare(power)~morethan~3}:name(Convert if power 5+) if compare(power)~morethan~4 then flip(backside)
+text=More Than Meets the Eye {5}{U}{B} (You may cast this card converted for {5}{U}{B}.) -- Flying -- Whenever Cyclonus deals combat damage to a player, it connives. Then if Cyclonus's power is 5 or greater, convert it. // Cyclonus, Cybertronian Fighter
+mana={2}{U}{B}
+type=Legendary Artifact Creature
+subtype=Robot
+power=2
+toughness=5
+[/card]
+[card]
+name=Cyclonus, Cybertronian Fighter
+abilities=flying
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@combatdamaged(player) from(this):name(Convert) flip(Cyclonus^ the Saboteur // Cyclonus^ Cybertronian Fighter)
+missing=the additional beginning phase after converting.
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Flying -- Whenever Cyclonus deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
+type=Legendary Artifact
+subtype=Vehicle
+color=blue,black
+power=5
+toughness=5
+[/card]
+[card]
+name=Goldbug, Humanity's Ally // Goldbug, Scrappy Scout
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also attacking Humans take no combat damage; back face: Human spells can't be countered, Goldbug + a Human attacking draws and converts (second-spell convert is tested).
+backside=Goldbug, Scrappy Scout
+anyzone={0}:doubleside(backside)
+other={W}{U} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=preventalldamage to(human[attacking]|mybattlefield) from(creature)
+auto=@movedTo(*|mystack) restriction{thisturn(*|mystack)~equalto~1}:name(Convert) flip(backside)
+text=More Than Meets the Eye {W}{U} (You may cast this card converted for {W}{U}.) -- Prevent all combat damage that would be dealt to attacking Humans you control. -- Whenever you cast your second spell each turn, convert Goldbug. // Goldbug, Scrappy Scout
+mana={1}{W}{U}
+type=Legendary Artifact Creature
+subtype=Robot
+power=3
+toughness=3
+[/card]
+[card]
+name=Goldbug, Scrappy Scout
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=lord(human|mystack) nofizzle
+auto=@combat(attacking) source(this) restriction{type(human[attacking]|mybattlefield)~morethan~0}:name(Draw and convert) draw:1 controller && flip(Goldbug^ Humanity's Ally // Goldbug^ Scrappy Scout)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Human spells you control can't be countered. -- Whenever Goldbug and at least one Human attack, draw a card and convert Goldbug.
+type=Legendary Artifact
+subtype=Vehicle
+color=white,blue
+power=1
+toughness=3
+[/card]
+[card]
+name=Prowl, Stoic Strategist // Prowl, Pursuit Vehicle
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also attack exile of a tapped creature/Vehicle its owner can play; back face counters and converts on the second entry.
+backside=Prowl, Pursuit Vehicle
+anyzone={0}:doubleside(backside)
+other={2}{W} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=_ATTACKING_name(Exile a tapped creature or Vehicle) moveto(exile) and!( transforms((,canplayfromexile)) forever )! target(<upto:1>other creature[tapped],vehicle[tapped])
+missing=drawing a card and converting when a player plays a card exiled with Prowl.
+text=More Than Meets the Eye {2}{W} (You may cast this card converted for {2}{W}.) -- Whenever Prowl attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it. -- Whenever a player plays a card exiled with Prowl, you draw a card and convert Prowl. // Prowl, Pursuit Vehicle
+mana={3}{W}
+type=Legendary Artifact Creature
+subtype=Robot
+power=3
+toughness=3
+[/card]
+[card]
+name=Prowl, Pursuit Vehicle
+auto=this(variable{controllerturn}) transforms((Creature))
+#The second resolution this turn is counted with a ProwlEntered counter, cleared at each end step.
+auto=@movedTo(other *[creature;vehicle]|mybattlefield):name(+1/+1 counter) counter(1/1) && counter(0/0,1,ProwlEntered)
+auto=@counteradded(0/0,1,ProwlEntered) from(this) restriction{compare(hascntprowlentered)~equalto~2}:name(Convert) flip(Prowl^ Stoic Strategist // Prowl^ Pursuit Vehicle)
+auto=@each end:removeallcounters(0/0,1,ProwlEntered) all(this)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Whenever another creature or Vehicle you control enters, put a +1/+1 counter on Prowl. If this is the second time this ability has resolved this turn, convert Prowl.
+type=Legendary Artifact
+subtype=Vehicle
+color=white
+power=2
+toughness=3
+[/card]
+[card]
+name=Starscream, Power Hungry // Starscream, Seeker Leader
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also monarch drain on draw, convert on combat damage to you; back face makes the damaged player monarch.
+abilities=flying
+backside=Starscream, Seeker Leader
+anyzone={0}:doubleside(backside)
+other={2}{B} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@drawof(player) restriction{type(The Monarch|mybattlefield)~morethan~0}:name(Opponent loses 2) life:-2 opponent
+auto=@combatdamageof(player) from(creature|opponentbattlefield) turnlimited:name(Convert) flip(backside)
+text=More Than Meets the Eye {2}{B} (You may cast this card converted for {2}{B}.) -- Flying -- Whenever you draw a card, if you're the monarch, target opponent loses 2 life. -- Whenever one or more creatures deal combat damage to you, convert Starscream. // Starscream, Seeker Leader
+mana={3}{B}
+type=Legendary Artifact Creature
+subtype=Robot
+power=2
+toughness=3
+[/card]
+[card]
+name=Starscream, Seeker Leader
+abilities=flying,menace,haste
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@combatdamaged(player) from(this) restriction{type(The Monarch|battlefield)~equalto~0}:name(They become the monarch) _MONARCH_OPPONENT_
+auto=@movedTo(The Monarch|mybattlefield):name(Convert) flip(Starscream^ Power Hungry // Starscream^ Seeker Leader)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Flying, menace, haste -- Whenever Starscream deals combat damage to a player, if there is no monarch, that player becomes the monarch. -- Whenever you become the monarch, convert Starscream.
+type=Legendary Artifact
+subtype=Vehicle
+color=black
+power=2
+toughness=3
+[/card]
+[card]
+name=Ultra Magnus, Tactician // Ultra Magnus, Armored Carrier
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also attack: put an artifact creature in tapped and attacking, convert at end of combat; back face formidable.
+backside=Ultra Magnus, Armored Carrier
+anyzone={0}:doubleside(backside)
+other={2}{R}{G}{W} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=_WARD2_
+auto=_ATTACKING_may name(Put an artifact creature onto the battlefield attacking) target(artifact[creature]|myhand) ninjutsu && all(this) transforms((,newability[phaseaction[combatends once] flip(backside)])) ueot
+text=More Than Meets the Eye {2}{R}{G}{W} (You may cast this card converted for {2}{R}{G}{W}.) -- Ward {2} -- Whenever Ultra Magnus attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert Ultra Magnus at end of combat. // Ultra Magnus, Armored Carrier
+mana={4}{R}{G}{W}
+type=Legendary Artifact Creature
+subtype=Robot
+power=7
+toughness=7
+[/card]
+[card]
+name=Ultra Magnus, Armored Carrier
+abilities=haste
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=_ATTACKING_name(Formidable) all(creature[attacking]|mybattlefield) indestructible ueot
+auto=_ATTACKING_name(Formidable - convert at 8 power) if compare(powertotalinplay)~morethan~7 then flip(Ultra Magnus^ Tactician // Ultra Magnus^ Armored Carrier)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Haste -- Formidable - Whenever Ultra Magnus attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert Ultra Magnus.
+type=Legendary Artifact
+subtype=Vehicle
+color=red,green,white
+power=4
+toughness=7
+[/card]
+[card]
+name=Flamewar, Brash Veteran // Flamewar, Streetwise Operative
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also back face exiles intel cards on combat damage; {1} discard-hand returns them (the sacrifice convert is tested).
+backside=Flamewar, Streetwise Operative
+anyzone={0}:doubleside(backside)
+other={B}{R} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto={S(other artifact|mybattlefield)}:name(+1/+1 counter and convert) counter(1/1) && flip(backside) asSorcery
+auto={1}:name(Discard your hand, return intel cards) reject all(*|myhand) && all(*[counter{0/0.1.Intel}]|myexile) moveto(myhand)
+text=More Than Meets the Eye {B}{R} (You may cast this card converted for {B}{R}.) -- Sacrifice another artifact: Put a +1/+1 counter on Flamewar and convert it. Activate only as a sorcery. -- {1}, Discard your hand: Put all exiled cards you own with intel counters on them into your hand. // Flamewar, Streetwise Operative
+mana={1}{B}{R}
+type=Legendary Artifact Creature
+subtype=Robot
+power=3
+toughness=2
+[/card]
+[card]
+name=Flamewar, Streetwise Operative
+abilities=menace,deathtouch
+auto=this(variable{controllerturn}) transforms((Creature))
+#The exiled cards are face up here.
+auto=@combatdamaged(player) from(this):name(Exile with intel counters) all(*[zpos<=thatmuch]|mylibrary) moveto(myexile) and!( counter(0/0,1,Intel) )! && flip(Flamewar^ Brash Veteran // Flamewar^ Streetwise Operative)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Menace, deathtouch -- Whenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
+type=Legendary Artifact
+subtype=Vehicle
+color=black,red
+power=2
+toughness=1
+[/card]
+[card]
+name=Jetfire, Ingenious Scientist // Jetfire, Air Guardian
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also remove counters for artifact-only {C} and convert (the {U}{U}{U} convert + adapt is tested).
+abilities=flying
+backside=Jetfire, Air Guardian
+anyzone={0}:doubleside(backside)
+other={3}{U} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+#The +1/+1 counters come from Jetfire itself (not from among all your artifacts); one to three.
+auto={C(1/1,-1)}:name(Remove 1 counter: add {C}) add{C} spendspells(artifact) spendabilities(*) && flip(backside)
+auto={C(1/1,-1)}{C(1/1,-1)}:name(Remove 2 counters: add {C}{C}) add{C}{C} spendspells(artifact) spendabilities(*) && flip(backside)
+auto={C(1/1,-1)}{C(1/1,-1)}{C(1/1,-1)}:name(Remove 3 counters: add {C}{C}{C}) add{C}{C}{C} spendspells(artifact) spendabilities(*) && flip(backside)
+text=More Than Meets the Eye {3}{U} (You may cast this card converted for {3}{U}.) -- Flying -- Remove one or more +1/+1 counters from among artifacts you control: Target player adds that much {C}. This mana can't be spent to cast nonartifact spells. Convert Jetfire. // Jetfire, Air Guardian
+mana={4}{U}
+type=Legendary Artifact Creature
+subtype=Robot
+power=3
+toughness=4
+[/card]
+[card]
+name=Jetfire, Air Guardian
+abilities=flying
+auto=this(variable{controllerturn}) transforms((Creature))
+auto={U}{U}{U}:name(Convert, then adapt 3) flip(Jetfire^ Ingenious Scientist // Jetfire^ Air Guardian) && _ADAPT3_
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Flying -- {U}{U}{U}: Convert Jetfire, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
+type=Legendary Artifact
+subtype=Vehicle
+color=blue
+power=3
+toughness=4
+[/card]
+[card]
+name=Megatron, Tyrant // Megatron, Destructive Force
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also post-combat convert adds {C} per life the opponent lost; back face sacrifices an artifact for damage.
+backside=Megatron, Destructive Force
+anyzone={0}:doubleside(backside)
+other={1}{R}{W}{B} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@each my secondmain:may name(Convert and add {C} per life lost) flip(backside) && thisforeach(variable{oplifelost}>0) add{C}
+missing=your opponents can't cast spells during combat.
+text=More Than Meets the Eye {1}{R}{W}{B} (You may cast this card converted for {1}{R}{W}{B}.) -- Your opponents can't cast spells during combat. -- At the beginning of each of your postcombat main phases, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn. // Megatron, Destructive Force
+mana={3}{R}{W}{B}
+type=Legendary Artifact Creature
+subtype=Robot
+power=7
+toughness=5
+[/card]
+[card]
+name=Megatron, Destructive Force
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=_ATTACKING_may name(Sacrifice another artifact) notaTarget(other artifact|mybattlefield) sacrifice && damage:storedmanacost target(creature)
+missing=excess damage going to the creature's controller (and converting Megatron when it does).
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Whenever Megatron attacks, you may sacrifice another artifact. When you do, Megatron deals damage equal to the sacrificed artifact's mana value to target creature. If excess damage would be dealt to that creature this way, instead that damage is dealt to that creature's controller and you convert Megatron.
+type=Legendary Artifact
+subtype=Vehicle
+color=red,white,black
+power=4
+toughness=5
+[/card]
+[card]
+name=Optimus Prime, Hero // Optimus Prime, Autobot Leader
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also end-step bolster 1; dies -> returns converted; back face bolsters 2 on attack.
+backside=Optimus Prime, Autobot Leader
+anyzone={0}:doubleside(backside)
+other={2}{U}{R}{W} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@each end:name(Bolster 1) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) counter(1/1)!$ controller
+auto=_DIES_name(Return converted) moveto(ownerbattlefield) all(trigger[to]) && flip(backside) all(trigger[to])
+text=More Than Meets the Eye {2}{U}{R}{W} (You may cast this card converted for {2}{U}{R}{W}.) -- At the beginning of each end step, bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.) -- When Optimus Prime dies, return it to the battlefield converted under its owner's control. // Optimus Prime, Autobot Leader
+mana={3}{U}{R}{W}
+type=Legendary Artifact Creature
+subtype=Robot
+power=4
+toughness=8
+[/card]
+[card]
+name=Optimus Prime, Autobot Leader
+abilities=trample
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Bolster 2) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) counter(1/1,2) && trample ueot!$ controller
+missing=converting when the bolstered creature deals combat damage to a player this turn.
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Trample -- Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
+type=Legendary Artifact
+subtype=Vehicle
+color=blue,red,white
+power=6
+toughness=8
+[/card]
+[card]
+name=Ratchet, Field Medic // Ratchet, Rescue Racer
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also gaining life may convert and return an artifact; back face converts when an artifact goes to the graveyard.
+abilities=lifelink
+backside=Ratchet, Rescue Racer
+anyzone={0}:doubleside(backside)
+other={1}{W} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+auto=@lifeof(player) from(*[-lifefaker]|*):may name(Convert and return an artifact) moveto(mybattlefield) and!( tap(noevent) )! target(artifact[manacost<=lifegain]|mygraveyard) && flip(backside)
+text=More Than Meets the Eye {1}{W} (You may cast this card converted for {1}{W}.) -- Lifelink -- Whenever you gain life, you may convert Ratchet. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped. // Ratchet, Rescue Racer
+mana={2}{W}
+type=Legendary Artifact Creature
+subtype=Robot
+power=2
+toughness=4
+[/card]
+[card]
+name=Ratchet, Rescue Racer
+abilities=lifelink
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@movedTo(artifact[-token]|graveyard) from(mybattlefield) turnlimited:name(Convert) flip(Ratchet^ Field Medic // Ratchet^ Rescue Racer)
+text=Living metal (During your turn, this Vehicle is also a creature.) -- Lifelink -- Whenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert Ratchet. This ability triggers only once each turn.
+type=Legendary Artifact
+subtype=Vehicle
+color=white
+power=1
+toughness=4
+[/card]
+[card]
+name=Slicer, Hired Muscle // Slicer, High-Speed Antagonist
+#REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also converts at each opponent upkeep; back face converts at end of combat after connecting.
+abilities=double strike,haste
+backside=Slicer, High-Speed Antagonist
+anyzone={0}:doubleside(backside)
+other={2}{R} name(More Than Meets the Eye)
+auto=if paid(alternative) then flip(backside)
+#The "give it to the opponent" branch is not offered: at each opponent's upkeep Slicer converts.
+auto=@each opponent upkeep:name(Convert) flip(backside)
+missing=letting the opponent gain control of Slicer (untapped, goaded, can't be sacrificed) instead of converting.
+text=More Than Meets the Eye {2}{R} (You may cast this card converted for {2}{R}.) -- Double strike, haste -- At the beginning of each opponent's upkeep, you may have that player gain control of Slicer until end of turn. If you do, untap Slicer, goad it, and it can't be sacrificed this turn. If you don't, convert it. // Slicer, High-Speed Antagonist
+mana={4}{R}
+type=Legendary Artifact Creature
+subtype=Robot
+power=3
+toughness=4
+[/card]
+[card]
+name=Slicer, High-Speed Antagonist
+abilities=first strike,haste
+auto=this(variable{controllerturn}) transforms((Creature))
+auto=@combatdamaged(player) from(this):name(Convert at end of combat) all(this) transforms((,newability[phaseaction[combatends once] flip(Slicer^ Hired Muscle // Slicer^ High-Speed Antagonist)])) ueot
+text=Living metal (During your turn, this Vehicle is also a creature.) -- First strike, haste -- Whenever Slicer deals combat damage to a player, convert it at end of combat.
+type=Legendary Artifact
+subtype=Vehicle
+color=red
+power=3
+toughness=2
+[/card]
