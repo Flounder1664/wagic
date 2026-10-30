@@ -145,7 +145,7 @@ namespace
         return manaIcons[idx].get();
     }
 
-    // Morph, manifest, manifest dread, disguise and cloak all end up isMorphed; a copy of a
+    // Morph, megamorph, disguise, manifest and manifest dread all end up isMorphed; a copy of a
     // face-down creature is renamed "Morph" without the flag.
     inline bool FaceDown(MTGCardInstance* card)
     {
@@ -154,13 +154,23 @@ namespace
 
     // The face-down card image: morph.jpg is full size (672x936, like card art), morph_thumb.jpg
     // the 120x172 thumbnail; manifest.jpg / manifest_thumb.jpg are the same pair for cards put
-    // face down by manifest, manifest dread or cloak (AManifest sets isFacedown; casting with
-    // morph or disguise does not). All resolve through graphicsFile, so a theme can override
-    // them. Falls back from thumb to full, and from manifest to morph, if a file is missing.
+    // face down by manifest or manifest dread (AManifest sets isFacedown; casting face down does
+    // not), and disguise.jpg for disguise, whose face-down side is scripted with ward
+    // (autofacedown=_WARD2_; macros stay unexpanded in magicTexts). All resolve through
+    // graphicsFile, so a theme can override them. Falls back from thumb to full, and to morph,
+    // if a file is missing.
     inline JQuadPtr FaceDownQuad(WResourceManager* resources, MTGCardInstance* card, bool full)
     {
         if (!resources) return JQuadPtr();
-        string base = card->isFacedown ? "manifest" : "morph";
+        string base = "morph";
+        if (card->isFacedown)
+            base = "manifest";
+        else
+        {
+            map<string, string>::const_iterator it = card->magicTexts.find("facedown");
+            if (it != card->magicTexts.end() && it->second.find("_WARD") != string::npos)
+                base = "disguise";
+        }
         JQuadPtr q;
         if (!full)
             q = resources->RetrieveTempQuad(base + "_thumb.jpg");
@@ -371,7 +381,7 @@ void CardGui::Render()
         MTGCard * tcard = MTGCollection()->getCardById(abs(card->copiedID));
         quad = game->getResourceManager()->RetrieveCardToken(tcard, cardStyle, 1, abs(card->copiedID));
     }
-    //Face-down cards (morph, manifest, manifest dread, disguise, cloak) are renamed "Morph",
+    //Face-down cards (morph, disguise, manifest, manifest dread) are renamed "Morph",
     //which matches no card, so the lookup above came back empty and the card fell through to
     //the plain text render: the morph.jpg overlay below never drew. Use the face-down image
     //as the card's own picture instead, at the same thumb/full split as real card art.
