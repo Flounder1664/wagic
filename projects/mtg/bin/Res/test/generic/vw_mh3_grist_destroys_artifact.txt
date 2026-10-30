@@ -1,0 +1,19 @@
+#Grist, the Plague Swarm (seeded with 3 loyalty): -2 destroys target artifact.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661782
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+661782
+choice 1
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661782
+counter:661782=loyalty:1
+[PLAYER2]
+graveyard:Ornithopter
+[END]

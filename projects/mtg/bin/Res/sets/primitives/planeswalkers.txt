@@ -4021,3 +4021,46 @@ loyalty=3
 text=[+2]: Up to one target creature gains all creature types until your next turn. -- [+1]: Target creature gets -2/-0 until your next turn.
 [/card]
 
+[card]
+name=Ajani, Nacatl Avenger
+#REVIEW-V 2026-10-30: check the 0 (Cat Warrior + damage with another red permanent) and the -4 keep-one-of-each sacrifice.
+backside=Ajani, Nacatl Pariah
+auto=counter(0/0,3,loyalty)
+auto={C(0/0,2,Loyalty)}:name(+2: +1/+1 counter on each Cat) all(cat|mybattlefield) counter(1/1)
+auto={C(0/0,0,Loyalty)}:name(0: Cat Warrior, then damage if you control another red permanent) create(Cat Warrior:creature cat warrior:2/1:white) && if type(other *[red]|mybattlefield)~morethan~0 then damage:type:creature:mybattlefield target(anytarget)
+auto={C(0/0,-4,Loyalty)}:name(-4: Opponent keeps one of each type) ability$!name(Keep an artifact, a creature, an enchantment and a planeswalker) notaTarget(<upto:1>artifact|mybattlefield) counter(0/0,1,AjaniKeep) && notaTarget(<upto:1>creature|mybattlefield) counter(0/0,1,AjaniKeep) && notaTarget(<upto:1>enchantment|mybattlefield) counter(0/0,1,AjaniKeep) && notaTarget(<upto:1>planeswalker|mybattlefield) counter(0/0,1,AjaniKeep) && all(*[-land;-counter{0/0.1.AjaniKeep}]|mybattlefield) sacrifice!$ opponent
+text=+2: Put a +1/+1 counter on each Cat you control. -- 0: Create a 2/1 white Cat Warrior creature token. When you do, if you control a red permanent other than Ajani, he deals damage equal to the number of creatures you control to any target. -- -4: Each opponent chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. // Ajani, Nacatl Pariah
+type=Legendary Planeswalker
+subtype=Ajani
+color=red,white
+[/card]
+[card]
+name=Ral, Leyline Prodigy
+#REVIEW-V 2026-10-30: check the extra loyalty per instant/sorcery cast this turn and both -2 modes.
+backside=Ral, Monsoon Mage
+#Enters with one extra loyalty per noncreature spell you cast this turn (for instants and sorceries).
+auto=counter(0/0,2,loyalty)
+auto=counter(0/0,countmynoncrespell,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: Instants and sorceries cost {1} less until your next turn) lord(*[instant;sorcery]|mycastingzone) altercost(colorless,-1) uynt
+auto={C(0/0,-2,Loyalty)}:name(-2: 2 damage to one target) damage:2 target(anytarget) && if type(*[blue]|mybattlefield)~morethan~0 then draw:1 controller
+auto={C(0/0,-2,Loyalty)}:name(-2: 1 damage to each of two targets) damage:1 target(<2>anytarget) && if type(*[blue]|mybattlefield)~morethan~0 then draw:1 controller
+auto={C(0/0,-8,Loyalty)}:name(-8: Exile the top eight, cast instants and sorceries free) all(*[zpos<=8]|mylibrary) moveto(myexile) and!( if cantargetcard(*[instant;sorcery]|*) then transforms((,canplayfromexile)) ueot )!
+missing=-8's instants and sorceries are castable from exile but not free.
+text=Ral enters with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn. -- +1: Until your next turn, instant and sorcery spells you cast cost {1} less to cast. -- -2: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral. -- -8: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs. // Ral, Monsoon Mage
+type=Legendary Planeswalker
+subtype=Ral
+color=blue,red
+[/card]
+[card]
+name=Grist, the Plague Swarm
+#REVIEW-V 2026-10-30: check +1 (Insect, mill two, deathtouch if a black card was on top).
+backside=Grist, Voracious Larva
+auto=counter(0/0,3,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: Insect, then mill two) create(Insect:creature insect:1/1:black,green) and!( if type(*[black;zpos<=2]|mylibrary)~morethan~0 then transforms((,deathtouch)) forever )! && deplete:2 controller
+auto={C(0/0,-2,Loyalty)}:name(-2: Destroy an artifact or enchantment) destroy target(artifact,enchantment)
+missing=-6, a 1/1 Insect token copy of each creature card in your graveyard.
+text=+1: Create a 1/1 black and green Insect creature token, then mill two cards. Put a deathtouch counter on the token if a black card was milled this way. -- -2: Destroy target artifact or enchantment. -- -6: For each creature card in your graveyard, create a token that's a copy of it, except it's a 1/1 black and green Insect. // Grist, Voracious Larva
+type=Legendary Planeswalker
+subtype=Grist
+color=black,green
+[/card]

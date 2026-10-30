@@ -1,0 +1,22 @@
+#Ajani, Nacatl Pariah: seeding it makes its Cat Warrior; when another Cat dies (Savannah Lions to
+#Shock) Ajani may exile and return as Ajani, Nacatl Avenger with 3 loyalty.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Savannah Lions,661753
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Savannah Lions
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661753,*
+graveyard:Shock,Savannah Lions
+counter:661753=loyalty:3
+manapool:{0}
+[PLAYER2]
+[END]
