@@ -145,6 +145,37 @@ namespace
         return manaIcons[idx].get();
     }
 
+    // Morph, manifest, manifest dread, disguise and cloak all end up isMorphed; a copy of a
+    // face-down creature is renamed "Morph" without the flag.
+    inline bool FaceDown(MTGCardInstance* card)
+    {
+        return card && (card->isMorphed || (card->name == "Morph" && card->isACopier));
+    }
+
+    // The face-down card image: morph.jpg is full size (672x936, like card art), morph_thumb.jpg
+    // the 120x172 thumbnail; manifest.jpg / manifest_thumb.jpg are the same pair for cards put
+    // face down by manifest, manifest dread or cloak (AManifest sets isFacedown; casting with
+    // morph or disguise does not). All resolve through graphicsFile, so a theme can override
+    // them. Falls back from thumb to full, and from manifest to morph, if a file is missing.
+    inline JQuadPtr FaceDownQuad(WResourceManager* resources, MTGCardInstance* card, bool full)
+    {
+        if (!resources) return JQuadPtr();
+        string base = card->isFacedown ? "manifest" : "morph";
+        JQuadPtr q;
+        if (!full)
+            q = resources->RetrieveTempQuad(base + "_thumb.jpg");
+        if (!q.get() || !q->mTex)
+            q = resources->RetrieveTempQuad(base + ".jpg");
+        if ((!q.get() || !q->mTex) && base != "morph")
+            q = resources->RetrieveTempQuad("morph.jpg");
+        if (q.get() && q->mTex)
+        {
+            q->SetHotSpot(static_cast<float> (q->mTex->mWidth / 2), static_cast<float> (q->mTex->mHeight / 2));
+            q->SetColor(ARGB(255,255,255,255));
+        }
+        return q;
+    }
+
 }
 
 CardGui::CardGui(MTGCardInstance* card, float x, float y)
@@ -339,6 +370,16 @@ void CardGui::Render()
     {
         MTGCard * tcard = MTGCollection()->getCardById(abs(card->copiedID));
         quad = game->getResourceManager()->RetrieveCardToken(tcard, cardStyle, 1, abs(card->copiedID));
+    }
+    //Face-down cards (morph, manifest, manifest dread, disguise, cloak) are renamed "Morph",
+    //which matches no card, so the lookup above came back empty and the card fell through to
+    //the plain text render: the morph.jpg overlay below never drew. Use the face-down image
+    //as the card's own picture instead, at the same thumb/full split as real card art.
+    if (FaceDown(card))
+    {
+        JQuadPtr fd = FaceDownQuad(resources, card, actZ > 1.2f);
+        if (fd.get())
+            quad = fd;
     }
     if (quad.get())
         alternate = false;
@@ -541,17 +582,6 @@ void CardGui::Render()
         }
 
     }
-    JQuadPtr mor;
-    if((card->isMorphed||(card->name == "Morph" && card->isACopier)) && !alternate)
-    {
-        mor = card->getObserver()->getResourceManager()->RetrieveTempQuad("morph.jpg");
-        if (mor &&  mor->mTex) {
-            mor->SetHotSpot(static_cast<float> (mor->mTex->mWidth / 2), static_cast<float> (mor->mTex->mHeight / 2));
-            mor->SetColor(ARGB(255,255,255,255));
-            renderer->RenderQuad(mor.get(), actX, actY, actT,scale, scale);
-        }
-    }
-
     //draw line
     if (game)
     {
@@ -1474,6 +1504,13 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
         quad = thumb ? WResourceManager::Instance()->RetrieveCardToken(tcard, RETRIEVE_THUMB, 1, abs(kcard->copiedID))
                      : WResourceManager::Instance()->RetrieveCardToken(tcard, RETRIEVE_NORMAL, 1, abs(kcard->copiedID));
     }
+    bool faceDown = kcard && FaceDown(kcard);
+    if (faceDown)
+    {
+        JQuadPtr fd = FaceDownQuad(WResourceManager::Instance(), kcard, !thumb);
+        if (fd.get())
+            quad = fd;
+    }
     if (quad.get() && myA)
     {
         if (quad->mHeight < quad->mWidth)
@@ -1483,7 +1520,8 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
         quad->SetColor(ARGB(255,255,255,255));
         float scale = pos.actZ * 250.f / quad->mHeight;
         //init setname
-        string cardsetname = setlist[card->setId].c_str();
+        //a face-down card must not give its set away through the border style
+        string cardsetname = faceDown ? "" : setlist[card->setId].c_str();
         /*if(!noborder)
         {
             if(cardsetname == "2ED"||cardsetname == "RV"||cardsetname == "4ED"||cardsetname == "5ED"||cardsetname == "6ED"||cardsetname == "7ED"||cardsetname == "8ED"||cardsetname == "9ED"||cardsetname == "S00"||cardsetname == "S99"||cardsetname == "PTK"||cardsetname == "BTD"||cardsetname == "ATH"||cardsetname == "BRB"||cardsetname == "CHR"||cardsetname == "DM")
