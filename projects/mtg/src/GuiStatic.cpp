@@ -184,50 +184,6 @@ void GuiAvatar::Render()
             break;
         }
     }
-    //player designations: small labelled tags stacked down the avatar's
-    //inner edge, opposite the counters. City's blessing and enduring story
-    //have no board presence at all; monarch/initiative do have battlefield
-    //emblems but are tagged too so the avatar reads at a glance. Day/Night
-    //and speed need none: both already show as cards on the battlefield.
-    {
-        struct Badge { const char * label; int red, green, blue; };
-        Badge badges[4];
-        int nbBadges = 0;
-        if (player->cityBlessing)
-        {
-            Badge b = { "CB", 255, 215, 0 };
-            badges[nbBadges++] = b;
-        }
-        if (player->enduringStory)
-        {
-            Badge b = { "ES", 120, 200, 255 };
-            badges[nbBadges++] = b;
-        }
-        if (player->monarch)
-        {
-            Badge b = { "M", 230, 120, 255 };
-            badges[nbBadges++] = b;
-        }
-        if (player->initiative)
-        {
-            Badge b = { "I", 255, 150, 60 };
-            badges[nbBadges++] = b;
-        }
-        mFont->SetScale(0.7f);
-        float badgeH = 8 * actZ;
-        float top = (corner == BOTTOM_RIGHT) ? actY - Height * actZ : actY;
-        for (int i = 0; i < nbBadges; i++)
-        {
-            float w = mFont->GetStringWidth(badges[i].label) + 3;
-            float bx = (corner == BOTTOM_RIGHT) ? actX - Width * actZ + 1 : actX + Width * actZ - w - 1;
-            float by = top + 1 + i * (badgeH + 1);
-            r->FillRect(bx, by, w, badgeH, ARGB((int)(actA * 0.8f), 0, 0, 0));
-            r->DrawRect(bx, by, w, badgeH, ARGB((int)actA, badges[i].red, badges[i].green, badges[i].blue));
-            mFont->SetColor(ARGB((int)actA, badges[i].red, badges[i].green, badges[i].blue));
-            mFont->DrawString(badges[i].label, bx + 1.5f, by + 1);
-        }
-        mFont->SetScale(1);
-    }
     PlayGuiObject::Render();
 }
 
