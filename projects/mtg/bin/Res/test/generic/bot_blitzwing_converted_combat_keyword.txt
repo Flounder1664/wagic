@@ -1,0 +1,31 @@
+#Blitzwing, Cruel Tormentor (732004) converts at its end step (the opponent lost no life), and on
+#the next turn's beginning of combat the back face gains its random keyword - flying with seed 2.
+#Proves the back face's combat trigger is live after a real convert, not only when seeded.
+seed 2
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732004
+library:Plains,Plains,Plains
+[PLAYER2]
+library:Forest,Forest,Forest
+[DO]
+eot
+next
+eot
+next
+next
+next
+next
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:732004
+type:732004=flying
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

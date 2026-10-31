@@ -1,0 +1,20 @@
+#Blitzwing, Adaptive Assailant (732104): at the beginning of combat on your turn it gains flying or
+#indestructible at random (genrand2, std::rand - fixed here by the seed). John saw neither in game
+#(2026-10-30); this proves the grant lands. seed 1 gives indestructible.
+seed 1
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732104
+[PLAYER2]
+[DO]
+next
+#combat begins
+next
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:732104
+type:732104=indestructible,-flying
+[PLAYER2]
+[END]
