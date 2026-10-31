@@ -55,6 +55,9 @@ protected:
     int currentAction;
     //Set by the [DO] verb "human": the script is over and a person is playing seat 1.
     bool humanControl;
+    //Set by the [DO] verb "aichooses": from here on the scripted players' reveal windows are
+    //answered by the AI's own pick, as a computer opponent's are.
+    bool aiChooses;
     //Failures found while running [DO] (a "menu! <label>" whose label was not offered) or
     //while loading (a zone line naming a card that does not exist), reported with the
     //[ASSERT] results.
@@ -187,6 +190,9 @@ public:
     //cards with an aicode= line ran that instead of their real ability, and a plain cast
     //auto-kicked. One answer here instead of a special case at each of those places.
     virtual int isAI() { return playMode == MODE_HUMAN ? 0 : 1; }
+    //The seat a scenario did not hand to John plays as an ordinary AI (see Act), so it picks
+    //for itself too - otherwise its reveal window waited on John's keys (Unidentified Hovership).
+    virtual bool choosesForItself();
     virtual int displayStack();
     bool parseLine(const string& s);
     bool summoningSickness() {return (suite->summoningSickness == 1); }

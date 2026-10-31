@@ -1,0 +1,31 @@
+#Unidentified Hovership exiled the OPPONENT's Llanowar Elves; when it leaves, that owner manifests
+#dread: of the top two (Island, Hill Giant) the AI picks one to manifest face down - a creature, so
+#Hill Giant becomes a 2/2 - and the other goes to ITS graveyard. Before 2026-10-31 a computer
+#player's reveal always declined option one, so both cards were binned and nothing manifested.
+#"aichooses" makes the scripted opponent answer the reveal as a computer opponent does.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unidentified Hovership,Shatter
+manapool:{1}{W}{W}{1}{R}
+[PLAYER2]
+inplay:Llanowar Elves
+library:Forest,Hill Giant,Island
+[DO]
+aichooses
+Unidentified Hovership
+choice 0
+Llanowar Elves
+Shatter
+Unidentified Hovership
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Unidentified Hovership,Shatter
+[PLAYER2]
+exile:Llanowar Elves
+inplay:Hill Giant
+pt:Hill Giant=2/2
+graveyard:Island
+library:Forest
+[END]

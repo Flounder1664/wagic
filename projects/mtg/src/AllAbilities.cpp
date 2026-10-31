@@ -306,8 +306,10 @@ void MTGRevealingCards::Update(float dt)
         revealDisplay->init(RevealZone);
         revealDisplay->zone = RevealZone;
         game->OpenedDisplay = revealDisplay;
-        toResolve();    
+        toResolve();
         initCD = true;
+        if (source->controller()->choosesForItself())
+            aiTakeFirstOption();
     }
 
 
@@ -409,6 +411,51 @@ int MTGRevealingCards::toResolve()
     return 1;
 }
 
+//A computer player never clicks a revealed card, and the NEXT that CheckUserInput presses for it
+//declined option one - so every reveal the AI made took option two. Unidentified Hovership's
+//opponent manifested nothing and binned both cards (John, 2026-10-30). Pick the targets here and
+//resolve option one; prefer creatures (a manifested creature can be turned up), then spells,
+//then the costliest.
+static bool revealPickBefore(MTGCardInstance * a, MTGCardInstance * b)
+{
+    if (a->isCreature() != b->isCreature())
+        return a->isCreature() > b->isCreature();
+    if (a->isLand() != b->isLand())
+        return a->isLand() < b->isLand();
+    return a->getManaCost()->getConvertedCost() > b->getManaCost()->getConvertedCost();
+}
+
+void MTGRevealingCards::aiTakeFirstOption()
+{
+    MTGAbility * core = abilityFirst;
+    //A targeted option one is wrapped in a must MayAbility (the one-entry menu that arms targeting).
+    if (MayAbility * may = dynamic_cast<MayAbility *>(core))
+        core = may->ability;
+    TargetAbility * first = dynamic_cast<TargetAbility *>(core);
+    if (!first || !first->getActionTc())
+        return;
+    TargetChooser * tc = first->getActionTc();
+    tc->initTargets();
+    vector<MTGCardInstance *> picks;
+    for (size_t i = 0; i < zone->cards.size(); i++)
+        if (zone->cards[i] && tc->canTarget(zone->cards[i]))
+            picks.push_back(zone->cards[i]);
+    std::stable_sort(picks.begin(), picks.end(), revealPickBefore);
+    for (size_t i = 0; i < picks.size() && !tc->full(); i++)
+        tc->addTarget(picks[i]);
+    if (!tc->getNbTargets())
+        return;
+    first->resolve();
+    source->getObserver()->mLayers->stackLayer()->Remove(abilityFirst);
+    game->removeObserver(abilityFirst);
+    if (zone->cards.size())
+    {
+        repeat = false;
+        abilitySecond = contructAbility(abilityTwo);
+        game->addObserver(abilitySecond);
+    }
+}
+
 MTGAbility * MTGRevealingCards::contructAbility(string abilityToMake)
 {
     AbilityFactory af(game);
@@ -438,7 +485,7 @@ bool MTGRevealingCards::CheckUserInput(JButton key)
     //The test suite's player answers isAI() too, but it picks its own targets with [DO] clicks.
     //Auto-pressing NEXT for it declined option one before the click landed, so option two ran and
     //an activated tutor (Johnny, Combo Player; Hour of Victory) put the card back in the library.
-    if (this->source->controller()->isAI() && this->source->controller()->playMode != Player::MODE_TEST_SUITE)
+    if (this->source->controller()->choosesForItself())
     {
         if (this->source->controller() != game->isInterrupting)
             game->mLayers->stackLayer()->cancelInterruptOffer(ActionStack::DONT_INTERRUPT, false);

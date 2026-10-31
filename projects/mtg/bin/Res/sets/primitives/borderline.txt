@@ -150831,7 +150831,11 @@ toughness=1
 name=Damocles Base, Sword of Kang
 #REVIEW-V 2026-10-29: the villainous choice is handed to the damaged player, which the harness cannot answer - check both options in game.
 abilities=flying,deathtouch
-auto=@combatdamaged(player) from(this):ability$!choice name(Sacrifice a nontoken creature) notaTarget(creature[-token]|mybattlefield) sacrifice _ choice name(Lose 2 life and they draw two) life:-2 controller && draw:2 opponent!$ opponent
+#The damaged player chooses; with no nontoken creature the sacrifice is impossible, so the other half just happens
+#(offering it anyway let the AI pick a sacrifice that did nothing - John, 2026-10-30).
+auto=@combatdamaged(opponent) from(this):if type(creature[-token]|opponentbattlefield)~morethan~0 then ability$!choice name(Sacrifice a nontoken creature) notaTarget(creature[-token]|mybattlefield) sacrifice _ choice name(Lose 2 life and they draw two) life:-2 controller && draw:2 opponent!$ opponent
+auto=@combatdamaged(opponent) from(this):if type(creature[-token]|opponentbattlefield)~equalto~0 then life:-2 opponent
+auto=@combatdamaged(opponent) from(this):if type(creature[-token]|opponentbattlefield)~equalto~0 then draw:2 controller
 auto=_CREW3_
 text=Flying, deathtouch -- Whenever Damocles Base deals combat damage to a player, that player faces a villainous choice - They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards. -- Crew 3
 mana={4}{B}

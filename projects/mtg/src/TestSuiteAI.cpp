@@ -307,6 +307,13 @@ Interruptible * TestSuiteGame::getActionByMTGId(int mtgid)
     return NULL;
 }
 
+bool TestSuiteAI::choosesForItself()
+{
+    if (playMode == MODE_AI)
+        return true;
+    return playMode == MODE_TEST_SUITE && (suite->humanControl || suite->aiChooses);
+}
+
 int TestSuiteAI::displayStack()
 {
     if (playMode == MODE_AI) return 0;
@@ -386,6 +393,12 @@ int TestSuiteAI::Act(float)
         DebugTrace("TESTSUITE You have control");
         playMode = MODE_HUMAN;
         suite->humanControl = true;
+        return 1;
+    }
+    else if (action.compare("aichooses") == 0)
+    {
+        DebugTrace("TESTSUITE reveal windows are answered by the AI from here on");
+        suite->aiChooses = true;
         return 1;
     }
     else if (action.compare("ai") == 0)
@@ -1482,6 +1495,7 @@ void TestSuiteGame::initGame()
 {
     DebugTrace("TESTSUITE Init Game");
     humanControl = false;
+    aiChooses = false;
     observer->phaseRing->goToPhase(initState.phase, observer->players[0], false);
     observer->setCurrentGamePhase(initState.phase);
 

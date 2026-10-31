@@ -149,6 +149,13 @@ public:
         return 0;
     }
 
+    //True when no one clicks for this player and the AI makes its picks: a real computer
+    //opponent. A scripted test-suite player answers isAI() too, but its [DO] clicks pick.
+    virtual bool choosesForItself()
+    {
+        return isAI() && playMode != MODE_TEST_SUITE;
+    }
+
     bool isHuman()
     {
         return (playMode == MODE_HUMAN);

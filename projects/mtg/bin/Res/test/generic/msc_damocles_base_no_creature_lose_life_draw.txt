@@ -1,0 +1,32 @@
+#Damocles Base, Sword of Kang (711110) hits a player with no nontoken creature: the "sacrifice" half
+#of the villainous choice is impossible, so they lose 2 life and you draw two. Before 2026-10-31 the
+#choice was still offered and picking "sacrifice" did nothing (John, scenario 67/68).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711110,Hill Giant
+library:Plains,Plains
+[PLAYER2]
+life:20
+[DO]
+711110
+choice 0
+Hill Giant
+next
+#combat begins
+next
+#attackers
+711110
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:711110,Hill Giant
+hand:*,*
+[PLAYER2]
+life:13
+[END]
