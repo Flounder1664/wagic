@@ -1,0 +1,39 @@
+#Foreboding Steamboat: seeded in play (its enters trigger still runs), you exile Grizzly Bears and Juggernaut, the opponent its two; crewed by Hill Giant it
+#attacks, you put Grizzly Bears (exiled with it) into your graveyard and investigate (a Clue, *).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Foreboding Steamboat,Grizzly Bears,Juggernaut,Hill Giant
+[PLAYER2]
+inplay:Llanowar Elves,Raging Goblin
+life:20
+[DO]
+Grizzly Bears
+Juggernaut
+Llanowar Elves
+Raging Goblin
+Foreboding Steamboat
+choice 0
+Hill Giant
+next
+#combat begins
+next
+#attackers
+Foreboding Steamboat
+next
+#the attack trigger: pick the exiled card
+Grizzly Bears
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Foreboding Steamboat,Hill Giant,*
+graveyard:Grizzly Bears
+exile:Juggernaut
+[PLAYER2]
+exile:Llanowar Elves,Raging Goblin
+life:15
+[END]

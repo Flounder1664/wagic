@@ -139120,7 +139120,8 @@ grade=borderline
 auto=name(Exile two of your creatures) notaTarget(<2>creature[-token;-vehicle]|mybattlefield) moveTo(exile) and!( counter(0/0,1,SteamboatExiled) )!
 auto=ability$!name(Exile two of your creatures) notaTarget(<2>creature[-token;-vehicle]|mybattlefield) moveTo(exile) and!( counter(0/0,1,SteamboatExiled) )!!$ opponent
 auto=@movedto(this|nonbattlezone) from(mybattlefield):all(*[counter{0/0.1.SteamboatExiled}]|exile) moveto(ownerbattlefield)
-auto=_ATTACKING_name(Graveyard an exiled card and investigate) notaTarget(<1>*[counter{0/0.1.SteamboatExiled}]|exile) moveto(ownergraveyard) && _CLUE_ controller
+#The Clue rides on and!: with "&& _CLUE_" the trigger skipped its pick and only investigated (John, 2026-10-30).
+auto=_ATTACKING_name(Graveyard an exiled card and investigate) notaTarget(<1>*[counter{0/0.1.SteamboatExiled}]|exile) moveto(ownergraveyard) and!( _CLUE_ controller )!
 auto=_CREW2_
 text=When this Vehicle enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves the battlefield. -- Whenever this Vehicle attacks, put a card exiled with it into its owner's graveyard. If you do, investigate. -- Crew 2
 mana={3}{B}{B}
