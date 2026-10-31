@@ -50,6 +50,15 @@ protected:
 
     GameObserver * game;
 
+    //Copies s into menuText, cut to fit. Not snprintf: config.h maps that to sprintf_s on
+    //Windows, which aborts the game when the text is too long instead of truncating.
+    void setMenuText(const string& s)
+    {
+        size_t n = s.size() < sizeof(menuText) ? s.size() : sizeof(menuText) - 1;
+        memcpy(menuText, s.c_str(), n);
+        menuText[n] = 0;
+    }
+
      // returns target itself if it is a player, or its controller if it is a card
      static Player * getPlayerFromTarget(Targetable * target);
 

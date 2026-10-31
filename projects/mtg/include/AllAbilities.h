@@ -2818,7 +2818,7 @@ public:
 
     const string getMenuText()
     {
-        sprintf(menuText,"Protection from %s",tcstr.c_str());
+        setMenuText("Protection from " + tcstr);
         return menuText;
     }
     
@@ -4308,7 +4308,7 @@ public:
 
     const string getMenuText()
     {
-        sprintf(menuText, "Create %s", name.c_str());
+        setMenuText("Create " + name);
         return menuText;
     }
 

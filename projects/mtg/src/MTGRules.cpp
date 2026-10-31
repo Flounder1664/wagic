@@ -2060,7 +2060,7 @@ ostream& MTGAttackCostRule::toString(ostream& out) const
 
 const string MTGAttackCostRule::getMenuText()
 {
-    snprintf(menuText, sizeof(menuText), "%s", scost.c_str());
+    setMenuText(scost);
     return menuText;
 }
 
@@ -2139,7 +2139,7 @@ ostream& MTGBlockCostRule::toString(ostream& out) const
 
 const string MTGBlockCostRule::getMenuText()
 {
-    snprintf(menuText, sizeof(menuText), "%s", scost.c_str());
+    setMenuText(scost);
     return menuText;
 }
 

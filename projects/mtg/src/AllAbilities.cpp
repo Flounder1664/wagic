@@ -3358,7 +3358,7 @@ const string AACounter::getMenuText()
         menu.append(buffer);
     }
 
-    snprintf(menuText, sizeof(menuText), "%s", menu.c_str());
+    setMenuText(menu);
     return menuText;
 }
 
@@ -5928,7 +5928,7 @@ int AAFlip::testDestroy()
 const string AAFlip::getMenuText()
 {
     string s = flipStats;
-    snprintf(menuText, sizeof(menuText), "Transform:%s", s.c_str()); //bounded: a two-face flipStats ("Blitzwing, Cruel Tormentor // Blitzwing, Adaptive Assailant") ran past menuText[50] into game and crashed the convert back
+    setMenuText("Transform:" + s); //cut to fit: a two-face flipStats ("Blitzwing, Cruel Tormentor // Blitzwing, Adaptive Assailant") ran past menuText[50] into game and crashed the convert back
     return menuText;
 }
 

@@ -151871,6 +151871,7 @@ toughness=20
 [/card]
 [card]
 name=Blitzwing, Cruel Tormentor // Blitzwing, Adaptive Assailant
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): cast for More Than Meets the Eye it enters converted; its combat damage converts it back to the 6/5 without crashing.
 #REVIEW-V 2026-10-29: More Than Meets the Eye (cast for the alternative cost, enters converted) cannot be driven in the harness; also the end-step drain when the opponent lost life (the no-loss convert is tested); back face's random flying/indestructible.
 backside=Blitzwing, Adaptive Assailant
 anyzone={0}:doubleside(backside)
