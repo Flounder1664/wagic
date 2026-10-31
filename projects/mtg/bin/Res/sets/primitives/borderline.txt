@@ -133449,6 +133449,7 @@ toughness=2
 [/card]
 [card]
 name=Unidentified Hovership
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): when it leaves, the opponent (owner of the exiled Elves) manifests dread.
 #REVIEW-V 2026-10-29: remove it after it exiled something and check the exiled card's owner manifests dread.
 abilities=flying
 auto=_CREW1_
@@ -139163,6 +139164,7 @@ toughness=4
 [/card]
 [card]
 name=Foreboding Steamboat
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): the attack trigger lets you pick an exiled creature for the graveyard, then you investigate.
 #REVIEW-V 2026-10-29: each player picks two of their own creatures (the opponent's pick cannot be driven here); check the attack trigger graveyards one and investigates, and they return when it leaves.
 grade=borderline
 #Each player exiles two of their own nontoken, non-Vehicle creatures; a SteamboatExiled counter
@@ -150893,6 +150895,8 @@ toughness=1
 [/card]
 [card]
 name=Damocles Base, Sword of Kang
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): the opponent with Llanowar Elves is offered the villainous choice and makes it itself.
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): opponent has no nontoken creature, so no villainous menu.
 #REVIEW-V 2026-10-29: the villainous choice is handed to the damaged player, which the harness cannot answer - check both options in game.
 abilities=flying,deathtouch
 #The damaged player chooses; with no nontoken creature the sacrifice is impossible, so the other half just happens

@@ -147772,6 +147772,7 @@ type=Land
 [/card]
 [card]
 name=Whisperwood Elemental
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): manifested card shows the Manifest token art.
 auto=@each my end:manifest all(*[zpos=1]|mylibrary)
 auto={S}:name(Until end of turn, nontoken creatures gain a manifest death trigger) all(creature[-token]|mybattlefield) transforms((,newability[_DIES_manifest all(*[zpos=1]|mylibrary)])) ueot
 note=face-down creatures you control also gain the death trigger (the real card gives it to face-up ones only)
