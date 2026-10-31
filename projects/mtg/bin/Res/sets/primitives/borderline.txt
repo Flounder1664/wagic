@@ -137814,6 +137814,20 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Scuttling Spidercoach
+#OM1 printing of Spider-Mobile (keep in sync)
+abilities=trample
+grade=borderline
+auto=@combat(attacking,blocking) source(this):type:spider:mybattlefield/type:spider:mybattlefield ueot
+auto=_CREW2_
+text=Trample -- Whenever this Vehicle attacks or blocks, it gets +1/+1 until end of turn for each Spider you control. -- Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=3
+[/card]
+[card]
 name=Magmatic Galleon
 grade=borderline
 auto=damage:5 target(creature|opponentbattlefield)
@@ -137905,8 +137919,34 @@ power=4
 toughness=3
 [/card]
 [card]
+name=Carriage of Dreams
+#OM1 printing of Passenger Ferry (keep in sync)
+grade=borderline
+auto=@combat(attacking) source(this):may name(Pay U to make a creature unblockable) pay[[{U}]] target(other creature[attacking]|mybattlefield) unblockable ueot
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=Whenever this Vehicle attacks, you may pay {U}. When you do, another target attacking creature can't be blocked this turn. -- Crew 2
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=4
+toughness=3
+[/card]
+[card]
 name=Subway Train
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): pay G, then pick a basic land.
+grade=borderline
+auto=may name(Pay G to search for a basic land) pay[[{G}]] target(land[basic]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
+auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
+text=When this Vehicle enters, you may pay {G}. If you do, search your library for a basic land card, reveal it, put it into your hand, then shuffle. -- Crew 2
+mana={2}
+type=Artifact
+subtype=Vehicle
+power=3
+toughness=1
+[/card]
+[card]
+name=Vinewoven Chariot
+#OM1 printing of Subway Train (keep in sync)
 grade=borderline
 auto=may name(Pay G to search for a basic land) pay[[{G}]] target(land[basic]|myLibrary) moveto(hand) and!( transforms((,newability[shuffle])) oneshot )!
 auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
@@ -138755,6 +138795,16 @@ mana={6}{G}{G}
 type=Enchantment
 [/card]
 [card]
+name=Through the Omenpath
+#OM1 printing of Web of Life and Destiny (keep in sync)
+other={convoke} name(Convoke)
+grade=borderline
+auto=@each my combatbegins:name(look) reveal:5 optionone name(put a creature into play) target(creature|reveal) moveto(mybattlefield) optiononeend optiontwo name(put back) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend
+text=Convoke -- At the beginning of combat on your turn, look at the top five cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+mana={6}{G}{G}
+type=Enchantment
+[/card]
+[card]
 name=Saber-Tooth Moose-Lion
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): forestcycling.
 abilities=reach
@@ -139586,6 +139636,19 @@ toughness=2
 [/card]
 [card]
 name=Masked Meower
+abilities=haste
+grade=borderline
+auto={D}{S(this)}:name(Discard and sacrifice to draw) draw:1 controller
+text=Haste -- Discard a card, Sacrifice this creature: Draw a card.
+mana={R}
+type=Creature
+subtype=Cat Hero
+power=1
+toughness=1
+[/card]
+[card]
+name=Skittering Kitten
+#OM1 printing of Masked Meower (keep in sync)
 abilities=haste
 grade=borderline
 auto={D}{S(this)}:name(Discard and sacrifice to draw) draw:1 controller
