@@ -1,0 +1,49 @@
+#Blitzwing cast and entering converted (Adaptive Assailant), then its combat damage converts it back to the
+#6/5 Cruel Tormentor. The convert back after a converted entry crashed John's game twice (scenario 74,
+#2026-10-30 and 2026-10-31).
+[INIT]
+SECONDMAIN
+[PLAYER1]
+hand:732004
+manapool:{B}{B}{B}{B}{B}{B}
+[PLAYER2]
+life:20
+[DO]
+732004
+menu! more than meets the eye
+next
+next
+#opponent's turn
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+next
+#my turn
+next
+next
+next
+next
+#attackers
+732004
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:732004
+pt:732004=6/5
+manapool:{0}
+[PLAYER2]
+life:17
+[END]
