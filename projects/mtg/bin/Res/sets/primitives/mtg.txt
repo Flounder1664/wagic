@@ -19871,6 +19871,7 @@ toughness=3
 [/card]
 [card]
 name=Champion of the Weird
+#VERIFIED IN GAME 2026-10-31 (John, scenario queue): Blight 2 cost can be paid with counters on Champion itself; target opponent blights 2.
 auto=aslongas(other goblin|mybattlefield,myhand) choice name(Behold a Goblin) notaTarget(other goblin|mybattlefield,myhand) hand(blink)forsrc oneshot
 auto=aslongas(other goblin|mybattlefield,myhand) sacrifice <1 oneshot
 auto={L:1}{C(-1/-1,2),creature|mybattlefield}:name(Target opponent blights 2) ability$!name(Blight 2) counter(-1/-1,2) notaTarget(creature|mybattlefield)!$ opponent asSorcery
