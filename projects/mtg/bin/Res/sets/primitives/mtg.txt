@@ -1824,6 +1824,18 @@ power=2
 toughness=3
 [/card]
 [card]
+name=Rhilex the Accursed
+#OM1 printing of Agent Venom (keep in sync)
+abilities=flash,menace
+auto=@movedTo(other creature[-token]|mygraveyard) from(mybattlefield):draw:1 && life:-1
+text=Flash, menace -- Whenever another nontoken creature you control dies, you draw a card and lose 1 life.
+mana={2}{B}
+type=Legendary Creature
+subtype=Symbiote Soldier Hero
+power=2
+toughness=3
+[/card]
+[card]
 name=Aggravate
 target=player
 auto=all(creature|targetedpersonsbattlefield) transforms((,newability[@damaged(this) from(aggravate|*):all(trigger) mustattack ueot])) ueot
@@ -2820,6 +2832,17 @@ type=Instant
 name=Alien Symbiosis
 #"aura" is a card TYPE, not a keyword, so abilities=aura set nothing and the Aura had no
 #target to attach to: it resolved straight back to hand.
+target=creature
+auto=teach(creature) 1/1
+auto=teach(creature) menace
+mana={1}{B}
+type=Enchantment
+subtype=Aura
+text=Enchant creature. Enchanted creature gets +1/+1 and has menace.
+[/card]
+[card]
+name=Aggressive Symbiosis
+#OM1 printing of Alien Symbiosis (keep in sync)
 target=creature
 auto=teach(creature) 1/1
 auto=teach(creature) menace
@@ -4321,6 +4344,19 @@ power=2
 toughness=2
 [/card]
 [card]
+name=Galvanized Workforce
+#OM1 printing of Angry Rabble (keep in sync)
+abilities=trample
+auto=@movedTo(*[-creature][manacost>=4]|mystack):damage:1 opponent
+auto={5}{R}:counter(1/1,2) all(this) asSorcery
+text=Trample -- Whenever you cast a spell with mana value 4 or greater, this creature deals 1 damage to each opponent. -- {5}{R}: Put two +1/+1 counters on this creature.
+mana={1}{R}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
 name=Anguished Unmaking
 target=*[-land]
 auto=moveto(exile)
@@ -4544,6 +4580,17 @@ toughness=0
 name=Anti-Venom, Horrifying Healer
 auto=moveto(mybattlefield) target(creature|mygraveyard)
 text=When Anti-Venom enters, return target creature card from your graveyard to the battlefield.
+mana={W}{W}{W}{W}{W}
+type=Legendary Creature
+subtype=Symbiote Hero
+power=5
+toughness=5
+[/card]
+[card]
+name=Verilax the Havenskin
+#OM1 printing of Anti-Venom, Horrifying Healer (keep in sync)
+auto=moveto(mybattlefield) target(creature|mygraveyard)
+text=When Verilax enters, if he was cast, return target creature card from your graveyard to the battlefield. -- If damage would be dealt to Verilax, prevent that damage and put that many +1/+1 counters on him.
 mana={W}{W}{W}{W}{W}
 type=Legendary Creature
 subtype=Symbiote Hero
@@ -7280,6 +7327,17 @@ power=0
 toughness=2
 [/card]
 [card]
+name=Zora, Spider Fancier
+#OM1 printing of Aunt May (keep in sync)
+auto=@movedTo(other creature|mybattlefield):life:1 controller
+text=Whenever another creature you control enters, you gain 1 life.
+mana={W}
+type=Legendary Creature
+subtype=Human Citizen
+power=0
+toughness=2
+[/card]
+[card]
 name=Auntie's Hovel
 auto=if type(*[goblin]|myhand)~equalto~0 then tap(noevent)
 auto={T}:Add{B}
@@ -8777,6 +8835,16 @@ name=Bagel and Schmear
 auto={W}{T}{S(this|mybattlefield)}:counter(1/1) target(creature|mybattlefield) && draw:1 asSorcery
 auto={2}{T}{S(this|mybattlefield)}:life:3 && draw:1
 text={W}, {T}, Sacrifice: Put a +1/+1 counter on target creature and draw a card. -- {2}, {T}, Sacrifice: You gain 3 life and draw a card.
+mana={1}
+type=Artifact
+subtype=Food
+[/card]
+[card]
+name=Perfected Pastry
+#OM1 printing of Bagel and Schmear (keep in sync)
+auto={W}{T}{S(this|mybattlefield)}:counter(1/1) target(creature|mybattlefield) && draw:1 asSorcery
+auto={2}{T}{S(this|mybattlefield)}:life:3 && draw:1
+text={W}, {T}, Sacrifice this artifact: Put a +1/+1 counter on up to one target creature. Draw a card. Activate only as a sorcery. -- {2}, {T}, Sacrifice this artifact: You gain 3 life and draw a card.
 mana={1}
 type=Artifact
 subtype=Food
@@ -10766,6 +10834,18 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Arala, Hedron Scaler
+#OM1 printing of Beetle, Legacy Criminal (keep in sync)
+abilities=flying
+auto=@movedTo(this|mygraveyard):may {1}{U}:counter(1/1) target(creature|mybattlefield) && ability(flying) target(creature|mybattlefield) ueot asSorcery
+text=Flying -- {1}{U}, Exile this card from your graveyard: Put a +1/+1 counter on target creature. It gains flying until end of turn.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=3
+toughness=3
+[/card]
+[card]
 name=Beetleback Chief
 auto=_GOBLINTOKEN_*2
 text=When Beetleback Chief enters, put two 1/1 red Goblin creature tokens onto the battlefield.
@@ -10847,6 +10927,15 @@ type=Sorcery
 name=Behold the Sinister Six!
 grade=borderline
 # REVIEW 2026-07-12 [P:med] allows selecting duplicates
+auto=moveto(mybattlefield) target(<upto:6>creature[-token]|mygraveyard)
+mana={6}{B}
+type=Sorcery
+text=Return up to six target creature cards with different names from your graveyard to the battlefield. (Up to 6 targets; different-names constraint not enforced.)
+[/card]
+[card]
+name=Hex of Undeath
+#OM1 printing of Behold the Sinister Six! (keep in sync)
+grade=borderline
 auto=moveto(mybattlefield) target(<upto:6>creature[-token]|mygraveyard)
 mana={6}{B}
 type=Sorcery
@@ -11421,6 +11510,17 @@ mana={2}{W}{U}
 type=Artifact
 subtype=Equipment
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=When this Equipment enters, attach it to target creature you control. -- Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control." (Equipment, Auras you control, and counters are modifications.) -- Equip {2}
+[/card]
+[card]
+name=Angler's Shield
+#OM1 printing of Biorganic Carapace (keep in sync)
+auto=equip target(creature|mybattlefield)
+auto={2}:equip
+auto=teach(creature) 2/2
+mana={2}{W}{U}
+type=Artifact
+subtype=Equipment
 text=When this Equipment enters, attach it to target creature you control. -- Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control." (Equipment, Auras you control, and counters are modifications.) -- Equip {2}
 [/card]
 [card]
@@ -18105,6 +18205,18 @@ toughness=3
 text=Trample -- When Carnage enters, you may return target creature card with mana value 3 or less from a graveyard to the battlefield.
 [/card]
 [card]
+name=Desecrex, Gift of Servitude
+#OM1 printing of Carnage, Crimson Chaos (keep in sync)
+abilities=trample
+auto=may moveto(mybattlefield) target(creature[-token&manacost<=3]|graveyard)
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Symbiote Villain
+power=4
+toughness=3
+text=Trample -- When Desecrex enters, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains "This creature attacks each combat if able" and "When this creature deals combat damage to a player, sacrifice it." -- Mayhem {B}{R}
+[/card]
+[card]
 name=Carnassid
 abilities=trample
 auto={1}{G}:regenerate
@@ -24297,6 +24409,17 @@ toughness=5
 text=Flying, first strike, trample, lifelink, haste
 [/card]
 [card]
+name=Scions of the Ur-Spider
+#OM1 printing of Cosmic Spider-Man (keep in sync)
+abilities=flying,first strike,trample,lifelink,haste
+mana={W}{U}{B}{R}{G}
+type=Legendary Creature
+subtype=Spider Hero
+power=5
+toughness=5
+text=Flying, first strike, trample, lifelink, haste
+[/card]
+[card]
 name=Cosmogrand Zenith
 auto=_FLURRY_ability$!name(Choose one) choice name(Create two 1/1 Human Soldiers) token(-1530502)*2 _ choice name(Put a +1/+1 counter on each creature you control) all(creature|mybattlefield) counter(1/1)!$ controller
 text=Whenever you cast your second spell each turn, choose one -- Create two 1/1 white Human Soldier creature tokens. -- Put a +1/+1 counter on each creature you control.
@@ -26885,6 +27008,18 @@ power=2
 toughness=3
 [/card]
 [card]
+name=Principled Referee
+#OM1 printing of Daily Bugle Reporters (keep in sync)
+auto=choice name(counter) counter(1/1) target(<upto:2>creature|mybattlefield)
+auto=choice name(return) moveto(hand) target(creature[manacost<=2]|mygraveyard)
+text=When this creature enters, choose one — -- • Put a +1/+1 counter on each of up to two target creatures. -- • Return target creature card with mana value 2 or less from your graveyard to your hand.
+mana={3}{W}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=3
+[/card]
+[card]
 name=Daily Regimen
 target=creature
 auto={1}{W}:counter(1/1)
@@ -26978,6 +27113,18 @@ power=3
 toughness=3
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=When this creature enters, choose one — -- • Repair — Return target card with mana value 4 or greater from your graveyard to your hand. -- • Impound — Exile target artifact or enchantment.
+[/card]
+[card]
+name=Selesnya Archivist
+#OM1 printing of Damage Control Crew (keep in sync)
+auto=choice name(Repair) moveTo(hand) target(*[manacost>=4]|mygraveyard)
+auto=choice name(Impound) moveTo(exile) target(*[artifact;enchantment])
+mana={3}{G}
+type=Creature
+subtype=Human Citizen
+power=3
+toughness=3
+text=When this creature enters, choose one — -- • Return target card with mana value 4 or greater from your graveyard to your hand. -- • Exile target artifact or enchantment.
 [/card]
 [card]
 name=Damia, Sage of Stone
@@ -32249,6 +32396,18 @@ power=2
 toughness=1
 [/card]
 [card]
+name=Obscura Alleylurkers
+#OM1 printing of Doc Ock's Henchmen (keep in sync)
+abilities=flash
+auto=@combat(attacking) source(this):_CONNIVES_
+text=Flash -- Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={2}{U}
+type=Creature
+subtype=Human Villain
+power=2
+toughness=1
+[/card]
+[card]
 name=Doc Ock's Tentacles
 auto={5}:equip
 auto=teach(creature) 4/4
@@ -32260,10 +32419,32 @@ subtype=Equipment
 text=Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it. -- Equipped creature gets +4/+4. -- Equip {5}
 [/card]
 [card]
+name=Giantcraft Helm
+#OM1 printing of Doc Ock's Tentacles (keep in sync)
+auto={5}:equip
+auto=teach(creature) 4/4
+mana={1}
+type=Artifact
+subtype=Equipment
+text=Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it. -- Equipped creature gets +4/+4. -- Equip {5}
+[/card]
+[card]
 name=Doc Ock, Sinister Scientist
 abilities=hexproof
 auto=aslongas(villain|mybattlefield) hexproof
 text=As long as there are eight or more cards in your graveyard, Doc Ock has base power and toughness 8/8. -- As long as you control another Villain, Doc Ock has hexproof.
+mana={4}{U}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=4
+toughness=5
+[/card]
+[card]
+name=Ozor, Chronicler of Collapse
+#OM1 printing of Doc Ock, Sinister Scientist (keep in sync)
+abilities=hexproof
+auto=aslongas(villain|mybattlefield) hexproof
+text=As long as there are eight or more cards in your graveyard, Ozor has base power and toughness 8/8. -- As long as you control another Villain, Ozor has hexproof. (He can't be the target of spells or abilities your opponents control.)
 mana={4}{U}
 type=Legendary Creature
 subtype=Human Scientist Villain
@@ -32298,6 +32479,17 @@ toughness=1
 [/card]
 [card]
 name=Doctor Octopus, Master Planner
+auto=lord(villain|mybattlefield) 2/2
+text=Other Villains you control get +2/+2. Your maximum hand size is eight.
+mana={5}{U}{B}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=4
+toughness=8
+[/card]
+[card]
+name=Neach, Pinnacle Pariah
+#OM1 printing of Doctor Octopus, Master Planner (keep in sync)
 auto=lord(villain|mybattlefield) 2/2
 text=Other Villains you control get +2/+2. Your maximum hand size is eight.
 mana={5}{U}{B}
@@ -36590,10 +36782,30 @@ type=Sorcery
 text=Electro's Bolt deals 4 damage to target creature.
 [/card]
 [card]
+name=Deathflame Burst
+#OM1 printing of Electro's Bolt (keep in sync)
+auto=damage:4 target(creature)
+mana={2}{R}
+type=Sorcery
+text=Deathflame Burst deals 4 damage to target creature. -- Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
+[/card]
+[card]
 name=Electro, Assaulting Battery
 abilities=flying
 auto=@movedTo(*[instant;sorcery]|mystack):Add{R} doesntempty
 text=Flying -- You don't lose unspent red mana as steps and phases end. -- Whenever you cast an instant or sorcery spell, add {R}.
+mana={1}{R}{R}
+type=Legendary Creature
+subtype=Human Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Bayo, Irritable Instructor
+#OM1 printing of Electro, Assaulting Battery (keep in sync)
+abilities=flying
+auto=@movedTo(*[instant;sorcery]|mystack):Add{R} doesntempty
+text=Flying -- You don't lose unspent red mana as steps and phases end. -- Whenever you cast an instant or sorcery spell, add {R}. -- When Bayo leaves the battlefield, you may pay {X}. When you do, he deals X damage to target player.
 mana={1}{R}{R}
 type=Legendary Creature
 subtype=Human Villain
@@ -40533,6 +40745,18 @@ subtype=Elemental
 [/card]
 [card]
 name=Ezekiel Sims, Spider-Totem
+abilities=reach
+auto=@each my combatbegins:2/2 target(spider|mybattlefield) ueot
+text=Reach -- At the beginning of combat on your turn, target Spider you control gets +2/+2 until end of turn.
+mana={4}{G}
+type=Legendary Creature
+subtype=Spider Human Advisor
+power=3
+toughness=5
+[/card]
+[card]
+name=Orris, Last of the Web Lords
+#OM1 printing of Ezekiel Sims, Spider-Totem (keep in sync)
 abilities=reach
 auto=@each my combatbegins:2/2 target(spider|mybattlefield) ueot
 text=Reach -- At the beginning of combat on your turn, target Spider you control gets +2/+2 until end of turn.
@@ -44938,6 +45162,18 @@ power=1
 toughness=1
 [/card]
 [card]
+name=Vexed Bots
+#OM1 printing of Flying Octobot (keep in sync)
+abilities=flying
+auto=@movedTo(other villain|mybattlefield) turnlimited:counter(1/1) all(this)
+text=Flying -- Whenever another Villain you control enters, put a +1/+1 counter on this creature. This ability triggers only once each turn.
+mana={1}{U}
+type=Artifact Creature
+subtype=Robot Villain
+power=1
+toughness=1
+[/card]
+[card]
 name=Fodder Cannon
 auto={4}{T}{S(creature|myBattlefield)}:Damage:4 target(creature)
 text={4}, {T}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.
@@ -46161,6 +46397,18 @@ type=Enchantment
 [/card]
 [card]
 name=Friendly Neighborhood
+target=land
+auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
+auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
+auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
+mana={3}{W}
+type=Enchantment
+subtype=Aura
+text=Enchant land -- When Friendly Neighborhood enters, create three 1/1 green and white Human Citizen creature tokens.
+[/card]
+[card]
+name=Remarkable Readings
+#OM1 printing of Friendly Neighborhood (keep in sync)
 target=land
 auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
 auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
@@ -53136,6 +53384,18 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Nu and Sumi, Career Criminals
+#OM1 printing of Green Goblin, Revenant (keep in sync)
+abilities=flying,deathtouch
+auto=@combat(attacking) source(this):discard:1 && draw:1
+text=Flying, deathtouch -- Whenever Nu and Sumi attacks, discard a card. Then draw a card for each card you've discarded this turn.
+mana={3}{B}{R}
+type=Legendary Creature
+subtype=Goblin Human Villain
+power=3
+toughness=3
+[/card]
+[card]
 name=Green Mana Battery
 auto={2}{T}:counter(0/0,1,Storage)
 auto={t}:name(Remove 0 Counters) add{G}
@@ -54846,6 +55106,18 @@ subtype=Human Advisor
 power=2
 toughness=3
 text={T}: Add one mana of any color. -- {2}{G}, {T}: Put a +1/+1 counter on target Spider you control.
+[/card]
+[card]
+name=Eccentric Arachnologist
+#OM1 printing of Guy in the Chair (keep in sync)
+auto={T}:name(add colored mana) ability$! choice add{G} _ choice add{R} _ choice add{U} _ choice add{B} _ choice add{W} !$ controller
+auto={2}{G}{T}:counter(1/1) target(spider|mybattlefield)
+mana={2}{G}
+type=Creature
+subtype=Human Advisor
+power=2
+toughness=3
+text={T}: Add one mana of any color. -- {2}{G}, {T}: Put a +1/+1 counter on target Spider. Activate only as a sorcery.
 [/card]
 [card]
 name=Gwafa Hazid, Profiteer
@@ -58190,6 +58462,18 @@ power=1
 toughness=2
 [/card]
 [card]
+name=Cam and Farrik, Havoc Duo
+#OM1 printing of Hobgoblin, Mantled Marauder (keep in sync)
+abilities=flying,haste
+auto=@movedTo(*|mygraveyard) from(myhand):all(this) 2/0 ueot
+text=Flying, haste -- Whenever you discard a card, Cam and Farrik gets +2/+0 until end of turn.
+mana={1}{R}
+type=Legendary Creature
+subtype=Goblin Human Villain
+power=1
+toughness=2
+[/card]
+[card]
 name=Hokori, Dust Drinker
 auto=lord(land) doesnotuntap
 auto=@each my upkeep:untap target(land)
@@ -59068,6 +59352,14 @@ subtype=Aura
 [/card]
 [card]
 name=Hot Dog Cart
+auto=_FOOD_
+mana={3}
+type=Artifact
+text=When Hot Dog Cart enters, create a Food token.
+[/card]
+[card]
+name=Treat Trolley
+#OM1 printing of Hot Dog Cart (keep in sync)
 auto=_FOOD_
 mana={3}
 type=Artifact
@@ -61856,6 +62148,17 @@ power=3
 toughness=4
 [/card]
 [card]
+name=Caldaia Brawlers
+#OM1 printing of Inner Demons Gangsters (keep in sync)
+auto={D}:all(this) 1/0 ueot && ability(menace) all(this) ueot asSorcery
+text=Discard a card: This creature gets +1/+0 and gains menace until end of turn. Activate only as a sorcery.
+mana={3}{B}
+type=Creature
+subtype=Human Rogue Villain
+power=3
+toughness=4
+[/card]
+[card]
 name=Inner Fire
 auto=foreach(*|myhand) add{R}
 text=Add {R} for each card in your hand.
@@ -63260,6 +63563,18 @@ name=J. Jonah Jameson
 auto=target(creature[-this]|mybattlefield) transforms((Suspected,menace,cantblock)) forever
 auto=@combat(attacking) source(creature[menace][-this]|mybattlefield):_TREASURE_
 text=When J. Jonah Jameson enters, suspect up to one target creature. (A suspected creature has menace and can't block.) -- Whenever a creature you control with menace attacks, create a Treasure token.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
+name=Lazlo, Enthusiastic Accuser
+#OM1 printing of J. Jonah Jameson (keep in sync)
+auto=target(creature[-this]|mybattlefield) transforms((Suspected,menace,cantblock)) forever
+auto=@combat(attacking) source(creature[menace][-this]|mybattlefield):_TREASURE_
+text=When Lazlo enters, suspect up to one target creature. -- Whenever a creature you control with menace attacks, create a Treasure token.
 mana={2}{R}
 type=Legendary Creature
 subtype=Human Citizen
@@ -65220,6 +65535,16 @@ toughness=2
 [/card]
 [card]
 name=Kapow!
+target=creature|mybattlefield
+auto=counter(1/1)
+auto=_FIGHT_
+text=Put a +1/+1 counter on target creature you control. It fights target creature an opponent controls.
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Perilous Lunge
+#OM1 printing of Kapow! (keep in sync)
 target=creature|mybattlefield
 auto=counter(1/1)
 auto=_FIGHT_
@@ -68391,7 +68716,30 @@ toughness=3
 text=Trample -- Whenever a creature an opponent controls dies, draw a card.
 [/card]
 [card]
+name=Brako, Heartless Hunter
+#OM1 printing of Kraven the Hunter (keep in sync)
+abilities=trample
+auto=@movedTo(other creature|opponentgraveyard) from(opponentbattlefield):draw:1
+mana={1}{B}{G}
+type=Legendary Creature
+subtype=Human Villain
+power=4
+toughness=3
+text=Trample -- Whenever a creature an opponent controls with the greatest power among creatures that player controls dies, draw a card and put a +1/+1 counter on Brako.
+[/card]
+[card]
 name=Kraven's Cats
+auto={2}{G}:all(this) 2/2 ueot asSorcery
+text={2}{G}: This creature gets +2/+2 until end of turn. Activate only once each turn.
+mana={1}{G}
+type=Creature
+subtype=Cat Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Cruel Caracals
+#OM1 printing of Kraven's Cats (keep in sync)
 auto={2}{G}:all(this) 2/2 ueot asSorcery
 text={2}{G}: This creature gets +2/+2 until end of turn. Activate only once each turn.
 mana={1}{G}
@@ -75838,6 +76186,17 @@ power=2
 toughness=2
 [/card]
 [card]
+name=Demera, Soul of a Spider
+#OM1 printing of Mary Jane Watson (keep in sync)
+auto=@movedTo(spider|mybattlefield) turnlimited:draw:1
+text=Whenever a Spider you control enters, draw a card. This ability triggers only once each turn.
+mana={1}{G/W}
+type=Legendary Creature
+subtype=Human Performer
+power=2
+toughness=2
+[/card]
+[card]
 name=Masako the Humorless
 abilities=flash
 auto=lord(creature[tapped]|mybattlefield) canblocktapped
@@ -76600,6 +76959,17 @@ toughness=2
 [/card]
 [card]
 name=Mechanical Mobster
+auto=moveto(exile) target(card|graveyard)
+mana={3}
+type=Artifact Creature
+subtype=Human Robot Villain
+power=2
+toughness=1
+text=When Mechanical Mobster enters, exile up to one target card from a graveyard.
+[/card]
+[card]
+name=Data Scrubber
+#OM1 printing of Mechanical Mobster (keep in sync)
 auto=moveto(exile) target(card|graveyard)
 mana={3}
 type=Artifact Creature
@@ -80216,6 +80586,17 @@ toughness=2
 text=When Molten Man enters, you may search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.
 [/card]
 [card]
+name=The Infernus
+#OM1 printing of Molten Man, Inferno Incarnate (keep in sync)
+auto=moveto(mybattlefield) search(mountain|library) tapped
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Villain
+power=3
+toughness=2
+text=When The Infernus enters, search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle. -- The Infernus gets +1/+1 for each Mountain you control. -- When The Infernus leaves the battlefield, sacrifice a land.
+[/card]
+[card]
 name=Molten Nursery
 auto=@movedto(*[colorless]|mystack):damage:1 target(anytarget)
 text=Devoid (This card has no color.) -- Whenever you cast a colorless spell, Molten Nursery deals 1 damage to any target.
@@ -80914,6 +81295,17 @@ type=Sorcery
 [/card]
 [card]
 name=Morbius the Living Vampire
+abilities=flying,vigilance,lifelink
+mana={2}{U}{B}
+type=Legendary Creature
+subtype=Vampire Villain
+power=3
+toughness=3
+text=Flying, vigilance, lifelink
+[/card]
+[card]
+name=Tearle, Entropic Hunger
+#OM1 printing of Morbius the Living Vampire (keep in sync)
 abilities=flying,vigilance,lifelink
 mana={2}{U}{B}
 type=Legendary Creature
@@ -82416,6 +82808,18 @@ type=Instant
 [/card]
 [card]
 name=Mysterio's Phantasm
+abilities=flying,vigilance
+auto=@combat(attacking) source(this):deplete:1 controller
+mana={1}{U}
+type=Creature
+subtype=Illusion Villain
+power=2
+toughness=1
+text=Flying, vigilance -- Whenever Mysterio's Phantasm attacks, mill a card.
+[/card]
+[card]
+name=Phantasmal Vision
+#OM1 printing of Mysterio's Phantasm (keep in sync)
 abilities=flying,vigilance
 auto=@combat(attacking) source(this):deplete:1 controller
 mana={1}{U}
@@ -84200,6 +84604,18 @@ toughness=2
 [/card]
 [card]
 name=News Helicopter
+abilities=flying
+auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
+mana={3}
+type=Artifact
+subtype=Vehicle
+power=2
+toughness=1
+text=Flying -- When News Helicopter enters, create a 1/1 green and white Human Citizen creature token.
+[/card]
+[card]
+name=Opulent Valet
+#OM1 printing of News Helicopter (keep in sync)
 abilities=flying
 auto=token(Human Citizen,Creature Human Citizen,1/1,,green white) controller
 mana={3}
@@ -88273,6 +88689,17 @@ toughness=1
 [/card]
 [card]
 name=Oscorp Research Team
+auto={6}{U}:draw:2
+text={6}{U}: Draw two cards.
+mana={3}{U}
+type=Creature
+subtype=Human Scientist
+power=1
+toughness=5
+[/card]
+[card]
+name=Pinnacle Research Team
+#OM1 printing of Oscorp Research Team (keep in sync)
 auto={6}{U}:draw:2
 text={6}{U}: Draw two cards.
 mana={3}{U}
@@ -94081,6 +94508,17 @@ toughness=3
 text=When Professional Wrestler enters, create a Treasure token.
 [/card]
 [card]
+name=Favored Fighter
+#OM1 printing of Professional Wrestler (keep in sync)
+auto=_TREASURE_
+mana={3}{G}
+type=Creature
+subtype=Human
+power=3
+toughness=3
+text=When Professional Wrestler enters, create a Treasure token.
+[/card]
+[card]
 name=Profound Journey
 target=*[-instant;-sorcery]|mygraveyard
 auto=moveto(ownerbattlefield)
@@ -96108,6 +96546,18 @@ toughness=1
 text=Reach, deathtouch -- Sacrifice Radioactive Spider: Search your library for a basic land card and put it into your hand, then shuffle.
 [/card]
 [card]
+name=Fateweaver
+#OM1 printing of Radioactive Spider (keep in sync)
+abilities=reach,deathtouch
+auto={S(this)}:name(search basic land) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose land) target(<1>land[basic]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+mana={G}
+type=Creature
+subtype=Spider
+power=1
+toughness=1
+text=Reach, deathtouch -- {2}, Sacrifice this creature: Search your library for a Spider Hero card, reveal it, put it into your hand, then shuffle. Activate only as a sorcery.
+[/card]
+[card]
 name=Radjan Spirit
 auto={T}:-flying target(creature)
 text={T}: Target creature loses flying until end of turn.
@@ -96287,6 +96737,17 @@ subtype=Goblin Berserker Villain
 power=5
 toughness=4
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
+text=Haste -- Mayhem {2}{R} (You may cast this card from your graveyard for {2}{R} if you discarded it this turn. Timing rules still apply.)
+[/card]
+[card]
+name=Lavaborn Goblins
+#OM1 printing of Raging Goblinoids (keep in sync)
+abilities=haste
+mana={4}{R}
+type=Creature
+subtype=Goblin Berserker Villain
+power=5
+toughness=4
 text=Haste -- Mayhem {2}{R} (You may cast this card from your graveyard for {2}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
@@ -100294,6 +100755,17 @@ toughness=7
 text=Vigilance, trample, haste
 [/card]
 [card]
+name=Xecau, Predation's Shadow
+#OM1 printing of Rhino, Barreling Brute (keep in sync)
+abilities=vigilance,trample,haste
+mana={3}{R}{R}{G}{G}
+type=Legendary Creature
+subtype=Human Villain
+power=6
+toughness=7
+text=Vigilance, trample, haste -- Whenever Xecau attacks, if you've cast a spell with mana value 4 or greater this turn, draw a card.
+[/card]
+[card]
 name=Rhox
 auto={G}{2}:regenerate
 auto=_BLOCKED_may name(assign combat damage to defending player) thisforeach(power>=1) damage:1 opponent && fog from(this)
@@ -101249,6 +101721,14 @@ type=Enchantment
 [/card]
 [card]
 name=Risky Research
+auto=surveil:2 && draw:2 && life:-2
+mana={2}{B}
+type=Instant
+text=Surveil 2, then draw two cards and lose 2 life.
+[/card]
+[card]
+name=Clandestine Work
+#OM1 printing of Risky Research (keep in sync)
 auto=surveil:2 && draw:2 && life:-2
 mana={2}{B}
 type=Instant
@@ -104375,6 +104855,17 @@ toughness=0
 text=Sandman's power and toughness are each equal to the number of lands you control.
 [/card]
 [card]
+name=The Scouring Stormsoul
+#OM1 printing of Sandman, Shifting Scoundrel (keep in sync)
+auto=foreach(land|mybattlefield) 1/1
+mana={1}{G}{G}
+type=Legendary Creature
+subtype=Sand Elemental Villain
+power=0
+toughness=0
+text=The Scouring Stormsoul's power and toughness are each equal to the number of lands you control. -- The Scouring Stormsoul can't be blocked by creatures with power 2 or less. -- {3}{G}{G}: Return this card and target land card from your graveyard to the battlefield tapped.
+[/card]
+[card]
 name=Sands of Delirium
 auto={x}{T}:deplete:x target(player)
 text={X}, {T}: Target player puts the top X cards of their library into their graveyard.
@@ -105425,6 +105916,21 @@ toughness=3
 text=Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.) -- Trample -- Sensational Save - If Scarlet Spider was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
 [/card]
 [card]
+name=Borys, the Spider Rider
+#OM1 printing of Scarlet Spider, Ben Reilly (keep in sync)
+grade=borderline
+other={R}{G}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+abilities=trample
+auto=if paid(alternative) then counter(1/1) all(this)
+mana={1}{R}{G}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=3
+text=Enweb {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.) -- Trample -- If Borys was cast using enweb, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
+[/card]
+[card]
 name=Scarlet Spider, Kaine
 abilities=menace
 auto=damage:1 target(creature)
@@ -105435,6 +105941,18 @@ power=2
 toughness=1
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Menace (This creature can't be blocked except by two or more creatures.) -- When Scarlet Spider enters, you may discard a card. If you do, put a +1/+1 counter on him. -- Mayhem {B/R} (You may cast this card from your graveyard for {B/R} if you discarded it this turn. Timing rules still apply.)
+[/card]
+[card]
+name=Kivni, Orb Weaver
+#OM1 printing of Scarlet Spider, Kaine (keep in sync)
+abilities=menace
+auto=damage:1 target(creature)
+mana={B}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=1
+text=Menace (This creature can't be blocked except by two or more creatures.) -- When Kivni enters, you may discard a card. If you do, put a +1/+1 counter on him. -- Mayhem {B/R} (You may cast this card from your graveyard for {B/R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
 name=Scarmaker
@@ -107923,6 +108441,18 @@ toughness=4
 [/card]
 [card]
 name=Selfless Police Captain
+auto=counter(1/1)
+auto=@movedTo(this|graveyard|exile):counter(1/1) target(creature|mybattlefield)
+text=This creature enters with a +1/+1 counter on it. -- When this creature leaves the battlefield, put its +1/+1 counters on target creature you control.
+mana={1}{W}
+type=Creature
+subtype=Human Detective
+power=1
+toughness=1
+[/card]
+[card]
+name=Crime-Scene Instructor
+#OM1 printing of Selfless Police Captain (keep in sync)
 auto=counter(1/1)
 auto=@movedTo(this|graveyard|exile):counter(1/1) target(creature|mybattlefield)
 text=This creature enters with a +1/+1 counter on it. -- When this creature leaves the battlefield, put its +1/+1 counters on target creature you control.
@@ -111443,6 +111973,22 @@ toughness=5
 text=Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Whenever you cast a creature spell, create a 1/1 green and white Human Citizen creature token. -- {3}{G}{W}: Creatures you control get +2/+2 and gain vigilance until end of turn.
 [/card]
 [card]
+name=Alenni, Brood Recruiter
+#OM1 printing of Silk, Web Weaver (keep in sync)
+grade=borderline
+other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=@movedTo(creature|mystack):token(Human Citizen,Creature Human Citizen,1/1,green white) controller
+auto={3}{G}{W}:all(creature|mybattlefield) 2/2 ueot
+auto={3}{G}{W}:all(creature|mybattlefield) vigilance ueot
+mana={2}{G}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=5
+text=Enweb {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Whenever you cast a creature spell, create a 1/1 green and white Human Citizen creature token. -- {3}{G}{W}: Creatures you control get +2/+2 and gain vigilance until end of turn.
+[/card]
+[card]
 name=Silkbind Faerie
 auto={1}{wu}{q}:target(creature) tap
 abilities=flying
@@ -111646,6 +112192,18 @@ name=Silver Sable, Mercenary Leader
 auto=counter(1/1) target(other creature|mybattlefield)
 auto=_ATTACKING_lifelink target(creature|mybattlefield) ueot
 text=When Silver Sable enters, put a +1/+1 counter on another target creature. -- Whenever Silver Sable attacks, target creature you control gains lifelink until end of turn.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Mercenary Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Generous Betty Wray
+#OM1 printing of Silver Sable, Mercenary Leader (keep in sync)
+auto=counter(1/1) target(other creature|mybattlefield)
+auto=_ATTACKING_lifelink target(creature|mybattlefield) ueot
+text=When Generous Betty Wray enters, put a +1/+1 counter on another target creature. -- Whenever Generous Betty Wray attacks, target modified creature you control gains lifelink until end of turn. (Equipment, Auras you control, and counters are modifications.)
 mana={2}{W}
 type=Legendary Creature
 subtype=Human Mercenary Hero
@@ -113600,6 +114158,17 @@ name=Skyward Spider
 #abilities=ward2 set no flag: the loader matches abilities= by substring against
 #Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
 #that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
+mana={W/U}{W/U}
+type=Creature
+subtype=Spider Human Hero
+power=2
+toughness=2
+text=Ward {2}
+[/card]
+[card]
+name=Wonderweave Aerialist
+#OM1 printing of Skyward Spider (keep in sync)
 auto=_WARD2_
 mana={W/U}{W/U}
 type=Creature
@@ -116550,6 +117119,19 @@ power=3
 toughness=2
 [/card]
 [card]
+name=Ademi of the Silkchutes
+#OM1 printing of Spectacular Spider-Man (keep in sync)
+abilities=flash
+auto={1}:ability(flying) all(this) ueot
+auto={1}{S(this|mybattlefield)}:ability(hexproof) all(creature|mybattlefield) ueot && ability(indestructible) all(creature|mybattlefield) ueot
+text=Flash -- {1}: Ademi gains flying until end of turn. -- {1}, Sacrifice Ademi: Creatures you control gain hexproof and indestructible until end of turn.
+mana={1}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=2
+[/card]
+[card]
 name=Spectacular Tactics
 auto=choice name(counter+hexproof) counter(1/1) && ability(hexproof) ueot target(creature|mybattlefield)
 auto=choice name(destroy) destroy target(creature[power>=4]|battlefield)
@@ -117064,6 +117646,20 @@ toughness=2
 text=Reach -- {T}: Add {R} or {G}. -- Whenever you cast a spell with mana value 4 or greater, untap this creature.
 [/card]
 [card]
+name=Leyline Weaver
+#OM1 printing of Spider Manifestation (keep in sync)
+abilities=reach
+auto={T}:Add{R}
+auto={T}:Add{G}
+auto=counter(1/1)
+mana={1}{R/G}
+type=Creature
+subtype=Spider Avatar
+power=2
+toughness=2
+text=Reach -- {T}: Add {R} or {G}. -- Whenever you cast a spell with mana value 4 or greater, untap this creature.
+[/card]
+[card]
 name=Spider Spawning
 auto=token(Spider,Creature Spider,1/2,green,reach)*type:creature:mygraveyard
 flashback={6}{B}
@@ -117094,9 +117690,32 @@ toughness=1
 text=Reach -- When Spider-Bot enters, you may search your library for a basic land card and put it into your hand, then shuffle.
 [/card]
 [card]
+name=Steelweb Surveyor
+#OM1 printing of Spider-Bot (keep in sync)
+abilities=reach
+auto=name(search basic land) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose land) target(<1>land[basic]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+mana={2}
+type=Artifact Creature
+subtype=Spider Robot Scout
+power=2
+toughness=1
+text=Reach -- When Spider-Bot enters, you may search your library for a basic land card and put it into your hand, then shuffle.
+[/card]
+[card]
 name=Spider-Byte, Web Warden
 auto=may moveto(hand) target(*[-land]|battlefield)
 text=When Spider-Byte enters, return up to one target nonland permanent to its owner's hand.
+mana={2}{U}
+type=Legendary Creature
+subtype=Spider Avatar Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Argyr, Tidal Spinner
+#OM1 printing of Spider-Byte, Web Warden (keep in sync)
+auto=may moveto(hand) target(*[-land]|battlefield)
+text=When Argyr enters, return up to one target nonland permanent to its owner's hand.
 mana={2}{U}
 type=Legendary Creature
 subtype=Spider Avatar Hero
@@ -117116,6 +117735,18 @@ toughness=3
 text=Reach -- Whenever Spider-Gwen becomes tapped, you may discard a card. If you do, draw a card.
 [/card]
 [card]
+name=Wardens of Silverweb Summit
+#OM1 printing of Spider-Gwen, Free Spirit (keep in sync)
+abilities=reach
+auto={T}{D}:draw:1
+mana={2}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=3
+text=Reach -- Whenever Wardens of Silverweb Summit becomes tapped, you may discard a card. If you do, draw a card.
+[/card]
+[card]
 name=Spider-Ham, Peter Porker
 auto=_FOOD_
 mana={1}{G}
@@ -117124,6 +117755,17 @@ subtype=Pig Hero
 power=2
 toughness=2
 text=When Spider-Ham enters, create a Food token.
+[/card]
+[card]
+name=Tarantusk, Unwisely Awoken
+#OM1 printing of Spider-Ham, Peter Porker (keep in sync)
+auto=_FOOD_
+mana={1}{G}
+type=Legendary Creature
+subtype=Pig Hero
+power=2
+toughness=2
+text=When Tarantusk enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") -- Animal May-Ham — Other Spiders, Boars, Bats, Bears, Birds, Cats, Dogs, Frogs, Jackals, Lizards, Mice, Otters, Rabbits, Raccoons, Rats, Squirrels, Turtles, and Wolves you control get +1/+1.
 [/card]
 [card]
 name=Spider-Islanders
@@ -117139,11 +117781,36 @@ toughness=3
 text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
 [/card]
 [card]
+name=Sadistic String-Puller
+#OM1 printing of Spider-Islanders (keep in sync)
+grade=borderline
+autograveyard={1}{R}{D} restriction{compare(oplifelost)~morethan~0}:moveto(mybattlefield) this asSorcery
+mana={3}{R}
+type=Creature
+subtype=Spider Horror Citizen
+power=4
+toughness=3
+text=Mayhem {1}{R} (You may cast this card from your graveyard for {1}{R} if you discarded it this turn. Timing rules still apply.)
+[/card]
+[card]
 name=Spider-Man Noir
 abilities=menace
 #where(alone) is not engine syntax at all - the combat trigger keyword is attackedalone, and
 #the triggering creature is all(trigger[to]). The old line also only watched THIS creature,
 #while the card says any creature you control (John, 2026-09-13: no counter appeared).
+auto=@combat(attackedalone) source(creature|mybattlefield):name(Counter and surveil) all(trigger[to]) counter(1/1) && _SURVEIL1_
+mana={4}{B}
+type=Legendary Creature
+subtype=Spider Hero
+power=3
+toughness=3
+missing=surveil is a flat 1, not X = the number of counters on the creature
+text=Menace -- Whenever a creature you control attacks alone, put a +1/+1 counter on it. Then surveil X, where X is the number of counters on it. (Look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+[/card]
+[card]
+name=Kroble, Envoy of the Bog
+#OM1 printing of Spider-Man Noir (keep in sync)
+abilities=menace
 auto=@combat(attackedalone) source(creature|mybattlefield):name(Counter and surveil) all(trigger[to]) counter(1/1) && _SURVEIL1_
 mana={4}{B}
 type=Legendary Creature
@@ -117164,6 +117831,19 @@ subtype=Spider Human Hero
 power=3
 toughness=3
 text=Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)
+[/card]
+[card]
+name=Darval, Whose Web Protects
+#OM1 printing of Spider-Man, Web-Slinger (keep in sync)
+other={W}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+grade=borderline
+mana={2}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=3
+text=Enweb {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)
 [/card]
 [card]
 name=Spider-Punk
@@ -117197,11 +117877,36 @@ toughness=1
 text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -- Other Spiders you control have riot. -- Spells and abilities can't be countered. -- Damage can't be prevented.
 [/card]
 [card]
+name=Kraza, the Swarm as One
+#OM1 printing of Spider-Punk (keep in sync)
+auto=choice name(Counter) counter(1/1) name(Haste) transforms((,haste)) forever
+auto=lord(other spider|mybattlefield) haste
+auto=lord(*|stack) nofizzle
+mana={1}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=1
+text=Riot (This creature enters with your choice of a +1/+1 counter or haste.) -- Other Spiders you control have riot. -- Spells and abilities can't be countered. -- Damage can't be prevented.
+[/card]
+[card]
 name=Spider-Rex, Daring Dino
 abilities=reach,trample
 #abilities=ward2 set no flag: the loader matches abilities= by substring against
 #Constants::MTGBasicAbilities and there is no 'ward' entry there at all. The 83 cards
 #that actually have ward use the _WARD2_ macro as an auto= line.
+auto=_WARD2_
+mana={4}{G}{G}
+type=Legendary Creature
+subtype=Spider Dinosaur
+power=6
+toughness=6
+text=Reach, trample, ward {2}
+[/card]
+[card]
+name=Chizak, Apex Arachnosaur
+#OM1 printing of Spider-Rex, Daring Dino (keep in sync)
+abilities=reach,trample
 auto=_WARD2_
 mana={4}{G}{G}
 type=Legendary Creature
@@ -117220,6 +117925,16 @@ subtype=Equipment
 text=Equipped creature gets +2/+2. Equip {2}.
 [/card]
 [card]
+name=Cactarantula Saddle
+#OM1 printing of Spider-Suit (keep in sync)
+auto={2}:equip
+auto=teach(creature) 2/2
+mana={1}
+type=Artifact
+subtype=Equipment
+text=Equipped creature gets +2/+2. Equip {2}.
+[/card]
+[card]
 name=Spider-UK
 #VERIFIED IN GAME 2026-10-14 (John, scenario queue): web-slinging alternative cost.
 grade=supported
@@ -117227,6 +117942,20 @@ other={2}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 auto=@each my endstep:if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 && life:2 controller
 text=At the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, draw a card and gain 2 life.
+mana={3}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=4
+[/card]
+[card]
+name=Sarn of the Silken Throne
+#OM1 printing of Spider-UK (keep in sync)
+grade=supported
+other={2}{W}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=@each my endstep:if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 && life:2 controller
+text=Enweb {2}{W} (You may cast this spell for {2}{W} if you also return a tapped creature you control to its owner's hand.) -- At the beginning of your end step, if two or more creatures entered the battlefield under your control this turn, you draw a card and gain 2 life.
 mana={3}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
@@ -119286,6 +120015,18 @@ power=3
 toughness=4
 [/card]
 [card]
+name=Eztli of the Thousand Moons
+#OM1 printing of Starling, Aerial Ally (keep in sync)
+abilities=flying
+auto=ability(flying) target(other creature|mybattlefield) ueot
+text=Flying -- When Eztli enters, another target creature you control gains flying until end of turn.
+mana={4}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=4
+[/card]
+[card]
 name=Starlit Angel
 abilities=flying
 text=Flying
@@ -119692,6 +120433,15 @@ type=Artifact
 text=When Steel Wrecking Ball enters, it deals 5 damage to target creature. -- {1}{R}, Discard a card: Destroy target artifact.
 [/card]
 [card]
+name=Temple Trap
+#OM1 printing of Steel Wrecking Ball (keep in sync)
+auto=damage:5 target(creature)
+auto={1}{R}{D}:destroy target(artifact)
+mana={5}
+type=Artifact
+text=When Steel Wrecking Ball enters, it deals 5 damage to target creature. -- {1}{R}, Discard a card: Destroy target artifact.
+[/card]
+[card]
 name=Steelclad Serpent
 auto=aslongas(other artifact|myBattlefield) cantattack <1
 auto=aslongas(other artifact|myBattlefield) cantpwattack <1
@@ -119778,6 +120528,18 @@ power=5
 toughness=4
 #REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=Menace (This creature can't be blocked except by two or more creatures.) -- Dinosaur Formula — {1}{R}, Discard this card: Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.
+[/card]
+[card]
+name=Kephon, Rage Incubator
+#OM1 printing of Stegron the Dinosaur Man (keep in sync)
+abilities=menace
+auto=ability(7/7) target(artifact[-creature]|mybattlefield) ueot
+mana={4}{R}
+type=Legendary Creature
+subtype=Dinosaur Villain
+power=5
+toughness=4
+text=Menace (This creature can't be blocked except by two or more creatures.) -- {1}{R}, Discard this card: Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.
 [/card]
 [card]
 name=Stench of Decay
@@ -123164,6 +123926,19 @@ toughness=2
 text=Flash, flying -- Mayhem {B} (approx: cast from graveyard for {B} plus discard a card).
 [/card]
 [card]
+name=Wekhdu, Midnight Hunter
+#OM1 printing of Swarm, Being of Bees (keep in sync)
+grade=borderline
+abilities=flash,flying
+autograveyard={B}{D} restriction{compare(oplifelost)~morethan~0}:moveto(mybattlefield) this asSorcery
+mana={2}{B}
+type=Legendary Creature
+subtype=Insect Villain
+power=2
+toughness=2
+text=Flash, flying -- Mayhem {B} (approx: cast from graveyard for {B} plus discard a card).
+[/card]
+[card]
 name=Swarmborn Giant
 auto=@combatdamageof(player):sacrifice all(this)
 auto=this(cantargetcard(*[-monstrous]) {4}{G}{G}:becomes(monstrous) forever && counter(1/1,2) && transforms((,reach)) forever
@@ -125100,6 +125875,17 @@ power=3
 toughness=1
 [/card]
 [card]
+name=Full-Throttle Fanatic
+#OM1 printing of Taxi Driver (keep in sync)
+auto={1}{T}:ability(haste) target(creature) ueot
+text={1}, {T}: Target creature gains haste until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Human Pilot
+power=3
+toughness=1
+[/card]
+[card]
 name=Teardrop Kami
 auto={S}:tap target(other creature)
 auto={S}:untap target(other creature)
@@ -126863,6 +127649,14 @@ type=Instant
 text=Put target creature on the bottom of its owner's library. You lose 2 life.
 [/card]
 [card]
+name=Remorseless Coup
+#OM1 printing of The Spot's Portal (keep in sync)
+auto=moveto(bottom) target(creature) && life:-2
+mana={2}{B}
+type=Instant
+text=Put target creature on the bottom of its owner's library. You lose 2 life.
+[/card]
+[card]
 name=The Tabernacle at Pendrell Vale
 auto=lord(creature) transforms((,newability[upcost[{1}] destroy]))
 text=All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
@@ -128470,6 +129264,17 @@ mana={W}
 type=Instant
 [/card]
 [card]
+name=Lively Leap
+#OM1 printing of Thwip! (keep in sync)
+target=creature|battlefield
+auto=2/2 ueot
+auto=ability(flying) ueot
+auto=if cantargetcard(creature[spider]|*) then life:2 controller
+text=Target creature gets +2/+2 and gains flying until end of turn. If it's a Spider, you gain 2 life.
+mana={W}
+type=Instant
+[/card]
+[card]
 name=Tibor and Lumia
 auto=@movedTo(*[blue]|mystack):flying target(creature) ueot
 auto=@movedTo(*[red]|mystack):damage:1 all(creature[-flying])
@@ -129429,6 +130234,17 @@ subtype=Human Villain
 power=3
 toughness=3
 text=When Tombstone enters, return target Villain creature card from your graveyard to your hand.
+[/card]
+[card]
+name=Nill, Vessel of Valgavoth
+#OM1 printing of Tombstone, Career Criminal (keep in sync)
+auto=moveto(hand) target(villain[-token]|mygraveyard)
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=3
+toughness=3
+text=When Nill enters, return target Villain card from your graveyard to your hand. -- Villain spells you cast cost {1} less to cast.
 [/card]
 [card]
 name=Tome Scour
@@ -135333,6 +136149,17 @@ auto=life:2 controller
 text=This spell costs {2} less to cast if you control a Villain. -- Destroy target creature. You gain 2 life.
 [/card]
 [card]
+name=Damning Caress
+#OM1 printing of Venom's Hunger (keep in sync)
+mana={4}{B}
+type=Sorcery
+anyzone=this(variable{type:villain:mybattlefield}>0)while changecost(colorless:-2) forcedalive
+target=creature
+auto=destroy
+auto=life:2 controller
+text=This spell costs {2} less to cast if you control a Villain. -- Destroy target creature. You gain 2 life.
+[/card]
+[card]
 name=Venom, Evil Unleashed
 abilities=deathtouch
 autograveyard={2}{B}:counter(1/1,2) target(creature|mybattlefield) asSorcery
@@ -135344,7 +136171,31 @@ toughness=5
 text=Deathtouch -- {2}{B}, Exile this card from your graveyard: Put two +1/+1 counters on target creature.
 [/card]
 [card]
+name=Tethex, Gift of Malice
+#OM1 printing of Venom, Evil Unleashed (keep in sync)
+abilities=deathtouch
+autograveyard={2}{B}:counter(1/1,2) target(creature|mybattlefield) asSorcery
+mana={4}{B}
+type=Legendary Creature
+subtype=Symbiote Villain
+power=4
+toughness=5
+text=Deathtouch -- {2}{B}, Exile this card from your graveyard: Put two +1/+1 counters on target creature.
+[/card]
+[card]
 name=Venomized Cat
+abilities=deathtouch
+auto=deplete:2 controller
+mana={2}{B}
+type=Creature
+subtype=Cat Symbiote
+power=2
+toughness=1
+text=Deathtouch -- When Venomized Cat enters, mill two cards.
+[/card]
+[card]
+name=Bane-Marked Leonin
+#OM1 printing of Venomized Cat (keep in sync)
 abilities=deathtouch
 auto=deplete:2 controller
 mana={2}{B}
@@ -138208,6 +139059,18 @@ toughness=6
 text=Flying -- Whenever Vulture attacks, other Villains you control gain flying until end of turn.
 [/card]
 [card]
+name=Rishei, Getaway Accomplice
+#OM1 printing of Vulture, Scheming Scavenger (keep in sync)
+abilities=flying
+auto=@combat(attacking) source(this):flying all(villain|mybattlefield) ueot
+mana={5}{U/B}
+type=Legendary Creature
+subtype=Human Artificer Villain
+power=4
+toughness=6
+text=Flying -- Whenever Rishei attacks, other Villains you control gain flying until end of turn.
+[/card]
+[card]
 name=Vulturous Aven
 abilities=flying
 auto=may name(Exploit) exploits notaTarget(creature|mybattlefield) && draw:2 controller && life:-2 controller
@@ -138479,6 +139342,14 @@ toughness=6
 [/card]
 [card]
 name=Wall Crawl
+auto=token(Spider,Creature Spider,2/1,reach,green) controller && life:foreach(spider|mybattlefield)
+mana={3}{G}
+type=Enchantment
+text=When Wall Crawl enters, create a 2/1 green Spider creature token with reach. You gain life equal to the number of Spiders you control.
+[/card]
+[card]
+name=Rouse the Swarm
+#OM1 printing of Wall Crawl (keep in sync)
 auto=token(Spider,Creature Spider,2/1,reach,green) controller && life:foreach(spider|mybattlefield)
 mana={3}{G}
 type=Enchantment
@@ -140391,6 +141262,14 @@ type=Enchantment
 text=When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.
 [/card]
 [card]
+name=Mothwing Shroud
+#OM1 printing of Web Up (keep in sync)
+auto=(blink)forsrc target(*[-land]|opponentbattlefield)
+mana={2}{W}
+type=Enchantment
+text=When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.
+[/card]
+[card]
 name=Web-Shooters
 auto={2}:equip
 auto=teach(creature) 1/1
@@ -140402,7 +141281,30 @@ type=Artifact
 subtype=Equipment
 [/card]
 [card]
+name=Archangler's Skyrod
+#OM1 printing of Web-Shooters (keep in sync)
+auto={2}:equip
+auto=teach(creature) 1/1
+auto=teach(creature) reach
+auto=teach(creature) transforms((,newability[@combat(attacking) source(mytgt):tap target(creature|opponentbattlefield)]))
+text=Equipped creature gets +1/+1, has reach, and has "Whenever this creature attacks, tap target creature an opponent controls." -- Equip {2}.
+mana={1}{W}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
 name=Web-Warriors
+auto=counter(1/1) all(other creature|mybattlefield)
+mana={4}{G/W}
+type=Creature
+subtype=Spider Hero
+power=4
+toughness=4
+text=When Web-Warriors enters, put a +1/+1 counter on each other creature you control.
+[/card]
+[card]
+name=Diligent Webkeepers
+#OM1 printing of Web-Warriors (keep in sync)
 auto=counter(1/1) all(other creature|mybattlefield)
 mana={4}{G/W}
 type=Creature
@@ -141332,6 +142234,14 @@ type=Instant
 text=Return target creature to its owner's hand.
 [/card]
 [card]
+name=Snatch Back
+#OM1 printing of Whoosh! (keep in sync)
+auto=moveto(hand) target(creature)
+mana={1}{U}
+type=Instant
+text=Return target creature to its owner's hand.
+[/card]
+[card]
 name=Wicked Pact
 auto=target(<2>creature[-black]) destroy
 auto=life:-5 controller
@@ -141604,6 +142514,17 @@ toughness=3
 name=Wild Pack Squad
 #2026-10-18: was two triggers, ability(firststrike) and ability(vigilance), each with its own target - firststrike
 #is not a keyword, and the card has ONE "up to one target creature". Test: spm_wild_pack_squad_first_strike.
+auto=@each my combatbegins:target(<upto:1>creature) transforms((,first strike,vigilance)) ueot
+text=At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.
+mana={2}{W}
+type=Creature
+subtype=Human Mercenary
+power=2
+toughness=3
+[/card]
+[card]
+name=Freestrider Aces
+#OM1 printing of Wild Pack Squad (keep in sync)
 auto=@each my combatbegins:target(<upto:1>creature) transforms((,first strike,vigilance)) ueot
 text=At the beginning of combat on your turn, up to one target creature gains first strike and vigilance until end of turn.
 mana={2}{W}
@@ -143631,6 +144552,17 @@ subtype=Human Detective
 power=1
 toughness=1
 text=Double strike -- Wraith can't be blocked.
+[/card]
+[card]
+name=Margot, On the Case
+#OM1 printing of Wraith, Vicious Vigilante (keep in sync)
+abilities=double strike,unblockable
+mana={1}{W}{U}
+type=Legendary Creature
+subtype=Human Detective
+power=1
+toughness=1
+text=Double strike -- Margot can't be blocked.
 [/card]
 [card]
 name=Wrangle
@@ -145914,6 +146846,18 @@ power=2
 toughness=3
 [/card]
 [card]
+name=Carlo, Suave Schemer
+#OM1 printing of Prowler, Clawed Thief (keep in sync)
+abilities=menace
+auto=@movedTo(other villain|mybattlefield):_CONNIVES_
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever another Villain you control enters, Carlo connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={1}{U}{B}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=2
+toughness=3
+[/card]
+[card]
 name=Robotics Mastery
 abilities=flash
 target=creature
@@ -145938,6 +146882,20 @@ type=Artifact
 subtype=Equipment
 [/card]
 [card]
+name=Stitcher's Wings
+#OM1 printing of Rocket-Powered Goblin Glider (keep in sync)
+retrace={2} name(Mayhem)
+auto=if paid(retrace) then rehook target(creature|mybattlefield)
+auto={2}:equip
+auto=teach(creature) 2/0
+auto=teach(creature) flying
+auto=teach(creature) haste
+text=When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control. -- Equipped creature gets +2/+0 and has flying and haste. -- Equip {2} -- Mayhem {2}
+mana={3}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
 name=SP//dr, Piloted by Peni
 abilities=vigilance
 auto=counter(1/1) target(creature)
@@ -145950,7 +146908,30 @@ power=4
 toughness=4
 [/card]
 [card]
+name=Kumonosu, the Watchful
+#OM1 printing of SP//dr, Piloted by Peni (keep in sync)
+abilities=vigilance
+auto=counter(1/1) target(creature)
+auto=@combatdamaged(player) from(creature[modified]|mybattlefield):draw:1 controller
+text=Vigilance -- When Kumonosu enters, put a +1/+1 counter on target creature. -- Whenever a modified creature you control deals combat damage to a player, draw a card. (Equipment, Auras you control, and counters are modifications.)
+mana={3}{W}{U}
+type=Legendary Artifact Creature
+subtype=Spider Hero
+power=4
+toughness=4
+[/card]
+[card]
 name=Sandman's Quicksand
+retrace={3}{B} name(Mayhem)
+auto=if paid(retrace) then all(creature|opponentbattlefield) -2/-2 ueot
+auto=ifnot paid(retrace) then all(creature) -2/-2 ueot
+text=Mayhem {3}{B} (You may cast this card from your graveyard for {3}{B} if you discarded it this turn. Timing rules still apply.) -- All creatures get -2/-2 until end of turn. If this spell's mayhem cost was paid, creatures your opponents control get -2/-2 until end of turn instead.
+mana={1}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Miasmic Mist
+#OM1 printing of Sandman's Quicksand (keep in sync)
 retrace={3}{B} name(Mayhem)
 auto=if paid(retrace) then all(creature|opponentbattlefield) -2/-2 ueot
 auto=ifnot paid(retrace) then all(creature) -2/-2 ueot
@@ -145971,7 +146952,33 @@ power=5
 toughness=5
 [/card]
 [card]
+name=Kazuo, Ruthless Rival
+#OM1 printing of Shocker, Unshakable (keep in sync)
+auto=this(variable{controllerturn}>0) first strike
+auto=target(creature) transforms((,newability[damage:2 controller],newability[damage:2 all(this)])) oneshot
+note=both 2-damage hits are dealt as if by the targeted creature, not by Shocker (matters only for protection, deathtouch and lifelink)
+text=During your turn, Kazuo has first strike. -- When Kazuo enters, he deals 2 damage to target creature and 2 damage to that creature's controller.
+mana={4}{R}{R}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=5
+toughness=5
+[/card]
+[card]
 name=Ultimate Green Goblin
+retrace={2}{B/R} name(Mayhem)
+auto=@each my upkeep:ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
+auto=@each my upkeep:_TREASURE_
+text=At the beginning of your upkeep, discard a card, then create a Treasure token. -- Mayhem {2}{B/R} (You may cast this card from your graveyard for {2}{B/R} if you discarded it this turn. Timing rules still apply.)
+mana={1}{B/R}{B/R}
+type=Legendary Creature
+subtype=Goblin Villain
+power=5
+toughness=4
+[/card]
+[card]
+name=Ruzic, Booed but Victorious
+#OM1 printing of Ultimate Green Goblin (keep in sync)
 retrace={2}{B/R} name(Mayhem)
 auto=@each my upkeep:ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
 auto=@each my upkeep:_TREASURE_
@@ -146069,10 +147076,34 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Scorvus Ames, Crimelord
+#OM1 printing of Scorpion, Seething Striker (keep in sync)
+abilities=deathtouch
+auto=@each my end restriction{compare(bothalldeadcreature)~morethan~0}:target(creature|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot
+text=Deathtouch -- At the beginning of your end step, if a creature died this turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={3}{B}
+type=Legendary Creature
+subtype=Scorpion Human Villain
+power=3
+toughness=3
+[/card]
+[card]
 name=Shriek, Treblemaker
 auto=@each my firstmain:may name(Discard a card) reject notaTarget(*|myhand) and!( target(creature) cantblock ueot )!
 auto=@movedTo(creature|graveyard) from(opponentbattlefield):damage:1 opponent
 text=At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn. -- Sonic Blast — Whenever a creature an opponent controls dies, Shriek deals 1 damage to that player.
+mana={2}{B/R}
+type=Legendary Creature
+subtype=Mutant Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Crash, Reckless Endrider
+#OM1 printing of Shriek, Treblemaker (keep in sync)
+auto=@each my firstmain:may name(Discard a card) reject notaTarget(*|myhand) and!( target(creature) cantblock ueot )!
+auto=@movedTo(creature|graveyard) from(opponentbattlefield):damage:1 opponent
+text=At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn. -- Whenever a creature an opponent controls dies, Crash deals 1 damage to that player.
 mana={2}{B/R}
 type=Legendary Creature
 subtype=Mutant Villain
@@ -146091,7 +147122,33 @@ power=2
 toughness=1
 [/card]
 [card]
+name=Goro Rel, Scourge to Spiders
+#OM1 printing of Spider-Slayer, Hatred Honed (keep in sync)
+auto=@damaged(spider) from(this):all(trigger[to]) destroy
+autograveyard={6}{E}:token(Robot,Artifact Creature Robot,1/1,flying)*2 and!( tap(noevent) )!
+text=Whenever Goro Rel deals damage to a Spider, destroy that creature. -- {6}, Exile this card from your graveyard: Create two tapped 1/1 colorless Robot artifact creature tokens with flying.
+mana={2}
+type=Legendary Artifact Creature
+subtype=Human Villain
+power=2
+toughness=1
+[/card]
+[card]
 name=Iron Spider, Stark Upgrade
+abilities=vigilance
+auto={T}:all(creature[artifact]|mybattlefield) counter(1/1) && all(vehicle[-creature]|mybattlefield) counter(1/1)
+auto={2}{C(1/1,-2)}:draw:1 controller
+missing=the two +1/+1 counters for the draw ability can only be removed from Iron Spider itself, not from among your other artifacts
+text=Vigilance -- {T}: Put a +1/+1 counter on each artifact creature and/or Vehicle you control. -- {2}, Remove two +1/+1 counters from among artifacts you control: Draw a card.
+mana={3}
+type=Legendary Artifact Creature
+subtype=Spider Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Fizik, Etherium Mechanic
+#OM1 printing of Iron Spider, Stark Upgrade (keep in sync)
 abilities=vigilance
 auto={T}:all(creature[artifact]|mybattlefield) counter(1/1) && all(vehicle[-creature]|mybattlefield) counter(1/1)
 auto={2}{C(1/1,-2)}:draw:1 controller
@@ -146114,10 +147171,33 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Error-9, Viral Node
+#OM1 printing of Living Brain, Mechanical Marvel (keep in sync)
+auto=@each my combatbegins:target(artifact[-equipment]|mybattlefield) transforms((Creature,setpower=3,settoughness=3,newability[untap])) ueot
+text=At the beginning of combat on your turn, target non-Equipment artifact you control becomes an artifact creature with base power and toughness 3/3 until end of turn. Untap it.
+mana={4}
+type=Legendary Artifact Creature
+subtype=Robot Villain
+power=3
+toughness=3
+[/card]
+[card]
 name=Lizard, Connors's Curse
 abilities=trample
 auto=target(<upto:1>other creature) transforms((Lizard,green,setpower=4,settoughness=4,newability[loseabilities],-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
 text=Trample -- Lizard Formula — When Lizard, Connors's Curse enters, up to one other target creature loses all abilities and becomes a green Lizard creature with base power and toughness 4/4.
+mana={2}{G}{G}
+type=Legendary Creature
+subtype=Lizard Villain
+power=5
+toughness=5
+[/card]
+[card]
+name=King of the Coldblood Curse
+#OM1 printing of Lizard, Connors's Curse (keep in sync)
+abilities=trample
+auto=target(<upto:1>other creature) transforms((Lizard,green,setpower=4,settoughness=4,newability[loseabilities],-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible,-defender,-flash)) forever
+text=Trample -- When King of the Coldblood Curse enters, up to one other target creature loses all abilities and becomes a green Lizard creature with base power and toughness 4/4.
 mana={2}{G}{G}
 type=Legendary Creature
 subtype=Lizard Villain
@@ -146136,10 +147216,34 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
+name=Hide in Mundanity
+#OM1 printing of Spider-Man No More (keep in sync)
+target=creature
+auto=teach(creature) loseabilities
+auto=teach(creature) transforms((,setpower=1,settoughness=1))
+auto=teach(creature) transforms((Citizen,defender,-flying,-first strike,-double strike,-deathtouch,-lifelink,-trample,-vigilance,-haste,-reach,-menace,-hexproof,-indestructible))
+text=Enchant creature -- Enchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities. (It also loses all other creature types.)
+mana={1}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
 name=Kraven, Proud Predator
 abilities=vigilance
 anyzone=convertedcost:highest:*:mybattlefield/4 cdaactive
 text=Vigilance -- Top of the Food Chain — Kraven's power is equal to the greatest mana value among permanents you control.
+mana={1}{R}{G}
+type=Legendary Creature
+subtype=Human Warrior Villain
+power=*
+toughness=4
+[/card]
+[card]
+name=Dreadfang, Loathed by Fans
+#OM1 printing of Kraven, Proud Predator (keep in sync)
+abilities=vigilance
+anyzone=convertedcost:highest:*:mybattlefield/4 cdaactive
+text=Vigilance -- Dreadfang's power is equal to the greatest mana value among permanents you control.
 mana={1}{R}{G}
 type=Legendary Creature
 subtype=Human Warrior Villain
@@ -146173,7 +147277,36 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=The House Grows Hungry
+#OM1 printing of The Death of Gwen Stacy (keep in sync)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=destroy target(creature)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) ability$!name(Discard a card or lose 3 life) choice restriction{type(*|myhand)~morethan~0} name(Discard a card) notaTarget(*|myhand) reject _ choice name(Lose 3 life) life:-3 controller!$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) ability$!name(Discard a card or lose 3 life) choice restriction{type(*|myhand)~morethan~0} name(Discard a card) notaTarget(*|myhand) reject _ choice name(Lose 3 life) life:-3 controller!$ controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) ability$!name(Exile graveyards) choice name(Exile opponent's graveyard) all(*|opponentgraveyard) moveto(exile) _ choice name(Exile both graveyards) all(*|graveyard) moveto(exile) _ choice name(Exile your graveyard) all(*|mygraveyard) moveto(exile) _ choice name(Exile neither) donothing!$ controller
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Destroy target creature. -- II — Each player may discard a card. Each player who doesn't loses 3 life. -- III — Exile any number of target players' graveyards.
+mana={2}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
 name=Kraven's Last Hunt
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=deplete:5 controller and!( damage:power:highest:creature:mygraveyard target(creature) )!
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mybattlefield) 2/2 ueot
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(myhand) target(creature|mygraveyard)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Mill five cards. When you do, this Saga deals damage equal to the greatest power among creature cards in your graveyard to target creature. -- II — Target creature you control gets +2/+2 until end of turn. -- III — Return target creature card from your graveyard to your hand.
+mana={3}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=A Trail of Teacups
+#OM1 printing of Kraven's Last Hunt (keep in sync)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=deplete:5 controller and!( damage:power:highest:creature:mygraveyard target(creature) )!
@@ -146204,7 +147337,39 @@ power=3
 toughness=3
 [/card]
 [card]
+name=Yera and Oski, Weaver and Guide
+#OM1 printing of Arachne, Psionic Weaver (keep in sync)
+other={W}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=choice name(Artifact) transforms((,newability[lord(*[artifact]|mycastingzone) changecost(colorless:+1)],newability[lord(*[artifact]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Enchantment) transforms((,newability[lord(*[enchantment]|mycastingzone) changecost(colorless:+1)],newability[lord(*[enchantment]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Instant) transforms((,newability[lord(*[instant]|mycastingzone) changecost(colorless:+1)],newability[lord(*[instant]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Sorcery) transforms((,newability[lord(*[sorcery]|mycastingzone) changecost(colorless:+1)],newability[lord(*[sorcery]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Planeswalker) transforms((,newability[lord(*[planeswalker]|mycastingzone) changecost(colorless:+1)],newability[lord(*[planeswalker]|opponentcastingzone) changecost(colorless:+1)])) forever
+auto=choice name(Battle) transforms((,newability[lord(*[battle]|mycastingzone) changecost(colorless:+1)],newability[lord(*[battle]|opponentcastingzone) changecost(colorless:+1)])) forever
+note=looking at the opponent's hand before choosing is not shown
+text=Enweb {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.) -- As Yera and Oski enters, look at an opponent's hand, then choose a card type other than creature. -- Spells of the chosen type cost {1} more to cast.
+mana={2}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=3
+[/card]
+[card]
 name=Superior Foes of Spider-Man
+abilities=trample
+auto=@movedTo(*[manacost>=4]|mystack):may all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) forever )!
+missing=a card exiled earlier stays playable after the next one is exiled (the real card only lets you play the most recent one)
+text=Trample -- Whenever you cast a spell with mana value 4 or greater, you may exile the top card of your library. If you do, you may play that card until you exile another card with this creature.
+mana={2}{R}
+type=Creature
+subtype=Human Rogue Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Restless Razorkin
+#OM1 printing of Superior Foes of Spider-Man (keep in sync)
 abilities=trample
 auto=@movedTo(*[manacost>=4]|mystack):may all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) forever )!
 missing=a card exiled earlier stays playable after the next one is exiled (the real card only lets you play the most recent one)
@@ -146234,6 +147399,25 @@ power=1
 toughness=1
 [/card]
 [card]
+name=Druneth, Reviver of the Hive
+#OM1 printing of Jackal, Genius Geneticist (keep in sync)
+abilities=trample
+auto=@movedto(*[creature;manacost=1]|mystack) restriction{compare(power)~equalto~1}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=2]|mystack) restriction{compare(power)~equalto~2}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=3]|mystack) restriction{compare(power)~equalto~3}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=4]|mystack) restriction{compare(power)~equalto~4}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=5]|mystack) restriction{compare(power)~equalto~5}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=6]|mystack) restriction{compare(power)~equalto~6}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=7]|mystack) restriction{compare(power)~equalto~7}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+auto=@movedto(*[creature;manacost=8]|mystack) restriction{compare(power)~equalto~8}:all(trigger[to]) clone options(nolegend) && counter(1/1) all(this)
+text=Trample -- Whenever you cast a creature spell with mana value equal to Druneth's power, copy that spell, except the copy isn't legendary. Then put a +1/+1 counter on Druneth. (The copy becomes a token.)
+mana={G}{U}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=1
+toughness=1
+[/card]
+[card]
 name=Impostor Syndrome
 auto=@combatdamaged(player) from(creature[-token]|mybattlefield):all(trigger[from]) clone options(nolegend)
 text=Whenever a nontoken creature you control deals combat damage to a player, create a token that's a copy of it, except it isn't legendary.
@@ -146245,6 +147429,18 @@ name=Mister Negative
 abilities=vigilance,lifelink
 auto=ability$!name(Darkforce Inversion) choice name(Exchange life totals) exchangelife opponent && if compare(opponentlifetotal)~morethan~compare(lifetotal) then draw:opponentlifetotalminuslifetotalminusend controller _ choice name(Don't exchange) donothing!$ controller
 text=Vigilance, lifelink -- Darkforce Inversion — When Mister Negative enters, you may exchange life totals with target opponent. If you lost life this way, draw that many cards.
+mana={5}{W}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=5
+toughness=5
+[/card]
+[card]
+name=Withar, Cocoon Keeper
+#OM1 printing of Mister Negative (keep in sync)
+abilities=vigilance,lifelink
+auto=ability$!name(Darkforce Inversion) choice name(Exchange life totals) exchangelife opponent && if compare(opponentlifetotal)~morethan~compare(lifetotal) then draw:opponentlifetotalminuslifetotalminusend controller _ choice name(Don't exchange) donothing!$ controller
+text=Vigilance, lifelink -- When Withar enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
 mana={5}{W}{B}
 type=Legendary Creature
 subtype=Human Villain
@@ -146265,8 +147461,32 @@ power=2
 toughness=2
 [/card]
 [card]
+name=Basil, Cabaretti Loudmouth
+#OM1 printing of Flash Thompson, Spider-Fan (keep in sync)
+abilities=flash
+auto=choice name(Heckle - tap target creature) tap target(creature)
+auto=choice name(Hero Worship - untap target creature) untap target(creature)
+auto=choice name(Both) tap target(creature) && ability$!name(Hero Worship) choice name(Untap target creature) untap target(creature)!$ controller
+text=Flash -- When Basil enters, choose one or both— -- • Tap target creature. -- • Untap target creature.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
 name=Amazing Acrobatics
 #REVIEW-V counter and Both modes are tested with player 2 countering (om1_amazing_acrobatics_*)
+auto=choice name(Counter target spell) fizzle target(*|stack)
+auto=choice name(Tap one or two target creatures) tap target(<upto:2>creature)
+auto=choice name(Both) fizzle target(*|stack) && ability$!name(Tap creatures) choice name(Tap one or two target creatures) tap target(<upto:2>creature)!$ controller
+text=Choose one or both — -- • Counter target spell. -- • Tap one or two target creatures.
+mana={1}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Drix Interception
+#OM1 printing of Amazing Acrobatics (keep in sync)
 auto=choice name(Counter target spell) fizzle target(*|stack)
 auto=choice name(Tap one or two target creatures) tap target(<upto:2>creature)
 auto=choice name(Both) fizzle target(*|stack) && ability$!name(Tap creatures) choice name(Tap one or two target creatures) tap target(<upto:2>creature)!$ controller
@@ -146285,10 +147505,28 @@ mana={3}{U}{U}
 type=Instant
 [/card]
 [card]
+name=Outsmart the Amateur
+#OM1 printing of School Daze (keep in sync)
+auto=choice name(Do Homework - draw three cards) draw:3 controller
+auto=choice name(Fight Crime - counter target spell, draw a card) fizzle target(*|stack) && draw:1 controller
+text=Choose one — -- • Draw three cards. -- • Counter target spell. Draw a card.
+mana={3}{U}{U}
+type=Instant
+[/card]
+[card]
 name=Heroes' Hangout
 auto=choice name(Date Night) all(*[zpos<=2]|mylibrary) moveto(myexile) and!( transforms((hangoutexiled)) ueot )! && ability$!name(Choose the card to play) notatarget(hangoutexiled|myexile) transforms((,canplayfromexile)) uent!$ controller
 auto=choice name(Patrol Night) target(<upto:2>creature) transforms((,first strike,newability[1/0])) ueot
 text=Choose one — -- • Date Night — Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card. -- • Patrol Night — One or two target creatures each get +1/+0 and gain first strike until end of turn.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Fire-Brained Scheme
+#OM1 printing of Heroes' Hangout (keep in sync)
+auto=choice name(Date Night) all(*[zpos<=2]|mylibrary) moveto(myexile) and!( transforms((hangoutexiled)) ueot )! && ability$!name(Choose the card to play) notatarget(hangoutexiled|myexile) transforms((,canplayfromexile)) uent!$ controller
+auto=choice name(Patrol Night) target(<upto:2>creature) transforms((,first strike,newability[1/0])) ueot
+text=Choose one — -- • Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card. -- • One or two target creatures each get +1/+0 and gain first strike until end of turn.
 mana={R}
 type=Sorcery
 [/card]
@@ -146313,6 +147551,19 @@ power=3
 toughness=3
 [/card]
 [card]
+name=The Watcher on the Road
+#OM1 printing of Mysterio, Master of Illusion (keep in sync)
+auto=token(Illusion Villain,Creature Illusion Villain,3/3,blue)*type:villain[-token]:mybattlefield
+auto=@movedTo(this|nonbattlezone) from(battlefield):moveto(exile) all(illusion[token]|mybattlefield)
+note=when Mysterio leaves, every Illusion token you control is exiled, not only the ones he made
+text=When The Watcher on the Road enters, create a 3/3 blue Illusion Villain creature token for each nontoken Villain you control. Exile those tokens when The Watcher on the Road leaves the battlefield.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Villain
+power=3
+toughness=3
+[/card]
+[card]
 name=The Soul Stone
 #VERIFIED IN GAME 2026-10-30 (John, scenario queue): harnessed, its upkeep trigger asks for a creature card in your graveyard and returns it (retest of scenario_43).
 #VERIFIED IN GAME 2026-10-28 (John, scenario queue): harnessing asks which creature to exile and exiles it. Untested: the upkeep return.
@@ -146321,6 +147572,18 @@ auto={T}:Add{B}
 auto={6}{B}{T}{E(creature|mybattlefield)}:name(Harness The Soul Stone) counter(0/0,1,stoneharnessed)
 auto=@each my upkeep restriction{compare(hascntstoneharnessed)~morethan~0}:moveto(mybattlefield) target(creature|mygraveyard)
 text=Indestructible -- {T}: Add {B}. -- {6}{B}, {T}, Exile a creature you control: Harness The Soul Stone. (Once harnessed, its ∞ ability is active.) -- ∞ — At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
+mana={1}{B}
+type=Legendary Artifact
+subtype=Infinity Stone
+[/card]
+[card]
+name=The Terminus of Return
+#OM1 printing of The Soul Stone (keep in sync)
+abilities=indestructible
+auto={T}:Add{B}
+auto={6}{B}{T}{E(creature|mybattlefield)}:name(Harness The Terminus of Return) counter(0/0,1,stoneharnessed)
+auto=@each my upkeep restriction{compare(hascntstoneharnessed)~morethan~0}:moveto(mybattlefield) target(creature|mygraveyard)
+text=Indestructible -- {T}: Add {B}. -- {6}{B}, {T}, Exile a creature you control: Harness The Terminus of Return. (Once harnessed, its Origin ability is active.) -- Origin — At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
 mana={1}{B}
 type=Legendary Artifact
 subtype=Infinity Stone
@@ -146336,9 +147599,29 @@ mana={1}{R}
 type=Enchantment
 [/card]
 [card]
+name=Quint's Insight
+#OM1 printing of Shadow of the Goblin (keep in sync)
+auto=@each my firstmain:name(Discard a card) reject notaTarget(<1>*|myhand) and!( draw:1 controller )!
+auto=@movedTo(*|mystack) from(mygraveyard,myexile,mylibrary):damage:1 opponent
+auto=@movedTo(land|mybattlefield) from(mygraveyard,myexile):damage:1 opponent
+note=a land put onto the battlefield from a graveyard or exile by an effect also counts as played
+text=At the beginning of your first main phase, discard a card. If you do, draw a card. -- Whenever you play a land or cast a spell from anywhere other than your hand, this enchantment deals 1 damage to each opponent.
+mana={1}{R}
+type=Enchantment
+[/card]
+[card]
 name=Pictures of Spider-Man
 #VERIFIED IN GAME 2026-10-28 (John, scenario queue): reveal top five: the rest go on the bottom of the library.
 #REVIEW-V the reveal (take up to two creatures, rest on the bottom): the harness cannot press OK in a reveal window to start the second option
+auto=reveal:5 optionone name(Take up to two creatures) target(<upto:2>creature|reveal) moveto(myhand) optiononeend optiontwo name(Put the rest on the bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+auto={1}{T}{S}:_TREASURE_
+text=When this artifact enters, look at the top five cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order. -- {1}, {T}, Sacrifice this artifact: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={2}{G}
+type=Artifact
+[/card]
+[card]
+name=Ancestral Carvings
+#OM1 printing of Pictures of Spider-Man (keep in sync)
 auto=reveal:5 optionone name(Take up to two creatures) target(<upto:2>creature|reveal) moveto(myhand) optiononeend optiontwo name(Put the rest on the bottom) target(*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
 auto={1}{T}{S}:_TREASURE_
 text=When this artifact enters, look at the top five cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order. -- {1}, {T}, Sacrifice this artifact: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
@@ -146351,6 +147634,15 @@ name=Rent Is Due
 #two-target chooser runs once per target, which drew two cards).
 auto=@each my end:if type(*[rentpaid]|mybattlefield)~morethan~1 then draw:1 controller
 auto=@each my end:ability$!name(Rent is due) choice restriction{type(*[creature;treasure][-tapped]|mybattlefield)~morethan~1} name(Tap two creatures or Treasures and draw) tap notatarget(<2>*[creature;treasure][-tapped]|mybattlefield) and!( transforms((rentpaid)) ueot )! _ choice name(Sacrifice Rent Is Due) sacrifice all(mysource)!$ controller
+text=At the beginning of your end step, you may tap two untapped creatures and/or Treasures you control. If you do, draw a card. Otherwise, sacrifice this enchantment.
+mana={W}
+type=Enchantment
+[/card]
+[card]
+name=Confessor's Bindings
+#OM1 printing of Rent Is Due (keep in sync)
+auto=@each my end:if type(*[rentpaid]|mybattlefield)~morethan~1 then draw:1 controller
+auto=@each my end:ability$!name(Rent is due) choice restriction{type(*[creature;treasure][-tapped]|mybattlefield)~morethan~1} name(Tap two creatures or Treasures and draw) tap notatarget(<2>*[creature;treasure][-tapped]|mybattlefield) and!( transforms((rentpaid)) ueot )! _ choice name(Sacrifice Confessor's Bindings) sacrifice all(mysource)!$ controller
 text=At the beginning of your end step, you may tap two untapped creatures and/or Treasures you control. If you do, draw a card. Otherwise, sacrifice this enchantment.
 mana={W}
 type=Enchantment
@@ -146374,7 +147666,35 @@ power=0
 toughness=2
 [/card]
 [card]
+name=Merata, Neuron Hacker
+#OM1 printing of Lady Octopus, Inspired Inventor (keep in sync)
+auto=@drawn(controller) restriction{compare(pdrewcount)~lessthan~3}:counter(0/0,1,ingenuity) all(this)
+auto=this(variable{hascntingenuity}=0) {T}:name(Cast an artifact for free) target(artifact[manacost<=0]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=1) {T}:name(Cast an artifact for free) target(artifact[manacost<=1]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=2) {T}:name(Cast an artifact for free) target(artifact[manacost<=2]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=3) {T}:name(Cast an artifact for free) target(artifact[manacost<=3]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=4) {T}:name(Cast an artifact for free) target(artifact[manacost<=4]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=5) {T}:name(Cast an artifact for free) target(artifact[manacost<=5]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}=6) {T}:name(Cast an artifact for free) target(artifact[manacost<=6]|myhand) activate castcard(normal)
+auto=this(variable{hascntingenuity}>=7) {T}:name(Cast an artifact for free) target(artifact|myhand) activate castcard(normal)
+text=Whenever you draw your first or second card each turn, put an ingenuity counter on Merata. -- {T}: You may cast an artifact spell from your hand with mana value less than or equal to the number of ingenuity counters on Merata without paying its mana cost.
+mana={U}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=0
+toughness=2
+[/card]
+[card]
 name=Parker Luck
+auto=@each my end:life:-convertedcost:highest:*[zpos=1]:opponentlibrary controller && life:-convertedcost:highest:*[zpos=1]:mylibrary opponent && all(*[zpos=1]|mylibrary) moveto(myhand) && all(*[zpos=1]|opponentlibrary) moveto(opponenthand)
+note=the two target players are always you and your opponent
+text=At the beginning of your end step, two target players each reveal the top card of their library. They each lose life equal to the mana value of the card revealed by the other player. Then they each put the card they revealed into their hand.
+mana={2}{B}
+type=Enchantment
+[/card]
+[card]
+name=Duskmourn's Claim
+#OM1 printing of Parker Luck (keep in sync)
 auto=@each my end:life:-convertedcost:highest:*[zpos=1]:opponentlibrary controller && life:-convertedcost:highest:*[zpos=1]:mylibrary opponent && all(*[zpos=1]|mylibrary) moveto(myhand) && all(*[zpos=1]|opponentlibrary) moveto(opponenthand)
 note=the two target players are always you and your opponent
 text=At the beginning of your end step, two target players each reveal the top card of their library. They each lose life equal to the mana value of the card revealed by the other player. Then they each put the card they revealed into their hand.
@@ -146394,6 +147714,19 @@ power=2
 toughness=3
 [/card]
 [card]
+name=Vazin, Two-Faced Trickster
+#OM1 printing of Chameleon, Master of Disguise (keep in sync)
+retrace={2}{U} name(Mayhem)
+auto=may copy notaTarget(other creature|mybattlefield)
+note=as a copy he takes the copied creature's name
+text=You may have Vazin enter as a copy of a creature you control, except his name is Vazin, Two-Faced Trickster. -- Mayhem {2}{U} (You may cast this card from your graveyard for {2}{U} if you discarded it this turn. Timing rules still apply.)
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Shapeshifter Villain
+power=2
+toughness=3
+[/card]
+[card]
 name=Daily Bugle Building
 #VERIFIED IN GAME 2026-10-28 (John, scenario queue): Smear Campaign: target legendary creature gains menace.
 auto={T}:Add{C}
@@ -146403,6 +147736,19 @@ auto={1}{T}:Add{B}
 auto={1}{T}:Add{R}
 auto={1}{T}:Add{G}
 #REVIEW-V Smear Campaign (a land's non-mana ability) cannot be clicked in the harness
+auto={1}{T}:name(Smear Campaign) target(creature[legendary]) menace ueot asSorcery
+text={T}: Add {C}. -- {1}, {T}: Add one mana of any color. -- Smear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery.
+type=Land
+[/card]
+[card]
+name=Fearsome Ridgeline
+#OM1 printing of Daily Bugle Building (keep in sync)
+auto={T}:Add{C}
+auto={1}{T}:Add{W}
+auto={1}{T}:Add{U}
+auto={1}{T}:Add{B}
+auto={1}{T}:Add{R}
+auto={1}{T}:Add{G}
 auto={1}{T}:name(Smear Campaign) target(creature[legendary]) menace ueot asSorcery
 text={T}: Add {C}. -- {1}, {T}: Add one mana of any color. -- Smear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery.
 type=Land
@@ -146738,6 +148084,16 @@ mana={B/R}{D(*|myhand)}
 type=Sorcery
 [/card]
 [card]
+name=Knife Trick
+#OM1 printing of Pumpkin Bombardment (keep in sync)
+target=creature
+other={2}{B/R} name(Pay two instead)
+auto=damage:3
+text=As an additional cost to cast this spell, discard a card or pay {2}. -- Knife Trick deals 3 damage to target creature.
+mana={B/R}{D(*|myhand)}
+type=Sorcery
+[/card]
+[card]
 name=Wisecrack
 target=creature
 auto=if cantargetcard(creature[attacking]) then damage:2 targetcontroller
@@ -146749,6 +148105,18 @@ type=Instant
 [/card]
 [card]
 name=Arana, Heart of the Spider
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:counter(1/1) target(creature[attacking]|mybattlefield)
+auto=@combatdamaged(player) from(creature[modified]|mybattlefield):all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!
+text=Whenever you attack, put a +1/+1 counter on target attacking creature. -- Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Gloria, the Great Armorer
+#OM1 printing of Arana, Heart of the Spider (keep in sync)
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited:counter(1/1) target(creature[attacking]|mybattlefield)
 auto=@combatdamaged(player) from(creature[modified]|mybattlefield):all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile ueot])) ueot )!
 text=Whenever you attack, put a +1/+1 counter on target attacking creature. -- Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)
@@ -146775,11 +148143,39 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=Lavabrink Repels the Magmaloth
+#OM1 printing of Maximum Carnage (keep in sync)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=all(creature) transforms((,mustattack)) uynt
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) Add{R}{R}{R}
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) damage:5 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+note=chapter I affects the creatures on the battlefield when it resolves; creatures entering later are not forced to attack
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Until your next turn, each creature attacks each combat if able and attacks a player other than you if able. -- II — Add {R}{R}{R}. -- III — This Saga deals 5 damage to each opponent.
+mana={4}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
 name=Morlun, Devourer of Spiders
 abilities=lifelink
 auto=counter(1/1,X)
 auto=damage:X target(opponent)
 text=Lifelink -- Morlun enters with X +1/+1 counters on him. -- When Morlun enters, he deals X damage to target opponent.
+mana={X}{B}{B}
+type=Legendary Creature
+subtype=Vampire Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Luis, Pompous Pillager
+#OM1 printing of Morlun, Devourer of Spiders (keep in sync)
+abilities=lifelink
+auto=counter(1/1,X)
+auto=damage:X target(opponent)
+text=Lifelink -- Luis enters with X+1/+1 counters on him. -- When Luis enters, he deals X damage to target opponent.
 mana={X}{B}{B}
 type=Legendary Creature
 subtype=Vampire Villain
@@ -146801,10 +148197,36 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
+name=A Most Helpful Weaver
+#OM1 printing of Origin of Spider-Man (keep in sync)
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=token(Spider,Creature Spider,2/1,green,reach)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=2) target(creature|mybattlefield) transforms((Legendary Spider Hero,newability[counter(1/1)])) forever
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) target(creature|mybattlefield) transforms((,double strike)) ueot
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Create a 2/1 green Spider creature token with reach. -- II — Put a +1/+1 counter on target creature you control. It becomes a legendary Spider Hero in addition to its other types. -- III — Target creature you control gains double strike until end of turn.
+mana={1}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
 name=Spider-Girl, Legacy Hero
 auto=this(variable{controllerturn}>0) flying
 auto=@movedTo(this|nonbattlezone) from(battlefield):token(Human Citizen,Creature Human Citizen,1/1,green,white)
 text=During your turn, Spider-Girl has flying. -- When Spider-Girl leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
+mana={G}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Janai and Hoppy, Roofskippers
+#OM1 printing of Spider-Girl, Legacy Hero (keep in sync)
+auto=this(variable{controllerturn}>0) flying
+auto=@movedTo(this|nonbattlezone) from(battlefield):token(Human Citizen,Creature Human Citizen,1/1,green,white)
+text=During your turn, Janai and Hoppy has flying. -- When Janai and Hoppy leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
 mana={G}{W}
 type=Legendary Creature
 subtype=Spider Human Hero
@@ -146824,11 +148246,37 @@ power=1
 toughness=2
 [/card]
 [card]
+name=Rizna, the Spider-Crowned
+#OM1 printing of Spinneret and Spiderling (keep in sync)
+auto=@each my blockers restriction{type(spider[attacking]|mybattlefield)~morethan~1}:counter(1/1) all(this)
+auto=@damaged(anytarget) from(this):if compare(thatmuch)~morethan~3 then all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile uent])) uent )!
+note=the attack trigger is checked at the declare blockers step rather than as attackers are declared
+text=Whenever you attack with two or more Spiders, put a +1/+1 counter on Rizna. -- Whenever Rizna deals 4 or more damage, exile the top card of your library. Until the end of your next turn, you may play that card.
+mana={R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=1
+toughness=2
+[/card]
+[card]
 name=Sun-Spider, Nimble Webber
 auto=this(variable{controllerturn}>0) flying
 auto=ability$!name(Search for an Aura or Equipment) moveto(myhand) notatarget(<upto:1>*[aura;equipment]|mylibrary)!$ controller
 auto=shuffle
 text=During your turn, Sun-Spider has flying. -- When Sun-Spider enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
+mana={3}{W/U}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=Cirina Bargainspinner
+#OM1 printing of Sun-Spider, Nimble Webber (keep in sync)
+auto=this(variable{controllerturn}>0) flying
+auto=ability$!name(Search for an Aura or Equipment) moveto(myhand) notatarget(<upto:1>*[aura;equipment]|mylibrary)!$ controller
+auto=shuffle
+text=During your turn, Cirina Bargainspinner has flying. -- When Cirina Bargainspinner enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
 mana={3}{W/U}
 type=Legendary Creature
 subtype=Spider Human Hero
@@ -146847,6 +148295,18 @@ power=2
 toughness=2
 [/card]
 [card]
+name=Makdee and Itla, Skysnarers
+#OM1 printing of Spider-Woman, Stunning Savior (keep in sync)
+abilities=flying
+auto=lord(*[recent;artifact;creature]|opponentbattlefield) transforms((,newability[tap(noevent)]))
+text=Flying -- Artifacts and creatures your opponents control enter tapped.
+mana={1}{W/U}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=2
+[/card]
+[card]
 name=Spider-Sense
 target=*[instant;sorcery]|stack
 other={U}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
@@ -146858,12 +148318,38 @@ mana={1}{U}
 type=Instant
 [/card]
 [card]
+name=Detect Intrusion
+#OM1 printing of Spider-Sense (keep in sync)
+target=*[instant;sorcery]|stack
+other={U}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=fizzle
+missing=cannot counter a triggered ability, only instant and sorcery spells
+text=Enweb {U} (You may cast this spell for {U} if you also return a tapped creature you control to its owner's hand.) -- Counter target instant spell, sorcery spell, or triggered ability.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
 name=Spiders-Man, Heroic Horde
 other={4}{G}{G}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 auto=if paid(alternative) then life:3 controller
 auto=if paid(alternative) then token(Spider,Creature Spider,2/1,green,reach)*2
 text=Web-slinging {4}{G}{G} (You may cast this spell for {4}{G}{G} if you also return a tapped creature you control to its owner's hand.) -- When Spiders-Man enters, if they were cast using web-slinging, you gain 3 life and create two 2/1 green Spider creature tokens with reach.
+mana={1}{G}
+type=Legendary Creature
+subtype=Spider Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=The Clutter Cluster
+#OM1 printing of Spiders-Man, Heroic Horde (keep in sync)
+other={4}{G}{G}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=if paid(alternative) then life:3 controller
+auto=if paid(alternative) then token(Spider,Creature Spider,2/1,green,reach)*2
+text=Enweb {4}{G}{G} (You may cast this spell for {4}{G}{G} if you also return a tapped creature you control to its owner's hand.) -- When The Clutter Cluster enters, if they were cast using enweb, you gain 3 life and create two 2/1 green Spider creature tokens with reach.
 mana={1}{G}
 type=Legendary Creature
 subtype=Spider Hero
@@ -146884,11 +148370,38 @@ power=4
 toughness=3
 [/card]
 [card]
+name=Zan, Tunnelweb Explorer
+#OM1 printing of Spider-Man, Brooklyn Visionary (keep in sync)
+other={2}{G}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=name(Search for a basic land) notaTarget(<upto:1>land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )!
+auto=shuffle
+text=Enweb {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to its owner's hand.) -- When Zan enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+mana={4}{G}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=3
+[/card]
+[card]
 name=Spider-Man India
 other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
 auto=@movedTo(creature|mystack):counter(1/1) target(creature|mybattlefield) and!( transforms((,flying)) ueot )!
 text=Web-slinging {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Pavitr's Sevā — Whenever you cast a creature spell, put a +1/+1 counter on target creature you control. It gains flying until end of turn.
+mana={3}{G}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=Alessos and Pras, Acrobats
+#OM1 printing of Spider-Man India (keep in sync)
+other={1}{G}{W}{h(creature[tapped]|myBattlefield)} name(Enweb)
+otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
+auto=@movedTo(creature|mystack):counter(1/1) target(creature|mybattlefield) and!( transforms((,flying)) ueot )!
+text=Enweb {1}{G}{W} (You may cast this spell for {1}{G}{W} if you also return a tapped creature you control to its owner's hand.) -- Whenever you cast a creature spell, put a +1/+1 counter on target creature you control. It gains flying until end of turn.
 mana={3}{G}{W}
 type=Legendary Creature
 subtype=Spider Human Hero

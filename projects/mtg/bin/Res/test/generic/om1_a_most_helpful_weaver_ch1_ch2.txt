@@ -1,0 +1,31 @@
+#A Most Helpful Weaver (OM1 printing of A Most Helpful Weaver, its own primitive): chapter I makes a 2/1 Spider token; one round later chapter II puts a +1/+1
+#counter on Grizzly Bears (2/2 -> 3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:A Most Helpful Weaver
+manapool:{1}{W}
+library:Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+A Most Helpful Weaver
+eot
+eot
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:A Most Helpful Weaver,Grizzly Bears,*
+counter:A Most Helpful Weaver=Lore:2
+pt:Grizzly Bears=3/3
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]
