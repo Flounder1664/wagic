@@ -1,0 +1,26 @@
+#Colorstorm Stallion: Fireball with X=4 (five mana) makes a token copy of the Stallion AND still
+#deals its 4 damage. Scenario 76 (2026-10-31): the copy was made but Fireball did no damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Colorstorm Stallion
+hand:Fireball
+manapool:{4}{R}
+[PLAYER2]
+life:20
+[DO]
+Fireball
+choice 4
+p2
+next
+Fireball
+Colorstorm Stallion
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Colorstorm Stallion,*
+graveyard:Fireball
+manapool:{0}
+[PLAYER2]
+life:16
+[END]

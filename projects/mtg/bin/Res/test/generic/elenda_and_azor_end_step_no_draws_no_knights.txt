@@ -1,0 +1,20 @@
+#Elenda and Azor: at an end step where you drew no cards, paying 4 life makes NO Vampire Knights
+#(the count is the number of cards drawn this turn). Scenario 77 (2026-10-31): a 0-draw end step made one.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:612084
+[PLAYER2]
+life:20
+[DO]
+next
+choice 0
+endinterruption
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:612084
+life:16
+[PLAYER2]
+life:20
+[END]
