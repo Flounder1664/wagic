@@ -13436,6 +13436,7 @@ toughness=2
 [/card]
 [card]
 name=Bolrac-Clan Basher
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): face-down via disguise: Mysterious Creature art, zoom inset, W2 badge.
 abilities=double strike,trample
 facedown={3}
 autofacedown=_WARD2_
@@ -150134,6 +150135,7 @@ toughness=4
 [/card]
 [card]
 name=Stinging Vitriol
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): only the opponent is a target; 2 damage, their hand is revealed, you choose a nonland card, they discard it.
 #VERIFIED IN GAME 2026-10-12 (John, scenario queue): 2 damage, hand revealed, the chosen nonland card is discarded.
 #NOT A CARD BUG (2026-10-11). It failed to discard in a scenario because the scenario seat was
 #being treated as an AI and the reveal window answered for John. Duress only appeared to work
@@ -150161,6 +150163,7 @@ toughness=3
 [/card]
 [card]
 name=Pia, Aether Ascetic
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): the enchantment search after the discard: it must be offered and the pick goes to hand.
 #The search used to follow the discard with "&&" - a second target in one chain is never asked for, so John
 #discarded and could not search (2026-11-01). Disciple of Deceit's shape: the discard grants the search.
 auto=may name(Discard a card to search for an enchantment) target(*|myhand) reject and!( transforms((,newability[name(Search for an enchantment) target(enchantment|mylibrary) moveto(myhand) and!( shuffle )!])) oneshot )!
@@ -150245,6 +150248,8 @@ type=Legendary Enchantment
 [/card]
 [card]
 name=Hunter's Axe
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): deathtouch mode: the grant lands on the attacking creature, so its preview shows the DT badge.
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): trample mode: the grant lands on the attacking creature, so its preview shows the TR badge.
 #VERIFIED IN GAME 2026-10-13, second pass (John, scenario queue): the prompt is announced as "Trample or deathtouch".
 #VERIFIED IN GAME 2026-10-13 (John, scenario queue): attacking offers the trample-or-deathtouch menu. [CORRECTED 2026-11-01: the keyword was NOT granted - see below.]
 auto={2}:equip
@@ -150285,6 +150290,7 @@ toughness=4
 [/card]
 [card]
 name=Saheeli, Consul of Oversight
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): a Jace surveil makes a Thopter: Way of the Healer's Jace token, -1 Surveil 1.
 #VERIFIED IN GAME 2026-10-15 (John, scenario queue): one Thopter per turn, no end-step lock.
 auto=@counteradded(0/0,1,ScryMark) from(this) turnlimited:token(-735514)
 auto=@each end:all(this) removeallcounters(0/0,1,ScryMark)
@@ -151272,6 +151278,7 @@ toughness=6
 [/card]
 [card]
 name=Colorstorm Stallion
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): RETEST: Opus token copy when five mana is spent on Fireball (X = 4).
 #REVIEW-V 2026-10-29: cast a five-mana instant or sorcery and check a token copy appears (the +1/+1 half is tested).
 abilities=haste
 auto=_WARD1_
@@ -151347,6 +151354,7 @@ toughness=3
 [/card]
 [card]
 name=The Fantasticar
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): retest after the fix: the four Construct tokens show card art.
 #REVIEW-V 2026-10-29: check the may-animate on each noncreature spell and the sacrifice for four Constructs on the fourth.
 abilities=flying
 auto=@movedTo(*[-creature]|mystack):may name(Become an artifact creature) all(this) becomes(Artifact Creature) ueot
@@ -151446,6 +151454,7 @@ toughness=4
 [/card]
 [card]
 name=Elenda and Azor
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): RETEST: attack menu "Pay {2}{W}{U}{B}: draw 2" draws two; end step makes one knight per card drawn.
 #REVIEW-V 2026-10-29: attack and pick an X from the menu (draw X); at an end step pay 4 life for lifelink Vampire Knights equal to cards drawn.
 abilities=flying
 auto=_WARD2_
@@ -151726,6 +151735,7 @@ toughness=4
 [/card]
 [card]
 name=Cosmic Cube
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): retest after the fix: the chosen spell goes back to the library before it is cast free.
 #REVIEW-V 2026-10-29: attack and check the top six are shown, one spell with mana value <= the biggest attacker's power can be cast free, the rest go to the bottom.
 auto=_WARD2_
 #"Whenever you attack" fires on the first attacker each turn.
@@ -152308,6 +152318,7 @@ toughness=2
 [/card]
 [card]
 name=Ral, Monsoon Mage
+#VERIFIED IN GAME 2026-11-01 (John, scenario queue): retest: the coin flip after your instant or sorcery; Ral transforms only when you are asked.
 #REVIEW-V 2026-10-30: cast an instant on your turn: lose the flip -> 1 damage, win -> may transform (coin flip, so no harness test); check the {1} cost reduction.
 backside=Ral, Leyline Prodigy
 restriction=compare(isflipped)~equalto~0
