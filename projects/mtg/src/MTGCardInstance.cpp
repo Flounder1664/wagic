@@ -462,6 +462,30 @@ int MTGCardInstance::removeType(int id, int removeAll)
     return result;
 }
 
+string MTGCardInstance::faceDownKind()
+{
+    //a copy of a face-down creature is renamed "Morph" without the flag
+    if (!isMorphed && !(isACopier && name == "Morph"))
+        return "";
+    if (isFacedown)
+        return "manifest";
+    return faceDownWard() ? "disguise" : "morph";
+}
+
+int MTGCardInstance::faceDownWard()
+{
+    if (isFacedown)
+        return 0; //a manifested or cloaked card does not get its own disguise ward
+    map<string, string>::const_iterator it = magicTexts.find("facedown");
+    if (it == magicTexts.end())
+        return 0;
+    //magic texts are lowercased when the card is loaded, and macros stay unexpanded
+    size_t found = it->second.find("_ward");
+    if (found == string::npos)
+        return 0;
+    return atoi(it->second.c_str() + found + 5);
+}
+
 int MTGCardInstance::isInPlay(GameObserver* game)
 {
     for (int i = 0; i < 2; i++)

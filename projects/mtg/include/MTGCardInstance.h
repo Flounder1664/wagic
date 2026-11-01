@@ -304,6 +304,12 @@ public:
     int swapT;
     bool isSwitchedPT;
     bool isACopier;
+    //Face-down state, for the card image and for tests: "" when face up, else "morph" (cast
+    //face down), "disguise" (cast face down with a facedown side scripted with ward, e.g.
+    //autofacedown=_WARD2_) or "manifest" (put face down by manifest / manifest dread, which
+    //set isFacedown). faceDownWard() is the ward amount that facedown side gives, 0 for none.
+    string faceDownKind();
+    int faceDownWard();
     bool bypassTC;
     bool discarded;
     int copiedID;

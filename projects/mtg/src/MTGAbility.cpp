@@ -2867,7 +2867,11 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     vector<string> splitMayPay = parseBetween(s, "pay(", ")", true);
     if(splitMayPay.size())
     {
-        GenericPaidAbility * a = NEW GenericPaidAbility(observer, id, card, target,newName,castRestriction,splitMayPay[1],storedPayString,asAlternate);
+        //Spend the stored payload: the factory parses every option of an ability$! menu in turn,
+        //so a payload left behind made each later pay option resolve the first one's (Elenda and Azor).
+        string payString = storedPayString;
+        storedPayString.clear();
+        GenericPaidAbility * a = NEW GenericPaidAbility(observer, id, card, target,newName,castRestriction,splitMayPay[1],payString,asAlternate);
         a->oneShot = 1;
         a->canBeInterrupted = false;
         return a;
@@ -3616,7 +3620,10 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     vector<string> splitMayPaysub = parseBetween(s, "pay[[","]]", true);
     if (splitMayPaysub.size())
     {
-        GenericPaidAbility * a = NEW GenericPaidAbility(observer, id, card, target,newName,castRestriction,splitMayPaysub[1],storedPayString,asAlternate);
+        //Spend the stored payload, as for pay( above.
+        string payString = storedPayString;
+        storedPayString.clear();
+        GenericPaidAbility * a = NEW GenericPaidAbility(observer, id, card, target,newName,castRestriction,splitMayPaysub[1],payString,asAlternate);
         a->oneShot = 1;
         a->canBeInterrupted = false;
         return a;
