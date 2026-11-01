@@ -863,7 +863,8 @@ void TestSuiteGame::assertGame()
                 Log(result); error++;
             }
         }
-        //type:<name-or-id>=<type>[,-<type>...] - types, or keyword abilities, a card in play has
+        //type:<name-or-id>=<type>[,-<type>...] - types, or keyword abilities, a card in play has;
+        //facedown:<morph|disguise|manifest> and ward:<n> check a face-down card's state
         for (size_t e = 0; e < endState.players[i]->expectedTypes.size(); ++e)
         {
             string spec = endState.players[i]->expectedTypes[e];
@@ -896,7 +897,13 @@ void TestSuiteGame::assertGame()
                 int ab = -1;
                 for (int a = 0; a < Constants::NB_BASIC_ABILITIES; a++)
                     if (t == Constants::MTGBasicAbilities[a]) { ab = a; break; }
-                bool has = ab >= 0 ? (found->basicAbilities[ab] != 0) : (found->hasType(t) != 0);
+                bool has;
+                if (t.find("facedown:") == 0)
+                    has = found->faceDownKind() == t.substr(9);
+                else if (t.find("ward:") == 0)
+                    has = found->faceDownWard() == atoi(t.c_str() + 5);
+                else
+                    has = ab >= 0 ? (found->basicAbilities[ab] != 0) : (found->hasType(t) != 0);
                 if (has == absent)
                 {
                     sprintf(result, "<span class=\"error\">==type problem for '%s' (player %i). Expected %s%s==</span><br />",

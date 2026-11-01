@@ -149,28 +149,27 @@ namespace
     // face-down creature is renamed "Morph" without the flag.
     inline bool FaceDown(MTGCardInstance* card)
     {
-        return card && (card->isMorphed || (card->name == "Morph" && card->isACopier));
+        return card && card->faceDownKind().size();
+    }
+
+    // You may look at your own face-down permanents and spells (CR 708.5), so the zoomed view
+    // shows their real card to a human controller. Never to anyone else.
+    inline bool CanPeekFaceDown(MTGCardInstance* card)
+    {
+        return card && card->controller() && card->controller()->isHuman();
     }
 
     // The face-down card image: morph.jpg is full size (672x936, like card art), morph_thumb.jpg
     // the 120x172 thumbnail; manifest.jpg / manifest_thumb.jpg are the same pair for cards put
-    // face down by manifest or manifest dread (AManifest sets isFacedown; casting face down does
-    // not), and disguise.jpg for disguise, whose face-down side is scripted with ward
-    // (autofacedown=_WARD2_; macros stay unexpanded in magicTexts). All resolve through
-    // graphicsFile, so a theme can override them. Falls back from thumb to full, and to morph,
-    // if a file is missing.
+    // face down by manifest or manifest dread, and disguise.jpg for disguise (see
+    // MTGCardInstance::faceDownKind). All resolve through graphicsFile, so a theme can override
+    // them. Falls back from thumb to full, and to morph, if a file is missing.
     inline JQuadPtr FaceDownQuad(WResourceManager* resources, MTGCardInstance* card, bool full)
     {
         if (!resources) return JQuadPtr();
-        string base = "morph";
-        if (card->isFacedown)
-            base = "manifest";
-        else
-        {
-            map<string, string>::const_iterator it = card->magicTexts.find("facedown");
-            if (it != card->magicTexts.end() && it->second.find("_WARD") != string::npos)
-                base = "disguise";
-        }
+        string base = card->faceDownKind();
+        if (base.empty())
+            base = "morph";
         JQuadPtr q;
         if (!full)
             q = resources->RetrieveTempQuad(base + "_thumb.jpg");
@@ -1515,10 +1514,20 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
                      : WResourceManager::Instance()->RetrieveCardToken(tcard, RETRIEVE_NORMAL, 1, abs(kcard->copiedID));
     }
     bool faceDown = kcard && FaceDown(kcard);
+    //the face-down image, drawn as a small inset over the real card when its controller peeks
+    JQuadPtr faceDownInset;
     if (faceDown)
     {
+        //the image lookup is by id, so the first RetrieveCard above got the real card's art
+        JQuadPtr real = thumb ? WResourceManager::Instance()->RetrieveCard(card, RETRIEVE_THUMB)
+                              : WResourceManager::Instance()->RetrieveCard(card);
         JQuadPtr fd = FaceDownQuad(WResourceManager::Instance(), kcard, !thumb);
-        if (fd.get())
+        if (CanPeekFaceDown(kcard) && real.get() && real->mHeight >= real->mWidth)
+        {
+            quad = real;
+            faceDownInset = FaceDownQuad(WResourceManager::Instance(), kcard, false);
+        }
+        else if (fd.get())
             quad = fd;
     }
     if (quad.get() && myA)
@@ -1585,6 +1594,18 @@ void CardGui::RenderBig(MTGCard* card, const Pos& pos, bool thumb, bool noborder
         float modyscale = (cardsetname =="UNH")?0.010f:0.0f;
         float gdvadd = gdv?0.008f:0.0f;//scale add grid deck view
         renderer->RenderQuad(quad.get(), x, pos.actY, pos.actT, (scale-0.005f)+modxscale+gdvadd, (scale-0.005f)+modyscale+gdvadd);
+        if (faceDownInset.get())
+        {
+            //bottom-right corner, a third of the card's height, so it is plain the real card is
+            //only shown because it is yours and it is still face down (a 2/2 with no name)
+            float insetScale = pos.actZ * 250.f / 3.f / faceDownInset->mHeight;
+            float insetX = x + (scale * quad->mWidth / 2) - (insetScale * faceDownInset->mWidth / 2) - 4.f * pos.actZ;
+            float insetY = pos.actY + (scale * quad->mHeight / 2) - (insetScale * faceDownInset->mHeight / 2) - 4.f * pos.actZ;
+            float iw = insetScale * faceDownInset->mWidth;
+            float ih = insetScale * faceDownInset->mHeight;
+            renderer->FillRoundRect(insetX - iw / 2 - 2.f, insetY - ih / 2 - 2.f, iw + 4.f, ih + 4.f, 2.f, ARGB(255, 5, 5, 5));
+            renderer->RenderQuad(faceDownInset.get(), insetX, insetY, pos.actT, insetScale, insetScale);
+        }
 
         RenderCountersBig(card, pos);
         RenderAbilityIconsBig(card, pos);
@@ -2470,6 +2491,19 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
             font->DrawString(kKeywords[k].badge, x + padX, y + padY);
         }
 
+        ++shown;
+    }
+
+    // A face-down disguised card has ward from its facedown side, which is a triggered ability
+    // (the _WARDn_ macro), not a basic ability, and its own card text is hidden. "W2" = ward {2}.
+    int ward = card->faceDownWard();
+    if (ward > 0 && ward < 10 && FaceDown(card) && shown < maxIcons)
+    {
+        char badge[3] = { 'W', (char)('0' + ward), 0 };
+        float y = y0 + shown * stepY;
+        renderer->FillRoundRect(x, y, boxW, bh, 2.f * pos.actZ, ARGB((int)(pos.actA * 0.7f), 15, 15, 22));
+        renderer->DrawRoundRect(x, y, boxW, bh, 2.f * pos.actZ, ARGB((int)pos.actA, 225, 225, 232));
+        font->DrawString(badge, x + padX, y + padY);
         ++shown;
     }
 

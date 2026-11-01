@@ -1,0 +1,20 @@
+#Bolrac-Clan Basher cast for disguise: face down as a disguised 2/2 with ward {2} (its
+#autofacedown=_WARD2_ side), so it draws disguise.jpg and a W2 badge, not the Morph art.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bolrac-Clan Basher
+manapool:{3}
+[PLAYER2]
+[DO]
+Bolrac-Clan Basher
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bolrac-Clan Basher
+type:Bolrac-Clan Basher=facedown:disguise,ward:2,-facedown:morph
+pt:Bolrac-Clan Basher=2/2
+manapool:{0}
+[PLAYER2]
+[END]

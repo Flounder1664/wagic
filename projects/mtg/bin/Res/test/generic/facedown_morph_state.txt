@@ -1,0 +1,19 @@
+#Exalted Angel cast face down with morph: a plain face-down 2/2, no disguise, no ward.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Exalted Angel
+manapool:{3}
+[PLAYER2]
+[DO]
+Exalted Angel
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Exalted Angel
+type:Exalted Angel=facedown:morph,ward:0,-facedown:disguise
+pt:Exalted Angel=2/2
+manapool:{0}
+[PLAYER2]
+[END]

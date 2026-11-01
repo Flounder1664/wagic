@@ -1,0 +1,31 @@
+#A face-down disguised Bolrac-Clan Basher has ward {2}: player 2 Shocks it in response to
+#Ornithopter, declines to pay the ward, and the Shock is countered. Without ward it would die.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bolrac-Clan Basher,Ornithopter
+manapool:{3}
+[PLAYER2]
+hand:Shock
+manapool:{R}
+[DO]
+Bolrac-Clan Basher
+choice 1
+Ornithopter
+no
+yes
+Shock
+Bolrac-Clan Basher
+choice 0
+Shock
+choice 1
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bolrac-Clan Basher,Ornithopter
+pt:Bolrac-Clan Basher=2/2
+manapool:{0}
+[PLAYER2]
+graveyard:Shock
+[END]
