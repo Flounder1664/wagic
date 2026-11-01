@@ -1,0 +1,28 @@
+#Playtest 2026-11-01. Pia, Aether Ascetic (735264): John discarded a card but was never let search. The
+#search sat after "&&" behind a notaTarget discard, and a second target in one chain is never asked for.
+#Discard Juggernaut, then fetch Pacifism to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:735264,Juggernaut
+library:Mind Stone,Pacifism
+manapool:{2}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735264
+choice 0
+Juggernaut
+Pacifism
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735264
+hand:Pacifism
+graveyard:Juggernaut
+library:Mind Stone
+life:20
+[PLAYER2]
+life:20
+[END]

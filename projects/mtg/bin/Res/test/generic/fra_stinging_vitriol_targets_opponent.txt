@@ -1,0 +1,28 @@
+#Playtest 2026-11-01. Stinging Vitriol (735152) hit its caster: it had no target= line, so the 2 damage and
+#the hand reveal both fell back to the controller. Now it targets an opponent: 2 damage to player 2, and
+#player 2 discards the chosen nonland card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:735152,Juggernaut
+manapool:{B}{R}
+life:20
+[PLAYER2]
+hand:Mind Stone,Swamp
+life:20
+[DO]
+735152
+p2
+choice 0
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Juggernaut
+graveyard:735152
+life:20
+[PLAYER2]
+hand:*
+graveyard:Mind Stone
+life:18
+[END]

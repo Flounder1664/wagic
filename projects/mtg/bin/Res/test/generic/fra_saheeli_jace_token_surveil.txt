@@ -1,0 +1,30 @@
+#Playtest 2026-11-01. A Jace token's "-1: Surveil 1" did not trigger Saheeli, Consul of Oversight (735203):
+#AASurveilEvent only sent the surveil event when a target player came through, and the surveil macros
+#never pass one. Way of the Healer makes the Jace token; its -1 surveils, and Saheeli must make a Thopter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735203
+hand:Way of the Healer
+library:Juggernaut,Mind Stone
+manapool:{3}{W}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Way of the Healer
+Jace Fra
+choice 0
+choice 0
+Mind Stone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735203,Way of the Healer,Jace Fra,*
+counter:Jace Fra=loyalty:4
+graveyard:Mind Stone
+library:Juggernaut
+life:20
+[PLAYER2]
+life:20
+[END]

@@ -332,7 +332,19 @@ void MTGRevealingCards::Update(float dt)
         { 
             afterEffectActivated = true;
             abilityAfter = contructAbility(afterReveal);
-            game->addObserver(abilityAfter);
+            //A plain one-shot (surveil, draw:1, shuffle, if ...) added as an observer is only ever
+            //garbage-collected, never resolved: the surveil macros' "afterrevealed surveil" sent no
+            //surveil event, so Saheeli, Consul of Oversight never saw a Jace token's surveil. Resolve
+            //it here, as MTGScryCards does with its delayed ability. all(...)/lords, may and menus
+            //act from the observer list, so they keep that path.
+            if (abilityAfter && abilityAfter->oneShot && !dynamic_cast<ListMaintainerAbility *>(abilityAfter)
+                && !dynamic_cast<MayAbility *>(abilityAfter))
+            {
+                abilityAfter->resolve();
+                SAFE_DELETE(abilityAfter);
+            }
+            else if (abilityAfter)
+                game->addObserver(abilityAfter);
         }
         else
             this->removeFromGame();
@@ -1293,20 +1305,20 @@ AASurveilEvent::AASurveilEvent(GameObserver* observer, int _id, MTGCardInstance 
 
 int AASurveilEvent::resolve()
 {
-    Damageable * _target = (Damageable *) getTarget();
     //Count the surveil even if no target player came through (the surveil macros pass none) - the
     //"you've scried or surveilled this turn" tracker must not depend on it.
-    Player * surveiler = _target ? (Player*)_target : (card ? card->controller() : NULL);
+    Player * surveiler = dynamic_cast<Player *>(getTarget());
+    if (!surveiler && card)
+        surveiler = card->controller();
     if (surveiler)
         surveiler->scrySurveilThisTurn++;
-    if (_target)
+    //The event must not depend on a target either. The surveil macros run after their reveal with no
+    //spell behind them, so no target ever came through and @surveiled never fired: a Jace token's
+    //"-1: Surveil 1" did not trigger Saheeli, Consul of Oversight (John, 2026-11-01).
+    if (card)
     {
-        Player * pTarget = (Player*)_target;
-        if(pTarget)
-        {
-            WEvent * e = NEW WEventCardSurveiled(card);
-            game->receiveEvent(e);
-        }
+        WEvent * e = NEW WEventCardSurveiled(card);
+        game->receiveEvent(e);
     }
     return 0;
 }

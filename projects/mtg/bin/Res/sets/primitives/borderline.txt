@@ -150137,6 +150137,8 @@ name=Stinging Vitriol
 #being treated as an AI and the reveal window answered for John. Duress only appeared to work
 #there because its aicode= line took a different path. Fixed in TestSuiteAI::isAI(); with that
 #fix this card, unchanged, discards the chosen card in the real game window.
+#No target= line until 2026-11-01: the damage and the reveal fell back to the caster (John: "targeted me").
+target=opponent
 auto=damage:2
 auto=reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(choose discards) notaTarget(<1>*[-land]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
 text=Stinging Vitriol deals 2 damage to target opponent. That player reveals their hand. You choose a nonland card from it. They discard that card.
@@ -150157,7 +150159,9 @@ toughness=3
 [/card]
 [card]
 name=Pia, Aether Ascetic
-auto=ability$!name(Discard a card to search for an enchantment) may reject notaTarget(*|myhand) && target(enchantment|mylibrary) moveto(hand) and!( shuffle )!!$ controller
+#The search used to follow the discard with "&&" - a second target in one chain is never asked for, so John
+#discarded and could not search (2026-11-01). Disciple of Deceit's shape: the discard grants the search.
+auto=may name(Discard a card to search for an enchantment) target(*|myhand) reject and!( transforms((,newability[name(Search for an enchantment) target(enchantment|mylibrary) moveto(myhand) and!( shuffle )!])) oneshot )!
 text=When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.
 mana={2}{G}
 type=Legendary Creature
@@ -150240,7 +150244,7 @@ type=Legendary Enchantment
 [card]
 name=Hunter's Axe
 #VERIFIED IN GAME 2026-10-13, second pass (John, scenario queue): the prompt is announced as "Trample or deathtouch".
-#VERIFIED IN GAME 2026-10-13 (John, scenario queue): attacking offers the trample-or-deathtouch menu and the chosen keyword is granted.
+#VERIFIED IN GAME 2026-10-13 (John, scenario queue): attacking offers the trample-or-deathtouch menu. [CORRECTED 2026-11-01: the keyword was NOT granted - see below.]
 auto={2}:equip
 auto=teach(creature) 2/0
 #No menu appeared in game (John, scenario, 2026-10-12): the choices each wrapped their keyword in a
@@ -150249,7 +150253,9 @@ auto=teach(creature) 2/0
 #The name goes INSIDE ability$!...!$, first. The engine takes the first name( it finds in there as the
 #announcement and deletes it, so without a leading one it stole the first choice's: a "trample" popup
 #before the menu (John, screenshot, 2026-10-13). A name( outside the ability$! is ignored.
-auto=teach(creature) transforms((,newability[@combat(attacking) source(this):ability$!name(Trample or deathtouch) choice name(Trample) trample ueot _ choice name(Deathtouch) deathtouch ueot!$ controller]))
+#ability$!...!$ casts its text from a dummy card, so a bare "trample ueot" went to the dummy and the creature
+#never gained anything (harness, 2026-11-01). all(mysource) reaches the creature that attacked.
+auto=teach(creature) transforms((,newability[@combat(attacking) source(this):ability$!name(Trample or deathtouch) choice name(Trample) all(mysource) trample ueot _ choice name(Deathtouch) all(mysource) deathtouch ueot!$ controller]))
 text=Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn." -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={G}
 type=Artifact

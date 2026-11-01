@@ -1,0 +1,28 @@
+#Playtest 2026-11-01. Hunter's Axe (735108): attacking offers trample or deathtouch, and the chosen keyword must
+#land on the EQUIPPED creature (John could not tell whether it had). Equip Eager Cadet, attack, pick Deathtouch (choice 1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735108,Eager Cadet
+manapool:{2}
+life:20
+[PLAYER2]
+life:20
+[DO]
+735108
+Eager Cadet
+next
+next
+Eager Cadet
+next
+choice 1
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:735108,Eager Cadet
+type:Eager Cadet=deathtouch,-trample
+pt:Eager Cadet=3/1
+life:20
+[PLAYER2]
+life:20
+[END]
