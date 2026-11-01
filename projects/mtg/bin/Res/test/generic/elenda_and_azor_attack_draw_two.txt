@@ -1,0 +1,33 @@
+#Elenda and Azor: attacking and choosing "Pay {2}{W}{U}{B}: draw 2" draws two cards.
+#Scenario 77 (2026-10-31): X = 2 drew only one card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Island,Swamp,Mountain,Forest,612084
+library:Grizzly Bears,Hill Giant,Eager Cadet
+[PLAYER2]
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+612084
+next
+Plains
+Island
+Swamp
+Mountain
+Forest
+choice 2
+choice 0
+endinterruption
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:*,*,*,*,*,612084
+hand:*,*
+library:*
+[PLAYER2]
+life:20
+[END]

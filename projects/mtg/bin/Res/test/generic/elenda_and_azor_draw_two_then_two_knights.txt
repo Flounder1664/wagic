@@ -1,0 +1,60 @@
+#Elenda and Azor: draw 2 off the attack menu, then at your end step pay 4 life for TWO Vampire
+#Knights; at the opponent's end step (you drew nothing that turn) paying again makes none.
+#Scenario 77 (2026-10-31): the draw was 1 and the knight counts were off.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Island,Swamp,Mountain,Forest,612084
+library:Grizzly Bears,Hill Giant,Eager Cadet
+[PLAYER2]
+library:Forest,Forest,Forest
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+612084
+next
+Plains
+Island
+Swamp
+Mountain
+Forest
+choice 2
+choice 0
+endinterruption
+next
+#damage
+next
+#combat end
+next
+#second main
+next
+#end step
+choice 0
+endinterruption
+#to the opponent's end step
+eot
+next
+next
+next
+next
+next
+next
+next
+next
+choice 0
+endinterruption
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:*,*,*,*,*,612084,*,*
+hand:*,*
+library:*
+life:12
+[PLAYER2]
+hand:*
+library:*,*
+life:14
+[END]
