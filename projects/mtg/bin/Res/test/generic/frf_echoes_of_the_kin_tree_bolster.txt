@@ -1,0 +1,18 @@
+#Echoes of the Kin Tree: {2}{W}: bolster 1 - the plain activated bolster puts its counter on the lowest-toughness creature.
+#Control for bot_optimus_autobot_leader_bolster_trample (same notaTarget bolster, no grant).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Echoes of the Kin Tree,Eager Cadet
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Echoes of the Kin Tree
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Echoes of the Kin Tree,Eager Cadet
+pt:Eager Cadet=2/2
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#Illusionary Presence (2512): at your upkeep choose a land type; IT gains that landwalk until end of turn.
+#ability$!...!$ casts the choice from a dummy card, so a bare "islandwalk ueot" went to the dummy (2026-11-01).
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:2512
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+choice 1
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:2512
+type:2512=islandwalk,-forestwalk
+life:20
+[PLAYER2]
+life:20
+[END]

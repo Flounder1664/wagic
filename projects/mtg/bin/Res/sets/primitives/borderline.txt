@@ -56895,7 +56895,9 @@ type=Instant
 [card]
 name=Illusionary Presence
 auto=cumulativeupcost[{U}] sacrifice
-auto=@each my upkeep:ability$!name(Choose a land type) choice name(plains) plainswalk ueot _ choice name(island) islandwalk ueot _ choice name(swamp) swampwalk ueot _ choice name(mountain) mountainwalk ueot _ choice name(forest) forestwalk ueot!$ controller
+#ability$!...!$ casts its text from a dummy card, so a bare "islandwalk ueot" went to the dummy and the
+#Presence never gained landwalk (harness, 2026-11-01). all(mysource) reaches the Presence.
+auto=@each my upkeep:ability$!name(Choose a land type) choice name(plains) all(mysource) plainswalk ueot _ choice name(island) all(mysource) islandwalk ueot _ choice name(swamp) all(mysource) swampwalk ueot _ choice name(mountain) all(mysource) mountainwalk ueot _ choice name(forest) all(mysource) forestwalk ueot!$ controller
 text=Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.) -- At the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
 mana={1}{U}{U}
 type=Creature
@@ -152217,7 +152219,9 @@ toughness=8
 name=Optimus Prime, Autobot Leader
 abilities=trample
 auto=this(variable{controllerturn}) transforms((Creature))
-auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Bolster 2) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) counter(1/1,2) && trample ueot!$ controller
+#Was "counter(1/1,2) && trample ueot": the && chain dropped the counters AND the trample (harness, 2026-11-01).
+#Two newability counters, not counter(1/1,2) - transforms splits its list on the comma.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Bolster 2) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) transforms((,newability[counter(1/1)],newability[counter(1/1)],trample)) ueot!$ controller
 missing=converting when the bolstered creature deals combat damage to a player this turn.
 text=Living metal (During your turn, this Vehicle is also a creature.) -- Trample -- Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
 type=Legendary Artifact

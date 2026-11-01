@@ -1,0 +1,29 @@
+#Optimus Prime, Autobot Leader (732113): whenever you attack, bolster 2; the bolstered creature gains trample until end of turn.
+#Before 2026-11-01 the line was "notaTarget(...) counter(1/1,2) && trample ueot": the && chain lost BOTH the counters and
+#the trample (Cadet stayed 1/1). Optimus (6 power, trample) attacks alone, so player 2 loses 6.
+#The Cadet click answers bolster's notaTarget choice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732113,Eager Cadet
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+732113
+next
+Eager Cadet
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:732113,Eager Cadet
+pt:Eager Cadet=3/3
+type:Eager Cadet=trample
+life:20
+[PLAYER2]
+life:14
+[END]
