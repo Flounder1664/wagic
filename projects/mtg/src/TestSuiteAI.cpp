@@ -518,7 +518,18 @@ int TestSuiteAI::Act(float)
         }
         DebugTrace("TESTSUITE revealdone " << (open ? "pressed" : "- no reveal window open"));
         if (open)
+        {
+            //In the game the press arrives through MTGRevealingCards::Render, inside
+            //ActionLayer::Update's update pass, and that same pass goes on to update whatever the
+            //press appended. Pressed from here instead, the next pass ran testDestroy first and threw
+            //away a forceDestroy option two such as "all(*|reveal) bottomoflibrary" before it ever
+            //moved a card (Cosmic Cube). Give the new abilities their update now, as the game does.
+            size_t before = al->mObjects.size();
             open->CheckUserInput(JGE_BTN_NEXT);
+            for (size_t i = before; i < al->mObjects.size(); i++)
+                if (al->mObjects[i])
+                    ((ActionElement *) al->mObjects[i])->Update(0);
+        }
     }
     else if (action.compare("mulligan") == 0)
     {

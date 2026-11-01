@@ -1,0 +1,29 @@
+#Ral, Monsoon Mage: a WON coin flip offers to exile Ral and return him
+#transformed; here the offer is accepted (choice 0 after the Tails pick),
+#so Ral leaves for exile and comes back as Ral, Leyline Prodigy.
+#Pairs with ral_monsoon_mage_flip_may.txt, which declines it. seed 2 wins
+#the flip with Tails picked. (Ral by set id 661773: comma in the name.)
+seed 2
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661773
+hand:Divination
+manapool:{1}{U}
+library:Plains,Swamp,Mountain,Forest
+[PLAYER2]
+[DO]
+Divination
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661773
+counter:661773=loyalty:3
+hand:Mountain,Forest
+library:Plains,Swamp
+graveyard:Divination
+life:20
+[PLAYER2]
+[END]

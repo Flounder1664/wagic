@@ -22,6 +22,39 @@ const size_t kLordKeywordsCount = 5;
 const string kThisKeywords[] = { "this(", "thisforeach(","while(", };
 const size_t kThisKeywordsCount = 3;
 
+//True when pos lies inside a coin flip's or die roll's "winability ... winabilityend" or
+//"loseability ... loseabilityend" branch. That text is parsed on its own only once the flip
+//or roll resolves (AASetCoin/AASetDie), so the and!(, && and lord splitters must leave it
+//alone. They used to cut it out of the whole line first: Ral, Monsoon Mage's won-flip
+//"may ... and!( flip(backside) )! all(this)" turned the line into all(this) damage:1 with
+//the flip glued on, so Ral took 1 and transformed with no choice (John, scenario 80).
+static bool insideFlipBranch(const string& s, size_t pos)
+{
+    const string opens[] = { "winability ", "loseability " };
+    const string closes[] = { " winabilityend", " loseabilityend" };
+    for (int k = 0; k < 2; ++k)
+    {
+        size_t start = s.find(opens[k]);
+        while (start != string::npos && start < pos)
+        {
+            size_t end = s.find(closes[k], start);
+            if (end == string::npos || end > pos)
+                return true;
+            start = s.find(opens[k], end + closes[k].size());
+        }
+    }
+    return false;
+}
+
+//First occurrence of key at or after from that is not inside a flip/roll branch.
+static size_t findOutsideFlipBranch(const string& s, const string& key, size_t from = 0)
+{
+    size_t found = s.find(key, from);
+    while (found != string::npos && insideFlipBranch(s, found))
+        found = s.find(key, found + 1);
+    return found;
+}
+
 
 // Used for the maxCast/maxPlay ability parsing
 const string kMaxCastKeywords[] = { "maxplay(", "maxcast("};
@@ -2545,10 +2578,10 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         }
     }
 
-    found = s.find("and!(");
+    found = findOutsideFlipBranch(s, "and!(");
     if (found != string::npos && found + 6 != ')' && storedAndAbility.empty())
     {
-        vector<string> splitAnd = parseBetween(s, "and!(", ")!",false);
+        vector<string> splitAnd = parseBetween(s.substr(found), "and!(", ")!",false);
         if(splitAnd.size())
         {
             storedAndAbility.append(splitAnd[1]);
@@ -3011,7 +3044,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     size_t lord = string::npos;
     for (size_t j = 0; j < kLordKeywordsCount; ++j)
     {
-        size_t found2 = s.find(kLordKeywords[j]);
+        size_t found2 = findOutsideFlipBranch(s, kLordKeywords[j]);
         if (found2 != string::npos && ((found == string::npos) || found2 < found))
         {
             lord = found2;
@@ -3128,11 +3161,26 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     }
 
     //Multiple abilities for ONE cost
-    found = s.find("&&");
+    found = findOutsideFlipBranch(s, "&&");
     if (found != string::npos)
     {
         SAFE_DELETE(tc);
-        vector<string> multiEffects = split(s,'&');
+        vector<string> multiEffects;
+        if (s.find("winability ") == string::npos && s.find("loseability ") == string::npos)
+            multiEffects = split(s,'&');
+        else
+        {
+            //Split only on the && outside a flip/roll branch (Winter Sky's won flip is
+            //"damage:1 all(creature) && damage:1 all(player)", one branch, not two abilities).
+            size_t start = 0;
+            while (found != string::npos)
+            {
+                multiEffects.push_back(s.substr(start, found - start));
+                start = found + 2;
+                found = findOutsideFlipBranch(s, "&&", start);
+            }
+            multiEffects.push_back(s.substr(start));
+        }
         MultiAbility * multi = NEW MultiAbility(observer, id, card, target, NULL);
         for(unsigned int i = 0;i < multiEffects.size();i++)
         {
@@ -3153,7 +3201,7 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     i = -1;
     for (size_t j = 0; j < kLordKeywordsCount; ++j)
     {
-        size_t found2 = s.find(kLordKeywords[j]);
+        size_t found2 = findOutsideFlipBranch(s, kLordKeywords[j]);
         if (found2 != string::npos && ((found == string::npos) || found2 < found))
         {
             found = found2;

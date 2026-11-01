@@ -1,0 +1,30 @@
+#Ral, Monsoon Mage: a WON coin flip only OFFERS to exile Ral and return him
+#transformed ("you may exile Ral"). Here the offer is declined, so Ral
+#must stay on the battlefield untransformed. Before the fix the may was
+#lost inside the flip's win branch and Ral flipped with no choice
+#(John, scenario 80, 2026-10-31). Divination costs {1}{U} with Ral out.
+#(Ral by set id 661773: the name contains a comma.)
+seed 2
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661773
+hand:Divination
+manapool:{1}{U}
+library:Plains,Swamp,Mountain,Forest
+[PLAYER2]
+[DO]
+Divination
+choice 0
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:661773
+counter:661773=loyalty:0
+hand:Mountain,Forest
+library:Plains,Swamp
+graveyard:Divination
+life:20
+[PLAYER2]
+[END]

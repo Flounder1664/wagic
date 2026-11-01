@@ -1,0 +1,29 @@
+#Cosmic Cube: attacking with Grizzly Bears (power 2) looks at the top six;
+#Shock (mana value 1) is cast for free at the opponent, the rest go to the
+#bottom. John's game locked up casting the Shock (scenario 78, 2026-10-31).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cosmic Cube,Grizzly Bears
+library:Swamp,Forest,Mountain,Island,Shock,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+Grizzly Bears
+next
+choice 0
+Shock
+revealdone
+p2
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Cosmic Cube,Grizzly Bears
+library:Swamp,Forest,Mountain,Island,Hill Giant
+graveyard:Shock
+[PLAYER2]
+life:16
+[END]

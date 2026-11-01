@@ -151721,7 +151721,7 @@ name=Cosmic Cube
 #REVIEW-V 2026-10-29: attack and check the top six are shown, one spell with mana value <= the biggest attacker's power can be cast free, the rest go to the bottom.
 auto=_WARD2_
 #"Whenever you attack" fires on the first attacker each turn.
-auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Look at the top six) reveal:6 revealzone(mylibrary) optionone name(Cast a spell for free) target(<upto:1>*[-land;manacost<=power:highest:creature[attacking]:mybattlefield]|reveal) becomes(tobecast) ueot optiononeend optiontwo all(*[-tobecast]|reveal) bottomoflibrary optiontwoend afterrevealed all(tobecast|mylibrary) activate castcard(normal) afterrevealedend revealend
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Look at the top six) reveal:6 revealzone(mylibrary) optionone name(Cast a spell for free) target(<upto:1>*[-land;manacost<=power:highest:creature[attacking]:mybattlefield]|reveal) moveTo(mylibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed all(tobecast|mylibrary) moveTo(myLibrary) and!( activate castcard(normal) )! afterrevealedend revealend
 text=Ward {2} -- Whenever you attack, look at the top six cards of your library. You may cast a spell from among them with mana value less than or equal to the greatest power among attacking creatures you control without paying its mana cost. Put the rest on the bottom of your library in a random order.
 mana={5}
 type=Artifact

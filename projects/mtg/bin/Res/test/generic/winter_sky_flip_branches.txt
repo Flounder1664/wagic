@@ -1,0 +1,28 @@
+#Winter Sky: a won flip deals 1 damage to each creature AND each player.
+#The won branch holds "damage:1 all(creature) && damage:1 all(player)";
+#the && splitter used to cut the line there, before the flip was parsed,
+#so the coin never flipped. seed 2 wins with Tails (choice 0).
+seed 2
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Winter Sky
+manapool:{R}
+library:Plains
+[PLAYER2]
+inplay:Llanowar Elves
+library:Swamp
+[DO]
+Winter Sky
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Winter Sky
+library:Plains
+life:19
+[PLAYER2]
+graveyard:Llanowar Elves
+library:Swamp
+life:19
+[END]
