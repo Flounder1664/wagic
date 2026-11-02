@@ -1,0 +1,21 @@
+#SNC batch 1 (#44). Out of the Way returns Hill Giant to its owner's hand and draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Out of the Way
+library:Memnite
+manapool:{3}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Out of the Way
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Memnite
+graveyard:Out of the Way
+[PLAYER2]
+hand:Hill Giant
+[END]

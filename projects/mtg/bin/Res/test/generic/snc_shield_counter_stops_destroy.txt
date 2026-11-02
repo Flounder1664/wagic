@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). Shield counter: Murder would destroy Disciplined Duelist; its shield is removed instead.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Disciplined Duelist
+hand:Murder
+manapool:{1}{B}{B}
+[PLAYER2]
+[DO]
+Murder
+Disciplined Duelist
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Disciplined Duelist
+graveyard:Murder
+counter:Disciplined Duelist=shield:0
+[PLAYER2]
+[END]

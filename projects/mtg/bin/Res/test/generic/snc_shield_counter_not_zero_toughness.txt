@@ -1,0 +1,18 @@
+#SNC batch 1 (#44). A shield counter does not save a creature whose toughness drops to 0 - that is not
+#destruction. Disfigure gives Swooping Protector (2/1) -2/-2; it dies with its shield still on.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swooping Protector
+hand:Disfigure
+manapool:{B}
+[PLAYER2]
+[DO]
+Disfigure
+Swooping Protector
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Disfigure,Swooping Protector
+[PLAYER2]
+[END]

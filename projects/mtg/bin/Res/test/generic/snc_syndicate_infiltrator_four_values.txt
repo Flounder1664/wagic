@@ -1,0 +1,16 @@
+#SNC batch 1 (#44). Four mana values only - two cards share mana value 2 - so Syndicate Infiltrator stays 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Syndicate Infiltrator
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Divination
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Syndicate Infiltrator
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Divination
+pt:Syndicate Infiltrator=3/3
+[PLAYER2]
+[END]

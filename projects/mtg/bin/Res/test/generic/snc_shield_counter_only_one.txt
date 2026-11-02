@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). A shield counter is spent by the first hit: the second Shock kills Swooping Protector.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swooping Protector
+hand:Shock,Lightning Bolt
+manapool:{R}{R}
+[PLAYER2]
+[DO]
+Shock
+Swooping Protector
+Lightning Bolt
+Swooping Protector
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Shock,Lightning Bolt,Swooping Protector
+[PLAYER2]
+[END]

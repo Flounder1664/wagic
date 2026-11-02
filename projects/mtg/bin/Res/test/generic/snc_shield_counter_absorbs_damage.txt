@@ -1,0 +1,20 @@
+#SNC batch 1 (#44). Shield counter engine support: Swooping Protector (2/1) enters with a shield counter.
+#Shock would kill it; the shield is removed instead and the Protector survives undamaged.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swooping Protector
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Swooping Protector
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swooping Protector
+graveyard:Shock
+counter:Swooping Protector=shield:0
+[PLAYER2]
+[END]

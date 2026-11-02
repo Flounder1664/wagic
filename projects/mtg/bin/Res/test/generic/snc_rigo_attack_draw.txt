@@ -1,0 +1,25 @@
+#SNC batch 1 (#44). Rigo (555416) attacks with power 2; Memnite (power 1) attacks too, so Rigo draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555416,Memnite
+library:Ornithopter
+[PLAYER2]
+life:20
+[DO]
+next
+next
+555416
+Memnite
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:555416,Memnite
+hand:Ornithopter
+[PLAYER2]
+life:17
+[END]

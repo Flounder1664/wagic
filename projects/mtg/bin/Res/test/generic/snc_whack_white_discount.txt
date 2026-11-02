@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). Whack costs {B} when it targets a white creature: Savannah Lions gets -4/-4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Whack
+manapool:{B}
+[PLAYER2]
+inplay:Savannah Lions
+[DO]
+Whack
+choice 1
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Whack
+[PLAYER2]
+graveyard:Savannah Lions
+[END]

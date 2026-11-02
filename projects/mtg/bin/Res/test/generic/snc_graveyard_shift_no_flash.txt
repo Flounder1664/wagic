@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). Only four mana values: no flash, so Graveyard Shift cannot be cast at the beginning of combat.
+[INIT]
+COMBATBEGIN
+[PLAYER1]
+hand:Graveyard Shift
+graveyard:Shock,Grizzly Bears,Mind Rot,Craw Wurm
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+Graveyard Shift
+Craw Wurm
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+hand:Graveyard Shift
+graveyard:Shock,Grizzly Bears,Mind Rot,Craw Wurm
+manapool:{4}{B}
+[PLAYER2]
+[END]

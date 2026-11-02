@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). Aven Heartstabber dies: mill two, then draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aven Heartstabber
+hand:Shock
+library:Memnite,Ornithopter,Grizzly Bears
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Aven Heartstabber
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Memnite
+graveyard:Shock,Aven Heartstabber,Ornithopter,Grizzly Bears
+[PLAYER2]
+[END]

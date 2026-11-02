@@ -1,0 +1,21 @@
+#SNC batch 1 (#44). Rhox Pummeler has trample while it has a shield counter; Shock spends the counter
+#and the trample goes with it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhox Pummeler
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Rhox Pummeler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhox Pummeler
+graveyard:Shock
+counter:Rhox Pummeler=shield:0
+type:Rhox Pummeler=-trample
+[PLAYER2]
+[END]

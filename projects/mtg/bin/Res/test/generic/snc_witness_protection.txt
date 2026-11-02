@@ -1,0 +1,20 @@
+#SNC batch 1 (#44). Witness Protection makes Serra Angel a 1/1 with no flying or vigilance.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Witness Protection
+manapool:{U}
+[PLAYER2]
+inplay:Serra Angel
+[DO]
+Witness Protection
+Serra Angel
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Witness Protection
+[PLAYER2]
+inplay:Serra Angel
+pt:Serra Angel=1/1
+type:Serra Angel=-flying,-vigilance,citizen
+[END]

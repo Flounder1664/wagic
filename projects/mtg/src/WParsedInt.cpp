@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "AllAbilities.h"
+#include <set>
 
 int WParsedInt::computeX(Spell * spell, MTGCardInstance * card)
 {
@@ -1365,6 +1366,15 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
         for (int j = 0; j < p->game->graveyard->nb_cards; j++)
             if (p->game->graveyard->cards[j]->isPermanent())
                 intValue++;
+    }
+    else if (s == "mygravemanavalues" || s == "oppgravemanavalues")//number of different mana values among cards in a graveyard (SNC: "five or more mana values")
+    {
+        //Lands count, as mana value 0, like any other card.
+        Player * p = (s == "mygravemanavalues") ? card->controller() : card->controller()->opponent();
+        set<int> seen;
+        for (int j = 0; j < p->game->graveyard->nb_cards; j++)
+            seen.insert(p->game->graveyard->cards[j]->getManaCost()->getConvertedCost());
+        intValue = (int)seen.size();
     }
     else if (s == "mygravecardtypes" || s == "oppgravecardtypes" || s == "allgravecardtypes")//Count number of card types in graveyards
     {

@@ -1,0 +1,15 @@
+#SNC batch 1 (#44). Dapper Shieldmate (2/2) gets +2/+0 during its controller's turn and has a shield counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dapper Shieldmate
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dapper Shieldmate
+pt:Dapper Shieldmate=4/2
+counter:Dapper Shieldmate=shield:1
+[PLAYER2]
+[END]

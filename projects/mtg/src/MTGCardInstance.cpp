@@ -600,8 +600,34 @@ int MTGCardInstance::toGrave( bool forced )
     p->game->putInZone(this, p->game->inPlay, owner->game->graveyard);
     return 1;
 }
+//Shield counter (SNC): "If it would be dealt damage or destroyed, remove a shield counter from it instead."
+//Removes one and returns true when the card has one. Counter names keep the case the card wrote them in.
+bool MTGCardInstance::spendShieldCounter()
+{
+    if (!counters)
+        return false;
+    for (int i = 0; i < counters->mCount; i++)
+    {
+        Counter * c = counters->counters[i];
+        if (c && c->nb > 0 && c->power == 0 && c->toughness == 0 && c->name.size() == 6)
+        {
+            string n = c->name;
+            std::transform(n.begin(), n.end(), n.begin(), ::tolower);
+            if (n == "shield")
+            {
+                counters->removeCounter(c->name.c_str(), 0, 0);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 int MTGCardInstance::destroy()
 {
+    //a creature at 0 toughness is put into the graveyard, not destroyed, so a shield can't save it
+    if ((!isCreature() || toughness > 0) && spendShieldCounter())
+        return 0;
     if (hasTotemArmor())
         return totem();
     else if (!triggerRegenerate())
@@ -610,6 +636,8 @@ int MTGCardInstance::destroy()
 }
 int MTGCardInstance::destroyNoRegen()
 {
+    if ((!isCreature() || toughness > 0) && spendShieldCounter())
+        return 0;
     if (hasTotemArmor())
         return totem(true);
     else

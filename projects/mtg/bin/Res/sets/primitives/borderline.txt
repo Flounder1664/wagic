@@ -152349,3 +152349,272 @@ subtype=Insect
 power=1
 toughness=2
 [/card]
+[card]
+name=Boon of Safety
+target=creature
+auto=counter(0/0,1,Shield)
+auto=_SCRY1_
+text=Put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- Scry 1.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Dapper Shieldmate
+auto=counter(0/0,1,Shield)
+auto=this(variable{controllerturn}>0) 2/0
+text=This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- During your turn, this creature gets +2/+0.
+mana={3}{W}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=2
+[/card]
+[card]
+name=Swooping Protector
+abilities=flash,flying
+auto=counter(0/0,1,Shield)
+text=Flash -- Flying -- This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+mana={3}{W}
+type=Creature
+subtype=Bird Citizen
+power=2
+toughness=1
+[/card]
+[card]
+name=Wingshield Agent
+auto=counter(0/0,1,Shield)
+auto=_ATTACKING_may name(Give flying) target(other creature) flying ueot
+text=This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- Whenever this creature attacks, up to one other target creature gains flying until end of turn.
+mana={2}{U}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=3
+[/card]
+[card]
+name=Rhox Pummeler
+auto=counter(0/0,1,Shield)
+auto=this(counter{0/0.1.Shield}>0) trample
+text=This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- This creature has trample as long as it has a shield counter on it.
+mana={5}{G}
+type=Creature
+subtype=Rhino Soldier
+power=6
+toughness=3
+[/card]
+[card]
+name=Disciplined Duelist
+abilities=double strike
+auto=counter(0/0,1,Shield)
+text=Double strike -- This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+mana={G}{W}{U}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=1
+[/card]
+[card]
+name=Voice of the Vermin
+auto=counter(0/0,1,Shield)
+auto=_ATTACKING_name(Base 4/4) target(creature|mybattlefield) becomes(,4/4) ueot
+text=This creature enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- Whenever this creature attacks, target creature you control has base power and toughness 4/4 until end of turn.
+mana={3}{G}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
+name=Brokers Veteran
+auto=_DIES_name(Shield counter) target(creature|mybattlefield) counter(0/0,1,Shield)
+text=When this creature dies, put a shield counter on target creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+mana={1}{U}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=1
+[/card]
+[card]
+name=Rigo, Streetwise Mentor
+auto=counter(0/0,1,Shield)
+auto=@each my blockers restriction{type(creature[attacking&power<=1]|myBattlefield)~morethan~0}:draw:1 controller
+text=Rigo enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.) -- Whenever you attack a player or planeswalker with one or more creatures with power 1 or less, draw a card.
+mana={G/W}{W}{W/U}
+type=Legendary Creature
+subtype=Cat Citizen
+power=2
+toughness=2
+[/card]
+[card]
+name=Sanctuary Warden
+abilities=flying
+auto=counter(0/0,2,Shield)
+auto=may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[_CITIZENTOKEN_])) oneshot
+auto=_ATTACKING_may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[_CITIZENTOKEN_])) oneshot
+text=Flying -- This creature enters with two shield counters on it. -- Whenever this creature enters or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
+mana={4}{W}{W}
+type=Creature
+subtype=Angel Soldier
+power=5
+toughness=5
+[/card]
+[card]
+name=Syndicate Infiltrator
+abilities=flying
+auto=this(variable{mygravemanavalues}>4) 2/2
+text=Flying -- As long as there are five or more mana values among cards in your graveyard, this creature gets +2/+2.
+mana={2}{U}{B}
+type=Creature
+subtype=Vampire Wizard
+power=3
+toughness=3
+[/card]
+[card]
+name=Snooping Newsie
+auto=deplete:2 controller
+auto=this(variable{mygravemanavalues}>4) 1/1
+auto=this(variable{mygravemanavalues}>4) lifelink
+text=When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.) -- As long as there are five or more mana values among cards in your graveyard, this creature gets +1/+1 and has lifelink.
+mana={U}{B}
+type=Creature
+subtype=Human Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Aven Heartstabber
+abilities=flying
+auto=this(variable{mygravemanavalues}>4) 2/2
+auto=this(variable{mygravemanavalues}>4) deathtouch
+auto=_DIES_deplete:2 controller && draw:1 controller
+text=Flying -- As long as there are five or more mana values among cards in your graveyard, this creature gets +2/+2 and has deathtouch. -- When this creature dies, mill two cards, then draw a card.
+mana={U}{B}
+type=Creature
+subtype=Bird Assassin
+power=1
+toughness=1
+[/card]
+[card]
+name=Tainted Indulgence
+auto=draw:2 controller
+auto=if compare(mygravemanavalues)~lessthan~5 then discard:1
+text=Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.
+mana={U}{B}
+type=Instant
+[/card]
+[card]
+name=Graveyard Shift
+anyzone=this(variable{mygravemanavalues}>4) flash
+target=creature|mygraveyard
+auto=moveTo(myBattlefield)
+text=This spell has flash as long as there are five or more mana values among cards in your graveyard. -- Return target creature card from your graveyard to the battlefield.
+mana={4}{B}
+type=Sorcery
+[/card]
+[card]
+name=Sewer Crocodile
+auto=this(variable{mygravemanavalues}<5) {3}{U}:unblockable ueot
+auto=this(variable{mygravemanavalues}>4) {U}:unblockable ueot
+text={3}{U}: This creature can't be blocked this turn. This ability costs {3} less to activate if there are five or more mana values among cards in your graveyard.
+mana={5}{U}
+type=Creature
+subtype=Crocodile
+power=4
+toughness=6
+[/card]
+[card]
+name=Sanguine Spy
+abilities=menace,lifelink
+auto={1}{S(other creature|mybattlefield)}:_SURVEIL1_
+auto=@each my end restriction{compare(mygravemanavalues)~morethan~4}:may name(Pay 2 life and draw) life:-2 controller && draw:1 controller
+text=Menace, lifelink -- {1}, Sacrifice another creature: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.) -- At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.
+mana={2}{B}
+type=Creature
+subtype=Vampire Rogue
+power=2
+toughness=3
+[/card]
+[card]
+name=Run Out of Town
+target=*[-land]
+auto=transforms((,newability[choice name(Put on top) moveto(ownerlibrary)],newability[choice name(Put on bottom) bottomoflibrary])) oneshot
+missing=the owner chooses top or bottom; here the caster does
+text=The owner of target nonland permanent puts it on their choice of the top or bottom of their library.
+mana={3}{U}
+type=Instant
+[/card]
+[card]
+name=Maestros Diabolist
+abilities=deathtouch,haste
+auto=@combat(attacking) source(this) restriction{type(devil[token]|mybattlefield)~equalto~0}:create(devil:creature devil:1/1:red:battleready) and!( transforms((,newability[@movedto(this|mygraveyard):damage:1 target(anytarget)])) forever )!
+text=Deathtouch, haste -- Whenever this creature attacks, if you don't control a Devil token, create a tapped and attacking 1/1 red Devil creature token with "When this token dies, it deals 1 damage to any target."
+mana={U}{B}{R}
+type=Creature
+subtype=Vampire Warrior
+power=1
+toughness=4
+[/card]
+[card]
+name=Witness Protection
+target=creature
+auto=teach(creature) loseabilities
+auto=teach(creature) transforms((,setpower=1,settoughness=1))
+auto=teach(creature) transforms((Citizen,green,white))
+missing=the creature keeps its other creature types, card types, colours and name (it should become only a green and white Citizen named Legitimate Businessperson)
+text=Enchant creature -- Enchanted creature loses all abilities and is a green and white Citizen creature with base power and toughness 1/1 named Legitimate Businessperson. (It loses all other colors, card types, creature types, and names.)
+mana={U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Knockout Blow
+other={W} name(Target a red creature)
+otherrestriction=type(creature[red][attacking;blocking]|battlefield)~morethan~0
+auto=alternative name(Red attacking or blocking creature) target(creature[red][attacking;blocking]|battlefield) damage:4
+auto=ifnot paid(alternative) then name(Attacking or blocking creature) target(creature[attacking;blocking]|battlefield) damage:4
+auto=life:2 controller
+text=This spell costs {2} less to cast if it targets a red creature. -- Knockout Blow deals 4 damage to target attacking or blocking creature and you gain 2 life.
+mana={2}{W}
+type=Instant
+[/card]
+[card]
+name=Whack
+other={B} name(Target a white creature)
+otherrestriction=type(creature[white]|battlefield)~morethan~0
+auto=alternative name(White creature) target(creature[white]|battlefield) -4/-4 ueot
+auto=ifnot paid(alternative) then name(Target creature) target(creature|battlefield) -4/-4 ueot
+text=This spell costs {3} less to cast if it targets a white creature. -- Target creature gets -4/-4 until end of turn.
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Out of the Way
+other={1}{U} name(Target a green permanent)
+otherrestriction=type(*[-land][green]|opponentbattlefield)~morethan~0
+auto=alternative name(Green nonland permanent) target(*[-land][green]|opponentbattlefield) moveto(ownerhand)
+auto=ifnot paid(alternative) then name(Nonland permanent) target(*[-land]|opponentbattlefield) moveto(ownerhand)
+auto=draw:1 controller
+text=This spell costs {2} less to cast if it targets a green permanent. -- Return target nonland permanent an opponent controls to its owner's hand. -- Draw a card.
+mana={3}{U}
+type=Instant
+[/card]
+[card]
+name=Torch Breath
+abilities=nofizzle
+target=creature,planeswalker
+auto=damage:X
+missing=costs {2} less if it targets a blue permanent
+text=This spell costs {2} less to cast if it targets a blue permanent. -- This spell can't be countered. -- Torch Breath deals X damage to target creature or planeswalker.
+mana={X}{R}
+type=Instant
+[/card]
+[card]
+name=Bouncer's Beatdown
+target=creature,planeswalker
+auto=exiledeath
+auto=damage:power:highest:creature:mybattlefield
+missing=costs {2} less if it targets a black permanent
+text=This spell costs {2} less to cast if it targets a black permanent. -- Bouncer's Beatdown deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control. If that creature or planeswalker would die this turn, exile it instead.
+mana={2}{G}
+type=Instant
+[/card]

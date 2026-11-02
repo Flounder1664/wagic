@@ -1,0 +1,23 @@
+#SNC batch 1 (#44). Maestros Diabolist attacks and, with no Devil out, makes a tapped and attacking 1/1 Devil.
+#Both connect: player 2 takes 1 + 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maestros Diabolist
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Maestros Diabolist
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Maestros Diabolist,*
+[PLAYER2]
+life:18
+[END]

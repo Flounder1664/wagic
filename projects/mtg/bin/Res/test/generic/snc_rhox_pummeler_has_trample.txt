@@ -1,0 +1,15 @@
+#SNC batch 1 (#44). Rhox Pummeler enters with a shield counter and so has trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhox Pummeler
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rhox Pummeler
+counter:Rhox Pummeler=shield:1
+type:Rhox Pummeler=trample
+[PLAYER2]
+[END]

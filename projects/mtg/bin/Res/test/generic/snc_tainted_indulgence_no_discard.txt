@@ -1,0 +1,18 @@
+#SNC batch 1 (#44). Five mana values in the graveyard: Tainted Indulgence draws two and discards nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Tainted Indulgence
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Craw Wurm
+library:Ornithopter,Memnite
+manapool:{U}{B}
+[PLAYER2]
+[DO]
+Tainted Indulgence
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter,Memnite
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Craw Wurm,Tainted Indulgence
+[PLAYER2]
+[END]

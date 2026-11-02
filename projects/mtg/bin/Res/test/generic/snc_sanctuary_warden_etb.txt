@@ -1,0 +1,22 @@
+#SNC batch 1 (#44). Sanctuary Warden enters with two shield counters, removes one of them, draws a card and
+#makes a Citizen.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Sanctuary Warden
+library:Memnite
+manapool:{4}{W}{W}
+[PLAYER2]
+[DO]
+Sanctuary Warden
+choice 0
+Sanctuary Warden
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sanctuary Warden,*
+hand:Memnite
+counter:Sanctuary Warden=shield:1
+[PLAYER2]
+[END]

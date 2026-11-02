@@ -1,0 +1,19 @@
+#SNC batch 1 (#44). With five mana values in the graveyard, Graveyard Shift has flash: cast at the
+#beginning of combat, it returns Craw Wurm.
+[INIT]
+COMBATBEGIN
+[PLAYER1]
+hand:Graveyard Shift
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Craw Wurm
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+Graveyard Shift
+Craw Wurm
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Craw Wurm
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Graveyard Shift
+[PLAYER2]
+[END]

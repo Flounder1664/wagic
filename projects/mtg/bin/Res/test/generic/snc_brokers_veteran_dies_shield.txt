@@ -1,0 +1,20 @@
+#SNC batch 1 (#44). Brokers Veteran dies to Shock and puts a shield counter on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brokers Veteran,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Brokers Veteran
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Shock,Brokers Veteran
+counter:Grizzly Bears=shield:1
+[PLAYER2]
+[END]

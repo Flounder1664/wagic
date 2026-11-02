@@ -165,6 +165,7 @@ public:
     ManaCost * getProducedMana();
     bool matchesCastFilter(int castMethod);
     bool hasTotemArmor();
+    bool spendShieldCounter();
 
     // The recommended method to test for summoning Sickness !
     int hasSummoningSickness();

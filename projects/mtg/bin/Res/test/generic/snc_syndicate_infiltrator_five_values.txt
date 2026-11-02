@@ -1,0 +1,16 @@
+#SNC batch 1 (#44). Five mana values (1,2,3,4,6) in the graveyard: Syndicate Infiltrator is 5/5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Syndicate Infiltrator
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Craw Wurm
+[PLAYER2]
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Syndicate Infiltrator
+graveyard:Shock,Grizzly Bears,Mind Rot,Juggernaut,Craw Wurm
+pt:Syndicate Infiltrator=5/5
+[PLAYER2]
+[END]

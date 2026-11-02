@@ -1,0 +1,23 @@
+#SNC batch 1 (#44). Boon of Safety puts a shield counter on Grizzly Bears, which then survives a Shock.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Boon of Safety,Shock
+library:Mountain
+manapool:{W}{R}
+[PLAYER2]
+[DO]
+Boon of Safety
+Grizzly Bears
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Boon of Safety,Shock
+library:*
+counter:Grizzly Bears=shield:0
+[PLAYER2]
+[END]
