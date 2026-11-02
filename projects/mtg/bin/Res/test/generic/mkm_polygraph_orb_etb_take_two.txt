@@ -1,0 +1,28 @@
+#Polygraph Orb enters: look at the top four (library is listed BOTTOM first, so the top four are
+#Grizzly Bears, Hill Giant, Air Elemental, Juggernaut), put two into your hand and the other two into
+#the graveyard, then lose 2 life. Ornithopter is fifth from the top and must stay in the library.
+#Replaces the old "#REVIEW-V cannot be harness-tested: a multi-card reveal segfaults the headless harness".
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Polygraph Orb
+library:Ornithopter,Grizzly Bears,Hill Giant,Air Elemental,Juggernaut
+manapool:{4}{B}
+[PLAYER2]
+[DO]
+Polygraph Orb
+choice 0
+Juggernaut
+Hill Giant
+revealdone
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Polygraph Orb
+hand:Juggernaut,Hill Giant
+library:Ornithopter
+graveyard:Grizzly Bears,Air Elemental
+life:18
+[PLAYER2]
+[END]
