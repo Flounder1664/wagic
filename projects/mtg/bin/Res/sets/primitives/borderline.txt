@@ -136699,8 +136699,7 @@ grade=supported
 auto=name(look) reveal:4 optionone name(Put 2 in hand) target(<upto:2>*|reveal) moveto(hand) optiononeend optiontwo name(Rest to graveyard) target(<1>*|reveal) moveto(ownergraveyard) and!( all(*|reveal) moveto(ownergraveyard) )! optiontwoend revealend
 #Uses <upto:2>, NOT <2>: John found Dig Through Time (<2>) never presented its cards
 #while Collected Company (<upto:2>) did. Trade-off: the player may take fewer than 2.
-#REVIEW-V Cannot be harness-tested: casting a multi-card reveal segfaults the HEADLESS
-#harness only (fake renderer). Verified in game via Collected Company, same construct.
+#Test: mkm_polygraph_orb_etb_take_two (take two, rest to the graveyard, lose 2).
 auto=life:-2 controller
 auto={2}{T}{evidence3(*|mygraveyard)}:name(Collect evidence 3 - Drain) life:-3 opponent
 missing=The activated ability should let each opponent discard a card or sacrifice a creature INSTEAD of losing 3 life; the opponent-choice construct is known to no-op against the harness AI, so the life loss is applied unconditionally, making it strictly better than the real card.
