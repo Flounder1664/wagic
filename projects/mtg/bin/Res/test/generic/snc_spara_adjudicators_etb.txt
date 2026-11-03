@@ -1,0 +1,20 @@
+#SNC batch 3 (#44). Spara's Adjudicators enters: Hill Giant can't block.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spara's Adjudicators
+manapool:{2}{G}{W}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Spara's Adjudicators
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spara's Adjudicators
+[PLAYER2]
+inplay:Hill Giant
+type:Hill Giant=cantblock,cantattack
+[END]

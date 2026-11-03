@@ -1,0 +1,19 @@
+#SNC batch 3 (#44). Alliance: the second creature entering gives every creature you control deathtouch.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Venom Connoisseur
+hand:Memnite,Ornithopter
+[PLAYER2]
+[DO]
+Memnite
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Venom Connoisseur,Memnite,Ornithopter
+type:Venom Connoisseur=deathtouch
+type:Memnite=deathtouch
+type:Ornithopter=deathtouch
+[PLAYER2]
+[END]

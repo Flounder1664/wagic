@@ -1,0 +1,17 @@
+#SNC batch 3 (#44). Obscura Ascendancy: Grizzly Bears (mana value 2) with no soul counters yet does nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Obscura Ascendancy
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Obscura Ascendancy,Grizzly Bears
+counter:Obscura Ascendancy=soul:0
+[PLAYER2]
+[END]

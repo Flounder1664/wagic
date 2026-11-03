@@ -1,0 +1,22 @@
+#SNC batch 3 (#44). Gala Greeters: first entry gains 2 life (mode 3 of 3); the second offers only the two left, and
+#takes the +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gala Greeters
+hand:Memnite,Ornithopter
+life:20
+[PLAYER2]
+[DO]
+Memnite
+choice 2
+Ornithopter
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gala Greeters,Memnite,Ornithopter
+pt:Gala Greeters=2/2
+life:22
+[PLAYER2]
+[END]

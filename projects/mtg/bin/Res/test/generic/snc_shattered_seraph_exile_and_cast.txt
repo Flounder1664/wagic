@@ -1,0 +1,21 @@
+#SNC batch 3 (#44). Shattered Seraph: {2}, exile it from hand to give Rogue's Passage its mana ability, then cast it from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rogue's Passage
+hand:Shattered Seraph
+manapool:{6}{W}{U}{B}
+life:20
+[PLAYER2]
+[DO]
+Shattered Seraph
+choice 1
+Rogue's Passage
+Shattered Seraph
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rogue's Passage,Shattered Seraph
+life:23
+[PLAYER2]
+[END]

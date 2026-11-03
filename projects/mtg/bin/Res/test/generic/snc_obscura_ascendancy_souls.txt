@@ -1,0 +1,19 @@
+#SNC batch 3 (#44). Obscura Ascendancy: Savannah Lions (mana value 1) then Grizzly Bears (2) each add a soul counter
+#and make a 2/2 Spirit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Obscura Ascendancy
+hand:Savannah Lions,Grizzly Bears
+manapool:{W}{1}{G}
+[PLAYER2]
+[DO]
+Savannah Lions
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Obscura Ascendancy,Savannah Lions,Grizzly Bears,*,*
+counter:Obscura Ascendancy=soul:2
+[PLAYER2]
+[END]

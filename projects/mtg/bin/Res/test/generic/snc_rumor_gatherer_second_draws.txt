@@ -1,0 +1,19 @@
+#SNC batch 3 (#44). Alliance: Memnite enters (scry 1), then Ornithopter enters - the second resolution draws instead.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rumor Gatherer
+hand:Memnite,Ornithopter
+library:Grizzly Bears
+[PLAYER2]
+[DO]
+Memnite
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rumor Gatherer,Memnite,Ornithopter
+hand:Grizzly Bears
+counter:Rumor Gatherer=AllianceRG:2
+[PLAYER2]
+[END]

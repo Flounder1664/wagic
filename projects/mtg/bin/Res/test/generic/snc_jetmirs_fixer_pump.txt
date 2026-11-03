@@ -1,0 +1,16 @@
+#SNC batch 3 (#44). Jetmir's Fixer: {R}{G}: +1/+1 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jetmir's Fixer
+manapool:{R}{G}
+[PLAYER2]
+[DO]
+Jetmir's Fixer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jetmir's Fixer
+pt:Jetmir's Fixer=3/3
+[PLAYER2]
+[END]

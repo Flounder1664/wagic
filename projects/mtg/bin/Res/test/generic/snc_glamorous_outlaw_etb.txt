@@ -1,0 +1,20 @@
+#SNC batch 3 (#44). Glamorous Outlaw enters: 2 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glamorous Outlaw
+library:Memnite,Ornithopter
+manapool:{3}{U}{B}{R}
+[PLAYER2]
+life:20
+[DO]
+Glamorous Outlaw
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glamorous Outlaw
+library:*,*
+[PLAYER2]
+life:18
+[END]

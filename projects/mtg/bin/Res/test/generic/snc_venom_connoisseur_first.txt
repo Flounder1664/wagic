@@ -1,0 +1,17 @@
+#SNC batch 3 (#44). Alliance: after only one creature enters, only Venom Connoisseur has deathtouch.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Venom Connoisseur
+hand:Memnite
+[PLAYER2]
+[DO]
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Venom Connoisseur,Memnite
+type:Venom Connoisseur=deathtouch
+type:Memnite=-deathtouch
+[PLAYER2]
+[END]

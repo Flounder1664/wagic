@@ -152791,3 +152791,208 @@ subtype=Human Warrior
 power=3
 toughness=5
 [/card]
+[card]
+name=Rumor Gatherer
+auto=@movedTo(other creature|myBattlefield):all(this) counter(0/0,1,AllianceRG)
+auto=@counteradded(0/0,1,AllianceRG) from(this) restriction{compare(hascntalliancerg)~equalto~1}:name(Scry 1) _SCRY1_
+auto=@counteradded(0/0,1,AllianceRG) from(this) restriction{compare(hascntalliancerg)~equalto~2}:name(Draw a card) draw:1 controller
+auto=@counteradded(0/0,1,AllianceRG) from(this) restriction{compare(hascntalliancerg)~morethan~2}:name(Scry 1) _SCRY1_
+auto=@each end:removeallcounters(0/0,1,AllianceRG)
+text=Alliance - Whenever another creature you control enters, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
+mana={1}{W}{W}
+type=Creature
+subtype=Elf Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Venom Connoisseur
+auto=@movedTo(other creature|myBattlefield):all(this) counter(0/0,1,AllianceVC)
+auto=@counteradded(0/0,1,AllianceVC) from(this) restriction{compare(hascntalliancevc)~equalto~1}:deathtouch ueot
+auto=@counteradded(0/0,1,AllianceVC) from(this) restriction{compare(hascntalliancevc)~equalto~2}:all(creature|mybattlefield) deathtouch ueot
+auto=@counteradded(0/0,1,AllianceVC) from(this) restriction{compare(hascntalliancevc)~morethan~2}:deathtouch ueot
+auto=@each end:removeallcounters(0/0,1,AllianceVC)
+text=Alliance - Whenever another creature you control enters, this creature gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
+mana={1}{G}
+type=Creature
+subtype=Human Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Sizzling Soloist
+auto=@movedTo(other creature|myBattlefield):name(Can't block) target(creature|opponentbattlefield) cantblock ueot
+missing=the second resolution each turn does not also make that creature attack during its controller's next combat
+text=Alliance - Whenever another creature you control enters, target creature an opponent controls can't block this turn. If this is the second time this ability has resolved this turn, that creature attacks during its controller's next combat phase if able.
+mana={3}{R}
+type=Creature
+subtype=Human Citizen
+power=3
+toughness=2
+[/card]
+[card]
+name=Gala Greeters
+auto=@movedTo(other creature|myBattlefield):transforms((,newability[choice name(Put a +1/+1 counter) all(this) counter(0/0.1.GalaCounter)],newability[choice name(Create a Treasure) all(this) counter(0/0.1.GalaTreasure)],newability[choice name(Gain 2 life) all(this) counter(0/0.1.GalaLife)])) oneshot
+auto=@counteradded(0/0,1,GalaCounter) from(this) restriction{compare(hascntgalacounter)~equalto~1}:counter(1/1)
+auto=@counteradded(0/0,1,GalaTreasure) from(this) restriction{compare(hascntgalatreasure)~equalto~1}:token(Treasure)
+auto=@counteradded(0/0,1,GalaLife) from(this) restriction{compare(hascntgalalife)~equalto~1}:life:2 controller
+auto=@each end:removeallcounters(0/0,1,GalaCounter)
+auto=@each end:removeallcounters(0/0,1,GalaTreasure)
+auto=@each end:removeallcounters(0/0,1,GalaLife)
+missing=a mode already chosen this turn is still offered (picking it again does nothing); the Treasure enters untapped
+text=Alliance - Whenever another creature you control enters, choose one that hasn't been chosen this turn - -- - Put a +1/+1 counter on this creature. -- - Create a tapped Treasure token. -- - You gain 2 life.
+mana={1}{G}
+type=Creature
+subtype=Elf Druid
+power=1
+toughness=1
+[/card]
+[card]
+name=Glamorous Outlaw
+auto=damage:2 opponent
+auto=_SCRY2_
+autohand={2}{E}:name(Exile it: a land taps for U, B or R) target(land|mybattlefield) transforms((,newability[{T}:add{U}],newability[{T}:add{B}],newability[{T}:add{R}])) forever
+autoexile=canplayfromexile
+missing=the land keeps its new mana ability after this card is cast, and the card can be cast from exile however it got there
+text=When this creature enters, it deals 2 damage to each opponent and you scry 2. -- {2}, Exile this card from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+mana={3}{U}{B}{R}
+type=Creature
+subtype=Vampire Rogue
+power=4
+toughness=5
+[/card]
+[card]
+name=Masked Bandits
+abilities=vigilance,menace
+autohand={2}{E}:name(Exile it: a land taps for B, R or G) target(land|mybattlefield) transforms((,newability[{T}:add{B}],newability[{T}:add{R}],newability[{T}:add{G}])) forever
+autoexile=canplayfromexile
+missing=the land keeps its new mana ability after this card is cast, and the card can be cast from exile however it got there
+text=Vigilance -- Menace (This creature can't be blocked except by two or more creatures.) -- {2}, Exile this card from your hand: Target land gains "{T}: Add {B}, {R}, or {G}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+mana={3}{B}{R}{G}
+type=Creature
+subtype=Raccoon Rogue
+power=5
+toughness=5
+[/card]
+[card]
+name=Rakish Revelers
+auto=_CITIZENTOKEN_
+autohand={2}{E}:name(Exile it: a land taps for R, G or W) target(land|mybattlefield) transforms((,newability[{T}:add{R}],newability[{T}:add{G}],newability[{T}:add{W}])) forever
+autoexile=canplayfromexile
+missing=the land keeps its new mana ability after this card is cast, and the card can be cast from exile however it got there
+text=When this creature enters, create a 1/1 green and white Citizen creature token. -- {2}, Exile this card from your hand: Target land gains "{T}: Add {R}, {G}, or {W}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+mana={2}{R}{G}{W}
+type=Creature
+subtype=Elf Druid Rogue
+power=5
+toughness=3
+[/card]
+[card]
+name=Shattered Seraph
+abilities=flying
+auto=life:3 controller
+autohand={2}{E}:name(Exile it: a land taps for W, U or B) target(land|mybattlefield) transforms((,newability[{T}:add{W}],newability[{T}:add{U}],newability[{T}:add{B}])) forever
+autoexile=canplayfromexile
+missing=the land keeps its new mana ability after this card is cast, and the card can be cast from exile however it got there
+text=Flying -- When this creature enters, you gain 3 life. -- {2}, Exile this card from your hand: Target land gains "{T}: Add {W}, {U}, or {B}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+mana={4}{W}{U}{B}
+type=Creature
+subtype=Angel Rogue
+power=4
+toughness=4
+[/card]
+[card]
+name=Spara's Adjudicators
+auto=target(creature|opponentbattlefield) transforms((,newability[cantattack],newability[cantblock])) uynt
+autohand={2}{E}:name(Exile it: a land taps for G, W or U) target(land|mybattlefield) transforms((,newability[{T}:add{G}],newability[{T}:add{W}],newability[{T}:add{U}])) forever
+autoexile=canplayfromexile
+missing=the land keeps its new mana ability after this card is cast, and the card can be cast from exile however it got there
+text=When this creature enters, target creature an opponent controls can't attack or block until your next turn. -- {2}, Exile this card from your hand: Target land gains "{T}: Add {G}, {W}, or {U}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
+mana={2}{G}{W}{U}
+type=Creature
+subtype=Cat Citizen
+power=4
+toughness=4
+[/card]
+[card]
+name=Jetmir's Fixer
+auto={R}{G}:1/1 ueot
+missing=if Treasure mana paid for it, a +1/+1 counter instead of the pump
+text={R}{G}: This creature gets +1/+1 until end of turn. If mana from a Treasure was spent to activate this ability, put a +1/+1 counter on this creature instead.
+mana={R}{G}
+type=Creature
+subtype=Cat Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=Security Rhox
+other={S(treasure|mybattlefield)}{S(treasure|mybattlefield)} name(Sacrifice two Treasures)
+otherrestriction=type(treasure|mybattlefield)~morethan~1
+missing=the Treasure cost is paid by sacrificing two Treasures rather than spending their mana
+text=You may pay {R}{G} rather than pay this spell's mana cost. Spend only mana produced by Treasures to cast it this way.
+mana={2}{R}{G}
+type=Creature
+subtype=Rhino Warrior
+power=5
+toughness=4
+[/card]
+[card]
+name=Arc Spitter
+auto={1}:equip
+auto=teach(creature) transforms((,newability[{1}:name(1 damage to a blocker) damage:1 target(creature[blocking])]))
+missing=can hit any blocking creature, not only one blocking the equipped creature
+text=Equipped creature has "{1}: This creature deals 1 damage to target creature that's blocking it." -- Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+mana={1}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Lord Xander, the Collector
+auto=ability$!name(Discard half your hand) reject notaTarget(<halfdowntype:*:myhand>*|myhand)!$ opponent
+auto=_ATTACKING_deplete:halfdowntype:*:opponentlibrary opponent
+auto=_DIES_ability$!name(Sacrifice half your nonland permanents) notaTarget(<halfdowntype:*[-land]:mybattlefield>*[-land]|mybattlefield) sacrifice!$ opponent
+text=When Lord Xander enters, target opponent discards half the cards in their hand, rounded down. -- Whenever Lord Xander attacks, defending player mills half their library, rounded down. -- When Lord Xander dies, target opponent sacrifices half the nonland permanents they control of their choice, rounded down.
+mana={4}{U}{B}{R}
+type=Legendary Creature
+subtype=Vampire Demon Noble
+power=6
+toughness=6
+[/card]
+[card]
+name=Urabrask, Heretic Praetor
+abilities=haste
+auto=@each my upkeep:all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) ueot )!
+missing=each opponent's next draw after their upkeep is not replaced by exiling their top card
+text=Haste -- At the beginning of your upkeep, exile the top card of your library. You may play it this turn. -- At the beginning of each opponent's upkeep, the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn.
+mana={3}{R}{R}
+type=Legendary Creature
+subtype=Phyrexian Praetor
+power=4
+toughness=4
+[/card]
+[card]
+name=Obscura Ascendancy
+auto=@movedTo(*[manacost=1]|mystack) restriction{compare(hascntsoul)~equalto~0}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=2]|mystack) restriction{compare(hascntsoul)~equalto~1}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=3]|mystack) restriction{compare(hascntsoul)~equalto~2}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=4]|mystack) restriction{compare(hascntsoul)~equalto~3}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=5]|mystack) restriction{compare(hascntsoul)~equalto~4}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=6]|mystack) restriction{compare(hascntsoul)~equalto~5}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=7]|mystack) restriction{compare(hascntsoul)~equalto~6}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=8]|mystack) restriction{compare(hascntsoul)~equalto~7}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=9]|mystack) restriction{compare(hascntsoul)~equalto~8}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=@movedTo(*[manacost=10]|mystack) restriction{compare(hascntsoul)~equalto~9}:counter(0/0,1,Soul) && create(spirit:creature spirit:2/2:white:flying)
+auto=this(variable{hascntsoul}>4) lord(spirit|mybattlefield) 3/3
+missing=stops at ten soul counters
+text=Whenever you cast a spell, if its mana value is equal to 1 plus the number of soul counters on this enchantment, put a soul counter on this enchantment, then create a 2/2 white Spirit creature token with flying. -- As long as there are five or more soul counters on this enchantment, Spirits you control get +3/+3.
+mana={W}{U}{B}
+type=Enchantment
+[/card]
+[card]
+name=Cabaretti Ascendancy
+auto=@each my upkeep:name(Look at the top card) reveal:1 optionone name(Put a creature or planeswalker into your hand) target(<upto:1>*[creature;planeswalker]|reveal) moveto(myhand) optiononeend optiontwo name(Top or bottom) target(<1>*|reveal) transforms((,newability[choice name(Leave it on top) moveto(mylibrary)],newability[choice name(Put it on the bottom) bottomoflibrary])) oneshot optiontwoend revealend
+text=At the beginning of your upkeep, look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it on the bottom of your library.
+mana={R}{G}{W}
+type=Enchantment
+[/card]
