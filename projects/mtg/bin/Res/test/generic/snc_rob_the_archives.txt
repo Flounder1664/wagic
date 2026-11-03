@@ -1,0 +1,20 @@
+#SNC batch 2 (#44). Rob the Archives exiles the top two cards (Ornithopter, Memnite); Memnite is then cast from exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rob the Archives
+library:Craw Wurm,Memnite,Ornithopter
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Rob the Archives
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Memnite
+exile:Ornithopter
+library:Craw Wurm
+graveyard:Rob the Archives
+[PLAYER2]
+[END]

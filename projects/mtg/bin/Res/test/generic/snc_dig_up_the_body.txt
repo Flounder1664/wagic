@@ -1,0 +1,20 @@
+#SNC batch 2 (#44). Dig Up the Body mills Hill Giant and Grizzly Bears (the top two) and returns Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dig Up the Body
+library:Memnite,Grizzly Bears,Hill Giant
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+Dig Up the Body
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant
+library:Memnite
+graveyard:Grizzly Bears,Dig Up the Body
+[PLAYER2]
+[END]

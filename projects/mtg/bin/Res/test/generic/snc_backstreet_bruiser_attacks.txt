@@ -1,0 +1,30 @@
+#SNC batch 2 (#44). Two Boons of Safety put counters on two creatures, so Backstreet Bruiser (defender) can attack.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Backstreet Bruiser,Grizzly Bears
+hand:Boon of Safety,Boon of Safety
+library:Memnite,Ornithopter
+manapool:{W}{W}
+[PLAYER2]
+life:20
+[DO]
+Boon of Safety
+Backstreet Bruiser
+Boon of Safety
+Grizzly Bears
+next
+next
+Backstreet Bruiser
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Backstreet Bruiser,Grizzly Bears
+graveyard:Boon of Safety,Boon of Safety
+library:*,*
+[PLAYER2]
+life:17
+[END]

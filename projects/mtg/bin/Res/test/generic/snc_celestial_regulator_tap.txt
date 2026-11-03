@@ -1,0 +1,19 @@
+#SNC batch 2 (#44). Celestial Regulator enters and taps the opponent's Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Celestial Regulator
+manapool:{1}{W}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Celestial Regulator
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Celestial Regulator
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]

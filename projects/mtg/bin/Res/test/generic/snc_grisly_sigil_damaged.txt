@@ -1,0 +1,23 @@
+#SNC batch 2 (#44). Shock first, then Grisly Sigil deals 3 to the damaged Hill Giant (it dies) and you gain 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grisly Sigil,Shock
+manapool:{B}{R}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shock
+Hill Giant
+Grisly Sigil
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grisly Sigil,Shock
+life:23
+[PLAYER2]
+graveyard:Hill Giant
+[END]

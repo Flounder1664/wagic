@@ -1,0 +1,21 @@
+#SNC batch 2 (#44). Hostile Takeover: Craw Wurm becomes 1/1, Hill Giant 4/4, then 3 damage to each creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hostile Takeover
+manapool:{2}{U}{B}{R}
+[PLAYER2]
+inplay:Hill Giant,Craw Wurm
+[DO]
+Hostile Takeover
+Hill Giant
+choice 0
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hostile Takeover
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Craw Wurm
+[END]

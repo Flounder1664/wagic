@@ -152618,3 +152618,176 @@ text=This spell costs {2} less to cast if it targets a black permanent. -- Bounc
 mana={2}{G}
 type=Instant
 [/card]
+[card]
+name=Cut Your Losses
+other={4}{U}{U}{S(creature[power>=2]|myBattlefield)} name(Casualty 2)
+otherrestriction=type(creature[power>=2]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Cut Your Losses) activate castcard(copied noevent named!:Cut Your Losses:!)!$ controller
+auto=deplete:halfdowntype:*:opponentlibrary opponent
+missing=always mills the opponent (the target player is not chosen)
+text=Casualty 2 (As you cast this spell, you may sacrifice a creature with power 2 or greater. When you do, copy this spell and you may choose a new target for the copy.) -- Target player mills half their library, rounded down.
+mana={4}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=A Little Chat
+other={1}{U}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy A Little Chat) activate castcard(copied noevent named!:A Little Chat:!)!$ controller
+auto=name(Look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) target(<2>*|reveal) bottomoflibrary optiontwoend revealend
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell.) -- Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Make Disappear
+other={1}{U}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Make Disappear) activate castcard(copied noevent named!:Make Disappear:!)!$ controller
+target=*|stack
+auto=transforms((,newability[pay[[{2}]] name(pay 2 mana) donothing?fizzle])) forever
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose a new target for the copy.) -- Counter target spell unless its controller pays {2}.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Rooftop Nuisance
+other={2}{U}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Rooftop Nuisance) activate castcard(copied noevent named!:Rooftop Nuisance:!)!$ controller
+target=creature
+auto=freeze
+auto=draw:1 controller
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose a new target for the copy.) -- Tap target creature. It doesn't untap during its controller's next untap step. -- Draw a card.
+mana={2}{U}
+type=Sorcery
+[/card]
+[card]
+name=Cut of the Profits
+other={X}{B}{B}{S(creature[power>=3]|myBattlefield)} name(Casualty 3)
+otherrestriction=type(creature[power>=3]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Cut of the Profits) activate castcard(copied noevent named!:Cut of the Profits:!)!$ controller
+auto=draw:X controller
+auto=life:-X controller
+missing=the casualty copy may not keep X
+text=Casualty 3 (As you cast this spell, you may sacrifice a creature with power 3 or greater. When you do, copy this spell.) -- You draw X cards and you lose X life.
+mana={X}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Dig Up the Body
+other={2}{B}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Dig Up the Body) activate castcard(copied noevent named!:Dig Up the Body:!)!$ controller
+auto=deplete:2 controller
+auto=may name(Return a creature card) target(creature|mygraveyard) moveto(myhand)
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell.) -- Mill two cards, then you may return a creature card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Grisly Sigil
+other={B}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Grisly Sigil) activate castcard(copied noevent named!:Grisly Sigil:!)!$ controller
+target=creature,planeswalker
+auto=if cantargetcard(*[damaged]|*) then life:3 controller else life:1 controller
+auto=if cantargetcard(*[damaged]|*) then damage:3 else damage:1
+missing=any damage this turn counts, not only noncombat damage
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose a new target for the copy.) -- Choose target creature or planeswalker. If it was dealt noncombat damage this turn, Grisly Sigil deals 3 damage to it and you gain 3 life. Otherwise, Grisly Sigil deals 1 damage to it and you gain 1 life.
+mana={B}
+type=Sorcery
+[/card]
+[card]
+name=Illicit Shipment
+other={3}{B}{B}{S(creature[power>=3]|myBattlefield)} name(Casualty 3)
+otherrestriction=type(creature[power>=3]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Illicit Shipment) activate castcard(copied noevent named!:Illicit Shipment:!)!$ controller
+auto=name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Casualty 3 (As you cast this spell, you may sacrifice a creature with power 3 or greater. When you do, copy this spell.) -- Search your library for a card, put it into your hand, then shuffle.
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Rob the Archives
+other={1}{R}{S(creature[power>=1]|myBattlefield)} name(Casualty 1)
+otherrestriction=type(creature[power>=1]|myBattlefield)~morethan~0
+auto=alternative ability$!name(Copy Rob the Archives) activate castcard(copied noevent named!:Rob the Archives:!)!$ controller
+auto=all(*[zpos<=2]|myLibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile])) ueot )!
+text=Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell.) -- Exile the top two cards of your library. You may play those cards this turn.
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Backstreet Bruiser
+abilities=defender
+auto=aslongas(creature[counter{any}]|myBattlefield) canattack >1
+missing=counts creatures you control that have a counter, not the counters themselves (one creature with two counters is not enough)
+text=Defender -- As long as there are two or more counters among creatures you control, this creature can attack as though it didn't have defender.
+mana={1}{U}
+type=Creature
+subtype=Octopus Rogue
+power=3
+toughness=3
+[/card]
+[card]
+name=Celestial Regulator
+abilities=flying
+auto=if type(creature[counter{any}]|mybattlefield)~morethan~0 then name(Tap and freeze) freeze target(creature|opponentbattlefield) else name(Tap) tap target(creature|opponentbattlefield)
+text=Flying -- When this creature enters, choose target creature you don't control and tap it. If you control a creature with a counter on it, the chosen creature doesn't untap during its controller's next untap step.
+mana={1}{W}{U}
+type=Creature
+subtype=Angel Advisor
+power=2
+toughness=3
+[/card]
+[card]
+name=Fake Your Own Death
+target=creature
+auto=transforms((,newability[2/0],newability[inplaytapdeath],newability[_DIES__TREASURE_])) ueot
+text=Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={1}{B}
+type=Instant
+[/card]
+[card]
+name=Pyre-Sledge Arsonist
+auto={1}{T}:damage:psacrificedcount target(anytarget)
+text={1}, {T}: This creature deals X damage to any target, where X is the number of permanents you've sacrificed this turn.
+mana={2}{R}
+type=Creature
+subtype=Lizard Shaman
+power=2
+toughness=2
+[/card]
+[card]
+name=Hostile Takeover
+target=creature
+auto=transforms((,setpower=4,settoughness=4)) ueot
+auto=transforms((,newability[damage:3 all(creature)])) oneshot
+auto=may name(Base 1/1) target(creature) transforms((,setpower=1,settoughness=1)) ueot
+missing=the 4/4 target is required rather than "up to one", and the 1/1 is chosen after the damage (a 1/1 with 3 damage dies just the same)
+text=Up to one target creature has base power and toughness 1/1 until end of turn. Up to one other target creature has base power and toughness 4/4 until end of turn. Then Hostile Takeover deals 3 damage to each creature.
+mana={2}{U}{B}{R}
+type=Sorcery
+[/card]
+[card]
+name=Structural Assault
+auto=thisforeach(variable{type:artifact:battlefield}) damage:1 all(creature)
+auto=destroy all(artifact)
+missing=counts only the artifacts this spell destroys, not ones that went to a graveyard earlier this turn; the damage is dealt before the artifacts are destroyed
+text=Destroy all artifacts, then Structural Assault deals damage to each creature equal to the number of artifacts that were put into graveyards from the battlefield this turn.
+mana={3}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Ballroom Brawlers
+auto=_ATTACKING_transforms((,newability[choice name(First strike) first strike ueot],newability[choice name(Lifelink) lifelink ueot])) oneshot
+auto=_ATTACKING_may name(Another creature) target(other creature|mybattlefield) transforms((,newability[choice name(First strike) first strike ueot],newability[choice name(Lifelink) lifelink ueot])) oneshot
+missing=the two choices are separate, so the other creature can get a different keyword
+text=Whenever this creature attacks, this creature and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.
+mana={3}{W}{W}
+type=Creature
+subtype=Human Warrior
+power=3
+toughness=5
+[/card]

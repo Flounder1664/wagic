@@ -1,0 +1,28 @@
+#SNC batch 2 (#44). Only one creature has a counter: Backstreet Bruiser keeps defender and cannot attack.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Backstreet Bruiser,Grizzly Bears
+hand:Boon of Safety
+library:Memnite
+manapool:{W}
+[PLAYER2]
+life:20
+[DO]
+Boon of Safety
+Backstreet Bruiser
+next
+next
+Backstreet Bruiser
+next
+next
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Backstreet Bruiser,Grizzly Bears
+graveyard:Boon of Safety
+library:*
+[PLAYER2]
+life:20
+[END]

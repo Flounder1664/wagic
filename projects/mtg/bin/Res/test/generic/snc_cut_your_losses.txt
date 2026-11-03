@@ -1,0 +1,18 @@
+#SNC batch 2 (#44). Cut Your Losses, cast normally: the opponent mills half their library (6 -> 3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Cut Your Losses
+manapool:{4}{U}{U}
+[PLAYER2]
+library:Memnite,Ornithopter,Grizzly Bears,Hill Giant,Craw Wurm,Shock
+[DO]
+Cut Your Losses
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Cut Your Losses
+[PLAYER2]
+library:Memnite,Ornithopter,Grizzly Bears
+graveyard:Hill Giant,Craw Wurm,Shock
+[END]

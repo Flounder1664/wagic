@@ -1,0 +1,20 @@
+#SNC batch 2 (#44). Fake Your Own Death on Grizzly Bears, then Shock: the Bears return tapped and a Treasure is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Fake Your Own Death,Shock
+manapool:{1}{B}{R}
+[PLAYER2]
+[DO]
+Fake Your Own Death
+Grizzly Bears
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Fake Your Own Death,Shock
+[PLAYER2]
+[END]

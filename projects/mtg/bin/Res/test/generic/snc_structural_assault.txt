@@ -1,0 +1,18 @@
+#SNC batch 2 (#44). Three artifacts are destroyed, and each creature takes 3: Hill Giant dies, Craw Wurm (6/4) lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Structural Assault
+manapool:{3}{R}{R}
+[PLAYER2]
+inplay:Ornithopter,Memnite,Millstone,Hill Giant,Craw Wurm
+[DO]
+Structural Assault
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Structural Assault
+[PLAYER2]
+inplay:Craw Wurm
+graveyard:Ornithopter,Memnite,Millstone,Hill Giant
+[END]

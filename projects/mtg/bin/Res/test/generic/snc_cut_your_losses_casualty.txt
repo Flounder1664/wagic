@@ -1,0 +1,22 @@
+#SNC batch 2 (#44). Casualty 2: sacrificing Hill Giant copies Cut Your Losses. The copy mills half of eight
+#(4), then the original half of the four left (2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Cut Your Losses
+manapool:{4}{U}{U}
+[PLAYER2]
+library:Memnite,Ornithopter,Grizzly Bears,Savannah Lions,Craw Wurm,Shock,Mind Rot,Juggernaut
+[DO]
+Cut Your Losses
+choice 1
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Cut Your Losses,Hill Giant
+[PLAYER2]
+library:Memnite,Ornithopter
+graveyard:Grizzly Bears,Savannah Lions,Craw Wurm,Shock,Mind Rot,Juggernaut
+[END]

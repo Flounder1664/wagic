@@ -1,0 +1,21 @@
+#SNC batch 2 (#44). Grisly Sigil on an undamaged Hill Giant: 1 damage, gain 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grisly Sigil
+manapool:{B}
+life:20
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Grisly Sigil
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grisly Sigil
+life:21
+[PLAYER2]
+inplay:Hill Giant
+[END]

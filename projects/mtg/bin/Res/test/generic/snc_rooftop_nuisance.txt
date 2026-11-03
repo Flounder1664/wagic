@@ -1,0 +1,22 @@
+#SNC batch 2 (#44). Rooftop Nuisance taps Hill Giant and draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rooftop Nuisance
+library:Memnite
+manapool:{2}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Rooftop Nuisance
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Memnite
+graveyard:Rooftop Nuisance
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]

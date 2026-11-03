@@ -1,0 +1,20 @@
+#SNC batch 2 (#44). Hostile Takeover makes Hill Giant 4/4 (it survives the 3 damage); Grizzly Bears dies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hostile Takeover
+manapool:{2}{U}{B}{R}
+[PLAYER2]
+inplay:Hill Giant,Grizzly Bears
+[DO]
+Hostile Takeover
+Hill Giant
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hostile Takeover
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+[END]
