@@ -4517,7 +4517,13 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             if (forceUEOT || preventDamageForceOneShot[i])
                 ab = NEW APreventDamageTypesUEOT(observer, id, card, to, from, preventDamageTypes[i]);
             else
-                ab = NEW APreventDamageTypes(observer, id, card, to, from, preventDamageTypes[i]);
+            {
+                APreventDamageTypes * pdt = NEW APreventDamageTypes(observer, id, card, to, from, preventDamageTypes[i]);
+                vector<string> splitMill = parseBetween(s, "millprevented(", ")");
+                if (splitMill.size())
+                    pdt->millPrevented = atoi(splitMill[1].c_str());
+                ab = pdt;
+            }
 
             if (preventDamageForceOneShot[i])
                 ab->oneShot = 1;

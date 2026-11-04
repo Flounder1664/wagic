@@ -1,0 +1,27 @@
+#SNC batch 4 (#44). Corpse Appraiser exiles the opponent's Grizzly Bears, then you take Memnite from your top three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Corpse Appraiser
+library:Llanowar Elves,Ornithopter,Savannah Lions,Memnite
+manapool:{U}{B}{R}
+[PLAYER2]
+graveyard:Grizzly Bears
+[DO]
+Corpse Appraiser
+choice 1
+Grizzly Bears
+choice 0
+Memnite
+revealdone
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Corpse Appraiser
+hand:Memnite
+graveyard:Ornithopter,Savannah Lions
+library:Llanowar Elves
+[PLAYER2]
+exile:Grizzly Bears
+[END]

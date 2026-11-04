@@ -1,0 +1,15 @@
+#SNC batch 4 (#44). Mage's Attendant enters and makes a 1/1 Wizard token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Mage's Attendant
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Mage's Attendant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mage's Attendant,*
+[PLAYER2]
+[END]

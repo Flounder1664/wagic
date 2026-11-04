@@ -1,0 +1,18 @@
+#SNC batch 4 (#44). Titan of Industry: gain 5 life and make a Rhino.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Titan of Industry
+manapool:{4}{G}{G}{G}
+life:20
+[PLAYER2]
+[DO]
+Titan of Industry
+choice 3
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Titan of Industry,*
+life:25
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#SNC batch 4 (#44). Patch Up, split 1+1+1: three mana value 1 creatures come back; Grizzly Bears (2) stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Patch Up
+graveyard:Savannah Lions,Elite Vanguard,Llanowar Elves,Grizzly Bears
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Patch Up
+choice 1
+Savannah Lions
+Elite Vanguard
+Llanowar Elves
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Savannah Lions,Elite Vanguard,Llanowar Elves
+graveyard:Patch Up,Grizzly Bears
+[PLAYER2]
+[END]

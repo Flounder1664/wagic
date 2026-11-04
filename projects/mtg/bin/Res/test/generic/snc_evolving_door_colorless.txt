@@ -1,0 +1,22 @@
+#SNC batch 4 (#44). Evolving Door: sacrifice Memnite (colourless), exile Grizzly Bears (one colour) and cast it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Evolving Door,Memnite
+library:Grizzly Bears,Ornithopter
+manapool:{1}{1}{G}
+[PLAYER2]
+[DO]
+Evolving Door
+choice 0
+Memnite
+Grizzly Bears
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Evolving Door,Grizzly Bears
+graveyard:Memnite
+library:Ornithopter
+[PLAYER2]
+[END]

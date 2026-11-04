@@ -1,0 +1,21 @@
+#SNC batch 4 (#44). Dusk Mangler cast paying 4 life; it enters and the opponent loses 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dusk Mangler
+manapool:{5}{B}{B}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Dusk Mangler
+choice 0
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dusk Mangler
+life:16
+[PLAYER2]
+life:16
+[END]

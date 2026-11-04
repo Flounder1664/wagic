@@ -1,0 +1,20 @@
+#SNC batch 4 (#44). Jinnie Fay: Raise the Alarm's two Soldiers become two 2/2 Cats (Pride Sovereign counts them).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555396,Pride Sovereign
+hand:Raise the Alarm
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Raise the Alarm
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555396,Pride Sovereign,*,*
+graveyard:*
+pt:Pride Sovereign=4/4
+[PLAYER2]
+[END]
