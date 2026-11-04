@@ -1,0 +1,21 @@
+#SNC batch 4 (#44). Toluz connives, discards Grizzly Bears (counter), and the Bears are exiled from the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:555429,Grizzly Bears
+library:Memnite
+manapool:{W}{U}{B}
+[PLAYER2]
+[DO]
+555429
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555429
+hand:Memnite
+exile:Grizzly Bears
+pt:555429=4/2
+[PLAYER2]
+[END]

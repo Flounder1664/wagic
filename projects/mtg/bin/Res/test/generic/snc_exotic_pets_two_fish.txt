@@ -1,0 +1,16 @@
+#SNC batch 4 (#44). Exotic Pets makes two Fish.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Exotic Pets
+manapool:{1}{W}{U}
+[PLAYER2]
+[DO]
+Exotic Pets
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:Exotic Pets
+[PLAYER2]
+[END]

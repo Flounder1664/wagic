@@ -7,7 +7,8 @@
 
 REDamagePrevention::REDamagePrevention(MTGAbility * source, TargetChooser *tcSource, TargetChooser *tcTarget, int damage,
                 bool oneShot, Damage::DamageType typeOfDamage) :
-    source(source), tcSource(tcSource), tcTarget(tcTarget), damage(damage), oneShot(oneShot), typeOfDamage(typeOfDamage)
+    source(source), tcSource(tcSource), tcTarget(tcTarget), damage(damage), oneShot(oneShot), typeOfDamage(typeOfDamage),
+    millPrevented(0)
 {
 }
 
@@ -41,6 +42,13 @@ WEvent * REDamagePrevention::replace(WEvent *event)
     {
         if (damage == -1)
         {
+            if (millPrevented > 0 && d->damage > 0 && d->target && d->target->type_as_damageable == Damageable::DAMAGEABLE_PLAYER)
+            {
+                Player * p = (Player *) d->target;
+                MTGLibrary * library = p->game->library;
+                for (int i = 0; i < d->damage * millPrevented && library->nb_cards; ++i)
+                    p->game->putInZone(library->cards[library->nb_cards - 1], library, p->game->graveyard);
+            }
             d->damage = 0;
             delete event;
             if (oneShot) damage = 0;

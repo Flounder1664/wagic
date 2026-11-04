@@ -1,0 +1,18 @@
+#SNC batch 4 (#44). Lagrella exiles the opponent's Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:555397
+manapool:{G}{W}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+555397
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555397
+[PLAYER2]
+exile:Grizzly Bears
+[END]

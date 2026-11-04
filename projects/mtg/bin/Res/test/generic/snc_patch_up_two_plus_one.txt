@@ -1,0 +1,21 @@
+#SNC batch 4 (#44). Patch Up, split 2+1: Grizzly Bears and then Savannah Lions come back.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Patch Up
+graveyard:Savannah Lions,Grizzly Bears
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Patch Up
+choice 2
+Grizzly Bears
+choice 0
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Savannah Lions,Grizzly Bears
+graveyard:Patch Up
+[PLAYER2]
+[END]

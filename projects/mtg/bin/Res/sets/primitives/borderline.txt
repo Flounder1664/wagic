@@ -152996,3 +152996,191 @@ text=At the beginning of your upkeep, look at the top card of your library. If i
 mana={R}{G}{W}
 type=Enchantment
 [/card]
+[card]
+name=Mage's Attendant
+auto=token(Wizard^Creature Wizard^1/1^blue) and!( transforms((,newability[{1}{S}:name(Counter unless pay 1) target(*[-creature]|stack) transforms((,newability[pay[[{1}]] name(pay 1 mana) donothing?fizzle])) forever])) forever )!
+text=When this creature enters, create a 1/1 blue Wizard creature token with "{1}, Sacrifice this token: Counter target noncreature spell unless its controller pays {1}."
+mana={2}{W}
+type=Creature
+subtype=Cat Rogue
+power=3
+toughness=2
+[/card]
+[card]
+name=Patch Up
+auto=choice name(One creature with mana value 3 or less) target(creature[manacost<=3]|mygraveyard) moveto(mybattlefield)
+auto=choice name(Up to three with mana value 1 or less) target(<upto:3>creature[manacost<=1]|mygraveyard) moveto(mybattlefield)
+auto=choice name(One with mana value 2 and one with 1 or less) target(creature[manacost=2]|mygraveyard) moveto(mybattlefield) and!( transforms((,newability[may name(Return one with mana value 1 or less) target(creature[manacost<=1]|mygraveyard) moveto(mybattlefield)])) oneshot )!
+missing=total mana value is offered as three splits (3 / 1+1+1 / 2+1); splits with mana value 0 cards beyond those are not offered
+text=Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield.
+mana={2}{W}
+type=Sorcery
+[/card]
+[card]
+name=All-Seeing Arbiter
+abilities=flying
+auto=draw:2 controller && ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
+auto=@combat(attacking) source(this):draw:2 controller && ability$!name(Discard a card) notaTarget(*|myhand) reject!$ controller
+auto=@discarded(*|myhand):name(Target gets -X/-0) target(creature|opponentbattlefield) -mygravemanavalues/0 uynt
+text=Flying -- Whenever this creature enters or attacks, draw two cards, then discard a card. -- Whenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
+mana={4}{U}{U}
+type=Creature
+subtype=Avatar
+power=5
+toughness=4
+[/card]
+[card]
+name=Angel of Suffering
+abilities=flying
+auto=preventalldamage to(controller) millprevented(2)
+text=Flying -- If damage would be dealt to you, prevent that damage and mill twice that many cards.
+mana={3}{B}{B}
+type=Creature
+subtype=Nightmare Angel
+power=5
+toughness=3
+[/card]
+[card]
+name=Dusk Mangler
+other={5}{B}{B}{S(creature|mybattlefield)} name(Sacrifice a creature)
+auto=ability$!name(Sacrifice a creature) notaTarget(creature|mybattlefield) sacrifice!$ opponent
+auto=ability$!name(Discard a card) notaTarget(*|myhand) reject!$ opponent
+auto=life:-4 opponent
+missing=the additional cost offers pay 4 life (normal cast) or sacrifice a creature (alternative); the discard-a-card option is not offered
+text=As an additional cost to cast this spell, sacrifice a creature, discard a card, or pay 4 life. -- When this creature enters, each opponent sacrifices a creature of their choice, discards a card, and loses 4 life.
+mana={5}{B}{B}{L:4}
+type=Creature
+subtype=Horror
+power=5
+toughness=4
+[/card]
+[card]
+name=Glittering Stockpile
+auto={T}:Add{R} && counter(0/0,1,Stash)
+auto={T}{S}:name(Add W for each stash counter) thisforeach(counter{0/0.1.Stash}) add{W}
+auto={T}{S}:name(Add U for each stash counter) thisforeach(counter{0/0.1.Stash}) add{U}
+auto={T}{S}:name(Add B for each stash counter) thisforeach(counter{0/0.1.Stash}) add{B}
+auto={T}{S}:name(Add R for each stash counter) thisforeach(counter{0/0.1.Stash}) add{R}
+auto={T}{S}:name(Add G for each stash counter) thisforeach(counter{0/0.1.Stash}) add{G}
+text={T}: Add {R}. Put a stash counter on this artifact. -- {T}, Sacrifice this artifact: Add X mana of any one color, where X is the number of stash counters on this artifact.
+mana={2}{R}
+type=Artifact
+subtype=Treasure
+[/card]
+[card]
+name=Evolving Door
+auto={1}{T}{S(creature[colorless]|mybattlefield)}:name(Sacrifice colorless: exile a one-colour creature) target(creature[-multicolor][-colorless]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )! asSorcery
+auto={1}{T}{S(creature[-multicolor][-colorless]|mybattlefield)}:name(Sacrifice one-colour: exile a multicolour creature) target(creature[multicolor]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )! asSorcery
+auto={1}{T}{S(creature[multicolor]|mybattlefield)}:name(Sacrifice multicolour: exile a multicolour creature) target(creature[multicolor]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )! asSorcery
+missing=the engine has no "exactly N colours" filter: a one-colour sacrifice finds any multicolour creature, and a multicolour sacrifice finds any multicolour creature instead of exactly one more colour; the library is not shuffled
+text={1}, {T}, Sacrifice a creature: Count the colors of the sacrificed creature, then search your library for a creature card that's exactly that many colors plus one. Exile that card, then shuffle. You may cast the exiled card. Activate only as a sorcery.
+mana={2}{G}
+type=Artifact
+[/card]
+[card]
+name=Titan of Industry
+abilities=reach,trample
+auto=choice name(Destroy + gain 5 life) target(*[artifact;enchantment]|battlefield) destroy && ability$!life:5!$ controller
+auto=choice name(Destroy + Rhino) target(*[artifact;enchantment]|battlefield) destroy && ability$!token(Rhino Warrior^Creature Rhino Warrior^4/4^green)!$ controller
+auto=choice name(Destroy + shield counter) target(*[artifact;enchantment]|battlefield) destroy && ability$!name(Shield counter) notaTarget(creature|mybattlefield) counter(0/0,1,Shield)!$ controller
+auto=choice name(Gain 5 life + Rhino) life:5 controller && token(Rhino Warrior^Creature Rhino Warrior^4/4^green)
+auto=choice name(Gain 5 life + shield counter) target(creature|mybattlefield) counter(0/0,1,Shield) && ability$!life:5!$ controller
+auto=choice name(Rhino + shield counter) target(creature|mybattlefield) counter(0/0,1,Shield) && ability$!token(Rhino Warrior^Creature Rhino Warrior^4/4^green)!$ controller
+missing=the two modes are offered as the six pairs; "target player gains 5 life" always gains you the life
+text=Reach, trample -- When this creature enters, choose two - -- - Destroy target artifact or enchantment. -- - Target player gains 5 life. -- - Create a 4/4 green Rhino Warrior creature token. -- - Put a shield counter on a creature you control.
+mana={4}{G}{G}{G}
+type=Creature
+subtype=Elemental
+power=7
+toughness=7
+[/card]
+[card]
+name=Civil Servant
+auto=_ATTACKING_if type(other citizen[-tapped]|mybattlefield)~morethan~0 then may name(Tap another Citizen) tap notaTarget(other citizen[-tapped]|mybattlefield) && all(this) 1/0 ueot && all(this) lifelink ueot
+text=Whenever this creature attacks, you may tap another untapped Citizen you control. If you do, this creature gets +1/+0 and gains lifelink until end of turn.
+mana={G}{W}
+type=Creature
+subtype=Cat Citizen
+power=2
+toughness=3
+[/card]
+[card]
+name=Corpse Appraiser
+auto=choice name(Exile from your graveyard) target(creature|mygraveyard) moveto(exile) && ability$!reveal:3 optionone name(Put one into your hand) target(<1>*|reveal) moveto(myhand) optiononeend optiontwo name(Rest into your graveyard) target(<1>*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend!$ controller
+auto=choice name(Exile from an opponent's graveyard) target(creature|opponentgraveyard) moveto(exile) && ability$!reveal:3 optionone name(Put one into your hand) target(<1>*|reveal) moveto(myhand) optiononeend optiontwo name(Rest into your graveyard) target(<1>*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend!$ controller
+auto=choice name(Exile nothing) donothing
+text=When this creature enters, exile up to one target creature card from a graveyard. If a card is put into exile this way, look at the top three cards of your library, then put one of those cards into your hand and the rest into your graveyard.
+mana={U}{B}{R}
+type=Creature
+subtype=Vampire Rogue
+power=3
+toughness=3
+[/card]
+[card]
+name=Exotic Pets
+auto=token(Fish^Creature Fish^1/1^blue^unblockable)
+auto=token(Fish^Creature Fish^1/1^blue^unblockable) and!( transforms((,newability[if type(creature[counter{1/1.1}]|mybattlefield)~morethan~0 then counter(1/1)],newability[if type(creature[counter{0/0.1.Shield}]|mybattlefield)~morethan~0 then counter(0/0.1.Shield)],newability[if type(creature[counter{0/0.1.Flying}]|mybattlefield)~morethan~0 then counter(0/0.1.Flying)],newability[if type(creature[counter{0/0.1.Deathtouch}]|mybattlefield)~morethan~0 then counter(0/0.1.Deathtouch)],newability[if type(creature[counter{0/0.1.Lifelink}]|mybattlefield)~morethan~0 then counter(0/0.1.Lifelink)],newability[if type(creature[counter{0/0.1.Menace}]|mybattlefield)~morethan~0 then counter(0/0.1.Menace)],newability[if type(creature[counter{0/0.1.Trample}]|mybattlefield)~morethan~0 then counter(0/0.1.Trample)],newability[if type(creature[counter{0/0.1.Vigilance}]|mybattlefield)~morethan~0 then counter(0/0.1.Vigilance)],newability[if type(creature[counter{0/0.1.Reach}]|mybattlefield)~morethan~0 then counter(0/0.1.Reach)],newability[if type(creature[counter{0/0.1.Hexproof}]|mybattlefield)~morethan~0 then counter(0/0.1.Hexproof)],newability[if type(creature[counter{0/0.1.Indestructible}]|mybattlefield)~morethan~0 then counter(0/0.1.Indestructible)])) oneshot )!
+missing=every kind found goes on the second Fish (you don't choose which token); -1/-1 and other named counters beyond +1/+1, shield and the keyword counters are not copied
+text=Create two 1/1 blue Fish creature tokens with "This token can't be blocked." Then for each kind of counter among creatures you control, put a counter of that kind on either of those tokens.
+mana={1}{W}{U}
+type=Instant
+[/card]
+[card]
+name=Jinnie Fay, Jetmir's Second
+auto=@tokencreated(*[-cat;-dog]|myBattlefield):name(Jinnie Fay) all(trigger) transforms((,newability[choice name(Replace it with a 2/2 Cat with haste) token(Cat^Creature Cat^2/2^green^haste) && moveto(exile)],newability[choice name(Replace it with a 3/1 Dog with vigilance) token(Dog^Creature Dog^3/1^green^vigilance) && moveto(exile)],newability[choice name(Keep the token) donothing])) oneshot
+missing=works by exiling each new token and making the replacement (one at a time), so "enters" triggers of the original token still fire; Cat and Dog tokens are never replaced
+text=If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance.
+mana={R/G}{G}{G/W}
+type=Legendary Creature
+subtype=Elf Druid
+power=3
+toughness=3
+[/card]
+[card]
+name=Lagrella, the Magpie
+auto=target(<upto:2>other creature|battlefield) (blink)forsrc
+missing=the targets are not limited to creatures controlled by different players, and the returned cards get no +1/+1 counters
+text=When Lagrella enters, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card enters under your control this way, put two +1/+1 counters on it.
+mana={G}{W}{U}
+type=Legendary Creature
+subtype=Human Soldier
+power=2
+toughness=3
+[/card]
+[card]
+name=Scheming Fence
+auto=may name(Choose a nonland permanent) target(other *[-land]|battlefield) transforms((,noactivatedability)) forsrc
+missing=this creature does not gain the chosen permanent's activated abilities
+text=As this creature enters, you may choose a nonland permanent. -- Activated abilities of the chosen permanent can't be activated. -- This creature has all activated abilities of the chosen permanent except for loyalty abilities. You may spend mana as though it were mana of any color to activate those abilities.
+mana={W}{U}
+type=Creature
+subtype=Human Citizen
+power=2
+toughness=3
+[/card]
+[card]
+name=Toluz, Clever Conductor
+auto=_CONNIVES_
+auto=@movedTo(*|mygraveyard) from(myhand):all(trigger[to]) moveto(exile) and!( counter(0/0.1.ToluzExiled) )!
+auto=_DIES_all(*[counter{0/0.1.ToluzExiled}]|myexile) moveto(myhand)
+text=When Toluz enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Whenever you discard one or more cards, exile them from your graveyard. -- When Toluz dies, put the cards exiled with it into their owner's hand.
+mana={W/U}{U}{U/B}
+type=Legendary Creature
+subtype=Human Rogue
+power=3
+toughness=1
+[/card]
+[card]
+name=Ziatora's Envoy
+abilities=trample
+other={2}{B}{R}{G} name(Blitz)
+auto=alternative moveto(mybattlefield) and!( transforms((,haste,newability[_DIES_draw:1 controller],newability[treason])) forever )! asSorcery
+auto=@combatdamaged(player) from(this):name(Look at the top card) all(*[zpos=1]|mylibrary) moveto(myhand)
+missing=the top card always goes to your hand; you can't play the land or cast the spell for free from the library
+text=Trample -- Whenever this creature deals combat damage to a player, look at the top card of your library. You may play a land from the top of your library or cast a spell with mana value less than or equal to the damage dealt from the top of your library without paying its mana cost. If you don't, put that card into your hand. -- Blitz {2}{B}{R}{G}
+mana={1}{B}{R}{G}
+type=Creature
+subtype=Lizard Warrior
+power=5
+toughness=4
+[/card]

@@ -1,0 +1,24 @@
+#SNC batch 4 (#44). All-Seeing Arbiter enters: draw two, discard Grizzly Bears; the discard gives Hill Giant -1/-0
+#(one mana value in the graveyard).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:All-Seeing Arbiter
+library:Grizzly Bears,Memnite
+manapool:{4}{U}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+All-Seeing Arbiter
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:All-Seeing Arbiter
+hand:Memnite
+graveyard:Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=2/3
+[END]

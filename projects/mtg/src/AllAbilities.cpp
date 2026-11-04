@@ -9413,7 +9413,7 @@ ALoseSubtypes * ALoseSubtypes::clone() const
 
 //APreventDamageTypes
 APreventDamageTypes::APreventDamageTypes(GameObserver* observer, int id, MTGCardInstance * source, string to, string from, int type) :
-    MTGAbility(observer, id, source), to(to), from(from), type(type)
+    MTGAbility(observer, id, source), to(to), from(from), type(type), millPrevented(0)
 {
     re = NULL;
 }
@@ -9444,6 +9444,7 @@ int APreventDamageTypes::addToGame()
     {
         re = NEW REDamagePrevention(this, fromTc, toTc, -1, false, Damage::DAMAGE_OTHER);
     }
+    re->millPrevented = millPrevented;
     game->replacementEffects->add(re);
     return MTGAbility::addToGame();
 }

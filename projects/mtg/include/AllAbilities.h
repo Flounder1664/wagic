@@ -5827,6 +5827,7 @@ public:
     string to, from;
     REDamagePrevention * re;
     int type;
+    int millPrevented;
 
     APreventDamageTypes(GameObserver* observer, int id, MTGCardInstance * source, string to, string from, int type = 0);
     int addToGame();

@@ -1,0 +1,21 @@
+#SNC batch 4 (#44). Titan of Industry: destroy Ornithopter and put a shield counter on Titan.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Titan of Industry
+manapool:{4}{G}{G}{G}
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Titan of Industry
+choice 2
+Ornithopter
+Titan of Industry
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Titan of Industry
+counter:Titan of Industry=Shield:1
+[PLAYER2]
+graveyard:Ornithopter
+[END]

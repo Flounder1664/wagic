@@ -1,0 +1,22 @@
+#SNC batch 4 (#44). Glittering Stockpile taps for {R} (Lightning Bolt) and gets a stash counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glittering Stockpile
+hand:Lightning Bolt
+[PLAYER2]
+life:20
+[DO]
+Glittering Stockpile
+choice 0
+Lightning Bolt
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glittering Stockpile
+graveyard:Lightning Bolt
+counter:Glittering Stockpile=Stash:1
+[PLAYER2]
+life:17
+[END]

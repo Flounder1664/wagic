@@ -1,0 +1,25 @@
+#SNC batch 4 (#44). Ziatora's Envoy hits for 5 and the top card goes to your hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ziatora's Envoy
+library:Ornithopter,Memnite
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Ziatora's Envoy
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Ziatora's Envoy
+hand:Memnite
+library:Ornithopter
+[PLAYER2]
+life:15
+[END]

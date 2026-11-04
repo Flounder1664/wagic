@@ -1,0 +1,22 @@
+#SNC batch 4 (#44). Scheming Fence chooses Prodigal Sorcerer; its ping can no longer be activated.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Sorcerer
+hand:Scheming Fence
+manapool:{W}{U}
+[PLAYER2]
+life:20
+[DO]
+Scheming Fence
+choice 0
+Prodigal Sorcerer
+Prodigal Sorcerer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Sorcerer,Scheming Fence
+[PLAYER2]
+life:20
+[END]

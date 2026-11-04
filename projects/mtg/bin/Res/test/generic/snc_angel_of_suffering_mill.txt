@@ -1,0 +1,22 @@
+#SNC batch 4 (#44). Angel of Suffering: Lightning Bolt at yourself is prevented and you mill six.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Angel of Suffering
+hand:Lightning Bolt
+library:Memnite,Ornithopter,Grizzly Bears,Savannah Lions,Elite Vanguard,Llanowar Elves,Hill Giant
+manapool:{R}
+life:20
+[PLAYER2]
+[DO]
+Lightning Bolt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Angel of Suffering
+graveyard:Lightning Bolt,Ornithopter,Grizzly Bears,Savannah Lions,Elite Vanguard,Llanowar Elves,Hill Giant
+library:Memnite
+life:20
+[PLAYER2]
+[END]
