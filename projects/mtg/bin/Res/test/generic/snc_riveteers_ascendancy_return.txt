@@ -1,0 +1,24 @@
+#SNC batch 5 (#44). Riveteers Ascendancy: sacrifice Hill Giant (4) to Bone Splinters, return Grizzly Bears (2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Riveteers Ascendancy,Hill Giant
+hand:Bone Splinters
+graveyard:Grizzly Bears
+manapool:{B}
+[PLAYER2]
+inplay:Memnite
+[DO]
+Bone Splinters
+Hill Giant
+Memnite
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Riveteers Ascendancy,Grizzly Bears
+graveyard:Bone Splinters,Hill Giant
+[PLAYER2]
+graveyard:Memnite
+[END]

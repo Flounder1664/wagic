@@ -1,0 +1,22 @@
+#SNC batch 5 (#44). Luxior on Grizzly Bears with one +1/+1 counter (Battlegrowth): 2/2 + 1 + 1 = 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555441,Grizzly Bears
+hand:Battlegrowth
+manapool:{3}{G}
+[PLAYER2]
+[DO]
+555441
+choice 1
+Grizzly Bears
+Battlegrowth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555441,Grizzly Bears
+graveyard:Battlegrowth
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

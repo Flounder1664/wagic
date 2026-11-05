@@ -1,0 +1,22 @@
+#SNC batch 5 (#44). Two Vision Skeins make the opponent draw four, so Even the Score costs only {X}: X=1 draws one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vision Skeins,Vision Skeins,Even the Score
+library:Memnite,Ornithopter,Grizzly Bears,Savannah Lions,Elite Vanguard
+manapool:{1}{U}{1}{U}{1}
+[PLAYER2]
+library:Hill Giant,Juggernaut,Llanowar Elves,Shock
+[DO]
+Vision Skeins
+Vision Skeins
+Even the Score
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Memnite,Ornithopter,Grizzly Bears,Savannah Lions,Elite Vanguard
+graveyard:Vision Skeins,Vision Skeins,Even the Score
+[PLAYER2]
+hand:Hill Giant,Juggernaut,Llanowar Elves,Shock
+[END]
