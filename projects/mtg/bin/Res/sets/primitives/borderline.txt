@@ -153184,3 +153184,102 @@ subtype=Lizard Warrior
 power=5
 toughness=4
 [/card]
+[card]
+name=Freelance Muscle
+auto=@combat(attacking,blocking) source(this):greatestotherpt/greatestotherpt ueot
+text=Whenever this creature attacks or blocks, it gets +X/+X until end of turn, where X is the greatest power and/or toughness among other creatures you control.
+mana={4}{G}
+type=Creature
+subtype=Rhino Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Shadow of Mortality
+anyzone=this(variable{lifetotal}<20)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<19)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<18)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<17)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<16)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<15)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<14)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<13)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<12)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<11)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<10)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<9)while changecost(colorless:-1) forcedalive
+anyzone=this(variable{lifetotal}<8)while changecost(colorless:-1) forcedalive
+missing=assumes a starting life total of 20 (each life point below 20 takes {1} off, up to {13})
+text=If your life total is less than your starting life total, this spell costs {X} less to cast, where X is the difference.
+mana={13}{B}{B}
+type=Creature
+subtype=Avatar
+power=7
+toughness=7
+[/card]
+[card]
+name=Even the Score
+anyzone=this(variable{odrewcount}>3)while changecost(blue:-3) forcedalive
+auto=draw:X controller
+text=This spell costs {U}{U}{U} less to cast if an opponent has drawn four or more cards this turn. -- Draw X cards.
+mana={X}{U}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Park Heights Pegasus
+abilities=flying,trample
+auto=@combatdamaged(player) from(this):if type(creature[fresh]|mybattlefield)~morethan~1 then draw:1 controller
+missing=counts creatures that entered this turn and are still on the battlefield
+text=Flying, trample -- Whenever this creature deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn.
+mana={G}{W}
+type=Creature
+subtype=Pegasus
+power=2
+toughness=1
+[/card]
+[card]
+name=Riveteers Ascendancy
+auto=@sacrificed(creature[manacost=1]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=0]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=2]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=1]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=3]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=2]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=4]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=3]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=5]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=4]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=6]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=5]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=7]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=6]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=8]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=7]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost=9]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=8]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature[manacost>=10]|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:may name(Return a creature with lesser mana value) target(creature[manacost<=9]|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )!
+auto=@sacrificed(creature|mybattlefield) restriction{compare(hascntriveteersused)~equalto~0}:counter(0/0,1,RiveteersUsed)
+auto=@each end:removeallcounters(0/0,1,RiveteersUsed)
+missing=the once-each-turn is used up even when you decline the return; sacrificing a mana value 10+ creature returns at most mana value 9
+text=Whenever you sacrifice a creature, you may return target creature card with lesser mana value from your graveyard to the battlefield tapped. Do this only once each turn.
+mana={B}{R}{G}
+type=Enchantment
+[/card]
+[card]
+name=Unleash the Inferno
+target=creature,planeswalker
+auto=if compare(toughness)~equalto~1 then may name(Destroy with 6 excess) target(*[artifact;enchantment][manacost<=6]|opponentbattlefield) destroy
+auto=if compare(toughness)~equalto~2 then may name(Destroy with 5 excess) target(*[artifact;enchantment][manacost<=5]|opponentbattlefield) destroy
+auto=if compare(toughness)~equalto~3 then may name(Destroy with 4 excess) target(*[artifact;enchantment][manacost<=4]|opponentbattlefield) destroy
+auto=if compare(toughness)~equalto~4 then may name(Destroy with 3 excess) target(*[artifact;enchantment][manacost<=3]|opponentbattlefield) destroy
+auto=if compare(toughness)~equalto~5 then may name(Destroy with 2 excess) target(*[artifact;enchantment][manacost<=2]|opponentbattlefield) destroy
+auto=if compare(toughness)~equalto~6 then may name(Destroy with 1 excess) target(*[artifact;enchantment][manacost<=1]|opponentbattlefield) destroy
+auto=damage:7
+missing=excess is worked out from the creature's toughness (damage already marked is ignored); a planeswalker target never gives the destroy
+text=Unleash the Inferno deals 7 damage to target creature or planeswalker. When it deals excess damage this way, destroy target artifact or enchantment an opponent controls with mana value less than or equal to that amount of excess damage.
+mana={1}{B}{R}{G}
+type=Instant
+[/card]
+[card]
+name=Luxior, Giada's Gift
+auto=teach(creature) hascntanycnt/hascntanycnt nonstatic
+auto=teach(planeswalker) transforms((Creature,setpower=0,settoughness=0))
+auto={1}:name(Equip planeswalker) equip target(planeswalker|mybattlefield)
+auto={3}:equip
+missing=the equipped planeswalker is still a planeswalker as well as a creature
+text=Equipped creature gets +1/+1 for each counter on it. -- Equipped permanent isn't a planeswalker and is a creature in addition to its other types. (Loyalty abilities can still be activated.) -- Equip planeswalker {1} -- Equip {3}
+mana={1}
+type=Legendary Artifact
+subtype=Equipment
+[/card]

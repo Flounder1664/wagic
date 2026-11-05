@@ -1376,6 +1376,18 @@ void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
             seen.insert(p->game->graveyard->cards[j]->getManaCost()->getConvertedCost());
         intValue = (int)seen.size();
     }
+    else if (s == "greatestotherpt")//greatest power and/or toughness among other creatures you control (SNC: Freelance Muscle)
+    {
+        intValue = 0;
+        MTGGameZone * z = card->controller()->game->battlefield;
+        for (int j = 0; j < z->nb_cards; j++)
+        {
+            MTGCardInstance * c = z->cards[j];
+            if (c == card || !c->isCreature())
+                continue;
+            intValue = MAX(intValue, MAX(c->power, c->toughness));
+        }
+    }
     else if (s == "mygravecardtypes" || s == "oppgravecardtypes" || s == "allgravecardtypes")//Count number of card types in graveyards
     {
         intValue = 0;

@@ -1,0 +1,18 @@
+#SNC batch 5 (#44). Shadow of Mortality at 20 life is not castable with five mana.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shadow of Mortality
+manapool:{3}{B}{B}
+life:20
+[PLAYER2]
+[DO]
+Shadow of Mortality
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shadow of Mortality
+manapool:{3}{B}{B}
+life:20
+[PLAYER2]
+[END]

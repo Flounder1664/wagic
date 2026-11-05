@@ -1,0 +1,17 @@
+#SNC batch 5 (#44). Shadow of Mortality at 10 life costs {3}{B}{B}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shadow of Mortality
+manapool:{3}{B}{B}
+life:10
+[PLAYER2]
+[DO]
+Shadow of Mortality
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shadow of Mortality
+life:10
+[PLAYER2]
+[END]

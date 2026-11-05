@@ -1,0 +1,20 @@
+#SNC batch 5 (#44). Unleash the Inferno kills Grizzly Bears with 5 excess and destroys Juggernaut (4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unleash the Inferno
+manapool:{1}{B}{R}{G}
+[PLAYER2]
+inplay:Grizzly Bears,Juggernaut
+[DO]
+Unleash the Inferno
+Grizzly Bears
+choice 0
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Unleash the Inferno
+[PLAYER2]
+graveyard:Grizzly Bears,Juggernaut
+[END]

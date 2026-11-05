@@ -1,0 +1,27 @@
+#SNC batch 5 (#44). Two creatures entered this turn, so Park Heights Pegasus's hit draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Park Heights Pegasus
+hand:Memnite,Ornithopter
+library:Grizzly Bears
+[PLAYER2]
+life:20
+[DO]
+Memnite
+Ornithopter
+next
+next
+Park Heights Pegasus
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Park Heights Pegasus,Memnite,Ornithopter
+hand:Grizzly Bears
+[PLAYER2]
+life:18
+[END]
