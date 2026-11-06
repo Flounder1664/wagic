@@ -1,0 +1,22 @@
+#SNC batch 6 (#44). Fatal Grudge, sacrificing Memnite: you draw. The harness can't answer the opponent's sacrifice prompt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Memnite
+hand:Fatal Grudge
+library:Ornithopter
+manapool:{B}{R}
+[PLAYER2]
+inplay:Grizzly Bears,Glorious Anthem
+[DO]
+Fatal Grudge
+choice 0
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ornithopter
+graveyard:Fatal Grudge,Memnite
+[PLAYER2]
+inplay:Grizzly Bears,Glorious Anthem
+[END]

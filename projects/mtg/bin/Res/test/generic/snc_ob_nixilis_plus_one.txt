@@ -1,0 +1,16 @@
+#SNC batch 6 (#44). Ob Nixilis +1 goes to 4 loyalty. The harness can't answer the opponent's discard-or-lose-2 prompt.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555407
+[PLAYER2]
+[DO]
+555407
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555407
+counter:555407=loyalty:4
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#SNC batch 6 (#44). Extract the Truth mode 1: the opponent discards Grizzly Bears; Shock stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Extract the Truth
+manapool:{1}{B}
+[PLAYER2]
+hand:Grizzly Bears,Shock
+[DO]
+Extract the Truth
+p2
+choice 0
+choice 0
+Grizzly Bears
+revealdone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Extract the Truth
+[PLAYER2]
+hand:Shock
+graveyard:Grizzly Bears
+[END]

@@ -1,0 +1,22 @@
+#SNC batch 6 (#44). Elspeth Resplendent -3: Ornithopter from the top seven enters with a shield counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elspeth Resplendent
+library:Hill Giant,Juggernaut,Llanowar Elves,Shock,Savannah Lions,Elite Vanguard,Ornithopter
+[PLAYER2]
+[DO]
+Elspeth Resplendent
+choice 1
+choice 0
+Ornithopter
+revealdone
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elspeth Resplendent,Ornithopter
+library:*,*,*,*,*,*
+counter:Ornithopter=Shield:1
+[PLAYER2]
+[END]

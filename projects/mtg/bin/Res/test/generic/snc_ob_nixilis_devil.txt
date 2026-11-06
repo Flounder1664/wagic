@@ -1,0 +1,15 @@
+#SNC batch 6 (#44). Ob Nixilis -2 makes a Devil.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555407
+[PLAYER2]
+[DO]
+555407
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555407,*
+[PLAYER2]
+[END]

@@ -914,7 +914,7 @@ void TestSuiteGame::assertGame()
                 else if (t.find("ward:") == 0)
                     has = found->faceDownWard() == atoi(t.c_str() + 5);
                 else
-                    has = ab >= 0 ? (found->basicAbilities[ab] != 0) : (found->hasType(t) != 0);
+                    has = ab >= 0 ? (found->has(ab) != 0) : (found->hasType(t) != 0);
                 if (has == absent)
                 {
                     sprintf(result, "<span class=\"error\">==type problem for '%s' (player %i). Expected %s%s==</span><br />",

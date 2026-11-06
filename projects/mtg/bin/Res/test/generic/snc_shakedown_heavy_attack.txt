@@ -1,0 +1,25 @@
+#SNC batch 6 (#44). Shakedown Heavy attacks; the opponent (AI) declines to let you draw, so it hits for 6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shakedown Heavy
+library:Memnite
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Shakedown Heavy
+next
+next
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Shakedown Heavy
+library:Memnite
+[PLAYER2]
+life:14
+[END]

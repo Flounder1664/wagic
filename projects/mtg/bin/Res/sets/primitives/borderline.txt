@@ -153283,3 +153283,89 @@ mana={1}
 type=Legendary Artifact
 subtype=Equipment
 [/card]
+[card]
+name=Shakedown Heavy
+abilities=menace
+auto=_ATTACKING_ability$!name(Shakedown Heavy) choice name(Let them draw a card) draw:1 opponent && all(mysource) removefromcombat && all(mysource) untap _ choice name(Don't) donothing!$ opponent
+text=Menace -- Whenever this creature attacks, defending player may have you draw a card. If they do, untap this creature and remove it from combat.
+mana={2}{B}
+type=Creature
+subtype=Ogre Warrior
+power=6
+toughness=4
+[/card]
+[card]
+name=Extract the Truth
+target=opponent
+auto=choice name(Reveal hand: discard a creature, enchantment or planeswalker) reveal:type:*:targetedpersonshand revealzone(targetedpersonshand) optionone name(Choose a card) notaTarget(<1>*[creature;enchantment;planeswalker]|reveal) transforms((,newability[moveto(hand) all(other *|reveal)],newability[moveto(hand) and!(reject)!])) ueot optiononeend optiontwo name(Put back) target(<1>*|reveal) moveto(hand) and!( all(*|reveal) moveto(hand) )! optiontwoend revealend
+auto=choice name(Opponent sacrifices an enchantment) ability$!name(Sacrifice an enchantment) notaTarget(enchantment|mybattlefield) sacrifice!$ opponent
+text=Choose one - -- - Target opponent reveals their hand. You may choose a creature, enchantment, or planeswalker card from it. That player discards that card. -- - Target opponent sacrifices an enchantment of their choice.
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Incriminate
+target=<2>creature|opponentbattlefield
+auto=transforms((Incriminated)) ueot
+auto=ability$!name(Sacrifice one of them) notaTarget(creature[incriminated]|mybattlefield) sacrifice!$ opponent
+missing=the two creatures must be controlled by an opponent (not your own two)
+text=Choose two target creatures controlled by the same player. That player sacrifices one of them of their choice.
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Fatal Grudge
+other={B}{R}{S(*[artifact;enchantment;planeswalker;battle][-creature]|mybattlefield)} name(Sacrifice a noncreature permanent)
+auto=ifnot paid(alternative) then ability$!name(Sacrifice a creature) notaTarget(creature|mybattlefield) sacrifice!$ opponent
+auto=if paid(alternative) then ability$!name(Sacrifice a noncreature permanent) notaTarget(*[artifact;enchantment;planeswalker;battle]|mybattlefield) sacrifice!$ opponent
+auto=draw:1 controller
+missing=sacrificing a creature makes them sacrifice a creature; sacrificing any other nonland permanent makes them sacrifice an artifact, enchantment, planeswalker or battle (not exactly a shared card type)
+text=As an additional cost to cast this spell, sacrifice a nonland permanent. -- Each opponent chooses a permanent they control that shares a card type with the sacrificed permanent and sacrifices it. -- Draw a card.
+mana={B}{R}{S(creature|mybattlefield)}
+type=Sorcery
+[/card]
+[card]
+name=Elspeth Resplendent
+auto=counter(0/0,5,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: +1/+1 counter and a keyword counter) target(<upto:1>creature) transforms((,newability[counter(1/1)],newability[choice name(Flying counter) counter(0/0.1.Flying)],newability[choice name(First strike counter) counter(0/0.1.First Strike)],newability[choice name(Lifelink counter) counter(0/0.1.Lifelink)],newability[choice name(Vigilance counter) counter(0/0.1.Vigilance)])) oneshot
+auto={C(0/0,-3,Loyalty)}:name(-3: Look at the top seven) reveal:7 optionone name(Put a permanent with mana value 3 or less onto the battlefield) target(<upto:1>*[-instant][-sorcery][manacost<=3]|reveal) moveto(mybattlefield) and!( counter(0/0.1.Shield) )! optiononeend optiontwo name(Rest on the bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+auto={C(0/0,-7,Loyalty)}:name(-7: Five 3/3 Angels) token(Angel,Creature Angel,3/3,white,flying)*5
+missing=the -3 puts the rest on the bottom in their current order, not a random one
+text=+1: Choose up to one target creature. Put a +1/+1 counter and a counter from among flying, first strike, lifelink, or vigilance on it. -- -3: Look at the top seven cards of your library. You may put a permanent card with mana value 3 or less from among them onto the battlefield with a shield counter on it. Put the rest on the bottom of your library in a random order. -- -7: Create five 3/3 white Angel creature tokens with flying.
+mana={3}{W}{W}
+type=Legendary Planeswalker
+subtype=Elspeth
+[/card]
+[card]
+name=Vivien on the Hunt
+auto=counter(0/0,4,loyalty)
+auto={C(0/0,2,Loyalty)}:name(+2: Don't sacrifice) donothing
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=0]|mybattlefield)}:name(+2: Sacrifice mana value 0, find 1) target(creature[manacost=1]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=1]|mybattlefield)}:name(+2: Sacrifice mana value 1, find 2) target(creature[manacost=2]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=2]|mybattlefield)}:name(+2: Sacrifice mana value 2, find 3) target(creature[manacost=3]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=3]|mybattlefield)}:name(+2: Sacrifice mana value 3, find 4) target(creature[manacost=4]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=4]|mybattlefield)}:name(+2: Sacrifice mana value 4, find 5) target(creature[manacost=5]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=5]|mybattlefield)}:name(+2: Sacrifice mana value 5, find 6) target(creature[manacost=6]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=6]|mybattlefield)}:name(+2: Sacrifice mana value 6, find 7) target(creature[manacost=7]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,2,Loyalty)}{S(creature[manacost=7]|mybattlefield)}:name(+2: Sacrifice mana value 7, find 8) target(creature[manacost=8]|mylibrary) moveto(mybattlefield)
+auto={C(0/0,1,Loyalty)}:name(+1: Mill five, creatures to hand) reveal:5 optionone name(Put creature cards into your hand) target(<anyamount>creature|reveal) moveto(myhand) optiononeend optiontwo name(Rest into your graveyard) target(<1>*|reveal) moveto(mygraveyard) and!( all(*|reveal) moveto(mygraveyard) )! optiontwoend revealend
+auto={C(0/0,-1,Loyalty)}:name(-1: 4/4 Rhino Warrior) token(Rhino Warrior,Creature Rhino Warrior,4/4,green)
+missing=the +2 is one menu entry per sacrificed mana value (0 to 7) and the library is not shuffled; the +1 reveals the five cards rather than milling them, so mill triggers don't fire
+text=+2: You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle. -- +1: Mill five cards, then put any number of creature cards milled this way into your hand. -- -1: Create a 4/4 green Rhino Warrior creature token.
+mana={4}{G}{G}
+type=Legendary Planeswalker
+subtype=Vivien
+[/card]
+[card]
+name=Ob Nixilis, the Adversary
+auto=counter(0/0,3,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: Opponent discards or loses 2) transforms((,newability[ability$!name(Discard a card or lose 2 life) choice name(Discard a card) notaTarget(*|myhand) reject _ choice name(Lose 2 life) life:-2 controller!$ opponent],newability[if type(*[demon;devil]|mybattlefield)~morethan~0 then life:2 controller])) oneshot
+auto={C(0/0,-2,Loyalty)}:name(-2: 1/1 Devil) token(Devil,Creature Devil,1/1,red) and!( transforms((,newability[_DIES_damage:1 target(anytarget)])) forever )!
+auto={C(0/0,-7,Loyalty)}:name(-7: Opponent draws seven and loses 7 life) draw:7 opponent && life:-7 opponent
+auto={C(0/0,-7,Loyalty)}:name(-7: You draw seven and lose 7 life) draw:7 controller && life:-7 controller
+missing=Casualty X is not offered (no copy of a planeswalker)
+text=Casualty X. The copy isn't legendary and has starting loyalty X. (As you cast this spell, you may sacrifice a creature with power X. When you do, copy this spell. The copy becomes a token.) -- +1: Each opponent loses 2 life unless they discard a card. If you control a Demon or Devil, you gain 2 life. -- -2: Create a 1/1 red Devil creature token with "When this token dies, it deals 1 damage to any target." -- -7: Target player draws seven cards and loses 7 life.
+mana={1}{B}{R}
+type=Legendary Planeswalker
+subtype=Nixilis
+[/card]

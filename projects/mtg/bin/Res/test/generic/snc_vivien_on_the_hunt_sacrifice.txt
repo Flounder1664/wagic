@@ -1,0 +1,20 @@
+#SNC batch 6 (#44). Vivien on the Hunt +2: sacrifice Memnite (0), Savannah Lions (1) comes from the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vivien on the Hunt,Memnite
+library:Grizzly Bears,Savannah Lions
+[PLAYER2]
+[DO]
+Vivien on the Hunt
+choice 1
+Memnite
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vivien on the Hunt,Savannah Lions
+graveyard:Memnite
+library:Grizzly Bears
+[PLAYER2]
+[END]
