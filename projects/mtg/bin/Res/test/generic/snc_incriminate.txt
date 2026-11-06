@@ -1,0 +1,23 @@
+#SNC batch 6 (#44). Incriminate marks Grizzly Bears and Hill Giant, not Memnite. The harness can't answer the opponent's
+#sacrifice prompt, so nothing is sacrificed here.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Incriminate
+manapool:{1}{B}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant,Memnite
+[DO]
+Incriminate
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Incriminate
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant,Memnite
+type:Grizzly Bears=incriminated
+type:Hill Giant=incriminated
+type:Memnite=-incriminated
+[END]

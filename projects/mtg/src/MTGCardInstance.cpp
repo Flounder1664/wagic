@@ -651,7 +651,44 @@ MTGGameZone * MTGCardInstance::getCurrentZone()
 
 int MTGCardInstance::has(int basicAbility)
 {
-    return basicAbilities[basicAbility];
+    if (basicAbilities[basicAbility])
+        return basicAbilities[basicAbility];
+    //A keyword counter (flying, first strike, lifelink...) grants its keyword while it is on the permanent
+    //(SNC: Elspeth Resplendent, Exotic Pets). Cards that already add the keyword themselves are unaffected.
+    if (counters && counters->mCount)
+    {
+        const char * keyword = NULL;
+        switch (basicAbility)
+        {
+        case Constants::FLYING: keyword = "flying"; break;
+        case Constants::FIRSTSTRIKE: keyword = "first strike"; break;
+        case Constants::DOUBLESTRIKE: keyword = "double strike"; break;
+        case Constants::LIFELINK: keyword = "lifelink"; break;
+        case Constants::VIGILANCE: keyword = "vigilance"; break;
+        case Constants::DEATHTOUCH: keyword = "deathtouch"; break;
+        case Constants::MENACE: keyword = "menace"; break;
+        case Constants::TRAMPLE: keyword = "trample"; break;
+        case Constants::REACH: keyword = "reach"; break;
+        case Constants::HEXPROOF: keyword = "hexproof"; break;
+        case Constants::INDESTRUCTIBLE: keyword = "indestructible"; break;
+        default: break;
+        }
+        if (keyword)
+        {
+            for (int i = 0; i < counters->mCount; i++)
+            {
+                Counter * c = counters->counters[i];
+                if (c->nb > 0 && !c->power && !c->toughness && c->name.size() == strlen(keyword))
+                {
+                    string lower = c->name;
+                    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+                    if (lower == keyword)
+                        return 1;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 //Return the toxicity of card

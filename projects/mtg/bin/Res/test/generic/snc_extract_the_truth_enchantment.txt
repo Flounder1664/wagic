@@ -1,0 +1,20 @@
+#SNC batch 6 (#44). Extract the Truth mode 2: the opponent sacrifices Glorious Anthem.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Extract the Truth
+manapool:{1}{B}
+[PLAYER2]
+inplay:Glorious Anthem,Grizzly Bears
+[DO]
+Extract the Truth
+p2
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Extract the Truth
+[PLAYER2]
+inplay:Grizzly Bears
+graveyard:Glorious Anthem
+[END]

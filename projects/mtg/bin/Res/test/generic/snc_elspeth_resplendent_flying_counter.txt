@@ -1,0 +1,20 @@
+#SNC batch 6 (#44). Elspeth Resplendent +1 on Grizzly Bears, flying counter: 3/3, and the keyword counter grants flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elspeth Resplendent,Grizzly Bears
+[PLAYER2]
+[DO]
+Elspeth Resplendent
+choice 0
+Grizzly Bears
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elspeth Resplendent,Grizzly Bears
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=flying
+counter:Elspeth Resplendent=loyalty:6
+[PLAYER2]
+[END]
