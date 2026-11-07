@@ -1,0 +1,21 @@
+#SNC batch 7 (#44). Rabble Rousing enters: hideaway 5 exiles Memnite, the other four go to the bottom.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rabble Rousing
+library:Hill Giant,Juggernaut,Llanowar Elves,Ornithopter,Savannah Lions,Memnite
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+Rabble Rousing
+choice 0
+Memnite
+revealdone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rabble Rousing
+library:*,*,*,*,*
+exile:Memnite
+[PLAYER2]
+[END]

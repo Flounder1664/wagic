@@ -1,0 +1,24 @@
+#SNC batch 7 (#44). Arcane Bombardment: the first instant (Lightning Bolt) exiles Shock from the graveyard and casts a copy of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Arcane Bombardment
+hand:Lightning Bolt
+graveyard:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[DO]
+Lightning Bolt
+p2
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Arcane Bombardment
+graveyard:Lightning Bolt
+exile:Shock
+[PLAYER2]
+life:15
+[END]

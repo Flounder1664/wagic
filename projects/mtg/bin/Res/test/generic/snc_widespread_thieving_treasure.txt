@@ -1,0 +1,21 @@
+#SNC batch 7 (#44). Widespread Thieving: casting Lightning Helix (multicolored) makes a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving
+hand:Lightning Helix
+manapool:{R}{W}
+[PLAYER2]
+life:20
+[DO]
+Lightning Helix
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving,*
+graveyard:Lightning Helix
+life:23
+[PLAYER2]
+life:17
+[END]

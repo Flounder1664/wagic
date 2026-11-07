@@ -1,0 +1,18 @@
+#SNC batch 7 (#44). Undercover Operative copies your Grizzly Bears and gets a shield counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Undercover Operative
+manapool:{2}{U}{U}
+[PLAYER2]
+[DO]
+Undercover Operative
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+[PLAYER2]
+[END]
