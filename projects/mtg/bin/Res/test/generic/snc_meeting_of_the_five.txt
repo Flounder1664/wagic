@@ -1,0 +1,19 @@
+#SNC batch 7 (#44). Meeting of the Five exiles the top ten and adds ten mana.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Meeting of the Five
+library:Hill Giant,Juggernaut,Llanowar Elves,Ornithopter,Memnite,Grizzly Bears,Savannah Lions,Elite Vanguard,Shock,Lightning Bolt,Glorious Anthem
+manapool:{3}{W}{U}{B}{R}{G}
+[PLAYER2]
+[DO]
+Meeting of the Five
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Meeting of the Five
+library:Hill Giant
+exile:*,*,*,*,*,*,*,*,*,*
+manapool:{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}
+[PLAYER2]
+[END]

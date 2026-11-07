@@ -1,0 +1,21 @@
+#SNC batch 7 (#44). Evelyn enters and exiles the top card of each library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:555385
+library:Grizzly Bears,Memnite
+manapool:{2}{B}{B}{B}
+[PLAYER2]
+library:Hill Giant,Ornithopter
+[DO]
+555385
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555385
+library:Grizzly Bears
+exile:Memnite
+[PLAYER2]
+library:Hill Giant
+exile:Ornithopter
+[END]

@@ -1,0 +1,15 @@
+#SNC batch 7 (#44). Brass Knuckles: casting it makes a token copy too.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Brass Knuckles
+manapool:{4}
+[PLAYER2]
+[DO]
+Brass Knuckles
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brass Knuckles,*
+[PLAYER2]
+[END]

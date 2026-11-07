@@ -1,0 +1,24 @@
+#SNC batch 7 (#44). Maestros Ascendancy: sacrifice Memnite, cast Shock from the graveyard; it is exiled afterwards.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maestros Ascendancy,Memnite
+graveyard:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[DO]
+Maestros Ascendancy
+Memnite
+Shock
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maestros Ascendancy
+graveyard:Memnite
+exile:Shock
+[PLAYER2]
+life:18
+[END]

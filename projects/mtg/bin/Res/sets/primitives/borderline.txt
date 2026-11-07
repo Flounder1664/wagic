@@ -153369,3 +153369,131 @@ mana={1}{B}{R}
 type=Legendary Planeswalker
 subtype=Nixilis
 [/card]
+[card]
+name=Rabble Rousing
+auto=name(Hideaway 5) reveal:5 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=@combat(attacking) source(creature|mybattlefield):name(Create a Citizen) _CITIZENTOKEN_
+auto=@combat(attacking) source(creature|mybattlefield) restriction{type(creature|mybattlefield)~morethan~9}:may name(Play the hidden card free) target(*[evictname]|myexile) activate castcard(normal)
+missing=the hidden card is exiled face up; one Citizen per attacking creature, and the play offer checks your creature count as each attack trigger fires
+text=Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.) -- Whenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.
+mana={4}{W}
+type=Enchantment
+[/card]
+[card]
+name=Wiretapping
+auto=name(Hideaway 5) reveal:5 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=@each my draw:name(Draw a card) draw:1 controller
+auto=@each my draw restriction{type(*|myhand)~morethan~6}:may name(Play the hidden card free) target(*[evictname]|myexile) activate castcard(normal)
+missing=the hidden card is exiled face up; triggers at the start of your draw step, and the nine-cards check is made then (seven or more in hand, before the two draws)
+text=Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.) -- Whenever you draw your first card during each of your draw steps, draw a card. Then if you have nine or more cards in hand, you may play the exiled card without paying its mana cost.
+mana={4}{U}
+type=Enchantment
+[/card]
+[card]
+name=Cemetery Tampering
+auto=name(Hideaway 5) reveal:5 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=@each my upkeep:may name(Mill three cards) deplete:3 controller
+auto=@each my upkeep restriction{type(*|mygraveyard)~morethan~16}:may name(Play the hidden card free) target(*[evictname]|myexile) activate castcard(normal)
+missing=the hidden card is exiled face up; the twenty-cards check is made before the mill (seventeen or more)
+text=Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.) -- At the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
+mana={2}{B}
+type=Enchantment
+[/card]
+[card]
+name=Widespread Thieving
+auto=name(Hideaway 5) reveal:5 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=@movedTo(*[multicolor]|mystack):name(Create a Treasure) _TREASURE_
+auto=this(variable{hasevict}>0) {W}{U}{B}{R}{G}:name(Play the hidden card free) target(*[evictname]|myexile) activate castcard(normal)
+missing=the hidden card is exiled face up; paying {W}{U}{B}{R}{G} is an activated ability you can use any time, not only right after a multicolored spell
+text=Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.) -- Whenever you cast a multicolored spell, create a Treasure token. Then you may pay {W}{U}{B}{R}{G}. If you do, you may play the exiled card without paying its mana cost.
+mana={2}{R}
+type=Enchantment
+[/card]
+[card]
+name=Arcane Bombardment
+auto=@movedTo(*[instant;sorcery]|myStack) restriction{thisturn(*[instant;sorcery]|myStack)~lessthan~1} turnlimited:name(Arcane Bombardment) target(*[instant;sorcery]|mygraveyard) moveto(myexile) and!( counter(0/0.1.BombardExiled) && all(*[counter{0/0.1.BombardExiled}]|myexile) activate castcard(copied noevent) )!
+missing=you choose the exiled card instead of it being random, and every copy is cast (you can't skip one)
+text=Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at random from your graveyard. Then copy each card exiled with this enchantment. You may cast any number of the copies without paying their mana costs.
+mana={4}{R}{R}
+type=Enchantment
+[/card]
+[card]
+name=Errant, Street Artist
+abilities=flash,defender,haste
+auto={1}{U}{T}:name(Copy target spell you control) target(*[instant;sorcery]|mystack) castcard(copied noevent)
+missing=copies any instant or sorcery you control, not only one that wasn't cast
+text=Flash -- Defender, haste -- {1}{U}, {T}: Copy target spell you control that wasn't cast. You may choose new targets for the copy.
+mana={U}
+type=Legendary Creature
+subtype=Human Rogue
+power=0
+toughness=3
+[/card]
+[card]
+name=Undercover Operative
+auto=choice name(Copy a creature you control, with a shield counter) copy notaTarget(creature|mybattlefield) && all(this) counter(0/0,1,Shield)
+auto=choice name(Copy an opponent's creature) copy notaTarget(creature|opponentbattlefield)
+auto=choice name(Don't copy) donothing
+text=You may have this creature enter as a copy of any creature on the battlefield, except it enters with a shield counter on it if you control that creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+mana={2}{U}{U}
+type=Creature
+subtype=Shapeshifter Rogue
+power=0
+toughness=0
+[/card]
+[card]
+name=Brass Knuckles
+autostack=if casted(this) then ability$!name(Copy Brass Knuckles) activate castcard(copied noevent named!:Brass Knuckles:!)!$ controller
+auto=teach(creature) transforms((,newability[this(variable{gear}>1) double strike]))
+auto={1}:equip
+text=When you cast this spell, copy it. (The copy becomes a token.) -- Equipped creature has double strike as long as two or more Equipment are attached to it. -- Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+mana={4}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Maestros Ascendancy
+auto={S(creature|mybattlefield)}:name(Sacrifice a creature: cast an instant or sorcery from your graveyard) ability$!name(Give flashback) target(*[instant;sorcery]|mygraveyard) tempflashback ueot!$ controller limit:1 myturnonly
+missing=works as giving the card flashback for its mana cost this turn (it is exiled after); the sacrifice is paid before you cast it
+text=Once during each of your turns, you may cast an instant or sorcery spell from your graveyard by sacrificing a creature in addition to paying its other costs. If a spell cast this way would be put into your graveyard, exile it instead.
+mana={U}{B}{R}
+type=Enchantment
+[/card]
+[card]
+name=Falco Spara, Pactweaver
+abilities=flying,trample,showfromtoplibrary
+auto=counter(0/0,1,Shield)
+auto=this(variable{type:creature[counter{any}]:mybattlefield}>0) canplayfromlibrarytop
+missing=you can cast from the top of your library while you control a creature with a counter, but no counter is removed
+text=Flying, trample -- Falco Spara enters with a shield counter on it. -- You may look at the top card of your library any time. -- You may cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs.
+mana={1}{G}{W}{U}
+type=Legendary Creature
+subtype=Bird Demon
+power=3
+toughness=3
+[/card]
+[card]
+name=Evelyn, the Covetous
+abilities=flash
+auto=all(*[zpos=1]|mylibrary) moveto(myexile) and!( counter(0/0.1.Collection) )!
+auto=all(*[zpos=1]|opponentlibrary) moveto(opponentexile) and!( counter(0/0.1.Collection) )!
+auto=@movedTo(other vampire|mybattlefield):name(Collect) all(*[zpos=1]|mylibrary) moveto(myexile) and!( counter(0/0.1.Collection) )!
+auto=@movedTo(other vampire|mybattlefield):name(Collect) all(*[zpos=1]|opponentlibrary) moveto(opponentexile) and!( counter(0/0.1.Collection) )!
+auto={0}:name(Play a collected card) target(*[counter{0/0.1.Collection}]|myexile) transforms((,canplayfromexile)) ueot limit:1
+missing=only your own collected cards can be played (not the opponent's), and the mana can't be spent as any color
+text=Flash -- Whenever Evelyn or another Vampire you control enters, exile the top card of each player's library with a collection counter on it. -- Once each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were mana of any color to cast it.
+mana={2}{U/B}{B}{B/R}
+type=Legendary Creature
+subtype=Vampire Rogue
+power=2
+toughness=5
+[/card]
+[card]
+name=Meeting of the Five
+auto=all(*[zpos<=10]|mylibrary) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )!
+auto=add{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}
+missing=any of the exiled cards can be cast this turn (not only three-colour spells), and the mana is not restricted to three-colour spells
+text=Exile the top ten cards of your library. You may cast spells with exactly three colors from among them this turn. Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Spend this mana only to cast spells with exactly three colors.
+mana={3}{W}{U}{B}{R}{G}
+type=Sorcery
+[/card]

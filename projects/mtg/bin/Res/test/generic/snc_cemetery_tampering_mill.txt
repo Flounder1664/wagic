@@ -1,0 +1,22 @@
+#SNC batch 7 (#44). Cemetery Tampering: at upkeep you may mill three.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Cemetery Tampering
+library:Grizzly Bears,Hill Giant,Juggernaut,Llanowar Elves,Ornithopter,Memnite
+[PLAYER2]
+[DO]
+choice 0
+Memnite
+revealdone
+next
+choice 0
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Cemetery Tampering
+library:*,*
+graveyard:*,*,*
+exile:Memnite
+[PLAYER2]
+[END]

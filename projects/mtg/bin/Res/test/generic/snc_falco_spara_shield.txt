@@ -1,0 +1,16 @@
+#SNC batch 7 (#44). Falco Spara enters with a shield counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:555387
+manapool:{1}{G}{W}{U}
+[PLAYER2]
+[DO]
+555387
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:555387
+counter:555387=Shield:1
+[PLAYER2]
+[END]
