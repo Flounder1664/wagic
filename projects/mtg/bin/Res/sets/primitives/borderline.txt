@@ -147243,6 +147243,7 @@ type=Enchantment
 [/card]
 [card]
 name=Zoyowa Lava-Tongue
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): end step: opponent chooses discard, sacrifice, or 3 damage after you descended.
 abilities=deathtouch
 auto=@each my end:if type(*[-instant;-sorcery;fresh]|mygraveyard)~morethan~0 then ability$!if type(*|myhand)~morethan~0 then choice name(Discard a card) reject notaTarget(*|myhand) _ if type(*|mybattlefield)~morethan~0 then choice name(Sacrifice a permanent) sacrifice notaTarget(*|mybattlefield) _ choice name(Take 3 damage) damage:3 controller!$ opponent
 missing=descended is read from permanent cards that entered your graveyard this turn and are still there
@@ -152524,6 +152525,7 @@ toughness=6
 [/card]
 [card]
 name=Sanguine Spy
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): end step draw: pay 2 life with five mana values in your graveyard.
 abilities=menace,lifelink
 auto={1}{S(other creature|mybattlefield)}:_SURVEIL1_
 auto=@each my end restriction{compare(mygravemanavalues)~morethan~4}:may name(Pay 2 life and draw) life:-2 controller && draw:1 controller
@@ -152949,6 +152951,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Lord Xander, the Collector
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): dies: the opponent sacrifices half their nonland permanents.
 auto=ability$!name(Discard half your hand) reject notaTarget(<halfdowntype:*:myhand>*|myhand)!$ opponent
 auto=_ATTACKING_deplete:halfdowntype:*:opponentlibrary opponent
 auto=_DIES_ability$!name(Sacrifice half your nonland permanents) notaTarget(<halfdowntype:*[-land]:mybattlefield>*[-land]|mybattlefield) sacrifice!$ opponent
@@ -153056,6 +153059,7 @@ toughness=4
 [/card]
 [card]
 name=Glittering Stockpile
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): sacrifice for X mana of one chosen colour after a stash counter.
 auto={T}:Add{R} && counter(0/0,1,Stash)
 auto={T}{S}:name(Add W for each stash counter) thisforeach(counter{0/0.1.Stash}) add{W}
 auto={T}{S}:name(Add U for each stash counter) thisforeach(counter{0/0.1.Stash}) add{U}
@@ -153285,6 +153289,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Shakedown Heavy
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): opponent accepts: you draw, Heavy is untapped and removed from combat.
 abilities=menace
 auto=_ATTACKING_ability$!name(Shakedown Heavy) choice name(Let them draw a card) draw:1 opponent && all(mysource) removefromcombat && all(mysource) untap _ choice name(Don't) donothing!$ opponent
 text=Menace -- Whenever this creature attacks, defending player may have you draw a card. If they do, untap this creature and remove it from combat.
@@ -153326,6 +153331,7 @@ type=Sorcery
 [/card]
 [card]
 name=Elspeth Resplendent
+#VERIFIED IN GAME 2026-11-07 (John, scenario queue): -7 makes five 3/3 flying Angels.
 auto=counter(0/0,5,loyalty)
 auto={C(0/0,1,Loyalty)}:name(+1: +1/+1 counter and a keyword counter) target(<upto:1>creature) transforms((,newability[counter(1/1)],newability[choice name(Flying counter) counter(0/0.1.Flying)],newability[choice name(First strike counter) counter(0/0.1.First Strike)],newability[choice name(Lifelink counter) counter(0/0.1.Lifelink)],newability[choice name(Vigilance counter) counter(0/0.1.Vigilance)])) oneshot
 auto={C(0/0,-3,Loyalty)}:name(-3: Look at the top seven) reveal:7 optionone name(Put a permanent with mana value 3 or less onto the battlefield) target(<upto:1>*[-instant][-sorcery][manacost<=3]|reveal) moveto(mybattlefield) and!( counter(0/0.1.Shield) )! optiononeend optiontwo name(Rest on the bottom) target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
