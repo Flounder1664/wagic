@@ -1,0 +1,26 @@
+#Playing a hidden land is a land play (CR 305.3): with the land drop already used on Great Furnace,
+#Widespread Thieving's play is refused and Ancient Den stays in exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving
+hand:Great Furnace
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+manapool:{W}{U}{B}{R}{G}
+[PLAYER2]
+[DO]
+choice 0
+Ancient Den
+revealdone
+Great Furnace
+Widespread Thieving
+choice 0
+Ancient Den
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving,Great Furnace
+exile:Ancient Den
+library:*,*,*,*,*,*
+[PLAYER2]
+[END]

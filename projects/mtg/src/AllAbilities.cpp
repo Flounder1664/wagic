@@ -11185,10 +11185,21 @@ int AACastCard::resolveSpell()
             }
             else
             {
-                MTGAbility * a = NEW AAMover(game, -1, source, _target, "mybattlefield", "");
-                a->oneShot = true;
-                a->resolve();
-                SAFE_DELETE(a);
+                //Playing a land is a land play (CR 305.3): only on your turn, only with a land drop
+                //left, and it uses that drop. A bare move to the battlefield skipped all three, so a
+                //hidden Wiretapping land was a free extra land (John, scenario 98, 2026-11-08).
+                Player * p = source->controller();
+                if (game->currentPlayer != p || p->game->playRestrictions->canPutIntoZone(_target, p->game->inPlay) == PlayRestriction::CANT_PLAY)
+                {
+                    this->forceDestroy = true;
+                    processed = true;
+                    return 0;
+                }
+                MTGCardInstance * copy = p->game->putInZone(_target, _target->currentZone, p->game->temp);
+                Spell * spell = NEW Spell(game, 0, copy, NULL, NULL, ManaCost::MANA_PAID);
+                spell->resolve();
+                _target = spell->source;
+                delete spell;
             }
             if(andAbility) // Allow to use and!()! with lands.
             {

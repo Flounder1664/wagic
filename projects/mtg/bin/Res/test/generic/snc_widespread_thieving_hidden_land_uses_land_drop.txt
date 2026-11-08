@@ -1,0 +1,25 @@
+#Twin: the hidden Ancient Den played by Widespread Thieving uses the land drop, so Great Furnace stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving
+hand:Great Furnace
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+manapool:{W}{U}{B}{R}{G}
+[PLAYER2]
+[DO]
+choice 0
+Ancient Den
+revealdone
+Widespread Thieving
+choice 0
+Ancient Den
+Great Furnace
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving,Ancient Den
+hand:Great Furnace
+library:*,*,*,*,*,*
+[PLAYER2]
+[END]
