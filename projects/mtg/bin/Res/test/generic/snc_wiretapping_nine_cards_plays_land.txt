@@ -1,0 +1,32 @@
+#SNC (#44), John's scenario 98: Wiretapping's free play comes after the draw-step draws, and a hidden land can be played.
+#Seven cards in hand; the draw step's draw plus Wiretapping's draw makes nine, so the hidden Ancient Den is offered.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Wiretapping,Memnite,Ornithopter,Juggernaut,Hill Giant,Savannah Lions,Eager Cadet,Mind Stone
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+manapool:{4}{U}
+[PLAYER2]
+library:Swamp,Swamp,Swamp
+[DO]
+Wiretapping
+choice 0
+Ancient Den
+revealdone
+eot
+next
+eot
+next
+next
+choice 0
+Ancient Den
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Wiretapping,Ancient Den
+hand:Memnite,Ornithopter,Juggernaut,Hill Giant,Savannah Lions,Eager Cadet,Mind Stone,*,*
+library:*,*,*,*
+[PLAYER2]
+hand:*
+library:Swamp,Swamp
+[END]

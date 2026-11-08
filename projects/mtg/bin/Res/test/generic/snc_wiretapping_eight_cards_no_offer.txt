@@ -1,0 +1,33 @@
+#SNC (#44): twin of snc_wiretapping_nine_cards_plays_land. Six cards in hand make only eight after the two draws,
+#so the hidden Ancient Den is not offered and stays in exile.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Wiretapping,Memnite,Ornithopter,Juggernaut,Hill Giant,Savannah Lions,Eager Cadet
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+manapool:{4}{U}
+[PLAYER2]
+library:Swamp,Swamp,Swamp
+[DO]
+Wiretapping
+choice 0
+Ancient Den
+revealdone
+eot
+next
+eot
+next
+next
+choice 0
+Ancient Den
+[ASSERT]
+DRAW
+[PLAYER1]
+inplay:Wiretapping
+hand:Memnite,Ornithopter,Juggernaut,Hill Giant,Savannah Lions,Eager Cadet,*,*
+exile:Ancient Den
+library:*,*,*,*
+[PLAYER2]
+hand:*
+library:Swamp,Swamp
+[END]

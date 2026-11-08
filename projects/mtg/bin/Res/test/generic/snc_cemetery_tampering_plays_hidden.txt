@@ -1,0 +1,30 @@
+#SNC (#44): Cemetery Tampering with seventeen cards in the graveyard offers the hidden card at upkeep.
+#*[evictname] used to be read when the card loaded, so the offer never found the card (as Wiretapping, scenario 98).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cemetery Tampering
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+graveyard:Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite
+[PLAYER2]
+library:Swamp,Swamp,Swamp
+[DO]
+choice 0
+Ancient Den
+revealdone
+eot
+next
+eot
+next
+choice 0
+Ancient Den
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Cemetery Tampering,Ancient Den
+library:*,*,*,*,*,*
+graveyard:Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite,Memnite
+[PLAYER2]
+hand:*
+library:Swamp,Swamp
+[END]

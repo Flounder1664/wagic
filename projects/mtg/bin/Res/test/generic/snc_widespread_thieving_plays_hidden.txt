@@ -1,0 +1,23 @@
+#SNC (#44): Widespread Thieving's {W}{U}{B}{R}{G} plays the hidden card. *[evictname] used to be read when the card loaded,
+#before anything was hidden, so the play never found a card (found through Wiretapping, John's scenario 98).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving
+library:Grizzly Bears,Llanowar Elves,Shock,Lightning Bolt,Giant Growth,Counterspell,Ancient Den
+manapool:{W}{U}{B}{R}{G}
+[PLAYER2]
+[DO]
+choice 0
+Ancient Den
+revealdone
+Widespread Thieving
+choice 0
+Ancient Den
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Widespread Thieving,Ancient Den
+library:*,*,*,*,*,*
+[PLAYER2]
+[END]
