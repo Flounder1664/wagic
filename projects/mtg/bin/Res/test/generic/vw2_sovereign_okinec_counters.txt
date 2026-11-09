@@ -1,0 +1,33 @@
+#Sovereign Okinec Ahau attacks: Grizzly Bears pumped +3 by Giant Growth gets three +1/+1 counters
+#(8/8 this turn); Sovereign itself is at base power and gets none.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sovereign Okinec Ahau,Grizzly Bears
+hand:Giant Growth
+manapool:{G}
+[PLAYER2]
+life:20
+[DO]
+Giant Growth
+Grizzly Bears
+next
+#begin
+next
+#attackers
+Sovereign Okinec Ahau
+next
+#blockers
+next
+#damage
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Sovereign Okinec Ahau,Grizzly Bears
+graveyard:Giant Growth
+pt:Grizzly Bears=8/8
+pt:Sovereign Okinec Ahau=3/4
+[PLAYER2]
+life:17
+[END]

@@ -8679,7 +8679,20 @@ ATransformer::ATransformer(GameObserver* observer, int id, MTGCardInstance * sou
             stypes = source->chooseasubtype;
         }
         if(stypes.find("evicttypes") == string::npos) // The imprinted types and subtypes will be replaced later.
-            PopulateSubtypesIndexVector(types, stypes);
+        {
+            //the remove keywords are not types, so "removealltypes Artifact Treasure" swaps the whole type line
+            string typesOnly = stypes;
+            const string removeKeywords[] = { "removealltypes", "removetypes" };
+            for (int k = 0; k < 2; k++)
+            {
+                size_t kw = typesOnly.find(removeKeywords[k]);
+                if (kw != string::npos)
+                    typesOnly.erase(kw, removeKeywords[k].size());
+            }
+            typesOnly = trim(typesOnly);
+            if (typesOnly.size())
+                PopulateSubtypesIndexVector(types, typesOnly);
+        }
     }
 
     menu = stypes;
@@ -8756,6 +8769,11 @@ int ATransformer::addToGame()
         for (it = oldtypes.begin(); it != oldtypes.end(); it++)
         {
             _target->removeType(*it);
+        }
+        //any types listed with removealltypes replace the old ones (Kitesail Larcenist's Treasure)
+        for (it = types.begin(); it != types.end(); it++)
+        {
+            _target->addType(*it);
         }
     }
     else
@@ -8937,7 +8955,7 @@ int ATransformer::destroy()
             _target = _target->next;
         list<int>::iterator it;
         
-        if (!remove)
+        //with removealltypes the listed types were added too; the old ones come back below
         {
             for (it = types.begin(); it != types.end(); it++)
             {

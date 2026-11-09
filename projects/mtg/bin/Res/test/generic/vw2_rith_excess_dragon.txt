@@ -1,0 +1,22 @@
+#Rith, Liberated Primeval: Shock kills a 1/1 the opponent controls with 1 excess damage - a 4/4
+#flying Dragon at your end step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:574694
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Eager Cadet
+[DO]
+Shock
+Eager Cadet
+goto end
+[ASSERT]
+END
+[PLAYER1]
+inplay:574694,*
+graveyard:Shock
+[PLAYER2]
+graveyard:Eager Cadet
+[END]

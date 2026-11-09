@@ -1,0 +1,20 @@
+#Gisa, the Hellraiser: Shocking your own creature is not a crime - no Zombie Rogues.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030
+graveyard:Shock,Grizzly Bears
+[PLAYER2]
+life:20
+[END]

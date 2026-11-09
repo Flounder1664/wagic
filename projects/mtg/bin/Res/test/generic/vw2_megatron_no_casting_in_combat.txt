@@ -1,0 +1,22 @@
+#Megatron, Tyrant (player 2): its opponents can't cast spells during combat - player 1's Shock at
+#declare attackers stays in hand.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:732012
+life:20
+[DO]
+Shock
+p2
+[ASSERT]
+COMBATATTACKERS
+[PLAYER1]
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:732012
+life:20
+[END]

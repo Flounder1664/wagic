@@ -1,0 +1,25 @@
+#Marauding Sphinx: Shock the opponent (a crime) - surveil 2, binning both cards (the put-back branch cannot be driven).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Marauding Sphinx
+hand:Shock
+manapool:{R}
+library:Memnite,Juggernaut,Ornithopter
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+choice 0
+Ornithopter
+Juggernaut
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Marauding Sphinx
+library:Memnite
+graveyard:Shock,Ornithopter,Juggernaut
+[PLAYER2]
+life:18
+[END]

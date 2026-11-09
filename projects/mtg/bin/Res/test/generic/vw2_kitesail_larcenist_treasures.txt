@@ -1,0 +1,24 @@
+#Kitesail Larcenist: the opponent's Grizzly Bears becomes a Treasure artifact, not a creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kitesail Larcenist
+inplay:Ornithopter
+manapool:{2}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Kitesail Larcenist
+choice 0
+Ornithopter
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kitesail Larcenist,Ornithopter
+type:Ornithopter=artifact,treasure,-creature
+[PLAYER2]
+inplay:Grizzly Bears
+type:Grizzly Bears=artifact,treasure,-creature
+[END]

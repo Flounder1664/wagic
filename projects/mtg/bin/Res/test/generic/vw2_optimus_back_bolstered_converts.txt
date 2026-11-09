@@ -1,0 +1,27 @@
+#Optimus Prime, Autobot Leader: Eager Cadet attacks, is bolstered 2 (3/3 trample) and connects -
+#Optimus converts to the 4/8 front.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732113,Eager Cadet
+[PLAYER2]
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+Eager Cadet
+next
+Eager Cadet
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:732113,Eager Cadet
+pt:Eager Cadet=3/3
+pt:732113=4/8
+[PLAYER2]
+life:17
+[END]

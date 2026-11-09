@@ -139201,10 +139201,12 @@ toughness=5
 [card]
 name=Smuggler's Buggy
 grade=borderline
-auto={crew2(other creature|myBattlefield)}:name(Crew 2) becomes(Artifact Creature) ueot restriction{compare(crewtotalpower)~morethan~1}
-missing=hideaway 4 and the combat-damage payoff that casts the hidden card for free;
-#hideaway appears once in the corpus and not in a form that can be reused here.
-text=Hideaway 4 -- Whenever this Vehicle deals combat damage to a player, you may cast the exiled card without paying its mana cost. (Neither implemented.) -- Crew 2
+auto=name(Hideaway 4) reveal:4 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+#The offer is built at resolution (transforms), so *[evictname] sees the hidden card - see Wiretapping.
+auto=@combatdamaged(player) from(this):name(Cast the hidden card free) transforms((,newability[may name(Cast the hidden card free) target(*[evictname]|myexile) activate castcard(normal) && moveto(ownerhand) all(this)])) ueot
+auto=_CREW2_
+#The hidden card is exiled face up.
+text=Hideaway 4 (When this artifact enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.) -- Whenever this Vehicle deals combat damage to a player, you may cast the exiled card without paying its mana cost. If you do, return this Vehicle to its owner's hand. -- Crew 2
 mana={4}
 type=Artifact
 subtype=Vehicle
@@ -147338,9 +147340,12 @@ toughness=6
 name=Kitesail Larcenist
 abilities=flying
 auto=_WARD1_
-auto=target(<upto:1>other *[artifact;creature]|mybattlefield) transforms((Artifact Treasure,newability[loseabilities],newability[{T}{S}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller])) forever
-auto=target(<upto:1>*[artifact;creature]|opponentbattlefield) transforms((Artifact Treasure,newability[loseabilities],newability[{T}{S}:name(Add one mana of any color) ability$!choice Add{W} _ choice Add{U} _ choice Add{B} _ choice Add{R} _ choice Add{G}!$ controller])) forever
-missing=the change is permanent instead of lasting only while this creature stays on the battlefield
+#One pick per player, each through its own may (two plain targeted enters-triggers share one menu and the
+#second is lost). The picks are marked, and the lord makes them Treasures only while Larcenist is on the battlefield.
+auto=ability$! may target(other *[artifact;creature]|mybattlefield) counter(0/0,1,LarcenistTreasure) !$ controller
+auto=ability$! may target(*[artifact;creature]|opponentbattlefield) counter(0/0,1,LarcenistTreasure) !$ controller
+auto=lord(*[counter{0/0.1.LarcenistTreasure}]|battlefield) transforms((removealltypes Artifact Treasure,newability[loseabilities],newability[{T}{S}:Add{W}],newability[{T}{S}:Add{U}],newability[{T}{S}:Add{B}],newability[{T}{S}:Add{R}],newability[{T}{S}:Add{G}]))
+auto=@movedTo(this|graveyard,exile,hand,library) from(battlefield):all(*[counter{0/0.1.LarcenistTreasure}]|battlefield) removeallcounters(0/0,1,LarcenistTreasure)
 text=Flying, ward {1} -- When this creature enters, for each player, choose up to one other target artifact or creature that player controls. For as long as this creature remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.
 mana={2}{U}
 type=Creature
@@ -147473,7 +147478,8 @@ toughness=4
 [card]
 name=Sovereign Okinec Ahau
 auto=_WARD2_
-missing=the attack trigger - each creature you control whose power is above its base power gets that many +1/+1 counters; a per-creature difference cannot be expressed
+#Each creature counts its own excess over base power (powerabovebase), read on that creature.
+auto=_ATTACKING_name(+1/+1 counters for power above base) all(creature|mybattlefield) transforms((,newability[thisforeach(variable{powerabovebase}>0) counter(1/1)])) oneshot
 text=Ward {2} -- Whenever Sovereign Okinec Ahau attacks, for each creature you control with power greater than that creature's base power, put a number of +1/+1 counters on that creature equal to the difference.
 mana={2}{G}{W}
 type=Legendary Creature
@@ -151076,8 +151082,8 @@ name=Gisa, the Hellraiser
 auto=_WARDMANALIFE_(2,2)
 auto=lord(*[skeleton;zombie]|mybattlefield) 1/1
 auto=lord(*[skeleton;zombie]|mybattlefield) menace
-missing=the crime trigger (two tapped 2/2 Zombie Rogues once each turn when you target an opponent or what they have) - the engine has no "you committed a crime" event.
-text=Ward-{2}, Pay 2 life. -- Skeletons and Zombies you control get +1/+1 and have menace. -- Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+auto=@committedcrime turnlimited:name(Create two tapped Zombie Rogues) create(Zombie Rogue:creature zombie rogue:2/2:blue:black)*2 and!( tap(noevent) )!
+text=Ward--{2}, Pay 2 life. -- Skeletons and Zombies you control get +1/+1 and have menace. -- Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 mana={3}{B}{B}
 type=Legendary Creature
 subtype=Human Warlock
@@ -151183,11 +151189,14 @@ toughness=2
 [/card]
 [card]
 name=Rith, Liberated Primeval
-#REVIEW-V 2026-10-29: the excess-damage Dragon token is not implemented (missing=).
 abilities=flying
 auto=_WARD2_
 auto=lord(other dragon|mybattlefield) transforms((,newability[_WARD2_]))
-missing=the end-step Dragon token when a creature or planeswalker an opponent controlled was dealt excess damage this turn - nothing records excess damage over a turn.
+#Excess damage to an opponent's creature or planeswalker is marked on Rith and paid out at your end step.
+#Only damage dealt while Rith is on the battlefield is seen.
+auto=@damaged(*[creature;planeswalker]|opponentbattlefield):if compare(excessdamage)~morethan~0 then counter(0/0,1,RithExcess) all(this)
+auto=@each my end restriction{compare(hascntrithexcess)~morethan~0}:name(Create a 4/4 Dragon) create(Dragon:creature dragon:4/4:red:flying) && removeallcounters(0/0,1,RithExcess) all(this)
+auto=@each upkeep:removeallcounters(0/0,1,RithExcess) all(this)
 text=Flying, ward {2} -- Other Dragons you control have ward {2}. -- At the beginning of your end step, if a creature or planeswalker an opponent controlled was dealt excess damage this turn, create a 4/4 red Dragon creature token with flying.
 mana={2}{R}{G}{W}
 type=Legendary Creature
@@ -151790,7 +151799,7 @@ toughness=1
 name=Marauding Sphinx
 abilities=flying,vigilance
 auto=_WARD2_
-missing=the crime trigger (surveil 2 once each turn) - the engine has no "you committed a crime" event.
+auto=@committedcrime turnlimited:_SURVEIL2_
 text=Flying, vigilance, ward {2} -- Whenever you commit a crime, surveil 2. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 mana={3}{U}{U}
 type=Creature
@@ -151979,8 +151988,8 @@ toughness=5
 name=Cyclonus, Cybertronian Fighter
 abilities=flying
 auto=this(variable{controllerturn}) transforms((Creature))
-auto=@combatdamaged(player) from(this):name(Convert) flip(Cyclonus^ the Saboteur // Cyclonus^ Cybertronian Fighter)
-missing=the additional beginning phase after converting.
+#Each extra step is inserted right after end of combat, so draw/upkeep/untap are added in reverse.
+auto=@combatdamaged(player) from(this):name(Convert and take an extra beginning phase) nextphasealter(add,draw,controller,after<combatends>) && nextphasealter(add,upkeep,controller,after<combatends>) && nextphasealter(add,untap,controller,after<combatends>) && flip(Cyclonus^ the Saboteur // Cyclonus^ Cybertronian Fighter)
 text=Living metal (During your turn, this Vehicle is also a creature.) -- Flying -- Whenever Cyclonus deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
 type=Legendary Artifact
 subtype=Vehicle
@@ -152187,7 +152196,11 @@ other={1}{R}{W}{B} name(More Than Meets the Eye)
 #so without the isflipped check it flipped straight back inside the convert (crashed John's game, 2026-10-30).
 auto=if paid(alternative) then if compare(isflipped)~equalto~0 then flip(backside)
 auto=@each my secondmain:may name(Convert and add {C} per life lost) flip(backside) && thisforeach(variable{oplifelost}>0) add{C}
-missing=your opponents can't cast spells during combat.
+auto=while(restriction{combatbeginsonly}) maxCast(*)0 opponent
+auto=while(restriction{attackersonly}) maxCast(*)0 opponent
+auto=while(restriction{blockersonly}) maxCast(*)0 opponent
+auto=while(restriction{combatdamageonly}) maxCast(*)0 opponent
+auto=while(restriction{combatendsonly}) maxCast(*)0 opponent
 text=More Than Meets the Eye {1}{R}{W}{B} (You may cast this card converted for {1}{R}{W}{B}.) -- Your opponents can't cast spells during combat. -- At the beginning of each of your postcombat main phases, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn. // Megatron, Destructive Force
 mana={3}{R}{W}{B}
 type=Legendary Artifact Creature
@@ -152198,8 +152211,11 @@ toughness=5
 [card]
 name=Megatron, Destructive Force
 auto=this(variable{controllerturn}) transforms((Creature))
-auto=_ATTACKING_may name(Sacrifice another artifact) notaTarget(other artifact|mybattlefield) sacrifice && damage:storedmanacost target(creature)
-missing=excess damage going to the creature's controller (and converting Megatron when it does).
+#The sacrifice is a cost (it records the artifact's mana value), granted for the turn the attack trigger fires;
+#a reflexive "when you do" trigger cannot target inside an && chain. Usable once, any time that turn.
+auto=_ATTACKING_name(Sacrifice another artifact for damage) all(this) transforms((,newability[{S(other artifact|mybattlefield)}:name(Sacrifice another artifact - damage) damage:storedmanacost target(creature) limit:1])) ueot
+#The excess also stays on the creature, which is dying anyway.
+auto=@noncombatdamaged(creature) from(this):if compare(excessdamage)~morethan~0 then name(Excess damage to its controller and convert) damage:excessdamage opponent && flip(Megatron^ Tyrant // Megatron^ Destructive Force)
 text=Living metal (During your turn, this Vehicle is also a creature.) -- Whenever Megatron attacks, you may sacrifice another artifact. When you do, Megatron deals damage equal to the sacrificed artifact's mana value to target creature. If excess damage would be dealt to that creature this way, instead that damage is dealt to that creature's controller and you convert Megatron.
 type=Legendary Artifact
 subtype=Vehicle
@@ -152231,8 +152247,10 @@ abilities=trample
 auto=this(variable{controllerturn}) transforms((Creature))
 #Was "counter(1/1,2) && trample ueot": the && chain dropped the counters AND the trample (harness, 2026-11-01).
 #Two newability counters, not counter(1/1,2) - transforms splits its list on the comma.
-auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Bolster 2) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) transforms((,newability[counter(1/1)],newability[counter(1/1)],trample)) ueot!$ controller
-missing=converting when the bolstered creature deals combat damage to a player this turn.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Bolster 2) ability$!name(Bolster) notaTarget(creature[toughness=toughness:lowest:creature:mybattlefield]|mybattlefield) transforms((,newability[counter(1/1)],newability[counter(1/1)],newability[counter(0/0.1.OptimusChosen)],trample)) ueot!$ controller
+#The bolstered creature is marked; when it connects this turn, Optimus converts.
+auto=@combatdamaged(player) from(creature[counter{0/0.1.OptimusChosen}]|mybattlefield):name(Convert Optimus Prime) flip(Optimus Prime^ Hero // Optimus Prime^ Autobot Leader)
+auto=@each end:all(*[counter{0/0.1.OptimusChosen}]|battlefield) removeallcounters(0/0,1,OptimusChosen)
 text=Living metal (During your turn, this Vehicle is also a creature.) -- Trample -- Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
 type=Legendary Artifact
 subtype=Vehicle

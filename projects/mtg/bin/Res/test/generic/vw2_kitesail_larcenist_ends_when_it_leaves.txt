@@ -1,0 +1,27 @@
+#Kitesail Larcenist: once it leaves (Lightning Bolt), the two Treasures are creatures again.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Kitesail Larcenist,Lightning Bolt
+inplay:Ornithopter
+manapool:{2}{U}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Kitesail Larcenist
+choice 0
+Ornithopter
+choice 0
+Grizzly Bears
+Lightning Bolt
+Kitesail Larcenist
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Kitesail Larcenist,Lightning Bolt
+type:Ornithopter=artifact,creature,-treasure
+[PLAYER2]
+inplay:Grizzly Bears
+type:Grizzly Bears=creature,-artifact,-treasure
+[END]

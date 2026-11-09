@@ -1677,6 +1677,53 @@ public:
     }
 };
 
+//you commit a crime: a spell or ability you control targets an opponent, anything an opponent
+//controls, or a card in an opponent's graveyard (OTJ). Fires on the same target events as @targeted.
+class TrCommittedCrime: public Trigger
+{
+public:
+    bool limitOnceATurn;
+    int triggeredTurn;
+    TrCommittedCrime(GameObserver* observer, int id, MTGCardInstance * source, bool once = false, bool limitOnceATurn = false) :
+    Trigger(observer, id, source, once), limitOnceATurn(limitOnceATurn)
+    {
+        triggeredTurn = -1;
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        Player * you = source->controller();
+        Player * victim = NULL;
+        MTGCardInstance * by = NULL;
+        if (WEventTarget * e = dynamic_cast<WEventTarget *> (event))
+        {
+            if (!e->card) return 0;
+            by = e->source;
+            MTGCardInstance * c = e->card;
+            if (c->currentZone == c->owner->game->graveyard)
+                victim = c->owner;
+            else
+                victim = c->controller();
+        }
+        else if (WEventPlayerTargeted * pe = dynamic_cast<WEventPlayerTargeted *> (event))
+        {
+            by = pe->source;
+            victim = pe->player;
+        }
+        else
+            return 0;
+        if (!by || by->controller() != you || victim != you->opponent()) return 0;
+        if (limitOnceATurn && triggeredTurn == game->turn) return 0;
+        triggeredTurn = game->turn;
+        return 1;
+    }
+
+    TrCommittedCrime * clone() const
+    {
+        return NEW TrCommittedCrime(*this);
+    }
+};
+
 //counter trigger
 class TrCounter: public Trigger
 {

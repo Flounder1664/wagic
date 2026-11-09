@@ -1935,6 +1935,10 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
         return NEW TrVampired(observer, id, card, tc, fromTc, once, limitOnceATurn);
     }
 
+    //when you commit a crime
+    if (s.find("committedcrime") != string::npos)
+        return NEW TrCommittedCrime(observer, id, card, once, limitOnceATurn);
+
     //when card becomes the target of a spell or ability
     if (TargetChooser * tc = parseSimpleTC(s, "targeted", card))
     {

@@ -1,0 +1,33 @@
+#Megatron, Destructive Force attacks, then sacrifices Mind Stone (mana value 2): 2 damage to a 1/1
+#Eager Cadet, the 1 excess goes to player 2, and Megatron converts to the 7/5 front. Player 2 also
+#takes 4 combat damage (1 + 4 = 5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732112,Mind Stone
+[PLAYER2]
+inplay:Eager Cadet
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+732112
+next
+next
+#blockers
+732112
+choice 0
+Mind Stone
+Eager Cadet
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:732112
+graveyard:Mind Stone
+pt:732112=7/5
+[PLAYER2]
+graveyard:Eager Cadet
+life:15
+[END]

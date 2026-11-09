@@ -1,0 +1,24 @@
+#Gisa, the Hellraiser: Shocking the opponent is a crime - two tapped 2/2 Zombie Rogues (3/3 with
+#Gisa's lord). A second crime the same turn makes nothing (once each turn).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030
+hand:Shock,Lightning Bolt
+manapool:{R}{R}
+[PLAYER2]
+life:20
+[DO]
+Shock
+p2
+Lightning Bolt
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,*,*
+tappedinplay:2
+graveyard:Shock,Lightning Bolt
+[PLAYER2]
+life:15
+[END]

@@ -870,6 +870,12 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     {
         intValue = target->getCurrentToughness();
     }
+    else if (s == "powerabovebase")//how far power is above base power, 0 if not (Sovereign Okinec Ahau)
+    {
+        intValue = target->getCurrentPower() - target->origpower;
+        if (intValue < 0)
+            intValue = 0;
+    }
     else if (s == "countedamount" || s == "countedbamount")
     {
         intValue = (s == "countedamount")?target->CountedObjects:target->CountedObjectsB;

@@ -1,0 +1,30 @@
+#Cyclonus, Cybertronian Fighter connects: it converts and there is an extra beginning phase after
+#combat, so player 1 draws Juggernaut before the second main phase.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:732109
+library:Memnite,Juggernaut
+[PLAYER2]
+life:20
+[DO]
+next
+#begin
+next
+#attackers
+732109
+next
+#blockers
+next
+#damage
+next
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:732109
+hand:Juggernaut
+library:Memnite
+[PLAYER2]
+life:15
+[END]

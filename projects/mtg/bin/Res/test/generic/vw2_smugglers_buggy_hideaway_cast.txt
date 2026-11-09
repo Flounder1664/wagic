@@ -1,0 +1,36 @@
+#Smuggler's Buggy: hideaway 4 hides Grizzly Bears; crewed, it connects and casts the Bears free,
+#then returns to its owner's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+library:Juggernaut,Ornithopter,Memnite,Grizzly Bears
+inplay:Gray Ogre,Smuggler's Buggy
+[PLAYER2]
+life:20
+[DO]
+choice 0
+Grizzly Bears
+revealdone
+Smuggler's Buggy
+Gray Ogre
+next
+#begin
+next
+#attackers
+Smuggler's Buggy
+next
+#blockers
+next
+#damage
+choice 0
+Grizzly Bears
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Gray Ogre,Grizzly Bears
+hand:Smuggler's Buggy
+library:*,*,*
+[PLAYER2]
+life:15
+[END]

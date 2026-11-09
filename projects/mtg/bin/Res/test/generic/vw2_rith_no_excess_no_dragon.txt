@@ -1,0 +1,21 @@
+#Rith, Liberated Primeval: Shock on a 2/2 is exactly lethal - no excess, no Dragon.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:574694
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Shock
+Grizzly Bears
+goto end
+[ASSERT]
+END
+[PLAYER1]
+inplay:574694
+graveyard:Shock
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]
