@@ -1,26 +1,24 @@
 #Imposter Mech as a copy of Hill Giant has crew 3: Craw Wurm crews it, it becomes a creature, and
-#Day of Judgment now destroys it (the copy keeps Imposter Mech's id, 553722).
+#Day of Judgment now destroys it (seeded by id 553722 - it has two printings - and the copy keeps that id).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
-hand:Imposter Mech,Day of Judgment
+hand:553722,Day of Judgment
 inplay:Craw Wurm
 manapool:{3}{U}{W}{W}
 [PLAYER2]
 inplay:Hill Giant
 [DO]
-Imposter Mech
+553722
 choice 0
 Hill Giant
 553722
-#menu zzz is only a beat: the crew pick lands one command late without it
-menu zzz
 Craw Wurm
 Day of Judgment
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-graveyard:Imposter Mech,Craw Wurm,Day of Judgment
+graveyard:553722,Craw Wurm,Day of Judgment
 [PLAYER2]
 graveyard:Hill Giant
 [END]
