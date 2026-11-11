@@ -1,0 +1,33 @@
+#Amalia Benavides Aguirre: Titanic Growth, Giant Growth and Berserk make her 18/9. Each Revitalize
+#gains life (and draws), and she explores a nonland card, left on top: 19 power after the first (nothing happens),
+#exactly 20 after the second, so all other creatures are destroyed. The check must see the explore's
+#+1/+1 counter: as a separate life-gain trigger it read 19 and destroyed nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636941
+hand:Titanic Growth,Giant Growth,Berserk,Revitalize,Revitalize
+library:Juggernaut,Memnite,Mind Stone,Ornithopter,Millstone
+manapool:{3}{G}{G}{G}{W}{W}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Titanic Growth
+636941
+Giant Growth
+636941
+Berserk
+636941
+Revitalize
+Revitalize
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:636941
+hand:Millstone,Ornithopter
+graveyard:Titanic Growth,Giant Growth,Berserk,Revitalize,Revitalize
+library:Juggernaut,Memnite,Mind Stone
+life:26
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

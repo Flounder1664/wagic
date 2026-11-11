@@ -1,0 +1,22 @@
+#Imposter Mech enters as a copy of player 2's Hill Giant - but as an artifact Vehicle, not a creature,
+#so Day of Judgment leaves it (the copy keeps Imposter Mech's id, 553722) and kills the real Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Imposter Mech,Day of Judgment
+manapool:{3}{U}{W}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Imposter Mech
+choice 0
+Hill Giant
+Day of Judgment
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:553722
+graveyard:Day of Judgment
+[PLAYER2]
+graveyard:Hill Giant
+[END]

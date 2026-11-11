@@ -57388,7 +57388,8 @@ type=Instant
 [card]
 name=Imposter Mech
 auto=_CREW3_
-missing=the enter-as-a-copy of an opponent's creature (as a crew 3 Vehicle) is not written; it is a plain 3/1 crew 3 Vehicle.
+#Copying replaces the crew line above, so the copy is given its own; supertypes go with the other types.
+auto=may name(Enter as a copy of an opponent's creature) notaTarget(creature|opponentbattlefield) copy and!( transforms((removealltypes Artifact Vehicle,newability[_CREW3_])) forever )!
 text=You may have Imposter Mech enter the battlefield as a copy of a creature an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types. -- Crew 3
 mana={1}{U}
 type=Artifact
@@ -147072,8 +147073,8 @@ name=Amalia Benavides Aguirre
 #Ward - pay 3 life: Gev, Scaled Scorch's ward line with 3 for 2.
 auto=@targeted(this|myBattlefield) from(*[instant;sorcery]|opponentzones):choice name(This spell costs 3 life more) name(This spell costs 3 life more) target(*[instant;sorcery]|opponentzones) transforms((,newability[pay[[{L:3}]] name(pay 3 life) donothing?fizzle])) oneshot
 auto=@lifeof(player) from(*[-lifefaker]|*):explore:1
-auto=@lifeof(player) from(*[-lifefaker]|*):if compare(power)~equalto~20 then name(Destroy all other creatures) all(other creature|battlefield) destroy
-missing=the power-20 check is a separate trigger, so it can resolve before the explore's +1/+1 counter lands
+#The power check rides on Amalia's own explore, so it sees the +1/+1 counter.
+auto=@explored(this):if compare(power)~equalto~20 then name(Destroy all other creatures) all(other creature|battlefield) destroy
 text=Ward-Pay 3 life. -- Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all other creatures if its power is exactly 20. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
 mana={W}{B}
 type=Legendary Creature
@@ -151761,9 +151762,13 @@ auto=_WARD3_
 #Council's dilemma: you cast your vote and your extra vote; the opponent votes too.
 auto=ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
 auto=ability$!choice name(Extra vote evidence - investigate) _CLUE_ _ choice name(Extra vote bribery - Treasure) _TREASURE_ _ choice name(No extra vote) donothing!$ controller
-auto=ability$!choice name(Vote evidence) donothing _ choice name(Vote bribery) donothing!$ opponent
+#The opponent votes through counters on Tivit, so the Clue or Treasure is yours.
+auto=ability$!choice name(Vote evidence) counter(0/0,1,TivitEvidence) all(this) _ choice name(Vote bribery) counter(0/0,1,TivitBribery) all(this)!$ opponent
 auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
-missing=the opponent's vote is asked but does not make a Clue or Treasure for you; only your two votes count.
+auto=@combatdamaged(player) from(this):ability$!choice name(Extra vote evidence - investigate) _CLUE_ _ choice name(Extra vote bribery - Treasure) _TREASURE_ _ choice name(No extra vote) donothing!$ controller
+auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence) counter(0/0,1,TivitEvidence) all(this) _ choice name(Vote bribery) counter(0/0,1,TivitBribery) all(this)!$ opponent
+auto=@counteradded(0/0,1,TivitEvidence) from(this):name(Investigate) _CLUE_ && removeallcounters(0/0,1,TivitEvidence) all(this)
+auto=@counteradded(0/0,1,TivitBribery) from(this):name(Create a Treasure) _TREASURE_ && removeallcounters(0/0,1,TivitBribery) all(this)
 text=Flying, ward {3} -- Council's dilemma - Whenever Tivit enters or deals combat damage to a player, starting with you, each player votes for evidence or bribery. For each evidence vote, investigate. For each bribery vote, create a Treasure token. -- While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)
 mana={3}{W}{U}{B}
 type=Legendary Creature
