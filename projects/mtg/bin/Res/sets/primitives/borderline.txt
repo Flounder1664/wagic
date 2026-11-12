@@ -151762,13 +151762,12 @@ auto=_WARD3_
 #Council's dilemma: you cast your vote and your extra vote; the opponent votes too.
 auto=ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
 auto=ability$!choice name(Extra vote evidence - investigate) _CLUE_ _ choice name(Extra vote bribery - Treasure) _TREASURE_ _ choice name(No extra vote) donothing!$ controller
-#The opponent votes through counters on Tivit, so the Clue or Treasure is yours.
-auto=ability$!choice name(Vote evidence) counter(0/0,1,TivitEvidence) all(this) _ choice name(Vote bribery) counter(0/0,1,TivitBribery) all(this)!$ opponent
+#The opponent answers this menu; "controller" on the token is still Tivit's controller, so the Clue or Treasure is yours.
+#(Counters on Tivit placed from this menu never landed - scenario 99, 2026-11-12.)
+auto=ability$!choice name(Vote evidence) _CLUE_ controller _ choice name(Vote bribery) _TREASURE_ controller!$ opponent
 auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence - investigate) _CLUE_ _ choice name(Vote bribery - Treasure) _TREASURE_!$ controller
 auto=@combatdamaged(player) from(this):ability$!choice name(Extra vote evidence - investigate) _CLUE_ _ choice name(Extra vote bribery - Treasure) _TREASURE_ _ choice name(No extra vote) donothing!$ controller
-auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence) counter(0/0,1,TivitEvidence) all(this) _ choice name(Vote bribery) counter(0/0,1,TivitBribery) all(this)!$ opponent
-auto=@counteradded(0/0,1,TivitEvidence) from(this):name(Investigate) _CLUE_ && removeallcounters(0/0,1,TivitEvidence) all(this)
-auto=@counteradded(0/0,1,TivitBribery) from(this):name(Create a Treasure) _TREASURE_ && removeallcounters(0/0,1,TivitBribery) all(this)
+auto=@combatdamaged(player) from(this):ability$!choice name(Vote evidence) _CLUE_ controller _ choice name(Vote bribery) _TREASURE_ controller!$ opponent
 text=Flying, ward {3} -- Council's dilemma - Whenever Tivit enters or deals combat damage to a player, starting with you, each player votes for evidence or bribery. For each evidence vote, investigate. For each bribery vote, create a Treasure token. -- While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)
 mana={3}{W}{U}{B}
 type=Legendary Creature
@@ -153410,6 +153409,7 @@ type=Enchantment
 [/card]
 [card]
 name=Wiretapping
+#VERIFIED IN GAME 2026-11-12 (John, scenario queue): nine cards after the extra draw offers the hidden card free in the draw step; a hidden land uses your land drop.
 auto=name(Hideaway 5) reveal:5 optionone name(Exile a card) target(*|reveal) imprint optiononeend optiontwo name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 auto=@drawof(player) restriction{compare(opponentturn)~equalto~0,compare(currentphase)~equalto~3,compare(pdrewcount)~equalto~1}:name(Draw a card) draw:1 controller
 auto=@drawof(player) restriction{compare(opponentturn)~equalto~0,compare(currentphase)~equalto~3,compare(pdrewcount)~equalto~2,type(*|myhand)~morethan~8}:name(Play the hidden card free) transforms((,newability[may name(Play the hidden card free) target(*[evictname]|myexile) activate castcard(normal)])) ueot
