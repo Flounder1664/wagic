@@ -64,6 +64,14 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     bool other = false;//othertype:[subtype]
 
     if (!target) target = card;
+    //How far power is above base power, 0 if not (Sovereign Okinec Ahau). Early return: see above.
+    if (s == "powerabovebase")
+    {
+        intValue = target->getCurrentPower() - target->origpower;
+        if (intValue < 0)
+            intValue = 0;
+        return;
+    }
     int multiplier = 1;
     if (s[0] == '-')
     {
@@ -869,12 +877,6 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     else if (s == "t" || s == "toughness")
     {
         intValue = target->getCurrentToughness();
-    }
-    else if (s == "powerabovebase")//how far power is above base power, 0 if not (Sovereign Okinec Ahau)
-    {
-        intValue = target->getCurrentPower() - target->origpower;
-        if (intValue < 0)
-            intValue = 0;
     }
     else if (s == "countedamount" || s == "countedbamount")
     {
