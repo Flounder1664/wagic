@@ -1,0 +1,19 @@
+#Professor Dellian Fel -3: destroy target creature (5 -> 2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Professor Dellian Fel
+menu -3: Destroy target creature
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+counter:Professor Dellian Fel=loyalty:2
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

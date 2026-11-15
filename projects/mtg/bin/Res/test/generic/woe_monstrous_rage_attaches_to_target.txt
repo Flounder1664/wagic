@@ -1,0 +1,22 @@
+#Monstrous Rage: +2/+0 and a Monster Role (+1/+1, trample) attached to THE TARGET, with no second
+#choice. Raging Goblin is listed first and is also a legal creature; the Role must still land on
+#Grizzly Bears: 2/2 +2/+0 +1/+1 = 5/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Grizzly Bears
+hand:Monstrous Rage
+manapool:{R}
+[PLAYER2]
+[DO]
+Monstrous Rage
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Grizzly Bears,Monster@Grizzly Bears
+pt:Grizzly Bears=5/3
+pt:Raging Goblin=1/1
+graveyard:Monstrous Rage
+[PLAYER2]
+[END]

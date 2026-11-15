@@ -1643,6 +1643,35 @@ AAAlterMonarch::~AAAlterMonarch()
 {
 }
 
+//AA can't gain life for the rest of the game
+AACantGainLifeForGame::AACantGainLifeForGame(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, ManaCost * _cost,
+        int who) :
+    ActivatedAbilityTP(observer, _id, _source, _target, _cost, who)
+{
+}
+
+int AACantGainLifeForGame::resolve()
+{
+    Damageable * _target = (Damageable *) getTarget();
+    if (_target && _target->type_as_damageable == Damageable::DAMAGEABLE_PLAYER)
+        ((Player *) _target)->cantGainLifeForGame = true;
+    return 0;
+}
+
+const string AACantGainLifeForGame::getMenuText()
+{
+    return _("Can't gain life for the rest of the game").c_str();
+}
+
+AACantGainLifeForGame * AACantGainLifeForGame::clone() const
+{
+    return NEW AACantGainLifeForGame(*this);
+}
+
+AACantGainLifeForGame::~AACantGainLifeForGame()
+{
+}
+
 //AA Initiative
 AAAlterInitiative::AAAlterInitiative(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, ManaCost * _cost,
         int who) :

@@ -1,0 +1,24 @@
+#Screaming Nemesis dealt 2 by Shock (it survives) deals 2 to another creature: Grizzly Bears dies.
+#The opponent's life is untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Screaming Nemesis
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Shock
+Screaming Nemesis
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Screaming Nemesis
+graveyard:Shock
+[PLAYER2]
+graveyard:Grizzly Bears
+life:20
+[END]

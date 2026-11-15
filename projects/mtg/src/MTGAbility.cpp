@@ -3826,6 +3826,11 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             //tapped and attacking - Fire Navy Trebuchet needed both that and its art (John, 2026-09-23).
             if (s.find("battleready") != string::npos)
                 tok->battleReady = true;
+            if (s.find("attachtoit") != string::npos)
+            {
+                tok->attachToIt = true;
+                tok->attachTarget = target;
+            }
             //andability
             if(storedAndAbility.size())
             {
@@ -4726,6 +4731,16 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     {
         Targetable * t = spell ? spell->getNextTarget() : NULL;
         MTGAbility * a = NEW AAAlterMonarch(observer, id, card, t, NULL, who);
+        a->oneShot = 1;
+        return a;
+    }
+
+    //that player can't gain life for the rest of the game (Screaming Nemesis)
+    vector<string> splitCantGainLife = parseBetween(s, "cantgainlifeforgame", " ", false);
+    if (splitCantGainLife.size())
+    {
+        Targetable * t = spell ? spell->getNextTarget() : NULL;
+        MTGAbility * a = NEW AACantGainLifeForGame(observer, id, card, t, NULL, who);
         a->oneShot = 1;
         return a;
     }

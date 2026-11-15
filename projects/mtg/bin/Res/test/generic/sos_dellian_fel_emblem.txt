@@ -1,0 +1,43 @@
+#Professor Dellian Fel -6 emblem: whenever you gain life, the opponent loses that much.
+#Turn 1 +2 (5 -> 7, life 23), turn 3 -6 (7 -> 1), turn 5 +2 (1 -> 3, life 26): the emblem drains
+#the opponent 3. Without it the opponent stays at 20 (sos_dellian_fel_plus_two).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+library:Hill Giant,Gray Ogre,Craw Wurm,Spined Wurm,Horned Turtle,Air Elemental
+[PLAYER2]
+library:Raging Goblin,Goblin Piker,Goblin Hero,Goblin King,Goblin Balloon Brigade,Mons's Goblin Raiders
+[DO]
+Professor Dellian Fel
+menu +2: You gain 3 life
+eot
+next
+eot
+next
+next
+next
+Professor Dellian Fel
+menu -6: Emblem: whenever you gain life, opponent loses that much
+eot
+next
+eot
+next
+next
+next
+Professor Dellian Fel
+menu +2: You gain 3 life
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+counter:Professor Dellian Fel=loyalty:3
+hand:*,*
+library:Hill Giant,Gray Ogre,Craw Wurm,Spined Wurm
+life:26
+commandzone:*
+[PLAYER2]
+hand:*,*
+library:Raging Goblin,Goblin Piker,Goblin Hero,Goblin King
+life:17
+[END]

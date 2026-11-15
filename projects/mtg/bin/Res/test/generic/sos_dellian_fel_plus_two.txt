@@ -1,0 +1,19 @@
+#Professor Dellian Fel enters with 5 loyalty; +2 gains you 3 life (5 -> 7). The opponent's life
+#stays at 20, which the -6 emblem test relies on to show the drain is the emblem's.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+[PLAYER2]
+[DO]
+Professor Dellian Fel
+menu +2: You gain 3 life
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+counter:Professor Dellian Fel=loyalty:7
+life:23
+[PLAYER2]
+life:20
+[END]

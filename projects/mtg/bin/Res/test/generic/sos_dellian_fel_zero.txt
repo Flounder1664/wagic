@@ -1,0 +1,20 @@
+#Professor Dellian Fel 0: you draw a card and lose 1 life. Loyalty stays at 5.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+library:Hill Giant,Grizzly Bears
+[PLAYER2]
+[DO]
+Professor Dellian Fel
+menu 0: Draw a card and lose 1 life
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Professor Dellian Fel
+counter:Professor Dellian Fel=loyalty:5
+hand:Grizzly Bears
+library:Hill Giant
+life:19
+[PLAYER2]
+[END]

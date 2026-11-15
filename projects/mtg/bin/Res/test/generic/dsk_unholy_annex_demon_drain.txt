@@ -1,0 +1,34 @@
+#Unholy Annex end step: draw a card, and with a Demon in play each opponent loses 2 and you gain 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unholy Annex // Ritual Chamber
+inplay:Desecration Demon
+manapool:{2}{B}
+library:Hill Giant,Grizzly Bears
+[PLAYER2]
+[DO]
+Unholy Annex // Ritual Chamber
+#combat begins
+next
+#attackers
+next
+#blockers
+next
+#damage
+next
+#combat end
+next
+#second main
+next
+#end step
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:Desecration Demon,Unholy Annex // Ritual Chamber
+hand:Grizzly Bears
+library:Hill Giant
+life:22
+[PLAYER2]
+life:18
+[END]

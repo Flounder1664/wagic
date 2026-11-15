@@ -38,6 +38,9 @@ public:
     //Storied: once you control 3+ artifacts/legendaries/Sagas, you have an
     //enduring story for the rest of the game -- never resets once true.
     bool enduringStory;
+    //"That player can't gain life for the rest of the game" (Screaming Nemesis).
+    //Set by the cantgainlifeforgame effect; never resets once true.
+    bool cantGainLifeForGame;
     MTGPlayerCards * game;
     MTGDeck * mDeck;
     string deckFile;

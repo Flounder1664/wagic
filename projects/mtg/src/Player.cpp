@@ -26,6 +26,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     nomaxhandsize = false;
     cityBlessing = false;
     enduringStory = false;
+    cantGainLifeForGame = false;
     poisonCount = 0;
     damageCount = 0;
     nonCombatDamage = 0;
@@ -188,6 +189,8 @@ int Player::gainOrLoseLife(int value, MTGCardInstance* source)
     if (!value)
         return 0; //Don't do anything if there's no actual life change
     if (value>0 && (opponent()->game->battlefield->hasAbility(Constants::NOLIFEGAINOPPONENT)||game->battlefield->hasAbility(Constants::NOLIFEGAIN)))//nolifegain
+        return 0;
+    if (value > 0 && cantGainLifeForGame) //Screaming Nemesis: for the rest of the game
         return 0;
 
     if (value < 0)
