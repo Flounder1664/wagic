@@ -79,7 +79,15 @@ and shipped. In order:
 5. **Commit, merge into trunk, build from trunk, deploy** (below).
 6. On a pass in game, record `#VERIFIED IN GAME <date> ...` under the card's `name=` line.
 
-File format traps that have each cost a session:
+**Card data is linted on commit.** `tools/git-hooks/pre-commit` runs
+`wagic-tools/lint_primitives.py` whenever a commit touches `Res/sets` or `Res/test`
+(enabled per clone by `git config core.hooksPath tools/git-hooks`). It fails only on
+findings that are not in `wagic-tools/audits/lint_baseline.txt`; run it by hand with
+`--all` to see the known ones. Do not bypass it with `--no-verify`: fix the finding, or if
+it is a deliberate exception, `--update-baseline`. When a new kind of silent failure turns
+up, add a check for it there rather than a note.
+
+File format traps that have each cost a session (the lint catches the first two):
 
 - Primitives and `_tests.txt` are **CRLF**. Git Bash `sed -i` strips the CRs; edit with the
   Edit tool or Python in binary mode, and check before packaging.
