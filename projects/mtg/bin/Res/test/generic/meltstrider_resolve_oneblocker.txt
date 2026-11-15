@@ -1,0 +1,39 @@
+#Meltstrider's Resolve: the enchanted creature can't be blocked by more than one creature.
+#The Aura is cast on Grizzly Bears (2/4) and its fight declined. The Bears attack; Scathe Zombies
+#and Gray Ogre both try to block. Only the first block counts, so the Bears take 2, kill the
+#Zombies and live. Double-blocked they would take 4 and die.
+#(An Aura seeded with inplay:X@Y left the attacker unblockable in the harness, so it is cast.)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Meltstrider's Resolve
+inplay:Grizzly Bears
+manapool:{G}
+[PLAYER2]
+inplay:Scathe Zombies,Gray Ogre
+[DO]
+Meltstrider's Resolve
+Grizzly Bears
+choice 1
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+Scathe Zombies
+Gray Ogre
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Grizzly Bears,Meltstrider's Resolve
+pt:Grizzly Bears=2/4
+[PLAYER2]
+inplay:Gray Ogre
+graveyard:Scathe Zombies
+[END]

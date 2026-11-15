@@ -1,0 +1,19 @@
+#Garruk, Curse Breaker -3 makes a 4/4 Beast (5 -> 2); a power-4 creature entering draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735007
+library:Hill Giant,Grizzly Bears
+[PLAYER2]
+[DO]
+735007
+menu -3: Create a 4/4 Beast with trample
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735007,*
+counter:735007=loyalty:2
+hand:Grizzly Bears
+library:Hill Giant
+[PLAYER2]
+[END]

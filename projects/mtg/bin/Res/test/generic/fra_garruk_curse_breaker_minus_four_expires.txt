@@ -1,0 +1,52 @@
+#Garruk, Curse Breaker -4 (5 -> 1): Grizzly Bears attacks as a 4/4 with trample; the opponent takes 4.
+#On your next turn the effect has ended: the Bears hit for 2 (16 -> 14), not 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735007,Grizzly Bears
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+library:Raging Goblin,Goblin Piker
+[DO]
+735007
+menu -4: Attackers get +2/+2 and trample until your next turn
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+eot
+next
+eot
+next
+next
+next
+next
+#combat begins
+next
+#attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#combat end
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:735007,Grizzly Bears
+counter:735007=loyalty:1
+hand:Gray Ogre
+library:Hill Giant
+[PLAYER2]
+hand:Goblin Piker
+library:Raging Goblin
+life:14
+[END]

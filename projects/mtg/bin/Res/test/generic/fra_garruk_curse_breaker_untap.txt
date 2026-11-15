@@ -1,0 +1,30 @@
+#Garruk, Curse Breaker +2 (5 -> 7) untaps up to two lands. Forest pays for one Giant Growth and
+#Swamp is tapped too; +2 untaps both, and the Forest pays for a second Growth: 2/2 -> 8/8.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735007,Forest,Swamp,Grizzly Bears
+hand:Giant Growth,Giant Growth
+[PLAYER2]
+[DO]
+Forest
+Giant Growth
+Grizzly Bears
+Swamp
+735007
+menu +2: Untap up to two target lands
+Forest
+Swamp
+Forest
+Giant Growth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:735007,Forest,Swamp,Grizzly Bears
+counter:735007=loyalty:7
+graveyard:Giant Growth,Giant Growth
+pt:Grizzly Bears=8/8
+manapool:{B}
+[PLAYER2]
+[END]

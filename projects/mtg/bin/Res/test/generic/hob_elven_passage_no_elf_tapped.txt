@@ -1,0 +1,24 @@
+#Elven Passage without an Elf: the Forest enters tapped and can't pay for Giant Growth.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Elven Passage,Grizzly Bears
+hand:Giant Growth
+library:Forest
+[PLAYER2]
+[DO]
+Elven Passage
+Forest
+Forest
+Giant Growth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Forest
+hand:Giant Growth
+graveyard:Elven Passage
+pt:Grizzly Bears=2/2
+life:19
+[PLAYER2]
+[END]

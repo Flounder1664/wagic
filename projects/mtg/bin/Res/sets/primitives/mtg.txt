@@ -77255,8 +77255,8 @@ target=creature
 #what supplies the second - it targets your creature, then targets theirs inside.
 auto=teach(creature) +0/+2
 auto=may name(Fight a creature) _FIGHT_
-missing=cannot be blocked by more than one creature
-text=Enchant creature you control. When this Aura enters, enchanted creature fights up to one target creature an opponent controls. Enchanted creature gets +0/+2 and can't be blocked by more than one creature. (Approximation: only +0/+2 static bonus implemented.)
+auto=teach(creature) oneblocker
+text=Enchant creature you control. When this Aura enters, enchanted creature fights up to one target creature an opponent controls. Enchanted creature gets +0/+2 and can't be blocked by more than one creature.
 mana={G}
 type=Enchantment
 subtype=Aura

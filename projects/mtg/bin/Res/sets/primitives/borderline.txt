@@ -142235,10 +142235,10 @@ subtype=Equipment
 [/card]
 [card]
 name=Elven Passage
-auto={T}{L:1}{S}:name(Fetch a basic land) target(land[basic]|mylibrary) moveto(mybattlefield) and!( tap(noevent) )! && shuffle
+#Behold an Elf = choose an Elf you control or reveal one from hand, so with one in either zone the
+#land is left untapped (the untap is never a drawback). Same form as Sarkhan, Dragon Ascendant.
+auto={T}{L:1}{S}:name(Fetch a basic land) target(land[basic]|mylibrary) moveto(mybattlefield) and!( if type(elf|mybattlefieldhand)~equalto~0 then tap(noevent) )! && shuffle
 grade=borderline
-# REVIEW 2026-08-02 [P:low] HOB preview build; behold-an-Elf-to-untap not implemented
-missing="you may behold an Elf. If you do, untap that land" not implemented
 text={T}, Pay 1 life, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. You may behold an Elf. If you do, untap that land.
 type=Land
 [/card]
@@ -153563,4 +153563,21 @@ type=Creature
 subtype=Spirit
 power=3
 toughness=3
+[/card]
+[card]
+name=Garruk, Curse Breaker
+auto=counter(0/0,5,loyalty)
+auto=@movedTo(creature[power>=4]|myBattlefield):name(Draw a card) draw:1 controller
+auto={C(0/0,2,Loyalty)}:name(+2: Untap up to two target lands) untap target(<upto:2>land)
+auto={C(0/0,-3,Loyalty)}:name(-3: Create a 4/4 Beast with trample) token(Beast,Creature Beast,4/4,green,trample)
+#-4 as a lord over attacking creatures: a pump inside an emblem's @combat(attacking) trigger
+#segfaults the engine (all(trigger[to]) 2/2 ueot, with uynt or forever - 2026-11-15).
+#ueot, not uynt: uynt inside an emblem never expires (fra_garruk_curse_breaker_minus_four_expires).
+#Two-player, only your creatures can attack your opponent before your next turn, so ueot is the same.
+note=-4: lasts until end of turn, which equals until your next turn in a two-player game (not with extra turns); the +2/+2 and trample last while the creature attacks (to end of combat, not end of turn), and creatures attacking a planeswalker get them too - the engine does not tell the two apart.
+auto={C(0/0,-4,Loyalty)}:name(-4: Attackers get +2/+2 and trample until your next turn) emblem transforms((,newability[lord(creature[attacking]|mybattlefield) 2/2],newability[lord(creature[attacking]|mybattlefield) trample])) ueot
+text=Whenever a creature you control with power 4 or greater enters, draw a card. -- +2: Untap up to two target lands. -- -3: Create a 4/4 green Beast creature token with trample. -- -4: Until your next turn, whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and gain trample until end of turn. -- Starting Loyalty (5)
+mana={3}{G}{G}
+type=Legendary Planeswalker
+subtype=Garruk
 [/card]
