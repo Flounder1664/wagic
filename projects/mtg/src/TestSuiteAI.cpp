@@ -15,6 +15,7 @@
 #include "GameObserver.h"
 #include "GameStateShop.h"
 #include "MTGPack.h"
+#include "MTGDeck.h"
 #ifdef QT_CONFIG
 #include <QThread>
 #endif
@@ -1472,6 +1473,26 @@ void TestSuite::pregameTests()
         {
             Log("<span class=\"error\">a new TaskList did not start TASKS_INACTIVE</span><br />");
             nbFailed++;
+        }
+    }
+
+    //Meta theme decks (Nov 2026): every line must resolve through the real deck
+    //loader. MTGDeck drops an unknown card name silently, so a typo or a card
+    //with no set printing shows up only as a short deck.
+    {
+        const char * metaDecks[] = { "ai/baka/deck165.txt", "ai/baka/deck166.txt" };
+        for (size_t i = 0; i < sizeof(metaDecks) / sizeof(metaDecks[0]); i++)
+        {
+            nbTests++;
+            sprintf(result, "<h3>pregame/MetaDeck %s</h3>", metaDecks[i]);
+            Log(result);
+            MTGDeck deck(metaDecks[i], MTGCollection());
+            if (deck.totalCards() != 60)
+            {
+                sprintf(result, "<span class=\"error\">%s loaded %i cards, expected 60</span><br />", metaDecks[i], deck.totalCards());
+                Log(result);
+                nbFailed++;
+            }
         }
     }
 }
