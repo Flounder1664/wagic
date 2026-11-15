@@ -465,6 +465,9 @@ int Spell::resolve()
 {
     MTGCardInstance * oldStored = source->storedCard;
     Player * playerT = source->playerTarget;
+    //An Aura token made "attached to" a creature (token(...) attachtoit) has its host set before
+    //it resolves; putInZone below makes a new instance, which would forget it.
+    MTGCardInstance * auraTokenHost = (source->isToken && source->hasSubtype(Subtypes::TYPE_AURA)) ? source->target : NULL;
     if (!source->hasType(Subtypes::TYPE_INSTANT) && !source->hasType(Subtypes::TYPE_SORCERY) && source->name.size())
     {
         Player * p = source->controller();
@@ -483,6 +486,8 @@ int Spell::resolve()
         from = p->game->battlefield;
     }
     source->playerTarget = playerT;
+    if (auraTokenHost && !source->target)
+        source->target = auraTokenHost;
     source->storedCard = oldStored;
     //Play SFX
     if (options[Options::SFXVOLUME].number > 0)

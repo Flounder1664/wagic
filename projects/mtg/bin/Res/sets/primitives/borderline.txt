@@ -133255,12 +133255,14 @@ subtype=Room
 name=Unholy Annex // Ritual Chamber
 other={3}{B}{B} name(Ritual Chamber)
 auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex draw) draw:1 controller
+auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex - you control a Demon) if type(demon|mybattlefield)~morethan~0 then life:-2 opponent && life:2 controller
+auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex - no Demon) if type(demon|mybattlefield)~equalto~0 then life:-2 controller
 auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Ritual Chamber ETB) token(Demon,Creature Demon,6/6,black,flying)
 auto={3}{B}{B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Ritual Chamber) name(Unlock Ritual Chamber) unlockdoor:2 asSorcery
 auto={2}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Unholy Annex) name(Unlock Unholy Annex) unlockdoor:1 asSorcery
 auto=ifnot paid(alternative) then unlockdoor:1
 auto=alternative unlockdoor:2
-text=Unholy Annex (Door 1, {2}{B}): At the beginning of your end step, draw a card. (Simplified: original card also has Demon-conditional drain.) -- Ritual Chamber (Door 2, {3}{B}{B}): When you unlock this door, create a 6/6 black Demon creature token with flying.
+text=Unholy Annex (Door 1, {2}{B}): At the beginning of your end step, draw a card. If you control a Demon, each opponent loses 2 life and you gain 2 life. Otherwise, you lose 2 life. -- Ritual Chamber (Door 2, {3}{B}{B}): When you unlock this door, create a 6/6 black Demon creature token with flying.
 mana={2}{B}
 type=Enchantment
 subtype=Room
@@ -153525,4 +153527,40 @@ missing=any of the exiled cards can be cast this turn (not only three-colour spe
 text=Exile the top ten cards of your library. You may cast spells with exactly three colors from among them this turn. Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Spend this mana only to cast spells with exactly three colors.
 mana={3}{W}{U}{B}{R}{G}
 type=Sorcery
+[/card]
+[card]
+name=Professor Dellian Fel
+auto=counter(0/0,5,loyalty)
+auto={C(0/0,2,Loyalty)}:name(+2: You gain 3 life) life:3 controller
+auto={C(0/0,0,Loyalty)}:name(0: Draw a card and lose 1 life) draw:1 controller && life:-1 controller
+auto={C(0/0,-3,Loyalty)}:name(-3: Destroy target creature) destroy target(creature)
+auto={C(0/0,-6,Loyalty)}:name(-6: Emblem: whenever you gain life, opponent loses that much) emblem("Whenever you gain life, target opponent loses that much life.") transforms((,newability[@lifeof(player) from(*[-lifefaker]|*):life:-thatmuch opponent])) forever dontremove
+text=+2: You gain 3 life. -- 0: You draw a card and lose 1 life. -- -3: Destroy target creature. -- -6: You get an emblem with "Whenever you gain life, target opponent loses that much life." -- Starting Loyalty (5)
+mana={2}{B}{G}
+type=Legendary Planeswalker
+subtype=Dellian
+[/card]
+[card]
+name=Monstrous Rage
+target=creature
+auto=2/0 ueot
+#attachtoit (engine, 2026-11-15): the Role token enters attached to this spell's target, so
+#there is no second choice of creature - the retargetfromplay form always asks for one.
+auto=token(-632901) attachtoit
+text=Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+mana={R}
+type=Instant
+[/card]
+[card]
+name=Screaming Nemesis
+abilities=haste
+#cantgainlifeforgame (engine, 2026-11-15) sets a player flag that never resets, so the lock
+#outlasts this creature - nolifegainopponent only works while a permanent stays in play.
+auto=@damaged(this):name(Deal that much damage) ability$!name(Choose a target) choice name(Damage opponent) damage:storedthatmuch opponent && cantgainlifeforgame opponent _ choice name(Damage another creature or planeswalker) target(other *[creature;planeswalker]|battlefield) damage:storedthatmuch _ choice name(Damage yourself) damage:storedthatmuch controller && cantgainlifeforgame controller!$ controller
+text=Haste -- Whenever this creature is dealt damage, it deals that much damage to any other target. If a player is dealt damage this way, they can't gain life for the rest of the game.
+mana={2}{R}
+type=Creature
+subtype=Spirit
+power=3
+toughness=3
 [/card]

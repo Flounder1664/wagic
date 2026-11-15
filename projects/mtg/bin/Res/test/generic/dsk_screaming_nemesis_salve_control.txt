@@ -1,0 +1,18 @@
+#Control for dsk_screaming_nemesis_player_lock: the same Healing Salve on the opponent gains them 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Healing Salve
+manapool:{W}
+[PLAYER2]
+[DO]
+Healing Salve
+choice 0
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Healing Salve
+[PLAYER2]
+life:23
+[END]

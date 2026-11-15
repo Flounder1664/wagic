@@ -4059,6 +4059,10 @@ public:
     bool aLivingWeapon;
     string spt;
     bool battleReady;
+    //attachtoit: an Aura token enters attached to the creating spell's target
+    //("Create a Monster Role token attached to it" - Monstrous Rage).
+    bool attachToIt;
+    Targetable * attachTarget;
     MTGCardInstance * myToken;
     vector<MTGAbility *> currentAbilities;
     MTGAbility * andAbility;
@@ -4078,6 +4082,8 @@ public:
         MTGCard * card = MTGCollection()->getCardById(tokenId);
         if (card) name = card->data->getName();
         battleReady = false;
+        attachToIt = false;
+        attachTarget = NULL;
         andAbility = NULL;
         cID = "";
     }
@@ -4098,6 +4104,8 @@ public:
             name = card->data->getName();
         }
         battleReady = false;
+        attachToIt = false;
+        attachTarget = NULL;
         andAbility = NULL;
         cID = "";
     }
@@ -4112,6 +4120,8 @@ public:
         tokenId = 0;
         aType = MTGAbility::STANDARD_TOKENCREATOR;
         battleReady = false;
+        attachToIt = false;
+        attachTarget = NULL;
         andAbility = NULL;
         cID = tnum;
         if (!multiplier) this->multiplier = NEW WParsedInt(1);
@@ -4243,6 +4253,14 @@ public:
             spell->source->isToken = 1;
             spell->source->fresh = 1;
             spell->source->entersBattlefield = 1;
+            if (attachToIt && spell->source->hasSubtype(Subtypes::TYPE_AURA))
+            {
+                MTGCardInstance * host = dynamic_cast<MTGCardInstance *>(attachTarget);
+                if (!host || host == source)
+                    host = ((MTGCardInstance *)source)->target;
+                if (host && host != source && host->currentZone == host->controller()->game->battlefield)
+                    spell->source->target = host;
+            }
             if(spell->source->getMTGId() == 0)
             {//fix missing art: if token creator is put inside ability$!!$ who, then try to get the stored source card
                 if(((MTGCardInstance*)source)->storedSourceCard)
@@ -5131,6 +5149,19 @@ public:
     const string getMenuText();
     AAAlterMonarch * clone() const;
     ~AAAlterMonarch();
+};
+
+//"That player can't gain life for the rest of the game" (Screaming Nemesis)
+class AACantGainLifeForGame: public ActivatedAbilityTP
+{
+public:
+
+    AACantGainLifeForGame(GameObserver* observer, int _id, MTGCardInstance * _source, Targetable * _target, ManaCost * _cost = NULL,
+            int who = TargetChooser::UNSET);
+    int resolve();
+    const string getMenuText();
+    AACantGainLifeForGame * clone() const;
+    ~AACantGainLifeForGame();
 };
 
 //Initiative
