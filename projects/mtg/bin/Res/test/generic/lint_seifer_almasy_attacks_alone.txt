@@ -1,0 +1,29 @@
+#Seifer Almasy: a creature you control that attacks ALONE gains double strike. Raging Goblin
+#attacks alone and deals 1 twice: 18. Twin of lint_seifer_almasy_two_attackers.
+#The old line was "@combat(attacking) source(this):doublestrike ..." - not a keyword, and it
+#watched only Seifer himself rather than any creature attacking alone.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Seifer Almasy,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Raging Goblin
+next
+#first-strike damage
+next
+#regular damage
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Seifer Almasy,Raging Goblin
+life:20
+[PLAYER2]
+life:18
+[END]

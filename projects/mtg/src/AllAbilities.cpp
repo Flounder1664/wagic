@@ -9361,7 +9361,7 @@ int ALoseAbilities::addToGame()
     //2026-10-15). Only real keyword abilities are cleared - the same bitset also holds engine flags
     //(kicker markers, canplayfrom*, cantattack...) that must not be touched. Keywords granted
     //AFTER this (Deep Freeze's defender, Darksteel Mutation's indestructible) are added later and stay.
-    static const char * const kKeywords[] = { "trample", "forestwalk", "islandwalk", "mountainwalk", "swampwalk", "plainswalk", "flying", "firststrike", "doublestrike", "fear", "haste", "lifelink", "reach", "shroud", "vigilance", "defender", "banding", "protectionfromgreen", "protectionfromblue", "protectionfromred", "protectionfromblack", "protectionfromwhite", "unblockable", "wither", "persist", "exalted", "shadow", "reachshadow", "horsemanship", "hexproof", "indestructible", "intimidate", "deathtouch", "infect", "changeling", "menace", "prowess", "skulk", "undying", "snowlandwalk", "nonbasiclandwalk" };
+    static const char * const kKeywords[] = { "trample", "forestwalk", "islandwalk", "mountainwalk", "swampwalk", "plainswalk", "flying", "first strike", "double strike", "fear", "haste", "lifelink", "reach", "shroud", "vigilance", "defender", "banding", "protection from green", "protection from blue", "protection from red", "protection from black", "protection from white", "unblockable", "wither", "persist", "exalted", "shadow", "reachshadow", "horsemanship", "hexproof", "indestructible", "intimidate", "deathtouch", "infect", "changeling", "menace", "prowess", "skulk", "undying", "snowlandwalk", "nonbasiclandwalk" };
     clearedKeywords.clear();
     if (_target)
     {

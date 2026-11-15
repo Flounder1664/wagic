@@ -1,0 +1,30 @@
+#Genji Glove: equipped creature has double strike. Raging Goblin (1/1) attacks unblocked and deals
+#1 twice: 18. The old line was "teach(creature) doublestrike" - not a keyword, granted nothing (19).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin,Genji Glove
+manapool:{3}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Genji Glove
+Raging Goblin
+next
+next
+Raging Goblin
+next
+#first-strike damage
+next
+#regular damage
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Raging Goblin,Genji Glove
+life:20
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,26 @@
+#!/bin/sh
+# Lints card data before a commit that touches it, so the faults that fail silently in
+# game (LF-only lines, stray control bytes, a lost [card] opener, a keyword the engine does
+# not know, a test that is listed but missing, a duplicate id) are caught here instead.
+#
+# Enabled per clone with:   git config core.hooksPath tools/git-hooks
+# The lint itself lives in the wagic-tools repo, next to the main checkout.
+
+git diff --cached --name-only | grep -qE '^projects/mtg/bin/Res/(sets|test)/|MTGDefinitions\.cpp$' || exit 0
+
+common=$(git rev-parse --path-format=absolute --git-common-dir)
+lint="$common/../../wagic-tools/lint_primitives.py"
+if [ ! -f "$lint" ]; then
+    echo "pre-commit: $lint not found - card data NOT linted" >&2
+    exit 0
+fi
+
+python "$lint" --repo "$(git rev-parse --show-toplevel)" --quiet
+rc=$?
+if [ "$rc" -ne 0 ]; then
+    echo >&2
+    echo "pre-commit: card data lint failed (rc=$rc). Fix the NEW findings above." >&2
+    echo "If one is a deliberate exception: python $lint --update-baseline" >&2
+    exit 1
+fi
+exit 0
