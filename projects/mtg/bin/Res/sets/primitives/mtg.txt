@@ -3138,13 +3138,6 @@ mana={G}{W}{S(creature|mybattlefield)}
 type=Sorcery
 [/card]
 [card]
-name=Altar Of Dementia
-auto=aslongas(creature|mybattlefield) {S(creature|mybattlefield)} restriction{compare(ishuman)~morethan~0}:name(deplete player) target(player) deplete:storedpower
-text=Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
-mana={2}
-type=Artifact
-[/card]
-[card]
 name=Altar of Shadows
 auto=@each my firstmain:thisforeach(counter{0/0.1.Charge}) add{B}
 auto={7}{T}:destroy target(creature) && counter(0/0,1,Charge) all(this)

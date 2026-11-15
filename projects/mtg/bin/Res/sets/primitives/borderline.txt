@@ -2353,8 +2353,10 @@ type=Artifact
 [/card]
 [card]
 name=Altar of Dementia
+#2026-11-15: the one Altar of Dementia. mtg.txt had a second copy spelt "Altar Of Dementia" that only a human could
+#activate (not on the card); the Tempest printing pointed at it. Removed, TMP now uses this one.
 auto={S(creature|mybattlefield)}:name(deplete player) target(player) deplete:storedpower
-text=Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
+text=Sacrifice a creature: Target player mills cards equal to the sacrificed creature's power.
 mana={2}
 type=Artifact
 [/card]
