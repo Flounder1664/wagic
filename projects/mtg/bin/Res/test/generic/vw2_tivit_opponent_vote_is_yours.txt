@@ -1,0 +1,20 @@
+#Tivit, Seller of Secrets enters: you vote evidence (Clue), take the extra vote (Clue), and player 2's
+#vote (its menu, choice 0 = evidence) makes a third Clue - for YOU. Scenario 99 (John, 2026-11-12):
+#the old counters-on-Tivit version gave no token for the opponent's vote; this fails against it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:559712
+manapool:{3}{W}{U}{B}
+[PLAYER2]
+[DO]
+559712
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:559712,*,*,*
+[PLAYER2]
+[END]
