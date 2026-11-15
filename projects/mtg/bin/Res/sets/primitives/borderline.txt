@@ -134410,7 +134410,6 @@ note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note b
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #VERIFIED IN GAME 2026-10-11 (John graded it Supported during the Sneak scenario): Sneak is castable in combat by returning an unblocked attacker.
 #Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -134449,7 +134448,6 @@ note=Sneak's payment is the H(...) extra cost, BounceTargetCost. An older note b
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; both modes can be chosen.
 #Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -134475,7 +134473,6 @@ name=Leonardo's Technique
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; returns two creatures from the graveyard.
 #Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -134499,7 +134496,6 @@ name=New Generation's Technique
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; fetches two basic lands tapped.
 #Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -134537,7 +134533,6 @@ name=Shredder's Technique
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #VERIFIED IN GAME 2026-10-11 (John, scenario queue): Sneak castable in combat; destroys the target creature.
 #Earlier note: Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
@@ -134562,7 +134557,6 @@ name=Splinter's Technique
 #MTGAlternativeCostRule, so the sneak cost is instant-speed and the normal cost stays
 #sorcery-speed. Before it, the card carried plain flash and both costs were relaxed.
 abilities=altflash
-
 #REVIEW-V Verified as far as the harness allows: the alternative cost is taken with choice 1, and
 #H(...) pays - a probe with the restriction stripped and the target widened bounced the attacker to
 #hand and resolved the spell. What could NOT be tested is the combination in combat, because this
@@ -151336,7 +151330,9 @@ toughness=4
 [card]
 name=Benevolent River Spirit
 #REVIEW-V 2026-10-29: cast it tapping creatures to help (convoke stands in for waterbend) and check the scry 2.
-abilities=flying,convoke
+abilities=flying
+#2026-11-15: convoke was listed in abilities=, where it is not a keyword and did nothing; it is the other= cost below. Test lint_benevolent_river_spirit_convoke.
+other={convoke} name(Convoke)
 #Waterbend {5} as an additional cost is folded into the mana cost, and convoke stands in for
 #tapping artifacts and creatures to help (creatures only). Its mana value reads 7, not 2.
 auto=_WARD2_

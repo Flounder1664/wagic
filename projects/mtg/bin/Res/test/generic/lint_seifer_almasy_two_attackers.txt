@@ -1,0 +1,25 @@
+#Seifer Almasy: two attackers is not attacking alone, so nobody gains double strike.
+#Seifer (3) + Raging Goblin (1) = 4: 16. Twin of lint_seifer_almasy_attacks_alone.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Seifer Almasy,Raging Goblin
+life:20
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Seifer Almasy
+Raging Goblin
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Seifer Almasy,Raging Goblin
+life:20
+[PLAYER2]
+life:16
+[END]

@@ -1,0 +1,35 @@
+#"Loses all abilities" must take first strike too. Frogify on our own White Knight: a 1/1 Frog
+#with no first strike, blocked by Eager Cadet (1/1) - both die. Before the fix the keyword list
+#in ALoseAbilities spelt it "firststrike" (the engine's name is "first strike"), so the Frog kept
+#first strike, killed the Cadet first and survived. The same list misspelt double strike and the
+#five colour protections.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:White Knight
+hand:Frogify
+manapool:{1}{U}
+life:20
+[PLAYER2]
+inplay:Eager Cadet
+life:20
+[DO]
+Frogify
+White Knight
+next
+next
+White Knight
+next
+Eager Cadet
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+graveyard:White Knight,Frogify
+life:20
+[PLAYER2]
+graveyard:Eager Cadet
+life:20
+[END]

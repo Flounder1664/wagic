@@ -1,0 +1,37 @@
+#Dual-Sun Technique on a creature WITH a +1/+1 counter (Battlegrowth first): double strike on a
+#2/2 Raging Goblin (2 twice, 16) and the caster draws the Forest. Twin of
+#lint_dual_sun_technique_no_counter, which must not draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raging Goblin
+hand:Battlegrowth,Dual-Sun Technique
+library:Forest
+manapool:{1}{W}{G}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Battlegrowth
+Raging Goblin
+Dual-Sun Technique
+Raging Goblin
+next
+next
+Raging Goblin
+next
+#first-strike damage
+next
+#regular damage
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Raging Goblin
+hand:Forest
+graveyard:Battlegrowth,Dual-Sun Technique
+life:20
+[PLAYER2]
+life:16
+[END]

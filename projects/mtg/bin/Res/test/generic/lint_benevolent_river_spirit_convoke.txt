@@ -1,0 +1,26 @@
+#Benevolent River Spirit: waterbend {5} is written as convoke. With only {3}{U}{U} floating the
+#spell is castable only by tapping two creatures for the rest. The old line put "convoke" in
+#abilities=, where it is not a keyword and did nothing; the working form is other={convoke}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+hand:Benevolent River Spirit
+manapool:{3}{U}{U}
+life:20
+[PLAYER2]
+life:20
+[DO]
+Benevolent River Spirit
+choice 1
+Grizzly Bears
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant,Benevolent River Spirit
+tappedinplay:2
+life:20
+[PLAYER2]
+life:20
+[END]

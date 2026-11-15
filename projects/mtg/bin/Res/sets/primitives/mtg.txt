@@ -34877,7 +34877,9 @@ toughness=2
 [card]
 name=Dual-Sun Technique
 target=creature|mybattlefield
-auto=doublestrike ueot
+#2026-11-15: was "doublestrike ueot" - not a keyword, granted nothing; the counter draw was unwritten. Tests lint_dual_sun_technique_*.
+auto=double strike ueot
+auto=if cantargetcard(creature[counter{1/1.1}]) then draw:1 controller
 text=Target creature you control gains double strike until end of turn. If it has a +1/+1 counter on it, draw a card.
 mana={1}{W}
 type=Instant
@@ -48281,7 +48283,8 @@ text=Reveal the top X cards of your library. You may put any number of permanent
 [card]
 name=Genji Glove
 auto={3}:equip
-auto=teach(creature) doublestrike
+#2026-11-15: was "teach(creature) doublestrike" - not a keyword, granted nothing. Test lint_genji_glove_double_strike.
+auto=teach(creature) double strike
 text=Equipped creature has double strike. -- Equip {3}.
 mana={5}
 type=Artifact
@@ -83895,7 +83898,7 @@ subtype=Aura
 [card]
 name=Necromancer's Stockpile
 auto={1}{B}{D(creature[Zombie]|myHand)}:_ZOMBIETOKEN_ and!( tap(noevent) && draw:1 )! restriction{type(creature[Zombie]|myHand)~morethan~0}
-auto={1}{B}{D(creature[-Zombie]|myHand)}:draw:1 restriction{type(creature[-Zombie]|myHand)~morethan~0}
+auto={1}{B}{D(creature[-Zombie]|myHand)}:draw:1 restriction{type(creature[-Zombie]|myHand)~morethan~0}
 text={1}{B}, Discard a creature card: Draw a card. If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.
 mana={1}{B}
 type=Enchantment
@@ -108138,7 +108141,8 @@ toughness=3
 [/card]
 [card]
 name=Seifer Almasy
-auto=@combat(attacking) source(this):doublestrike target(creature[attacking]|mybattlefield) ueot
+#2026-11-15: was "@combat(attacking) source(this):doublestrike ..." - not a keyword, and it watched only this creature, not any creature attacking alone. Tests lint_seifer_almasy_*, lint_squall_attacks_alone.
+auto=@combat(attackedalone) source(creature|myBattlefield):all(trigger[to]) double strike ueot
 text=Whenever a creature you control attacks alone, it gains double strike until end of turn.
 mana={3}{R}
 type=Legendary Creature
@@ -119358,7 +119362,8 @@ type=Instant
 [/card]
 [card]
 name=Squall, SeeD Mercenary
-auto=@combat(attacking) source(this):doublestrike target(creature[attacking]|mybattlefield) ueot
+#2026-11-15: was "@combat(attacking) source(this):doublestrike ..." - not a keyword, and it watched only this creature, not any creature attacking alone. Tests lint_seifer_almasy_*, lint_squall_attacks_alone.
+auto=@combat(attackedalone) source(creature|myBattlefield):all(trigger[to]) double strike ueot
 auto=@combat(attackdamage) source(this):moveto(mybattlefield) target(*[manacost<=3]|mygraveyard)
 text=Whenever a creature you control attacks alone, it gains double strike until end of turn. -- Whenever Squall deals combat damage to a player, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
 mana={2}{W}{B}
@@ -148412,4 +148417,3 @@ power=4
 toughness=4
 [/card]
 #Due to card type association, Dryad Arbor is placed at the end. Any other card that associates two super types in this manner should also be placed at the end of the primitive to avoid changeling thinking that "forest" is a creature type. This applies to reconfigure cards as well, to avoid making changelings equipment.
-[/card]
