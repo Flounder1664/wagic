@@ -1,0 +1,21 @@
+#Old Rutstein: "mill a card. If a creature card is milled this way, create a 1/1 green Insect."
+#pt: by id proves it is the Crimson Vow Insect (-541125, which has the picture), not a token carrying
+#the milled card's id as it did before 2026-11-16.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:541118
+manapool:{1}{B}{G}
+library:Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+541118
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:541118,*
+pt:-541125=1/1
+graveyard:*
+library:*
+[PLAYER2]
+[END]

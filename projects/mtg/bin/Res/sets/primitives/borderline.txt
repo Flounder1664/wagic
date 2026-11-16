@@ -80544,8 +80544,10 @@ toughness=*
 [/card]
 [card]
 name=Old Rutstein
-auto=name(Mill a card) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(land|*) then _TREASURE_],newability[if cantargetcard(creature|*) then _INSECTTOKEN_],newability[if cantargetcard(*[-land;-creature]|*) then _BLOOD_])) oneshot )!
-auto=@each my upkeep:name(Mill a card) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(land|*) then _TREASURE_],newability[if cantargetcard(creature|*) then _INSECTTOKEN_],newability[if cantargetcard(*[-land;-creature]|*) then _BLOOD_])) oneshot )!
+#2026-11-16 tokens are made by id: they are created through the milled card, so an inline or by-name
+#token took that card's id and set and showed no picture (or another set's Treasure).
+auto=name(Mill a card) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(land|*) then token(-54111811)],newability[if cantargetcard(creature|*) then token(-541125)],newability[if cantargetcard(*[-land;-creature]|*) then token(-541117)])) oneshot )!
+auto=@each my upkeep:name(Mill a card) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(land|*) then token(-54111811)],newability[if cantargetcard(creature|*) then token(-541125)],newability[if cantargetcard(*[-land;-creature]|*) then token(-541117)])) oneshot )!
 text=When Old Rutstein enters or at the beginning of your upkeep, mill a card. If a land card is milled this way, create a Treasure token. If a creature card is milled this way, create a 1/1 green Insect creature token. If a noncreature, nonland card is milled this way, create a Blood token.
 mana={1}{B}{G}
 type=Legendary Creature
@@ -117034,11 +117036,12 @@ subtype=Saga
 [/card]
 [card]
 name=The First Iroan Games
+#2026-11-16 chapter III: a bare "if type(...) then" never fires; it needs ~morethan~0.
 auto=token(Soldier,Creature Human Soldier,1/1,white)
 auto=counter(0/0,1,Lore)
 auto=@each my firstmain:counter(0/0,1,Lore)
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) counter(1/1,3) target(creature|myBattlefield)
-auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) if type(creature[power>=4]|myBattlefield) then draw:2 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}=) if type(creature[power>=4]|myBattlefield)~morethan~0 then draw:2 controller
 auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.4.Lore}) token(Gold) && sacrifice(this)
 text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.) -- I - Create a 1/1 white Human Soldier token. -- II - Put three +1/+1 counters on target creature you control. -- III - If you control a creature with power 4 or greater, draw two cards. -- IV - Create a Gold token.
 mana={2}{G}

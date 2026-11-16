@@ -1,0 +1,20 @@
+#Old Rutstein: "If a land card is milled this way, create a Treasure token." No Insect for a land.
+#pt: by id proves it is the Crimson Vow Treasure (-54111811) though the milled land is from another set.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:541118
+manapool:{1}{B}{G}
+library:Wasteland,Wasteland
+[PLAYER2]
+[DO]
+541118
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:541118,*
+pt:-54111811=0/0
+graveyard:*
+library:*
+[PLAYER2]
+[END]

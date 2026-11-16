@@ -1,0 +1,36 @@
+#The First Iroan Games chapter III: "If you control a creature with power 4 or greater, draw two cards."
+#Craw Wurm (6/4) is in play. Two turn draws plus the two from chapter III = four cards in hand.
+#Regression 2026-11-16: the bare "if type(...) then" form never fired; John drew nothing in game.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:The First Iroan Games
+manapool:{2}{G}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant
+[DO]
+The First Iroan Games
+eot
+eot
+next
+next
+next
+#chapter II: the three counters go on Craw Wurm
+Craw Wurm
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,The First Iroan Games,*
+hand:*,*,*,*
+library:*,*
+[PLAYER2]
+hand:*,*
+library:*
+[END]
