@@ -33041,6 +33041,7 @@ abilities=flying
 [/card]
 [card]
 name=Dragon Egg
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): the 2/2 flying Dragon token shows its picture (CMR printing).
 abilities=defender
 auto=_DIES_name(Create dragon) token(Dragon Egg Dragon)
 text=Defender. -- When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
@@ -77245,6 +77246,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Meltstrider's Resolve
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): the fight is offered on entering and resolves.
 target=creature
 #The fight is _FIGHT_, the corpus macro. My first attempt named only the opponent's creature and
 #no damage was dealt either way (John, 2026-09-12): a fight needs BOTH sides, and the macro is

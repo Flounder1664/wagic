@@ -61415,6 +61415,7 @@ toughness=2
 [/card]
 [card]
 name=Jolrael, Mwonvuli Recluse
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): the 2/2 Cat token shows its picture.
 auto=_SECOND_DRAW_name(Create cat) token(Cat Jol)
 auto={4}{G}{G}:name(All creatures becomes X/X) all(creature|mybattlefield) transforms((,setpower=type:*:myHand,settoughness=type:*:myHand)) ueot
 text=Whenever you draw your second card each turn, create a 2/2 green Cat creature token. -- {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
@@ -117036,6 +117037,7 @@ subtype=Saga
 [/card]
 [card]
 name=The First Iroan Games
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): chapter IV Gold token shows the Theros Gold art. (Chapter III failed that day and was fixed after.)
 #2026-11-16 chapter III: a bare "if type(...) then" never fires; it needs ~morethan~0.
 auto=token(Soldier,Creature Human Soldier,1/1,white)
 auto=counter(0/0,1,Lore)
@@ -133258,6 +133260,7 @@ subtype=Room
 [/card]
 [card]
 name=Unholy Annex // Ritual Chamber
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): end step draw and life loss with no Demon; unlocking Ritual Chamber makes the 6/6 Demon and the end step then drains.
 other={3}{B}{B} name(Ritual Chamber)
 auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex draw) draw:1 controller
 auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex - you control a Demon) if type(demon|mybattlefield)~morethan~0 then life:-2 opponent && life:2 controller
@@ -142234,6 +142237,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Elven Passage
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): with an Elf to behold, the fetched Forest enters untapped.
 #Behold an Elf = choose an Elf you control or reveal one from hand, so with one in either zone the
 #land is left untapped (the untap is never a drawback). Same form as Sarkhan, Dragon Ascendant.
 auto={T}{L:1}{S}:name(Fetch a basic land) target(land[basic]|mylibrary) moveto(mybattlefield) and!( if type(elf|mybattlefieldhand)~equalto~0 then tap(noevent) )! && shuffle
@@ -151759,6 +151763,7 @@ type=Artifact
 [/card]
 [card]
 name=Tivit, Seller of Secrets
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): scenario 99, the opponent vote.
 #REVIEW-V 2026-10-29: check the two votes on entering and on combat damage make Clues/Treasures.
 abilities=flying
 auto=_WARD3_
@@ -153531,6 +153536,7 @@ type=Sorcery
 [/card]
 [card]
 name=Professor Dellian Fel
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): loyalty menu lists all four abilities; -3 destroys the target.
 auto=counter(0/0,5,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: You gain 3 life) life:3 controller
 auto={C(0/0,0,Loyalty)}:name(0: Draw a card and lose 1 life) draw:1 controller && life:-1 controller
@@ -153543,6 +153549,7 @@ subtype=Dellian
 [/card]
 [card]
 name=Monstrous Rage
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): the Monster Role attaches to the target with no second prompt.
 target=creature
 auto=2/0 ueot
 #attachtoit (engine, 2026-11-15): the Role token enters attached to this spell's target, so
@@ -153554,6 +153561,7 @@ type=Instant
 [/card]
 [card]
 name=Screaming Nemesis
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): damage menu offers the three choices; damage to the opponent lands.
 abilities=haste
 #cantgainlifeforgame (engine, 2026-11-15) sets a player flag that never resets, so the lock
 #outlasts this creature - nolifegainopponent only works while a permanent stays in play.
@@ -153567,6 +153575,7 @@ toughness=3
 [/card]
 [card]
 name=Garruk, Curse Breaker
+#VERIFIED IN GAME 2026-11-16 (John, scenario queue): -4 makes the emblem and the attacker gets the bonus, no crash.
 auto=counter(0/0,5,loyalty)
 auto=@movedTo(creature[power>=4]|myBattlefield):name(Draw a card) draw:1 controller
 auto={C(0/0,2,Loyalty)}:name(+2: Untap up to two target lands) untap target(<upto:2>land)
