@@ -1,0 +1,16 @@
+#Xindi Surveyors (TRK, 3/2): landfall puts a +1/+1 counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Xindi Surveyors
+hand:Forest
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Xindi Surveyors,*
+pt:Xindi Surveyors=4/3
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Fugitive Listener (TRK): when it enters, each opponent discards a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fugitive Listener
+manapool:{2}{B}
+[PLAYER2]
+hand:Grizzly Bears
+[DO]
+Fugitive Listener
+#the opponent's pick
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fugitive Listener
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

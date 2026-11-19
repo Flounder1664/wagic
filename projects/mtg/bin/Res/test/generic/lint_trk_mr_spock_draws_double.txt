@@ -1,0 +1,21 @@
+#Mr. Spock, Science Officer (TRK): if you would draw a card, draw two instead.
+#Divination draws two, so four cards come; without Spock it would be two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706074
+hand:Divination
+manapool:{2}{U}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706074
+graveyard:Divination
+hand:*,*,*,*
+library:*,*
+[PLAYER2]
+[END]

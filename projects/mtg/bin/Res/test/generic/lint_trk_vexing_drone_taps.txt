@@ -1,0 +1,19 @@
+#Vexing Drone (TRK): when it enters, tap target creature an opponent controls.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vexing Drone
+manapool:{1}{W}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Vexing Drone
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Vexing Drone
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+[END]
