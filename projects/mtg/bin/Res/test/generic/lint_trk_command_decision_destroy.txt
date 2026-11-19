@@ -1,0 +1,19 @@
+#Command Decision (TRK): the destroy mode takes Hill Giant? No - power 3. It takes Craw Wurm (6).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Command Decision
+manapool:{1}{W}
+[PLAYER2]
+inplay:Craw Wurm
+[DO]
+Command Decision
+choice 0
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Command Decision
+[PLAYER2]
+graveyard:Craw Wurm
+[END]

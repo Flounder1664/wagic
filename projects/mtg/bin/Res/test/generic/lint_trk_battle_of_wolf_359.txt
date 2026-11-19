@@ -1,0 +1,23 @@
+#Battle of Wolf 359 (TRC): nonartifact creatures get -X/-X, X = your artifact creatures (2).
+#Grizzly Bears dies, Hill Giant is 1/1, Ornithopter and Memnite are untouched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Memnite
+hand:Battle of Wolf 359
+manapool:{3}{B}{B}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+Battle of Wolf 359
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Memnite
+graveyard:Battle of Wolf 359
+pt:Memnite=1/1
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+pt:Hill Giant=1/1
+[END]

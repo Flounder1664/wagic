@@ -20741,15 +20741,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Bio-Asset Allocator
-text=Artifact creatures you control have "Whenever this creature attacks, each opponent loses 1 life and you gain 1 life."
-mana={3}{B}{B}
-type=Artifact Creature
-subtype=Borg
-power=3
-toughness=4
-[/card]
-[card]
 name=Borg Queen, Perfection Manifest
 text=Artifact creatures you control get +2/+0. -- When Borg Queen enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
 mana={4}{B}{B}
@@ -20783,29 +20774,6 @@ mana={1}{U}
 type=Instant
 [/card]
 [card]
-name=Defense Force Aggressor
-mana={R}
-type=Creature
-subtype=Klingon Warrior
-power=2
-toughness=1
-[/card]
-[card]
-name=Disruptor Pistol
-text={4}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.
-mana={2}
-type=Artifact
-[/card]
-[card]
-name=Gumato
-text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Add {G}{G}{G}.
-mana={4}{G}
-type=Creature
-subtype=Ape Beast
-power=4
-toughness=5
-[/card]
-[card]
 name=Kirk, Enterprising Captain
 text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever Kirk attacks while creatures you control have total power 8 or greater, exile the top card of your library. You may play that card this turn.
 mana={3}{R}
@@ -20824,24 +20792,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Kruge, Genesis Seeker
-text=Whenever Kruge attacks, attacking Klingons you control get +1/+1 until end of turn.
-mana={2}{R}
-type=Legendary Creature
-subtype=Klingon Officer
-power=2
-toughness=2
-[/card]
-[card]
-name=La Forge, Perceptive Engineer
-text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Add {U}. Spend this mana only to cast an artifact spell.
-mana={1}{U}
-type=Legendary Creature
-subtype=Human Artificer
-power=1
-toughness=4
-[/card]
-[card]
 name=Operations Officer
 text=Lifelink (Damage dealt by this creature also causes you to gain that much life.) -- When this creature enters, draw a card. -- Whenever this creature attacks, put a +1/+1 counter on it.
 mana={3}{W}
@@ -20851,15 +20801,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Picard, Steadfast Captain
-text=Whenever Picard enters or attacks, put two +1/+1 counters on another target creature you control.
-mana={4}{W}{W}
-type=Legendary Creature
-subtype=Human Officer
-power=4
-toughness=4
-[/card]
-[card]
 name=Shuttle Crew
 text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When this creature enters, it deals 4 damage to target tapped creature an opponent controls.
 mana={2}{W}
@@ -20867,23 +20808,6 @@ type=Creature
 subtype=Human Officer
 power=1
 toughness=1
-[/card]
-[card]
-name=Spock, Logical Choice
-text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Draw a card.
-mana={3}{U}{U}
-type=Legendary Creature
-subtype=Vulcan Human Scientist
-power=3
-toughness=5
-[/card]
-[card]
-name=Starfleet Crew
-mana={1}{W}
-type=Creature
-subtype=Officer
-power=2
-toughness=3
 [/card]
 [card]
 name=T'Pol, Vulcan Representative
@@ -20904,14 +20828,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Warship Flight Crew
-mana={1}{R}
-type=Creature
-subtype=Klingon Pilot
-power=2
-toughness=2
-[/card]
-[card]
 name=70,000 Light-Years from Home
 text=Exile target creature or Spacecraft. Its controller may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
 mana={1}{W}
@@ -20929,15 +20845,6 @@ text=(As this Saga enters and after your draw step, add a lore counter. Sacrific
 mana={2}{G}
 type=Enchantment
 subtype=Saga
-[/card]
-[card]
-name=Automated Warfare System
-text=Flying -- Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.
-mana={2}{B}
-type=Artifact Creature
-subtype=Construct
-power=2
-toughness=2
 [/card]
 [card]
 name=Bat'leth
@@ -21001,15 +20908,6 @@ power=2
 toughness=3
 [/card]
 [card]
-name=Cloistered Telepath
-text=Flash -- When this creature enters, draw a card, then discard a card.
-mana={1}{U}
-type=Creature
-subtype=Talosian Advisor
-power=2
-toughness=1
-[/card]
-[card]
 name=Cold-Blooded Crew
 text=When this creature enters, put two +1/+1 counters on target creature. -- This creature can't be blocked by creatures with power 2 or less. -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
 mana={4}{G}{G}
@@ -21019,40 +20917,10 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Collective Drone
-text=Collective Drone's power is equal to the number of artifact creatures you control.
-mana={1}{B}
-type=Artifact Creature
-subtype=Borg
-power=*
-toughness=2
-[/card]
-[card]
-name=Command Decision
-text=Choose one — -- • Destroy target creature with power 4 or greater. -- • Draw a card.
-mana={1}{W}
-type=Sorcery
-[/card]
-[card]
-name=Common Goal
-text=One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.
-mana={1}{G}
-type=Sorcery
-[/card]
-[card]
 name=Consider the Prime Directive
 text=Choose one — -- • Interfere — Counter target spell unless its controller pays {3}. -- • Observe — Tap up to one target creature and put a stun counter on it. Draw a card. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 mana={2}{U}
 type=Instant
-[/card]
-[card]
-name=Crystalline Entity
-text=Flying -- When this creature enters, if you cast it, destroy all nonartifact creatures.
-mana={8}
-type=Artifact Creature
-subtype=Elemental
-power=7
-toughness=7
 [/card]
 [card]
 name=Cybernetic Specialist
@@ -21062,15 +20930,6 @@ type=Artifact Creature
 subtype=Human Scientist
 power=2
 toughness=1
-[/card]
-[card]
-name=DOT-7 Repair Squad
-text=Flying -- {1}{W}: Untap target creature. Activate only as a sorcery and only once each turn.
-mana={3}{W}
-type=Artifact Creature
-subtype=Robot
-power=3
-toughness=3
 [/card]
 [card]
 name=Dathon and Picard at El-Adrel
@@ -21106,15 +20965,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Emergency Medical Hologram
-text=When this creature enters, put a +1/+1 counter on target creature. You gain 1 life.
-mana={W}
-type=Artifact Creature
-subtype=Illusion Doctor
-power=0
-toughness=1
-[/card]
-[card]
 name=Federation Field Medic
 text=Vigilance -- When this creature enters, choose one — -- • Put a +1/+1 counter on target creature. It gains vigilance until end of turn. -- • Draw a card if you control a permanent with a counter on it.
 mana={3}{W}
@@ -21148,24 +20998,9 @@ power=4
 toughness=5
 [/card]
 [card]
-name=General Chang, Cold Warrior
-text={1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.
-mana={B}
-type=Legendary Creature
-subtype=Klingon Warrior Officer
-power=1
-toughness=2
-[/card]
-[card]
 name=Guidance Failure
 text=This spell costs {1} less to cast if it targets an attacking creature. -- Target creature or Spacecraft's owner puts it on their choice of the top or bottom of their library.
 mana={3}{U}
-type=Instant
-[/card]
-[card]
-name=He's Dead, Jim
-text=Destroy target creature. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
-mana={3}{B}
 type=Instant
 [/card]
 [card]
@@ -21206,45 +21041,12 @@ type=Enchantment
 subtype=Saga
 [/card]
 [card]
-name=Khaaaaaaaaaaaannn!
-text=Khaaaaaaaaaaaannn! deals twice X damage to target creature. If that creature would die this turn, exile it instead.
-mana={X}{R}
-type=Instant
-[/card]
-[card]
-name=La'An Noonien-Singh, Security
-text=Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.
-mana={2}{R}{R}
-type=Legendary Creature
-subtype=Human Soldier
-power=4
-toughness=3
-[/card]
-[card]
 name=Marooned
 target=artifact
 text=Enchant artifact or creature -- When this Aura enters, you may pay {3}. If you do, tap enchanted permanent. -- Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
 mana={U}
 type=Enchantment
 subtype=Aura
-[/card]
-[card]
-name=Moopsy
-text=Deathtouch -- {2}: This creature gains reach until end of turn.
-mana={G}
-type=Creature
-subtype=Beast
-power=1
-toughness=1
-[/card]
-[card]
-name=Mugato
-text=Reach, vigilance, deathtouch
-mana={3}{G}{G}
-type=Creature
-subtype=Ape Beast
-power=6
-toughness=6
 [/card]
 [card]
 name=Open Communications
@@ -21275,24 +21077,6 @@ type=Legendary Creature
 subtype=Human Officer
 power=2
 toughness=2
-[/card]
-[card]
-name=Planetary Patrol
-text=Landfall — Whenever a land you control enters, this creature gets +1/+1 until end of turn.
-mana={1}{R}
-type=Creature
-subtype=Scout
-power=2
-toughness=2
-[/card]
-[card]
-name=Relentless Drednok
-text=Lifelink -- {2}{B}, Exile this card from your graveyard: You draw a card and lose 1 life.
-mana={B}
-type=Artifact Creature
-subtype=Robot
-power=1
-toughness=1
 [/card]
 [card]
 name=Resistance Is Futile
@@ -21358,15 +21142,6 @@ mana={1}{W}
 type=Instant
 [/card]
 [card]
-name=Shuttle Ace
-text=During your turn, this creature has flying. -- Whenever this creature becomes tapped, you gain 2 life.
-mana={4}{W}
-type=Creature
-subtype=Kelpien Pilot
-power=4
-toughness=4
-[/card]
-[card]
 name=Silicate Surveyor
 text=Reach -- When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
 mana={4}{R}
@@ -21380,15 +21155,6 @@ name=Support Mission
 text=Whenever a creature you control enters, put a quest counter on this enchantment. Put a +1/+1 counter on that creature. If this enchantment has five or more quest counters on it, instead put two +1/+1 counters on that creature.
 mana={2}{G}
 type=Enchantment
-[/card]
-[card]
-name=Syndicate Liquidators
-text=Trample -- Landfall — Whenever a land you control enters, put two +1/+1 counters on target creature you control.
-mana={4}{G}
-type=Creature
-subtype=Orion Pirate
-power=4
-toughness=4
 [/card]
 [card]
 name=Tactical Officer

@@ -1,0 +1,19 @@
+#Crystalline Entity (TRK): cast, it destroys all nonartifact creatures. Ornithopter lives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Grizzly Bears
+hand:Crystalline Entity
+manapool:{8}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Crystalline Entity
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter,Crystalline Entity
+graveyard:Grizzly Bears
+[PLAYER2]
+graveyard:Hill Giant
+[END]

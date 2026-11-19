@@ -1,0 +1,21 @@
+#Data, New Life (TRK, 0/1): whenever you draw, a +1/+1 counter. Divination draws two: 2/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706052
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706052
+graveyard:Divination
+pt:Data, New Life=2/3
+hand:*,*
+library:*
+[PLAYER2]
+[END]

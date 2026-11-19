@@ -1,0 +1,19 @@
+#Command Decision (TRK): the draw mode.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Command Decision
+manapool:{1}{W}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Command Decision
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Command Decision
+hand:*
+library:*
+[PLAYER2]
+[END]

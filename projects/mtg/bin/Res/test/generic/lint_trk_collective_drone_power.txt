@@ -1,0 +1,15 @@
+#Collective Drone (TRK, */2): power = artifact creatures you control. With itself, Ornithopter and Memnite: 3/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Collective Drone,Ornithopter,Memnite
+[PLAYER2]
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Collective Drone,Ornithopter,Memnite
+pt:Collective Drone=3/2
+[PLAYER2]
+[END]

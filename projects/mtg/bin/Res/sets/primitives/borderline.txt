@@ -154104,3 +154104,691 @@ text=({T}: Add {W} or {B}.) -- This land enters tapped. -- Cycling {2} ({2}, Dis
 type=Land
 subtype=Plains Swamp
 [/card]
+[card]
+name=Assembly Specialist
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=create(Borg:artifact creature Borg:1/1)
+text=When this creature enters, create a 1/1 colorless Borg artifact creature token.
+mana={1}{W}
+type=Artifact Creature
+subtype=Borg
+power=1
+toughness=1
+[/card]
+[card]
+name=Command Decision
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=choice name(Destroy a creature with power 4 or greater) target(creature[power>=4]) destroy
+auto=choice name(Draw a card) draw:1 controller
+text=Choose one - -- * Destroy target creature with power 4 or greater. -- * Draw a card.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Command Subadjunct
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact]|myBattlefield) vigilance
+text=Artifact creatures you control have vigilance.
+mana={W}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=1
+[/card]
+[card]
+name=Deanna Troi, Psychic Counsel
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@movedTo(other creature|myBattlefield):all(trigger[to]) counter(1/1)
+text=Other creatures you control enter with an additional +1/+1 counter on them.
+mana={1}{W}
+type=Legendary Creature
+subtype=Betazoid Human Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=DOT-7 Repair Squad
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=flying
+auto={1}{W}:untap target(creature) asSorcery limit:1
+text=Flying -- {1}{W}: Untap target creature. Activate only as a sorcery and only once each turn.
+mana={3}{W}
+type=Artifact Creature
+subtype=Robot
+power=3
+toughness=3
+[/card]
+[card]
+name=Emergency Medical Hologram
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=counter(1/1) target(creature)
+auto=life:1 controller
+text=When this creature enters, put a +1/+1 counter on target creature. You gain 1 life.
+mana={W}
+type=Artifact Creature
+subtype=Illusion Doctor
+power=0
+toughness=1
+[/card]
+[card]
+name=Hologram Janeway
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:counter(1/1) target(creature)
+text=Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on target creature.
+mana={2}{W}
+type=Legendary Artifact Creature
+subtype=Illusion Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Primary Unimatrix Adjunct
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact]|myBattlefield) double strike
+text=Artifact creatures you control have double strike.
+mana={3}{W}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=3
+[/card]
+[card]
+name=Shuttle Ace
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=this(variable{controllerturn}>0) flying
+auto=@tapped(this):life:2 controller
+text=During your turn, this creature has flying. -- Whenever this creature becomes tapped, you gain 2 life.
+mana={4}{W}
+type=Creature
+subtype=Kelpien Pilot
+power=4
+toughness=4
+[/card]
+[card]
+name=Troubling Tribbles
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=cantblock
+auto=@each my upkeep:clone all(this)
+text=This creature can't block. -- At the beginning of your upkeep, create a token that's a copy of this creature.
+mana={2}{W}
+type=Creature
+subtype=Tribble
+power=0
+toughness=1
+[/card]
+[card]
+name=Cloistered Telepath
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=flash
+auto=draw:1 controller
+auto=reject notaTarget(*|myhand)
+text=Flash -- When this creature enters, draw a card, then discard a card.
+mana={1}{U}
+type=Creature
+subtype=Talosian Advisor
+power=2
+toughness=1
+[/card]
+[card]
+name=Data, New Life
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@drawof(player):counter(1/1)
+text=Whenever you draw a card, put a +1/+1 counter on Data.
+mana={1}{U}
+type=Legendary Artifact Creature
+subtype=Android Scientist
+power=0
+toughness=1
+[/card]
+[card]
+name=Automated Warfare System
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=flying
+auto=@combat(attacking) source(this):may name(Sacrifice to draw) target(other creature,artifact|mybattlefield) sacrifice && draw:1 controller
+text=Flying -- Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.
+mana={2}{B}
+type=Artifact Creature
+subtype=Construct
+power=2
+toughness=2
+[/card]
+[card]
+name=Collation Trimatrix
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}{T(*[artifact;creature]|mybattlefield)}:draw:1 controller && life:-1 controller
+text=Tap three untapped artifact creatures you control: You draw a card and lose 1 life.
+mana={B}
+type=Artifact Creature
+subtype=Borg
+power=1
+toughness=1
+[/card]
+[card]
+name=Collective Drone
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+anyzone=type:creature[artifact]:mybattlefield/2 cdaactive
+text=Collective Drone's power is equal to the number of artifact creatures you control.
+mana={1}{B}
+type=Artifact Creature
+subtype=Borg
+power=*
+toughness=2
+[/card]
+[card]
+name=General Chang, Cold Warrior
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={1}{S(creature|mybattlefield)}:counter(1/1) all(klingon|mybattlefield)
+text={1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.
+mana={B}
+type=Legendary Creature
+subtype=Klingon Warrior Officer
+power=1
+toughness=2
+[/card]
+[card]
+name=He's Dead, Jim
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+target=creature
+auto=destroy
+auto=_SURVEIL1_
+text=Destroy target creature. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={3}{B}
+type=Instant
+[/card]
+[card]
+name=Relentless Drednok
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=lifelink
+autograveyard={2}{B}{E}:draw:1 controller && life:-1 controller
+text=Lifelink -- {2}{B}, Exile this card from your graveyard: You draw a card and lose 1 life.
+mana={B}
+type=Artifact Creature
+subtype=Robot
+power=1
+toughness=1
+[/card]
+[card]
+name=Tenacious Drone
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_DIES_create(Borg:artifact creature Borg:1/1)
+text=When this creature dies, create a 1/1 colorless Borg artifact creature token.
+mana={1}{B}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=1
+[/card]
+[card]
+name=Khaaaaaaaaaaaannn!
+#2026-11-19 Star Trek batch 2: written from existing working forms (twiceX as in Dawnglow Infusion).
+target=creature
+auto=exiledeath
+auto=damage:twiceX
+text=Khaaaaaaaaaaaannn! deals twice X damage to target creature. If that creature would die this turn, exile it instead.
+mana={X}{R}
+type=Instant
+[/card]
+[card]
+name=Khan, Despot by Design
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=trample
+auto=damage:1 opponent
+auto=damage:1 all(creature|opponentBattlefield)
+text=Trample -- When Khan enters, he deals 1 damage to each opponent and each creature your opponents control.
+mana={4}{R}
+type=Legendary Creature
+subtype=Human Rogue
+power=5
+toughness=4
+[/card]
+[card]
+name=La'An Noonien-Singh, Security
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:target(creature) transforms((,cantblock)) ueot
+text=Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=Human Soldier
+power=4
+toughness=3
+[/card]
+[card]
+name=Planetary Patrol
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_LANDFALL_1/1 ueot
+text=Landfall - Whenever a land you control enters, this creature gets +1/+1 until end of turn.
+mana={1}{R}
+type=Creature
+subtype=Scout
+power=2
+toughness=2
+[/card]
+[card]
+name=Red Alert!
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+other={R} name(A creature is attacking you)
+otherrestriction=type(creature[attacking]|opponentbattlefield)~morethan~0
+auto=all(creature|myBattlefield) 2/0 ueot
+text=This spell costs {2} less to cast if a creature is attacking you. -- Creatures you control get +2/+0 until end of turn.
+mana={2}{R}
+type=Instant
+[/card]
+[card]
+name=Tal Shiar Analyst
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={T}:damage:1 opponent
+auto=@movedto(*[-creature]|mystack):untap(this)
+text={T}: This creature deals 1 damage to each opponent. -- Whenever you cast a noncreature spell, untap this creature.
+mana={2}{R}
+type=Creature
+subtype=Romulan Scientist
+power=3
+toughness=2
+[/card]
+[card]
+name=Common Goal
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+target=<upto:2>creature|mybattlefield
+auto=transforms((,newability[target(creature|opponentbattlefield) dynamicability<!powerstrike!>])) oneshot
+text=One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.
+mana={1}{G}
+type=Sorcery
+[/card]
+[card]
+name=Culber and Stamets, Star-Crossed
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=choice name(Put a +1/+1 counter on target creature) counter(1/1) target(creature)
+auto=choice name(Add {W}{W}) add{W}{W}
+auto=choice name(Add {U}{U}) add{U}{U}
+auto=choice name(Add {B}{B}) add{B}{B}
+auto=choice name(Add {R}{R}) add{R}{R}
+auto=choice name(Add {G}{G}) add{G}{G}
+text=When Culber and Stamets enter, choose one - -- * Put a +1/+1 counter on target creature. -- * Add two mana of any one color.
+mana={3}{G}
+type=Legendary Creature
+subtype=Human Doctor Artificer
+power=3
+toughness=4
+[/card]
+[card]
+name=Moopsy
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=deathtouch
+auto={2}:reach ueot
+text=Deathtouch -- {2}: This creature gains reach until end of turn.
+mana={G}
+type=Creature
+subtype=Beast
+power=1
+toughness=1
+[/card]
+[card]
+name=Mugato
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=deathtouch,reach,vigilance
+text=Reach, vigilance, deathtouch
+mana={3}{G}{G}
+type=Creature
+subtype=Ape Beast
+power=6
+toughness=6
+[/card]
+[card]
+name=Photosynthetic Physician
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=reach
+autograveyard={G}:moveto(exile) && token(Officer,creature Officer,1/1,red) asSorcery
+text=Reach -- {G}, Exile this card from your graveyard: Create a 1/1 red Officer creature token. Activate only as a sorcery.
+mana={4}{G}
+type=Creature
+subtype=Plant Doctor
+power=5
+toughness=5
+[/card]
+[card]
+name=Syndicate Liquidators
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=trample
+auto=_LANDFALL_counter(1/1,2) target(creature|myBattlefield)
+text=Trample -- Landfall - Whenever a land you control enters, put two +1/+1 counters on target creature you control.
+mana={4}{G}
+type=Creature
+subtype=Orion Pirate
+power=4
+toughness=4
+[/card]
+[card]
+name=The Duras Sisters
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_DIES_create(Klingon Warrior:creature Klingon Warrior:2/1:red:haste)
+text=When The Duras Sisters die, create a 2/1 red Klingon Warrior creature token with haste.
+mana={B/R}{B/R}
+type=Legendary Creature
+subtype=Klingon Warrior
+power=3
+toughness=2
+[/card]
+[card]
+name=Crystalline Entity
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=flying
+auto=if casted(this) then destroy all(creature[-artifact])
+text=Flying -- When this creature enters, if you cast it, destroy all nonartifact creatures.
+mana={8}
+type=Artifact Creature
+subtype=Elemental
+power=7
+toughness=7
+[/card]
+[card]
+name=Beverly Crusher, Ship's Doctor
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_SECOND_DRAW_counter(1/1) target(<upto:3>creature)
+text=Seek out - Whenever you draw your second card each turn, put a +1/+1 counter on each of up to three target creatures.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Doctor
+power=2
+toughness=2
+[/card]
+[card]
+name=Dr. Pulaski, Cynical Clinician
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_SECOND_DRAW_life:4 controller
+text=Seek out - Whenever you draw your second card each turn, you gain 4 life.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Doctor
+power=2
+toughness=2
+[/card]
+[card]
+name=Emergency Regeneration
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=all(artifact|mybattlefield) indestructible ueot
+auto=all(artifact|mybattlefield) hexproof ueot
+text=Artifacts you control gain hexproof and indestructible until end of turn.
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=M'Ress, Crew Coordinator
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_LANDFALL_create(Officer:creature Officer:1/1:red)*2
+text=Landfall - Whenever a land you control enters, create two 1/1 red Officer creature tokens.
+mana={4}{W}
+type=Legendary Creature
+subtype=Caitian Officer
+power=4
+toughness=4
+[/card]
+[card]
+name=Supplementation Node
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):counter(1/1)]))
+text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."
+mana={2}{W}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=2
+[/card]
+[card]
+name=Co-Option Adjutant
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):draw:1 controller]))
+text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, draw a card."
+mana={3}{U}
+type=Artifact Creature
+subtype=Borg
+power=3
+toughness=3
+[/card]
+[card]
+name=Fleet Captain Christopher Pike
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={1}{T}:name(Yes - untap two) untap target(<2>other creature)
+auto={2}{T}:name(No - tap two) tap target(<2>other creature)
+text=Yes - {1}, {T}: Untap two other target creatures. -- No - {2}, {T}: Tap two other target creatures.
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Officer
+power=0
+toughness=6
+[/card]
+[card]
+name=On the Shoulders of Giants
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact;legendary]|myBattlefield) flying
+text=Historic creatures you control have flying. (Artifacts, legendaries, and Sagas are historic.)
+mana={2}{U}
+type=Enchantment
+[/card]
+[card]
+name=Battle of Wolf 359
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=all(creature[-artifact]) -type:creature[artifact]:mybattlefield/-type:creature[artifact]:mybattlefield ueot
+text=All nonartifact creatures get -X/-X until end of turn, where X is the number of artifact creatures you control.
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Reclamation Specialist
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={1}{S(creature[artifact]|myBattlefield)}:draw:1 controller
+text={1}, Sacrifice an artifact creature: Draw a card.
+mana={2}{B}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=2
+[/card]
+[card]
+name=Gnarling Targ
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=trample
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:all(*[klingon;warrior]|myBattlefield) 2/0 ueot
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:all(*[klingon;warrior]|myBattlefield) trample ueot
+text=Trample -- Whenever you attack, Klingons and Warriors you control get +2/+0 and gain trample until end of turn.
+mana={4}{R}
+type=Creature
+subtype=Boar
+power=4
+toughness=5
+[/card]
+[card]
+name=Rom and Leeta, Unlikely Pair
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_SECOND_DRAW__TREASURE_ and!( tap(noevent) )!
+auto=_SECOND_DRAW__TREASURE_ and!( tap(noevent) )!
+text=Seek out - Whenever you draw your second card each turn, create two tapped Treasure tokens.
+mana={3}{R}
+type=Legendary Creature
+subtype=Ferengi Bajoran
+power=4
+toughness=3
+[/card]
+[card]
+name=Chancellor Gorkon
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=vigilance
+auto=_DIES_target(<upto:2>creature) moveto(exile)
+text=Vigilance -- When Chancellor Gorkon dies, exile up to two target creatures.
+mana={3}{W}{B}
+type=Legendary Creature
+subtype=Klingon Noble
+power=5
+toughness=3
+[/card]
+[card]
+name=Commander William Riker
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=vigilance,haste
+auto={1}{T}:target(opponent) draw:2 controller && draw:2 opponent
+text=Vigilance, haste -- {1}, {T}: You and target opponent each draw two cards.
+mana={1}{R}{W}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Starfleet Crew
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+mana={1}{W}
+type=Creature
+subtype=Officer
+power=2
+toughness=3
+[/card]
+[card]
+name=La Forge, Perceptive Engineer
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=vigilance
+auto={T}:add{U} spendspells(artifact)
+text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Add {U}. Spend this mana only to cast an artifact spell.
+mana={1}{U}
+type=Legendary Creature
+subtype=Human Artificer
+power=1
+toughness=4
+[/card]
+[card]
+name=Defense Force Aggressor
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+mana={R}
+type=Creature
+subtype=Klingon Warrior
+power=2
+toughness=1
+[/card]
+[card]
+name=Kruge, Genesis Seeker
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_ATTACKING_all(klingon[attacking]|myBattlefield) 1/1 ueot
+text=Whenever Kruge attacks, attacking Klingons you control get +1/+1 until end of turn.
+mana={2}{R}
+type=Legendary Creature
+subtype=Klingon Officer
+power=2
+toughness=2
+[/card]
+[card]
+name=Warship Flight Crew
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+mana={1}{R}
+type=Creature
+subtype=Klingon Pilot
+power=2
+toughness=2
+[/card]
+[card]
+name=Gumato
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=vigilance
+auto={T}:Add{G}{G}{G}
+text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Add {G}{G}{G}.
+mana={4}{G}
+type=Creature
+subtype=Ape Beast
+power=4
+toughness=5
+[/card]
+[card]
+name=Disruptor Pistol
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={4}{T}{S}:damage:5 target(creature)
+text={4}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.
+mana={2}
+type=Artifact
+[/card]
+[card]
+name=Kirk, Man of Action
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(other creature[officer;artificer;doctor;pilot;scientist;spacecraft]|myBattlefield) 2/2
+text=Other Officers, Artificers, Doctors, Pilots, Scientists, and Spacecraft creatures you control get +2/+2.
+mana={2}{G}{W}{U}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Uhura, Xenolinguist
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@movedTo(creature[-human]|battlefield):pay({1}) draw:1 controller
+text=Whenever a non-Human creature enters, you may pay {1}. If you do, draw a card.
+mana={4}{U}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=4
+[/card]
+[card]
+name=Scotty, Chief Engineer
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto={T(*[artifact]|myBattlefield)}:unblockable target(creature) ueot
+text=Tap an untapped artifact you control: Target creature can't be blocked this turn.
+mana={3}{U}
+type=Legendary Creature
+subtype=Human Artificer
+power=3
+toughness=4
+[/card]
+[card]
+name=Data, Professor of Humanities
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=_SECOND_DRAW_create(Faerie:creature Faerie:1/1:blue:flying)*2
+text=Seek out - Whenever you draw your second card each turn, create two 1/1 blue Faerie creature tokens with flying.
+mana={3}{U}
+type=Legendary Artifact Creature
+subtype=Android Scientist
+power=3
+toughness=4
+[/card]
+[card]
+name=Troi, Winging It
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=@drawof(opponent) restriction{myturnonly}:create(Faerie:creature Faerie:1/1:blue:flying)
+text=Whenever an opponent draws a card during your turn, create a 1/1 blue Faerie creature token with flying.
+mana={3}{W}
+type=Legendary Creature
+subtype=Betazoid Human Advisor
+power=3
+toughness=2
+[/card]
+[card]
+name=Picard, Steadfast Captain
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=target(other creature|myBattlefield) counter(1/1,2)
+auto=_ATTACKING_target(other creature|myBattlefield) counter(1/1,2)
+text=Whenever Picard enters or attacks, put two +1/+1 counters on another target creature you control.
+mana={4}{W}{W}
+type=Legendary Creature
+subtype=Human Officer
+power=4
+toughness=4
+[/card]
+[card]
+name=Spock, Logical Choice
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+abilities=vigilance
+auto={T}:draw:1 controller
+text=Vigilance (Attacking doesn't cause this creature to tap.) -- {T}: Draw a card.
+mana={3}{U}{U}
+type=Legendary Creature
+subtype=Vulcan Human Scientist
+power=3
+toughness=5
+[/card]
+[card]
+name=Bio-Asset Allocator
+#2026-11-19 Star Trek batch 2: written from existing working forms.
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combat(attacking) source(this):life:-1 opponent && life:1 controller]))
+text=Artifact creatures you control have "Whenever this creature attacks, each opponent loses 1 life and you gain 1 life."
+mana={3}{B}{B}
+type=Artifact Creature
+subtype=Borg
+power=3
+toughness=4
+[/card]

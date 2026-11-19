@@ -2,10 +2,80 @@
 author=Wagic Team
 name=Star Trek Commander
 year=2026-11-13
-total=206
+total=225
 orderindex=UBZ-ZZZ.TRC
 autounlock=true
 [/meta]
+[card]
+primitive=Beverly Crusher, Ship's Doctor
+id=704011
+rarity=R
+[/card]
+[card]
+primitive=Dr. Pulaski, Cynical Clinician
+id=704013
+rarity=R
+[/card]
+[card]
+primitive=Emergency Regeneration
+id=704014
+rarity=R
+[/card]
+[card]
+primitive=M'Ress, Crew Coordinator
+id=704026
+rarity=R
+[/card]
+[card]
+primitive=Supplementation Node
+id=704031
+rarity=R
+[/card]
+[card]
+primitive=Co-Option Adjutant
+id=704039
+rarity=R
+[/card]
+[card]
+primitive=Fleet Captain Christopher Pike
+id=704041
+rarity=R
+[/card]
+[card]
+primitive=On the Shoulders of Giants
+id=704047
+rarity=R
+[/card]
+[card]
+primitive=Battle of Wolf 359
+id=704057
+rarity=R
+[/card]
+[card]
+primitive=Reclamation Specialist
+id=704062
+rarity=R
+[/card]
+[card]
+primitive=Gnarling Targ
+id=704069
+rarity=R
+[/card]
+[card]
+primitive=Rom and Leeta, Unlikely Pair
+id=704076
+rarity=R
+[/card]
+[card]
+primitive=Chancellor Gorkon
+id=704086
+rarity=R
+[/card]
+[card]
+primitive=Commander William Riker
+id=704091
+rarity=R
+[/card]
 [card]
 primitive=Evasive Maneuvers
 id=704132
@@ -19,6 +89,11 @@ rarity=C
 [card]
 primitive=Sickbay Orderly
 id=704138
+rarity=C
+[/card]
+[card]
+primitive=Starfleet Crew
+id=704139
 rarity=C
 [/card]
 [card]
@@ -42,6 +117,11 @@ id=704146
 rarity=C
 [/card]
 [card]
+primitive=La Forge, Perceptive Engineer
+id=704147
+rarity=U
+[/card]
+[card]
 primitive=Pelia, Immortal Innovator
 id=704148
 rarity=U
@@ -57,6 +137,11 @@ id=704153
 rarity=C
 [/card]
 [card]
+primitive=Defense Force Aggressor
+id=704161
+rarity=C
+[/card]
+[card]
 primitive=Direct Hit
 id=704162
 rarity=C
@@ -67,8 +152,18 @@ id=704163
 rarity=C
 [/card]
 [card]
+primitive=Kruge, Genesis Seeker
+id=704165
+rarity=U
+[/card]
+[card]
 primitive=Mek'leth Berserker
 id=704166
+rarity=C
+[/card]
+[card]
+primitive=Warship Flight Crew
+id=704168
 rarity=C
 [/card]
 [card]
@@ -77,13 +172,63 @@ id=704172
 rarity=C
 [/card]
 [card]
+primitive=Gumato
+id=704173
+rarity=U
+[/card]
+[card]
 primitive=Talarian Hook Spider
 id=704175
 rarity=C
 [/card]
 [card]
+primitive=Disruptor Pistol
+id=704177
+rarity=C
+[/card]
+[card]
+primitive=Kirk, Man of Action
+id=704180
+rarity=R
+[/card]
+[card]
+primitive=Uhura, Xenolinguist
+id=704182
+rarity=R
+[/card]
+[card]
+primitive=Scotty, Chief Engineer
+id=704184
+rarity=R
+[/card]
+[card]
+primitive=Data, Professor of Humanities
+id=704189
+rarity=R
+[/card]
+[card]
+primitive=Troi, Winging It
+id=704191
+rarity=R
+[/card]
+[card]
+primitive=Picard, Steadfast Captain
+id=704007
+rarity=M
+[/card]
+[card]
+primitive=Spock, Logical Choice
+id=704008
+rarity=M
+[/card]
+[card]
 primitive=Trelane, Squire of Gothos
 id=704010
+rarity=R
+[/card]
+[card]
+primitive=Bio-Asset Allocator
+id=704001
 rarity=R
 [/card]
 [card]
@@ -917,19 +1062,9 @@ id=704137
 rarity=U
 [/card]
 [card]
-primitive=Starfleet Crew
-id=704139
-rarity=C
-[/card]
-[card]
 primitive=Cryogenic Stasis
 id=704142
 rarity=C
-[/card]
-[card]
-primitive=La Forge, Perceptive Engineer
-id=704147
-rarity=U
 [/card]
 [card]
 primitive=T'Pol, Vulcan Representative
@@ -937,48 +1072,8 @@ id=704151
 rarity=U
 [/card]
 [card]
-primitive=Defense Force Aggressor
-id=704161
-rarity=C
-[/card]
-[card]
-primitive=Kruge, Genesis Seeker
-id=704165
-rarity=U
-[/card]
-[card]
-primitive=Warship Flight Crew
-id=704168
-rarity=C
-[/card]
-[card]
-primitive=Gumato
-id=704173
-rarity=U
-[/card]
-[card]
-primitive=Disruptor Pistol
-id=704177
-rarity=C
-[/card]
-[card]
 primitive=Operations Officer
 id=704006
-rarity=R
-[/card]
-[card]
-primitive=Picard, Steadfast Captain
-id=704007
-rarity=M
-[/card]
-[card]
-primitive=Spock, Logical Choice
-id=704008
-rarity=M
-[/card]
-[card]
-primitive=Bio-Asset Allocator
-id=704001
 rarity=R
 [/card]
 [card]

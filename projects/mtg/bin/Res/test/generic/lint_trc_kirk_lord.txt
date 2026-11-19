@@ -1,0 +1,16 @@
+#Kirk, Man of Action (TRC): other Officers etc. get +2/+2. Starfleet Crew (Officer, 2/3) is 4/5; Grizzly Bears stays 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704180,Starfleet Crew,Grizzly Bears
+[PLAYER2]
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704180,Starfleet Crew,Grizzly Bears
+pt:Starfleet Crew=4/5
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]

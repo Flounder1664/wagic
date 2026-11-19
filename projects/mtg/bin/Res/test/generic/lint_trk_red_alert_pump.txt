@@ -1,0 +1,18 @@
+#Red Alert! (TRK): creatures you control get +2/+0 (normal cost; the {R} cost needs an attacker).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Red Alert!
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Red Alert!
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Red Alert!
+pt:Grizzly Bears=4/2
+[PLAYER2]
+[END]

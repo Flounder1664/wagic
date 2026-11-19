@@ -1,0 +1,21 @@
+#Rom and Leeta, Unlikely Pair (TRC): seek out - on your second draw, two tapped Treasures. Divination draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704076
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704076,*,*
+tappedinplay:2
+graveyard:Divination
+hand:*,*
+library:*
+[PLAYER2]
+[END]

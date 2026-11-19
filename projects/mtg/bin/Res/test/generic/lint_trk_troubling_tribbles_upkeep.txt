@@ -1,0 +1,24 @@
+#Troubling Tribbles (TRK): at your upkeep, create a token copy of it. Two turns on: two Tribbles.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Troubling Tribbles
+library:Forest,Forest,Forest
+[PLAYER2]
+library:Forest,Forest,Forest
+[DO]
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Troubling Tribbles,Troubling Tribbles
+hand:*
+library:*,*
+[PLAYER2]
+hand:*
+library:*,*
+[END]

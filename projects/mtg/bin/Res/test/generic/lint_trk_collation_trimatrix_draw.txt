@@ -1,0 +1,23 @@
+#Collation Trimatrix (TRK): tap three untapped artifact creatures you control: draw a card, lose 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Collation Trimatrix,Ornithopter,Memnite
+library:Forest,Forest
+life:20
+[PLAYER2]
+[DO]
+Collation Trimatrix
+Ornithopter
+Memnite
+Collation Trimatrix
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Collation Trimatrix,Ornithopter,Memnite
+tappedinplay:3
+hand:*
+library:*
+life:19
+[PLAYER2]
+[END]

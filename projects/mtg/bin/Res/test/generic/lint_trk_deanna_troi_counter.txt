@@ -1,0 +1,17 @@
+#Deanna Troi, Psychic Counsel (TRK): other creatures you control enter with a +1/+1 counter. Grizzly Bears: 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706985
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706985,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

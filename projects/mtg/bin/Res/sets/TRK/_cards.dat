@@ -2,7 +2,7 @@
 author=Wagic Team
 name=Star Trek
 year=2026-11-13
-total=120
+total=135
 orderindex=UBZ-ZZZ.TRK
 autounlock=true
 [/meta]
@@ -10,6 +10,41 @@ autounlock=true
 primitive=Andromedan Automatons
 id=706992
 rarity=C
+[/card]
+[card]
+primitive=Assembly Specialist
+id=706990
+rarity=U
+[/card]
+[card]
+primitive=Command Decision
+id=706998
+rarity=C
+[/card]
+[card]
+primitive=Command Subadjunct
+id=706987
+rarity=U
+[/card]
+[card]
+primitive=Deanna Troi, Psychic Counsel
+id=706985
+rarity=R
+[/card]
+[card]
+primitive=DOT-7 Repair Squad
+id=706997
+rarity=C
+[/card]
+[card]
+primitive=Emergency Medical Hologram
+id=706996
+rarity=C
+[/card]
+[card]
+primitive=Hologram Janeway
+id=706980
+rarity=U
 [/card]
 [card]
 primitive=Malfunctioning Holodeck
@@ -22,9 +57,34 @@ id=706028
 rarity=C
 [/card]
 [card]
+primitive=Primary Unimatrix Adjunct
+id=706030
+rarity=R
+[/card]
+[card]
+primitive=Shuttle Ace
+id=706036
+rarity=C
+[/card]
+[card]
+primitive=Troubling Tribbles
+id=706041
+rarity=R
+[/card]
+[card]
 primitive=Vexing Drone
 id=706045
 rarity=C
+[/card]
+[card]
+primitive=Cloistered Telepath
+id=706050
+rarity=C
+[/card]
+[card]
+primitive=Data, New Life
+id=706052
+rarity=U
 [/card]
 [card]
 primitive=Humpback Whales
@@ -47,9 +107,24 @@ id=706092
 rarity=C
 [/card]
 [card]
+primitive=Automated Warfare System
+id=706093
+rarity=C
+[/card]
+[card]
 primitive=Cha'DIch Investigator
 id=706097
 rarity=C
+[/card]
+[card]
+primitive=Collation Trimatrix
+id=706098
+rarity=R
+[/card]
+[card]
+primitive=Collective Drone
+id=706099
+rarity=U
 [/card]
 [card]
 primitive=Eject the Warp Core
@@ -59,6 +134,26 @@ rarity=C
 [card]
 primitive=Fugitive Listener
 id=706107
+rarity=C
+[/card]
+[card]
+primitive=General Chang, Cold Warrior
+id=706109
+rarity=R
+[/card]
+[card]
+primitive=He's Dead, Jim
+id=706114
+rarity=C
+[/card]
+[card]
+primitive=Relentless Drednok
+id=706124
+rarity=C
+[/card]
+[card]
+primitive=Tenacious Drone
+id=706133
 rarity=C
 [/card]
 [card]
@@ -72,9 +167,29 @@ id=706152
 rarity=C
 [/card]
 [card]
+primitive=Khaaaaaaaaaaaannn!
+id=706154
+rarity=U
+[/card]
+[card]
+primitive=Khan, Despot by Design
+id=706155
+rarity=U
+[/card]
+[card]
+primitive=La'An Noonien-Singh, Security
+id=706156
+rarity=U
+[/card]
+[card]
 primitive=Munitions Enthusiast
 id=706158
 rarity=U
+[/card]
+[card]
+primitive=Planetary Patrol
+id=706163
+rarity=C
 [/card]
 [card]
 primitive=Plasma Cascade
@@ -87,6 +202,46 @@ id=706168
 rarity=C
 [/card]
 [card]
+primitive=Red Alert!
+id=706169
+rarity=U
+[/card]
+[card]
+primitive=Tal Shiar Analyst
+id=706174
+rarity=C
+[/card]
+[card]
+primitive=Common Goal
+id=706190
+rarity=C
+[/card]
+[card]
+primitive=Culber and Stamets, Star-Crossed
+id=706191
+rarity=U
+[/card]
+[card]
+primitive=Moopsy
+id=706207
+rarity=C
+[/card]
+[card]
+primitive=Mugato
+id=706208
+rarity=U
+[/card]
+[card]
+primitive=Photosynthetic Physician
+id=706210
+rarity=C
+[/card]
+[card]
+primitive=Syndicate Liquidators
+id=706218
+rarity=U
+[/card]
+[card]
 primitive=Xenobotanist
 id=706224
 rarity=C
@@ -95,6 +250,16 @@ rarity=C
 primitive=Xindi Surveyors
 id=706225
 rarity=C
+[/card]
+[card]
+primitive=The Duras Sisters
+id=706235
+rarity=U
+[/card]
+[card]
+primitive=Crystalline Entity
+id=706008
+rarity=M
 [/card]
 [card]
 primitive=Engineered Explosives
@@ -242,24 +407,9 @@ id=706003
 rarity=U
 [/card]
 [card]
-primitive=Command Decision
-id=706998
-rarity=C
-[/card]
-[card]
-primitive=DOT-7 Repair Squad
-id=706997
-rarity=C
-[/card]
-[card]
 primitive=Dr. Beverly Crusher
 id=706009
 rarity=M
-[/card]
-[card]
-primitive=Emergency Medical Hologram
-id=706996
-rarity=C
 [/card]
 [card]
 primitive=Federation Field Medic
@@ -292,18 +442,8 @@ id=706035
 rarity=C
 [/card]
 [card]
-primitive=Shuttle Ace
-id=706036
-rarity=C
-[/card]
-[card]
 primitive=Tactical Officer
 id=706038
-rarity=C
-[/card]
-[card]
-primitive=Cloistered Telepath
-id=706050
 rarity=C
 [/card]
 [card]
@@ -352,11 +492,6 @@ id=706087
 rarity=U
 [/card]
 [card]
-primitive=Automated Warfare System
-id=706093
-rarity=C
-[/card]
-[card]
 primitive=Bat'leth
 id=706094
 rarity=U
@@ -367,23 +502,8 @@ id=706095
 rarity=C
 [/card]
 [card]
-primitive=Collective Drone
-id=706099
-rarity=U
-[/card]
-[card]
-primitive=General Chang, Cold Warrior
-id=706109
-rarity=R
-[/card]
-[card]
 primitive=A Good Day to Die
 id=706111
-rarity=C
-[/card]
-[card]
-primitive=He's Dead, Jim
-id=706114
 rarity=C
 [/card]
 [card]
@@ -400,11 +520,6 @@ rarity=U
 primitive=Organic Avulsion Unit
 id=706121
 rarity=U
-[/card]
-[card]
-primitive=Relentless Drednok
-id=706124
-rarity=C
 [/card]
 [card]
 primitive=Resistance Is Futile
@@ -437,23 +552,8 @@ id=706005
 rarity=M
 [/card]
 [card]
-primitive=Khaaaaaaaaaaaannn!
-id=706154
-rarity=U
-[/card]
-[card]
-primitive=La'An Noonien-Singh, Security
-id=706156
-rarity=U
-[/card]
-[card]
 primitive=Perils of the Past
 id=706161
-rarity=C
-[/card]
-[card]
-primitive=Planetary Patrol
-id=706163
 rarity=C
 [/card]
 [card]
@@ -477,11 +577,6 @@ id=706189
 rarity=C
 [/card]
 [card]
-primitive=Common Goal
-id=706190
-rarity=C
-[/card]
-[card]
 primitive=Dathon and Picard at El-Adrel
 id=706192
 rarity=C
@@ -502,16 +597,6 @@ id=706203
 rarity=C
 [/card]
 [card]
-primitive=Moopsy
-id=706207
-rarity=C
-[/card]
-[card]
-primitive=Mugato
-id=706208
-rarity=U
-[/card]
-[card]
 primitive=Saurian Explorer
 id=706213
 rarity=C
@@ -519,11 +604,6 @@ rarity=C
 [card]
 primitive=Support Mission
 id=706216
-rarity=U
-[/card]
-[card]
-primitive=Syndicate Liquidators
-id=706218
 rarity=U
 [/card]
 [card]
@@ -535,11 +615,6 @@ rarity=R
 primitive=Seven of Nine
 id=706019
 rarity=U
-[/card]
-[card]
-primitive=Crystalline Entity
-id=706008
-rarity=M
 [/card]
 [card]
 primitive=Cybernetic Specialist
