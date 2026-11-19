@@ -1,0 +1,30 @@
+#Starfleet Spanner Jockey (TRK, 3/3 defender): after a noncreature spell this turn it can attack. Opponent to 17.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Starfleet Spanner Jockey
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Divination
+next
+next
+Starfleet Spanner Jockey
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Starfleet Spanner Jockey
+graveyard:Divination
+hand:*,*
+library:*
+life:20
+[PLAYER2]
+life:17
+[END]

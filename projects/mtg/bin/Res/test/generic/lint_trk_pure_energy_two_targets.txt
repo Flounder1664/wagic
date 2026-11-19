@@ -1,0 +1,21 @@
+#Pure Energy (TRK): a +1/+1 counter on each of two target creatures.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Savannah Lions
+hand:Pure Energy
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Pure Energy
+Grizzly Bears
+Savannah Lions
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Savannah Lions
+graveyard:Pure Energy
+pt:Grizzly Bears=3/3
+pt:Savannah Lions=3/2
+[PLAYER2]
+[END]

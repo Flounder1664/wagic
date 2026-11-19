@@ -1,0 +1,21 @@
+#Set Phasers to . . . (TRK): Stun mode taps the creature and puts a stun counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Set Phasers to . . .
+manapool:{W}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Set Phasers to . . .
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Set Phasers to . . .
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+counter:Grizzly Bears=stun:1
+[END]

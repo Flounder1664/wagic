@@ -154792,3 +154792,188 @@ subtype=Borg
 power=3
 toughness=4
 [/card]
+[card]
+name=70,000 Light-Years from Home
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+target=creature,artifact[spacecraft]
+auto=moveto(exile) && ability$!name(Search for a basic land) may notaTarget(land[basic]|mylibrary) moveTo(myhand)!$ targetcontroller
+text=Exile target creature or Spacecraft. Its controller may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Antagonist Incorporator
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):pay({1}) create(Borg:artifact creature Borg:1/1)]))
+text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay {1}. If you do, create a 1/1 colorless Borg artifact creature token."
+mana={1}{W}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=3
+[/card]
+[card]
+name=Free Borg Revolutionaries
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+abilities=cycling
+auto=all(creature|myBattlefield) 1/1 ueot
+autohand={2}{cycle}:target(land[basic]|mylibrary) moveto(hand)
+text=When this creature enters, creatures you control get +1/+1 until end of turn. -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+mana={3}{W}{W}
+type=Artifact Creature
+subtype=Borg Rebel
+power=4
+toughness=5
+[/card]
+[card]
+name=Ghost of Illyria
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+abilities=flying
+auto=may (blink)ueot target(other *[-land]|myBattlefield)
+text=Flying -- When this creature enters, exile up to one other target nonland permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+mana={3}{W}
+type=Creature
+subtype=Elemental Spirit
+power=3
+toughness=3
+[/card]
+[card]
+name=Miles O'Brien, Transporter Ops
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=may moveTo(hand) target(other creature,artifact|myBattlefield)
+auto=@movedTo(*|myhand) from(battlefield):phaseaction[end once] draw:1 controller limit:1
+text=When Miles O'Brien enters, return up to one other target creature or artifact you control to its owner's hand. -- At the beginning of each end step, if a permanent was returned to your hand from the battlefield this turn, draw a card.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Artificer
+power=3
+toughness=3
+[/card]
+[card]
+name=Pure Energy
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+target=creature
+auto=counter(1/1)
+auto=counter(1/1) target(creature)
+flashback={2}{W}{H(creature|mybattlefield)}
+text=Distribute two +1/+1 counters among one or two target creatures. -- Beam me up {2}{W} (You may cast this card from your graveyard for {2}{W} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=Set Phasers to . . .
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=choice name(Stun - tap and stun target creature) tap target(creature) && counter(0/0,1,stun)
+auto=choice name(Kill - 3 damage to target attacking creature) damage:3 target(creature[attacking])
+text=Choose one - -- * Stun - Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- * Kill - This spell deals 3 damage to target attacking creature.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Tactical Officer
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:counter(1/1) all(this) && untap all(this)
+text=Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.
+mana={1}{W}
+type=Creature
+subtype=Human Officer
+power=2
+toughness=1
+[/card]
+[card]
+name=Una Chin-Riley, Number One
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:target(creature[attacking]) transforms((,newability[2/0],first strike)) ueot
+text=Whenever you attack while creatures you control have total power 8 or greater, target attacking creature gets +2/+0 and gains first strike until end of turn.
+mana={4}{W}
+type=Legendary Creature
+subtype=Illyrian Officer
+power=4
+toughness=5
+[/card]
+[card]
+name=Cetacean Ops
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=_WARD1_
+auto=@movedTo(*[-creature]|mystack):counter(1/1) all(this)
+text=Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.) -- Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.
+mana={3}{U}
+type=Creature
+subtype=Whale Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Consider the Prime Directive
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=choice name(Interfere - counter unless they pay 3) target(*|stack) transforms((,newability[pay[[{3}]] name(pay 3 mana) donothing?fizzle])) forever
+auto=choice name(Observe - tap and stun, draw) draw:1 controller && may tap target(creature) && counter(0/0,1,stun)
+text=Choose one - -- * Interfere - Counter target spell unless its controller pays {3}. -- * Observe - Tap up to one target creature and put a stun counter on it. Draw a card. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+mana={2}{U}
+type=Instant
+[/card]
+[card]
+name=Energize
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+target=creature|opponentbattlefield
+auto=moveTo(hand)
+flashback={3}{U}{H(creature|mybattlefield)}
+text=Return target creature an opponent controls to its owner's hand. -- Beam me up {3}{U} (You may cast this card from your graveyard for {3}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={1}{U}
+type=Sorcery
+[/card]
+[card]
+name=Federation Probe
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+abilities=flying
+auto=choice name(Target creature gets +1/+1) target(creature) 1/1 ueot
+auto=choice name(Surveil 1) _SURVEIL1_
+text=Flying -- When this creature enters, choose one - -- * Target creature gets +1/+1 until end of turn. -- * Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={U}
+type=Artifact Creature
+subtype=Construct
+power=1
+toughness=1
+[/card]
+[card]
+name=Highly Illogical
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+kicker={1}{U}
+auto=ifnot paid(kicker) then target(*[manacost<=2]|stack) fizzle
+auto=if paid(kicker) then target(*|stack) fizzle
+text=Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.) -- Counter target spell with mana value 2 or less. If this spell was kicked, instead counter target spell.
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Marooned
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+target=artifact,creature
+auto=teach(creature) doesnotuntap
+auto=may name(Pay 3 - tap it) pay({3}) name(Pay 3 - tap it) teach(creature) freeze
+text=Enchant artifact or creature -- When this Aura enters, you may pay {3}. If you do, tap enchanted permanent. -- Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
+mana={U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Open Communications
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+auto=draw:1 controller
+flashback={2}{U}{H(creature|mybattlefield)}
+text=Draw a card. -- Beam me up {2}{U} (You may cast this card from your graveyard for {2}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={U}
+type=Sorcery
+[/card]
+[card]
+name=Starfleet Spanner Jockey
+#2026-11-19 Star Trek batch 3: written from existing working forms.
+abilities=defender
+auto=@movedTo(*[-creature]|mystack) turnlimited:-defender ueot
+text=Defender -- As long as you've cast a noncreature spell this turn, this creature can attack as though it didn't have defender.
+mana={1}{U}
+type=Creature
+subtype=Human Artificer
+power=3
+toughness=3
+[/card]

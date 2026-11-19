@@ -1,0 +1,21 @@
+#Open Communications (TRK): Beam me up {2}{U} - cast from the graveyard by also returning a creature
+#you control to hand, then it is exiled. Draws a card; Grizzly Bears goes back to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Open Communications
+manapool:{2}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Open Communications
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:Open Communications
+hand:Grizzly Bears,*
+library:*
+[PLAYER2]
+[END]

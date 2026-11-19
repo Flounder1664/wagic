@@ -1,0 +1,20 @@
+#Free Borg Revolutionaries (TRK, 4/5): when it enters, creatures you control get +1/+1 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Free Borg Revolutionaries
+manapool:{3}{W}{W}
+[PLAYER2]
+[DO]
+Free Borg Revolutionaries
+#cast, not landcycling
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Free Borg Revolutionaries
+pt:Grizzly Bears=3/3
+pt:Free Borg Revolutionaries=5/6
+[PLAYER2]
+[END]

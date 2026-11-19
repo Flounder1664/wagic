@@ -20828,12 +20828,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=70,000 Light-Years from Home
-text=Exile target creature or Spacecraft. Its controller may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
-mana={1}{W}
-type=Sorcery
-[/card]
-[card]
 name=A Good Day to Die
 text=Target creature gets +2/+0 until end of turn. When that creature dies this turn, you draw a card.
 mana={B}
@@ -20917,12 +20911,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Consider the Prime Directive
-text=Choose one — -- • Interfere — Counter target spell unless its controller pays {3}. -- • Observe — Tap up to one target creature and put a stun counter on it. Draw a card. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-mana={2}{U}
-type=Instant
-[/card]
-[card]
 name=Cybernetic Specialist
 text=When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) -- {1}, {T}: Put target card from your graveyard on the bottom of your library.
 mana={2}
@@ -20974,39 +20962,15 @@ power=3
 toughness=2
 [/card]
 [card]
-name=Federation Probe
-text=Flying -- When this creature enters, choose one — -- • Target creature gets +1/+1 until end of turn. -- • Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
-mana={U}
-type=Artifact Creature
-subtype=Construct
-power=1
-toughness=1
-[/card]
-[card]
 name=First Contact
 text=Mill four cards. You may put a permanent card from among them into your hand. If this spell is the first spell you've cast this game, you gain 2 life. (To mill four cards, put the top four cards of your library into your graveyard.)
 mana={1}{G}
 type=Instant
 [/card]
 [card]
-name=Free Borg Revolutionaries
-text=When this creature enters, creatures you control get +1/+1 until end of turn. -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
-mana={3}{W}{W}
-type=Artifact Creature
-subtype=Borg Rebel
-power=4
-toughness=5
-[/card]
-[card]
 name=Guidance Failure
 text=This spell costs {1} less to cast if it targets an attacking creature. -- Target creature or Spacecraft's owner puts it on their choice of the top or bottom of their library.
 mana={3}{U}
-type=Instant
-[/card]
-[card]
-name=Highly Illogical
-text=Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.) -- Counter target spell with mana value 2 or less. If this spell was kicked, instead counter target spell.
-mana={1}{U}
 type=Instant
 [/card]
 [card]
@@ -21039,20 +21003,6 @@ text=(As this Saga enters and after your draw step, add a lore counter. Sacrific
 mana={3}{B}{B}
 type=Enchantment
 subtype=Saga
-[/card]
-[card]
-name=Marooned
-target=artifact
-text=Enchant artifact or creature -- When this Aura enters, you may pay {3}. If you do, tap enchanted permanent. -- Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.
-mana={U}
-type=Enchantment
-subtype=Aura
-[/card]
-[card]
-name=Open Communications
-text=Draw a card. -- Beam me up {2}{U} (You may cast this card from your graveyard for {2}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)
-mana={U}
-type=Sorcery
 [/card]
 [card]
 name=Organic Avulsion Unit
@@ -21121,12 +21071,6 @@ power=4
 toughness=3
 [/card]
 [card]
-name=Set Phasers to . . .
-text=Choose one — -- • Stun — Tap target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- • Kill — This spell deals 3 damage to target attacking creature.
-mana={W}
-type=Instant
-[/card]
-[card]
 name=Seven of Nine
 text=Whenever you face a dilemma, draw a card. (You face a dilemma as you choose one or more modes for a spell or ability.)
 mana={2}{U}{B}
@@ -21155,15 +21099,6 @@ name=Support Mission
 text=Whenever a creature you control enters, put a quest counter on this enchantment. Put a +1/+1 counter on that creature. If this enchantment has five or more quest counters on it, instead put two +1/+1 counters on that creature.
 mana={2}{G}
 type=Enchantment
-[/card]
-[card]
-name=Tactical Officer
-text=Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.
-mana={1}{W}
-type=Creature
-subtype=Human Officer
-power=2
-toughness=1
 [/card]
 [card]
 name=The City on the Edge of Forever

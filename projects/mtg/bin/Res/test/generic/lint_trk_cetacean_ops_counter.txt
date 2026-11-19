@@ -1,0 +1,21 @@
+#Cetacean Ops (TRK, 3/3): whenever you cast a noncreature spell, a +1/+1 counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cetacean Ops
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cetacean Ops
+graveyard:Divination
+pt:Cetacean Ops=4/4
+hand:*,*
+library:*
+[PLAYER2]
+[END]
