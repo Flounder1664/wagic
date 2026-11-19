@@ -41,6 +41,8 @@ public:
     //"That player can't gain life for the rest of the game" (Screaming Nemesis).
     //Set by the cantgainlifeforgame effect; never resets once true.
     bool cantGainLifeForGame;
+    //The "Can't Gain Life" marker card has been put in the command zone (so it is shown once).
+    bool cantGainLifeMarker;
     MTGPlayerCards * game;
     MTGDeck * mDeck;
     string deckFile;

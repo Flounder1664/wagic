@@ -1,6 +1,6 @@
 #Screaming Nemesis: Lightning Bolt kills it, and its trigger deals that 3 to the opponent (17).
 #The opponent then can't gain life for the rest of the game - even with Nemesis gone, Healing
-#Salve on them does nothing. Control: dsk_screaming_nemesis_salve_control (same Salve, gains 3).
+#Salve on them does nothing, and a "Can't Gain Life" marker sits in their command zone. Control: dsk_screaming_nemesis_salve_control (same Salve, gains 3).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -20,5 +20,6 @@ FIRSTMAIN
 [PLAYER1]
 graveyard:Lightning Bolt,Healing Salve,Screaming Nemesis
 [PLAYER2]
+commandzone:Can't Gain Life
 life:17
 [END]

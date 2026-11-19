@@ -1102,6 +1102,14 @@ void GameObserver::gameStateBasedEffects()
                 dropStateMarker(p, "Enduring Story");
             }
         }
+        //"Can't gain life for the rest of the game" (Screaming Nemesis) was invisible: John
+        //asked in the 2026-11-16 queue whether it should show. It never ends, so it gets the
+        //same command-zone marker card as the other for-the-game states.
+        if (p->cantGainLifeForGame && !p->cantGainLifeMarker)
+        {
+            p->cantGainLifeMarker = true;
+            dropStateMarker(p, "Can't Gain Life");
+        }
         //////////////////////////////////
         //clear will attack player or pw//
         //////////////////////////////////

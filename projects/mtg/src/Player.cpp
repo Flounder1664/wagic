@@ -27,6 +27,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     cityBlessing = false;
     enduringStory = false;
     cantGainLifeForGame = false;
+    cantGainLifeMarker = false;
     poisonCount = 0;
     damageCount = 0;
     nonCombatDamage = 0;

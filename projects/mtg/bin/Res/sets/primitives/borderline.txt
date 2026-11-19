@@ -142448,6 +142448,15 @@ text=You have an enduring story for the rest of the game. (Storied -- if you con
 type=Emblem
 [/card]
 [card]
+name=Can't Gain Life
+#2026-11-19 engine marker: dropped into a player's command zone by GameObserver when
+#cantgainlifeforgame (Screaming Nemesis) applies to them. Same form as Enduring Story.
+restriction=never
+abilities=shroud,indestructible,nofizzle,nomovetrigger
+text=This player can't gain life for the rest of the game. (Screaming Nemesis)
+type=Emblem
+[/card]
+[card]
 name=Electrosiphon
 grade=borderline
 target=*|stack
