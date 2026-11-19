@@ -72,11 +72,17 @@ and shipped. In order:
 2. **Implement the whole card.** A `missing=` line means the card is effectively
    unsupported. Use it only when the engine truly cannot do the thing, and say so.
 3. **Test in the WSL harness** (below). Pair every positive assertion with something that
-   proves the ability is live: a negative twin, or a `:0` absence assertion.
+   proves the ability is live: a negative twin, or a `:0` absence assertion. Then
+   `wagic-tools/prove_test.py <test>` must say PROVEN: it runs the test on the card data
+   from before your change and again now.
 4. **If the harness cannot check it** (choosing a trigger's target, reveal windows, menus,
    anything visual), queue a hand-played scenario with the `wagic-scenario` skill. One
-   scenario tests one untested feature of one card.
-5. **Commit, merge into trunk, build from trunk, deploy** (below).
+   scenario tests one untested feature of one card. Before queueing, run
+   `wagic-tools/audit_token_art.py --card <card>`: a token or emblem with no picture is a
+   defect to fix, not something for John to find.
+5. **Commit, merge into trunk, build from trunk, deploy** (below). For card data only,
+   `wagic-tools/ship_card_data.py` does the push, `core.zip` patch, read-back, backup
+   pruning and `BUILD_LOG.md` line in one step (dry run unless `--go`).
 6. On a pass in game, record `#VERIFIED IN GAME <date> ...` under the card's `name=` line.
 
 **Card data is linted on commit.** `tools/git-hooks/pre-commit` runs
