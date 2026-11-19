@@ -1,6 +1,8 @@
 #Avatar Sagas transform on chapter III instead of being sacrificed. This was disabled
 #because the flip crashed on an imageless back face; all six backs now have art in TLA.zip.
 #Cast it (lore 1), pass turns until lore 3, then the BACK FACE must be on the battlefield.
+#2026-11-19: it asserted at UNTAP, before lore 3, and passed only because the harness ignored
+#an asserted card that is nowhere in the game. Now it reaches FIRSTMAIN, where the back face (1510300) is in play.
 #Note the "choice 0" - the doubleside(backside) ability puts a menu on the card, so a
 #bare click does not cast it.
 [INIT]
@@ -18,8 +20,11 @@ eot
 eot
 eot
 eot
+next
+next
+next
 [ASSERT]
-UNTAP
+FIRSTMAIN
 [PLAYER1]
 inplay:Avatar Kuruk
 [PLAYER2]

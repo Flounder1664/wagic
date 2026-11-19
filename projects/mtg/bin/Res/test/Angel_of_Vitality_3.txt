@@ -1,4 +1,6 @@
 #Life Gain Angel of Vitality 3
+#2026-11-19: asserted Savannah Sage (copied from test 1) though this one casts a second Angel;
+#it passed on the card count alone.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -21,7 +23,7 @@ eot
 [ASSERT]
 UNTAP
 [PLAYER1]
-inplay:Plains, Plains, Plains, Angel of Vitality, Impassioned Orator, Savannah Sage
+inplay:Plains, Plains, Plains, Angel of Vitality, Impassioned Orator, Angel of Vitality
 hand:
 life:23
 [PLAYER2]

@@ -971,7 +971,27 @@ void TestSuiteGame::assertGame()
                 if(cardToCheck)
                 {   // Can be NULL if used "*" in the testcase.
                     MTGCardInstance* card = Rules::getCardByMTGId(observer, cardToCheck->getId());
-                    if (card != 0 && !zone->hasCard(card))
+                    //No card with that id anywhere in the game used to pass silently: an
+                    //asserted token that was never created (inplay:-541125) proved nothing
+                    //(Old Rutstein, 2026-11-16). Only the zone counts were checked.
+                    //A card of the same NAME in the zone still passes: a transformed DFC keeps
+                    //its front face's id while the test names the back face, and a token or
+                    //card can come from another printing (21 existing tests rely on this).
+                    if (card == 0)
+                    {
+                        bool sameName = false;
+                        for (int c = 0; c < zone->nb_cards && !sameName; c++)
+                            if (zone->cards[c] && zone->cards[c]->getLCName() == cardToCheck->getLCName())
+                                sameName = true;
+                        if (!sameName)
+                        {
+                            sprintf(result, "<span class=\"error\">==No card with id %i or named '%s' is in player %i's %s==</span><br />",
+                                cardToCheck->getId(), cardToCheck->getName().c_str(), i, zone->getName());
+                            Log(result);
+                            error++;
+                        }
+                    }
+                    else if (!zone->hasCard(card))
                     {
                         sprintf(result, "<span class=\"error\">==Card ID not the same. Didn't find %i</span><br />", card->getId());
                         Log(result);
