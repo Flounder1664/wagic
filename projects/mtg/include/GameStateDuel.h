@@ -180,8 +180,8 @@ private:
 #ifdef TESTSUITE
     TestSuite * testSuite;
     bool restartScenarioRequested;
-    int scenarioVerdict; //0 none, 1 works, 2 wrong: set from the menu, acted on once it has closed
-    void recordScenarioVerdict(bool works);
+    int scenarioVerdict; //0 none, 1 works, 2 wrong, 3 works with a note: set from the menu, acted on once it has closed
+    void recordScenarioVerdict(bool works, bool wantsNote = false);
 #endif
 
     Credits * credits;
@@ -274,6 +274,7 @@ public:
         MENUITEM_LOAD = -17,
         MENUITEM_SCENARIO_WORKS = -60,
         MENUITEM_SCENARIO_WRONG = -61,
+        MENUITEM_SCENARIO_WORKS_NOTE = -62,
 #endif
 #ifdef NETWORK_SUPPORT
         MENUITEM_REMOTE_CLIENT = -18,

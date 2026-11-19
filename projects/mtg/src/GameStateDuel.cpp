@@ -442,7 +442,7 @@ static void snapshotZone(ostream & out, const char * label, MTGGameZone * zone, 
     out << "\n";
 }
 
-void GameStateDuel::recordScenarioVerdict(bool works)
+void GameStateDuel::recordScenarioVerdict(bool works, bool wantsNote)
 {
     if (!testSuite) return;
     char when[32];
@@ -452,7 +452,10 @@ void GameStateDuel::recordScenarioVerdict(bool works)
     ofstream file;
     if (JFileSystem::GetInstance()->openForWrite(file, "test/scenario_verdicts.tsv", ios_base::app))
     {
-        file << when << "\t" << scenario << "\t" << (works ? "works" : "wrong") << "\n";
+        //A 4th column "note" asks the launcher for the note box; readers of the first three
+        //columns still see a plain "works".
+        file << when << "\t" << scenario << "\t" << (works ? "works" : "wrong")
+             << (wantsNote ? "\tnote" : "") << "\n";
         file.close();
     }
     if (works || !game) return;
@@ -1146,6 +1149,10 @@ void GameStateDuel::Update(float dt)
                     {
                         menu->Add(MENUITEM_LOAD, "Restart scenario");
                         menu->Add(MENUITEM_SCENARIO_WORKS, "Works: next scenario");
+                        //John's remarks on passing scenarios (missing art, "should this be
+                        //visible?") came by chat and had to be matched to files by hand. This
+                        //marks the verdict line; Play-Scenario.ps1 pops the note box for it.
+                        menu->Add(MENUITEM_SCENARIO_WORKS_NOTE, "Works, with a note: next scenario");
                         menu->Add(MENUITEM_SCENARIO_WRONG, "Wrong: next scenario");
                     }
 #endif
@@ -1223,7 +1230,7 @@ void GameStateDuel::Update(float dt)
             }
             else if (scenarioVerdict)
             {
-                recordScenarioVerdict(scenarioVerdict == 1);
+                recordScenarioVerdict(scenarioVerdict != 2, scenarioVerdict == 3);
                 scenarioVerdict = 0;
                 if (testSuite->loadNext())
                 {
@@ -2085,8 +2092,10 @@ void GameStateDuel::ButtonPressed(int controllerId, int controlId)
             }
         case MENUITEM_SCENARIO_WORKS:
         case MENUITEM_SCENARIO_WRONG:
+        case MENUITEM_SCENARIO_WORKS_NOTE:
             {
-                scenarioVerdict = (controlId == MENUITEM_SCENARIO_WORKS) ? 1 : 2;
+                scenarioVerdict = (controlId == MENUITEM_SCENARIO_WORKS) ? 1
+                                : (controlId == MENUITEM_SCENARIO_WORKS_NOTE) ? 3 : 2;
                 menu->Close();
                 setGamePhase(DUEL_STATE_CANCEL);
                 break;
