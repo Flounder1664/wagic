@@ -1,0 +1,21 @@
+#Suurok-Class Science Vessel (TRK): Grizzly Bears (power 2) stations it with 2 counters - below 5, still not a creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+#the creature first: Suurok's draw-on-enter fires during setup
+inplay:Grizzly Bears,706083
+library:Forest,Forest
+[PLAYER2]
+[DO]
+706083
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,706083
+hand:*
+library:*
+tappedinplay:1
+counter:706083=Charge:2
+[PLAYER2]
+[END]

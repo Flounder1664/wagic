@@ -1,0 +1,16 @@
+#Starship Enterprise (TRC): landfall puts four charge counters on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Starship Enterprise
+hand:Forest
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Starship Enterprise,Forest
+counter:Starship Enterprise=Charge:4
+[PLAYER2]
+[END]

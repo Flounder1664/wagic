@@ -1,0 +1,20 @@
+#Enterprise NX-01 (TRK): when it enters, tap target creature an opponent controls and stun it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Enterprise NX-01
+manapool:{3}{U}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Enterprise NX-01
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Enterprise NX-01
+[PLAYER2]
+inplay:Grizzly Bears
+tappedinplay:1
+counter:Grizzly Bears=stun:1
+[END]

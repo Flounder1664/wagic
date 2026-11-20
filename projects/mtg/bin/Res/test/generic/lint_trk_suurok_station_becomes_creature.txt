@@ -1,0 +1,23 @@
+#Suurok-Class Science Vessel (TRK, Station 5+): tapping Craw Wurm (power 6) puts 6 charge counters on it,
+#so it is a 3/2 flying artifact creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+#the creature first: Suurok's draw-on-enter fires during setup
+inplay:Craw Wurm,706083
+library:Forest,Forest
+[PLAYER2]
+[DO]
+706083
+Craw Wurm
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,706083
+hand:*
+library:*
+tappedinplay:1
+counter:706083=Charge:6
+pt:Suurok-Class Science Vessel=3/2
+[PLAYER2]
+[END]

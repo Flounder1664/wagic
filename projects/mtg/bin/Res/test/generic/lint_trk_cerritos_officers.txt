@@ -1,0 +1,15 @@
+#U.S.S. Cerritos, Following Up (TRK): when it enters, two 1/1 red Officer tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:706272
+manapool:{5}
+[PLAYER2]
+[DO]
+706272
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706272,*,*
+[PLAYER2]
+[END]

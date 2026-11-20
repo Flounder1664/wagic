@@ -154804,7 +154804,7 @@ type=Sorcery
 [card]
 name=Antagonist Incorporator
 #2026-11-19 Star Trek batch 3: written from existing working forms.
-auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):pay({1}) create(Borg:artifact creature Borg:1/1)]))
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):pay({1}) token(-706519)]))
 text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay {1}. If you do, create a 1/1 colorless Borg artifact creature token."
 mana={1}{W}
 type=Artifact Creature
@@ -154976,4 +154976,226 @@ type=Creature
 subtype=Human Artificer
 power=3
 toughness=3
+[/card]
+[card]
+name=Oberth-Class Starship
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=may notaTarget(plains[basic]|mylibrary) moveTo(myhand)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, search your library for a basic Plains card, reveal it, put it into your hand, then shuffle. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Flying
+mana={1}{W}
+type=Artifact
+subtype=Spacecraft
+power=2
+toughness=2
+[/card]
+[card]
+name=Test of Conviction
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=choice name(Battle Stations - +1/+1 counter on each creature you control) counter(1/1) all(creature|mybattlefield)
+auto=choice name(Begin Negotiations - opponent draws one, you draw two) draw:1 opponent && draw:2 controller
+text=Choose one - -- * Battle Stations - Put a +1/+1 counter on each creature you control. -- * Begin Negotiations - Target opponent draws a card. You draw two cards.
+mana={1}{W}
+type=Sorcery
+[/card]
+[card]
+name=U.S.S. Enterprise-A, Free Spirit
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=_WARD2_
+auto=create(Officer:creature Officer:1/1:red)*3
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying,lifelink))
+text=Ward {2} -- When U.S.S. Enterprise-A enters, create three 1/1 red Officer creature tokens. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Flying, lifelink
+mana={3}{W}{W}
+type=Legendary Artifact
+subtype=Spacecraft
+power=5
+toughness=5
+[/card]
+[card]
+name=U.S.S. Excelsior, Cutting Edge
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=destroy target(creature[tapped]|opponentbattlefield)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying))
+text=When U.S.S. Excelsior enters, destroy target tapped creature an opponent controls. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying
+mana={3}{W}
+type=Legendary Artifact
+subtype=Spacecraft
+power=4
+toughness=4
+[/card]
+[card]
+name=Enterprise NX-01
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=target(creature|opponentbattlefield) transforms((,newability[tap],newability[counter(0/0.1.Stun)])) oneshot
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying,vigilance))
+text=When Enterprise NX-01 enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.) -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Flying, vigilance
+mana={3}{U}
+type=Legendary Artifact
+subtype=Spacecraft
+power=4
+toughness=3
+[/card]
+[card]
+name=Suurok-Class Science Vessel
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=draw:1 controller
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,5,Charge}) transforms((Artifact Creature,flying))
+text=When this Spacecraft enters, draw a card. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 5+.) -- 5+ | Flying
+mana={2}{U}
+type=Artifact
+subtype=Spacecraft
+power=3
+toughness=2
+[/card]
+[card]
+name=Class-F Shuttlecraft
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto={T}:_MANAOFANYCOLOR_
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying,vigilance))
+text={T}: Add one mana of any color. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Flying, vigilance
+mana={3}
+type=Artifact
+subtype=Spacecraft
+power=2
+toughness=4
+[/card]
+[card]
+name=U.S.S. Cerritos, Following Up
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=create(Officer:creature Officer:1/1:red)*2
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying))
+text=When U.S.S. Cerritos enters, create two 1/1 red Officer creature tokens. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Flying
+mana={5}
+type=Legendary Artifact
+subtype=Spacecraft
+power=4
+toughness=4
+[/card]
+[card]
+name=U.S.S. Enterprise-E, Sovereign
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=destroy all(creature[tapped])
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,8,Charge}) transforms((Artifact Creature,flying,vigilance))
+text=When U.S.S. Enterprise-E enters, destroy all tapped creatures. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.) -- 8+ | Flying, vigilance
+mana={3}{W}{W}
+type=Legendary Artifact
+subtype=Spacecraft
+power=7
+toughness=7
+[/card]
+[card]
+name=Borg Scout Sphere
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=draw:1 controller
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,6,Charge}) transforms((Artifact Creature,flying))
+auto=this(counter{0/0,6,Charge}) lord(creature[artifact]|mybattlefield) flying
+text=When this Spacecraft enters, draw a card. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.) -- 6+ | Artifact creatures you control have flying.
+mana={2}{U}
+type=Artifact
+subtype=Spacecraft
+power=5
+toughness=5
+[/card]
+[card]
+name=Class-4 Tactical Cube
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=create(Borg:artifact creature Borg:1/1)*2
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,7,Charge}) transforms((Artifact Creature,flying))
+auto=this(counter{0/0,7,Charge}) lord(creature[artifact]|mybattlefield) 1/1
+text=When this Spacecraft enters, create two 1/1 colorless Borg artifact creature tokens. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.) -- 7+ | Flying -- Artifact creatures you control get +1/+1.
+mana={4}
+type=Artifact
+subtype=Spacecraft
+power=4
+toughness=4
+[/card]
+[card]
+name=I.K.S. Negh'Var, Imperial Flagship
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=lord(*[klingon;warrior]|mybattlefield) vigilance
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,10,Charge}) transforms((Artifact Creature,flying,vigilance))
+text=Klingons and Warriors you control have vigilance. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.) -- 10+ | Flying, vigilance
+mana={3}
+type=Legendary Artifact
+subtype=Spacecraft
+power=6
+toughness=6
+[/card]
+[card]
+name=K't'inga-Class Battle Cruiser
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=target(<upto:2>*[klingon;warrior]|mybattlefield) flying ueot
+auto=@combat(attacking) source(this):target(<upto:2>*[klingon;warrior]|mybattlefield) flying ueot
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,4,Charge}) transforms((Artifact Creature,flying))
+text=Whenever this Spacecraft enters or attacks, one or two target Klingons and/or Warriors you control gain flying until end of turn. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.) -- 4+ | Flying
+mana={3}
+type=Artifact
+subtype=Spacecraft
+power=5
+toughness=5
+[/card]
+[card]
+name=K'Vort-Class Raider
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=this(variable{controllerturn}>0) hexproof
+auto=this(variable{controllerturn}>0) lord(creature|mybattlefield) hexproof
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,4,Charge}) transforms((Artifact Creature,flying,menace,haste))
+text=During your turn, this Spacecraft and creatures you control have hexproof. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.) -- 4+ | Flying, menace, haste
+mana={4}
+type=Artifact
+subtype=Spacecraft
+power=5
+toughness=3
+[/card]
+[card]
+name=Starship Enterprise
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=_LANDFALL_counter(0/0,4,Charge) all(this)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,16,Charge}) transforms((Artifact Creature,flying))
+auto=@combatdamaged(player) from(this):draw:thatmuch controller
+text=Landfall - Whenever a land you control enters, put four charge counters on Starship Enterprise. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 16+.) -- 16+ | Flying -- Whenever Starship Enterprise deals combat damage to a player, draw that many cards.
+mana={5}
+type=Legendary Artifact
+subtype=Spacecraft
+power=4
+toughness=6
+[/card]
+[card]
+name=U.S.S. Defiant, Tough Little Ship
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto=may destroy target(artifact,enchantment)
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,5,Charge}) transforms((Artifact Creature,flying,hexproof))
+text=When U.S.S. Defiant enters, destroy up to one target artifact or enchantment. -- Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 5+.) -- 5+ | Flying, hexproof
+mana={6}
+type=Legendary Artifact
+subtype=Spacecraft
+power=7
+toughness=4
+[/card]
+[card]
+name=U.S.S. Prometheus, Prototype
+#2026-11-19 Star Trek batch 4: written from existing working forms.
+auto={T(other creature|myBattlefield)}:name(Station) counter(0/0,storedpower,Charge) asSorcery
+auto=this(counter{0/0,4,Charge}) transforms((Artifact Creature,flying))
+text=Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.) -- 4+ | Flying -- 8+ | Multivector Assault Mode - Whenever U.S.S. Prometheus deals combat damage to an opponent, it deals that much damage to each other opponent.
+mana={5}
+type=Legendary Artifact
+subtype=Spacecraft
+power=6
+toughness=6
 [/card]

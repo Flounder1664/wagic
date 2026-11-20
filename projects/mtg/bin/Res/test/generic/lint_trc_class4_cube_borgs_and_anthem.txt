@@ -1,0 +1,23 @@
+#Class-4 Tactical Cube (TRC): two Borg tokens on entering; at 7+ charge it is a creature and artifact
+#creatures you control get +1/+1. Stationed by Craw Wurm, then Memnite (6 + 1 = 7): Memnite is 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Class-4 Tactical Cube
+manapool:{4}
+inplay:Craw Wurm,Memnite
+[PLAYER2]
+[DO]
+Class-4 Tactical Cube
+Class-4 Tactical Cube
+Craw Wurm
+Class-4 Tactical Cube
+Memnite
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Class-4 Tactical Cube,Craw Wurm,Memnite,*,*
+counter:Class-4 Tactical Cube=Charge:7
+pt:Memnite=2/2
+[PLAYER2]
+[END]
