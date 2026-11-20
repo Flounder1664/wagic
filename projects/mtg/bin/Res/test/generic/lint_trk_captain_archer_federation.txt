@@ -1,0 +1,19 @@
+#Captain Jonathan Archer (TRK): Federation - {G},{T}: target creature you control gets +X/+X, X = creature
+#types among non-Borg creatures you control: Human, Officer (Archer), Dog (Porthos), Bear = 4. Vexing Drone is a
+#Borg and does not count (with it, X would be 5). Grizzly Bears: 6/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Vexing Drone,706186
+manapool:{G}
+[PLAYER2]
+[DO]
+706186
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Vexing Drone,706186,*
+pt:Grizzly Bears=6/6
+[PLAYER2]
+[END]

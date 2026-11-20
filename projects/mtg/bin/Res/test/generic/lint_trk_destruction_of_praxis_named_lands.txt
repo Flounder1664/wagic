@@ -1,0 +1,22 @@
+#The Destruction of Praxis (TRK): all creatures get -X/-X, X = differently named lands (Forest, Island = 2).
+#Grizzly Bears dies, Hill Giant is 1/1; X < 6 so no Klingon tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Island
+hand:The Destruction of Praxis
+manapool:{3}{B}{B}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+The Destruction of Praxis
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:The Destruction of Praxis
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+pt:Hill Giant=1/1
+[END]

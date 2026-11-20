@@ -155199,3 +155199,118 @@ subtype=Spacecraft
 power=6
 toughness=6
 [/card]
+[card]
+name=Deep Space Scan
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=draw:pdiffnamedlands controller
+auto=all(*|mybattlefield,mylibrary) transforms((,nomaxhand)) uynt
+text=Strange new worlds - Draw X cards, where X is the number of differently named lands you control. You have no maximum hand size until your next turn.
+mana={4}{U}{U}
+type=Sorcery
+[/card]
+[card]
+name=The Destruction of Praxis
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=all(creature) -pdiffnamedlands/-pdiffnamedlands ueot
+auto=if compare(pdiffnamedlands)~morethan~5 then create(Klingon Warrior:creature Klingon Warrior:2/1:red:haste)*2
+text=Strange new worlds - All creatures get -X/-X until end of turn, where X is the number of differently named lands you control. If X is 6 or more, create two 2/1 red Klingon Warrior creature tokens with haste.
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Pah-Wraith
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+abilities=first strike,haste
+auto=_ATTACKING_all(creature|myBattlefield) pdiffnamedlands/0 ueot
+text=First strike, haste -- Strange new worlds - Whenever this creature attacks, creatures you control get +X/+0 until end of turn, where X is the number of differently named lands you control.
+mana={5}{R}{R}
+type=Creature
+subtype=Wraith
+power=4
+toughness=4
+[/card]
+[card]
+name=Christine Chapel, Combat Medic
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=life:pdiffnamedlands controller
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1,2)
+text=Strange new worlds - When Christine Chapel enters, you gain life equal to the number of differently named lands you control. -- Whenever you gain life, put two +1/+1 counters on Christine Chapel.
+mana={3}{G}
+type=Legendary Creature
+subtype=Human Doctor
+power=2
+toughness=2
+[/card]
+[card]
+name=The Traveler
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+abilities=reach,vigilance
+anyzone=pdiffnamedlands/3 cdaactive
+text=Reach, vigilance -- Strange new worlds - The Traveler's power is equal to the number of differently named lands you control.
+mana={G}{U}
+type=Legendary Creature
+subtype=Scout
+power=*
+toughness=3
+[/card]
+[card]
+name=Lt. Arex, Ever-Adapting
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+abilities=trample
+anyzone=pdiffnamedlands/pdiffnamedlands cdaactive
+auto=draw:3 controller
+auto=may target(<upto:3>land|myhand) moveto(mybattlefield) and!( tap(noevent) )!
+text=Trample -- Strange new worlds - Lt. Arex's power and toughness are each equal to the number of differently named lands you control. -- When Lt. Arex enters, draw three cards. You may put up to three land cards from your hand onto the battlefield tapped.
+mana={5}{G}{U}
+type=Legendary Creature
+subtype=Edosian Officer
+power=*
+toughness=*
+[/card]
+[card]
+name=Excalbian Gamemaster
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=create(Officer:creature Officer:1/1:red)*pdiffnamedlands
+auto=@movedTo(creature|graveyard) from(mybattlefield):counter(1/1) target(creature|mybattlefield)
+text=Strange new worlds - When this creature enters, create X 1/1 red Officer creature tokens, where X is the number of differently named lands you control. -- Whenever this creature or another creature you control dies, put a +1/+1 counter on target creature you control.
+mana={5}{W}
+type=Creature
+subtype=Excalbian
+power=6
+toughness=6
+[/card]
+[card]
+name=Saavik, Stoic Student
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+abilities=flash
+auto=damage:pfederation target(creature[attacking;blocking]|opponentbattlefield)
+text=Flash -- Federation - When Saavik enters, she deals X damage to target attacking or blocking creature an opponent controls, where X is the number of creature types among non-Borg creatures you control.
+mana={4}{W}
+type=Legendary Creature
+subtype=Vulcan Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=Captain Jonathan Archer
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=create(Porthos:legendary creature Dog:1/1:green)
+auto={G}{T}:target(creature|mybattlefield) pfederation/pfederation ueot asSorcery
+text=When Captain Archer enters, create Porthos, a legendary 1/1 green Dog creature token. -- Federation - {G}, {T}: Target creature you control gets +X/+X until end of turn, where X is the number of creature types among non-Borg creatures you control. Activate only as a sorcery.
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Hoshi Sato, Exolinguist
+#2026-11-19 Star Trek batch 5: written from existing working forms.
+auto=name(Look) reveal:pfederation optionone name(Get a Card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo target(<1>*|reveal) bottomoflibrary and!( all(*|reveal) bottomoflibrary )! optiontwoend revealend
+text=Federation - When Hoshi Sato enters, look at the top X cards of your library, where X is the number of creature types among non-Borg creatures you control. Put one of them into your hand and the rest on the bottom of your library in a random order.
+mana={4}{U}
+type=Legendary Creature
+subtype=Human Scientist
+power=3
+toughness=3
+[/card]

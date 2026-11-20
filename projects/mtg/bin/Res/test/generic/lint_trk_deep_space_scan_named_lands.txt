@@ -1,0 +1,20 @@
+#Deep Space Scan (TRK): draw X, X = differently named lands you control. Forest, Forest, Island, Swamp = 3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Island,Swamp
+hand:Deep Space Scan
+manapool:{4}{U}{U}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+Deep Space Scan
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,*
+graveyard:Deep Space Scan
+hand:*,*,*
+library:*,*
+[PLAYER2]
+[END]

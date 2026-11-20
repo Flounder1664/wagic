@@ -1312,6 +1312,47 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
 
 void WParsedInt::extendedParse(string s, Spell * spell, MTGCardInstance * card)
 {
+    //Star Trek (2026-11-20). Handled here, ahead of the long chain below, rather than as two
+    //more branches of it (MSVC's C1061 limits else-if depth in these parser functions).
+    //pdiffnamedlands - "Strange new worlds": the number of differently named lands you control.
+    //pfederation     - "Federation": creature types among non-Borg creatures you control.
+    if (s == "pdiffnamedlands" || s == "pfederation")
+    {
+        MTGGameZone * zone = card->controller()->inPlay();
+        if (s == "pdiffnamedlands")
+        {
+            set<string> names;
+            for (int i = 0; i < zone->nb_cards; i++)
+                if (zone->cards[i] && zone->cards[i]->hasType(Subtypes::TYPE_LAND))
+                    names.insert(zone->cards[i]->getLCName());
+            intValue = (int) names.size();
+            return;
+        }
+        int borg = MTGAllCards::findType("Borg");
+        static const char * kNonCreature[] = { "Vehicle", "Spacecraft", "Equipment", "Fortification", "Forest", "Plains", "Island", "Swamp", "Mountain", "Desert", "Gate", "Saga", "Food", "Clue", "Treasure", "Gold", "Blood", "Shrine", "Class", "Case", "Room", "Role", "Shard", "Rune", "Planet", "Contraption", "Attraction", "Powerstone", "Lesson", "Adventure", "Arcane", "Trap", "Siege", "Cartouche", "Curse", "Aura" };
+        set<int> nonCreature;
+        for (size_t k = 0; k < sizeof(kNonCreature) / sizeof(kNonCreature[0]); k++)
+            nonCreature.insert(MTGAllCards::findType(kNonCreature[k], false));
+        set<int> found;
+        for (int i = 0; i < zone->nb_cards; i++)
+        {
+            MTGCardInstance * c = zone->cards[i];
+            if (!c || !c->isCreature() || c->hasSubtype(borg))
+                continue;
+            //Not the type registry: Subtypes::add re-files a subtype under whatever parent it is
+            //added with last, so after the full harness run (2,400 tests) Bear, Human, Officer and
+            //Dog no longer read as creature types and this counted 0 (alone: 4). A creature's
+            //subtypes are its creature types, minus the few non-creature subtypes a creature can carry.
+            for (size_t t = 0; t < c->types.size(); t++)
+            {
+                int st = c->types[t];
+                if (st > Subtypes::LAST_TYPE && !nonCreature.count(st))
+                    found.insert(st);
+            }
+        }
+        intValue = (int) found.size();
+        return;
+    }
     if (s == "mybattlefieldcardtypes" || s == "oppbattlefieldcardtypes" || s == "allbattlefieldcardtypes")//Count number of card types on battlefield
     {
         intValue = 0;

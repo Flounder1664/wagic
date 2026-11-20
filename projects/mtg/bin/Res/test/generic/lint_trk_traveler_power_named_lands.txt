@@ -1,0 +1,15 @@
+#The Traveler (TRK, */3): power = differently named lands you control. Plains, Island, Island: 2/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains,Island,Island,The Traveler
+[PLAYER2]
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,The Traveler
+pt:The Traveler=2/3
+[PLAYER2]
+[END]
