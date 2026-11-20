@@ -1,0 +1,28 @@
+#Gul Dukat, Colonial Prefect (TRK): at each end step each opponent loses life equal to the life they lost
+#this turn, and you gain that much. Lightning Bolt takes the opponent to 17; at the end step 14, you 23.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706113
+hand:Lightning Bolt
+manapool:{R}
+library:Forest,Forest
+life:20
+[PLAYER2]
+library:Forest,Forest
+life:20
+[DO]
+Lightning Bolt
+p2
+eot
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:706113
+graveyard:Lightning Bolt
+library:*,*
+life:23
+[PLAYER2]
+library:*,*
+life:14
+[END]

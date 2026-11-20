@@ -1,0 +1,20 @@
+#Amok Time (TRK Saga) chapter I: your creature fights one an opponent controls. Craw Wurm kills Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+hand:Amok Time
+manapool:{2}{G}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Amok Time
+Craw Wurm
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Amok Time
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

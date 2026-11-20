@@ -1,0 +1,19 @@
+#Boarding Action (TRK): cast from the graveyard (Beam me up, returning Grizzly Bears): a 2/1 Klingon, exiled after.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Boarding Action
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Boarding Action
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+hand:Grizzly Bears
+exile:Boarding Action
+[PLAYER2]
+[END]

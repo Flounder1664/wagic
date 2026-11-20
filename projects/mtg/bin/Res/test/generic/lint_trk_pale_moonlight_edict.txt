@@ -1,0 +1,19 @@
+#In the Pale Moonlight (TRK Saga) chapter I: each opponent sacrifices a nontoken creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:In the Pale Moonlight
+manapool:{3}{B}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+In the Pale Moonlight
+#the opponent's pick
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:In the Pale Moonlight
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

@@ -1,0 +1,21 @@
+#Academy Instructor (TRK, 0/3): a noncreature spell makes an Officer token; +1/+0 per Officer token. 1/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Academy Instructor
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Academy Instructor,*
+graveyard:Divination
+pt:Academy Instructor=1/3
+hand:*,*
+library:*
+[PLAYER2]
+[END]

@@ -20825,29 +20825,6 @@ mana={B}
 type=Instant
 [/card]
 [card]
-name=Amok Time
-text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Target creature you control fights up to one target creature an opponent controls. -- II — You gain 3 life. -- III — Return target creature card from your graveyard to your hand.
-mana={2}{G}
-type=Enchantment
-subtype=Saga
-[/card]
-[card]
-name=Bat'leth
-text=When this Equipment enters, target creature an opponent controls gets -2/-2 until end of turn. -- Equipped creature gets +2/+0. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-mana={2}{B}
-type=Artifact
-subtype=Equipment
-[/card]
-[card]
-name=Battle-Scarred Survivalist
-text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever another creature dies, put a +1/+1 counter on this creature. This ability triggers only once each turn.
-mana={1}{B}
-type=Creature
-subtype=Klingon Scout
-power=1
-toughness=1
-[/card]
-[card]
 name=Beckett Mariner, Impetuous Ensign
 text=First strike -- Reckless Behavior — Whenever Beckett Mariner becomes tapped, put a promotion counter on her. Then if there are three or more promotion counters on her, remove those counters and she deals 2 damage to each opponent.
 mana={1}{R}
@@ -20965,40 +20942,9 @@ mana={3}{U}
 type=Instant
 [/card]
 [card]
-name=Hive Mind Coprocessor
-text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."
-mana={4}{B}
-type=Artifact Creature
-subtype=Borg
-power=4
-toughness=4
-[/card]
-[card]
 name=I'm a Doctor, Not a . . .
 text=Put a +1/+1 counter on target creature you control. Untap it. Until end of turn, it gets +1/+1 and becomes a Doctor. (It loses all other creature types.)
 mana={G}
-type=Instant
-[/card]
-[card]
-name=In the Pale Moonlight
-text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I — Each opponent sacrifices a nontoken creature of their choice. -- II — Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- III — You may sacrifice an artifact or creature. If you do, create two 2/2 black Romulan creature tokens.
-mana={3}{B}{B}
-type=Enchantment
-subtype=Saga
-[/card]
-[card]
-name=Organic Avulsion Unit
-text={2}: Artifact creatures you control gain menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
-mana={2}{B}
-type=Artifact Creature
-subtype=Borg
-power=2
-toughness=3
-[/card]
-[card]
-name=Perils of the Past
-text=Choose one — -- • Use the Relic — Target creature gets +3/+2 until end of turn. -- • Destroy the Relic — Destroy target artifact.
-mana={1}{R}
 type=Instant
 [/card]
 [card]
@@ -21009,12 +20955,6 @@ type=Legendary Creature
 subtype=Human Officer
 power=2
 toughness=2
-[/card]
-[card]
-name=Resistance Is Futile
-text=Choose one — -- • Destroy target nonartifact creature. -- • Return target artifact creature card with mana value 3 or less from your graveyard to the battlefield.
-mana={1}{B}
-type=Sorcery
 [/card]
 [card]
 name=Rogue Artificial Intelligence

@@ -1,0 +1,36 @@
+#Year of Hell (TRK Saga): I, II, III - each player draws a card and takes 2. Through chapter III: both at 14,
+#each has drawn three extra (plus two turn draws), the Saga is sacrificed. Turn-passing as in dom_history_of_benalia_ch3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Year of Hell
+manapool:{1}{U}{R}
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+life:20
+[PLAYER2]
+library:Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant,Hill Giant
+life:20
+[DO]
+Year of Hell
+eot
+eot
+next
+next
+next
+eot
+eot
+next
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Year of Hell
+hand:*,*,*,*,*
+library:*,*,*
+life:14
+[PLAYER2]
+hand:*,*,*,*,*
+library:*,*,*
+life:14
+[END]

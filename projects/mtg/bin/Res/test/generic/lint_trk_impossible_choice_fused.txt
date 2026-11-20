@@ -1,0 +1,23 @@
+#Impossible Choice (TRK) Remain Fused: you draw two, each player loses 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Impossible Choice
+manapool:{2}{B}
+library:Forest,Forest,Forest
+life:20
+[PLAYER2]
+life:20
+[DO]
+Impossible Choice
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Impossible Choice
+hand:*,*
+library:*
+life:18
+[PLAYER2]
+life:18
+[END]

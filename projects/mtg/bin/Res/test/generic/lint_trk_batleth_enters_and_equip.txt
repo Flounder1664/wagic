@@ -1,0 +1,22 @@
+#Bat'leth (TRK): when it enters, -2/-2 to an opponent's creature (Grizzly Bears dies); equipped +2/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Bat'leth
+manapool:{4}{B}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Bat'leth
+Grizzly Bears
+Bat'leth
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Bat'leth
+pt:Hill Giant=5/3
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]

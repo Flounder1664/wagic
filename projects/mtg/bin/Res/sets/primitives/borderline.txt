@@ -155314,3 +155314,251 @@ subtype=Human Scientist
 power=3
 toughness=3
 [/card]
+[card]
+name=Amok Time
+#2026-11-19 Star Trek batch 6: written from existing working forms.
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=target(creature|mybattlefield) _FIGHT_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) life:3 controller
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) moveto(hand) target(creature|mygraveyard)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Target creature you control fights up to one target creature an opponent controls. -- II - You gain 3 life. -- III - Return target creature card from your graveyard to your hand.
+mana={2}{G}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Year of Hell
+#2026-11-19 Star Trek batch 6: written from existing working forms.
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=draw:1 controller && draw:1 opponent && damage:2 controller && damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) draw:1 controller && draw:1 opponent && damage:2 controller && damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) draw:1 controller && draw:1 opponent && damage:2 controller && damage:2 opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I, II, III - Each player draws a card. This Saga deals 2 damage to each player.
+mana={1}{U}{R}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=In the Pale Moonlight
+#2026-11-19 Star Trek batch 6: written from existing working forms.
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=ability$!name(sacrifice) notaTarget(creature[-token]|myBattlefield) sacrifice!$ opponent
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) _CLUE_
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may name(Sacrifice for two Romulans) target(*[artifact;creature]|mybattlefield) sacrifice && create(Romulan:creature Romulan:2/2:black)*2
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Each opponent sacrifices a nontoken creature of their choice. -- II - Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- III - You may sacrifice an artifact or creature. If you do, create two 2/2 black Romulan creature tokens.
+mana={3}{B}{B}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Balance of Terror
+#2026-11-19 Star Trek batch 6: written from existing working forms.
+auto=counter(0/0,1,Lore)
+auto=@each my firstmain:counter(0/0,1,Lore)
+auto=may destroy target(other artifact,enchantment)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.2.Lore}=) may (blink)ueot target(other *|myBattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) may (blink)ueot target(other *|myBattlefield)
+auto=@counteradded(0/0,1,Lore) from(this):this(counter{0/0.3.Lore}) sacrifice(this)
+text=(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.) -- I - Destroy up to one other target artifact or enchantment. -- II, III - Exile up to one other target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+mana={2}{W}
+type=Enchantment
+subtype=Saga
+[/card]
+[card]
+name=Bat'leth
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto={2}:equip
+auto=teach(creature) 2/0
+auto=target(creature|opponentbattlefield) -2/-2 ueot
+text=When this Equipment enters, target creature an opponent controls gets -2/-2 until end of turn. -- Equipped creature gets +2/+0. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+mana={2}{B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Battle-Scarred Survivalist
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+abilities=menace
+auto=@movedTo(other creature|graveyard) from(battlefield) turnlimited:counter(1/1) all(this)
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever another creature dies, put a +1/+1 counter on this creature. This ability triggers only once each turn.
+mana={1}{B}
+type=Creature
+subtype=Klingon Scout
+power=1
+toughness=1
+[/card]
+[card]
+name=Commander Raffi Musiker
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Exile a card from a graveyard, gain 2) target(*|graveyard) moveto(exile) && life:2 controller
+auto=choice name(Investigate, lose 2) _CLUE_ && life:-2 controller
+text=When Commander Musiker enters, choose one - -- * Exile up to one target card from a graveyard. You gain 2 life. -- * Investigate. You lose 2 life. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=2
+[/card]
+[card]
+name=D'Ghor Bloodletter
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(All other creatures get -1/-1) all(other creature) -1/-1 ueot
+auto=choice name(Each player sacrifices a creature) ability$!name(sacrifice) notaTarget(creature|myBattlefield) sacrifice!$ opponent && ability$!name(sacrifice) notaTarget(creature|myBattlefield) sacrifice!$ controller
+text=When this creature enters, choose one - -- * All other creatures get -1/-1 until end of turn. -- * Each player sacrifices a creature of their choice.
+mana={2}{B}
+type=Creature
+subtype=Klingon Assassin
+power=2
+toughness=2
+[/card]
+[card]
+name=Grand Nagus Zek
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=foreach(treasure|mybattlefield) 1/1
+auto=@movedTo(other creature|graveyard) from(battlefield) turnlimited:_TREASURE_
+text=Grand Nagus Zek gets +1/+1 for each Treasure you control. -- Whenever another creature dies, create a Treasure token. This ability triggers only once each turn. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={2}{B}
+type=Legendary Creature
+subtype=Ferengi Noble
+power=1
+toughness=1
+[/card]
+[card]
+name=Gul Dukat, Colonial Prefect
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+abilities=menace
+auto=@each end:life:oplifelost controller && life:-oplifelost opponent
+text=Menace -- At the beginning of each end step, each opponent loses life equal to the life that player lost this turn. You gain life equal to the life lost this way. (Damage causes loss of life.)
+mana={4}{B}{B}{B}
+type=Legendary Creature
+subtype=Cardassian Rogue
+power=6
+toughness=6
+[/card]
+[card]
+name=Hive Mind Coprocessor
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=lord(creature[artifact]|mybattlefield) transforms((,newability[@combatdamaged(player) from(this):pay({L:1}) draw:1 controller]))
+text=Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."
+mana={4}{B}
+type=Artifact Creature
+subtype=Borg
+power=4
+toughness=4
+[/card]
+[card]
+name=Impossible Choice
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Surgical Separation - destroy, its controller gets two Officers) target(creature) destroy && token(Officer,creature Officer,1/1,red)*2 targetcontroller
+auto=choice name(Remain Fused - draw two, each player loses 2) draw:2 controller && life:-2 controller && life:-2 opponent
+text=Choose one - -- * Surgical Separation - Destroy target creature. Its controller creates two 1/1 red Officer creature tokens. -- * Remain Fused - You draw two cards and each player loses 2 life.
+mana={2}{B}
+type=Instant
+[/card]
+[card]
+name=Organic Avulsion Unit
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto={2}:all(creature[artifact]|mybattlefield) menace ueot
+text={2}: Artifact creatures you control gain menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
+mana={2}{B}
+type=Artifact Creature
+subtype=Borg
+power=2
+toughness=3
+[/card]
+[card]
+name=Resistance Is Futile
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Destroy target nonartifact creature) destroy target(creature[-artifact])
+auto=choice name(Return an artifact creature, mana value 3 or less) target(creature[artifact&manacost<=3]|mygraveyard) moveTo(mybattlefield)
+text=Choose one - -- * Destroy target nonartifact creature. -- * Return target artifact creature card with mana value 3 or less from your graveyard to the battlefield.
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Stray from History
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Rewrite the Past) target(<upto:2>*[creature;spacecraft]|mygraveyard) moveto(hand)
+auto=choice name(Repair the Timeline) moveto(exile) notaTarget(*[-land]|opponenthand)
+text=Choose one - -- * Rewrite the Past - Return one or two target creature and/or Spacecraft cards from your graveyard to your hand. -- * Repair the Timeline - Target opponent reveals their hand. You choose a nonland card from it. Exile that card.
+mana={2}{B}
+type=Sorcery
+[/card]
+[card]
+name=Test of Loyalty
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Plain, Simple Garak) target(*|graveyard) moveTo(exile) && draw:1 controller
+auto=choice name(Of the Obsidian Order) moveto(hand) target(creature|mygraveyard)
+text=Choose one - -- * Plain, Simple Garak - Exile target card from a graveyard. Draw a card. -- * Of the Obsidian Order - Return target creature card from your graveyard to your hand.
+mana={B}
+type=Sorcery
+[/card]
+[card]
+name=Academy Instructor
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=foreach(creature[officer&token]|mybattlefield) 1/0
+auto=@movedto(*[-creature]|mystack):create(Officer:creature Officer:1/1:red)
+text=This creature gets +1/+0 for each Officer token you control. -- Whenever you cast a noncreature spell, create a 1/1 red Officer creature token.
+mana={2}{R}
+type=Creature
+subtype=Bolian Officer
+power=0
+toughness=3
+[/card]
+[card]
+name=Boarding Action
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=create(Klingon Warrior:creature Klingon Warrior:2/1:red:haste)
+flashback={2}{R}{H(creature|mybattlefield)}
+text=Create a 2/1 red Klingon Warrior creature token with haste. -- Beam me up {2}{R} (You may cast this card from your graveyard for {2}{R} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Captain Michael Burnham
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+abilities=trample
+auto=_LANDFALL_damage:1 opponent
+auto=@movedTo(land|myBattlefield) restriction{thisturn(land[fresh]|myBattlefield)~equalto~2}:counter(1/1) all(this)
+text=Trample -- Landfall - Whenever a land you control enters, Captain Burnham deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, put a +1/+1 counter on Captain Burnham.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Officer
+power=3
+toughness=3
+[/card]
+[card]
+name=Dahar Master
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=may name(Sacrifice another nonland permanent) notaTarget(other *[-land]|mybattlefield) sacrifice and!( damage:2 target(anytarget) )!
+text=When this creature enters, you may sacrifice another nonland permanent. When you do, this creature deals 2 damage to any target.
+mana={3}{R}
+type=Creature
+subtype=Klingon Warrior
+power=4
+toughness=3
+[/card]
+[card]
+name=Encounter the Unknown
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Come in Peace) all(*[zpos<=2]|mylibrary) moveto(exile) and!( transforms((,newability[canplayfromexile uent])) uent )!
+auto=choice name(Shoot to Kill) damage:2 all(creature) && damage:2 all(player)
+text=Choose one - -- * Come in Peace - Exile the top two cards of your library. Until the end of your next turn, you may play those cards. -- * Shoot to Kill - Encounter the Unknown deals 2 damage to each creature and each player.
+mana={1}{R}{R}
+type=Instant
+[/card]
+[card]
+name=Perils of the Past
+#2026-11-19 Star Trek batch 7: written from existing working forms.
+auto=choice name(Use the Relic) target(creature) 3/2 ueot
+auto=choice name(Destroy the Relic) destroy target(artifact)
+text=Choose one - -- * Use the Relic - Target creature gets +3/+2 until end of turn. -- * Destroy the Relic - Destroy target artifact.
+mana={1}{R}
+type=Instant
+[/card]

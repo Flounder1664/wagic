@@ -1,0 +1,20 @@
+#Impossible Choice (TRK) Surgical Separation: destroy target creature; its controller makes two Officers.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Impossible Choice
+manapool:{2}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Impossible Choice
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Impossible Choice
+[PLAYER2]
+inplay:*,*
+graveyard:Hill Giant
+[END]

@@ -1,0 +1,20 @@
+#Resistance Is Futile (TRK): return an artifact creature card with mana value 3 or less. Ornithopter (0)
+#comes back; the choice must need BOTH artifact and mana value <= 3 (Grizzly Bears is not offered).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Resistance Is Futile
+manapool:{1}{B}
+graveyard:Ornithopter,Grizzly Bears
+[PLAYER2]
+[DO]
+Resistance Is Futile
+choice 1
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Grizzly Bears,Resistance Is Futile
+[PLAYER2]
+[END]

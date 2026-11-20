@@ -1,0 +1,22 @@
+#Grand Nagus Zek (TRK, 1/1): +1/+1 per Treasure; another creature dying makes a Treasure (once a turn).
+#Lightning Bolt kills Grizzly Bears: a Treasure, Zek is 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grand Nagus Zek
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grand Nagus Zek,*
+graveyard:Lightning Bolt
+pt:Grand Nagus Zek=2/2
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]
