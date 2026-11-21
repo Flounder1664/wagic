@@ -52,4 +52,5 @@ Device serials:
 2026-11-20 182f7acd8 (wagic-v146-windows)  device=Windows result=build-pass - v145 Release/Win32 rebuilds, 0 errors; Wagic.exe + Wagic-testsuite.exe deployed to G: (pdiffnamedlands/pfederation counts). Both launched side by side for 45 s on the patched core.zip before the swap, no crash logged; gameplay not checked. Android not rebuilt.
 2026-11-20 921ad3a7d (wagic-v146-windows)  device=Windows result=core-zip-patch - 4 member(s): sets/TRC/_cards.dat, sets/TRK/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611201928.old; read back ok. Star Trek batches 6-7: 4 Sagas, 18 medium cards. Collection chain NOT run yet: 14 new ids.
 2026-11-21 b659c2b4c (wagic-v146-windows)  device=Windows result=core-zip-patch - 3 member(s): sets/TRK/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611211643.old; read back ok. Collection chain NOT run yet: 28 new ids.
+2026-11-21 7c33e4a45 (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611211817.old; read back ok.
 ```
