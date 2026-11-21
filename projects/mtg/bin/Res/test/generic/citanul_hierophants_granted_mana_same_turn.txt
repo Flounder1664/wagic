@@ -1,0 +1,22 @@
+#Citanul Hierophants: the turn it is cast, Grizzly Bears taps for {G} with the granted ability (engine fix
+#2026-11-21: a lord-granted {T} cost checked the lord's summoning sickness, not the creature's).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Citanul Hierophants
+manapool:{3}{G}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Citanul Hierophants
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Citanul Hierophants
+library:*,*
+manapool:{G}
+tappedinplay:1
+[PLAYER2]
+[END]

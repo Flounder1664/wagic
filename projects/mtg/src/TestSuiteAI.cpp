@@ -1585,7 +1585,18 @@ void TestSuiteGame::initGame()
             MTGGameZone * zone = playerZones[j];
             for (size_t k = 0; k < loadedPlayerZones[j]->cards.size(); k++)
             {
-                MTGCardInstance * card = Rules::getCardByMTGId(observer, loadedPlayerZones[j]->cards[k]->getId());
+                MTGCardInstance * card = NULL;
+                if (zone != p->game->library)
+                {
+                    //Take it off the TOP of this player's library (see buildDeck), so a card that
+                    //is also listed in library: never takes one of the library's own copies.
+                    int wanted = loadedPlayerZones[j]->cards[k]->getId();
+                    for (int c = p->game->library->nb_cards - 1; c >= 0 && !card; --c)
+                        if (p->game->library->cards[c] && p->game->library->cards[c]->getMTGId() == wanted)
+                            card = p->game->library->cards[c];
+                    if (!card)
+                        card = Rules::getCardByMTGId(observer, wanted);
+                }
                 if (card && zone != p->game->library)
                 {
                     if (zone == p->game->inPlay && attachSpecFor(initState.players[i], card))
@@ -1690,8 +1701,13 @@ MTGPlayerCards * TestSuiteGame::buildDeck(Player* player, int playerId)
 
     if(initState.players.size() > (size_t)playerId)
     {
-        MTGGameZone * loadedPlayerZones[] = { initState.players[playerId]->game->graveyard,
-            initState.players[playerId]->game->library,
+        //The library's own cards go in FIRST, so they sit at the bottom in their listed order;
+        //initGame then takes every other zone's cards off the top, searching down. With the
+        //graveyard first and a bottom-up search, an inplay Forest took the library's bottom
+        //Forest and left its own copy on top: Branching Timeline revealed three basics instead of
+        //the listed top three, in the harness and in John's scenario queue (2026-11-21).
+        MTGGameZone * loadedPlayerZones[] = { initState.players[playerId]->game->library,
+            initState.players[playerId]->game->graveyard,
             initState.players[playerId]->game->hand,
             initState.players[playerId]->game->removedFromGame,
             initState.players[playerId]->game->commandzone,

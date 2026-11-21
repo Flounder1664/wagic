@@ -1,0 +1,23 @@
+#Rok-Tahk, Budding Scientist (TRK): cast this turn, Grizzly Bears (already in play) taps for {G}{G} at once.
+#The granted {T} used to check and tap the lord instead (engine fix 2026-11-21, MTGAbility::propagateSource):
+#Rok-Tahk stays untapped, only the Bears is tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:706211
+manapool:{4}{G}{G}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+706211
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,706211,Murf
+library:*,*
+manapool:{G}{G}
+tappedinplay:1
+[PLAYER2]
+[END]

@@ -7742,6 +7742,18 @@ void MTGAbility::propagateSource(MTGAbility * a, MTGCardInstance * newSource)
     if (!a || !newSource)
         return;
     a->source = newSource;
+    //The cost's extra costs ({T}, sacrifice this...) carry their own source, set when the
+    //ability was parsed - the lord's card. Left alone, a lord-granted "{T}: Add {G}{G}"
+    //(Rok-Tahk, Citanul Hierophants) checked the LORD for tapped/summoning sickness, so it
+    //could not be used the turn the lord arrived, and paying it tapped the lord.
+    ManaCost * cost = a->getCost();
+    if (cost && cost->extraCosts)
+    {
+        cost->extraCosts->source = newSource;
+        for (size_t i = 0; i < cost->extraCosts->costs.size(); ++i)
+            if (cost->extraCosts->costs[i])
+                cost->extraCosts->costs[i]->setSource(newSource);
+    }
     //Wrappers (GenericActivatedAbility & co) hold the real effect nested
     //inside; resolve() forwards target but reads source from the child.
     if (NestedAbility * na = dynamic_cast<NestedAbility *>(a))

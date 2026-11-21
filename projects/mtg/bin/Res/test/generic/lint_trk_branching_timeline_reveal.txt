@@ -1,0 +1,26 @@
+#Branching Timeline (TRK): Forest, Island, Plains = 3 names, so reveal the top 3 (Grizzly Bears, Hill Giant, Shock;
+#the library is listed bottom first). The two permanents enter tapped, Shock goes to the bottom.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Island,Plains
+hand:Branching Timeline
+library:Forest,Island,Plains,Shock,Hill Giant,Grizzly Bears
+manapool:{6}{G}{G}
+[PLAYER2]
+[DO]
+Branching Timeline
+choice 0
+Grizzly Bears
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,Grizzly Bears,Hill Giant
+graveyard:Branching Timeline
+library:*,*,*,Shock
+tappedinplay:2
+[PLAYER2]
+[END]
