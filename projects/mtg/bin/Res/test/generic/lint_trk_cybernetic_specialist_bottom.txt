@@ -1,0 +1,18 @@
+#Cybernetic Specialist (TRK): {1}, tap - Hill Giant from the graveyard to the bottom of the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cybernetic Specialist
+graveyard:Hill Giant
+manapool:{1}
+[PLAYER2]
+[DO]
+Cybernetic Specialist
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cybernetic Specialist
+library:Hill Giant
+[PLAYER2]
+[END]

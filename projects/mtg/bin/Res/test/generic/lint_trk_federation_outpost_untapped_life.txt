@@ -1,0 +1,19 @@
+#Federation Outpost (TRK): two other lands, so it enters untapped and you choose - gain 2 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest
+hand:Federation Outpost
+life:20
+[PLAYER2]
+[DO]
+Federation Outpost
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,Federation Outpost
+tappedinplay:0
+life:22
+[PLAYER2]
+[END]

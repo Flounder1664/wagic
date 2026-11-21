@@ -1,0 +1,24 @@
+#Kirk, Commanding Officer (TRK): attacking with total power 9 exiles the top card (Hill Giant) to play this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706243,Craw Wurm
+library:Ornithopter,Hill Giant
+[PLAYER2]
+life:20
+[DO]
+next
+next
+706243
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:706243,Craw Wurm
+exile:Hill Giant
+library:Ornithopter
+[PLAYER2]
+life:17
+[END]

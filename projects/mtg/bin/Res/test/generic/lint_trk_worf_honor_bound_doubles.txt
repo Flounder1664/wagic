@@ -1,0 +1,21 @@
+#Worf, Honor-Bound Warrior (TRK, 1/1): attacking with total power 10 (Craw Wurm at home) doubles him - 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706256,Craw Wurm,Hill Giant
+[PLAYER2]
+life:20
+[DO]
+next
+next
+706256
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:706256,Craw Wurm,Hill Giant
+[PLAYER2]
+life:18
+[END]

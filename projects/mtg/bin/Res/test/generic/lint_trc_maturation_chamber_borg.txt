@@ -1,0 +1,17 @@
+#Maturation Chamber (TRC): casting Ornithopter adds a charge counter; {4}, tap: one Borg.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maturation Chamber
+hand:Ornithopter
+manapool:{4}
+[PLAYER2]
+[DO]
+Ornithopter
+Maturation Chamber
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Maturation Chamber,Ornithopter,Borg
+[PLAYER2]
+[END]

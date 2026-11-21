@@ -1,0 +1,24 @@
+#Julian Bashir, Frontier Doctor (TRC, 1/1): attacks - return Llanowar Elves (mana value 1) to the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704021
+graveyard:Llanowar Elves
+[PLAYER2]
+life:20
+[DO]
+next
+next
+704021
+next
+Llanowar Elves
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:704021,Llanowar Elves
+[PLAYER2]
+life:19
+[END]

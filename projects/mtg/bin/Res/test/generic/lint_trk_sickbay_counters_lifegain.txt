@@ -1,0 +1,21 @@
+#Sickbay (TRK): Grizzly Bears enters (gain 1), then at combat X = 1 + 1 gained: two counters, Bears 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sickbay
+hand:Grizzly Bears
+manapool:{1}{G}
+life:20
+[PLAYER2]
+[DO]
+Grizzly Bears
+next
+Grizzly Bears
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Sickbay,Grizzly Bears
+pt:Grizzly Bears=4/4
+life:21
+[PLAYER2]
+[END]

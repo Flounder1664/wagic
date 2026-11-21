@@ -1,0 +1,18 @@
+#Federation Outpost (TRK): only one other land - it enters tapped and there is no mode (life stays 20).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest
+hand:Federation Outpost
+life:20
+[PLAYER2]
+[DO]
+Federation Outpost
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,Federation Outpost
+tappedinplay:1
+life:20
+[PLAYER2]
+[END]

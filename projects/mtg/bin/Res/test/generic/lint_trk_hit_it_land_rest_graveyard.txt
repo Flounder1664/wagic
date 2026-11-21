@@ -1,0 +1,23 @@
+#Hit It! (TRK): top five - Evolving Wilds onto the battlefield tapped, the other four into the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hit It!
+library:Ornithopter,Hill Giant,Hill Giant,Evolving Wilds,Grizzly Bears,Hill Giant
+manapool:{1}{R}{G}
+[PLAYER2]
+[DO]
+Hit It!
+choice 0
+Evolving Wilds
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hit It!,Evolving Wilds
+tappedinplay:1
+graveyard:Hill Giant,Hill Giant,Grizzly Bears,Hill Giant
+library:Ornithopter
+[PLAYER2]
+[END]

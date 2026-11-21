@@ -1,0 +1,19 @@
+#Join the Collective (TRC): destroys three creatures, two of them nonartifact (Ornithopter is an artifact) - two Borg.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Join the Collective
+manapool:{5}{W}{W}
+[PLAYER2]
+inplay:Hill Giant,Ornithopter
+[DO]
+Join the Collective
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Borg,Borg
+graveyard:Grizzly Bears,Join the Collective
+[PLAYER2]
+graveyard:Hill Giant,Ornithopter
+[END]

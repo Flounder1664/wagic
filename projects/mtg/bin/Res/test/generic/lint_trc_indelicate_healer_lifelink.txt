@@ -1,0 +1,17 @@
+#Indelicate Healer (TRC, a Klingon Warrior): when it enters, your creatures gain lifelink - Grizzly Bears has it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Indelicate Healer
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Indelicate Healer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Indelicate Healer
+type:Grizzly Bears=lifelink
+[PLAYER2]
+[END]

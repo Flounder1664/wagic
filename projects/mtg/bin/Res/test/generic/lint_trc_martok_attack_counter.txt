@@ -1,0 +1,24 @@
+#Martok, Hero of the Empire (TRC, 2/2): you attack - a +1/+1 counter on Martok himself, 3 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704023
+[PLAYER2]
+life:20
+[DO]
+next
+next
+704023
+next
+704023
+next
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:704023
+pt:Martok, Hero of the Empire=3/3
+[PLAYER2]
+life:17
+[END]

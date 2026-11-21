@@ -1,0 +1,21 @@
+#Korok, Liberated Rage (TRC, 2/2): attacking one opponent gives your creatures +1/+1 - 3 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:704022
+[PLAYER2]
+life:20
+[DO]
+next
+next
+704022
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:704022
+[PLAYER2]
+life:17
+[END]

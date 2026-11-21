@@ -1,0 +1,18 @@
+#Subspace Anomaly (TRK land): {4}{W}, tap, sacrifice - two Officers and a tapped New Planet.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Subspace Anomaly
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+Subspace Anomaly
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Officer,Officer,New Planet
+graveyard:Subspace Anomaly
+tappedinplay:1
+[PLAYER2]
+[END]

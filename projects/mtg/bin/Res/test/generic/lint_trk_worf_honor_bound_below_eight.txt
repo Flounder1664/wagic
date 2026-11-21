@@ -1,0 +1,21 @@
+#Worf, Honor-Bound Warrior (TRK): total power 4 (Hill Giant) - no doubling, 1 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706256,Hill Giant
+[PLAYER2]
+life:20
+[DO]
+next
+next
+706256
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:706256,Hill Giant
+[PLAYER2]
+life:19
+[END]

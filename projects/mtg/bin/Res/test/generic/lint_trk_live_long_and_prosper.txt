@@ -1,0 +1,20 @@
+#Live Long and Prosper (TRK): life 10 doubled to 20; two cards in hand, so draw two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Live Long and Prosper,Hill Giant,Hill Giant
+library:Ornithopter,Ornithopter,Ornithopter
+manapool:{5}{W}{U}
+life:10
+[PLAYER2]
+[DO]
+Live Long and Prosper
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*,*,*
+library:*
+graveyard:Live Long and Prosper
+life:20
+[PLAYER2]
+[END]

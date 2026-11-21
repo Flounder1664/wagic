@@ -1,0 +1,21 @@
+#Spatial Anomaly (TRK land): {4}{R}, tap, sacrifice - 2 damage kills Grizzly Bears; a tapped New Planet for you.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spatial Anomaly
+manapool:{4}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Spatial Anomaly
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:New Planet
+graveyard:Spatial Anomaly
+tappedinplay:1
+[PLAYER2]
+graveyard:Grizzly Bears
+[END]
