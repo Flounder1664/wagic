@@ -1,0 +1,20 @@
+#706204 (TRK): first main phase - a +1/+1 counter, then {G} for it.
+[INIT]
+UPKEEP
+[PLAYER1]
+inplay:706204
+library:Hill Giant,Hill Giant
+[PLAYER2]
+[DO]
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706204
+manapool:{G}
+pt:Jadzia Dax, Living Legacy=1/2
+hand:*
+library:*
+[PLAYER2]
+[END]

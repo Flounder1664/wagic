@@ -1,0 +1,25 @@
+#Targ Wrangler (TRK, 5/3 menace): it attacked, so at your end step you sacrifice a nonland permanent (Grizzly Bears).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Targ Wrangler,Grizzly Bears
+[PLAYER2]
+life:20
+[DO]
+next
+next
+Targ Wrangler
+next
+next
+next
+next
+next
+Grizzly Bears
+[ASSERT]
+END
+[PLAYER1]
+inplay:Targ Wrangler
+graveyard:Grizzly Bears
+[PLAYER2]
+life:15
+[END]

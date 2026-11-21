@@ -1,0 +1,19 @@
+#706209 (TRK): enters with a Food; eating it gains 3 life and puts a +1/+1 counter on Neelix.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:706209
+manapool:{1}{G}{2}
+life:20
+[PLAYER2]
+[DO]
+706209
+Food
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706209
+pt:Neelix, Moral Support=2/2
+life:23
+[PLAYER2]
+[END]

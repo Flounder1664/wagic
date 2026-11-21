@@ -1,0 +1,19 @@
+#706203 (TRK): +1/+1 counter and +1/+1 until end of turn - Grizzly Bears is 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:706203
+manapool:{G}
+[PLAYER2]
+[DO]
+706203
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:706203
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

@@ -1,0 +1,18 @@
+#Dominion Supervisor (TRK): enters, +1/+1 counter on target creature (Grizzly Bears).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Dominion Supervisor
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Dominion Supervisor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Dominion Supervisor
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

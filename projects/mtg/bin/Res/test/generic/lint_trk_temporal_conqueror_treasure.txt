@@ -1,0 +1,18 @@
+#Temporal Conqueror (TRK): no land among the milled cards, so a Treasure instead.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Temporal Conqueror
+library:Grizzly Bears,Hill Giant,Hill Giant,Hill Giant
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Temporal Conqueror
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Temporal Conqueror,Treasure
+graveyard:Hill Giant,Hill Giant,Hill Giant
+library:Grizzly Bears
+[PLAYER2]
+[END]

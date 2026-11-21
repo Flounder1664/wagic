@@ -153668,7 +153668,11 @@ subtype=Equipment
 [card]
 name=New Planet
 grade=borderline
-missing={T}: Add one mana of any color.
+auto={T}:Add{W}
+auto={T}:Add{U}
+auto={T}:Add{B}
+auto={T}:Add{R}
+auto={T}:Add{G}
 text={T}: Add one mana of any color.
 type=Land
 subtype=Planet
@@ -155561,4 +155565,380 @@ auto=choice name(Destroy the Relic) destroy target(artifact)
 text=Choose one - -- * Use the Relic - Target creature gets +3/+2 until end of turn. -- * Destroy the Relic - Destroy target artifact.
 mana={1}{R}
 type=Instant
+[/card]
+[card]
+name=Planetary Bombardment
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+target=creature
+auto=if morbid then damage:4
+auto=ifnot morbid then damage:2
+text=Planetary Bombardment deals 2 damage to target creature. Planetary Bombardment deals 4 damage to that creature instead if a creature died this turn.
+mana={R}
+type=Sorcery
+[/card]
+[card]
+name=Savvy Profiteer
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto={T}:Add{R}
+auto={3}{T}:_TREASURE_
+text={T}: Add {R}. -- {3}, {T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+mana={1}{R}
+type=Creature
+subtype=Ferengi Rogue
+power=2
+toughness=1
+[/card]
+[card]
+name=Silicate Surveyor
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=reach
+auto=_IMPULSEUENT_
+text=Reach -- When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+mana={4}{R}
+type=Creature
+subtype=Tholian Scout
+power=4
+toughness=4
+[/card]
+[card]
+name=Starfleet Security
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=haste
+auto=@movedTo(this|graveyard) from(battlefield) restriction{myturnonly}:_CLUE_
+text=Haste -- When this creature dies during your turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+mana={R}
+type=Creature
+subtype=Human Officer
+power=1
+toughness=1
+[/card]
+[card]
+name=Targ Wrangler
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=menace
+auto=@combat(attacking) source(this) turnlimited:transforms((,newability[@each my end:ability$!name(sacrifice) notaTarget(*[-land]|myBattlefield) sacrifice!$ controller])) ueot
+text=Menace (This creature can't be blocked except by two or more creatures.) -- At the beginning of your end step, if this creature attacked this turn, sacrifice a nonland permanent.
+mana={2}{R}
+type=Creature
+subtype=Klingon Warrior
+power=5
+toughness=3
+[/card]
+[card]
+name=Test of Identity
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=choice name(I Am Klingon) target(creature[klingon]) transforms((,newability[1/1],double strike)) ueot
+auto=choice name(I Am Starfleet) reject notaTarget(*|myhand) and!(draw:2 controller)!
+text=Choose one - -- * I Am Klingon - Target Klingon gets +1/+1 and gains double strike until end of turn. -- * I Am Starfleet - Discard a card. If you do, draw two cards.
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Transporter Malfunction
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+target=anytarget
+auto=damage:3
+flashback={3}{R}{R}{R}{H(creature|mybattlefield)}
+text=Transporter Malfunction deals 3 damage to any target. -- Beam me up {3}{R}{R}{R} (You may cast this card from your graveyard for {3}{R}{R}{R} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={1}{R}
+type=Sorcery
+[/card]
+[card]
+name=Worf, Intelligence Contractor
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=target(<upto:1>creature[manacost<=3]|opponentbattlefield) moveto(mybattlefield) and!(transforms((Warrior,newability[@next end:moveTo(previousbattlefield)],newability[untap],haste)) ueot)!
+text=When Worf enters, for each opponent, gain control of up to one target creature that player controls with mana value 3 or less until end of turn. Untap those creatures. Until end of turn, they become Warriors in addition to their other types and gain haste.
+mana={2}{R}
+type=Legendary Creature
+subtype=Klingon Warrior Spy
+power=3
+toughness=2
+[/card]
+[card]
+name=Adversary by Algorithm
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=token(Illusion,Artifact Creature Illusion,3/3)
+flashback={3}{G}{H(creature|mybattlefield)}
+text=Create a 3/3 colorless Illusion artifact creature token. -- Beam me up {3}{G} (You may cast this card from your graveyard for {3}{G} if you also return a creature you control to its owner's hand. Then exile this spell.)
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Branching Timeline
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=name(Reveal) reveal:pdiffnamedlands optionone name(Put permanents onto the battlefield tapped) target(<anyamount>*[-instant&-sorcery]|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo choice name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+text=Strange new worlds - Reveal the top X cards of your library, where X is the number of differently named lands you control. Put all permanent cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.
+mana={6}{G}{G}
+type=Sorcery
+[/card]
+[card]
+name=Captain Pike, Fullness of Time
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=showfromtoplibrary,canplaylandlibrarytop
+anyzone=pdiffnamedlands/pdiffnamedlands cdaactive
+text=Strange new worlds - Captain Pike's power and toughness are each equal to the number of differently named lands you control. -- You may look at the top card of your library any time. -- You may play lands from the top of your library.
+mana={1}{G}{G}
+type=Legendary Creature
+subtype=Human Officer Scout
+power=*
+toughness=*
+[/card]
+[card]
+name=Dathon and Picard at El-Adrel
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=choice name(Temba, His Arms Wide) target(creature) transforms((,newability[3/3],trample)) ueot
+auto=choice name(Shaka, When the Walls Fell) ability$!name(sacrifice) notaTarget(artifact[-token],enchantment[-token]|myBattlefield) sacrifice!$ opponent
+text=Choose one - -- * Temba, His Arms Wide - Target creature gets +3/+3 and gains trample until end of turn. -- * Shaka, When the Walls Fell - Each opponent sacrifices a nontoken artifact or enchantment of their choice.
+mana={2}{G}
+type=Instant
+[/card]
+[card]
+name=David and Carol Marcus, Creators
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=token(-706527) and!( tap(noevent) )!
+text=When David and Carol Marcus enter, create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Scientist
+power=1
+toughness=3
+[/card]
+[card]
+name=Dominion Assault Force
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=vigilance
+auto=choice name(Exile target card from a graveyard) target(*|graveyard) moveTo(exile)
+auto=choice name(Surveil 1) _SURVEIL1_
+text=Vigilance -- When this creature enters, choose one - -- * Exile target card from a graveyard. -- * Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={3}{G}
+type=Creature
+subtype=Jem'Hadar Warrior
+power=4
+toughness=4
+[/card]
+[card]
+name=Dominion Supervisor
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=target(creature) counter(1/1)
+auto=lord(creature[counter{any}]|mybattlefield) trample
+text=When this creature enters, put a +1/+1 counter on target creature. -- Creatures you control with counters on them have trample.
+mana={2}{G}
+type=Creature
+subtype=Vorta Doctor
+power=3
+toughness=1
+[/card]
+[card]
+name=Dr. Joseph M'Benga
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=lord(other creature[counter{any}]|mybattlefield) hexproof
+auto=@totalcounteradded(any) from(creature|myBattlefield) duplicate(all) except(*|opponentzones):ability$!name(Double the counters) donothing!$ controller
+text=Other creatures you control with counters on them have hexproof. -- If you would put one or more counters on a creature you control, put twice that many of each of those kinds of counters on that creature instead.
+mana={2}{G}{G}
+type=Legendary Creature
+subtype=Human Doctor
+power=3
+toughness=3
+[/card]
+[card]
+name=Hologram Stalker
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=target(*[-instant&-sorcery]|mygraveyard) moveto(hand)
+auto=@movedTo(*|hand,library,battlefield,exile,stack) from(mygraveyard) turnlimited:token(Illusion,Artifact Creature Illusion,3/3)
+text=When this creature enters, return target permanent card from your graveyard to your hand. -- Whenever a card leaves your graveyard, create a 3/3 colorless Illusion artifact creature token. This ability triggers only once each turn.
+mana={4}{G}{G}
+type=Creature
+subtype=Hirogen Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=I'm a Doctor, Not a . . .
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+target=creature|myBattlefield
+auto=counter(1/1)
+auto=untap
+auto=transforms((removecreaturesubtypes)) ueot
+auto=transforms((Doctor)) ueot
+auto=1/1 ueot
+text=Put a +1/+1 counter on target creature you control. Untap it. Until end of turn, it gets +1/+1 and becomes a Doctor. (It loses all other creature types.)
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Jadzia Dax, Living Legacy
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=@each my firstmain:counter(1/1)
+auto=@counteradded(1/1) from(this):thisforeach(variable{hascntanycnt}>0) Add{G}
+autohand={2}{G}{D(this|myhand)}:name(Transfer Symbiont) counter(1/1,2) target(creature)
+text=At the beginning of your first main phase, put a +1/+1 counter on Jadzia Dax, then add an amount of {G} equal to the number of counters on her. -- Transfer Symbiont - {2}{G}, Discard this card: Put two +1/+1 counters on target creature.
+mana={1}{G}
+type=Legendary Creature
+subtype=Trill Scientist
+power=0
+toughness=1
+[/card]
+[card]
+name=Jake Sisko, War Correspondent
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=_LANDFALL_life:1 controller
+auto=@movedTo(land|myBattlefield) restriction{thisturn(land[fresh]|myBattlefield)~equalto~2}:_CLUE_
+text=Landfall - Whenever a land you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+mana={1}{G}
+type=Legendary Creature
+subtype=Human Citizen
+power=2
+toughness=2
+[/card]
+[card]
+name=MACO Strike Team
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=@targeted(creature|myBattlefield) from(*|opponentbattlefield,opponenthand,opponentstack,opponentgraveyard,opponentexile,opponentlibrary):token(-706506) and!( tap(noevent) )!
+text=Whenever a creature you control becomes the target of a spell or ability an opponent controls, create a tapped 1/1 red Officer creature token.
+mana={G}
+type=Creature
+subtype=Human Soldier
+power=2
+toughness=1
+[/card]
+[card]
+name=Neelix, Moral Support
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=token(-706523)
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1)
+text=When Neelix enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") -- Whenever you gain life, put a +1/+1 counter on Neelix.
+mana={1}{G}
+type=Legendary Creature
+subtype=Talaxian Advisor
+power=1
+toughness=1
+[/card]
+[card]
+name=Rok-Tahk, Budding Scientist
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=lord(creature|myBattlefield) {T}:Add{G}{G}
+auto=token(-706516)
+text=Creatures you control have "{T}: Add {G}{G}." -- When Rok-Tahk enters, create Murf, a legendary 0/1 green Ooze Slug creature token with indestructible.
+mana={4}{G}{G}
+type=Legendary Creature
+subtype=Brikar Scientist
+power=5
+toughness=5
+[/card]
+[card]
+name=Saru, Unthreatened
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+abilities=flash
+auto=target(other creature|mybattlefield) hexproof ueot
+text=Flash -- When Saru enters, another target creature you control gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+mana={2}{G}
+type=Legendary Creature
+subtype=Kelpien Officer
+power=3
+toughness=2
+[/card]
+[card]
+name=Saurian Explorer
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=_LANDFALL_2/2 ueot
+auto={6}:name(Create New Planet) token(-706527) and!( tap(noevent) )! asSorcery
+text=Landfall - Whenever a land you control enters, this creature gets +2/+2 until end of turn. -- {6}: Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color." Activate only as a sorcery.
+mana={3}{G}
+type=Creature
+subtype=Dinosaur Scout
+power=4
+toughness=3
+[/card]
+[card]
+name=Temporal Conqueror
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=deplete:3 controller && transforms((,newability[if type(land|mygraveyard)~morethan~0 then target(land|mygraveyard) moveto(hand) else _TREASURE_])) oneshot
+text=When this creature enters, mill three cards. Then return a land card from your graveyard to your hand. If you can't, create a Treasure token. (To mill three cards, put the top three cards of your library into your graveyard.)
+mana={2}{G}
+type=Creature
+subtype=Na'kuhl Warrior
+power=2
+toughness=3
+[/card]
+[card]
+name=Test of Courage
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=choice name(Alter the Past) target(*|graveyard) moveTo(exile) && life:2 controller
+auto=choice name(Obliterate the Transwarp Network) destroy target(artifact[manacost<=3],enchantment[manacost<=3])
+text=Choose one - -- * Alter the Past - Exile target card from a graveyard. You gain 2 life. -- * Obliterate the Transwarp Network - Destroy target artifact or enchantment with mana value 3 or less.
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Cleveland Booker, Empath
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=_LANDFALL_token(Worm,Creature Worm,2/2,red,green,cantblock)
+auto={8}:all(creature|myBattlefield) 2/0 ueot
+text=Landfall - Whenever a land you control enters, create a 2/2 red and green Worm creature token with "This token can't block." -- {8}: Creatures you control get +2/+0 until end of turn.
+mana={2}{R/G}{R/G}
+type=Legendary Creature
+subtype=Kwejian Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Daniels, Temporal Agent
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=target(creature|mygraveyard) moveto(hand)
+autograveyard={2}:name(Put on the bottom, gain 2) bottomoflibrary && life:2 controller
+text=When Daniels enters, return target creature card from your graveyard to your hand. -- {2}, Put this card from your graveyard on the bottom of your library: You gain 2 life.
+mana={2}{B/G}{B/G}
+type=Legendary Creature
+subtype=Human Advisor
+power=3
+toughness=1
+[/card]
+[card]
+name=The Doctor, EMH
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=choice name(Target a creature you control) target(creature|mybattlefield) transforms((,newability[counter(1/1)],newability[counter(1/1) all(creature[counter{any}]|mybattlefield)])) oneshot
+auto=choice name(Target a creature an opponent controls) target(creature|opponentbattlefield) transforms((,newability[counter(1/1)],newability[counter(1/1) all(creature[counter{any}]|opponentbattlefield)])) oneshot
+text=When The Doctor enters, put a +1/+1 counter on target creature. Then put a +1/+1 counter on each creature you control with a counter on it.
+mana={3}{G/W}{G/W}
+type=Legendary Artifact Creature
+subtype=Illusion Doctor
+power=3
+toughness=3
+[/card]
+[card]
+name=D'Vana Tendi, Optimistic Ensign
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto={T}:untap target(other *)
+auto={3}:_SURVEIL1_
+text={T}: Untap another target permanent. -- {3}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+mana={1}{G/U}{G/U}
+type=Legendary Creature
+subtype=Orion Scientist
+power=2
+toughness=4
+[/card]
+[card]
+name=Gowron, Eager for Battle
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=@movedTo(other creature|graveyard) from(battlefield):counter(1/1) all(this)
+auto={S(other creature[-klingon]|mybattlefield)}:trample ueot
+auto={S(other creature[klingon]|mybattlefield)}:trample ueot && draw:1 controller && life:-1 controller
+text=Whenever another creature dies, put a +1/+1 counter on Gowron. -- Sacrifice another creature: Gowron gains trample until end of turn. If you sacrificed a Klingon this way, you draw a card and lose 1 life.
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Klingon Warrior
+power=3
+toughness=3
+[/card]
+[card]
+name=Hemmer, Fixing What Is Broken
+#2026-11-19 Star Trek batch 8: written from existing working forms.
+auto=this(variable{controllerturn}>0) lord(*[spacecraft]|mybattlefield) hexproof
+auto=@tapped(this):_LOOT_
+text=During your turn, Spacecraft you control have hexproof. (They can't be the targets of spells or abilities your opponents control.) -- Whenever Hemmer becomes tapped, draw a card, then discard a card.
+mana={W}{U}
+type=Legendary Creature
+subtype=Aenar Artificer
+power=2
+toughness=3
 [/card]

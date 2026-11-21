@@ -1,0 +1,18 @@
+#Hologram Stalker (TRK): returns Hill Giant from the graveyard; a card left the graveyard, so a 3/3 Illusion.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hologram Stalker
+graveyard:Hill Giant
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+Hologram Stalker
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hologram Stalker,Illusion
+hand:Hill Giant
+[PLAYER2]
+[END]

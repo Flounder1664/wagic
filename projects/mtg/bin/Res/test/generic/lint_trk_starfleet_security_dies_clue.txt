@@ -1,0 +1,18 @@
+#Starfleet Security (TRK): dies during your turn (Shock), investigate: a Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Starfleet Security
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Starfleet Security
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Clue
+graveyard:Starfleet Security,Shock
+[PLAYER2]
+[END]

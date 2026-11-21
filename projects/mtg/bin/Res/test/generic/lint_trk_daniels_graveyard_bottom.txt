@@ -1,0 +1,18 @@
+#706232 (TRK): {2} from the graveyard - Daniels goes to the bottom of the library and you gain 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:706232
+library:Hill Giant
+manapool:{2}
+life:20
+[PLAYER2]
+[DO]
+706232
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+library:706232,Hill Giant
+life:22
+[PLAYER2]
+[END]

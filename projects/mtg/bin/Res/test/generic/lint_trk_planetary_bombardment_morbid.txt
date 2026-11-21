@@ -1,0 +1,20 @@
+#Planetary Bombardment (TRK): a creature died this turn (Shock on Grizzly Bears), so 4 damage kills Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock,Planetary Bombardment
+manapool:{R}{R}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+Shock
+Grizzly Bears
+Planetary Bombardment
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Shock,Planetary Bombardment
+[PLAYER2]
+graveyard:Grizzly Bears,Hill Giant
+[END]

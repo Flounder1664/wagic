@@ -1,0 +1,16 @@
+#Saurian Explorer (TRK): {6}: a tapped New Planet; the explorer itself stays untapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Saurian Explorer
+manapool:{6}
+[PLAYER2]
+[DO]
+Saurian Explorer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Saurian Explorer,New Planet
+tappedinplay:1
+[PLAYER2]
+[END]

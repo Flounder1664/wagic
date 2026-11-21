@@ -1,0 +1,20 @@
+#706234 (TRK): counter on Grizzly Bears, then another on each creature with a counter - Bears 2, Hill Giant 0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+hand:706234
+manapool:{3}{G}{G}
+[PLAYER2]
+[DO]
+706234
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant,706234
+pt:Grizzly Bears=4/4
+pt:Hill Giant=3/3
+[PLAYER2]
+[END]

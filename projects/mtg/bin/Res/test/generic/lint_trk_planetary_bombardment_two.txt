@@ -1,0 +1,19 @@
+#Planetary Bombardment (TRK): no creature died, 2 damage - Grizzly Bears dies, Hill Giant is not touched.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Planetary Bombardment
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears,Hill Giant
+[DO]
+Planetary Bombardment
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Planetary Bombardment
+[PLAYER2]
+inplay:Hill Giant
+graveyard:Grizzly Bears
+[END]

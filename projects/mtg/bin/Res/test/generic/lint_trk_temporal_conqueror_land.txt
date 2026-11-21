@@ -1,0 +1,20 @@
+#Temporal Conqueror (TRK): mill three (Hill Giant, Hill Giant, Forest), return the Forest.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Temporal Conqueror
+library:Hill Giant,Hill Giant,Forest,Hill Giant,Hill Giant
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Temporal Conqueror
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Temporal Conqueror
+hand:*
+graveyard:*,*
+library:*,*
+[PLAYER2]
+[END]

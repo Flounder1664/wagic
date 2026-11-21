@@ -1,0 +1,18 @@
+#706211 (TRK): makes Murf, a 0/1 (the granted {T}: Add {G}{G} is a hand-played scenario).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:706211,Llanowar Elves
+manapool:{4}{G}{G}
+[PLAYER2]
+[DO]
+706211
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706211,Murf,Grizzly Bears
+hand:Llanowar Elves
+pt:Murf=0/1
+[PLAYER2]
+[END]

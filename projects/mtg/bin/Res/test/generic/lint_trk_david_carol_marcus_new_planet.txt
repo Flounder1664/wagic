@@ -1,0 +1,16 @@
+#706193 (TRK): enters with a tapped New Planet land token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:706193
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+706193
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706193,New Planet
+tappedinplay:1
+[PLAYER2]
+[END]

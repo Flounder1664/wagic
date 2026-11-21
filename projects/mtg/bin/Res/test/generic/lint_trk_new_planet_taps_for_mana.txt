@@ -1,0 +1,18 @@
+#New Planet (TRK token): taps for any color - green pays for Grizzly Bears with the {1} in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:New Planet
+hand:Grizzly Bears
+manapool:{1}
+[PLAYER2]
+[DO]
+New Planet
+choice 4
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:New Planet,Grizzly Bears
+[PLAYER2]
+[END]

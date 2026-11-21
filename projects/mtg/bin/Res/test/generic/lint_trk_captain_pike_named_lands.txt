@@ -1,0 +1,15 @@
+#706188 (TRK, */*): Forest, Island, Island - two names, so 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Island,Island,706188
+[PLAYER2]
+[DO]
+
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,706188
+pt:Captain Pike, Fullness of Time=2/2
+[PLAYER2]
+[END]

@@ -1,4 +1,4 @@
-#Tagged-mana migration 2026-10-11. Unclaimed Territory: the first type offered (Ally) is chosen as it enters; its {G}
+#Tagged-mana migration 2026-10-11. Unclaimed Territory: Ally is chosen (menu index 1 since 2026-11-21: the list is alphabetical and Star Trek added Aenar; index-based, so new types can shift it) as it enters; its {G}
 #(menu: C W U R G B) and a Forest cast Oran-Rief Survivalist, an Ally.
 [INIT]
 FIRSTMAIN
@@ -10,7 +10,7 @@ life:20
 life:20
 [DO]
 Unclaimed Territory
-choice 0
+choice 1
 choice 3
 Unclaimed Territory
 choice 4

@@ -1,0 +1,17 @@
+#706180 (TRK): gain control of the opponent's Grizzly Bears (mana value 2) until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:706180
+manapool:{2}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+706180
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706180,Grizzly Bears
+[PLAYER2]
+[END]

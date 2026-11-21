@@ -1,0 +1,19 @@
+#Dr. Joseph M'Benga (TRK): Battlegrowth's one +1/+1 counter on Grizzly Bears becomes two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dr. Joseph M'Benga,Grizzly Bears
+hand:Battlegrowth
+manapool:{G}
+[PLAYER2]
+[DO]
+Battlegrowth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dr. Joseph M'Benga,Grizzly Bears
+graveyard:Battlegrowth
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

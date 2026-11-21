@@ -1,0 +1,22 @@
+#706237 (TRK): sacrifice Grizzly Bears (not a Klingon) - another creature died, so a +1/+1 counter; no card drawn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706237,Grizzly Bears
+library:Hill Giant
+life:20
+[PLAYER2]
+[DO]
+706237
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706237
+graveyard:Grizzly Bears
+pt:Gowron, Eager for Battle=4/4
+library:Hill Giant
+life:20
+[PLAYER2]
+[END]
