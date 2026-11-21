@@ -54,4 +54,5 @@ Device serials:
 2026-11-21 b659c2b4c (wagic-v146-windows)  device=Windows result=core-zip-patch - 3 member(s): sets/TRK/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611211643.old; read back ok. Collection chain NOT run yet: 28 new ids.
 2026-11-21 7c33e4a45 (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611211817.old; read back ok.
 2026-11-21 2d3421ba9 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (lord-granted tap costs, test loader library order); launched from G: 15s before replacing; harness 6/2462 known failures; backups .old.202611212149.
+2026-11-21 d0f0adb3d (wagic-v146-windows)  device=Windows result=core-zip-patch - 4 member(s): sets/TRC/_cards.dat, sets/TRK/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611212351.old; read back ok. Collection chain NOT run yet: 30 new ids.
 ```
