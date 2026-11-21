@@ -80545,6 +80545,8 @@ toughness=*
 [/card]
 [card]
 name=Old Rutstein
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the Treasure token shows the Crimson Vow Treasure art.
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the Insect token has its picture.
 #2026-11-16 tokens are made by id: they are created through the milled card, so an inline or by-name
 #token took that card's id and set and showed no picture (or another set's Treasure).
 auto=name(Mill a card) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[if cantargetcard(land|*) then token(-54111811)],newability[if cantargetcard(creature|*) then token(-541125)],newability[if cantargetcard(*[-land;-creature]|*) then token(-541117)])) oneshot )!
@@ -133260,6 +133262,7 @@ subtype=Room
 [/card]
 [card]
 name=Unholy Annex // Ritual Chamber
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the Demon token has its picture.
 #VERIFIED IN GAME 2026-11-16 (John, scenario queue): end step draw and life loss with no Demon; unlocking Ritual Chamber makes the 6/6 Demon and the end step then drains.
 other={3}{B}{B} name(Ritual Chamber)
 auto=@each my end restriction{compare(hascntdoor1)~equalto~1}:name(Unholy Annex draw) draw:1 controller
@@ -153545,6 +153548,7 @@ type=Sorcery
 [/card]
 [card]
 name=Professor Dellian Fel
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the -6 emblem has its picture.
 #VERIFIED IN GAME 2026-11-16 (John, scenario queue): loyalty menu lists all four abilities; -3 destroys the target.
 auto=counter(0/0,5,loyalty)
 auto={C(0/0,2,Loyalty)}:name(+2: You gain 3 life) life:3 controller
@@ -153570,6 +153574,7 @@ type=Instant
 [/card]
 [card]
 name=Screaming Nemesis
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the "Can't Gain Life" marker appears in the opponent's command zone.
 #VERIFIED IN GAME 2026-11-16 (John, scenario queue): damage menu offers the three choices; damage to the opponent lands.
 abilities=haste
 #cantgainlifeforgame (engine, 2026-11-15) sets a player flag that never resets, so the lock
@@ -154176,6 +154181,7 @@ toughness=1
 [/card]
 [card]
 name=Hologram Janeway
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): attacking with total power 8 or more puts a +1/+1 counter on a target.
 #2026-11-19 Star Trek batch 2: written from existing working forms.
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:counter(1/1) target(creature)
 text=Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on target creature.
@@ -154324,6 +154330,7 @@ toughness=1
 [/card]
 [card]
 name=Khaaaaaaaaaaaannn!
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): twice X damage, and exile instead of dying.
 #2026-11-19 Star Trek batch 2: written from existing working forms (twiceX as in Dawnglow Infusion).
 target=creature
 auto=exiledeath
@@ -154347,6 +154354,7 @@ toughness=4
 [/card]
 [card]
 name=La'An Noonien-Singh, Security
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): attacking with total power 8 or more stops a blocker.
 #2026-11-19 Star Trek batch 2: written from existing working forms.
 auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(powertotalinplay)~morethan~7}:target(creature) transforms((,cantblock)) ueot
 text=Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.
@@ -155792,6 +155800,7 @@ toughness=2
 [/card]
 [card]
 name=MACO Strike Team
+#VERIFIED IN GAME 2026-11-21 (John, scenario queue): the computer targets your creature with a spell; you get a tapped 1/1 red Officer.
 #2026-11-19 Star Trek batch 8: written from existing working forms.
 auto=@targeted(creature|myBattlefield) from(*|opponentbattlefield,opponenthand,opponentstack,opponentgraveyard,opponentexile,opponentlibrary):token(-706506) and!( tap(noevent) )!
 text=Whenever a creature you control becomes the target of a spell or ability an opponent controls, create a tapped 1/1 red Officer creature token.
