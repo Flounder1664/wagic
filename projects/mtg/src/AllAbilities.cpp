@@ -8479,6 +8479,13 @@ int MenuAbility::reactToChoiceClick(Targetable * object,int choice,int control)
         return 0;
     if(!abilities.size()||!triggered)
         return 0;
+    //A click on a menu already answered is ignored. A may menu keeps mClone after it is
+    //processed, so a second click with an index past the entries (the decline index of a
+    //one-entry may menu) skipped the clone loop and read abilities[choice] past the end - a
+    //segfault (Getaway Glamer's (blink)ueot mode in the harness, 2026-11-22). Do not reject an
+    //out-of-range index on a fresh menu: that is how a one-entry may menu is declined.
+    if (processed)
+        return 0;
     for(int i = 0;i < int(abilities.size());i++)
     {
 
