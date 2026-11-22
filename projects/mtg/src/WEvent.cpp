@@ -784,6 +784,17 @@ Targetable * WEventplayerShuffled::getTarget(Player * player)
     return NULL;
 }
 
+WEventClash::WEventClash(Player * player, bool won) :
+    player(player), won(won)
+{
+}
+
+Targetable * WEventClash::getTarget(Player * player)
+{
+    if (player) return player;
+    return NULL;
+}
+
 std::ostream& WEvent::toString(std::ostream& out) const
 {
     return out << "EVENT";

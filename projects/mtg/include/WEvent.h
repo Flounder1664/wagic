@@ -445,6 +445,15 @@ struct WEventplayerShuffled : public WEvent {
     virtual Targetable * getTarget(Player * player);
 };
 
+//clash event (CR 701.30): sent once per clashing player after the clash ends
+struct WEventClash : public WEvent {
+    WEventClash(Player * player, bool won);
+    Player * player;
+    bool won;
+    using WEvent::getTarget;
+    virtual Targetable * getTarget(Player * player);
+};
+
 //boast event
 struct WEventCardBoasted : public WEventCardUpdate {
     WEventCardBoasted(MTGCardInstance * card);

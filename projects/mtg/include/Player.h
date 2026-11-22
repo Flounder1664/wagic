@@ -54,6 +54,8 @@ public:
     int extraTurn;
     int drawCounter;
     int energyCount;
+    //1 if this player's most recent clash was a win, 0 if not (read as "lastclashwon").
+    int lastClashWon;
     int experienceCount;
     //DFT "speed": a per-player 0..4 counter. Start your engines! sets it to 1, it rises
     //by one the first time each turn an opponent loses life, and max speed means 4.

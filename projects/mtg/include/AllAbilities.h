@@ -838,6 +838,35 @@ public:
     }
 };
 
+//@clashedof(player) / @clashedfoeof(player) / @clashwonof(player): a player clashed (won only).
+class TrPlayerClashed: public Trigger
+{
+public:
+    bool thiscontroller, thisopponent, onlyWon;
+    TrPlayerClashed(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, bool once = false, bool thiscontroller = false, bool thisopponent = false, bool onlyWon = false) :
+        Trigger(observer, id, source, once, tc), thiscontroller(thiscontroller), thisopponent(thisopponent), onlyWon(onlyWon)
+    {
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        WEventClash * e = dynamic_cast<WEventClash *> (event);
+        if (!e) return 0;
+        if (onlyWon && !e->won) return 0;
+        if (!tc->canTarget(e->player)) return 0;
+        if (thiscontroller && e->player != source->controller())
+            return 0;
+        if (thisopponent && e->player == source->controller())
+            return 0;
+        return 1;
+    }
+
+    TrPlayerClashed * clone() const
+    {
+        return NEW TrPlayerClashed(*this);
+    }
+};
+
 class TrcardDrawn: public Trigger
 {
 public:
@@ -7834,6 +7863,37 @@ public:
     ~GenericPaidAbility();
 
 };
+//--------clash (CR 701.30)
+//"clash [repeat] winability X winabilityend loseability Y loseabilityend clashend".
+//Each player reveals their top card; you win if yours has the greater mana value. Each then
+//chooses top or bottom for their card (a menu for a clicking player, a heuristic for the AI),
+//then the clash ends with a WEventClash per player. X (won) or Y (lost) happens as the clash
+//resolves; with "repeat" it waits for the choices instead, and a win runs X and clashes again
+//(Hoarder's Greed). A branch starting "thiscard " acts on the clash's own card instead of its
+//target ("return CARDNAME to its owner's hand").
+class AAClash: public InstantAbility
+{
+public:
+    string branches;
+    bool repeat;
+    int placeFor;              //menu option: 0 = not an option, 1 = your card, 2 = theirs
+    bool placeBottom;          //menu option: where that card goes
+    MTGCardInstance * mine;
+    MTGCardInstance * theirs;
+    bool won;
+    int rounds;
+    string menuText;
+    AAClash(GameObserver* observer, int id, MTGCardInstance * source, Targetable * target, string branches, bool repeat);
+    int resolve();
+    void askPlacement(int who);
+    void place(MTGCardInstance * card, bool bottom);
+    bool aiPutsOnBottom(Player * p, MTGCardInstance * card);
+    void applyOutcome();
+    void finish();
+    const string getMenuText();
+    AAClash * clone() const;
+};
+
 //--------manifest
 class AManifest: public InstantAbility
 {

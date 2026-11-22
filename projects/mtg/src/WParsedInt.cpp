@@ -727,8 +727,13 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
     {
         intValue = (s == "pdnoncount")?target->controller()->nonCombatDamage:target->controller()->opponent()->nonCombatDamage;
     }
-    else if (s == "mypoisoncount" || s == "opponentpoisoncount")
+    else if (s == "mypoisoncount" || s == "opponentpoisoncount" || s == "lastclashwon")
     {
+        //lastclashwon: 1 if the source's controller won their most recent clash (folded into
+        //this branch so the else-if chain gets no deeper - MSVC C1061)
+        if (s == "lastclashwon")
+            intValue = card->controller()->lastClashWon;
+        else
         intValue = (s == "mypoisoncount")?target->controller()->poisonCount:target->controller()->opponent()->poisonCount;
     }
     else if(s == "lastrollresult" || s == "lastrollchoice" || s == "lastdiefaces" || s == "srclastrollresult" || s == "srclastrollchoice" || s == "srclastdiefaces")

@@ -812,6 +812,11 @@ void TestSuiteGame::assertGame()
                 if (!c) continue;
                 if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
             }
+            //A token named like a database card (Gilt-Leaf Ambush's Elf Warriors) has its own id,
+            //so the id never matches: fall back to the name.
+            for (int k = 0; mtgid && k < p->game->inPlay->nb_cards && !found; k++)
+                if (p->game->inPlay->cards[k] && p->game->inPlay->cards[k]->getLCName() == who)
+                    found = p->game->inPlay->cards[k];
             if (!found)
             {
                 sprintf(result, "<span class=\"error\">==pt: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
@@ -847,6 +852,11 @@ void TestSuiteGame::assertGame()
                 if (!c) continue;
                 if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
             }
+            //A token named like a database card (Gilt-Leaf Ambush's Elf Warriors) has its own id,
+            //so the id never matches: fall back to the name.
+            for (int k = 0; mtgid && k < p->game->inPlay->nb_cards && !found; k++)
+                if (p->game->inPlay->cards[k] && p->game->inPlay->cards[k]->getLCName() == who)
+                    found = p->game->inPlay->cards[k];
             if (!found)
             {
                 sprintf(result, "<span class=\"error\">==counter: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);
@@ -895,6 +905,11 @@ void TestSuiteGame::assertGame()
                 if (!c) continue;
                 if (mtgid ? (c->getMTGId() == mtgid) : (c->getLCName() == who)) found = c;
             }
+            //A token named like a database card (Gilt-Leaf Ambush's Elf Warriors) has its own id,
+            //so the id never matches: fall back to the name.
+            for (int k = 0; mtgid && k < p->game->inPlay->nb_cards && !found; k++)
+                if (p->game->inPlay->cards[k] && p->game->inPlay->cards[k]->getLCName() == who)
+                    found = p->game->inPlay->cards[k];
             if (!found)
             {
                 sprintf(result, "<span class=\"error\">==type: '%s' is not on player %i's battlefield==</span><br />", who.c_str(), i);

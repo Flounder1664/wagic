@@ -4182,6 +4182,208 @@ AASetNameChosen::~AASetNameChosen()
 
 //
 //choosing flip coin
+//clash (CR 701.30) - see AllAbilities.h
+static MTGCardInstance * latestInstance(MTGCardInstance * c)
+{
+    //a card that changed zones since the clash began (the spell itself, now in the graveyard;
+    //a creature it killed) lives on as the newest instance in its chain
+    int guard = 0;
+    while (c && c->next && guard++ < 50)
+        c = c->next;
+    return c;
+}
+
+AAClash::AAClash(GameObserver* observer, int id, MTGCardInstance * source, Targetable * _target, string branches, bool repeat) :
+    InstantAbility(observer, id, source), branches(branches), repeat(repeat), placeFor(0), placeBottom(false),
+    mine(NULL), theirs(NULL), won(false), rounds(0)
+{
+    target = _target;
+}
+
+bool AAClash::aiPutsOnBottom(Player * p, MTGCardInstance * card)
+{
+    int lands = p->game->inPlay->countByType("land");
+    if (card->hasType("land"))
+        return lands >= 6;
+    return card->getManaCost()->getConvertedCost() > lands + 2;
+}
+
+void AAClash::place(MTGCardInstance * card, bool bottom)
+{
+    if (!card || !bottom)
+        return;
+    MTGLibrary * library = card->owner->game->library;
+    vector<MTGCardInstance *> newOrder;
+    newOrder.push_back(card);
+    bool found = false;
+    for (size_t k = 0; k < library->cards.size(); ++k)
+    {
+        if (library->cards[k] == card)
+            found = true;
+        else
+            newOrder.push_back(library->cards[k]);
+    }
+    if (found)
+        library->cards = newOrder;
+}
+
+//who: 1 = the clash's controller places their card, 2 = the opponent, 3 = both done
+void AAClash::askPlacement(int who)
+{
+    if (who > 2)
+    {
+        finish();
+        return;
+    }
+    Player * p = (who == 1) ? source->controller() : source->controller()->opponent();
+    MTGCardInstance * card = (who == 1) ? mine : theirs;
+    if (!card)
+    {
+        askPlacement(who + 1);
+        return;
+    }
+    if (p->choosesForItself())
+    {
+        place(card, aiPutsOnBottom(p, card));
+        askPlacement(who + 1);
+        return;
+    }
+    vector<MTGAbility*> selection;
+    for (int b = 0; b < 2; ++b)
+    {
+        AAClash * option = clone();
+        option->placeFor = who;
+        option->placeBottom = (b == 1);
+        option->menuText = string(b ? "Put " : "Keep ") + card->getName() + (b ? " on the bottom" : " on top");
+        option->oneShot = true;
+        option->canBeInterrupted = false;
+        selection.push_back(option);
+    }
+    MTGAbility * menu = NEW MenuAbility(game, this->GetId(), source, source, true, selection, p,
+        who == 1 ? "Clash: your card" : "Clash: opponent's card");
+    game->mLayers->actionLayer()->currentActionCard = source;
+    menu->resolve();
+}
+
+//the clash's own target (a card follows its newest instance) goes to an effect that names
+//none, and to each part of an "X && Y" effect; an effect with its own target() keeps it
+static void aimClashEffect(MTGAbility * a, Targetable * target)
+{
+    if (!a || !target || dynamic_cast<TargetAbility *>(a))
+        return;
+    if (MTGCardInstance * t = dynamic_cast<MTGCardInstance *>(target))
+        a->target = latestInstance(t);
+    else
+        a->target = target;
+    if (MultiAbility * m = dynamic_cast<MultiAbility *>(a))
+        for (size_t i = 0; i < m->abilities.size(); ++i)
+            aimClashEffect(m->abilities[i], target);
+}
+
+void AAClash::applyOutcome()
+{
+    string branch;
+    vector<string> parts = parseBetween(branches, won ? "winability " : "loseability ", won ? " winabilityend" : " loseabilityend");
+    if (parts.size())
+        branch = parts[1];
+    if (!branch.size())
+        return;
+    //"thiscard X": X acts on the clash's own card, not on what that card targets - "return
+    //Release the Ants to its owner's hand", where the spell's target is the creature it hit.
+    //(all(this) only looks on the battlefield, and the spell is on the stack.)
+    Targetable * aim = target;
+    if (branch.find("thiscard ") == 0)
+    {
+        branch = branch.substr(9);
+        aim = source;
+    }
+    AbilityFactory af(game);
+    MTGAbility * a = af.parseMagicLine(branch, this->GetId(), NULL, latestInstance(source));
+    if (!a)
+        return;
+    aimClashEffect(a, aim);
+    a->canBeInterrupted = false;
+    if (a->oneShot)
+    {
+        a->resolve();
+        SAFE_DELETE(a);
+    }
+    else
+        a->addToGame();
+}
+
+void AAClash::finish()
+{
+    Player * you = source->controller();
+    Player * them = you->opponent();
+    int myMV = mine ? mine->getManaCost()->getConvertedCost() : -1;
+    int theirMV = theirs ? theirs->getManaCost()->getConvertedCost() : -1;
+    bool theyWon = theirs && theirMV > myMV;
+    you->lastClashWon = won ? 1 : 0;
+    them->lastClashWon = theyWon ? 1 : 0;
+    game->receiveEvent(NEW WEventClash(you, won));
+    game->receiveEvent(NEW WEventClash(them, theyWon));
+    if (!repeat)
+        return;     //the outcome already happened as the clash resolved
+    //Hoarder's Greed: "if you win, repeat this process" draws from the library the clash just
+    //rearranged, so here the outcome waits for both top/bottom choices (CR 701.30 order)
+    applyOutcome();
+    if (won && rounds < 30)
+    {
+        AAClash * again = NEW AAClash(game, this->GetId(), latestInstance(source), target, branches, repeat);
+        again->rounds = rounds + 1;
+        again->resolve();
+        SAFE_DELETE(again);
+    }
+}
+
+int AAClash::resolve()
+{
+    if (placeFor)
+    {
+        //a top/bottom menu option: place that card, then carry on with the clash
+        place(placeFor == 1 ? mine : theirs, placeBottom);
+        askPlacement(placeFor + 1);
+        return 1;
+    }
+    Player * you = source->controller();
+    Player * them = you->opponent();
+    MTGLibrary * myLib = you->game->library;
+    MTGLibrary * theirLib = them->game->library;
+    mine = myLib->nb_cards ? myLib->cards[myLib->nb_cards - 1] : NULL;
+    theirs = theirLib->nb_cards ? theirLib->cards[theirLib->nb_cards - 1] : NULL;
+    int myMV = mine ? mine->getManaCost()->getConvertedCost() : -1;
+    int theirMV = theirs ? theirs->getManaCost()->getConvertedCost() : -1;
+    won = mine && myMV > theirMV;
+    std::ostringstream msg;
+    msg << "Clash: " << (mine ? mine->getName() : string("no card")) << " (" << (mine ? myMV : 0) << ") vs "
+        << (theirs ? theirs->getName() : string("no card")) << " (" << (theirs ? theirMV : 0) << ") - "
+        << (won ? "you win" : "you lose");
+    MTGAbility * message = NEW MTGEventText(game, this->GetId(), source, msg.str());
+    message->oneShot = true;
+    message->addToGame();
+    //Deviation from CR 701.30: without "repeat" the win/lose effect happens now, while the spell
+    //is still resolving (so "return CARDNAME to its owner's hand", "target player" and the spell's
+    //own target still work), and the top/bottom choices follow. Nothing those effects do reads
+    //the revealed cards' positions.
+    if (!repeat)
+        applyOutcome();
+    askPlacement(1);
+    return 1;
+}
+
+const string AAClash::getMenuText()
+{
+    if (menuText.size())
+        return menuText.c_str();
+    return "Clash";
+}
+
+AAClash * AAClash::clone() const
+{
+    return NEW AAClash(*this);
+}
+
 GenericFlipACoin::GenericFlipACoin(GameObserver* observer, int id, MTGCardInstance * source, Targetable *,string _toAdd, ManaCost * cost, int userchoice) :
 ActivatedAbility(observer, id, source, cost, 0), baseAbility(_toAdd), userchoice(userchoice)
 {

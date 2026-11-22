@@ -46,6 +46,22 @@ static bool insideFlipBranch(const string& s, size_t pos)
     return false;
 }
 
+//True when pos lies between a "clash " and its " clashend": that text is parsed only when the
+//clash resolves (AAClash), so the line-wide ability$! extraction must leave it alone - it
+//emptied Springjack Knight's won "ability$!target(creature) ...!$ controller".
+static bool insideClash(const string& s, size_t pos)
+{
+    size_t start = s.find("clash ");
+    while (start != string::npos && start < pos)
+    {
+        size_t end = s.find(" clashend", start);
+        if (end == string::npos || end > pos)
+            return true;
+        start = s.find("clash ", end + 9);
+    }
+    return false;
+}
+
 //First occurrence of key at or after from that is not inside a flip/roll branch.
 static size_t findOutsideFlipBranch(const string& s, const string& key, size_t from = 0)
 {
@@ -1634,6 +1650,14 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
     if (TargetChooser * tc = parseSimpleTC(s, "takeninitiativefoeof", card))
         return NEW TrplayerInitiative(observer, id, card, tc, once, false, true);
 
+    //clashed - controller of card / opponent of card controller; clashwonof: won the clash
+    if (TargetChooser * tc = parseSimpleTC(s, "clashedof", card))
+        return NEW TrPlayerClashed(observer, id, card, tc, once, true, false, false);
+    if (TargetChooser * tc = parseSimpleTC(s, "clashedfoeof", card))
+        return NEW TrPlayerClashed(observer, id, card, tc, once, false, true, false);
+    if (TargetChooser * tc = parseSimpleTC(s, "clashwonof", card))
+        return NEW TrPlayerClashed(observer, id, card, tc, once, true, false, true);
+
     //shuffled library - controller of card
     if (TargetChooser * tc = parseSimpleTC(s, "shuffledof", card))
         return NEW TrplayerShuffled(observer, id, card, tc, once, true, false);
@@ -2160,6 +2184,22 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     MTGCardInstance * target = card->target;
     if (!target)
         target = card;
+    //clash with an opponent (CR 701.30): "clash [repeat] winability ... winabilityend loseability
+    //... loseabilityend clashend" - see AAClash. Claimed before anything else reads the line: the
+    //ability$!, dynamicability<! and pay( parsers below take their keyword from anywhere in it,
+    //so they ate the win branch (Pulling Teeth discarded nothing; Weed Strangle gained life on a
+    //loss). A trigger or "may" reaches here again with the text after its own prefix.
+    if (s.find("clash ") == 0 && s.find(" clashend") != string::npos)
+    {
+        string branches = s.substr(6, s.rfind(" clashend") - 6);
+        bool repeat = branches.find("repeat ") == 0;
+        if (repeat)
+            branches = branches.substr(7);
+        MTGAbility * a = NEW AAClash(observer, id, card, target, branches, repeat);
+        a->oneShot = 1;
+        a->canBeInterrupted = false;
+        return a;
+    }
     //pay and castcard?
     if(s.find("castcard(restricted") != string::npos && (s.find("pay(") != string::npos || s.find("pay[[") != string::npos))
         asAlternate = true;
@@ -2549,6 +2589,8 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     }
 
     found = s.find("ability$!");
+    if (found != string::npos && insideClash(s, found))
+        found = string::npos;   //belongs to a clash branch, parsed when the clash resolves
     if (found != string::npos && storedAbilityString.empty())
     {
         size_t real_end = s.find("!$", found);
@@ -2559,6 +2601,8 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     else
     {
         found = unchangedS.find("ability$!");//did find it in a changed s, try unchanged.
+        if (found != string::npos && insideClash(unchangedS, found))
+            found = string::npos;
         if (found != string::npos && storedAbilityString.empty())
         {
             size_t real_end = unchangedS.find("!$", found);
