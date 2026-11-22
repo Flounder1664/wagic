@@ -1,0 +1,22 @@
+#Gylwain: Grizzly Bears entering, choose a Monster Role for it - 3/3 with trample.
+#Set up in play, Gylwain runs its own enter choice first: Royal Role on itself (3/4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:633158
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+choice 0
+Grizzly Bears
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:633158,Grizzly Bears,*,*
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=trample
+pt:Gylwain, Casting Director=3/4
+[PLAYER2]
+[END]

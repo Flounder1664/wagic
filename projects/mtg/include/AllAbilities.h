@@ -4255,11 +4255,24 @@ public:
             spell->source->entersBattlefield = 1;
             if (attachToIt && spell->source->hasSubtype(Subtypes::TYPE_AURA))
             {
-                MTGCardInstance * host = dynamic_cast<MTGCardInstance *>(attachTarget);
-                if (!host || host == source)
-                    host = ((MTGCardInstance *)source)->target;
-                if (host && host != source && host->currentZone == host->controller()->game->battlefield)
-                    spell->source->target = host;
+                //Host, in order: the target this ability resolves with (a trigger's target is
+                //chosen after parsing, so attachTarget, stored at parse time, misses it), the
+                //parse-time target, the spell's own target, and last the source itself - "create
+                //a Role token attached to it" on a permanent's own enter trigger.
+                MTGCardInstance * src = (MTGCardInstance *)source;
+                MTGCardInstance * candidates[4] = { dynamic_cast<MTGCardInstance *>(target),
+                    dynamic_cast<MTGCardInstance *>(attachTarget), src->target, src };
+                for (int c = 0; c < 4; c++)
+                {
+                    MTGCardInstance * host = candidates[c];
+                    if (!host || (host == src && c < 3))
+                        continue;
+                    if (host->currentZone == host->controller()->game->battlefield)
+                    {
+                        spell->source->target = host;
+                        break;
+                    }
+                }
             }
             if(spell->source->getMTGId() == 0)
             {//fix missing art: if token creator is put inside ability$!!$ who, then try to get the stored source card

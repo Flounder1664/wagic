@@ -1,0 +1,17 @@
+#Gylwain: as it enters itself, choosing a Royal Role makes it 3/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:633158
+manapool:{1}{G}{W}
+[PLAYER2]
+[DO]
+633158
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:633158,*
+pt:Gylwain, Casting Director=3/4
+[PLAYER2]
+[END]

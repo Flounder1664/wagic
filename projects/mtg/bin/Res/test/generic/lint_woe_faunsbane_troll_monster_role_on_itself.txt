@@ -1,0 +1,17 @@
+#Faunsbane Troll: its enter trigger puts a Monster Role on itself - 5/5 with trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Faunsbane Troll
+manapool:{2}{B}{G}
+[PLAYER2]
+[DO]
+Faunsbane Troll
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Faunsbane Troll,*
+pt:Faunsbane Troll=5/5
+type:Faunsbane Troll=trample
+[PLAYER2]
+[END]

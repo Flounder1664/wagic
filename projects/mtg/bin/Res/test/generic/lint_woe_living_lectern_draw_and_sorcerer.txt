@@ -1,0 +1,21 @@
+#Living Lectern: {1}, sacrifice it - draw a card and a Sorcerer Role on Grizzly Bears (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Living Lectern,Grizzly Bears
+manapool:{1}
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+[DO]
+Living Lectern
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+pt:Grizzly Bears=3/3
+graveyard:Living Lectern
+hand:Gray Ogre
+library:Hill Giant
+[PLAYER2]
+[END]

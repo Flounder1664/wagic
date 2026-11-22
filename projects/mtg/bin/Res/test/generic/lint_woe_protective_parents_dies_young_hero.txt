@@ -1,0 +1,19 @@
+#Protective Parents: when Shock kills it, a Young Hero Role goes on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Protective Parents,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Protective Parents
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Protective Parents,Shock
+[PLAYER2]
+[END]

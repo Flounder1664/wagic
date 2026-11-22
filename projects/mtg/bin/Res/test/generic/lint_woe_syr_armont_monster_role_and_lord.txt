@@ -1,0 +1,20 @@
+#Syr Armont: Monster Role on Grizzly Bears (+1/+1), and enchanted creatures you control get +1/+1: Bears 4/4, Armont 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:629715
+manapool:{3}{G}{W}
+[PLAYER2]
+[DO]
+629715
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,629715,*
+pt:Grizzly Bears=4/4
+pt:Syr Armont, the Redeemer=4/4
+type:Grizzly Bears=trample
+[PLAYER2]
+[END]

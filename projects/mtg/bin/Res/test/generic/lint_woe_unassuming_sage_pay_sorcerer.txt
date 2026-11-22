@@ -1,0 +1,17 @@
+#Unassuming Sage: pay {2} as it enters for a Sorcerer Role on itself (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unassuming Sage
+manapool:{1}{W}{2}
+[PLAYER2]
+[DO]
+Unassuming Sage
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unassuming Sage,*
+pt:Unassuming Sage=3/3
+[PLAYER2]
+[END]

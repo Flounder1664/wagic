@@ -1,0 +1,19 @@
+#Charming Scoundrel, second mode: a Treasure, and Grizzly Bears stays 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Charming Scoundrel
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Charming Scoundrel
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Charming Scoundrel,*
+pt:Grizzly Bears=2/2
+pt:-629629=0/0
+[PLAYER2]
+[END]

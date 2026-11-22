@@ -1,0 +1,18 @@
+#Lord Skitter's Blessing: a Wicked Role on Grizzly Bears makes it 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Lord Skitter's Blessing
+manapool:{1}{B}
+[PLAYER2]
+[DO]
+Lord Skitter's Blessing
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Lord Skitter's Blessing,*
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

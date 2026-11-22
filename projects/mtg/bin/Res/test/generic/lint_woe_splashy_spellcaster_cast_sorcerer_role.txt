@@ -1,0 +1,22 @@
+#Splashy Spellcaster: casting Shock puts a Sorcerer Role on Grizzly Bears (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Splashy Spellcaster,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Splashy Spellcaster,Grizzly Bears,*
+pt:Grizzly Bears=3/3
+pt:Splashy Spellcaster=2/4
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

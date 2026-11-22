@@ -1,0 +1,17 @@
+#Embereth Veteran: {1}, sacrifice it - a Young Hero Role on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Embereth Veteran,Grizzly Bears
+manapool:{1}
+[PLAYER2]
+[DO]
+Embereth Veteran
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+graveyard:Embereth Veteran
+[PLAYER2]
+[END]

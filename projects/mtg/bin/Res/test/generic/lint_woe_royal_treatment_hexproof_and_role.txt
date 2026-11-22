@@ -1,0 +1,20 @@
+#Royal Treatment: Grizzly Bears gains hexproof and gets a Royal Role (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Royal Treatment
+manapool:{G}
+[PLAYER2]
+[DO]
+Royal Treatment
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=hexproof
+graveyard:Royal Treatment
+[PLAYER2]
+[END]

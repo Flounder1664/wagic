@@ -1,0 +1,19 @@
+#Charming Scoundrel, third mode: a Wicked Role on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Charming Scoundrel
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Charming Scoundrel
+choice 2
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Charming Scoundrel,*
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

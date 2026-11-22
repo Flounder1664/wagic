@@ -1,0 +1,19 @@
+#Redtooth Genealogist: its enter trigger puts the Role on Grizzly Bears (3/3), not on itself (2/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Redtooth Genealogist
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Redtooth Genealogist
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Redtooth Genealogist,*
+pt:Grizzly Bears=3/3
+pt:Redtooth Genealogist=2/3
+[PLAYER2]
+[END]

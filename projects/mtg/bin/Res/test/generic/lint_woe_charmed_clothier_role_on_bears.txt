@@ -1,0 +1,19 @@
+#Charmed Clothier: its enter trigger puts the Role on Grizzly Bears (3/3), not on itself (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Charmed Clothier
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+Charmed Clothier
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Charmed Clothier,*
+pt:Grizzly Bears=3/3
+pt:Charmed Clothier=3/3
+[PLAYER2]
+[END]

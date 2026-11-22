@@ -1,0 +1,19 @@
+#Spiteful Hexmage: a Cursed Role on your Hill Giant makes it 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Spiteful Hexmage
+manapool:{B}
+[PLAYER2]
+[DO]
+Spiteful Hexmage
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant,Spiteful Hexmage,*
+pt:Hill Giant=1/1
+pt:Spiteful Hexmage=3/2
+[PLAYER2]
+[END]

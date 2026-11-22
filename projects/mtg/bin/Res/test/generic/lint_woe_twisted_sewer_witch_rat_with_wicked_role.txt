@@ -1,0 +1,18 @@
+#Twisted Sewer-Witch: a Rat that can't block (TWOE #7, -632907), then a Wicked Role on it: 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Twisted Sewer-Witch
+manapool:{3}{B}{B}
+[PLAYER2]
+[DO]
+Twisted Sewer-Witch
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Twisted Sewer-Witch,*,*
+pt:-632907=2/2
+type:-632907=cantblock
+pt:Twisted Sewer-Witch=3/4
+[PLAYER2]
+[END]

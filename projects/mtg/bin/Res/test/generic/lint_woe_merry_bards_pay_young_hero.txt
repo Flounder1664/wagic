@@ -1,0 +1,18 @@
+#Merry Bards: pay {1} as it enters for a Young Hero Role on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Merry Bards
+manapool:{2}{R}{1}
+[PLAYER2]
+[DO]
+Merry Bards
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Merry Bards,*
+[PLAYER2]
+[END]
