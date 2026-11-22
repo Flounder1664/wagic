@@ -1,0 +1,23 @@
+#Baron Helmut Zemo connives when a black spell (Dark Ritual) is cast from hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712028
+hand:Dark Ritual,Eager Cadet
+manapool:{B}
+library:Forest
+[PLAYER2]
+[DO]
+Dark Ritual
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712028
+pt:712028=4/4
+hand:Forest
+graveyard:Dark Ritual,Eager Cadet
+manapool:{B}{B}{B}
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#Red Room Recruit enters and connives: draws Forest, discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Red Room Recruit,Eager Cadet
+manapool:{1}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Red Room Recruit
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Red Room Recruit
+pt:Red Room Recruit=2/3
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

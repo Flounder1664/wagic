@@ -1,0 +1,21 @@
+#Twin: Red Room Recruit connives and discards the Forest it drew - no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Red Room Recruit,Eager Cadet
+manapool:{1}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Red Room Recruit
+choice 1
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Red Room Recruit
+pt:Red Room Recruit=1/2
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+[END]

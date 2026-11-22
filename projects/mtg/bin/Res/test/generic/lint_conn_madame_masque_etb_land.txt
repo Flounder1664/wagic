@@ -1,0 +1,21 @@
+#Twin: Madame Masque connives and discards the Forest it drew - no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Madame Masque,Eager Cadet
+manapool:{4}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Madame Masque
+choice 1
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Madame Masque
+pt:Madame Masque=3/2
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+[END]

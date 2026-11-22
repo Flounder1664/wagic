@@ -1,0 +1,21 @@
+#Madame Masque enters and connives: draws Forest, discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Madame Masque,Eager Cadet
+manapool:{4}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Madame Masque
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Madame Masque
+pt:Madame Masque=4/3
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

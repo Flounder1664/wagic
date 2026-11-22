@@ -1,0 +1,24 @@
+#Villainous Hideout: {3},{T} - Red Room Recruit connives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Villainous Hideout,Red Room Recruit
+hand:Eager Cadet
+manapool:{3}
+library:Forest
+[PLAYER2]
+[DO]
+Villainous Hideout
+choice 1
+Red Room Recruit
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Villainous Hideout,Red Room Recruit
+pt:Red Room Recruit=2/3
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

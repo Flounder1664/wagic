@@ -1,0 +1,23 @@
+#Atlantean Skirmisher attacks and connives: discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Atlantean Skirmisher
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+Atlantean Skirmisher
+next
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Atlantean Skirmisher
+pt:Atlantean Skirmisher=2/3
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

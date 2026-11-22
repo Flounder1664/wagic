@@ -157756,3 +157756,208 @@ text=Return target card from your graveyard to your hand. Clash with an opponent
 mana={3}{G}
 type=Sorcery
 [/card]
+[card]
+name=A.I.M. Scientists
+#2026-11-22 connive batch: written from existing working forms.
+auto=_CONNIVES_
+autohand={2}{cycle}:name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>land[basic]|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(hand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
+mana={3}{U}
+type=Creature
+subtype=Human Scientist Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Atlantean Skirmisher
+#2026-11-22 connive batch: written from existing working forms.
+auto=@combat(attacking) source(this):_CONNIVES_
+text=Whenever this creature attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={1}{U}
+type=Creature
+subtype=Merfolk Rogue
+power=1
+toughness=2
+[/card]
+[card]
+name=Baron Helmut Zemo
+#2026-11-22 connive batch: written from existing working forms.
+auto=@movedTo(*[black]|mystack) from(myhand):_CONNIVES_
+missing=Boast - copying and casting exiled black cards
+text=Whenever you cast a black spell from your hand, Baron Helmut Zemo connives. -- Boast - Exile any number of black cards from your graveyard with fifteen or more black mana symbols among their mana costs: Copy those exiled cards. You may cast up to three of the copies without paying their mana costs. (Activate only if this creature attacked this turn and only once each turn.)
+mana={B}{B}{B}
+type=Legendary Creature
+subtype=Human Noble Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Baron Strucker, HYDRA Overlord
+#2026-11-22 connive batch: written from existing working forms.
+auto=lord(villain|mycastingzone) altercost(colorless,-1)
+#"Do this only once each turn": turnlimited, so a declined "may" also uses up the turn.
+auto=@movedTo(other villain|mybattlefield) turnlimited:may name(Have it connive) all(trigger[to]) transforms((,newability[_CONNIVES_])) oneshot
+text=Villain spells you cast cost {1} less to cast. -- Whenever another Villain you control enters, you may have it connive. Do this only once each turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Doctor Doom, King of Latveria
+#2026-11-22 connive batch: written from existing working forms.
+#Fires per land card discarded, not once per discard event.
+auto=@discarded(land|myhand):life:-2 opponent
+auto=@each my combatbegins:target(villain|mybattlefield) transforms((,menace,newability[_CONNIVES_])) ueot
+text=Whenever you discard one or more land cards, each opponent loses 2 life. -- At the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={1}{U}{B}{R}
+type=Legendary Creature
+subtype=Human Noble Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Kamiz, Obscura Oculus
+#2026-11-22 connive batch: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:target(creature[attacking]|mybattlefield) transforms((,unblockable,newability[_CONNIVES_])) ueot
+missing=double strike for another attacking creature with lesser power
+text=Whenever you attack, target attacking creature can't be blocked this turn. It connives. Then choose another attacking creature with lesser power. That creature gains double strike until end of turn. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={1}{W}{U}{B}
+type=Legendary Creature
+subtype=Octopus Rogue
+power=2
+toughness=4
+[/card]
+[card]
+name=Kang, Temporal Tyrant
+#2026-11-22 connive batch: written from existing working forms.
+auto=@combat(attacking) source(this):_CONNIVES_
+auto=_SECOND_DRAW_life:-1 opponent && life:1 controller
+text=Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Whenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.
+mana={2}{U}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=3
+toughness=4
+[/card]
+[card]
+name=Leader, Super-Genius
+#2026-11-22 connive batch: written from existing working forms.
+auto=@each my combatbegins:target(creature|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot
+missing=the draw-first replacement when a creature you control would connive
+text=If a creature you control would connive, instead you draw a card, then that creature connives. -- At the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={2}{U}{U}
+type=Legendary Creature
+subtype=Gamma Scientist Villain
+power=1
+toughness=3
+[/card]
+[card]
+name=M.O.D.O.K.
+#2026-11-22 connive batch: written from existing working forms.
+abilities=flying,lifelink
+auto={L:3}:_CONNIVES_ myturnonly
+auto=lord(creature|opponentbattlefield) -1/-1
+text=Flying, lifelink -- Mental Organism - Pay 3 life: M.O.D.O.K. connives. Activate only during your turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Designed Only for Killing - Creatures your opponents control get -1/-1.
+mana={3}{B}{B}
+type=Legendary Artifact Creature
+subtype=Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Madame Masque
+#2026-11-22 connive batch: written from existing working forms.
+auto=_CONNIVES_
+auto=_SECOND_DRAW_token(Villain,Creature Villain,2/1,black,menace)
+text=When Madame Masque enters, she connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Whenever you draw your second card each turn, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+mana={4}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=3
+toughness=2
+[/card]
+[card]
+name=Namor, Scourge of the Seas
+#2026-11-22 connive batch: written from existing working forms.
+abilities=flying
+auto=lord(other merfolk[counter{1/1}]|mybattlefield) flying
+auto=@each my combatbegins:target(creature|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot
+text=Flying -- Each other Merfolk you control with a +1/+1 counter on it has flying. -- At the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={3}{U}{U}
+type=Legendary Creature
+subtype=Mutant Merfolk Villain
+power=4
+toughness=4
+[/card]
+[card]
+name=Red Room Recruit
+#2026-11-22 connive batch: written from existing working forms.
+auto=_CONNIVES_
+text=When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+mana={1}{B}
+type=Creature
+subtype=Human Spy Villain
+power=1
+toughness=2
+[/card]
+[card]
+name=Swordsman, Sharp Scoundrel
+#2026-11-22 connive batch: written from existing working forms.
+auto=@combat(attacking) source(creature[geared]|mybattlefield):all(trigger[to]) transforms((,newability[_CONNIVES_])) oneshot
+missing=attaching an Equipment when another Villain enters
+text=Whenever another Villain you control enters, attach up to one target Equipment you control to target creature you control. -- Whenever an equipped creature you control attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Hero Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Tiger Shark, Abyssal Hunter
+#2026-11-22 connive batch: written from existing working forms.
+auto=_CONNIVES_
+auto=@combat(attacking) source(this):_CONNIVES_
+auto={4}{U/B}:unblockable ueot
+text=Whenever Tiger Shark enters or attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- {4}{U/B}: Tiger Shark can't be blocked this turn.
+mana={2}{U/B}{U/B}
+type=Legendary Creature
+subtype=Shark Human Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Ultron, Unlimited
+#2026-11-22 connive batch: written from existing working forms.
+abilities=flying
+auto=@combat(attacking) source(this):_CONNIVES_
+missing=the pay-{1} Robot token when a creature you control connives
+text=Flying -- Whenever Ultron attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.) -- Whenever a creature you control connives, you may pay {1}. If you do, create a 2/2 colorless Robot Villain artifact creature token.
+mana={1}{U}{B}
+type=Legendary Artifact Creature
+subtype=Robot Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Valentina Allegra de Fontaine
+#2026-11-22 connive batch: written from existing working forms.
+auto=lord(other villain|mybattlefield) becomes(Hero)
+auto={T}:target(hero|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot asSorcery
+text=Other Villains you control are Heroes in addition to their other types. -- {T}: Target Hero you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Spy Villain
+power=2
+toughness=3
+[/card]
+[card]
+name=Villainous Hideout
+#2026-11-22 connive batch: written from existing working forms.
+auto={T}:add{C}
+auto={3}{T}:target(villain|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot asSorcery
+missing=the Villain-only mana of any colour
+text={T}: Add {C}. -- {T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source. -- {3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+type=Land
+[/card]

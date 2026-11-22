@@ -1,0 +1,23 @@
+#Namor: at beginning of combat Atlantean Skirmisher (a Merfolk) connives, gets a counter and so has flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711346,Atlantean Skirmisher
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+next
+Atlantean Skirmisher
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:711346,Atlantean Skirmisher
+pt:Atlantean Skirmisher=2/3
+type:Atlantean Skirmisher=flying
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

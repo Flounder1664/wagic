@@ -1,0 +1,23 @@
+#Twin: discarding Eager Cadet instead - a counter on Doom, no life loss.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711127
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+next
+711127
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:711127
+pt:711127=4/4
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+life:20
+[END]

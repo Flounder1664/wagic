@@ -1,0 +1,21 @@
+#Twin: 711537 connives and discards the Forest it drew - no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:711537,Eager Cadet
+manapool:{2}{U}{B}
+library:Forest
+[PLAYER2]
+[DO]
+711537
+choice 1
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711537
+pt:711537=2/3
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+[END]

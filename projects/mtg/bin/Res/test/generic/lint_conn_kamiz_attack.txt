@@ -1,0 +1,25 @@
+#Kamiz: Grizzly Bears attacks - it cannot be blocked and connives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:559655,Grizzly Bears
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+Grizzly Bears
+next
+Grizzly Bears
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:559655,Grizzly Bears
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=unblockable
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

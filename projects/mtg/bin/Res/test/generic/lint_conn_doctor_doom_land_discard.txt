@@ -1,0 +1,24 @@
+#Doctor Doom: at beginning of combat he gains menace and connives; discarding the Forest makes the opponent lose 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711127
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+next
+711127
+choice 1
+Forest
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:711127
+pt:711127=3/3
+type:711127=menace
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+life:18
+[END]

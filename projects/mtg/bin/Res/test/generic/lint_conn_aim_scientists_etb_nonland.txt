@@ -1,0 +1,22 @@
+#A.I.M. Scientists enters and connives: draws Forest, discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:A.I.M. Scientists,Eager Cadet
+manapool:{3}{U}
+library:Forest
+[PLAYER2]
+[DO]
+A.I.M. Scientists
+choice 0
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:A.I.M. Scientists
+pt:A.I.M. Scientists=4/4
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

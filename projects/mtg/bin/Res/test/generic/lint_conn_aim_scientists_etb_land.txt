@@ -1,0 +1,22 @@
+#Twin: A.I.M. Scientists connives and discards the Forest it drew - no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:A.I.M. Scientists,Eager Cadet
+manapool:{3}{U}
+library:Forest
+[PLAYER2]
+[DO]
+A.I.M. Scientists
+choice 0
+choice 1
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:A.I.M. Scientists
+pt:A.I.M. Scientists=3/3
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+[END]

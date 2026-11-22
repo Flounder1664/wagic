@@ -1,0 +1,23 @@
+#Twin: Atlantean Skirmisher discards a land - no counter, no flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711346,Atlantean Skirmisher
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+next
+Atlantean Skirmisher
+choice 1
+Forest
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:711346,Atlantean Skirmisher
+pt:Atlantean Skirmisher=1/2
+type:Atlantean Skirmisher=-flying
+hand:Eager Cadet
+graveyard:Forest
+[PLAYER2]
+[END]

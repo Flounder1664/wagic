@@ -1,0 +1,25 @@
+#M.O.D.O.K.: pay 3 life, he connives; the opponent's Grizzly Bears is 1/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:M.O.D.O.K.
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+M.O.D.O.K.
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:M.O.D.O.K.
+pt:M.O.D.O.K.=3/3
+life:17
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+inplay:Grizzly Bears
+pt:Grizzly Bears=1/1
+[END]

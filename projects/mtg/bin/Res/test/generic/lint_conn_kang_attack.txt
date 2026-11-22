@@ -1,0 +1,23 @@
+#Kang, Temporal Tyrant attacks and connives: discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712125
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+712125
+next
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:712125
+pt:712125=4/5
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

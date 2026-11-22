@@ -1,0 +1,21 @@
+#711537 enters and connives: draws Forest, discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:711537,Eager Cadet
+manapool:{2}{U}{B}
+library:Forest
+[PLAYER2]
+[DO]
+711537
+choice 0
+Eager Cadet
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711537
+pt:711537=3/4
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]

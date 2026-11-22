@@ -1,0 +1,23 @@
+#Ultron, Unlimited attacks and connives: discards Eager Cadet - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711557
+hand:Eager Cadet
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+711557
+next
+choice 0
+Eager Cadet
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711557
+pt:711557=3/3
+hand:Forest
+graveyard:Eager Cadet
+[PLAYER2]
+[END]
