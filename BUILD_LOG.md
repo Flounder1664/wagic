@@ -59,4 +59,5 @@ Device serials:
 2026-11-22 6fa67dfbb (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (power-up engine word); launched from G: 15s before replacing; harness 7/2513 (6 known + 1 intermittent saga test that passes on rerun); backups .old.202611221417; collection rebuilt, 46,303 ids, no id moves.
 2026-11-22 5d91d9f5d (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221503.old; read back ok. 16 manifest / manifest dread cards (needs the 5d91d9f5d exes: facedown descriptor)
 2026-11-22 5d91d9f5d (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (facedown descriptor); launched from G: 15s before replacing; harness 6/2529 known failures; backups .old.202611221504; collection rebuilt.
+2026-11-22 fbdaf6c16 (wagic-v146-windows)  device=Windows result=core-zip-patch - 3 member(s): sets/WOE/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221608.old; read back ok. 18 Role cards + Rat Woe token (needs the fbdaf6c16 exes: Role attach)
 ```
