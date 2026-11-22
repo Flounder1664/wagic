@@ -1,0 +1,24 @@
+#Slimy Aquarium (cast as the second door): manifest dread with a +1/+1 counter on the face-down creature.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Underwater Tunnel // Slimy Aquarium
+manapool:{3}{U}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Underwater Tunnel // Slimy Aquarium
+choice 1
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Underwater Tunnel // Slimy Aquarium,Hill Giant
+pt:Hill Giant=3/3
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

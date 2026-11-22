@@ -1,0 +1,23 @@
+#Conductive Machete: manifest dread, then it is attached to the face-down Hill Giant (2/2 -> 4/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Conductive Machete
+manapool:{4}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Conductive Machete
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Conductive Machete,Hill Giant
+pt:Hill Giant=4/3
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

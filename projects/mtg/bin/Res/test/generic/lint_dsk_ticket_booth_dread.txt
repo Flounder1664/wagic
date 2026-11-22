@@ -1,0 +1,23 @@
+#Ticket Booth: unlocking it manifests dread.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ticket Booth // Tunnel of Hate
+manapool:{2}{R}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Ticket Booth // Tunnel of Hate
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ticket Booth // Tunnel of Hate,Hill Giant
+pt:Hill Giant=2/2
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

@@ -1,0 +1,25 @@
+#Unnerving Grasp: Ornithopter back to its owner's hand, then manifest dread.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unnerving Grasp
+manapool:{2}{U}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Unnerving Grasp
+Ornithopter
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Unnerving Grasp,Island
+library:Forest
+[PLAYER2]
+hand:Ornithopter
+[END]

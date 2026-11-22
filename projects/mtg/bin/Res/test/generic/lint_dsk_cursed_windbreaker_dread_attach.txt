@@ -1,0 +1,24 @@
+#Cursed Windbreaker: manifest dread, then it is attached to the face-down Hill Giant (2/2 -> 2/2, flying).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Cursed Windbreaker
+manapool:{2}{U}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Cursed Windbreaker
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cursed Windbreaker,Hill Giant
+pt:Hill Giant=2/2
+graveyard:Island
+library:Forest
+type:Hill Giant=flying
+[PLAYER2]
+[END]

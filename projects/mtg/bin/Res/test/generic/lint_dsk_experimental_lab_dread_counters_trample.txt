@@ -1,0 +1,24 @@
+#Experimental Lab: unlocking it manifests dread, and the face-down creature gets two +1/+1 counters and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Experimental Lab // Staff Room
+manapool:{3}{G}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Experimental Lab // Staff Room
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Experimental Lab // Staff Room,Hill Giant
+pt:Hill Giant=4/4
+type:Hill Giant=trample
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

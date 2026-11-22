@@ -1,0 +1,26 @@
+#Moldering Gym fetches a basic land tapped; unlocking Weight Room manifests dread with three +1/+1 counters.
+#The search shuffles, so the library left is just the two cards the dread then sees.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Moldering Gym // Weight Room
+manapool:{2}{G}{5}{G}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Moldering Gym // Weight Room
+choice 0
+Forest
+Moldering Gym // Weight Room
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Moldering Gym // Weight Room,Forest,Hill Giant
+pt:Hill Giant=5/5
+graveyard:Island
+[PLAYER2]
+[END]

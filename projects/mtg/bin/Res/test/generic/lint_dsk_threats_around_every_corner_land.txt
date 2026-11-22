@@ -1,0 +1,23 @@
+#Threats Around Every Corner: manifest dread; the face-down creature entering fetches a basic land tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Threats Around Every Corner
+manapool:{3}{G}
+library:Forest,Ornithopter,Hill Giant
+[PLAYER2]
+[DO]
+Threats Around Every Corner
+choice 0
+Hill Giant
+revealdone
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Threats Around Every Corner,Hill Giant,Forest
+tappedinplay:1
+graveyard:Ornithopter
+[PLAYER2]
+[END]

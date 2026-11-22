@@ -896,10 +896,13 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                         cd->CDdiscarded = 1;
                     }
                 }
-                //put in its zone this turn
-                else if (attribute.find("fresh") != string::npos)
+                //put in its zone this turn; "facedown" (manifested, morphed, cloaked...) shares the
+                //branch so the else-if chain gets no deeper (MSVC C1061)
+                else if (attribute.find("fresh") != string::npos || attribute == "facedown")
                 {
-                    if (minus)
+                    if (attribute == "facedown")
+                        cd->CDfacedown = minus ? -1 : 1;
+                    else if (minus)
                     {
                         cd->unsecuresetfresh(-1);
                     }

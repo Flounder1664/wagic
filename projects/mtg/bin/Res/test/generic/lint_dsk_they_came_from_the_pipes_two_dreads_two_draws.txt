@@ -1,0 +1,27 @@
+#They Came from the Pipes: manifest dread twice; each face-down creature entering draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:They Came from the Pipes
+manapool:{4}{U}
+library:Plains,Swamp,Mountain,Gray Ogre,Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+They Came from the Pipes
+choice 0
+Hill Giant
+revealdone
+choice 0
+choice 0
+Gray Ogre
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:They Came from the Pipes,Hill Giant,Gray Ogre
+graveyard:*,*
+hand:*,*
+library:*
+[PLAYER2]
+[END]

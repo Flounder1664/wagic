@@ -1,0 +1,24 @@
+#Growing Dread: manifest dread (Hill Giant face down), then turning it face up for {3}{R} puts a +1/+1 counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Growing Dread
+manapool:{G}{U}{3}{R}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Growing Dread
+choice 0
+Hill Giant
+revealdone
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Growing Dread,Hill Giant
+pt:Hill Giant=4/4
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

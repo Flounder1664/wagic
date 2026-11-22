@@ -1,0 +1,22 @@
+#Cryptic Pursuit: casting Shock from hand manifests the top card of the library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cryptic Pursuit
+hand:Shock
+manapool:{R}
+library:Forest,Hill Giant
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cryptic Pursuit,Hill Giant
+pt:Hill Giant=2/2
+graveyard:Shock
+library:Forest
+[PLAYER2]
+life:18
+[END]

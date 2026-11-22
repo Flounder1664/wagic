@@ -1,0 +1,18 @@
+#Primordial Mist: at the beginning of your end step you may manifest the top card of your library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Primordial Mist
+library:Forest,Hill Giant
+[PLAYER2]
+[DO]
+goto end
+choice 0
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Primordial Mist,Hill Giant
+pt:Hill Giant=2/2
+library:Forest
+[PLAYER2]
+[END]

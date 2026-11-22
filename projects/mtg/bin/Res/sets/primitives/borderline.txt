@@ -156631,3 +156631,186 @@ subtype=Human Performer Hero
 power=4
 toughness=4
 [/card]
+[card]
+name=They Came from the Pipes
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@movedTo(creature[facedown]|mybattlefield):draw:1 controller
+text=When this enchantment enters, manifest dread twice. (To manifest dread, look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- Whenever a face-down creature you control enters, draw a card.
+mana={4}{U}
+type=Enchantment
+[/card]
+[card]
+name=Conductive Machete
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( rehook )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=teach(creature) 2/1
+auto={4}:equip
+text=When this Equipment enters, manifest dread, then attach this Equipment to that creature. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- Equipped creature gets +2/+1. -- Equip {4}
+mana={4}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Cursed Windbreaker
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( rehook )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=teach(creature) flying
+auto={3}:equip
+text=When this Equipment enters, manifest dread, then attach this Equipment to that creature. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- Equipped creature has flying. -- Equip {3}
+mana={2}{U}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Dissection Tools
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( rehook )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=teach(creature) 2/2
+auto=teach(creature) deathtouch
+auto=teach(creature) lifelink
+auto={S(creature|mybattlefield)}:equip
+text=When this Equipment enters, manifest dread, then attach this Equipment to that creature. -- Equipped creature gets +2/+2 and has deathtouch and lifelink. -- Equip-Sacrifice a creature.
+mana={5}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Killer's Mask
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( rehook )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=teach(creature) menace
+auto={2}:equip
+text=When this Equipment enters, manifest dread, then attach this Equipment to that creature. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- Equipped creature has menace. -- Equip {2}
+mana={2}{B}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Growing Dread
+#2026-11-22 manifest batch: written from existing working forms.
+abilities=flash
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@facedup(*|mybattlefield):all(trigger) counter(1/1)
+text=Flash -- When this enchantment enters, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- Whenever you turn a permanent face up, put a +1/+1 counter on it.
+mana={G}{U}
+type=Enchantment
+[/card]
+[card]
+name=Threats Around Every Corner
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+auto=@movedTo(*[facedown]|mybattlefield):target(land[basic]|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle controller])) oneshot )!
+text=When this enchantment enters, manifest dread. -- Whenever a face-down permanent you control enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+mana={3}{G}
+type=Enchantment
+[/card]
+[card]
+name=Under the Skin
+#2026-11-22 manifest batch: written from existing working forms.
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend afterrevealed may name(Return a permanent card) moveto(myhand) notatarget(<upto:1>*[permanent]|mygraveyard) afterrevealedend revealend
+text=Manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.) -- You may return a permanent card from your graveyard to your hand.
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Unnerving Grasp
+#2026-11-22 manifest batch: written from existing working forms.
+target=<upto:1>*[-land]|battlefield
+auto=moveto(ownerhand)
+auto=name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend
+text=Return up to one target nonland permanent to its owner's hand. Manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+mana={2}{U}
+type=Sorcery
+[/card]
+[card]
+name=Experimental Lab // Staff Room
+#2026-11-22 manifest batch: written from existing working forms.
+other={2}{G} name(Staff Room)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Experimental Lab) ability$!name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( transforms((,newability[counter(1/1.2)],newability[counter(0/0.1.Trample)],newability[this(counter{0/0.1.Trample}>=1) trample])) forever )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend!$ controller
+auto=@combatdamaged(player) from(creature|mybattlefield) restriction{compare(hascntdoor2)~equalto~1}:name(Staff Room) all(trigger[from]) transforms((,newability[choice name(Turn it face up) morph],newability[choice name(Put a +1/+1 counter) counter(1/1)])) oneshot
+auto={2}{G} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Staff Room) name(Unlock Staff Room) unlockdoor:2 asSorcery
+auto={3}{G} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Experimental Lab) name(Unlock Experimental Lab) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Experimental Lab (Door 1, {3}{G}): When you unlock this door, manifest dread, then put two +1/+1 counters and a trample counter on that creature. -- Staff Room (Door 2, {2}{G}): Whenever a creature you control deals combat damage to a player, turn that creature face up or put a +1/+1 counter on it.
+mana={3}{G}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Moldering Gym // Weight Room
+#2026-11-22 manifest batch: written from existing working forms.
+other={5}{G} name(Weight Room)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Moldering Gym) ability$!target(land[basic]|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[shuffle controller])) oneshot )!!$ controller
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Weight Room) ability$!name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( counter(1/1,3) )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend!$ controller
+auto={5}{G} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Weight Room) name(Unlock Weight Room) unlockdoor:2 asSorcery
+auto={2}{G} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Moldering Gym) name(Unlock Moldering Gym) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Moldering Gym (Door 1, {2}{G}): When you unlock this door, search your library for a basic land card, put it onto the battlefield tapped, then shuffle. -- Weight Room (Door 2, {5}{G}): When you unlock this door, manifest dread, then put three +1/+1 counters on that creature.
+mana={2}{G}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Underwater Tunnel // Slimy Aquarium
+#2026-11-22 manifest batch: written from existing working forms.
+other={3}{U} name(Slimy Aquarium)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Underwater Tunnel) ability$!_SURVEIL2_!$ controller
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Slimy Aquarium) ability$!name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest and!( counter(1/1) )! optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend!$ controller
+auto={3}{U} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Slimy Aquarium) name(Unlock Slimy Aquarium) unlockdoor:2 asSorcery
+auto={U} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Underwater Tunnel) name(Unlock Underwater Tunnel) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Underwater Tunnel (Door 1, {U}): When you unlock this door, surveil 2. -- Slimy Aquarium (Door 2, {3}{U}): When you unlock this door, manifest dread, then put a +1/+1 counter on that creature.
+mana={U}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Ticket Booth // Tunnel of Hate
+#2026-11-22 manifest batch: written from existing working forms.
+other={4}{R}{R} name(Tunnel of Hate)
+auto=@counteradded(0/0.1.door1) from(this|battlefield):name(Ticket Booth) ability$!name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend!$ controller
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited restriction{compare(hascntdoor2)~equalto~1}:name(Tunnel of Hate) target(creature[attacking]|mybattlefield) double strike ueot
+auto={4}{R}{R} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Tunnel of Hate) name(Unlock Tunnel of Hate) unlockdoor:2 asSorcery
+auto={2}{R} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Ticket Booth) name(Unlock Ticket Booth) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Ticket Booth (Door 1, {2}{R}): When you unlock this door, manifest dread. -- Tunnel of Hate (Door 2, {4}{R}{R}): Whenever you attack, target attacking creature gains double strike until end of turn.
+mana={2}{R}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Cryptic Pursuit
+#2026-11-22 manifest batch: written from existing working forms.
+auto=@movedTo(instant,sorcery|mystack) from(myhand):manifest all(*[zpos=1]|mylibrary)
+auto=@movedTo(instant,sorcery|mygraveyard) from(mybattlefield):all(trigger[to]) moveto(myexile) and!( transforms((,canplayfromexile)) uent )!
+text=Whenever you cast an instant or sorcery spell from your hand, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.) -- Whenever a face-down creature you control dies, exile it if it's an instant or sorcery card. You may cast that card until the end of your next turn.
+mana={2}{U}{R}
+type=Enchantment
+[/card]
+[card]
+name=Primordial Mist
+#2026-11-22 manifest batch: written from existing working forms.
+auto=@each my end:may manifest all(*[zpos=1]|mylibrary)
+auto={0}:name(Exile a face-down permanent face up) target(*[facedown]|mybattlefield) moveto(myexile) and!( transforms((,canplayfromexile)) ueot )!
+text=At the beginning of your end step, you may manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.) -- Exile a face-down permanent you control face up: You may play that card this turn. (You still pay its costs. Timing rules still apply.)
+mana={4}{U}
+type=Enchantment
+[/card]
+[card]
+name=Glitch Interpreter
+#2026-11-22 manifest batch: written from existing working forms.
+auto=if type(*[facedown]|mybattlefield)~equalto~0 then moveto(ownerhand) all(this) && ability$!name(Manifest dread) reveal:2 optionone name(Manifest) target(*|reveal) manifest optiononeend optiontwo all(*|reveal) moveto(mygraveyard) optiontwoend revealend!$ controller
+auto=@combatdamaged(player) from(creature[colorless]|mybattlefield) turnlimited:draw:1 controller
+text=When this creature enters, if you control no face-down permanents, return this creature to its owner's hand and manifest dread. -- Whenever one or more colorless creatures you control deal combat damage to a player, draw a card.
+mana={2}{U}
+type=Creature
+subtype=Human Wizard
+power=2
+toughness=3
+[/card]

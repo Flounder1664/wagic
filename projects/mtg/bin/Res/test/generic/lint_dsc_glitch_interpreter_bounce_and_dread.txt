@@ -1,0 +1,23 @@
+#Glitch Interpreter with no face-down permanents: it returns to hand and you manifest dread.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glitch Interpreter
+manapool:{2}{U}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Glitch Interpreter
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+hand:Glitch Interpreter
+graveyard:Island
+library:Forest
+[PLAYER2]
+[END]

@@ -48,6 +48,7 @@ CardDescriptor::CardDescriptor()
     CDdamager = 0;
     CDgeared = 0;
     CDdiscarded = 0;
+    CDfacedown = 0;
     CDcrewedSource = 0;
     CDtoughGtPow = 0;
     CDattached = 0;
@@ -445,6 +446,12 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
         match = NULL;
     }
 
+    //face down. When a manifested card's enter event fires the copy has neither flag yet: initMTGCI
+    //copies morphed from previous, but removeCard sets previous only after constructing the copy.
+    //So also read the previous instance, on the same condition initMTGCI uses.
+    bool faceDown = card->isMorphed || card->isFacedown || (card->previous && card->previous->morphed && !card->turningOver);
+    if ((CDfacedown == -1 && faceDown) || (CDfacedown == 1 && !faceDown))
+        match = NULL;
     if ((CDdiscarded == -1 && card->discarded) || (CDdiscarded == 1 && !card->discarded))
     {
         match = NULL;

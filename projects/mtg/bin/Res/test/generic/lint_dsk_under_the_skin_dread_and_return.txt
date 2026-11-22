@@ -1,0 +1,28 @@
+#Under the Skin: manifest dread (Hill Giant face down, Island to the graveyard),
+#then return Ornithopter, a permanent card, from the graveyard to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Under the Skin
+graveyard:Ornithopter
+manapool:{2}{G}
+library:Forest,Hill Giant,Island
+[PLAYER2]
+[DO]
+Under the Skin
+choice 0
+Hill Giant
+revealdone
+choice 0
+choice 0
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+pt:Hill Giant=2/2
+graveyard:Under the Skin,Island
+hand:Ornithopter
+library:Forest
+[PLAYER2]
+[END]

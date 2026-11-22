@@ -1,0 +1,24 @@
+#Killer's Mask: manifest dread, then it is attached to the face-down Hill Giant (2/2 -> 2/2, menace).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Killer's Mask
+manapool:{2}{B}
+library:Forest,Island,Hill Giant
+[PLAYER2]
+[DO]
+Killer's Mask
+choice 0
+Hill Giant
+revealdone
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Killer's Mask,Hill Giant
+pt:Hill Giant=2/2
+graveyard:Island
+library:Forest
+type:Hill Giant=menace
+[PLAYER2]
+[END]
