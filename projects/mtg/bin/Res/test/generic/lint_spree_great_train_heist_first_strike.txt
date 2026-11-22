@@ -1,0 +1,22 @@
+#Great Train Heist, second mode: Grizzly Bears gets +1/+0 and first strike.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Great Train Heist
+manapool:{R}{2}
+[PLAYER2]
+[DO]
+Great Train Heist
+choice 1
+choice 0
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/2
+type:Grizzly Bears=first strike
+graveyard:Great Train Heist
+[PLAYER2]
+[END]

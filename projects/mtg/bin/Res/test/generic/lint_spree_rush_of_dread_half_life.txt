@@ -1,0 +1,19 @@
+#Rush of Dread, third mode: the opponent loses half their life (20 -> 10).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rush of Dread
+manapool:{1}{B}{B}{2}
+[PLAYER2]
+[DO]
+Rush of Dread
+choice 1
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Rush of Dread
+[PLAYER2]
+life:10
+[END]

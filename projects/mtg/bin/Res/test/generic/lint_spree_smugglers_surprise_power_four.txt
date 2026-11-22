@@ -1,0 +1,23 @@
+#Smuggler's Surprise, third mode: Craw Wurm (power 6) gains hexproof and indestructible, Hill Giant (3) does not.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Hill Giant
+hand:Smuggler's Surprise
+manapool:{G}{1}
+[PLAYER2]
+[DO]
+Smuggler's Surprise
+choice 1
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm,Hill Giant
+type:Craw Wurm=hexproof
+type:Craw Wurm=indestructible
+type:Hill Giant=-hexproof
+graveyard:Smuggler's Surprise
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#One Last Job, first mode: Grizzly Bears returns from my graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:One Last Job
+graveyard:Grizzly Bears
+manapool:{2}{W}{2}
+[PLAYER2]
+[DO]
+One Last Job
+choice 0
+Grizzly Bears
+choice 1
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:One Last Job
+[PLAYER2]
+[END]

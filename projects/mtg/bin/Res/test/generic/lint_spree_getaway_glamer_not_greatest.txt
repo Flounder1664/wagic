@@ -1,0 +1,22 @@
+#Twin: Grizzly Bears is not the most powerful (Hill Giant is) - it survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Getaway Glamer
+manapool:{W}{2}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Getaway Glamer
+choice 1
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Getaway Glamer
+[PLAYER2]
+inplay:Hill Giant
+[END]

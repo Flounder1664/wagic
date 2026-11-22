@@ -1,0 +1,22 @@
+#Getaway Glamer, second mode: Hill Giant has the greatest power, so it is destroyed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Getaway Glamer
+manapool:{W}{2}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Getaway Glamer
+choice 1
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Getaway Glamer
+[PLAYER2]
+graveyard:Hill Giant
+[END]

@@ -158106,3 +158106,81 @@ subtype=Human Detective
 power=2
 toughness=2
 [/card]
+[card]
+name=Getaway Glamer
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{2}: Destroy target creature if no other creature has greater power) pay({2}) name(Destroy target creature if no other creature has greater power) target(creature) transforms((,newability[if compare(power:highest:creature:battlefield)~equalto~compare(power) then destroy])) oneshot
+auto=may name(+{1}: Exile target nontoken creature, return it at the next end step) pay({1}) name(Exile target nontoken creature, return it at the next end step) target(creature[-token]) (blink)ueot
+text=Spree (Choose one or more additional costs.) -- + {1} - Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step. -- + {2} - Destroy target creature if no other creature has greater power.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Great Train Heist
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{R}: A Treasure whenever a creature you control deals combat damage to the opponent) pay({R}) name(A Treasure whenever a creature you control deals combat damage to the opponent) emblem transforms((,newability[@combatdamaged(opponent) from(creature|mybattlefield):_TREASURE_])) ueot
+auto=may name(+{2}: Creatures you control get +1/+0 and first strike) pay({2}) name(Creatures you control get +1/+0 and first strike) all(creature|mybattlefield) 1/0 ueot && all(creature|mybattlefield) transforms((,first strike)) ueot
+auto=may name(+{2}{R}: Untap all creatures you control) pay({2}{R}) name(Untap all creatures you control) untap all(creature|mybattlefield)
+missing=the first mode's additional combat phase, and the Treasures entering tapped
+text=Spree (Choose one or more additional costs.) -- + {2}{R} - Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase. -- + {2} - Creatures you control get +1/+0 and gain first strike until end of turn. -- + {R} - Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.
+mana={R}
+type=Instant
+[/card]
+[card]
+name=Lively Dirge
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+#Each returned creature card has mana value 4 or less; their TOTAL is not checked.
+auto=may name(+{2}: Return up to two creature cards (total mana value 4 or less)) pay({2}) name(Return up to two creature cards (total mana value 4 or less)) target(<upto:2>creature[manacost<=4]|mygraveyard) moveto(mybattlefield)
+auto=may name(+{1}: Search your library for a card, put it into your graveyard) pay({1}) name(Search your library for a card, put it into your graveyard) target(*|mylibrary) moveto(mygraveyard) and!( shuffle )!
+text=Spree (Choose one or more additional costs.) -- + {1} - Search your library for a card, put it into your graveyard, then shuffle. -- + {2} - Return up to two creature cards with total mana value 4 or less from your graveyard to the battlefield.
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=One Last Job
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: Return target Aura or Equipment attached to a creature you control) pay({1}) name(Return target Aura or Equipment attached to a creature you control) target(*[aura;equipment]|mygraveyard) moveto(mybattlefield) and!( rehook target(creature|mybattlefield) )!
+auto=may name(+{1}: Return target Mount or Vehicle card to the battlefield) pay({1}) name(Return target Mount or Vehicle card to the battlefield) target(*[mount;vehicle]|mygraveyard) moveto(mybattlefield)
+auto=may name(+{2}: Return target creature card to the battlefield) pay({2}) name(Return target creature card to the battlefield) target(creature|mygraveyard) moveto(mybattlefield)
+text=Spree (Choose one or more additional costs.) -- + {2} - Return target creature card from your graveyard to the battlefield. -- + {1} - Return target Mount or Vehicle card from your graveyard to the battlefield. -- + {1} - Return target Aura or Equipment card from your graveyard to the battlefield attached to a creature you control.
+mana={2}{W}
+type=Sorcery
+[/card]
+[card]
+name=Rush of Dread
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{2}: Opponent loses half their life, rounded up) pay({2}) name(Opponent loses half their life, rounded up) life:-halfupopponentlifetotal opponent
+auto=may name(+{2}: Opponent discards half their hand, rounded up) pay({2}) name(Opponent discards half their hand, rounded up) ability$!name(Discard half your hand) reject notaTarget(<halfuptype:*:myhand>*|myhand)!$ opponent
+auto=may name(+{1}: Opponent sacrifices half their creatures, rounded up) pay({1}) name(Opponent sacrifices half their creatures, rounded up) ability$!name(Sacrifice half your creatures) sacrifice notaTarget(<halfuptype:creature:mybattlefield>creature|mybattlefield)!$ opponent
+text=Spree (Choose one or more additional costs.) -- + {1} - Target opponent sacrifices half the creatures they control of their choice, rounded up. -- + {2} - Target opponent discards half the cards in their hand, rounded up. -- + {2} - Target opponent loses half their life, rounded up.
+mana={1}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Shifting Grift
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+#Each exchange is one of the opponent's permanents for one of yours.
+auto=may name(+{1}: Exchange control of two enchantments) pay({1}) name(Exchange control of two enchantments) target(enchantment|opponentbattlefield) moveto(mybattlefield) and!( transforms((,newability[name(Give one of yours) target(other enchantment|mybattlefield) moveto(opponentbattlefield)])) oneshot )!
+auto=may name(+{1}: Exchange control of two artifacts) pay({1}) name(Exchange control of two artifacts) target(artifact|opponentbattlefield) moveto(mybattlefield) and!( transforms((,newability[name(Give one of yours) target(other artifact|mybattlefield) moveto(opponentbattlefield)])) oneshot )!
+auto=may name(+{2}: Exchange control of two creatures) pay({2}) name(Exchange control of two creatures) target(creature|opponentbattlefield) moveto(mybattlefield) and!( transforms((,newability[name(Give one of yours) target(other creature|mybattlefield) moveto(opponentbattlefield)])) oneshot )!
+text=Spree (Choose one or more additional costs.) -- + {2} - Exchange control of two target creatures. -- + {1} - Exchange control of two target artifacts. -- + {1} - Exchange control of two target enchantments.
+mana={U}{U}
+type=Sorcery
+[/card]
+[card]
+name=Smuggler's Surprise
+#2026-11-22 spree batch 2: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: Creatures you control with power 4 or more gain hexproof and indestructible) pay({1}) name(Creatures you control with power 4 or more gain hexproof and indestructible) all(creature[power>=4]|mybattlefield) transforms((,hexproof,indestructible)) ueot
+auto=may name(+{4}{G}: Put up to two creature cards from your hand onto the battlefield) pay({4}{G}) name(Put up to two creature cards from your hand onto the battlefield) target(<upto:2>creature|myhand) moveto(mybattlefield)
+auto=may name(+{2}: Mill four, put up to two creature or land cards among them into your hand) pay({2}) name(Mill four, put up to two creature or land cards among them into your hand) reveal:4 revealzone(mylibrary) optionone name(Put up to two into your hand) target(<upto:2>creature,land|reveal) moveto(myhand) optiononeend optiontwo name(Keep none) donothing optiontwoend afterrevealed all(*|reveal) moveto(mygraveyard) afterrevealedend revealend
+text=Spree (Choose one or more additional costs.) -- + {2} - Mill four cards. You may put up to two creature and/or land cards from among the milled cards into your hand. -- + {4}{G} - You may put up to two creature cards from your hand onto the battlefield. -- + {1} - Creatures you control with power 4 or greater gain hexproof and indestructible until end of turn.
+mana={G}
+type=Instant
+[/card]
