@@ -155667,6 +155667,7 @@ type=Sorcery
 [/card]
 [card]
 name=Branching Timeline
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): reveal three, permanents enter tapped, the rest go to the bottom.
 #2026-11-19 Star Trek batch 8: written from existing working forms.
 auto=name(Reveal) reveal:pdiffnamedlands optionone name(Put permanents onto the battlefield tapped) target(<anyamount>*[-instant&-sorcery]|reveal) moveto(mybattlefield) and!( tap(noevent) )! optiononeend optiontwo choice name(Put the rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 text=Strange new worlds - Reveal the top X cards of your library, where X is the number of differently named lands you control. Put all permanent cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.
@@ -155818,6 +155819,7 @@ toughness=1
 [/card]
 [card]
 name=Rok-Tahk, Budding Scientist
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): another creature you control taps for {G}{G}.
 #2026-11-19 Star Trek batch 8: written from existing working forms.
 auto=lord(creature|myBattlefield) {T}:Add{G}{G}
 auto=token(-706516)
@@ -156263,6 +156265,7 @@ type=Artifact
 [/card]
 [card]
 name=Black Panther, Most Dangerous
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): enrage sends the damage to a chosen target.
 #2026-11-22 Marvel power-up batch 1: engine word powerup (once per object; costs less by its mana cost the turn it entered).
 auto=_ENRAGE_damage:thatmuch target(anytarget)
 auto={5}{W}{W}:counter(1/1,2) && all(other creature|mybattlefield) 2/2 ueot powerup
@@ -156335,6 +156338,7 @@ toughness=2
 [/card]
 [card]
 name=Jack of Hearts, Volatile Hero
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): on death deals damage equal to his power to each creature.
 #2026-11-22 Marvel power-up batch 1: engine word powerup (once per object; costs less by its mana cost the turn it entered).
 abilities=flying,haste
 auto=_DIES_damage:power all(creature)
@@ -156430,6 +156434,7 @@ toughness=3
 [/card]
 [card]
 name=Brave Brawler
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the power-up menu shows the reduced cost the turn it is cast, and not again after use.
 #2026-11-22 Marvel power-up batch 1: engine word powerup (once per object; costs less by its mana cost the turn it entered).
 abilities=lifelink
 auto={4}{W}:counter(1/1,2) powerup
@@ -156479,6 +156484,7 @@ toughness=5
 [/card]
 [card]
 name=Human Torch, Johnny Storm
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): a draw with another Hero in play deals 1 damage to the opponent.
 #2026-11-22 Marvel power-up batch 1: engine word powerup (once per object; costs less by its mana cost the turn it entered).
 abilities=flying
 auto=@drawof(player):if type(other hero|mybattlefield)~morethan~0 then damage:1 target(opponent)
@@ -156492,6 +156498,7 @@ toughness=2
 [/card]
 [card]
 name=Kang the Conqueror
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the power-up gives an extra turn.
 #2026-11-22 Marvel power-up batch 1: engine word powerup (once per object; costs less by its mana cost the turn it entered).
 abilities=flying
 auto={5}{U}{U}{U}:counter(1/1) && turns:+1 controller powerup
@@ -156843,6 +156850,7 @@ type=Instant
 [/card]
 [card]
 name=Charmed Clothier
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): a Royal Role sends your existing Wicked Role to the graveyard.
 #2026-11-22 Role batch: written from existing working forms.
 abilities=flying
 auto=token(-632903) attachtoit target(other creature|mybattlefield)
@@ -156889,6 +156897,7 @@ toughness=2
 [/card]
 [card]
 name=Lord Skitter's Blessing
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): draw step with an enchanted creature: lose 1 life, draw an extra card.
 #2026-11-22 Role batch: written from existing working forms.
 auto=token(-632905) attachtoit target(creature|mybattlefield)
 auto=@each my draw:if type(creature[enchanted]|mybattlefield)~morethan~0 then life:-1 controller && draw:1 controller
@@ -156965,6 +156974,7 @@ type=Sorcery
 [/card]
 [card]
 name=Spellbook Vendor
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): pay {1} at beginning of combat for a Sorcerer Role on a chosen creature.
 #2026-11-22 Role batch: written from existing working forms.
 abilities=vigilance
 auto=@each my combatbegins:may name(Pay 1 for a Sorcerer Role) pay({1}) name(Sorcerer Role) token(-632902) attachtoit target(creature|mybattlefield)
@@ -156988,6 +156998,7 @@ toughness=4
 [/card]
 [card]
 name=Gylwain, Casting Director
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the choose-a-Role menu when another nontoken creature enters.
 #2026-11-22 Role batch: written from existing working forms.
 auto=name(Choose a Role) transforms((,newability[choice name(Royal Role) token(-632903) attachtoit],newability[choice name(Sorcerer Role) token(-632902) attachtoit],newability[choice name(Monster Role) token(-632901) attachtoit])) oneshot
 auto=@movedTo(other creature[-token]|mybattlefield):name(Choose a Role) all(trigger[to]) transforms((,newability[choice name(Royal Role) token(-632903) attachtoit],newability[choice name(Sorcerer Role) token(-632902) attachtoit],newability[choice name(Monster Role) token(-632901) attachtoit])) oneshot
@@ -157000,6 +157011,7 @@ toughness=3
 [/card]
 [card]
 name=Twisted Sewer-Witch
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the Rat token shows its picture and gets a Wicked Role.
 #2026-11-22 Role batch: written from existing working forms.
 auto=token(-632907) && all(rat|mybattlefield) transforms((,newability[token(-632905) attachtoit])) oneshot
 text=When this creature enters, create a 1/1 black Rat creature token with "This creature can't block." Then for each Rat you control, create a Wicked Role token attached to that Rat. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)
@@ -157482,6 +157494,7 @@ toughness=2
 [/card]
 [card]
 name=Broken Ambitions
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): counters a spell, clash won: its controller mills four.
 #2026-11-22 clash batch: written from existing working forms.
 target=*|stack
 auto=transforms((,newability[pay[[{value:storedx}]] name(pay {value} mana) donothing?fizzle])) forever
@@ -157494,7 +157507,9 @@ type=Instant
 name=Captivating Glance
 #2026-11-22 clash batch: written from existing working forms.
 target=creature
-auto=@each my end:clash winability moveto(mybattlefield) all(mytgt) winabilityend loseability moveto(opponentbattlefield) all(mytgt) loseabilityend clashend
+#The clash's own target is the enchanted creature, so the branches move it directly (all(mytgt) moved
+#nothing - John, scenario 136). Act of Treason's moveto(mybattlefield) form.
+auto=@each my end:clash winability moveto(mybattlefield) winabilityend loseability moveto(opponentbattlefield) loseabilityend clashend
 text=Enchant creature -- At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
 mana={2}{U}
 type=Enchantment
@@ -157510,6 +157525,7 @@ type=Enchantment
 [/card]
 [card]
 name=Fire Juggler
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): becomes blocked, clash won: 4 damage to each blocker.
 #2026-11-22 clash batch: written from existing working forms.
 #"each creature blocking it" is every blocking creature: the engine has no blocking-this-creature selector.
 auto=@combat(blocked) source(this):clash winability damage:4 all(creature[blocking]) winabilityend clashend
@@ -157570,6 +157586,7 @@ type=Instant
 [/card]
 [card]
 name=Pulling Teeth
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): clash won: the target player discards two.
 #2026-11-22 clash batch: written from existing working forms.
 target=player
 auto=clash winability ability$!name(discard 2 cards) target(<2>*|myhand) reject!$ targetedplayer winabilityend loseability ability$!name(discard a card) target(<1>*|myhand) reject!$ targetedplayer loseabilityend clashend
@@ -157588,6 +157605,7 @@ subtype=Elemental
 [/card]
 [card]
 name=Recross the Paths
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): reveal until a land, land onto the battlefield, rest on the bottom, clash won: returns to hand.
 #2026-11-22 clash batch: written from existing working forms.
 auto=reveal:1 revealzone(mylibrary) revealuntil(*[land]|mylibrary) optionone choice name(Put the land onto the battlefield) target(land|reveal) moveto(mybattlefield) optiononeend optiontwo choice name(Rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed clash winability thiscard moveto(ownerhand) winabilityend clashend afterrevealedend revealend
 text=Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. Clash with an opponent. If you win, return Recross the Paths to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
@@ -157597,12 +157615,9 @@ type=Sorcery
 [card]
 name=Redeem the Lost
 #2026-11-22 clash batch: written from existing working forms.
-target=creature|mybattlefield
-auto=choice name(Protection from white) transforms((,newability[protection from white])) ueot
-auto=choice name(Protection from blue) transforms((,newability[protection from blue])) ueot
-auto=choice name(Protection from black) transforms((,newability[protection from black])) ueot
-auto=choice name(Protection from red) transforms((,newability[protection from red])) ueot
-auto=choice name(Protection from green) transforms((,newability[protection from green])) ueot
+#The five protection choices are one ability$! menu: as five separate "choice" lines the clash's
+#top/bottom menu took their place and no colour was ever offered (John, scenario 135).
+auto=ability$!choice name(Protection from white) target(creature|mybattlefield) transforms((,newability[protection from white])) ueot _ choice name(Protection from blue) target(creature|mybattlefield) transforms((,newability[protection from blue])) ueot _ choice name(Protection from black) target(creature|mybattlefield) transforms((,newability[protection from black])) ueot _ choice name(Protection from red) target(creature|mybattlefield) transforms((,newability[protection from red])) ueot _ choice name(Protection from green) target(creature|mybattlefield) transforms((,newability[protection from green])) ueot!$ controller
 auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
 text=Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return Redeem the Lost to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
 mana={1}{W}
@@ -157620,6 +157635,7 @@ type=Instant
 [/card]
 [card]
 name=Research the Deep
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the top/bottom clash menu, clash won: returns to hand.
 #2026-11-22 clash batch: written from existing working forms.
 auto=draw:1 controller
 auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
@@ -157673,6 +157689,7 @@ type=Instant
 [/card]
 [card]
 name=Springjack Knight
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): attack clash won: the chosen creature gains double strike.
 #2026-11-22 clash batch: written from existing working forms.
 auto=_ATTACKING_clash winability target(creature) transforms((,double strike)) ueot winabilityend clashend
 text=Whenever this creature attacks, clash with an opponent. If you win, target creature gains double strike until end of turn. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)

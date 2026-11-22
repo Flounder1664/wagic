@@ -1,0 +1,27 @@
+#Captivating Glance on the opponent's Gray Ogre. At my end step I clash (won): on a win I gain control of the Ogre.
+#John's scenario 136 reported no win with Llanowar Elves (1) vs Plains (0) on top.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Island
+hand:Captivating Glance
+manapool:{2}{U}
+library:Memnite,Hill Giant
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Plains
+[DO]
+Captivating Glance
+Gray Ogre
+goto end
+choice 0
+choice 0
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Island,Gray Ogre,Captivating Glance
+library:Memnite,Hill Giant
+[PLAYER2]
+
+library:Ornithopter,Plains
+[END]

@@ -1,0 +1,22 @@
+#Faunsbane Troll: {1}, sacrifice its Monster Role - it fights Hill Giant (4 vs 3), and Hill Giant is exiled instead of dying.
+#Before the fix the Role was not an "attached" Aura, so the sacrifice cost had nothing to pay with (John, scenario 129).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Faunsbane Troll
+manapool:{2}{B}{G}{1}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Faunsbane Troll
+Faunsbane Troll
+Monster
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Faunsbane Troll
+pt:Faunsbane Troll=4/4
+[PLAYER2]
+exile:Hill Giant
+[END]

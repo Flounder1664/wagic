@@ -1,0 +1,30 @@
+#Redeem the Lost gives Grizzly Bears protection from red (choice 3); Shock then cannot target the Bears and stays in hand.
+#Twin of the clash tests: before the fix the colour menu never appeared and the Bears died (John, scenario 135).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Redeem the Lost,Shock
+manapool:{1}{W}{R}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Redeem the Lost
+choice 3
+Grizzly Bears
+choice 0
+choice 0
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shock
+graveyard:Redeem the Lost
+manapool:{R}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Plains
+[END]
