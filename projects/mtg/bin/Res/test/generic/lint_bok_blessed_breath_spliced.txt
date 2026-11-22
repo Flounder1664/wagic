@@ -1,0 +1,24 @@
+#Blessed Breath spliced onto Glacial Ray aimed at your own Grizzly Bears: the splice resolves first and
+#gives the Bears protection from red (4th choice), so Glacial Ray loses its target and the Bears live.
+#Blessed Breath stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Glacial Ray,Blessed Breath
+manapool:{1}{R}{W}
+[PLAYER2]
+[DO]
+Glacial Ray
+Grizzly Bears
+choice 0
+choice 3
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Blessed Breath
+graveyard:Glacial Ray
+[PLAYER2]
+[END]

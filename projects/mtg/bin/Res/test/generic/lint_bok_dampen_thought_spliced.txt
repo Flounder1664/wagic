@@ -1,0 +1,23 @@
+#Dampen Thought spliced onto Glacial Ray: pay {1}{U} as the Arcane spell is cast; Dampen Thought stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glacial Ray,Dampen Thought
+manapool:{1}{R}{1}{U}
+[PLAYER2]
+library:Forest,Island,Swamp,Mountain,Plains
+[DO]
+Glacial Ray
+p2
+choice 0
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dampen Thought
+graveyard:Glacial Ray
+[PLAYER2]
+library:Forest
+graveyard:Island,Swamp,Mountain,Plains
+life:18
+[END]

@@ -1,0 +1,20 @@
+#Desperate Ritual spliced onto Glacial Ray: pay {1}{R} as the Arcane spell is cast; Desperate Ritual stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glacial Ray,Desperate Ritual
+manapool:{1}{R}{1}{R}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+manapool:{R}{R}{R}
+hand:Desperate Ritual
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

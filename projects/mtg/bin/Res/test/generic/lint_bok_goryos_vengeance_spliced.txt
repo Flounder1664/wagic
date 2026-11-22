@@ -1,0 +1,23 @@
+#Goryo's Vengeance spliced onto Glacial Ray: pay {2}{B} as the Arcane spell is cast; Goryo's Vengeance stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Captain Sisay
+hand:Glacial Ray,Goryo's Vengeance
+manapool:{1}{R}{2}{B}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Captain Sisay
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Captain Sisay
+type:Captain Sisay=haste
+hand:Goryo's Vengeance
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

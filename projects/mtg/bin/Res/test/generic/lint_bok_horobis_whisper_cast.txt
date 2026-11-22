@@ -1,0 +1,20 @@
+#Horobi's Whisper cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swamp
+hand:Horobi's Whisper
+manapool:{1}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Horobi's Whisper
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Swamp
+graveyard:Horobi's Whisper
+[PLAYER2]
+graveyard:Hill Giant
+[END]

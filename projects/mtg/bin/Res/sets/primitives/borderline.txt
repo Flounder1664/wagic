@@ -157020,3 +157020,272 @@ power=1
 toughness=1
 color=black
 [/card]
+[card]
+name=Glacial Ray
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature,player
+auto=damage:2
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Glacial Ray) pay({1}{R}) name(Splice Glacial Ray) damage:2 target(creature,player)
+text=Glacial Ray deals 2 damage to any target. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Kodama's Might
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature
+auto=2/2 ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Kodama's Might) pay({G}) name(Splice Kodama's Might) 2/2 ueot target(creature)
+text=Target creature gets +2/+2 until end of turn. -- Splice onto Arcane {G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={G}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Blessed Breath
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature|mybattlefield
+auto=choice name(Protection from white) transforms((,newability[protection from white])) ueot
+auto=choice name(Protection from blue) transforms((,newability[protection from blue])) ueot
+auto=choice name(Protection from black) transforms((,newability[protection from black])) ueot
+auto=choice name(Protection from red) transforms((,newability[protection from red])) ueot
+auto=choice name(Protection from green) transforms((,newability[protection from green])) ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Blessed Breath) pay({W}) name(Splice Blessed Breath) ability$!choice name(Protection from white) target(creature|mybattlefield) transforms((,newability[protection from white])) ueot _ choice name(Protection from blue) target(creature|mybattlefield) transforms((,newability[protection from blue])) ueot _ choice name(Protection from black) target(creature|mybattlefield) transforms((,newability[protection from black])) ueot _ choice name(Protection from red) target(creature|mybattlefield) transforms((,newability[protection from red])) ueot _ choice name(Protection from green) target(creature|mybattlefield) transforms((,newability[protection from green])) ueot!$ controller
+text=Target creature you control gains protection from the color of your choice until end of turn. -- Splice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={W}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Consuming Vortex
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature
+auto=moveto(ownerhand)
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Consuming Vortex) pay({3}{U}) name(Splice Consuming Vortex) moveto(ownerhand) target(creature)
+text=Return target creature to its owner's hand. -- Splice onto Arcane {3}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{U}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Dampen Thought
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=player
+auto=deplete:4
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Dampen Thought) pay({1}{U}) name(Splice Dampen Thought) deplete:4 target(player)
+text=Target player mills four cards. -- Splice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{U}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Desperate Ritual
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=Add{R}{R}{R}
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Desperate Ritual) pay({1}{R}) name(Splice Desperate Ritual) Add{R}{R}{R}
+text=Add {R}{R}{R}. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Everdream
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=draw:1 controller
+autohand=@movedTo(other instant,sorcery|mystack) from(myhand):may name(Splice Everdream) pay({2}{U}) name(Splice Everdream) draw:1 controller
+text=Draw a card. -- Splice onto instant or sorcery {2}{U} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Goryo's Vengeance
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature[legendary]|mygraveyard
+auto=moveTo(mybattlefield) && transforms((,unearth,haste)) ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Goryo's Vengeance) pay({2}{B}) name(Splice Goryo's Vengeance) moveTo(mybattlefield) and!( transforms((,unearth,haste)) ueot )! target(creature[legendary]|mygraveyard)
+text=Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step. -- Splice onto Arcane {2}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{B}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Hideous Laughter
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=all(creature) -2/-2 ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Hideous Laughter) pay({3}{B}{B}) name(Splice Hideous Laughter) all(creature) -2/-2 ueot
+text=All creatures get -2/-2 until end of turn. -- Splice onto Arcane {3}{B}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={2}{B}{B}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Into the Fray
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature
+auto=mustattack ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Into the Fray) pay({R}) name(Splice Into the Fray) mustattack ueot target(creature)
+text=Target creature attacks this turn if able. -- Splice onto Arcane {R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Lifted by Clouds
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature
+auto=flying ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Lifted by Clouds) pay({1}{U}) name(Splice Lifted by Clouds) flying ueot target(creature)
+text=Target creature gains flying until end of turn. -- Splice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={2}{U}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Psychic Puppetry
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=*|battlefield
+auto=choice name(Tap it) tap
+auto=choice name(Untap it) untap
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Psychic Puppetry) pay({U}) name(Splice Psychic Puppetry) ability$!choice name(Tap it) tap target(*|battlefield) _ choice name(Untap it) untap target(*|battlefield)!$ controller
+text=You may tap or untap target permanent. -- Splice onto Arcane {U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{U}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Roar of Jukai
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=if type(forest|mybattlefield)~morethan~0 then all(creature[blocked]) 2/2 ueot
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Roar of Jukai) name(Splice Roar of Jukai) life:5 opponent && if type(forest|mybattlefield)~morethan~0 then all(creature[blocked]) 2/2 ueot
+text=If you control a Forest, each blocked creature gets +2/+2 until end of turn. -- Splice onto Arcane-An opponent gains 5 life. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={2}{G}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Soulless Revival
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature|mygraveyard
+auto=moveto(myhand)
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Soulless Revival) pay({1}{B}) name(Splice Soulless Revival) moveto(myhand) target(creature|mygraveyard)
+text=Return target creature card from your graveyard to your hand. -- Splice onto Arcane {1}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{B}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Spiritual Visit
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=token(Spirit,Creature Spirit,1/1)
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Spiritual Visit) pay({W}) name(Splice Spiritual Visit) token(Spirit,Creature Spirit,1/1)
+text=Create a 1/1 colorless Spirit creature token. -- Splice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={W}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Strange Inversion
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=creature
+auto=swap
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Strange Inversion) pay({1}{R}) name(Splice Strange Inversion) swap target(creature)
+text=Switch target creature's power and toughness until end of turn. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={2}{R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Through the Breach
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=may moveto(mybattlefield) target(creature|myhand) && transforms((,treason,haste)) forever
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Through the Breach) pay({2}{R}{R}) name(Splice Through the Breach) moveto(mybattlefield) and!( transforms((,treason,haste)) forever )! target(<upto:1>creature|myhand)
+text=You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step. -- Splice onto Arcane {2}{R}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={4}{R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Vital Surge
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+auto=life:3 controller
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Vital Surge) pay({1}{G}) name(Splice Vital Surge) life:3 controller
+text=You gain 3 life. -- Splice onto Arcane {1}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{G}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Wear Away
+#2026-11-22 Splice batch: written from existing working forms.
+#Splice is a trigger on the card in hand: casting another Arcane spell from hand offers the splice cost; the effect resolves just before that spell, not as part of it.
+target=artifact,enchantment
+auto=destroy
+autohand=@movedTo(other arcane|mystack) from(myhand):may name(Splice Wear Away) pay({3}{G}) name(Splice Wear Away) destroy target(artifact,enchantment)
+text=Destroy target artifact or enchantment. -- Splice onto Arcane {3}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={G}{G}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Horobi's Whisper
+#2026-11-22 Splice batch: written from existing working forms.
+target=creature[-black]
+auto=if type(swamp|mybattlefield)~morethan~0 then destroy
+missing=the splice cost (exile four cards from your graveyard) - pay() takes mana only, so this card cannot be spliced; cast as itself it is complete
+text=If you control a Swamp, destroy target nonblack creature. -- Splice onto Arcane-Exile four cards from your graveyard. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{B}{B}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Hundred-Talon Strike
+#2026-11-22 Splice batch: written from existing working forms.
+target=creature
+auto=transforms((,first strike,newability[1/0 ueot])) ueot
+missing=the splice cost (tap an untapped white creature you control) - pay() takes mana only, so this card cannot be spliced; cast as itself it is complete
+text=Target creature gets +1/+0 and gains first strike until end of turn. -- Splice onto Arcane-Tap an untapped white creature you control. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={W}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Torrent of Stone
+#2026-11-22 Splice batch: written from existing working forms.
+target=creature
+auto=damage:4
+missing=the splice cost (sacrifice two Mountains) - pay() takes mana only, so this card cannot be spliced; cast as itself it is complete
+text=Torrent of Stone deals 4 damage to target creature. -- Splice onto Arcane-Sacrifice two Mountains. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={3}{R}
+type=Instant
+subtype=Arcane
+[/card]
+[card]
+name=Veil of Secrecy
+#2026-11-22 Splice batch: written from existing working forms.
+target=creature
+auto=transforms((,shroud,unblockable)) ueot
+missing=the splice cost (return a blue creature you control to its owner's hand) - pay() takes mana only, so this card cannot be spliced; cast as itself it is complete
+text=Target creature gains shroud until end of turn and can't be blocked this turn. (A creature with shroud can't be the target of spells or abilities.) -- Splice onto Arcane-Return a blue creature you control to its owner's hand. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+mana={1}{U}
+type=Instant
+subtype=Arcane
+[/card]

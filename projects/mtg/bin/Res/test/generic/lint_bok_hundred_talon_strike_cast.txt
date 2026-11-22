@@ -1,0 +1,20 @@
+#Hundred-Talon Strike cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Hundred-Talon Strike
+manapool:{W}
+[PLAYER2]
+[DO]
+Hundred-Talon Strike
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/2
+type:Grizzly Bears=first strike
+graveyard:Hundred-Talon Strike
+[PLAYER2]
+[END]

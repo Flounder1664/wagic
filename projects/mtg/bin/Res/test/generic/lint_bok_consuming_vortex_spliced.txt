@@ -1,0 +1,22 @@
+#Consuming Vortex spliced onto Glacial Ray: pay {3}{U} as the Arcane spell is cast; Consuming Vortex stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glacial Ray,Consuming Vortex
+manapool:{1}{R}{3}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Glacial Ray
+p2
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Consuming Vortex
+graveyard:Glacial Ray
+[PLAYER2]
+hand:Hill Giant
+life:18
+[END]

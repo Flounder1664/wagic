@@ -1,0 +1,23 @@
+#Blessed Breath cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shock,Blessed Breath
+manapool:{W}{R}
+[PLAYER2]
+[DO]
+Blessed Breath
+Grizzly Bears
+choice 3
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shock
+manapool:{R}
+graveyard:Blessed Breath
+[PLAYER2]
+[END]

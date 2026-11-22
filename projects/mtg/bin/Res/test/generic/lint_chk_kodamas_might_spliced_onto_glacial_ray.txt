@@ -1,0 +1,24 @@
+#Splice: casting Glacial Ray (Arcane) with Kodama's Might in hand, pay {G} to splice Might onto it:
+#Grizzly Bears gets +2/+2 (4/4) and Glacial Ray hits the opponent for 2. Kodama's Might stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Glacial Ray,Kodama's Might
+manapool:{1}{R}{G}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+hand:Kodama's Might
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,19 @@
+#Hideous Laughter cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Hideous Laughter
+manapool:{2}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Hideous Laughter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Hideous Laughter
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=1/1
+[END]

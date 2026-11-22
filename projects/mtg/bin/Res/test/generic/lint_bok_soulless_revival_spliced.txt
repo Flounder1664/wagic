@@ -1,0 +1,21 @@
+#Soulless Revival spliced onto Glacial Ray: pay {1}{B} as the Arcane spell is cast; Soulless Revival stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hill Giant
+hand:Glacial Ray,Soulless Revival
+manapool:{1}{R}{1}{B}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Soulless Revival
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

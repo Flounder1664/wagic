@@ -1,0 +1,24 @@
+#Twin: Shock is not Arcane, so Kodama's Might offers no splice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shock,Kodama's Might
+manapool:{R}{G}
+[PLAYER2]
+[DO]
+Shock
+p2
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=2/2
+hand:Kodama's Might
+graveyard:Shock
+manapool:{G}
+[PLAYER2]
+life:18
+[END]

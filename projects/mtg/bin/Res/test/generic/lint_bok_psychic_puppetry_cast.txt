@@ -1,0 +1,20 @@
+#Psychic Puppetry cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Psychic Puppetry
+manapool:{1}{U}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Psychic Puppetry
+Hill Giant
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Psychic Puppetry
+[PLAYER2]
+inplay:Hill Giant
+tappedinplay:1
+[END]

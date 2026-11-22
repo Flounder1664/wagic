@@ -1,0 +1,19 @@
+#Kodama's Might cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Kodama's Might
+manapool:{G}
+[PLAYER2]
+[DO]
+Kodama's Might
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+graveyard:Kodama's Might
+[PLAYER2]
+[END]

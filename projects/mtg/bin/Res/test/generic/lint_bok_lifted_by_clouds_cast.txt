@@ -1,0 +1,19 @@
+#Lifted by Clouds cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Lifted by Clouds
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Lifted by Clouds
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+type:Grizzly Bears=flying
+graveyard:Lifted by Clouds
+[PLAYER2]
+[END]

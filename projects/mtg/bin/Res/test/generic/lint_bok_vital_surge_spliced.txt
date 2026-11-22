@@ -1,0 +1,20 @@
+#Vital Surge spliced onto Glacial Ray: pay {1}{G} as the Arcane spell is cast; Vital Surge stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glacial Ray,Vital Surge
+manapool:{1}{R}{1}{G}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:23
+hand:Vital Surge
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

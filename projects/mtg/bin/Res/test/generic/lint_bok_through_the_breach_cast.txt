@@ -1,0 +1,19 @@
+#Through the Breach cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Through the Breach
+manapool:{4}{R}
+[PLAYER2]
+[DO]
+Through the Breach
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+type:Hill Giant=haste
+graveyard:Through the Breach
+[PLAYER2]
+[END]

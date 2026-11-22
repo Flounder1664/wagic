@@ -1,0 +1,16 @@
+#Spiritual Visit cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spiritual Visit
+manapool:{W}
+[PLAYER2]
+[DO]
+Spiritual Visit
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Spiritual Visit
+[PLAYER2]
+[END]

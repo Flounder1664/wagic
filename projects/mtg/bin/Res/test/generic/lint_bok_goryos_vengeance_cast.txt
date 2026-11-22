@@ -1,0 +1,19 @@
+#Goryo's Vengeance cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Captain Sisay
+hand:Goryo's Vengeance
+manapool:{1}{B}
+[PLAYER2]
+[DO]
+Goryo's Vengeance
+Captain Sisay
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Captain Sisay
+type:Captain Sisay=haste
+graveyard:Goryo's Vengeance
+[PLAYER2]
+[END]

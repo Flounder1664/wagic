@@ -1,0 +1,18 @@
+#Soulless Revival cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Hill Giant
+hand:Soulless Revival
+manapool:{1}{B}
+[PLAYER2]
+[DO]
+Soulless Revival
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant
+graveyard:Soulless Revival
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Lifted by Clouds spliced onto Glacial Ray: pay {1}{U} as the Arcane spell is cast; Lifted by Clouds stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Glacial Ray,Lifted by Clouds
+manapool:{1}{R}{1}{U}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+type:Grizzly Bears=flying
+hand:Lifted by Clouds
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

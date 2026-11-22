@@ -1,0 +1,21 @@
+#Everdream splices onto any instant or sorcery: Shock, pay {2}{U}, draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock,Everdream
+manapool:{R}{2}{U}
+library:Forest,Island
+[PLAYER2]
+[DO]
+Shock
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Everdream,Island
+library:Forest
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

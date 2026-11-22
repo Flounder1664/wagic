@@ -1,0 +1,19 @@
+#Dampen Thought cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dampen Thought
+manapool:{1}{U}
+[PLAYER2]
+library:Forest,Island,Swamp,Mountain,Plains
+[DO]
+Dampen Thought
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Dampen Thought
+[PLAYER2]
+library:Forest
+graveyard:Island,Swamp,Mountain,Plains
+[END]

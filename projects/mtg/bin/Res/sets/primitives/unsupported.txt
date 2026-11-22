@@ -902,13 +902,6 @@ power=0
 toughness=3
 [/card]
 [card]
-name=Blessed Breath
-text=Target creature you control gains protection from the color of your choice until end of turn. -- Splice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={W}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Blight Titan
 abilities=deathtouch
 auto=@ or attacksdeplete:2 && incubate x, where x is the number of creature cards in your graveyard
@@ -1922,13 +1915,6 @@ mana={5}{U}
 type=Enchantment
 [/card]
 [card]
-name=Consuming Vortex
-text=Return target creature to its owner's hand. -- Splice onto Arcane {3}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{U}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Contract from Below
 text=Remove Contract from Below from your deck before playing if you're not playing for ante. -- Discard your hand, add the top card of your library to the ante, then draw seven cards.
 mana={B}
@@ -2185,13 +2171,6 @@ type=Creature
 subtype=Merfolk Wizard
 power=1
 toughness=1
-[/card]
-[card]
-name=Dampen Thought
-text=Target player puts the top four cards of his or her library into his or her graveyard. -- Splice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{U}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Damping Engine
@@ -2455,13 +2434,6 @@ name=Desperate Research
 text=Name a card other than a basic land card. Then reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest.
 mana={1}{B}
 type=Sorcery
-[/card]
-[card]
-name=Desperate Ritual
-text=Add {R}{R}{R} to your mana pool. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{R}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Dichotomancy
@@ -3108,12 +3080,6 @@ text=Enchant permanent -- As long as enchanted permanent is red or green, it has
 mana={U}
 type=Enchantment
 subtype=Aura
-[/card]
-[card]
-name=Everdream
-text=Draw a card. -- Splice onto instant or sorcery {2}{U} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{U}
-type=Instant
 [/card]
 [card]
 name=Evermind
@@ -3959,13 +3925,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Glacial Ray
-text=Glacial Ray deals 2 damage to target creature or player. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{R}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Glamer Spinners
 abilities=flash,flying
 text=Flash -- Flying -- When Glamer Spinners enters the battlefield, attach all Auras enchanting target permanent to another permanent with the same controller.
@@ -4183,13 +4142,6 @@ name=Golgothian Sylex
 text={1}, {T}: Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.
 mana={4}
 type=Artifact
-[/card]
-[card]
-name=Goryo's Vengeance
-text=Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step. -- Splice onto Arcane {2}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{B}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Grafdigger's Cage
@@ -4639,13 +4591,6 @@ mana={1}{U}
 type=Sorcery
 [/card]
 [card]
-name=Hideous Laughter
-text=All creatures get -2/-2 until end of turn. -- Splice onto Arcane {3}{B}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={2}{B}{B}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=High Ground
 missing=can block more than one creature - not implemented, and not a missing keyword: the combat model is one blocker to one attacker. MTGCardInstance::defenser is a single pointer and setDefenser() removes the blocker from the previous attacker's list before assigning the new one, so a creature cannot be in two attackers' blocker lists at once. Checked 2026-09-08 across all primitive files: 39 cards are printed with this and not one of them implements it. The existing oneblocker/threeblockers/blockers keywords are all on the ATTACKER side - how many creatures may block IT - which is the opposite relation. See https://github.com/Flounder1664/wagic/issues/38
 text=Each creature you control can block an additional creature.
@@ -4690,13 +4635,6 @@ type=Plane
 subtype=Pyrulea
 [/card]
 [card]
-name=Horobi's Whisper
-text=If you control a Swamp, destroy target nonblack creature. -- Splice onto Arcane-Exile four cards from your graveyard. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{B}{B}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Hostility
 text=Haste -- If a spell you control would deal damage to an opponent, prevent that damage. Put a 3/1 red Elemental Shaman creature token with haste onto the battlefield for each 1 damage prevented this way. -- When Hostility is put into a graveyard from anywhere, shuffle it into its owner's library.
 mana={3}{R}{R}{R}
@@ -4739,13 +4677,6 @@ type=Creature
 subtype=Bird
 power=+2
 toughness=+3
-[/card]
-[card]
-name=Hundred-Talon Strike
-text=Target creature gets +1/+0 and gains first strike until end of turn. -- Splice onto Arcane-Tap an untapped white creature you control. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={W}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Hurloon Wrangler
@@ -5115,13 +5046,6 @@ type=Instant
 name=Into the Earthen Maw
 text=When you set this scheme in motion, exile up to one target creature with flying, up to one target creature without flying, and all cards from up to one target opponent's graveyard.
 type=Scheme
-[/card]
-[card]
-name=Into the Fray
-text=Target creature attacks this turn if able. -- Splice onto Arcane {R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={R}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Introductions Are in Order
@@ -5715,13 +5639,6 @@ mana={4}
 type=Artifact
 [/card]
 [card]
-name=Kodama's Might
-text=Target creature gets +2/+2 until end of turn. -- Splice onto Arcane {G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={G}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Kor Chant
 text=All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
 mana={2}{W}
@@ -6023,13 +5940,6 @@ type=Creature
 subtype=Human Soldier
 power=2
 toughness=2
-[/card]
-[card]
-name=Lifted by Clouds
-text=Target creature gains flying until end of turn. -- Splice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={2}{U}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Light from Within
@@ -8143,13 +8053,6 @@ mana={U}
 type=Enchantment
 [/card]
 [card]
-name=Psychic Puppetry
-text=You may tap or untap target permanent. -- Splice onto Arcane {U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{U}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Psychic Rebuttal
 text=Counter target instant or sorcery spell that targets you. -- Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
 mana={1}{U}
@@ -8711,13 +8614,6 @@ type=Artifact Creature
 subtype=Cyborg Rigger
 power=2
 toughness=2
-[/card]
-[card]
-name=Roar of Jukai
-text=If you control a Forest, each blocked creature gets +2/+2 until end of turn. -- Splice onto Arcane-An opponent gains 5 life. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={2}{G}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Robo-
@@ -9693,13 +9589,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Soulless Revival
-text=Return target creature card from your graveyard to your hand. -- Splice onto Arcane {1}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{B}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Spark Fiend
 text=When Spark Fiend comes into play, roll two six-sided dice. On a total of 2, 3, or 12, sacrifice Spark Fiend. On a total of 7 or 11, do not roll dice for Spark Fiend during any of your following upkeep phases. If you roll any other total, note it. -- During your upkeep, roll two six-sided dice. On a total of 7, sacrifice Spark Fiend. If you roll the noted total, do not roll dice for Spark Fiend during any of your following upkeep phases. On any other roll, there is no effect.
 mana={4}{R}
@@ -9861,13 +9750,6 @@ type=Creature
 subtype=Treefolk Spirit
 power=3
 toughness=3
-[/card]
-[card]
-name=Spiritual Visit
-text=Put a 1/1 colorless Spirit creature token onto the battlefield. -- Splice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={W}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Spitting Slug
@@ -10167,13 +10049,6 @@ name=Story Circle
 text=As Story Circle enters the battlefield, choose a color. -- {W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
 mana={1}{W}{W}
 type=Enchantment
-[/card]
-[card]
-name=Strange Inversion
-text=Switch target creature's power and toughness until end of turn. -- Splice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={2}{R}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Stranglehold
@@ -10956,13 +10831,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Through the Breach
-text=You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step. -- Splice onto Arcane {2}{R}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={4}{R}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Throwing Knife
 text=Equipped creature gets +2/+0. -- Whenever equipped creature attacks, you may sacrifice Throwing Knife. If you do, Throwing Knife deals 2 damage to target creature or player. -- Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 mana={2}
@@ -11112,13 +10980,6 @@ type=Creature
 subtype=Shapeshifter
 power=3
 toughness=3
-[/card]
-[card]
-name=Torrent of Stone
-text=Torrent of Stone deals 4 damage to target creature. -- Splice onto Arcane-Sacrifice two Mountains. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={3}{R}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Total War
@@ -11459,13 +11320,6 @@ mana={3}{W}
 type=Enchantment
 [/card]
 [card]
-name=Veil of Secrecy
-text=Target creature gains shroud until end of turn and is unblockable this turn. -- Splice onto Arcane-Return a blue creature you control to its owner's hand. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{U}
-type=Instant
-subtype=Arcane
-[/card]
-[card]
 name=Vengeful Archon
 abilities=flying
 text=Flying -- {X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.
@@ -11564,13 +11418,6 @@ name=Vision Charm
 text=Choose one -- Target player puts the top four cards of his or her library into his or her graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
 mana={U}
 type=Instant
-[/card]
-[card]
-name=Vital Surge
-text=You gain 3 life. -- Splice onto Arcane {1}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={1}{G}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Vizier of the Anointed
@@ -11870,13 +11717,6 @@ type=Artifact
 name=Watermarket
 text={T}: Add {1}{1} . Spend this mana only to cast spells with watermarks.
 type=Land
-[/card]
-[card]
-name=Wear Away
-text=Destroy target artifact or enchantment. -- Splice onto Arcane {3}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-mana={G}{G}
-type=Instant
-subtype=Arcane
 [/card]
 [card]
 name=Weathered Bodyguards

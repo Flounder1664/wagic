@@ -1,0 +1,18 @@
+#Wear Away cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Wear Away
+manapool:{G}{G}
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Wear Away
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Wear Away
+[PLAYER2]
+graveyard:Ornithopter
+[END]

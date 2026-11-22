@@ -1,0 +1,16 @@
+#Desperate Ritual cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Desperate Ritual
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Desperate Ritual
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+manapool:{R}{R}{R}
+graveyard:Desperate Ritual
+[PLAYER2]
+[END]

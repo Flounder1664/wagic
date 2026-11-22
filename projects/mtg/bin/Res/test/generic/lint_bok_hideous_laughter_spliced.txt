@@ -1,0 +1,23 @@
+#Hideous Laughter spliced onto Glacial Ray: pay {3}{B}{B} as the Arcane spell is cast; Hideous Laughter stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Glacial Ray,Hideous Laughter
+manapool:{1}{R}{3}{B}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Glacial Ray
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Glacial Ray
+hand:Hideous Laughter
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=1/1
+life:18
+[END]

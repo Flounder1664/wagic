@@ -1,0 +1,23 @@
+#Strange Inversion spliced onto Glacial Ray: pay {1}{R} as the Arcane spell is cast; Strange Inversion stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Glacial Ray,Strange Inversion
+manapool:{1}{R}{1}{R}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+pt:Horned Turtle=4/1
+hand:Strange Inversion
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,23 @@
+#Twin: decline the splice - Grizzly Bears stays 2/2 and the {G} stays in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Glacial Ray,Kodama's Might
+manapool:{1}{R}{G}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=2/2
+hand:Kodama's Might
+graveyard:Glacial Ray
+manapool:{G}
+[PLAYER2]
+life:18
+[END]

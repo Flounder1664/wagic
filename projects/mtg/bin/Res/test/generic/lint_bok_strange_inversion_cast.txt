@@ -1,0 +1,19 @@
+#Strange Inversion cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+hand:Strange Inversion
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Strange Inversion
+Horned Turtle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Horned Turtle
+pt:Horned Turtle=4/1
+graveyard:Strange Inversion
+[PLAYER2]
+[END]

@@ -1,0 +1,16 @@
+#Vital Surge cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Vital Surge
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Vital Surge
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:23
+graveyard:Vital Surge
+[PLAYER2]
+[END]

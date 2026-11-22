@@ -1,0 +1,19 @@
+#Veil of Secrecy cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Veil of Secrecy
+manapool:{1}{U}
+[PLAYER2]
+[DO]
+Veil of Secrecy
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+type:Grizzly Bears=shroud
+graveyard:Veil of Secrecy
+[PLAYER2]
+[END]

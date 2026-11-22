@@ -1,0 +1,22 @@
+#Through the Breach spliced onto Glacial Ray: pay {2}{R}{R} as the Arcane spell is cast; Through the Breach stays in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Glacial Ray,Through the Breach
+manapool:{1}{R}{2}{R}{R}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+type:Hill Giant=haste
+hand:Through the Breach
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,17 @@
+#Glacial Ray cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Glacial Ray
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Glacial Ray
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Glacial Ray
+[PLAYER2]
+life:18
+[END]

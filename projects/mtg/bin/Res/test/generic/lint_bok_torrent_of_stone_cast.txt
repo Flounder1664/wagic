@@ -1,0 +1,18 @@
+#Torrent of Stone cast as itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Torrent of Stone
+manapool:{3}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Torrent of Stone
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Torrent of Stone
+[PLAYER2]
+graveyard:Hill Giant
+[END]
