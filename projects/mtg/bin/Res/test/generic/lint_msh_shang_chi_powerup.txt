@@ -1,0 +1,16 @@
+#Shang-Chi, Martial Mentor: power-up for its reduced cost {2} gives 10/10. Its doubling turns the three counters into six.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711433
+manapool:{2}
+[PLAYER2]
+[DO]
+711433
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711433
+pt:Shang-Chi, Martial Mentor=10/10
+[PLAYER2]
+[END]

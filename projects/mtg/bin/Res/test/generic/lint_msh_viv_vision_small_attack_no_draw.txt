@@ -1,0 +1,22 @@
+#Twin: Viv Vision attacking as a 2/2 draws nothing (her power is below 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712263
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+[DO]
+next
+next
+712263
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:712263
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+life:18
+[END]

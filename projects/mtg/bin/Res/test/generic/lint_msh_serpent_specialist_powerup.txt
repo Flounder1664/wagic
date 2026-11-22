@@ -1,0 +1,16 @@
+#Serpent Specialist: power-up for its reduced cost {3} gives 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Serpent Specialist
+manapool:{3}
+[PLAYER2]
+[DO]
+Serpent Specialist
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Serpent Specialist
+pt:Serpent Specialist=3/3
+[PLAYER2]
+[END]

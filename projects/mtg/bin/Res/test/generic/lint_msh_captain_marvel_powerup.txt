@@ -1,0 +1,18 @@
+#Captain Marvel: power-up for {2} gives a +1/+1 and an indestructible counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712048
+manapool:{2}
+[PLAYER2]
+[DO]
+712048
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712048
+pt:Captain Marvel, Earth's Protector=6/5
+counter:Captain Marvel, Earth's Protector=Indestructible:1
+type:Captain Marvel, Earth's Protector=indestructible
+[PLAYER2]
+[END]

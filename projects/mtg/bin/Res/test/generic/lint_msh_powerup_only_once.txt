@@ -1,0 +1,19 @@
+#Power-up: activate each power-up ability only once - the second activation is refused though {3} is left.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Brave Brawler
+manapool:{W}{1}{1}{1}{1}{1}{1}{1}
+[PLAYER2]
+[DO]
+Brave Brawler
+Brave Brawler
+Brave Brawler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brave Brawler
+pt:Brave Brawler=4/3
+manapool:{1}{1}{1}
+[PLAYER2]
+[END]

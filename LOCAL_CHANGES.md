@@ -31,6 +31,7 @@ Tracks changes made on `Flounder1664/wagic` that are not in upstream `WagicProje
 | 2026-09-13 | wagic-v146-windows         | ae0ce982f  | MTGDefinitions.{h,cpp}, Player.{h,cpp}, Damage.cpp - doublelifelossopponent | WSL harness          | OK — Bloodletter of Aclazotz: opponents lose double life on your turn (replacement in Player::lifeLossMultiplier) |
 | 2026-09-13 | wagic-v146-windows         | 116ab5d97  | AllAbilities.{h,cpp}, MTGAbility.cpp - explore:N (AAExplore)     | WSL harness          | OK — target creature explores: real reveal, keep-or-bin menu naming the card, explored event (Map, Over the Edge, Guidestone Compass, Twists and Turns) |
 | 2026-09-13 | wagic-v146-windows         | (this commit) | JGE/src/pc/JGfx.cpp - LoadPNG setjmp recovery                     | Windows (builds)     | Unconfirmed until played — libpng 1.2 aborted the process (0x40000015 in libpng13.dll) on a failed PNG read; now the load fails instead. Two crashes on 2026-09-13, invisible to crash_log.txt |
+| 2026-11-22 | wagic-v146-windows | (this commit) | ManaCost.{h,cpp} (copyManaOnly, reduceByManaCost), MTGAbility.{h,cpp} - `powerup` word on an activated ability | WSL harness, 33 lint_msh_* tests PROVEN | Power-up (Marvel MSH/MSC): the ability can be activated once per object, and costs less by the card's mana cost (CR 118.7) while it entered this turn. 30 cards written on it |
 
 ## Follow-ups / known limitations
 

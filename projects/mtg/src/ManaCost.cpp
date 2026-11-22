@@ -704,6 +704,58 @@ void ManaCost::resetCosts()
     SAFE_DELETE(Bestow);
 }
 
+//The mana symbols and hybrids only: extra costs, kicker and the rest are left alone.
+void ManaCost::copyManaOnly(ManaCost * _manaCost)
+{
+    if (!_manaCost)
+        return;
+    cost = _manaCost->cost;
+    hybrids = _manaCost->hybrids;
+}
+
+//Reduce this cost by a mana cost (power-up: "reduce the cost by its mana cost"), CR 118.7:
+//generic removes generic; each coloured symbol removes one of its colour, or one generic when
+//this cost has none of that colour; a hybrid removes the same hybrid, else either colour, else generic.
+void ManaCost::reduceByManaCost(ManaCost * _manaCost)
+{
+    if (!_manaCost)
+        return;
+    int generic = _manaCost->getCost(Constants::MTG_COLOR_ARTIFACT);
+    for (int c = Constants::MTG_COLOR_ARTIFACT + 1; c < Constants::NB_Colors; c++)
+    {
+        int want = _manaCost->getCost(c);
+        int take = min((int)cost[c], want);
+        cost[c] = (int16_t)(cost[c] - take);
+        generic += want - take;
+    }
+    for (size_t i = 0; i < _manaCost->hybrids.size(); i++)
+    {
+        ManaCostHybrid& h = _manaCost->hybrids[i];
+        bool done = false;
+        for (size_t j = 0; j < hybrids.size() && !done; j++)
+        {
+            if (hybrids[j].color1 == h.color1 && hybrids[j].color2 == h.color2 && hybrids[j].value1 == h.value1 && hybrids[j].value2 == h.value2)
+            {
+                hybrids.erase(hybrids.begin() + j);
+                done = true;
+            }
+        }
+        if (!done && cost[h.color1] > 0)
+        {
+            cost[h.color1]--;
+            done = true;
+        }
+        if (!done && cost[h.color2] > 0)
+        {
+            cost[h.color2]--;
+            done = true;
+        }
+        if (!done)
+            generic += 1;
+    }
+    remove(Constants::MTG_COLOR_ARTIFACT, generic);
+}
+
 void ManaCost::copy(ManaCost * _manaCost)
 {
     if (!_manaCost)

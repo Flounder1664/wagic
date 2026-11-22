@@ -2733,6 +2733,17 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             tc->belongsToAbility = sWithoutTc;
     }
 
+    //Power-up (Marvel): "{cost}:effect powerup". The word is taken off before the effect is parsed.
+    bool powerUp = false;
+    if (sWithoutTc.find_first_not_of(" ") != string::npos && sWithoutTc[sWithoutTc.find_first_not_of(" ")] == '{')
+    {
+        size_t powerUpAt = sWithoutTc.rfind(" powerup");
+        if (powerUpAt != string::npos && (powerUpAt + 8 == sWithoutTc.size() || sWithoutTc[powerUpAt + 8] == ' '))
+        {
+            powerUp = true;
+            sWithoutTc.erase(powerUpAt, 8);
+        }
+    }
     size_t delimiter = sWithoutTc.find("}:");
     size_t firstNonSpace = sWithoutTc.find_first_not_of(" ");
     if (delimiter != string::npos && firstNonSpace != string::npos && sWithoutTc[firstNonSpace] == '{')
@@ -2813,9 +2824,15 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             if (tc)
             {
                 tc->belongsToAbility = sWithoutTc;
-                return NEW GenericTargetAbility(observer, newName,castRestriction,id, card, tc, a, cost, limit,sideEffect,usesBeforeSideEffect, restrictions, dest,tcString);
+                GenericTargetAbility * gta = NEW GenericTargetAbility(observer, newName,castRestriction,id, card, tc, a, cost, limit,sideEffect,usesBeforeSideEffect, restrictions, dest,tcString);
+                if (powerUp)
+                    gta->setPowerUp(cost);
+                return gta;
             }
-            return NEW GenericActivatedAbility(observer, newName,castRestriction,id, card, a, cost, limit,sideEffect,usesBeforeSideEffect,restrictions, dest);
+            GenericActivatedAbility * gaa = NEW GenericActivatedAbility(observer, newName,castRestriction,id, card, a, cost, limit,sideEffect,usesBeforeSideEffect,restrictions, dest);
+            if (powerUp)
+                gaa->setPowerUp(cost);
+            return gaa;
         }
         SAFE_DELETE(cost);
     }
@@ -7777,12 +7794,37 @@ ActivatedAbility::ActivatedAbility(GameObserver* observer, int id, MTGCardInstan
     setCost(_cost);
     abilityCost = 0;
     sa = NULL;
+    powerUp = false;
+    powerUpUses = 0;
+}
+
+void ActivatedAbility::setPowerUp(ManaCost * base)
+{
+    powerUp = true;
+    powerUpBase.copyManaOnly(base);
+}
+
+//Re-derive the cost each time it is offered: full, or reduced while the card is fresh.
+void ActivatedAbility::refreshPowerUpCost()
+{
+    ManaCost * cost = getCost();
+    if (!powerUp || !cost)
+        return;
+    cost->copyManaOnly(&powerUpBase);
+    if (source && source->fresh && source->isInPlay(game))
+        cost->reduceByManaCost(source->getManaCost());
 }
 
 int ActivatedAbility::isReactingToClick(MTGCardInstance * card, ManaCost * mana)
 {        
     if(card->isPhased)
         return 0;
+    if (powerUp)
+    {
+        if (powerUpUses >= 1)
+            return 0;
+        refreshPowerUpCost();
+    }
     Player * player = game->currentlyActing();
     int cPhase = game->getCurrentGamePhase();
     switch (restrictions)
@@ -8039,6 +8081,8 @@ int ActivatedAbility::activateAbility()
         return 1;
     }
     counters++;
+    if (powerUp)
+        powerUpUses++;
     if(sideEffect && usesBeforeSideEffects.size())
     {
         activateSideEffect();

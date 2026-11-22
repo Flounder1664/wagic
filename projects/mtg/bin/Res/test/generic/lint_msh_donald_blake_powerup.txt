@@ -1,0 +1,17 @@
+#Donald Blake: power-up for {3}{W} gives two +1/+1 counters and a flying counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711132
+manapool:{3}{W}
+[PLAYER2]
+[DO]
+711132
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711132
+pt:Donald Blake, Guise of Thor=3/5
+type:Donald Blake, Guise of Thor=flying
+[PLAYER2]
+[END]

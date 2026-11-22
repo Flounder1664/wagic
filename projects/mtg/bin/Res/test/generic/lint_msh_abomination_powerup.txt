@@ -1,0 +1,19 @@
+#Abomination: power-up for {2}{R} puts a counter on it, then it fights Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712003
+manapool:{1}{1}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+712003
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712003
+pt:Abomination, Terrifying Titan=5/5
+[PLAYER2]
+graveyard:Hill Giant
+[END]

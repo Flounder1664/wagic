@@ -1,0 +1,19 @@
+#Molly Hayes: power-up for {3} puts two counters on her and exiles the top card to play.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711334
+manapool:{3}
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+[DO]
+711334
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711334
+pt:Molly Hayes, Runaway=5/5
+exile:Gray Ogre
+library:Hill Giant
+[PLAYER2]
+[END]

@@ -1,0 +1,16 @@
+#Wonder Man, Hollywood Hero: power-up for its reduced cost {2} gives 6/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712277
+manapool:{2}
+[PLAYER2]
+[DO]
+712277
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712277
+pt:Wonder Man, Hollywood Hero=6/6
+[PLAYER2]
+[END]

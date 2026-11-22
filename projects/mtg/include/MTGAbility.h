@@ -319,6 +319,12 @@ public:
     string usesBeforeSideEffects;
     int uses;
     string castRestriction;
+    //Power-up: once per object, and cheaper by the card's mana cost on the turn it entered
+    bool powerUp;
+    int powerUpUses;
+    ManaCost powerUpBase;
+    void setPowerUp(ManaCost * base);
+    void refreshPowerUpCost();
 
     ActivatedAbility(GameObserver* observer, int id, MTGCardInstance* card, ManaCost* _cost = NULL, int _restrictions = NO_RESTRICTION, string limit = "", MTGAbility* sideEffect = NULL, string usesBeforeSideEffects = "",string castRestriction = "");
     virtual ~ActivatedAbility();

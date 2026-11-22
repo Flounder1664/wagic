@@ -1,0 +1,19 @@
+#Gamma Grotesque: power-up for {2}{G} - three counters, then one draw (only it has counters; Grizzly Bears does not).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gamma Grotesque,Grizzly Bears
+manapool:{2}{G}
+library:Hill Giant,Gray Ogre,Craw Wurm
+[PLAYER2]
+[DO]
+Gamma Grotesque
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gamma Grotesque,Grizzly Bears
+pt:Gamma Grotesque=6/6
+hand:Craw Wurm
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+[END]

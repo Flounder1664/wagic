@@ -1,0 +1,21 @@
+#Jack of Hearts: power-up for {3} discards the hand, draws three and puts two counters on him.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711270
+manapool:{3}
+hand:Shock
+library:Hill Giant,Gray Ogre,Craw Wurm,Ornithopter
+[PLAYER2]
+[DO]
+711270
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711270
+pt:Jack of Hearts, Volatile Hero=4/4
+graveyard:Shock
+hand:Gray Ogre,Craw Wurm,Ornithopter
+library:Hill Giant
+[PLAYER2]
+[END]

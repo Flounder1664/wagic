@@ -1,0 +1,19 @@
+#Brawn: his enter trigger draws Craw Wurm, then power-up for {3} puts a counter on him for each of the three cards in hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711057
+manapool:{3}
+hand:Hill Giant,Gray Ogre
+library:Craw Wurm
+[PLAYER2]
+[DO]
+711057
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711057
+pt:Brawn, Amadeus Cho=4/4
+hand:Hill Giant,Gray Ogre,Craw Wurm
+[PLAYER2]
+[END]

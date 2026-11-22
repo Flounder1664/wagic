@@ -1,0 +1,16 @@
+#Kang the Conqueror: power-up for its reduced cost {3}{U} gives 5/6.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kang the Conqueror
+manapool:{3}{U}
+[PLAYER2]
+[DO]
+Kang the Conqueror
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kang the Conqueror
+pt:Kang the Conqueror=5/6
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Goliath: power-up for {3} - two counters, then draw for Goliath (4) and Craw Wurm (6), not Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711200,Craw Wurm,Grizzly Bears
+manapool:{3}
+library:Hill Giant,Gray Ogre,Ornithopter
+[PLAYER2]
+[DO]
+711200
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711200,Craw Wurm,Grizzly Bears
+pt:Goliath, Mass Manipulator=4/4
+hand:Gray Ogre,Ornithopter
+library:Hill Giant
+[PLAYER2]
+[END]

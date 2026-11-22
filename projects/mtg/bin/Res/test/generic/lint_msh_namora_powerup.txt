@@ -1,0 +1,17 @@
+#Namora: power-up for {3} puts a counter on her and makes two Merfolk.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711347
+manapool:{3}
+[PLAYER2]
+[DO]
+711347
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711347,*,*
+pt:Namora, the Sea Queen=3/4
+pt:-712506=1/1
+[PLAYER2]
+[END]

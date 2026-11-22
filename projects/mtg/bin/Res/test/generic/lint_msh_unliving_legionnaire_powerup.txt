@@ -1,0 +1,19 @@
+#Unliving Legionnaire: power-up for {2}{B} returns Hill Giant to hand and puts two counters on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unliving Legionnaire
+manapool:{2}{B}
+graveyard:Hill Giant
+[PLAYER2]
+[DO]
+Unliving Legionnaire
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Unliving Legionnaire
+pt:Unliving Legionnaire=5/4
+hand:Hill Giant
+[PLAYER2]
+[END]

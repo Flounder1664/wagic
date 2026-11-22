@@ -1,0 +1,16 @@
+#Hercules, Prince of Power: power-up for its reduced cost {2} gives 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712100
+manapool:{2}
+[PLAYER2]
+[DO]
+712100
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712100
+pt:Hercules, Prince of Power=4/4
+[PLAYER2]
+[END]

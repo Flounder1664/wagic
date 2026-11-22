@@ -1,0 +1,19 @@
+#She-Hulk, Jade Defender: power-up for {1}{G} destroys Ornithopter and puts a counter on her.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712198
+manapool:{1}{G}
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+712198
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712198
+pt:She-Hulk, Jade Defender=5/5
+[PLAYER2]
+graveyard:Ornithopter
+[END]

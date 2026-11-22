@@ -1,0 +1,18 @@
+#Extremis Elite: power-up for {3} deals 1 to the opponent and puts two counters on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Extremis Elite
+manapool:{3}
+[PLAYER2]
+[DO]
+Extremis Elite
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Extremis Elite
+pt:Extremis Elite=4/4
+[PLAYER2]
+life:19
+[END]

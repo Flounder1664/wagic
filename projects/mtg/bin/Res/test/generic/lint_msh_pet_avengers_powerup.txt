@@ -1,0 +1,17 @@
+#Pet Avengers: power-up for {3} puts a counter on it and makes a 3/2 Hero.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pet Avengers
+manapool:{3}
+[PLAYER2]
+[DO]
+Pet Avengers
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Pet Avengers,*
+pt:Pet Avengers=5/5
+pt:-712502=3/2
+[PLAYER2]
+[END]

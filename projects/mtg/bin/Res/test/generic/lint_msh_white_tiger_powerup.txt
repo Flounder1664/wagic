@@ -1,0 +1,18 @@
+#White Tiger: power-up for {4} puts a counter on her and makes The Tiger God.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712271
+manapool:{4}
+[PLAYER2]
+[DO]
+712271
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712271,*
+pt:White Tiger, Ava Ayala=3/3
+pt:-712515=4/4
+type:-712515=oneblocker
+[PLAYER2]
+[END]

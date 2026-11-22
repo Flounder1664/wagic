@@ -1,0 +1,18 @@
+#Ninja of the Hand: power-up for {2} makes the opponent discard and puts a counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ninja of the Hand
+manapool:{2}
+[PLAYER2]
+hand:Hill Giant
+[DO]
+Ninja of the Hand
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ninja of the Hand
+pt:Ninja of the Hand=3/3
+[PLAYER2]
+graveyard:Hill Giant
+[END]

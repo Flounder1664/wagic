@@ -1,0 +1,16 @@
+#Aerial Doombot: power-up for its reduced cost {5} gives 4/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aerial Doombot
+manapool:{5}
+[PLAYER2]
+[DO]
+Aerial Doombot
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Aerial Doombot
+pt:Aerial Doombot=4/4
+[PLAYER2]
+[END]

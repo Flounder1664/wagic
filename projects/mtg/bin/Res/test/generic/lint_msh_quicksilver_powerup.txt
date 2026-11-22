@@ -1,0 +1,17 @@
+#Quicksilver: power-up for {4} gives a +1/+1 and a double strike counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712175
+manapool:{4}
+[PLAYER2]
+[DO]
+712175
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712175
+pt:Quicksilver, Brash Blur=2/2
+type:Quicksilver, Brash Blur=double strike
+[PLAYER2]
+[END]

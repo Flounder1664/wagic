@@ -1,0 +1,17 @@
+#Power-up: Brave Brawler cast this turn - the {4}{W} power-up costs {3} (its mana cost {1}{W} off).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Brave Brawler
+manapool:{W}{1}{1}{1}{1}
+[PLAYER2]
+[DO]
+Brave Brawler
+Brave Brawler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brave Brawler
+pt:Brave Brawler=4/3
+[PLAYER2]
+[END]

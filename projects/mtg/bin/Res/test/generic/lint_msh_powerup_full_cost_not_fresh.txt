@@ -1,0 +1,33 @@
+#Power-up: a Brave Brawler that did not enter this turn pays the full {4}{W}. On the next turn, with
+#{W}{R}{B}{G} floating (enough for the reduced {3}) the power-up is refused; the fifth land pays for it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brave Brawler,Plains,Mountain,Swamp,Forest,Island
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+library:Hill Giant,Gray Ogre
+[DO]
+eot
+next
+eot
+next
+next
+next
+Plains
+Mountain
+Swamp
+Forest
+Brave Brawler
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Brave Brawler,Plains,Mountain,Swamp,Forest,Island
+hand:*
+library:*
+pt:Brave Brawler=2/1
+manapool:{W}{R}{B}{G}
+[PLAYER2]
+hand:*
+library:*
+[END]

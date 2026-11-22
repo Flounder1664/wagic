@@ -1,0 +1,16 @@
+#Hulk, Gamma Goliath: power-up for its reduced cost {3} gives 11/10.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712107
+manapool:{3}
+[PLAYER2]
+[DO]
+712107
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712107
+pt:Hulk, Gamma Goliath=11/10
+[PLAYER2]
+[END]

@@ -1,0 +1,25 @@
+#Viv Vision: power-up for {4} makes her 4/4, so her attack trigger draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712263
+manapool:{4}
+library:Hill Giant,Gray Ogre
+[PLAYER2]
+[DO]
+712263
+next
+next
+712263
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:712263
+hand:Gray Ogre
+library:Hill Giant
+[PLAYER2]
+life:16
+[END]
