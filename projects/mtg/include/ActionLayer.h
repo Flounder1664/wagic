@@ -30,6 +30,9 @@ public:
     //One per entry of a custom choice menu: the card drawn beside the menu for that entry.
     std::vector<MTGCardInstance *> menuPreviewCards;
     std::vector<MTGCardInstance *> menuPreviewCards2;
+    //True while an open menu is drawing a preview card for its highlighted entry: the
+    //CardSelector's hover preview then stays hidden instead of covering it (John, 2026-11-22).
+    bool isShowingMenuPreview();
     int stuffHappened;
     virtual void Render();
     virtual void Update(float dt);

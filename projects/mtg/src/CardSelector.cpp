@@ -6,6 +6,8 @@
 #include "GuiHand.h"
 #include "Closest.cpp"
 #include "GameObserver.h"
+#include "ActionLayer.h"
+#include "DuelLayers.h"
 
 struct CardSelectorLeft: public Exp
 {
@@ -341,7 +343,8 @@ void CardSelector::Render()
         {
             //if(timer > 0)
                 //card->DrawCard(bigpos, mDrawMode);
-            if(timer > 0)
+            ActionLayer * al = (observer && observer->mLayers) ? observer->mLayers->actionLayer() : NULL;
+            if(timer > 0 && !(al && al->isShowingMenuPreview()))
              {
                  float modx = 0.f;
                  Pos npos = Pos(bigpos.x+modx,bigpos.y-4.f,bigpos.zoom-(bigpos.zoom/5),bigpos.t,bigpos.alpha);

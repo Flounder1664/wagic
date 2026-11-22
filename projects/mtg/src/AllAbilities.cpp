@@ -4254,7 +4254,8 @@ void AAClash::askPlacement(int who)
         AAClash * option = clone();
         option->placeFor = who;
         option->placeBottom = (b == 1);
-        option->menuText = string(b ? "Put " : "Keep ") + card->getName() + (b ? " on the bottom" : " on top");
+        //short: both cards are drawn beside the menu, which has to fit between them
+        option->menuText = b ? "Put on the bottom" : "Keep on top";
         //show both revealed cards while this player chooses: theirs is the other one
         option->menuPreviewCard = card;
         option->menuPreviewCard2 = (who == 1) ? theirs : mine;
@@ -4267,12 +4268,13 @@ void AAClash::askPlacement(int who)
     bool chooserWins = (who == 1) ? won
         : (theirs && theirs->getManaCost()->getConvertedCost() > (mine ? mine->getManaCost()->getConvertedCost() : -1));
     std::ostringstream title;
-    title << "Clash: " << card->getName() << " (" << card->getManaCost()->getConvertedCost() << ") vs "
-          << (other ? other->getName() : string("no card")) << " (" << (other ? other->getManaCost()->getConvertedCost() : 0) << ") - "
-          << (chooserWins ? "you win" : "you lose");
+    title << "Clash " << card->getManaCost()->getConvertedCost() << " vs "
+          << (other ? other->getManaCost()->getConvertedCost() : 0) << ": " << (chooserWins ? "you win" : "you lose");
     MTGAbility * menu = NEW MenuAbility(game, this->GetId(), source, source, true, selection, p, title.str());
-    game->mLayers->actionLayer()->currentActionCard = source;
-    menu->resolve();
+    //addToGame, not resolve(): resolve() puts the menu up at once and throws away one already
+    //open - Redeem the Lost's colour choice vanished under it (John, scenario 135). Added, it
+    //waits until no other menu is showing.
+    menu->addToGame();
 }
 
 //the clash's own target (a card follows its newest instance) goes to an effect that names

@@ -214,6 +214,14 @@ void ActionLayer::Update(float dt)
     }
 }
 
+bool ActionLayer::isShowingMenuPreview()
+{
+    if (!menuObject || !abilitiesMenu)
+        return false;
+    int entry = abilitiesMenu->getmCurr();
+    return entry >= 0 && entry < (int) menuPreviewCards.size() && menuPreviewCards[entry];
+}
+
 void ActionLayer::Render()
 {
     if (menuObject)
@@ -225,19 +233,20 @@ void ActionLayer::Render()
         MTGCardInstance * other = (entry >= 0 && entry < (int) menuPreviewCards2.size()) ? menuPreviewCards2[entry] : NULL;
         if (other && menuPreviewCards[entry] && observer->getCardSelector())
         {
-            //two cards side by side, smaller: the one this choice is about on the right, the other
-            //player's to its left, each with a label above it
-            const float scale = 0.58f;
+            //the two cards at the screen's edges, theirs left and yours right, so the menu (kept
+            //short by the clash) fits between them; each with a label above it
+            const float scale = 0.48f;
             const float w = CardGui::BigWidth * scale;
-            const float top = 142 - CardGui::BigHeight * scale / 2;
+            const float y = SCREEN_HEIGHT_F / 2 + 8;
+            const float top = y - CardGui::BigHeight * scale / 2;
             MTGCardInstance * shown[2] = { other, menuPreviewCards[entry] };
             const char * labels[2] = { "Theirs", "Yours" };
             WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
             for (int k = 0; k < 2; ++k)
             {
-                float x = SCREEN_WIDTH_F - 4 - w / 2 - (1 - k) * (w + 6);
-                Pos pos = Pos(x, 142, scale, 0.0, 255);
-                pos.actY = 142;
+                float x = k ? SCREEN_WIDTH_F - 3 - w / 2 : 3 + w / 2;
+                Pos pos = Pos(x, y, scale, 0.0, 255);
+                pos.actY = y;
                 CardGui::DrawCard(shown[k], pos, observer->getCardSelector()->GetDrawMode());
                 if (font)
                 {

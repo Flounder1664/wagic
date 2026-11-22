@@ -157618,9 +157618,14 @@ type=Sorcery
 [card]
 name=Redeem the Lost
 #2026-11-22 clash batch: written from existing working forms.
-#The five protection choices are one ability$! menu: as five separate "choice" lines the clash's
-#top/bottom menu took their place and no colour was ever offered (John, scenario 135).
-auto=ability$!choice name(Protection from white) target(creature|mybattlefield) transforms((,newability[protection from white])) ueot _ choice name(Protection from blue) target(creature|mybattlefield) transforms((,newability[protection from blue])) ueot _ choice name(Protection from black) target(creature|mybattlefield) transforms((,newability[protection from black])) ueot _ choice name(Protection from red) target(creature|mybattlefield) transforms((,newability[protection from red])) ueot _ choice name(Protection from green) target(creature|mybattlefield) transforms((,newability[protection from green])) ueot!$ controller
+target=creature|mybattlefield
+#Center Soul's five choice lines. The clash's top/bottom menu now waits for this colour menu
+#instead of replacing it (John, scenario 135).
+auto=choice name(Protection from white) transforms((,newability[protection from white])) ueot
+auto=choice name(Protection from blue) transforms((,newability[protection from blue])) ueot
+auto=choice name(Protection from black) transforms((,newability[protection from black])) ueot
+auto=choice name(Protection from red) transforms((,newability[protection from red])) ueot
+auto=choice name(Protection from green) transforms((,newability[protection from green])) ueot
 auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
 text=Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return Redeem the Lost to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
 mana={1}{W}
