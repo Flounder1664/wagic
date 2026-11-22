@@ -1,0 +1,20 @@
+#Bjorna: {T}, sacrifice Ornithopter - 1 damage to Gray Ogre and goad it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:731002,Ornithopter
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+731002
+Ornithopter
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:731002
+graveyard:Ornithopter
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+[END]

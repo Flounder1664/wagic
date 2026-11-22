@@ -1,0 +1,20 @@
+#Ransom Note: {2}, sacrifice it - goad Gray Ogre.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ransom Note
+manapool:{2}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Ransom Note
+choice 0
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Ransom Note
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+[END]

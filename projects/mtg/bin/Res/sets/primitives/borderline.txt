@@ -157961,3 +157961,148 @@ missing=the Villain-only mana of any colour
 text={T}: Add {C}. -- {T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source. -- {3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
 type=Land
 [/card]
+[card]
+name=Coercive Impetus
+#2026-11-22 goad batch: written from existing working forms.
+target=creature
+auto=1/1
+auto=mustattack
+auto=@combat(attacking) source(mytgt):draw:1 controller && life:-1 controller
+text=Enchant creature -- Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, you draw a card and lose 1 life.
+mana={2}{B}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Redemption Arc
+#2026-11-22 goad batch: written from existing working forms.
+target=creature
+auto=indestructible
+auto=mustattack
+auto={1}{W}:name(Exile enchanted creature) imprint
+text=Enchant creature -- Enchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- {1}{W}: Exile enchanted creature.
+mana={2}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Eye of Nidhogg
+#2026-11-22 goad batch: written from existing working forms.
+target=creature
+#Frogify's form: the Dragon type is added, the old creature types stay.
+auto=teach(creature) transforms((,setpower=4,settoughness=2))
+auto=teach(creature) transforms((Dragon,black))
+auto=teach(creature) flying
+auto=teach(creature) deathtouch
+auto=mustattack
+autograveyard=_DIES_moveTo(hand)
+text=Enchant creature -- Enchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- When Eye of Nidhogg is put into a graveyard from the battlefield, return it to its owner's hand.
+mana={2}{B}
+type=Legendary Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Bloodthirsty Blade
+#2026-11-22 goad batch: written from existing working forms.
+auto=teach(creature) 2/0
+auto=teach(creature) mustattack
+auto={1}:name(Attach to an opponent's creature) equip target(creature|opponentbattlefield) asSorcery
+text=Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- {1}: Attach this Equipment to target creature an opponent controls. Activate only as a sorcery.
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Fast Forward
+#2026-11-22 goad batch: written from existing working forms.
+auto=all(creature|opponentBattlefield) _GOAD_
+missing=the {1} reduction for each opponent you attacked this turn
+text=This spell costs {1} less to cast for each opponent you attacked this turn. -- Goad all creatures your opponents control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+mana={4}{R}
+type=Sorcery
+[/card]
+[card]
+name=Bjorna, Nightfall Alchemist
+#2026-11-22 goad batch: written from existing working forms.
+auto={T}{S(artifact|mybattlefield)}:name(1 damage and goad) target(creature) transforms((,newability[damage:1],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
+text={T}, Sacrifice an artifact: Bjorna, Nightfall Alchemist deals 1 damage to target creature. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Partner-Friends forever (You can have two commanders if both have this ability.)
+mana={U}{R}
+type=Legendary Creature
+subtype=Human
+power=1
+toughness=3
+[/card]
+[card]
+name=Havoc Eater
+#2026-11-22 goad batch: written from existing working forms.
+abilities=flying
+auto=name(Goad a creature) target(<upto:1>creature|opponentbattlefield) _GOAD_
+missing=the +1/+1 counters equal to the goaded creatures' total power
+text=Flying -- When this creature enters, for each opponent, goad up to one target creature that opponent controls. Put X +1/+1 counters on this creature, where X is the total power of creatures goaded this way.
+mana={5}{R}{R}
+type=Creature
+subtype=Elemental
+power=3
+toughness=3
+[/card]
+[card]
+name=Puppet Master, String Puller
+#2026-11-22 goad batch: written from existing working forms.
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Goad a creature) target(creature|opponentbattlefield) transforms((,newability[transforms((,cantblock)) ueot],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
+missing=the Treasure when goaded creatures deal combat damage to an opponent
+text=Whenever you attack, goad target creature an opponent controls. It can't block this turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever one or more goaded creatures deal combat damage to one of your opponents, create a Treasure token.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Artificer Villain
+power=2
+toughness=4
+[/card]
+[card]
+name=Ransom Note
+#2026-11-22 goad batch: written from existing working forms.
+auto=_SURVEIL1_
+auto={2}{S}:name(Goad target creature) target(creature) _GOAD_
+auto={2}{S}:name(Draw a card) draw:1 controller
+missing=the cloak mode
+text=When this artifact enters, surveil 1. -- {2}, Sacrifice this artifact: Choose one - -- * Cloak the top card of your library. -- * Goad target creature. -- * Draw a card.
+mana={1}
+type=Artifact
+subtype=Clue
+[/card]
+[card]
+name=Seifer, Balamb Rival
+#2026-11-22 goad batch: written from existing working forms.
+abilities=first strike
+auto=@combat(attacking) source(creature|mybattlefield) turnlimited:name(Goad a creature) target(creature|opponentbattlefield) _GOAD_
+missing=deathtouch for an attacker blocked by two or more creatures
+text=First strike -- Whenever you attack a player, goad target creature that player controls. -- Whenever a creature attacking one of your opponents becomes blocked by two or more creatures, that attacking creature gains deathtouch until end of turn.
+mana={2}{B}{R}
+type=Legendary Creature
+subtype=Human Mercenary
+power=4
+toughness=3
+[/card]
+[card]
+name=Killian, Decisive Mentor
+#2026-11-22 goad batch: written from existing working forms.
+auto=_CONSTELLATION_name(Tap and goad) target(<upto:1>creature) transforms((,newability[tap],newability[counter(0/0.1.Goaded) notrg],newability[this(counter{0/0.1.Goaded}>0) mustattack],newability[phaseaction[myupkeep next once sourceinplay] counter(0/0.-hascntgoaded.Goaded) notrg])) forever
+missing=the draw when creatures enchanted by your Auras attack
+text=Whenever an enchantment you control enters, tap up to one target creature and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever one or more creatures that are enchanted by an Aura you control attack, draw a card.
+mana={1}{W}{B}
+type=Legendary Creature
+subtype=Human Warlock
+power=2
+toughness=3
+[/card]
+[card]
+name=Serene Sleuth
+#2026-11-22 goad batch: written from existing working forms.
+auto=_CLUE_
+missing=investigating for each goaded creature you control, and ending their goad
+text=When this creature enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") -- At the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded.
+mana={1}{W}
+type=Creature
+subtype=Human Detective
+power=2
+toughness=2
+[/card]

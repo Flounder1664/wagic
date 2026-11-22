@@ -1,0 +1,21 @@
+#Fast Forward goads every creature the opponent controls, not mine.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Fast Forward
+manapool:{4}{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Fast Forward
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+counter:Grizzly Bears=Goaded:0
+graveyard:Fast Forward
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+[END]

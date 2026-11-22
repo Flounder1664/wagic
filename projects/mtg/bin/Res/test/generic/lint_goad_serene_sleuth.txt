@@ -1,0 +1,15 @@
+#Serene Sleuth enters and investigates: a Clue.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Serene Sleuth
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Serene Sleuth
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Serene Sleuth,*
+[PLAYER2]
+[END]

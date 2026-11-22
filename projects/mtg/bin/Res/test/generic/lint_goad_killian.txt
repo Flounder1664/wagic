@@ -1,0 +1,21 @@
+#Killian: an enchantment (Glorious Anthem) enters - tap Gray Ogre and goad it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:708160
+hand:Glorious Anthem
+manapool:{1}{W}{W}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Glorious Anthem
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:708160,Glorious Anthem
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+tappedinplay:1
+[END]

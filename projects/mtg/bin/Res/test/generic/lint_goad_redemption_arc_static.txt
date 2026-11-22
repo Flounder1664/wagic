@@ -1,0 +1,19 @@
+#Redemption Arc on Grizzly Bears: indestructible and goaded.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Redemption Arc
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+Redemption Arc
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Redemption Arc
+type:Grizzly Bears=indestructible
+type:Grizzly Bears=mustattack
+[PLAYER2]
+[END]

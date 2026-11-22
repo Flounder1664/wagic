@@ -1,0 +1,20 @@
+#Seifer: when I attack, Gray Ogre is goaded.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713919,Grizzly Bears
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+goto attackers
+Grizzly Bears
+next
+Gray Ogre
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:713919,Grizzly Bears
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+[END]

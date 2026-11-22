@@ -1,0 +1,17 @@
+#Twin: no attack, no goad.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713919,Grizzly Bears
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:713919,Grizzly Bears
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:0
+[END]

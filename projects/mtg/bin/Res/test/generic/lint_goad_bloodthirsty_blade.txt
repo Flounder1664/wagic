@@ -1,0 +1,20 @@
+#Bloodthirsty Blade's {1}: attach it to the opponent's Gray Ogre - 4/2 and goaded.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bloodthirsty Blade
+manapool:{1}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Bloodthirsty Blade
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bloodthirsty Blade
+[PLAYER2]
+inplay:Gray Ogre
+pt:Gray Ogre=4/2
+type:Gray Ogre=mustattack
+[END]

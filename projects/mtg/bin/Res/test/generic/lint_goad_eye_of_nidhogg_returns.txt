@@ -1,0 +1,20 @@
+#Shock kills the enchanted Bears: Eye of Nidhogg goes to the graveyard and returns to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Eye of Nidhogg,Shock
+manapool:{2}{B}{R}
+[PLAYER2]
+[DO]
+Eye of Nidhogg
+Grizzly Bears
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Eye of Nidhogg
+graveyard:Grizzly Bears,Shock
+[PLAYER2]
+[END]

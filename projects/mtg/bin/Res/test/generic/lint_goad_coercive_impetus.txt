@@ -1,0 +1,26 @@
+#Coercive Impetus on Grizzly Bears: 3/3 and goaded (must attack); when it attacks you draw a card and lose 1 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Coercive Impetus
+manapool:{2}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Coercive Impetus
+Grizzly Bears
+goto attackers
+Grizzly Bears
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Grizzly Bears,Coercive Impetus
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=mustattack
+hand:Forest
+life:19
+[PLAYER2]
+life:20
+[END]

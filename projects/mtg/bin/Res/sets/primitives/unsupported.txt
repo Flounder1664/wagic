@@ -940,15 +940,6 @@ power=2
 toughness=3
 [/card]
 [card]
-name=Bloodthirsty Blade
-auto=teach(creature) 2/0
-auto=teach(creature) mustattack
-text=Equipped creature gets +2/+0 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- {1}: Attach Bloodthirsty Blade to target creature an opponent controls. Activate this ability only any time you could cast a sorcery.
-mana={2}
-type=Artifact
-subtype=Equipment
-[/card]
-[card]
 name=Bludgeon Brawl
 text=Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
 mana={2}{R}
@@ -15399,15 +15390,6 @@ mana={3}
 type=Artifact
 [/card]
 [card]
-name=Puppet Master, String Puller
-text=Whenever you attack, goad target creature an opponent controls. It can't block this turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever one or more goaded creatures deal combat damage to one of your opponents, create a Treasure token.
-mana={2}{R}
-type=Legendary Creature
-subtype=Human Artificer Villain
-power=2
-toughness=4
-[/card]
-[card]
 name=Quantum Entanglement
 text=Flash -- When this enchantment enters and at the beginning of your end step, you may pay {1}{W}. When you do, exile target creature you control, then return that card to the battlefield under its owner's control.
 mana={1}{W}
@@ -18088,14 +18070,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Eye of Nidhogg
-target=creature
-text=Enchant creature -- Enchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- When Eye of Nidhogg is put into a graveyard from the battlefield, return it to its owner's hand.
-mana={2}{B}
-type=Legendary Enchantment
-subtype=Aura
-[/card]
-[card]
 name=Fandaniel, Telophoroi Ascian
 text=Whenever you cast an instant or sorcery spell, surveil 1. -- At the beginning of your end step, each opponent may sacrifice a nontoken creature of their choice. Each opponent who doesn't loses 2 life for each instant and sorcery card in your graveyard.
 mana={4}{B}
@@ -18416,15 +18390,6 @@ name=Search for Dagger
 text=Whenever your commander enters or attacks, look at the top six cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 mana={1}{W}
 type=Enchantment
-[/card]
-[card]
-name=Seifer, Balamb Rival
-text=First strike -- Whenever you attack a player, goad target creature that player controls. -- Whenever a creature attacking one of your opponents becomes blocked by two or more creatures, that attacking creature gains deathtouch until end of turn.
-mana={2}{B}{R}
-type=Legendary Creature
-subtype=Human Mercenary
-power=4
-toughness=3
 [/card]
 [card]
 name=Sephiroth, Fallen Hero
@@ -19450,14 +19415,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Coercive Impetus
-target=creature
-text=Enchant creature -- Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- Whenever enchanted creature attacks, you draw a card and lose 1 life.
-mana={2}{B}
-type=Enchantment
-subtype=Aura
-[/card]
-[card]
 name=Defiling Daemogoth
 text=Menace -- Whenever a creature you control deals combat damage to a player, you gain 1 life. -- At the beginning of your end step, each opponent loses X life, where X is the amount of life you gained this turn.
 mana={3}{B}{B}
@@ -19573,15 +19530,6 @@ type=Enchantment
 subtype=Class
 [/card]
 [card]
-name=Killian, Decisive Mentor
-text=Whenever an enchantment you control enters, tap up to one target creature and goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Whenever one or more creatures that are enchanted by an Aura you control attack, draw a card.
-mana={1}{W}{B}
-type=Legendary Creature
-subtype=Human Warlock
-power=2
-toughness=3
-[/card]
-[card]
 name=Kinetic Ooze
 text=This creature enters with X +1/+1 counters on it. -- When this creature enters, destroy up to one target artifact or enchantment with mana value X or less. If X is 5 or more, you draw a card. If X is 10 or more, double the number of +1/+1 counters on any number of other target creatures.
 mana={X}{G}
@@ -19695,14 +19643,6 @@ text=Whenever one or more cards leave your graveyard, create a 3/2 red and white
 mana={2}{R}{W}
 type=Legendary Planeswalker
 subtype=Quintorius
-[/card]
-[card]
-name=Redemption Arc
-target=creature
-text=Enchant creature -- Enchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.) -- {1}{W}: Exile enchanted creature.
-mana={2}{W}
-type=Enchantment
-subtype=Aura
 [/card]
 [card]
 name=Relic Retriever
@@ -22340,12 +22280,6 @@ mana={3}
 type=Artifact
 [/card]
 [card]
-name=Fast Forward
-text=This spell costs {1} less to cast for each opponent you attacked this turn. -- Goad all creatures your opponents control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
-mana={4}{R}
-type=Sorcery
-[/card]
-[card]
 name=Foot Chopper
 text=When this Equipment enters, create a 1/1 black Ninja creature token, then attach this Equipment to it. -- Equipped creature has flying. -- Whenever equipped creature deals combat damage to a player, you may sacrifice it. If you do, draw cards equal to its power. -- Equip {2}
 mana={1}{B}
@@ -22919,15 +22853,6 @@ type=Legendary Creature
 subtype=Human Warrior
 power=0
 toughness=7
-[/card]
-[card]
-name=Bjorna, Nightfall Alchemist
-text={T}, Sacrifice an artifact: Bjorna, Nightfall Alchemist deals 1 damage to target creature. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.) -- Partner—Friends forever (You can have two commanders if both have this ability.)
-mana={U}{R}
-type=Legendary Creature
-subtype=Human
-power=1
-toughness=3
 [/card]
 [card]
 name=Bohn, Beguiling Balladeer

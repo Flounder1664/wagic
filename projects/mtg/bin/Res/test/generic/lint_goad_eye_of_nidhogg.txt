@@ -1,0 +1,22 @@
+#Eye of Nidhogg on Grizzly Bears: a 4/2 flying deathtouch Dragon, goaded (the Bear type stays, as with Frogify).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Eye of Nidhogg
+manapool:{2}{B}
+[PLAYER2]
+[DO]
+Eye of Nidhogg
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Eye of Nidhogg
+pt:Grizzly Bears=4/2
+type:Grizzly Bears=flying
+type:Grizzly Bears=deathtouch
+type:Grizzly Bears=dragon
+type:Grizzly Bears=mustattack
+[PLAYER2]
+[END]

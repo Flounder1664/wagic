@@ -1,0 +1,19 @@
+#Havoc Eater enters and goads the opponent's Gray Ogre.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Havoc Eater
+manapool:{5}{R}{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Havoc Eater
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Havoc Eater
+[PLAYER2]
+inplay:Gray Ogre
+counter:Gray Ogre=Goaded:1
+[END]
