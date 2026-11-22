@@ -64,4 +64,5 @@ Device serials:
 2026-11-22 a102b4521 (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221648.old; read back ok. 23 Splice + 13 Spree cards (card data only; exes of fbdaf6c16 are current)
 2026-11-22 c8691ac50 (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611221738.old; read back ok. Final Showdown back on the transforms loseabilities form (needs the c8691ac50 exes: loseabilities crash fix)
 2026-11-22 c8691ac50 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (loseabilities teardown crash fix); launched from G: 15s before replacing; harness 6/2606 known failures; backups .old.202611221739.
+2026-11-22 02c86885a (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221951.old; read back ok. clash: 30 cards + engine 89c4bdad0
 ```
