@@ -479,7 +479,12 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
         match = NULL;
     }
  
-    if ((CDattached == -1 && card->parentCards.size() > 0) || (CDattached == 1 && card->parentCards.size() < 1))
+    //attached: an Equipment/connected card lists its host in parentCards; an Aura only records the
+    //creature it enchants as its target, so "aura[attached]" never matched and Faunsbane Troll's
+    //"sacrifice an Aura attached to this creature" had nothing to pay with (John, scenario 129).
+    bool isAttached = card->parentCards.size() > 0
+        || (card->hasSubtype(Subtypes::TYPE_AURA) && card->target && card->target->isInPlay(card->getObserver()));
+    if ((CDattached == -1 && isAttached) || (CDattached == 1 && !isAttached))
     {
         match = NULL;
     }
