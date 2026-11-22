@@ -61,4 +61,5 @@ Device serials:
 2026-11-22 5d91d9f5d (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (facedown descriptor); launched from G: 15s before replacing; harness 6/2529 known failures; backups .old.202611221504; collection rebuilt.
 2026-11-22 fbdaf6c16 (wagic-v146-windows)  device=Windows result=core-zip-patch - 3 member(s): sets/WOE/_cards.dat, sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221608.old; read back ok. 18 Role cards + Rat Woe token (needs the fbdaf6c16 exes: Role attach)
 2026-11-22 fbdaf6c16 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (Role attach host); launched from G: 15s before replacing; harness 6/2548 known failures; backups .old.202611221609; Rat Woe art (632907) added to User/sets/WOE/WOE.zip; collection rebuilt, 46,304 ids.
+2026-11-22 a102b4521 (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611221648.old; read back ok. 23 Splice + 13 Spree cards (card data only; exes of fbdaf6c16 are current)
 ```
