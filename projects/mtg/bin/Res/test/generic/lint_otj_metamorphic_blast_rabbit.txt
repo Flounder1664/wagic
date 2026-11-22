@@ -1,0 +1,22 @@
+#Metamorphic Blast, first mode: Hill Giant becomes a 0/1 Rabbit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Metamorphic Blast
+manapool:{U}{1}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Metamorphic Blast
+choice 0
+Hill Giant
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Metamorphic Blast
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=0/1
+[END]

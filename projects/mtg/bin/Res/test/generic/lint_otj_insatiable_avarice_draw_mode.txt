@@ -1,0 +1,23 @@
+#Insatiable Avarice, second mode on yourself: draw three, lose 3 life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Insatiable Avarice
+manapool:{B}{B}{B}
+library:Forest,Island,Swamp,Mountain
+[PLAYER2]
+[DO]
+Insatiable Avarice
+choice 1
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island,Swamp,Mountain
+library:Forest
+graveyard:Insatiable Avarice
+life:17
+[PLAYER2]
+[END]

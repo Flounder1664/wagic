@@ -1,0 +1,27 @@
+#Three Steps Ahead, second and third modes: a token copy of Grizzly Bears; draw two, discard one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Three Steps Ahead,Shock
+manapool:{U}{3}{2}
+library:Forest,Island,Swamp
+[PLAYER2]
+[DO]
+Three Steps Ahead
+choice 1
+choice 0
+Grizzly Bears
+choice 0
+choice 0
+Shock
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,*
+hand:Island,Swamp
+library:Forest
+graveyard:Three Steps Ahead,Shock
+[PLAYER2]
+[END]

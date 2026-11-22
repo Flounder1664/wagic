@@ -1,0 +1,22 @@
+#Unfortunate Accident, both modes: Hill Giant destroyed and a 1/1 Mercenary.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unfortunate Accident
+manapool:{B}{2}{B}{1}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Unfortunate Accident
+choice 0
+Hill Giant
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Unfortunate Accident
+[PLAYER2]
+graveyard:Hill Giant
+[END]

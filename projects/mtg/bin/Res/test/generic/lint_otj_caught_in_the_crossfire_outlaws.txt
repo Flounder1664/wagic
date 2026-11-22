@@ -1,0 +1,21 @@
+#Caught in the Crossfire, outlaw mode: 2 damage kills Krovikan Scoundrel (a Human Rogue), not Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Caught in the Crossfire
+manapool:{R}{R}{1}
+[PLAYER2]
+inplay:Krovikan Scoundrel
+[DO]
+Caught in the Crossfire
+choice 0
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Caught in the Crossfire
+[PLAYER2]
+graveyard:Krovikan Scoundrel
+[END]

@@ -1,0 +1,20 @@
+#Dance of the Tumbleweeds, second mode with three lands in play: a 3/3 Elemental.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Forest
+hand:Dance of the Tumbleweeds
+manapool:{1}{G}{3}
+[PLAYER2]
+[DO]
+Dance of the Tumbleweeds
+choice 1
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Forest,Forest,*
+graveyard:Dance of the Tumbleweeds
+[PLAYER2]
+[END]

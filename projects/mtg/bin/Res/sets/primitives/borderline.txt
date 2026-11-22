@@ -157289,3 +157289,137 @@ mana={1}{U}
 type=Instant
 subtype=Arcane
 [/card]
+[card]
+name=Final Showdown
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{3}{W}{W}: Destroy all creatures) pay({3}{W}{W}) name(Destroy all creatures) all(creature) destroy
+auto=may name(+{1}: A creature you control gains indestructible) pay({1}) name(A creature you control gains indestructible) target(creature|mybattlefield) transforms((,indestructible)) ueot
+auto=may name(+{1}: All creatures lose all abilities) pay({1}) name(All creatures lose all abilities) all(creature) loseabilities ueot
+text=Spree (Choose one or more additional costs.) -- + {1} - All creatures lose all abilities until end of turn. -- + {1} - Choose a creature you control. It gains indestructible until end of turn. -- + {3}{W}{W} - Destroy all creatures.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Requisition Raid
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: A +1/+1 counter on each creature target player controls) pay({1}) name(A +1/+1 counter on each creature target player controls) ability$!choice name(Your creatures) counter(1/1) all(creature|mybattlefield) _ choice name(Opponent creatures) counter(1/1) all(creature|opponentbattlefield)!$ controller
+auto=may name(+{1}: Destroy target enchantment) pay({1}) name(Destroy target enchantment) destroy target(enchantment)
+auto=may name(+{1}: Destroy target artifact) pay({1}) name(Destroy target artifact) destroy target(artifact)
+text=Spree (Choose one or more additional costs.) -- + {1} - Destroy target artifact. -- + {1} - Destroy target enchantment. -- + {1} - Put a +1/+1 counter on each creature target player controls.
+mana={W}
+type=Sorcery
+[/card]
+[card]
+name=Caught in the Crossfire
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: 2 damage to each non-outlaw creature) pay({1}) name(2 damage to each non-outlaw creature) damage:2 all(creature[-assassin;-mercenary;-pirate;-rogue;-warlock])
+auto=may name(+{1}: 2 damage to each outlaw creature) pay({1}) name(2 damage to each outlaw creature) damage:2 all(assassin,mercenary,pirate,rogue,warlock)
+text=Spree (Choose one or more additional costs.) -- + {1} - Caught in the Crossfire deals 2 damage to each outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.) -- + {1} - Caught in the Crossfire deals 2 damage to each non-outlaw creature.
+mana={R}{R}
+type=Instant
+[/card]
+[card]
+name=Explosive Derailment
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{2}: Destroy target artifact) pay({2}) name(Destroy target artifact) destroy target(artifact)
+auto=may name(+{2}: 4 damage to target creature) pay({2}) name(4 damage to target creature) damage:4 target(creature)
+text=Spree (Choose one or more additional costs.) -- + {2} - Explosive Derailment deals 4 damage to target creature. -- + {2} - Destroy target artifact.
+mana={R}
+type=Instant
+[/card]
+[card]
+name=Insatiable Avarice
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{B}{B}: Target player draws three and loses 3 life) pay({B}{B}) name(Target player draws three and loses 3 life) ability$!choice name(You) draw:3 controller && life:-3 controller _ choice name(Opponent) draw:3 opponent && life:-3 opponent!$ controller
+auto=may name(+{2}: Search for a card, put it on top) pay({2}) name(Search for a card, put it on top) reveal:plibrarycount optionone name(choose card) target(*|reveal) moveto(ownerlibrary) and!( becomes(tobecast) ueot )! optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend afterrevealed all(tobecast|mylibrary) moveto(mylibrary) afterrevealedend revealend
+text=Spree (Choose one or more additional costs.) -- + {2} - Search your library for a card, then shuffle and put that card on top. -- + {B}{B} - Target player draws three cards and loses 3 life.
+mana={B}
+type=Sorcery
+[/card]
+[card]
+name=Jailbreak Scheme
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{2}: Its owner puts it on top or bottom) pay({2}) name(Its owner puts it on top or bottom) target(artifact,creature) transforms((,newability[choice name(Top of library) moveto(ownerlibrary)],newability[choice name(Bottom of library) bottomoflibrary])) oneshot
+auto=may name(+{3}: +1/+1 counter, cannot be blocked) pay({3}) name(+1/+1 counter, cannot be blocked) target(creature) transforms((,newability[counter(1/1)],unblockable)) ueot
+text=Spree (Choose one or more additional costs.) -- + {3} - Put a +1/+1 counter on target creature. It can't be blocked this turn. -- + {2} - Target artifact or creature's owner puts it on their choice of the top or bottom of their library.
+mana={U}
+type=Sorcery
+[/card]
+[card]
+name=Metamorphic Blast
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{3}: Target player draws two) pay({3}) name(Target player draws two) draw:2 target(player)
+auto=may name(+{1}: Target creature becomes a white 0/1 Rabbit) pay({1}) name(Target creature becomes a white 0/1 Rabbit) target(creature) transforms((Rabbit,removecreaturesubtypes,setpower=0,settoughness=1,white)) ueot
+text=Spree (Choose one or more additional costs.) -- + {1} - Until end of turn, target creature becomes a white Rabbit with base power and toughness 0/1. -- + {3} - Target player draws two cards.
+mana={U}
+type=Instant
+[/card]
+[card]
+name=Phantom Interference
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: Counter target spell unless its controller pays {2}) pay({1}) name(Counter target spell unless its controller pays {2}) countertarget unless(pay:2) target(*|stack)
+auto=may name(+{3}: A 2/2 white flying Spirit) pay({3}) name(A 2/2 white flying Spirit) token(Spirit,Creature Spirit,2/2,white,flying)
+text=Spree (Choose one or more additional costs.) -- + {3} - Create a 2/2 white Spirit creature token with flying. -- + {1} - Counter target spell unless its controller pays {2}.
+mana={U}
+type=Instant
+[/card]
+[card]
+name=Rustler Rampage
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: Target creature gains double strike) pay({1}) name(Target creature gains double strike) target(creature) transforms((,double strike)) ueot
+auto=may name(+{1}: Untap all creatures target player controls) pay({1}) name(Untap all creatures target player controls) ability$!choice name(Untap your creatures) untap all(creature|mybattlefield) _ choice name(Untap opponent creatures) untap all(creature|opponentbattlefield)!$ controller
+text=Spree (Choose one or more additional costs.) -- + {1} - Untap all creatures target player controls. -- + {1} - Target creature gains double strike until end of turn.
+mana={W}
+type=Instant
+[/card]
+[card]
+name=Three Steps Ahead
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{2}: Draw two, then discard one) pay({2}) name(Draw two, then discard one) draw:2 controller && transforms((,newability[notatarget(*|myhand) reject])) forever
+auto=may name(+{3}: Copy target artifact or creature you control) pay({3}) name(Copy target artifact or creature you control) clone target(artifact,creature|mybattlefield)
+auto=may name(+{1}{U}: Counter target spell) pay({1}{U}) name(Counter target spell) fizzle target(*|stack)
+text=Spree (Choose one or more additional costs.) -- + {1}{U} - Counter target spell. -- + {3} - Create a token that's a copy of target artifact or creature you control. -- + {2} - Draw two cards, then discard a card.
+mana={U}
+type=Instant
+[/card]
+[card]
+name=Trash the Town
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: Target creature draws two on combat damage) pay({1}) name(Target creature draws two on combat damage) target(creature) transforms((,newability[@combatdamaged(player) from(this):draw:2 controller])) ueot
+auto=may name(+{1}: Target creature gains trample) pay({1}) name(Target creature gains trample) target(creature) transforms((,trample)) ueot
+auto=may name(+{2}: Two +1/+1 counters on target creature) pay({2}) name(Two +1/+1 counters on target creature) counter(1/1,2) target(creature)
+text=Spree (Choose one or more additional costs.) -- + {2} - Put two +1/+1 counters on target creature. -- + {1} - Target creature gains trample until end of turn. -- + {1} - Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, draw two cards."
+mana={G}
+type=Instant
+[/card]
+[card]
+name=Unfortunate Accident
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{1}: A 1/1 red Mercenary) pay({1}) name(A 1/1 red Mercenary) token(Mercenary,Creature Mercenary,1/1,red) and!( transforms((,newability[{T}:name(Target creature you control gets +1/+0) target(creature|mybattlefield) 1/0 ueot asSorcery])) forever )!
+auto=may name(+{2}{B}: Destroy target creature) pay({2}{B}) name(Destroy target creature) destroy target(creature)
+text=Spree (Choose one or more additional costs.) -- + {2}{B} - Destroy target creature. -- + {1} - Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+mana={B}
+type=Instant
+[/card]
+[card]
+name=Dance of the Tumbleweeds
+#2026-11-22 Spree batch: written from existing working forms.
+#Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
+auto=may name(+{3}: An X/X Elemental, X = lands you control) pay({3}) name(An X/X Elemental, X = lands you control) token(Elemental,Creature Elemental,type:land:mybattlefield/type:land:mybattlefield,green)
+auto=may name(+{1}: A basic land or Desert onto the battlefield) pay({1}) name(A basic land or Desert onto the battlefield) target(land[basic],desert|mylibrary) moveto(mybattlefield) and!( shuffle )!
+text=Spree (Choose one or more additional costs.) -- + {1} - Search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle. -- + {3} - Create an X/X green Elemental creature token, where X is the number of lands you control.
+mana={1}{G}
+type=Sorcery
+[/card]

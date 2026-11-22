@@ -1,0 +1,22 @@
+#Final Showdown, first mode only: all creatures lose all abilities - the opponent's Air Elemental loses flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Final Showdown
+manapool:{W}{1}
+[PLAYER2]
+inplay:Air Elemental
+[DO]
+Final Showdown
+choice 0
+choice 1
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Final Showdown
+[PLAYER2]
+inplay:Air Elemental
+type:Air Elemental=-flying
+[END]

@@ -1,0 +1,23 @@
+#Jailbreak Scheme, first mode: Grizzly Bears gets a +1/+1 counter and cannot be blocked.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Jailbreak Scheme
+manapool:{U}{3}
+[PLAYER2]
+[DO]
+Jailbreak Scheme
+choice 0
+Grizzly Bears
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=unblockable
+graveyard:Jailbreak Scheme
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Requisition Raid, artifact mode only: Ornithopter is destroyed, Hill Giant gets no counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Requisition Raid
+manapool:{W}{1}
+[PLAYER2]
+inplay:Ornithopter,Hill Giant
+[DO]
+Requisition Raid
+choice 0
+Ornithopter
+choice 1
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Requisition Raid
+[PLAYER2]
+inplay:Hill Giant
+pt:Hill Giant=3/3
+graveyard:Ornithopter
+[END]

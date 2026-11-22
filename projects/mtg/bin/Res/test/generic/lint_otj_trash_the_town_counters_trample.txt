@@ -1,0 +1,26 @@
+#Trash the Town, first two modes: Grizzly Bears gets two +1/+1 counters and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Trash the Town
+manapool:{G}{2}{1}
+[PLAYER2]
+[DO]
+Trash the Town
+choice 0
+Grizzly Bears
+choice 0
+choice 0
+Grizzly Bears
+choice 0
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+type:Grizzly Bears=trample
+graveyard:Trash the Town
+[PLAYER2]
+[END]

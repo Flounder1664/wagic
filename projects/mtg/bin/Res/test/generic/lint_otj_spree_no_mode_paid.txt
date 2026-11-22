@@ -1,0 +1,20 @@
+#Twin: Explosive Derailment with no mode paid does nothing - Hill Giant lives and {2}{2} stays in the pool.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Explosive Derailment
+manapool:{R}{2}{2}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Explosive Derailment
+choice 1
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Explosive Derailment
+manapool:{4}
+[PLAYER2]
+inplay:Hill Giant
+[END]

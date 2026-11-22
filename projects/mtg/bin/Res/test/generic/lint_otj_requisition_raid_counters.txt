@@ -1,0 +1,24 @@
+#Requisition Raid, third mode, choosing you: a +1/+1 counter on each creature you control.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+hand:Requisition Raid
+manapool:{W}{1}
+[PLAYER2]
+[DO]
+Requisition Raid
+choice 1
+choice 1
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+pt:Grizzly Bears=3/3
+pt:Hill Giant=4/4
+graveyard:Requisition Raid
+[PLAYER2]
+[END]

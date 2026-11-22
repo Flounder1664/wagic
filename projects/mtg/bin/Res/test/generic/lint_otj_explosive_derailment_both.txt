@@ -1,0 +1,23 @@
+#Explosive Derailment, both modes: 4 damage kills Hill Giant and Ornithopter is destroyed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Explosive Derailment
+manapool:{R}{2}{2}
+[PLAYER2]
+inplay:Hill Giant,Ornithopter
+[DO]
+Explosive Derailment
+choice 0
+Hill Giant
+choice 0
+choice 0
+Ornithopter
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Explosive Derailment
+[PLAYER2]
+graveyard:Hill Giant,Ornithopter
+[END]

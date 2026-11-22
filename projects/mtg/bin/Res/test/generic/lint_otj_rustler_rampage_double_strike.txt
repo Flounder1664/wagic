@@ -1,0 +1,22 @@
+#Rustler Rampage, second mode: Grizzly Bears gains double strike.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Rustler Rampage
+manapool:{W}{1}
+[PLAYER2]
+[DO]
+Rustler Rampage
+choice 1
+choice 0
+Grizzly Bears
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+type:Grizzly Bears=double strike
+graveyard:Rustler Rampage
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Jailbreak Scheme, second mode: the opponent's Hill Giant goes to the bottom of its owner's library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Jailbreak Scheme
+manapool:{U}{2}
+[PLAYER2]
+inplay:Hill Giant
+library:Forest
+[DO]
+Jailbreak Scheme
+choice 1
+choice 0
+Hill Giant
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Jailbreak Scheme
+[PLAYER2]
+library:Hill Giant,Forest
+[END]

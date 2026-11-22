@@ -1,0 +1,24 @@
+#Final Showdown, all three modes: abilities off, Grizzly Bears indestructible, then destroy all - only the Bears live.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Final Showdown
+manapool:{W}{1}{1}{3}{W}{W}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Final Showdown
+choice 0
+choice 0
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Final Showdown
+[PLAYER2]
+graveyard:Hill Giant
+[END]

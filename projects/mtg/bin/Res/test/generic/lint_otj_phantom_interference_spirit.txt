@@ -1,0 +1,19 @@
+#Phantom Interference, first mode: a 2/2 flying Spirit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Phantom Interference
+manapool:{U}{3}
+[PLAYER2]
+[DO]
+Phantom Interference
+choice 0
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*
+graveyard:Phantom Interference
+[PLAYER2]
+[END]

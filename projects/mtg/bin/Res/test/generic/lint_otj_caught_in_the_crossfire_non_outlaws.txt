@@ -1,0 +1,18 @@
+#Caught in the Crossfire, non-outlaw mode: 2 damage kills Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Caught in the Crossfire
+manapool:{R}{R}{1}
+[PLAYER2]
+[DO]
+Caught in the Crossfire
+choice 1
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Grizzly Bears,Caught in the Crossfire
+[PLAYER2]
+[END]
