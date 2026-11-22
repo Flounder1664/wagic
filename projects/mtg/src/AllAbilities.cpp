@@ -4255,12 +4255,22 @@ void AAClash::askPlacement(int who)
         option->placeFor = who;
         option->placeBottom = (b == 1);
         option->menuText = string(b ? "Put " : "Keep ") + card->getName() + (b ? " on the bottom" : " on top");
+        //show both revealed cards while this player chooses: theirs is the other one
+        option->menuPreviewCard = card;
+        option->menuPreviewCard2 = (who == 1) ? theirs : mine;
         option->oneShot = true;
         option->canBeInterrupted = false;
         selection.push_back(option);
     }
-    MTGAbility * menu = NEW MenuAbility(game, this->GetId(), source, source, true, selection, p,
-        who == 1 ? "Clash: your card" : "Clash: opponent's card");
+    //title from the choosing player's side: "Clash: Hill Giant (4) vs Plains (0) - you win"
+    MTGCardInstance * other = (who == 1) ? theirs : mine;
+    bool chooserWins = (who == 1) ? won
+        : (theirs && theirs->getManaCost()->getConvertedCost() > (mine ? mine->getManaCost()->getConvertedCost() : -1));
+    std::ostringstream title;
+    title << "Clash: " << card->getName() << " (" << card->getManaCost()->getConvertedCost() << ") vs "
+          << (other ? other->getName() : string("no card")) << " (" << (other ? other->getManaCost()->getConvertedCost() : 0) << ") - "
+          << (chooserWins ? "you win" : "you lose");
+    MTGAbility * menu = NEW MenuAbility(game, this->GetId(), source, source, true, selection, p, title.str());
     game->mLayers->actionLayer()->currentActionCard = source;
     menu->resolve();
 }
@@ -4358,7 +4368,7 @@ int AAClash::resolve()
     std::ostringstream msg;
     msg << "Clash: " << (mine ? mine->getName() : string("no card")) << " (" << (mine ? myMV : 0) << ") vs "
         << (theirs ? theirs->getName() : string("no card")) << " (" << (theirs ? theirMV : 0) << ") - "
-        << (won ? "you win" : "you lose");
+        << you->getDisplayName() << (won ? " wins" : " loses");
     MTGAbility * message = NEW MTGEventText(game, this->GetId(), source, msg.str());
     message->oneShot = true;
     message->addToGame();

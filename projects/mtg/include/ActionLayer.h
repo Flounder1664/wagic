@@ -29,6 +29,7 @@ public:
     MTGCardInstance * currentActionCard;
     //One per entry of a custom choice menu: the card drawn beside the menu for that entry.
     std::vector<MTGCardInstance *> menuPreviewCards;
+    std::vector<MTGCardInstance *> menuPreviewCards2;
     int stuffHappened;
     virtual void Render();
     virtual void Update(float dt);

@@ -222,7 +222,31 @@ void ActionLayer::Render()
         //Drawn last: where the two overlap it is the menu's empty margin that is covered, and
         //the card's rules text - the reason for showing it - stays whole.
         int entry = abilitiesMenu->getmCurr();
-        if (entry >= 0 && entry < (int) menuPreviewCards.size() && menuPreviewCards[entry] && observer->getCardSelector())
+        MTGCardInstance * other = (entry >= 0 && entry < (int) menuPreviewCards2.size()) ? menuPreviewCards2[entry] : NULL;
+        if (other && menuPreviewCards[entry] && observer->getCardSelector())
+        {
+            //two cards side by side, smaller: the one this choice is about on the right, the other
+            //player's to its left, each with a label above it
+            const float scale = 0.58f;
+            const float w = CardGui::BigWidth * scale;
+            const float top = 142 - CardGui::BigHeight * scale / 2;
+            MTGCardInstance * shown[2] = { other, menuPreviewCards[entry] };
+            const char * labels[2] = { "Theirs", "Yours" };
+            WFont * font = WResourceManager::Instance()->GetWFont(Fonts::MAIN_FONT);
+            for (int k = 0; k < 2; ++k)
+            {
+                float x = SCREEN_WIDTH_F - 4 - w / 2 - (1 - k) * (w + 6);
+                Pos pos = Pos(x, 142, scale, 0.0, 255);
+                pos.actY = 142;
+                CardGui::DrawCard(shown[k], pos, observer->getCardSelector()->GetDrawMode());
+                if (font)
+                {
+                    font->SetColor(ARGB(255,255,255,255));
+                    font->DrawString(labels[k], x, top - 14, JGETEXT_CENTER);
+                }
+            }
+        }
+        else if (entry >= 0 && entry < (int) menuPreviewCards.size() && menuPreviewCards[entry] && observer->getCardSelector())
         {
             const float scale = 0.80f;
             Pos pos = Pos(SCREEN_WIDTH_F - CardGui::BigWidth * scale / 2 - 4, 142, scale, 0.0, 255);
@@ -411,6 +435,7 @@ void ActionLayer::setMenuObject(Targetable * object, bool must)
     menuObject = object;
     menuMust = must;
     menuPreviewCards.clear();
+    menuPreviewCards2.clear();
 
     SAFE_DELETE(abilitiesMenu);
     abilitiesTriggered = NULL;
@@ -469,6 +494,7 @@ void ActionLayer::setCustomMenuObject(Targetable * object, bool must,vector<MTGA
     abilitiesMenu = NEW SimpleMenu(observer->getInput(), observer->getResourceManager(), 10, this, Fonts::MAIN_FONT, 100, 100, customName.size()?customName.c_str():object->getDisplayName().c_str());
     currentActionCard = NULL;
     menuPreviewCards.clear();
+    menuPreviewCards2.clear();
     abilitiesMenu->isMultipleChoice = false;
     if(abilities.size())
     {
@@ -489,6 +515,7 @@ void ActionLayer::setCustomMenuObject(Targetable * object, bool must,vector<MTGA
                     preview = acted;
             }
             menuPreviewCards.push_back(preview);
+            menuPreviewCards2.push_back(abilities[w]->menuPreviewCard2);
             currentActionCard = (MTGCardInstance*)abilities[0]->target;
             abilitiesMenu->Add(mObjects.size()-1, currentAction->getMenuText(),"",false);
         }

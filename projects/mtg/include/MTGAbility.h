@@ -133,6 +133,9 @@ public:
     //When this ability is an entry in a choice menu: the card to show beside the menu while
     //the entry is highlighted. NULL = let the menu work it out (see ActionLayer).
     MTGCardInstance * menuPreviewCard;
+    //A second card shown beside the first, labelled as the other player's: a clash shows both
+    //revealed cards while each player picks top or bottom (John, scenario 134).
+    MTGCardInstance * menuPreviewCard2;
     bool canBeInterrupted;
     ManaCost* alternative;
     ManaCost* BuyBack;
