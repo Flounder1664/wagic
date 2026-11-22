@@ -1,0 +1,22 @@
+#A tie is not a win (Forest MV 0 vs Plains MV 0): Oaken Brawler stays 2/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Oaken Brawler
+manapool:{3}{W}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Oaken Brawler
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Oaken Brawler
+pt:Oaken Brawler=2/4
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

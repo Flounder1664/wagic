@@ -1,0 +1,22 @@
+#Twin: draws Hill Giant, reveals Forest - a tie, it stays in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Research the Deep
+manapool:{1}{U}
+library:Craw Wurm,Forest,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Research the Deep
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant
+graveyard:Research the Deep
+library:Craw Wurm,Forest
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

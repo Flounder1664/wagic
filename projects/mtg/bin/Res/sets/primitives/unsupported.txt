@@ -95,15 +95,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Adder-Staff Boggart
-text=When Adder-Staff Boggart enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Adder-Staff Boggart. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{R}
-type=Creature
-subtype=Goblin Warrior
-power=2
-toughness=1
-[/card]
-[card]
 name=Adventurers' Guildhouse
 missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=Green legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
@@ -974,15 +965,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Bog Hoodlums
-text=Bog Hoodlums can't block. -- When Bog Hoodlums enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Bog Hoodlums. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={5}{B}
-type=Creature
-subtype=Goblin Warrior
-power=4
-toughness=1
-[/card]
-[card]
 name=Bone Dancer
 text=Whenever Bone Dancer attacks and isn't blocked, you may put the top creature card of defending player's graveyard onto the battlefield under your control. If you do, Bone Dancer assigns no combat damage this turn.
 mana={1}{B}{B}
@@ -1133,12 +1115,6 @@ type=Creature
 subtype=Hag
 power=2
 toughness=2
-[/card]
-[card]
-name=Broken Ambitions
-text=Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of his or her library into his or her graveyard. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={X}{U}
-type=Instant
 [/card]
 [card]
 name=Bronze Bombshell
@@ -1354,14 +1330,6 @@ type=Creature
 subtype=Efreet
 power=6
 toughness=4
-[/card]
-[card]
-name=Captivating Glance
-target=creature
-text=Enchant creature -- At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={2}{U}
-type=Enchantment
-subtype=Aura
 [/card]
 [card]
 name=Captured by the Consulate
@@ -2962,12 +2930,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Entangling Trap
-text=Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
-mana={1}{W}
-type=Enchantment
-[/card]
-[card]
 name=Enter the Dungeon
 text=Players play a Magic subgame under the table starting at 5 life, using their libraries as their decks. After the subgame ends, the winner searches his or her library for two cards, puts those cards into his or her hand, then shuffles his or her library.
 mana={B}{B}
@@ -3367,15 +3329,6 @@ mana={5}{B}
 type=Sorcery
 [/card]
 [card]
-name=Fire Juggler
-text=Whenever Fire Juggler becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={2}{R}
-type=Creature
-subtype=Goblin Shaman
-power=2
-toughness=2
-[/card]
-[card]
 name=First Come, First Served
 text=The attacking or blocking creature with the lowest collector number has first strike. If two or more creatures are tied, they all have first strike.
 mana={1}{W}
@@ -3385,12 +3338,6 @@ type=Enchantment
 name=First Pick
 text=Destroy target artifact or enchantment. Assemble a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)
 mana={3}{G}
-type=Instant
-[/card]
-[card]
-name=Fistful of Force
-text=Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{G}
 type=Instant
 [/card]
 [card]
@@ -3900,13 +3847,6 @@ type=Creature
 subtype=Drake
 power=3
 toughness=3
-[/card]
-[card]
-name=Gilt-Leaf Ambush
-text=Put two 1/1 green Elf Warrior creature tokens onto the battlefield. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost. Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
-mana={2}{G}
-type=Tribal Instant
-subtype=Elf
 [/card]
 [card]
 name=Gimme Five
@@ -4596,12 +4536,6 @@ missing=can block more than one creature - not implemented, and not a missing ke
 text=Each creature you control can block an additional creature.
 mana={W}
 type=Enchantment
-[/card]
-[card]
-name=Hoarder's Greed
-text=You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={3}{B}
-type=Sorcery
 [/card]
 [card]
 name=Hogaak, Arisen Necropolis
@@ -5778,12 +5712,6 @@ name=Landfill
 text=Choose a land type. Remove from play all lands of that type that you control. Drop those cards, one at a time, onto the playing area from a height of at least one foot. Destroy each card in play that is completely covered by those cards. Then return to play, tapped, all lands dropped in this way.
 mana={4}{R}
 type=Sorcery
-[/card]
-[card]
-name=Lash Out
-text=Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{R}
-type=Instant
 [/card]
 [card]
 name=Last Thoughts
@@ -7023,15 +6951,6 @@ mana={1}{G}{G}
 type=Enchantment
 [/card]
 [card]
-name=Nath's Elite
-text=All creatures able to block Nath's Elite do so. -- When Nath's Elite enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Nath's Elite. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={4}{G}
-type=Creature
-subtype=Elf Warrior
-power=4
-toughness=2
-[/card]
-[card]
 name=Nature Demands an Offering
 text=When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles his or her library.
 type=Scheme
@@ -7288,15 +7207,6 @@ text=Nontoken creatures are enchantments in addition to their other types. -- Co
 mana=null
 type=Plane
 subtype=Theros
-[/card]
-[card]
-name=Oaken Brawler
-text=When Oaken Brawler enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Oaken Brawler. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={3}{W}
-type=Creature
-subtype=Treefolk Warrior
-power=2
-toughness=4
 [/card]
 [card]
 name=Oaken Power Suit
@@ -7664,15 +7574,6 @@ type=Plane
 subtype=Mirrodin
 [/card]
 [card]
-name=Paperfin Rascal
-text=When Paperfin Rascal enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Paperfin Rascal. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={2}{U}
-type=Creature
-subtype=Merfolk Rogue
-power=2
-toughness=2
-[/card]
-[card]
 name=Parallel Thoughts
 text=When Parallel Thoughts enters the battlefield, search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library. -- If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
 mana={3}{U}{U}
@@ -7920,12 +7821,6 @@ mana={4}
 type=Artifact
 [/card]
 [card]
-name=Pollen Lullaby
-text=Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{W}
-type=Instant
-[/card]
-[card]
 name=Pools of Becoming
 text=At the beginning of your end step, put the cards in your hand on the bottom of your library in any order, then draw that many cards. -- Whenever you roll {C}, reveal the top three cards of your planar deck. Each of the revealed cards' {C} abilities triggers. Then put the revealed cards on the bottom of your planar deck in any order.
 type=Plane
@@ -8063,12 +7958,6 @@ name=Puca's Mischief
 text=At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
 mana={3}{U}
 type=Enchantment
-[/card]
-[card]
-name=Pulling Teeth
-text=Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{B}
-type=Sorcery
 [/card]
 [card]
 name=Punctuate
@@ -8328,13 +8217,6 @@ mana={2}{G}
 type=Instant
 [/card]
 [card]
-name=Rebellion of the Flamekin
-text=Whenever you clash, you may pay {1}. If you do, put a 3/1 red Elemental Shaman creature token onto the battlefield. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
-mana={3}{R}
-type=Tribal Enchantment
-subtype=Elemental
-[/card]
-[card]
 name=Rebirth
 text=Remove Rebirth from your deck before playing if you're not playing for ante. --  -- Each player may put the top card of his or her library into the ante. If a player does, his or her life total becomes 20.
 mana={3}{G}{G}{G}
@@ -8353,12 +8235,6 @@ type=Artifact
 subtype=Contraption
 [/card]
 [card]
-name=Recross the Paths
-text=Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. Clash with an opponent. If you win, return Recross the Paths to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={2}{G}
-type=Sorcery
-[/card]
-[card]
 name=Red-Hot Hottie
 text=Whenever Red-Hot Hottie deals damage to a creature, put a third-degree-burn counter on that creature. It has "At the end of each turn, sacrifice this creature unless you scream ?Aaah' at the top of your lungs."
 mana={2}{R}{R}
@@ -8366,12 +8242,6 @@ type=Creature
 subtype=Elemental
 power=2
 toughness=5
-[/card]
-[card]
-name=Redeem the Lost
-text=Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return Redeem the Lost to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{W}
-type=Instant
 [/card]
 [card]
 name=Refibrillator
@@ -8429,12 +8299,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Release the Ants
-text=Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return Release the Ants to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{R}
-type=Instant
-[/card]
-[card]
 name=Remodel
 text=If you control two or more green permanents that share an artist, you may play Remodel without paying its mana cost. -- Remove target artifact from the game.
 mana={2}{G}
@@ -8451,12 +8315,6 @@ name=Reroute
 text=Change the target of target activated ability with a single target. (Mana abilities can't be targeted.) -- Draw a card.
 mana={1}{R}
 type=Instant
-[/card]
-[card]
-name=Research the Deep
-text=Draw a card. Clash with an opponent. If you win, return Research the Deep to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{U}
-type=Sorcery
 [/card]
 [card]
 name=Retether
@@ -8493,12 +8351,6 @@ name=Reverse Polarity
 text=You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.
 mana={W}{W}
 type=Instant
-[/card]
-[card]
-name=Revive the Fallen
-text=Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{B}
-type=Sorcery
 [/card]
 [card]
 name=Reweave
@@ -8568,16 +8420,6 @@ name=Rings of Brighthearth
 text=Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
 mana={3}
 type=Artifact
-[/card]
-[card]
-name=Ringskipper
-abilities=flying
-text=Flying -- When Ringskipper dies, clash with an opponent. If you win, return Ringskipper to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{U}
-type=Creature
-subtype=Faerie Wizard
-power=1
-toughness=1
 [/card]
 [card]
 name=Riptide Island
@@ -8965,16 +8807,6 @@ type=Artifact Creature
 subtype=Shapeshifter
 power=1
 toughness=1
-[/card]
-[card]
-name=Sentry Oak
-abilities=defender
-text=Defender -- At the beginning of combat on your turn, you may clash with an opponent. If you win, Sentry Oak gets +2/+0 and loses defender until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={4}{W}
-type=Creature
-subtype=Treefolk Warrior
-power=3
-toughness=5
 [/card]
 [card]
 name=Seraph
@@ -9785,21 +9617,6 @@ mana={B}
 type=Instant
 [/card]
 [card]
-name=Spring Cleaning
-text=Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{G}
-type=Instant
-[/card]
-[card]
-name=Springjack Knight
-text=Whenever Springjack Knight attacks, clash with an opponent. If you win, target creature gains double strike until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={2}{W}
-type=Creature
-subtype=Kithkin Knight
-power=2
-toughness=1
-[/card]
-[card]
 name=Spy Kit
 text=Equipped creature gets +1/+1 and has all names of nonlegendary creature cards in addition to its name. -- Equip {2}
 mana={2}
@@ -10292,12 +10109,6 @@ type=Creature
 subtype=Human Knight
 power=1
 toughness=3
-[/card]
-[card]
-name=Sylvan Echoes
-text=Whenever you clash and win, you may draw a card. (This ability triggers after the clash ends.)
-mana={G}
-type=Enchantment
 [/card]
 [card]
 name=Symbol Status
@@ -10933,12 +10744,6 @@ type=Creature
 subtype=Horror
 power=1
 toughness=1
-[/card]
-[card]
-name=Titan's Revenge
-text=Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={X}{R}{R}
-type=Sorcery
 [/card]
 [card]
 name=Togglodyte
@@ -11749,12 +11554,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Weed Strangle
-text=Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={3}{B}{B}
-type=Sorcery
-[/card]
-[card]
 name=Weight of Conscience
 target=creature
 text=Enchant creature -- Enchanted creature can't attack. -- Tap two untapped creatures you control that share a creature type: Exile enchanted creature.
@@ -11820,12 +11619,6 @@ type=Creature
 subtype=Dwarf
 power=1
 toughness=1
-[/card]
-[card]
-name=Whirlpool Whelm
-text=Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-mana={1}{U}
-type=Instant
 [/card]
 [card]
 name=Whispergear Sneak
@@ -11943,12 +11736,6 @@ type=Creature
 subtype=Unicorn Monger
 power=3
 toughness=3
-[/card]
-[card]
-name=Woodland Guidance
-text=Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.) -- Exile Woodland Guidance.
-mana={3}{G}
-type=Sorcery
 [/card]
 [card]
 name=Word of Command

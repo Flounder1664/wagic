@@ -1,0 +1,23 @@
+#Bog Hoodlums, clash won (Hill Giant MV 4 vs Plains MV 0): a +1/+1 counter; it cannot block.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bog Hoodlums
+manapool:{5}{B}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Bog Hoodlums
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bog Hoodlums
+pt:Bog Hoodlums=5/2
+type:Bog Hoodlums=cantblock
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

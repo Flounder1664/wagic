@@ -1,0 +1,25 @@
+#Redeem the Lost, clash won (Hill Giant MV 4 vs Plains MV 0): Redeem the Lost returns to hand (its protection is checked in game).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Redeem the Lost
+manapool:{1}{W}
+library:Memnite,Hill Giant
+inplay:Grizzly Bears
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Redeem the Lost
+Grizzly Bears
+choice 0
+choice 0
+choice 3
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Redeem the Lost
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

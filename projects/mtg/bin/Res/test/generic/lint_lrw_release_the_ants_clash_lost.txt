@@ -1,0 +1,23 @@
+#Twin: Release the Ants, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Release the Ants
+manapool:{1}{R}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Release the Ants
+p2
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Release the Ants
+library:Hill Giant,Memnite
+[PLAYER2]
+life:19
+library:Ornithopter,Craw Wurm
+[END]

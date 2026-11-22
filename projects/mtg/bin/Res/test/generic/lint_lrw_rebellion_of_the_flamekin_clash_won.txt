@@ -1,0 +1,24 @@
+#Adder-Staff Boggart, clash won (Hill Giant MV 4 vs Plains MV 0): Rebellion of the Flamekin pays {1} for a 3/1 Elemental Shaman with haste.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Adder-Staff Boggart
+manapool:{1}{R}{1}
+library:Memnite,Hill Giant
+inplay:Rebellion of the Flamekin
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Adder-Staff Boggart
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rebellion of the Flamekin,Adder-Staff Boggart,*
+type:Elemental Shaman=haste
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

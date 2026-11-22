@@ -1,0 +1,24 @@
+#Shock, clash won (Hill Giant MV 4 vs Plains MV 0): Ringskipper dies and returns to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock
+manapool:{R}
+library:Memnite,Hill Giant
+inplay:Ringskipper
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Shock
+Ringskipper
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ringskipper
+graveyard:Shock
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

@@ -1,0 +1,26 @@
+#Island, clash won (Hill Giant MV 4 vs Plains MV 0): at the beginning of combat Sentry Oak gets +2/+0 and loses defender.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island
+manapool:{0}
+library:Memnite,Hill Giant
+inplay:Sentry Oak
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Island
+next
+choice 0
+choice 0
+choice 0
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:Sentry Oak,Island
+pt:Sentry Oak=5/5
+type:Sentry Oak=-defender
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

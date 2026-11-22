@@ -1,0 +1,22 @@
+#Twin: Bog Hoodlums, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Bog Hoodlums
+manapool:{5}{B}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Bog Hoodlums
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bog Hoodlums
+pt:Bog Hoodlums=4/1
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

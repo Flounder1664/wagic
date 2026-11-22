@@ -1,0 +1,25 @@
+#Twin: keep Hill Giant on TOP instead. Repeat: draw Hill Giant, Forest; reveal Mountain vs Plains - a tie, lost. Life 16.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hoarder's Greed
+manapool:{3}{B}
+library:Mountain,Forest,Hill Giant,Island,Swamp
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Hoarder's Greed
+choice 0
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Swamp,Island,Hill Giant,Forest
+library:Mountain
+life:16
+graveyard:Hoarder's Greed
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

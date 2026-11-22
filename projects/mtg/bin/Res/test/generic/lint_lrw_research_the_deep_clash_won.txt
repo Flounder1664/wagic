@@ -1,0 +1,21 @@
+#Research the Deep draws Hill Giant, reveals Craw Wurm (6) vs Plains and returns to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Research the Deep
+manapool:{1}{U}
+library:Forest,Craw Wurm,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Research the Deep
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Research the Deep
+library:Forest,Craw Wurm
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

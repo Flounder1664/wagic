@@ -1,0 +1,19 @@
+#Against an empty library any card wins, even Memnite (MV 0): Paperfin Rascal gets its counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Paperfin Rascal
+manapool:{2}{U}
+library:Hill Giant,Memnite
+[PLAYER2]
+[DO]
+Paperfin Rascal
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Paperfin Rascal
+pt:Paperfin Rascal=3/3
+library:Hill Giant,Memnite
+[PLAYER2]
+[END]

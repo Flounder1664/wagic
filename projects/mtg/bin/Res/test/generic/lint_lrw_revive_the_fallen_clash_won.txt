@@ -1,0 +1,23 @@
+#Revive the Fallen, clash won (Hill Giant MV 4 vs Plains MV 0): the Bears and the spell return.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Revive the Fallen
+manapool:{1}{B}
+library:Memnite,Hill Giant
+graveyard:Grizzly Bears
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Revive the Fallen
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Revive the Fallen,Grizzly Bears
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

@@ -1,0 +1,29 @@
+#Woodland Guidance returns Shock, untaps both Forests on the win, and exiles itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Snow-Covered Forest
+graveyard:Shock
+hand:Woodland Guidance
+manapool:{2}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Forest
+Snow-Covered Forest
+Woodland Guidance
+Shock
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Snow-Covered Forest
+hand:Shock
+exile:Woodland Guidance
+tappedinplay:0
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

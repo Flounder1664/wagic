@@ -1,0 +1,28 @@
+#Adder-Staff Boggart, clash won (Hill Giant MV 4 vs Plains MV 0): Entangling Trap taps Gray Ogre, which stays tapped through its controller's untap step.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Adder-Staff Boggart
+manapool:{1}{R}
+library:Memnite,Hill Giant
+inplay:Entangling Trap
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Plains
+[DO]
+Adder-Staff Boggart
+choice 0
+choice 0
+Gray Ogre
+eot
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Entangling Trap,Adder-Staff Boggart
+library:Memnite,Hill Giant
+[PLAYER2]
+inplay:Gray Ogre
+tappedinplay:1
+library:Ornithopter,Plains
+[END]

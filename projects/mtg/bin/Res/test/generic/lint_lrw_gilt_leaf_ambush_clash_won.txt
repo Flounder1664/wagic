@@ -1,0 +1,23 @@
+#Gilt-Leaf Ambush, clash won (Hill Giant MV 4 vs Plains MV 0): two Elf Warriors with deathtouch.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gilt-Leaf Ambush
+manapool:{2}{G}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Gilt-Leaf Ambush
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+type:Elf Warrior=deathtouch
+graveyard:Gilt-Leaf Ambush
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

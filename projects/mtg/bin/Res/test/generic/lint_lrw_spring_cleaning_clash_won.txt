@@ -1,0 +1,26 @@
+#Spring Cleaning, clash won (Hill Giant MV 4 vs Plains MV 0): Pacifism destroyed, then every enchantment the opponent controls (not mine).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spring Cleaning
+manapool:{1}{G}
+library:Memnite,Hill Giant
+inplay:Glorious Anthem
+[PLAYER2]
+inplay:Pacifism,Bad Moon
+library:Ornithopter,Plains
+[DO]
+Spring Cleaning
+Pacifism
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glorious Anthem
+graveyard:Spring Cleaning
+library:Memnite,Hill Giant
+[PLAYER2]
+graveyard:Pacifism,Bad Moon
+library:Ornithopter,Plains
+[END]

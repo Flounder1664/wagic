@@ -1,0 +1,23 @@
+#Nath's Elite wins: 5/3, and it has lure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Nath's Elite
+manapool:{4}{G}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Nath's Elite
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Nath's Elite
+pt:Nath's Elite=5/3
+type:Nath's Elite=lure
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

@@ -1,0 +1,26 @@
+#Twin: Island, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island
+manapool:{0}
+library:Hill Giant,Memnite
+inplay:Sentry Oak
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Island
+next
+choice 0
+choice 0
+choice 0
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:Sentry Oak,Island
+pt:Sentry Oak=3/5
+type:Sentry Oak=defender
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

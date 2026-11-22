@@ -1,0 +1,24 @@
+#Twin: Revive the Fallen, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Revive the Fallen
+manapool:{1}{B}
+library:Hill Giant,Memnite
+graveyard:Grizzly Bears
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Revive the Fallen
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grizzly Bears
+graveyard:Revive the Fallen
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

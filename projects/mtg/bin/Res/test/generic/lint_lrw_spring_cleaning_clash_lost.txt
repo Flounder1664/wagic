@@ -1,0 +1,27 @@
+#Twin: Spring Cleaning, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Spring Cleaning
+manapool:{1}{G}
+library:Hill Giant,Memnite
+inplay:Glorious Anthem
+[PLAYER2]
+inplay:Pacifism,Bad Moon
+library:Ornithopter,Craw Wurm
+[DO]
+Spring Cleaning
+Pacifism
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glorious Anthem
+graveyard:Spring Cleaning
+library:Hill Giant,Memnite
+[PLAYER2]
+graveyard:Pacifism
+inplay:Bad Moon
+library:Ornithopter,Craw Wurm
+[END]

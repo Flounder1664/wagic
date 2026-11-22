@@ -1,0 +1,25 @@
+#Twin: Whirlpool Whelm, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Whirlpool Whelm
+manapool:{1}{U}
+library:Hill Giant,Memnite
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Craw Wurm
+[DO]
+Whirlpool Whelm
+Gray Ogre
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Whirlpool Whelm
+library:Hill Giant,Memnite
+[PLAYER2]
+hand:Gray Ogre
+library:Ornithopter,Craw Wurm
+[END]

@@ -1,0 +1,25 @@
+#Lash Out, clash won (Hill Giant MV 4 vs Plains MV 0): 3 to the Bears, then 3 to their controller.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lash Out
+manapool:{1}{R}
+library:Memnite,Hill Giant
+[PLAYER2]
+inplay:Grizzly Bears
+library:Ornithopter,Plains
+[DO]
+Lash Out
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Lash Out
+library:Memnite,Hill Giant
+[PLAYER2]
+graveyard:Grizzly Bears
+life:17
+library:Ornithopter,Plains
+[END]

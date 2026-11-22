@@ -1,0 +1,22 @@
+#Adder-Staff Boggart, clash won (Hill Giant MV 4 vs Plains MV 0): a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Adder-Staff Boggart
+manapool:{1}{R}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Adder-Staff Boggart
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Adder-Staff Boggart
+pt:Adder-Staff Boggart=3/2
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

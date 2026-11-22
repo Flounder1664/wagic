@@ -1,0 +1,29 @@
+#Twin: lost, the Forests stay tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Snow-Covered Forest
+graveyard:Shock
+hand:Woodland Guidance
+manapool:{2}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Forest
+Snow-Covered Forest
+Woodland Guidance
+Shock
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Snow-Covered Forest
+hand:Shock
+exile:Woodland Guidance
+tappedinplay:2
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

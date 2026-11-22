@@ -1,0 +1,25 @@
+#Hoarder's Greed: draw Swamp, Island; win with Hill Giant and put it on the BOTTOM. Repeat: draw Forest, Mountain; reveal Memnite vs Plains - a tie, lost. Hill Giant stays in the library under Memnite. Two rounds: life 16.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hoarder's Greed
+manapool:{3}{B}
+library:Memnite,Mountain,Forest,Hill Giant,Island,Swamp
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Hoarder's Greed
+choice 1
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Swamp,Island,Forest,Mountain
+library:Hill Giant,Memnite
+life:16
+graveyard:Hoarder's Greed
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

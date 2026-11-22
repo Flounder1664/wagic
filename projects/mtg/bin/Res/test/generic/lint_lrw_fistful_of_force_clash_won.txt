@@ -1,0 +1,26 @@
+#Fistful of Force, clash won (Hill Giant MV 4 vs Plains MV 0): +4/+4 and trample in all.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fistful of Force
+manapool:{1}{G}
+library:Memnite,Hill Giant
+inplay:Grizzly Bears
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Fistful of Force
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=6/6
+type:Grizzly Bears=trample
+graveyard:Fistful of Force
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[END]

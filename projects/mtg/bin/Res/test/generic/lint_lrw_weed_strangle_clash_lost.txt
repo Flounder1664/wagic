@@ -1,0 +1,25 @@
+#Twin: Weed Strangle, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Weed Strangle
+manapool:{3}{B}{B}
+library:Hill Giant,Memnite
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Craw Wurm
+[DO]
+Weed Strangle
+Gray Ogre
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:20
+graveyard:Weed Strangle
+library:Hill Giant,Memnite
+[PLAYER2]
+graveyard:Gray Ogre
+library:Ornithopter,Craw Wurm
+[END]

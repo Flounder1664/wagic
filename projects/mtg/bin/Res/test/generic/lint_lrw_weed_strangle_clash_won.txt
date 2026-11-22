@@ -1,0 +1,25 @@
+#Weed Strangle, clash won (Hill Giant MV 4 vs Plains MV 0): Gray Ogre destroyed, gain life equal to its toughness (2).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Weed Strangle
+manapool:{3}{B}{B}
+library:Memnite,Hill Giant
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Plains
+[DO]
+Weed Strangle
+Gray Ogre
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+life:22
+graveyard:Weed Strangle
+library:Memnite,Hill Giant
+[PLAYER2]
+graveyard:Gray Ogre
+library:Ornithopter,Plains
+[END]

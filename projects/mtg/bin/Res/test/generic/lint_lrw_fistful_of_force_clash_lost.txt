@@ -1,0 +1,26 @@
+#Twin: Fistful of Force, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Fistful of Force
+manapool:{1}{G}
+library:Hill Giant,Memnite
+inplay:Grizzly Bears
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Fistful of Force
+Grizzly Bears
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+type:Grizzly Bears=-trample
+graveyard:Fistful of Force
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

@@ -1,0 +1,23 @@
+#Release the Ants, clash won (Hill Giant MV 4 vs Plains MV 0): 1 to the opponent, then back to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Release the Ants
+manapool:{1}{R}
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains
+[DO]
+Release the Ants
+p2
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Release the Ants
+library:Memnite,Hill Giant
+[PLAYER2]
+life:19
+library:Ornithopter,Plains
+[END]

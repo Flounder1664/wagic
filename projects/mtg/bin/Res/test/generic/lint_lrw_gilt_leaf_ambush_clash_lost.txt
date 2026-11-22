@@ -1,0 +1,23 @@
+#Twin: Gilt-Leaf Ambush, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gilt-Leaf Ambush
+manapool:{2}{G}
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Gilt-Leaf Ambush
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+type:Elf Warrior=-deathtouch
+graveyard:Gilt-Leaf Ambush
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

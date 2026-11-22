@@ -157423,3 +157423,310 @@ text=Spree (Choose one or more additional costs.) -- + {1} - Search your library
 mana={1}{G}
 type=Sorcery
 [/card]
+[card]
+name=Adder-Staff Boggart
+#2026-11-22 clash batch: written from existing working forms.
+auto=clash winability counter(1/1) winabilityend clashend
+text=When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{R}
+type=Creature
+subtype=Goblin Warrior
+power=2
+toughness=1
+[/card]
+[card]
+name=Bog Hoodlums
+#2026-11-22 clash batch: written from existing working forms.
+abilities=cantblock
+auto=clash winability counter(1/1) winabilityend clashend
+text=This creature can't block. -- When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={5}{B}
+type=Creature
+subtype=Goblin Warrior
+power=4
+toughness=1
+[/card]
+[card]
+name=Nath's Elite
+#2026-11-22 clash batch: written from existing working forms.
+auto=lure
+auto=clash winability counter(1/1) winabilityend clashend
+text=All creatures able to block this creature do so. -- When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={4}{G}
+type=Creature
+subtype=Elf Warrior
+power=4
+toughness=2
+[/card]
+[card]
+name=Oaken Brawler
+#2026-11-22 clash batch: written from existing working forms.
+auto=clash winability counter(1/1) winabilityend clashend
+text=When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={3}{W}
+type=Creature
+subtype=Treefolk Warrior
+power=2
+toughness=4
+[/card]
+[card]
+name=Paperfin Rascal
+#2026-11-22 clash batch: written from existing working forms.
+auto=clash winability counter(1/1) winabilityend clashend
+text=When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={2}{U}
+type=Creature
+subtype=Merfolk Rogue
+power=2
+toughness=2
+[/card]
+[card]
+name=Broken Ambitions
+#2026-11-22 clash batch: written from existing working forms.
+target=*|stack
+auto=transforms((,newability[pay[[{value:storedx}]] name(pay {value} mana) donothing?fizzle])) forever
+auto=clash winability deplete:4 targetcontroller winabilityend clashend
+text=Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={X}{U}
+type=Instant
+[/card]
+[card]
+name=Captivating Glance
+#2026-11-22 clash batch: written from existing working forms.
+target=creature
+auto=@each my end:clash winability moveto(mybattlefield) all(mytgt) winabilityend loseability moveto(opponentbattlefield) all(mytgt) loseabilityend clashend
+text=Enchant creature -- At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={2}{U}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Entangling Trap
+#2026-11-22 clash batch: written from existing working forms.
+auto=@clashedof(player):target(creature|opponentbattlefield) tap and!( if compare(lastclashwon)~morethan~0 then frozen )!
+text=Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
+mana={1}{W}
+type=Enchantment
+[/card]
+[card]
+name=Fire Juggler
+#2026-11-22 clash batch: written from existing working forms.
+#"each creature blocking it" is every blocking creature: the engine has no blocking-this-creature selector.
+auto=@combat(blocked) source(this):clash winability damage:4 all(creature[blocking]) winabilityend clashend
+text=Whenever this creature becomes blocked, clash with an opponent. If you win, this creature deals 4 damage to each creature blocking it. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={2}{R}
+type=Creature
+subtype=Goblin Shaman
+power=2
+toughness=2
+[/card]
+[card]
+name=Fistful of Force
+#2026-11-22 clash batch: written from existing working forms.
+target=creature
+auto=2/2 ueot
+auto=clash winability 2/2 ueot && transforms((,trample)) ueot winabilityend clashend
+text=Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Gilt-Leaf Ambush
+#2026-11-22 clash batch: written from existing working forms.
+auto=token(Elf Warrior,creature Elf Warrior,1/1,green)*2
+auto=clash winability all(elf[token;fresh]|mybattlefield) transforms((,deathtouch)) ueot winabilityend clashend
+text=Create two 1/1 green Elf Warrior creature tokens. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value. Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
+mana={2}{G}
+type=Kindred Instant
+subtype=Elf
+[/card]
+[card]
+name=Hoarder's Greed
+#2026-11-22 clash batch: written from existing working forms.
+auto=life:-2 controller && draw:2 controller
+auto=clash repeat winability life:-2 controller && draw:2 controller winabilityend clashend
+text=You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={3}{B}
+type=Sorcery
+[/card]
+[card]
+name=Lash Out
+#2026-11-22 clash batch: written from existing working forms.
+target=creature
+auto=damage:3
+auto=clash winability damage:3 targetcontroller winabilityend clashend
+text=Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Pollen Lullaby
+#2026-11-22 clash batch: written from existing working forms.
+auto=preventAllcombatDamage ueot
+auto=clash winability all(creature|opponentbattlefield) frozen winabilityend clashend
+text=Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Pulling Teeth
+#2026-11-22 clash batch: written from existing working forms.
+target=player
+auto=clash winability ability$!name(discard 2 cards) target(<2>*|myhand) reject!$ targetedplayer winabilityend loseability ability$!name(discard a card) target(<1>*|myhand) reject!$ targetedplayer loseabilityend clashend
+text=Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Rebellion of the Flamekin
+#2026-11-22 clash batch: written from existing working forms.
+auto=@clashedof(player):may pay({1}) name(Pay 1: 3/1 Elemental Shaman) if compare(lastclashwon)~morethan~0 then token(Elemental Shaman,creature Elemental Shaman,3/1,red,haste) else token(Elemental Shaman,creature Elemental Shaman,3/1,red)
+text=Whenever you clash, you may pay {1}. If you do, create a 3/1 red Elemental Shaman creature token. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
+mana={3}{R}
+type=Kindred Enchantment
+subtype=Elemental
+[/card]
+[card]
+name=Recross the Paths
+#2026-11-22 clash batch: written from existing working forms.
+auto=reveal:1 revealzone(mylibrary) revealuntil(*[land]|mylibrary) optionone choice name(Put the land onto the battlefield) target(land|reveal) moveto(mybattlefield) optiononeend optiontwo choice name(Rest on the bottom) all(*|reveal) bottomoflibrary optiontwoend afterrevealed clash winability thiscard moveto(ownerhand) winabilityend clashend afterrevealedend revealend
+text=Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. Clash with an opponent. If you win, return Recross the Paths to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={2}{G}
+type=Sorcery
+[/card]
+[card]
+name=Redeem the Lost
+#2026-11-22 clash batch: written from existing working forms.
+target=creature|mybattlefield
+auto=choice name(Protection from white) transforms((,newability[protection from white])) ueot
+auto=choice name(Protection from blue) transforms((,newability[protection from blue])) ueot
+auto=choice name(Protection from black) transforms((,newability[protection from black])) ueot
+auto=choice name(Protection from red) transforms((,newability[protection from red])) ueot
+auto=choice name(Protection from green) transforms((,newability[protection from green])) ueot
+auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return Redeem the Lost to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{W}
+type=Instant
+[/card]
+[card]
+name=Release the Ants
+#2026-11-22 clash batch: written from existing working forms.
+target=creature,player,planeswalker,battle
+auto=damage:1
+auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Release the Ants deals 1 damage to any target. Clash with an opponent. If you win, return Release the Ants to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Research the Deep
+#2026-11-22 clash batch: written from existing working forms.
+auto=draw:1 controller
+auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Draw a card. Clash with an opponent. If you win, return Research the Deep to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{U}
+type=Sorcery
+[/card]
+[card]
+name=Revive the Fallen
+#2026-11-22 clash batch: written from existing working forms.
+target=creature|graveyard
+auto=moveto(ownerhand)
+auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{B}
+type=Sorcery
+[/card]
+[card]
+name=Ringskipper
+#2026-11-22 clash batch: written from existing working forms.
+abilities=flying
+auto=@movedTo(this|graveyard) from(battlefield):clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Flying -- When this creature dies, clash with an opponent. If you win, return this card to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{U}
+type=Creature
+subtype=Faerie Wizard
+power=1
+toughness=1
+[/card]
+[card]
+name=Sentry Oak
+#2026-11-22 clash batch: written from existing working forms.
+abilities=defender
+auto=@each my combatbegins:may clash winability transforms((,newability[-defender ueot],newability[2/0 ueot])) oneshot winabilityend clashend
+text=Defender -- At the beginning of combat on your turn, you may clash with an opponent. If you win, this creature gets +2/+0 and loses defender until end of turn. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={4}{W}
+type=Creature
+subtype=Treefolk Warrior
+power=3
+toughness=5
+[/card]
+[card]
+name=Spring Cleaning
+#2026-11-22 clash batch: written from existing working forms.
+target=enchantment
+auto=destroy
+auto=clash winability destroy all(enchantment|opponentbattlefield) winabilityend clashend
+text=Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{G}
+type=Instant
+[/card]
+[card]
+name=Springjack Knight
+#2026-11-22 clash batch: written from existing working forms.
+auto=_ATTACKING_clash winability target(creature) transforms((,double strike)) ueot winabilityend clashend
+text=Whenever this creature attacks, clash with an opponent. If you win, target creature gains double strike until end of turn. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={2}{W}
+type=Creature
+subtype=Kithkin Knight
+power=2
+toughness=1
+[/card]
+[card]
+name=Sylvan Echoes
+#2026-11-22 clash batch: written from existing working forms.
+auto=@clashwonof(player):may draw:1 controller
+text=Whenever you clash and win, you may draw a card. (This ability triggers after the clash ends.)
+mana={G}
+type=Enchantment
+[/card]
+[card]
+name=Titan's Revenge
+#2026-11-22 clash batch: written from existing working forms.
+target=creature,player,planeswalker,battle
+auto=damage:X
+auto=clash winability thiscard moveto(ownerhand) winabilityend clashend
+text=Titan's Revenge deals X damage to any target. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={X}{R}{R}
+type=Sorcery
+[/card]
+[card]
+name=Weed Strangle
+#2026-11-22 clash batch: written from existing working forms.
+target=creature
+auto=destroy
+auto=clash winability dynamicability<!mytgt toughnesslifegain srccontroller!> winabilityend clashend
+text=Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={3}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Whirlpool Whelm
+#2026-11-22 clash batch: written from existing working forms.
+target=creature
+auto=clash winability transforms((,newability[choice name(Put it on top of its library) moveto(ownerlibrary)],newability[choice name(Return it to hand) moveto(ownerhand)])) oneshot winabilityend loseability moveto(ownerhand) loseabilityend clashend
+text=Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
+mana={1}{U}
+type=Instant
+[/card]
+[card]
+name=Woodland Guidance
+#2026-11-22 clash batch: written from existing working forms.
+abilities=exiledeath
+target=*|mygraveyard
+auto=moveto(hand)
+auto=clash winability untap all(forest|mybattlefield) winabilityend clashend
+text=Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.) -- Exile Woodland Guidance.
+mana={3}{G}
+type=Sorcery
+[/card]

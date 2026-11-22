@@ -1,0 +1,24 @@
+#Twin: Adder-Staff Boggart, clash lost (Forest MV 0 vs Craw Wurm MV 6) - no win effect.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Adder-Staff Boggart
+manapool:{1}{R}{1}
+library:Hill Giant,Memnite
+inplay:Rebellion of the Flamekin
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[DO]
+Adder-Staff Boggart
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rebellion of the Flamekin,Adder-Staff Boggart,*
+type:Elemental Shaman=-haste
+library:Hill Giant,Memnite
+[PLAYER2]
+library:Ornithopter,Craw Wurm
+[END]

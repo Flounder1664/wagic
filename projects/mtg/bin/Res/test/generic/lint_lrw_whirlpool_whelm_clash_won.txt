@@ -1,0 +1,24 @@
+#Whirlpool Whelm, clash won (Hill Giant MV 4 vs Plains MV 0): Gray Ogre goes on top of its library instead of to hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Whirlpool Whelm
+manapool:{1}{U}
+library:Memnite,Hill Giant
+[PLAYER2]
+inplay:Gray Ogre
+library:Ornithopter,Plains
+[DO]
+Whirlpool Whelm
+Gray Ogre
+choice 0
+choice 0
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Whirlpool Whelm
+library:Memnite,Hill Giant
+[PLAYER2]
+library:Ornithopter,Plains,Gray Ogre
+[END]
