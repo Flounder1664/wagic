@@ -69,4 +69,5 @@ Device serials:
 2026-11-22 922c10ba9 (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611222050.old; read back ok. scenario queue fixes (Redeem the Lost, Captivating Glance) + 18 VERIFIED; exes 77715ec43 [attached] fix
 2026-11-22 922c10ba9 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe ([attached] matches an Aura, 77715ec43); launched from G: 15s before replacing, no crash; harness 6/2651 known failures; backups .old.202611222050.
 2026-11-22 4d8a4cd50 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (clash shows both revealed cards); launched from G: 15s before replacing, no crash; harness 6/2653 known failures; rendering not yet seen; backups .old.202611222056.
+2026-11-22 3c9a82b2b (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611222117.old; read back ok. Redeem the Lost back on choice lines (needs exes 3c9a82b2b: clash menu waits)
 ```
