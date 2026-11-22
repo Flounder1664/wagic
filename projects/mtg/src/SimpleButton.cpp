@@ -16,6 +16,7 @@
 SimpleButton::SimpleButton(int id): JGuiObject(id)
 {
     mIsValidSelection = false;
+    mCompact = false;
 }
 
 SimpleButton::SimpleButton(JGuiController* _parent, int id, int fontId, string text, float x, float y, bool hasFocus, bool autoTranslate) :
@@ -28,15 +29,16 @@ JGuiObject(id), mX(x), mY(y), parent(_parent), mFontId(fontId)
         mText = text;
     
     mHasFocus = hasFocus;
+    mCompact = false;
     
-    mScale = (mText.size() < 20) ? SCALE_LARGE_NORMAL : SCALE_NORMAL;
+    mScale = (isLarge()) ? SCALE_LARGE_NORMAL : SCALE_NORMAL;
 
     if (mHasFocus) {
-        mTargetScale = (mText.size() < 20) ? SCALE_SELECTED_LARGE : SCALE_SELECTED;
+        mTargetScale = (isLarge()) ? SCALE_SELECTED_LARGE : SCALE_SELECTED;
     }
     else
     {
-         mTargetScale = (mText.size() < 20) ? SCALE_LARGE_NORMAL : SCALE_NORMAL;
+         mTargetScale = (isLarge()) ? SCALE_LARGE_NORMAL : SCALE_NORMAL;
     }
 
     
@@ -160,19 +162,28 @@ bool SimpleButton::isSelectionValid() const
     return mIsValidSelection;
 }
 
+void SimpleButton::setCompact(bool compact)
+{
+    if (mCompact == compact)
+        return;
+    mCompact = compact;
+    mScale = isLarge() ? SCALE_LARGE_NORMAL : SCALE_NORMAL;
+    setFocus(mHasFocus);
+}
+
 void SimpleButton::setFocus(bool value)
 {
     mHasFocus = value;
 
     if (mHasFocus) {
-        if(mText.size() < 20)
+        if(isLarge())
             mTargetScale = (SCALE_SELECTED_LARGE);
         else
             mTargetScale = (SCALE_SELECTED);
     }
     else
     {
-        if(mText.size() < 20)
+        if(isLarge())
             mTargetScale = (SCALE_LARGE_NORMAL);
         else
             mTargetScale = (SCALE_NORMAL);
@@ -211,7 +222,7 @@ float SimpleButton::GetEnlargedWidth()
     WFont * mFont = WResourceManager::Instance()->GetWFont(mFontId);
     float backup = mFont->GetScale();
     mFont->SetScale(SCALE_SELECTED);
-    if(mText.size() < 20)
+    if(isLarge())
         mFont->SetScale(SCALE_SELECTED_LARGE);
     float result = mFont->GetStringWidth(mText.c_str());
     mFont->SetScale(backup);

@@ -356,6 +356,14 @@ void SimpleMenu::Add(int id, const string& text, string desc, bool forceFocus)
 
     smi->setDescription(desc);
     JGuiController::Add(smi);
+    //one size for every item: if any label is long, none is drawn large (see SimpleButton::mCompact)
+    bool anyLong = false;
+    for (size_t i = 0; i < mObjects.size() && !anyLong; i++)
+        if (SimpleMenuItem * item = dynamic_cast<SimpleMenuItem *> (mObjects[i]))
+            anyLong = item->getText().size() >= 20;
+    for (size_t i = 0; anyLong && i < mObjects.size(); i++)
+        if (SimpleMenuItem * item = dynamic_cast<SimpleMenuItem *> (mObjects[i]))
+            item->setCompact(true);
     if (mCount <= maxItems) mHeight += SimpleMenuConst::kLineHeight;
     if (forceFocus)
     {

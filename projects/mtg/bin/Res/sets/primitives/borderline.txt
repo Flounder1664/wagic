@@ -157438,7 +157438,7 @@ type=Sorcery
 [/card]
 [card]
 name=Adder-Staff Boggart
-#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the clash shows both revealed cards (Theirs / Yours) while each player picks top or bottom.
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the clash shows both revealed cards (Theirs / Yours) while each player picks top or bottom; after the layout fix (screen edges, no hover preview) rechecked same day.
 #2026-11-22 clash batch: written from existing working forms.
 auto=clash winability counter(1/1) winabilityend clashend
 text=When this creature enters, clash with an opponent. If you win, put a +1/+1 counter on this creature. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)
@@ -157617,6 +157617,7 @@ type=Sorcery
 [/card]
 [card]
 name=Redeem the Lost
+#VERIFIED IN GAME 2026-11-22 (John, scenario queue): the colour menu appears; protection from red stops Shock targeting the creature.
 #2026-11-22 clash batch: written from existing working forms.
 target=creature|mybattlefield
 #Center Soul's five choice lines. The clash's top/bottom menu now waits for this colour menu

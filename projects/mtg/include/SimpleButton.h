@@ -29,6 +29,11 @@ private:
     float mTargetScale;
     bool mHasFocus;
     bool mIsValidSelection;
+    //A label under 20 characters is drawn 1.5x. In a menu that also has longer labels the
+    //short one stood out ("Protection from red" beside "Protection from blue" - John,
+    //2026-11-22); the menu sets compact on all its items then, so they share one size.
+    bool mCompact;
+    bool isLarge() const { return mText.size() < 20 && !mCompact; }
     float mX;
     float mY;
     
@@ -55,6 +60,7 @@ public:
     
     virtual void setIsSelectionValid( bool validSelection );    
     virtual void setFocus(bool value);    
+    void setCompact(bool compact);
     virtual void setText( const string& text);
     
     virtual bool isSelectionValid() const;
