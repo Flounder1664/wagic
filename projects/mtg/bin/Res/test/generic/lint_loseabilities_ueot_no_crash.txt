@@ -1,0 +1,22 @@
+#Merfolk Trickster taps Air Elemental and it loses all abilities until end of turn. Before 2026-11-22
+#the game segfaulted on teardown after any "transforms((,newability[loseabilities])) ueot" (a double
+#delete in ActionLayer::cleanGarbage); the test is lost (never reports) when that happens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Merfolk Trickster
+manapool:{U}{U}
+[PLAYER2]
+inplay:Air Elemental
+[DO]
+Merfolk Trickster
+Air Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Merfolk Trickster
+[PLAYER2]
+inplay:Air Elemental
+tappedinplay:1
+type:Air Elemental=-flying
+[END]

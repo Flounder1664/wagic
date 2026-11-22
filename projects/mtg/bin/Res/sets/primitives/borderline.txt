@@ -157295,7 +157295,7 @@ name=Final Showdown
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
 auto=may name(+{3}{W}{W}: Destroy all creatures) pay({3}{W}{W}) name(Destroy all creatures) all(creature) destroy
 auto=may name(+{1}: A creature you control gains indestructible) pay({1}) name(A creature you control gains indestructible) target(creature|mybattlefield) transforms((,indestructible)) ueot
-auto=may name(+{1}: All creatures lose all abilities) pay({1}) name(All creatures lose all abilities) all(creature) loseabilities ueot
+auto=may name(+{1}: All creatures lose all abilities) pay({1}) name(All creatures lose all abilities) all(creature) transforms((,newability[loseabilities])) ueot
 text=Spree (Choose one or more additional costs.) -- + {1} - All creatures lose all abilities until end of turn. -- + {1} - Choose a creature you control. It gains indestructible until end of turn. -- + {3}{W}{W} - Destroy all creatures.
 mana={W}
 type=Instant

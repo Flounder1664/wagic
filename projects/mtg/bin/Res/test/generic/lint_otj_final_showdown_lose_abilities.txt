@@ -1,4 +1,6 @@
 #Final Showdown, first mode only: all creatures lose all abilities - the opponent's Air Elemental loses flying.
+#Also the regression test for the loseabilities crash: before 2026-11-22 this exact line segfaulted when
+#the game ended (a freed ATransformerInstant deleted twice in ActionLayer::cleanGarbage).
 [INIT]
 FIRSTMAIN
 [PLAYER1]

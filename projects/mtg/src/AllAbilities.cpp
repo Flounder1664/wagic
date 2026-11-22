@@ -9325,6 +9325,15 @@ int ALoseAbilities::addToGame()
             ALoseAbilities * la = dynamic_cast<ALoseAbilities*> (currentAction);
             if(la)
                 continue;
+            //An instant ability in the action layer is an effect already applied to the card (e.g.
+            //the ATransformerInstant granting this very loseabilities, or a ueot pump), not one of
+            //the card's own abilities, and "loses all abilities" does not end effects that already
+            //exist. It also belongs to a wrapper (GenericInstantAbility) that deletes it when it
+            //cannot find it in the game: storing it here left a freed pointer that destroy() put
+            //back, and it was deleted twice - a segfault in ActionLayer::cleanGarbage when the
+            //game ended (all(creature) transforms((,newability[loseabilities])) ueot, 2026-11-22).
+            if (currentAction->oneShot || dynamic_cast<InstantAbility*> (currentAction))
+                continue;
             if (currentAction->source == _target)
             {
                 bool canRemove = true;
