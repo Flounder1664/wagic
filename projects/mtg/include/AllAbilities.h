@@ -1579,6 +1579,42 @@ public:
     }
 };
 
+//stifleability(<kind>[:<source types>][:destroy]) - counter the nearest unresolved activated or triggered
+//ability below this one on the stack (ActionStack::counterStackAbility). kind: any, activated, triggered.
+class AAStifleAbility: public MTGAbility
+{
+public:
+    int kind;
+    TargetChooser * sourceTc;
+    bool destroySource;
+    AAStifleAbility(GameObserver* observer, int id, MTGCardInstance * source, int kind, TargetChooser * sourceTc, bool destroySource) :
+    MTGAbility(observer, id, source), kind(kind), sourceTc(sourceTc), destroySource(destroySource)
+    {
+        oneShot = true;
+    }
+    int resolve()
+    {
+        if (!source || !game->mLayers || !game->mLayers->stackLayer())
+            return 0;
+        game->mLayers->stackLayer()->counterStackAbility(kind, sourceTc, destroySource);
+        return 1;
+    }
+    const string getMenuText()
+    {
+        return "Counter ability";
+    }
+    AAStifleAbility * clone() const
+    {
+        AAStifleAbility * a = NEW AAStifleAbility(*this);
+        a->sourceTc = sourceTc ? sourceTc->clone() : NULL;
+        return a;
+    }
+    ~AAStifleAbility()
+    {
+        SAFE_DELETE(sourceTc);
+    }
+};
+
 class TrCardDiscarded: public Trigger
 {
 public:

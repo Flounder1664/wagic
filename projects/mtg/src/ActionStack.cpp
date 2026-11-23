@@ -1771,10 +1771,9 @@ void ActionStack::Dump()
 
 #endif
 
-int ActionStack::copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times)
+StackAbility * ActionStack::findStackAbility(Player * who, int kind, TargetChooser * sourceTc)
 {
-    StackAbility * found = NULL;
-    for (int i = (int)(mObjects.size()) - 1; i >= 0 && !found; i--)
+    for (int i = (int)(mObjects.size()) - 1; i >= 0; i--)
     {
         Interruptible * it = (Interruptible *) mObjects[i];
         if (!it || it == resolvingAction || it->state != NOT_RESOLVED)
@@ -1782,15 +1781,34 @@ int ActionStack::copyStackAbility(Player * you, int kind, TargetChooser * source
         StackAbility * sa = dynamic_cast<StackAbility *>(it);
         if (!sa || !sa->ability || !sa->ability->source)
             continue;
-        if (you && sa->ability->source->controller() != you)
+        if (who && sa->ability->source->controller() != who)
             continue;
         bool triggered = dynamic_cast<TriggeredAbility *>(sa->ability) != NULL;
         if ((kind == 1 && triggered) || (kind == 2 && !triggered))
             continue;
         if (sourceTc && !sourceTc->canTarget(sa->ability->source))
             continue;
-        found = sa;
+        return sa;
     }
+    return NULL;
+}
+
+MTGCardInstance * ActionStack::counterStackAbility(int kind, TargetChooser * sourceTc, bool destroySource)
+{
+    StackAbility * found = findStackAbility(NULL, kind, sourceTc);
+    if (!found)
+        return NULL;
+    //Countered: it leaves the stack without resolving, as Fizzle does for a spell.
+    found->state = RESOLVED_NOK;
+    MTGCardInstance * src = found->ability->source;
+    if (destroySource && src && src->isInPlay(observer))
+        src->destroy();
+    return src;
+}
+
+int ActionStack::copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times)
+{
+    StackAbility * found = findStackAbility(you, kind, sourceTc);
     if (!found)
         return 0;
     int made = 0;

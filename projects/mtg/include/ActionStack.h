@@ -241,6 +241,11 @@ public:
     //kind: 0 any, 1 activated, 2 triggered. sourceTc (may be NULL) filters the ability's source card.
     //The copy keeps the original's targets (choosing new ones is optional in the rules). Returns copies made.
     int copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times);
+    //The nearest unresolved ability below the resolving one (controller == who unless who is NULL).
+    StackAbility * findStackAbility(Player * who, int kind, TargetChooser * sourceTc);
+    //"Counter target activated or triggered ability": the nearest one, any controller. destroySource:
+    //"... and destroy that permanent" (Green Slime, Ouphe Vandals). Returns the countered ability's source.
+    MTGCardInstance * counterStackAbility(int kind, TargetChooser * sourceTc, bool destroySource);
     Interruptible * resolvingAction; //the stack object whose resolve() is running, if any
     bool copyingAbility;             //a copy is being put on the stack: it is not cast or activated, so no crime
     Spell * addSpell(MTGCardInstance* card, TargetChooser * tc, ManaCost * mana, int payResult, int storm, bool forcedinterrupt = false);

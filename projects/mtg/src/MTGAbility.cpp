@@ -4234,6 +4234,36 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //Counter an ability on the stack (AAStifleAbility). Before "fizzle", "destroy" and "copy".
+    vector<string> splitStifle = parseBetween(s, "stifleability(", ")");
+    if (splitStifle.size())
+    {
+        vector<string> parts = split(splitStifle[1], ':');
+        string kindStr = parts.size() ? parts[0] : "any";
+        int kind = (kindStr == "activated") ? 1 : (kindStr == "triggered") ? 2 : 0;
+        bool destroySource = false;
+        string types = "";
+        for (size_t k = 1; k < parts.size(); k++)
+        {
+            if (parts[k] == "destroy")
+                destroySource = true;
+            else
+                types = parts[k];
+        }
+        TargetChooser * sourceTc = NULL;
+        if (types.size())
+        {
+            if (types.find("|") == string::npos)
+                types.append("|*");
+            TargetChooserFactory tcf(observer);
+            sourceTc = tcf.createTargetChooser(types, card);
+            if (!sourceTc)
+                return NULL;
+            sourceTc->targetter = NULL;
+        }
+        return NEW AAStifleAbility(observer, id, card, kind, sourceTc, destroySource);
+    }
+
     //Copy an ability on the stack (AADuplicateAbility). Before "copy" below, which would match it.
     vector<string> splitDupAbility = parseBetween(s, "duplicateability(", ")");
     if (splitDupAbility.size())
