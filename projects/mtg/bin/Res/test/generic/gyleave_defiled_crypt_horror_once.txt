@@ -1,0 +1,21 @@
+#Defiled Crypt: cast, then two separate cards leave my graveyard - one Horror (once each turn).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Defiled Crypt // Cadaver Lab
+manapool:{3}{B}
+inplay:Gravedigger,Tormod's Crypt
+graveyard:Hill Giant
+[PLAYER2]
+[DO]
+Defiled Crypt // Cadaver Lab
+choice 0
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Defiled Crypt // Cadaver Lab,Gravedigger,*
+exile:Tormod's Crypt,Hill Giant
+[PLAYER2]
+[END]

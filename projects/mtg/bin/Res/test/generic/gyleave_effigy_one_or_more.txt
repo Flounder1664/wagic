@@ -1,0 +1,18 @@
+#Fuming Effigy: the Crypt exiles three cards from my graveyard at once - one trigger, 1 damage (not 3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fuming Effigy,Tormod's Crypt
+graveyard:Grizzly Bears,Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fuming Effigy
+exile:Tormod's Crypt,Grizzly Bears,Forest
+[PLAYER2]
+life:19
+[END]

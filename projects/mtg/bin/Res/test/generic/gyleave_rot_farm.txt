@@ -1,0 +1,18 @@
+#Rot Farm Mortipede: a creature card leaves - +1/+0 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rot Farm Mortipede,Tormod's Crypt
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rot Farm Mortipede
+exile:Tormod's Crypt,Grizzly Bears
+pt:Rot Farm Mortipede=4/4
+[PLAYER2]
+[END]

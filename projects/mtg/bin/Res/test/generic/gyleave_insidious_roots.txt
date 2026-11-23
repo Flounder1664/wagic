@@ -1,0 +1,18 @@
+#Insidious Roots: a creature card leaves - a 0/1 Plant, then +1/+1 on each Plant: 1/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Insidious Roots,Tormod's Crypt
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Insidious Roots,*
+exile:Tormod's Crypt,Grizzly Bears
+pt:Plant=1/2
+[PLAYER2]
+[END]

@@ -1,0 +1,25 @@
+#Teval: attacks, mills three, I return Forest tapped - which leaves my graveyard: a Zombie Druid.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:695727
+library:Plains,Swamp,Forest,Island
+[PLAYER2]
+[DO]
+next
+next
+695727
+next
+choice 0
+Forest
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:695727,Forest,*
+graveyard:Swamp,Island
+library:Plains
+[PLAYER2]
+life:16
+[END]

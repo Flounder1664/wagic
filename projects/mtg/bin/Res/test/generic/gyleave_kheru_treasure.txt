@@ -1,0 +1,17 @@
+#Kheru Goldkeeper: cards leave on my turn - a Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kheru Goldkeeper,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Kheru Goldkeeper,*
+exile:Tormod's Crypt,Forest
+[PLAYER2]
+[END]

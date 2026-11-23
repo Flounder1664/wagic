@@ -1,0 +1,19 @@
+#Thran Vigil: an artifact (the Crypt) and a creature leave on my turn - one counter on my Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thran Vigil,Grizzly Bears,Tormod's Crypt
+graveyard:Hill Giant
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Thran Vigil,Grizzly Bears
+pt:Grizzly Bears=3/3
+exile:Tormod's Crypt,Hill Giant
+[PLAYER2]
+[END]

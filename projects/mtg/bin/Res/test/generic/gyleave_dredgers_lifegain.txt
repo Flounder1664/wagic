@@ -1,0 +1,22 @@
+#Dredger's Insight: cast it, it mills four instants (nothing to take); then the Crypt exiles my graveyard - an artifact and a creature card among them leave at once: I gain 1, once.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dredger's Insight
+manapool:{1}{G}
+inplay:Tormod's Crypt
+graveyard:Grizzly Bears
+library:Shock,Think Twice,Lightning Bolt,Giant Growth
+[PLAYER2]
+[DO]
+Dredger's Insight
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dredger's Insight
+exile:Tormod's Crypt,Grizzly Bears,Shock,Think Twice,Lightning Bolt,Giant Growth
+life:21
+[PLAYER2]
+[END]

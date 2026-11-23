@@ -14362,12 +14362,6 @@ power=4
 toughness=4
 [/card]
 [card]
-name=Grim Reaper's Scythe
-text=Whenever one or more creature cards leave your graveyard, create a 2/2 black Zombie creature token. -- {3}{B}, {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
-mana={2}{B}
-type=Legendary Artifact
-[/card]
-[card]
 name=H.E.R.B.I.E., Lovable Robot
 text=Flying -- At the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1. -- {T}: Add {C}. -- {1}, {T}: Add one mana of any color.
 mana={2}
@@ -15686,15 +15680,6 @@ mana={1}{B}
 type=Artifact Creature
 subtype=Robot Villain
 power=1
-toughness=1
-[/card]
-[card]
-name=Undead Hand Ninja
-text=Deathtouch -- Whenever one or more creature cards leave your graveyard, each opponent loses 1 life and you gain 1 life.
-mana={1}{B}
-type=Creature
-subtype=Zombie Ninja Villain
-power=2
 toughness=1
 [/card]
 [card]
@@ -17569,15 +17554,6 @@ type=Artifact
 subtype=Equipment
 [/card]
 [card]
-name=Cyan, Vengeful Samurai
-text=This spell costs {1} less to cast for each creature card in your graveyard. -- Double strike -- Whenever one or more creature cards leave your graveyard, put a +1/+1 counter on Cyan.
-mana={6}{W}
-type=Legendary Creature
-subtype=Human Samurai
-power=3
-toughness=3
-[/card]
-[card]
 name=Duelist's Flame
 text=Until end of turn, target blocked creature you control gets +X/+0 and gains trample and "Whenever this creature deals combat damage to a player, look at that many cards from the top of your library. Exile up to one nonland card from among them and put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost."
 mana={X}{R}{R}
@@ -18337,12 +18313,6 @@ mana={2}{G}{U}
 type=Sorcery
 [/card]
 [card]
-name=Ark of Hunger
-text=Whenever one or more cards leave your graveyard, this artifact deals 1 damage to each opponent and you gain 1 life. -- {T}: Mill a card. You may play that card this turn.
-mana={2}{R}{W}
-type=Artifact
-[/card]
-[card]
 name=Aziza, Mage Tower Captain
 text=Whenever you cast an instant or sorcery spell, you may tap three untapped creatures you control. If you do, copy that spell. You may choose new targets for the copy.
 mana={R}{W}
@@ -18427,15 +18397,6 @@ toughness=4
 name=Great Hall of the Biblioplex
 text={T}: Add {C}. -- {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell. -- {5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.
 type=Land
-[/card]
-[card]
-name=Hardened Academic
-text=Flying, haste -- Discard a card: This creature gains lifelink until end of turn. -- Whenever one or more cards leave your graveyard, put a +1/+1 counter on target creature you control.
-mana={R}{W}
-type=Creature
-subtype=Bird Cleric
-power=2
-toughness=1
 [/card]
 [card]
 name=Informed Inkwright

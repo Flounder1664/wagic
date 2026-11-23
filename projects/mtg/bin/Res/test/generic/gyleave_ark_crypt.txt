@@ -1,0 +1,19 @@
+#Ark of Hunger: cards leave my graveyard - 1 damage to the opponent, I gain 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ark of Hunger,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ark of Hunger
+exile:Tormod's Crypt,Forest
+life:21
+[PLAYER2]
+life:19
+[END]

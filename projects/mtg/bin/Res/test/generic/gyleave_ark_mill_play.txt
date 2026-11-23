@@ -1,0 +1,19 @@
+#Ark of Hunger: {T} mills Mountain, I play it from the graveyard - which is a card leaving it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ark of Hunger
+library:Plains,Mountain
+[PLAYER2]
+[DO]
+Ark of Hunger
+Mountain
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ark of Hunger,Mountain
+library:Plains
+life:21
+[PLAYER2]
+life:19
+[END]

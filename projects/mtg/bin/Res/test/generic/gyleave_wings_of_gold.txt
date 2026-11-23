@@ -1,0 +1,18 @@
+#On Wings of Gold: cards leave - a 1/1 Zombie, which its anthem makes 2/2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:On Wings of Gold,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:On Wings of Gold,*
+exile:Tormod's Crypt,Forest
+pt:Zombie=2/2
+[PLAYER2]
+[END]

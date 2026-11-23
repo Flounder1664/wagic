@@ -1,0 +1,21 @@
+#Willow Geist: casting Think Twice from my graveyard (flashback) is a card leaving it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Willow Geist
+graveyard:Think Twice
+manapool:{2}{U}
+library:Plains,Forest
+[PLAYER2]
+[DO]
+Think Twice
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Willow Geist
+exile:Think Twice
+hand:Forest
+library:Plains
+pt:Willow Geist=2/2
+[PLAYER2]
+[END]

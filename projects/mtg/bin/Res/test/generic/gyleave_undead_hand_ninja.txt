@@ -1,0 +1,19 @@
+#Undead Hand Ninja: a creature card leaves - drain 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Undead Hand Ninja,Tormod's Crypt
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Undead Hand Ninja
+exile:Tormod's Crypt,Grizzly Bears
+life:21
+[PLAYER2]
+life:19
+[END]

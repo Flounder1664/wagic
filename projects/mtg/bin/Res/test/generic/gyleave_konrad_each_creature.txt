@@ -1,0 +1,18 @@
+#Syr Konrad, the Grim triggers per creature card: two creature cards leave, 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:676031,Tormod's Crypt
+graveyard:Grizzly Bears,Hill Giant,Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:676031
+exile:Tormod's Crypt,Grizzly Bears,Hill Giant,Forest
+[PLAYER2]
+life:18
+[END]

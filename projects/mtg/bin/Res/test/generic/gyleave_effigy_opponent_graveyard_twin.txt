@@ -1,0 +1,19 @@
+#Twin: exiling the OPPONENT's graveyard does not trigger Fuming Effigy.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fuming Effigy,Tormod's Crypt
+[PLAYER2]
+graveyard:Grizzly Bears,Forest
+[DO]
+Tormod's Crypt
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fuming Effigy
+graveyard:Tormod's Crypt
+[PLAYER2]
+exile:Grizzly Bears,Forest
+life:20
+[END]

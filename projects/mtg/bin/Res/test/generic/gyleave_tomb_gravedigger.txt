@@ -1,0 +1,20 @@
+#Desecrated Tomb: Gravedigger returns a creature card to my hand - a Bat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desecrated Tomb
+hand:Gravedigger
+graveyard:Hill Giant
+manapool:{3}{B}
+[PLAYER2]
+[DO]
+Gravedigger
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Desecrated Tomb,Gravedigger,*
+hand:Hill Giant
+[PLAYER2]
+[END]

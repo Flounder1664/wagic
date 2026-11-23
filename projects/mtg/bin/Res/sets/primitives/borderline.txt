@@ -28481,7 +28481,8 @@ type=Instant
 [/card]
 [card]
 name=Desecrated Tomb
-auto=@movedto(creature|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):create(bat:creature bat:1/1:black:flying)
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(creature) oneormore:create(bat:creature bat:1/1:black:flying)
 text=Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying.
 mana={3}
 type=Artifact
@@ -36081,9 +36082,8 @@ type=Instant
 [card]
 name=Erebos's Titan
 auto=restriction{type(creature|opponentBattlefield)~lessthan~1}:indestructible
-autograveyard=@movedTo(creature|opponentexile) from(opponentgraveyard):if type(*|myhand)~morethan~0 then ability$!may reject notaTarget(*|myhand) and!(moveto(hand))! !$ controller
-autograveyard=@movedTo(creature|opponentBattlefield) from(opponentgraveyard):if type(*|myhand)~morethan~0 then ability$!may reject notaTarget(*|myhand) and!(moveto(hand))! !$ controller
-autograveyard=@movedTo(creature|opponenthand) from(opponentgraveyard):if type(*|myhand)~morethan~0 then ability$!may reject notaTarget(*|myhand) and!(moveto(hand))! !$ controller
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+autograveyard=@leftopponentgraveyard(creature):if type(*|myhand)~morethan~0 then ability$!may reject notaTarget(*|myhand) and!(moveto(hand))! !$ controller
 text=As long as your opponents control no creatures, Erebos's Titan has indestructible. (Damage and effects that say "destroy" don't destroy it.) -- Whenever a creature card leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.
 mana={1}{B}{B}{B}
 type=Creature
@@ -43851,7 +43851,8 @@ type=Instant
 [/card]
 [card]
 name=Fuming Effigy
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Deals 1 damage) damage:1 opponent
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore:name(Deals 1 damage) damage:1 opponent
 text=Whenever one or more cards leave your graveyard, Fuming Effigy deals 1 damage to each opponent.
 mana={3}{R}
 type=Creature
@@ -63954,7 +63955,8 @@ toughness=3
 [card]
 name=Kishla Skimmer
 abilities=flying
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,myexile,mycommandzone) from(mygraveyard) restriction{myturnonly,turnlimited}:draw:1
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) turnlimited restriction{myturnonly}:draw:1
 text=Flying -- Whenever a card leaves your graveyard during your turn, draw a card. This ability triggers only once each turn.
 mana={G}{U}
 type=Creature
@@ -76077,7 +76079,8 @@ abilities=flying
 other={delve} name(Delve)
 auto=foreach(instant[fresh]|myexile) counter(1/1)
 auto=foreach(sorcery[fresh]|myexile) counter(1/1)
-auto=@movedto(*[instant;sorcery]|mystack,myhand,mylibrary,mysideboard,myexile) from(mygraveyard):counter(1/1)
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*[instant;sorcery]):counter(1/1)
 text=Delve (Each card you exile from your graveyard while casting this spell pays for {1}.) -- Flying -- Murktide Regent enters with a +1/+1 counter on it for each instant and sorcery card exiled with it. -- Whenever an instant or sorcery card leaves your graveyard, put a +1/+1 counter on Murktide Regent.
 mana={5}{U}{U}
 type=Creature
@@ -89169,7 +89172,8 @@ type=Sorcery
 [card]
 name=Quintorius, Field Historian
 auto=lord(spirit|mybattlefield) 1/0
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Create Spirit) token(Spirit Soc)
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore:name(Create Spirit) token(Spirit Soc)
 text=Spirits you control get +1/+0. -- Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.
 mana={3}{R}{W}
 type=Legendary Creature
@@ -111071,7 +111075,8 @@ toughness=1
 [card]
 name=Stonebound Mentor
 aicode=activate transforms((,newability[all(*[zpos<=1]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Scry 1) _SCRY1_
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore:name(Scry 1) _SCRY1_
 text=Whenever one or more cards leave your graveyard, scry 1.
 mana={1}{R}{W}
 type=Creature
@@ -114149,7 +114154,8 @@ toughness=5
 [card]
 name=Syr Konrad, the Grim
 auto=@movedTo(creature|graveyard):damage:1 opponent
-auto=@movedTo(creature|*) from(myGraveyard):damage:1 opponent
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(creature):damage:1 opponent
 auto={1}{B}:deplete:1 && deplete:1 opponent
 text=Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad, the Grim deals 1 damage to each opponent. -- {1}{B}: Each player mills a card.
 mana={3}{B}{B}
@@ -118435,7 +118441,8 @@ type=Artifact
 [/card]
 [card]
 name=Thran Vigil
-auto=@movedto(creature|mystack,mycommandzone,mylibrary,mybattlefield,mysideboard,myexile) from(mygraveyard):name(Put 1/1 counter) target(creature|myBattlefield) counter(1/1)
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(artifact,creature) oneormore restriction{myturnonly}:name(Put 1/1 counter) target(creature|myBattlefield) counter(1/1)
 text=Whenever one or more artifact and/or creature cards leave your graveyard during your turn, put a +1/+1 counter on target creature you control.
 mana={1}{B}
 type=Enchantment
@@ -120473,12 +120480,8 @@ toughness=2
 [card]
 name=Tormod, the Desecrator
 abilities=partner
-auto=@movedto(*|battlefield) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
-auto=@movedto(*|hand) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
-auto=@movedto(*|library) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
-auto=@movedto(*|exile) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
-auto=@movedto(*|sideboard) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
-auto=@movedto(*|commandzone) from(mygraveyard):_ZOMBIETOKEN_ and!( tap(noevent) )!
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore:_ZOMBIETOKEN_ and!( tap(noevent) )!
 text=Whenever one or more cards leave your graveyard, create a tapped 2/2 black Zombie creature token. -- Partner (You can have two commanders if both have partner.)
 mana={3}{B}
 type=Legendary Creature
@@ -130216,7 +130219,8 @@ toughness=2
 [card]
 name=Willow Geist
 abilities=trample
-auto=@movedto(*|mybattlefield,mystack,myhand,mylibrary,mysideboard,myexile,mycommandzone) from(mygraveyard):name(Put 1/1 counter) counter(1/1)
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore:name(Put 1/1 counter) counter(1/1)
 auto=_DIES_name(Gain life) life:p controller
 text=Trample -- Whenever one or more cards leave your graveyard, put a +1/+1 counter on Willow Geist. -- When Willow Geist dies, you gain life equal to its power.
 type=Creature
@@ -136962,7 +136966,8 @@ grade=borderline
 #"Leave your graveyard" needs the destinations spelling out - a from() trigger matches
 #on where the card LANDS. Comma-separated zones are valid (cf. Eternal Scourge).
 #turnlimited gives the printed "only once each turn".
-auto=@movedTo(*|myhand,mybattlefield,myexile,mylibrary,mystack) from(mygraveyard) turnlimited:draw:1 controller && life:-1 controller
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(*) oneormore turnlimited:draw:1 controller && life:-1 controller
 text=Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn. (Melds with Vanille, Cheerful l'Cie.)
 mana={2}{B}
 type=Legendary Creature
@@ -141780,7 +141785,8 @@ subtype=Equipment
 name=Along the Crooked Way
 # REVIEW 2026-08-02 [P:low] HOB preview build; removed stray top-level target= (Aura-only field); targeting belongs only in the inline target() call
 auto=target(creature|mygraveyard) moveto(hand)
-auto=@movedTo(creature|myexile,myhand,mybattlefield,mylibrary,opponentbattlefield,opponentexile) from(mygraveyard):_AMASSGOBLIN1_
+#2026-11-23: graveyard-leave trigger is now @leftmygraveyard - any destination, "one or more" = one trigger per effect.
+auto=@leftmygraveyard(creature):_AMASSGOBLIN1_
 auto={1}{B}:lord(*[goblin;orc]|mybattlefield) menace ueot
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; "creature card leaves your graveyard" trigger approximated as leaves-to-exile only
@@ -159745,4 +159751,231 @@ type=Legendary Creature
 subtype=Vampire Rogue
 power=2
 toughness=2
+[/card]
+[card]
+name=Ark of Hunger
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(*) oneormore:damage:1 opponent && life:1 controller
+auto={T}:name(Mill a card - you may play it this turn) all(*[zpos=1]|mylibrary) moveto(mygraveyard) and!( transforms((,newability[canPlayFromGraveyard])) ueot )!
+text=Whenever one or more cards leave your graveyard, this artifact deals 1 damage to each opponent and you gain 1 life. -- {T}: Mill a card. You may play that card this turn.
+mana={2}{R}{W}
+type=Artifact
+[/card]
+[card]
+name=Attuned Hunter
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=trample
+auto=@leftmygraveyard(*) oneormore restriction{myturnonly}:counter(1/1)
+text=Trample -- Whenever one or more cards leave your graveyard during your turn, put a +1/+1 counter on this creature.
+mana={2}{G}
+type=Creature
+subtype=Human Ranger
+power=3
+toughness=3
+[/card]
+[card]
+name=Chalk Outline
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(creature) oneormore:token(Detective,Creature Detective,2/2,white,blue) && _CLUE_
+text=Whenever one or more creature cards leave your graveyard, create a 2/2 white and blue Detective creature token, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+mana={3}{G}
+type=Enchantment
+[/card]
+[card]
+name=Cyan, Vengeful Samurai
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=affinitygravecreatures,double strike
+auto=@leftmygraveyard(creature) oneormore:counter(1/1)
+text=This spell costs {1} less to cast for each creature card in your graveyard. -- Double strike -- Whenever one or more creature cards leave your graveyard, put a +1/+1 counter on Cyan.
+mana={6}{W}
+type=Legendary Creature
+subtype=Human Samurai
+power=3
+toughness=3
+[/card]
+[card]
+name=Defiled Crypt // Cadaver Lab
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+other={B} name(Cadaver Lab)
+auto=@leftmygraveyard(*) oneormore turnlimited restriction{compare(hascntdoor1)~equalto~1}:name(Create a Horror) token(Horror,Enchantment Creature Horror,2/2,black)
+auto=@counteradded(0/0.1.door2) from(this|battlefield):name(Cadaver Lab: return a creature card) target(creature|mygraveyard) moveto(myhand)
+auto={B} restriction{compare(hascntdoor2)~equalto~0}:name(Unlock Cadaver Lab) name(Unlock Cadaver Lab) unlockdoor:2 asSorcery
+auto={3}{B} restriction{compare(hascntdoor1)~equalto~0}:name(Unlock Defiled Crypt) name(Unlock Defiled Crypt) unlockdoor:1 asSorcery
+auto=ifnot paid(alternative) then unlockdoor:1
+auto=alternative unlockdoor:2
+text=Defiled Crypt (Door 1, {3}{B}): Whenever one or more cards leave your graveyard, create a 2/2 black Horror enchantment creature token. This ability triggers only once each turn. -- Cadaver Lab (Door 2, {B}): When you unlock this door, return target creature card from your graveyard to your hand.
+mana={3}{B}
+type=Enchantment
+subtype=Room
+[/card]
+[card]
+name=Dredger's Insight
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(artifact,creature) oneormore:life:1 controller
+#"From among the milled cards" is read as artifact/creature/land cards put into your graveyard this turn.
+auto=deplete:4 controller && ability$!name(Put a milled card into your hand) target(<upto:1>*[fresh&artifact;fresh&creature;fresh&land]|mygraveyard) moveto(myhand) !$ controller
+text=Whenever one or more artifact and/or creature cards leave your graveyard, you gain 1 life. -- When this enchantment enters, mill four cards. You may put an artifact, creature, or land card from among the milled cards into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
+mana={1}{G}
+type=Enchantment
+[/card]
+[card]
+name=Garrison Excavator
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=menace
+auto=@leftmygraveyard(*) oneormore:token(Spirit,Creature Spirit,2/2,red,white)
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever one or more cards leave your graveyard, create a 2/2 red and white Spirit creature token.
+mana={3}{R}
+type=Creature
+subtype=Orc Sorcerer
+power=3
+toughness=4
+[/card]
+[card]
+name=Grim Reaper's Scythe
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(creature) oneormore:_ZOMBIETOKEN_
+auto={3}{B}{T}{S(creature|mybattlefield)}{S(creature|mybattlefield)}:target(creature|mygraveyard) moveTo(mybattlefield) _FINALITY_COUNTER_ asSorcery
+text=Whenever one or more creature cards leave your graveyard, create a 2/2 black Zombie creature token. -- {3}{B}, {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
+mana={2}{B}
+type=Legendary Artifact
+[/card]
+[card]
+name=Hardened Academic
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=flying,haste
+auto={D(*|myHand)}:name(Gains lifelink) transforms((,lifelink)) ueot
+auto=@leftmygraveyard(*) oneormore:counter(1/1) target(creature|mybattlefield)
+text=Flying, haste -- Discard a card: This creature gains lifelink until end of turn. -- Whenever one or more cards leave your graveyard, put a +1/+1 counter on target creature you control.
+mana={R}{W}
+type=Creature
+subtype=Bird Cleric
+power=2
+toughness=1
+[/card]
+[card]
+name=Imotekh the Stormlord
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(artifact) oneormore:token(Necron Warrior,Artifact Creature Necron Warrior,2/2,black)*2
+auto=@each my combatbegins:name(Grand Strategist) target(other creature[artifact]|mybattlefield) transforms((,menace)) ueot && 2/2 ueot
+text=Phaeron - Whenever one or more artifact cards leave your graveyard, create two 2/2 black Necron Warrior artifact creature tokens. -- Grand Strategist - At the beginning of combat on your turn, another target artifact creature you control gets +2/+2 and gains menace until end of turn.
+mana={2}{B}{B}
+type=Legendary Artifact Creature
+subtype=Necron
+power=3
+toughness=3
+[/card]
+[card]
+name=Insidious Roots
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=lord(creature[token]|mybattlefield) transforms((,newability[{T}:add{G}],newability[{T}:add{U}],newability[{T}:add{R}],newability[{T}:add{B}],newability[{T}:add{W}]))
+auto=@leftmygraveyard(creature) oneormore:token(Plant,Creature Plant,0/1,green) && all(plant|mybattlefield) counter(1/1)
+text=Creature tokens you control have "{T}: Add one mana of any color." -- Whenever one or more creature cards leave your graveyard, create a 0/1 green Plant creature token, then put a +1/+1 counter on each Plant you control.
+mana={B}{G}
+type=Enchantment
+[/card]
+[card]
+name=Kheru Goldkeeper
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=flying
+auto=@leftmygraveyard(*) oneormore restriction{myturnonly}:_TREASURE_
+autograveyard=name(Renew) {2}{B}{G}{U}{E}:target(creature) counter(1/1,2) && counter(0/0,1,Flying) asSorcery
+text=Flying -- Whenever one or more cards leave your graveyard during your turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") -- Renew - {2}{B}{G}{U}, Exile this card from your graveyard: Put two +1/+1 counters and a flying counter on target creature. Activate only as a sorcery.
+mana={1}{B}{G}{U}
+type=Creature
+subtype=Dragon
+power=3
+toughness=3
+[/card]
+[card]
+name=On Wings of Gold
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=lord(creature[zombie;token]|mybattlefield) 1/1
+auto=lord(creature[zombie;token]|mybattlefield) flying
+auto=@leftmygraveyard(*) oneormore:token(Zombie,Creature Zombie,1/1,white)
+text=Creatures you control that are Zombies and/or tokens get +1/+1 and have flying. -- Whenever one or more cards leave your graveyard, create a 1/1 white Zombie creature token.
+mana={3}{W}
+type=Enchantment
+[/card]
+[card]
+name=Owlin Historian
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=flying
+auto=_SURVEIL1_
+auto=@leftmygraveyard(*) oneormore:all(this) 1/1 ueot
+text=Flying -- When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) -- Whenever one or more cards leave your graveyard, this creature gets +1/+1 until end of turn.
+mana={2}{W}
+type=Creature
+subtype=Bird Cleric
+power=2
+toughness=3
+[/card]
+[card]
+name=Rot Farm Mortipede
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(creature) oneormore:all(this) 1/0 ueot && all(this) transforms((,menace,lifelink)) ueot
+text=Whenever one or more creature cards leave your graveyard, this creature gets +1/+0 and gains menace and lifelink until end of turn.
+mana={3}{B}
+type=Creature
+subtype=Insect
+power=3
+toughness=4
+[/card]
+[card]
+name=Skeleton Crew
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=lord(other creature[skeleton;pirate]|mybattlefield) 1/1
+auto=@leftmygraveyard(creature) oneormore:token(Skeleton Pirate,Creature Skeleton Pirate,2/2,black)
+autograveyard={5}{B}:moveTo(mybattlefield) and!( tap(noevent) )!
+text=Each other creature you control that's a Skeleton or Pirate gets +1/+1. -- Whenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token. (This ability triggers only from the battlefield.) -- {5}{B}: Return this card from your graveyard to the battlefield tapped.
+mana={3}{B}
+type=Creature
+subtype=Skeleton Pirate
+power=3
+toughness=3
+[/card]
+[card]
+name=Soul Enervation
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=flash
+auto=target(creature) -4/-4 ueot
+auto=@leftmygraveyard(creature) oneormore:life:-1 opponent && life:1 controller
+text=Flash -- When this enchantment enters, target creature gets -4/-4 until end of turn. -- Whenever one or more creature cards leave your graveyard, each opponent loses 1 life and you gain 1 life.
+mana={3}{B}
+type=Enchantment
+[/card]
+[card]
+name=Spirit Mascot
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+auto=@leftmygraveyard(*) oneormore:counter(1/1)
+text=Whenever one or more cards leave your graveyard, put a +1/+1 counter on this creature.
+mana={R}{W}
+type=Creature
+subtype=Spirit Ox
+power=2
+toughness=2
+[/card]
+[card]
+name=Teval, the Balanced Scale
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=flying
+auto=@combat(attacking) source(this):deplete:3 controller && ability$!name(Return a land tapped) target(<upto:1>land|mygraveyard) moveto(mybattlefield) and!( tap(noevent) )! !$ controller
+auto=@leftmygraveyard(*) oneormore:token(Zombie Druid,Creature Zombie Druid,2/2,black)
+text=Flying -- Whenever Teval attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped. -- Whenever one or more cards leave your graveyard, create a 2/2 black Zombie Druid creature token.
+mana={1}{B}{G}{U}
+type=Legendary Creature
+subtype=Spirit Dragon
+power=4
+toughness=4
+[/card]
+[card]
+name=Undead Hand Ninja
+#2026-11-23 graveyard-leave batch: written from existing working forms.
+abilities=deathtouch
+auto=@leftmygraveyard(creature) oneormore:life:-1 opponent && life:1 controller
+text=Deathtouch -- Whenever one or more creature cards leave your graveyard, each opponent loses 1 life and you gain 1 life.
+mana={1}{B}
+type=Creature
+subtype=Zombie Ninja Villain
+power=2
+toughness=1
 [/card]

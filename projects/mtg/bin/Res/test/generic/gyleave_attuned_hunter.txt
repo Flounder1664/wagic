@@ -1,0 +1,18 @@
+#Attuned Hunter: cards leave my graveyard on my turn - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Attuned Hunter,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Attuned Hunter
+exile:Tormod's Crypt,Forest
+pt:Attuned Hunter=4/4
+[PLAYER2]
+[END]

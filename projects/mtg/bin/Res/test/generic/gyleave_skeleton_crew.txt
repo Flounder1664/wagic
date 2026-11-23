@@ -1,0 +1,18 @@
+#Skeleton Crew: a creature card leaves - a 2/2 Skeleton Pirate, 3/3 with the Crew's anthem.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Skeleton Crew,Tormod's Crypt
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Skeleton Crew,*
+exile:Tormod's Crypt,Grizzly Bears
+pt:Skeleton Pirate=3/3
+[PLAYER2]
+[END]

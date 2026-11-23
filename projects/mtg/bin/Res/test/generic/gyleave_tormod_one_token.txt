@@ -1,0 +1,18 @@
+#Tormod, the Desecrator: three cards leave at once - one tapped Zombie, not three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:497675,Tormod's Crypt
+graveyard:Grizzly Bears,Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:497675,*
+tappedinplay:1
+exile:Tormod's Crypt,Grizzly Bears,Forest
+[PLAYER2]
+[END]

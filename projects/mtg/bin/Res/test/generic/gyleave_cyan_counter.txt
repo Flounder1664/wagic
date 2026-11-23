@@ -1,0 +1,18 @@
+#Cyan, Vengeful Samurai: a creature card leaves - a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713975,Tormod's Crypt
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713975
+exile:Tormod's Crypt,Grizzly Bears
+pt:713975=4/4
+[PLAYER2]
+[END]

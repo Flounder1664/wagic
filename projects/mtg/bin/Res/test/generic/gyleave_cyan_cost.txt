@@ -1,0 +1,17 @@
+#Cyan costs {1} less per creature card in my graveyard: two of them, {4}{W} casts it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:713975
+graveyard:Grizzly Bears,Hill Giant
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+713975
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:713975
+graveyard:Grizzly Bears,Hill Giant
+[PLAYER2]
+[END]
