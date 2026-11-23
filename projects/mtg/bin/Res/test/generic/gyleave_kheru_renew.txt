@@ -1,0 +1,20 @@
+#Kheru Goldkeeper Renew from my graveyard: exile it, two +1/+1 counters and a flying counter on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Kheru Goldkeeper
+inplay:Grizzly Bears
+manapool:{2}{B}{G}{U}
+[PLAYER2]
+[DO]
+Kheru Goldkeeper
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:Kheru Goldkeeper
+inplay:Grizzly Bears
+pt:Grizzly Bears=4/4
+counter:Grizzly Bears=Flying:1
+[PLAYER2]
+[END]
