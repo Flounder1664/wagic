@@ -1,0 +1,24 @@
+#Black Widow deals combat damage: both players draw two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711048
+library:Forest,Forest
+[PLAYER2]
+library:Mountain,Mountain
+[DO]
+next
+next
+711048
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:711048
+hand:Forest,Forest
+[PLAYER2]
+hand:Mountain,Mountain
+life:17
+[END]

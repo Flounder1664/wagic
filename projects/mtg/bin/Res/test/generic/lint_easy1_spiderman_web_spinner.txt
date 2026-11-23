@@ -1,0 +1,20 @@
+#Spider-Man attacks: Gray Ogre can't block.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711463
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+goto attackers
+711463
+next
+Gray Ogre
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711463
+[PLAYER2]
+inplay:Gray Ogre
+type:Gray Ogre=cantblock
+[END]

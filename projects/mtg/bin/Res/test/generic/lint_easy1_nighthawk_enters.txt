@@ -1,0 +1,18 @@
+#Nighthawk enters: Grizzly Bears gets +1/+1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:711353
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+711353
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,711353
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

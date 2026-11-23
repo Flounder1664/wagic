@@ -1,0 +1,18 @@
+#Agents of HYDRA enters: Yellowjacket gets +1/+0 and lifelink.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712280
+hand:712010
+manapool:{1}{B}
+[PLAYER2]
+[DO]
+712010
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712280,712010
+pt:712280=2/2
+type:712280=lifelink
+[PLAYER2]
+[END]

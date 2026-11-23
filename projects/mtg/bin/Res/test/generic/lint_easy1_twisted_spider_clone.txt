@@ -1,0 +1,21 @@
+#Battlegrowth puts a counter on Grizzly Bears; the Clone adds another, Gray Ogre (no counter) gets none.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Gray Ogre
+hand:Battlegrowth,730019
+manapool:{G}{3}{G}
+[PLAYER2]
+[DO]
+Battlegrowth
+Grizzly Bears
+730019
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Gray Ogre,730019
+graveyard:Battlegrowth
+pt:Grizzly Bears=4/4
+pt:Gray Ogre=2/2
+[PLAYER2]
+[END]

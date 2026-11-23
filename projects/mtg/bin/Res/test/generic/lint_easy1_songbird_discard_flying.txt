@@ -1,0 +1,18 @@
+#Songbird: discard Forest, gain flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711454
+hand:Forest
+[PLAYER2]
+[DO]
+711454
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711454
+graveyard:Forest
+type:711454=flying
+[PLAYER2]
+[END]

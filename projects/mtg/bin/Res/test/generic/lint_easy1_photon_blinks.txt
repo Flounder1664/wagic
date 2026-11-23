@@ -1,0 +1,18 @@
+#Photon attacks and blinks Valkyrior Skyrider: it re-enters, so I gain 4 more (its setup ETB already gave 4).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711373,711565
+[PLAYER2]
+[DO]
+goto attackers
+711373
+next
+711565
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711373,711565
+life:28
+[PLAYER2]
+[END]

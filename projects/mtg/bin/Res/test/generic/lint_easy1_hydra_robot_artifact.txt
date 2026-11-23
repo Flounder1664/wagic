@@ -1,0 +1,16 @@
+#Ornithopter (an artifact) enters: 1 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712091
+hand:Ornithopter
+[PLAYER2]
+[DO]
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712091,Ornithopter
+[PLAYER2]
+life:19
+[END]

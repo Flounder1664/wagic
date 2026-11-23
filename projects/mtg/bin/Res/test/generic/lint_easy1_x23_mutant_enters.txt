@@ -1,0 +1,18 @@
+#Incurable Ogre (a Mutant) enters: a counter on it and on X-23.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711613
+hand:Incurable Ogre
+manapool:{3}{R}
+[PLAYER2]
+[DO]
+Incurable Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711613,Incurable Ogre
+pt:711613=4/4
+pt:Incurable Ogre=6/2
+[PLAYER2]
+[END]

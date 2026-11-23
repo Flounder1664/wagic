@@ -1,0 +1,20 @@
+#The opponent's Gray Ogre dies: Minotaur makes a Villain.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711325
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Shock
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711325,*
+graveyard:Shock
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

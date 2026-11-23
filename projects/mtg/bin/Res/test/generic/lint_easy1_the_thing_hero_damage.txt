@@ -1,0 +1,21 @@
+#Spider-Man (a Hero) deals combat damage: two counters on The Thing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712237,711462
+[PLAYER2]
+[DO]
+next
+next
+711462
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:712237,711462
+pt:712237=9/9
+[PLAYER2]
+life:17
+[END]

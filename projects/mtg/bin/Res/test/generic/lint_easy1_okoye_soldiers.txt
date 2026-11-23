@@ -1,0 +1,15 @@
+#Okoye enters: two Soldier tokens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:712161
+manapool:{3}{W}
+[PLAYER2]
+[DO]
+712161
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712161,*,*
+[PLAYER2]
+[END]

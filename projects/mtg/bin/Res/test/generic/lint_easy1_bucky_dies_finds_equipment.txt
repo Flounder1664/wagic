@@ -1,0 +1,23 @@
+#Bucky Barnes dies: look at the top four, take Bonesplitter.
+#The library is not asserted: after a triggered look-at-the-top pick, the harness leaves the other
+#cards in the reveal zone (Brazen Upstart does the same). Rest-to-bottom is a scenario check.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711058
+hand:Shock
+manapool:{R}
+library:Forest,Forest,Forest,Bonesplitter
+[PLAYER2]
+[DO]
+Shock
+711058
+choice 0
+Bonesplitter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:711058,Shock
+hand:Bonesplitter
+[PLAYER2]
+[END]

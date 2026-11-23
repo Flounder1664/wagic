@@ -1,0 +1,17 @@
+#Ornithopter enters: Moon Girl draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712151
+hand:Ornithopter
+library:Forest
+[PLAYER2]
+[DO]
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712151,Ornithopter
+hand:Forest
+[PLAYER2]
+[END]

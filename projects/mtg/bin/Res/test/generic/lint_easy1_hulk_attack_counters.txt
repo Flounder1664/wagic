@@ -1,0 +1,18 @@
+#Hulk attacks: a counter on each other creature I control.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711237,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+711237
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711237,Grizzly Bears
+pt:Grizzly Bears=3/3
+pt:711237=4/4
+[PLAYER2]
+[END]

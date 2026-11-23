@@ -1,0 +1,21 @@
+#Grizzly Bears attacks alone: +1/+1, and Gray Ogre is tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strategic Intervention,Grizzly Bears
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+goto attackers
+Grizzly Bears
+next
+Gray Ogre
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Strategic Intervention,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+inplay:Gray Ogre
+tappedinplay:1
+[END]

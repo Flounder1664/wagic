@@ -1,0 +1,19 @@
+#Another Hero enters: a counter on it and on Captain America; it gains haste.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711066
+hand:711462
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+711462
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711066,711462
+pt:711066=4/4
+pt:711462=4/4
+type:711462=haste
+[PLAYER2]
+[END]

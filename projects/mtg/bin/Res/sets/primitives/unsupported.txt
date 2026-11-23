@@ -13818,15 +13818,6 @@ mana={1}{R}{G}{W}
 type=Legendary Enchantment
 [/card]
 [card]
-name=Ant-Man's Air Force
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever this creature attacks, up to one target creature gets -1/-0 until end of turn.
-mana={1}{U}
-type=Creature
-subtype=Insect
-power=2
-toughness=1
-[/card]
-[card]
 name=Ant-Man, Elusive Avenger
 text=Ant-Man can't be blocked by creatures with greater power. -- Whenever Ant-Man deals combat damage to a player, create that many Treasure tokens.
 mana={1}{U}{R}
@@ -13967,29 +13958,11 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Black Widow, Intel Expert
-text=First strike -- Whenever Black Widow deals combat damage to an opponent, you and that player each draw two cards.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Spy Hero
-power=3
-toughness=3
-[/card]
-[card]
 name=Bob, Reluctant HYDRA Agent
 text=Whenever Bob attacks alone, return him to his owner's hand. If you do, each opponent loses 2 life and you gain 2 life.
 mana={1}{B}
 type=Legendary Creature
 subtype=Human Coward Villain
-power=2
-toughness=2
-[/card]
-[card]
-name=Bucky Barnes, Eager Ally
-text=Vigilance -- When Bucky Barnes dies, look at the top four cards of your library. You may reveal an Equipment, Hero, or Soldier card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-mana={1}{W}
-type=Legendary Creature
-subtype=Human Soldier Hero
 power=2
 toughness=2
 [/card]
@@ -14018,24 +13991,6 @@ mana={3}{W}{W}
 type=Legendary Creature
 subtype=Human Soldier Hero
 power=4
-toughness=4
-[/card]
-[card]
-name=Captain America, Team Leader
-text=Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America.
-mana={R}{W}{U}
-type=Legendary Creature
-subtype=Human Soldier Hero
-power=3
-toughness=3
-[/card]
-[card]
-name=Captain America, Unbowed
-text=Flash -- When Captain America enters, Soldiers and Heroes you control gain indestructible until end of turn.
-mana={3}{W}
-type=Legendary Creature
-subtype=Human Soldier Hero
-power=3
 toughness=4
 [/card]
 [card]
@@ -14106,15 +14061,6 @@ name=Criminal Enterprise
 text=When this enchantment enters, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.) -- Whenever a Villain you control dies, this enchantment deals 1 damage to each opponent and you gain 1 life.
 mana={2}{B}
 type=Enchantment
-[/card]
-[card]
-name=Crimson Cowl, Master of Evil
-text=Whenever one or more nontoken Villains you control attack a player, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
-mana={2}{B}
-type=Legendary Creature
-subtype=Human Villain
-power=1
-toughness=3
 [/card]
 [card]
 name=Crimson Operative
@@ -14298,15 +14244,6 @@ power=*
 toughness=5
 [/card]
 [card]
-name=Elektra, Femme Fatale
-text=When Elektra enters, you may have her deal 2 damage to you. When you do, she deals 4 damage to target creature.
-mana={3}{R}
-type=Legendary Creature
-subtype=Human Assassin Hero
-power=3
-toughness=2
-[/card]
-[card]
 name=Endless Ranks of HYDRA
 text=For each opponent, you create a 2/1 black Villain creature token with menace. -- Whenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand.
 mana={3}{B}
@@ -14333,15 +14270,6 @@ name=Extract Power
 text=Look at the top card of each player's library, then exile those cards face down. You may play them without paying their mana costs for as long as they remain exiled.
 mana={5}{U}
 type=Sorcery
-[/card]
-[card]
-name=Falcon and Redwing
-text=Flying -- Whenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Bird Hero
-power=1
-toughness=2
 [/card]
 [card]
 name=Falcon, Joaquin Torres
@@ -14631,15 +14559,6 @@ name=Hulk's Thunderclap
 text=As an additional cost to cast this spell, you may behold a Gamma creature. (You may choose a Gamma creature you control or reveal a Gamma creature card from your hand.) -- Target creature you control deals damage equal to its power to another target creature. If this spell's additional cost was paid, destroy target noncreature artifact or noncreature enchantment.
 mana={1}{G}
 type=Sorcery
-[/card]
-[card]
-name=Hulk, Brutal Brawler
-text=Hulk attacks each combat if able. -- Whenever Hulk attacks, put a +1/+1 counter on each other creature you control.
-mana={2}{G}{G}
-type=Legendary Creature
-subtype=Gamma Berserker Hero
-power=4
-toughness=4
 [/card]
 [card]
 name=Hulk, Strongest There Is
@@ -15060,15 +14979,6 @@ power=1
 toughness=3
 [/card]
 [card]
-name=MJ, Rising Star
-text=Vigilance (Attacking doesn't cause this creature to tap.) -- Whenever you gain life, put a +1/+1 counter on MJ.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Performer
-power=2
-toughness=3
-[/card]
-[card]
 name=Machine Man, Model X-51
 text=Whenever you cast a noncreature spell, put a +1/+1 counter on Machine Man and he gains flying until end of turn.
 mana={4}
@@ -15130,15 +15040,6 @@ mana={1}{B}
 type=Sorcery
 [/card]
 [card]
-name=Minotaur, Roxxon CEO
-text=Whenever Minotaur, Roxxon CEO or another nontoken creature dies, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
-mana={4}{B}{B}
-type=Legendary Creature
-subtype=Minotaur Villain
-power=4
-toughness=4
-[/card]
-[card]
 name=Mister Fantastic
 text=Reach, vigilance -- At the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card. -- {R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies.
 mana={2}{U}
@@ -15152,15 +15053,6 @@ name=Mjölnir's Might
 text=Mjölnir's Might deals 4 damage to target player. -- Exile the top card of your library. Until the end of your next turn, you may play that card.
 mana={3}{R}
 type=Sorcery
-[/card]
-[card]
-name=Mockingbird, Bobbi Morse
-text=Whenever Mockingbird is dealt damage, put a +1/+1 counter on her. (She must survive the damage to get the counter.)
-mana={3}{W}
-type=Legendary Creature
-subtype=Human Hero
-power=3
-toughness=3
 [/card]
 [card]
 name=Molecule Man
@@ -15253,15 +15145,6 @@ power=2
 toughness=4
 [/card]
 [card]
-name=Nighthawk, Dark Defender
-text=Flying -- Whenever Nighthawk or another Hero you control enters, target creature gets +1/+1 until end of turn.
-mana={1}{W}
-type=Legendary Creature
-subtype=Human Hero
-power=2
-toughness=1
-[/card]
-[card]
 name=Nova Flame
 text=Put X +1/+1 counters on target creature you control. It deals damage equal to its power to each other creature.
 mana={X}{2}{R}{R}
@@ -15335,24 +15218,6 @@ type=Legendary Creature
 subtype=Human Hero
 power=3
 toughness=2
-[/card]
-[card]
-name=Peggy Carter, Secret Agent
-text=Whenever a creature you control attacks alone, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
-mana={1}{W}
-type=Legendary Creature
-subtype=Human Spy Hero
-power=2
-toughness=1
-[/card]
-[card]
-name=Photon, Lady of Light
-text=Flying -- Whenever Photon attacks, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.
-mana={3}{W}
-type=Legendary Creature
-subtype=Human Hero
-power=3
-toughness=3
 [/card]
 [card]
 name=Photon, Mighty Marvel
@@ -15511,15 +15376,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Shang-Chi and the Ten Rings
-text=First strike -- Whenever you draw a card, put a +1/+1 counter on Shang-Chi. -- When the tenth +1/+1 counter is put on Shang-Chi, you draw five cards and gain 5 life.
-mana={1}{W}{U}
-type=Legendary Creature
-subtype=Human Warrior Hero
-power=2
-toughness=2
-[/card]
-[card]
 name=She-Hulk, Jennifer Walters
 text=Trample (This creature can deal excess combat damage to the player she's attacking.) -- {2}{R}, Sacrifice a land: Draw a card and put a +1/+1 counter on She-Hulk.
 mana={3}{R}
@@ -15598,34 +15454,10 @@ power=4
 toughness=5
 [/card]
 [card]
-name=Smashing Spree
-text=Target attacking creature gets +3/+3 and gains trample until end of turn. (It can deal excess combat damage to the player it's attacking.)
-mana={1}{R}
-type=Instant
-[/card]
-[card]
-name=Songbird, Sonic Screamer
-text=Lifelink (Damage dealt by this creature also causes you to gain that much life.) -- Discard a card: Songbird gains flying until end of turn. (She can't be blocked except by creatures with flying or reach.)
-mana={1}{B}
-type=Legendary Creature
-subtype=Human Villain
-power=2
-toughness=1
-[/card]
-[card]
 name=Spaceshift
 text=Exile target artifact or creature, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.
 mana={1}{U}
 type=Instant
-[/card]
-[card]
-name=Spider-Man, Hometown Hero
-text=Reach (This creature can block creatures with flying.) -- When Spider-Man enters, target creature with power 2 or less can't be blocked this turn.
-mana={4}{R}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=5
-toughness=4
 [/card]
 [card]
 name=Spider-Man, New Champion
@@ -15634,15 +15466,6 @@ mana={2}{R}
 type=Legendary Creature
 subtype=Spider Human Hero
 power=3
-toughness=3
-[/card]
-[card]
-name=Spider-Man, Web-Spinner
-text=Double strike (This creature deals both first-strike and regular combat damage.) -- Haste (This creature can attack and {T} as soon as he comes under your control.) -- Whenever Spider-Man attacks, target creature can't block this turn.
-mana={3}{R}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=2
 toughness=3
 [/card]
 [card]
@@ -15699,12 +15522,6 @@ power=4
 toughness=3
 [/card]
 [card]
-name=Strategic Intervention
-text=Whenever a creature you control attacks alone, it gets +1/+1 until end of turn. Tap up to one target creature defending player controls.
-mana={1}{W}
-type=Enchantment
-[/card]
-[card]
 name=Stunning Shot
 text=Put two +1/+1 counters on up to one target creature you control. Tap up to one target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 mana={1}{W}
@@ -15750,15 +15567,6 @@ text=(As this Saga enters and after your draw step, add a lore counter. Sacrific
 mana={3}{U}
 type=Enchantment
 subtype=Saga
-[/card]
-[card]
-name=The Falcon, Sam Wilson
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When The Falcon enters, put a +1/+1 counter on each other creature you control.
-mana={4}{W}
-type=Legendary Creature
-subtype=Human Hero
-power=3
-toughness=3
 [/card]
 [card]
 name=The Fantastic Four
@@ -15834,15 +15642,6 @@ type=Legendary Artifact Creature
 subtype=Mutant Hero
 power=3
 toughness=3
-[/card]
-[card]
-name=The Wasp, Janet Van Dyne
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When The Wasp enters, she deals 4 damage to target tapped creature an opponent controls.
-mana={2}{W}
-type=Legendary Creature
-subtype=Human Hero
-power=1
-toughness=1
 [/card]
 [card]
 name=The Wasp, Winsome Avenger
@@ -15995,15 +15794,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Valkyrior Skyrider
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When this creature enters, you gain 4 life.
-mana={4}{W}
-type=Creature
-subtype=God Warrior Hero
-power=3
-toughness=4
-[/card]
-[card]
 name=Vault Guardsman
 text=Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.) -- When this creature enters, exile target artifact or creature an opponent controls until this creature leaves the battlefield.
 mana={5}{W}
@@ -16061,15 +15851,6 @@ type=Artifact Creature
 subtype=Illusion Advisor
 power=3
 toughness=3
-[/card]
-[card]
-name=Virtuous Variant
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When this creature enters, put a +1/+1 counter on target creature you control.
-mana={2}{W}
-type=Creature
-subtype=Spider Human Hero
-power=1
-toughness=2
 [/card]
 [card]
 name=Vision, Spectral Synthezoid
@@ -16160,15 +15941,6 @@ power=3
 toughness=5
 [/card]
 [card]
-name=War Machine, James Rhodes
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever War Machine attacks, tap up to one target creature.
-mana={3}{W/U}
-type=Legendary Artifact Creature
-subtype=Human Hero
-power=3
-toughness=2
-[/card]
-[card]
 name=Wasp, Shrinking Savior
 text=Flying -- Whenever Wasp attacks, up to one other target creature gets -3/-0 until your next turn. Then draw a card for each creature with power less than 0 on the battlefield.
 mana={2}{U}
@@ -16256,15 +16028,6 @@ power=2
 toughness=5
 [/card]
 [card]
-name=X-23, Deadly Weapon
-text=Whenever another Mutant you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on X-23.
-mana={2}{G}
-type=Legendary Creature
-subtype=Mutant Berserker Hero
-power=3
-toughness=3
-[/card]
-[card]
 name=Zarda, the Power Princess
 text=Flying -- Other Heroes you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
 mana={3}{W}
@@ -16316,15 +16079,6 @@ mana={W}
 type=Legendary Creature
 subtype=Human Spy Hero
 power=2
-toughness=1
-[/card]
-[card]
-name=Agents of HYDRA
-text=When this creature dies, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
-mana={1}{B}
-type=Creature
-subtype=Human Spy Villain
-power=1
 toughness=1
 [/card]
 [card]
@@ -16389,15 +16143,6 @@ mana={5}{U}{U}
 type=Sorcery
 [/card]
 [card]
-name=Attuma, Atlantean Warlord
-text=Other Merfolk you control get +1/+1. -- Whenever one or more Merfolk you control attack a player, draw a card.
-mana={2}{U}{U}
-type=Legendary Creature
-subtype=Merfolk Warrior Villain
-power=3
-toughness=4
-[/card]
-[card]
 name=Avengers Assemble!
 text=Flash -- Heroes you control get +2/+2. -- At the beginning of each end step, if you attacked with a Hero this turn or a Hero entered the battlefield under your control this turn, draw a card.
 mana={4}{W}
@@ -16443,15 +16188,6 @@ type=Legendary Creature
 subtype=Human Warrior Hero
 power=4
 toughness=4
-[/card]
-[card]
-name=Black Widow, Double Agent
-text=Deathtouch -- Whenever a creature you control attacks alone, it gains first strike and menace until end of turn. (It can't be blocked except by two or more creatures.)
-mana={1}{W}{B}
-type=Legendary Creature
-subtype=Human Hero Villain
-power=3
-toughness=2
 [/card]
 [card]
 name=Black Widow, Super Spy
@@ -16553,15 +16289,6 @@ text=Whenever you draw your second card each turn, create a 2/1 black Villain cr
 mana={2}{B}
 type=Enchantment
 subtype=Plan
-[/card]
-[card]
-name=Crossbones, Malicious Mercenary
-text=Deathtouch -- Whenever another Villain you control enters, put a +1/+1 counter on Crossbones. He deals 2 damage to each opponent. This ability triggers only once each turn.
-mana={3}{B}
-type=Legendary Creature
-subtype=Human Mercenary Villain
-power=3
-toughness=3
 [/card]
 [card]
 name=Crowd of True Believers
@@ -16749,28 +16476,10 @@ power=2
 toughness=2
 [/card]
 [card]
-name=H.E.R.B.I.E. Scout Unit
-text=Flying -- When this creature enters, draw a card, then you may put a land card from your hand onto the battlefield tapped.
-mana={4}
-type=Artifact Creature
-subtype=Robot Scout
-power=2
-toughness=1
-[/card]
-[card]
 name=HULK SMASH!
 text=Teamwork 4 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 4 or more.) -- Choose one. If this spell was cast using teamwork, choose both instead. -- • Destroy target noncreature artifact. -- • Target creature you control deals damage equal to its power to target creature an opponent controls.
 mana={1}{R}
 type=Instant
-[/card]
-[card]
-name=HYDRA Assault Robot
-text=Whenever another Villain and/or artifact you control enters, this creature deals 1 damage to target opponent.
-mana={1}{R}
-type=Artifact Creature
-subtype=Robot Villain
-power=1
-toughness=3
 [/card]
 [card]
 name=HYDRA Infiltration
@@ -16865,12 +16574,6 @@ type=Legendary Creature
 subtype=Kree Skrull Hero
 power=2
 toughness=3
-[/card]
-[card]
-name=I Am Iron Man
-text=Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying. -- Draw a card.
-mana={2}{U}
-type=Instant
 [/card]
 [card]
 name=Invisible Woman, Sue Storm
@@ -16988,15 +16691,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Knight of Wundagore
-text=Trample -- Whenever you put a +1/+1 counter on another creature, put a +1/+1 counter on this creature. This ability triggers only once each turn.
-mana={1}{G}
-type=Creature
-subtype=Cat Knight Villain
-power=2
-toughness=1
-[/card]
-[card]
 name=Kree Sentinel
 text=Reach -- Basic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)
 mana={4}{R}
@@ -17076,15 +16770,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Moon Girl and Devil Dinosaur
-text=Whenever you draw your second card each turn, until end of turn, Moon Girl and Devil Dinosaur's base power and toughness become 6/6 and they gain trample. -- Whenever an artifact you control enters, draw a card. This ability triggers only once each turn.
-mana={1}{G}{U}
-type=Legendary Creature
-subtype=Human Dinosaur Hero
-power=2
-toughness=2
-[/card]
-[card]
 name=Moonstone, Harsh Mistress
 text=Flying -- Whenever you discard a card, you may exile that card from your graveyard. If you do, until the end of your next turn, you may play that card.
 mana={3}{B}
@@ -17140,15 +16825,6 @@ type=Legendary Creature
 subtype=Human Doctor Hero
 power=2
 toughness=1
-[/card]
-[card]
-name=Okoye, Dora Milaje Leader
-text=When Okoye enters, create two 1/1 white Soldier creature tokens. -- Attacking creature tokens you control have first strike.
-mana={3}{W}
-type=Legendary Creature
-subtype=Human Warrior Hero
-power=3
-toughness=2
 [/card]
 [card]
 name=Origin of the Avengers
@@ -17380,15 +17056,6 @@ power=3
 toughness=2
 [/card]
 [card]
-name=Spider-Woman, Secret Agent
-text=Flash -- When Spider-Woman enters, tap target creature an opponent controls. That creature can't become untapped for as long as you control Spider-Woman.
-mana={3}{W/U}
-type=Legendary Creature
-subtype=Spider Human Spy Hero
-power=1
-toughness=4
-[/card]
-[card]
 name=Stark Industries Executive
 text={2}, {T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 mana={R}
@@ -17603,15 +17270,6 @@ name=The Ten Rings
 text=Your maximum hand size is ten. -- At the beginning of your end step, if you have fewer than ten cards in hand, draw cards equal to the difference.
 mana={8}
 type=Legendary Artifact
-[/card]
-[card]
-name=The Thing, Ben Grimm
-text=Trample -- Whenever one or more Heroes you control deal damage to a player, put two +1/+1 counters on The Thing.
-mana={5}{G}
-type=Legendary Creature
-subtype=Human Hero
-power=7
-toughness=7
 [/card]
 [card]
 name=The Unbeatable Squirrel Girl
@@ -17836,15 +17494,6 @@ name=Worlds Within Worlds
 text=Exile all creatures. Each player may put any number of creature cards from their hand onto the battlefield. Then put all cards exiled this way into their owners' hands. Exile Worlds Within Worlds.
 mana={5}{G}{U}
 type=Sorcery
-[/card]
-[card]
-name=Yellowjacket, Heartless Marauder
-text=Flying -- Whenever another Villain you control enters, Yellowjacket gets +1/+0 and gains lifelink until end of turn.
-mana={1}{B}
-type=Legendary Creature
-subtype=Human Rogue Villain
-power=1
-toughness=2
 [/card]
 [card]
 name=Aerith, Last Ancient
@@ -22669,15 +22318,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Ghost-Spider, Gwen Stacy
-text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever Ghost-Spider attacks, she deals X damage to defending player, where X is the number of attacking creatures.
-mana={3}{R}{R}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=4
-toughness=4
-[/card]
-[card]
 name=Grasping Tentacles
 text=Target opponent mills eight cards. You may put an artifact card from that player's graveyard onto the battlefield under your control.
 mana={1}{U}{B}
@@ -22706,24 +22346,6 @@ name=Lethal Protection
 text=Destroy target creature. Return up to one target creature card from your graveyard to your hand.
 mana={3}{B}
 type=Sorcery
-[/card]
-[card]
-name=Lyla, Holographic Assistant
-text=Whenever you draw a card, put a +1/+1 counter on target creature.
-mana={3}{U}
-type=Legendary Artifact Creature
-subtype=Illusion Advisor
-power=2
-toughness=2
-[/card]
-[card]
-name=Prowler, Misguided Mentor
-text=Prowler can't be blocked by creatures with power 2 or less. -- Whenever Prowler deals combat damage to a player, put a +1/+1 counter on another target creature you control.
-mana={2}{G}
-type=Legendary Creature
-subtype=Human Rogue Villain
-power=3
-toughness=3
 [/card]
 [card]
 name=Pumpkin Bombs
@@ -22768,15 +22390,6 @@ power=5
 toughness=5
 [/card]
 [card]
-name=Spider-Man, Peter Parker
-text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever you gain life, put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
-mana={3}{W}{W}
-type=Legendary Creature
-subtype=Spider Human Hero
-power=4
-toughness=4
-[/card]
-[card]
 name=Symbiote Spawn
 text=When this creature dies, each opponent loses 2 life and you gain 2 life.
 mana={2}{B}
@@ -22793,15 +22406,6 @@ type=Legendary Creature
 subtype=Human Bard Performer
 power=3
 toughness=3
-[/card]
-[card]
-name=Twisted Spider-Clone
-text=When this creature enters, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
-mana={3}{G}
-type=Creature
-subtype=Spider Human
-power=4
-toughness=4
 [/card]
 [card]
 name=Venom Blast

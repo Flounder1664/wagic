@@ -1,0 +1,18 @@
+#Ghost-Spider and Grizzly Bears attack: 2 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730014,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+730014
+Grizzly Bears
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:730014,Grizzly Bears
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,19 @@
+#H.E.R.B.I.E. enters: draw Forest, put it onto the battlefield tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:712089
+manapool:{4}
+library:Forest
+[PLAYER2]
+[DO]
+712089
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712089,Forest
+tappedinplay:1
+[PLAYER2]
+[END]

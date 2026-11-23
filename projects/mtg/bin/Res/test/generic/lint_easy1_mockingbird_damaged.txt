@@ -1,0 +1,19 @@
+#Shock on Mockingbird: she survives with a counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711332
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+711332
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711332
+graveyard:Shock
+pt:711332=4/4
+[PLAYER2]
+[END]

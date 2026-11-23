@@ -1,0 +1,21 @@
+#Falcon and Redwing deal 1 combat damage: one Bird, and a counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711156
+[PLAYER2]
+[DO]
+next
+next
+711156
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:711156,*
+pt:711156=2/3
+[PLAYER2]
+life:19
+[END]

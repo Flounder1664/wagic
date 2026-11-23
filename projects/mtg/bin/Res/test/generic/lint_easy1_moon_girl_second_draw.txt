@@ -1,0 +1,21 @@
+#Divination: the second draw makes Moon Girl a 6/6 trampler.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712151
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712151
+hand:Forest,Forest
+graveyard:Divination
+pt:712151=6/6
+type:712151=trample
+[PLAYER2]
+[END]

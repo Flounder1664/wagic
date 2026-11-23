@@ -1,0 +1,16 @@
+#Valkyrior Skyrider enters: gain 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:711565
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+711565
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711565
+life:24
+[PLAYER2]
+[END]

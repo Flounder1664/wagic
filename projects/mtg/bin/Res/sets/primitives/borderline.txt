@@ -158184,3 +158184,534 @@ text=Spree (Choose one or more additional costs.) -- + {2} - Mill four cards. Yo
 mana={G}
 type=Instant
 [/card]
+[card]
+name=Ant-Man's Air Force
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=_ATTACKING_target(<upto:1>creature) -1/-0 ueot
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever this creature attacks, up to one target creature gets -1/-0 until end of turn.
+mana={1}{U}
+type=Creature
+subtype=Insect
+power=2
+toughness=1
+[/card]
+[card]
+name=Black Widow, Intel Expert
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=first strike
+auto=@combatdamaged(opponent) from(this):draw:2 controller && draw:2 opponent
+text=First strike -- Whenever Black Widow deals combat damage to an opponent, you and that player each draw two cards.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Spy Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Bucky Barnes, Eager Ally
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=vigilance
+auto=_DIES_name(look) reveal:4 optionone name(Get a card) target(<1>equipment,hero,soldier|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+text=Vigilance -- When Bucky Barnes dies, look at the top four cards of your library. You may reveal an Equipment, Hero, or Soldier card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Soldier Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Captain America, Team Leader
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@movedTo(other hero|mybattlefield):counter(1/1) all(trigger[to]) && counter(1/1) all(this) && all(trigger[to]) transforms((,vigilance,haste)) ueot
+text=Whenever another Hero you control enters, it gains vigilance and haste until end of turn. Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America.
+mana={R}{W}{U}
+type=Legendary Creature
+subtype=Human Soldier Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Captain America, Unbowed
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flash
+auto=all(creature[soldier;hero]|mybattlefield) transforms((,indestructible)) ueot
+text=Flash -- When Captain America enters, Soldiers and Heroes you control gain indestructible until end of turn.
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Soldier Hero
+power=3
+toughness=4
+[/card]
+[card]
+name=Crimson Cowl, Master of Evil
+#2026-11-22 easy batch 1: written from existing working forms.
+#One token per turn: "one or more Villains attack" happens once each combat.
+auto=@combat(attacking) source(villain[-token]|mybattlefield) turnlimited:token(Villain,Creature Villain,2/1,black,menace)
+text=Whenever one or more nontoken Villains you control attack a player, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+mana={2}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=1
+toughness=3
+[/card]
+[card]
+name=Elektra, Femme Fatale
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=may name(Deal 2 damage to yourself) damage:2 controller && ability$!name(4 damage to a creature) damage:4 target(creature)!$ controller
+text=When Elektra enters, you may have her deal 2 damage to you. When you do, she deals 4 damage to target creature.
+mana={3}{R}
+type=Legendary Creature
+subtype=Human Assassin Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=Falcon and Redwing
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=@combatdamaged(player) from(this):token(Bird,Creature Bird,1/1,white,flying)*thatmuch
+auto=@combatdamaged(player) from(this):counter(1/1) all(this)
+text=Flying -- Whenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Bird Hero
+power=1
+toughness=2
+[/card]
+[card]
+name=Hulk, Brutal Brawler
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=mustattack
+auto=_ATTACKING_all(other creature|mybattlefield) counter(1/1)
+text=Hulk attacks each combat if able. -- Whenever Hulk attacks, put a +1/+1 counter on each other creature you control.
+mana={2}{G}{G}
+type=Legendary Creature
+subtype=Gamma Berserker Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=MJ, Rising Star
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=vigilance
+auto=@lifeof(player) from(*[-lifefaker]|*):counter(1/1) all(this)
+text=Vigilance (Attacking doesn't cause this creature to tap.) -- Whenever you gain life, put a +1/+1 counter on MJ.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Performer
+power=2
+toughness=3
+[/card]
+[card]
+name=Minotaur, Roxxon CEO
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@movedTo(creature[-token]|graveyard) from(battlefield):token(Villain,Creature Villain,2/1,black,menace)
+text=Whenever Minotaur, Roxxon CEO or another nontoken creature dies, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+mana={4}{B}{B}
+type=Legendary Creature
+subtype=Minotaur Villain
+power=4
+toughness=4
+[/card]
+[card]
+name=Mockingbird, Bobbi Morse
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=_ENRAGE_counter(1/1)
+text=Whenever Mockingbird is dealt damage, put a +1/+1 counter on her. (She must survive the damage to get the counter.)
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Nighthawk, Dark Defender
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=target(creature) 1/1 ueot
+auto=@movedTo(other hero|mybattlefield):target(creature) 1/1 ueot
+text=Flying -- Whenever Nighthawk or another Hero you control enters, target creature gets +1/+1 until end of turn.
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=2
+toughness=1
+[/card]
+[card]
+name=Peggy Carter, Secret Agent
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@combat(attackedalone) source(creature|mybattlefield):all(trigger[to]) indestructible ueot
+text=Whenever a creature you control attacks alone, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+mana={1}{W}
+type=Legendary Creature
+subtype=Human Spy Hero
+power=2
+toughness=1
+[/card]
+[card]
+name=Photon, Lady of Light
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=_ATTACKING_target(<upto:1>other creature|mybattlefield) moveto(exile) and!( moveto(ownerbattlefield) )!
+text=Flying -- Whenever Photon attacks, exile up to one other target creature you control, then return that card to the battlefield under its owner's control.
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Shang-Chi and the Ten Rings
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=first strike
+auto=@drawof(player):counter(1/1)
+#The tenth counter: fires when a counter leaves exactly ten on him.
+auto=@counteradded(1/1) from(this) restriction{compare(hascnt11)~equalto~10}:draw:5 controller && life:5 controller
+text=First strike -- Whenever you draw a card, put a +1/+1 counter on Shang-Chi. -- When the tenth +1/+1 counter is put on Shang-Chi, you draw five cards and gain 5 life.
+mana={1}{W}{U}
+type=Legendary Creature
+subtype=Human Warrior Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Smashing Spree
+#2026-11-22 easy batch 1: written from existing working forms.
+target=creature[attacking]
+auto=3/3 ueot
+auto=transforms((,trample)) ueot
+text=Target attacking creature gets +3/+3 and gains trample until end of turn. (It can deal excess combat damage to the player it's attacking.)
+mana={1}{R}
+type=Instant
+[/card]
+[card]
+name=Songbird, Sonic Screamer
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=lifelink
+auto={D(*|myhand)}:flying ueot
+text=Lifelink (Damage dealt by this creature also causes you to gain that much life.) -- Discard a card: Songbird gains flying until end of turn. (She can't be blocked except by creatures with flying or reach.)
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Villain
+power=2
+toughness=1
+[/card]
+[card]
+name=Spider-Man, Hometown Hero
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=reach
+auto=target(creature[power<=2]) transforms((,unblockable)) ueot
+text=Reach (This creature can block creatures with flying.) -- When Spider-Man enters, target creature with power 2 or less can't be blocked this turn.
+mana={4}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=5
+toughness=4
+[/card]
+[card]
+name=Spider-Man, Web-Spinner
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=double strike,haste
+auto=_ATTACKING_target(creature) transforms((,cantblock)) ueot
+text=Double strike (This creature deals both first-strike and regular combat damage.) -- Haste (This creature can attack and {T} as soon as he comes under your control.) -- Whenever Spider-Man attacks, target creature can't block this turn.
+mana={3}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=2
+toughness=3
+[/card]
+[card]
+name=Strategic Intervention
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@combat(attackedalone) source(creature|mybattlefield):all(trigger[to]) 1/1 ueot
+auto=@combat(attackedalone) source(creature|mybattlefield):target(<upto:1>creature|opponentbattlefield) tap
+text=Whenever a creature you control attacks alone, it gets +1/+1 until end of turn. Tap up to one target creature defending player controls.
+mana={1}{W}
+type=Enchantment
+[/card]
+[card]
+name=The Falcon, Sam Wilson
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=all(other creature|mybattlefield) counter(1/1)
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When The Falcon enters, put a +1/+1 counter on each other creature you control.
+mana={4}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=The Wasp, Janet Van Dyne
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=target(creature[tapped]|opponentbattlefield) damage:4
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When The Wasp enters, she deals 4 damage to target tapped creature an opponent controls.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Hero
+power=1
+toughness=1
+[/card]
+[card]
+name=Valkyrior Skyrider
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=life:4 controller
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When this creature enters, you gain 4 life.
+mana={4}{W}
+type=Creature
+subtype=God Warrior Hero
+power=3
+toughness=4
+[/card]
+[card]
+name=Virtuous Variant
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=target(creature|mybattlefield) counter(1/1)
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- When this creature enters, put a +1/+1 counter on target creature you control.
+mana={2}{W}
+type=Creature
+subtype=Spider Human Hero
+power=1
+toughness=2
+[/card]
+[card]
+name=War Machine, James Rhodes
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=_ATTACKING_target(<upto:1>creature) tap
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever War Machine attacks, tap up to one target creature.
+mana={3}{W/U}
+type=Legendary Artifact Creature
+subtype=Human Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=X-23, Deadly Weapon
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@movedTo(other mutant|mybattlefield):counter(1/1) all(trigger[to]) && counter(1/1) all(this)
+text=Whenever another Mutant you control enters, put a +1/+1 counter on that creature and a +1/+1 counter on X-23.
+mana={2}{G}
+type=Legendary Creature
+subtype=Mutant Berserker Hero
+power=3
+toughness=3
+[/card]
+[card]
+name=Agents of HYDRA
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=_DIES_token(Villain,Creature Villain,2/1,black,menace)
+text=When this creature dies, create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+mana={1}{B}
+type=Creature
+subtype=Human Spy Villain
+power=1
+toughness=1
+[/card]
+[card]
+name=Attuma, Atlantean Warlord
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=lord(other merfolk|mybattlefield) 1/1
+auto=@combat(attacking) source(merfolk|mybattlefield) turnlimited:draw:1 controller
+text=Other Merfolk you control get +1/+1. -- Whenever one or more Merfolk you control attack a player, draw a card.
+mana={2}{U}{U}
+type=Legendary Creature
+subtype=Merfolk Warrior Villain
+power=3
+toughness=4
+[/card]
+[card]
+name=Black Widow, Double Agent
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=deathtouch
+auto=@combat(attackedalone) source(creature|mybattlefield):all(trigger[to]) transforms((,first strike,menace)) ueot
+text=Deathtouch -- Whenever a creature you control attacks alone, it gains first strike and menace until end of turn. (It can't be blocked except by two or more creatures.)
+mana={1}{W}{B}
+type=Legendary Creature
+subtype=Human Hero Villain
+power=3
+toughness=2
+[/card]
+[card]
+name=Crossbones, Malicious Mercenary
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=deathtouch
+auto=@movedTo(other villain|mybattlefield) turnlimited:counter(1/1) all(this) && damage:2 opponent
+text=Deathtouch -- Whenever another Villain you control enters, put a +1/+1 counter on Crossbones. He deals 2 damage to each opponent. This ability triggers only once each turn.
+mana={3}{B}
+type=Legendary Creature
+subtype=Human Mercenary Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=H.E.R.B.I.E. Scout Unit
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=draw:1
+auto=may target(land|myhand) moveto(mybattlefield) and!( tap(noevent) )!
+text=Flying -- When this creature enters, draw a card, then you may put a land card from your hand onto the battlefield tapped.
+mana={4}
+type=Artifact Creature
+subtype=Robot Scout
+power=2
+toughness=1
+[/card]
+[card]
+name=HYDRA Assault Robot
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@movedTo(other *[villain;artifact]|mybattlefield):damage:1 opponent
+text=Whenever another Villain and/or artifact you control enters, this creature deals 1 damage to target opponent.
+mana={1}{R}
+type=Artifact Creature
+subtype=Robot Villain
+power=1
+toughness=3
+[/card]
+[card]
+name=I Am Iron Man
+#2026-11-22 easy batch 1: written from existing working forms.
+target=artifact,creature
+auto=transforms((Artifact Creature,setpower=4,settoughness=4,flying)) ueot
+auto=draw:1 controller
+text=Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying. -- Draw a card.
+mana={2}{U}
+type=Instant
+[/card]
+[card]
+name=Moon Girl and Devil Dinosaur
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=_SECOND_DRAW_transforms((,setpower=6,settoughness=6,trample)) ueot
+auto=@movedTo(artifact|mybattlefield) turnlimited:draw:1 controller
+text=Whenever you draw your second card each turn, until end of turn, Moon Girl and Devil Dinosaur's base power and toughness become 6/6 and they gain trample. -- Whenever an artifact you control enters, draw a card. This ability triggers only once each turn.
+mana={1}{G}{U}
+type=Legendary Creature
+subtype=Human Dinosaur Hero
+power=2
+toughness=2
+[/card]
+[card]
+name=Okoye, Dora Milaje Leader
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=token(Soldier,Creature Soldier,1/1,white)*2
+auto=lord(creature[token&attacking]|mybattlefield) first strike
+text=When Okoye enters, create two 1/1 white Soldier creature tokens. -- Attacking creature tokens you control have first strike.
+mana={3}{W}
+type=Legendary Creature
+subtype=Human Warrior Hero
+power=3
+toughness=2
+[/card]
+[card]
+name=Spider-Woman, Secret Agent
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flash
+#As Dungeon Geists: the tapped creature stays locked even after Spider-Woman leaves.
+auto=target(creature|opponentbattlefield) transforms((,doesnotuntap,newability[tap]))
+text=Flash -- When Spider-Woman enters, tap target creature an opponent controls. That creature can't become untapped for as long as you control Spider-Woman.
+mana={3}{W/U}
+type=Legendary Creature
+subtype=Spider Human Spy Hero
+power=1
+toughness=4
+[/card]
+[card]
+name=The Thing, Ben Grimm
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=trample
+#Fires once per Hero that deals damage, not once per event.
+auto=@damaged(player) from(hero|mybattlefield):counter(1/1,2) all(this)
+text=Trample -- Whenever one or more Heroes you control deal damage to a player, put two +1/+1 counters on The Thing.
+mana={5}{G}
+type=Legendary Creature
+subtype=Human Hero
+power=7
+toughness=7
+[/card]
+[card]
+name=Yellowjacket, Heartless Marauder
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=@movedTo(other villain|mybattlefield):1/0 ueot
+auto=@movedTo(other villain|mybattlefield):transforms((,lifelink)) ueot
+text=Flying -- Whenever another Villain you control enters, Yellowjacket gets +1/+0 and gains lifelink until end of turn.
+mana={1}{B}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=1
+toughness=2
+[/card]
+[card]
+name=Ghost-Spider, Gwen Stacy
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=menace
+auto=_ATTACKING_damage:type:creature[attacking]:mybattlefield opponent
+text=Menace (This creature can't be blocked except by two or more creatures.) -- Whenever Ghost-Spider attacks, she deals X damage to defending player, where X is the number of attacking creatures.
+mana={3}{R}{R}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=Lyla, Holographic Assistant
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=@drawof(player):target(creature) counter(1/1)
+text=Whenever you draw a card, put a +1/+1 counter on target creature.
+mana={3}{U}
+type=Legendary Artifact Creature
+subtype=Illusion Advisor
+power=2
+toughness=2
+[/card]
+[card]
+name=Prowler, Misguided Mentor
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=cantbeblockedby(creature[power<=2])
+auto=@combatdamaged(player) from(this):target(other creature|mybattlefield) counter(1/1)
+text=Prowler can't be blocked by creatures with power 2 or less. -- Whenever Prowler deals combat damage to a player, put a +1/+1 counter on another target creature you control.
+mana={2}{G}
+type=Legendary Creature
+subtype=Human Rogue Villain
+power=3
+toughness=3
+[/card]
+[card]
+name=Spider-Man, Peter Parker
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=flying
+auto=@lifeof(player) from(*[-lifefaker]|*):target(creature|mybattlefield) transforms((,indestructible,newability[counter(1/1)])) ueot
+text=Flying (This creature can't be blocked except by creatures with flying or reach.) -- Whenever you gain life, put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+mana={3}{W}{W}
+type=Legendary Creature
+subtype=Spider Human Hero
+power=4
+toughness=4
+[/card]
+[card]
+name=Twisted Spider-Clone
+#2026-11-22 easy batch 1: written from existing working forms.
+auto=all(creature[counter{1/1.1}]|mybattlefield) counter(1/1)
+text=When this creature enters, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
+mana={3}{G}
+type=Creature
+subtype=Spider Human
+power=4
+toughness=4
+[/card]
+[card]
+name=Knight of Wundagore
+#2026-11-22 easy batch 1: written from existing working forms.
+abilities=trample
+auto=@counteradded(1/1) from(other creature|battlefield) turnlimited:counter(1/1) all(this)
+text=Trample -- Whenever you put a +1/+1 counter on another creature, put a +1/+1 counter on this creature. This ability triggers only once each turn.
+mana={1}{G}
+type=Creature
+subtype=Cat Knight Villain
+power=2
+toughness=1
+[/card]

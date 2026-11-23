@@ -1,0 +1,19 @@
+#Attuma: Maritime Guard is 2/4, and when it attacks I draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712022,Maritime Guard
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+Maritime Guard
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:712022,Maritime Guard
+pt:Maritime Guard=2/4
+hand:Forest
+[PLAYER2]
+[END]

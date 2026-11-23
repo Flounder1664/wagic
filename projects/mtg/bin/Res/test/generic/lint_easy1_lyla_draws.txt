@@ -1,0 +1,22 @@
+#Divination: two draws, two counters on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730007,Grizzly Bears
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+Grizzly Bears
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730007,Grizzly Bears
+hand:Forest,Forest
+graveyard:Divination
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

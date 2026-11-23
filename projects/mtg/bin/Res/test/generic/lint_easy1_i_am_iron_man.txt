@@ -1,0 +1,23 @@
+#I Am Iron Man on Grizzly Bears: a 4/4 flying artifact; draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:712111
+manapool:{2}{U}
+library:Forest
+[PLAYER2]
+[DO]
+712111
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:712111
+hand:Forest
+pt:Grizzly Bears=4/4
+type:Grizzly Bears=flying
+type:Grizzly Bears=artifact
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Elektra enters: I take 2, Hill Giant takes 4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:711146
+manapool:{3}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+711146
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711146
+life:18
+[PLAYER2]
+graveyard:Hill Giant
+[END]

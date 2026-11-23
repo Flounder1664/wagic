@@ -1,0 +1,20 @@
+#Divination: two draws, two counters on Shang-Chi.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711432
+hand:Divination
+manapool:{2}{U}
+library:Forest,Forest
+[PLAYER2]
+[DO]
+Divination
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711432
+hand:Forest,Forest
+graveyard:Divination
+pt:711432=4/4
+[PLAYER2]
+[END]

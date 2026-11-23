@@ -1,0 +1,17 @@
+#Grizzly Bears attacks alone: indestructible.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711371,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+Grizzly Bears
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711371,Grizzly Bears
+type:Grizzly Bears=indestructible
+[PLAYER2]
+[END]

@@ -1,0 +1,18 @@
+#Virtuous Variant enters: a counter on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:711579
+manapool:{2}{W}
+[PLAYER2]
+[DO]
+711579
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,711579
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

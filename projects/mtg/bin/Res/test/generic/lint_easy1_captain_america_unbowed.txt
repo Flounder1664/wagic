@@ -1,0 +1,18 @@
+#Captain America, Unbowed: Soldiers get indestructible, Grizzly Bears does not.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glory Seeker,Grizzly Bears
+hand:711067
+manapool:{3}{W}
+[PLAYER2]
+[DO]
+711067
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Glory Seeker,Grizzly Bears,711067
+type:Glory Seeker=indestructible
+type:Grizzly Bears=-indestructible
+[PLAYER2]
+[END]

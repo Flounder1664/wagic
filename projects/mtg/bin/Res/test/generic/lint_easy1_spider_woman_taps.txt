@@ -1,0 +1,19 @@
+#Spider-Woman enters: Gray Ogre is tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:712203
+manapool:{3}{W}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+712203
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:712203
+[PLAYER2]
+inplay:Gray Ogre
+tappedinplay:1
+[END]

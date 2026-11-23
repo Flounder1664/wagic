@@ -1,0 +1,16 @@
+#A nontoken Villain attacks: Crimson Cowl makes a 2/1 Villain.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711100,712010
+[PLAYER2]
+[DO]
+goto attackers
+712010
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:711100,712010,*
+[PLAYER2]
+[END]

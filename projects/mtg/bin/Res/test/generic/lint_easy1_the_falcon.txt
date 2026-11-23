@@ -1,0 +1,18 @@
+#The Falcon enters: a counter on Grizzly Bears, none on itself.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:711507
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+711507
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,711507
+pt:Grizzly Bears=3/3
+pt:711507=3/3
+[PLAYER2]
+[END]

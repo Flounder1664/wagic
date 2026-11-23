@@ -1,0 +1,22 @@
+#Prowler deals combat damage: a counter on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730017,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+next
+730017
+next
+next
+Grizzly Bears
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:730017,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+life:17
+[END]

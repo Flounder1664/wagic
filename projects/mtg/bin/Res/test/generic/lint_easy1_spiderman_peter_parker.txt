@@ -1,0 +1,21 @@
+#Angel's Mercy: Grizzly Bears gets a counter and indestructible.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730004,Grizzly Bears
+hand:Angel's Mercy
+manapool:{2}{W}{W}
+[PLAYER2]
+[DO]
+Angel's Mercy
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:730004,Grizzly Bears
+graveyard:Angel's Mercy
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=indestructible
+life:27
+[PLAYER2]
+[END]

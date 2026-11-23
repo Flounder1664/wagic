@@ -1,0 +1,19 @@
+#Angel's Mercy gains 7 life: a counter on MJ.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711306
+hand:Angel's Mercy
+manapool:{2}{W}{W}
+[PLAYER2]
+[DO]
+Angel's Mercy
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:711306
+graveyard:Angel's Mercy
+pt:711306=3/4
+life:27
+[PLAYER2]
+[END]
