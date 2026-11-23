@@ -1,0 +1,18 @@
+#Spirit Mascot: three cards leave at once - one +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spirit Mascot,Tormod's Crypt
+graveyard:Forest,Plains
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spirit Mascot
+exile:Tormod's Crypt,Forest,Plains
+pt:Spirit Mascot=3/3
+[PLAYER2]
+[END]

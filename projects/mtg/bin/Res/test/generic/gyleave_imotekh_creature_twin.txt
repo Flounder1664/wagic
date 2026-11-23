@@ -1,0 +1,20 @@
+#Twin: Gravedigger returns a creature card, not an artifact - no Necrons.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Imotekh the Stormlord
+hand:Gravedigger
+graveyard:Hill Giant
+manapool:{3}{B}
+[PLAYER2]
+[DO]
+Gravedigger
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Imotekh the Stormlord,Gravedigger
+hand:Hill Giant
+[PLAYER2]
+[END]

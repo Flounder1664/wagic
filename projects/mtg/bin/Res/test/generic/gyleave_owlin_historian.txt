@@ -1,0 +1,18 @@
+#Owlin Historian: cards leave my graveyard - +1/+1 until end of turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Owlin Historian,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Owlin Historian
+exile:Tormod's Crypt,Forest
+pt:Owlin Historian=3/4
+[PLAYER2]
+[END]

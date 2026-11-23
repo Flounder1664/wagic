@@ -1,0 +1,17 @@
+#Garrison Excavator: cards leave my graveyard - one 2/2 Spirit.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Garrison Excavator,Tormod's Crypt
+graveyard:Forest,Plains
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Garrison Excavator,*
+exile:Tormod's Crypt,Forest,Plains
+[PLAYER2]
+[END]

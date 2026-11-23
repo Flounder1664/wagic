@@ -1,0 +1,17 @@
+#Imotekh: an artifact card (the Crypt itself) leaves my graveyard - two Necron Warriors.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Imotekh the Stormlord,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Imotekh the Stormlord,*,*
+exile:Tormod's Crypt,Forest
+[PLAYER2]
+[END]
