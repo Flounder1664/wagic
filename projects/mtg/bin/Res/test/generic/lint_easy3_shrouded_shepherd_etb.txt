@@ -1,0 +1,19 @@
+#Shrouded Shepherd cast as a creature: Grizzly Bears gets +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:629737
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+629737
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,629737
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

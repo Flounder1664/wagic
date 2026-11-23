@@ -1,0 +1,19 @@
+#Deathly Ride (adventure): Grizzly Bears returns to my hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:629593
+graveyard:Grizzly Bears
+manapool:{1}{B}
+[PLAYER2]
+[DO]
+629593
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grizzly Bears
+exile:629593
+[PLAYER2]
+[END]

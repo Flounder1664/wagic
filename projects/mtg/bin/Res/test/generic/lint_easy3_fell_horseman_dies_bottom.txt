@@ -1,0 +1,19 @@
+#Fell Horseman dies: it goes to the bottom of my library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:629593
+hand:Murder
+manapool:{1}{B}{B}
+library:Forest
+[PLAYER2]
+[DO]
+Murder
+629593
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Murder
+library:629593,Forest
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Mend the Wilds (adventure): Grizzly Bears goes on top of my library.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:629742
+graveyard:Grizzly Bears
+manapool:{G}
+library:Forest
+[PLAYER2]
+[DO]
+629742
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+exile:629742
+library:Forest,Grizzly Bears
+[PLAYER2]
+[END]

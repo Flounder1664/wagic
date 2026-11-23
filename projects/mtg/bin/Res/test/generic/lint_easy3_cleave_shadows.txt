@@ -1,0 +1,22 @@
+#Cleave Shadows (adventure): the opponent's creatures get -1/-1, mine do not.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:629737
+manapool:{1}{B}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+629737
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+exile:629737
+pt:Grizzly Bears=2/2
+[PLAYER2]
+inplay:Gray Ogre
+pt:Gray Ogre=1/1
+[END]

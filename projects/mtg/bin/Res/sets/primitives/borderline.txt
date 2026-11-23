@@ -159229,3 +159229,127 @@ subtype=Cat Warlock
 power=1
 toughness=1
 [/card]
+[card]
+name=Cheeky House-Mouse // Squeak By
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure
+other={W} name(Adventure)
+auto=alternative name(Squeak By) name(Squeak By) target(creature|mybattlefield) transforms((,newability[1/1 ueot],newability[cantbeblockedby(creature[power>=3])])) ueot
+auto=alternative _ADVENTURE_
+text=Adventure: Squeak By {W} (Sorcery): Target creature you control gets +1/+1 until end of turn. It can't be blocked by creatures with power 3 or greater this turn.
+mana={W}
+type=Creature
+subtype=Mouse
+power=2
+toughness=1
+[/card]
+[card]
+name=Fell Horseman // Deathly Ride
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure
+other={1}{B} name(Adventure)
+auto=alternative name(Deathly Ride) name(Deathly Ride) target(creature|mygraveyard) moveto(myhand)
+auto=alternative _ADVENTURE_
+auto=_DIES_name(Put on the bottom of library) all(trigger[to]) bottomoflibrary
+text=When this creature dies, put it on the bottom of its owner's library. -- Adventure: Deathly Ride {1}{B} (Sorcery): Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+mana={3}{B}
+type=Creature
+subtype=Zombie Knight
+power=3
+toughness=3
+[/card]
+[card]
+name=Minecart Daredevil // Ride the Rails
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure,asflash
+restriction=can play creature
+other={1}{R} name(Adventure)
+auto=alternative name(Ride the Rails) name(Ride the Rails) target(creature) 2/1 ueot
+auto=alternative _ADVENTURE_
+text=Adventure: Ride the Rails {1}{R} (Instant): Target creature gets +2/+1 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+mana={2}{R}
+type=Creature
+subtype=Dwarf Knight
+power=4
+toughness=2
+[/card]
+[card]
+name=Obyra's Attendants // Desperate Parry
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure,asflash,flying
+restriction=can play creature
+other={1}{U} name(Adventure)
+auto=alternative name(Desperate Parry) name(Desperate Parry) target(creature) -4/-0 ueot
+auto=alternative _ADVENTURE_
+text=Flying -- Adventure: Desperate Parry {1}{U} (Instant): Target creature gets -4/-0 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+mana={4}{U}
+type=Creature
+subtype=Faerie Wizard
+power=3
+toughness=4
+[/card]
+[card]
+name=Shrouded Shepherd // Cleave Shadows
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure
+other={1}{B} name(Adventure)
+auto=alternative name(Cleave Shadows) name(Cleave Shadows) all(creature|opponentbattlefield) -1/-1 ueot
+auto=alternative _ADVENTURE_
+auto=ifnot paid(alternative) then target(creature|mybattlefield) 2/2 ueot
+text=When this creature enters, target creature you control gets +2/+2 until end of turn. -- Adventure: Cleave Shadows {1}{B} (Sorcery): Creatures your opponents control get -1/-1 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+mana={1}{W}
+type=Creature
+subtype=Spirit Warrior
+power=2
+toughness=2
+[/card]
+[card]
+name=Woodland Acolyte // Mend the Wilds
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=adventure,asflash
+restriction=can play creature
+other={G} name(Adventure)
+auto=alternative name(Mend the Wilds) name(Mend the Wilds) target(*[-instant&-sorcery]|mygraveyard) moveto(mylibrary)
+auto=alternative _ADVENTURE_
+auto=ifnot paid(alternative) then draw:1 controller
+text=When this creature enters, draw a card. -- Adventure: Mend the Wilds {G} (Instant): Put target permanent card from your graveyard on top of your library. (Then exile this card. You may cast the creature later from exile.)
+mana={2}{W}
+type=Creature
+subtype=Human Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Tribal Unity
+#2026-11-22 easy batch 3: written from existing working forms.
+auto=chooseatype all(creature[chosentype]) X/X ueot chooseend
+text=Creatures of the creature type of your choice get +X/+X until end of turn.
+mana={X}{2}{G}
+type=Instant
+[/card]
+[card]
+name=Eagle of Deliverance
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=flying
+auto=target(other creature|mybattlefield) transforms((,newability[counter(0/0.1.Indestructible)],newability[this(counter{0/0.1.Indestructible}>=1) indestructible],newability[if compare(power)~lessthan~3 then draw:1 controller])) forever
+text=Flying -- When this creature enters, put an indestructible counter on another target creature you control. Draw a card if that creature's power is 2 or less.
+mana={4}{W}{W}
+type=Creature
+subtype=Bird Soldier
+power=5
+toughness=5
+[/card]
+[card]
+name=Zodiark, Umbral God
+#2026-11-22 easy batch 3: written from existing working forms.
+abilities=indestructible
+auto=ability$!name(Sacrifice half your non-God creatures) notaTarget(<halfdowntype:creature[-god]:mybattlefield>creature[-god]|mybattlefield) sacrifice!$ controller
+auto=ability$!name(Sacrifice half your non-God creatures) notaTarget(<halfdowntype:creature[-god]:mybattlefield>creature[-god]|mybattlefield) sacrifice!$ opponent
+auto=@sacrificed(other creature|battlefield):counter(1/1)
+text=Indestructible -- When Zodiark enters, each player sacrifices half the non-God creatures they control of their choice, rounded down. -- Whenever a player sacrifices another creature, put a +1/+1 counter on Zodiark.
+mana={B}{B}{B}{B}{B}
+type=Legendary Creature
+subtype=God
+power=5
+toughness=5
+[/card]

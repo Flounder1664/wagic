@@ -1,0 +1,20 @@
+#Ride the Rails (adventure) on Grizzly Bears: +2/+1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:629642
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+629642
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+exile:629642
+pt:Grizzly Bears=4/3
+[PLAYER2]
+[END]

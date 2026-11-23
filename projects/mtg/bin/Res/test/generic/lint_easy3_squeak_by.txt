@@ -1,0 +1,20 @@
+#Squeak By (adventure) on Grizzly Bears: +1/+1; the card goes on an adventure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:629508
+manapool:{W}
+[PLAYER2]
+[DO]
+629508
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+exile:629508
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

@@ -1,0 +1,20 @@
+#Eagle of Deliverance: Grizzly Bears (power 2) gets an indestructible counter, and I draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Eagle of Deliverance
+manapool:{4}{W}{W}
+library:Forest
+[PLAYER2]
+[DO]
+Eagle of Deliverance
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Eagle of Deliverance
+hand:Forest
+type:Grizzly Bears=indestructible
+[PLAYER2]
+[END]

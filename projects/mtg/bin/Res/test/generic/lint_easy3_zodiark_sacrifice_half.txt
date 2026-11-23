@@ -1,0 +1,22 @@
+#Zodiark: I sacrifice one of two creatures (half rounded down); the opponent keeps their only one; a counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+hand:702128
+manapool:{B}{B}{B}{B}{B}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+702128
+Grizzly Bears
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:Hill Giant,702128
+graveyard:Grizzly Bears
+pt:702128=6/6
+[PLAYER2]
+inplay:Gray Ogre
+[END]
