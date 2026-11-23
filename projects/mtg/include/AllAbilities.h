@@ -992,6 +992,54 @@ public:
     }
 };
 
+//Whenever an ability of a card matching tc is activated.
+//  activated(tc)        - not a mana ability ("activate an ability that isn't a mana ability")
+//  activatedany(tc)     - any ability, mana abilities included
+//  activatedloyalty(tc) - loyalty abilities only
+//  activatednotap(tc)   - any ability without {T} in its cost (Haunting Wind)
+//Who activated it is not recorded: select it by the zone owner, e.g. creature|opponentbattlefield.
+class TrCardActivated: public Trigger
+{
+public:
+    enum { NONMANA = 0, ANY = 1, LOYALTY = 2, NOTAP = 3 };
+    int mode;
+    bool limitOnceATurn;
+    int triggeredTurn;
+    MTGCardInstance * preCard; //the card as it was just before its costs were paid
+    TrCardActivated(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, int mode, bool once = false, bool limitOnceATurn = false) :
+        Trigger(observer, id, source, once, tc), mode(mode), limitOnceATurn(limitOnceATurn)
+    {
+        triggeredTurn = -1;
+        preCard = NULL;
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        if (WEventCardActivating * pre = dynamic_cast<WEventCardActivating *> (event))
+        {
+            preCard = (pre->card && tc->canTarget(pre->card)) ? pre->card : NULL;
+            return 0;
+        }
+        WEventCardActivated * e = dynamic_cast<WEventCardActivated *> (event);
+        if (!e) return 0;
+        bool matchedBeforeCost = (preCard && preCard == e->card);
+        preCard = NULL;
+        if (limitOnceATurn && triggeredTurn == game->turn)
+            return 0;
+        if (mode == NONMANA && e->isMana) return 0;
+        if (mode == LOYALTY && !e->isLoyalty) return 0;
+        if (mode == NOTAP && e->hasTap) return 0;
+        if (!matchedBeforeCost && !tc->canTarget(e->card)) return 0;
+        triggeredTurn = game->turn;
+        return 1;
+    }
+
+    TrCardActivated * clone() const
+    {
+        return NEW TrCardActivated(*this);
+    }
+};
+
 class TrCardBoasted: public Trigger
 {
 public:

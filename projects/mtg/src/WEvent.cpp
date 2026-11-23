@@ -353,6 +353,16 @@ WEventplayerShuffled::WEventplayerShuffled(Player * player) :
 {
 }
 
+WEventCardActivated::WEventCardActivated(MTGCardInstance * card, bool isMana, bool isLoyalty, bool hasTap) :
+    WEventCardUpdate(card), isMana(isMana), isLoyalty(isLoyalty), hasTap(hasTap)
+{
+}
+
+WEventCardActivating::WEventCardActivating(MTGCardInstance * card) :
+    WEvent(), card(card)
+{
+}
+
 WEventCardBoasted::WEventCardBoasted(MTGCardInstance * card) :
     WEventCardUpdate(card)
 {
@@ -647,6 +657,12 @@ Targetable * WEventCardCopiedACard::getTarget(int target)
 }
 
 Targetable * WEventCardMutated::getTarget(int target)
+{
+    if (target) return card;
+    return NULL;
+}
+
+Targetable * WEventCardActivated::getTarget(int target)
 {
     if (target) return card;
     return NULL;

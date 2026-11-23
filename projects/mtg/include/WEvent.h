@@ -454,6 +454,22 @@ struct WEventClash : public WEvent {
     virtual Targetable * getTarget(Player * player);
 };
 
+//an ability of card was activated (fired once it is on the stack, or after a mana ability resolves)
+struct WEventCardActivated : public WEventCardUpdate {
+    bool isMana;
+    bool isLoyalty;
+    bool hasTap;
+    WEventCardActivated(MTGCardInstance * card, bool isMana, bool isLoyalty, bool hasTap);
+    virtual Targetable * getTarget(int target);
+};
+
+//sent just before an ability's costs are paid, so @activated triggers can see where the card was
+//before a cost moved it (a sacrificed artifact is no longer on the battlefield afterwards)
+struct WEventCardActivating : public WEvent {
+    MTGCardInstance * card;
+    WEventCardActivating(MTGCardInstance * card);
+};
+
 //boast event
 struct WEventCardBoasted : public WEventCardUpdate {
     WEventCardBoasted(MTGCardInstance * card);

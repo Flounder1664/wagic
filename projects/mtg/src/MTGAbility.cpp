@@ -1682,6 +1682,16 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
     if (TargetChooser * tc = parseSimpleTC(s, "mutated", card))
         return NEW TrCardMutated(observer, id, card, tc, once, limitOnceATurn);
 
+    //an ability of a card has been activated - see TrCardActivated for the four forms
+    if (TargetChooser * tc = parseSimpleTC(s, "activatedany", card))
+        return NEW TrCardActivated(observer, id, card, tc, TrCardActivated::ANY, once, limitOnceATurn);
+    if (TargetChooser * tc = parseSimpleTC(s, "activatedloyalty", card))
+        return NEW TrCardActivated(observer, id, card, tc, TrCardActivated::LOYALTY, once, limitOnceATurn);
+    if (TargetChooser * tc = parseSimpleTC(s, "activatednotap", card))
+        return NEW TrCardActivated(observer, id, card, tc, TrCardActivated::NOTAP, once, limitOnceATurn);
+    if (TargetChooser * tc = parseSimpleTC(s, "activated", card))
+        return NEW TrCardActivated(observer, id, card, tc, TrCardActivated::NONMANA, once, limitOnceATurn);
+
     //boast has been performed from a card
     if (TargetChooser * tc = parseSimpleTC(s, "boasted", card))
         return NEW TrCardBoasted(observer, id, card, tc, once, limitOnceATurn);
@@ -8034,6 +8044,7 @@ int ActivatedAbility::reactToClick(MTGCardInstance * card)
             }
         }
         ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
+        game->receiveEvent(NEW WEventCardActivating(source)); //for @activated triggers, before a cost can move the card
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
         game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
@@ -8072,6 +8083,7 @@ int ActivatedAbility::reactToTargetClick(Targetable * object)
             }
         }
         ManaCost * previousManaPool = NEW ManaCost(player->getManaPool());
+        game->receiveEvent(NEW WEventCardActivating(source)); //for @activated triggers, before a cost can move the card
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
         game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
@@ -8117,6 +8129,26 @@ int ActivatedAbility::activateAbility()
             game->receiveEvent(e);
         }
     }
+    //what kind of ability this is, for @activated triggers (TrCardActivated)
+    bool hasTap = needsTapping || (amp && amp->tap) || (femp && femp->tap);
+    bool isLoyalty = false;
+    if (cost && cost->extraCosts)
+    {
+        for (unsigned int i = 0; i < cost->extraCosts->costs.size(); i++)
+        {
+            if (dynamic_cast<TapCost*>(cost->extraCosts->costs[i]))
+                hasTap = true;
+            CounterCost * cc = dynamic_cast<CounterCost*>(cost->extraCosts->costs[i]);
+            if (cc && cc->counter && source->hasType(Subtypes::TYPE_PLANESWALKER))
+            {
+                string cname = cc->counter->name;
+                std::transform(cname.begin(), cname.end(), cname.begin(), ::tolower);
+                if (cname == "loyalty")
+                    isLoyalty = true;
+            }
+        }
+    }
+    MTGCardInstance * activatedFrom = source;
     if (amp||femp)
     {
         counters++;
@@ -8125,6 +8157,7 @@ int ActivatedAbility::activateAbility()
             activateSideEffect();
         }
         this->resolve();
+        game->receiveEvent(NEW WEventCardActivated(activatedFrom, true, false, hasTap));
         return 1;
     }
     counters++;
@@ -8135,6 +8168,8 @@ int ActivatedAbility::activateAbility()
         activateSideEffect();
     }
     fireAbility();
+    //after fireAbility, so the trigger goes on the stack above the ability it reacts to
+    game->receiveEvent(NEW WEventCardActivated(activatedFrom, false, isLoyalty, hasTap));
     return 1;
 }
 
@@ -9096,6 +9131,7 @@ int AManaProducer::reactToClick(MTGCardInstance * _card)
                 return 0;
             }
         }
+        game->receiveEvent(NEW WEventCardActivating(source)); //for @activated triggers, before a cost can move the card
         cost->doPayExtra(); // Bring here brefore the normal payment to solve Snow Mana payment bug.
         game->currentlyActing()->getManaPool()->setSpender(source, false);
         game->currentlyActing()->getManaPool()->pay(cost);
