@@ -43,16 +43,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Abstruse Archaic
-abilities=vigilance
-text=Vigilance -- {1}, {T}: Copy target activated or triggered ability you control from a colorless source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
-mana={4}
-type=Creature
-subtype=Avatar
-power=3
-toughness=4
-[/card]
-[card]
 name=Academy at Tolaria West
 text=At the beginning of your end step, if you have no cards in hand, draw seven cards. -- Whenever you roll {C}, discard your hand.
 type=Plane
@@ -715,13 +705,6 @@ type=Artifact Creature
 subtype=Construct
 power=1
 toughness=1
-[/card]
-[card]
-name=Battlemage's Bracers
-text=Equipped creature has haste. -- Whenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy. -- Equip {2}
-mana={2}{R}
-type=Artifact
-subtype=Equipment
 [/card]
 [card]
 name=Bazaar of Wonders
@@ -1440,12 +1423,6 @@ type=Creature
 subtype=Elemental
 power=6
 toughness=6
-[/card]
-[card]
-name=Chandra's Regulator
-text=Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay 1. If you do, copy that ability. You may choose new targets for the copy. -- {1}, {T}, Discard a Mountain card or a red card: Draw a card.
-mana={1}{R}
-type=Legendary Artifact
 [/card]
 [card]
 name=Channel Harm
@@ -4687,13 +4664,6 @@ mana={U}{U}
 type=Enchantment
 [/card]
 [card]
-name=Illusionist's Bracers
-text=Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy. -- Equip {3}
-mana={2}
-type=Artifact
-subtype=Equipment
-[/card]
-[card]
 name=Illusionist's Gambit
 text=Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn. -- Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
 mana={2}{U}{U}
@@ -5531,15 +5501,6 @@ mana={3}{B}{B}
 type=Creature
 subtype=Vampire
 power=3
-toughness=3
-[/card]
-[card]
-name=Kurkesh, Onakke Ancient
-text=Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do, copy that ability. You may choose new targets for the copy.
-mana={2}{R}{R}
-type=Legendary Creature
-subtype=Ogre Spirit
-power=4
 toughness=3
 [/card]
 [card]
@@ -8338,12 +8299,6 @@ mana={2}{U}{U}
 type=Enchantment
 [/card]
 [card]
-name=Rings of Brighthearth
-text=Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
-mana={3}
-type=Artifact
-[/card]
-[card]
 name=Riptide Island
 auto=all(creature|myBattlefield) haste and get +x/+x , where x is the number of slivers you control +x/+x , where x is the number of slivers you control
 auto=@chaos ensuesslivers|myBattlefield)) haste &&) x/x ueot, where x is the number of slivers|myBattlefield)
@@ -8420,21 +8375,6 @@ toughness=3
 name=Rotted Ones, Lay Siege
 text=When you set this scheme in motion, for each opponent, put a 2/2 black Zombie creature token onto the battlefield that attacks that player each combat if able.
 type=Scheme
-[/card]
-[card]
-name=Rowan's Talent
-target=planeswalker
-auto=teach(creature) Enchant planeswalker
-auto=teach(creature) Enchanted planeswalker
-auto=teach(creature) "[+1]: Up to one target creature
-auto=teach(creature) +2/+0
-auto=teach(creature) first strike
-auto=teach(creature) trample "
-auto=teach(creature) Whenever you activateloyalty ability of enchanted planeswalker copy that ability You may choose new targets for the copy
-text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Up to one target creature gets +2/+0 and gains first strike and trample until end of turn." -- Whenever you activate a loyalty ability of enchanted planeswalker, copy that ability. You may choose new targets for the copy.
-mana={2}{R}{R}
-type=Enchantment
-subtype=Aura
 [/card]
 [card]
 name=Rules Lawyer
@@ -9814,12 +9754,6 @@ mana={U}
 type=Instant
 [/card]
 [card]
-name=Strionic Resonator
-text={2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words "when," "whenever," or "at.")
-mana={2}
-type=Artifact
-[/card]
-[card]
 name=Strip Bare
 text=Destroy all Auras and Equipment attached to target creature.
 mana={W}
@@ -10114,15 +10048,6 @@ name=Tawnos's Coffin
 text=You may choose not to untap Tawnos's Coffin during your untap step. -- {3}, {T}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When Tawnos's Coffin leaves the battlefield or becomes untapped, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
 mana={4}
 type=Artifact
-[/card]
-[card]
-name=Tawnos, Urza's Apprentice
-text=Haste -- {U}{R}, {T}: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
-mana={U}{R}
-type=Legendary Creature
-subtype=Human Artificer
-power=1
-toughness=3
 [/card]
 [card]
 name=Tayam, Luminous Enigma
@@ -11444,16 +11369,6 @@ type=Creature
 subtype=Human Soldier
 power=2
 toughness=5
-[/card]
-[card]
-name=Weaver of Harmony
-auto=lord(other creature[enchantment]|myBattlefield) 1/1
-text=Other enchantment creatures you control get +1/+1. -- {G}, {T}: Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
-mana={1}{G}
-type=Enchantment Creature
-subtype=Snake Druid
-power=2
-toughness=2
 [/card]
 [card]
 name=Weaver of Lies
@@ -14956,15 +14871,6 @@ mana={1}{B}
 type=Sorcery
 [/card]
 [card]
-name=Mister Fantastic
-text=Reach, vigilance -- At the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card. -- {R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies.
-mana={2}{U}
-type=Legendary Creature
-subtype=Human Scientist Hero
-power=2
-toughness=4
-[/card]
-[card]
 name=Mjölnir's Might
 text=Mjölnir's Might deals 4 damage to target player. -- Exile the top card of your library. Until the end of your next turn, you may play that card.
 mana={3}{R}
@@ -16277,15 +16183,6 @@ mana={4}{G}{G}
 type=Sorcery
 [/card]
 [card]
-name=Echo, Perceptive Prodigy
-text=Vigilance -- {1}, {T}: Copy target activated or triggered ability you control from a creature source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
-mana={2}{U}
-type=Legendary Creature
-subtype=Human Hero
-power=1
-toughness=4
-[/card]
-[card]
 name=Elektra, Daughter of the Hand
 text=Sneak {1}{B}{B} (You may cast this spell for {1}{B}{B} if you also return an unblocked attacker you control to hand during the declare blockers step. She enters tapped and attacking.) -- When Elektra enters, destroy target creature an opponent controls with power 3 or less.
 mana={2}{B}{B}
@@ -16899,15 +16796,6 @@ type=Creature
 subtype=Dinosaur
 power=7
 toughness=6
-[/card]
-[card]
-name=Scientist Supreme of A.I.M.
-text=Pay 2 life: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. Activate only during your turn and only once each turn. (Mana abilities can't be targeted.)
-mana={U}{B}
-type=Legendary Creature
-subtype=Human Scientist Villain
-power=2
-toughness=2
 [/card]
 [card]
 name=Secret Invasion
@@ -23203,16 +23091,6 @@ type=Legendary Creature
 subtype=Vampire Wizard
 power=3
 toughness=4
-[/card]
-[card]
-name=Kirol, Attentive First-Year
-missing=Copying a triggered ability is not implemented (Strionic Resonator and Lithoform Engine are blocked on the same gap), so Kirol's only ability cannot be written. Moved to unsupported 2026-10-28.
-text=Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
-mana={1}{R/W}{R/W}
-type=Legendary Creature
-subtype=Vampire Cleric
-power=3
-toughness=3
 [/card]
 [card]
 name=Raiding Schemes

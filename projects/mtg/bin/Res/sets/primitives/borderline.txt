@@ -67797,7 +67797,7 @@ subtype=Aura
 [/card]
 [card]
 name=Lithoform Engine
-#auto={2}{T}:No copy for triggered abilities ATM...
+auto={2}{T}:name(Copy target activated or triggered ability) duplicateability(any)
 auto={3}{T}:name(Copy instant or sorcery) target(*[instant;sorcery]|mystack) transforms((,newability[activate castcard(copied noevent)])) oneshot
 auto={4}{T}:name(Copy permanent) target(*[-instant;-sorcery]|mystack) transforms((,newability[clone])) oneshot
 text={2},{T}: Copy target activated or triggered ability you control. You may choose new targets for the copy. -- {3},{T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. -- {4},{T}: Copy target permanent spell you control. (the copy becomes a token.)
@@ -159978,4 +159978,192 @@ type=Creature
 subtype=Zombie Ninja Villain
 power=2
 toughness=1
+[/card]
+[card]
+name=Strionic Resonator
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto={2}{T}:name(Copy target triggered ability you control) duplicateability(triggered)
+text={2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words "when," "whenever," or "at.")
+mana={2}
+type=Artifact
+[/card]
+[card]
+name=Rings of Brighthearth
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=@activated(*|mybattlefield,myhand,mygraveyard,myexile):pay({2}) name(Copy that ability) duplicateability(activated)
+text=Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
+mana={3}
+type=Artifact
+[/card]
+[card]
+name=Kurkesh, Onakke Ancient
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=@activated(artifact|mybattlefield,myhand,mygraveyard,myexile):pay({R}) name(Copy that ability) duplicateability(activated:artifact)
+text=Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do, copy that ability. You may choose new targets for the copy.
+mana={2}{R}{R}
+type=Legendary Creature
+subtype=Ogre Spirit
+power=4
+toughness=3
+[/card]
+[card]
+name=Illusionist's Bracers
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=@activated(mytgt):name(Copy that ability) duplicateability(activated)
+auto={3}:equip
+text=Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy. -- Equip {3}
+mana={2}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Battlemage's Bracers
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=teach(creature) haste
+auto=@activated(mytgt):pay({1}) name(Copy that ability) duplicateability(activated)
+auto={2}:equip
+text=Equipped creature has haste. -- Whenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy. -- Equip {2}
+mana={2}{R}
+type=Artifact
+subtype=Equipment
+[/card]
+[card]
+name=Chandra's Regulator
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=@activatedloyalty(planeswalker[chandra]|mybattlefield):pay({1}) name(Copy that ability) duplicateability(activated)
+auto={1}{T}{D(*[mountain;red]|myhand)}:draw:1 controller
+text=Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy. -- {1}, {T}, Discard a Mountain card or a red card: Draw a card.
+mana={1}{R}
+type=Legendary Artifact
+[/card]
+[card]
+name=Rowan's Talent
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+target=planeswalker
+auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Up to one creature gets +2/+0, first strike, trample) target(<upto:1>creature) 2/0 ueot && transforms((,first strike,trample)) ueot
+auto=@activatedloyalty(mytgt):name(Copy that ability) duplicateability(activated)
+text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Up to one target creature gets +2/+0 and gains first strike and trample until end of turn." -- Whenever you activate a loyalty ability of enchanted planeswalker, copy that ability. You may choose new targets for the copy.
+mana={2}{R}{R}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Echo, Perceptive Prodigy
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+abilities=vigilance
+auto={1}{T}:name(Copy an ability from a creature) duplicateability(any:creature)
+text=Vigilance -- {1}, {T}: Copy target activated or triggered ability you control from a creature source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Hero
+power=1
+toughness=4
+[/card]
+[card]
+name=Tawnos, Urza's Apprentice
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+abilities=haste
+auto={U}{R}{T}:name(Copy an ability from an artifact) duplicateability(any:artifact)
+text=Haste -- {U}{R}, {T}: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+mana={U}{R}
+type=Legendary Creature
+subtype=Human Artificer
+power=1
+toughness=3
+[/card]
+[card]
+name=Weaver of Harmony
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=lord(other creature[enchantment]|myBattlefield) 1/1
+auto={G}{T}:name(Copy an ability from an enchantment) duplicateability(any:enchantment)
+text=Other enchantment creatures you control get +1/+1. -- {G}, {T}: Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+mana={1}{G}
+type=Enchantment Creature
+subtype=Snake Druid
+power=2
+toughness=2
+[/card]
+[card]
+name=Abstruse Archaic
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+abilities=vigilance
+auto={1}{T}:name(Copy an ability from a colorless source) duplicateability(any:*[colorless])
+text=Vigilance -- {1}, {T}: Copy target activated or triggered ability you control from a colorless source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+mana={4}
+type=Creature
+subtype=Avatar
+power=3
+toughness=4
+[/card]
+[card]
+name=Scientist Supreme of A.I.M.
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto={L:2}:name(Copy an ability from an artifact) duplicateability(any:artifact) limit:1 myTurnOnly
+text=Pay 2 life: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. Activate only during your turn and only once each turn. (Mana abilities can't be targeted.)
+mana={U}{B}
+type=Legendary Creature
+subtype=Human Scientist Villain
+power=2
+toughness=2
+[/card]
+[card]
+name=Mister Fantastic
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+abilities=reach,vigilance
+auto=@each my combatbegins restriction{thisturn(*[-creature]|mystack)~morethan~0}:draw:1 controller
+auto={R}{G}{W}{U}{T}:name(Copy target triggered ability twice) duplicateability(triggered::2)
+text=Reach, vigilance -- At the beginning of combat on your turn, if you've cast a noncreature spell this turn, draw a card. -- {R}{G}{W}{U}, {T}: Copy target triggered ability you control twice. You may choose new targets for the copies.
+mana={2}{U}
+type=Legendary Creature
+subtype=Human Scientist Hero
+power=2
+toughness=4
+[/card]
+[card]
+name=Kirol, Attentive First-Year
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto={T(creature|myBattlefield)}{T(creature|myBattlefield)}:name(Copy target triggered ability) duplicateability(triggered) limit:1
+text=Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
+mana={1}{R/W}{R/W}
+type=Legendary Creature
+subtype=Vampire Cleric
+power=3
+toughness=3
+[/card]
+[card]
+name=Peter Parker's Camera
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+auto=counter(0/0,3,film)
+auto={2}{T}{C(0/0,-1,film)}:name(Copy an ability) duplicateability(any)
+text=This artifact enters with three film counters on it. -- {2}, {T}, Remove a film counter from this artifact: Copy target activated or triggered ability you control. You may choose new targets for the copy.
+mana={1}
+type=Artifact
+[/card]
+[card]
+name=The Peregrine Dynamo
+#2026-11-23 ability-copy batch: written from existing working forms.
+#"You may choose new targets for the copy": the copy keeps the original's targets.
+abilities=haste
+auto={1}{T}:name(Copy an ability from another legendary source) duplicateability(any:other *[legendary&-iscommander])
+text=Haste -- {1}, {T}: Copy target activated or triggered ability you control from another legendary source that's not a commander. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+mana={3}
+type=Legendary Artifact Creature
+subtype=Construct
+power=1
+toughness=5
 [/card]

@@ -1,0 +1,16 @@
+#Twin: another Prodigal Pyromancer without the Bracers is not copied.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Illusionist's Bracers,Prodigal Pyromancer
+[PLAYER2]
+[DO]
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Illusionist's Bracers,Prodigal Pyromancer
+[PLAYER2]
+life:19
+[END]

@@ -1,0 +1,18 @@
+#Twin: Prodigal Pyromancer is not an artifact; Kurkesh does not offer a copy.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:383295,Prodigal Pyromancer
+manapool:{R}
+[PLAYER2]
+[DO]
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:383295,Prodigal Pyromancer
+manapool:{R}
+[PLAYER2]
+life:19
+[END]

@@ -1,0 +1,19 @@
+#Rings of Brighthearth: I activate Rod of Ruin at the opponent and pay {2}; the copy deals 1 more - 2 in all.
+#The copy resolving first must not clear the original's target.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rings of Brighthearth,Rod of Ruin
+manapool:{3}{2}
+[PLAYER2]
+[DO]
+Rod of Ruin
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rings of Brighthearth,Rod of Ruin
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,18 @@
+#Kurkesh: an artifact's ability (Rod of Ruin), I pay {R}, it is copied - 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:383295,Rod of Ruin
+manapool:{3}{R}
+[PLAYER2]
+[DO]
+Rod of Ruin
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:383295,Rod of Ruin
+[PLAYER2]
+life:18
+[END]

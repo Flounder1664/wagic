@@ -1,0 +1,20 @@
+#Chandra's Regulator: Chandra Nalaar's +1 at the opponent, I pay {1}, it is copied - 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Chandra's Regulator,Chandra Nalaar
+manapool:{1}
+[PLAYER2]
+[DO]
+Chandra Nalaar
+choice 0
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Chandra's Regulator,Chandra Nalaar
+counter:Chandra Nalaar=loyalty:7
+[PLAYER2]
+life:18
+[END]

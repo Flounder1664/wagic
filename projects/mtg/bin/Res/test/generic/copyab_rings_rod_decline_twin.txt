@@ -1,0 +1,19 @@
+#Twin: I decline to pay {2}; no copy, 1 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rings of Brighthearth,Rod of Ruin
+manapool:{3}{2}
+[PLAYER2]
+[DO]
+Rod of Ruin
+p2
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rings of Brighthearth,Rod of Ruin
+manapool:{2}
+[PLAYER2]
+life:19
+[END]

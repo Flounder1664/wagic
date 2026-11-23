@@ -1,0 +1,19 @@
+#Illusionist's Bracers on Prodigal Pyromancer: its ping is copied - 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Illusionist's Bracers,Prodigal Pyromancer
+manapool:{3}
+[PLAYER2]
+[DO]
+Illusionist's Bracers
+Prodigal Pyromancer
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Illusionist's Bracers,Prodigal Pyromancer
+[PLAYER2]
+life:18
+[END]
