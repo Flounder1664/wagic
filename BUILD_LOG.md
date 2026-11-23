@@ -77,4 +77,5 @@ Device serials:
 2026-11-22 f14f9af17 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (menu-click guard ca7e3869e); launched from G: 15s before replacing, no crash; harness 6/2697 known failures; collection rebuilt; backups .old.202611222211.
 2026-11-23 cfb3ab8ed (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611230019.old; read back ok.
 2026-11-23 2b8613d87 (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611230830.old; read back ok.
+2026-11-23 2b8613d87 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (@activated trigger family 9412aacf5; both full rebuilds, a stale-PCH incremental build was discarded); launched from G: 15s before replacing, no crash; harness 6/2823 known; FRA.zip gained Cadet token art 735001t (backup FRA.zip.bak).
 ```
