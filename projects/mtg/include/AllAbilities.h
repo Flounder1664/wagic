@@ -1490,6 +1490,59 @@ public:
     }
 };
 
+//A card leaves a graveyard, to any zone (cast from it, returned, exiled, shuffled away):
+//  @leftmygraveyard(<types>)       - a card leaves YOUR graveyard
+//  @leftopponentgraveyard(<types>) - a card leaves an opponent's graveyard
+//  @leftanygraveyard(<types>)      - any graveyard
+//<types> is a card selector without a zone (creature, *[instant;sorcery], artifact,creature).
+//"oneormore": "whenever one or more cards leave" - one trigger per resolving effect, not one per card
+//(Delve exiling five cards is one trigger), grouped by observer->resolveCount as for @discarded.
+class TrCardLeftGraveyard: public Trigger
+{
+public:
+    enum { MINE, OPPONENT, ANY };
+    int whose;
+    bool oneOrMore;
+    bool limitOnceATurn;
+    int triggeredTurn;
+    int lastBatch;
+    int lastBatchTurn;
+    TrCardLeftGraveyard(GameObserver* observer, int id, MTGCardInstance * source, TargetChooser * tc, int whose, bool oneOrMore, bool once = false, bool limitOnceATurn = false) :
+    Trigger(observer, id, source, once, tc), whose(whose), oneOrMore(oneOrMore), limitOnceATurn(limitOnceATurn)
+    {
+        triggeredTurn = -1;
+        lastBatch = -1;
+        lastBatchTurn = -1;
+    }
+
+    int triggerOnEventImpl(WEvent * event)
+    {
+        WEventZoneChange * e = dynamic_cast<WEventZoneChange *> (event);
+        if (!e || !e->card || !e->from || e->from == e->to) return 0;
+        MTGCardInstance * c = e->card;
+        Player * owner = c->owner;
+        if (!owner || e->from != owner->game->graveyard) return 0;
+        Player * you = source->controller();
+        if (whose == MINE && owner != you) return 0;
+        if (whose == OPPONENT && owner != you->opponent()) return 0;
+        if (limitOnceATurn && triggeredTurn == game->turn) return 0;
+        if (tc && !tc->canTarget(c)) return 0;
+        if (oneOrMore)
+        {
+            if (lastBatch == game->resolveCount && lastBatchTurn == game->turn) return 0;
+            lastBatch = game->resolveCount;
+            lastBatchTurn = game->turn;
+        }
+        triggeredTurn = game->turn;
+        return 1;
+    }
+
+    TrCardLeftGraveyard * clone() const
+    {
+        return NEW TrCardLeftGraveyard(*this);
+    }
+};
+
 class TrCardDiscarded: public Trigger
 {
 public:

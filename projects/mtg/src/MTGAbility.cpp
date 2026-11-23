@@ -1343,6 +1343,32 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
     int lifeamount = lifelost ? atoi(s.substr(s.find("foelost(") + 8,')').c_str()) : 0;
     bool neverRemove = (s.find("dontremove") != string::npos);
 
+    //A card leaves a graveyard (TrCardLeftGraveyard). Checked first: "...graveyard(" must not
+    //reach the movedto/from parsing below.
+    {
+        const char * keys[] = { "leftmygraveyard(", "leftopponentgraveyard(", "leftanygraveyard(" };
+        for (int k = 0; k < 3; k++)
+        {
+            size_t at = s.find(keys[k]);
+            if (at == string::npos)
+                continue;
+            size_t start = at + strlen(keys[k]);
+            size_t end = s.find(")", start);
+            if (end == string::npos)
+                return NULL;
+            string types = s.substr(start, end - start);
+            if (types.find("|") == string::npos)
+                types.append("|*");
+            TargetChooserFactory tcf(observer);
+            TargetChooser * ltc = tcf.createTargetChooser(types, card);
+            if (!ltc)
+                return NULL;
+            ltc->targetter = NULL;
+            bool oneOrMore = (s.find("oneormore") != string::npos);
+            return NEW TrCardLeftGraveyard(observer, id, card, ltc, k, oneOrMore, once, limitOnceATurn);
+        }
+    }
+
     //Card Changed Zone
     found = s.find("movedto(");
     if (found != string::npos)
