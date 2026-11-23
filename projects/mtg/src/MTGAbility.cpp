@@ -4234,6 +4234,43 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //Copy an ability on the stack (AADuplicateAbility). Before "copy" below, which would match it.
+    vector<string> splitDupAbility = parseBetween(s, "duplicateability(", ")");
+    if (splitDupAbility.size())
+    {
+        string spec = splitDupAbility[1];
+        string kindStr = spec, types = "", countStr = "";
+        size_t c1 = spec.find(":");
+        if (c1 != string::npos)
+        {
+            kindStr = spec.substr(0, c1);
+            string rest = spec.substr(c1 + 1);
+            size_t c2 = rest.rfind(":");
+            types = (c2 != string::npos) ? rest.substr(0, c2) : rest;
+            countStr = (c2 != string::npos) ? rest.substr(c2 + 1) : "";
+        }
+        int kind = (kindStr == "activated") ? 1 : (kindStr == "triggered") ? 2 : 0;
+        TargetChooser * sourceTc = NULL;
+        if (types.size())
+        {
+            if (types.find("|") == string::npos)
+                types.append("|*");
+            TargetChooserFactory tcf(observer);
+            sourceTc = tcf.createTargetChooser(types, card);
+            if (!sourceTc)
+                return NULL;
+            sourceTc->targetter = NULL;
+        }
+        int times = 1;
+        if (countStr.size())
+        {
+            WParsedInt * w = NEW WParsedInt(countStr, NULL, card);
+            times = w->getValue();
+            SAFE_DELETE(w);
+        }
+        return NEW AADuplicateAbility(observer, id, card, kind, sourceTc, times);
+    }
+
     //Copy a target
     found = s.find("copy");
     if (found != string::npos)

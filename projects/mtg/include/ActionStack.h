@@ -236,6 +236,13 @@ public:
     //A spell or ability just put on the stack: if it targets an opponent, anything an opponent
     //controls, or a card in an opponent's graveyard, its controller commits a crime (WEventCrime).
     void checkCrime(Interruptible * action);
+    //"Copy target activated or triggered ability you control" / "copy that ability": put a copy of the
+    //nearest unresolved ability on the stack below the one now resolving, controlled by `you`.
+    //kind: 0 any, 1 activated, 2 triggered. sourceTc (may be NULL) filters the ability's source card.
+    //The copy keeps the original's targets (choosing new ones is optional in the rules). Returns copies made.
+    int copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times);
+    Interruptible * resolvingAction; //the stack object whose resolve() is running, if any
+    bool copyingAbility;             //a copy is being put on the stack: it is not cast or activated, so no crime
     Spell * addSpell(MTGCardInstance* card, TargetChooser * tc, ManaCost * mana, int payResult, int storm, bool forcedinterrupt = false);
     int AddNextGamePhase();
     int AddNextCombatStep();

@@ -879,7 +879,7 @@ void ActionStack::checkCrime(Interruptible * action)
             tc = sa->ability->getActionTc();
         }
     }
-    if (!src || !tc)
+    if (!src || !tc || copyingAbility)
         return;
     Player * criminal = src->controller();
     if (!criminal)
@@ -928,6 +928,8 @@ Interruptible * ActionStack::getAt(int id)
 ActionStack::ActionStack(GameObserver* game)
     : GuiLayer(game), currentTutorial(0), resolveDepth(0)
 {
+    resolvingAction = NULL;
+    copyingAbility = false;
     for (int i = 0; i < 2; i++)
         interruptDecision[i] = NOT_DECIDED;
     askIfWishesToInterrupt = NULL;
@@ -1007,7 +1009,11 @@ int ActionStack::resolveInner()
         CrashLog::setBreadcrumb(crumb.str());
     }
 
-    if (action->resolve())
+    Interruptible * outerResolving = resolvingAction;
+    resolvingAction = action;
+    int resolved = action->resolve();
+    resolvingAction = outerResolving;
+    if (resolved)
     {
         action->state = RESOLVED_OK;
     }
@@ -1764,3 +1770,42 @@ void ActionStack::Dump()
 }
 
 #endif
+
+int ActionStack::copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times)
+{
+    StackAbility * found = NULL;
+    for (int i = (int)(mObjects.size()) - 1; i >= 0 && !found; i--)
+    {
+        Interruptible * it = (Interruptible *) mObjects[i];
+        if (!it || it == resolvingAction || it->state != NOT_RESOLVED)
+            continue;
+        StackAbility * sa = dynamic_cast<StackAbility *>(it);
+        if (!sa || !sa->ability || !sa->ability->source)
+            continue;
+        if (you && sa->ability->source->controller() != you)
+            continue;
+        bool triggered = dynamic_cast<TriggeredAbility *>(sa->ability) != NULL;
+        if ((kind == 1 && triggered) || (kind == 2 && !triggered))
+            continue;
+        if (sourceTc && !sourceTc->canTarget(sa->ability->source))
+            continue;
+        found = sa;
+    }
+    if (!found)
+        return 0;
+    int made = 0;
+    copyingAbility = true;
+    for (int n = 0; n < times; n++)
+    {
+        //A clone carries its own TargetChooser (ActionElement's copy constructor clones it, targets
+        //included), so the copy resolving first does not clear the original's targets. StackAbility does
+        //not own its ability, and the clone is never added to the game, so it is left allocated.
+        MTGAbility * copy = found->ability->clone();
+        if (!copy)
+            break;
+        addAbility(copy);
+        made++;
+    }
+    copyingAbility = false;
+    return made;
+}

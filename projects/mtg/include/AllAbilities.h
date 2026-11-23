@@ -1543,6 +1543,42 @@ public:
     }
 };
 
+//duplicateability(<kind>[:<source types>[:<count>]]) - copy the nearest unresolved ability you
+//control below this one on the stack (ActionStack::copyStackAbility). kind: any, activated, triggered.
+class AADuplicateAbility: public MTGAbility
+{
+public:
+    int kind;
+    TargetChooser * sourceTc;
+    int times;
+    AADuplicateAbility(GameObserver* observer, int id, MTGCardInstance * source, int kind, TargetChooser * sourceTc, int times) :
+    MTGAbility(observer, id, source), kind(kind), sourceTc(sourceTc), times(times)
+    {
+        oneShot = true;
+    }
+    int resolve()
+    {
+        if (!source || !game->mLayers || !game->mLayers->stackLayer())
+            return 0;
+        game->mLayers->stackLayer()->copyStackAbility(source->controller(), kind, sourceTc, times > 0 ? times : 1);
+        return 1;
+    }
+    const string getMenuText()
+    {
+        return "Copy ability";
+    }
+    AADuplicateAbility * clone() const
+    {
+        AADuplicateAbility * a = NEW AADuplicateAbility(*this);
+        a->sourceTc = sourceTc ? sourceTc->clone() : NULL;
+        return a;
+    }
+    ~AADuplicateAbility()
+    {
+        SAFE_DELETE(sourceTc);
+    }
+};
+
 class TrCardDiscarded: public Trigger
 {
 public:
