@@ -1,0 +1,17 @@
+#Naban: a Wizard (Prodigal Sorcerer) entering - Soul Warden triggers twice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:442946,Soul Warden
+hand:Prodigal Sorcerer
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Prodigal Sorcerer
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:442946,Soul Warden,Prodigal Sorcerer
+life:22
+[PLAYER2]
+[END]

@@ -1,0 +1,17 @@
+#Twin: Grizzly Bears is neither legendary nor an artifact - once.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gandalf the White,Soul Warden
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gandalf the White,Soul Warden,Grizzly Bears
+life:21
+[PLAYER2]
+[END]

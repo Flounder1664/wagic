@@ -44595,7 +44595,8 @@ toughness=4
 [/card]
 [card]
 name=Gandalf the White
-missing=that ability triggers an additional time
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(*|mybattlefield) cause(entersorleaves:*[legendary;artifact])
 abilities=flash
 auto=lord(*[legendary]|mycastingzone) asflash
 auto=lord(*[artifact]|mycastingzone) asflash
@@ -131731,9 +131732,10 @@ type=Instant
 [/card]
 [card]
 name=Wulfgar of Icewind Dale
-missing=not possible to trigger twice any ability ATM
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+#Melee is one +1/+1 trigger; Wulfgar attacking also doubles it (its second ability), so +2/+2 attacking alone.
 auto=_ATTACKING_name(Melee) 1/1 ueot
-auto=_ATTACKING_name(Melee) 1/1 ueot
+auto=doubletrigger(*|mybattlefield) cause(attacks:creature|mybattlefield)
 text=Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.) -- If a creature you control attacking would cause a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 mana={3}{R}{G}
 type=Legendary Creature
@@ -138688,10 +138690,12 @@ type=Enchantment
 [/card]
 [card]
 name=Wayta, Trainer Prodigy
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(*|mybattlefield) cause(damaged:creature|mybattlefield)
+missing=the {2} discount when both targets are yours
 abilities=haste
 grade=borderline
 auto={2}{G}{T}:name(Creatures fight) target(creature|mybattlefield) _FIGHT_
-missing=the {2} discount when both targets are yours, and the "damage-triggered abilities of your permanents trigger an additional time" clause
 text=Haste -- {2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control. (No discount.) -- If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Not implemented.)
 mana={R}{G}{W}
 type=Legendary Creature
@@ -140163,12 +140167,13 @@ toughness=6
 [/card]
 [card]
 name=Chief of the Wilds
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(other *[wolf;battle]|mybattlefield)
 abilities=menace
 auto=@movedTo(other wolf|myBattlefield):all(this) counter(1/1,2)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOC preview build
 text=Menace -- Whenever another Wolf you control enters, put two +1/+1 counters on Chief of the Wilds. -- If an ability of another Wolf or battle you control triggers, that ability triggers an additional time.
-missing=trigger-doubling-for-wolves-and-battles clause not implemented on this card (a general doubletrigger primitive exists for other cards; not wired to Chief of the Wilds' specific wolf/battle restriction yet)
 mana={2}{B}{G}
 type=Legendary Creature
 subtype=Wolf
@@ -141442,11 +141447,12 @@ toughness=3
 [/card]
 [card]
 name=Bifur, Melodic Rider
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=this(variable{enduringstory}>0) doubletrigger(dwarf|mybattlefield)
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; dwarf trigger-doubling clause not implemented
 auto=target(creature) counter(1/1)
 auto=_ATTACKING_target(creature) counter(1/1)
-missing=trigger-doubling-for-dwarves-while-enduring-story not implemented on this card (a general doubletrigger primitive exists elsewhere, not wired here)
 text=Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.) -- Whenever Bifur enters or attacks, put a +1/+1 counter on target creature. -- As long as you have an enduring story, if an ability of a Dwarf you control triggers, that ability triggers an additional time.
 mana={4}{R/W}{R/W}
 type=Legendary Creature
@@ -141768,6 +141774,8 @@ type=Enchantment
 [/card]
 [card]
 name=Wizard's Staff
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(mytgt)
 #Prowess. The keyword itself is inert - Constants::PROWESS is declared and never read by the
 #engine - so every working prowess card writes the trigger out. 48 of the 51 did; this Equipment had it on ITSELF, where it does nothing - it belongs on the equipped creature. Audited 2026-09-08.
 auto=teach(creature) transforms((,newability[@movedTo(*[-creature]|mystack):1/1 ueot]))
@@ -141775,7 +141783,6 @@ auto={1}:name(Equip wizard) rehook target(wizard|mybattlefield) asSorcery
 auto={3}:equip
 grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build; trigger-doubling-for-equipped-creature not implemented
-missing="if an ability of equipped creature triggers, it triggers an additional time" not implemented
 text=Equipped creature has prowess. -- If an ability of equipped creature triggers, that ability triggers an additional time. -- Equip Wizard {1} -- Equip {3}
 mana={1}{U}
 type=Artifact
@@ -142538,9 +142545,9 @@ subtype=Bobblehead
 [/card]
 [card]
 name=Panharmonicon
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(*|mybattlefield) cause(enters:artifact,creature)
 grade=borderline
-auto=doubletrigger(*|mybattlefield)
-missing=the doubling should apply only when an ARTIFACT or CREATURE entering caused the trigger; here every triggered ability of your permanents is doubled
 text=If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. (Approximated: all your permanents' triggers are doubled.)
 mana={4}
 type=Artifact
@@ -151799,9 +151806,10 @@ toughness=6
 [/card]
 [card]
 name=Felix Five-Boots
+#2026-11-23: trigger doubling written with doubletrigger(...) cause(...).
+auto=doubletrigger(*|mybattlefield) cause(combatdamageplayer:creature|mybattlefield)
 abilities=menace
 auto=_WARD2_
-missing=the trigger doubling (combat damage to a player makes your permanents' triggers fire an additional time) - there is no trigger-doubling route.
 text=Menace, ward {2} -- If a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 mana={2}{B}{G}{U}
 type=Legendary Creature
@@ -160165,5 +160173,96 @@ mana={3}
 type=Legendary Artifact Creature
 subtype=Construct
 power=1
+toughness=5
+[/card]
+[card]
+name=Annie Joins Up
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=damage:5 target(creature,planeswalker|opponentbattlefield)
+auto=doubletrigger(creature[legendary]|mybattlefield)
+text=When Annie Joins Up enters, it deals 5 damage to target creature or planeswalker an opponent controls. -- If a triggered ability of a legendary creature you control triggers, that ability triggers an additional time.
+mana={1}{R}{G}{W}
+type=Legendary Enchantment
+[/card]
+[card]
+name=Clara Oswald
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+#"If Clara Oswald is your commander, choose a color" only matters in Commander and is not modelled.
+auto=doubletrigger(creature[doctor]|mybattlefield)
+text=Impossible Girl - If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color. -- If a triggered ability of a Doctor you control triggers, that ability triggers an additional time. -- Doctor's companion (You can have two commanders if the other is the Doctor.)
+mana={6}
+type=Legendary Creature
+subtype=Human Advisor
+power=2
+toughness=6
+[/card]
+[card]
+name=Dr. Beverly Crusher
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=doubletrigger(*|mybattlefield) cause(lifegain)
+auto=@lifeof(player) from(*[-lifefaker]|*):name(Put 1/1 counter) counter(1/1)
+text=If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. -- Whenever you gain life, put a +1/+1 counter on Dr. Crusher.
+mana={2}{W}
+type=Legendary Creature
+subtype=Human Doctor
+power=2
+toughness=2
+[/card]
+[card]
+name=Drivnod, Carnage Dominus
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=doubletrigger(*|mybattlefield) cause(dies)
+auto={p(B)}{p(B)}{E(creature|mygraveyard)}{E(creature|mygraveyard)}{E(creature|mygraveyard)}:name(Indestructible counter) counter(0/0,1,Indestructible)
+text=If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time. -- {B/P}{B/P}, Exile three creature cards from your graveyard: Put an indestructible counter on Drivnod. ({B/P} can be paid with either {B} or 2 life.)
+mana={3}{B}{B}
+type=Legendary Creature
+subtype=Phyrexian Horror
+power=8
+toughness=3
+[/card]
+[card]
+name=Isshin, Two Heavens as One
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=doubletrigger(*|mybattlefield) cause(attacks)
+text=If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+mana={R}{W}{B}
+type=Legendary Creature
+subtype=Human Samurai
+power=3
+toughness=4
+[/card]
+[card]
+name=Naban, Dean of Iteration
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=doubletrigger(*|mybattlefield) cause(enters:wizard|mybattlefield)
+text=If a Wizard you control entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+mana={1}{U}
+type=Legendary Creature
+subtype=Human Wizard
+power=2
+toughness=1
+[/card]
+[card]
+name=Splinter, Radical Rat
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+auto=doubletrigger(creature[ninja]|mybattlefield)
+auto={1}{U}:name(Target Ninja cannot be blocked) target(ninja) unblockable ueot
+text=If a triggered ability of a Ninja creature you control triggers, that ability triggers an additional time. -- {1}{U}: Target Ninja can't be blocked this turn.
+mana={1}{W/B}{W/B}
+type=Legendary Creature
+subtype=Mutant Ninja Rat
+power=2
+toughness=4
+[/card]
+[card]
+name=Yarok, the Desecrated
+#2026-11-23 trigger-doubling batch: written from existing working forms.
+abilities=deathtouch,lifelink
+auto=doubletrigger(*|mybattlefield) cause(enters)
+text=Deathtouch, lifelink -- If a permanent entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+mana={2}{B}{G}{U}
+type=Legendary Creature
+subtype=Elemental Horror
+power=3
 toughness=5
 [/card]

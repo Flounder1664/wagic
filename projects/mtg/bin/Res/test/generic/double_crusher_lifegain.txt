@@ -1,0 +1,18 @@
+#Dr. Beverly Crusher: Soul Warden gains me 1 - Crusher's own counter trigger, caused by gaining life, fires twice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dr. Beverly Crusher,Soul Warden
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dr. Beverly Crusher,Soul Warden,Grizzly Bears
+life:21
+pt:Dr. Beverly Crusher=4/4
+[PLAYER2]
+[END]

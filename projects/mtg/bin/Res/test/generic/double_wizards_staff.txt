@@ -1,0 +1,22 @@
+#Wizard's Staff on Prodigal Sorcerer: Shock triggers the Staff's prowess on it twice - 3/3.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wizard's Staff,Prodigal Sorcerer
+hand:Shock
+manapool:{1}{R}
+[PLAYER2]
+[DO]
+Wizard's Staff
+Prodigal Sorcerer
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Wizard's Staff,Prodigal Sorcerer
+graveyard:Shock
+pt:Prodigal Sorcerer=3/3
+[PLAYER2]
+life:18
+[END]

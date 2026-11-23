@@ -1,0 +1,20 @@
+#Wulfgar attacks alone: melee (+1/+1) is caused by a creature attacking, so it triggers twice - 6/6, 6 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:531957
+[PLAYER2]
+[DO]
+next
+next
+531957
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:531957
+[PLAYER2]
+life:14
+[END]

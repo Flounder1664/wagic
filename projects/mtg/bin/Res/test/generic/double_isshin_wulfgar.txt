@@ -1,0 +1,20 @@
+#Isshin and Wulfgar: two doublers, melee three times - 7 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:718054,531957
+[PLAYER2]
+[DO]
+next
+next
+531957
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:718054,531957
+[PLAYER2]
+life:13
+[END]

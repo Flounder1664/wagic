@@ -1,0 +1,18 @@
+#Twin: a card leaving my graveyard is not something entering - Fuming Effigy deals 1, not 2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Panharmonicon,Fuming Effigy,Tormod's Crypt
+graveyard:Forest
+[PLAYER2]
+[DO]
+Tormod's Crypt
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Panharmonicon,Fuming Effigy
+exile:Tormod's Crypt,Forest
+[PLAYER2]
+life:19
+[END]

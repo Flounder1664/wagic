@@ -1,0 +1,25 @@
+#Splinter: a Ninja's trigger fires twice - Ninja of the Deep Hours draws two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520169,Ninja of the Deep Hours
+library:Plains,Forest,Island
+[PLAYER2]
+[DO]
+next
+next
+Ninja of the Deep Hours
+next
+next
+choice 0
+choice 0
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:1520169,Ninja of the Deep Hours
+hand:Island,Forest
+library:Plains
+[PLAYER2]
+life:18
+[END]

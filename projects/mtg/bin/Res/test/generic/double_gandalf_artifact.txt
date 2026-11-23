@@ -1,0 +1,16 @@
+#Gandalf the White: an artifact (Ornithopter) entering - Soul Warden triggers twice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gandalf the White,Soul Warden
+hand:Ornithopter
+[PLAYER2]
+[DO]
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gandalf the White,Soul Warden,Ornithopter
+life:22
+[PLAYER2]
+[END]

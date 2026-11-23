@@ -1,0 +1,19 @@
+#Panharmonicon: a creature entering (Elvish Visionary) - its enters ability draws twice.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Panharmonicon
+hand:Elvish Visionary
+manapool:{1}{G}
+library:Plains,Forest,Island
+[PLAYER2]
+[DO]
+Elvish Visionary
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Panharmonicon,Elvish Visionary
+hand:Island,Forest
+library:Plains
+[PLAYER2]
+[END]
