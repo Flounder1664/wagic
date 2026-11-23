@@ -1,0 +1,21 @@
+#Overzealous Muscle: a crime on my turn makes it indestructible; Murder does not kill it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Overzealous Muscle
+hand:Shock,Murder
+manapool:{R}{1}{B}{B}
+[PLAYER2]
+[DO]
+Shock
+p2
+Murder
+Overzealous Muscle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Overzealous Muscle
+graveyard:Shock,Murder
+[PLAYER2]
+life:18
+[END]

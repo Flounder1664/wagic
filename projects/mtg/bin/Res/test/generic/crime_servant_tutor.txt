@@ -1,0 +1,29 @@
+#Servant of the Stinger: after a crime it connects; I sacrifice it and search for Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Servant of the Stinger
+hand:Shock
+manapool:{R}
+library:Plains,Hill Giant,Forest
+[PLAYER2]
+[DO]
+Shock
+p2
+next
+next
+Servant of the Stinger
+next
+next
+next
+choice 0
+Hill Giant
+[ASSERT]
+COMBATEND
+[PLAYER1]
+graveyard:Shock,Servant of the Stinger
+hand:Hill Giant
+library:Plains,Forest
+[PLAYER2]
+life:17
+[END]

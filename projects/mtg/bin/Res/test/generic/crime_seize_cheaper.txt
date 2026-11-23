@@ -1,0 +1,21 @@
+#Seize the Secrets costs {1} less after a crime: {1}{U} casts it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock,Seize the Secrets
+manapool:{R}{1}{U}
+library:Plains,Forest,Island
+[PLAYER2]
+[DO]
+Shock
+p2
+Seize the Secrets
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island,Forest
+graveyard:Shock,Seize the Secrets
+library:Plains
+[PLAYER2]
+life:18
+[END]

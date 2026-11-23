@@ -1,0 +1,23 @@
+#Twin: no crime, so no flash - it cannot be cast in combat.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Take for a Ride
+inplay:Mountain,Sol Ring
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+next
+Mountain
+Sol Ring
+Take for a Ride
+Hill Giant
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+hand:Take for a Ride
+inplay:Mountain,Sol Ring
+manapool:{R}{C}{C}
+[PLAYER2]
+inplay:Hill Giant
+[END]

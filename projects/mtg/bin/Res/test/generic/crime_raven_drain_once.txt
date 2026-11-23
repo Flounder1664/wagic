@@ -1,0 +1,22 @@
+#Raven of Fell Omens: two crimes, one drain.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raven of Fell Omens,Prodigal Pyromancer
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Raven of Fell Omens,Prodigal Pyromancer
+graveyard:Shock
+life:21
+[PLAYER2]
+life:16
+[END]

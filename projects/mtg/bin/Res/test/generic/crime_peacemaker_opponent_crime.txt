@@ -1,0 +1,28 @@
+#Patrolling Peacemaker: the opponent Shocks me on their turn - a crime - and I proliferate.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Patrolling Peacemaker
+[PLAYER2]
+hand:Shock
+inplay:Mountain
+[DO]
+eot
+next
+next
+next
+Mountain
+Shock
+p1
+Patrolling Peacemaker
+Patrolling Peacemaker
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Patrolling Peacemaker
+pt:Patrolling Peacemaker=3/3
+life:18
+[PLAYER2]
+inplay:Mountain
+graveyard:Shock
+[END]

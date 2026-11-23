@@ -1,0 +1,19 @@
+#Gisa: Shock at the opponent is a crime; two Zombie Rogues.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,*,*
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

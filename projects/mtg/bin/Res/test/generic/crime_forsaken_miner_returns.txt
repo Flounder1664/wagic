@@ -1,0 +1,20 @@
+#Forsaken Miner: a crime, I pay {B}, it comes back from my graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Forsaken Miner
+hand:Shock
+manapool:{R}{B}
+[PLAYER2]
+[DO]
+Shock
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forsaken Miner
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

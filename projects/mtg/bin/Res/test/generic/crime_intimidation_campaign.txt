@@ -1,0 +1,23 @@
+#Intimidation Campaign: enters (drain 1, draw), then a crime returns it to my hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Intimidation Campaign,Shock
+manapool:{1}{U}{B}{R}
+library:Plains,Forest
+[PLAYER2]
+[DO]
+Intimidation Campaign
+Shock
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Intimidation Campaign,Forest
+graveyard:Shock
+library:Plains
+life:21
+[PLAYER2]
+life:17
+[END]

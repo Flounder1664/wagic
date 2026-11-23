@@ -1,0 +1,20 @@
+#Magda, the Hoardmaster: a crime makes a tapped Treasure.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655074
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655074,*
+tappedinplay:1
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

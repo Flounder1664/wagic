@@ -1,0 +1,22 @@
+#Bandit's Haul: two crimes in a turn, one loot counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bandit's Haul,Prodigal Pyromancer
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bandit's Haul,Prodigal Pyromancer
+graveyard:Shock
+counter:Bandit's Haul=Loot:1
+[PLAYER2]
+life:17
+[END]

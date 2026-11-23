@@ -1,0 +1,19 @@
+#Twin: Shock at my own Grizzly Bears is no crime; the Miner stays in the graveyard.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Forsaken Miner
+inplay:Grizzly Bears
+hand:Shock
+manapool:{R}{B}
+[PLAYER2]
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Forsaken Miner,Grizzly Bears,Shock
+manapool:{B}
+[PLAYER2]
+[END]

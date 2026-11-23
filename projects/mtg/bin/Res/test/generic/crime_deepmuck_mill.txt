@@ -1,0 +1,22 @@
+#Deepmuck Desperado: a crime mills the opponent three.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deepmuck Desperado
+hand:Shock
+manapool:{R}
+[PLAYER2]
+library:Island,Swamp,Swamp,Swamp
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deepmuck Desperado
+graveyard:Shock
+[PLAYER2]
+library:Island
+graveyard:Swamp,Swamp,Swamp
+life:18
+[END]

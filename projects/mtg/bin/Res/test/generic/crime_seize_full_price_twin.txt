@@ -1,0 +1,18 @@
+#Twin: no crime, {1}{U} is not enough for Seize the Secrets.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Seize the Secrets
+manapool:{1}{U}
+library:Plains,Forest,Island
+[PLAYER2]
+[DO]
+Seize the Secrets
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Seize the Secrets
+manapool:{1}{U}
+library:Plains,Forest,Island
+[PLAYER2]
+[END]

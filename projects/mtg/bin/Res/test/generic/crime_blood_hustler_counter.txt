@@ -1,0 +1,20 @@
+#Blood Hustler: a crime puts a +1/+1 counter on it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blood Hustler
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blood Hustler
+graveyard:Shock
+pt:Blood Hustler=2/2
+[PLAYER2]
+life:18
+[END]

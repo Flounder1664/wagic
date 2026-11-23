@@ -1,0 +1,22 @@
+#Twin: no crime, so it connects and nothing more happens.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Servant of the Stinger
+library:Plains,Hill Giant,Forest
+[PLAYER2]
+[DO]
+next
+next
+Servant of the Stinger
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Servant of the Stinger
+library:Plains,Hill Giant,Forest
+[PLAYER2]
+life:19
+[END]

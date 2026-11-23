@@ -1,0 +1,17 @@
+#Twin: no crime, Murder kills Overzealous Muscle.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Overzealous Muscle
+hand:Murder
+manapool:{1}{B}{B}
+[PLAYER2]
+[DO]
+Murder
+Overzealous Muscle
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Overzealous Muscle,Murder
+[PLAYER2]
+[END]

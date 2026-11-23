@@ -1,0 +1,20 @@
+#Twin: no crime, so no double strike - 2 combat damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Omenport Vigilante
+[PLAYER2]
+[DO]
+next
+next
+Omenport Vigilante
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Omenport Vigilante
+[PLAYER2]
+life:18
+[END]

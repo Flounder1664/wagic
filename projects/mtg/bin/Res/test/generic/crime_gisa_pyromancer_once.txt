@@ -1,0 +1,21 @@
+#Gisa: two crimes in one turn (Shock, then Prodigal Pyromancer at the opponent); the tokens come once.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Prodigal Pyromancer
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Prodigal Pyromancer,*,*
+graveyard:Shock
+[PLAYER2]
+life:17
+[END]

@@ -1,0 +1,19 @@
+#At Knifepoint: a crime makes a Mercenary token.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:At Knifepoint
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:At Knifepoint,*
+graveyard:Shock
+[PLAYER2]
+life:18
+[END]

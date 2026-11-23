@@ -1,0 +1,18 @@
+#Twin: Shock at my own Grizzly Bears is no crime; no Zombies.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030
+graveyard:Shock,Grizzly Bears
+[PLAYER2]
+[END]

@@ -1,0 +1,25 @@
+#Take for a Ride has flash after a crime: cast in combat, it steals their Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Shock,Take for a Ride
+manapool:{R}
+inplay:Mountain,Sol Ring
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shock
+p2
+next
+Mountain
+Sol Ring
+Take for a Ride
+Hill Giant
+[ASSERT]
+COMBATBEGIN
+[PLAYER1]
+inplay:Mountain,Sol Ring,Hill Giant
+graveyard:Shock,Take for a Ride
+[PLAYER2]
+life:18
+[END]

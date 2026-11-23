@@ -1,0 +1,19 @@
+#Twin: no crime, Slickshot Vault-Buster stays 1/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Slickshot Vault-Buster,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Slickshot Vault-Buster
+graveyard:Shock,Grizzly Bears
+pt:Slickshot Vault-Buster=1/4
+[PLAYER2]
+[END]

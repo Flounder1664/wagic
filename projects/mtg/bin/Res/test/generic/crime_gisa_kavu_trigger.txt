@@ -1,0 +1,19 @@
+#Gisa: Flametongue Kavu's enters trigger targets their Hill Giant - a crime by a triggered ability.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030
+hand:Flametongue Kavu
+manapool:{3}{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Flametongue Kavu
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:655030,Flametongue Kavu,*,*
+[PLAYER2]
+graveyard:Hill Giant
+[END]

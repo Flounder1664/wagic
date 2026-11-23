@@ -1,0 +1,19 @@
+#Blood Hustler's own drain targets the opponent: that is a crime too, so it also grows.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blood Hustler
+manapool:{3}{B}
+[PLAYER2]
+[DO]
+Blood Hustler
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Blood Hustler
+pt:Blood Hustler=2/2
+life:21
+[PLAYER2]
+life:19
+[END]

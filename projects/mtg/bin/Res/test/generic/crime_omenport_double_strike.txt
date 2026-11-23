@@ -1,0 +1,26 @@
+#Omenport Vigilante: after a crime it has double strike - 2+2 combat damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Omenport Vigilante
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+next
+next
+Omenport Vigilante
+next
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Omenport Vigilante
+graveyard:Shock
+[PLAYER2]
+life:14
+[END]

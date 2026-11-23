@@ -1,0 +1,20 @@
+#Slickshot Vault-Buster gets +2/+0 once I have committed a crime this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Slickshot Vault-Buster
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Slickshot Vault-Buster
+graveyard:Shock
+pt:Slickshot Vault-Buster=3/4
+[PLAYER2]
+life:18
+[END]
