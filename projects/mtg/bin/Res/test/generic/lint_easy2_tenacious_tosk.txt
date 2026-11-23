@@ -1,0 +1,21 @@
+#Tenacious Tosk deals combat damage: a counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Tenacious Tosk
+[PLAYER2]
+[DO]
+next
+next
+Tenacious Tosk
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Tenacious Tosk
+pt:Tenacious Tosk=5/5
+[PLAYER2]
+life:16
+[END]

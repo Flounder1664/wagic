@@ -1,0 +1,22 @@
+#Definitely Not a Turtle dies: look at the top six, take a land.
+#The library is not asserted (see master_piandao_look).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Definitely Not a Turtle
+hand:Shock
+manapool:{R}
+library:Ornithopter,Ornithopter,Ornithopter,Ornithopter,Ornithopter,Forest
+[PLAYER2]
+[DO]
+Shock
+Definitely Not a Turtle
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Definitely Not a Turtle,Shock
+hand:Forest
+[PLAYER2]
+[END]

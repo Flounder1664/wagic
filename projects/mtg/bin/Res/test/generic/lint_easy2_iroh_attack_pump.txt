@@ -1,0 +1,19 @@
+#Iroh and Grizzly Bears attack: both get +1/+1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726240,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+726240
+Grizzly Bears
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:726240,Grizzly Bears
+pt:Grizzly Bears=3/3
+pt:726240=3/3
+[PLAYER2]
+[END]

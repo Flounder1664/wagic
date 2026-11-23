@@ -1,0 +1,17 @@
+#A Lesson in my graveyard: Aang has vigilance.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726146
+graveyard:1510018
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:726146
+graveyard:1510018
+type:726146=vigilance
+[PLAYER2]
+[END]

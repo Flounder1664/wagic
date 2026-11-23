@@ -1,0 +1,20 @@
+#Dina's Guidance: Grizzly Bears into my hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dina's Guidance
+manapool:{1}{B}{G}
+library:Forest,Grizzly Bears
+[PLAYER2]
+[DO]
+Dina's Guidance
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Grizzly Bears
+graveyard:Dina's Guidance
+library:Forest
+[PLAYER2]
+[END]

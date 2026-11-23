@@ -1,0 +1,19 @@
+#Triceraton Regenta and Grizzly Bears attack: the Bears untap.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Triceraton Regenta,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+Triceraton Regenta
+Grizzly Bears
+next
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Triceraton Regenta,Grizzly Bears
+tappedinplay:0
+[PLAYER2]
+[END]

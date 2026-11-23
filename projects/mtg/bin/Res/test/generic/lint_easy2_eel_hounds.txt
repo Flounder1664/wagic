@@ -1,0 +1,19 @@
+#Eel-Hounds attacks: Grizzly Bears gets +2/+2 and trample.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Eel-Hounds,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+Eel-Hounds
+next
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Eel-Hounds,Grizzly Bears
+pt:Grizzly Bears=4/4
+type:Grizzly Bears=trample
+[PLAYER2]
+[END]

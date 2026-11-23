@@ -1,0 +1,18 @@
+#Hemosymbic Mite attacks (becomes tapped): Grizzly Bears gets +X/+X, X = the Mite's power (1).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hemosymbic Mite,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+Hemosymbic Mite
+next
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Hemosymbic Mite,Grizzly Bears
+pt:Grizzly Bears=3/3
+[PLAYER2]
+[END]

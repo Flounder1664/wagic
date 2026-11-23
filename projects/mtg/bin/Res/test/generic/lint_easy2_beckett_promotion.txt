@@ -1,0 +1,17 @@
+#Beckett Mariner attacks (becomes tapped): a promotion counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:706001
+[PLAYER2]
+[DO]
+goto attackers
+706001
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:706001
+counter:706001=Promotion:1
+[PLAYER2]
+[END]

@@ -1,0 +1,23 @@
+#Pressure Point taps Gray Ogre, then Momo deals 4 to it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point,726217
+manapool:{1}{W}{2}{W}
+library:Forest
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Pressure Point
+Gray Ogre
+726217
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726217
+hand:Forest
+graveyard:Pressure Point
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

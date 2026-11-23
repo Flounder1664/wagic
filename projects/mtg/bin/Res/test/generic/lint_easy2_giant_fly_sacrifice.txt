@@ -1,0 +1,18 @@
+#Bloodthrone Vampire sacrifices Ornithopter: Giant Fly gets +1/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Giant Fly,Bloodthrone Vampire,Ornithopter
+[PLAYER2]
+[DO]
+Bloodthrone Vampire
+Ornithopter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Giant Fly,Bloodthrone Vampire
+graveyard:Ornithopter
+pt:Giant Fly=3/2
+pt:Bloodthrone Vampire=3/3
+[PLAYER2]
+[END]

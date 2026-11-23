@@ -1,0 +1,22 @@
+#Mind Transfer Protocol: Grizzly Bears is a 4/5 artifact; draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Mind Transfer Protocol
+manapool:{2}{U}
+library:Forest
+[PLAYER2]
+[DO]
+Mind Transfer Protocol
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Forest
+graveyard:Mind Transfer Protocol
+pt:Grizzly Bears=4/5
+type:Grizzly Bears=artifact
+[PLAYER2]
+[END]

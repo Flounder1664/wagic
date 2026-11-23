@@ -1,0 +1,20 @@
+#Braulios is 3/3 with three lands; attacking draws Plains, which goes onto the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Braulios of Pheres Band,Forest,Forest,Forest
+library:Plains
+[PLAYER2]
+[DO]
+goto attackers
+Braulios of Pheres Band
+next
+choice 0
+Plains
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Braulios of Pheres Band,Forest,Forest,Forest,Plains
+pt:Braulios of Pheres Band=4/4
+[PLAYER2]
+[END]

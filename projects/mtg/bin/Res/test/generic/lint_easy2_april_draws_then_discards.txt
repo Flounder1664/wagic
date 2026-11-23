@@ -1,0 +1,24 @@
+#April deals 2: draw two, then discard one.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520030
+library:Island,Forest
+[PLAYER2]
+[DO]
+next
+next
+1520030
+next
+next
+Forest
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:1520030
+hand:Island
+graveyard:Forest
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,20 @@
+#Battlegrowth puts a counter on Grizzly Bears: draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520158,Grizzly Bears
+hand:Battlegrowth
+manapool:{G}
+library:Forest
+[PLAYER2]
+[DO]
+Battlegrowth
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520158,Grizzly Bears
+graveyard:Battlegrowth
+hand:Forest
+[PLAYER2]
+[END]

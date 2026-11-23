@@ -1,0 +1,21 @@
+#Master Piandao attacks: look at the top four, take Bonesplitter.
+#The library is not asserted (triggered reveal leftovers stay in the reveal zone in the harness).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Master Piandao
+library:Forest,Forest,Forest,Bonesplitter
+[PLAYER2]
+[DO]
+goto attackers
+Master Piandao
+next
+choice 0
+Bonesplitter
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Master Piandao
+hand:Bonesplitter
+[PLAYER2]
+[END]

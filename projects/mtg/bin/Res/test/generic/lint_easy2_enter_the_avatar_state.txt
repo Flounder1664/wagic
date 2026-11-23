@@ -1,0 +1,22 @@
+#Enter the Avatar State on Grizzly Bears: flying, first strike, lifelink, hexproof.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Enter the Avatar State
+manapool:{W}
+[PLAYER2]
+[DO]
+Enter the Avatar State
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Enter the Avatar State
+type:Grizzly Bears=flying
+type:Grizzly Bears=hexproof
+type:Grizzly Bears=lifelink
+type:Grizzly Bears=avatar
+[PLAYER2]
+[END]

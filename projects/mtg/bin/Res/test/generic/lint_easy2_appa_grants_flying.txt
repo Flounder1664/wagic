@@ -1,0 +1,19 @@
+#Appa attacks with Grizzly Bears: the Bears gain flying.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726214,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+726214
+Grizzly Bears
+next
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:726214,Grizzly Bears
+type:Grizzly Bears=flying
+[PLAYER2]
+[END]

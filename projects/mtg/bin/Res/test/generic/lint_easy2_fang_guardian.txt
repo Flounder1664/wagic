@@ -1,0 +1,18 @@
+#Fang Guardian enters: Grizzly Bears gets +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Fang Guardian
+manapool:{3}{G}
+[PLAYER2]
+[DO]
+Fang Guardian
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Fang Guardian
+pt:Grizzly Bears=4/4
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Grizzly Bears leaves the battlefield: a counter on Super Shredder.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Super Shredder,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Super Shredder
+graveyard:Grizzly Bears,Shock
+pt:Super Shredder=2/2
+[PLAYER2]
+[END]

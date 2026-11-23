@@ -1,0 +1,19 @@
+#Casey Jones enters: look at the top four, take Bonesplitter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:1520087
+manapool:{1}{R}
+library:Forest,Forest,Forest,Bonesplitter
+[PLAYER2]
+[DO]
+1520087
+choice 0
+Bonesplitter
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520087
+hand:Bonesplitter
+[PLAYER2]
+[END]

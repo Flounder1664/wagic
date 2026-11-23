@@ -1,0 +1,21 @@
+#Lessons from Life: draw three, put a land onto the battlefield tapped.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Lessons from Life
+manapool:{2}{G}{U}
+library:Island,Island,Plains
+[PLAYER2]
+[DO]
+Lessons from Life
+choice 0
+Plains
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains
+tappedinplay:1
+hand:Island,Island
+graveyard:Lessons from Life
+[PLAYER2]
+[END]

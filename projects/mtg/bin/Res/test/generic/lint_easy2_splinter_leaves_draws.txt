@@ -1,0 +1,21 @@
+#Splinter dies: both players draw.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:729104
+hand:Shock
+manapool:{R}
+library:Forest
+[PLAYER2]
+library:Mountain
+[DO]
+Shock
+729104
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:729104,Shock
+hand:Forest
+[PLAYER2]
+hand:Mountain
+[END]

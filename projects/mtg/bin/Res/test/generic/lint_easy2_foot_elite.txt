@@ -1,0 +1,19 @@
+#Foot Elite attacks: Grizzly Bears gets +1/+0 and indestructible.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Foot Elite,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+Foot Elite
+next
+Grizzly Bears
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:Foot Elite,Grizzly Bears
+pt:Grizzly Bears=3/2
+type:Grizzly Bears=indestructible
+[PLAYER2]
+[END]

@@ -1,0 +1,18 @@
+#Tui and La attack (become tapped): draw a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726096
+library:Forest
+[PLAYER2]
+[DO]
+goto attackers
+726096
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:726096
+hand:Forest
+[PLAYER2]
+[END]

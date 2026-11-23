@@ -1,0 +1,25 @@
+#Smellerbee and Grizzly Bears (haste from her) attack: discard two, draw two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726125
+hand:Grizzly Bears,Forest
+manapool:{1}{G}
+library:Swamp,Island,Mountain
+[PLAYER2]
+[DO]
+Grizzly Bears
+goto attackers
+726125
+Grizzly Bears
+next
+choice 0
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:726125,Grizzly Bears
+graveyard:Forest
+hand:Island,Mountain
+library:Swamp
+[PLAYER2]
+[END]

@@ -1,0 +1,21 @@
+#Angel's Mercy: a counter on Blech (a Pest) and Giant Fly (an Insect), not Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:707006,Giant Fly,Grizzly Bears
+hand:Angel's Mercy
+manapool:{2}{W}{W}
+[PLAYER2]
+[DO]
+Angel's Mercy
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:707006,Giant Fly,Grizzly Bears
+graveyard:Angel's Mercy
+pt:Giant Fly=3/3
+pt:707006=4/5
+pt:Grizzly Bears=2/2
+life:27
+[PLAYER2]
+[END]

@@ -1,0 +1,18 @@
+#Katara enters: a counter on Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:726215
+manapool:{4}{W}
+[PLAYER2]
+[DO]
+726215
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,726215
+pt:Grizzly Bears=3/3
+pt:726215=2/3
+[PLAYER2]
+[END]

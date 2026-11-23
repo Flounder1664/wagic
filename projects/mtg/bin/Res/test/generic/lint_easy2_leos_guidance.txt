@@ -1,0 +1,25 @@
+#Leo's Guidance: a counter on each of three creatures.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+hand:Leo's Guidance
+manapool:{2}{W}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Leo's Guidance
+Grizzly Bears
+Hill Giant
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Hill Giant
+graveyard:Leo's Guidance
+pt:Grizzly Bears=3/3
+pt:Hill Giant=4/4
+[PLAYER2]
+inplay:Gray Ogre
+pt:Gray Ogre=3/3
+[END]

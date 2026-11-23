@@ -1,0 +1,21 @@
+#Two Zombies in play (Prophet + Gutter Skulk), three in the graveyard: draw three. Distinct cards per zone: the harness finds a card by id.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gutter Skulk
+graveyard:Gravedigger,Walking Corpse,Scathe Zombies
+hand:Prophet of the Scarab
+manapool:{4}{U}
+library:Forest,Island,Mountain,Plains
+[PLAYER2]
+[DO]
+Prophet of the Scarab
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Gutter Skulk,Prophet of the Scarab
+graveyard:Gravedigger,Walking Corpse,Scathe Zombies
+hand:Island,Mountain,Plains
+library:Forest
+[PLAYER2]
+[END]

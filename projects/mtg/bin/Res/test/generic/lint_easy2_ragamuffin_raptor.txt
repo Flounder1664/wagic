@@ -1,0 +1,18 @@
+#Ragamuffin Raptor enters: Grizzly Bears returns to my hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Ragamuffin Raptor
+graveyard:Grizzly Bears
+manapool:{4}{G}
+[PLAYER2]
+[DO]
+Ragamuffin Raptor
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ragamuffin Raptor
+hand:Grizzly Bears
+[PLAYER2]
+[END]

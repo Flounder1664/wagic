@@ -1,0 +1,23 @@
+#Pressure Point taps Gray Ogre, then Shuttle Crew deals 4 to it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Pressure Point,Shuttle Crew
+manapool:{1}{W}{2}{W}
+library:Forest
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Pressure Point
+Gray Ogre
+Shuttle Crew
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shuttle Crew
+hand:Forest
+graveyard:Pressure Point
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

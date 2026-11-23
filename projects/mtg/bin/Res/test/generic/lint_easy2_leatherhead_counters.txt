@@ -1,0 +1,18 @@
+#Leatherhead attacks: two counters on each of my creatures.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:729030,Grizzly Bears
+[PLAYER2]
+[DO]
+goto attackers
+729030
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:729030,Grizzly Bears
+pt:Grizzly Bears=4/4
+pt:729030=7/7
+[PLAYER2]
+[END]

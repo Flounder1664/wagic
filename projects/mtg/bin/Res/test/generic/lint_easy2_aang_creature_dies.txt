@@ -1,0 +1,19 @@
+#Grizzly Bears dies: a counter on Aang.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726146,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+[DO]
+Shock
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726146
+graveyard:Grizzly Bears,Shock
+pt:726146=4/3
+[PLAYER2]
+[END]

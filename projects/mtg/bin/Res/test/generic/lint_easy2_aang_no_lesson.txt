@@ -1,0 +1,17 @@
+#Twin: no Lesson, no vigilance.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:726146
+graveyard:Grizzly Bears
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:726146
+graveyard:Grizzly Bears
+type:726146=-vigilance
+[PLAYER2]
+[END]

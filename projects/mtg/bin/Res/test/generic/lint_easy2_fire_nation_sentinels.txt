@@ -1,0 +1,22 @@
+#The opponent's Gray Ogre dies: a counter on each of my creatures.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation Sentinels,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Shock
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fire Nation Sentinels,Grizzly Bears
+graveyard:Shock
+pt:Grizzly Bears=3/3
+pt:Fire Nation Sentinels=5/5
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

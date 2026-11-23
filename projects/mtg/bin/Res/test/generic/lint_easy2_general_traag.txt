@@ -1,0 +1,22 @@
+#General Traag enters: sacrifice Ornithopter, 4 damage to Gray Ogre.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+hand:1520090
+manapool:{3}{R}{R}
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+1520090
+choice 0
+Ornithopter
+Gray Ogre
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1520090
+graveyard:Ornithopter
+[PLAYER2]
+graveyard:Gray Ogre
+[END]

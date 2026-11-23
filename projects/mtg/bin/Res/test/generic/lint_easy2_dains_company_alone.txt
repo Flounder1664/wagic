@@ -1,0 +1,15 @@
+#Twin: no other Dwarf, no lifelink.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700993,Grizzly Bears
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+COMBATBEGINS
+[PLAYER1]
+inplay:700993,Grizzly Bears
+type:700993=-lifelink
+[PLAYER2]
+[END]

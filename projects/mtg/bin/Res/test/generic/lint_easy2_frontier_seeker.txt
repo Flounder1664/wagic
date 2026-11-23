@@ -1,0 +1,19 @@
+#Frontier Seeker enters: look at the top five, take Plains.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Frontier Seeker
+manapool:{1}{W}
+library:Mountain,Mountain,Mountain,Mountain,Plains
+[PLAYER2]
+[DO]
+Frontier Seeker
+choice 0
+Plains
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Frontier Seeker
+hand:Plains
+[PLAYER2]
+[END]

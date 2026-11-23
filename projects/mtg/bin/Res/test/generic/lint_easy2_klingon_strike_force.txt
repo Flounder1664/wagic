@@ -1,0 +1,18 @@
+#Klingon Strike Force dies: 2 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Klingon Strike Force
+hand:Murder
+manapool:{1}{B}{B}
+[PLAYER2]
+[DO]
+Murder
+Klingon Strike Force
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Klingon Strike Force,Murder
+[PLAYER2]
+life:18
+[END]

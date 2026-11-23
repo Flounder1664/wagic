@@ -1,0 +1,17 @@
+#Broadcast Takeover: I control the opponent's Ornithopter this turn.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Broadcast Takeover
+manapool:{2}{R}{R}{R}
+[PLAYER2]
+inplay:Ornithopter
+[DO]
+Broadcast Takeover
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ornithopter
+graveyard:Broadcast Takeover
+[PLAYER2]
+[END]

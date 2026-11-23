@@ -1,0 +1,17 @@
+#Dain attacks with another Dwarf in play: 2 damage to the opponent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:701997,Bastion Enforcer
+[PLAYER2]
+[DO]
+goto attackers
+701997
+next
+[ASSERT]
+COMBATBLOCKERS
+[PLAYER1]
+inplay:701997,Bastion Enforcer
+[PLAYER2]
+life:18
+[END]

@@ -1,0 +1,21 @@
+#Shields Up! on Grizzly Bears: hexproof, indestructible, a counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shields Up!
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Shields Up!
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+graveyard:Shields Up!
+pt:Grizzly Bears=3/3
+type:Grizzly Bears=hexproof
+type:Grizzly Bears=indestructible
+[PLAYER2]
+[END]

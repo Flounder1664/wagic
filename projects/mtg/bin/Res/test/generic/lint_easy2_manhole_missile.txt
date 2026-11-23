@@ -1,0 +1,23 @@
+#Manhole Missile: 3 to Gray Ogre; bottom Forest, draw Island.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Manhole Missile,Forest
+manapool:{1}{R}
+library:Island
+[PLAYER2]
+inplay:Gray Ogre
+[DO]
+Manhole Missile
+Gray Ogre
+choice 0
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Island
+library:Forest
+graveyard:Manhole Missile
+[PLAYER2]
+graveyard:Gray Ogre
+[END]
