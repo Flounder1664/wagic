@@ -1,0 +1,22 @@
+#Rowan's Talent on Chandra Nalaar: her +1 at the opponent is copied - 2 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Rowan's Talent
+manapool:{2}{R}{R}
+inplay:Chandra Nalaar
+[PLAYER2]
+[DO]
+Rowan's Talent
+Chandra Nalaar
+Chandra Nalaar
+choice 0
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rowan's Talent,Chandra Nalaar
+counter:Chandra Nalaar=loyalty:7
+[PLAYER2]
+life:18
+[END]
