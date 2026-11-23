@@ -1,0 +1,20 @@
+#Ajani Unrelenting -2: discard my hand, then draw one per creature - Llanowar Elves and the Cadet the trigger made first.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,Llanowar Elves
+hand:Grizzly Bears,Swamp
+library:Island,Plains,Mountain
+[PLAYER2]
+[DO]
+Ajani Unrelenting
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,Llanowar Elves,*
+graveyard:Grizzly Bears,Swamp
+hand:Mountain,Plains
+library:Island
+[PLAYER2]
+[END]

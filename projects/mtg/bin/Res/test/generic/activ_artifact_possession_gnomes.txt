@@ -1,0 +1,20 @@
+#Artifact Possession on my Bottle Gnomes: sacrificing it (no {T} in the cost) deals 2 damage to me.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bottle Gnomes
+hand:Artifact Possession
+manapool:{2}{B}
+life:20
+[PLAYER2]
+[DO]
+Artifact Possession
+Bottle Gnomes
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Bottle Gnomes,Artifact Possession
+life:21
+[PLAYER2]
+[END]

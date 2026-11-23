@@ -1,0 +1,18 @@
+#Ajani Unrelenting -3: 4 damage kills my Grizzly Bears and their Hill Giant; my Cadet token survives.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Ajani Unrelenting
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,*
+graveyard:Grizzly Bears
+[PLAYER2]
+graveyard:Hill Giant
+[END]
