@@ -80,4 +80,5 @@ Device serials:
 2026-11-23 2b8613d87 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (@activated trigger family 9412aacf5; both full rebuilds, a stale-PCH incremental build was discarded); launched from G: 15s before replacing, no crash; harness 6/2823 known; FRA.zip gained Cadet token art 735001t (backup FRA.zip.bak).
 2026-11-23 ea78e8fde (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611232034.old; read back ok. crime engine: 21 OTJ crime cards + Patrolling Peacemaker; exes rebuilt
 2026-11-23 ea78e8fde (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (crime engine a224cce41; both full rebuilds); launched from G: 15s before replacing, no crash; harness 6/2859 known; collection rebuilt (46,304 IDs, none moved).
+2026-11-23 4a117f03b (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611232057.old; read back ok. graveyard-leave trigger: 20 cards + 13 moved; exes rebuilt; Horror/Zombie token art
 ```
