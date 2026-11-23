@@ -6218,7 +6218,39 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         TargetChooser * doubleScope = tcf.createTargetChooser(splitDoubleTrigger[1], card);
         if (!doubleScope)
             return NULL;
-        return NEW ATriggerDoubler(observer, id, card, doubleScope);
+        ATriggerDoubler * doubler = NEW ATriggerDoubler(observer, id, card, doubleScope);
+        doubler->scopeIsAttached = (splitDoubleTrigger[1] == "mytgt");
+        //cause(<kind>[:<cards>]) - only triggers caused by that event are doubled
+        vector<string> splitCause = parseBetween(s, "cause(", ")");
+        if (splitCause.size())
+        {
+            string spec = splitCause[1], kind = spec, cards = "";
+            size_t colon = spec.find(":");
+            if (colon != string::npos) { kind = spec.substr(0, colon); cards = spec.substr(colon + 1); }
+            const char * kinds[] = { "any", "enters", "leaves", "entersorleaves", "dies", "attacks",
+                                     "combatdamageplayer", "damaged", "targeted", "draw", "lifegain", "faceup" };
+            doubler->causeKind = -1;
+            for (int k = 0; k < 12; k++)
+                if (kind == kinds[k]) doubler->causeKind = k;
+            if (doubler->causeKind < 0)
+            {
+                SAFE_DELETE(doubler);
+                return NULL;
+            }
+            if (cards.size())
+            {
+                if (cards.find("|") == string::npos)
+                    cards.append("|*");
+                doubler->causeTc = tcf.createTargetChooser(cards, card);
+                if (!doubler->causeTc)
+                {
+                    SAFE_DELETE(doubler);
+                    return NULL;
+                }
+                doubler->causeTc->targetter = NULL;
+            }
+        }
+        return doubler;
     }
 
     //identify what a leveler creature will max out at.
@@ -7046,7 +7078,7 @@ int AbilityFactory::magicText(int id, Spell * spell, MTGCardInstance * card, int
                 MTGCardInstance * etbSource = (spell && spell->source) ? spell->source : card;
                 if (etbSource && etbSource->isInPlay(observer))
                 {
-                    for (int extra = countTriggerDoublers(observer, etbSource); extra > 0; extra--)
+                    for (int extra = countTriggerDoublers(observer, etbSource, NULL, etbSource); extra > 0; extra--)
                         a->resolve();
                 }
                 delete (a);
@@ -8452,6 +8484,10 @@ int TriggeredAbility::receiveEvent(WEvent * e)
         //(A player target too: left on the stack, Danitha, Spear of Agony's trigger sat there before the
         //spell was cast, so a sorcery aimed at the opponent could never be cast - Solve for Disappointment.)
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
     }
     if(dynamic_cast<WEventCardSacrifice*>(e))
@@ -8461,6 +8497,10 @@ int TriggeredAbility::receiveEvent(WEvent * e)
         //must be able to survive a sacrificed bloodfire collosus,
         //same with mortician beetle vs phyrexian denouncer test
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
     }
     if(dynamic_cast<WEventCardExploited*>(e))
@@ -8468,6 +8508,10 @@ int TriggeredAbility::receiveEvent(WEvent * e)
         //exploited event must resolve instantly or by the time they do the cards that triggered them 
         //have already been put in graveyard.
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
     }
     if(dynamic_cast<WEventCardDiscard*>(e))
@@ -8475,12 +8519,20 @@ int TriggeredAbility::receiveEvent(WEvent * e)
         //discard event must resolve instantly or by the time they do the cards that triggered them 
         //have already been put in graveyard.
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
     }
     WEventCardCycle * cycleCheck = dynamic_cast<WEventCardCycle*>(e);
     if(cycleCheck && cycleCheck->card == source)
     {
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
         //When you cycle this card, first the cycling ability goes on the stack, 
         //then the triggered ability goes on the stack on top of it. 
@@ -8494,12 +8546,16 @@ int TriggeredAbility::receiveEvent(WEvent * e)
     if(stackCheck && (stackCheck->to == game->currentPlayer->game->stack||stackCheck->to == game->currentPlayer->opponent()->game->stack))
     {
         resolve();
+        //Instant-resolving triggers are doubled too (prowess and cast triggers under Harmonic Prodigy,
+        //Wizard's Staff) - this branch returned before the fireAbility doubling below.
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
+            resolve();
         return 1;
         //triggers that resolve from stack events must resolve instantly or by the time they do the cards that triggered them
         //have already been put in play or graveyard.
     }
         fireAbility();
-        for (int extra = extraTriggerCount(); extra > 0; extra--)
+        for (int extra = extraTriggerCount(e); extra > 0; extra--)
             fireAbility();
         return 1;
     }
@@ -8511,24 +8567,32 @@ int TriggeredAbility::receiveEvent(WEvent * e)
 //trigger fire one ADDITIONAL time. Firing twice is safe: ActionStack::addAbility
 //wraps the ability in a fresh StackAbility per call, and StackAbility neither owns
 //nor deletes the ability (its resolve() is just ability->resolve()).
-int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource)
+int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource, WEvent * e, MTGCardInstance * etbCard)
 {
     if (!triggerSource || !observer || !observer->mLayers || !observer->mLayers->actionLayer())
         return 0;
     int extra = 0;
+    vector<MTGCardInstance *> seenSources;
     ActionLayer * al = observer->mLayers->actionLayer();
     for (size_t i = 1; i < al->mObjects.size(); i++)
     {
         ATriggerDoubler * doubler = dynamic_cast<ATriggerDoubler *>((MTGAbility *) al->mObjects[i]);
-        if (doubler && doubler->doubles(triggerSource))
+        if (doubler && doubler->doubles(triggerSource, e, etbCard))
+        {
+            //One per card: equipping re-adds an Equipment's abilities, so Wizard's Staff could
+            //otherwise count twice after a re-equip.
+            if (std::find(seenSources.begin(), seenSources.end(), doubler->source) != seenSources.end())
+                continue;
+            seenSources.push_back(doubler->source);
             extra++;
+        }
     }
     return extra;
 }
 
-int TriggeredAbility::extraTriggerCount()
+int TriggeredAbility::extraTriggerCount(WEvent * e)
 {
-    return countTriggerDoublers(game, source);
+    return countTriggerDoublers(game, source, e);
 }
 
 void TriggeredAbility::Update(float)

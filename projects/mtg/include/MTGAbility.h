@@ -280,7 +280,7 @@ public:
     virtual ostream& toString(ostream& out) const;
     //Number of ADDITIONAL times this trigger should fire, from trigger-doubling
     //permanents in play (Harmonic Prodigy, Panharmonicon...). 0 = normal.
-    int extraTriggerCount();
+    int extraTriggerCount(WEvent * e = NULL);
     string castRestriction;
 };
 
@@ -288,7 +288,7 @@ public:
 //TriggeredAbility::extraTriggerCount and the ETB (oneShot) path in
 //AbilityFactory::magicText, since Wagic resolves enter-the-battlefield effects
 //directly rather than as TriggeredAbilities.
-int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource);
+int countTriggerDoublers(GameObserver * observer, MTGCardInstance * triggerSource, WEvent * e = NULL, MTGCardInstance * etbCard = NULL);
 
 
 //Triggers are not "real" abilities. They don't resolve, they just "trigger" and are associated to other abilities that will be addedToGame when the Trigger triggers

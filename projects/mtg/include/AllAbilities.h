@@ -2671,10 +2671,21 @@ class ATriggerDoubler: public MTGAbility
 {
 public:
     TargetChooser * doubleScope; //whose triggered abilities get doubled
+    //Optional cause(<kind>[:<cards>]): only triggers caused by that kind of event are doubled
+    //("If an artifact or creature entering causes a triggered ability ... to trigger").
+    enum { CAUSE_ANY, CAUSE_ENTERS, CAUSE_LEAVES, CAUSE_ENTERSORLEAVES, CAUSE_DIES, CAUSE_ATTACKS,
+           CAUSE_COMBATDAMAGEPLAYER, CAUSE_DAMAGED, CAUSE_TARGETED, CAUSE_DRAW, CAUSE_LIFEGAIN, CAUSE_FACEUP };
+    int causeKind;
+    TargetChooser * causeTc; //the card the cause is about (NULL = any)
+    //doubletrigger(mytgt): the creature this Equipment/Aura is attached to NOW (Wizard's Staff).
+    //"mytgt" as a selector is fixed when the line is parsed, before the card is attached.
+    bool scopeIsAttached;
 
     ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope);
-    //true when a trigger belonging to triggerSource should fire an extra time
-    bool doubles(MTGCardInstance * triggerSource);
+    //true when a trigger belonging to triggerSource should fire an extra time. e is the event the
+    //trigger fired on (NULL for state/phase triggers); etbCard is set on the enters-the-battlefield path.
+    bool doubles(MTGCardInstance * triggerSource, WEvent * e = NULL, MTGCardInstance * etbCard = NULL);
+    bool causeMatches(WEvent * e, MTGCardInstance * etbCard);
     const string getMenuText();
     ATriggerDoubler * clone() const;
     ~ATriggerDoubler();

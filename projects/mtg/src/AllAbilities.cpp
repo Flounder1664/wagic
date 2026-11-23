@@ -7109,12 +7109,89 @@ ACastRestriction::~ACastRestriction()
 ATriggerDoubler::ATriggerDoubler(GameObserver* observer, int _id, MTGCardInstance * card, TargetChooser * _doubleScope) :
     MTGAbility(observer, _id, card), doubleScope(_doubleScope)
 {
+    causeKind = CAUSE_ANY;
+    causeTc = NULL;
+    scopeIsAttached = false;
 }
 
-bool ATriggerDoubler::doubles(MTGCardInstance * triggerSource)
+bool ATriggerDoubler::causeMatches(WEvent * e, MTGCardInstance * etbCard)
+{
+    if (causeKind == CAUSE_ANY)
+        return true;
+    MTGCardInstance * about = NULL;
+    Player * you = source->controller();
+    if (etbCard)
+    {
+        if (causeKind != CAUSE_ENTERS && causeKind != CAUSE_ENTERSORLEAVES)
+            return false;
+        about = etbCard;
+    }
+    else if (!e)
+        return false;
+    else if (WEventZoneChange * z = dynamic_cast<WEventZoneChange *>(e))
+    {
+        if (!z->card || !z->card->owner)
+            return false;
+        Player * p0 = z->card->owner;
+        bool toPlay = (z->to == p0->game->inPlay || z->to == p0->opponent()->game->inPlay);
+        bool fromPlay = (z->from == p0->game->inPlay || z->from == p0->opponent()->game->inPlay);
+        bool toGrave = (z->to == p0->game->graveyard);
+        if (causeKind == CAUSE_ENTERS && !(toPlay && !fromPlay)) return false;
+        if (causeKind == CAUSE_LEAVES && !(fromPlay && !toPlay)) return false;
+        if (causeKind == CAUSE_ENTERSORLEAVES && toPlay == fromPlay) return false;
+        if (causeKind == CAUSE_DIES && !(fromPlay && toGrave && z->card->hasType(Subtypes::TYPE_CREATURE))) return false;
+        if (causeKind != CAUSE_ENTERS && causeKind != CAUSE_LEAVES && causeKind != CAUSE_ENTERSORLEAVES && causeKind != CAUSE_DIES) return false;
+        about = z->card;
+    }
+    else if (WEventCardAttacked * a = dynamic_cast<WEventCardAttacked *>(e))
+    {
+        if (causeKind != CAUSE_ATTACKS) return false;
+        about = a->card;
+    }
+    else if (WEventDamage * d = dynamic_cast<WEventDamage *>(e))
+    {
+        if (!d->damage) return false;
+        if (causeKind == CAUSE_COMBATDAMAGEPLAYER)
+        {
+            if (d->damage->typeOfDamage != Damage::DAMAGE_COMBAT || !dynamic_cast<Player *>(d->damage->target)) return false;
+            about = d->damage->source;
+        }
+        else if (causeKind == CAUSE_DAMAGED)
+        {
+            about = dynamic_cast<MTGCardInstance *>(d->damage->target);
+            if (!about) return false;
+        }
+        else return false;
+    }
+    else if (WEventTarget * t = dynamic_cast<WEventTarget *>(e))
+    {
+        if (causeKind != CAUSE_TARGETED) return false;
+        about = t->card;
+    }
+    else if (dynamic_cast<WEventcardDraw *>(e))
+        return causeKind == CAUSE_DRAW;
+    else if (WEventLife * l = dynamic_cast<WEventLife *>(e))
+        return causeKind == CAUSE_LIFEGAIN && l->player == you && l->amount > 0;
+    else if (WEventCardFaceUp * f = dynamic_cast<WEventCardFaceUp *>(e))
+    {
+        if (causeKind != CAUSE_FACEUP) return false;
+        about = f->card;
+    }
+    else
+        return false;
+    if (!about)
+        return false;
+    return !causeTc || causeTc->canTarget(about);
+}
+
+bool ATriggerDoubler::doubles(MTGCardInstance * triggerSource, WEvent * e, MTGCardInstance * etbCard)
 {
     if (!triggerSource || !doubleScope || !source)
         return false;
+    if (!causeMatches(e, etbCard))
+        return false;
+    if (scopeIsAttached)
+        return source->target && source->target == triggerSource && triggerSource->controller() == source->controller();
     //"a permanent YOU control" - a doubler never doubles an opponent's triggers
     if (triggerSource->controller() != source->controller())
         return false;
@@ -7134,12 +7211,15 @@ ATriggerDoubler * ATriggerDoubler::clone() const
     ATriggerDoubler * a = NEW ATriggerDoubler(*this);
     if (doubleScope)
         a->doubleScope = doubleScope->clone();
+    if (causeTc)
+        a->causeTc = causeTc->clone();
     return a;
 }
 
 ATriggerDoubler::~ATriggerDoubler()
 {
     SAFE_DELETE(doubleScope);
+    SAFE_DELETE(causeTc);
 }
 
 
