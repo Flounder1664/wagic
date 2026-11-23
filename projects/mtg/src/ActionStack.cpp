@@ -838,8 +838,62 @@ int ActionStack::addAction(Interruptible * action)
     Add(action);
     lastActionController = observer->currentlyActing();
     DebugTrace("Action added to stack: " << action->getDisplayName());
+    checkCrime(action);
 
     return 1;
+}
+
+//Who a target belongs to, for crime: a player, a card in a graveyard (its owner), a spell or
+//ability on the stack (its controller), or a permanent (its controller).
+static Player * crimeVictimOf(Targetable * t)
+{
+    if (Player * p = dynamic_cast<Player *>(t))
+        return p;
+    if (MTGCardInstance * c = dynamic_cast<MTGCardInstance *>(t))
+    {
+        if (c->owner && c->currentZone == c->owner->game->graveyard)
+            return c->owner;
+        return c->controller();
+    }
+    if (Spell * sp = dynamic_cast<Spell *>(t))
+        return sp->source ? sp->source->controller() : NULL;
+    if (StackAbility * sa = dynamic_cast<StackAbility *>(t))
+        return (sa->ability && sa->ability->source) ? sa->ability->source->controller() : NULL;
+    return NULL;
+}
+
+void ActionStack::checkCrime(Interruptible * action)
+{
+    MTGCardInstance * src = NULL;
+    TargetChooser * tc = NULL;
+    if (Spell * sp = dynamic_cast<Spell *>(action))
+    {
+        src = sp->source;
+        tc = sp->tc;
+    }
+    else if (StackAbility * sa = dynamic_cast<StackAbility *>(action))
+    {
+        if (sa->ability)
+        {
+            src = sa->ability->source;
+            tc = sa->ability->getActionTc();
+        }
+    }
+    if (!src || !tc)
+        return;
+    Player * criminal = src->controller();
+    if (!criminal)
+        return;
+    vector<Targetable *> targets = tc->getTargetsFrom();
+    for (size_t i = 0; i < targets.size(); i++)
+    {
+        if (crimeVictimOf(targets[i]) == criminal->opponent())
+        {
+            criminal->crimesThisTurn++;
+            observer->receiveEvent(NEW WEventCrime(criminal, src));
+            return;
+        }
+    }
 }
 
 Spell * ActionStack::addSpell(MTGCardInstance * _source, TargetChooser * tc, ManaCost * mana, int payResult,

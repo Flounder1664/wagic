@@ -70,6 +70,7 @@ public:
     int initiative;
     int surveilOffset;
     int sacrificedThisTurn; //permanents this player sacrificed this turn (Count Nefaria, Sawblade Skinripper)
+    int crimesThisTurn; //crimes this player committed this turn ("if you've committed a crime this turn")
     int scrySurveilThisTurn; //times this player scried or surveilled this turn ("as long as you've scried or surveilled this turn")
     int devotionOffset;
     int lastShuffleTurn;

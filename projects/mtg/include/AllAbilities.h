@@ -1754,42 +1754,32 @@ public:
     }
 };
 
-//you commit a crime: a spell or ability you control targets an opponent, anything an opponent
-//controls, or a card in an opponent's graveyard (OTJ). Fires on the same target events as @targeted.
+//A crime is committed (OTJ): a spell or ability is put on the stack targeting an opponent of its
+//controller, anything that opponent controls, or a card in their graveyard. ActionStack::checkCrime
+//sends one WEventCrime per spell or ability, so a spell with two such targets is one crime.
+//  @committedcrime          - you commit a crime
+//  @opponentcommittedcrime  - an opponent commits a crime (Patrolling Peacemaker)
+//  @anycommittedcrime       - any player commits a crime (Tarnation)
 class TrCommittedCrime: public Trigger
 {
 public:
+    enum { YOU, OPPONENT, ANY };
+    int who;
     bool limitOnceATurn;
     int triggeredTurn;
-    TrCommittedCrime(GameObserver* observer, int id, MTGCardInstance * source, bool once = false, bool limitOnceATurn = false) :
-    Trigger(observer, id, source, once), limitOnceATurn(limitOnceATurn)
+    TrCommittedCrime(GameObserver* observer, int id, MTGCardInstance * source, bool once = false, bool limitOnceATurn = false, int who = YOU) :
+    Trigger(observer, id, source, once), who(who), limitOnceATurn(limitOnceATurn)
     {
         triggeredTurn = -1;
     }
 
     int triggerOnEventImpl(WEvent * event)
     {
+        WEventCrime * e = dynamic_cast<WEventCrime *> (event);
+        if (!e || !e->player) return 0;
         Player * you = source->controller();
-        Player * victim = NULL;
-        MTGCardInstance * by = NULL;
-        if (WEventTarget * e = dynamic_cast<WEventTarget *> (event))
-        {
-            if (!e->card) return 0;
-            by = e->source;
-            MTGCardInstance * c = e->card;
-            if (c->currentZone == c->owner->game->graveyard)
-                victim = c->owner;
-            else
-                victim = c->controller();
-        }
-        else if (WEventPlayerTargeted * pe = dynamic_cast<WEventPlayerTargeted *> (event))
-        {
-            by = pe->source;
-            victim = pe->player;
-        }
-        else
-            return 0;
-        if (!by || by->controller() != you || victim != you->opponent()) return 0;
+        if (who == YOU && e->player != you) return 0;
+        if (who == OPPONENT && e->player != you->opponent()) return 0;
         if (limitOnceATurn && triggeredTurn == game->turn) return 0;
         triggeredTurn = game->turn;
         return 1;

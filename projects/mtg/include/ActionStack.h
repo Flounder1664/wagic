@@ -233,6 +233,9 @@ public:
     Player * askIfWishesToInterrupt;
     int garbageCollect();
     int addAction(Interruptible * interruptible);
+    //A spell or ability just put on the stack: if it targets an opponent, anything an opponent
+    //controls, or a card in an opponent's graveyard, its controller commits a crime (WEventCrime).
+    void checkCrime(Interruptible * action);
     Spell * addSpell(MTGCardInstance* card, TargetChooser * tc, ManaCost * mana, int payResult, int storm, bool forcedinterrupt = false);
     int AddNextGamePhase();
     int AddNextCombatStep();

@@ -46,6 +46,13 @@ void WParsedInt::init(string s, Spell * spell, MTGCardInstance * card)
         intValue = p->scrySurveilThisTurn;
         return;
     }
+    //Crimes this player committed this turn (OTJ). Early return: see above.
+    if (s == "pcrimecount" || s == "ocrimecount")
+    {
+        Player * p = (s == "pcrimecount") ? card->controller() : card->controller()->opponent();
+        intValue = p->crimesThisTurn;
+        return;
+    }
     //Permanents this player sacrificed this turn. Early return: see above.
     if (s == "psacrificedcount" || s == "osacrificedcount")
     {

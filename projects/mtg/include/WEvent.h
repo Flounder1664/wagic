@@ -145,6 +145,15 @@ struct WEventPlayerTargeted : public WEvent {
   WEventPlayerTargeted(Player * player, MTGCardInstance * source) : WEvent(), player(player), source(source) {}
 };
 
+//A player committed a crime (OTJ): a spell or ability they control was put on the stack
+//targeting an opponent, anything an opponent controls, or a card in an opponent's graveyard.
+//Fired once per spell or ability, however many of its targets are the opponent's.
+struct WEventCrime : public WEvent {
+  Player * player;
+  MTGCardInstance * source;
+  WEventCrime(Player * player, MTGCardInstance * source) : WEvent(), player(player), source(source) {}
+};
+
 //Event when a card gains/looses types
 struct WEventCardChangeType : public WEventCardUpdate {
   int type;

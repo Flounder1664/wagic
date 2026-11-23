@@ -228,6 +228,8 @@ void GameObserver::nextGamePhase()
         currentPlayer->nonCombatDamage = 0;
         currentPlayer->scrySurveilThisTurn = 0;
         currentPlayer->opponent()->scrySurveilThisTurn = 0;
+        currentPlayer->crimesThisTurn = 0;
+        currentPlayer->opponent()->crimesThisTurn = 0;
         currentPlayer->sacrificedThisTurn = 0;
         currentPlayer->opponent()->sacrificedThisTurn = 0;
         currentPlayer->drawCounter = 0;

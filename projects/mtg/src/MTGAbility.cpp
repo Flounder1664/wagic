@@ -1970,6 +1970,10 @@ TriggeredAbility * AbilityFactory::parseTrigger(string s, string, int id, Spell 
     }
 
     //when you commit a crime
+    if (s.find("opponentcommittedcrime") != string::npos)
+        return NEW TrCommittedCrime(observer, id, card, once, limitOnceATurn, TrCommittedCrime::OPPONENT);
+    if (s.find("anycommittedcrime") != string::npos)
+        return NEW TrCommittedCrime(observer, id, card, once, limitOnceATurn, TrCommittedCrime::ANY);
     if (s.find("committedcrime") != string::npos)
         return NEW TrCommittedCrime(observer, id, card, once, limitOnceATurn);
 
