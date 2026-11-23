@@ -1,0 +1,22 @@
+#Runic Armasaur (opponent's): I activate Prodigal Pyromancer; its controller may draw, and does.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+inplay:Runic Armasaur
+library:Swamp,Island
+[DO]
+Prodigal Pyromancer
+p2
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+inplay:Runic Armasaur
+hand:Island
+library:Swamp
+life:19
+[END]

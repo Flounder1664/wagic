@@ -416,14 +416,6 @@ power=1
 toughness=2
 [/card]
 [card]
-name=Artifact Possession
-target=artifact
-text=Enchant artifact -- Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.
-mana={2}{B}
-type=Enchantment
-subtype=Aura
-[/card]
-[card]
 name=Artificial Evolution
 text=Change the text of target spell or permanent by replacing all instances of one creature type with another. The new creature type can't be Wall. (This effect lasts indefinitely.)
 mana={U}
@@ -1183,15 +1175,6 @@ power=3
 toughness=3
 [/card]
 [card]
-name=Burning-Tree Shaman
-text=Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.
-mana={1}{R}{G}
-type=Creature
-subtype=Centaur Shaman
-power=3
-toughness=4
-[/card]
-[card]
 name=Bursting Beebles
 text=Bursting Beebles is unblockable as long as defending player controls two or more nonland permanents that share an artist.
 mana={2}{U}
@@ -1382,15 +1365,6 @@ name=Cathedral of Serra
 missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
 text=White legendary creatures you control have "bands with other legendary creatures." (Any legendary creatures can attack in a band as long as at least one has "bands with other legendary creatures." Bands are blocked as a group. If at least two legendary creatures you control, one of which has "bands with other legendary creatures," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 type=Land
-[/card]
-[card]
-name=Ceaseless Searblades
-text=Whenever you activate an ability of an Elemental, Ceaseless Searblades gets +1/+0 until end of turn.
-mana={3}{R}
-type=Creature
-subtype=Elemental Warrior
-power=2
-toughness=4
 [/card]
 [card]
 name=Celestial Convergence
@@ -1977,15 +1951,6 @@ text=Enchant creature -- Enchanted creature can't attack or block unless its con
 mana={W}
 type=Enchantment
 subtype=Aura
-[/card]
-[card]
-name=Crackdown Construct
-text=Whenever you activate an ability of an artifact or creature that isn't a mana ability, Crackdown Construct gets +1/+1 until end of turn.
-mana={4}
-type=Artifact Creature
-subtype=Construct
-power=2
-toughness=2
 [/card]
 [card]
 name=Crafty Octopus
@@ -2791,19 +2756,6 @@ type=Legendary Creature
 subtype=Elf Noble
 power=3
 toughness=3
-[/card]
-[card]
-name=Elspeth's Talent
-target=planeswalker
-auto=teach(creature) Enchant planeswalker
-auto=teach(creature) Enchanted planeswalker
-auto=teach(creature) "[+1]: Create three 1/1 white Soldier creature tokens"
-auto=teach(creature) Whenever you activateloyalty ability of enchanted planeswalker creatures you control get +2/+2
-auto=teach(creature) gain vigilance 
-text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens." -- Whenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
-mana={2}{W}{W}
-type=Enchantment
-subtype=Aura
 [/card]
 [card]
 name=Elvish House Party
@@ -4378,15 +4330,6 @@ mana={2}{W}{W}
 type=Enchantment
 [/card]
 [card]
-name=Harsh Mentor
-text=Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, Harsh Mentor deals 2 damage to that player.
-mana={1}{R}
-type=Creature
-subtype=Human Cleric
-power=2
-toughness=2
-[/card]
-[card]
 name=Hatchery Sliver
 text=Replicate {1}{G} (When you cast this spell, copy it for each time you paid its replicate cost.) -- Each Sliver spell you cast has replicate. The replicate cost is equal to its mana cost. (A copy of a permanent spell becomes a token.)
 mana={1}{G}
@@ -4394,12 +4337,6 @@ type=Creature
 subtype=Sliver
 power=2
 toughness=2
-[/card]
-[card]
-name=Haunting Wind
-text=Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, Haunting Wind deals 1 damage to that artifact's controller.
-mana={3}{B}
-type=Enchantment
 [/card]
 [card]
 name=Havengul Lich
@@ -7855,12 +7792,6 @@ mana={X}{U}
 type=Instant
 [/card]
 [card]
-name=Powerleech
-text=Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.
-mana={G}{G}
-type=Enchantment
-[/card]
-[card]
 name=Precursor Golem
 auto=token(Golem,Artifact Creature Golem,3/3)
 auto=token(Golem,Artifact Creature Golem,3/3)
@@ -8525,15 +8456,6 @@ name=Runesword
 text={3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
 mana={6}
 type=Artifact
-[/card]
-[card]
-name=Runic Armasaur
-text=Whenever an opponent activates an ability of a creature or land that isn't a mana ability, you may draw a card.
-mana={1}{G}{G}
-type=Creature
-subtype=Dinosaur
-power=2
-toughness=5
 [/card]
 [card]
 name=Rust
@@ -17523,15 +17445,6 @@ power=2
 toughness=5
 [/card]
 [card]
-name=Avalanche of Sector 7
-text=Menace -- Avalanche of Sector 7's power is equal to the number of artifacts your opponents control. -- Whenever an opponent activates an ability of an artifact they control, Avalanche of Sector 7 deals 1 damage to that player.
-mana={2}{R}
-type=Legendary Creature
-subtype=Human Rebel
-power=*
-toughness=3
-[/card]
-[card]
 name=Banon, the Returners' Leader
 text=Pray — Once during each of your turns, you may cast a creature spell from among cards in your graveyard that were put there from anywhere other than the battlefield this turn. -- Whenever you attack, you may pay {1} and discard a card. If you do, draw a card.
 mana={R}{W}
@@ -19425,13 +19338,6 @@ toughness=4
 name=Ajani Resolute
 text=Whenever you gain life, put a loyalty counter on Ajani. -- 0: You gain 1 life. -- −4: Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on this token." -- −10: You get an emblem with "Creatures you control get +2/+2."
 mana={1}{W}
-type=Legendary Planeswalker
-subtype=Ajani
-[/card]
-[card]
-name=Ajani Unrelenting
-text=Whenever you activate a loyalty ability, create a 2/2 colorless Wizard Soldier creature token named Cadet. -- +1: Creatures you control get +1/+0 and gain haste until end of turn. -- −2: Discard your hand, then draw a card for each creature you control. -- −3: Ajani deals 4 damage to each creature except for tokens you control.
-mana={4}{R}{R}
 type=Legendary Planeswalker
 subtype=Ajani
 [/card]

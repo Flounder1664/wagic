@@ -1,0 +1,17 @@
+#Crackdown Construct: I activate Shivan Dragon; the Construct gets +1/+1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Crackdown Construct,Shivan Dragon
+manapool:{R}
+[PLAYER2]
+[DO]
+Shivan Dragon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Crackdown Construct,Shivan Dragon
+pt:Crackdown Construct=3/3
+pt:Shivan Dragon=6/5
+[PLAYER2]
+[END]

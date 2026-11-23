@@ -1,0 +1,15 @@
+#Ajani Unrelenting +1: a Cadet is made.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting
+[PLAYER2]
+[DO]
+Ajani Unrelenting
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,*
+[PLAYER2]
+[END]

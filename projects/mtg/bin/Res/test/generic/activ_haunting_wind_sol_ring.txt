@@ -1,0 +1,17 @@
+#Haunting Wind: tapping Sol Ring deals 1 damage once (it becomes tapped; the {T} ability does not count again).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Haunting Wind,Sol Ring
+life:20
+[PLAYER2]
+[DO]
+Sol Ring
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Haunting Wind,Sol Ring
+manapool:{C}{C}
+life:19
+[PLAYER2]
+[END]

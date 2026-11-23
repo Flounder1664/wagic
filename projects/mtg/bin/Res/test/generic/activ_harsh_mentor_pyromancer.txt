@@ -1,0 +1,21 @@
+#Harsh Mentor (opponent's): I activate Prodigal Pyromancer; it deals 2 damage to me.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+life:20
+[PLAYER2]
+inplay:Harsh Mentor
+life:20
+[DO]
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+life:18
+[PLAYER2]
+inplay:Harsh Mentor
+life:19
+[END]

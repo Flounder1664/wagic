@@ -1,0 +1,20 @@
+#Avalanche of Sector 7 (opponent's): my Sol Ring makes it 1/3, and tapping it for mana deals 1 to me.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sol Ring
+life:20
+[PLAYER2]
+inplay:Avalanche of Sector 7
+[DO]
+Sol Ring
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sol Ring
+manapool:{C}{C}
+life:19
+[PLAYER2]
+inplay:Avalanche of Sector 7
+pt:Avalanche of Sector 7=1/3
+[END]

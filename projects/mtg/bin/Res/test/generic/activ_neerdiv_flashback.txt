@@ -1,0 +1,21 @@
+#Neerdiv: I flash back Think Twice from my graveyard; I draw one more and Neerdiv gets a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:680936
+graveyard:Think Twice
+manapool:{2}{U}
+library:Forest,Plains,Mountain
+[PLAYER2]
+[DO]
+Think Twice
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:680936
+exile:Think Twice
+hand:Plains,Mountain
+library:Forest
+pt:680936=3/3
+[PLAYER2]
+[END]

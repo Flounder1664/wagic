@@ -1,0 +1,16 @@
+#Twin: tapping a Forest for mana does not pump Crackdown Construct.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Crackdown Construct,Forest
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Crackdown Construct,Forest
+manapool:{G}
+pt:Crackdown Construct=2/2
+[PLAYER2]
+[END]

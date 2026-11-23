@@ -1,0 +1,20 @@
+#Harsh Mentor: Bottle Gnomes is sacrificed to pay its own cost, and still counts as an artifact on the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bottle Gnomes
+life:20
+[PLAYER2]
+inplay:Harsh Mentor
+life:20
+[DO]
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Bottle Gnomes
+life:21
+[PLAYER2]
+inplay:Harsh Mentor
+life:20
+[END]

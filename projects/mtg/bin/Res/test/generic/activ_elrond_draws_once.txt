@@ -1,0 +1,20 @@
+#Elrond, Moon-Reader: I pump Shivan Dragon twice; I draw one card, not two (once each turn).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700036,Shivan Dragon
+manapool:{R}{R}
+library:Plains,Forest
+[PLAYER2]
+[DO]
+Shivan Dragon
+Shivan Dragon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:700036,Shivan Dragon
+pt:Shivan Dragon=7/5
+hand:Forest
+library:Plains
+[PLAYER2]
+[END]

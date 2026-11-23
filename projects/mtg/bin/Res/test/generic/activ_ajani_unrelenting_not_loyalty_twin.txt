@@ -1,0 +1,16 @@
+#Twin: activating Prodigal Pyromancer is not a loyalty ability; no Cadet.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,Prodigal Pyromancer
+[PLAYER2]
+[DO]
+Prodigal Pyromancer
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ajani Unrelenting,Prodigal Pyromancer
+[PLAYER2]
+life:19
+[END]

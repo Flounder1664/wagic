@@ -1,0 +1,17 @@
+#Twin: tapping a Forest for mana is a mana ability, so Burning-Tree Shaman does nothing.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Burning-Tree Shaman,Forest
+life:20
+[PLAYER2]
+[DO]
+Forest
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Burning-Tree Shaman,Forest
+manapool:{G}
+life:20
+[PLAYER2]
+[END]

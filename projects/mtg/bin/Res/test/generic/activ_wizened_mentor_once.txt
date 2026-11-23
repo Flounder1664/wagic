@@ -1,0 +1,19 @@
+#Wizened Mentor (opponent's): I pump Shivan Dragon twice; one Zombie, not two.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shivan Dragon
+manapool:{R}{R}
+[PLAYER2]
+inplay:Wizened Mentor
+[DO]
+Shivan Dragon
+Shivan Dragon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Shivan Dragon
+pt:Shivan Dragon=7/5
+[PLAYER2]
+inplay:Wizened Mentor,*
+[END]

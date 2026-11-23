@@ -41677,7 +41677,8 @@ type=Instant
 [/card]
 [card]
 name=Flamescroll Celebrant
-missing=opponent activates an ability
+#2026-11-23: trigger written with the new @activated trigger.
+auto=@activated(*|opponentbattlefield,opponenthand,opponentgraveyard,opponentexile):damage:1 opponent
 abilities=flash
 other={W}{W} name(Revel in Silence)
 otherrestriction=compare(isflipped)~equalto~1
@@ -142300,7 +142301,8 @@ grade=borderline
 # REVIEW 2026-08-02 [P:low] HOB preview build
 # REMOVED 2026-08-03: invented trigger (zero uses in mtg.txt, unknown to the parser) -- auto=@activate ability(*[-mana]) source(creature|mybattlefield) restriction{} turnlimited:draw:1 controller
 auto={5}{U}{U}:target(<2>other permanent[-land]|mybattlefield) moveto(myexile) and!( transforms((,newability[phaseaction[end once] moveto(ownerbattlefield)])) forever )!
-missing=the 'whenever you activate an ability of a creature, draw a card' trigger is not implemented (@activate is not a real trigger and crashed the engine)
+#2026-11-23: trigger written with the new @activatedany trigger (mana abilities count: the card does not exclude them).
+auto=@activatedany(creature|mybattlefield) turnlimited:draw:1 controller
 text=Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn. -- {5}{U}{U}: Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 mana={2}{U}
 type=Legendary Creature
@@ -159352,4 +159354,152 @@ type=Legendary Creature
 subtype=God
 power=5
 toughness=5
+[/card]
+[card]
+name=Burning-Tree Shaman
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activated(*|mybattlefield,myhand,mygraveyard,myexile):damage:1 controller
+auto=@activated(*|opponentbattlefield,opponenthand,opponentgraveyard,opponentexile):damage:1 opponent
+text=Whenever a player activates an ability that isn't a mana ability, this creature deals 1 damage to that player.
+mana={1}{R}{G}
+type=Creature
+subtype=Centaur Shaman
+power=3
+toughness=4
+[/card]
+[card]
+name=Runic Armasaur
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activated(creature,land|opponentbattlefield):may draw:1 controller
+text=Whenever an opponent activates an ability of a creature or land that isn't a mana ability, you may draw a card.
+mana={1}{G}{G}
+type=Creature
+subtype=Dinosaur
+power=2
+toughness=5
+[/card]
+[card]
+name=Harsh Mentor
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activated(artifact,creature,land|opponentbattlefield):damage:2 opponent
+text=Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, this creature deals 2 damage to that player.
+mana={1}{R}
+type=Creature
+subtype=Human Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Crackdown Construct
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activated(artifact,creature|mybattlefield):all(this) 1/1 ueot
+text=Whenever you activate an ability of an artifact or creature that isn't a mana ability, this creature gets +1/+1 until end of turn.
+mana={4}
+type=Artifact Creature
+subtype=Construct
+power=2
+toughness=2
+[/card]
+[card]
+name=Wizened Mentor
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activated(*|opponentbattlefield) turnlimited:token(Zombie,Creature Zombie,1/1,white)
+text=Whenever an opponent activates an ability of a permanent that isn't a mana ability, you create a 1/1 white Zombie creature token. This ability triggers only once each turn.
+mana={1}{W}
+type=Creature
+subtype=Zombie Cleric
+power=2
+toughness=2
+[/card]
+[card]
+name=Ceaseless Searblades
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@activatedany(elemental|mybattlefield,myhand,mygraveyard,myexile):all(this) 1/0 ueot
+text=Whenever you activate an ability of an Elemental, this creature gets +1/+0 until end of turn.
+mana={3}{R}
+type=Creature
+subtype=Elemental Warrior
+power=2
+toughness=4
+[/card]
+[card]
+name=Avalanche of Sector 7
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+abilities=menace
+anyzone=type:artifact:opponentbattlefield/3 cdaactive
+auto=@activatedany(artifact|opponentbattlefield):damage:1 opponent
+text=Menace -- Avalanche of Sector 7's power is equal to the number of artifacts your opponents control. -- Whenever an opponent activates an ability of an artifact they control, Avalanche of Sector 7 deals 1 damage to that player.
+mana={2}{R}
+type=Legendary Creature
+subtype=Human Rebel
+power=*
+toughness=3
+[/card]
+[card]
+name=Ajani Unrelenting
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=counter(0/0,5,loyalty)
+auto=@activatedloyalty(planeswalker|mybattlefield):token(Cadet,Creature Wizard Soldier,2/2)
+auto={C(0/0,1,Loyalty)}:name(+1: Creatures get +1/+0 and haste) all(creature|mybattlefield) 1/0 ueot && all(creature|mybattlefield) haste ueot
+auto={C(0/0,-2,Loyalty)}:name(-2: Discard your hand, draw per creature) reject all(*|myhand) && draw:type:creature:mybattlefield controller
+auto={C(0/0,-3,Loyalty)}:name(-3: 4 damage to each creature but your tokens) all(creature[-token]|mybattlefield) damage:4 && all(creature|opponentbattlefield) damage:4
+text=Whenever you activate a loyalty ability, create a 2/2 colorless Wizard Soldier creature token named Cadet. -- +1: Creatures you control get +1/+0 and gain haste until end of turn. -- -2: Discard your hand, then draw a card for each creature you control. -- -3: Ajani deals 4 damage to each creature except for tokens you control.
+mana={4}{R}{R}
+type=Legendary Planeswalker
+subtype=Ajani
+[/card]
+[card]
+name=Elspeth's Talent
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+target=planeswalker
+auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Create three 1/1 Soldiers) token(Soldier,Creature Soldier,1/1,white)*3
+auto=@activatedloyalty(mytgt):all(creature|mybattlefield) 2/2 ueot && all(creature|mybattlefield) vigilance ueot
+text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens." -- Whenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
+mana={2}{W}{W}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Haunting Wind
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@tapped(artifact|mybattlefield):damage:1 controller
+auto=@tapped(artifact|opponentbattlefield):damage:1 opponent
+auto=@activatednotap(artifact|mybattlefield):damage:1 controller
+auto=@activatednotap(artifact|opponentbattlefield):damage:1 opponent
+text=Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, this enchantment deals 1 damage to that artifact's controller.
+mana={3}{B}
+type=Enchantment
+[/card]
+[card]
+name=Powerleech
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@tapped(artifact|opponentbattlefield):life:1 controller
+auto=@activatednotap(artifact|opponentbattlefield):life:1 controller
+text=Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.
+mana={G}{G}
+type=Enchantment
+[/card]
+[card]
+name=Artifact Possession
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+target=artifact
+auto=@tapped(mytgt):damage:2 targetcontroller
+auto=@activatednotap(mytgt):damage:2 targetcontroller
+text=Enchant artifact -- Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, this Aura deals 2 damage to that artifact's controller.
+mana={2}{B}
+type=Enchantment
+subtype=Aura
+[/card]
+[card]
+name=Neerdiv, Devious Diver
+#2026-11-23 activate-ability trigger batch: written from existing working forms.
+auto=@tapped(this):target(player) deplete:power
+auto=@movedTo(*|mystack) from(mygraveyard):draw:1 controller && counter(1/1) all(this)
+auto=@activatedany(*|mygraveyard):draw:1 controller && counter(1/1) all(this)
+text=Whenever Neerdiv becomes tapped, target player mills cards equal to its power. -- Whenever you cast a spell from your graveyard or activate an ability of a card in your graveyard, draw a card and put a +1/+1 counter on Neerdiv.
+mana={2}{U}
+type=Legendary Creature
+subtype=Merfolk Rogue
+power=2
+toughness=2
 [/card]

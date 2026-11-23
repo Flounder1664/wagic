@@ -1,0 +1,17 @@
+#Haunting Wind: Bottle Gnomes (no {T} in its cost) is activated: 3 life, then 1 damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Haunting Wind,Bottle Gnomes
+life:20
+[PLAYER2]
+[DO]
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Haunting Wind
+graveyard:Bottle Gnomes
+life:22
+[PLAYER2]
+[END]

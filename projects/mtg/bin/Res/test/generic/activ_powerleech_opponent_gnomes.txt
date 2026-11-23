@@ -1,0 +1,20 @@
+#Powerleech (opponent's): I activate Bottle Gnomes (no {T} in its cost); they gain 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bottle Gnomes
+life:20
+[PLAYER2]
+inplay:Powerleech
+life:20
+[DO]
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Bottle Gnomes
+life:23
+[PLAYER2]
+inplay:Powerleech
+life:21
+[END]

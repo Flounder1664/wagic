@@ -1,0 +1,25 @@
+#Elspeth's Talent on Jace Beleren: Jace's +2 gives my Grizzly Bears +2/+2.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jace Beleren,Grizzly Bears
+hand:Elspeth's Talent
+manapool:{2}{W}{W}
+library:Plains,Forest
+[PLAYER2]
+library:Island
+[DO]
+Elspeth's Talent
+Jace Beleren
+Jace Beleren
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Jace Beleren,Grizzly Bears,Elspeth's Talent
+pt:Grizzly Bears=4/4
+hand:Forest
+library:Plains
+[PLAYER2]
+hand:Island
+[END]

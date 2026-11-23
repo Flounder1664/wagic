@@ -1,0 +1,17 @@
+#Ceaseless Searblades: I pump Flame Spirit (an Elemental); Searblades gets +1/+0.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ceaseless Searblades,Flame Spirit
+manapool:{R}
+[PLAYER2]
+[DO]
+Flame Spirit
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ceaseless Searblades,Flame Spirit
+pt:Ceaseless Searblades=3/4
+pt:Flame Spirit=3/3
+[PLAYER2]
+[END]

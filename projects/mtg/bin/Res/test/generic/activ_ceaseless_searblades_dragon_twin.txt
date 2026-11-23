@@ -1,0 +1,17 @@
+#Twin: Shivan Dragon is not an Elemental; Searblades stays 2/4.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ceaseless Searblades,Shivan Dragon
+manapool:{R}
+[PLAYER2]
+[DO]
+Shivan Dragon
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Ceaseless Searblades,Shivan Dragon
+pt:Ceaseless Searblades=2/4
+pt:Shivan Dragon=6/5
+[PLAYER2]
+[END]

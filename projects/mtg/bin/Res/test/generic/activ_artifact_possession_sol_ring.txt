@@ -1,0 +1,21 @@
+#Artifact Possession on my Sol Ring: tapping it deals 2 damage to me.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sol Ring
+hand:Artifact Possession
+manapool:{2}{B}
+life:20
+[PLAYER2]
+[DO]
+Artifact Possession
+Sol Ring
+Sol Ring
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Sol Ring,Artifact Possession
+manapool:{C}{C}
+life:18
+[PLAYER2]
+[END]
