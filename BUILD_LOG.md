@@ -75,4 +75,5 @@ Device serials:
 2026-11-22 d1aec4132 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (one text size per menu); launched from G: 15s before replacing, no crash; harness 6/2653 known failures; backups .old.202611222132.
 2026-11-22 f14f9af17 (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611222211.old; read back ok. connive 17, goad 12, spree 7 (exes ca7e3869e menu-click guard)
 2026-11-22 f14f9af17 (wagic-v146-windows)  device=Windows result=exes - Wagic.exe + Wagic-testsuite.exe (menu-click guard ca7e3869e); launched from G: 15s before replacing, no crash; harness 6/2697 known failures; collection rebuilt; backups .old.202611222211.
+2026-11-23 cfb3ab8ed (wagic-v146-windows)  device=Windows result=core-zip-patch - 2 member(s): sets/primitives/borderline.txt, sets/primitives/unsupported.txt; backup core.zip.ship202611230019.old; read back ok.
 ```
