@@ -148311,11 +148311,11 @@ toughness=2
 [/card]
 [card]
 name=Spider-Sense
-target=*[instant;sorcery]|stack
+#2026-11-23: countering an ability is stifleability(...) - the nearest ability below this on the stack.
+auto=choice name(Counter target instant or sorcery spell) fizzle target(*[instant;sorcery]|stack)
+auto=choice name(Counter target triggered ability) stifleability(triggered)
 other={U}{h(creature[tapped]|myBattlefield)} name(Web-slinging)
 otherrestriction=type(creature[tapped]|mybattlefield)~morethan~0
-auto=fizzle
-missing=cannot counter a triggered ability, only instant and sorcery spells
 text=Web-slinging {U} (You may cast this spell for {U} if you also return a tapped creature you control to its owner's hand.) -- Counter target instant spell, sorcery spell, or triggered ability.
 mana={1}{U}
 type=Instant

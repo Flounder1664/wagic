@@ -1,0 +1,18 @@
+#Twin: Soul Warden is a creature, not an artifact or enchantment - its trigger resolves.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden
+hand:Green Slime
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Green Slime
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden,Green Slime
+life:21
+[PLAYER2]
+[END]

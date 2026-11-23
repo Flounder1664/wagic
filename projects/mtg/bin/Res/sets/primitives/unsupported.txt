@@ -569,15 +569,6 @@ power=2
 toughness=2
 [/card]
 [card]
-name=Azorius Guildmage
-text={2}{W}: Tap target creature. -- {2}{U}: Counter target activated ability. (Mana abilities can't be targeted.)
-mana={WU}{WU}
-type=Creature
-subtype=Vedalken Wizard
-power=2
-toughness=2
-[/card]
-[card]
 name=B-I-N-G-O
 abilities=trample
 text=Trample -- Whenever a player plays a spell, put a chip counter on its converted mana cost. -- B-I-N-G-O gets +9/+9 for each set of three numbers in a row with chip counters on them.
@@ -802,12 +793,6 @@ name=Better Than One
 text=A person outside the game becomes your teammate. (Choose any number of cards in your hand, on top of your library, or on the battlefield under your control. Those cards become your teammate's hand, library, and permanents, respectively.)
 mana={G}{W}
 type=Sorcery
-[/card]
-[card]
-name=Bind
-text=Counter target activated ability. (Mana abilities can't be targeted.) -- Draw a card.
-mana={1}{G}
-type=Instant
 [/card]
 [card]
 name=Biomancer's Familiar
@@ -1111,15 +1096,6 @@ type=Creature
 subtype=Cat
 power=3
 toughness=3
-[/card]
-[card]
-name=Brown Ouphe
-text={1}{G}, {T}: Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
-mana={G}
-type=Creature
-subtype=Ouphe
-power=1
-toughness=1
 [/card]
 [card]
 name=Brushstroke Paintermage
@@ -4042,16 +4018,6 @@ name=Greater Realm of Preservation
 text={1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.
 mana={1}{W}
 type=Enchantment
-[/card]
-[card]
-name=Green Slime
-abilities=flash
-text=Flash -- When Green Slime enters the battlefield, counter target activated or triggered ability from an artifact or enchantment source. If a permanent's ability is countered this way, destroy that permanent. -- Foretell {G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
-mana={2}{G}
-type=Creature
-subtype=Ooze
-power=2
-toughness=2
 [/card]
 [card]
 name=Grell Philosopher
@@ -7347,15 +7313,6 @@ mana={1}{B}{B}
 type=Enchantment
 [/card]
 [card]
-name=Ouphe Vandals
-text={G}, Sacrifice Ouphe Vandals: Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield. (Mana abilities can't be targeted.)
-mana={2}{G}
-type=Creature
-subtype=Ouphe Rogue
-power=2
-toughness=2
-[/card]
-[card]
 name=Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental
 text=Art rampage 2 (Whenever this becomes blocked by a creature, it gets +2/+2 for each creature in the blocker's art beyond the first.)
 mana={1}{G}{G}
@@ -8266,15 +8223,6 @@ mana={1}{W}
 type=Enchantment
 [/card]
 [card]
-name=Rimewind Cryomancer
-text={1}, {T}: Counter target activated ability. Activate this ability only if you control four or more snow permanents. (Mana abilities can't be targeted.)
-mana={3}{U}
-type=Creature
-subtype=Human Wizard
-power=2
-toughness=3
-[/card]
-[card]
 name=Rings a Bell
 text=As Rings a Bell enters the battlefield, choose a word with four or more letters. -- After you say the chosen word for the first time each turn, an opponent may ring or imitate a bell within five seconds. When no opponent does, draw a card.
 mana={2}{U}{U}
@@ -8378,12 +8326,6 @@ name=Runesword
 text={3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
 mana={6}
 type=Artifact
-[/card]
-[card]
-name=Rust
-text=Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
-mana={G}
-type=Instant
 [/card]
 [card]
 name=Ruxa, Patient Professor
@@ -9471,12 +9413,6 @@ mana={1}{U}{R}
 type=Sorcery
 [/card]
 [card]
-name=Squelch
-text=Counter target activated ability. (Mana abilities can't be targeted.) -- Draw a card.
-mana={1}{U}
-type=Instant
-[/card]
-[card]
 name=Squirrel Dealer
 text=When Squirrel Dealer enters the battlefield, ask a person outside the game "Do you like Squirrels?" If they do, create a 1/1 green Squirrel creature token.
 mana={G}
@@ -9629,12 +9565,6 @@ name=Stick Together
 text=Each player chooses a party from among creatures they control, then sacrifices the rest. (To choose a party, choose up to one each of Cleric, Rogue, Warrior, and Wizard.)
 mana={3}{W}{W}
 type=Sorcery
-[/card]
-[card]
-name=Stifle
-text=Counter target activated or triggered ability. (Mana abilities can't be targeted.)
-mana={U}
-type=Instant
 [/card]
 [card]
 name=Stinging Licid
@@ -11071,16 +11001,6 @@ type=Creature
 subtype=Wall
 power=0
 toughness=4
-[/card]
-[card]
-name=Voidmage Husher
-abilities=flash
-text=Flash (You may cast this spell any time you could cast an instant.) -- When Voidmage Husher enters the battlefield, counter target activated ability. (Mana abilities can't be targeted.) -- Whenever you cast a spell, you may return Voidmage Husher to its owner's hand.
-mana={3}{U}
-type=Creature
-subtype=Human Wizard
-power=2
-toughness=2
 [/card]
 [card]
 name=Voidwalk

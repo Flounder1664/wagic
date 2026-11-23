@@ -1,0 +1,18 @@
+#Tishana's Tidebinder enters; Soul Warden's trigger from it is on the stack, and Tidebinder counters it - no life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden
+hand:Tishana's Tidebinder
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Tishana's Tidebinder
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden,Tishana's Tidebinder
+life:20
+[PLAYER2]
+[END]

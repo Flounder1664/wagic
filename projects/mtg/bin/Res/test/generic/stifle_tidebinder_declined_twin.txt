@@ -1,0 +1,18 @@
+#Twin: I decline to counter - Soul Warden gains me 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden
+hand:Tishana's Tidebinder
+manapool:{2}{U}
+[PLAYER2]
+[DO]
+Tishana's Tidebinder
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden,Tishana's Tidebinder
+life:21
+[PLAYER2]
+[END]

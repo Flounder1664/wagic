@@ -1,4 +1,5 @@
 #Spider-Sense (player 2) counters player 1's instant (Shock aimed at player 2).
+#It is modal since 2026-11-23 (spell or triggered ability): choice 0 is the spell mode.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -13,6 +14,7 @@ p2
 no
 yes
 Spider-Sense
+choice 0
 Shock
 endinterruption
 [ASSERT]

@@ -1,0 +1,26 @@
+#Squelch (player 2) counters my Prodigal Pyromancer's ping and draws a card.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+hand:Squelch
+manapool:{1}{U}
+library:Plains,Island
+[DO]
+Prodigal Pyromancer
+p2
+no
+yes
+Squelch
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+graveyard:Squelch
+hand:Island
+library:Plains
+life:20
+[END]

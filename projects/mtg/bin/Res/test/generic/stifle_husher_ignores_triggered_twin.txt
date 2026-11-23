@@ -1,0 +1,17 @@
+#Voidmage Husher counters only ACTIVATED abilities: Soul Warden's trigger still gains me 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden
+hand:Voidmage Husher
+manapool:{3}{U}
+[PLAYER2]
+[DO]
+Voidmage Husher
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden,Voidmage Husher
+life:21
+[PLAYER2]
+[END]

@@ -1,0 +1,19 @@
+#Green Slime enters: it counters Impact Tremors' trigger (an enchantment's) and destroys Impact Tremors.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Impact Tremors
+hand:Green Slime
+manapool:{2}{G}
+[PLAYER2]
+[DO]
+Green Slime
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Green Slime
+graveyard:Impact Tremors
+[PLAYER2]
+life:20
+[END]

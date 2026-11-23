@@ -1,0 +1,18 @@
+#Sister of Silence enters; I choose to counter an ability - Soul Warden's trigger from it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden
+hand:Sister of Silence
+manapool:{4}{U}
+[PLAYER2]
+[DO]
+Sister of Silence
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Soul Warden,Sister of Silence
+life:20
+[PLAYER2]
+[END]

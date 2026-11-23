@@ -1,0 +1,23 @@
+#Stifle (player 2) counters my Prodigal Pyromancer's ping in response - no damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+hand:Stifle
+manapool:{U}
+[DO]
+Prodigal Pyromancer
+p2
+no
+yes
+Stifle
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Prodigal Pyromancer
+[PLAYER2]
+graveyard:Stifle
+life:20
+[END]

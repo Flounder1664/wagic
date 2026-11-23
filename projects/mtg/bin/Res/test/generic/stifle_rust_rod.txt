@@ -1,0 +1,24 @@
+#Rust (player 2) counters Rod of Ruin's ability (an artifact's) - no damage.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rod of Ruin
+manapool:{3}
+[PLAYER2]
+hand:Rust
+manapool:{G}
+[DO]
+Rod of Ruin
+p2
+no
+yes
+Rust
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rod of Ruin
+[PLAYER2]
+graveyard:Rust
+life:20
+[END]
