@@ -159701,8 +159701,7 @@ toughness=4
 name=Rattleback Apothecary
 #2026-11-23 crime batch: written from existing working forms.
 abilities=deathtouch
-auto=@committedcrime:choice name(Menace) target(creature|mybattlefield) menace ueot
-auto=@committedcrime:choice name(Lifelink) target(creature|mybattlefield) lifelink ueot
+auto=@committedcrime:name(Menace or lifelink) target(creature|mybattlefield) transforms((,newability[choice name(Gains menace) becomes(^^menace) ueot],newability[choice name(Gains lifelink) becomes(^^lifelink) ueot])) ueot
 text=Deathtouch -- Whenever you commit a crime, target creature you control gains your choice of menace or lifelink until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 mana={2}{B}
 type=Creature
@@ -159841,8 +159840,8 @@ subtype=Room
 name=Dredger's Insight
 #2026-11-23 graveyard-leave batch: written from existing working forms.
 auto=@leftmygraveyard(artifact,creature) oneormore:life:1 controller
-#"From among the milled cards" is read as artifact/creature/land cards put into your graveyard this turn.
-auto=deplete:4 controller && ability$!name(Put a milled card into your hand) target(<upto:1>*[fresh&artifact;fresh&creature;fresh&land]|mygraveyard) moveto(myhand) !$ controller
+note=The pick may take any artifact, creature or land card in your graveyard, not only the milled ones: the engine marks a card "fresh" only when it reaches the graveyard from the battlefield or the stack, so a filter on fresh found nothing after the mill (scenario 164, 2026-11-24).
+auto=deplete:4 controller && ability$!name(Put a milled card into your hand) target(<upto:1>artifact,creature,land|mygraveyard) moveto(myhand)!$ controller
 text=Whenever one or more artifact and/or creature cards leave your graveyard, you gain 1 life. -- When this enchantment enters, mill four cards. You may put an artifact, creature, or land card from among the milled cards into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
 mana={1}{G}
 type=Enchantment

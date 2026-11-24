@@ -1,0 +1,21 @@
+#Dredger's Insight: mill four, then take an artifact, creature or land among them. Hill Giant goes to
+#hand, and leaving the graveyard triggers the 1-life gain.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Dredger's Insight
+manapool:{1}{G}
+library:Shock,Plains,Llanowar Elves,Hill Giant
+[PLAYER2]
+[DO]
+Dredger's Insight
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Dredger's Insight
+hand:Hill Giant
+graveyard:Shock,Plains,Llanowar Elves
+life:21
+[PLAYER2]
+[END]
