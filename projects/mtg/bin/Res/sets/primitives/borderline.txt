@@ -160572,3 +160572,11 @@ text=The owner of target permanent shuffles it into their library. Then they may
 mana={2}{R}
 type=Instant
 [/card]
+[card]
+name=Mishra's Toy Workshop
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms (Mishra's Workshop).
+#The mana is spendable on spells and abilities of cards that make tokens ([tokenmaker]); Wagic cannot tell which of a card's abilities makes them. Toys are not modelled.
+auto={T}:add{C}{C}{C} spendspells(*[tokenmaker]) spendabilities(*[tokenmaker])
+text={T}: Add {C}{C}{C}. Spend this mana only on spells and abilities that put tokens onto the battlefield. Use toys to represent the tokens.
+type=Land
+[/card]

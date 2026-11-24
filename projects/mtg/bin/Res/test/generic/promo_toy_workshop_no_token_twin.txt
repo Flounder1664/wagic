@@ -1,0 +1,18 @@
+#Twin: Bronze Sable makes no tokens, so the Workshop's mana cannot pay for it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mishra's Toy Workshop
+hand:Bronze Sable
+[PLAYER2]
+[DO]
+Mishra's Toy Workshop
+Bronze Sable
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mishra's Toy Workshop
+hand:Bronze Sable
+manapool:{C}{C}{C}
+[PLAYER2]
+[END]

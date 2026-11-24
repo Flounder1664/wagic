@@ -1,0 +1,17 @@
+#Mishra's Toy Workshop: its {C}{C}{C} pays for Myr Sire, a card that makes a token (one {C} left).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mishra's Toy Workshop
+hand:Myr Sire
+[PLAYER2]
+[DO]
+Mishra's Toy Workshop
+Myr Sire
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Mishra's Toy Workshop,Myr Sire
+manapool:{C}
+[PLAYER2]
+[END]
