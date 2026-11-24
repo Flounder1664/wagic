@@ -1,0 +1,18 @@
+#Last-Minute Chopping: I gain control of the opponent's Hill Giant.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Last-Minute Chopping
+manapool:{1}{U}{B}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Last-Minute Chopping
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Last-Minute Chopping
+[PLAYER2]
+[END]

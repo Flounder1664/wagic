@@ -1,0 +1,24 @@
+#Snow Mercy: Prodigal Pyromancer pings me and gets a globe counter; I untap it with Vitalize, then Snow Mercy taps it again.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snow Mercy,Prodigal Pyromancer,Grizzly Bears
+hand:Vitalize
+manapool:{G}
+[PLAYER2]
+[DO]
+Prodigal Pyromancer
+p1
+Vitalize
+Snow Mercy
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Snow Mercy,Prodigal Pyromancer,Grizzly Bears
+life:19
+counter:Prodigal Pyromancer=Globe:1
+counter:Grizzly Bears=Globe:0
+tappedinplay:2
+graveyard:Vitalize
+[PLAYER2]
+[END]

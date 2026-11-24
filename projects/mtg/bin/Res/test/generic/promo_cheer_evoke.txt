@@ -1,0 +1,19 @@
+#Cheer evoked for {0}: it copies a Soldier twice and is sacrificed.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Raise the Alarm,Cheer
+manapool:{1}{W}
+[PLAYER2]
+[DO]
+Raise the Alarm
+Cheer
+choice 1
+Soldier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*,*,*
+graveyard:Raise the Alarm,Cheer
+[PLAYER2]
+[END]

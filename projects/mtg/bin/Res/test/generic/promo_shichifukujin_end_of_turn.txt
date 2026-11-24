@@ -1,0 +1,17 @@
+#...and puts three back at end of turn (8/8).
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Shichifukujin Dragon
+manapool:{R}{R}{R}
+[PLAYER2]
+[DO]
+Shichifukujin Dragon
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+inplay:Shichifukujin Dragon
+pt:Shichifukujin Dragon=8/8
+[PLAYER2]
+[END]

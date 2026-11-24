@@ -1,0 +1,19 @@
+#Cheer enters and makes two copies of a Soldier token: four Soldiers.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Raise the Alarm,Cheer
+manapool:{1}{W}{3}{R}{W}
+[PLAYER2]
+[DO]
+Raise the Alarm
+Cheer
+choice 0
+Soldier
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Cheer,*,*,*,*
+graveyard:Raise the Alarm
+[PLAYER2]
+[END]

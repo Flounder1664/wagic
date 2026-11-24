@@ -1,0 +1,16 @@
+#Deb Thomas +1: an Employee token enters, which adds another loyalty counter (3 -> 5).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deb Thomas
+[PLAYER2]
+[DO]
+Deb Thomas
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deb Thomas,*
+counter:Deb Thomas=loyalty:5
+[PLAYER2]
+[END]

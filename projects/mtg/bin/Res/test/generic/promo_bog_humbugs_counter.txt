@@ -1,0 +1,21 @@
+#Bog Humbugs deals combat damage and gets a +1/+1 counter.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Bog Humbugs
+[PLAYER2]
+[DO]
+next
+next
+Bog Humbugs
+next
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Bog Humbugs
+pt:Bog Humbugs=2/2
+[PLAYER2]
+life:19
+[END]

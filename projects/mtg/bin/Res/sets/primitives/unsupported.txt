@@ -16,13 +16,6 @@ mana={2}{B}
 type=Enchantment
 [/card]
 [card]
-name=1996 World Champion
-text=Cannot be the targets of spells or effects. World Champion has power and toughness equal to the life totals of target opponent. {0}: Discard your hand to search your library for 1996 World Champion and reveal it to all players. Shuffle your library and put 1996 World Champion on top of it. Use this ability only at the beginning of your upkeep, and only if 1996 World Champion is in your library.
-mana={W}{U}{B}{R}{G}
-type=Summon
-subtype=Legend
-[/card]
-[card]
 name=A Display of My Dark Power
 text=When you set this scheme in motion, until your next turn, whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
 type=Scheme
@@ -2996,12 +2989,6 @@ type=Artifact
 name=Evil Comes to Fruition
 text=When you set this scheme in motion, put seven 0/1 green Plant creature tokens onto the battlefield. If you control ten or more lands, put seven 3/3 green Elemental creature tokens onto the battlefield instead.
 type=Scheme
-[/card]
-[card]
-name=Evil Presents
-text=Put a creature card from your hand into play under starget opponent's control. That creature attacks each turn if able... and always attacks its controller.
-mana={2}{B}{B}
-type=Sorcery
 [/card]
 [card]
 name=Exiled Doomsayer
@@ -8757,13 +8744,6 @@ power=?
 toughness=?
 [/card]
 [card]
-name=Shichifukujin Dragon
-text=When Shichifukujin Dragon comes into play, put seven +1/+1 counters on it. {R}{R}{R}, Remove two +1/+1 counters: Put three +1/+1 counters on Shichifukujin Dragon at end of turn. Play this ability as a sorcery.
-mana={6}{R}{R}{R}
-type=Summon
-subtype=Dragon
-[/card]
-[card]
 name=Shield Bearer
 abilities=banding
 missing=banding is not implemented. The keyword parses and Constants::BANDING exists, but the only code that reads it - MTGCardInstance::getNextPartner() - is never called from anywhere, and the banding member is only ever set to NULL. Measured 2026-09-08. Same root cause as "can block an additional creature": the combat model pairs one blocker with one attacker. See https://github.com/Flounder1664/wagic/issues/38
@@ -9065,12 +9045,6 @@ type=Creature
 subtype=Squirrel Advisor
 power=1
 toughness=1
-[/card]
-[card]
-name=Snow Mercy
-text=Whenever a creature deals damage to you, put a globe counter on it. -- {T}, {untap}, {T}, {untap}, {T}: Tap all creatures with globe counters on them.
-mana={2}{W}{W}
-type=Snow Enchantment
 [/card]
 [card]
 name=Snowblind

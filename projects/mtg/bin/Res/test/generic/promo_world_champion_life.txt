@@ -1,0 +1,16 @@
+#1996 World Champion is as big as the opponent's life total (13).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1996 World Champion
+[PLAYER2]
+life:13
+[DO]
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1996 World Champion
+pt:1996 World Champion=13/13
+[PLAYER2]
+life:13
+[END]

@@ -1,0 +1,21 @@
+#Naughty: I take Hill Giant from the opponent's library into my hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Naughty // Nice
+manapool:{1}{B}{B}
+[PLAYER2]
+library:Plains,Hill Giant,Island
+[DO]
+Naughty // Nice
+choice 0
+Hill Giant
+revealdone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant
+graveyard:Naughty // Nice
+[PLAYER2]
+library:Plains,Island
+[END]

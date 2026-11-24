@@ -1,0 +1,22 @@
+#Nice: I put Hill Giant from my library into the opponent's hand.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Naughty // Nice
+manapool:{1}{W}{W}
+library:Swamp,Hill Giant
+[PLAYER2]
+[DO]
+Naughty // Nice
+choice 1
+choice 0
+Hill Giant
+revealdone
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Naughty // Nice
+library:Swamp
+[PLAYER2]
+hand:Hill Giant
+[END]

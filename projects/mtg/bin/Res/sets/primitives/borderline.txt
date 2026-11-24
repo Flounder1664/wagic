@@ -160399,3 +160399,113 @@ subtype=Human Knight
 power=3
 toughness=3
 [/card]
+[card]
+name=Naughty // Nice
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Naughty puts the other cards back but does not shuffle the opponent's library afterwards.
+other={1}{W}{W} name(Nice)
+auto=ifnot paid(alternative) then name(search card) reveal:type:*:opponentlibrary revealzone(opponentlibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(ownerlibrary)],newability[moveto(myhand)])) optiononeend optiontwo name(put back) target(<1>*|reveal) moveto(ownerlibrary) and!( all(*|reveal) moveto(ownerlibrary) and!(shuffle)! )! optiontwoend revealend
+auto=alternative name(search card) Reveal:type:*:mylibrary revealzone(mylibrary) optionone name(choose card) target(<1>*|reveal) transforms((,newability[all(other *|reveal) moveto(mylibrary) and!(shuffle)!],newability[moveto(opponenthand)])) optiononeend optiontwo name(shuffle) bottomoflibrary target(<1>*|reveal) and!( all(*|reveal) bottomoflibrary and!(shuffle)! )! optiontwoend revealend
+text=Naughty: Search another target player's library for a card and put that card into your hand. Then shuffle that player's library. -- Nice: Search your library for a card and put it into another target player's hand. Then shuffle your library.
+mana={1}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Bog Humbugs
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Humming a song is not modelled: the +1/+1 counter is always put on.
+abilities=flying
+auto=@combatdamaged(player) from(this):counter(1/1)
+auto=@combatdamaged(creature) from(this):counter(1/1)
+text=Flying -- Whenever Bog Humbugs deals combat damage, hum that many notes of a festive song. If you can, put a +1/+1 counter on Bog Humbugs.
+mana={1}{B}
+type=Creature
+subtype=Insect
+power=1
+toughness=1
+[/card]
+[card]
+name=Evil Presents
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#"Always attacks its controller": with two players the only player it can attack is you, the caster.
+auto=target(creature|myhand) moveTo(opponentbattlefield) and!( transforms((,mustattack)) forever )!
+text=Put a creature card from your hand into play under target opponent's control. That creature attacks each turn if able . . . and always attacks its controller.
+mana={2}{B}{B}
+type=Sorcery
+[/card]
+[card]
+name=Snow Mercy
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#The {T}, {Q}, {T}, {Q}, {T} cost is modelled as {T}: tapping and untapping it in turn changes nothing else.
+auto=@damageof(player) from(creature):all(trigger[from]) counter(0/0,1,Globe)
+auto={T}:name(Tap creatures with globe counters) all(creature[counter{0/0.1.Globe}]|battlefield) tap
+text=Whenever a creature deals damage to you, put a globe counter on it. -- {T}, {Q}, {T}, {Q}, {T}: Tap all creatures with globe counters on them.
+mana={2}{W}{W}
+type=Snow Enchantment
+[/card]
+[card]
+name=Cheer
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Evoke - Celebrate an opponent costs no mana, so evoke is {0}.
+abilities=lifelink,haste
+other={0} name(Evoke)
+auto=alternative sacrifice
+auto=name(Copy a token twice) target(*[token]|battlefield) transforms((,newability[clone],newability[clone])) oneshot
+text=Lifelink, haste -- When this creature enters, create two tokens that are copies of target token. -- Evoke - Celebrate an opponent. (To celebrate an opponent, give them a gift, toast to them, or even just tell them you're grateful to be playing Magic together.)
+mana={3}{R}{W}
+type=Creature
+subtype=Elemental Incarnation
+power=4
+toughness=4
+[/card]
+[card]
+name=Last-Minute Chopping
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Cards from outside the game are not modelled, so the opponent never has a present: you gain control of the permanent.
+auto=target(*|opponentbattlefield) moveTo(mybattlefield)
+text=Ask target opponent if they remembered to get you a present. If they say yes, they put a card they own from outside the game into your hand. Otherwise, you gain control of target permanent they control.
+mana={1}{U}{B}
+type=Sorcery
+[/card]
+[card]
+name=Shichifukujin Dragon
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+auto=counter(1/1,7)
+auto={R}{R}{R}{C(1/1,-2)}:name(Three +1/+1 counters at end of turn) phaseaction[end once] counter(1/1,3) asSorcery
+text=When Shichifukujin Dragon comes into play, put seven +1/+1 counters on it. -- {R}{R}{R}, Sacrifice two +1/+1 counters: Put three +1/+1 counters on Shichifukujin Dragon at end of turn. Play this ability as a sorcery.
+mana={6}{R}{R}{R}
+type=Creature
+subtype=Dragon
+power=0
+toughness=0
+[/card]
+[card]
+name=Deb Thomas
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+auto=counter(0/0,3,loyalty)
+auto=@movedTo(creature[employee]|mybattlefield):counter(0/0,1,loyalty)
+auto={C(0/0,1,Loyalty)}:name(+1: Create a 1/1 Employee) token(Employee,Creature Employee,1/1,red)
+auto={C(0/0,-1,Loyalty)}:name(-1: Employees and Dogs get +1/+0) all(creature[employee;dog]|mybattlefield) 1/0 ueot
+auto={C(0/0,-2,Loyalty)}:name(-2: Employees and Dogs get +2/+0) all(creature[employee;dog]|mybattlefield) 2/0 ueot
+auto={C(0/0,-3,Loyalty)}:name(-3: Employees and Dogs get +3/+0) all(creature[employee;dog]|mybattlefield) 3/0 ueot
+auto={C(0/0,-4,Loyalty)}:name(-4: Employees and Dogs get +4/+0) all(creature[employee;dog]|mybattlefield) 4/0 ueot
+auto={C(0/0,-5,Loyalty)}:name(-5: Employees and Dogs get +5/+0) all(creature[employee;dog]|mybattlefield) 5/0 ueot
+auto={C(0/0,-6,Loyalty)}:name(-6: Employees and Dogs get +6/+0) all(creature[employee;dog]|mybattlefield) 6/0 ueot
+auto={C(0/0,-7,Loyalty)}:name(-7: Employees and Dogs get +7/+0) all(creature[employee;dog]|mybattlefield) 7/0 ueot
+text=Whenever an Employee enters under your control, put a loyalty counter on Deb Thomas. -- +1: Create a 1/1 red Employee creature token. -- -X: Employees and Dogs you control get +X/+0 until end of turn.
+mana={3}{R}
+type=Legendary Planeswalker
+subtype=Deb
+[/card]
+[card]
+name=1996 World Champion
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+abilities=shroud
+anyzone=opponentlifetotal/opponentlifetotal cdaactive
+missing=The {0} ability works from your library at the beginning of your upkeep; Wagic has no way to activate an ability of a card in the library.
+text=Cannot be the target of spells or effects. World Champion has power and toughness equal to the life total of target opponent. -- {0}: Discard your hand to search your library for 1996 World Champion and reveal it to all players. Shuffle your library and put 1996 World Champion on top of it. Use this ability only at the beginning of your upkeep, and only if 1996 World Champion is in your library.
+mana={W}{U}{B}{R}{G}
+type=Legendary Creature
+power=*
+toughness=*
+[/card]

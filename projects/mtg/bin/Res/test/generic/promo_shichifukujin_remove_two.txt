@@ -1,0 +1,16 @@
+#Shichifukujin Dragon enters with seven counters (7/7); its ability removes two right away (5/5).
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Shichifukujin Dragon
+manapool:{R}{R}{R}
+[PLAYER2]
+[DO]
+Shichifukujin Dragon
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:Shichifukujin Dragon
+pt:Shichifukujin Dragon=5/5
+[PLAYER2]
+[END]

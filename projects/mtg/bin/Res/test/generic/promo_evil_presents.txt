@@ -1,0 +1,17 @@
+#Evil Presents puts my Grizzly Bears onto the opponent's battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Evil Presents,Grizzly Bears
+manapool:{2}{B}{B}
+[PLAYER2]
+[DO]
+Evil Presents
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Evil Presents
+[PLAYER2]
+inplay:Grizzly Bears
+[END]

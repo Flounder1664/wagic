@@ -1,0 +1,18 @@
+#Deb Thomas -2: my Dog gets +2/+0, my Grizzly Bears (neither Employee nor Dog) do not.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deb Thomas,Akroan Mastiff,Grizzly Bears
+[PLAYER2]
+[DO]
+Deb Thomas
+choice 2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Deb Thomas,Akroan Mastiff,Grizzly Bears
+counter:Deb Thomas=loyalty:1
+pt:Akroan Mastiff=4/2
+pt:Grizzly Bears=2/2
+[PLAYER2]
+[END]
