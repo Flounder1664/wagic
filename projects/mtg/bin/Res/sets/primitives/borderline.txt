@@ -157636,6 +157636,7 @@ type=Sorcery
 [/card]
 [card]
 name=Redeem the Lost
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): every colour in the protection menu is drawn at the same size.
 #VERIFIED IN GAME 2026-11-22 (John, scenario queue): the colour menu appears; protection from red stops Shock targeting the creature.
 #2026-11-22 clash batch: written from existing working forms.
 target=creature|mybattlefield
@@ -157812,6 +157813,7 @@ toughness=3
 [/card]
 [card]
 name=Baron Strucker, HYDRA Overlord
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): another Villain entering offers a "may connive".
 #2026-11-22 connive batch: written from existing working forms.
 auto=lord(villain|mycastingzone) altercost(colorless,-1)
 #"Do this only once each turn": turnlimited, so a declined "may" also uses up the turn.
@@ -157887,6 +157889,7 @@ toughness=2
 [/card]
 [card]
 name=Madame Masque
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): drawing your second card each turn makes a 2/1 Villain token.
 #2026-11-22 connive batch: written from existing working forms.
 auto=_CONNIVES_
 auto=_SECOND_DRAW_token(Villain,Creature Villain,2/1,black,menace)
@@ -157961,6 +157964,7 @@ toughness=2
 [/card]
 [card]
 name=Valentina Allegra de Fontaine
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): {T} target Hero connives (discard choice).
 #2026-11-22 connive batch: written from existing working forms.
 auto=lord(other villain|mybattlefield) becomes(Hero)
 auto={T}:target(hero|mybattlefield) transforms((,newability[_CONNIVES_])) oneshot asSorcery
@@ -158160,6 +158164,7 @@ type=Sorcery
 [/card]
 [card]
 name=One Last Job
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): +{1} third mode: return an Aura from your graveyard attached to a creature you control.
 #2026-11-22 spree batch 2: written from existing working forms.
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
 auto=may name(+{1}: Return target Aura or Equipment attached to a creature you control) pay({1}) name(Return target Aura or Equipment attached to a creature you control) target(*[aura;equipment]|mygraveyard) moveto(mybattlefield) and!( rehook target(creature|mybattlefield) )!
@@ -158171,6 +158176,7 @@ type=Sorcery
 [/card]
 [card]
 name=Rush of Dread
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): +{1} mode: opponent sacrifices half their creatures, rounded up (their choice).
 #2026-11-22 spree batch 2: written from existing working forms.
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
 auto=may name(+{2}: Opponent loses half their life, rounded up) pay({2}) name(Opponent loses half their life, rounded up) life:-halfupopponentlifetotal opponent
@@ -158396,6 +158402,7 @@ toughness=2
 [/card]
 [card]
 name=Smashing Spree
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): +3/+3 and trample on an attacking creature, cast during combat. NOTE: cast before blocks, the opponent could still choose not to block with Hill Giant (Lure should force it).
 #2026-11-22 easy batch 1: written from existing working forms.
 target=creature[attacking]
 auto=3/3 ueot
@@ -158783,6 +158790,7 @@ toughness=4
 [/card]
 [card]
 name=Frantic Confrontation
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): X=2 gives +2/+0, first strike and trample.
 #2026-11-22 easy batch 2: written from existing working forms.
 target=creature|mybattlefield
 auto=X/0 ueot
@@ -158964,6 +158972,7 @@ type=Sorcery
 [/card]
 [card]
 name=Casey Jones, Jury-Rig Justiciar
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): the other three looked-at cards go back into the library.
 #2026-11-22 easy batch 2: written from existing working forms.
 abilities=haste
 auto=name(look) reveal:4 optionone name(Get a card) target(<1>artifact|reveal) moveto(hand) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
@@ -159213,6 +159222,7 @@ type=Instant
 [/card]
 [card]
 name=Tattered Ratter
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): a Rat that becomes blocked gets +2/+0.
 #2026-11-22 easy batch 2: written from existing working forms.
 auto=@combat(blocked) source(rat|mybattlefield):all(trigger[to]) 2/0 ueot
 text=Whenever a Rat you control becomes blocked, it gets +2/+0 until end of turn.
@@ -159236,6 +159246,7 @@ toughness=4
 [/card]
 [card]
 name=Merchant of Venom
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): each player sacrifices a creature; each sacrifice puts a +1/+1 counter on Merchant.
 #2026-11-22 easy batch 2: written from existing working forms.
 abilities=menace
 auto=sacrifice notaTarget(creature|mybattlefield)
@@ -159340,6 +159351,7 @@ toughness=2
 [/card]
 [card]
 name=Tribal Unity
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): X=1, choose Bear: Bears get +1/+1, a non-Bear does not.
 #2026-11-22 easy batch 3: written from existing working forms.
 auto=chooseatype all(creature[chosentype]) X/X ueot chooseend
 text=Creatures of the creature type of your choice get +X/+X until end of turn.
@@ -159467,6 +159479,7 @@ subtype=Ajani
 [/card]
 [card]
 name=Elspeth's Talent
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): the [+1] it gives the enchanted planeswalker. NOTE: menu text says "create soldier" without "+1:"; the Soldier tokens have no picture.
 #2026-11-23 activate-ability trigger batch: written from existing working forms.
 target=planeswalker
 auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Create three 1/1 Soldiers) token(Soldier,Creature Soldier,1/1,white)*3
@@ -159509,6 +159522,7 @@ subtype=Aura
 [/card]
 [card]
 name=Neerdiv, Devious Diver
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): becoming tapped makes a target player mill cards equal to its power.
 #2026-11-23 activate-ability trigger batch: written from existing working forms.
 auto=@tapped(this):target(player) deplete:power
 auto=@movedTo(*|mystack) from(mygraveyard):draw:1 controller && counter(1/1) all(this)
@@ -159589,6 +159603,7 @@ toughness=2
 [/card]
 [card]
 name=Freestrider Lookout
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): the crime window: one land onto the battlefield tapped, the rest to the bottom.
 #2026-11-23 crime batch: written from existing working forms.
 abilities=reach
 auto=@committedcrime turnlimited:name(Look at the top five) reveal:5 optionone choice name(Choose a land card) target(<upto:1>land|reveal) moveto(mybattlefield) and!(tap(noevent))! optiononeend optiontwo choice name(Put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
@@ -159624,6 +159639,7 @@ type=Enchantment
 [/card]
 [card]
 name=Magda, the Hoardmaster
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): sacrifice three Treasures for a 4/4 Scorpion Dragon with flying and haste. NOTE: the Scorpion Dragon token shows the wrong picture.
 #2026-11-23 crime batch: written from existing working forms.
 auto=@committedcrime turnlimited:_TREASURE_ and!( tap(noevent) )!
 auto={S(*[Treasure]|myBattlefield)}{S(*[Treasure]|myBattlefield)}{S(*[Treasure]|myBattlefield)}:token(Scorpion Dragon,Creature Scorpion Dragon,4/4,red,flying,haste) asSorcery
@@ -159636,6 +159652,7 @@ toughness=2
 [/card]
 [card]
 name=Marchesa, Dealer of Death
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): pay {1} for the look, one card to hand and one to the graveyard.
 #2026-11-23 crime batch: written from existing working forms.
 auto=@committedcrime:pay({1}) name(look) reveal:2 optionone name(Get a card) target(<1>*|reveal) moveto(hand) optiononeend optiontwo name(put in graveyard) all(*|reveal) moveto(mygraveyard) optiontwoend revealend
 text=Whenever you commit a crime, you may pay {1}. If you do, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
@@ -159843,6 +159860,7 @@ toughness=4
 [/card]
 [card]
 name=Grim Reaper's Scythe
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): sacrifice two creatures to return a creature card with a finality counter.
 #2026-11-23 graveyard-leave batch: written from existing working forms.
 auto=@leftmygraveyard(creature) oneormore:_ZOMBIETOKEN_
 auto={3}{B}{T}{S(creature|mybattlefield)}{S(creature|mybattlefield)}:target(creature|mygraveyard) moveTo(mybattlefield) _FINALITY_COUNTER_ asSorcery
@@ -159992,6 +160010,7 @@ toughness=1
 [/card]
 [card]
 name=Strionic Resonator
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): copy a triggered ability (you respond to your own trigger). NOTE: it also let him target the Grizzly Bears SPELL (did nothing); targeting the trigger worked.
 #2026-11-23 ability-copy batch: written from existing working forms.
 #"You may choose new targets for the copy": the copy keeps the original's targets.
 auto={2}{T}:name(Copy target triggered ability you control) duplicateability(triggered)
@@ -160131,6 +160150,7 @@ toughness=2
 [/card]
 [card]
 name=Mister Fantastic
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): copy a triggered ability twice (you respond to your own trigger).
 #2026-11-23 ability-copy batch: written from existing working forms.
 #"You may choose new targets for the copy": the copy keeps the original's targets.
 abilities=reach,vigilance
@@ -160426,6 +160446,7 @@ toughness=1
 [/card]
 [card]
 name=Evil Presents
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): the gifted creature must attack each turn.
 #2026-11-24 HHO/PCEL promo batch: written from existing working forms.
 #"Always attacks its controller": with two players the only player it can attack is you, the caster.
 auto=target(creature|myhand) moveTo(opponentbattlefield) and!( transforms((,mustattack)) forever )!
@@ -160564,6 +160585,7 @@ type=Instant
 [/card]
 [card]
 name=Chaos Wrap
+#VERIFIED IN GAME 2026-11-24 (John, scenario queue): declining leaves the card on top of the library.
 #2026-11-24 HHO/PCEL promo batch: written from existing working forms.
 #Wrapping in sleeves is a real-world act and is not modelled. Chaos Warp form; the face-down card is a 4/4 red Present. Declining (option two) is hand-checked: scenario 172.
 target=*|battlefield
