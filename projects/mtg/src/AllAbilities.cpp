@@ -7610,6 +7610,64 @@ AARandomMover::~AARandomMover()
     SAFE_DELETE(andAbility);
 }
 
+//Apply an effect to a card chosen at random (atrandom)
+AAAtRandom::AAAtRandom(GameObserver* observer, int _id, MTGCardInstance * _source, string _tcs, MTGAbility * _effect) :
+    ActivatedAbility(observer, _id, _source, NULL, 0), effect(_effect), abilityTC(_tcs)
+{
+}
+
+int AAAtRandom::resolve()
+{
+    if (!effect || !source)
+        return 0;
+    TargetChooserFactory tcf(game);
+    TargetChooser * rTc = tcf.createTargetChooser(abilityTC, source);
+    if (!rTc)
+        return 0;
+    rTc->targetter = NULL;
+    vector<MTGCardInstance*> candidates;
+    for (int i = 0; i < 2; i++)
+    {
+        MTGGameZone * zone = game->players[i]->game->inPlay;
+        for (size_t k = 0; k < zone->cards.size(); ++k)
+            if (rTc->canTarget(zone->cards[k]))
+                candidates.push_back(zone->cards[k]);
+    }
+    SAFE_DELETE(rTc);
+    if (!candidates.size())
+        return 0;
+    MTGCardInstance * chosen = candidates[game->getRandomGenerator()->random() % candidates.size()];
+    source->storedCard = chosen->createSnapShot();
+    MTGAbility * a = effect->clone();
+    a->target = chosen;
+    if (a->oneShot)
+    {
+        a->resolve();
+        SAFE_DELETE(a);
+    }
+    else
+        a->addToGame();
+    return 1;
+}
+
+const string AAAtRandom::getMenuText()
+{
+    return effect ? effect->getMenuText() : "At random";
+}
+
+AAAtRandom * AAAtRandom::clone() const
+{
+    AAAtRandom * a = NEW AAAtRandom(*this);
+    if (effect)
+        a->effect = effect->clone();
+    return a;
+}
+
+AAAtRandom::~AAAtRandom()
+{
+    SAFE_DELETE(effect);
+}
+
 //Random Discard
 AARandomDiscarder::AARandomDiscarder(GameObserver* observer, int _id, MTGCardInstance * card, Targetable * _target,string nbcardsStr, ManaCost * _cost,
          int who) :

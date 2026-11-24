@@ -2504,6 +2504,21 @@ public:
     ~AARandomMover();
 };
 
+// AAAtRandom: atrandom(<cards>) <effect> - apply <effect> to one card chosen at random among
+// every card in play that <cards> matches (both battlefields). The chosen card is kept in
+// source->storedCard, so a later part of the same line can read storedmanacost etc. (Yule Ooze).
+class AAAtRandom: public ActivatedAbility
+{
+public:
+    MTGAbility * effect;
+    string abilityTC;
+    AAAtRandom(GameObserver* observer, int _id, MTGCardInstance * _source, string tcs, MTGAbility * effect);
+    int resolve();
+    const string getMenuText();
+    AAAtRandom * clone() const;
+    ~AAAtRandom();
+};
+
 //-----------------------------------------------------------------------------------------------
 
 class AABuryCard: public ActivatedAbility

@@ -4234,6 +4234,23 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         return a;
     }
 
+    //atrandom(<cards>) <effect>: the effect hits one matching permanent chosen at random (Yule Ooze).
+    //Before "destroy", which would otherwise catch "atrandom(...) destroy".
+    vector<string> splitAtRandom = parseBetween(s, "atrandom(", ")");
+    if (splitAtRandom.size())
+    {
+        string rest = splitAtRandom[2];
+        while (rest.size() && rest[0] == ' ')
+            rest = rest.substr(1);
+        MTGAbility * eff = parseMagicLine(rest, id, spell, card);
+        if (!eff)
+            return NULL;
+        MTGAbility * a = NEW AAAtRandom(observer, id, card, splitAtRandom[1], eff);
+        a->oneShot = true;
+        a->canBeInterrupted = false;
+        return a;
+    }
+
     //Counter an ability on the stack (AAStifleAbility). Before "fizzle", "destroy" and "copy".
     vector<string> splitStifle = parseBetween(s, "stifleability(", ")");
     if (splitStifle.size())
