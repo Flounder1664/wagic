@@ -1,0 +1,31 @@
+#Twin: Seasonal Sequels with X=0 makes no copies - only I draw and lose life.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Succumb to Temptation
+manapool:{1}{B}{B}
+library:Alpha Tyrranax,Amphin Cutthroat,Ancient Carp,Barbarian Horde
+[PLAYER2]
+hand:Seasonal Sequels
+manapool:{U}{U}{U}
+library:Ancient Ooze,Armored Warhorse,Armored Wolf-Rider,Axebane Stag
+[DO]
+Succumb to Temptation
+no
+yes
+Seasonal Sequels
+choice 0
+Succumb to Temptation
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Succumb to Temptation
+hand:Ancient Carp,Barbarian Horde
+library:Alpha Tyrranax,Amphin Cutthroat
+life:18
+[PLAYER2]
+graveyard:Seasonal Sequels
+library:Ancient Ooze,Armored Warhorse,Armored Wolf-Rider,Axebane Stag
+life:20
+[END]

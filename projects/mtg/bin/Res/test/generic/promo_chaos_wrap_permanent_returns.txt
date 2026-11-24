@@ -1,0 +1,20 @@
+#Chaos Wrap on my Hill Giant wearing Holy Strength, empty library: the Giant is shuffled in, comes back as the top card, and the Aura is gone (3/3).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Holy Strength@Hill Giant,Hill Giant
+hand:Chaos Wrap
+manapool:{2}{R}
+[PLAYER2]
+[DO]
+Chaos Wrap
+Hill Giant
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Chaos Wrap,Holy Strength
+pt:Hill Giant=3/3
+[PLAYER2]
+[END]

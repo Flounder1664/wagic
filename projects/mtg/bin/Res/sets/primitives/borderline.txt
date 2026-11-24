@@ -160532,3 +160532,43 @@ subtype=Ooze
 power=1
 toughness=1
 [/card]
+[card]
+name=Seasonal Sequels
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Pitching sequel titles is a real-world act: you get X copies (the names are not changed), and they keep the original targets.
+target=*|stack
+#One line per copy: thisforeach(X) does not repeat castcard. X above 10 makes 10 copies.
+auto=if compare(X)~morethan~0 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~0 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~1 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~1 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~2 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~2 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~3 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~3 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~4 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~4 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~5 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~5 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~6 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~6 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~7 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~7 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~8 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~8 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+auto=if compare(X)~morethan~9 then if cantargetcard(*[instant;sorcery]|*) then castcard(copied noevent)
+auto=if compare(X)~morethan~9 then if cantargetcard(*[-instant;-sorcery]|*) then clone
+text=Pitch the titles of up to X holiday-themed sequels to target spell. Copy that spell for each title pitched, except the copy has that name. You may choose new targets for the copies. (Simply adding numbers isn't festive enough.)
+mana={X}{U}{U}{U}
+type=Instant
+[/card]
+[card]
+name=Chaos Wrap
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#Wrapping in sleeves is a real-world act and is not modelled. Chaos Warp form; the face-down card is a 4/4 red Present. Declining (option two) is hand-checked: scenario 172.
+target=*|battlefield
+auto=moveto(ownerlibrary) and!(shuffle && ability$!Reveal:1 revealzone(mylibrary) optionone choice name(Put it onto the battlefield) all(*[instant;sorcery]|reveal) manifest and!( transforms((Present,red,setpower=4,settoughness=4)) forever )! && all(*[-instant;-sorcery]|reveal) moveto(ownerbattlefield) optiononeend optiontwo choice name(Leave it on top) all(*|reveal) moveto(ownerlibrary) optiontwoend revealend !$ targetcontroller)!
+text=The owner of target permanent shuffles it into their library. Then they may look at the top card of their library and may wrap it. If it's a permanent card, they may put it onto the battlefield. Otherwise, they may put it onto the battlefield face down as a 4/4 red Present creature. (To wrap a card, put it inside lots of sleeves. If it would be dealt damage or destroyed, remove a sleeve from it instead.)
+mana={2}{R}
+type=Instant
+[/card]

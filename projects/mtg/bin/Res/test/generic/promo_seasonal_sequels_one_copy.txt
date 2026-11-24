@@ -1,0 +1,32 @@
+#Seasonal Sequels (player 2, X=1) copies my Succumb to Temptation once: player 2 draws two and loses 2 life too.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Succumb to Temptation
+manapool:{1}{B}{B}
+library:Alpha Tyrranax,Amphin Cutthroat,Ancient Carp,Barbarian Horde
+[PLAYER2]
+hand:Seasonal Sequels
+manapool:{2}{U}{U}{U}
+library:Ancient Ooze,Armored Warhorse,Armored Wolf-Rider,Axebane Stag
+[DO]
+Succumb to Temptation
+no
+yes
+Seasonal Sequels
+choice 1
+Succumb to Temptation
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Succumb to Temptation
+hand:Ancient Carp,Barbarian Horde
+library:Alpha Tyrranax,Amphin Cutthroat
+life:18
+[PLAYER2]
+graveyard:Seasonal Sequels
+hand:Armored Wolf-Rider,Axebane Stag
+library:Ancient Ooze,Armored Warhorse
+life:18
+[END]

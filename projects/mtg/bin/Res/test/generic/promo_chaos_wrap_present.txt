@@ -1,0 +1,21 @@
+#Chaos Wrap on a Soldier token (it leaves the game in the library): the top card is Shock, not a permanent, so it comes in face down as a 4/4 red Present.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Raise the Alarm,Chaos Wrap
+manapool:{1}{W}{2}{R}
+library:Shock
+[PLAYER2]
+[DO]
+Raise the Alarm
+Chaos Wrap
+Soldier
+choice 0
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,Shock
+graveyard:Raise the Alarm,Chaos Wrap
+pt:Shock=4/4
+[PLAYER2]
+[END]
