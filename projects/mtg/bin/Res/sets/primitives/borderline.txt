@@ -100210,7 +100210,8 @@ type=Instant
 [card]
 name=Season's Beatings
 #2026-11-24: the engine has no random targeting, so each creature's damage goes to a creature the player picks rather than a random one.
-auto=choice name(Choose opponent) all(creature|opponentbattlefield) transforms((,newability[damage:p target(other creature|opponentbattlefield)])) oneshot
+#Inside each creature's new ability "my" is that creature's side, so mybattlefield is right for both modes (opponentbattlefield made their creatures hit yours - John, scenario 169).
+auto=choice name(Choose opponent) all(creature|opponentbattlefield) transforms((,newability[damage:p target(other creature|mybattlefield)])) oneshot
 auto=choice name(Choose yourself) all(creature|mybattlefield) transforms((,newability[damage:p target(other creature|mybattlefield)])) oneshot
 text=Family gathering - Each creature target player controls deals damage equal to its power to another random creature that player controls.
 mana={R}{R}{R}{R}
