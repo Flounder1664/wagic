@@ -2748,6 +2748,13 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
     }
     string newName = "";
     vector<string> splitName = parseBetween(s, "name(", ")");
+    //"teach(<who>) {cost}:name(X) effect" - the name belongs to the ability being granted. ATeach
+    //has no menu text of its own, so taking the name off here lost it: Elspeth's Talent's +1 showed
+    //the token's default "create soldier". Leave it for the inner parse of the granted ability.
+    //(teach ... transforms((,newability[...])) lines keep the old parse; their names are doubled.)
+    if (splitName.size() && s.find_first_not_of(" ") != string::npos && s.find("teach(") == s.find_first_not_of(" ")
+        && s.find("transforms(") == string::npos && s.find("newability") == string::npos)
+        splitName.clear();
     if (splitName.size())
     {
         newName = splitName[1];

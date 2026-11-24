@@ -1,0 +1,33 @@
+#Smashing Spree on a Lure creature, cast after attackers are declared (before blocks).
+#Lure must still force Hill Giant to block: the 5/5 trampler kills it and tramples over for 2.
+#Without the forced block P2 would take 5 and Hill Giant would live. (John, scenario 2026-11-24)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Lure@Grizzly Bears
+hand:Smashing Spree
+manapool:{1}{R}
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+goto attackers
+Grizzly Bears
+Smashing Spree
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#end combat
+[ASSERT]
+COMBATDAMAGE
+[PLAYER1]
+inplay:Grizzly Bears,Lure
+graveyard:Smashing Spree
+manapool:{0}
+[PLAYER2]
+graveyard:Hill Giant
+life:18
+[END]

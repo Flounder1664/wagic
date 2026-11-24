@@ -1563,6 +1563,14 @@ public:
         game->mLayers->stackLayer()->copyStackAbility(source->controller(), kind, sourceTc, times > 0 ? times : 1);
         return 1;
     }
+    //Is there an ability on the stack this could copy? Activation is refused without one, so a
+    //Strionic Resonator cannot be pointed at a spell (or an empty stack) and fizzle.
+    bool hasCopyCandidate()
+    {
+        if (!source || !game->mLayers || !game->mLayers->stackLayer())
+            return false;
+        return game->mLayers->stackLayer()->findStackAbility(source->controller(), kind, sourceTc) != NULL;
+    }
     const string getMenuText()
     {
         return "Copy ability";
