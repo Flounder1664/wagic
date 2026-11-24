@@ -1,0 +1,26 @@
+#Shifting Grift, +{2} mode (scenario 146): take Hill Giant, then give Grizzly Bears. The other two mode
+#menus used to open while the creature pick was still queued, so a GUI click on them never reached the
+#right menu and the artifact menu looped (John, 2026-11-24). Now the picks follow the menus in order.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Shifting Grift
+manapool:{U}{U}{2}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shifting Grift
+choice 0
+Hill Giant
+choice 1
+choice 1
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Hill Giant
+graveyard:Shifting Grift
+[PLAYER2]
+inplay:Grizzly Bears
+[END]

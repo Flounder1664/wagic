@@ -603,7 +603,9 @@ void ActionLayer::ButtonPressedOnMultipleChoice(int choice)
         //the currently displayed menu is not always the currently listenning action object
         //find the menu which is displayed.
         MenuAbility * ma = dynamic_cast<MenuAbility *>(mObjects[i]);//find the active menu
-        if(ma && ma->triggered)
+        //An answered menu stays in the list until it is cleaned up, and it is never the one on
+        //screen: a click given to it is ignored and the menu on screen never closes.
+        if(ma && ma->triggered && !ma->processed)
         {
             currentMenuObject = i;
             break;

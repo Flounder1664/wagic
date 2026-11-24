@@ -8498,6 +8498,20 @@ bool MenuAbility::CheckUserInput(JButton key)
     return false;
 }
 
+//True while the targeted option just picked from a menu is still waiting to run: processAbility
+//queues it as an autoResolve may and destroys the menu, and that may opens its target prompt only
+//once no menu is up - so a menu opened first sits over it.
+static bool pickedOptionPending(ActionLayer * al)
+{
+    for (size_t i = 0; i < al->mObjects.size(); i++)
+    {
+        MayAbility * may = dynamic_cast<MayAbility *>(al->mObjects[i]);
+        if (may && may->autoResolve && !may->triggered && !dynamic_cast<MenuAbility *>(may))
+            return true;
+    }
+    return false;
+}
+
 void MenuAbility::Update(float dt)
 {
     MTGAbility::Update(dt);
@@ -8540,7 +8554,12 @@ void MenuAbility::Update(float dt)
     {
         triggered = 0;
     }
-    if(triggered && !game->mExtraPayment && !processed)
+    //Wait while an earlier answer is still being carried out. A Spree spell resolves one paid menu
+    //per mode; paying a targeted mode armed its target prompt (or queued the may that arms it), and
+    //the next mode's menu opened over it in the same frame. The GUI then could not reach the prompt,
+    //every click on the new menu went to the answered one, and it never closed (Getaway Glamer,
+    //Shifting Grift - John, 2026-11-24).
+    if(triggered && !game->mExtraPayment && !processed && !object->getCurrentTargetChooser() && !pickedOptionPending(object))
     {
         game->mLayers->actionLayer()->setCustomMenuObject(source, must,abilities,newNameString.size()?newNameString.c_str():"");
         previousInterrupter = game->isInterrupting;

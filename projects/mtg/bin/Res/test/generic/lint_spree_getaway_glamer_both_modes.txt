@@ -1,0 +1,26 @@
+#Getaway Glamer, both modes (scenario 145): pay +{1} exile and target Grizzly Bears, then pay +{2} destroy
+#and target Hill Giant. The +{2} menu used to open while the exile target was still pending, and every
+#click on it went to the already-answered +{1} menu, so it never closed (John, 2026-11-24).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Getaway Glamer
+manapool:{W}{1}{2}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Getaway Glamer
+choice 0
+Grizzly Bears
+choice 0
+Hill Giant
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+graveyard:Getaway Glamer
+exile:Grizzly Bears
+manapool:{0}
+[PLAYER2]
+graveyard:Hill Giant
+[END]
