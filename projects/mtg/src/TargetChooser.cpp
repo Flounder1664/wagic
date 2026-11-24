@@ -819,6 +819,7 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                     cd->isConvoker = minus ? -1 : 1;
                     cd->convokeSource = card;
                 }
+                //"tokenmaker" and "ortoken" both contain "token": they are told apart inside this branch.
                 //Token as an OR alternative - must be tested BEFORE "token", which it contains
                 else if (attribute.find("ortoken") != string::npos)
                 {
@@ -827,7 +828,9 @@ TargetChooser * TargetChooserFactory::createTargetChooser(string s, MTGCardInsta
                 //Token
                 else if (attribute.find("token") != string::npos)
                 {
-                    if (minus)
+                    if (attribute.find("tokenmaker") != string::npos)
+                        cd->tokenMaker = minus ? -1 : 1;
+                    else if (minus)
                     {
                         cd->isToken = -1;
                     }

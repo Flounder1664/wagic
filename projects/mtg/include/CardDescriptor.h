@@ -44,6 +44,8 @@ class CardDescriptor: public MTGCardInstance
   //"ortoken": being a token SATISFIES an OR filter, rather than being an extra requirement.
   //Distinct from isToken, which is always an AND and which 154 existing cards rely on.
   int orToken;
+  //"tokenmaker": the card's rules text puts tokens onto the battlefield (Mishra's Toy Workshop).
+  int tokenMaker;
   int powerComparisonMode;
   int foretoldComparisonMode;
   int kickedComparisonMode;

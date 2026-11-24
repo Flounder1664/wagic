@@ -15,6 +15,7 @@ CardDescriptor::CardDescriptor()
     counterToughness = 0;
     counterNB = 0;
     orToken = 0;
+    tokenMaker = 0;
     mode = CD_AND;
     foretoldComparisonMode = COMPARISON_NONE;
     kickedComparisonMode = COMPARISON_NONE;
@@ -609,6 +610,18 @@ MTGCardInstance * CardDescriptor::match(MTGCardInstance * card)
     if ((isToken == -1 && card->isToken) || (isToken == 1 && !card->isToken))
     {
         match = NULL;
+    }
+
+    if (tokenMaker)
+    {
+        //Any ability of the card that creates a token: token(...), create(...) or a _...TOKEN_ macro.
+        string text = card->magicText;
+        for (map<string, string>::iterator it = card->magicTexts.begin(); it != card->magicTexts.end(); ++it)
+            text.append(" ").append(it->second);
+        std::transform(text.begin(), text.end(), text.begin(), ::tolower);
+        bool makes = text.find("token(") != string::npos || text.find("create(") != string::npos || text.find("token_") != string::npos;
+        if ((tokenMaker == 1 && !makes) || (tokenMaker == -1 && makes))
+            match = NULL;
     }
 
     if (isConvoker)
