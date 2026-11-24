@@ -1,0 +1,17 @@
+#Fruitcake Elemental, {3}: the opponent gains control of it.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Fruitcake Elemental
+manapool:{3}
+[PLAYER2]
+[DO]
+Fruitcake Elemental
+choice 0
+Fruitcake Elemental
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+[PLAYER2]
+inplay:Fruitcake Elemental
+[END]

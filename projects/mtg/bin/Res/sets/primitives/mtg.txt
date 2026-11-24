@@ -43504,16 +43504,6 @@ power=1
 toughness=1
 [/card]
 [card]
-name=Firehoof Calvary
-auto={3}{R}:transforms((,newability[2/0],trample)) ueot
-text={3}{R}: Firehoof Cavalry gets +2/+0 and gains trample until end of turn.
-mana={W}
-type=Creature
-subtype=Human Berserker
-power=1
-toughness=1
-[/card]
-[card]
 name=Firehoof Cavalry
 auto={3}{R}:+2/0 ueot && trample ueot
 text={3}{R}: Firehoof Cavalry gets +2/+0 and gains trample until end of turn.

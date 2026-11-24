@@ -95011,7 +95011,7 @@ subtype=Equipment
 [/card]
 [card]
 name=Robot Chicken
-auto=@movedto(*|mystack):token(Egg,Creature Egg,0/1)
+auto=@movedto(*|mystack):token(Egg,Artifact Creature Egg,0/1)
 auto=@movedto(mygraveyard) from(creature[egg]|mybattlefield):destroy target(creature,artifact)
 text=Whenever you cast a spell, put a 0/1 colorless Egg artifact creature token onto the battlefield. -- Whenever an Egg you control is put into a graveyard from the battlefield, destroy target artifact or creature.
 mana={4}
@@ -100209,7 +100209,8 @@ type=Instant
 [/card]
 [card]
 name=Season's Beatings
-auto=choice name(Choose opponent) all(creature|opponentbattlefield) transforms((,newability[damage:p target(other creature|mybattlefield)])) oneshot
+#2026-11-24: the engine has no random targeting, so each creature's damage goes to a creature the player picks rather than a random one.
+auto=choice name(Choose opponent) all(creature|opponentbattlefield) transforms((,newability[damage:p target(other creature|opponentbattlefield)])) oneshot
 auto=choice name(Choose yourself) all(creature|mybattlefield) transforms((,newability[damage:p target(other creature|mybattlefield)])) oneshot
 text=Family gathering - Each creature target player controls deals damage equal to its power to another random creature that player controls.
 mana={R}{R}{R}{R}

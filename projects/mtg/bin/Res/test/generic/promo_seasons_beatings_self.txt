@@ -1,0 +1,22 @@
+#Season's Beatings on myself: my Craw Wurm deals 6 to my Grizzly Bears, which die; the Bears deal 2 to the Wurm.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Season's Beatings
+manapool:{R}{R}{R}{R}
+inplay:Grizzly Bears,Craw Wurm
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Season's Beatings
+choice 1
+Craw Wurm
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Craw Wurm
+graveyard:Grizzly Bears,Season's Beatings
+[PLAYER2]
+inplay:Hill Giant
+[END]

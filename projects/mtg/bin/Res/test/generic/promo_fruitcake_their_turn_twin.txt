@@ -1,0 +1,16 @@
+#Twin: the opponent controls Fruitcake Elemental, so it does not hurt them at the end of MY turn.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+[PLAYER2]
+inplay:Fruitcake Elemental
+[DO]
+next
+[ASSERT]
+ENDOFTURN
+[PLAYER1]
+life:20
+[PLAYER2]
+inplay:Fruitcake Elemental
+life:20
+[END]

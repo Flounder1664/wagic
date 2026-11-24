@@ -1,0 +1,24 @@
+#Robot Chicken: each spell I cast makes an Egg; Shocking an Egg makes Robot Chicken destroy the opponent's Grizzly Bears.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Robot Chicken
+hand:Shock,Shock
+manapool:{R}{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Shock
+p2
+Shock
+Egg
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Robot Chicken,*
+graveyard:Shock,Shock
+[PLAYER2]
+graveyard:Grizzly Bears
+life:18
+[END]
