@@ -1,0 +1,18 @@
+#Clara Oswald: Christine Chapel (a Doctor) gets two +1/+1 counters when I gain life - her trigger fires twice. Soul Warden is not a Doctor, so I gain only 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Clara Oswald,704078,Soul Warden
+hand:Grizzly Bears
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Clara Oswald,704078,Soul Warden,Grizzly Bears
+life:21
+pt:704078=6/6
+[PLAYER2]
+[END]
