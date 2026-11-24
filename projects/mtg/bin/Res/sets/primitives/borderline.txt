@@ -160509,3 +160509,26 @@ type=Legendary Creature
 power=*
 toughness=*
 [/card]
+[card]
+name=Gifts Given
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#You pick the four cards as the spell's targets; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
+auto=name(Take four cards) target(<upto:4>*|opponentlibrary) moveto(myhand) and!( becomes(giftgiven) ueot )!
+auto=ability$!name(Choose two for the graveyard) target(<2>giftgiven|opponenthand) moveto(ownergraveyard)!$ opponent
+text=Search target opponent's library for four cards with different names and reveal them. That player chooses two of those cards. Put the chosen cards into the player's graveyard and the rest into your hand. Then that player shuffles their library.
+mana={3}{U}
+type=Instant
+[/card]
+[card]
+name=Yule Ooze
+#2026-11-24 HHO/PCEL promo batch: written from existing working forms.
+#"Eat some food" is a real-world act, not a game cost, so regenerating costs only {R}{G}.
+auto=@each my upkeep restriction{type(*[-land]|battlefield)~morethan~1}:atrandom(other *[-land]|battlefield) destroy && all(this) transforms((,newability[counter(1/1.storedmanacost)])) oneshot
+auto={R}{G}:regenerate
+text=At the beginning of your upkeep, destroy another nonland permanent chosen at random, then put a number of +1/+1 counters on Yule Ooze equal to that permanent's converted mana cost. -- {R}{G}, Eat some food: Regenerate Yule Ooze.
+mana={2}{R}{G}
+type=Creature
+subtype=Ooze
+power=1
+toughness=1
+[/card]

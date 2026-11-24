@@ -1,0 +1,22 @@
+#Gifts Given: the four cards I target in the opponent's library go to my hand (the opponent's pick of two is AI-only - scenario 171).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gifts Given
+manapool:{3}{U}
+[PLAYER2]
+library:Plains,Hill Giant,Grizzly Bears,Shock,Island,Mountain
+[DO]
+Gifts Given
+Hill Giant
+Grizzly Bears
+Shock
+Island
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Hill Giant,Grizzly Bears,Shock,Island
+graveyard:Gifts Given
+[PLAYER2]
+library:Plains,Mountain
+[END]

@@ -3701,12 +3701,6 @@ type=Enchantment
 subtype=Aura
 [/card]
 [card]
-name=Gifts Given
-text=Search target opponent?s library for four cards with different names and reveal them. That player chooses two of those cards. Put the chosen cards into the player?s graveyard and the rest into your hand. Then that player shuffles their library.
-mana={3}{U}
-type=Instant
-[/card]
-[card]
 name=Gifts Ungiven
 text=Search your library for four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
 mana={3}{U}
@@ -11577,15 +11571,6 @@ type=Scheme
 name=Your Will Is Not Your Own
 text=When you set this scheme in motion, gain control of target creature an opponent controls until end of turn. Untap that creature. It gets +3/+3 and gains haste and trample until end of turn.
 type=Scheme
-[/card]
-[card]
-name=Yule Ooze
-text=At the beginning of your upkeep, destroy another nonland permanent chosen at random, then put a number of +1/+1 counters on Yule Ooze equal to that permanent's converted mana cost. -- {R}{G}, Eat some food: Regenerate Yule Ooze.
-mana={2}{R}{G}
-type=Creature
-subtype=Ooze
-power=1
-toughness=1
 [/card]
 [card]
 name=Yusri, Fortune's Flame

@@ -1,0 +1,19 @@
+#Twin: no other nonland permanent - nothing is destroyed and the Ooze stays 1/1.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Yule Ooze,Forest
+library:Swamp,Swamp
+[PLAYER2]
+inplay:Mountain
+[DO]
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Yule Ooze,Forest
+library:Swamp,Swamp
+pt:Yule Ooze=1/1
+[PLAYER2]
+inplay:Mountain
+[END]

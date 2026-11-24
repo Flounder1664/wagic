@@ -1,0 +1,20 @@
+#Yule Ooze, my upkeep: the only other nonland permanent is Hill Giant (mana value 4) - it is destroyed and the Ooze gets four +1/+1 counters.
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Yule Ooze,Forest
+library:Swamp,Swamp
+[PLAYER2]
+inplay:Hill Giant,Mountain
+[DO]
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Yule Ooze,Forest
+library:Swamp,Swamp
+pt:Yule Ooze=5/5
+[PLAYER2]
+graveyard:Hill Giant
+inplay:Mountain
+[END]
