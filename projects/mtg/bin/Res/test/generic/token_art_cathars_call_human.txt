@@ -1,0 +1,19 @@
+#Cathar's Call: the Human made at end step by the enchanted creature takes Cathar's Call's token
+#picture (tnum.=296854, id -296854). Made inline through the creature it took Grizzly Bears' id and
+#had no picture (token-art audit, 2026-11-25). pt:-296854 finds it only by that id.
+[INIT]
+SECONDMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Cathar's Call@Grizzly Bears
+[PLAYER2]
+[DO]
+next
+#end step: the trigger resolves
+next
+[ASSERT]
+CLEANUP
+[PLAYER1]
+inplay:Grizzly Bears,Cathar's Call,Human
+pt:-296854=1/1
+[PLAYER2]
+[END]

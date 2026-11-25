@@ -7756,7 +7756,7 @@ subtype=Equipment
 name=Avacyn's Collar
 auto=teach(creature) 1/0
 auto=teach(creature) vigilance
-auto=teach(human) transforms((,newability[_DIES__SPIRITTOKEN_]))
+auto=teach(human) transforms((,newability[_DIES_create(Spirit:creature Spirit:1/1:white:flying:tnum.=262863)]))
 auto={2}:equip
 text=Equipped creature gets +1/+0 and has vigilance. -- Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield. -- Equip {2}
 mana={1}
@@ -23004,7 +23004,7 @@ toughness=5
 [card]
 name=Commander's Authority
 target=creature
-auto=teach(creature) transforms((,newability[@each my upkeep:create(Human:creature Human:1/1:white) controller]))
+auto=teach(creature) transforms((,newability[@each my upkeep:create(Human:creature Human:1/1:white:tnum.=278252) controller]))
 text=Enchant creature -- Enchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."
 mana={4}{W}
 type=Enchantment
@@ -53866,7 +53866,7 @@ type=Instant
 [card]
 name=Grip of Phyresis
 target=equipment
-auto=moveto(mybattlefield) and!( transforms((Stolen,newability[token(Phyrexian Germ^Creature Phyrexian Germ^0/0^black) and!( name(Choose stolen equipment) target(equipment[stolen&-attached]|mybattlefield) transforms((,newability[name(Attach to phyrexian) rehook target(phyrexian[token&fresh&-geared]|mybattlefield)])) ueot )!])) oneshot )!
+auto=moveto(mybattlefield) and!( transforms((Stolen,newability[token(Phyrexian Germ^Creature Phyrexian Germ^0/0^black^tnum.=420626) and!( name(Choose stolen equipment) target(equipment[stolen&-attached]|mybattlefield) transforms((,newability[name(Attach to phyrexian) rehook target(phyrexian[token&fresh&-geared]|mybattlefield)])) ueot )!])) oneshot )!
 text=Gain control of target Equipment, then create a 0/0 black Phyrexian Germ creature token and attach that Equipment to it.
 mana={2}{U}
 type=Instant
@@ -114405,7 +114405,7 @@ toughness=2
 name=Slayer's Plate
 auto={3}:equip
 auto=teach(creature) 4/2
-auto=teach(human) transforms((,newability[_DIES__SPIRITTOKEN_]))
+auto=teach(human) transforms((,newability[_DIES_create(Spirit:creature Spirit:1/1:white:flying:tnum.=606889)]))
 text=Equipped creature gets +4/+2. -- Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield. -- Equip {3}
 mana={3}
 type=Artifact

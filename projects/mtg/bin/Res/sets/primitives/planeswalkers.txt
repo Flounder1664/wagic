@@ -954,7 +954,7 @@ abilities=canbecommander
 auto=counter(0/0,5,loyalty)
 auto=@scryed(*|myzones):name(Next spell cost less) target(*[instant;sorcery]|myhand) transforms((,newability[changecost(colorless:-scryedcards) forcedalive])) ueot
 auto={C(0/0,+2,Loyalty)}:name(Draw and scry) draw:1 && _SCRY2_
-auto={C(0/0,-3,Loyalty)}:name(Exile top card) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[name(Create faeries) token(Faerie^Creature Faerie Dragon^1/1^blue)*manacost])) oneshot )!
+auto={C(0/0,-3,Loyalty)}:name(Exile top card) all(*[zpos=1]|mylibrary) moveto(myexile) and!( transforms((,newability[name(Create faeries) token(Faerie^Creature Faerie Dragon^1/1^blue^tnum.=563157)*manacost])) oneshot )!
 text=Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way. -- [+2]: Draw a card, then scry 2. -- [-3]: Exile the top card of your library. Create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to that card's mana value. -- Elminster can be your commander.
 mana={3}{W}{U}
 type=Legendary Planeswalker
@@ -1833,26 +1833,26 @@ auto={C(0/0.-19.Loyalty)}:limit:1 name(-19: Create fractal with 19 counter) toke
 auto={C(0/0.-20.Loyalty)}:limit:1 name(-20: Create fractal with 20 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.20) )!
 auto={C(0/0.-8.Loyalty)}:limit:1 name(-8: Search instant or sorcery) target(*[instant;sorcery;share!color!]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile forever],newability[zerocast forever])) forever )!
 auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.2.Loyalty)}:limit:1 name(+2: Scry 1) _SCRY1_]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-1.Loyalty)}:limit:1 name(-1: Create fractal with 1 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-2.Loyalty)}:limit:1 name(-2: Create fractal with 2 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.2) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-3.Loyalty)}:limit:1 name(-3: Create fractal with 3 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.3) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-4.Loyalty)}:limit:1 name(-4: Create fractal with 4 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.4) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-5.Loyalty)}:limit:1 name(-5: Create fractal with 5 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.5) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-6.Loyalty)}:limit:1 name(-6: Create fractal with 6 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.6) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-7.Loyalty)}:limit:1 name(-7: Create fractal with 7 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.7) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-8.Loyalty)}:limit:1 name(-8: Create fractal with 8 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.8) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-9.Loyalty)}:limit:1 name(-9: Create fractal with 9 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.9) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-10.Loyalty)}:limit:1 name(-10: Create fractal with 10 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.10) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-11.Loyalty)}:limit:1 name(-11: Create fractal with 11 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.11) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-12.Loyalty)}:limit:1 name(-12: Create fractal with 12 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.12) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-13.Loyalty)}:limit:1 name(-13: Create fractal with 13 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.13) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-14.Loyalty)}:limit:1 name(-14: Create fractal with 14 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.14) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-15.Loyalty)}:limit:1 name(-15: Create fractal with 15 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.15) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-16.Loyalty)}:limit:1 name(-16: Create fractal with 16 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.16) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-17.Loyalty)}:limit:1 name(-17: Create fractal with 17 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.17) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-18.Loyalty)}:limit:1 name(-18: Create fractal with 18 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.18) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-19.Loyalty)}:limit:1 name(-19: Create fractal with 19 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.19) )!]))
-auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-20.Loyalty)}:limit:1 name(-20: Create fractal with 20 counter) token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.20) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-1.Loyalty)}:limit:1 name(-1: Create fractal with 1 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-2.Loyalty)}:limit:1 name(-2: Create fractal with 2 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.2) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-3.Loyalty)}:limit:1 name(-3: Create fractal with 3 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.3) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-4.Loyalty)}:limit:1 name(-4: Create fractal with 4 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.4) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-5.Loyalty)}:limit:1 name(-5: Create fractal with 5 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.5) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-6.Loyalty)}:limit:1 name(-6: Create fractal with 6 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.6) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-7.Loyalty)}:limit:1 name(-7: Create fractal with 7 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.7) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-8.Loyalty)}:limit:1 name(-8: Create fractal with 8 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.8) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-9.Loyalty)}:limit:1 name(-9: Create fractal with 9 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.9) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-10.Loyalty)}:limit:1 name(-10: Create fractal with 10 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.10) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-11.Loyalty)}:limit:1 name(-11: Create fractal with 11 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.11) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-12.Loyalty)}:limit:1 name(-12: Create fractal with 12 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.12) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-13.Loyalty)}:limit:1 name(-13: Create fractal with 13 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.13) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-14.Loyalty)}:limit:1 name(-14: Create fractal with 14 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.14) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-15.Loyalty)}:limit:1 name(-15: Create fractal with 15 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.15) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-16.Loyalty)}:limit:1 name(-16: Create fractal with 16 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.16) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-17.Loyalty)}:limit:1 name(-17: Create fractal with 17 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.17) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-18.Loyalty)}:limit:1 name(-18: Create fractal with 18 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.18) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-19.Loyalty)}:limit:1 name(-19: Create fractal with 19 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.19) )!]))
+auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-20.Loyalty)}:limit:1 name(-20: Create fractal with 20 counter) token(Fractal^Creature Fractal^0/0^green^blue^tnum.=513688) and!( counter(1/1.20) )!]))
 auto=lord(other planeswalker|mybattlefield) transforms((,newability[{C(0/0.-8.Loyalty)}:limit:1 name(-8: Search instant or sorcery) target(*[instant;sorcery;share!color!]|mylibrary) moveto(myexile) and!( transforms((,newability[canplayfromexile forever],newability[zerocast forever])) forever )!]))
 text=Each other planeswalker you control has the loyalty abilities of Kasmina, Enigma Sage. -- +2: Scry 1. -- -X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. -- -8: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
 mana={1}{G}{U}
@@ -1977,7 +1977,7 @@ name=Kiora, the Tide's Fury
 auto=counter(0/0,4,Loyalty)
 auto={C(0/0,1,Loyalty)}:name(+1: Conjure a Kraken Hatchling) conjure cards(Kraken Hatchling) zone(myhand)
 auto={C(0/0,-2,Loyalty)}:name(-1: Untap and prevent) target(*[land;creature]) transforms((,newability[untap],newability[preventalldamage to(this)],newability[preventalldamage from(this)])) uynt
-auto={C(0/0,-3,Loyalty)}:name(-3: Sacrifice a Kraken) target(kraken|mybattlefield) transforms((,newability[sacrifice],newability[token(Kraken^Creature Kraken^8/8^blue)])) oneshot
+auto={C(0/0,-3,Loyalty)}:name(-3: Sacrifice a Kraken) target(kraken|mybattlefield) transforms((,newability[sacrifice],newability[token(Kraken^Creature Kraken^8/8^blue^tnum.=296439)])) oneshot
 text=+1: Conjure a Kraken Hatchling into your hand. -- +1: Untap target creature or land. Until your next turn, prevent all damage that would be dealt to and dealt by that permanent. -- -3: You may sacrifice a Kraken. If you do, create a 8/8 blue Kraken creature token.
 mana={3}{U}
 type=Legendary Planeswalker
@@ -3943,7 +3943,7 @@ auto=this(variable{isflipped}>0) lord(instant,sorcery|mycastingzone) altercost(c
 auto=this(variable{isflipped}>0) {C(0/0,1,Loyalty)}:name(+1: Dont't target any creature) name(+1: Dont't target any creature) donothing
 auto=this(variable{isflipped}>0) {C(0/0,1,Loyalty)}:name(+1: Target creature becomes 0/2) name(+1: Target creature becomes 0/2) target(creature) transforms((,setpower=0,settoughness=2)) uynt
 auto=this(variable{isflipped}>0) {C(0/0,-3,Loyalty)}:name(-3: Draw 2 cards) name(-3: Draw 2 cards) draw:2 controller
-auto=this(variable{isflipped}>0) {C(0/0,-7,Loyalty)}:name(-7: Exile 5 permanents) name(-7: Exile 5 permanents) target(<upto:5>*|battlefield) moveto(exile) and!( transforms((,newability[token(Elemental^Creature Elemental^4/4^blue^red)])) oneshot )!
+auto=this(variable{isflipped}>0) {C(0/0,-7,Loyalty)}:name(-7: Exile 5 permanents) name(-7: Exile 5 permanents) target(<upto:5>*|battlefield) moveto(exile) and!( transforms((,newability[token(Elemental^Creature Elemental^4/4^blue^red^tnum.=513642)])) oneshot )!
 text=Instant and sorcery spells you cast cost {1} less to cast. -- +1: Up to one target creature has base power and toughness 0/2 until your next turn. -- -3: Draw two cards. -- -7: Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental creature token. // {2}{R} Rowan, Scholar of Sparks
 mana={4}{U}
 type=Legendary Planeswalker

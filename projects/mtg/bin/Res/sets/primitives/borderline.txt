@@ -86,7 +86,7 @@ type=Artifact
 [card]
 name=Abdel Adrian, Gorion's Ward
 abilities=backgroundpartner
-auto=may name(Exile nonland permanents) target(<anyamount>other *[-land]|mybattlefield) transforms((,newability[token(Soldier^Creature Soldier^1/1^white)],newability[moveto(exile) and!( counter(0/0.1.AbdelExiled) )!])) oneshot
+auto=may name(Exile nonland permanents) target(<anyamount>other *[-land]|mybattlefield) transforms((,newability[token(Soldier^Creature Soldier^1/1^white^tnum.=562885)],newability[moveto(exile) and!( counter(0/0.1.AbdelExiled) )!])) oneshot
 auto=_DIES_name(Return exiled permanents) all(*[counter{0/0.1.AbdelExiled}]|myexile) moveto(mybattlefield)
 text=When Abdel Adrian, Gorion's Ward enters, exile any number of other nonland permanents you control until Abdel Adrian leaves the battlefield. Create a 1/1 white Soldier creature token for each permanent exiled this way. -- Choose a Background (You can have a Background as a second commander.)
 mana={4}{W}
@@ -2926,8 +2926,8 @@ type=Land
 [/card]
 [card]
 name=Anduril, Flame of the West
-auto=teach(creature[legendary]) transforms((,newability[3/1],newability[@combat(attacking) source(this):name(Create spirits) name(Create spirits) token(Spirit^Creature Spirit^1/1^white^battleready^flying)*2]))
-auto=teach(creature[-legendary]) transforms((,newability[3/1],newability[@combat(attacking) source(this):name(Create spirits) name(Create spirits) token(Spirit^Creature Spirit^1/1^white^flying)*2 and!( tap(noevent) )!]))
+auto=teach(creature[legendary]) transforms((,newability[3/1],newability[@combat(attacking) source(this):name(Create spirits) name(Create spirits) token(Spirit^Creature Spirit^1/1^white^battleready^flying^tnum.=617066)*2]))
+auto=teach(creature[-legendary]) transforms((,newability[3/1],newability[@combat(attacking) source(this):name(Create spirits) name(Create spirits) token(Spirit^Creature Spirit^1/1^white^flying^tnum.=617066)*2 and!( tap(noevent) )!]))
 auto={2}:equip
 text=Equipped creature gets +3/+1. -- Whenever equipped creature attacks, create two tapped 1/1 white Spirit creature tokens with flying. If that creature is legendary, instead create two of those tokens that are tapped and attacking. -- Equip {2}
 mana={3}
@@ -7924,8 +7924,8 @@ type=Legendary Land
 [card]
 name=Baral and Kari Zev
 abilities=first strike,menace
-auto=@movedTo(*[instant]|myStack) restriction{thisturn(*[instant;sorcery]|myStack)~lessthan~1} turnlimited:name(Casted first instant) all(trigger[to]) transforms((,newability[if type(instant[manacost<=manacostminus1minusend]|myhand)~morethan~0 then choice name(Cast another spell) target(instant[manacost<=manacostminus1minusend]|myhand) activate castcard(normal)],newability[choice name(Create pirate) token(First Mate Ragavan^Legendary Monkey Pirate Creature^2/1^red) and!( transforms((,haste)) ueot)!])) oneshot
-auto=@movedTo(*[sorcery]|myStack) restriction{thisturn(*[instant;sorcery]|myStack)~lessthan~1} turnlimited:name(Casted first sorcery) all(trigger[to]) transforms((,newability[if type(sorcery[manacost<=manacostminus1minusend]|myhand)~morethan~0 then choice name(Cast another spell) target(sorcery[manacost<=manacostminus1minusend]|myhand) activate castcard(normal)],newability[choice name(Create pirate) token(First Mate Ragavan^Legendary Monkey Pirate Creature^2/1^red) and!( transforms((,haste)) ueot)!])) oneshot
+auto=@movedTo(*[instant]|myStack) restriction{thisturn(*[instant;sorcery]|myStack)~lessthan~1} turnlimited:name(Casted first instant) all(trigger[to]) transforms((,newability[if type(instant[manacost<=manacostminus1minusend]|myhand)~morethan~0 then choice name(Cast another spell) target(instant[manacost<=manacostminus1minusend]|myhand) activate castcard(normal)],newability[choice name(Create pirate) token(First Mate Ragavan^Legendary Monkey Pirate Creature^2/1^red^tnum.=607276) and!( transforms((,haste)) ueot)!])) oneshot
+auto=@movedTo(*[sorcery]|myStack) restriction{thisturn(*[instant;sorcery]|myStack)~lessthan~1} turnlimited:name(Casted first sorcery) all(trigger[to]) transforms((,newability[if type(sorcery[manacost<=manacostminus1minusend]|myhand)~morethan~0 then choice name(Cast another spell) target(sorcery[manacost<=manacostminus1minusend]|myhand) activate castcard(normal)],newability[choice name(Create pirate) token(First Mate Ragavan^Legendary Monkey Pirate Creature^2/1^red^tnum.=607276) and!( transforms((,haste)) ueot)!])) oneshot
 text=First strike, menace -- Whenever you cast your first instant or sorcery spell each turn, you may cast a spell with lesser mana value that shares a card type with it from your hand without paying its mana cost. If you don't, create First Mate Ragavan, a legendary 2/1 red Monkey Pirate creature token. It gains haste until end of turn.
 mana={1}{U}{R}
 type=Legendary Creature
@@ -14092,7 +14092,7 @@ toughness=4
 name=Boromir, Warden of the Tower
 abilities=vigilance
 auto=@movedTo(*|opponentstack):name(Counter if no mana spent) all(trigger[to]) name(Counter if no mana spent) transforms((,newability[if compare(totmanaspent)~equalto~0 then name(Counter spell) name(Counter spell) ability$!name(Counter spell) name(Counter spell) target(*|opponentstack) fizzle!$ opponent])) oneshot
-auto={0}:name(Sacrifice and give indestructible) sacrifice and!( transforms((,newability[all(creature|mybattlefield) indestructible ueot],newability[ability$!name(The ring tempts you) _RINGTEMPTS_!$ controller])) ueot )!
+auto={0}:name(Sacrifice and give indestructible) sacrifice and!( transforms((,newability[all(creature|mybattlefield) indestructible ueot],newability[ability$!name(The ring tempts you) if type(The Ring|mybattlefield)~morethan~0 then all(The Ring|mybattlefield) transforms((,newability[theringtempts:1 controller],newability[name(Chose a ring bearer) target(creature|mybattlefield) becomesringbearer])) oneshot else token(The Ring^notrigger^tnum.=616834) and!( theringtempts:1 controller and!( name(Choose a ring bearer) target(creature|myBattlefield) becomesringbearer )! )!!$ controller])) ueot )!
 text=Vigilance -- Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell. -- Sacrifice Boromir, Warden of the Tower: Creatures you control gain indestructible until end of turn. The Ring tempts you.
 mana={2}{W}
 type=Legendary Creature
@@ -15277,7 +15277,7 @@ anyzone={0}:doubleside(backside)
 retrace={W}{U} name(Cast with disturb)
 auto=name(Create Spirit) _SPIRITTOKEN_
 auto=@targeted(this) from(aura|*):name(Create Spirit) _SPIRITTOKEN_
-autostack=if paid(retrace) then flip(backside) forcetype(Enchantment Aura) and!( transforms((,newability[name(Attach to creature) retargetfromplay target(creature)],newability[teach(creature) transforms((,newability[@targeted(this) from(aura|*):name(Create Spirit) token(Spirit^Creature Spirit^1/1^white^flying)]))])) forever )!
+autostack=if paid(retrace) then flip(backside) forcetype(Enchantment Aura) and!( transforms((,newability[name(Attach to creature) retargetfromplay target(creature)],newability[teach(creature) transforms((,newability[@targeted(this) from(aura|*):name(Create Spirit) token(Spirit^Creature Spirit^1/1^white^flying^tnum.=297431)]))])) forever )!
 text=Whenever Brine Comber enters or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying. -- Disturb {W}{U} (You may cast this card from your graveyard transformed for its disturb cost.) // Brinebound Gift
 mana={1}{W}{U}
 type=Creature
@@ -15457,8 +15457,8 @@ type=Sorcery
 [card]
 name=Broken Visage
 restriction=type(creature[attacking;-artifact]|battlefield)~morethan~0
-auto=if type(creature[attacking;-artifact]|opponentbattlefield)~morethan~0 then choice name(Destroy opponent creature) name(Destroy opponent creature) target(creature[attacking;-artifact]|opponentbattlefield) transforms((,newability[destroy],newability[token(Spirit^Creature Spirit^p/t^black^treason) opponent])) oneshot
-auto=if type(creature[attacking;-artifact]|mybattlefield)~morethan~0 then choice name(Destroy your creature) name(Destroy your creature) target(creature[attacking;-artifact]|mybattlefield) transforms((,newability[destroy],newability[token(Spirit^Creature Spirit^p/t^black^treason)])) oneshot
+auto=if type(creature[attacking;-artifact]|opponentbattlefield)~morethan~0 then choice name(Destroy opponent creature) name(Destroy opponent creature) target(creature[attacking;-artifact]|opponentbattlefield) transforms((,newability[destroy],newability[token(Spirit^Creature Spirit^p/t^black^treason^tnum.=3832) opponent])) oneshot
+auto=if type(creature[attacking;-artifact]|mybattlefield)~morethan~0 then choice name(Destroy your creature) name(Destroy your creature) target(creature[attacking;-artifact]|mybattlefield) transforms((,newability[destroy],newability[token(Spirit^Creature Spirit^p/t^black^treason^tnum.=3832)])) oneshot
 text=Destroy target nonartifact attacking creature. It can't be regenerated. Put a black Spirit creature token with that creature's power and toughness onto the battlefield. Sacrifice the token at the beginning of the next end step.
 mana={4}{B}
 type=Instant
@@ -18016,7 +18016,7 @@ toughness=1
 name=Cathar's Call
 target=creature
 auto=teach(creature) vigilance
-auto=teach(creature) transforms((,newability[@each my end:name(Create human) token(Human^Creature Human^1/1^white)]))
+auto=teach(creature) transforms((,newability[@each my end:name(Create human) token(Human^Creature Human^1/1^white^tnum.=296854)]))
 text=Enchant creature -- Enchanted creature has vigilance and "At the beginning of your end step, create a 1/1 white Human creature token."
 mana={2}{W}
 type=Enchantment
@@ -21111,7 +21111,7 @@ toughness=4
 [/card]
 [card]
 name=Cloakwood Hermit
-auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@each my end restriction{type(creature[fresh]|mygraveyard)~morethan~0}:name(Create 2 squirrels) token(Squirrel^Creature Squirrel^1/1^green)*2 and!( tap(noevent) )!]))
+auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@each my end restriction{type(creature[fresh]|mygraveyard)~morethan~0}:name(Create 2 squirrels) token(Squirrel^Creature Squirrel^1/1^green^tnum.=563104)*2 and!( tap(noevent) )!]))
 text=Commander creatures you own have "At the beginning of your end step, if a creature card was put into your graveyard from anywhere this turn, create two tapped 1/1 green Squirrel creature tokens."
 mana={2}{G}
 type=Legendary Enchantment
@@ -27090,8 +27090,8 @@ toughness=5
 [card]
 name=Death Tyrant
 abilities=menace
-auto=lord(creature[attacking]|mybattlefield) transforms((,newability[_DIES_name(Create zombie) _ZOMBIETOKEN_]))
-auto=lord(creature[blocking]|opponentbattlefield) transforms((,newability[_DIES_name(Create zombie) _ZOMBIETOKEN_ opponent]))
+auto=lord(creature[attacking]|mybattlefield) transforms((,newability[_DIES_name(Create zombie) create(zombie:creature zombie:2/2:black:tnum.=531928)]))
+auto=lord(creature[blocking]|opponentbattlefield) transforms((,newability[_DIES_name(Create zombie) create(zombie:creature zombie:2/2:black:tnum.=531928) opponent]))
 autograveyard={5}{B}:name(Return to battlefield) moveto(mybattlefield) and!( tap(noevent) )!
 text=Menace -- Negative Energy Cone - Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token. -- {5}{B}: Return Death Tyrant from your graveyard to the battlefield tapped.
 mana={4}{B}
@@ -27490,7 +27490,7 @@ type=Instant
 [/card]
 [card]
 name=Deekah, Fractal Theorist
-auto=@movedto(*[instant;sorcery]|mystack):name(Create Fractal) all(trigger[to]) transforms((,newability[token(Fractal^Creature Fractal^0/0^green^blue) and!( counter(1/1.manacost) )!])) oneshot
+auto=@movedto(*[instant;sorcery]|mystack):name(Create Fractal) all(trigger[to]) transforms((,newability[token(Fractal^Creature Fractal^0/0^green^blue^tnum.=518422) and!( counter(1/1.manacost) )!])) oneshot
 auto={3}{U}:name(Token gains unblockable) target(creature[token]|battlefield) transforms((,unblockable)) ueot
 text=Magecraft - Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value. -- {3}{U}: Target creature token can't be blocked this turn.
 mana={4}{U}
@@ -30857,7 +30857,7 @@ type=Instant
 name=Dragon Cultist
 auto=@damaged(*[creature;planeswalker]|opponentbattlefield) from(*|myzones) restriction{compare(thatmuch)~morethan~4}:name(A source dealt damage) all(creature[iscommander]|mybattlefield) counter(0/0.1.DamageDealt) notrg
 auto=@damaged(player) from(*|myzones) restriction{compare(thatmuch)~morethan~4}:name(A source dealt damage) all(creature[iscommander]|mybattlefield) counter(0/0.1.DamageDealt) notrg
-auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@each my end restriction{compare(hascntdamagedealt)~morethan~0}:name(Create Dragon) token(Dragon^Creature Dragon^4/4^red^flying)],newability[@each my end restriction{compare(hascntdamagedealt)~morethan~0}:name(Effect ends) removeallcounters(0/0.1.DamageDealt)]))
+auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@each my end restriction{compare(hascntdamagedealt)~morethan~0}:name(Create Dragon) token(Dragon^Creature Dragon^4/4^red^flying^tnum.=563053)],newability[@each my end restriction{compare(hascntdamagedealt)~morethan~0}:name(Effect ends) removeallcounters(0/0.1.DamageDealt)]))
 text=Commander creatures you own have "At the beginning of your end step, if a source you controlled dealt 5 or more damage this turn, create a 4/4 red Dragon creature token with flying."
 mana={4}{R}
 type=Legendary Enchantment
@@ -31462,7 +31462,7 @@ toughness=2
 [/card]
 [card]
 name=Draugr's Helm
-autostack=may name(Create zombie and attach) pay({2}{B}) name(Create zombie and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Zombie^Creature Zombie Berserker^2/2^black)],newability[rehook target(berserker[token;zombie;fresh]|mybattlefield)])) oneshot )!
+autostack=may name(Create zombie and attach) pay({2}{B}) name(Create zombie and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Zombie^Creature Zombie Berserker^2/2^black^tnum.=503696)],newability[rehook target(berserker[token;zombie;fresh]|mybattlefield)])) oneshot )!
 auto={4}:equip
 auto=teach(creature) 2/2
 auto=teach(creature) menace
@@ -33167,7 +33167,7 @@ toughness=3
 [/card]
 [card]
 name=Dwarven Hammer
-autostack=may name(Create dwarf and attach) pay({2}) name(Create dwarf and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Dwarf^Creature Dwarf Berserker^2/1^red)],newability[rehook target(berserker[token;dwarf;fresh]|mybattlefield)])) oneshot )!
+autostack=may name(Create dwarf and attach) pay({2}) name(Create dwarf and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Dwarf^Creature Dwarf Berserker^2/1^red^tnum.=627683)],newability[rehook target(berserker[token;dwarf;fresh]|mybattlefield)])) oneshot )!
 auto={3}:equip
 auto=teach(creature) 3/0
 auto=teach(creature) trample
@@ -34219,7 +34219,7 @@ type=Sorcery
 [/card]
 [card]
 name=Elemental Expressionist
-auto=@movedto(*[instant;sorcery]|mystack):name(Choose a creature) target(creature|mybattlefield) transforms((,newability[exiledeath],newability[@movedto(this|exile):token(Elemental^Creature Elemental^4/4^blue^red)])) ueot
+auto=@movedto(*[instant;sorcery]|mystack):name(Choose a creature) target(creature|mybattlefield) transforms((,newability[exiledeath],newability[@movedto(this|exile):token(Elemental^Creature Elemental^4/4^blue^red^tnum.=513673)])) ueot
 text=Magecraft - Whenever you cast or copy an instant or sorcery spell, choose target creature you control. Until end of turn, it gains "If this creature would leave the battlefield, exile it instead of putting it anywhere else" and "When this creature is put into exile, create a 4/4 blue and red Elemental creature token." (Each instance of that ability triggers separately.)
 mana={UR}{UR}{UR}{UR}
 type=Creature
@@ -34672,7 +34672,7 @@ type=Instant
 [card]
 name=Elven Bow
 auto={3}:equip
-autostack=pay({2}) name(Create elf and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Elf^Creature Elf Warrior^1/1^green)],newability[rehook target(warrior[token;elf;fresh]|mybattlefield)])) oneshot )!
+autostack=pay({2}) name(Create elf and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Elf^Creature Elf Warrior^1/1^green^tnum.=592731)],newability[rehook target(warrior[token;elf;fresh]|mybattlefield)])) oneshot )!
 auto=teach(creature) 1/2
 auto=teach(creature) reach
 text=When Elven Bow enters, you may pay {2}. If you do, create a 1/1 green Elf Warrior creature token, then attach Elven Bow to it. -- Equipped creature gets +1/+2 and has reach. -- Equip {3}
@@ -35836,8 +35836,8 @@ type=Sorcery
 [/card]
 [card]
 name=Entrapment Maneuver
-auto=choice name(Target opponent) ability$!name(Sacrifice attacker) name(Sacrifice attacker) notaTarget(creature[attacking]|mybattlefield) sacrifice and!( transforms((,newability[_SOLDIERTOKEN_*toughness opponent])) oneshot )!!$ opponent
-auto=choice name(Target yourself) ability$!name(Sacrifice attacker) name(Sacrifice attacker) notaTarget(creature[attacking]|mybattlefield) sacrifice and!( transforms((,newability[_SOLDIERTOKEN_*toughness])) oneshot )!!$ controller
+auto=choice name(Target opponent) ability$!name(Sacrifice attacker) name(Sacrifice attacker) notaTarget(creature[attacking]|mybattlefield) sacrifice and!( transforms((,newability[create(soldier:creature soldier:1/1:white:tnum.=420619)*toughness opponent])) oneshot )!!$ opponent
+auto=choice name(Target yourself) ability$!name(Sacrifice attacker) name(Sacrifice attacker) notaTarget(creature[attacking]|mybattlefield) sacrifice and!( transforms((,newability[create(soldier:creature soldier:1/1:white:tnum.=420619)*toughness])) oneshot )!!$ controller
 text=Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness.
 mana={3}{W}
 type=Instant
@@ -40412,7 +40412,7 @@ toughness=2
 [/card]
 [card]
 name=Feywild Visitor
-auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@combatdamagefoeof(player) from(creature[-token]|mybattlefield):name(Create Faerie) token(Faerie Dragon^Creature Faerie Dragon^1/1^blue^flying)],newability[@combatdamageof(player) from(creature[-token]|mybattlefield):name(Create Faerie) token(Faerie Dragon^Creature Faerie Dragon^1/1^blue^flying)]))
+auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@combatdamagefoeof(player) from(creature[-token]|mybattlefield):name(Create Faerie) token(Faerie Dragon^Creature Faerie Dragon^1/1^blue^flying^tnum.=562953)],newability[@combatdamageof(player) from(creature[-token]|mybattlefield):name(Create Faerie) token(Faerie Dragon^Creature Faerie Dragon^1/1^blue^flying^tnum.=562953)]))
 text=Commander creatures you own have "Whenever one or more nontoken creatures you control deal combat damage to a player, you create a 1/1 blue Faerie Dragon creature token with flying."
 mana={2}{U}
 type=Legendary Enchantment
@@ -46038,7 +46038,7 @@ toughness=4
 [/card]
 [card]
 name=Giant's Amulet
-autostack=may name(Create giant and attach) pay({3}{U}) name(Create giant and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Giant^Creature Giant Wizard^4/4^blue)],newability[rehook target(warrior[token;giant;fresh]|mybattlefield)])) oneshot )!
+autostack=may name(Create giant and attach) pay({3}{U}) name(Create giant and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Giant^Creature Giant Wizard^4/4^blue^tnum.=503667)],newability[rehook target(warrior[token;giant;fresh]|mybattlefield)])) oneshot )!
 auto={2}:equip
 auto=teach(creature) 0/1
 auto=teach(creature) transforms((,newability[this(variable{tapped}<1) hexproof]))
@@ -50247,7 +50247,7 @@ toughness=3
 [card]
 name=Grima Wormtongue
 abilities=nolifegainopponent
-auto={T}:name(Scrifice creature) target(other creature|mybattlefield) sacrifice and!( transforms((,newability[choice name(Opponent loses life) life:-1 opponent],newability[choice name(You lose life) life:-1 controller],newability[if cantargetcard(*[legendary]|*) then name(Amass orc 2) name(Amass orc 2) ability$!name(Amass 1) _AMASSORC2_!$ controller])) forever )!
+auto={T}:name(Scrifice creature) target(other creature|mybattlefield) sacrifice and!( transforms((,newability[choice name(Opponent loses life) life:-1 opponent],newability[choice name(You lose life) life:-1 controller],newability[if cantargetcard(*[legendary]|*) then name(Amass orc 2) name(Amass orc 2) ability$!name(Amass 1) if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notatarget(army|myBattlefield) transforms((Orc,newability[counter(1/1.2)])) forever else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black^tnum.=616918) and!( name(Put 1/1 counters) counter(1/1.2) notatarget(army|myBattlefield) )!!$ controller])) forever )!
 text=Your opponents can't gain life. -- {T}, Sacrifice another creature: Target player loses 1 life. If the sacrificed creature was legendary, amass Orcs 2.
 mana={2}{B}
 type=Legendary Creature
@@ -55526,8 +55526,8 @@ type=Instant
 [card]
 name=Hour of Promise
 auto=choice name(Don't search any land) if type(desert|mybattlefield)~morethan~2 then token(Zombie^Creature Zombie^2/2^black)
-auto=choice name(Search 1 land) target(land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[if type(desert|mybattlefield)~morethan~2 then token(Zombie^Creature Zombie^2/2^black)])) oneshot )!
-auto=choice name(Search 2 lands) target(land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[name(Search another land) target(other land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[if type(desert|mybattlefield)~morethan~2 then token(Zombie^Creature Zombie^2/2^black)])) oneshot )! ])) oneshot )!
+auto=choice name(Search 1 land) target(land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[if type(desert|mybattlefield)~morethan~2 then token(Zombie^Creature Zombie^2/2^black^tnum.=547664)])) oneshot )!
+auto=choice name(Search 2 lands) target(land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[name(Search another land) target(other land|mylibrary) moveto(mybattlefield) and!( transforms((,newability[tap(noevent)],newability[if type(desert|mybattlefield)~morethan~2 then token(Zombie^Creature Zombie^2/2^black^tnum.=547664)])) oneshot )! ])) oneshot )!
 text=Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.
 mana={4}{G}
 type=Sorcery
@@ -58147,7 +58147,7 @@ toughness=1
 [card]
 name=Infested Fleshcutter
 auto=teach(creature) 2/0
-auto=teach(creature) transforms((,newability[_ATTACKING__PHYREXIANMITETOKEN_]))
+auto=teach(creature) transforms((,newability[_ATTACKING_create(phyrexian mite:artifact creature phyrexian mite:1/1:poisontoxic:cantblock:tnum.=602547)]))
 auto={2}{W}:equip
 text=Equipped creature gets +2/+0. -- Whenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.) -- Equip {2}{W}
 mana={1}{W}
@@ -58157,7 +58157,7 @@ subtype=Equipment
 [card]
 name=Infested Thrinax
 abilities=flash
-auto=transforms((,newability[lord(creature|myBattlefield) transforms((,newability[_DIES__SAPROLINGTOKEN_*power]))])) ueot
+auto=transforms((,newability[lord(creature|myBattlefield) transforms((,newability[_DIES_create(Saproling:creature Saproling:1/1:green:tnum.=665084)*power]))])) ueot
 text=Flash -- When Infested Thrinax enters, until end of turn, whenever a nontoken creature you control dies, create a number of 1/1 green Saproling creature tokens equal to that creature's power.
 mana={3}{B}{G}
 type=Creature
@@ -59988,7 +59988,7 @@ toughness=2
 [/card]
 [card]
 name=Iridescent Hornbeetle
-auto=@counteradded(1/1) from(creature|myBattlefield) restriction{myTurnOnly}:all(this) transforms((,newability[phaseaction[end sourceinplay once] _INSECTTOKEN_])) ueot
+auto=@counteradded(1/1) from(creature|myBattlefield) restriction{myTurnOnly}:all(this) transforms((,newability[phaseaction[end sourceinplay once] create(Insect:Creature Insect:1/1:green:tnum.=592756)])) ueot
 text=At the beginning of your end step, create a 1/1 green Insect creature token for each +1/+1 counter you've put on creatures under your control this turn.
 mana={4}{G}
 type=Creature
@@ -62180,8 +62180,8 @@ toughness=3
 [/card]
 [card]
 name=Kalitas, Bloodchief of Ghet
-auto=this(variable{type:creature[-indestructible]:opponentbattlefield}>0) {B}{B}{B}{T}:name(Destroy opponent creature) name(Destroy opponent creature) target(creature[-indestructible]|opponentbattlefield) transforms((,newability[destroy],newability[token(Vampire^Creature Vampire^p/t^black) opponent])) oneshot
-auto=this(variable{type:creature[-indestructible]:mybattlefield}>0) {B}{B}{B}{T}:name(Destroy your creature) name(Destroy your creature) target(creature[-indestructible]|mybattlefield) transforms((,newability[destroy],newability[token(Vampire^Creature Vampire^p/t^black)])) oneshot
+auto=this(variable{type:creature[-indestructible]:opponentbattlefield}>0) {B}{B}{B}{T}:name(Destroy opponent creature) name(Destroy opponent creature) target(creature[-indestructible]|opponentbattlefield) transforms((,newability[destroy],newability[token(Vampire^Creature Vampire^p/t^black^tnum.=185704) opponent])) oneshot
+auto=this(variable{type:creature[-indestructible]:mybattlefield}>0) {B}{B}{B}{T}:name(Destroy your creature) name(Destroy your creature) target(creature[-indestructible]|mybattlefield) transforms((,newability[destroy],newability[token(Vampire^Creature Vampire^p/t^black^tnum.=185704)])) oneshot
 text={B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
 mana={5}{B}{B}
 type=Legendary Creature
@@ -63761,7 +63761,7 @@ subtype=Saga
 [card]
 name=King of the Oathbreakers
 abilities=flying
-auto=@targeted(spirit|mybattlefield) from(*|mycastingzone,opponentcastingzone):name(Phases out) all(trigger[to]) name(Phases out) transforms((,newability[phaseout],newability[phaseaction[my untap once sourceinplay] token(Spirit^Creature Spirit^1/1^white^flying^battleready)])) forever
+auto=@targeted(spirit|mybattlefield) from(*|mycastingzone,opponentcastingzone):name(Phases out) all(trigger[to]) name(Phases out) transforms((,newability[phaseout],newability[phaseaction[my untap once sourceinplay] token(Spirit^Creature Spirit^1/1^white^flying^battleready^tnum.=617041)])) forever
 text=Flying -- Whenever King of the Oathbreakers or another Spirit you control becomes the target of a spell, it phases out. (Treat it and anything attached to it as though they don't exist until your next turn.) -- Whenever King of the Oathbreakers or another Spirit you control phases in, create a tapped 1/1 white Spirit creature token with flying.
 mana={2}{W}{B}
 type=Legendary Creature
@@ -65919,7 +65919,7 @@ type=Instant
 name=Launch the Fleet
 abilities=hasnokicker,hasstrive
 kicker=multi{1} name(Strive)
-auto=if compare(kicked)~equalto~0 then name(choose 1 creature) name(choose 1 creature) target(creature) transforms((,newability[_ATTACKING_token(Soldier^Creature Soldier^1/1^white^battleready)])) ueot
+auto=if compare(kicked)~equalto~0 then name(choose 1 creature) name(choose 1 creature) target(creature) transforms((,newability[_ATTACKING_token(Soldier^Creature Soldier^1/1^white^battleready^tnum.=380449)])) ueot
 auto=if compare(kicked)~equalto~1 then name(choose 2 creatures) name(choose 2 creatures) target(<upto:2>creature) transforms((,newability[_ATTACKING_token(Soldier^Creature Soldier^1/1^white^battleready)])) ueot
 auto=if compare(kicked)~equalto~2 then name(choose 3 creatures) name(choose 3 creatures) target(<upto:3>creature) transforms((,newability[_ATTACKING_token(Soldier^Creature Soldier^1/1^white^battleready)])) ueot
 auto=if compare(kicked)~equalto~3 then name(choose 4 creatures) name(choose 4 creatures) target(<upto:4>creature) transforms((,newability[_ATTACKING_token(Soldier^Creature Soldier^1/1^white^battleready)])) ueot
@@ -67596,7 +67596,7 @@ abilities=lifelink
 backside=Liliana, Defiant Necromancer
 restriction=compare(isflipped)~equalto~0
 anyzone={0}:doubleside(backside)
-auto=@movedTo(other creature[-token]|graveyard) from(myBattlefield):name(Liliana, Defiant Necromancer) moveto(exile) and!( moveto(ownerbattlefield) and!( transforms((,newability[flip(backside)],newability[name(Create Zombie) _ZOMBIETOKEN_])) oneshot )! )!
+auto=@movedTo(other creature[-token]|graveyard) from(myBattlefield):name(Liliana, Defiant Necromancer) moveto(exile) and!( moveto(ownerbattlefield) and!( transforms((,newability[flip(backside)],newability[name(Create Zombie) create(zombie:creature zombie:2/2:black:tnum.=296820)])) oneshot )! )!
 text=Lifelink -- Whenever another nontoken creature you control dies, exile Liliana, Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield. // Liliana, Defiant Necromancer
 mana={1}{B}{B}
 type=Legendary Creature
@@ -68802,7 +68802,7 @@ name=Lost Mine of Phandelver
 restriction=never
 autocommandzone=transforms((,newability[shroud],indestructible)) forever
 autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~1}:thisforeach(variable{type:*[twodngtrg]:myBattlefieldplus1plusend}) ability$!name(Cave Entrance) name(Cave Entrance) _SCRY1_!$ controller
-autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~2}:ability$!name(Goblin Lair or Mine Tunnels) all(Lost Mine of Phandelver|mycommandzone) transforms((,newability[choice name(Goblin Lair)*type:*[twodngtrg]:mybattlefieldplus1plusend _GOBLINTOKEN_ and!( all(Lost Mine of Phandelver|mycommandzone) counter(0/0.1.GoblinLiar) notrg )!],newability[choice name(Mine Tunnels) _TREASURE_*type:*[twodngtrg]:mybattlefieldplus1plusend and!( all(Lost Mine of Phandelver|mycommandzone) counter(0/0.1.MineTunnels) notrg )!])) oneshot!$ controller
+autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~2}:ability$!name(Goblin Lair or Mine Tunnels) all(Lost Mine of Phandelver|mycommandzone) transforms((,newability[choice name(Goblin Lair)*type:*[twodngtrg]:mybattlefieldplus1plusend create(Goblin:Creature Goblin:1/1:red:tnum.=530448) and!( all(Lost Mine of Phandelver|mycommandzone) counter(0/0.1.GoblinLiar) notrg )!],newability[choice name(Mine Tunnels) token(Treasure)*type:*[twodngtrg]:mybattlefieldplus1plusend and!( all(Lost Mine of Phandelver|mycommandzone) counter(0/0.1.MineTunnels) notrg )!])) oneshot!$ controller
 autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~3,compare(hascntgoblinliar)~morethan~0}:ability$!name(Storeroom or Dark Pool) all(Lost Mine of Phandelver|mycommandzone) transforms((,newability[if type(creature|battlefield)~morethan~0 then choice name(Storeroom) name(Storeroom) target(<type:*[twodngtrg]:myBattlefieldplus1plusend>creature|battlefield) counter(1/1)],newability[choice name(Dark Pool) life:type:*[twodngtrg]:mybattlefieldplus1plusend controller && life:-type:*[twodngtrg]:mybattlefieldplus1plusend opponent])) oneshot!$ controller
 autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~3,compare(hascntminetunnels)~morethan~0}:ability$!name(Dark Pool or Fungi Cavern) all(Lost Mine of Phandelver|mycommandzone) transforms((,newability[choice name(Dark Pool) life:type:*[twodngtrg]:mybattlefieldplus1plusend controller controller && life:-type:*[twodngtrg]:mybattlefieldplus1plusend controller opponent],newability[if type(creature|battlefield)~morethan~0 then choice name(Fungi Cavern) name(Fungi Cavern) target(<type:*[twodngtrg]:myBattlefieldplus1plusend>creature|battlefield) transforms((,newability[-4/0])) uynt])) oneshot!$ controller
 autocommandzone=@counteradded(0/0,1,Explore) from(Lost Mine of Phandelver|mycommandzone) restriction{compare(hascntexplore)~equalto~4}:choice name(Dungeon completed) all(Lost Mine of Phandelver|mycommandzone) completedungeon:1 controller
@@ -75490,7 +75490,7 @@ toughness=1
 [card]
 name=Moria Scavenger
 abilities=deathtouch,haste
-auto={T}:name(Discard and draw) target(*|myhand) transforms((,newability[reject and!( draw:1 controller )!],newability[if cantargetcard(*[creature]|*) then name(Amass orcs 1) name(Amass orcs 1) ability$!name(Amass orcs 1) _AMASSORC1_!$ controller])) oneshot
+auto={T}:name(Discard and draw) target(*|myhand) transforms((,newability[reject and!( draw:1 controller )!],newability[if cantargetcard(*[creature]|*) then name(Amass orcs 1) name(Amass orcs 1) ability$!name(Amass orcs 1) if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counter) name(Put 1/1 counter) notatarget(army|myBattlefield) transforms((Orc,newability[counter(1/1)])) forever else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black^tnum.=620749) and!( name(Put 1/1 counter) counter(1/1) notatarget(army|myBattlefield) )!!$ controller])) oneshot
 text=Deathtouch, haste -- {T}, Discard a card: Draw a card. If the discarded card was a creature card, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
 mana={1}{B}{R}
 type=Creature
@@ -80201,7 +80201,7 @@ name=Oglor, Devoted Assistant
 aicode=activate transforms((,newability[target(*[zpos<=2]|mylibrary) moveto(mygraveyard)])) ueot
 auto=@each my upkeep:name(Look top 2 card) reveal:2 optionone name(Put in graveyard) target(*|reveal) moveto(mylibrary) and!( moveto(mygraveyard) )! optiononeend optiontwo name(Put back) all(*|reveal) moveto(mylibrary) optiontwoend revealend
 auto=@movedto(creature|mygraveyard) from(mylibrary):name(Gains ability) all(trigger[to]) name(Gains ability) counter(0/0.1.PerpetualZombie) notrg
-auto=emblem transforms((,newability[@movedto(*|myzones) from(mygraveyard):name(Create zombie) all(trigger[to]) name(Create zombie) transforms((,newability[if compare(hascntperpetualzombie)~morethan~0 then _ZOMBIETOKEN_ and!( tap(noevent) )!])) oneshot])) forever dontremove
+auto=emblem transforms((,newability[@movedto(*|myzones) from(mygraveyard):name(Create zombie) all(trigger[to]) name(Create zombie) transforms((,newability[if compare(hascntperpetualzombie)~morethan~0 then create(zombie:creature zombie:2/2:black:tnum.=548246) and!( tap(noevent) )!])) oneshot])) forever dontremove
 text=At the beginning of your upkeep, look at the top two cards of your library, then put one of them into your graveyard. -- Whenever a creature card is put into your graveyard from your library, it perpetually gains "When this card leaves your graveyard, create a 2/2 tapped black Zombie creature token."
 mana={1}{U}
 type=Legendary Creature
@@ -81169,7 +81169,7 @@ subtype=Aura
 name=One with the Kami
 abilities=flash
 target=creature|myBattlefield
-auto=lord(creature[modified]|myBattlefield) transforms((,newability[@movedto(this|graveyard) from(myBattlefield):create(Spirit:creature Spirit:1/1)*power]))
+auto=lord(creature[modified]|myBattlefield) transforms((,newability[@movedto(this|graveyard) from(myBattlefield):create(Spirit:creature Spirit:1/1:tnum.=553924)*power]))
 text=Flash -- Enchant creature you control -- Whenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power. (Equipment, Auras you control, and counters are modifications.)
 mana={3}{G}
 type=Enchantment
@@ -82654,7 +82654,7 @@ type=Instant
 name=Ovika, Enigma Goliath
 abilities=flying
 auto=@targeted(this) from(*|opponentzones):choice name(This spell costs 3 mana and 3 life more) name(This spell costs 3 mana and 3 life more) target(*|opponentzones) transforms((,newability[pay[[{3}{L:3}]] name(pay 3 mana and 3 life) donothing?fizzle])) oneshot
-auto=@movedTo(*[-creature]|mystack):name(Create goblin) all(trigger[to]) transforms((,newability[name(Create goblin) token(Phyrexian Goblin^Creature Phyrexian Goblin^1/1^red)*manacost and!( transforms((,haste)) ueot )!])) ueot
+auto=@movedTo(*[-creature]|mystack):name(Create goblin) all(trigger[to]) transforms((,newability[name(Create goblin) token(Phyrexian Goblin^Creature Phyrexian Goblin^1/1^red^tnum.=680802)*manacost and!( transforms((,haste)) ueot )!])) ueot
 text=Flying -- Ward {3}, Pay 3 life. -- Whenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.
 mana={5}{U}{R}
 type=Legendary Creature
@@ -90163,8 +90163,8 @@ subtype=Equipment
 [/card]
 [card]
 name=Rampage of the Clans
-auto=all(artifact|battlefield) transforms((,newability[destroy],newability[create(Centaur:Creature Centaur:3/3:green)])) oneshot
-auto=all(enchantment|battlefield) transforms((,newability[destroy],newability[create(Centaur:Creature Centaur:3/3:green)])) oneshot
+auto=all(artifact|battlefield) transforms((,newability[destroy],newability[create(Centaur:Creature Centaur:3/3:green:tnum.=457278)])) oneshot
+auto=all(enchantment|battlefield) transforms((,newability[destroy],newability[create(Centaur:Creature Centaur:3/3:green:tnum.=457278)])) oneshot
 text=Destroy all artifacts and enchantments. For each permanent destroyed this way, its controller creates a 3/3 green Centaur creature token.
 mana={3}{G}
 type=Instant
@@ -91864,7 +91864,7 @@ type=Instant
 [card]
 name=Reduce to Memory
 target=*[-land]|battlefield
-auto=moveto(ownerexile) and!( transforms((,newability[token(Spirit^Creature Spirit^3/2^red^white)])) oneshot )!
+auto=moveto(ownerexile) and!( transforms((,newability[token(Spirit^Creature Spirit^3/2^red^white^tnum.=513502)])) oneshot )!
 text=Exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token.
 mana={1}{W}{W}
 type=Sorcery
@@ -92767,7 +92767,7 @@ toughness=2
 [card]
 name=Resculpt
 target=artifact,creature
-auto=moveto(exile) and!( transforms((,newability[token(Elemental^Creature Elemental^4/4^blue^red)])) )! oneshot
+auto=moveto(exile) and!( transforms((,newability[token(Elemental^Creature Elemental^4/4^blue^red^tnum.=622723)])) )! oneshot
 text=Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
 mana={1}{U}
 type=Instant
@@ -93689,7 +93689,7 @@ type=Sorcery
 [/card]
 [card]
 name=Ria Ivor, Bane of Bladehold
-auto=@each my combatbegins:name(Target creature prevent damage) target(creature|mybattlefield) transforms((,newability[_ATTACKING_name(Prevent damage) preventalldamage from(this) ueot],newability[_ATTACKING_name(Create mite) _PHYREXIANMITETOKEN_])) ueot
+auto=@each my combatbegins:name(Target creature prevent damage) target(creature|mybattlefield) transforms((,newability[_ATTACKING_name(Prevent damage) preventalldamage from(this) ueot],newability[_ATTACKING_name(Create mite) create(phyrexian mite:artifact creature phyrexian mite:1/1:poisontoxic:cantblock:tnum.=602744)])) ueot
 auto=_ATTACKING_all(other creature[attacking]|battlefield) 1/0 ueot
 text=Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.) -- At the beginning of combat on your turn, the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
 mana={2}{W}{B}
@@ -95819,7 +95819,7 @@ type=Sorcery
 [/card]
 [card]
 name=Rousing of Souls
-auto=all(*[zpos=1]|library) moveto(hand) and!( transforms((,newability[if cantargetcard(*[-land]|*) then token(Spirit^Creature Spirit^1/1^white^flying) srccontroller],newability[choice name(Put back and draw) moveto(ownerlibrary) and!( draw:1 )!])) oneshot )!
+auto=all(*[zpos=1]|library) moveto(hand) and!( transforms((,newability[if cantargetcard(*[-land]|*) then token(Spirit^Creature Spirit^1/1^white^flying^tnum.=382348) srccontroller],newability[choice name(Put back and draw) moveto(ownerlibrary) and!( draw:1 )!])) oneshot )!
 text=Parley - Each player reveals the top card of their library. For each nonland card revealed this way, you put a 1/1 white Spirit creature token with flying onto the battlefield. Then each player draws a card.
 mana={2}{W}
 type=Sorcery
@@ -98448,7 +98448,7 @@ toughness=2
 [/card]
 [card]
 name=Sauron's Ransom
-auto=all(*[zpos=1]|opponentlibrary) moveto(hand) and!( transforms((,newability[all(*[zpos=2]|opponentlibrary) moveto(hand)],newability[all(*[zpos=3]|opponentlibrary) moveto(mygraveyard)],newability[all(*[zpos=4]|opponentlibrary) moveto(mygraveyard)],newability[name(The ring tempts you) ability$!name(The ring tempts you) _RINGTEMPTS_!$ controller])) oneshot )!
+auto=all(*[zpos=1]|opponentlibrary) moveto(hand) and!( transforms((,newability[all(*[zpos=2]|opponentlibrary) moveto(hand)],newability[all(*[zpos=3]|opponentlibrary) moveto(mygraveyard)],newability[all(*[zpos=4]|opponentlibrary) moveto(mygraveyard)],newability[name(The ring tempts you) ability$!name(The ring tempts you) if type(The Ring|mybattlefield)~morethan~0 then all(The Ring|mybattlefield) transforms((,newability[theringtempts:1 controller],newability[name(Chose a ring bearer) target(creature|mybattlefield) becomesringbearer])) oneshot else token(The Ring^notrigger^tnum.=617055) and!( theringtempts:1 controller and!( name(Choose a ring bearer) target(creature|myBattlefield) becomesringbearer )! )!!$ controller])) oneshot )!
 text=Choose an opponent. They look at the top four cards of your library and separate them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard. The Ring tempts you.
 mana={1}{U}{B}
 type=Instant
@@ -99418,7 +99418,7 @@ type=Sorcery
 [card]
 name=Scour the Desert
 target=creature|mygraveyard
-auto=moveto(Exile) and!( transforms((,newability[token(Bird^Creature Bird^1/1^white^flying)*toughness])) oneshot )!
+auto=moveto(Exile) and!( transforms((,newability[token(Bird^Creature Bird^1/1^white^flying^tnum.=296502)*toughness])) oneshot )!
 text=Exile target creature card from your graveyard. Create X 1/1 white Bird creature tokens with flying, where X is the exiled card's toughness.
 mana={3}{W}{W}
 type=Sorcery
@@ -100262,7 +100262,7 @@ toughness=1
 [/card]
 [card]
 name=Seasoned Pyromancer
-auto=ability$!name(Discard and draw) name(Discard and draw) target(<2>*|myhand) reject and!( transforms((,newability[draw:1 controller],newability[if cantargetcard(*[-land]|*) then token(Elemental^Creature Elemental^1/1^red)])) oneshot )! !$ controller
+auto=ability$!name(Discard and draw) name(Discard and draw) target(<2>*|myhand) reject and!( transforms((,newability[draw:1 controller],newability[if cantargetcard(*[-land]|*) then token(Elemental^Creature Elemental^1/1^red^tnum.=571456)])) oneshot )! !$ controller
 autograveyard={3}{R}{R}{E}:_REDELEMENTALTOKEN_*2
 text=When Seasoned Pyromancer enters, discard two cards, then draw two cards. For each nonland card discarded this way, create a 1/1 red Elemental creature token. -- {3}{R}{R}, Exile Seasoned Pyromancer from your graveyard: Create two 1/1 red Elemental creature tokens.
 mana={1}{R}{R}
@@ -101787,7 +101787,7 @@ toughness=3
 [/card]
 [card]
 name=Shagrat, Loot Bearer
-auto=@combat(attacking) source(this):may name(Attach equipment) target(equipment|myBattlefield) transforms((,newability[rehook all(Shagrat^ Loot Bearer[attacking]|myBattlefield)],newability[all(Shagrat^ Loot Bearer[attacking]|myBattlefield) transforms((,newability[if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notaTarget(army|mybattlefield) counter(1/1.gear) else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black) and!( name(Put 1/1 counters) notaTarget(army|mybattlefield) counter(1/1.gear) )!])) oneshot])) oneshot
+auto=@combat(attacking) source(this):may name(Attach equipment) target(equipment|myBattlefield) transforms((,newability[rehook all(Shagrat^ Loot Bearer[attacking]|myBattlefield)],newability[all(Shagrat^ Loot Bearer[attacking]|myBattlefield) transforms((,newability[if type(army|mybattlefield)~morethan~0 then name(Put 1/1 counters) name(Put 1/1 counters) notaTarget(army|mybattlefield) counter(1/1.gear) else name(Create Orc Army) token(Orc Army^Creature Orc Army^0/0^black^tnum.=617058) and!( name(Put 1/1 counters) notaTarget(army|mybattlefield) counter(1/1.gear) )!])) oneshot])) oneshot
 text=Whenever Shagrat, Loot Bearer attacks, attach up to one target Equipment to it. Then amass Orcs X, where X is the number of Equipment attached to Shagrat. (Control of the Equipment doesn't change. To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
 mana={2}{B}{R}
 type=Legendary Creature
@@ -102039,7 +102039,7 @@ type=Instant
 [card]
 name=Shark Typhoon
 abilities=cycling
-auto=@movedto(*[-creature]|mystack):all(trigger[to]) transforms((,newability[create(Shark:Creature Shark:manacost/manacost:blue:flying)])) oneshot
+auto=@movedto(*[-creature]|mystack):all(trigger[to]) transforms((,newability[create(Shark:Creature Shark:manacost/manacost:blue:flying:tnum.=676000)])) oneshot
 autohand={X}{1}{U}{cycle}:create(Shark:Creature Shark:X/X:blue:flying) && draw:1 controller
 text=Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value. -- Cycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.) -- When you cycle Shark Typhoon, create an X/X blue Shark creature token with flying.
 mana={5}{U}
@@ -106685,7 +106685,7 @@ toughness=4
 [/card]
 [card]
 name=Sokenzan Smelter
-auto=@each my combatbegins restriction{type(artifact|myBattlefield)~morethan~0}:name(Pay 1 and create construct) pay({1}) name(Pay 1 and create construct) all(this) transforms((,newability[sacrifice notaTarget(artifact|mybattlefield)],newability[create(Construct Artifact:Creature Artifact Construct:3/1:red:haste)]))
+auto=@each my combatbegins restriction{type(artifact|myBattlefield)~morethan~0}:name(Pay 1 and create construct) pay({1}) name(Pay 1 and create construct) all(this) transforms((,newability[sacrifice notaTarget(artifact|mybattlefield)],newability[create(Construct Artifact:Creature Artifact Construct:3/1:red:haste:tnum.=590174)]))
 text=At the beginning of combat on your turn, you may pay {1} and sacrifice an artifact. If you do, create a 3/1 red Construct artifact creature token with haste.
 mana={1}{R}
 type=Creature
@@ -109807,7 +109807,7 @@ type=Artifact
 [card]
 name=Staff of Titania
 auto=teach(creature) type:Forest:myBattlefield/type:Forest:myBattlefield nonstatic
-auto=teach(creature) transforms((,newability[_ATTACKING_create(dryad:creature forest dryad land:1/1:green)]))
+auto=teach(creature) transforms((,newability[_ATTACKING_create(dryad:creature forest dryad land:1/1:green:tnum.=586469)]))
 auto={3}:equip
 text=Equipped creature gets +X/+X, where X is the number of Forests you control. -- Whenever equipped creature attacks, create a 1/1 green Forest Dryad land creature token. (It's affected by summoning sickness.) -- Equip {3}
 mana={2}
@@ -113632,8 +113632,8 @@ auto={2}:equip
 auto=teach(creature) protection from(cleric)
 auto=teach(creature) protection from(rogue)
 auto=teach(creature) 2/2
-auto=teach(creature) transforms((,newability[@combatdamaged(player) from(this):name(Create dragon) token(Gold Dragon^Creature Dragon^4/4^white^black^red^blue^green^flying)]))
-auto=teach(creature) transforms((,newability[@tokencreated(Gold Dragon|myBattlefield):name(Roll a d20) rolld20 20 winability token(Gold Dragon^Creature Dragon^4/4^white^black^red^blue^green^flying) winabilityend rolld20end]))
+auto=teach(creature) transforms((,newability[@combatdamaged(player) from(this):name(Create dragon) token(Gold Dragon^Creature Dragon^4/4^white^black^red^blue^green^flying^tnum.=16809)]))
+auto=teach(creature) transforms((,newability[@tokencreated(Gold Dragon|myBattlefield):name(Roll a d20) rolld20 20 winability token(Gold Dragon^Creature Dragon^4/4^white^black^red^blue^green^flying^tnum.=16809) winabilityend rolld20end]))
 text=Equipped creature gets +2/+2 and has protection from Rogues and from Clerics. -- Whenever equipped creature deals combat damage to a player, create a 4/4 gold Dragon creature token with flying and roll a d20 (a twenty-sided die). If you roll a 20, repeat this process. -- Equip {2}
 mana={3}
 type=Artifact
@@ -124694,7 +124694,7 @@ type=Enchantment
 [/card]
 [card]
 name=Valkyrie's Sword
-autostack=may name(Create angel and attach) pay({4}{W}) name(Create angel and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Warrior^Creature Angel Warrior^4/4^white^flying^vigilance)],newability[rehook target(warrior[token;angel;fresh]|mybattlefield)])) oneshot )!
+autostack=may name(Create angel and attach) pay({4}{W}) name(Create angel and attach) moveTo(mybattlefield) and!( transforms((,newability[token(Warrior^Creature Angel Warrior^4/4^white^flying^vigilance^tnum.=503642)],newability[rehook target(warrior[token;angel;fresh]|mybattlefield)])) oneshot )!
 auto={3}:equip
 auto=teach(creature) 2/1
 text=When Valkyrie's Sword enters, you may pay {4}{W}. If you do, create a 4/4 white Angel Warrior creature token with flying and vigilance, then attach Valkyrie's Sword to it. -- Equipped creature gets +2/+1. -- Equip {3}
@@ -126075,7 +126075,7 @@ toughness=3
 [/card]
 [card]
 name=Veteran Soldier
-auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@combat(attacking) source(this):create(Soldier:Creature Soldier:1/1:white:battleready)]))
+auto=lord(creature[iscommander]|mybattlefield) transforms((,newability[@combat(attacking) source(this):create(Soldier:Creature Soldier:1/1:white:battleready:tnum.=562931)]))
 text=Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that opponent."
 mana={1}{W}
 type=Legendary Enchantment
@@ -132673,7 +132673,7 @@ auto={T}:add{B}{B}
 auto={T}:add{G}{G}
 auto={T}:add{R}{R}
 auto={T}:add{U}{U}
-auto=@movedto(*|mystack):all(trigger[to]) transforms((,newability[if compare(fullpaid)~morethan~0 then name(Create Hydra) token(Hydra^Creature Hydra^0/0^green) and!( counter(1/1.fullpaid) )!])) oneshot
+auto=@movedto(*|mystack):all(trigger[to]) transforms((,newability[if compare(fullpaid)~morethan~0 then name(Create Hydra) token(Hydra^Creature Hydra^0/0^green^tnum.=484727) and!( counter(1/1.fullpaid) )!])) oneshot
 text=Deathtouch -- {T}: Add two mana of any one color. -- Whenever you cast a spell with {X} in its mana cost, create a 0/0 green Hydra creature token, then put X +1/+1 counters on it.
 mana={1}{B}{G}{U}
 type=Legendary Creature
@@ -152506,8 +152506,8 @@ toughness=2
 name=Sanctuary Warden
 abilities=flying
 auto=counter(0/0,2,Shield)
-auto=may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[_CITIZENTOKEN_])) oneshot
-auto=_ATTACKING_may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[_CITIZENTOKEN_])) oneshot
+auto=may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[create(citizen:creature citizen:1/1:green:white:tnum.=555231)])) oneshot
+auto=_ATTACKING_may name(Remove a counter) target(*[creature;planeswalker][counter{any}]|mybattlefield) transforms((,newability[removesinglecountertype(1)],newability[draw:1 controller],newability[create(citizen:creature citizen:1/1:green:white:tnum.=555231)])) oneshot
 text=Flying -- This creature enters with two shield counters on it. -- Whenever this creature enters or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
 mana={4}{W}{W}
 type=Creature
