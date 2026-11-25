@@ -1,0 +1,25 @@
+#Gifts Given: the AI opponent makes its own pick of two of the four cards for its graveyard (scenario 171 - it used to make none).
+#Which two the AI takes varies, so the zones are asserted as counts.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Gifts Given
+manapool:{3}{U}
+[PLAYER2]
+library:Plains,Hill Giant,Grizzly Bears,Shock,Island,Mountain
+[DO]
+Gifts Given
+Hill Giant
+Grizzly Bears
+Shock
+Island
+ai
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:*,*
+graveyard:Gifts Given
+[PLAYER2]
+graveyard:*,*
+library:Plains,Mountain
+[END]

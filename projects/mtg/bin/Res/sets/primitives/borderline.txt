@@ -13998,7 +13998,7 @@ toughness=1
 [/card]
 [card]
 name=Bootleggers' Stash
-auto=lord(land|myBattlefield) {T}:_TREASURE_
+auto=lord(land|myBattlefield) {T}:token(-555307)
 text=Lands you control have "{T}: Create a Treasure token."
 mana={5}{G}
 type=Artifact
@@ -115030,7 +115030,7 @@ toughness=2
 [card]
 name=Tarmogoyf Nest
 target=land
-auto=teach(land) {1}{G}{T}:create(Tarmogoyf)
+auto=teach(land) {1}{G}{T}:token(-665078)
 text=Enchant land -- Enchanted land has "{1}{G}, {T}: Create a Tarmogoyf token." (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that power plus 1.")
 mana={2}{G}
 type=Kindred Enchantment
@@ -127013,7 +127013,7 @@ toughness=2
 name=Vivien's Talent
 target=planeswalker
 aicode=activate moveto(mylibrary) target(*[creature;land;zpos<=4]|mylibrary)
-auto=teach(planeswalker) {C(0/0,1,Loyalty)}:reveal:4 optionone name(Get a card) target(<1>*[creature;land]|reveal) moveto(mylibrary) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
+auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Look at the top four) reveal:4 optionone name(Get a card) target(<1>*[creature;land]|reveal) moveto(mylibrary) optiononeend optiontwo name(put on bottom) all(*|reveal) bottomoflibrary optiontwoend revealend
 auto=teach(planeswalker) @movedto(creature[-token]|mybattlefield):counter(0/0,1,loyalty)
 text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order." -- Whenever a nontoken creature enters under your control, put a loyalty counter on enchanted planeswalker.
 mana={1}{G}{G}
@@ -158404,6 +158404,7 @@ toughness=2
 [card]
 name=Smashing Spree
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): +3/+3 and trample on an attacking creature, cast during combat. NOTE: cast before blocks, the opponent could still choose not to block with Hill Giant (Lure should force it).
+#2026-11-24 FIXED (engine, MTGRules.cpp): blocks lock once blockers are chosen; the AI re-ran its block choice after the pump resolved and un-clicked the Lure-forced Hill Giant.
 #2026-11-22 easy batch 1: written from existing working forms.
 target=creature[attacking]
 auto=3/3 ueot
@@ -159481,9 +159482,10 @@ subtype=Ajani
 [card]
 name=Elspeth's Talent
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): the [+1] it gives the enchanted planeswalker. NOTE: menu text says "create soldier" without "+1:"; the Soldier tokens have no picture.
+#2026-11-24 FIXED: name() inside teach() now reaches the taught ability (MTGAbility.cpp); Soldiers made by id (MOC -615330, has art) instead of inline through the planeswalker.
 #2026-11-23 activate-ability trigger batch: written from existing working forms.
 target=planeswalker
-auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Create three 1/1 Soldiers) token(Soldier,Creature Soldier,1/1,white)*3
+auto=teach(planeswalker) {C(0/0,1,Loyalty)}:name(+1: Create three 1/1 Soldiers) token(-615330)*3
 auto=@activatedloyalty(mytgt):all(creature|mybattlefield) 2/2 ueot && all(creature|mybattlefield) vigilance ueot
 text=Enchant planeswalker -- Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens." -- Whenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
 mana={2}{W}{W}
@@ -159641,6 +159643,7 @@ type=Enchantment
 [card]
 name=Magda, the Hoardmaster
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): sacrifice three Treasures for a 4/4 Scorpion Dragon with flying and haste. NOTE: the Scorpion Dragon token shows the wrong picture.
+#2026-11-24 FIXED: 655074t/657361t/657722t.jpg in OTJ.zip held the Treasure picture (staging took the wrong linked token); replaced with the OTJ Scorpion Dragon token.
 #2026-11-23 crime batch: written from existing working forms.
 auto=@committedcrime turnlimited:_TREASURE_ and!( tap(noevent) )!
 auto={S(*[Treasure]|myBattlefield)}{S(*[Treasure]|myBattlefield)}{S(*[Treasure]|myBattlefield)}:token(Scorpion Dragon,Creature Scorpion Dragon,4/4,red,flying,haste) asSorcery
@@ -159701,8 +159704,7 @@ toughness=4
 name=Rattleback Apothecary
 #2026-11-23 crime batch: written from existing working forms.
 abilities=deathtouch
-auto=@committedcrime:choice name(Menace) target(creature|mybattlefield) menace ueot
-auto=@committedcrime:choice name(Lifelink) target(creature|mybattlefield) lifelink ueot
+auto=@committedcrime:name(Menace or lifelink) target(creature|mybattlefield) transforms((,newability[choice name(Gains menace) becomes(^^menace) ueot],newability[choice name(Gains lifelink) becomes(^^lifelink) ueot])) ueot
 text=Deathtouch -- Whenever you commit a crime, target creature you control gains your choice of menace or lifelink until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 mana={2}{B}
 type=Creature
@@ -159841,8 +159843,8 @@ subtype=Room
 name=Dredger's Insight
 #2026-11-23 graveyard-leave batch: written from existing working forms.
 auto=@leftmygraveyard(artifact,creature) oneormore:life:1 controller
-#"From among the milled cards" is read as artifact/creature/land cards put into your graveyard this turn.
-auto=deplete:4 controller && ability$!name(Put a milled card into your hand) target(<upto:1>*[fresh&artifact;fresh&creature;fresh&land]|mygraveyard) moveto(myhand) !$ controller
+note=The pick may take any artifact, creature or land card in your graveyard, not only the milled ones: the engine marks a card "fresh" only when it reaches the graveyard from the battlefield or the stack, so a filter on fresh found nothing after the mill (scenario 164, 2026-11-24).
+auto=deplete:4 controller && ability$!name(Put a milled card into your hand) target(<upto:1>artifact,creature,land|mygraveyard) moveto(myhand)!$ controller
 text=Whenever one or more artifact and/or creature cards leave your graveyard, you gain 1 life. -- When this enchantment enters, mill four cards. You may put an artifact, creature, or land card from among the milled cards into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
 mana={1}{G}
 type=Enchantment
@@ -160012,6 +160014,7 @@ toughness=1
 [card]
 name=Strionic Resonator
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): copy a triggered ability (you respond to your own trigger). NOTE: it also let him target the Grizzly Bears SPELL (did nothing); targeting the trigger worked.
+#2026-11-24 FIXED (engine, AllAbilities.cpp): duplicateability can only be activated while a matching ability you control is on the stack (test copyab_strionic_spell_refused).
 #2026-11-23 ability-copy batch: written from existing working forms.
 #"You may choose new targets for the copy": the copy keeps the original's targets.
 auto={2}{T}:name(Copy target triggered ability you control) duplicateability(triggered)
@@ -160534,9 +160537,9 @@ toughness=*
 [card]
 name=Gifts Given
 #2026-11-24 HHO/PCEL promo batch: written from existing working forms.
-#You pick the four cards as the spell's targets; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
-auto=name(Take four cards) target(<upto:4>*|opponentlibrary) moveto(myhand) and!( becomes(giftgiven) ueot )!
-auto=ability$!name(Choose two for the graveyard) target(<2>giftgiven|opponenthand) moveto(ownergraveyard)!$ opponent
+#You pick the four cards one at a time; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
+#Intuition's chain: each pick's card starts the next pick, and the fourth starts the opponent's. Two separate auto= lines do not work - the <upto:4> pick waits for clicks while the opponent's pick, queued beside it, finds no tagged card and is dropped (scenario 171, 2026-11-25).
+auto=name(Take the first card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the second card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the third card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the fourth card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[ability$!name(Choose two for the graveyard) target(<2>giftgiven|opponenthand) moveto(ownergraveyard)!$ opponent])) ueot )!])) ueot )!])) ueot )!])) ueot )!
 text=Search target opponent's library for four cards with different names and reveal them. That player chooses two of those cards. Put the chosen cards into the player's graveyard and the rest into your hand. Then that player shuffles their library.
 mana={3}{U}
 type=Instant

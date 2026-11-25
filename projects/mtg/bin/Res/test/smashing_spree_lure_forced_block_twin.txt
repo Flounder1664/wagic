@@ -1,0 +1,30 @@
+#Control twin: Lure alone, no Smashing Spree. Hill Giant is forced to block and kills the 2/2.
+#Lure must still force Hill Giant to block: the 5/5 trampler kills it and tramples over for 2.
+#Without the forced block P2 would take 5 and Hill Giant would live. (John, scenario 2026-11-24)
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears,Lure@Grizzly Bears
+hand:Smashing Spree
+manapool:{1}{R}
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[DO]
+goto attackers
+Grizzly Bears
+next
+#blockers
+next
+#damage
+next
+#end combat
+[ASSERT]
+COMBATEND
+[PLAYER1]
+graveyard:Grizzly Bears,Lure
+hand:Smashing Spree
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

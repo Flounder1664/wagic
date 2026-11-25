@@ -1069,6 +1069,10 @@ int GenericActivatedAbility::isReactingToClick(MTGCardInstance * card, ManaCost 
     if (AAMulligan * mulligan = dynamic_cast<AAMulligan*> (ability))
         if (!mulligan->mulliganWindowOpen())
             return 0;
+    //"Copy target triggered ability you control": needs such an ability on the stack to target
+    if (AADuplicateAbility * dup = dynamic_cast<AADuplicateAbility*> (ability))
+        if (!dup->hasCopyCandidate())
+            return 0;
     return ActivatedAbility::isReactingToClick(card, mana);
 }
 

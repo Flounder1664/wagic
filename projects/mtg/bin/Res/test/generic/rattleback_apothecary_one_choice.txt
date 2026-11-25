@@ -1,0 +1,33 @@
+#Rattleback Apothecary: a crime gives ONE of menace or lifelink (one menu), not both.
+#Shock the opponent, the trigger names Grizzly Bears, pick Menace. Hill Giant alone cannot block a
+#menace creature, so 2 lands; with no lifelink you stay at 20 (both granted = 22).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Rattleback Apothecary,Grizzly Bears
+hand:Shock
+manapool:{R}
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Shock
+p2
+Grizzly Bears
+choice 0
+next
+next
+Grizzly Bears
+next
+Hill Giant
+next
+next
+[ASSERT]
+COMBATEND
+[PLAYER1]
+inplay:Rattleback Apothecary,Grizzly Bears
+graveyard:Shock
+life:20
+[PLAYER2]
+inplay:Hill Giant
+life:16
+[END]
