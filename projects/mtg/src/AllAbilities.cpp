@@ -8451,6 +8451,12 @@ int MayAbility::reactToTargetClick(Targetable * object)
     mClone = ability->clone();
     mClone->addToGame();
     mClone->forceDestroy = 1;
+    //An option already picked from a menu (a Spree mode) is part of the spell resolving, so it
+    //resolves now, as processAbility does for an untargeted pick. On the stack it came after the
+    //later modes: Final Showdown destroyed the creature before it gained indestructible. Not for a
+    //card still in hand: a splice effect is meant to go on the stack ahead of the spell.
+    if (autoResolve && !(source && source->currentZone == source->controller()->game->hand))
+        mClone->canBeInterrupted = false;
     return mClone->reactToTargetClick(object);
 }
 
