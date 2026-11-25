@@ -1,0 +1,19 @@
+#Strionic Resonator copies a TRIGGERED ability only: with just a Grizzly Bears spell on the stack
+#it cannot be activated (John 2026-11-24: it tapped, took {2} and did nothing). The {2} stays unspent.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator
+hand:Grizzly Bears
+manapool:{1}{G}{2}
+[PLAYER2]
+[DO]
+Grizzly Bears
+Strionic Resonator
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator,Grizzly Bears
+manapool:{2}
+[PLAYER2]
+[END]

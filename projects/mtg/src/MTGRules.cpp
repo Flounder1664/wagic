@@ -2079,6 +2079,7 @@ MTGBlockCostRule::MTGBlockCostRule(GameObserver* observer, int _id) :
 int MTGBlockCostRule::isReactingToClick(MTGCardInstance * card, ManaCost * aiCheck)
 {
     if (currentPhase == MTG_PHASE_COMBATBLOCKERS && !game->isInterrupting
+        && game->combatStep == BLOCKERS //blocks are final after WEventBlockersChosen (see MTGBlockRule)
         && card->controller() != game->currentPlayer
         )
     {
@@ -2697,7 +2698,12 @@ int MTGBlockRule::receiveEvent(WEvent *e)
 
 int MTGBlockRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
 {
+    //Blocks are final once WEventBlockersChosen has fired (combatStep leaves BLOCKERS): that is
+    //when Lure/provoke/"must block" are enforced. The AI re-runs chooseBlockers every time it gets
+    //priority in this phase, so after a pump spell resolved it could un-click a Lure-forced blocker
+    //(Smashing Spree on a lured Grizzly Bears: Hill Giant stopped blocking, John 2026-11-24).
     if (currentPhase == MTG_PHASE_COMBATBLOCKERS && !game->isInterrupting
+        && game->combatStep == BLOCKERS
         && card->controller() != game->currentPlayer
         )
     {

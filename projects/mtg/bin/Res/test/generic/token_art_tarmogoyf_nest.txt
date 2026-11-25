@@ -1,0 +1,18 @@
+#Tarmogoyf Nest: the land makes M3C's registered Tarmogoyf token (-665078, has the token picture).
+#create(Tarmogoyf) through the land copied the real card instead. Empty graveyards: 0/1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Tarmogoyf Nest@Forest
+manapool:{1}{G}
+[PLAYER2]
+[DO]
+Forest
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Tarmogoyf Nest,Tarmogoyf
+pt:-665078=0/1
+[PLAYER2]
+[END]

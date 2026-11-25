@@ -1563,6 +1563,14 @@ public:
         game->mLayers->stackLayer()->copyStackAbility(source->controller(), kind, sourceTc, times > 0 ? times : 1);
         return 1;
     }
+    //Is there an ability on the stack this could copy? Activation is refused without one, so a
+    //Strionic Resonator cannot be pointed at a spell (or an empty stack) and fizzle.
+    bool hasCopyCandidate()
+    {
+        if (!source || !game->mLayers || !game->mLayers->stackLayer())
+            return false;
+        return game->mLayers->stackLayer()->findStackAbility(source->controller(), kind, sourceTc) != NULL;
+    }
     const string getMenuText()
     {
         return "Copy ability";
@@ -4427,7 +4435,19 @@ public:
             else
             {
                 myToken = NEW Token(name, source, power, toughness);
-                if(!cID.empty())
+                if(cID.size() > 1 && cID[0] == '=')
+                {
+                    //",tnum.=N": take card N's token picture (Nt.jpg in N's set) instead of the
+                    //creating card's. For a token made through a granted ability (teach/lord:
+                    //Spawning Grounds' land makes the Beast), the source is the land, whose id
+                    //can never have the right picture. 2026-11-25.
+                    WParsedInt artID(cReplaceString(cID.substr(1)," ",""), NULL, source);
+                    int artId = abs(artID.getValue());
+                    myToken->setMTGId(-artId);
+                    if (MTGCard * artCard = MTGCollection()->getCardById(artId))
+                        myToken->setId = artCard->setId;
+                }
+                else if(!cID.empty())
                 {
                     string customId = "";
                     ostringstream tokID;
