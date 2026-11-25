@@ -1,0 +1,28 @@
+#Smuggler's Surprise, mill mode (scenario 178): Mountain picked first, then Elves (the order John clicked) from the milled four.
+#Picking Mountain + Llanowar Elves put nothing in hand (John, 2026-11-25): he picked while the +{4}{G} mode's
+#menu sat over the reveal window. That menu now waits for the window, so it is answered after revealdone.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Smuggler's Surprise
+library:Plains,Llanowar Elves,Mountain,Grizzly Bears,Shock
+manapool:{G}{2}
+[PLAYER2]
+[DO]
+Smuggler's Surprise
+choice 0
+choice 0
+Mountain
+Llanowar Elves
+endinterruption
+revealdone
+choice 1
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+hand:Llanowar Elves,Mountain
+graveyard:Smuggler's Surprise,Grizzly Bears,Shock
+library:Plains
+[PLAYER2]
+[END]

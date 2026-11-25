@@ -1,0 +1,31 @@
+#Smuggler's Surprise, mill mode then the +{4}{G} mode (scenario 178). Modes resolve in printed order, so
+#creatures the mill mode just put in your hand can be put onto the battlefield. The +{4}{G} mode's menu
+#used to open over the reveal window, before anything reached the hand, so the menu! line below failed:
+#the open menu was that mode's one while the reveal was still up, and the creatures stayed off the battlefield.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Smuggler's Surprise
+library:Plains,Llanowar Elves,Mountain,Grizzly Bears,Shock
+manapool:{G}{G}{G}{G}{G}{G}{G}{G}
+[PLAYER2]
+[DO]
+Smuggler's Surprise
+choice 0
+choice 0
+Llanowar Elves
+Grizzly Bears
+endinterruption
+revealdone
+menu! put up to two creature cards from your hand onto the battlefield
+Llanowar Elves
+Grizzly Bears
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Llanowar Elves,Grizzly Bears
+graveyard:Smuggler's Surprise,Mountain,Shock
+library:Plains
+[PLAYER2]
+[END]

@@ -476,6 +476,8 @@ MTGAbility * MTGRevealingCards::contructAbility(string abilityToMake)
         return NULL;
     abilityToCast->canBeInterrupted = false;
     abilityToCast->forceDestroy = 1;
+    if (MayAbility * may = dynamic_cast<MayAbility *>(abilityToCast))
+        may->fromReveal = true;
     return abilityToCast;
 }
 
@@ -784,6 +786,8 @@ MTGAbility * MTGScryCards::contructAbility(string abilityToMake)
         return NULL;
     abilityToCast->canBeInterrupted = false;
     abilityToCast->forceDestroy = 1;
+    if (MayAbility * may = dynamic_cast<MayAbility *>(abilityToCast))
+        may->fromReveal = true;
     return abilityToCast;
 }
 
@@ -8367,6 +8371,7 @@ MayAbility::MayAbility(GameObserver* observer, int _id, MTGAbility * _ability, M
     triggered = 0;
     mClone = NULL;
     autoResolve = false;
+    fromReveal = false;
 }
 
 void MayAbility::Update(float dt)
@@ -8377,7 +8382,18 @@ void MayAbility::Update(float dt)
     //"may"s). A "may" enters-trigger beside a modal "choice" block (Champions of the Shoal: behold
     //or sacrifice, then may tap and stun) used to be listed as one more mode and was lost once a
     //mode was picked (John, scenario 25). Now it waits for that menu to close and opens its own.
-    if (!triggered && !game->getCurrentTargetChooser() && (!al->menuObject || (al->menuObject == source && al->menuMust == must)))
+    //A "may" that is not an option of an open reveal window waits for that window to close. Spree's
+    //Smuggler's Surprise resolves its modes as may-pay lines: the mill mode's "put up to two into
+    //your hand" menu armed its targeting in the same update pass the +{4}{G} mode's may ran, before
+    //the target chooser was live, so that mode's menu opened over the reveal window. Cards picked
+    //under it were lost and every milled card went to the graveyard (John, scenario 178). The later
+    //modes now ask once the reveal is done, which is also the printed order. (The harness never saw
+    //it: ActionStack::Update holds the stack only while a menu is open in a game with a human, so the
+    //picked cards' move sat on the stack under that menu, and the next click on the window read as
+    //"picked nothing".)
+    bool revealOpen = !fromReveal && game->OpenedDisplay
+        && (game->players[0]->game->reveal->cards.size() || game->players[1]->game->reveal->cards.size());
+    if (!triggered && !revealOpen && !game->getCurrentTargetChooser() && (!al->menuObject || (al->menuObject == source && al->menuMust == must)))
     {
         triggered = 1;
         if(Cond.size())
