@@ -4444,7 +4444,12 @@ public:
                     WParsedInt artID(cReplaceString(cID.substr(1)," ",""), NULL, source);
                     int artId = abs(artID.getValue());
                     myToken->setMTGId(-artId);
-                    if (MTGCard * artCard = MTGCollection()->getCardById(artId))
+                    //N is a registered token (-N, e.g. a Dog token added for Jinnie Fay) or a card whose
+                    //token picture is staged at Nt.jpg in its own set.
+                    MTGCard * artCard = MTGCollection()->getCardById(-artId);
+                    if (!artCard)
+                        artCard = MTGCollection()->getCardById(artId);
+                    if (artCard)
                         myToken->setId = artCard->setId;
                 }
                 else if(!cID.empty())

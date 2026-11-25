@@ -3997,6 +3997,9 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             sabilities.append(",");
             sabilities.append(tokenParameters[i]);
         }
+        //A token with no colour/abilities field ("token(Name,Types,P/T,tnum.=N)") has tnum. first.
+        if(sabilities.find("tnum.") == 0)
+            sabilities = "," + sabilities;
         if(sabilities.find(",tnum.") != string::npos)
         {
             size_t begins = sabilities.find(",tnum.");
@@ -4107,6 +4110,9 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             sabilities.append(",");
             sabilities.append(tokenParameters[i]);
         }
+        //A token with no colour/abilities field ("token(Name,Types,P/T,tnum.=N)") has tnum. first.
+        if(sabilities.find("tnum.") == 0)
+            sabilities = "," + sabilities;
         if(sabilities.find(",tnum.") != string::npos)
         {
             size_t begins = sabilities.find(",tnum.");
