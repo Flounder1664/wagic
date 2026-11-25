@@ -2,19 +2,19 @@
 [INIT]
 FIRSTMAIN
 [PLAYER1]
-inplay:Ashen Firebeast,Benalish Hero,Birds of Paradise
+inplay:Ashen Firebeast,Savannah Lions,Birds of Paradise
 manapool:{1}{R}
 [PLAYER2]
-inplay:plague rats,drudge skelettons,El_Hajaj,Air elemental
+inplay:plague rats,drudge skeletons,El-Hajjaj,Air elemental
 [DO]
 Ashen Firebeast
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-graveyard:Benalish Hero
+graveyard:Savannah Lions
 inplay:Ashen Firebeast,Birds of Paradise
 manapool:{0}
 [PLAYER2]
-graveyard:plague rats,drudge skelettons,El_Hajaj
+graveyard:plague rats,drudge skeletons,El-Hajjaj
 inplay:Air elemental
 [END]
