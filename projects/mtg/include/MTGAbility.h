@@ -370,6 +370,7 @@ class InstantAbility:public MTGAbility
 {
 public:
     int init;
+    bool tried; //Update has called resolve() at least once (init stays 0 if it failed)
     virtual void Update(float dt);
     virtual int testDestroy();
     InstantAbility(GameObserver* observer, int _id, MTGCardInstance * source);

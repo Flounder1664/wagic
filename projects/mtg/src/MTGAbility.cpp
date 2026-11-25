@@ -8709,6 +8709,7 @@ InstantAbility::InstantAbility(GameObserver* observer, int _id, MTGCardInstance 
     MTGAbility(observer, _id, source)
 {
     init = 0;
+    tried = false;
 }
 
 void InstantAbility::Update(float)
@@ -8716,6 +8717,7 @@ void InstantAbility::Update(float)
     if (!init)
     {
         init = resolve();
+        tried = true;
     }
 }
 
@@ -8723,6 +8725,7 @@ InstantAbility::InstantAbility(GameObserver* observer, int _id, MTGCardInstance 
     MTGAbility(observer, _id, source, _target)
     {
         init = 0;
+        tried = false;
     }
 
 //Instant abilities last generally until the end of the turn
