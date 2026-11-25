@@ -1,6 +1,8 @@
 #Shifting Grift, +{2} mode (scenario 146): take Hill Giant, then give Grizzly Bears. The other two mode
 #menus used to open while the creature pick was still queued, so a GUI click on them never reached the
-#right menu and the artifact menu looped (John, 2026-11-24). Now the picks follow the menus in order.
+#right menu and the artifact menu looped (John, 2026-11-24). Scenario 177 (2026-11-25): the other two menus then
+#opened between Hill Giant and the Bears. Now the creature mode finishes first: Hill Giant, the one-option
+#"Give one of yours" prompt (menu by label, so the test fails if another menu is on top), Grizzly Bears, and only then the artifact and enchantment menus.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -13,9 +15,10 @@ inplay:Hill Giant
 Shifting Grift
 choice 0
 Hill Giant
-choice 1
-choice 1
+menu give one of yours
 Grizzly Bears
+menu cancel
+menu cancel
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]

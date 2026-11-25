@@ -8527,12 +8527,27 @@ bool MenuAbility::CheckUserInput(JButton key)
 //True while the targeted option just picked from a menu is still waiting to run: processAbility
 //queues it as an autoResolve may and destroys the menu, and that may opens its target prompt only
 //once no menu is up - so a menu opened first sits over it.
-static bool pickedOptionPending(ActionLayer * al)
+static bool pickedOptionPending(ActionLayer * al, MTGCardInstance * menuSource)
 {
     for (size_t i = 0; i < al->mObjects.size(); i++)
     {
+        //The picked mode's and!( ... )! part, queued on the same card and not yet run: Shifting
+        //Grift's transforms((,newability[...])) oneshot is an InstantAbility that resolves on its first
+        //Update and only then adds the "Give one of yours" prompt below. Only until that first try, so
+        //one whose resolve() fails cannot hold the menu.
+        InstantAbility * ia = dynamic_cast<InstantAbility *>(al->mObjects[i]);
+        if (ia && !ia->tried && ia->source == menuSource)
+            return true;
         MayAbility * may = dynamic_cast<MayAbility *>(al->mObjects[i]);
-        if (may && may->autoResolve && !may->triggered && !dynamic_cast<MenuAbility *>(may))
+        if (!may || dynamic_cast<MenuAbility *>(may))
+            continue;
+        if (may->autoResolve && !may->triggered)
+            return true;
+        //A forced follow-up prompt the picked mode set up as it resolved: Shifting Grift's
+        //"take one of theirs" moves the card, then and!( transforms((,newability[target(...)])) )
+        //adds a must-may on it for "Give one of yours". It is still the same mode, so its pick
+        //comes before the next mode's menu, not after it (John, scenario 177, 2026-11-25).
+        if (may->must && (!may->triggered || (al->menuObject && al->menuObject == may->source)))
             return true;
     }
     return false;
@@ -8585,7 +8600,7 @@ void MenuAbility::Update(float dt)
     //the next mode's menu opened over it in the same frame. The GUI then could not reach the prompt,
     //every click on the new menu went to the answered one, and it never closed (Getaway Glamer,
     //Shifting Grift - John, 2026-11-24).
-    if(triggered && !game->mExtraPayment && !processed && !object->getCurrentTargetChooser() && !pickedOptionPending(object))
+    if(triggered && !game->mExtraPayment && !processed && !object->getCurrentTargetChooser() && !pickedOptionPending(object, source))
     {
         game->mLayers->actionLayer()->setCustomMenuObject(source, must,abilities,newNameString.size()?newNameString.c_str():"");
         previousInterrupter = game->isInterrupting;
