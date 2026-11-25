@@ -7126,7 +7126,22 @@ int AbilityFactory::magicText(int id, Spell * spell, MTGCardInstance * card, int
         }
         else
         {
-            if (a->oneShot)
+            MTGCardInstance * etbCard = (spell && spell->source) ? spell->source : card;
+            if (a->oneShot && spell && etbCard && etbCard->isInPlay(observer) && observer->mLayers
+                && observer->mLayers->stackLayer() && !dynamic_cast<MayAbility *>(a)
+                && observer->mLayers->stackLayer()->hasReadyTriggerCopier(etbCard->controller()))
+            {
+                //A bare auto= ETB normally resolves at once and never exists on the stack, so "copy target
+                //triggered ability" had nothing to target (Strionic Resonator on Elvish Visionary, scenario
+                //175). While its controller has such a copier ready, the ETB goes on the stack as a trigger
+                //instead. The stack does not own its abilities, so `a` is not deleted (see copyStackAbility).
+                a->etbTrigger = true;
+                a->canBeInterrupted = true;
+                observer->mLayers->stackLayer()->addAbility(a);
+                for (int extra = countTriggerDoublers(observer, etbCard, NULL, etbCard); extra > 0; extra--)
+                    observer->mLayers->stackLayer()->addAbility(a->clone());
+            }
+            else if (a->oneShot)
             {
                 a->resolve();
                 //Trigger doubling for ENTER-THE-BATTLEFIELD abilities. A permanent's
@@ -7806,6 +7821,7 @@ MTGAbility::MTGAbility(const MTGAbility& a): ActionElement(a)
     menuPreviewCard = a.menuPreviewCard;
     menuPreviewCard2 = a.menuPreviewCard2;
     canBeInterrupted = a.canBeInterrupted;
+    etbTrigger = a.etbTrigger;
 
     //costs get copied, and will be deleted in the destructor
     mCost = a.mCost ? NEW ManaCost(a.mCost) : NULL;
@@ -7843,6 +7859,7 @@ MTGAbility::MTGAbility(GameObserver* observer, int id, MTGCardInstance * card) :
     menuPreviewCard2 = NULL;
     oneShot = 0;
     canBeInterrupted = true;
+    etbTrigger = false;
 }
 
 MTGAbility::MTGAbility(GameObserver* observer, int id, MTGCardInstance * _source, Targetable * _target) :
@@ -7859,6 +7876,7 @@ MTGAbility::MTGAbility(GameObserver* observer, int id, MTGCardInstance * _source
     menuPreviewCard2 = NULL;
     oneShot = 0;
     canBeInterrupted = true;
+    etbTrigger = false;
 }
 
 void MTGAbility::setCost(ManaCost * cost, bool forceDelete)

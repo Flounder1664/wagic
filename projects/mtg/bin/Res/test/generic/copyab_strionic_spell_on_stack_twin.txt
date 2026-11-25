@@ -1,0 +1,22 @@
+#Twin of copyab_strionic_etb_trigger: with the Grizzly Bears SPELL held on the stack ("yes" on the
+#spell's own window), Strionic Resonator still cannot be activated - it copies triggers only.
+#The {2} stays unspent and the Resonator stays untapped (it is tapped for nothing otherwise).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator
+hand:Grizzly Bears
+manapool:{1}{G}{2}
+[PLAYER2]
+[DO]
+Grizzly Bears
+yes
+Strionic Resonator
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator,Grizzly Bears
+manapool:{2}
+[PLAYER2]
+[END]

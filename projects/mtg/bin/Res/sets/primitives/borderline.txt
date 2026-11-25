@@ -160023,6 +160023,7 @@ toughness=1
 name=Strionic Resonator
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): copy a triggered ability (you respond to your own trigger). NOTE: it also let him target the Grizzly Bears SPELL (did nothing); targeting the trigger worked.
 #2026-11-24 FIXED (engine, AllAbilities.cpp): duplicateability can only be activated while a matching ability you control is on the stack (test copyab_strionic_spell_refused).
+#2026-11-25 FIXED (engine, MTGAbility.cpp magicText + ActionStack): scenario 175 - Elvish Visionary's ETB could not be targeted. A bare auto= ETB resolved at once and was never on the stack; while you control a ready copier it now goes on the stack as a trigger and stops for a response (tests copyab_strionic_etb_trigger, _soul_warden, _spell_on_stack_twin).
 #2026-11-23 ability-copy batch: written from existing working forms.
 #"You may choose new targets for the copy": the copy keeps the original's targets.
 auto={2}{T}:name(Copy target triggered ability you control) duplicateability(triggered)
