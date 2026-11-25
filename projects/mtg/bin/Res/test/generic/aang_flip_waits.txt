@@ -1,0 +1,20 @@
+#Aang, at the Crossroads: the transform waits for the next upkeep. Later in the
+#same turn the creature that left is gone but Aang is still the front face (1510203).
+#Twin of aang_flip.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:1510203,Ornithopter,Nantuko Husk
+[PLAYER2]
+[DO]
+Nantuko Husk
+Ornithopter
+goto secondmain
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+inplay:1510203,Nantuko Husk
+graveyard:Ornithopter
+pt:1510203=3/3
+[PLAYER2]
+[END]

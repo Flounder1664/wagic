@@ -1,23 +1,27 @@
-#Aang, at the Crossroads transforms when another creature you control leaves the
-#battlefield. Its back face has art now, so the flip no longer crashes.
-#Sacrifice the Ornithopter and Aang must become Aang, Destined Savior.
+#Aang, at the Crossroads: when another creature you control leaves the battlefield,
+#transform Aang at the beginning of the NEXT upkeep. Sacrifice the Ornithopter to
+#Nantuko Husk; at the next upkeep Aang becomes Aang, Destined Savior (1510306).
+#Twin: aang_flip_waits checks it has not flipped yet later the same turn.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 inplay:1510203,Ornithopter,Nantuko Husk
-life:20
+library:Alpha Tyrranax
 [PLAYER2]
-life:20
+library:Ancient Carp,Barbarian Horde
 [DO]
 Nantuko Husk
 Ornithopter
-next
+goto upkeep
+goto draw
 [ASSERT]
-COMBATBEGINS
+DRAW
 [PLAYER1]
 inplay:1510306,Nantuko Husk
 graveyard:Ornithopter
-life:20
+pt:1510203=4/4
+library:Alpha Tyrranax
 [PLAYER2]
-life:20
+library:Ancient Carp
+hand:Barbarian Horde
 [END]
