@@ -100209,6 +100209,7 @@ type=Instant
 [/card]
 [card]
 name=Season's Beatings
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): choosing the opponent, their Craw Wurm and Grizzly Bears fight each other; your creature is untouched (169).
 #2026-11-24: the engine has no random targeting, so each creature's damage goes to a creature the player picks rather than a random one.
 #Inside each creature's new ability "my" is that creature's side, so mybattlefield is right for both modes (opponentbattlefield made their creatures hit yours - John, scenario 169).
 auto=choice name(Choose opponent) all(creature|opponentbattlefield) transforms((,newability[damage:p target(other creature|mybattlefield)])) oneshot
@@ -158132,6 +158133,7 @@ toughness=2
 [/card]
 [card]
 name=Getaway Glamer
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): only +{1} paid: +{1} menu, target prompt, +{2} menu; Bears blinks back at end step (176).
 #2026-11-22 spree batch 2: written from existing working forms.
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
 auto=may name(+{2}: Destroy target creature if no other creature has greater power) pay({2}) name(Destroy target creature if no other creature has greater power) target(creature) transforms((,newability[if compare(power:highest:creature:battlefield)~equalto~compare(power) then destroy])) oneshot
@@ -158403,6 +158405,7 @@ toughness=2
 [/card]
 [card]
 name=Smashing Spree
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): cast after the AI declared blocks: block stays, Hill Giant dies, 2 trample, no crash (172).
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): +3/+3 and trample on an attacking creature, cast during combat. NOTE: cast before blocks, the opponent could still choose not to block with Hill Giant (Lure should force it).
 #2026-11-24 FIXED (engine, MTGRules.cpp): blocks lock once blockers are chosen; the AI re-ran its block choice after the pump resolved and un-clicked the Lure-forced Hill Giant.
 #2026-11-22 easy batch 1: written from existing working forms.
@@ -159481,6 +159484,7 @@ subtype=Ajani
 [/card]
 [card]
 name=Elspeth's Talent
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): taught +1 menu label reads Create three 1/1 Soldiers; Soldier tokens show art (173).
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): the [+1] it gives the enchanted planeswalker. NOTE: menu text says "create soldier" without "+1:"; the Soldier tokens have no picture.
 #2026-11-24 FIXED: name() inside teach() now reaches the taught ability (MTGAbility.cpp); Soldiers made by id (MOC -615330, has art) instead of inline through the planeswalker.
 #2026-11-23 activate-ability trigger batch: written from existing working forms.
@@ -159642,6 +159646,7 @@ type=Enchantment
 [/card]
 [card]
 name=Magda, the Hoardmaster
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): sacrificing three Treasures makes a 4/4 flying haste Scorpion Dragon with its picture (174).
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): sacrifice three Treasures for a 4/4 Scorpion Dragon with flying and haste. NOTE: the Scorpion Dragon token shows the wrong picture.
 #2026-11-24 FIXED: 655074t/657361t/657722t.jpg in OTJ.zip held the Treasure picture (staging took the wrong linked token); replaced with the OTJ Scorpion Dragon token.
 #2026-11-23 crime batch: written from existing working forms.
@@ -159702,6 +159707,7 @@ toughness=4
 [/card]
 [card]
 name=Rattleback Apothecary
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): crime trigger offers ONE menu (menace or lifelink), then the target; Bears gets menace (179).
 #2026-11-23 crime batch: written from existing working forms.
 abilities=deathtouch
 auto=@committedcrime:name(Menace or lifelink) target(creature|mybattlefield) transforms((,newability[choice name(Gains menace) becomes(^^menace) ueot],newability[choice name(Gains lifelink) becomes(^^lifelink) ueot])) ueot
@@ -159826,6 +159832,7 @@ toughness=3
 [/card]
 [card]
 name=Defiled Crypt // Cadaver Lab
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): Room cast from hand, Cadaver Lab unlocked: Bears returned to hand, exactly one Horror, Shock not offered (181).
 #2026-11-23 graveyard-leave batch: written from existing working forms.
 other={B} name(Cadaver Lab)
 auto=@leftmygraveyard(*) oneormore turnlimited restriction{compare(hascntdoor1)~equalto~1}:name(Create a Horror) token(Horror,Enchantment Creature Horror,2/2,black)
@@ -159841,6 +159848,7 @@ subtype=Room
 [/card]
 [card]
 name=Dredger's Insight
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): mill-four pick offers artifact/creature/land only; Hill Giant to hand, life 20 to 21 (180).
 #2026-11-23 graveyard-leave batch: written from existing working forms.
 auto=@leftmygraveyard(artifact,creature) oneormore:life:1 controller
 note=The pick may take any artifact, creature or land card in your graveyard, not only the milled ones: the engine marks a card "fresh" only when it reaches the graveyard from the battlefield or the stack, so a filter on fresh found nothing after the mill (scenario 164, 2026-11-24).
@@ -160536,6 +160544,7 @@ toughness=*
 [/card]
 [card]
 name=Gifts Given
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): four single picks to hand, then the opponent picks two for their graveyard; you keep two (182).
 #2026-11-24 HHO/PCEL promo batch: written from existing working forms.
 #You pick the four cards one at a time; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
 #Intuition's chain: each pick's card starts the next pick, and the fourth starts the opponent's. Two separate auto= lines do not work - the <upto:4> pick waits for clicks while the opponent's pick, queued beside it, finds no tagged card and is dropped (scenario 171, 2026-11-25).
