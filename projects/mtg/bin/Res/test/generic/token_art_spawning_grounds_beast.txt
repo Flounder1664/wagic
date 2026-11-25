@@ -1,0 +1,18 @@
+#Spawning Grounds: the Beast its land makes takes Spawning Grounds' token picture (tnum.=376510,
+#id -376510) and keeps its own 5/5 trample. Made inline through the land it took the Forest's id
+#and could never show a picture (token-art audit, 2026-11-25).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Spawning Grounds@Forest
+[PLAYER2]
+[DO]
+Forest
+choice 1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Forest,Spawning Grounds,Beast
+pt:-376510=5/5
+[PLAYER2]
+[END]

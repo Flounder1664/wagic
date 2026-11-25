@@ -4435,7 +4435,19 @@ public:
             else
             {
                 myToken = NEW Token(name, source, power, toughness);
-                if(!cID.empty())
+                if(cID.size() > 1 && cID[0] == '=')
+                {
+                    //",tnum.=N": take card N's token picture (Nt.jpg in N's set) instead of the
+                    //creating card's. For a token made through a granted ability (teach/lord:
+                    //Spawning Grounds' land makes the Beast), the source is the land, whose id
+                    //can never have the right picture. 2026-11-25.
+                    WParsedInt artID(cReplaceString(cID.substr(1)," ",""), NULL, source);
+                    int artId = abs(artID.getValue());
+                    myToken->setMTGId(-artId);
+                    if (MTGCard * artCard = MTGCollection()->getCardById(artId))
+                        myToken->setId = artCard->setId;
+                }
+                else if(!cID.empty())
                 {
                     string customId = "";
                     ostringstream tokID;

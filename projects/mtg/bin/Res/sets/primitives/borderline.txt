@@ -13998,7 +13998,7 @@ toughness=1
 [/card]
 [card]
 name=Bootleggers' Stash
-auto=lord(land|myBattlefield) {T}:_TREASURE_
+auto=lord(land|myBattlefield) {T}:token(-555307)
 text=Lands you control have "{T}: Create a Treasure token."
 mana={5}{G}
 type=Artifact
@@ -115030,7 +115030,7 @@ toughness=2
 [card]
 name=Tarmogoyf Nest
 target=land
-auto=teach(land) {1}{G}{T}:create(Tarmogoyf)
+auto=teach(land) {1}{G}{T}:token(-665078)
 text=Enchant land -- Enchanted land has "{1}{G}, {T}: Create a Tarmogoyf token." (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that power plus 1.")
 mana={2}{G}
 type=Kindred Enchantment
