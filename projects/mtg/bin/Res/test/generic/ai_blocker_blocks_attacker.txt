@@ -1,0 +1,24 @@
+#The AI defender still declares its own blocks (Hill Giant blocks and kills the attacking Bears).
+#Guards the chooseBlockers gate added for scenario 172: the AI must block while blocks are open.
+#It is also the 172 hang: after blocks the AI gets priority again in this phase, and before the fix
+#it re-ran chooseBlockers, whose clicks the block lock refuses - the click loop never ended.
+[INIT]
+COMBATATTACKERS
+[PLAYER1]
+inplay:Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+[DO]
+Grizzly Bears
+next
+ai
+next
+next
+[ASSERT]
+SECONDMAIN
+[PLAYER1]
+graveyard:Grizzly Bears
+[PLAYER2]
+inplay:Hill Giant
+life:20
+[END]

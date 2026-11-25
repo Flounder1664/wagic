@@ -3958,7 +3958,12 @@ int AIPlayerBaka::computeActions()
             }
         case MTG_PHASE_COMBATBLOCKERS:
             {
-                if(observer->currentPlayer != this)//only on my opponents turns.
+                //Only while blocks can still be declared. Once WEventBlockersChosen fires the block
+                //rule refuses every click (blocks are final), and the AI gets priority again in this
+                //phase after any spell resolves - re-running chooseBlockers then is pointless and its
+                //click loops never end (scenario 172, 2026-11-25: out-of-memory crash).
+                if(observer->currentPlayer != this//only on my opponents turns.
+                    && observer->combatStep == BLOCKERS && !observer->isInterrupting)
                     chooseBlockers();
                 selectAbility();
                 break;
@@ -4203,14 +4208,21 @@ int AIPlayerBaka::chooseBlockers()
     cd.unsecureSetTapped(-1);
     card = NULL;
 
+    //Each click on a blocker moves it to the next attacker it can block, and from the last back
+    //to not blocking, so attackers+1 clicks visit every option. A click that changes nothing was
+    //refused by the block rule: stop clicking that creature rather than loop forever.
+    const int maxBlockClicks = (int)opponentsToughness.size() + 1;
+
     // First pass: auto-block top 3 threats if can be killed
     while ((card = cd.nextmatch(game->inPlay, card)))
     {
         if (hints && hints->HintSaysDontBlock(observer, card))
             continue;
 
+        MTGCardInstance* before = card->defenser;
         observer->cardClick(card, MTGAbility::MTG_BLOCK_RULE);
-        int set = 0;
+        int clicks = 1;
+        int set = (card->defenser == before) ? 1 : 0; //click refused: leave this creature as it is
         while (!set)
         {
             if (!card->defenser)
@@ -4239,7 +4251,10 @@ int AIPlayerBaka::chooseBlockers()
                         doAbility(a, card);
                         observer->cardClick(card, MTGAbility::BLOCK_COST);
                     }
+                    before = card->defenser;
                     observer->cardClick(card, MTGAbility::MTG_BLOCK_RULE);
+                    if (card->defenser == before || ++clicks > maxBlockClicks)
+                        set = 1;
                 }
             }
         }
@@ -4254,9 +4269,13 @@ int AIPlayerBaka::chooseBlockers()
 
         if (card->defenser && opponentsToughness[card->defenser] > 0)
         {
-            while (card->defenser)
+            int clicks = 0;
+            while (card->defenser && clicks++ <= maxBlockClicks)
             {
+                MTGCardInstance* before = card->defenser;
                 observer->cardClick(card, MTGAbility::MTG_BLOCK_RULE);
+                if (card->defenser == before)
+                    break; //click refused
             }
         }
     }

@@ -404,7 +404,7 @@ int TestSuiteAI::Act(float)
     }
     else if (action.compare("ai") == 0)
     {
-        DebugTrace("TESTSUITE Switching to AI");
+        DebugTrace("TESTSUITE Switching to AI player " << (this == observer->players[0] ? 1 : 2));
         playMode = MODE_AI;
         return 1;
     }
