@@ -1,22 +1,23 @@
-#Season's Beatings on myself: my Craw Wurm deals 6 to my Grizzly Bears, which die; the Bears deal 2 to the Wurm.
+#Season's Beatings on myself: my Axebane Stag deals 6 to my Armored Warhorse, which dies; the Warhorse deals 2 to the Stag.
+#Single-printing creatures: with multi-printing names the ids (and so the order the two target prompts come in) change per run.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
 hand:Season's Beatings
 manapool:{R}{R}{R}{R}
-inplay:Grizzly Bears,Craw Wurm
+inplay:Armored Warhorse,Axebane Stag
 [PLAYER2]
 inplay:Hill Giant
 [DO]
 Season's Beatings
 choice 1
-Craw Wurm
-Grizzly Bears
+Axebane Stag
+Armored Warhorse
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-inplay:Craw Wurm
-graveyard:Grizzly Bears,Season's Beatings
+inplay:Axebane Stag
+graveyard:Armored Warhorse,Season's Beatings
 [PLAYER2]
 inplay:Hill Giant
 [END]
