@@ -1,4 +1,4 @@
-#Gifts Given: the four cards I target in the opponent's library go to my hand (the opponent's pick of two is AI-only - scenario 171).
+#Gifts Given: the four cards I pick from the opponent's library come to my hand, then the opponent (driven by clicks) puts two of them in THEIR graveyard.
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -12,11 +12,15 @@ Hill Giant
 Grizzly Bears
 Shock
 Island
+p2
+Hill Giant
+Grizzly Bears
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-hand:Hill Giant,Grizzly Bears,Shock,Island
+hand:Shock,Island
 graveyard:Gifts Given
 [PLAYER2]
+graveyard:Hill Giant,Grizzly Bears
 library:Plains,Mountain
 [END]

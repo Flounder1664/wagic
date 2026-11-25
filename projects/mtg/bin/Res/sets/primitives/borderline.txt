@@ -160533,9 +160533,9 @@ toughness=*
 [card]
 name=Gifts Given
 #2026-11-24 HHO/PCEL promo batch: written from existing working forms.
-#You pick the four cards as the spell's targets; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
-auto=name(Take four cards) target(<upto:4>*|opponentlibrary) moveto(myhand) and!( becomes(giftgiven) ueot )!
-auto=ability$!name(Choose two for the graveyard) target(<2>giftgiven|opponenthand) moveto(ownergraveyard)!$ opponent
+#You pick the four cards one at a time; they go to your hand, then the opponent picks two of them for their graveyard. "Different names" is not enforced.
+#Intuition's chain: each pick's card starts the next pick, and the fourth starts the opponent's. Two separate auto= lines do not work - the <upto:4> pick waits for clicks while the opponent's pick, queued beside it, finds no tagged card and is dropped (scenario 171, 2026-11-25).
+auto=name(Take the first card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the second card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the third card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[name(Take the fourth card) target(*|opponentlibrary) moveto(myhand) and!( transforms((giftgiven,newability[ability$!name(Choose two for the graveyard) target(<2>giftgiven|opponenthand) moveto(ownergraveyard)!$ opponent])) ueot )!])) ueot )!])) ueot )!])) ueot )!
 text=Search target opponent's library for four cards with different names and reveal them. That player chooses two of those cards. Put the chosen cards into the player's graveyard and the rest into your hand. Then that player shuffles their library.
 mana={3}{U}
 type=Instant
