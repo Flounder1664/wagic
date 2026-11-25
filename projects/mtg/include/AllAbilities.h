@@ -2213,6 +2213,7 @@ public:
     int triggered;
     bool must;
     bool autoResolve; //already picked from a MenuAbility: activate without a second prompt
+    bool fromReveal; //an option of an open reveal/scry window: the one may that window does not wait for
     string Cond;
     Player * previousInterrupter;
     MTGAbility * mClone;

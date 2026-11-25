@@ -1,6 +1,7 @@
 #Smuggler's Surprise, mill mode (scenario 149): the top four are milled, two creatures go to the hand and
 #the other two stay in the graveyard. Option two was "donothing" with the binning left to an afterrevealed
 #step that only runs once the reveal is empty, so the two leftover cards stayed in the window (John, 2026-11-24).
+#The +{4}{G} and +{1} mode menus now open only once the reveal window is done (scenario 178).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -14,9 +15,10 @@ choice 0
 choice 0
 Llanowar Elves
 Grizzly Bears
-choice 1
-choice 1
+endinterruption
 revealdone
+choice 1
+choice 1
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
