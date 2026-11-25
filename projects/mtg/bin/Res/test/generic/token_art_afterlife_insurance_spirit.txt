@@ -1,0 +1,24 @@
+#Afterlife Insurance: the afterlife Spirit takes Afterlife Insurance's token picture (tnum.=651758,
+#id -651758). It is made through the creature that died, so it took that card's id and showed no
+#picture (token-art audit, 2026-11-26).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+hand:Afterlife Insurance,Lightning Bolt
+library:Forest
+manapool:{1}{W}{R}
+[PLAYER2]
+[DO]
+Afterlife Insurance
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Spirit
+hand:Forest
+graveyard:Afterlife Insurance,Lightning Bolt,Grizzly Bears
+pt:-651758=1/1
+[PLAYER2]
+[END]

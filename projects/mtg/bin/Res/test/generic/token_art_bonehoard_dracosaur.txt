@@ -1,0 +1,19 @@
+#Bonehoard Dracosaur: the Dinosaur from an exiled land takes the Dracosaur's token picture
+#(tnum.=636842, id -636842), and the Treasure from a nonland is made by id (-636991). Both are
+#made through the exiled card, so they took its id and set (token-art audit, 2026-11-26).
+[INIT]
+UNTAP
+[PLAYER1]
+inplay:Bonehoard Dracosaur
+library:Grizzly Bears,Forest
+[PLAYER2]
+[DO]
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+inplay:Bonehoard Dracosaur,Dinosaur,Treasure
+exile:Grizzly Bears,Forest
+pt:-636842=3/1
+[PLAYER2]
+[END]
