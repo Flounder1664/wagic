@@ -1,0 +1,23 @@
+#Head of the Hunt: the Wolf made when an opponent's creature dies takes Head of the Hunt's token
+#picture (tnum.=700075, id -700075). It is made through the dying creature, so it took that card's
+#id and showed no picture (token-art audit, 2026-11-26).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Head of the Hunt
+hand:Lightning Bolt
+manapool:{R}
+[PLAYER2]
+inplay:Grizzly Bears
+[DO]
+Lightning Bolt
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Head of the Hunt,Wolf
+graveyard:Lightning Bolt
+pt:-700075=2/2
+[PLAYER2]
+exile:Grizzly Bears
+[END]
