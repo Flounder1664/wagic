@@ -1,0 +1,22 @@
+#Strionic Resonator copies Soul Warden's @movedTo trigger (a TriggeredAbility): 2 life, not 1.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator,Soul Warden
+hand:Grizzly Bears
+manapool:{1}{G}{2}
+[PLAYER2]
+[DO]
+Grizzly Bears
+no
+no
+yes
+Strionic Resonator
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator,Soul Warden,Grizzly Bears
+life:22
+[PLAYER2]
+[END]

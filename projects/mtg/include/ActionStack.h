@@ -243,6 +243,9 @@ public:
     int copyStackAbility(Player * you, int kind, TargetChooser * sourceTc, int times);
     //The nearest unresolved ability below the resolving one (controller == who unless who is NULL).
     StackAbility * findStackAbility(Player * who, int kind, TargetChooser * sourceTc);
+    //Does `who` control an untapped permanent with a "copy target triggered ability" (duplicateability of
+    //kind triggered or any)? Only then do their own triggers stop for a response (Strionic Resonator).
+    bool hasReadyTriggerCopier(Player * who);
     //"Counter target activated or triggered ability": the nearest one, any controller. destroySource:
     //"... and destroy that permanent" (Green Slime, Ouphe Vandals). Returns the countered ability's source.
     MTGCardInstance * counterStackAbility(int kind, TargetChooser * sourceTc, bool destroySource);

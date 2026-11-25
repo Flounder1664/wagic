@@ -746,7 +746,11 @@ int ActionStack::addAbility(MTGAbility * ability)
         == options[Options::INTERRUPTMYABILITIES].number)
     {
         if((observer->gameType() == GAME_TYPE_MOMIR && ability->aType == MTGAbility::FORCED_TOKEN_CREATOR)||
-            (dynamic_cast<GenericTargetAbility *>(ability) && ability->canBeInterrupted && !observer->OpenedDisplay && !observer->players[0]->game->reveal->cards.size()))//test interrupt...
+            (dynamic_cast<GenericTargetAbility *>(ability) && ability->canBeInterrupted && !observer->OpenedDisplay && !observer->players[0]->game->reveal->cards.size())//test interrupt...
+            //Your own trigger stops for a response while you could copy it (Strionic Resonator, scenario 175):
+            //"Interrupt my abilities" is not in the options menu, so without this it never could be copied.
+            || ((dynamic_cast<TriggeredAbility *>(ability) || ability->etbTrigger) && !observer->OpenedDisplay
+                && !observer->players[0]->game->reveal->cards.size() && hasReadyTriggerCopier(observer->players[0])))
             interruptDecision[0] = NOT_DECIDED;
         else
             interruptDecision[0] = DONT_INTERRUPT;
@@ -1783,7 +1787,8 @@ StackAbility * ActionStack::findStackAbility(Player * who, int kind, TargetChoos
             continue;
         if (who && sa->ability->source->controller() != who)
             continue;
-        bool triggered = dynamic_cast<TriggeredAbility *>(sa->ability) != NULL;
+        //A bare auto= ETB put on the stack (etbTrigger) is an ActivatedAbility subclass, but a trigger.
+        bool triggered = dynamic_cast<TriggeredAbility *>(sa->ability) != NULL || sa->ability->etbTrigger;
         if ((kind == 1 && triggered) || (kind == 2 && !triggered))
             continue;
         if (sourceTc && !sourceTc->canTarget(sa->ability->source))
@@ -1791,6 +1796,26 @@ StackAbility * ActionStack::findStackAbility(Player * who, int kind, TargetChoos
         return sa;
     }
     return NULL;
+}
+
+bool ActionStack::hasReadyTriggerCopier(Player * who)
+{
+    if (!who || !observer->mLayers || !observer->mLayers->actionLayer())
+        return false;
+    ActionLayer * al = observer->mLayers->actionLayer();
+    for (size_t i = 0; i < al->mObjects.size(); i++)
+    {
+        GenericActivatedAbility * gaa = dynamic_cast<GenericActivatedAbility *>(al->mObjects[i]);
+        if (!gaa || !gaa->source || gaa->source->controller() != who)
+            continue;
+        AADuplicateAbility * dup = dynamic_cast<AADuplicateAbility *>(gaa->ability);
+        if (!dup || dup->kind == 1)
+            continue;
+        if (!gaa->source->isInPlay(observer) || gaa->source->isTapped())
+            continue;
+        return true;
+    }
+    return false;
 }
 
 MTGCardInstance * ActionStack::counterStackAbility(int kind, TargetChooser * sourceTc, bool destroySource)

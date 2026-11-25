@@ -137,6 +137,9 @@ public:
     //revealed cards while each player picks top or bottom (John, scenario 134).
     MTGCardInstance * menuPreviewCard2;
     bool canBeInterrupted;
+    //A permanent's bare auto= ETB effect, put on the stack as a trigger (ActionStack::etbOnStack) so a
+    //"copy target triggered ability" card can copy it. Such an ability is an ActivatedAbility subclass.
+    bool etbTrigger;
     ManaCost* alternative;
     ManaCost* BuyBack;
     ManaCost* FlashBack;

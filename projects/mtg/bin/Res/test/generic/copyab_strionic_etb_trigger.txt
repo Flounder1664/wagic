@@ -1,0 +1,26 @@
+#Strionic Resonator copies Elvish Visionary's ETB draw trigger: two cards drawn, not one (scenario 175,
+#John 2026-11-25). A bare auto= ETB used to resolve at once and never exist on the stack, so there was
+#nothing to target. "no","no" let the creature spell resolve; "yes" answers the trigger's window.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator
+hand:Elvish Visionary
+library:Plains,Swamp,Island
+manapool:{1}{G}{2}
+[PLAYER2]
+[DO]
+Elvish Visionary
+no
+no
+yes
+Strionic Resonator
+endinterruption
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Strionic Resonator,Elvish Visionary
+hand:Island,Swamp
+library:Plains
+[PLAYER2]
+[END]
