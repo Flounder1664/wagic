@@ -100209,6 +100209,7 @@ type=Instant
 [/card]
 [card]
 name=Season's Beatings
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): Choose yourself: your own creatures fight each other.
 #VERIFIED IN GAME 2026-11-25 (John, scenario queue): choosing the opponent, their Craw Wurm and Grizzly Bears fight each other; your creature is untouched (169).
 #2026-11-24: the engine has no random targeting, so each creature's damage goes to a creature the player picks rather than a random one.
 #Inside each creature's new ability "my" is that creature's side, so mybattlefield is right for both modes (opponentbattlefield made their creatures hit yours - John, scenario 169).
@@ -158191,6 +158192,7 @@ type=Sorcery
 [/card]
 [card]
 name=Shifting Grift
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): +{2} creature exchange prompts come in a logical order (retest of 177, engine b48ce7086). NOTE: giving away your own creature in the exchange is asked after the other options; John: acceptable.
 #VERIFIED IN GAME 2026-11-25 (John, scenario queue): +{2} only: Hill Giant taken, Grizzly Bears given. Note: the artifact and enchantment menus came between the two picks; fixed in b48ce7086, both picks now come first (177).
 #2026-11-22 spree batch 2: written from existing working forms.
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
@@ -158204,6 +158206,7 @@ type=Sorcery
 [/card]
 [card]
 name=Smuggler's Surprise
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): +{2} mode, picking Mountain + Elves puts both in hand, leftovers to graveyard (retest of 178, engine 19b3c1487).
 #2026-11-22 spree batch 2: written from existing working forms.
 #Spree: each mode is a "may pay +cost" as the spell resolves (CR 702.172 chooses and pays them as it is cast); no mode paid, no effect.
 auto=may name(+{1}: Creatures you control with power 4 or more gain hexproof and indestructible) pay({1}) name(Creatures you control with power 4 or more gain hexproof and indestructible) all(creature[power>=4]|mybattlefield) transforms((,hexproof,indestructible)) ueot
@@ -160022,6 +160025,7 @@ toughness=1
 [/card]
 [card]
 name=Strionic Resonator
+#VERIFIED IN GAME 2026-11-25 (John, scenario queue): copies Elvish Visionary's enter-the-battlefield draw trigger, two cards drawn (retest of 175, engine 8b8497b0d).
 #VERIFIED IN GAME 2026-11-24 (John, scenario queue): copy a triggered ability (you respond to your own trigger). NOTE: it also let him target the Grizzly Bears SPELL (did nothing); targeting the trigger worked.
 #2026-11-24 FIXED (engine, AllAbilities.cpp): duplicateability can only be activated while a matching ability you control is on the stack (test copyab_strionic_spell_refused).
 #2026-11-25 FIXED (engine, MTGAbility.cpp magicText + ActionStack): scenario 175 - Elvish Visionary's ETB could not be targeted. A bare auto= ETB resolved at once and was never on the stack; while you control a ready copier it now goes on the stack as a trigger and stops for a response (tests copyab_strionic_etb_trigger, _soul_warden, _spell_on_stack_twin).
