@@ -9450,7 +9450,11 @@ int ATransformer::destroy()
             for (unsigned int i = 0;i < newAbilities[_target].size(); i++)
             {
                 // The mutated cards probably cause a double free error and a crash, so for now they have been exluded...
-                if(newAbilities[_target].at(i) && !_target->mutation && _target->currentZone != _target->owner->game->library && !(_target->name == "" && (UYNT || UENT)))
+                //An emblem's transforms targets a nameless ExtraRules card. Upstream
+                //(eaef6a588) skipped removal there for uynt/uent to dodge a crash, so
+                //"until your next turn" inside an emblem never ended. The crash was the
+                //ExtraRules card having no observer (fixed in GameObserver's ctor).
+                if(newAbilities[_target].at(i) && !_target->mutation && _target->currentZone != _target->owner->game->library)
                 {
                     newAbilities[_target].at(i)->forceDestroy = 1;
                     newAbilities[_target].at(i)->removeFromGame();

@@ -102,6 +102,12 @@ GameObserver::GameObserver(WResourceManager *output, JGE* input)
 
 {
     ExtraRules = new MTGCardInstance[2]();
+    //The ExtraRules cards are the source of every emblem's abilities. Default-
+    //constructed, they had no observer, so anything reading source->getObserver()
+    //(PTInstant: a pump inside an emblem's trigger, Garruk, Curse Breaker -4)
+    //dereferenced NULL and crashed.
+    for (int i = 0; i < 2; ++i)
+        ExtraRules[i].setObserver(this);
 
     mGameType = GAME_TYPE_CLASSIC;
     currentPlayer = NULL;
