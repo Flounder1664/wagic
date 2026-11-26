@@ -2374,6 +2374,11 @@ void CardGui::RenderAbilityIconsBig(MTGCard * mtgcard, const Pos& pos)
     MTGCardInstance * card = dynamic_cast<MTGCardInstance*>(mtgcard);
     if (!card)
         return;
+    // Emblems and effect markers (No Prevention, Insult, ...) are carrier tokens with
+    // shroud and indestructible only to keep them safe; their picture already says what
+    // they do, so keyword badges on them were noise (John, scenario 184, 2026-11-26).
+    if (card->hasType(Subtypes::TYPE_EMBLEM))
+        return;
 
     // Curated evergreen keywords, in display order. `id` is the Constants basic-ability
     // index; `icon` is looked up as Res/graphics/keywords/<icon>.png (absent by default,

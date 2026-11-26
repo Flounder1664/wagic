@@ -443,7 +443,9 @@
 # turn. Emblem + shroud + indestructible + notrigger + unearth is the shape Insult // Injury
 # already uses for its own turn-long emblem; unearth is what removes it at end of turn.
 # noprevention on the card itself only ever covered that card's OWN damage.
-#AUTO_DEFINE _NOPREVENT_ token(No Prevention Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nopreventionall)
+# tnum.97: the marker's picture is <card id>97t.jpg, its own, so a card that also makes its
+# own marker (Insult, Isengard, No Lifegain share the card's id) shows both pictures.
+#AUTO_DEFINE _NOPREVENT_ token(No Prevention Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nopreventionall,tnum.97)
 
 # Speed (DFT) - "Start your engines!" sets your speed to 1 if you have none; thereafter it
 # rises by one the FIRST time each turn an opponent loses life, capping at max speed 4.

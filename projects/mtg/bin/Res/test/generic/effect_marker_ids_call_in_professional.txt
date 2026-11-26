@@ -1,0 +1,24 @@
+#Call In a Professional makes two effect markers: No Lifegain (its own) and No Prevention
+#(the _NOPREVENT_ macro). Both used to take the card's id, so one picture covered both
+#(John, scenario 185, 2026-11-26). tnum.97 gives No Prevention its own id: -55530497, picture
+#55530497t.jpg; No Lifegain keeps -555304. pt: asserts each token by id (0/0 markers).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:555304
+manapool:{2}{R}
+[PLAYER2]
+life:20
+[DO]
+555304
+p2
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:*,*
+graveyard:555304
+pt:-555304=0/0
+pt:-55530497=0/0
+[PLAYER2]
+life:17
+[END]
