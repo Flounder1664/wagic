@@ -164,6 +164,14 @@ public:
         return isAI() && playMode != MODE_TEST_SUITE;
     }
 
+    //"Choose a creature type" as a short menu - the types on this player's cards and the
+    //opponent's visible ones first, then one entry per first letter - instead of one list of every
+    //type. Only a person gets it: the AI and scripted tests answer the flat list by index.
+    virtual bool wantsGroupedTypeMenu()
+    {
+        return !isAI();
+    }
+
     bool isHuman()
     {
         return (playMode == MODE_HUMAN);

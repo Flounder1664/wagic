@@ -3968,6 +3968,11 @@ int GenericChooseTypeColorName::resolve()
             SAFE_DELETE(setName);
         }
     }
+    else if (source->controller()->wantsGroupedTypeMenu())
+    {
+        AAChooseTypeScreen::open(game, this->GetId(), source, (MTGCardInstance *)target, 0, baseAbility, ANonWall);
+        return 1;
+    }
     else
     {
         vector<string> values = MTGAllCards::getCreatureValuesById();
@@ -4118,7 +4123,134 @@ int AASetTypeChosen::resolve()
 
 const string AASetTypeChosen::getMenuText()
 {
-    return menutext.c_str();
+    return label.size() ? label : menutext;
+}
+
+//The grouped "choose a creature type" menu
+AAChooseTypeScreen::AAChooseTypeScreen(GameObserver* observer, int id, MTGCardInstance * source, MTGCardInstance * _target, char letter, string toAdd, bool nonWall, string label) :
+    InstantAbility(observer, id, source), letter(letter), toAdd(toAdd), nonWall(nonWall), label(label)
+{
+    this->target = _target;
+}
+
+int AAChooseTypeScreen::resolve()
+{
+    open(game, GetId(), source, (MTGCardInstance *)target, letter, toAdd, nonWall);
+    return 1;
+}
+
+const string AAChooseTypeScreen::getMenuText()
+{
+    return label;
+}
+
+AAChooseTypeScreen * AAChooseTypeScreen::clone() const
+{
+    return NEW AAChooseTypeScreen(*this);
+}
+
+//How many cards in these zones have each creature type printed on them. A changeling (or any card
+//with every creature type) is left out: it would put every type on the list.
+static void countCreatureTypes(MTGGameZone ** zones, int nbZones, bool hideFaceDown, const set<string>& creatureTypes, map<string, int>& counts)
+{
+    for (int k = 0; k < nbZones; k++)
+    {
+        MTGGameZone * zone = zones[k];
+        if (!zone)
+            continue;
+        for (int j = 0; j < zone->nb_cards; j++)
+        {
+            MTGCardInstance * c = zone->cards[j];
+            if (!c || c->has(Constants::CHANGELING))
+                continue;
+            if (hideFaceDown && (c->isFacedown || c->isMorphed))
+                continue;
+            set<string> seen;
+            for (size_t t = 0; t < c->types.size(); t++)
+            {
+                string name = MTGAllCards::findType(c->types[t]);
+                if (creatureTypes.count(name) && seen.insert(name).second)
+                    counts[name]++;
+            }
+        }
+    }
+}
+
+static bool moreCards(const pair<string, int>& a, const pair<string, int>& b)
+{
+    if (a.second != b.second)
+        return a.second > b.second;
+    return a.first < b.first;
+}
+
+void AAChooseTypeScreen::open(GameObserver * game, int id, MTGCardInstance * source, MTGCardInstance * target, char letter, const string& toAdd, bool nonWall)
+{
+    vector<string> values = MTGAllCards::getCreatureValuesById();
+    set<string> creatureTypes;
+    for (size_t i = 0; i < values.size(); ++i)
+        if (!nonWall || (values[i] != "wall" && values[i] != "Wall"))
+            creatureTypes.insert(values[i]);
+
+    vector<MTGAbility *> selection;
+    int maxId = game->mLayers->actionLayer()->getMaxId();
+    if (!letter)
+    {
+        Player * me = source->controller();
+        Player * them = me->opponent();
+        //Yours: every card you own, hidden ones included (it is your deck). Theirs: only what is public.
+        MTGGameZone * mine[] = { me->game->inPlay, me->game->hand, me->game->graveyard, me->game->library, me->game->stack, me->game->exile, me->game->commandzone };
+        MTGGameZone * theirs[] = { them->game->inPlay, them->game->graveyard, them->game->stack, them->game->exile, them->game->commandzone };
+        const char * headings[] = { "Yours: ", "Opponent's: " };
+        const size_t limits[] = { 6, 4 };
+        for (int side = 0; side < 2; side++)
+        {
+            map<string, int> counts;
+            if (side == 0)
+                countCreatureTypes(mine, 7, false, creatureTypes, counts);
+            else
+                countCreatureTypes(theirs, 5, true, creatureTypes, counts);
+            vector<pair<string, int> > ranked(counts.begin(), counts.end());
+            sort(ranked.begin(), ranked.end(), moreCards);
+            for (size_t i = 0; i < ranked.size() && i < limits[side]; i++)
+            {
+                AASetTypeChosen * pick = NEW AASetTypeChosen(game, maxId, source, target, 0, ranked[i].first, toAdd);
+                std::ostringstream lbl;
+                lbl << headings[side] << ranked[i].first << " (" << ranked[i].second << ")";
+                pick->label = lbl.str();
+                pick->oneShot = true;
+                selection.push_back(pick);
+            }
+        }
+        map<char, int> perLetter;
+        for (set<string>::iterator it = creatureTypes.begin(); it != creatureTypes.end(); ++it)
+            if (it->size())
+                perLetter[(char)toupper((unsigned char)(*it)[0])]++;
+        for (map<char, int>::iterator it = perLetter.begin(); it != perLetter.end(); ++it)
+        {
+            std::ostringstream lbl;
+            lbl << it->first << "...  (" << it->second << ")";
+            selection.push_back(NEW AAChooseTypeScreen(game, maxId, source, target, it->first, toAdd, nonWall, lbl.str()));
+        }
+    }
+    else
+    {
+        selection.push_back(NEW AAChooseTypeScreen(game, maxId, source, target, 0, toAdd, nonWall, "< Back"));
+        for (set<string>::iterator it = creatureTypes.begin(); it != creatureTypes.end(); ++it)
+        {
+            if (!it->size() || toupper((unsigned char)(*it)[0]) != letter)
+                continue;
+            AASetTypeChosen * pick = NEW AASetTypeChosen(game, maxId, source, target, 0, *it, toAdd);
+            pick->oneShot = true;
+            selection.push_back(pick);
+        }
+    }
+    for (size_t i = 0; i < selection.size(); i++)
+        selection[i]->oneShot = true;
+    if (!selection.size())
+        return;
+    MenuAbility * a1 = NEW MenuAbility(game, id, target, source, true, selection, NULL, "Choose a creature type");
+    game->mLayers->actionLayer()->currentActionCard = target;
+    a1->resolve();
 }
 
 AASetTypeChosen * AASetTypeChosen::clone() const

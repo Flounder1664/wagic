@@ -7970,11 +7970,27 @@ public:
     string abilityToAlter;
     string menutext;
     MTGAbility * abilityAltered;
+    string label; //what the menu shows, when it is not just the type ("Yours: Elf (14)")
     AASetTypeChosen(GameObserver* observer, int id, MTGCardInstance * source, MTGCardInstance * target, int _type = 0,string menu = "error" ,string toAdd = "");
     int resolve();
     const string getMenuText();
     AASetTypeChosen * clone() const;
     ~AASetTypeChosen();
+};
+//One screen of the grouped "choose a creature type" menu (Player::wantsGroupedTypeMenu): letter 0
+//is the first screen (your types, the opponent's, then the letters), 'A'..'Z' that letter's types.
+class AAChooseTypeScreen: public InstantAbility
+{
+public:
+    char letter;
+    string toAdd;
+    bool nonWall;
+    string label;
+    AAChooseTypeScreen(GameObserver* observer, int id, MTGCardInstance * source, MTGCardInstance * target, char letter, string toAdd, bool nonWall, string label);
+    int resolve();
+    const string getMenuText();
+    AAChooseTypeScreen * clone() const;
+    static void open(GameObserver * game, int id, MTGCardInstance * source, MTGCardInstance * target, char letter, const string& toAdd, bool nonWall);
 };
 class AASetNameChosen: public InstantAbility
 {

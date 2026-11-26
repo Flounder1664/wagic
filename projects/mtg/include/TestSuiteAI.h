@@ -44,6 +44,7 @@ protected:
     string filename;
     int summoningSickness;
     bool forceAbility;
+    bool groupedTypeMenu;
     GameType gameType;
     unsigned int seed;
     int aiMaxCalls;
@@ -196,6 +197,8 @@ public:
     virtual int displayStack();
     bool parseLine(const string& s);
     bool summoningSickness() {return (suite->summoningSickness == 1); }
+    //A test line "groupedtypemenu" gives the scripted players the grouped type menu a person sees.
+    virtual bool wantsGroupedTypeMenu() { return !isAI() || suite->groupedTypeMenu; }
 };
 
 #endif

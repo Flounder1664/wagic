@@ -1084,6 +1084,7 @@ TestSuite::TestSuite(const char * filename)
     int comment = 0;
     seed = 0;
     forceAbility = false;
+    groupedTypeMenu = false;
     aiMaxCalls = -1;
     startTime = JGEGetTime();
     endTime = startTime;
@@ -1338,6 +1339,7 @@ bool TestSuiteGame::load()
     doErrors.clear();
     summoningSickness = 0;
     forceAbility = false;
+    groupedTypeMenu = false;
     gameType = GAME_TYPE_CLASSIC;
 
     std::string s;
@@ -1363,6 +1365,11 @@ bool TestSuiteGame::load()
             if (s.compare("forceability") == 0)
             {
                 forceAbility = true;
+                continue;
+            }
+            if (s.compare("groupedtypemenu") == 0)
+            {
+                groupedTypeMenu = true;
                 continue;
             }
             if (s.find("seed ") == 0)
@@ -1540,13 +1547,13 @@ TestSuiteGame::~TestSuiteGame()
 }
 
 TestSuiteGame::TestSuiteGame(TestSuite* testsuite)
-    : summoningSickness(0), forceAbility(false), gameType(GAME_TYPE_CLASSIC), timerLimit(0),
+    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), gameType(GAME_TYPE_CLASSIC), timerLimit(0),
       currentAction(0), observer(0), testsuite(testsuite)
 {
 }
 
 TestSuiteGame::TestSuiteGame(TestSuite* testsuite, string _filename)
-    : summoningSickness(0), forceAbility(false), gameType(GAME_TYPE_CLASSIC), timerLimit(FAST_TEST),
+    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), gameType(GAME_TYPE_CLASSIC), timerLimit(FAST_TEST),
       currentAction(0), observer(0), testsuite(testsuite)
 {
     filename = _filename;

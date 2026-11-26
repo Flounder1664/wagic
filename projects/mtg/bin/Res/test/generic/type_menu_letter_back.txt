@@ -1,0 +1,35 @@
+#Grouped "choose a creature type" menu (groupedtypemenu = the menu a person gets). The first choice
+#plays the land. On the type menu's first screen (Yours: Ally, Bear, Human, Warrior - the library's Grizzly
+#Bears counts; Opponent's: Bear; then letters) choice 5 = "A..."; on that letter screen choice 0 = "< Back"; back on the first screen
+#choice 0 = "Yours: Ally (1)", so Unclaimed Territory's {G} casts Oran-Rief Survivalist (an Ally).
+groupedtypemenu
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Unclaimed Territory,Oran-Rief Survivalist
+inplay:Forest
+library:129586
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[DO]
+Unclaimed Territory
+choice 0
+choice 5
+choice 0
+choice 0
+Unclaimed Territory
+choice 4
+Forest
+Oran-Rief Survivalist
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+library:129586
+inplay:Unclaimed Territory,Forest,Oran-Rief Survivalist
+life:20
+[PLAYER2]
+inplay:Grizzly Bears
+life:20
+[END]
