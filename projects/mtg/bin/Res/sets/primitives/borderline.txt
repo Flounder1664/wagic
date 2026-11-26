@@ -58872,6 +58872,7 @@ toughness=1
 [/card]
 [card]
 name=Insult // Injury
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): Insult and No Prevention markers sit in the command zone with their own pictures and no keyword icons; damage doubled while they were there (Mogg Fanatic 20->18); both gone next turn.
 note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 abilities=hasaftermath,noprevention
 otherrestriction=type(creature|battlefield)~morethan~0
@@ -101601,6 +101602,7 @@ type=Sorcery
 [/card]
 [card]
 name=Shadow of the Enemy
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): opponent's creature cards went to my exile (land stayed), reminder marker in the command zone, cast Grizzly Bears from exile with red mana.
 #wagic#39: the emblem only shows the text and grants cast-from-exile to the exiled cards
 #(Tibalt, Cosmic Impostor's form); the cards go to YOUR exile zone so you can cast them.
 auto=choice name(Exile opponent's creature cards) all(creature|opponentgraveyard) moveto(myexile) and!( counter(0/0.1.ShadowExiled) notrg )! && emblem("You may cast spells from among creature cards exiled with Shadow of the Enemy, and mana of any type can be spent to cast them.") transforms((,newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) canplayfromexile],newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) anytypeofmana])) forever dontremove
