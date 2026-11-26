@@ -306,7 +306,13 @@ void Player::takeMulligan()
     //paid on KEEP: the player then puts handMulligans cards on the bottom
     //of the library (see GameObserver::cardClick / cardsToBottom).
     handMulligans++;
-    for (int i = 0; i < cardsinhand; i++)
+    //A new hand of SEVEN (CR 103.5), whatever is held now: after Serum Powder exiled part of a
+    //hand there are fewer cards, and redrawing that many shrank the hand for good (found reading
+    //the code for scenario 193, 2026-11-26). Capped by the library for tiny test decks.
+    int toDraw = 7;
+    if (toDraw > currentPlayerZones->library->nb_cards)
+        toDraw = currentPlayerZones->library->nb_cards;
+    for (int i = 0; i < toDraw; i++)
         game->drawFromLibrary();
 }
 
