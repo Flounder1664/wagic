@@ -90465,6 +90465,7 @@ toughness=1
 [/card]
 [card]
 name=Rankle and Torbran
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): "Damage plus 2 this turn" marker in the command zone with its own picture; Shock then did 4; marker gone at end of turn. (The Treasure mode showed no picture: MOM Treasure art fixed on G: the same day.)
 abilities=first strike,flying,haste
 auto=@combatdamaged(player) from(this):may name(Create treasure) _TREASURE_ and!( _TREASURE_ opponent )!
 auto=@combatdamaged(player) from(this):may name(Each player sacrifices) notaTarget(creature|myBattlefield) sacrifice and!( transforms((,newability[ability$!name(Sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent])) oneshot )!
@@ -123034,6 +123035,7 @@ type=Land
 [/card]
 [card]
 name=Unclaimed Territory
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): grouped type menu - first screen "Yours: Elf (3)" / Goblin / "Opponent's: Zombie (2)" / letters, Elf picked and Defiant Elf cast with its green; "V..." letter screen with Back, Vampire picked, Vampire Cutthroat cast with its black.
 auto={T}:add{C}
 auto=chooseatype transforms((,newability[{T}:add{W} spendspells(creature[chosentype])],newability[{T}:add{U} spendspells(creature[chosentype])],newability[{T}:add{R} spendspells(creature[chosentype])],newability[{T}:add{G} spendspells(creature[chosentype])],newability[{T}:add{B} spendspells(creature[chosentype])])) chooseend
 text=As Unclaimed Territory enters, choose a creature type. -- {T}: Add {1}. -- {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
