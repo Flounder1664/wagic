@@ -104,4 +104,5 @@ Device serials:
 2026-11-25 eb9f9ace7 (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611252338.old; read back ok.
 2026-11-26 4156f924d (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611260948.old; read back ok. 369a9c42b: Garruk, Curse Breaker -4 written as the card reads (uynt + pump on attack), with the emblem engine fixes; exes deployed from 4156f924d (both launch-checked 15s)
 2026-11-26 f78169e59 (wagic-v146-windows)  device=Windows result=core-zip-patch - 3 member(s): sets/primitives/_macros.txt, sets/primitives/borderline.txt, sets/primitives/planeswalkers.txt; backup core.zip.ship202611261218.old; read back ok. effect markers in the command zone (wagic#39); Wagic.exe + Wagic-testsuite.exe rebuilt from f78169e59 and launch-checked
+2026-11-26 9623b91ac (wagic-v146-windows)  device=Windows result=core-zip-patch - 1 member(s): sets/primitives/borderline.txt; backup core.zip.ship202611261235.old; read back ok. VERIFIED IN GAME lines for Insult // Injury and Shadow of the Enemy
 ```
