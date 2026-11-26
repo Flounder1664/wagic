@@ -1,3 +1,5 @@
+#wagic#39 (2026-11-26): the markers are display-only cards in the COMMAND ZONE now, not
+#tokens on the battlefield; the effect hangs off the hidden rules card.
 #Call In a Professional - "players can't gain life this turn" - puts out an end-of-turn emblem
 #carrying nolifegain and nolifegainopponent; Player::gainLife refuses while either applies.
 #Healing Salve afterwards must be CAST (it has to reach the graveyard, or the test would pass
@@ -19,7 +21,7 @@ p1
 [ASSERT]
 firstmain
 [PLAYER1]
-inplay:*,*
+commandzone:*,*
 graveyard:Call In a Professional,Healing Salve
 life:20
 [PLAYER2]

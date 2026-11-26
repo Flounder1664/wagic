@@ -1,7 +1,8 @@
 #Call In a Professional makes two effect markers: No Lifegain (its own) and No Prevention
 #(the _NOPREVENT_ macro). Both used to take the card's id, so one picture covered both
-#(John, scenario 185, 2026-11-26). tnum.97 gives No Prevention its own id: -55530497, picture
-#55530497t.jpg; No Lifegain keeps -555304. pt: asserts each token by id (0/0 markers).
+#(John, scenario 185, 2026-11-26). Now both are command-zone effect markers (wagic#39):
+#No Lifegain is emblem(...) -> -55530499 (picture 55530499t.jpg), No Prevention is
+#emblem(...,tnum.97) -> -55530497 (55530497t.jpg).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
@@ -15,10 +16,8 @@ p2
 [ASSERT]
 FIRSTMAIN
 [PLAYER1]
-inplay:*,*
+commandzone:-55530499,-55530497
 graveyard:555304
-pt:-555304=0/0
-pt:-55530497=0/0
 [PLAYER2]
 life:17
 [END]

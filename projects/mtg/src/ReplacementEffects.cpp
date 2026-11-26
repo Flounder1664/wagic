@@ -35,6 +35,9 @@ WEvent * REDamagePrevention::replace(WEvent *event)
                 MTGGameZone * z = g->players[i]->game->battlefield;
                 for (int j = 0; j < z->nb_cards; ++j)
                     if (z->cards[j]->has(Constants::NOPREVENTIONALL)) return event;
+                //an emblem effect (Skullcrack's "damage can't be prevented this turn") hangs
+                //off the hidden rules card, not a permanent (wagic#39)
+                if (g->ExtraRules && g->ExtraRules[i].has(Constants::NOPREVENTIONALL)) return event;
             }
         }
     }

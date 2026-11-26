@@ -1,0 +1,26 @@
+#Skullcrack: "Players can't gain life this turn." It used to grant nolifegain to the Skullcrack
+#spell itself, which the life check (battlefield only) never saw. Now an effect marker on the
+#hidden rules card (wagic#39): Healing Salve after it gains nothing, player 1 stays at 20.
+#Skullcrack shows two markers: No Lifegain and No Prevention.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:Skullcrack,Healing Salve
+manapool:{1}{R}{W}
+[PLAYER2]
+life:20
+[DO]
+Skullcrack
+p2
+Healing Salve
+choice 0
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+commandzone:*,*
+graveyard:Skullcrack,Healing Salve
+life:20
+[PLAYER2]
+life:17
+[END]

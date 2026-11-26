@@ -193,6 +193,15 @@ int Player::gainOrLoseLife(int value, MTGCardInstance* source)
         return 0; //Don't do anything if there's no actual life change
     if (value>0 && (opponent()->game->battlefield->hasAbility(Constants::NOLIFEGAINOPPONENT)||game->battlefield->hasAbility(Constants::NOLIFEGAIN)))//nolifegain
         return 0;
+    //...or an emblem effect: it hangs off its controller's hidden rules card, ExtraRules[i]
+    //(Call In a Professional's "Players can't gain life this turn", wagic#39).
+    if (value > 0 && getObserver() && getObserver()->ExtraRules)
+    {
+        GameObserver * g = getObserver();
+        int me = (g->players[0] == this) ? 0 : 1;
+        if (g->ExtraRules[me].has(Constants::NOLIFEGAIN) || g->ExtraRules[1 - me].has(Constants::NOLIFEGAINOPPONENT))
+            return 0;
+    }
     if (value > 0 && cantGainLifeForGame) //Screaming Nemesis: for the rest of the game
         return 0;
 

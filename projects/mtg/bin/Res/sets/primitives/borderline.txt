@@ -39628,12 +39628,8 @@ toughness=5
 [card]
 name=Fear, Fire, Foes!
 abilities=noprevention
-note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 target=creature
-#"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
-#only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
-#nopreventionall, which ReplacementEffects.cpp:36 honours for every source while it is on
-#the battlefield, and which unearth removes at end of turn.
 auto=_NOPREVENT_
 auto=damage:fullpaid && all(other creature|targetcontrollerbattlefield) damage:1
 text=Damage can't be prevented this turn. Fear, Fire, Foes! deals X damage to target creature and 1 damage to each other creature with the same controller.
@@ -58876,16 +58872,12 @@ toughness=1
 [/card]
 [card]
 name=Insult // Injury
-note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 abilities=hasaftermath,noprevention
 otherrestriction=type(creature|battlefield)~morethan~0
 flashback={2}{R} name(Injury)
-#"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
-#only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
-#nopreventionall, honoured by both prevention paths (ReplacementEffects and the prevent:N
-#shield in Damage.cpp) and removed at end of turn by unearth.
 auto=_NOPREVENT_
-auto=ifnot paid(flashback) then token(Insult Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth) and!( transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-Insult Emblem]|*):damage:thatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-Insult Emblem]|*):damage:thatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-Insult Emblem]|*):damage:thatmuch opponent],newability[@damaged(planeswalker|myBattlefield) from(*[-Insult Emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damaged(creature|myBattlefield) from(*[-Insult Emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damageof(player) from(*[-Insult Emblem]|myzones):damage:thatmuch controller])) ueot )!
+auto=ifnot paid(flashback) then emblem("If a source you control would deal damage this turn, it deals double that damage instead.") transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-emblem]|*):damage:thatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-emblem]|*):damage:thatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-emblem]|*):damage:thatmuch opponent],newability[@damaged(planeswalker|myBattlefield) from(*[-emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damaged(creature|myBattlefield) from(*[-emblem]|myzones):damage:thatmuch all(trigger[to])],newability[@damageof(player) from(*[-emblem]|myzones):damage:thatmuch controller])) ueot
 auto=if paid(flashback) then choice name(Damage creature) name(Damage creature) damage:2 target(creature|battlefield) && ability$!name(Damage player) name(Damage player) damage:2 target(player)!$ controller
 text=Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead. -- Aftermath (Cast this spell only from your graveyard. Then exile it.) Injury deals 2 damage to target creature and 2 damage to target player.
 mana={2}{R}
@@ -90475,10 +90467,10 @@ name=Rankle and Torbran
 abilities=first strike,flying,haste
 auto=@combatdamaged(player) from(this):may name(Create treasure) _TREASURE_ and!( _TREASURE_ opponent )!
 auto=@combatdamaged(player) from(this):may name(Each player sacrifices) notaTarget(creature|myBattlefield) sacrifice and!( transforms((,newability[ability$!name(Sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent])) oneshot )!
-auto=@combatdamaged(player) from(this):may name(Duouble the damage) token(Rankle Emblem,Emblem,0/0,shroud,indestructible,treason,notrigger) and!( transforms((,newability[@damaged(battle|battlefield) from(*[-Rankle Emblem]|*):all(trigger[to]) damage:2],newability[@damageof(player) from(*[-Rankle Emblem]|*):damage:2 controller],newability[@damagefoeof(player) from(*[-Rankle Emblem]|*):damage:2 opponent])) forever )!
+auto=@combatdamaged(player) from(this):may name(Damage plus 2 this turn) emblem("If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.") transforms((,newability[@damaged(battle|battlefield) from(*[-emblem]|*):all(trigger[to]) damage:2],newability[@damageof(player) from(*[-emblem]|*):damage:2 controller],newability[@damagefoeof(player) from(*[-emblem]|*):damage:2 opponent])) ueot
 auto=@combatdamaged(battle) from(this):may name(Create treasure) _TREASURE_ and!( _TREASURE_ opponent )!
 auto=@combatdamaged(battle) from(this):may name(Each player sacrifices) notaTarget(creature|myBattlefield) sacrifice and!( transforms((,newability[ability$!name(Sacrifice a creature) notaTarget(creature|myBattlefield) sacrifice!$ opponent])) oneshot )!
-auto=@combatdamaged(battle) from(this):may name(Duouble the damage) token(Rankle Emblem,Emblem,0/0,shroud,indestructible,treason,notrigger) and!( transforms((,newability[@damaged(battle|battlefield) from(*[-Rankle Emblem]|*):all(trigger[to]) damage:2],newability[@damageof(player) from(*[-Rankle Emblem]|*):damage:2 controller],newability[@damagefoeof(player) from(*[-Rankle Emblem]|*):damage:2 opponent])) forever )!
+auto=@combatdamaged(battle) from(this):may name(Damage plus 2 this turn) emblem("If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.") transforms((,newability[@damaged(battle|battlefield) from(*[-emblem]|*):all(trigger[to]) damage:2],newability[@damageof(player) from(*[-emblem]|*):damage:2 controller],newability[@damagefoeof(player) from(*[-emblem]|*):damage:2 opponent])) ueot
 text=Flying, first strike, haste -- Whenever Rankle and Torbran deals combat damage to a player or battle, choose any number -- Each player creates a Treasure token. -- Each player sacrifices a creature. -- If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.
 mana={1}{B}{B}{R}{R}
 type=Legendary Creature
@@ -101609,8 +101601,10 @@ type=Sorcery
 [/card]
 [card]
 name=Shadow of the Enemy
-auto=choice name(Exile opponent graveyard) token(ShadowEmblem,Emblem,0/0,shroud,indestructible,notrigger) and!( transforms((,newability[all(*|opponentgraveyard) moveto(opponentexile) and!( if cantargetcard(*[-land]|*) then counter(0/0.1.ShadowExiled) notrg )!],newability[{0}:name(Cast from opponent exile) target(*[counter{0/0.1.ShadowExiled}]|opponentexile) moveto(myexile) and!( transforms((,newability[counter(0/0.1.ShadowExiled) notrg],newability[canplayfromexile],newability[anytypeofmana],newability[phaseaction[end once checkex] moveTo(ownerexile)],newability[phaseaction[untap once checkex] counter(0/0.1.ShadowExiled) notrg])) ueot )!])) forever )!
-auto=choice name(Exile your graveyard) all(*|mygraveyard) moveto(myexile) and!( if cantargetcard(*[-land]|*) then transforms((,newability[canplayfromexile forever],newability[anytypeofmana forever])) forever )!
+#wagic#39: the emblem only shows the text and grants cast-from-exile to the exiled cards
+#(Tibalt, Cosmic Impostor's form); the cards go to YOUR exile zone so you can cast them.
+auto=choice name(Exile opponent's creature cards) all(creature|opponentgraveyard) moveto(myexile) and!( counter(0/0.1.ShadowExiled) notrg )! && emblem("You may cast spells from among creature cards exiled with Shadow of the Enemy, and mana of any type can be spent to cast them.") transforms((,newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) canplayfromexile],newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) anytypeofmana])) forever dontremove
+auto=choice name(Exile your creature cards) all(creature|mygraveyard) moveto(myexile) and!( counter(0/0.1.ShadowExiled) notrg )! && emblem("You may cast spells from among creature cards exiled with Shadow of the Enemy, and mana of any type can be spent to cast them.") transforms((,newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) canplayfromexile],newability[lord(*[counter{0/0.1.ShadowExiled}]|myexile) anytypeofmana])) forever dontremove
 text=Exile all creature cards from target player's graveyard. You may cast spells from among those cards for as long as they remain exiled, and mana of any type can be spent to cast them.
 mana={3}{B}{B}{B}
 type=Sorcery
@@ -105009,14 +105003,10 @@ toughness=1
 [card]
 name=Skullcrack
 abilities=noprevention
-note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 target=player
-#"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
-#only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
-#nopreventionall, which ReplacementEffects.cpp:36 honours for every source while it is on
-#the battlefield, and which unearth removes at end of turn.
 auto=_NOPREVENT_
-auto=transforms((,newability[nolifegain],newability[nolifegainopponent])) ueot
+auto=emblem("Players can't gain life this turn.") transforms((,nolifegain,nolifegainopponent)) ueot
 auto=damage:3
 text=Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
 mana={1}{R}
@@ -130005,12 +129995,8 @@ type=Instant
 [card]
 name=Wild Slash
 abilities=noprevention
-note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 target=anytarget
-#"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
-#only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
-#nopreventionall, which ReplacementEffects.cpp:36 honours for every source while it is on
-#the battlefield, and which unearth removes at end of turn.
 auto=_FEROCIOUS_ _NOPREVENT_
 auto=damage:2
 text=Ferocious - If you control a creature with power 4 or greater, damage can't be prevented this turn. -- Wild Slash deals 2 damage to target creature or player.
@@ -139418,28 +139404,14 @@ name=Isengard Unleashed
 abilities=noprevention
 grade=borderline
 flashback={4}{R}{R}{R}
-#"Damage can't be prevented this turn" is a GLOBAL, turn-long effect; abilities=noprevention
-#only ever covered this card's OWN damage. _NOPREVENT_ puts out an Emblem token carrying
-#nopreventionall, honoured by both prevention paths (ReplacementEffects and the prevent:N
-#shield in Damage.cpp) and removed at end of turn by unearth.
 auto=_NOPREVENT_
-#John: Mogg Fanatic still dealt 1, not 3. The triple-damage half was written on a shape that
-#does not fire - "emblem transforms((...)) ueot" with the operands the wrong way round
-#(all(trigger[to]) BEFORE the verb) and no self-exclusion, so the emblem's own extra damage
-#would re-trigger off itself. Insult // Injury does the identical job and John confirmed it
-#works, so this is now written on exactly its shape: a real emblem TOKEN carrying the
-#triggers, the verb first and the recipient after it as damage:N all(trigger[to]), and the
-#emblem excluded from its own source filter.
-#Triple means the original plus two more, so the payload is twicethatmuch - the same reason
-#Insult's double is a plain thatmuch.
-#The source filter is |* and not |myzones, which the card would prefer: measured 2026-09-10,
-#from(*[-Isengard Emblem]|myzones) makes the trigger not fire at all, while |* fires and
-#Mogg Fanatic's 1 becomes 3. Insult uses |* on its opponent-side triggers for the same
-#reason. Pinned in generic/isengard_triple_damage.txt against generic/insult_double_damage.txt.
-auto=token(Isengard Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth) and!( transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-Isengard Emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-Isengard Emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-Isengard Emblem]|*):damage:twicethatmuch opponent])) ueot )!
-note=The turn-long global half is the _NOPREVENT_ emblem, added 2026-09-08; noprevention still covers this card's own damage.
+#Triple = the original plus twicethatmuch more. An effect marker (wagic#39): the triggers
+#hang off the hidden rules card, and the command zone shows the text until end of turn.
+#Pinned in generic/isengard_triple_damage.txt against generic/insult_double_damage.txt.
+auto=emblem("If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead.") transforms((,newability[@damaged(planeswalker|opponentBattlefield) from(*[-emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damaged(creature|opponentBattlefield) from(*[-emblem]|*):damage:twicethatmuch all(trigger[to])],newability[@damagefoeof(player) from(*[-emblem]|*):damage:twicethatmuch opponent])) ueot
+note=The turn-long global half is the _NOPREVENT_ effect marker (command zone, wagic#39); noprevention still covers this card's own damage.
 missing=the tripling applies to any source rather than only to sources you control, because restricting the trigger to myzones stops it firing
-text=Damage can't be prevented this turn. (Not implemented.) If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
+text=Damage can't be prevented this turn. If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead. -- Flashback {4}{R}{R}{R}
 mana={2}{R}{R}{R}
 type=Sorcery
 [/card]
@@ -145898,12 +145870,12 @@ type=Instant
 [/card]
 [card]
 name=Call In a Professional
-#'Players can't gain life this turn' is an end-of-turn emblem you control carrying nolifegain
-#(you) and nolifegainopponent (them) - Player::gainLife checks both, Player.cpp:185.
+#'Players can't gain life this turn': an effect marker (wagic#39). nolifegain (you) and
+#nolifegainopponent (them) sit on your hidden rules card; Player::gainOrLoseLife checks both.
 abilities=noprevention
 target=anytarget
 auto=_NOPREVENT_
-auto=token(No Lifegain Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nolifegain,nolifegainopponent)
+auto=emblem("Players can't gain life this turn.") transforms((,nolifegain,nolifegainopponent)) ueot
 auto=damage:3
 text=Players can't gain life this turn. Damage can't be prevented this turn. Call In a Professional deals 3 damage to any target.
 mana={2}{R}

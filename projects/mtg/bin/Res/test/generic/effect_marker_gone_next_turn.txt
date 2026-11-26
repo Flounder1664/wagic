@@ -1,0 +1,38 @@
+#wagic#39: an effect marker for a "this turn" effect leaves the command zone at end of turn,
+#and the effect with it. Call In a Professional's two markers (No Lifegain, No Prevention) are
+#gone after the turn ends; on player 1's next turn Healing Salve gains the 3 life (20 -> 23).
+#Same turn, the markers are there and Salve gains nothing (call_in_professional_nolifegain).
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains
+hand:555304,Healing Salve
+manapool:{2}{R}
+library:Alpha Tyrranax,Ancient Carp
+[PLAYER2]
+library:Barbarian Horde,Armored Warhorse
+[DO]
+555304
+p2
+eot
+next
+eot
+next
+goto firstmain
+Plains
+Healing Salve
+choice 0
+p1
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Plains
+graveyard:555304,Healing Salve
+hand:Ancient Carp
+library:Alpha Tyrranax
+life:23
+[PLAYER2]
+hand:Armored Warhorse
+library:Barbarian Horde
+life:17
+[END]

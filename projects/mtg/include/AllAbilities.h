@@ -3487,8 +3487,14 @@ public:
     bool isEmblem;
     MTGCardInstance * emblemSource;
     string emblemText;
+    string emblemSuffix;   //picture id = <source id><suffix>; "99" unless emblem("text",tnum.N)
+    bool emblemUntilEOT;   //the effect is ueot: the shown card leaves the command zone at end of turn
+    //An emblem line's effect always lands on the hidden rules card (its source). A wrapper such
+    //as "ifnot paid(flashback) then emblem ..." re-points target at the spell, which put Insult
+    //// Injury's triggers on the spell itself (wagic#39).
+    bool onRulesCard;
     GenericAbilityMod(GameObserver* observer, int _id, MTGCardInstance * _source, Damageable * _target, MTGAbility * ability) :
-      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemSource(NULL)
+      InstantAbility(observer, _id, _source,_target), NestedAbility(ability), isEmblem(false), emblemSource(NULL), emblemSuffix("99"), emblemUntilEOT(false), onRulesCard(false)
       {
           ability->target = _target;
       }
@@ -3503,7 +3509,7 @@ public:
       {
           MTGAbility * toAdd = ability->clone();
           toAdd->forceDestroy = -1;
-          toAdd->target = target;
+          toAdd->target = onRulesCard ? (Targetable *) source : target;
           if(toAdd->getActionTc())
           {
               toAdd->reactToTargetClick(source);
@@ -3534,12 +3540,16 @@ public:
                   {
                       ostringstream emblemIdStr;
                       emblemIdStr << abs(tok->getId());
-                      string customEmblemId = emblemIdStr.str() + "99";
+                      string customEmblemId = emblemIdStr.str() + emblemSuffix;
                       WParsedInt newEmblemId(customEmblemId, NULL, emblemSource);
                       tok->setMTGId(-newEmblemId.getValue());
                   }
                   tok->owner = ctrl;
                   tok->isToken = 1;
+                  //"This turn" marker: MTGUnearthRule's end-of-turn sweep takes Emblem cards
+                  //carrying unearth out of the command zone (wagic#39).
+                  if (emblemUntilEOT)
+                      tok->basicAbilities[(int)Constants::UNEARTH] = 1;
                   ctrl->game->commandzone->addCard(tok);
               }
           }

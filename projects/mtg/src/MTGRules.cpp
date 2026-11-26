@@ -3701,6 +3701,20 @@ int MTGUnearthRule::receiveEvent(WEvent * event)
                         game->receiveEvent(e);
                     }
                 }
+                //An effect marker for a "this turn" effect (emblem("text") ... ueot) is a
+                //display-only Emblem card in the command zone; it just goes away (wagic#39).
+                MTGGameZone * cz = game->players[i]->game->commandzone;
+                for (int j = cz->nb_cards - 1; j >= 0; j--)
+                {
+                    MTGCardInstance * c = cz->cards[j];
+                    if (c && c->isToken && c->hasType(Subtypes::TYPE_EMBLEM) && c->basicAbilities[(int)Constants::UNEARTH])
+                    {
+                        found = true;
+                        MTGCardInstance * gone = cz->removeCard(c, 0);
+                        if (gone)
+                            game->players[i]->game->garbage->addCard(gone);
+                    }
+                }
             }
             if(found)
                 return 1;

@@ -82,6 +82,12 @@ int Damage::resolve()
         {
             for (int i = 0; i < 2 && !unpreventable; ++i)
             {
+                //an emblem effect hangs off the hidden rules card, not a permanent (wagic#39)
+                if (g->ExtraRules && g->ExtraRules[i].has(Constants::NOPREVENTIONALL))
+                {
+                    unpreventable = true;
+                    break;
+                }
                 MTGGameZone * z = g->players[i]->game->battlefield;
                 for (int j = 0; j < z->nb_cards; ++j)
                     if (z->cards[j]->has(Constants::NOPREVENTIONALL))

@@ -1,0 +1,23 @@
+#Urza, Planeswalker +2 (wagic#39): artifact, instant and sorcery spells cost {2} less this turn,
+#and you gain 2 life. The marker shows the text; the reduction hangs off the rules card.
+#Bottle Gnomes ({3}) is cast with {1}.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+inplay:588290
+hand:Bottle Gnomes
+manapool:{1}
+[PLAYER2]
+[DO]
+588290
+menu +2: Artifacts and spells cost 2 less
+Bottle Gnomes
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:588290,Bottle Gnomes
+commandzone:*
+counter:588290=loyalty:9
+life:22
+[PLAYER2]
+[END]

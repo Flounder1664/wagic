@@ -106,8 +106,16 @@ GameObserver::GameObserver(WResourceManager *output, JGE* input)
     //constructed, they had no observer, so anything reading source->getObserver()
     //(PTInstant: a pump inside an emblem's trigger, Garruk, Curse Breaker -4)
     //dereferenced NULL and crashed.
+    //Typed Emblem so an emblem's own triggers can leave out the damage the emblem itself
+    //deals - from(*[-emblem]|*) - or Insult's "deals double" doubles its own extra damage
+    //forever (wagic#39). The cards are in no zone list, so the type changes no counts.
     for (int i = 0; i < 2; ++i)
+    {
         ExtraRules[i].setObserver(this);
+        //the primitive's addType: the instance's one would also rename the card and send an
+        //event, neither of which is wanted (or safe) while the observer is being built
+        ExtraRules[i].CardPrimitive::addType(Subtypes::TYPE_EMBLEM);
+    }
 
     mGameType = GAME_TYPE_CLASSIC;
     currentPlayer = NULL;

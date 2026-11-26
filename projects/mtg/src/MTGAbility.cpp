@@ -3093,6 +3093,10 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         //invisible internal/global effect - this cleanly excludes the overloaded
         //non-emblem uses (perpetuals, ueot globals like High Tide) with no guess.
         string emblemText = "";
+        //emblem("text",tnum.N): the shown card's picture id is <card id>N instead of the
+        //default <card id>99 - the same idea as a token's tnum., for a card that shows two
+        //emblems (Insult // Injury: Insult and No Prevention). wagic#39, 2026-11-26.
+        string emblemSuffix = "99";
         size_t firstNonSpace = rest.find_first_not_of(" ");
         if (firstNonSpace != string::npos && rest[firstNonSpace] == '(')
         {
@@ -3102,6 +3106,10 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
             if (q1 != string::npos && q2 != string::npos && closeParen != string::npos)
             {
                 emblemText = rest.substr(q1 + 1, q2 - q1 - 1);
+                string tail = rest.substr(q2 + 1, closeParen - q2 - 1);
+                size_t tn = tail.find("tnum.");
+                if (tn != string::npos)
+                    emblemSuffix = trim(tail.substr(tn + 5));
                 rest = rest.substr(closeParen + 1);
             }
         }
@@ -3109,12 +3117,24 @@ MTGAbility * AbilityFactory::parseMagicLine(string s, int id, Spell * spell, MTG
         if (!a1)
             return NULL;
 
-        GenericAbilityMod * gmod = NEW GenericAbilityMod(observer, 1, card->controller()->getObserver()->ExtraRules,card->controller()->getObserver()->ExtraRules, a1);
+        //The rules card the effect hangs off is the CONTROLLER's (ExtraRules[0] or [1]), so
+        //"my"/"opponent" inside the effect mean the right players when the AI casts it. It
+        //used to be ExtraRules[0] for everyone.
+        MTGCardInstance * rulesCard = observer->ExtraRules;
+        if (card->controller() == observer->players[1])
+            rulesCard = &(observer->ExtraRules[1]);
+        GenericAbilityMod * gmod = NEW GenericAbilityMod(observer, 1, rulesCard, rulesCard, a1);
+        gmod->onRulesCard = true;
         if (!emblemText.empty())
         {
             gmod->isEmblem = true;
             gmod->emblemSource = card;
             gmod->emblemText = emblemText;
+            gmod->emblemSuffix = emblemSuffix;
+            //An effect that lasts "this turn" (the line ends in ueot) takes its shown card away
+            //at end of turn too - an effect marker such as "Damage can't be prevented this turn".
+            string r = trim(rest);
+            gmod->emblemUntilEOT = r.size() >= 4 && r.substr(r.size() - 4) == "ueot";
         }
         return gmod;
     }

@@ -1,0 +1,24 @@
+#Shadow of the Enemy (wagic#39): exile the opponent's creature cards; you may cast them, and
+#mana of any type can be spent. The emblem is only the reminder - nothing to activate. Grizzly
+#Bears ({1}{G}) is cast from exile with {R}{R}. The Forest is not a creature card and stays.
+[INIT]
+FIRSTMAIN
+[PLAYER1]
+hand:701190
+manapool:{3}{B}{B}{B}{R}{R}
+[PLAYER2]
+graveyard:Grizzly Bears,Hill Giant,Forest
+[DO]
+701190
+choice 0
+Grizzly Bears
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+inplay:Grizzly Bears
+exile:Hill Giant
+graveyard:701190
+commandzone:*
+[PLAYER2]
+graveyard:Forest
+[END]

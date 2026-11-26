@@ -1,3 +1,5 @@
+#wagic#39 (2026-11-26): the markers are display-only cards in the COMMAND ZONE now, not
+#tokens on the battlefield; the effect hangs off the hidden rules card.
 #Insult // Injury's "if a source you control would deal damage this turn, it deals double
 #that damage instead" - John verified this one in game, and it is the control that showed
 #Isengard Unleashed's version was broken rather than the harness being unable to drive it.
@@ -24,7 +26,7 @@ goto secondmain
 [ASSERT]
 SECONDMAIN
 [PLAYER1]
-inplay:*,*
+commandzone:*,*
 graveyard:*,*
 life:20
 [PLAYER2]

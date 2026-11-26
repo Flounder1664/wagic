@@ -443,9 +443,11 @@
 # turn. Emblem + shroud + indestructible + notrigger + unearth is the shape Insult // Injury
 # already uses for its own turn-long emblem; unearth is what removes it at end of turn.
 # noprevention on the card itself only ever covered that card's OWN damage.
-# tnum.97: the marker's picture is <card id>97t.jpg, its own, so a card that also makes its
-# own marker (Insult, Isengard, No Lifegain share the card's id) shows both pictures.
-#AUTO_DEFINE _NOPREVENT_ token(No Prevention Emblem,Emblem,0/0,shroud,indestructible,notrigger,unearth,nopreventionall,tnum.97)
+# wagic#39 (2026-11-26): an EFFECT MARKER. The effect hangs off the hidden rules card
+# (emblem ... ueot), and the command zone shows a display-only card with this text, gone at
+# end of turn. tnum.97 gives it its own picture (<card id>97t.jpg), so a card that shows a
+# second marker of its own (Insult, Isengard, No Lifegain: <card id>99t.jpg) shows both.
+#AUTO_DEFINE _NOPREVENT_ emblem("Damage can't be prevented this turn.",tnum.97) transforms((,nopreventionall)) ueot
 
 # Speed (DFT) - "Start your engines!" sets your speed to 1 if you have none; thereafter it
 # rises by one the FIRST time each turn an opponent loses life, capping at max speed 4.

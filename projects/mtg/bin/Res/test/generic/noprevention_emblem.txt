@@ -1,3 +1,6 @@
+#wagic#39 (2026-11-26): the markers are display-only cards in the COMMAND ZONE now, not
+#tokens on the battlefield; the effect hangs off the hidden rules card. Skullcrack shows two:
+#No Prevention and No Lifegain ("players can't gain life this turn").
 #"Damage can't be prevented this turn" is a GLOBAL effect and was written as
 #abilities=noprevention, which only ever covered the card's OWN damage. It now also puts out
 #an Emblem token carrying nopreventionall, which ReplacementEffects.cpp:36 honours for every
@@ -25,7 +28,7 @@ p2
 [ASSERT]
 firstmain
 [PLAYER1]
-inplay:*
+commandzone:*,*
 graveyard:*,*,*
 life:17
 [PLAYER2]
