@@ -4253,6 +4253,117 @@ void AAChooseTypeScreen::open(GameObserver * game, int id, MTGCardInstance * sou
     a1->resolve();
 }
 
+//The opening (CR 103.5-103.6)
+AAOpeningChoice::AAOpeningChoice(GameObserver* observer, int id, MTGCardInstance * source, Player * who, int kind, MTGCardInstance * card, string line, string label) :
+    InstantAbility(observer, id, source), kind(kind), who(who), card(card), line(line), label(label)
+{
+    this->target = source;
+}
+
+const string AAOpeningChoice::getMenuText()
+{
+    return label;
+}
+
+AAOpeningChoice * AAOpeningChoice::clone() const
+{
+    return NEW AAOpeningChoice(*this);
+}
+
+//An autoopening= line, made ready to parse: without the "notstartingplayer" condition (the menu
+//checked it) and without a leading name(...) (that is the menu's label).
+static string openingEffect(string s)
+{
+    size_t p = s.find("notstartingplayer");
+    if (p != string::npos)
+        s.erase(p, 17);
+    while (s.size() && s[0] == ' ')
+        s.erase(0, 1);
+    if (s.find("name(") == 0)
+    {
+        int depth = 0;
+        for (size_t i = 4; i < s.size(); i++)
+        {
+            if (s[i] == '(') depth++;
+            else if (s[i] == ')' && --depth == 0)
+            {
+                s = s.substr(i + 1);
+                break;
+            }
+        }
+    }
+    while (s.size() && s[0] == ' ')
+        s.erase(0, 1);
+    return s;
+}
+
+void AAOpeningChoice::takeAction(GameObserver * game, Player * who, MTGCardInstance * card, int kind, const string& line)
+{
+    if (!card || !who->game->hand->hasCard(card))
+        return;
+    who->openingUsed.push_back(card);
+    if (kind == LEYLINE)
+    {
+        //"you may begin the game with it on the battlefield" - the same move the old turn-0 click made
+        MTGCardInstance * copy = who->game->putInZone(card, card->currentZone, who->game->temp);
+        Spell * spell = NEW Spell(game, copy);
+        spell->resolve();
+        delete spell;
+        return;
+    }
+    string effect = openingEffect(line);
+    if (!effect.size())
+        return;
+    AbilityFactory af(game);
+    MTGAbility * a = af.parseMagicLine(effect, game->mLayers->actionLayer()->getMaxId(), NULL, card);
+    if (!a)
+        return;
+    if (a->oneShot)
+    {
+        a->resolve();
+        delete a;
+    }
+    else
+        a->addToGame();
+}
+
+int AAOpeningChoice::resolve()
+{
+    if (!who)
+        return 0;
+    switch (kind)
+    {
+    case KEEP:
+        who->keptOpeningHand = true;
+        who->cardsToBottom = who->handMulligans;
+        who->openingStage = who->cardsToBottom > 0 ? Player::OPENING_BOTTOM : Player::OPENING_ACTIONS;
+        break;
+    case MULLIGAN:
+        who->takeMulligan();
+        break;
+    case SERUM:
+        who->serumMulligan();
+        break;
+    case BOTTOM:
+        if (card && who->game->hand->hasCard(card) && who->cardsToBottom > 0)
+        {
+            who->bottomCardFromHand(card);
+            who->cardsToBottom--;
+        }
+        if (who->cardsToBottom <= 0)
+            who->openingStage = Player::OPENING_ACTIONS;
+        break;
+    case LEYLINE:
+    case CARDLINE:
+        takeAction(game, who, card, kind, line);
+        break;
+    case DONE:
+        who->openingStage = Player::OPENING_DONE;
+        break;
+    }
+    return 1;
+}
+
 AASetTypeChosen * AASetTypeChosen::clone() const
 {
     return NEW AASetTypeChosen(*this);
@@ -7903,6 +8014,9 @@ bool AAMulligan::mulliganWindowOpen()
     //turn before drawing, with no game actions taken yet. Cards exiled
     //by previous Serum Powder redraws don't end the window (issue #979).
     Player * p = source->controller();
+    //A game that began with an opening: Serum Powder works while its owner decides keep or mulligan
+    if (game->hadOpening)
+        return game->inOpening(p, Player::OPENING_MULLIGAN);
     GamePhase phase = (GamePhase)game->getCurrentGamePhase();
     if (!((game->turn == 0 && phase == MTG_PHASE_FIRSTMAIN) || (game->turn == 1 && phase < MTG_PHASE_DRAW)))
         return false;

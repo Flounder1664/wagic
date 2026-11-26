@@ -838,9 +838,20 @@ void Rules::initGame(GameObserver *g, bool currentPlayerSet)
     }
     g->currentPlayer =  g->players[g->currentPlayerId];
     g->currentActionPlayer = g->currentPlayer;
+    //A real game begins with the opening (CR 103.5-103.6: mulligans, then Leylines and other
+    //opening-hand actions, each player in turn order) held at turn 0's untap step, so the starting
+    //player gets a first upkeep (Chancellor of the Dross's "first upkeep"). Tests, scenarios and
+    //story mode set up a position mid-game and keep their own starting phase.
+    GamePhase startPhase = initState.phase;
+    bool opening = g->currentPlayer->playMode != Player::MODE_TEST_SUITE && gamemode != GAME_TYPE_STORY
+        && initState.phase == MTG_PHASE_FIRSTMAIN && g->turn == 0;
+    if (opening)
+        startPhase = MTG_PHASE_UNTAP;
     g->phaseRing->goToPhase(0, g->currentPlayer, false);
-    g->phaseRing->goToPhase(initState.phase, g->currentPlayer);
-    g->setCurrentGamePhase(initState.phase);
+    g->phaseRing->goToPhase(startPhase, g->currentPlayer);
+    g->setCurrentGamePhase(startPhase);
+    if (opening)
+        g->startOpening();
 
     for (int i = 0; i < 2; i++)
     {

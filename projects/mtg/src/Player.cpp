@@ -56,6 +56,7 @@ Player::Player(GameObserver *observer, string file, string fileSmall, MTGDeck * 
     handMulligans = 0;
     cardsToBottom = 0;
     keptOpeningHand = false;
+    openingStage = OPENING_DONE;
     devotionOffset = 0;
     lastShuffleTurn = -1;
     epic = 0;

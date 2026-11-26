@@ -1,0 +1,30 @@
+#The opening (CR 103.5-103.6): both players keep and begin with their Leyline - the player on the
+#draw too, which the old turn-1 window got wrong. Menus: keep (choice 0), then the actions menu
+#(choice 0 = the Leyline, then choice 0 = "Start the game").
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:Leyline of Sanctity,129559
+library:129680,129680,129680
+[PLAYER2]
+hand:Leyline of the Void,129754
+library:129606,129606,129606
+[DO]
+choice 0
+choice 0
+choice 0
+choice 0
+choice 0
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+inplay:Leyline of Sanctity
+hand:129559
+library:129680,129680,129680
+[PLAYER2]
+inplay:Leyline of the Void
+hand:129754
+library:129606,129606,129606
+[END]

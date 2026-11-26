@@ -410,7 +410,9 @@ int MTGPutInPlayRule::isReactingToClick(MTGCardInstance * card, ManaCost *)
     //their first turn before drawing (mirrors the Mulligan menu's window) so
     //BOTH players can start Leylines on the battlefield. Was "turn < 1" only,
     //which excluded the player on the draw entirely (their first turn is 1).
-    if ((((game->turn == 0) && game->getCurrentGamePhase() == MTG_PHASE_FIRSTMAIN)
+    //A game that began with an opening offers Leylines there (GameObserver::openingMenu); this
+    //turn-0/turn-1 window is only for games that start mid-turn (tests, story mode).
+    if (!game->hadOpening && (((game->turn == 0) && game->getCurrentGamePhase() == MTG_PHASE_FIRSTMAIN)
           || ((game->turn == 1) && game->getCurrentGamePhase() < MTG_PHASE_DRAW))
         && (player->game->hand->nb_cards != 0) && (card->basicAbilities[(int)Constants::LEYLINE])
         && player->game->graveyard->nb_cards == 0

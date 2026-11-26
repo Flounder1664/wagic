@@ -92,6 +92,13 @@ public:
     //a player who has mulliganed (handMulligans>0) is held in the opening
     //window: they must Mulligan again or Keep Hand (which bottoms cards).
     bool keptOpeningHand;
+    //The opening (CR 103.5-103.6, GameObserver::driveOpening): where this player is in it -
+    //OPENING_MULLIGAN (keep or mulligan), OPENING_BOTTOM (put cards on the bottom),
+    //OPENING_ACTIONS (Leylines, reveals) or OPENING_DONE.
+    enum { OPENING_MULLIGAN = 0, OPENING_BOTTOM, OPENING_ACTIONS, OPENING_DONE };
+    int openingStage;
+    //Cards whose opening action this player has already taken (a revealed Chancellor stays in hand).
+    vector<MTGCardInstance *> openingUsed;
     //Move a card from this player's hand to the bottom of their library
     //(London-mulligan bottoming). Mirrors AALibraryBottom's placement.
     void bottomCardFromHand(MTGCardInstance * card);

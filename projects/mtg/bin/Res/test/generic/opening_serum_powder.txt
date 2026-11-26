@@ -1,0 +1,26 @@
+#Serum Powder in the opening: the keep-or-mulligan menu offers it (choice 2, after Keep and
+#Mulligan). It exiles the hand (Serum Powder and Grizzly Bears) and draws that many, with no
+#mulligan owed, then the player keeps (choice 0) - nothing goes on the bottom.
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:48920,129586
+library:129680,129680,129680
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+[DO]
+choice 2
+choice 0
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+exile:48920,129586
+hand:*,*
+library:*
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+[END]

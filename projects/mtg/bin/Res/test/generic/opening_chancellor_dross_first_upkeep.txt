@@ -1,0 +1,32 @@
+#Chancellor of the Dross revealed in the opening (choice 0 keep, choice 0 reveal, choice 0 start):
+#its marker waits in the command zone and fires at the FIRST upkeep - turn 0's, the starting
+#player's, which a game with an opening now has. The draw step of turn 0 is skipped (CR 103.8a), so
+#the hand is unchanged in first main. The marker stays in the command zone until end of turn. Negative twin: opening_chancellor_dross_not_revealed.
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:218020,129754
+library:129680,129680,129680
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+[DO]
+choice 0
+choice 0
+choice 0
+choice 0
+next
+next
+[ASSERT]
+FIRSTMAIN
+[PLAYER1]
+commandzone:-21802099
+hand:218020,129754
+library:129680,129680,129680
+life:23
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+life:17
+[END]

@@ -102,6 +102,11 @@ GameObserver::GameObserver(WResourceManager *output, JGE* input)
 
 {
     ExtraRules = new MTGCardInstance[2]();
+    openingActive = false;
+    hadOpening = false;
+    openingMenuShown = NULL;
+    openingIndex = 0;
+    startingPlayerId = 0;
     //The ExtraRules cards are the source of every emblem's abilities. Default-
     //constructed, they had no observer, so anything reading source->getObserver()
     //(PTInstant: a pump inside an emblem's trigger, Garruk, Curse Breaker -4)
@@ -215,6 +220,11 @@ void GameObserver::nextGamePhase()
         }
 
     phaseRing->forward();
+
+    //CR 103.8a: the starting player skips the draw step of their first turn. Only a game that began
+    //with an opening starts at turn 0's untap; tests and story mode start mid-turn and never get here.
+    if (hadOpening && turn == 0 && phaseRing->getCurrentPhase()->id == MTG_PHASE_DRAW)
+        phaseRing->forward();
 
     //Go directly to end of combat if no attackers
     if (cPhaseOld->id == MTG_PHASE_COMBATATTACKERS && !(currentPlayer->game->inPlay->getNextAttacker(NULL)))
@@ -350,6 +360,8 @@ void GameObserver::nextCombatStep()
 
 void GameObserver::userRequestNextGamePhase(bool allowInterrupt, bool log)
 {
+    if (openingActive)
+        return; //the game has not begun: both openings come first (CR 103)
     //London mulligan: the first attempt to move on after mulliganing means
     //"keep this hand". The player must then put one card per mulligan on the
     //bottom of their library (click them in hand) before the phase advances.
@@ -652,6 +664,13 @@ void GameObserver::Update(float dt)
     currentActionPlayer = player;
     if (isInterrupting) 
         player = isInterrupting;
+    //The opening: the player whose opening it is acts (and only they), and nothing else moves
+    if (openingActive && mLayers)
+    {
+        driveOpening();
+        if (openingActive && openingPlayer())
+            player = currentActionPlayer = openingPlayer();
+    }
     if(mLayers)
     {
         mLayers->Update(dt, player);
@@ -2417,6 +2436,191 @@ bool GameObserver::undo()
     stream << *this;
     DebugTrace(stream.str());
     return load(stream.str(), true);
+}
+
+//The opening (CR 103.5-103.6). Starts held at turn 0's untap step; GameObserver::Update calls
+//driveOpening every frame until both players are done.
+void GameObserver::startOpening()
+{
+    openingActive = true;
+    hadOpening = true;
+    openingIndex = 0;
+    startingPlayerId = currentPlayerId;
+    for (size_t i = 0; i < players.size(); i++)
+    {
+        players[i]->openingStage = Player::OPENING_MULLIGAN;
+        players[i]->openingUsed.clear();
+    }
+}
+
+Player * GameObserver::openingPlayer()
+{
+    if (!openingActive || openingIndex > 1 || players.size() < 2)
+        return NULL;
+    return players[(startingPlayerId + openingIndex) % 2];
+}
+
+bool GameObserver::inOpening(Player * p, int stage)
+{
+    return openingActive && p && openingPlayer() == p && p->openingStage == stage;
+}
+
+//The card's own opening-hand actions it can still take: autoopening= lines (one per line) and
+//the Leyline keyword. "notstartingplayer" lines (Gemstone Caverns) are only for the other player.
+static void openingActions(GameObserver * g, Player * p, vector<pair<MTGCardInstance *, string> >& out, vector<int>& kinds)
+{
+    MTGGameZone * hand = p->game->hand;
+    for (int i = 0; i < hand->nb_cards; i++)
+    {
+        MTGCardInstance * c = hand->cards[i];
+        if (find(p->openingUsed.begin(), p->openingUsed.end(), c) != p->openingUsed.end())
+            continue;
+        if (c->basicAbilities[(int)Constants::LEYLINE])
+        {
+            out.push_back(make_pair(c, string("")));
+            kinds.push_back(AAOpeningChoice::LEYLINE);
+        }
+        map<string, string>::iterator it = c->magicTexts.find("opening");
+        if (it == c->magicTexts.end() || !it->second.size())
+            continue;
+        vector<string> lines = split(it->second, '\n');
+        for (size_t l = 0; l < lines.size(); l++)
+        {
+            if (!lines[l].size())
+                continue;
+            if (lines[l].find("notstartingplayer") != string::npos && g->isStartingPlayer(p))
+                continue;
+            out.push_back(make_pair(c, lines[l]));
+            kinds.push_back(AAOpeningChoice::CARDLINE);
+            break; //one opening action per card
+        }
+    }
+}
+
+static string openingLabel(MTGCardInstance * c, int kind, const string& line)
+{
+    if (kind == AAOpeningChoice::LEYLINE)
+        return "Begin with " + c->name + " on the battlefield";
+    size_t p = line.find("name(");
+    if (p != string::npos)
+    {
+        size_t e = line.find(")", p);
+        string n = line.substr(p + 5, e - p - 5);
+        if (n.size())
+            n[0] = (char)toupper((unsigned char)n[0]);
+        return n;
+    }
+    return "Reveal " + c->name;
+}
+
+void GameObserver::openingMenu(Player * p)
+{
+    MTGCardInstance * rulesCard = &ExtraRules[p == players[0] ? 0 : 1];
+    int id = mLayers->actionLayer()->getMaxId();
+    vector<MTGAbility *> selection;
+    string title = "Opening hand";
+    if (p->openingStage == Player::OPENING_MULLIGAN)
+    {
+        std::ostringstream keep;
+        keep << "Keep this hand";
+        if (p->handMulligans)
+            keep << " (then put " << p->handMulligans << " on the bottom)";
+        selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::KEEP, NULL, "", keep.str()));
+        if (p->handMulligans < 7)
+            selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::MULLIGAN, NULL, "", "Mulligan (shuffle, draw 7)"));
+        MTGGameZone * hand = p->game->hand;
+        for (int i = 0; i < hand->nb_cards; i++)
+        {
+            map<string, string>::iterator it = hand->cards[i]->magicTexts.find("hand");
+            if (it != hand->cards[i]->magicTexts.end() && it->second.find("serumpowder") != string::npos)
+            {
+                selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::SERUM, hand->cards[i], "",
+                    hand->cards[i]->name + ": exile your hand, draw that many"));
+                break;
+            }
+        }
+        title = p->handMulligans ? "Opening hand: keep or mulligan again" : "Opening hand: keep or mulligan";
+    }
+    else if (p->openingStage == Player::OPENING_BOTTOM)
+    {
+        MTGGameZone * hand = p->game->hand;
+        for (int i = 0; i < hand->nb_cards; i++)
+            selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::BOTTOM, hand->cards[i], "",
+                hand->cards[i]->name));
+        std::ostringstream t;
+        t << "Put " << p->cardsToBottom << (p->cardsToBottom == 1 ? " card" : " cards") << " on the bottom";
+        title = t.str();
+    }
+    else if (p->openingStage == Player::OPENING_ACTIONS)
+    {
+        vector<pair<MTGCardInstance *, string> > acts;
+        vector<int> kinds;
+        openingActions(this, p, acts, kinds);
+        if (!acts.size())
+        {
+            p->openingStage = Player::OPENING_DONE;
+            return;
+        }
+        for (size_t i = 0; i < acts.size(); i++)
+            selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, kinds[i], acts[i].first, acts[i].second,
+                openingLabel(acts[i].first, kinds[i], acts[i].second)));
+        selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::DONE, NULL, "", "Start the game"));
+        title = "Opening hand: before the game begins";
+    }
+    else
+        return;
+    for (size_t i = 0; i < selection.size(); i++)
+        selection[i]->oneShot = true;
+    MenuAbility * menu = NEW MenuAbility(this, id, rulesCard, rulesCard, true, selection, NULL, title);
+    openingMenuShown = menu;
+    menu->resolve();
+}
+
+void GameObserver::driveOpening()
+{
+    while (openingActive)
+    {
+        Player * p = openingPlayer();
+        if (!p)
+        {
+            openingActive = false;
+            break;
+        }
+        //a hand kept with mulligans owes bottomed cards (clicked in hand, or picked from the menu)
+        if (p->openingStage == Player::OPENING_BOTTOM && p->cardsToBottom <= 0)
+            p->openingStage = Player::OPENING_ACTIONS;
+        if (p->openingStage == Player::OPENING_DONE)
+        {
+            openingIndex++;
+            if (openingIndex > 1)
+                openingActive = false;
+            continue;
+        }
+        if (p->choosesForItself())
+        {
+            //the AI keeps (it never mulligans) and takes every opening action it has
+            p->keptOpeningHand = true;
+            vector<pair<MTGCardInstance *, string> > acts;
+            vector<int> kinds;
+            openingActions(this, p, acts, kinds);
+            for (size_t i = 0; i < acts.size(); i++)
+                AAOpeningChoice::takeAction(this, p, acts[i].first, kinds[i], acts[i].second);
+            p->openingStage = Player::OPENING_DONE;
+            continue;
+        }
+        //a person, or a scripted test player: one menu at a time
+        if (mLayers->actionLayer()->menuObject)
+            return;
+        if (openingMenuShown && mLayers->actionLayer()->getIndexOf(openingMenuShown) != -1)
+            return;
+        openingMenuShown = NULL;
+        openingMenu(p);
+        if (p->openingStage == Player::OPENING_DONE)
+            continue; //nothing to offer
+        return;
+    }
+    openingMenuShown = NULL;
+    currentActionPlayer = currentPlayer;
 }
 
 void GameObserver::Mulligan(Player* player)

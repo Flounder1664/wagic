@@ -1,0 +1,29 @@
+#Gemstone Caverns: the player who is NOT the starting player may begin with it on the battlefield
+#with a luck counter, then exiles a card from hand. Player 1 (starting) keeps; player 2 keeps
+#(choice 0), takes the Caverns (choice 0), exiles Swamp (clicked), then starts the game (choice 0).
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:129559
+library:129680,129680,129680
+[PLAYER2]
+hand:716016,129754,129606
+library:129649,129649,129649
+[DO]
+choice 0
+choice 0
+choice 0
+129754
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+hand:129559
+library:129680,129680,129680
+[PLAYER2]
+inplay:716016
+hand:129606
+exile:129754
+library:129649,129649,129649
+[END]

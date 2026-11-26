@@ -1,0 +1,27 @@
+#Negative twin of opening_leylines_both_players: the starting player keeps and picks "Start the game"
+#(choice 1) without the Leyline, so it stays in hand; the other player still begins with theirs.
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:Leyline of Sanctity,129559
+library:129680,129680,129680
+[PLAYER2]
+hand:Leyline of the Void,129754
+library:129606,129606,129606
+[DO]
+choice 0
+choice 1
+choice 0
+choice 0
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+hand:Leyline of Sanctity,129559
+library:129680,129680,129680
+[PLAYER2]
+inplay:Leyline of the Void
+hand:129754
+library:129606,129606,129606
+[END]

@@ -1085,6 +1085,7 @@ TestSuite::TestSuite(const char * filename)
     seed = 0;
     forceAbility = false;
     groupedTypeMenu = false;
+    opening = false;
     aiMaxCalls = -1;
     startTime = JGEGetTime();
     endTime = startTime;
@@ -1340,6 +1341,7 @@ bool TestSuiteGame::load()
     summoningSickness = 0;
     forceAbility = false;
     groupedTypeMenu = false;
+    opening = false;
     gameType = GAME_TYPE_CLASSIC;
 
     std::string s;
@@ -1370,6 +1372,11 @@ bool TestSuiteGame::load()
             if (s.compare("groupedtypemenu") == 0)
             {
                 groupedTypeMenu = true;
+                continue;
+            }
+            if (s.compare("opening") == 0)
+            {
+                opening = true;
                 continue;
             }
             if (s.find("seed ") == 0)
@@ -1547,13 +1554,13 @@ TestSuiteGame::~TestSuiteGame()
 }
 
 TestSuiteGame::TestSuiteGame(TestSuite* testsuite)
-    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), gameType(GAME_TYPE_CLASSIC), timerLimit(0),
+    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), opening(false), gameType(GAME_TYPE_CLASSIC), timerLimit(0),
       currentAction(0), observer(0), testsuite(testsuite)
 {
 }
 
 TestSuiteGame::TestSuiteGame(TestSuite* testsuite, string _filename)
-    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), gameType(GAME_TYPE_CLASSIC), timerLimit(FAST_TEST),
+    : summoningSickness(0), forceAbility(false), groupedTypeMenu(false), opening(false), gameType(GAME_TYPE_CLASSIC), timerLimit(FAST_TEST),
       currentAction(0), observer(0), testsuite(testsuite)
 {
     filename = _filename;
@@ -1579,6 +1586,11 @@ void TestSuiteGame::initGame()
     aiChooses = false;
     observer->phaseRing->goToPhase(initState.phase, observer->players[0], false);
     observer->setCurrentGamePhase(initState.phase);
+    //A test or scenario is a position, not a new game: no opening, unless the test asks for one
+    observer->openingActive = false;
+    observer->hadOpening = false;
+    for (size_t i = 0; i < observer->players.size(); i++)
+        observer->players[i]->openingStage = Player::OPENING_DONE;
 
     observer->resetStartupGame();
 
@@ -1712,6 +1724,9 @@ void TestSuiteGame::initGame()
         p->game->inPlay->cardsSeenThisTurn.clear();
         p->game->stack->cardsSeenThisTurn.clear();
     }
+    //"opening": the hands above are the opening hands; the test's [DO] answers the menus
+    if (opening)
+        observer->startOpening();
     DebugTrace("TESTUITE Init Game Done !");
 }
 

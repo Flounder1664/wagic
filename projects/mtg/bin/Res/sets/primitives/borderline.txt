@@ -19026,8 +19026,9 @@ toughness=3
 [/card]
 [card]
 name=Chancellor of the Annex
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Chancellor of the Annex) emblem("Chancellor of the Annex: when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.") transforms((,newability[@movedto(*|opponentstack) once:all(trigger[to]) transforms((,newability[pay[[{1}]] name(pay 1 mana) donothing?fizzle])) forever])) forever
 abilities=flying
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Chancellor of the Annex) transforms((,newability[@movedto(*|opponentstack) once:all(trigger[to]) transforms((,newability[pay[[{1}]] name(pay 1 mana) donothing?fizzle])) forever])) forever
 auto=@movedto(*|opponentstack):all(trigger[to]) transforms((,newability[pay[[{1}]] name(pay 1 mana) donothing?fizzle])) forever
 text=You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}. -- Flying -- Whenever an opponent casts a spell, counter it unless that player pays {1}.
 mana={4}{W}{W}{W}
@@ -19038,8 +19039,9 @@ toughness=6
 [/card]
 [card]
 name=Chancellor of the Dross
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Chancellor of the Dross) emblem("Chancellor of the Dross: at the beginning of the first upkeep, each opponent loses 3 life and you gain life equal to the life lost this way.") transforms((,newability[@each upkeep once:lifeleech:-3 opponent])) ueot
 abilities=flying,lifelink
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Chancellor of the Dross) lifeleech:-3 opponent
 text=You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way. -- Flying, lifelink
 mana={4}{B}{B}{B}
 type=Creature
@@ -19049,7 +19051,8 @@ toughness=6
 [/card]
 [card]
 name=Chancellor of the Forge
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Chancellor of the Forge) token(Phyrexian Goblin,Creature Phyrexian Goblin,1/1,red,haste)
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Chancellor of the Forge) emblem("Chancellor of the Forge: at the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.") transforms((,newability[@each upkeep once:token(Phyrexian Goblin,Creature Phyrexian Goblin,1/1,red,haste)])) ueot
 auto=name(Create Phyrexian goblins) token(Phyrexian Goblin,Creature Phyrexian Goblin,1/1,red,haste)*type:creature:mybattlefield
 text=You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste. -- When Chancellor of the Forge enters, create X 1/1 red Phyrexian Goblin creature tokens with haste, where X is the number of creatures you control.
 mana={4}{R}{R}{R}
@@ -19060,8 +19063,9 @@ toughness=5
 [/card]
 [card]
 name=Chancellor of the Spires
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Chancellor of the Spires) emblem("Chancellor of the Spires: at the beginning of the first upkeep, each opponent mills seven cards.") transforms((,newability[@each upkeep once:deplete:7 opponent])) ueot
 abilities=flying
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Chancellor of the Spires) deplete:7 opponent
 auto=may name(Cast from opponent graveyard) target(*[instant;sorcery]|opponentgraveyard) activate castcard(normal)
 text=You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard. -- Flying -- When Chancellor of the Spires enters, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
 mana={4}{U}{U}{U}
@@ -19072,8 +19076,9 @@ toughness=7
 [/card]
 [card]
 name=Chancellor of the Tangle
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Chancellor of the Tangle) emblem("Chancellor of the Tangle: at the beginning of your first main phase, add {G}.") transforms((,newability[@each my firstmain once:add{G}])) forever
 abilities=reach,vigilance
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Chancellor of the Tangle) transforms((,newability[phaseaction[my firstmain once]:add{G}])) forever
 text=You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G}. -- Vigilance, reach
 mana={4}{G}{G}{G}
 type=Creature
@@ -45220,14 +45225,14 @@ toughness=4
 [/card]
 [card]
 name=Gemstone Caverns
-autohand=@each my upkeep restriction{compare(currentturn)~equalto~1}:may name(Start with gemstone in play) transforms((,newability[moveto(mybattlefield) and!( counter(0/0.1.luck) )!],newability[name(Exile card from hand) target(other *|myhand) moveto(myexile)])) oneshot
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=notstartingplayer name(Begin with Gemstone Caverns on the battlefield) moveto(mybattlefield) and!( counter(0/0.1.luck) )! && ability$!name(Exile a card from your hand) notatarget(*|myhand) moveto(myexile)!$ controller
 auto={T}:add{C}
 auto=this(counter{0/0.1.luck}>0) {T}:add{W}
 auto=this(counter{0/0.1.luck}>0) {T}:add{U}
 auto=this(counter{0/0.1.luck}>0) {T}:add{G}
 auto=this(counter{0/0.1.luck}>0) {T}:add{B}
 auto=this(counter{0/0.1.luck}>0) {T}:add{R}
-#REVIEWTEXT implementation was written against an inaccurate text and may not match this card; verify the auto= lines
 text=If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand. -- {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
 type=Legendary Land
 [/card]
@@ -87947,7 +87952,8 @@ toughness=1
 [/card]
 [card]
 name=Providence
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Providence) lifeset:26 controller
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Providence) emblem("Providence: at the beginning of the first upkeep, your life total becomes 26.") transforms((,newability[@each upkeep once:lifeset:26 controller])) ueot
 auto=lifeset:26 controller
 text=You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26. -- Your life total becomes 26.
 mana={5}{W}{W}
@@ -108552,8 +108558,9 @@ toughness=5
 [/card]
 [card]
 name=Sphinx of Foresight
+#2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
+autoopening=name(Reveal Sphinx of Foresight) emblem("Sphinx of Foresight: scry 3 at the beginning of your first upkeep.") transforms((,newability[@each my upkeep once:_SCRY3_])) forever
 abilities=flying
-autohand=@each upkeep restriction{compare(currentturn)~lessthan~2}:may name(Reveal Sphinx of Foresight) _SCRY3_
 aicode=activate transforms((,newability[all(*[zpos<=1]|mylibrary) transforms((,newability[may name(Put on bottom of library) moveto(myreveal) and!( bottomoflibrary )!])) oneshot])) oneshot
 auto=@each my upkeep:_SCRY1_
 text=You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep. -- Flying -- At the beginning of your upkeep, scry 1.

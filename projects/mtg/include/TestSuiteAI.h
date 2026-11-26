@@ -45,6 +45,7 @@ protected:
     int summoningSickness;
     bool forceAbility;
     bool groupedTypeMenu;
+    bool opening; //"opening": run the real opening (mulligan, Leylines, reveals) before turn 0
     GameType gameType;
     unsigned int seed;
     int aiMaxCalls;

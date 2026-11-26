@@ -1,0 +1,26 @@
+#The opening's London mulligan: the starting player mulligans (choice 1: shuffle, draw a new hand of
+#the same size), keeps (choice 0), then owes one card to the bottom (choice 0 = the first card).
+#Hand 2 -> 2 -> 1, library 3 -> 4 (asserted as counts: the new hand is random). The other player keeps (no opening actions, so no more menus).
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:129680,129680
+library:129680,129680,129680
+[PLAYER2]
+hand:129754
+library:129606,129606,129606
+[DO]
+choice 1
+choice 0
+choice 0
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+hand:*
+library:*,*,*,*
+[PLAYER2]
+hand:129754
+library:129606,129606,129606
+[END]

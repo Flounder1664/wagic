@@ -89,6 +89,20 @@ class GameObserver{
   time_t startedAt;
   Rules * mRules;
   MTGCardInstance* ExtraRules;
+  //The opening (CR 103): before turn 0's untap each player in turn order, starting player first,
+  //keeps or mulligans, bottoms cards, then takes opening-hand actions (Leylines, Chancellor
+  //reveals). Real games only; tests and story mode start mid-game and skip it.
+  bool openingActive;      //the game is held in the opening
+  bool hadOpening;         //this game started with an opening (turn 0 then skips its draw)
+  int openingIndex;        //0 = the starting player's opening, 1 = the other player's
+  int startingPlayerId;
+  void startOpening();
+  void driveOpening();
+  void openingMenu(Player * p);
+  Player * openingPlayer();
+  bool inOpening(Player * p, int stage);
+  MTGAbility * openingMenuShown; //the opening menu on screen, until it closes
+  bool isStartingPlayer(Player * p) { return p && players.size() > (size_t)startingPlayerId && players[startingPlayerId] == p; }
   Trash* mTrash;
 
   GameType gameType() const { return mGameType; };

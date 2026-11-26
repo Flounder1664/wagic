@@ -1,0 +1,23 @@
+#Negative twin of opening_gemstone_caverns_second_player: the STARTING player is offered nothing
+#for Gemstone Caverns - after keeping (choice 0) there are no opening actions, so it stays in hand.
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:716016,129754
+library:129680,129680,129680
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+[DO]
+choice 0
+choice 0
+[ASSERT]
+UNTAP
+[PLAYER1]
+hand:716016,129754
+library:129680,129680,129680
+[PLAYER2]
+hand:129559
+library:129606,129606,129606
+[END]

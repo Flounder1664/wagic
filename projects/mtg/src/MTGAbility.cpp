@@ -9021,7 +9021,10 @@ TriggerAtPhase::TriggerAtPhase(GameObserver* observer, int id, MTGCardInstance *
         }
 
     }
-        if(once && activeTrigger)
+        //"once": off after it has FIRED. It used to switch off on the first check, which for a phase
+        //trigger is the frame after it is created, so "@each upkeep once" never fired (Chancellor of
+        //the Dross's opening reveal, wagic#25).
+        if(once && activeTrigger && result)
             activeTrigger = false;
 
     return result;

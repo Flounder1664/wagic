@@ -7992,6 +7992,23 @@ public:
     AAChooseTypeScreen * clone() const;
     static void open(GameObserver * game, int id, MTGCardInstance * source, MTGCardInstance * target, char letter, const string& toAdd, bool nonWall);
 };
+//One entry of an opening menu (GameObserver::openingMenu, CR 103.5-103.6).
+class AAOpeningChoice: public InstantAbility
+{
+public:
+    enum { KEEP = 0, MULLIGAN, SERUM, BOTTOM, LEYLINE, CARDLINE, DONE };
+    int kind;
+    Player * who;
+    MTGCardInstance * card;
+    string line;
+    string label;
+    AAOpeningChoice(GameObserver* observer, int id, MTGCardInstance * source, Player * who, int kind, MTGCardInstance * card, string line, string label);
+    int resolve();
+    const string getMenuText();
+    AAOpeningChoice * clone() const;
+    //Runs a card's autoopening= line (or puts a Leyline onto the battlefield) for its owner.
+    static void takeAction(GameObserver * game, Player * who, MTGCardInstance * card, int kind, const string& line);
+};
 class AASetNameChosen: public InstantAbility
 {
 public:
