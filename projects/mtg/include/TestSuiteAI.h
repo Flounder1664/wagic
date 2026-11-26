@@ -64,6 +64,11 @@ protected:
     //while loading (a zone line naming a card that does not exist), reported with the
     //[ASSERT] results.
     vector<string> doErrors;
+    //The [DO] line being retried (goto, eot, a held interrupt offer) and how many Act turns it has
+    //waited. A goto that can never reach its phase (a menu left open) used to retry for ever and
+    //hang the whole suite; past a limit the test now ends and fails instead.
+    int stallAction;
+    int stallCount;
     GameObserver* observer;
 
     static boost::mutex mMutex;

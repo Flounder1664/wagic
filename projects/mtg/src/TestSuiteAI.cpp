@@ -30,6 +30,8 @@ using std::string;
 // Higher values == slower. Lower values == faster
 #define SLOW_TEST 40
 #define FAST_TEST 6
+//How many times one [DO] line may be retried before the test is failed as stuck (see Act)
+#define STALL_LIMIT 1000
 
 // NULL is sent in place of a MTGDeck since there is no way to create a MTGDeck without a proper deck file.
 // TestSuiteAI will be responsible for managing its own deck state.
@@ -373,6 +375,36 @@ int TestSuiteAI::Act(float)
             suite->currentAction--;
             return 1;
         }
+    }
+
+    //A line that keeps being retried - a goto or eot whose phase never comes, typically because a
+    //menu or target prompt the script never answered holds the game in place - used to retry for
+    //ever, and the whole suite hung on that one test (Season's Beatings, 2026-11-26). A goto across
+    //a whole turn retries a few dozen times; past STALL_LIMIT the test ends and fails, naming what
+    //is still open.
+    if (action != "" && suite->currentAction == suite->stallAction)
+    {
+        if (++suite->stallCount > STALL_LIMIT)
+        {
+            ActionLayer * al = observer->mLayers->actionLayer();
+            MTGCardInstance * menuCard = dynamic_cast<MTGCardInstance *>(al->menuObject);
+            TargetChooser * tc = observer->getCurrentTargetChooser();
+            stringstream why;
+            why << "[DO] line " << suite->currentAction << " '" << action << "' never completed";
+            if (al->menuObject)
+                why << "; a menu is still open on " << (menuCard ? menuCard->name : string("a non-card"));
+            if (tc)
+                why << "; a target prompt is still open for " << (tc->source ? tc->source->name : string("?"));
+            suite->doErrors.push_back(why.str());
+            DebugTrace("TESTSUITE stalled: " << why.str());
+            suite->currentAction = suite->actions.nbitems;
+            action = "";
+        }
+    }
+    else
+    {
+        suite->stallAction = suite->currentAction;
+        suite->stallCount = 0;
     }
 
     if (action == "")
@@ -1584,6 +1616,8 @@ void TestSuiteGame::initGame()
     DebugTrace("TESTSUITE Init Game");
     humanControl = false;
     aiChooses = false;
+    stallAction = -1;
+    stallCount = 0;
     observer->phaseRing->goToPhase(initState.phase, observer->players[0], false);
     observer->setCurrentGamePhase(initState.phase);
     //A test or scenario is a position, not a new game: no opening, unless the test asks for one

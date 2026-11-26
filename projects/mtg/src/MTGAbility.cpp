@@ -8816,7 +8816,14 @@ void ListMaintainerAbility::updateTargets()
             removed(card);
     }
     temp.clear();
-    //add New valid ones
+    //add New valid ones, in zone order: battlefield first, each zone as it is laid out. They were
+    //collected in a map keyed by the card's address, so an all() effect reached the cards in heap
+    //order - which changed with whatever ran before. Season's Beatings gives each creature a
+    //targeted damage ability, and the order of those prompts flipped between a test run alone and
+    //the same test in the full suite; the script's clicks then answered the wrong prompt, a menu was
+    //left open and the suite hung (2026-11-26).
+    vector<MTGCardInstance *> toAdd;
+    map<MTGCardInstance *, bool> found;
     for (int i = 0; i < 2; i++)
     {
         Player * p = game->players[i];
@@ -8831,9 +8838,10 @@ void ListMaintainerAbility::updateTargets()
                      MTGCardInstance * card = zone->cards[j];
                     if (canBeInList(card))
                     {
-                        if (cards.find(card) == cards.end())
+                        if (cards.find(card) == cards.end() && !found[card])
                         {
-                            temp[card] = true;
+                            found[card] = true;
+                            toAdd.push_back(card);
                         }
                     }
                 }
@@ -8841,14 +8849,12 @@ void ListMaintainerAbility::updateTargets()
         }
     }
 
-    for (map<MTGCardInstance *, bool>::iterator it = temp.begin(); it != temp.end(); ++it)
+    for (size_t c = 0; c < toAdd.size(); c++)
     {
-        MTGCardInstance * card = (*it).first;
+        MTGCardInstance * card = toAdd[c];
         cards[card] = true;
         added(card);
     }
-
-    temp.clear();
 
     for (int i = 0; i < 2; ++i)
     {

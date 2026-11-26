@@ -1,7 +1,9 @@
 #Season's Beatings on myself: my Axebane Stag deals 6 to my Armored Warhorse, which dies; the Warhorse deals 2 to the Stag.
 #goto secondmain: in a full suite run the last damage ability was still on the stack when the
 #test ended (alone it had resolved); changing phase resolves the stack first, either way.
-#Single-printing creatures: with multi-printing names the ids (and so the order the two target prompts come in) change per run.
+#The two target prompts come in battlefield order (Warhorse, then Stag). They used to come in heap-address
+#order, which flipped in the full suite: the Stag click was swallowed, Warhorse's menu stayed open and the
+#suite hung on this test (fixed in ListMaintainerAbility::updateTargets, 2026-11-26).
 [INIT]
 FIRSTMAIN
 [PLAYER1]
