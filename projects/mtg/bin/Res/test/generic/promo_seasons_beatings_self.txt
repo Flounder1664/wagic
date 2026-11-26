@@ -1,4 +1,6 @@
 #Season's Beatings on myself: my Axebane Stag deals 6 to my Armored Warhorse, which dies; the Warhorse deals 2 to the Stag.
+#goto secondmain: in a full suite run the last damage ability was still on the stack when the
+#test ended (alone it had resolved); changing phase resolves the stack first, either way.
 #Single-printing creatures: with multi-printing names the ids (and so the order the two target prompts come in) change per run.
 [INIT]
 FIRSTMAIN
@@ -13,8 +15,9 @@ Season's Beatings
 choice 1
 Axebane Stag
 Armored Warhorse
+goto secondmain
 [ASSERT]
-FIRSTMAIN
+SECONDMAIN
 [PLAYER1]
 inplay:Axebane Stag
 graveyard:Armored Warhorse,Season's Beatings
