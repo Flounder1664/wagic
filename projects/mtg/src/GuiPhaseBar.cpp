@@ -154,6 +154,21 @@ void GuiPhaseBar::Render()
     string phaseNameToTranslate = observer->phaseRing->phaseName(observer->phaseRing->getCurrentPhase()->id);
     phaseNameToTranslate = _(phaseNameToTranslate);
     sprintf(buf, _("(%s%s) %s").c_str(), currentP.c_str(), interrupt.c_str(),phaseNameToTranslate.c_str());
+    //Before the game begins the ring is parked on turn 0's untap step, which has not happened yet:
+    //say what the opening is waiting for instead (GameObserver::driveOpening).
+    if (observer->openingActive)
+    {
+        Player * op = observer->openingPlayer();
+        if (!op || op->choosesForItself())
+            snprintf(buf, sizeof(buf), "%s", _("Opening hand: opponent deciding").c_str());
+        else if (op->openingStage == Player::OPENING_BOTTOM)
+            snprintf(buf, sizeof(buf), "Opening hand: click %d %s in your hand to put on the bottom", op->cardsToBottom,
+                op->cardsToBottom == 1 ? "card" : "cards");
+        else if (op->openingBrowsing)
+            snprintf(buf, sizeof(buf), "%s", _("Opening hand: press Next to choose").c_str());
+        else
+            snprintf(buf, sizeof(buf), "%s", _("Opening hand").c_str());
+    }
 #if !defined (PSP)
     if(phaseinfo.get())
     {//fix phaseinfo graphics... should look nice now...

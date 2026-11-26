@@ -1,0 +1,33 @@
+#The opening's "Look at your hand" entry puts the menu away so the hand can be browsed and zoomed
+#(John, 2026-11-26: the mulligan menu stopped him previewing his cards). While it is away a click
+#on a hand card plays nothing (Shock stays in hand, the Mountain untapped); Next brings the menu
+#back, Keep (choice 0) and the other player's Keep end the opening, and the next Next reaches the
+#upkeep. Negative twin: opening_look_at_hand_stays_away.
+opening
+[INIT]
+UNTAP
+[PLAYER1]
+hand:129732,129680
+inplay:129649
+library:129606,129606,129606
+[PLAYER2]
+hand:129754
+library:129559,129559,129559
+[DO]
+menu! Look at your hand (Next to come back)
+129732
+next
+menu! Keep this hand
+choice 0
+next
+[ASSERT]
+UPKEEP
+[PLAYER1]
+hand:129732,129680
+inplay:129649
+library:129606,129606,129606
+[PLAYER2]
+life:20
+hand:129754
+library:129559,129559,129559
+[END]

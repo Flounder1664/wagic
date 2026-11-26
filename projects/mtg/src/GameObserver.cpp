@@ -361,7 +361,14 @@ void GameObserver::nextCombatStep()
 void GameObserver::userRequestNextGamePhase(bool allowInterrupt, bool log)
 {
     if (openingActive)
-        return; //the game has not begun: both openings come first (CR 103)
+    {
+        //the game has not begun: both openings come first (CR 103). Next only brings back an
+        //opening menu that "Look at your hand" put away.
+        Player * p = openingPlayer();
+        if (p)
+            p->openingBrowsing = false;
+        return;
+    }
     //London mulligan: the first attempt to move on after mulliganing means
     //"keep this hand". The player must then put one card per mulligan on the
     //bottom of their library (click them in hand) before the phase advances.
@@ -1756,6 +1763,10 @@ int GameObserver::cardClick(MTGCardInstance * card, Targetable * object, bool lo
             acter->cardsToBottom--;
             return cardClickLog(log, acter, zone, backup, index, 1);
         }
+        //Nothing is played before the game begins: during the opening a click only answers a
+        //target prompt (Gemstone Caverns' exile) or bottoms a card, above.
+        if (openingActive && !targetChooser)
+            return 0;
     }
 
     do {
@@ -2539,17 +2550,14 @@ void GameObserver::openingMenu(Player * p)
                 break;
             }
         }
+        selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::BROWSE, NULL, "", "Look at your hand (Next to come back)"));
         title = p->handMulligans ? "Opening hand: keep or mulligan again" : "Opening hand: keep or mulligan";
     }
     else if (p->openingStage == Player::OPENING_BOTTOM)
     {
-        MTGGameZone * hand = p->game->hand;
-        for (int i = 0; i < hand->nb_cards; i++)
-            selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::BOTTOM, hand->cards[i], "",
-                hand->cards[i]->name));
-        std::ostringstream t;
-        t << "Put " << p->cardsToBottom << (p->cardsToBottom == 1 ? " card" : " cards") << " on the bottom";
-        title = t.str();
+        //no menu: the cards are clicked in hand, where they can be seen and zoomed (cardClick),
+        //and the phase bar says how many are still owed
+        return;
     }
     else if (p->openingStage == Player::OPENING_ACTIONS)
     {
@@ -2565,6 +2573,7 @@ void GameObserver::openingMenu(Player * p)
             selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, kinds[i], acts[i].first, acts[i].second,
                 openingLabel(acts[i].first, kinds[i], acts[i].second)));
         selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::DONE, NULL, "", "Start the game"));
+        selection.push_back(NEW AAOpeningChoice(this, id, rulesCard, p, AAOpeningChoice::BROWSE, NULL, "", "Look at your hand (Next to come back)"));
         title = "Opening hand: before the game begins";
     }
     else
@@ -2608,7 +2617,10 @@ void GameObserver::driveOpening()
             p->openingStage = Player::OPENING_DONE;
             continue;
         }
-        //a person, or a scripted test player: one menu at a time
+        //a person, or a scripted test player: one menu at a time, none while the hand is being
+        //looked at or cards are being clicked to the bottom
+        if (p->openingBrowsing || p->openingStage == Player::OPENING_BOTTOM)
+            return;
         if (mLayers->actionLayer()->menuObject)
             return;
         if (openingMenuShown && mLayers->actionLayer()->getIndexOf(openingMenuShown) != -1)

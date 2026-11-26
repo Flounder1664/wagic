@@ -19039,6 +19039,7 @@ toughness=6
 [/card]
 [card]
 name=Chancellor of the Dross
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): revealed in the opening, its emblem drains 3 at the first upkeep (23/17), there is no turn-0 draw, and the emblem is gone the next turn.
 #2026-11-26: opening-hand reveal moved to the real opening (autoopening=, wagic#25); its marker sits in the command zone until the effect has happened.
 autoopening=name(Reveal Chancellor of the Dross) emblem("Chancellor of the Dross: at the beginning of the first upkeep, each opponent loses 3 life and you gain life equal to the life lost this way.") transforms((,newability[@each upkeep once:lifeleech:-3 opponent])) ueot
 abilities=flying,lifelink

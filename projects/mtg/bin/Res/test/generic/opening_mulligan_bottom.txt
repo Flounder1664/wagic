@@ -1,26 +1,28 @@
 #The opening's London mulligan: the starting player mulligans (choice 1: shuffle, draw a new hand of
-#the same size), keeps (choice 0), then owes one card to the bottom (choice 0 = the first card).
-#Hand 2 -> 2 -> 1, library 3 -> 4 (asserted as counts: the new hand is random). The other player keeps (no opening actions, so no more menus).
+#seven), keeps (choice 0), then owes one card to the bottom, CLICKED IN HAND (there is no menu for
+#it, so the cards can be seen and zoomed). Hand + library are exactly 7 cards, so the new hand is all
+#of them and the clicked Mountain is certainly in it: hand 1 -> 7 (Plains, Mountain, 5 Islands) -> 6,
+#library holds the Mountain. The other player keeps.
 opening
 [INIT]
 UNTAP
 [PLAYER1]
-hand:129680,129680
-library:129680,129680,129680
+hand:129680
+library:129649,129606,129606,129606,129606,129606
 [PLAYER2]
 hand:129754
-library:129606,129606,129606
+library:129559,129559,129559
 [DO]
 choice 1
 choice 0
-choice 0
+129649
 choice 0
 [ASSERT]
 UNTAP
 [PLAYER1]
-hand:*,*,*,*
-library:*
+hand:129680,129606,129606,129606,129606,129606
+library:129649
 [PLAYER2]
 hand:129754
-library:129606,129606,129606
+library:129559,129559,129559
 [END]

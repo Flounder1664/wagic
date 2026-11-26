@@ -70896,6 +70896,7 @@ type=Enchantment
 [/card]
 [card]
 name=Leyline of Sanctity
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): the opening (wagic#25) offers "Begin with Leyline of Sanctity on the battlefield" after keeping, before turn 0, and it starts on the battlefield.
 text=If Leyline of Sanctity is in your opening hand, you may begin the game with it on the battlefield. -- You can't be the target of spells or abilities your opponents control.
 mana={2}{W}{W}
 type=Enchantment
@@ -70919,6 +70920,7 @@ abilities=leyline
 [/card]
 [card]
 name=Leyline of the Void
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): an AI opponent begins the game with it on the battlefield from its opening hand (wagic#25), with no menu offered to it.
 abilities=leyline,oppgraveexiler
 text=If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield. -- If a card would be put into an opponent's graveyard from anywhere, exile it instead.
 mana={2}{B}{B}
@@ -109149,6 +109151,7 @@ toughness=2
 [/card]
 [card]
 name=Serum Powder
+#VERIFIED IN GAME 2026-11-26 (John, scenario queue): in the opening menu it exiles the hand and draws that many with no mulligan owed; a mulligan after it draws a full 7 and owes 1 to the bottom.
 auto={T}:Add{1}
 autohand={0}:serumpowder
 text={T}: Add {1}. -- Any time you could mulligan and Serum Powder is in your hand, you may exile all the cards from your hand, then draw that many cards. (You can do this in addition to taking mulligans.)

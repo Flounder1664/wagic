@@ -99,6 +99,9 @@ public:
     int openingStage;
     //Cards whose opening action this player has already taken (a revealed Chancellor stays in hand).
     vector<MTGCardInstance *> openingUsed;
+    //"Look at your hand": the opening menu is put away so the hand can be browsed and zoomed;
+    //Next (userRequestNextGamePhase) brings it back.
+    bool openingBrowsing;
     //Move a card from this player's hand to the bottom of their library
     //(London-mulligan bottoming). Mirrors AALibraryBottom's placement.
     void bottomCardFromHand(MTGCardInstance * card);

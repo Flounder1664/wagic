@@ -1,13 +1,13 @@
 #A mulligan after Serum Powder draws a new hand of SEVEN, not the number of cards then held. Serum
-#Powder (choice 2) exiles the 2-card hand and draws 2; Mulligan (choice 1) draws 7; Keep (choice 0)
-#owes 1 to the bottom (choice 0). Hand 6, library 9 -> 7 -> 2 -> 3. The old mulligan redrew 2 and
-#left a hand of 1.
+#Powder (choice 2) exiles the 2-card hand and draws 2; Mulligan (choice 1) draws 7 - the whole
+#library, so the hand is known; Keep (choice 0) owes 1 to the bottom, the Mountain clicked in hand.
+#Hand 6 Plains, library 7 -> 5 -> 0 -> 1. The old mulligan redrew 2 and left a hand of 1.
 opening
 [INIT]
 UNTAP
 [PLAYER1]
 hand:48920,129586
-library:129680,129680,129680,129680,129680,129680,129680,129680,129680
+library:129649,129680,129680,129680,129680,129680,129680
 [PLAYER2]
 hand:129559
 library:129606,129606,129606
@@ -15,14 +15,14 @@ library:129606,129606,129606
 choice 2
 choice 1
 choice 0
-choice 0
+129649
 choice 0
 [ASSERT]
 UNTAP
 [PLAYER1]
 exile:48920,129586
-hand:*,*,*,*,*,*
-library:*,*,*
+hand:129680,129680,129680,129680,129680,129680
+library:129649
 [PLAYER2]
 hand:129559
 library:129606,129606,129606

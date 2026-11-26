@@ -7996,7 +7996,7 @@ public:
 class AAOpeningChoice: public InstantAbility
 {
 public:
-    enum { KEEP = 0, MULLIGAN, SERUM, BOTTOM, LEYLINE, CARDLINE, DONE };
+    enum { KEEP = 0, MULLIGAN, SERUM, BOTTOM, LEYLINE, CARDLINE, DONE, BROWSE };
     int kind;
     Player * who;
     MTGCardInstance * card;

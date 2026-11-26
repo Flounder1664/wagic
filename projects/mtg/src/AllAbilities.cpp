@@ -4360,6 +4360,12 @@ int AAOpeningChoice::resolve()
     case DONE:
         who->openingStage = Player::OPENING_DONE;
         break;
+    case BROWSE:
+        //a replay must not wait for a Next that was never logged: the next logged choice answers
+        //the menu driveOpening puts straight back up
+        if (!game->isLoading())
+            who->openingBrowsing = true;
+        break;
     }
     return 1;
 }
